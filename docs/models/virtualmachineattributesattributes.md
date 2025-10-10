@@ -1,0 +1,23 @@
+# VirtualMachineAttributesAttributes
+
+## Example Usage
+
+```typescript
+import { VirtualMachineAttributesAttributes } from "latitudesh-typescript-sdk/models";
+
+let value: VirtualMachineAttributesAttributes = {};
+```
+
+## Fields
+
+| Field                                                                                          | Type                                                                                           | Required                                                                                       | Description                                                                                    |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `name`                                                                                         | *string*                                                                                       | :heavy_minus_sign:                                                                             | N/A                                                                                            |
+| `createdAt`                                                                                    | *string*                                                                                       | :heavy_minus_sign:                                                                             | N/A                                                                                            |
+| `status`                                                                                       | [models.VirtualMachineAttributesStatus](../models/virtualmachineattributesstatus.md)           | :heavy_minus_sign:                                                                             | N/A                                                                                            |
+| `operatingSystem`                                                                              | *string*                                                                                       | :heavy_minus_sign:                                                                             | N/A                                                                                            |
+| `credentials`                                                                                  | [models.VirtualMachineAttributesCredentials](../models/virtualmachineattributescredentials.md) | :heavy_minus_sign:                                                                             | N/A                                                                                            |
+| `plan`                                                                                         | [models.VirtualMachineAttributesPlan](../models/virtualmachineattributesplan.md)               | :heavy_minus_sign:                                                                             | N/A                                                                                            |
+| `specs`                                                                                        | [models.VirtualMachineAttributesSpecs](../models/virtualmachineattributesspecs.md)             | :heavy_minus_sign:                                                                             | N/A                                                                                            |
+| `team`                                                                                         | [models.TeamInclude](../models/teaminclude.md)                                                 | :heavy_minus_sign:                                                                             | N/A                                                                                            |
+| `project`                                                                                      | [models.ProjectInclude](../models/projectinclude.md)                                           | :heavy_minus_sign:                                                                             | N/A                                                                                            |

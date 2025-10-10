@@ -1,0 +1,19 @@
+# GetVirtualNetworksRequest
+
+## Example Usage
+
+```typescript
+import { GetVirtualNetworksRequest } from "latitudesh-typescript-sdk/models/operations";
+
+let value: GetVirtualNetworksRequest = {};
+```
+
+## Fields
+
+| Field                                                                                                                       | Type                                                                                                                        | Required                                                                                                                    | Description                                                                                                                 |
+| --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `filterLocation`                                                                                                            | *string*                                                                                                                    | :heavy_minus_sign:                                                                                                          | The location slug to filter by                                                                                              |
+| `filterProject`                                                                                                             | *string*                                                                                                                    | :heavy_minus_sign:                                                                                                          | The project id or slug to filter by                                                                                         |
+| `filterTags`                                                                                                                | *string*                                                                                                                    | :heavy_minus_sign:                                                                                                          | The tags ids to filter by, separated by comma, e.g. `filter[tags]=tag_1,tag_2`will return ssh keys with `tag_1` AND `tag_2` |
+| `pageSize`                                                                                                                  | *number*                                                                                                                    | :heavy_minus_sign:                                                                                                          | Number of items to return per page                                                                                          |
+| `pageNumber`                                                                                                                | *number*                                                                                                                    | :heavy_minus_sign:                                                                                                          | Page number to return (starts at 1)                                                                                         |

@@ -1,0 +1,2059 @@
+lockVersion: 2.0.0
+id: c8245324-f3d7-42c7-8124-ce79579cbff5
+management:
+  docChecksum: 1b8e178454366605ee9bbd0d81e35a93
+  docVersion: "2023-06-01"
+  speakeasyVersion: 1.636.3
+  generationVersion: 2.723.11
+  releaseVersion: 0.0.4
+  configChecksum: 029073a349def2c24933c7c13005fb19
+features:
+  typescript:
+    additionalDependencies: 0.1.0
+    constsAndDefaults: 0.1.12
+    core: 3.21.26
+    defaultEnabledRetries: 0.1.0
+    deprecations: 2.81.1
+    devContainers: 2.90.1
+    enumUnions: 0.1.0
+    envVarSecurityUsage: 0.1.2
+    globalSecurity: 2.82.14
+    globalSecurityCallbacks: 0.1.0
+    globalSecurityFlattening: 0.1.0
+    globalServerURLs: 2.82.5
+    groups: 2.81.3
+    mcpServer: 0.9.3
+    methodArguments: 0.1.2
+    nameOverrides: 2.81.2
+    pagination: 2.83.0
+    responseFormat: 0.2.3
+    retries: 2.83.0
+    sdkHooks: 0.3.0
+generatedFiles:
+  - .devcontainer/README.md
+  - .devcontainer/devcontainer.json
+  - .devcontainer/setup.sh
+  - .gitattributes
+  - .npmignore
+  - FUNCTIONS.md
+  - RUNTIMES.md
+  - USAGE.md
+  - docs/lib/utils/retryconfig.md
+  - docs/models/apikey.md
+  - docs/models/apikeyattributes.md
+  - docs/models/apikeytype.md
+  - docs/models/apikeyuser.md
+  - docs/models/assignment.md
+  - docs/models/attributesdata.md
+  - docs/models/author.md
+  - docs/models/bandwidthpackages.md
+  - docs/models/bandwidthpackagesattributes.md
+  - docs/models/bandwidthpackagesproject.md
+  - docs/models/bandwidthpackagestype.md
+  - docs/models/bandwidthplandata.md
+  - docs/models/bandwidthplandataattributes.md
+  - docs/models/bandwidthplandatabrl.md
+  - docs/models/bandwidthplandatapricing.md
+  - docs/models/bandwidthplandatatype.md
+  - docs/models/bandwidthplandatausd.md
+  - docs/models/bandwidthplans.md
+  - docs/models/bandwidthplansmeta.md
+  - docs/models/billingmethod.md
+  - docs/models/billingtype.md
+  - docs/models/billingusage.md
+  - docs/models/billingusageattributes.md
+  - docs/models/billingusagedata.md
+  - docs/models/billingusageproject.md
+  - docs/models/billingusagetype.md
+  - docs/models/billingusageunit.md
+  - docs/models/containerplandata.md
+  - docs/models/containerplandataattributes.md
+  - docs/models/containerplandatabrl.md
+  - docs/models/containerplandatacpu.md
+  - docs/models/containerplandatagpu.md
+  - docs/models/containerplandatalocations.md
+  - docs/models/containerplandatamemory.md
+  - docs/models/containerplandatapricing.md
+  - docs/models/containerplandataregion.md
+  - docs/models/containerplandataspecs.md
+  - docs/models/containerplandatastocklevel.md
+  - docs/models/containerplandatatype.md
+  - docs/models/containerplandatausd.md
+  - docs/models/createapikey.md
+  - docs/models/createapikeyattributes.md
+  - docs/models/createapikeydata.md
+  - docs/models/createapikeytype.md
+  - docs/models/currency.md
+  - docs/models/customtag.md
+  - docs/models/customtagdata.md
+  - docs/models/customtagdataattributes.md
+  - docs/models/customtagdatatype.md
+  - docs/models/customtagmeta.md
+  - docs/models/customtags.md
+  - docs/models/customtagsmeta.md
+  - docs/models/deployconfig.md
+  - docs/models/deployconfigattributes.md
+  - docs/models/deployconfigdata.md
+  - docs/models/discount.md
+  - docs/models/disk.md
+  - docs/models/distro.md
+  - docs/models/drive.md
+  - docs/models/drivetype.md
+  - docs/models/environment.md
+  - docs/models/ephemeralstorage.md
+  - docs/models/eventdata.md
+  - docs/models/eventdataattributes.md
+  - docs/models/eventdataproject.md
+  - docs/models/eventdatateam.md
+  - docs/models/eventdatatype.md
+  - docs/models/events.md
+  - docs/models/eventsmeta.md
+  - docs/models/family.md
+  - docs/models/filesystemdata.md
+  - docs/models/filesystemdataattributes.md
+  - docs/models/filesystemdataproject.md
+  - docs/models/filesystemdatatype.md
+  - docs/models/firewall.md
+  - docs/models/firewallassignmentdata.md
+  - docs/models/firewallassignmentdataattributes.md
+  - docs/models/firewallassignmentdataserver.md
+  - docs/models/firewallassignmentdatatype.md
+  - docs/models/firewallassignments.md
+  - docs/models/firewallassignmentsmeta.md
+  - docs/models/firewalldata.md
+  - docs/models/firewalldataattributes.md
+  - docs/models/firewalldataproject.md
+  - docs/models/firewalldatatype.md
+  - docs/models/firewallmeta.md
+  - docs/models/firewalls.md
+  - docs/models/firewallserver.md
+  - docs/models/firewallserverattributes.md
+  - docs/models/firewallservertype.md
+  - docs/models/firewallsmeta.md
+  - docs/models/initiator.md
+  - docs/models/interface.md
+  - docs/models/ipaddress.md
+  - docs/models/ipaddressattributes.md
+  - docs/models/ipaddresses.md
+  - docs/models/ipaddressproject.md
+  - docs/models/ipaddressregion.md
+  - docs/models/ipaddresstype.md
+  - docs/models/ipmisession.md
+  - docs/models/ipmisessionattributes.md
+  - docs/models/ipmisessiondata.md
+  - docs/models/ipmisessiontype.md
+  - docs/models/ipmistatus.md
+  - docs/models/location.md
+  - docs/models/membership.md
+  - docs/models/membershipattributes.md
+  - docs/models/membershipdata.md
+  - docs/models/membershiprole.md
+  - docs/models/metadata.md
+  - docs/models/nic.md
+  - docs/models/operatingsystem.md
+  - docs/models/operatingsystemdata.md
+  - docs/models/operatingsystemdataattributes.md
+  - docs/models/operatingsystemdatafeatures.md
+  - docs/models/operatingsystemdatatype.md
+  - docs/models/operatingsystems.md
+  - docs/models/operatingsystemsmeta.md
+  - docs/models/operations/assignservervirtualnetworkattributes2.md
+  - docs/models/operations/assignservervirtualnetworkdata2.md
+  - docs/models/operations/assignservervirtualnetworkrequest.md
+  - docs/models/operations/assignservervirtualnetworktype2.md
+  - docs/models/operations/createfirewallassignmentattributes2.md
+  - docs/models/operations/createfirewallassignmentdata2.md
+  - docs/models/operations/createfirewallassignmentrequest.md
+  - docs/models/operations/createfirewallassignmentrequestbody2.md
+  - docs/models/operations/createfirewallassignmenttype2.md
+  - docs/models/operations/createfirewallattributes2.md
+  - docs/models/operations/createfirewalldata2.md
+  - docs/models/operations/createfirewallprotocol2.md
+  - docs/models/operations/createfirewallrequest.md
+  - docs/models/operations/createfirewallrule2.md
+  - docs/models/operations/createfirewalltype2.md
+  - docs/models/operations/createipmisessionrequest.md
+  - docs/models/operations/createprojectattributes2.md
+  - docs/models/operations/createprojectdata2.md
+  - docs/models/operations/createprojectenvironment2.md
+  - docs/models/operations/createprojectrequest.md
+  - docs/models/operations/createprojectresponse.md
+  - docs/models/operations/createprojecttype2.md
+  - docs/models/operations/createserveractionaction2.md
+  - docs/models/operations/createserveractionattributes2.md
+  - docs/models/operations/createserveractiondata2.md
+  - docs/models/operations/createserveractionrequest.md
+  - docs/models/operations/createserveractionrequestbody2.md
+  - docs/models/operations/createserveractiontype2.md
+  - docs/models/operations/createserverattributes2.md
+  - docs/models/operations/createserverbilling2.md
+  - docs/models/operations/createserverdata2.md
+  - docs/models/operations/createserveroperatingsystem2.md
+  - docs/models/operations/createserveroutofbandattributes2.md
+  - docs/models/operations/createserveroutofbanddata2.md
+  - docs/models/operations/createserveroutofbandrequest.md
+  - docs/models/operations/createserveroutofbandrequestbody2.md
+  - docs/models/operations/createserveroutofbandtype2.md
+  - docs/models/operations/createserverraid2.md
+  - docs/models/operations/createserverreinstallattributes2.md
+  - docs/models/operations/createserverreinstalldata2.md
+  - docs/models/operations/createserverreinstalloperatingsystem2.md
+  - docs/models/operations/createserverreinstallpartition2.md
+  - docs/models/operations/createserverreinstallraid2.md
+  - docs/models/operations/createserverreinstallrequest.md
+  - docs/models/operations/createserverreinstallrequestbody2.md
+  - docs/models/operations/createserverreinstalltype2.md
+  - docs/models/operations/createserverrequest.md
+  - docs/models/operations/createserversite2.md
+  - docs/models/operations/createservertype2.md
+  - docs/models/operations/createtagattributes2.md
+  - docs/models/operations/createtagdata2.md
+  - docs/models/operations/createtagrequest.md
+  - docs/models/operations/createtagtype2.md
+  - docs/models/operations/createvirtualmachineactionaction2.md
+  - docs/models/operations/createvirtualmachineactionattributes2.md
+  - docs/models/operations/createvirtualmachineactionrequest.md
+  - docs/models/operations/createvirtualmachineactionrequestbody2.md
+  - docs/models/operations/createvirtualmachineactiontype2.md
+  - docs/models/operations/createvirtualnetworkattributes2.md
+  - docs/models/operations/createvirtualnetworkdata2.md
+  - docs/models/operations/createvirtualnetworkrequest.md
+  - docs/models/operations/createvirtualnetworksite2.md
+  - docs/models/operations/createvirtualnetworktype2.md
+  - docs/models/operations/deleteapikeyrequest.md
+  - docs/models/operations/deletefirewallassignmentrequest.md
+  - docs/models/operations/deletefirewallrequest.md
+  - docs/models/operations/deleteprojectrequest.md
+  - docs/models/operations/deleteprojectsshkeyrequest.md
+  - docs/models/operations/deleteprojectuserdatarequest.md
+  - docs/models/operations/deletesshkeyrequest.md
+  - docs/models/operations/deletestoragefilesystemsrequest.md
+  - docs/models/operations/deletestoragevolumesrequest.md
+  - docs/models/operations/deleteuserdatarequest.md
+  - docs/models/operations/deletevirtualnetworksassignmentsrequest.md
+  - docs/models/operations/deletevpnsessionrequest.md
+  - docs/models/operations/destroyserverrequest.md
+  - docs/models/operations/destroytagrequest.md
+  - docs/models/operations/destroyteammemberrequest.md
+  - docs/models/operations/destroyvirtualmachinerequest.md
+  - docs/models/operations/destroyvirtualnetworkrequest.md
+  - docs/models/operations/filterfamily.md
+  - docs/models/operations/filterlocation.md
+  - docs/models/operations/filterstocklevel.md
+  - docs/models/operations/filtertype.md
+  - docs/models/operations/getallfirewallassignmentsrequest.md
+  - docs/models/operations/getallfirewallassignmentsresponse.md
+  - docs/models/operations/getbandwidthplansrequest.md
+  - docs/models/operations/getbandwidthplansresponse.md
+  - docs/models/operations/getbillingusagerequest.md
+  - docs/models/operations/getcontainersplanrequest.md
+  - docs/models/operations/geteventsrequest.md
+  - docs/models/operations/geteventsresponse.md
+  - docs/models/operations/geteventsresponsebody.md
+  - docs/models/operations/getfirewallassignmentsrequest.md
+  - docs/models/operations/getfirewallassignmentsresponse.md
+  - docs/models/operations/getfirewallrequest.md
+  - docs/models/operations/getiprequest.md
+  - docs/models/operations/getipsrequest.md
+  - docs/models/operations/getipsresponse.md
+  - docs/models/operations/getplanrequest.md
+  - docs/models/operations/getplansoperatingsystemrequest.md
+  - docs/models/operations/getplansoperatingsystemresponse.md
+  - docs/models/operations/getplansoperatingsystemresponsebody.md
+  - docs/models/operations/getplansrequest.md
+  - docs/models/operations/getplansresponse.md
+  - docs/models/operations/getprojectsrequest.md
+  - docs/models/operations/getprojectsresponse.md
+  - docs/models/operations/getprojectsshkeyrequest.md
+  - docs/models/operations/getprojectsshkeyresponse.md
+  - docs/models/operations/getprojectsshkeysrequest.md
+  - docs/models/operations/getprojectuserdatarequest.md
+  - docs/models/operations/getprojectusersdatarequest.md
+  - docs/models/operations/getprojectusersdataresponse.md
+  - docs/models/operations/getregionrequest.md
+  - docs/models/operations/getregionsrequest.md
+  - docs/models/operations/getregionsresponse.md
+  - docs/models/operations/getroleidrequest.md
+  - docs/models/operations/getrolesrequest.md
+  - docs/models/operations/getrolesresponse.md
+  - docs/models/operations/getrolesresponsebody.md
+  - docs/models/operations/getserverdeployconfigrequest.md
+  - docs/models/operations/getserveroutofbandrequest.md
+  - docs/models/operations/getserverrequest.md
+  - docs/models/operations/getserversrequest.md
+  - docs/models/operations/getserversresponse.md
+  - docs/models/operations/getsshkeyrequest.md
+  - docs/models/operations/getsshkeyresponse.md
+  - docs/models/operations/getsshkeysrequest.md
+  - docs/models/operations/getstoragefilesystemsrequest.md
+  - docs/models/operations/getstoragevolumerequest.md
+  - docs/models/operations/getstoragevolumeresponse.md
+  - docs/models/operations/getstoragevolumesrequest.md
+  - docs/models/operations/getstoragevolumesresponse.md
+  - docs/models/operations/getteammembersrequest.md
+  - docs/models/operations/getteammembersresponse.md
+  - docs/models/operations/gettrafficconsumptionrequest.md
+  - docs/models/operations/gettrafficquotarequest.md
+  - docs/models/operations/getuserdatarequest.md
+  - docs/models/operations/getuserprofileresponse.md
+  - docs/models/operations/getusersdatarequest.md
+  - docs/models/operations/getusersdataresponse.md
+  - docs/models/operations/getvirtualnetworkrequest.md
+  - docs/models/operations/getvirtualnetworkresponse.md
+  - docs/models/operations/getvirtualnetworksassignmentsrequest.md
+  - docs/models/operations/getvirtualnetworksassignmentsresponse.md
+  - docs/models/operations/getvirtualnetworksrequest.md
+  - docs/models/operations/getvirtualnetworksresponse.md
+  - docs/models/operations/getvpnsessionsrequest.md
+  - docs/models/operations/getvpnsessionsresponse.md
+  - docs/models/operations/indexvirtualmachinerequest.md
+  - docs/models/operations/listfirewallsrequest.md
+  - docs/models/operations/listfirewallsresponse.md
+  - docs/models/operations/meta.md
+  - docs/models/operations/patchcurrentteamattributes2.md
+  - docs/models/operations/patchcurrentteamcurrency2.md
+  - docs/models/operations/patchcurrentteamdata2.md
+  - docs/models/operations/patchcurrentteamrequest.md
+  - docs/models/operations/patchcurrentteamrequestbody2.md
+  - docs/models/operations/patchcurrentteamresponse.md
+  - docs/models/operations/patchcurrentteamtype2.md
+  - docs/models/operations/patchstoragefilesystemsattributes2.md
+  - docs/models/operations/patchstoragefilesystemsdata2.md
+  - docs/models/operations/patchstoragefilesystemsrequest.md
+  - docs/models/operations/patchstoragefilesystemsrequestbody2.md
+  - docs/models/operations/patchstoragefilesystemsresponse.md
+  - docs/models/operations/patchstoragefilesystemstype2.md
+  - docs/models/operations/patchuserdataattributes2.md
+  - docs/models/operations/patchuserdatadata2.md
+  - docs/models/operations/patchuserdatarequest.md
+  - docs/models/operations/patchuserdatarequestbody2.md
+  - docs/models/operations/patchuserdatatype2.md
+  - docs/models/operations/patchuserprofileattributes2.md
+  - docs/models/operations/patchuserprofiledata2.md
+  - docs/models/operations/patchuserprofilerequest.md
+  - docs/models/operations/patchuserprofilerequestbody2.md
+  - docs/models/operations/patchuserprofileresponse.md
+  - docs/models/operations/patchuserprofilerole2.md
+  - docs/models/operations/patchuserprofiletype2.md
+  - docs/models/operations/plan2.md
+  - docs/models/operations/postapikeyresponse.md
+  - docs/models/operations/postprojectsshkeyattributes2.md
+  - docs/models/operations/postprojectsshkeydata2.md
+  - docs/models/operations/postprojectsshkeyrequest.md
+  - docs/models/operations/postprojectsshkeyrequestbody2.md
+  - docs/models/operations/postprojectsshkeyresponse.md
+  - docs/models/operations/postprojectsshkeytype2.md
+  - docs/models/operations/postprojectuserdataattributes2.md
+  - docs/models/operations/postprojectuserdatadata2.md
+  - docs/models/operations/postprojectuserdatarequest.md
+  - docs/models/operations/postprojectuserdatarequestbody2.md
+  - docs/models/operations/postprojectuserdatatype2.md
+  - docs/models/operations/postsshkeyattributes2.md
+  - docs/models/operations/postsshkeydata2.md
+  - docs/models/operations/postsshkeyrequest.md
+  - docs/models/operations/postsshkeyresponse.md
+  - docs/models/operations/postsshkeytype2.md
+  - docs/models/operations/poststoragefilesystemsattributes2.md
+  - docs/models/operations/poststoragefilesystemsdata2.md
+  - docs/models/operations/poststoragefilesystemsrequest.md
+  - docs/models/operations/poststoragefilesystemsresponse.md
+  - docs/models/operations/poststoragefilesystemstype2.md
+  - docs/models/operations/poststoragevolumesattributes2.md
+  - docs/models/operations/poststoragevolumesdata2.md
+  - docs/models/operations/poststoragevolumesmountattributes.md
+  - docs/models/operations/poststoragevolumesmountdata.md
+  - docs/models/operations/poststoragevolumesmountrequest.md
+  - docs/models/operations/poststoragevolumesmountrequestbody.md
+  - docs/models/operations/poststoragevolumesmounttype.md
+  - docs/models/operations/poststoragevolumesrequest.md
+  - docs/models/operations/poststoragevolumesresponse.md
+  - docs/models/operations/poststoragevolumestype2.md
+  - docs/models/operations/postteamattributes2.md
+  - docs/models/operations/postteamcurrency2.md
+  - docs/models/operations/postteamdata2.md
+  - docs/models/operations/postteammembersattributes2.md
+  - docs/models/operations/postteammembersdata2.md
+  - docs/models/operations/postteammembersrequest.md
+  - docs/models/operations/postteammembersrole2.md
+  - docs/models/operations/postteammemberstype2.md
+  - docs/models/operations/postteamrequest.md
+  - docs/models/operations/postteamresponse.md
+  - docs/models/operations/postteamtype2.md
+  - docs/models/operations/postuserdataattributes2.md
+  - docs/models/operations/postuserdatadata2.md
+  - docs/models/operations/postuserdatarequest.md
+  - docs/models/operations/postuserdatatype2.md
+  - docs/models/operations/postvpnsessionattributes2.md
+  - docs/models/operations/postvpnsessiondata2.md
+  - docs/models/operations/postvpnsessionrequest.md
+  - docs/models/operations/postvpnsessionsite2.md
+  - docs/models/operations/postvpnsessiontype2.md
+  - docs/models/operations/provisioningtype2.md
+  - docs/models/operations/putprojectsshkeyattributes2.md
+  - docs/models/operations/putprojectsshkeydata2.md
+  - docs/models/operations/putprojectsshkeyrequest.md
+  - docs/models/operations/putprojectsshkeyrequestbody2.md
+  - docs/models/operations/putprojectsshkeyresponse.md
+  - docs/models/operations/putprojectsshkeytype2.md
+  - docs/models/operations/putprojectuserdataattributes2.md
+  - docs/models/operations/putprojectuserdatadata2.md
+  - docs/models/operations/putprojectuserdatarequest.md
+  - docs/models/operations/putprojectuserdatarequestbody2.md
+  - docs/models/operations/putprojectuserdatatype2.md
+  - docs/models/operations/putsshkeyattributes2.md
+  - docs/models/operations/putsshkeydata2.md
+  - docs/models/operations/putsshkeyrequest.md
+  - docs/models/operations/putsshkeyrequestbody2.md
+  - docs/models/operations/putsshkeyresponse.md
+  - docs/models/operations/putsshkeytype2.md
+  - docs/models/operations/putvpnsessionrequest.md
+  - docs/models/operations/serverexitrescuemoderequest.md
+  - docs/models/operations/serverlockrequest.md
+  - docs/models/operations/serverscheduledeletionrequest.md
+  - docs/models/operations/serverstartrescuemoderequest.md
+  - docs/models/operations/serverunlockrequest.md
+  - docs/models/operations/serverunscheduledeletionrequest.md
+  - docs/models/operations/showvirtualmachinerequest.md
+  - docs/models/operations/updateapikeyrequest.md
+  - docs/models/operations/updateapikeyresponse.md
+  - docs/models/operations/updatefirewallattributes2.md
+  - docs/models/operations/updatefirewalldata2.md
+  - docs/models/operations/updatefirewallprotocol2.md
+  - docs/models/operations/updatefirewallrequest.md
+  - docs/models/operations/updatefirewallrequestbody2.md
+  - docs/models/operations/updatefirewallrule2.md
+  - docs/models/operations/updatefirewalltype2.md
+  - docs/models/operations/updateplansbandwidthattributes2.md
+  - docs/models/operations/updateplansbandwidthdata2.md
+  - docs/models/operations/updateplansbandwidthrequest.md
+  - docs/models/operations/updateplansbandwidthtype2.md
+  - docs/models/operations/updateprojectattributes2.md
+  - docs/models/operations/updateprojectdata2.md
+  - docs/models/operations/updateprojectenvironment2.md
+  - docs/models/operations/updateprojectrequest.md
+  - docs/models/operations/updateprojectrequestbody2.md
+  - docs/models/operations/updateprojectresponse.md
+  - docs/models/operations/updateprojecttype2.md
+  - docs/models/operations/updateserverattributes2.md
+  - docs/models/operations/updateserverbilling2.md
+  - docs/models/operations/updateserverdata2.md
+  - docs/models/operations/updateserverdeployconfigattributes2.md
+  - docs/models/operations/updateserverdeployconfigoperatingsystem2.md
+  - docs/models/operations/updateserverdeployconfigpartition2.md
+  - docs/models/operations/updateserverdeployconfigraid2.md
+  - docs/models/operations/updateserverdeployconfigrequest.md
+  - docs/models/operations/updateserverdeployconfigrequestbody2.md
+  - docs/models/operations/updateserverdeployconfigtype2.md
+  - docs/models/operations/updateserverrequest.md
+  - docs/models/operations/updateserverrequestbody2.md
+  - docs/models/operations/updateservertype2.md
+  - docs/models/operations/updatetagattributes2.md
+  - docs/models/operations/updatetagdata2.md
+  - docs/models/operations/updatetagrequest.md
+  - docs/models/operations/updatetagrequestbody2.md
+  - docs/models/operations/updatetagtype2.md
+  - docs/models/operations/updatevirtualnetworkattributes2.md
+  - docs/models/operations/updatevirtualnetworkdata2.md
+  - docs/models/operations/updatevirtualnetworkrequest.md
+  - docs/models/operations/updatevirtualnetworkrequestbody2.md
+  - docs/models/operations/updatevirtualnetworktype2.md
+  - docs/models/outofbandconnection.md
+  - docs/models/outofbandconnectionattributes.md
+  - docs/models/outofbandconnectioncredentials.md
+  - docs/models/outofbandconnectiondata.md
+  - docs/models/package.md
+  - docs/models/partition.md
+  - docs/models/period.md
+  - docs/models/plan.md
+  - docs/models/plandata.md
+  - docs/models/plandataattributes.md
+  - docs/models/plandatabrl.md
+  - docs/models/plandatacpu.md
+  - docs/models/plandatagpu.md
+  - docs/models/plandatalocations.md
+  - docs/models/plandatamemory.md
+  - docs/models/plandatapricing.md
+  - docs/models/plandataregion.md
+  - docs/models/plandataspecs.md
+  - docs/models/plandatastocklevel.md
+  - docs/models/plandatausd.md
+  - docs/models/product.md
+  - docs/models/project.md
+  - docs/models/projectattributes.md
+  - docs/models/projectbilling.md
+  - docs/models/projectinclude.md
+  - docs/models/projectincludebilling.md
+  - docs/models/projectincludestats.md
+  - docs/models/projects.md
+  - docs/models/projectstats.md
+  - docs/models/quotainmbps.md
+  - docs/models/quotaintb.md
+  - docs/models/quotaperproject.md
+  - docs/models/quotaperregion.md
+  - docs/models/region.md
+  - docs/models/regionattributes.md
+  - docs/models/regioncountry.md
+  - docs/models/regiondata.md
+  - docs/models/regionresourcedata.md
+  - docs/models/regionresourcedatasite.md
+  - docs/models/regions.md
+  - docs/models/regionsattributes.md
+  - docs/models/regionscountry.md
+  - docs/models/regionsdata.md
+  - docs/models/role.md
+  - docs/models/roledata.md
+  - docs/models/roledataattributes.md
+  - docs/models/roledatatype.md
+  - docs/models/rolemeta.md
+  - docs/models/rule.md
+  - docs/models/security.md
+  - docs/models/server.md
+  - docs/models/serveraction.md
+  - docs/models/serveractionattributes.md
+  - docs/models/serveractiondata.md
+  - docs/models/serveractionmeta.md
+  - docs/models/serveractiontype.md
+  - docs/models/serverdata.md
+  - docs/models/serverdataattributes.md
+  - docs/models/serverdatafeatures.md
+  - docs/models/serverdataplan.md
+  - docs/models/serverdatarole.md
+  - docs/models/serverdataspecs.md
+  - docs/models/serverdatastatus.md
+  - docs/models/servermeta.md
+  - docs/models/serverregionresourcedata.md
+  - docs/models/serverregionresourcedatasite.md
+  - docs/models/serverrescue.md
+  - docs/models/serverrescuemeta.md
+  - docs/models/servers.md
+  - docs/models/serverscheduledeletion.md
+  - docs/models/serverscheduledeletionattributes.md
+  - docs/models/serverscheduledeletiondata.md
+  - docs/models/serverscheduledeletiontype.md
+  - docs/models/serversmeta.md
+  - docs/models/size.md
+  - docs/models/sshkey.md
+  - docs/models/sshkeydata.md
+  - docs/models/sshkeydataattributes.md
+  - docs/models/sshkeydatatype.md
+  - docs/models/sshkeys.md
+  - docs/models/sshkeysmeta.md
+  - docs/models/storageplandata.md
+  - docs/models/storageplandataattributes.md
+  - docs/models/storageplandatapricing.md
+  - docs/models/storageplandatatype.md
+  - docs/models/storageplans.md
+  - docs/models/storageplansmeta.md
+  - docs/models/target.md
+  - docs/models/team.md
+  - docs/models/teamattributes.md
+  - docs/models/teambilling.md
+  - docs/models/teaminclude.md
+  - docs/models/teammembers.md
+  - docs/models/teammembersdata.md
+  - docs/models/teammembersrole.md
+  - docs/models/teams.md
+  - docs/models/teamsmeta.md
+  - docs/models/traffic.md
+  - docs/models/trafficattributes.md
+  - docs/models/trafficdata.md
+  - docs/models/trafficquota.md
+  - docs/models/trafficquotaattributes.md
+  - docs/models/trafficquotadata.md
+  - docs/models/trafficquotatype.md
+  - docs/models/trafficregion.md
+  - docs/models/traffictype.md
+  - docs/models/typelocal.md
+  - docs/models/typeplans.md
+  - docs/models/updateapikey.md
+  - docs/models/updateapikeyattributes.md
+  - docs/models/updateapikeydata.md
+  - docs/models/updateapikeytype.md
+  - docs/models/usagetype.md
+  - docs/models/user.md
+  - docs/models/userattributes.md
+  - docs/models/userdata.md
+  - docs/models/userdatameta.md
+  - docs/models/userdataproperties.md
+  - docs/models/userdatapropertiesattributes.md
+  - docs/models/userdatapropertiestype.md
+  - docs/models/userinclude.md
+  - docs/models/userincluderole.md
+  - docs/models/userrole.md
+  - docs/models/userteam.md
+  - docs/models/userteamattributes.md
+  - docs/models/userteambilling.md
+  - docs/models/userteams.md
+  - docs/models/userteamsmeta.md
+  - docs/models/userupdate.md
+  - docs/models/userupdateattributes.md
+  - docs/models/virtualmachine.md
+  - docs/models/virtualmachineattributes.md
+  - docs/models/virtualmachineattributesattributes.md
+  - docs/models/virtualmachineattributescredentials.md
+  - docs/models/virtualmachineattributesplan.md
+  - docs/models/virtualmachineattributesspecs.md
+  - docs/models/virtualmachineattributesstatus.md
+  - docs/models/virtualmachineattributestype.md
+  - docs/models/virtualmachinemeta.md
+  - docs/models/virtualmachinepayload.md
+  - docs/models/virtualmachinepayloadattributes.md
+  - docs/models/virtualmachinepayloaddata.md
+  - docs/models/virtualmachinepayloadtype.md
+  - docs/models/virtualmachineplans.md
+  - docs/models/virtualmachineplansattributes.md
+  - docs/models/virtualmachineplansbrl.md
+  - docs/models/virtualmachineplansdata.md
+  - docs/models/virtualmachineplanspricing.md
+  - docs/models/virtualmachineplansregion.md
+  - docs/models/virtualmachineplansspecs.md
+  - docs/models/virtualmachineplansstocklevel.md
+  - docs/models/virtualmachineplanstype.md
+  - docs/models/virtualmachineplansunit.md
+  - docs/models/virtualmachineplansusd.md
+  - docs/models/virtualnetwork.md
+  - docs/models/virtualnetworkassignment.md
+  - docs/models/virtualnetworkassignmentdata.md
+  - docs/models/virtualnetworkassignmentdataattributes.md
+  - docs/models/virtualnetworkassignmentdataserver.md
+  - docs/models/virtualnetworkassignmentdatatype.md
+  - docs/models/virtualnetworkassignmentmeta.md
+  - docs/models/virtualnetworkassignments.md
+  - docs/models/virtualnetworkassignmentsmeta.md
+  - docs/models/virtualnetworkdata.md
+  - docs/models/virtualnetworkdataattributes.md
+  - docs/models/virtualnetworkdataregion.md
+  - docs/models/virtualnetworkdatasite.md
+  - docs/models/virtualnetworkdatatype.md
+  - docs/models/virtualnetworkmeta.md
+  - docs/models/virtualnetworks.md
+  - docs/models/virtualnetworksmeta.md
+  - docs/models/volumedata.md
+  - docs/models/volumedataattributes.md
+  - docs/models/volumedatatype.md
+  - docs/models/vpnsessiondatawithpassword.md
+  - docs/models/vpnsessiondatawithpasswordattributes.md
+  - docs/models/vpnsessiondatawithpasswordstatus.md
+  - docs/models/vpnsessiondatawithpasswordtype.md
+  - docs/models/vpnsessionwithpassword.md
+  - docs/sdks/apikeys/README.md
+  - docs/sdks/assignments/README.md
+  - docs/sdks/billing/README.md
+  - docs/sdks/events/README.md
+  - docs/sdks/firewalls/README.md
+  - docs/sdks/ipaddresses/README.md
+  - docs/sdks/members/README.md
+  - docs/sdks/operatingsystems/README.md
+  - docs/sdks/plans/README.md
+  - docs/sdks/privatenetworks/README.md
+  - docs/sdks/projects/README.md
+  - docs/sdks/projectssshkeys/README.md
+  - docs/sdks/regions/README.md
+  - docs/sdks/roles/README.md
+  - docs/sdks/servers/README.md
+  - docs/sdks/sshkeys/README.md
+  - docs/sdks/storage/README.md
+  - docs/sdks/tags/README.md
+  - docs/sdks/teammembers/README.md
+  - docs/sdks/teams/README.md
+  - docs/sdks/traffic/README.md
+  - docs/sdks/userdata/README.md
+  - docs/sdks/userprofile/README.md
+  - docs/sdks/virtualmachines/README.md
+  - docs/sdks/virtualnetworks/README.md
+  - docs/sdks/vm/README.md
+  - docs/sdks/vpnsessions/README.md
+  - eslint.config.mjs
+  - examples/.env.template
+  - examples/README.md
+  - examples/apiKeysList.example.ts
+  - examples/package.json
+  - jsr.json
+  - package.json
+  - src/core.ts
+  - src/funcs/apiKeysCreate.ts
+  - src/funcs/apiKeysDelete.ts
+  - src/funcs/apiKeysList.ts
+  - src/funcs/apiKeysUpdate.ts
+  - src/funcs/billingListUsage.ts
+  - src/funcs/eventsList.ts
+  - src/funcs/firewallsAssignmentsCreate.ts
+  - src/funcs/firewallsCreate.ts
+  - src/funcs/firewallsDelete.ts
+  - src/funcs/firewallsDeleteAssignment.ts
+  - src/funcs/firewallsGet.ts
+  - src/funcs/firewallsGetAllFirewallAssignments.ts
+  - src/funcs/firewallsList.ts
+  - src/funcs/firewallsListAssignments.ts
+  - src/funcs/firewallsUpdate.ts
+  - src/funcs/ipAddressesGet.ts
+  - src/funcs/ipAddressesList.ts
+  - src/funcs/operatingSystemsListPlans.ts
+  - src/funcs/plansGet.ts
+  - src/funcs/plansGetBandwidth.ts
+  - src/funcs/plansGetContainersPlan.ts
+  - src/funcs/plansList.ts
+  - src/funcs/plansListStorage.ts
+  - src/funcs/plansUpdateBandwidth.ts
+  - src/funcs/plansVmList.ts
+  - src/funcs/privateNetworksAssign.ts
+  - src/funcs/privateNetworksCreate.ts
+  - src/funcs/privateNetworksDeleteAssignment.ts
+  - src/funcs/privateNetworksGet.ts
+  - src/funcs/privateNetworksList.ts
+  - src/funcs/privateNetworksListAssignments.ts
+  - src/funcs/privateNetworksUpdate.ts
+  - src/funcs/projectsCreate.ts
+  - src/funcs/projectsDelete.ts
+  - src/funcs/projectsList.ts
+  - src/funcs/projectsSshKeysPostProjectSshKey.ts
+  - src/funcs/projectsUpdate.ts
+  - src/funcs/regionsFetch.ts
+  - src/funcs/regionsGet.ts
+  - src/funcs/rolesGet.ts
+  - src/funcs/rolesList.ts
+  - src/funcs/serversCreate.ts
+  - src/funcs/serversCreateIpmiSession.ts
+  - src/funcs/serversDelete.ts
+  - src/funcs/serversExitRescueMode.ts
+  - src/funcs/serversGet.ts
+  - src/funcs/serversGetDeployConfig.ts
+  - src/funcs/serversGetOutOfBand.ts
+  - src/funcs/serversList.ts
+  - src/funcs/serversLock.ts
+  - src/funcs/serversReinstall.ts
+  - src/funcs/serversRunAction.ts
+  - src/funcs/serversScheduleDeletion.ts
+  - src/funcs/serversStartOutOfBandConnection.ts
+  - src/funcs/serversStartRescueMode.ts
+  - src/funcs/serversUnlock.ts
+  - src/funcs/serversUnscheduleDeletion.ts
+  - src/funcs/serversUpdate.ts
+  - src/funcs/serversUpdateDeployConfig.ts
+  - src/funcs/sshKeysCreate.ts
+  - src/funcs/sshKeysDelete.ts
+  - src/funcs/sshKeysGet.ts
+  - src/funcs/sshKeysList.ts
+  - src/funcs/sshKeysListAll.ts
+  - src/funcs/sshKeysModifyProjectKey.ts
+  - src/funcs/sshKeysRemoveFromProject.ts
+  - src/funcs/sshKeysRetrieve.ts
+  - src/funcs/sshKeysUpdate.ts
+  - src/funcs/storageCreateFilesystem.ts
+  - src/funcs/storageDeleteFilesystem.ts
+  - src/funcs/storageDeleteStorageVolumes.ts
+  - src/funcs/storageGetStorageVolume.ts
+  - src/funcs/storageGetStorageVolumes.ts
+  - src/funcs/storageListFilesystems.ts
+  - src/funcs/storagePostStorageVolumes.ts
+  - src/funcs/storagePostStorageVolumesMount.ts
+  - src/funcs/storageUpdateFilesystem.ts
+  - src/funcs/tagsCreate.ts
+  - src/funcs/tagsDelete.ts
+  - src/funcs/tagsList.ts
+  - src/funcs/tagsUpdate.ts
+  - src/funcs/teamMembersDelete.ts
+  - src/funcs/teamMembersPostTeamMembers.ts
+  - src/funcs/teamsCreate.ts
+  - src/funcs/teamsGet.ts
+  - src/funcs/teamsMembersGetTeamMembers.ts
+  - src/funcs/teamsUpdate.ts
+  - src/funcs/trafficGet.ts
+  - src/funcs/trafficGetQuota.ts
+  - src/funcs/userDataCreate.ts
+  - src/funcs/userDataCreateNew.ts
+  - src/funcs/userDataDelete.ts
+  - src/funcs/userDataDeleteProjectUserData.ts
+  - src/funcs/userDataGetProjectUserData.ts
+  - src/funcs/userDataGetProjectUsersData.ts
+  - src/funcs/userDataList.ts
+  - src/funcs/userDataRetrieve.ts
+  - src/funcs/userDataUpdate.ts
+  - src/funcs/userDataUpdateForProject.ts
+  - src/funcs/userProfileGet.ts
+  - src/funcs/userProfileListTeams.ts
+  - src/funcs/userProfileUpdate.ts
+  - src/funcs/virtualMachinesCreate.ts
+  - src/funcs/virtualMachinesCreateVirtualMachineAction.ts
+  - src/funcs/virtualMachinesDelete.ts
+  - src/funcs/virtualMachinesGet.ts
+  - src/funcs/virtualMachinesList.ts
+  - src/funcs/virtualNetworksDelete.ts
+  - src/funcs/vpnSessionsCreate.ts
+  - src/funcs/vpnSessionsDelete.ts
+  - src/funcs/vpnSessionsList.ts
+  - src/funcs/vpnSessionsRefreshPassword.ts
+  - src/hooks/hooks.ts
+  - src/hooks/index.ts
+  - src/hooks/types.ts
+  - src/index.ts
+  - src/lib/base64.ts
+  - src/lib/config.ts
+  - src/lib/dlv.ts
+  - src/lib/encodings.ts
+  - src/lib/env.ts
+  - src/lib/files.ts
+  - src/lib/http.ts
+  - src/lib/is-plain-object.ts
+  - src/lib/logger.ts
+  - src/lib/matchers.ts
+  - src/lib/primitives.ts
+  - src/lib/retries.ts
+  - src/lib/schemas.ts
+  - src/lib/sdks.ts
+  - src/lib/security.ts
+  - src/lib/url.ts
+  - src/mcp-server/build.mts
+  - src/mcp-server/cli.ts
+  - src/mcp-server/cli/start/command.ts
+  - src/mcp-server/cli/start/impl.ts
+  - src/mcp-server/console-logger.ts
+  - src/mcp-server/extensions.ts
+  - src/mcp-server/mcp-server.ts
+  - src/mcp-server/prompts.ts
+  - src/mcp-server/resources.ts
+  - src/mcp-server/scopes.ts
+  - src/mcp-server/server.ts
+  - src/mcp-server/shared.ts
+  - src/mcp-server/tools.ts
+  - src/mcp-server/tools/apiKeysCreate.ts
+  - src/mcp-server/tools/apiKeysDelete.ts
+  - src/mcp-server/tools/apiKeysList.ts
+  - src/mcp-server/tools/apiKeysUpdate.ts
+  - src/mcp-server/tools/billingListUsage.ts
+  - src/mcp-server/tools/eventsList.ts
+  - src/mcp-server/tools/firewallsAssignmentsCreate.ts
+  - src/mcp-server/tools/firewallsCreate.ts
+  - src/mcp-server/tools/firewallsDelete.ts
+  - src/mcp-server/tools/firewallsDeleteAssignment.ts
+  - src/mcp-server/tools/firewallsGet.ts
+  - src/mcp-server/tools/firewallsGetAllFirewallAssignments.ts
+  - src/mcp-server/tools/firewallsList.ts
+  - src/mcp-server/tools/firewallsListAssignments.ts
+  - src/mcp-server/tools/firewallsUpdate.ts
+  - src/mcp-server/tools/ipAddressesGet.ts
+  - src/mcp-server/tools/ipAddressesList.ts
+  - src/mcp-server/tools/operatingSystemsListPlans.ts
+  - src/mcp-server/tools/plansGet.ts
+  - src/mcp-server/tools/plansGetBandwidth.ts
+  - src/mcp-server/tools/plansGetContainersPlan.ts
+  - src/mcp-server/tools/plansList.ts
+  - src/mcp-server/tools/plansListStorage.ts
+  - src/mcp-server/tools/plansUpdateBandwidth.ts
+  - src/mcp-server/tools/plansVmList.ts
+  - src/mcp-server/tools/privateNetworksAssign.ts
+  - src/mcp-server/tools/privateNetworksCreate.ts
+  - src/mcp-server/tools/privateNetworksDeleteAssignment.ts
+  - src/mcp-server/tools/privateNetworksGet.ts
+  - src/mcp-server/tools/privateNetworksList.ts
+  - src/mcp-server/tools/privateNetworksListAssignments.ts
+  - src/mcp-server/tools/privateNetworksUpdate.ts
+  - src/mcp-server/tools/projectsCreate.ts
+  - src/mcp-server/tools/projectsDelete.ts
+  - src/mcp-server/tools/projectsList.ts
+  - src/mcp-server/tools/projectsSshKeysPostProjectSshKey.ts
+  - src/mcp-server/tools/projectsUpdate.ts
+  - src/mcp-server/tools/regionsFetch.ts
+  - src/mcp-server/tools/regionsGet.ts
+  - src/mcp-server/tools/rolesGet.ts
+  - src/mcp-server/tools/rolesList.ts
+  - src/mcp-server/tools/serversCreate.ts
+  - src/mcp-server/tools/serversCreateIpmiSession.ts
+  - src/mcp-server/tools/serversDelete.ts
+  - src/mcp-server/tools/serversExitRescueMode.ts
+  - src/mcp-server/tools/serversGet.ts
+  - src/mcp-server/tools/serversGetDeployConfig.ts
+  - src/mcp-server/tools/serversGetOutOfBand.ts
+  - src/mcp-server/tools/serversList.ts
+  - src/mcp-server/tools/serversLock.ts
+  - src/mcp-server/tools/serversReinstall.ts
+  - src/mcp-server/tools/serversRunAction.ts
+  - src/mcp-server/tools/serversScheduleDeletion.ts
+  - src/mcp-server/tools/serversStartOutOfBandConnection.ts
+  - src/mcp-server/tools/serversStartRescueMode.ts
+  - src/mcp-server/tools/serversUnlock.ts
+  - src/mcp-server/tools/serversUnscheduleDeletion.ts
+  - src/mcp-server/tools/serversUpdate.ts
+  - src/mcp-server/tools/serversUpdateDeployConfig.ts
+  - src/mcp-server/tools/sshKeysCreate.ts
+  - src/mcp-server/tools/sshKeysDelete.ts
+  - src/mcp-server/tools/sshKeysGet.ts
+  - src/mcp-server/tools/sshKeysList.ts
+  - src/mcp-server/tools/sshKeysListAll.ts
+  - src/mcp-server/tools/sshKeysModifyProjectKey.ts
+  - src/mcp-server/tools/sshKeysRemoveFromProject.ts
+  - src/mcp-server/tools/sshKeysRetrieve.ts
+  - src/mcp-server/tools/sshKeysUpdate.ts
+  - src/mcp-server/tools/storageCreateFilesystem.ts
+  - src/mcp-server/tools/storageDeleteFilesystem.ts
+  - src/mcp-server/tools/storageDeleteStorageVolumes.ts
+  - src/mcp-server/tools/storageGetStorageVolume.ts
+  - src/mcp-server/tools/storageGetStorageVolumes.ts
+  - src/mcp-server/tools/storageListFilesystems.ts
+  - src/mcp-server/tools/storagePostStorageVolumes.ts
+  - src/mcp-server/tools/storagePostStorageVolumesMount.ts
+  - src/mcp-server/tools/storageUpdateFilesystem.ts
+  - src/mcp-server/tools/tagsCreate.ts
+  - src/mcp-server/tools/tagsDelete.ts
+  - src/mcp-server/tools/tagsList.ts
+  - src/mcp-server/tools/tagsUpdate.ts
+  - src/mcp-server/tools/teamMembersDelete.ts
+  - src/mcp-server/tools/teamMembersPostTeamMembers.ts
+  - src/mcp-server/tools/teamsCreate.ts
+  - src/mcp-server/tools/teamsGet.ts
+  - src/mcp-server/tools/teamsMembersGetTeamMembers.ts
+  - src/mcp-server/tools/teamsUpdate.ts
+  - src/mcp-server/tools/trafficGet.ts
+  - src/mcp-server/tools/trafficGetQuota.ts
+  - src/mcp-server/tools/userDataCreate.ts
+  - src/mcp-server/tools/userDataCreateNew.ts
+  - src/mcp-server/tools/userDataDelete.ts
+  - src/mcp-server/tools/userDataDeleteProjectUserData.ts
+  - src/mcp-server/tools/userDataGetProjectUserData.ts
+  - src/mcp-server/tools/userDataGetProjectUsersData.ts
+  - src/mcp-server/tools/userDataList.ts
+  - src/mcp-server/tools/userDataRetrieve.ts
+  - src/mcp-server/tools/userDataUpdate.ts
+  - src/mcp-server/tools/userDataUpdateForProject.ts
+  - src/mcp-server/tools/userProfileGet.ts
+  - src/mcp-server/tools/userProfileListTeams.ts
+  - src/mcp-server/tools/userProfileUpdate.ts
+  - src/mcp-server/tools/virtualMachinesCreate.ts
+  - src/mcp-server/tools/virtualMachinesCreateVirtualMachineAction.ts
+  - src/mcp-server/tools/virtualMachinesDelete.ts
+  - src/mcp-server/tools/virtualMachinesGet.ts
+  - src/mcp-server/tools/virtualMachinesList.ts
+  - src/mcp-server/tools/virtualNetworksDelete.ts
+  - src/mcp-server/tools/vpnSessionsCreate.ts
+  - src/mcp-server/tools/vpnSessionsDelete.ts
+  - src/mcp-server/tools/vpnSessionsList.ts
+  - src/mcp-server/tools/vpnSessionsRefreshPassword.ts
+  - src/models/apikey.ts
+  - src/models/bandwidthpackages.ts
+  - src/models/bandwidthplandata.ts
+  - src/models/bandwidthplans.ts
+  - src/models/billingusage.ts
+  - src/models/containerplandata.ts
+  - src/models/createapikey.ts
+  - src/models/customtag.ts
+  - src/models/customtagdata.ts
+  - src/models/customtags.ts
+  - src/models/deployconfig.ts
+  - src/models/errors/httpclienterrors.ts
+  - src/models/errors/index.ts
+  - src/models/errors/latitudeshdefaulterror.ts
+  - src/models/errors/latitudesherror.ts
+  - src/models/errors/responsevalidationerror.ts
+  - src/models/errors/sdkvalidationerror.ts
+  - src/models/eventdata.ts
+  - src/models/events.ts
+  - src/models/filesystemdata.ts
+  - src/models/firewall.ts
+  - src/models/firewallassignmentdata.ts
+  - src/models/firewallassignments.ts
+  - src/models/firewalldata.ts
+  - src/models/firewalls.ts
+  - src/models/firewallserver.ts
+  - src/models/index.ts
+  - src/models/ipaddress.ts
+  - src/models/ipaddresses.ts
+  - src/models/ipmisession.ts
+  - src/models/membership.ts
+  - src/models/operatingsystemdata.ts
+  - src/models/operatingsystems.ts
+  - src/models/operations/assignservervirtualnetwork.ts
+  - src/models/operations/createfirewall.ts
+  - src/models/operations/createfirewallassignment.ts
+  - src/models/operations/createipmisession.ts
+  - src/models/operations/createproject.ts
+  - src/models/operations/createserver.ts
+  - src/models/operations/createserveraction.ts
+  - src/models/operations/createserveroutofband.ts
+  - src/models/operations/createserverreinstall.ts
+  - src/models/operations/createtag.ts
+  - src/models/operations/createvirtualmachineaction.ts
+  - src/models/operations/createvirtualnetwork.ts
+  - src/models/operations/deleteapikey.ts
+  - src/models/operations/deletefirewall.ts
+  - src/models/operations/deletefirewallassignment.ts
+  - src/models/operations/deleteproject.ts
+  - src/models/operations/deleteprojectsshkey.ts
+  - src/models/operations/deleteprojectuserdata.ts
+  - src/models/operations/deletesshkey.ts
+  - src/models/operations/deletestoragefilesystems.ts
+  - src/models/operations/deletestoragevolumes.ts
+  - src/models/operations/deleteuserdata.ts
+  - src/models/operations/deletevirtualnetworksassignments.ts
+  - src/models/operations/deletevpnsession.ts
+  - src/models/operations/destroyserver.ts
+  - src/models/operations/destroytag.ts
+  - src/models/operations/destroyteammember.ts
+  - src/models/operations/destroyvirtualmachine.ts
+  - src/models/operations/destroyvirtualnetwork.ts
+  - src/models/operations/getallfirewallassignments.ts
+  - src/models/operations/getbandwidthplans.ts
+  - src/models/operations/getbillingusage.ts
+  - src/models/operations/getcontainersplan.ts
+  - src/models/operations/getevents.ts
+  - src/models/operations/getfirewall.ts
+  - src/models/operations/getfirewallassignments.ts
+  - src/models/operations/getip.ts
+  - src/models/operations/getips.ts
+  - src/models/operations/getplan.ts
+  - src/models/operations/getplans.ts
+  - src/models/operations/getplansoperatingsystem.ts
+  - src/models/operations/getprojects.ts
+  - src/models/operations/getprojectsshkey.ts
+  - src/models/operations/getprojectsshkeys.ts
+  - src/models/operations/getprojectuserdata.ts
+  - src/models/operations/getprojectusersdata.ts
+  - src/models/operations/getregion.ts
+  - src/models/operations/getregions.ts
+  - src/models/operations/getroleid.ts
+  - src/models/operations/getroles.ts
+  - src/models/operations/getserver.ts
+  - src/models/operations/getserverdeployconfig.ts
+  - src/models/operations/getserveroutofband.ts
+  - src/models/operations/getservers.ts
+  - src/models/operations/getsshkey.ts
+  - src/models/operations/getsshkeys.ts
+  - src/models/operations/getstoragefilesystems.ts
+  - src/models/operations/getstoragevolume.ts
+  - src/models/operations/getstoragevolumes.ts
+  - src/models/operations/getteammembers.ts
+  - src/models/operations/gettrafficconsumption.ts
+  - src/models/operations/gettrafficquota.ts
+  - src/models/operations/getuserdata.ts
+  - src/models/operations/getuserprofile.ts
+  - src/models/operations/getusersdata.ts
+  - src/models/operations/getvirtualnetwork.ts
+  - src/models/operations/getvirtualnetworks.ts
+  - src/models/operations/getvirtualnetworksassignments.ts
+  - src/models/operations/getvpnsessions.ts
+  - src/models/operations/index.ts
+  - src/models/operations/indexvirtualmachine.ts
+  - src/models/operations/listfirewalls.ts
+  - src/models/operations/patchcurrentteam.ts
+  - src/models/operations/patchstoragefilesystems.ts
+  - src/models/operations/patchuserdata.ts
+  - src/models/operations/patchuserprofile.ts
+  - src/models/operations/postapikey.ts
+  - src/models/operations/postprojectsshkey.ts
+  - src/models/operations/postprojectuserdata.ts
+  - src/models/operations/postsshkey.ts
+  - src/models/operations/poststoragefilesystems.ts
+  - src/models/operations/poststoragevolumes.ts
+  - src/models/operations/poststoragevolumesmount.ts
+  - src/models/operations/postteam.ts
+  - src/models/operations/postteammembers.ts
+  - src/models/operations/postuserdata.ts
+  - src/models/operations/postvpnsession.ts
+  - src/models/operations/putprojectsshkey.ts
+  - src/models/operations/putprojectuserdata.ts
+  - src/models/operations/putsshkey.ts
+  - src/models/operations/putvpnsession.ts
+  - src/models/operations/serverexitrescuemode.ts
+  - src/models/operations/serverlock.ts
+  - src/models/operations/serverscheduledeletion.ts
+  - src/models/operations/serverstartrescuemode.ts
+  - src/models/operations/serverunlock.ts
+  - src/models/operations/serverunscheduledeletion.ts
+  - src/models/operations/showvirtualmachine.ts
+  - src/models/operations/updateapikey.ts
+  - src/models/operations/updatefirewall.ts
+  - src/models/operations/updateplansbandwidth.ts
+  - src/models/operations/updateproject.ts
+  - src/models/operations/updateserver.ts
+  - src/models/operations/updateserverdeployconfig.ts
+  - src/models/operations/updatetag.ts
+  - src/models/operations/updatevirtualnetwork.ts
+  - src/models/outofbandconnection.ts
+  - src/models/plan.ts
+  - src/models/plandata.ts
+  - src/models/project.ts
+  - src/models/projectinclude.ts
+  - src/models/projects.ts
+  - src/models/region.ts
+  - src/models/regionresourcedata.ts
+  - src/models/regions.ts
+  - src/models/role.ts
+  - src/models/roledata.ts
+  - src/models/security.ts
+  - src/models/server.ts
+  - src/models/serveraction.ts
+  - src/models/serverdata.ts
+  - src/models/serverregionresourcedata.ts
+  - src/models/serverrescue.ts
+  - src/models/servers.ts
+  - src/models/serverscheduledeletion.ts
+  - src/models/sshkeydata.ts
+  - src/models/sshkeys.ts
+  - src/models/storageplandata.ts
+  - src/models/storageplans.ts
+  - src/models/team.ts
+  - src/models/teaminclude.ts
+  - src/models/teammembers.ts
+  - src/models/teams.ts
+  - src/models/traffic.ts
+  - src/models/trafficquota.ts
+  - src/models/updateapikey.ts
+  - src/models/user.ts
+  - src/models/userdata.ts
+  - src/models/userdataproperties.ts
+  - src/models/userinclude.ts
+  - src/models/userteam.ts
+  - src/models/userteams.ts
+  - src/models/userupdate.ts
+  - src/models/virtualmachine.ts
+  - src/models/virtualmachineattributes.ts
+  - src/models/virtualmachinepayload.ts
+  - src/models/virtualmachineplans.ts
+  - src/models/virtualnetwork.ts
+  - src/models/virtualnetworkassignment.ts
+  - src/models/virtualnetworkassignmentdata.ts
+  - src/models/virtualnetworkassignments.ts
+  - src/models/virtualnetworkdata.ts
+  - src/models/virtualnetworks.ts
+  - src/models/volumedata.ts
+  - src/models/vpnsessiondatawithpassword.ts
+  - src/models/vpnsessionwithpassword.ts
+  - src/sdk/apikeys.ts
+  - src/sdk/assignments.ts
+  - src/sdk/billing.ts
+  - src/sdk/events.ts
+  - src/sdk/firewalls.ts
+  - src/sdk/index.ts
+  - src/sdk/ipaddresses.ts
+  - src/sdk/members.ts
+  - src/sdk/operatingsystems.ts
+  - src/sdk/plans.ts
+  - src/sdk/privatenetworks.ts
+  - src/sdk/projects.ts
+  - src/sdk/projectssshkeys.ts
+  - src/sdk/regions.ts
+  - src/sdk/roles.ts
+  - src/sdk/sdk.ts
+  - src/sdk/servers.ts
+  - src/sdk/sshkeys.ts
+  - src/sdk/storage.ts
+  - src/sdk/tags.ts
+  - src/sdk/teammembers.ts
+  - src/sdk/teams.ts
+  - src/sdk/traffic.ts
+  - src/sdk/userdata.ts
+  - src/sdk/userprofile.ts
+  - src/sdk/virtualmachines.ts
+  - src/sdk/virtualnetworks.ts
+  - src/sdk/vm.ts
+  - src/sdk/vpnsessions.ts
+  - src/types/async.ts
+  - src/types/blobs.ts
+  - src/types/constdatetime.ts
+  - src/types/enums.ts
+  - src/types/fp.ts
+  - src/types/index.ts
+  - src/types/operations.ts
+  - src/types/rfcdate.ts
+  - src/types/streams.ts
+  - tsconfig.json
+examples:
+  get-api-keys:
+    Success:
+      responses:
+        "200":
+          application/vnd.api+json: {}
+  post-api-key:
+    Created:
+      requestBody:
+        application/json: {"data": {"type": "api_keys", "attributes": {"name": "App Token"}}}
+        application/vnd.api+json: {"data": {"type": "api_keys", "attributes": {"name": "App Token"}}}
+      responses:
+        "201":
+          application/vnd.api+json: {"data": {"id": "tok_ez2A3DVldnawP", "type": "api_keys", "attributes": {"name": "App Token", "api_version": "2023-06-01", "token_last_slice": "2c5bc", "last_used_at": "2025-01-24T09:24:12.041Z", "user": {"id": "user_W3oeKxYvbWIQlBGElMVWsrK2Qyw", "email": "harold@abshire.example"}, "created_at": "2025-07-16T18:36:26+00:00", "updated_at": "2025-07-16T18:36:26+00:00"}}}
+  update-api-key:
+    Success:
+      parameters:
+        path:
+          api_key_id: "tok_zlkg1DegdvZE5"
+      requestBody:
+        application/json: {"data": {"id": "tok_zlkg1DegdvZE5", "type": "api_keys", "attributes": {"name": "App Token", "api_version": "2023-06-01"}}}
+        application/vnd.api+json: {"data": {"id": "tok_zlkg1DegdvZE5", "type": "api_keys", "attributes": {"name": "App Token", "api_version": "2023-06-01"}}}
+      responses:
+        "200":
+          application/vnd.api+json: {"data": {"id": "tok_zlkg1DegdvZE5", "type": "api_keys", "attributes": {"name": "App Token", "api_version": "2023-06-01", "token_last_slice": "e0fd0", "last_used_at": "2025-10-18T03:22:51.570Z", "user": {"id": "user_Lp2QwzbxephLaWxAnwpouknrPzm", "email": "leland_kutch@hayes-beatty.test"}, "created_at": "2025-07-16T18:36:27+00:00", "updated_at": "2025-07-16T18:36:27+00:00"}}}
+  delete-api-key:
+    Success:
+      parameters:
+        path:
+          api_key_id: "tok_x1ZJrdx5qg4LV"
+  get-billing-usage:
+    Success:
+      parameters:
+        query:
+          filter[products][]: ["si_lvdub7r3", "si_utp5nfrf"]
+          filter[plan]: "plan.name"
+          filter[project]: "proj_6059EqYkOQj8p"
+      responses:
+        "200":
+          application/vnd.api+json: {"data": {"id": "", "attributes": {"project": {"id": "proj_6059EqYkOQj8p", "slug": "ergonomic-marble-shoes", "name": "Ergonomic Marble Shoes"}, "period": {"start": "2025-06-25T18:36:28+00:00", "end": "2025-07-26T18:36:28+00:00"}, "price": 0, "threshold": 10000, "products": []}}}
+  get-events:
+    Success:
+      parameters:
+        query:
+          page[size]: 20
+          page[number]: 1
+      responses:
+        "200":
+          application/vnd.api+json: {"data": [{}]}
+  get-all-firewall-assignments:
+    Success:
+      parameters:
+        query:
+          filter[server]: "sv_RLYV8DZ2D5QoE"
+          page[size]: 20
+          page[number]: 1
+      responses:
+        "200":
+          application/vnd.api+json: {"data": [{"id": "fwasg_zGr47qlMDAg0m", "type": "firewall_assignments", "attributes": {"server": {"id": "sv_RLYV8DZ2D5QoE", "primary_ipv4": "102.29.146.162", "hostname": "Synergistic Steel Car"}}}, {"id": "fwasg_w5AEmq7XDBkWX", "type": "firewall_assignments", "attributes": {"server": {"id": "sv_RLYV8DZ2D5QoE", "primary_ipv4": "102.29.146.162", "hostname": "Synergistic Steel Car"}}}]}
+  list-firewalls:
+    Success:
+      parameters:
+        query:
+          filter[project]: "incredible-bronze-car"
+          page[size]: 20
+          page[number]: 1
+      responses:
+        "200":
+          application/vnd.api+json: {"data": [{"id": "fw_w5AEmq7XDBkWX", "type": "firewalls", "attributes": {"name": "Greenfelder-Brekke", "rules": [{"from": "92.95.228.250", "to": "43.35.45.108", "port": "80", "protocol": "TCP"}], "project": {"id": "proj_x1ZJrdx5qg4LV", "slug": "incredible-bronze-car", "name": "Incredible Bronze Car"}}}]}
+  create-firewall:
+    Created:
+      requestBody:
+        application/json: {"data": {"type": "firewalls", "attributes": {"name": "my-firewall", "project": "awesome-granite-chair", "rules": [{"from": "192.168.42.73", "to": "192.168.43.51", "protocol": "TCP", "port": "80"}, {"from": "192.168.1.0/24", "to": "ANY", "protocol": "TCP", "port": "80"}, {"from": "192.168.1.10", "to": "192.168.1.20", "protocol": "UDP", "port": "3000-4000"}]}}}
+        application/vnd.api+json: {"data": {"type": "firewalls", "attributes": {"name": "my-firewall", "project": "awesome-granite-chair", "rules": [{"from": "192.168.42.73", "to": "192.168.43.51", "protocol": "TCP", "port": "80"}, {"from": "192.168.1.0/24", "to": "ANY", "protocol": "TCP", "port": "80"}, {"from": "192.168.1.10", "to": "192.168.1.20", "protocol": "UDP", "port": "3000-4000"}]}}}
+      responses:
+        "201":
+          application/vnd.api+json: {"data": {"id": "fw_VLMmAD8EOwop2", "type": "firewalls", "attributes": {"name": "my-firewall", "rules": [{"from": "ANY", "to": "ANY", "port": "22", "protocol": "TCP"}, {"from": "192.168.42.73", "to": "192.168.43.51", "port": "80", "protocol": "TCP"}, {"from": "192.168.1.0/24", "to": "ANY", "port": "80", "protocol": "TCP"}, {"from": "192.168.1.10", "to": "192.168.1.20", "port": "3000-4000", "protocol": "UDP"}], "project": {"id": "proj_6A05EdQ1dvKYQ", "slug": "awesome-granite-chair", "name": "Awesome Granite Chair"}}}}
+  get-firewall:
+    Success:
+      parameters:
+        path:
+          firewall_id: "fw_xkjQwdENqYNVP"
+      responses:
+        "200":
+          application/vnd.api+json: {"data": {"id": "fw_xkjQwdENqYNVP", "type": "firewalls", "attributes": {"name": "Batz Inc", "rules": [{"from": "217.160.173.14", "to": "99.87.69.88", "port": "80", "protocol": "TCP"}, {"from": "79.209.217.107", "to": "224.13.187.5", "port": "80", "protocol": "TCP"}], "project": {"id": "proj_Av9BVDavORm1W", "slug": "heavy-duty-paper-hat", "name": "Heavy Duty Paper Hat"}}}}
+  delete-firewall:
+    speakeasy-default-delete-firewall:
+      parameters:
+        path:
+          firewall_id: "<id>"
+  update-firewall:
+    Success:
+      parameters:
+        path:
+          firewall_id: "fw_6A05EdQ1dvKYQ"
+      requestBody:
+        application/json: {"data": {"type": "firewalls", "attributes": {"name": "new-name", "rules": [{"from": "192.168.1.0/24", "to": "ANY", "protocol": "TCP", "port": "80"}]}}}
+        application/vnd.api+json: {"data": {"type": "firewalls", "attributes": {"name": "new-name", "rules": [{"from": "192.168.1.0/24", "to": "ANY", "protocol": "TCP", "port": "80"}]}}}
+      responses:
+        "200":
+          application/vnd.api+json: {"data": {"id": "fw_6A05EdQ1dvKYQ", "type": "firewalls", "attributes": {"name": "new-name", "rules": [{"from": "192.168.1.0/24", "to": "ANY", "port": "80", "protocol": "TCP"}], "project": {"id": "proj_Ee8pKq05DWAob", "slug": "small-wooden-chair", "name": "Small Wooden Chair"}}}}
+  get-firewall-assignments:
+    Success:
+      parameters:
+        path:
+          firewall_id: "fw_z8Nkvdy1deLpx"
+        query:
+          page[size]: 20
+          page[number]: 1
+      responses:
+        "200":
+          application/vnd.api+json: {"data": [{"id": "fwasg_zGr47qlMDAg0m", "type": "firewall_assignments", "attributes": {"server": {"id": "sv_2695BdKrOevVo", "primary_ipv4": "218.124.123.71", "hostname": "Incredible Silk Watch"}, "firewall_id": "fw_z8Nkvdy1deLpx"}}, {"id": "fwasg_w5AEmq7XDBkWX", "type": "firewall_assignments", "attributes": {"server": {"id": "sv_byQrJdNJd30gv", "primary_ipv4": "84.9.159.24", "hostname": "Durable Cotton Knife"}, "firewall_id": "fw_z8Nkvdy1deLpx"}}]}
+  delete-firewall-assignment:
+    speakeasy-default-delete-firewall-assignment:
+      parameters:
+        path:
+          firewall_id: "<id>"
+          assignment_id: "<id>"
+  create-firewall-assignment:
+    Created:
+      parameters:
+        path:
+          firewall_id: "fw_Av9BVDavORm1W"
+      requestBody:
+        application/json: {"data": {"type": "firewall_assignments", "attributes": {"server_id": "sv_lpbV0DgRq4AWz"}}}
+        application/vnd.api+json: {"data": {"type": "firewall_assignments", "attributes": {"server_id": "sv_lpbV0DgRq4AWz"}}}
+      responses:
+        "201":
+          application/vnd.api+json: {}
+  get-ips:
+    Success:
+      parameters:
+        query:
+          page[size]: 20
+          page[number]: 1
+      responses:
+        "200":
+          application/vnd.api+json: {"data": [{"id": "ip_wg3ZDr23D5QlP", "attributes": {"address": "112.74.133.123", "cidr": "<value>", "family": "IPv4", "gateway": "<value>", "netmask": "255.255.255.255", "type": "Public", "public": true, "management": true, "project": {"id": "proj_RMLydp20DQKr1", "name": "Intelligent Silk Computer"}, "region": {}, "available": true, "assignment": {}}}, {"id": "ip_k0Ryqvz1qW36X", "attributes": {"address": "24.156.198.223", "cidr": "<value>", "family": "IPv4", "gateway": "<value>", "netmask": "255.255.255.255", "type": "Public", "public": true, "management": true, "project": {"id": "proj_RMLydp20DQKr1", "name": "Intelligent Silk Computer"}, "region": {}, "available": true, "assignment": {}}}]}
+  get-ip:
+    speakeasy-default-get-ip:
+      parameters:
+        path:
+          ip_id: "<id>"
+      responses:
+        "200":
+          application/vnd.api+json: {}
+  get-team:
+    Success:
+      responses:
+        "200":
+          application/vnd.api+json: {"data": [{"id": "team_8L90z0WyLyIK0KyEknmnijV38rk", "attributes": {"name": "583 Team", "slug": "583-team", "address": "654 Selene Pines, North Noble, HI 65384", "currency": "trb", "created_at": "2025-02-21T00:00:00+00:00", "updated_at": "2025-03-07T00:00:00+00:00", "enforce_mfa": false, "users": [{"id": "user_LwnmBv6vmeILPZEj4poJuEXnegj", "first_name": "Claretta", "last_name": "Kuhic", "email": "king.morissette@nitzsche.example", "created_at": "2025-05-04T00:00:00.000Z", "updated_at": "2024-09-09T00:00:00.000Z", "role": {"id": "role_735kl6xYEVcl5Nzn0weZuoxPrmL", "name": "Neville", "created_at": "2024-10-29T00:00:00.000Z", "updated_at": "2025-12-27T00:00:00.000Z"}}], "projects": [], "owner": {}, "billing": {}, "feature_flags": ["feature_flag_1", "feature_flag_2"]}}], "meta": {}}
+  post-team:
+    Created:
+      requestBody:
+        application/json: {"data": {"type": "teams", "attributes": {"name": "Name", "currency": "USD", "address": "Address"}}}
+        application/vnd.api+json: {"data": {"type": "teams", "attributes": {"name": "Name", "currency": "USD", "address": "Address"}}}
+      responses:
+        "201":
+          application/vnd.api+json: {"data": {"id": "team_zp6AZ91ZbLt8A7x47b6oI1510LV0", "attributes": {"name": "Name", "slug": "name", "address": "Address", "currency": "USD", "enforce_mfa": false}}}
+  patch-current-team:
+    Success:
+      parameters:
+        path:
+          team_id: "team_VNoL4jAy7YTbvVV0005jI6vQylGZ"
+      requestBody:
+        application/json: {"data": {"id": "team_z3Qna7E2QRc3455EQ34JfAWNQ42", "type": "teams", "attributes": {"address": "Address", "name": "Name", "currency": "USD"}}}
+        application/vnd.api+json: {"data": {"id": "team_z3Qna7E2QRc3455EQ34JfAWNQ42", "type": "teams", "attributes": {"address": "Address", "name": "Name", "currency": "USD"}}}
+      responses:
+        "200":
+          application/vnd.api+json: {"data": {"id": "team_z3Qna7E2QRc3455EQ34JfAWNQ42", "attributes": {"name": "Frami-Grady", "slug": "frami-grady", "address": "646 Vaughn Throughway", "currency": "TWD", "enforce_mfa": false}}}
+  get-team-members:
+    Success:
+      parameters:
+        query:
+          page[size]: 20
+          page[number]: 1
+      responses:
+        "200":
+          application/vnd.api+json: {"data": [{}, {}, {}]}
+  post-team-members:
+    Created:
+      requestBody:
+        application/json: {"data": {"type": "memberships", "attributes": {"first_name": "Bernard", "last_name": "Cremin", "email": "ernest@carter-lehner.example", "role": "collaborator"}}}
+        application/vnd.api+json: {"data": {"type": "memberships", "attributes": {"first_name": "Bernard", "last_name": "Cremin", "email": "ernest@carter-lehner.example", "role": "collaborator"}}}
+      responses:
+        "201":
+          application/vnd.api+json: {"data": {"id": "user_pbV0Dgykd4AWz", "attributes": {"first_name": "Bernard", "last_name": "Cremin", "email": "ernest@carter-lehner.example", "role": "collaborator", "mfa_enabled": false, "created_at": "2025-07-16T18:36:32+00:00", "updated_at": "2025-07-16T18:36:32+00:00"}}}
+  destroy-team-member:
+    Success:
+      parameters:
+        path:
+          user_id: "user_0MoLqJEYd57pY"
+  get-plans-operating-system:
+    Success:
+      parameters:
+        query:
+          page[size]: 20
+          page[number]: 1
+      responses:
+        "200":
+          application/vnd.api+json: {"data": [{}]}
+  get-plans:
+    Success:
+      responses:
+        "200":
+          application/vnd.api+json: {"data": [{"id": "plan_1Qkm7dXzD8nZV", "type": "plans", "attributes": {"slug": "g3-l40s-medium-31", "name": "g3.l40s.medium-31", "features": [], "specs": {"cpu": {"type": "E-2276G", "clock": 3.8, "cores": 6, "count": 1}, "memory": {"total": 32}, "drives": [{"count": 1, "size": "3.8TB", "type": "SSD"}], "nics": [{"count": 1, "type": "10 Gbps"}], "gpu": {"count": 4, "type": "NVIDIA H100"}}, "regions": [{"name": "Brazil", "deploys_instantly": [], "locations": {"available": ["SAO"], "in_stock": ["SAO"]}, "stock_level": "medium", "pricing": {"USD": {"hour": 10, "month": 50, "year": 100}, "BRL": {"hour": 53, "month": 108.5, "year": 205}}}]}}]}
+  get-plan:
+    Success:
+      parameters:
+        path:
+          plan_id: "plan_m5xyZOnNOWM0l"
+      responses:
+        "200":
+          application/vnd.api+json: {"data": {"id": "plan_m5xyZOnNOWM0l", "type": "plans", "attributes": {"slug": "g3-l40s-small-32", "name": "g3.l40s.small-32", "features": [], "specs": {"cpu": {"type": "E-2276G", "clock": 3.8, "cores": 6, "count": 1}, "memory": {"total": 32}, "drives": [{"count": 1, "size": "3.8TB", "type": "SSD"}], "nics": [{"count": 1, "type": "10 Gbps"}], "gpu": {"count": 4, "type": "NVIDIA H100"}}, "regions": [{"name": "Brazil", "deploys_instantly": [], "locations": {"available": ["SAO"], "in_stock": ["SAO"]}, "stock_level": "medium", "pricing": {"USD": {"hour": 10, "month": 50, "year": 100}, "BRL": {"hour": 53, "month": 108.5, "year": 205}}}]}}}
+  get-bandwidth-plans:
+    Success:
+      parameters:
+        query:
+          page[size]: 20
+          page[number]: 1
+        header:
+          API-Version: "2023-06-01"
+      responses:
+        "200":
+          application/vnd.api+json: {"data": [{"id": "argentina", "type": "bandwidth_plan", "attributes": {"region": "Argentina", "locations": ["ASH", "SAO"], "pricing": {"usd": {"monthly": 8000}, "brl": {"monthly": 4000}}}}], "meta": {}}
+  update-plans-bandwidth:
+    Success:
+      requestBody:
+        application/json: {"data": {"type": "bandwidth_packages", "attributes": {"project": "proj_z2A3DVZ3DnawP", "quantity": 5, "region_slug": "brazil"}}}
+        application/vnd.api+json: {"data": {"type": "bandwidth_packages", "attributes": {"project": "proj_z2A3DVZ3DnawP", "quantity": 5, "region_slug": "brazil"}}}
+      responses:
+        "200":
+          application/vnd.api+json: {}
+  get-containers-plan:
+    speakeasy-default-get-containers-plan:
+      parameters:
+        path:
+          plan_id: "<id>"
+      responses:
+        "200":
+          application/vnd.api+json: {}
+  get-storage-plans:
+    Success:
+      responses:
+        "200":
+          application/vnd.api+json: {"data": [{"id": "plan_MLGXPdWgdnNWk", "type": "storage_plans", "attributes": {"name": "Filesystem"}}]}
+  get-vm-plans:
+    Success:
+      responses:
+        "200":
+          application/vnd.api+json: {"data": [{"id": "plan_j0L6WO1QOPlXy", "type": "virtual_machine_plans", "attributes": {"name": "vm.l40s.tiny", "specs": {"memory": 16, "vcpus": 14, "disk": {"type": "local", "size": {"amount": 150, "unit": "gib"}}}, "regions": [{"name": "United States", "available": ["DAL"], "pricing": {"USD": {"hour": 1, "month": 720, "year": 8640}, "BRL": {"hour": 1, "month": 720, "year": 8640}}}], "stock_level": "low"}}]}
+  get-projects:
+    Success:
+      parameters:
+        query:
+          filter[tags]: "tag_GGXAB6PNQbU285ZYLP3wt3ZQyXW,tag_xR2B8J4W81TBL6YRGPJaCQRkVyn"
+          page[size]: 20
+          page[number]: 1
+      responses:
+        "200":
+          application/vnd.api+json: {"data": [{"id": "proj_lxWpD6xKdm6rk", "attributes": {"name": "Durable Steel Computer", "slug": "durable-steel-computer", "description": "Ergonomic Leather Table", "billing_type": "Hourly", "billing_method": "Normal", "cost": "677.59", "environment": "Development", "stats": {"ip_addresses": 0, "prefixes": 0, "servers": 0, "vlans": 0}, "billing": {}, "team": {"id": "team_RrG7kyBxXrHAeYr47GJ4HpKLQQr", "name": "138 Team", "slug": "138-team", "description": "138 Team", "address": "3417 Thiel Well, Port Omar, OH 21371", "currency": {}, "status": "verified", "feature_flags": []}, "created_at": "2025-07-16T18:36:34+00:00", "updated_at": "2025-07-16T18:36:34+00:00"}}]}
+  create-project:
+    Created:
+      requestBody:
+        application/json: {"data": {"type": "projects", "attributes": {"name": "Kshlerin, Hand and Beer", "provisioning_type": "on_demand", "description": "Thick slices of French toast bread, brown sugar, half-and-half and vanilla, topped with powdered sugar. With two eggs served any style, and your choice of smoked bacon or smoked ham.", "environment": "Development"}}}
+        application/vnd.api+json: {"data": {"type": "projects", "attributes": {"name": "Kshlerin, Hand and Beer", "provisioning_type": "on_demand", "description": "Thick slices of French toast bread, brown sugar, half-and-half and vanilla, topped with powdered sugar. With two eggs served any style, and your choice of smoked bacon or smoked ham.", "environment": "Development"}}}
+      responses:
+        "201":
+          application/vnd.api+json: {"data": {"id": "proj_lkg1De8vqvZE5", "attributes": {"name": "Kshlerin, Hand and Beer", "slug": "kshlerin-hand-and-beer", "description": "Thick slices of French toast bread, brown sugar, half-and-half and vanilla, topped with powdered sugar. With two eggs served any style, and your choice of smoked bacon or smoked ham.", "billing_type": "Normal", "billing_method": "Normal", "environment": "Development", "stats": {"ip_addresses": 0, "prefixes": 0, "servers": 0, "vlans": 0}, "billing": {"subscription_id": "sub_xb48v35nx0aybq", "type": "Normal", "method": "Normal"}, "team": {"id": "team_GJ5KavgA8es2BK0keG7xu4N9ZlY", "name": "141 Team", "slug": "141-team", "description": "141 Team", "address": "Apt. 307 36420 Randell Hollow, Dungborough, GA 20702", "currency": {}, "status": "verified", "feature_flags": []}, "created_at": "2025-07-16T18:36:34+00:00", "updated_at": "2025-07-16T18:36:34+00:00"}}}
+  delete-project:
+    speakeasy-default-delete-project:
+      parameters:
+        path:
+          project_id: "<id>"
+  update-project:
+    Success:
+      parameters:
+        path:
+          project_id: "proj_WVQJDMMwDRbyE"
+      requestBody:
+        application/json: {"data": {"id": "proj_WVQJDMMwDRbyE", "type": "projects", "attributes": {"name": "A brand new name for the virtual network", "description": "A brand new description for the virtual network", "bandwidth_alert": false, "tags": ["tag_xNrKWa1ZaMtBKwaZnYaMTBE2XQb", "tag_Ge9E4oboPgILP5e9aKNAUB4Gaw5"]}}}
+        application/vnd.api+json: {"data": {"id": "proj_WVQJDMMwDRbyE", "type": "projects", "attributes": {"name": "A brand new name for the virtual network", "description": "A brand new description for the virtual network", "bandwidth_alert": false, "tags": ["tag_xNrKWa1ZaMtBKwaZnYaMTBE2XQb", "tag_Ge9E4oboPgILP5e9aKNAUB4Gaw5"]}}}
+      responses:
+        "200":
+          application/vnd.api+json: {"data": {"id": "proj_WVQJDMMwDRbyE", "attributes": {"name": "Moore-Durgan", "slug": "moore-durgan", "description": "Sequi occaecati eaque exercitationem.", "billing_type": "Normal", "billing_method": "Normal", "environment": "Production", "stats": {"ip_addresses": 0, "prefixes": 0, "servers": 0, "vlans": 0}, "billing": {"subscription_id": "sub_gn4j87r9d8dt8s", "type": "Normal", "method": "Normal"}, "team": {"id": "team_eP8xa4KJl8t3GmjwLw4JfEKMXyr5", "name": "160 Team", "slug": "160-team", "description": "160 Team", "address": "68937 Leopoldo Greens, New Columbusmouth, NC 91874", "currency": {}, "status": "verified", "feature_flags": []}, "created_at": "2025-07-16T18:36:35+00:00", "updated_at": "2025-07-16T18:36:35+00:00"}}}
+  post-project-ssh-key:
+    Created:
+      parameters:
+        path:
+          project_id: "proj_RMLydp70OQKr1"
+      requestBody:
+        application/json: {"data": {"type": "ssh_keys", "attributes": {"name": "SSH Key", "public_key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDOLFnjGP3Jsh1usHNS2EILgfqZNC9pOvNqBZqxH+qNAdZdQCzy2csMuiq+ZwLA8Mm4Vo5CvSgBHs/kuZRUKyTl+79YUMZIj8PhHzL4XbdqX1ZnAIklHWcJaveB0+UXLEPKGzFIFq+FkuwtiXQsVe5NnSpIDYgpzhqEs38NsnXvsubKphGUdARDhaxvMdUUl4YsAtLHKMzSyIvE6xwfTtIVwA9bZt/8GoBzrn9px9PEcf25Rgd2NhOYs3WYcZuwvRmfcFdi2vGhVqTPqL9n16R/n5jknxHYrTyqWNxJdpdvg2YqXpN7vnFNoOjYFD6EahJ0pF/+WL4tPCIkLfoaVaSx"}}}
+        application/vnd.api+json: {"data": {"type": "ssh_keys", "attributes": {"name": "SSH Key", "public_key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDOLFnjGP3Jsh1usHNS2EILgfqZNC9pOvNqBZqxH+qNAdZdQCzy2csMuiq+ZwLA8Mm4Vo5CvSgBHs/kuZRUKyTl+79YUMZIj8PhHzL4XbdqX1ZnAIklHWcJaveB0+UXLEPKGzFIFq+FkuwtiXQsVe5NnSpIDYgpzhqEs38NsnXvsubKphGUdARDhaxvMdUUl4YsAtLHKMzSyIvE6xwfTtIVwA9bZt/8GoBzrn9px9PEcf25Rgd2NhOYs3WYcZuwvRmfcFdi2vGhVqTPqL9n16R/n5jknxHYrTyqWNxJdpdvg2YqXpN7vnFNoOjYFD6EahJ0pF/+WL4tPCIkLfoaVaSx"}}}
+      responses:
+        "201":
+          application/vnd.api+json: {"data": {"id": "ssh_w5AEmq7XDBkWX", "type": "ssh_keys", "attributes": {"name": "SSH Key", "public_key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDOLFnjGP3Jsh1usHNS2EILgfqZNC9pOvNqBZqxH+qNAdZdQCzy2csMuiq+ZwLA8Mm4Vo5CvSgBHs/kuZRUKyTl+79YUMZIj8PhHzL4XbdqX1ZnAIklHWcJaveB0+UXLEPKGzFIFq+FkuwtiXQsVe5NnSpIDYgpzhqEs38NsnXvsubKphGUdARDhaxvMdUUl4YsAtLHKMzSyIvE6xwfTtIVwA9bZt/8GoBzrn9px9PEcf25Rgd2NhOYs3WYcZuwvRmfcFdi2vGhVqTPqL9n16R/n5jknxHYrTyqWNxJdpdvg2YqXpN7vnFNoOjYFD6EahJ0pF/+WL4tPCIkLfoaVaSx", "fingerprint": "0a:00:34:53:51:0e:a5:4e:06:2c:d7:16:88:96:82:f3", "user": {"id": "user_VQNWk4maWktbnyBZr13YF6v7YvPo", "first_name": "Dino", "last_name": "Huels", "email": "jaye@fahey.test", "created_at": "2024-08-23T00:00:00.000Z", "updated_at": "2024-07-24T00:00:00.000Z", "role": {"id": "role_J6VmkZN3A5sLkXJeNrvJfykwnmW", "name": "owner", "created_at": "2025-04-29T00:00:00.000Z", "updated_at": "2026-06-29T00:00:00.000Z"}}, "created_at": "2025-07-16T18:36:37+00:00", "updated_at": "2025-07-16T18:36:37+00:00"}}}
+  get-project-ssh-keys:
+    Success:
+      parameters:
+        path:
+          project_id: "proj_LMmAD8kEqwop2"
+        query:
+          filter[tags]: "tag_K9kzXA45BEsjobKPNVEQCrrKbw4o,tag_my9K5XGPYBIr1ve257anIW4KRX2e"
+      responses:
+        "200":
+          application/vnd.api+json: {"data": [{"id": "ssh_mw49QDB5qagKb", "type": "ssh_keys", "attributes": {"name": "carroll-hane.test", "public_key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCjM7C3yylR7PMGQONLP64DvcopzCCgHT0jbfeX5cjja/SohEHEkFnS3MzRn9EBuZH1AKzVU25PlPuMmq3LZeyyOE9GQ087dF4SnRGgNWw8KL0W+HxdONq40MVjivT1luswFp61Vkty5zSpEvT9t7ZtZ9iV4QcCHCGZP2rf0YMEaT+FkPr5eIiwkfyONaMQn5Sr6+kCfwZbwTD7oM9MPWCu+Nazo62TA/Dyb6gj5+izINy4ynWO7YFnwcxGgT/sn+mznlopEEq4vay0air9wulcCM8eE/N3QyB86o/DebEYFUT85RXMtAocSNeehduyEVNNg9NbP1vXWX6/SWpOT71/", "fingerprint": "d1:77:d0:81:ab:b6:bb:7d:a1:2d:07:41:fb:f4:5d:c7", "user": {"id": "user_e2r1zkAyagSNz191p4NnI5MgreM", "first_name": "Isela", "last_name": "Altenwerth", "email": "dorathy@corkery-bode.test", "created_at": "2025-01-19T00:00:00.000Z", "updated_at": "2025-04-30T00:00:00.000Z", "role": {"id": "role_VjzZGYNr4AFb4zPwoXxVH6vk4xmZ", "name": "owner", "created_at": "2024-09-30T00:00:00.000Z", "updated_at": "2025-12-08T00:00:00.000Z"}}, "created_at": "2025-07-16T18:36:36+00:00", "updated_at": "2025-07-16T18:36:36+00:00"}}], "meta": {}}
+  get-project-ssh-key:
+    Success:
+      parameters:
+        path:
+          project_id: "proj_g1mbDwrBqLv5B"
+          ssh_key_id: "ssh_zGr47qlMDAg0m"
+      responses:
+        "200":
+          application/vnd.api+json: {"data": {"id": "ssh_zGr47qlMDAg0m", "type": "ssh_keys", "attributes": {"name": "ryan.test", "public_key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDL1aEqz3fu3mSqIUFUmN2ZoNjlqcWOZpHqBA89atzwag1epA/VhcaeCCkMHOKc6lEyaM45dcBMpnRxp8MyyOWDdvHe2aZ2g3zh8CnPUZZlIdGOj/JbzfF6gfmVbVPUor/hJUvCgW8DqFYU++BwlowDSXv6g0IWraY+9NhH+7Fy+eWX/Axdryb7vr/pnwMwYC693nI8FfRjUTxJft7/HG4Hf0Frp4inI8571z5EhrdjhXFaAU9W76qw2YhHUx54cFZXcL1LzIIjhU6BjKVNOxl7xY2AUnC0bnU19N1gALo0IyVSjQz+o10qgsubDkA0CXnmczmU8FbJs3pajdly2smn", "fingerprint": "7f:f1:16:b1:af:23:3e:7d:91:29:3d:58:ab:ab:99:07", "user": {"id": "user_86BjYvaogPsKnQYbLPMmtXmvk70X", "first_name": "Levi", "last_name": "White", "email": "tamela.parker@christiansen-damore.test", "created_at": "2024-10-25T00:00:00.000Z", "updated_at": "2025-05-19T00:00:00.000Z", "role": {"id": "role_JaWoMlVWw5fMx0BVbX6YcAAQj9Y", "name": "owner", "created_at": "2025-06-12T00:00:00.000Z", "updated_at": "2026-02-14T00:00:00.000Z"}}, "created_at": "2025-07-16T18:36:37+00:00", "updated_at": "2025-07-16T18:36:37+00:00"}}}
+  delete-project-ssh-key:
+    Success:
+      parameters:
+        path:
+          project_id: "proj_LMmAD8k4qwop2"
+          ssh_key_id: "ssh_7vYAZqGBdMQ94"
+  put-project-ssh-key:
+    Success:
+      parameters:
+        path:
+          project_id: "proj_W6Q2D9lGqKLpr"
+          ssh_key_id: "ssh_zlkg1DegdvZE5"
+      requestBody:
+        application/json: {"data": {"id": "ssh_zlkg1DegdvZE5", "type": "ssh_keys", "attributes": {"tags": ["tag_7YpWMjKZ8vujwmEV7blQhG87aaB", "tag_E8ZoPkZPXXsgN2L46WVvTeWog1rz"], "name": "New SSH Key Name"}}}
+        application/vnd.api+json: {"data": {"id": "ssh_zlkg1DegdvZE5", "type": "ssh_keys", "attributes": {"tags": ["tag_7YpWMjKZ8vujwmEV7blQhG87aaB", "tag_E8ZoPkZPXXsgN2L46WVvTeWog1rz"], "name": "New SSH Key Name"}}}
+      responses:
+        "200":
+          application/vnd.api+json: {"data": {"id": "ssh_zlkg1DegdvZE5", "type": "ssh_keys", "attributes": {"name": "quitzon-hahn.example", "public_key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDIPUwSU0uUOOHaiRgNvchWwbE1mMsLIXiMhsWu2HYCCskWhI87AIGGhesf8iqv/L61ZR4xSY2vpS+Ydj9m6DAIcbw4SrwCCbzYlSnJC8A3DNplfH8Yv3w1moJkryIu0Y1OPFstvr4UKLQKBzNPR5cjKKmJPX34BrmubNhRCOi9MR33UZAn+ek7Y6soHx+ftGNfLQTNCRa9l1pWk+zcaw3f1rIgrgCxRJZUxsfhAvhrH6gMQ52J4YPTwNYXiDz183lCXQ7ttCraTZOkt9Wrjes9GpAWdyAb54/YxB9C3a5Yuekd3affxWf5qS6iPH2cH4WqD85cCiAHWgP50QDy0Jzx", "fingerprint": "0a:d4:d1:f6:4a:b9:eb:d9:fc:b1:7f:3d:b1:7d:78:94", "user": {"id": "user_9LywwYp44LHZ8aarom8ziRm9MJw", "first_name": "Tennie", "last_name": "Cremin", "email": "antone.ward@streich.example", "created_at": "2024-09-10T00:00:00.000Z", "updated_at": "2024-12-12T00:00:00.000Z", "role": {"id": "role_wJZBnlQNwyhXGWEnZZGosBzP2VM", "name": "owner", "created_at": "2025-04-05T00:00:00.000Z", "updated_at": "2026-03-06T00:00:00.000Z"}}, "created_at": "2025-07-16T18:36:39+00:00", "updated_at": "2025-07-16T18:36:39+00:00"}}}
+  get-ssh-keys:
+    Success:
+      parameters:
+        query:
+          filter[tags]: "tag_lYXenaknWwsJ4rryVbNoUbn6p4V,tag_ARJPX1YRrgTKQ4xpvX5YuWNG2nwW"
+      responses:
+        "200":
+          application/vnd.api+json: {"data": [{"id": "ssh_aNmodj4eDbE8W", "type": "ssh_keys", "attributes": {"name": "shields-lind.test", "public_key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDAifZt83PbEYnFX/pVfbUAw+hN60eTak5x3EqSUAG2vUrchJiU+V5fVj9H1IstDOB3clhEGiAqxby+Bur9lp3mWSXvRoPo85VU5OH7DS/+8GFUKGtLpHPI7It+ZEq/LaIq8p1VIwql77SBbaUYgKJxWobfJPpQgipr2kphrrfXkqeqP/W0tLKHq6XYzKFl0dZWdduDDZ9ltfZJcLRnYMOMqh6rVw79lOIi6HCxANNoxEKE0p4qUaOWbGRknOADD4qlES7vZWRindKSRgN0jf21STzzzXdB9o4PQmHM/q39UbjBvFppE0NVwD5oBC7Vkej7GnoUxwUgwjgC4fDrZM2X", "fingerprint": "62:cd:46:63:46:c4:2b:19:47:9f:9e:19:f9:d8:be:87", "user": {"id": "user_5m68r767gNC5G528wokRFW2lLPy", "first_name": "Harris", "last_name": "Mills", "email": "carlton_feeney@fisher.example", "created_at": "2024-12-09T00:00:00.000Z", "updated_at": "2024-07-20T00:00:00.000Z", "role": {"id": "role_P2QbX40bZnu4J37oVba2TaQYp5M", "name": "owner", "created_at": "2025-03-15T00:00:00.000Z", "updated_at": "2026-06-22T00:00:00.000Z"}}, "created_at": "2025-07-16T18:37:05+00:00", "updated_at": "2025-07-16T18:37:05+00:00"}}], "meta": {}}
+  post-ssh-key:
+    Created:
+      requestBody:
+        application/json: {"data": {"type": "ssh_keys", "attributes": {"name": "SSH Key", "public_key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDOLFnjGP3Jsh1usHNS2EILgfqZNC9pOvNqBZqxH+qNAdZdQCzy2csMuiq+ZwLA8Mm4Vo5CvSgBHs/kuZRUKyTl+79YUMZIj8PhHzL4XbdqX1ZnAIklHWcJaveB0+UXLEPKGzFIFq+FkuwtiXQsVe5NnSpIDYgpzhqEs38NsnXvsubKphGUdARDhaxvMdUUl4YsAtLHKMzSyIvE6xwfTtIVwA9bZt/8GoBzrn9px9PEcf25Rgd2NhOYs3WYcZuwvRmfcFdi2vGhVqTPqL9n16R/n5jknxHYrTyqWNxJdpdvg2YqXpN7vnFNoOjYFD6EahJ0pF/+WL4tPCIkLfoaVaSx"}}}
+        application/vnd.api+json: {"data": {"type": "ssh_keys", "attributes": {"name": "SSH Key", "public_key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDOLFnjGP3Jsh1usHNS2EILgfqZNC9pOvNqBZqxH+qNAdZdQCzy2csMuiq+ZwLA8Mm4Vo5CvSgBHs/kuZRUKyTl+79YUMZIj8PhHzL4XbdqX1ZnAIklHWcJaveB0+UXLEPKGzFIFq+FkuwtiXQsVe5NnSpIDYgpzhqEs38NsnXvsubKphGUdARDhaxvMdUUl4YsAtLHKMzSyIvE6xwfTtIVwA9bZt/8GoBzrn9px9PEcf25Rgd2NhOYs3WYcZuwvRmfcFdi2vGhVqTPqL9n16R/n5jknxHYrTyqWNxJdpdvg2YqXpN7vnFNoOjYFD6EahJ0pF/+WL4tPCIkLfoaVaSx"}}}
+      responses:
+        "201":
+          application/vnd.api+json: {"data": {"id": "ssh_1ZJrdxw5Og4LV", "type": "ssh_keys", "attributes": {"name": "SSH Key", "public_key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDOLFnjGP3Jsh1usHNS2EILgfqZNC9pOvNqBZqxH+qNAdZdQCzy2csMuiq+ZwLA8Mm4Vo5CvSgBHs/kuZRUKyTl+79YUMZIj8PhHzL4XbdqX1ZnAIklHWcJaveB0+UXLEPKGzFIFq+FkuwtiXQsVe5NnSpIDYgpzhqEs38NsnXvsubKphGUdARDhaxvMdUUl4YsAtLHKMzSyIvE6xwfTtIVwA9bZt/8GoBzrn9px9PEcf25Rgd2NhOYs3WYcZuwvRmfcFdi2vGhVqTPqL9n16R/n5jknxHYrTyqWNxJdpdvg2YqXpN7vnFNoOjYFD6EahJ0pF/+WL4tPCIkLfoaVaSx", "fingerprint": "0a:00:34:53:51:0e:a5:4e:06:2c:d7:16:88:96:82:f3", "user": {"id": "user_wwjA0m2L4BTXAXMw4X17hMlZl6z", "first_name": "Genevive", "last_name": "Shields", "email": "jamel_mcdermott@homenick.example", "created_at": "2025-04-28T00:00:00.000Z", "updated_at": "2024-11-18T00:00:00.000Z", "role": {"id": "role_bj5BPjB5o7iyw0QbxWZatE5K81YQ", "name": "owner", "created_at": "2024-12-04T00:00:00.000Z", "updated_at": "2026-01-16T00:00:00.000Z"}}, "created_at": "2025-07-16T18:37:07+00:00", "updated_at": "2025-07-16T18:37:07+00:00"}}}
+  get-ssh-key:
+    Success:
+      parameters:
+        path:
+          ssh_key_id: "ssh_0MK4O4Zkqa95w"
+      responses:
+        "200":
+          application/vnd.api+json: {"data": {"id": "ssh_0MK4O4Zkqa95w", "type": "ssh_keys", "attributes": {"name": "skiles.test", "public_key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDOrRGYU+6bjz8a7DgqNdn4tHIZOp66o6imzvDk1clS4RRGCUwQlk8e0uOf3vEv2EF6QYlPpu+AaSiLryV4cT+RdY4XFLksTVwJ6pH5PIDpfcb+hh5E/HpyDUea38FDyED6+tkz75v6rvcVS7GliLKaHyiawMNqNPBEgEJBNPxwjhgDouhg9qjFcqFbEsKcVF+vZFrCpvTXWjI2O7EqI0es5p6161e88BvnKcVMsKfdpD35n2LwwGm2rK6+mBy1znUS0xDS0XDU8O/hAWPFQHhWj5TpoIrOwpYdfBIP/+tdQwmswD2JedsdcJl0MQMGSs5xSPZqUTB8qIktZ260o11h", "fingerprint": "06:9f:69:74:ab:43:9b:a6:47:d9:37:15:e2:d5:0d:31", "user": {"id": "user_VGBlzEKMLYIbpXXxZV8mCaKwPYV", "first_name": "Chuck", "last_name": "Kemmer", "email": "florencio@nader.example", "created_at": "2024-11-17T00:00:00.000Z", "updated_at": "2025-04-30T00:00:00.000Z", "role": {"id": "role_ZR4vkpP58YSGRzy8Qk4XHQeKjQK", "name": "owner", "created_at": "2025-02-01T00:00:00.000Z", "updated_at": "2026-05-25T00:00:00.000Z"}}, "created_at": "2025-07-16T18:37:07+00:00", "updated_at": "2025-07-16T18:37:07+00:00"}}}
+  delete-ssh-key:
+    Success:
+      parameters:
+        path:
+          ssh_key_id: "ssh_lxWpD6xKdm6rk"
+  put-ssh-key:
+    Success:
+      parameters:
+        path:
+          ssh_key_id: "ssh_8Nkvdyn1qeLpx"
+      requestBody:
+        application/json: {"data": {"id": "ssh_8Nkvdyn1qeLpx", "type": "ssh_keys", "attributes": {"tags": ["tag_BR6a9QPmXWCPVzLrmEYAslyroMK", "tag_yxVkGz7rxMsl9M54lr71fp5XZg60"], "name": "New SSH Key Name"}}}
+        application/vnd.api+json: {"data": {"id": "ssh_8Nkvdyn1qeLpx", "type": "ssh_keys", "attributes": {"tags": ["tag_BR6a9QPmXWCPVzLrmEYAslyroMK", "tag_yxVkGz7rxMsl9M54lr71fp5XZg60"], "name": "New SSH Key Name"}}}
+      responses:
+        "200":
+          application/vnd.api+json: {"data": {"id": "ssh_8Nkvdyn1qeLpx", "type": "ssh_keys", "attributes": {"name": "larson-grady.example", "public_key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCy3NKkUMbR6a+Z0i0UbVQfuTeSQ/9fspeNCCv/biB0QtJ5AgrtoxsBc2PVtUysBX0ZoBZrVX76ataGmivZdWzxRrli/ezpeLpQD4GWt2jhhdCfsHxrvorpfTNCzSSPl7DTmvOVHjHtOgytoPpB5V1C46tLomd78LqkQfM1pIaE1XFysnPNNSRIBgkY9IMfD1vp94ubx66FpgFO5e+kGEMueo8+zklf7Ec6bjzzsexdJ1MFHvkhzuieg5XApFczudD25wrKuZb4VIDfDCkaqKr3hMl1cLlFjEEng3bVNKtmkMtAalVIxK+h9Hg88uvvobPuO+fn9YEMzLRAlK+DW+3t", "fingerprint": "39:0b:6e:63:f8:a7:1a:55:85:1f:2f:32:22:b9:f7:60", "user": {"id": "user_Z40pnNJK5oImXEaPkBxbCpj3WZW", "first_name": "Clarence", "last_name": "Kilback", "email": "carey.ruecker@zboncak.example", "created_at": "2025-01-05T00:00:00.000Z", "updated_at": "2024-10-07T00:00:00.000Z", "role": {"id": "role_vePpArmPWlC0RAP78Gn5FvWgGY6o", "name": "owner", "created_at": "2024-11-25T00:00:00.000Z", "updated_at": "2026-01-28T00:00:00.000Z"}}, "created_at": "2025-07-16T18:37:09+00:00", "updated_at": "2025-07-16T18:37:09+00:00"}}}
+  get-project-users-data:
+    Success:
+      parameters:
+        path:
+          project_id: "proj_RMLydp7XOQKr1"
+        query:
+          extra_fields[user_data]: "decoded_content"
+      responses:
+        "200":
+          application/vnd.api+json: {"data": [{}]}
+  get-project-user-data:
+    Success:
+      parameters:
+        path:
+          project_id: "proj_Gr47qlevDAg0m"
+          user_data_id: "ud_VLMmAD8EOwop2"
+        query:
+          extra_fields[user_data]: "decoded_content"
+      responses:
+        "200":
+          application/vnd.api+json: {"data": {"id": "ud_VLMmAD8EOwop2", "type": "user_data", "attributes": {"description": "Breaded fried chicken with waffles, and a side of maple syrup.", "content": "VHdvIGJ1dHRlciBjcm9pc3NhbnRzIG9mIHlvdXIgY2hvaWNlIChwbGFpbiwgYWxtb25kIG9yIGNoZWVzZSkuIFdpdGggYSBzaWRlIG9mIGhlcmIgYnV0dGVyIG9yIGhvdXNlLW1hZGUgaGF6ZWxudXQgc3ByZWFkLg==", "created_at": "2025-07-16T18:36:39+00:00", "updated_at": "2025-07-16T18:36:39+00:00"}}, "meta": {}}
+  delete-project-user-data:
+    speakeasy-default-delete-project-user-data:
+      parameters:
+        path:
+          project_id: "<id>"
+          user_data_id: "<id>"
+  post-project-user-data:
+    Created:
+      parameters:
+        path:
+          project_id: "proj_kjQwdE0XOYNVP"
+      requestBody:
+        application/json: {"data": {"type": "user_data", "attributes": {"description": "User Data description", "content": "I2Nsb3VkLWNvbmZpZwpydW5jbWQ6CiAtIFsgdG91Y2gsICAvaG9tZS91YnVudHUvdGVzdCBd"}}}
+        application/vnd.api+json: {"data": {"type": "user_data", "attributes": {"description": "User Data description", "content": "I2Nsb3VkLWNvbmZpZwpydW5jbWQ6CiAtIFsgdG91Y2gsICAvaG9tZS91YnVudHUvdGVzdCBd"}}}
+      responses:
+        "201":
+          application/vnd.api+json: {"data": {"id": "ud_pRMLydp0dQKr1", "type": "user_data", "attributes": {"description": "User Data description", "content": "I2Nsb3VkLWNvbmZpZwpydW5jbWQ6CiAtIFsgdG91Y2gsICAvaG9tZS91YnVudHUvdGVzdCBd", "created_at": "2025-07-16T18:36:39+00:00", "updated_at": "2025-07-16T18:36:39+00:00"}}, "meta": {}}
+  put-project-user-data:
+    speakeasy-default-put-project-user-data:
+      parameters:
+        path:
+          project_id: "<id>"
+          user_data_id: "<id>"
+      responses:
+        "200":
+          application/vnd.api+json: {}
+  get-users-data:
+    Success:
+      parameters:
+        query:
+          extra_fields[user_data]: "decoded_content"
+      responses:
+        "200":
+          application/vnd.api+json: {"data": [{}]}
+  post-user-data:
+    Created:
+      requestBody:
+        application/json: {"data": {"type": "user_data", "attributes": {"description": "User Data description", "content": "I2Nsb3VkLWNvbmZpZwpydW5jbWQ6CiAtIFsgdG91Y2gsICAvaG9tZS91YnVudHUvdGVzdCBd"}}}
+        application/vnd.api+json: {"data": {"type": "user_data", "attributes": {"description": "User Data description", "content": "I2Nsb3VkLWNvbmZpZwpydW5jbWQ6CiAtIFsgdG91Y2gsICAvaG9tZS91YnVudHUvdGVzdCBd"}}}
+      responses:
+        "201":
+          application/vnd.api+json: {"data": {"id": "ud_GKN4ydzgqVob3", "type": "user_data", "attributes": {"description": "User Data description", "content": "I2Nsb3VkLWNvbmZpZwpydW5jbWQ6CiAtIFsgdG91Y2gsICAvaG9tZS91YnVudHUvdGVzdCBd", "created_at": "2025-07-16T18:37:12+00:00", "updated_at": "2025-07-16T18:37:12+00:00"}}, "meta": {}}
+  get-user-data:
+    Success:
+      parameters:
+        path:
+          user_data_id: "ud_1Qkm7dXzD8nZV"
+        query:
+          extra_fields[user_data]: "decoded_content"
+      responses:
+        "200":
+          application/vnd.api+json: {"data": {"id": "ud_1Qkm7dXzD8nZV", "type": "user_data", "attributes": {"description": "Breaded fried chicken with waffles, and a side of maple syrup.", "content": "QnJlYWRlZCBmcmllZCBjaGlja2VuIHdpdGggd2FmZmxlcywgYW5kIGEgc2lkZSBvZiBtYXBsZSBzeXJ1cC4=", "created_at": "2025-07-16T18:37:12+00:00", "updated_at": "2025-07-16T18:37:12+00:00"}}, "meta": {}}
+  delete-user-data:
+    speakeasy-default-delete-user-data:
+      parameters:
+        path:
+          user_data_id: "<id>"
+  patch-user-data:
+    speakeasy-default-patch-user-data:
+      parameters:
+        path:
+          user_data_id: "<id>"
+      responses:
+        "200":
+          application/vnd.api+json: {}
+  get-regions:
+    Success:
+      parameters:
+        query:
+          page[size]: 20
+          page[number]: 1
+      responses:
+        "200":
+          application/vnd.api+json: {"data": [{"id": "loc_k0RyqvNvqW36X", "attributes": {"slug": "mraz,-pagac-and-murazik", "name": "Mraz, Pagac and Murazik", "country": {"slug": "wintheiser,-kreiger-and-parisian", "name": "Wintheiser, Kreiger and Parisian"}}}]}
+  get-region:
+    Success:
+      parameters:
+        path:
+          region_id: "reg_GMy1DbYLqN50m"
+      responses:
+        "200":
+          application/vnd.api+json: {"data": {"id": "loc_WVQJDMQlDRbyE", "attributes": {"slug": "macgyver-tremblay", "name": "MacGyver-Tremblay", "country": {"slug": "breitenberg,-kirlin-and-doyle", "name": "Breitenberg, Kirlin and Doyle"}}}}
+  get-roles:
+    Success:
+      parameters:
+        query:
+          page[size]: 20
+          page[number]: 1
+      responses:
+        "200":
+          application/vnd.api+json: {"data": [{"id": "role_0L6WO1vEdPlXy", "type": "roles", "attributes": {"name": "collaborator"}}]}
+  get-role-id:
+    Success:
+      parameters:
+        path:
+          role_id: "role_LMmAD8vldwop2"
+      responses:
+        "200":
+          application/vnd.api+json: {"data": {"id": "role_LMmAD8vldwop2", "type": "roles", "attributes": {"name": "billing"}}, "meta": {}}
+  get-servers:
+    Success:
+      parameters:
+        query:
+          filter[tags]: "tag_Az0EY3zglei3jVBY1LroSWNyanye,tag_GXK6NGol1jF2xre0JrB0fK6wg0p"
+          page[size]: 20
+          page[number]: 1
+      responses:
+        "200":
+          application/vnd.api+json: {"data": [{"id": "sv_lxWpD6xKdm6rk", "type": "servers", "attributes": {"hostname": "Hostname", "label": "474495NODEMC", "status": "on", "ipmi_status": "Normal", "role": "Bare Metal", "locked": false, "primary_ipv4": "204.198.2.102", "primary_ipv6": "941c:f42a:460b:db1e:bde3:f7d4:c0cd:fd66", "created_at": "1720608931604", "scheduled_deletion_at": "<value>", "plan": {"id": "plan_g1mbDw8BOLv5B", "name": "g3.h100.large-38", "slug": "plan-slug", "billing": "hourly"}, "operating_system": {"name": "Ubuntu (18.04 x64 LTS)", "slug": "ubuntu_18_04_x64_lts", "version": "18.04 x64 LTS", "features": {"raid": true, "ssh_keys": true}, "distro": {"name": "Ubuntu", "slug": "ubuntu", "series": "bionic"}}, "region": {"city": "São Paulo", "country": "United States", "site": {"id": "loc_RMLydp20DQKr1", "name": "São Paulo", "slug": "SAO", "facility": "São Paulo", "rack_id": "rack_VLMmAD8EOwop2"}}, "specs": {"cpu": "Xeon E-2186G CPU @ 3.80GHz (6 cores)", "disk": "500 GB SSD", "ram": "32 GB", "nic": "", "gpu": "<value>"}, "interfaces": [{"role": "ipmi", "name": "IPMI", "mac_address": "00:11:22:33:44:55", "description": "IPMI Interface"}, {"role": "internal", "name": "PXE", "mac_address": "66:77:88:99:aa:bb", "description": "PXE Interface"}], "project": {"id": "proj_8NkvdyMKdeLpx", "name": "Incredible Bronze Bench", "slug": "incredible-bronze-bench", "description": "Practical Silk Gloves", "billing_type": "Normal", "provisioning_type": "on_demand", "billing_method": "Normal", "bandwidth_alert": false, "environment": "<value>", "billing": {}, "stats": {"ip_addresses": 8, "prefixes": 0, "servers": 3, "vlans": 0}}, "team": {"id": "team_JrVbpk7aNltMLVVPwmWkfyZb5Q1", "name": "254 Team", "slug": "254-team", "description": "254 Team", "address": "95005 Krajcik Trace, Rennerview, DE 88944", "currency": {}, "status": "verified", "feature_flags": []}}}], "meta": {}}
+  create-server:
+    Created:
+      requestBody:
+        application/json: {"data": {"type": "servers", "attributes": {"project": "proj_A05EdQ50dvKYQ", "plan": "c2-small-x86", "site": "ASH", "operating_system": "ubuntu_22_04_x64_lts", "hostname": "BRC1"}}}
+        application/vnd.api+json: {"data": {"type": "servers", "attributes": {"project": "proj_A05EdQ50dvKYQ", "plan": "c2-small-x86", "site": "ASH", "operating_system": "ubuntu_22_04_x64_lts", "hostname": "BRC1"}}}
+      responses:
+        "201":
+          application/vnd.api+json: {"data": {"id": "sv_KXgRdRyoOv9k5", "type": "servers", "attributes": {"hostname": "BRC1", "label": "868155NODEVO", "status": "off", "role": "Bare Metal", "primary_ipv4": "29.227.250.123", "primary_ipv6": "f5:1442:770b:d762:7b55:1583:8420:630b", "plan": {"id": "plan_VE1Wd3aXDXnZJ", "name": "c2.small.x86", "slug": "c2-small-x86", "billing": "hourly"}, "specs": {"cpu": "Xeon E-2186G CPU @ 3.80GHz (6 cores)", "disk": "500 GB SSD", "ram": "32 GB", "nic": ""}, "interfaces": [{"role": "ipmi", "name": "IPMI", "mac_address": "00:11:22:33:44:55", "description": "IPMI Interface"}, {"role": "internal", "name": "PXE", "mac_address": "66:77:88:99:aa:bb", "description": "PXE Interface"}]}}, "meta": {}}
+  get-server:
+    Success:
+      parameters:
+        path:
+          server_id: "sv_Gr47qleMDAg0m"
+      responses:
+        "200":
+          application/vnd.api+json: {"data": {"id": "sv_Gr47qleMDAg0m", "type": "servers", "attributes": {"hostname": "Hostname", "label": "203126NODEEM", "status": "on", "ipmi_status": "Normal", "role": "Bare Metal", "locked": false, "primary_ipv4": "171.105.213.73", "primary_ipv6": "539e:7347:6e9a:c432:bb5a:87b4:2ce1:4566", "created_at": "1707555929429", "scheduled_deletion_at": "<value>", "plan": {"id": "plan_aNmodj4eDbE8W", "name": "c2.large.arm", "slug": "c2-large-arm", "billing": "hourly"}, "operating_system": {"name": "Ubuntu (18.04 x64 LTS)", "slug": "ubuntu_18_04_x64_lts", "version": "18.04 x64 LTS", "features": {"raid": true, "ssh_keys": true}, "distro": {"name": "Ubuntu", "slug": "ubuntu", "series": "bionic"}}, "region": {"city": "São Paulo", "country": "Mexico", "site": {"id": "loc_A05EdQL1OvKYQ", "name": "São Paulo", "slug": "SAO", "facility": "São Paulo", "rack_id": "rack_6VE1Wd37dXnZJ"}}, "specs": {"cpu": "", "disk": "", "ram": "", "nic": "", "gpu": "<value>"}, "interfaces": [{"role": "ipmi", "name": "IPMI", "mac_address": "00:11:22:33:44:55", "description": "IPMI Interface"}, {"role": "internal", "name": "PXE", "mac_address": "66:77:88:99:aa:bb", "description": "PXE Interface"}], "project": {"id": "proj_KXgRdRyoOv9k5", "name": "Rustic Silk Knife", "slug": "rustic-silk-knife", "description": "Heavy Duty Concrete Keyboard", "billing_type": "Normal", "provisioning_type": "on_demand", "billing_method": "Normal", "bandwidth_alert": false, "environment": "<value>", "billing": {}, "stats": {"ip_addresses": 2, "prefixes": 0, "servers": 1, "vlans": 0}}, "team": {"id": "team_8mKNxlmL2McYo7Jz87KlCXynmenj", "name": "270 Team", "slug": "270-team", "description": "270 Team", "address": "Apt. 279 839 Boehm Street, South Randall, OH 69160", "currency": {}, "status": "verified", "feature_flags": []}}}, "meta": {}}
+  destroy-server:
+    speakeasy-default-destroy-server:
+      parameters:
+        path:
+          server_id: "<id>"
+  update-server:
+    Success:
+      parameters:
+        path:
+          server_id: "sv_aNmodjGyqbE8W"
+      requestBody:
+        application/json: {"data": {"id": "sv_aNmodjGyqbE8W", "type": "servers", "attributes": {"hostname": "new-hostname", "project": "proj_aNmodjoyqbE8W"}}}
+        application/vnd.api+json: {"data": {"id": "sv_aNmodjGyqbE8W", "type": "servers", "attributes": {"hostname": "new-hostname", "project": "proj_aNmodjoyqbE8W"}}}
+      responses:
+        "200":
+          application/vnd.api+json: {"data": {"id": "sv_aNmodjGyqbE8W", "type": "servers", "attributes": {"hostname": "Enormous Copper Hat", "label": "318187NODEHH", "status": "unknown", "ipmi_status": "Normal", "role": "Bare Metal", "locked": false, "primary_ipv4": "130.50.220.233", "primary_ipv6": "cb26:be3e:ec79:5115:c6d5:d41b:b4f4:9593", "created_at": "1729772597440", "scheduled_deletion_at": "<value>", "plan": {"id": "plan_k0Ryqvz1qW36X", "name": "c2.large.arm", "slug": "c2-large-arm", "billing": "hourly"}, "operating_system": {}, "region": {"city": "Frankfurt", "country": "Germany", "site": {"id": "loc_w49QDBa5qagKb", "name": "Frankfurt", "slug": "FRA", "facility": "Frankfurt", "rack_id": "rack_byQrJdNJd30gv"}}, "specs": {"cpu": "", "disk": "", "ram": "", "nic": "", "gpu": "<value>"}, "interfaces": [], "project": {"id": "proj_aNmodjoyqbE8W", "name": "Practical Plastic Lamp", "slug": "practical-plastic-lamp", "description": "Ergonomic Leather Hat", "billing_type": "Normal", "provisioning_type": "on_demand", "billing_method": "Normal", "bandwidth_alert": false, "environment": "<value>", "billing": {}, "stats": {"ip_addresses": 0, "prefixes": 0, "servers": 1, "vlans": 0}}, "team": {"id": "team_8yZmmmBZ5kuKeepJEE5JFaykBrr", "name": "310 Team", "slug": "310-team", "description": "310 Team", "address": "Apt. 492 6356 Hyatt Mountains, Skilesville, TN 12908-1951", "currency": {}, "status": "verified", "feature_flags": []}}}, "meta": {}}
+  get-server-deploy-config:
+    Success:
+      parameters:
+        path:
+          server_id: "sv_VLMmAD8EOwop2"
+      responses:
+        "200":
+          application/vnd.api+json: {"data": {"id": "sv_VLMmAD8EOwop2", "attributes": {"operating_system": "debian_10", "hostname": "Solarbreeze", "raid": "raid-1", "user_data": "ud_zGr47qlMDAg0m", "ssh_keys": ["ssh_6059EqYkOQj8p"], "partitions": [{"path": "/", "size_in_gb": 300, "filesystem_type": "ext4"}]}}}
+  update-server-deploy-config:
+    Success:
+      parameters:
+        path:
+          server_id: "sv_0L6WO141DPlXy"
+      requestBody:
+        application/json: {"type": "deploy_config"}
+        application/vnd.api+json: {"type": "deploy_config"}
+      responses:
+        "200":
+          application/vnd.api+json: {"data": {"id": "sv_0L6WO141DPlXy", "attributes": {"operating_system": "ubuntu_20_04_x64_lts", "hostname": "my-hostname", "raid": "raid-1", "user_data": "ud_5LA73qkjdaJ2o", "ssh_keys": ["ssh_GKN4ydzgqVob3"], "partitions": [{"path": "/", "size_in_gb": 300, "filesystem_type": "ext4"}]}}}
+  server-lock:
+    Success:
+      parameters:
+        path:
+          server_id: "sv_RMLydpoXOQKr1"
+      responses:
+        "200":
+          application/vnd.api+json: {"data": {"id": "sv_RMLydpoXOQKr1", "type": "servers", "attributes": {"hostname": "Practical Linen Chair", "label": "834976NODEXR", "status": "unknown", "ipmi_status": "Normal", "role": "Bare Metal Unmanaged", "locked": true, "primary_ipv4": "12.233.187.10", "created_at": "1732829027514", "scheduled_deletion_at": "<value>", "region": {"city": "Sydney", "country": "Australia", "site": {"id": "loc_wg3ZDrwWO5QlP", "name": "Sydney", "slug": "SYD", "facility": "Sydney"}}, "project": {"id": "proj_Qkm7dXRAD8nZV", "name": "Sleek Iron Pants", "slug": "sleek-iron-pants", "description": "Fantastic Cotton Clock", "billing_type": "Normal", "billing_method": "Normal", "bandwidth_alert": false, "environment": "<value>", "billing": {"subscription_id": "sub_cc8763jmlb30v3", "type": "Normal", "method": "Normal"}, "stats": {"ip_addresses": 0, "prefixes": 0, "servers": 1, "vlans": 0}}, "team": {"id": "team_56p6jJ3bzRF587xo6rvwf6VwgLbv", "name": "433 Team", "slug": "433-team", "description": "433 Team", "address": "5236 Hien Center, South Kelleychester, FL 98441", "currency": {}, "status": "verified"}}}}
+  server-unlock:
+    Success:
+      parameters:
+        path:
+          server_id: "sv_5AEmq7xMDBkWX"
+      responses:
+        "200":
+          application/vnd.api+json: {"data": {"id": "sv_5AEmq7xMDBkWX", "type": "servers", "attributes": {"hostname": "Durable Rubber Shoes", "label": "167521NODECL", "status": "unknown", "ipmi_status": "Normal", "role": "Storage", "locked": false, "primary_ipv4": "114.154.255.79", "created_at": "1709352489139", "scheduled_deletion_at": "<value>", "region": {"city": "Sydney", "country": "Australia", "site": {"id": "loc_KXgRdRyoOv9k5", "name": "Sydney", "slug": "SYD", "facility": "Sydney"}}, "project": {"id": "proj_LGXPdWX4qnNWk", "name": "Mediocre Concrete Shoes", "slug": "mediocre-concrete-shoes", "description": "Intelligent Wooden Knife", "billing_type": "Normal", "billing_method": "Normal", "bandwidth_alert": false, "environment": "<value>", "billing": {"subscription_id": "sub_lat09fkzpobtiz", "type": "Normal", "method": "Normal"}, "stats": {"ip_addresses": 0, "prefixes": 0, "servers": 1, "vlans": 0}}, "team": {"id": "team_87E9ev31amIKVpaG9G1YH6bJL04", "name": "438 Team", "slug": "438-team", "description": "438 Team", "address": "Apt. 872 986 Tora Mountains, North Wandaport, IA 08437", "currency": {}, "status": "verified"}}}}
+  get-server-out-of-band:
+    Success:
+      parameters:
+        path:
+          server_id: "sv_vYAZqGyJOMQ94"
+      responses:
+        "200":
+          application/vnd.api+json: {"data": {"id": "obc_AW6Q2D9lqKLpr", "type": "out_of_band", "attributes": {"ssh_key": {"id": "ssh_5AEmq71XOBkWX", "description": "oconnell.example", "fingerprint": "ae:17:77:b8:3c:3d:58:d9:5b:10:a1:71:56:b3:03:8b"}, "created_at": "2025-07-16T18:36:59+00:00", "username": "server-1", "credentials": {"user": "wilfred_dicki", "password": "8za8ppq9lz"}, "port": "2222", "access_ip": "189.1.2.0", "server_id": "sv_vYAZqGyJOMQ94", "status": "connected"}}}
+  create-server-out-of-band:
+    Created:
+      parameters:
+        path:
+          server_id: "sv_059EqYX2dQj8p"
+      requestBody:
+        application/json: {"data": {"type": "out_of_band", "attributes": {"ssh_key_id": "ssh_w49QDB55qagKb"}}}
+        application/vnd.api+json: {"data": {"type": "out_of_band", "attributes": {"ssh_key_id": "ssh_w49QDB55qagKb"}}}
+      responses:
+        "201":
+          application/vnd.api+json: {"data": {"id": "obc_mw49QDB5qagKb", "type": "out_of_band", "attributes": {"ssh_key": {"id": "ssh_w49QDB55qagKb", "description": "oberbrunner.test", "fingerprint": "7d:46:c6:b5:ca:28:43:5e:b9:2c:61:9e:fc:a6:5d:59"}, "created_at": "2025-07-16T18:36:57+00:00", "username": "server-1", "credentials": {"user": "phillip_legros", "password": "g5gyubdn5p"}, "port": "2222", "access_ip": "189.1.2.0", "server_id": "sv_059EqYX2dQj8p", "status": "connected"}}}
+  create-server-action:
+    Created:
+      parameters:
+        path:
+          server_id: "sv_LA73qkJwdaJ2o"
+      requestBody:
+        application/json: {"data": {"type": "actions", "attributes": {"action": "reboot"}}}
+        application/vnd.api+json: {"data": {"type": "actions", "attributes": {"action": "reboot"}}}
+      responses:
+        "201":
+          application/vnd.api+json: {"data": {"id": "act_V0DgYxxN9Ed4A", "type": "actions", "attributes": {"status": "Rebooting device"}}, "meta": {}}
+  create-ipmi-session:
+    Created:
+      parameters:
+        path:
+          server_id: "sv_e8pKq0xYqWAob"
+      responses:
+        "201":
+          application/vnd.api+json: {"data": {"id": "ipmi_mw49QDB5qagKb", "type": "ipmi_sessions", "attributes": {"ipmi_address": "10.0.10.1", "ipmi_username": "customer_access", "ipmi_password": "ipmi_password"}}}
+  server-start-rescue-mode:
+    Created:
+      parameters:
+        path:
+          server_id: "sv_695BdK25OevVo"
+      responses:
+        "201":
+          application/vnd.api+json: {"meta": {}}
+  server-exit-rescue-mode:
+    Success:
+      parameters:
+        path:
+          server_id: "sv_wg3ZDr0Wd5QlP"
+      responses:
+        "200":
+          application/vnd.api+json: {"meta": {}}
+  server-schedule-deletion:
+    Created:
+      parameters:
+        path:
+          server_id: "sv_GMy1Db2NDN50m"
+      responses:
+        "201":
+          application/vnd.api+json: {"data": {"id": "sv_GMy1Db2NDN50m", "type": "schedule_deletion", "attributes": {"server_id": "sv_GMy1Db2NDN50m", "scheduled_deletion_at": "2025-08-16T12:37:02Z"}}}
+  server-unschedule-deletion:
+    speakeasy-default-server-unschedule-deletion:
+      parameters:
+        path:
+          server_id: "<id>"
+  create-server-reinstall:
+    Created:
+      parameters:
+        path:
+          server_id: "sv_Z8rodmJGq1jLB"
+      requestBody:
+        application/json: {"data": {"type": "reinstalls", "attributes": {"operating_system": "ipxe", "hostname": "BRC1", "ipxe": "https://some-host.com/image.ipxe"}}}
+        application/vnd.api+json: {"data": {"type": "reinstalls", "attributes": {"operating_system": "ipxe", "hostname": "BRC1", "ipxe": "https://some-host.com/image.ipxe"}}}
+  get-storage-filesystems:
+    Success:
+      parameters:
+        query:
+          filter[project]: "sleek-silk-car"
+  post-storage-filesystems:
+    Created:
+      requestBody:
+        application/json: {"data": {"type": "filesystems", "attributes": {"project": "proj_kjQwdE2bqYNVP", "name": "my-data", "size_in_gb": 1500}}}
+        application/vnd.api+json: {"data": {"type": "filesystems", "attributes": {"project": "proj_kjQwdE2bqYNVP", "name": "my-data", "size_in_gb": 1500}}}
+      responses:
+        "201":
+          application/vnd.api+json: {"data": {"id": "fs_AW6Q2D9lqKLpr", "type": "filesystems", "attributes": {"name": "my-data", "size_in_gb": 1500, "created_at": "2025-07-16T18:37:09.000Z", "project": {"id": "proj_kjQwdE2bqYNVP", "name": "Heavy Duty Leather Clock", "slug": "heavy-duty-leather-clock"}}}}
+  delete-storage-filesystems:
+    speakeasy-default-delete-storage-filesystems:
+      parameters:
+        path:
+          filesystem_id: "<id>"
+  patch-storage-filesystems:
+    Success:
+      parameters:
+        path:
+          filesystem_id: "fs_7vYAZqGBdMQ94"
+      requestBody:
+        application/json: {"data": {"id": "fs_7vYAZqGBdMQ94", "type": "filesystems", "attributes": {"size_in_gb": 1501}}}
+        application/vnd.api+json: {"data": {"id": "fs_7vYAZqGBdMQ94", "type": "filesystems", "attributes": {"size_in_gb": 1501}}}
+      responses:
+        "200":
+          application/vnd.api+json: {"data": {"id": "fs_7vYAZqGBdMQ94", "type": "filesystems", "attributes": {"name": "Mediocre Cotton Shoes", "size_in_gb": 1501, "created_at": "2025-07-16T18:37:10.000Z", "project": {"id": "proj_lkg1De6ROvZE5", "name": "Mediocre Wool Car", "slug": "mediocre-wool-car"}}}}
+  get-storage-volumes:
+    Success:
+      parameters:
+        query:
+          filter[project]: "proj_GnzRD5X6qM5yw"
+      responses:
+        "200":
+          application/vnd.api+json: {"data": [{"id": "vol_RLYV8DZ2D5QoE", "type": "volumes", "attributes": {"name": "Enormous Wool Watch", "size_in_gb": 1500, "created_at": "2025-10-03T17:09:37.415Z", "namespace_id": 722662, "connector_id": "nqn.2001-07.com.ceph:1757602476548", "initiators": [{"nqn": "nqn.2014-08.org.nvmexpress:uuid:ae717767-c0fa-56f7-ab4b-5c426b0c553f"}], "project": {"id": "proj_GnzRD5X6qM5yw", "name": "Heavy Duty Iron Shoes", "slug": "heavy-duty-iron-shoes", "description": "Sleek Wool Clock", "billing_type": "Normal", "billing_method": "Normal", "bandwidth_alert": false, "environment": "<value>", "billing": {"subscription_id": "<id>", "type": "Normal", "method": "Normal"}, "stats": {"ip_addresses": 0, "prefixes": 0, "servers": 0, "vlans": 0}}, "team": {"id": "team_QnjVypy08mCW7amJPYj0hXGZgjjg", "name": "583 Team", "slug": "583-team", "description": "583 Team", "address": "69731 Lueilwitz Spurs, Aufderharmouth, MI 93262-2199", "currency": {}, "status": "verified"}}}]}
+  post-storage-volumes:
+    Created:
+      requestBody:
+        application/json: {"data": {"type": "volumes", "attributes": {"project": "proj_8NkvdyPXOeLpx", "name": "my-data", "size_in_gb": 1500}}}
+        application/vnd.api+json: {"data": {"type": "volumes", "attributes": {"project": "proj_8NkvdyPXOeLpx", "name": "my-data", "size_in_gb": 1500}}}
+      responses:
+        "201":
+          application/vnd.api+json: {"data": {"id": "vol_Av9BVDavORm1W", "type": "volumes", "attributes": {"name": "Incredible Linen Chair", "size_in_gb": 1500, "created_at": "2025-10-03T18:09:37.000Z", "namespace_id": 767995, "connector_id": "<id>", "initiators": [{}], "project": {"id": "proj_8NkvdyPXOeLpx", "name": "Small Concrete Bag", "slug": "small-concrete-bag", "description": "Enormous Iron Shoes", "billing_type": "Normal", "billing_method": "Normal", "bandwidth_alert": false, "environment": "<value>", "billing": {"subscription_id": "<id>", "type": "Normal", "method": "Normal"}, "stats": {"ip_addresses": 0, "prefixes": 0, "servers": 0, "vlans": 0}}, "team": {"id": "team_mPzlevJWQotr05vlaQ6mu9XaWvK", "name": "578 Team", "slug": "578-team", "description": "578 Team", "address": "Suite 629 420 Lindgren Square, Mahaven, KY 74726", "currency": {}, "status": "verified"}}}}
+  post-storage-volumes-mount:
+    speakeasy-default-post-storage-volumes-mount:
+      parameters:
+        path:
+          id: "<id>"
+      requestBody:
+        application/json: {"data": {"type": "volumes", "attributes": {"nqn": "nqn.2024-01.com.example:server01"}}}
+  get-storage-volume:
+    Success:
+      parameters:
+        path:
+          id: "vol_aKXgRdR3qv9k5"
+      responses:
+        "200":
+          application/vnd.api+json: {"data": {"id": "vol_aKXgRdR3qv9k5", "type": "volumes", "attributes": {"name": "Ergonomic Concrete Shoes", "size_in_gb": 1500, "created_at": "2025-10-03T17:09:38.006Z", "namespace_id": 580856, "connector_id": "nqn.2001-07.com.ceph:1757602476548", "initiators": [{"nqn": "nqn.2014-08.org.nvmexpress:uuid:ae717767-c0fa-56f7-ab4b-5c426b0c553f"}], "project": {"id": "proj_Z8rodmkAD1jLB", "name": "Practical Copper Bag", "slug": "practical-copper-bag", "description": "Aerodynamic Rubber Car", "billing_type": "Normal", "billing_method": "Normal", "bandwidth_alert": false, "environment": "<value>", "billing": {"subscription_id": "<id>", "type": "Normal", "method": "Normal"}, "stats": {"ip_addresses": 0, "prefixes": 0, "servers": 0, "vlans": 0}}, "team": {"id": "team_4zo3v0EbRvUKMXX1gKR2TkmXVPA", "name": "592 Team", "slug": "592-team", "description": "592 Team", "address": "58253 Schuppe Ports, Heathcoteborough, ND 34198-0887", "currency": {}, "status": "verified"}}}}
+  delete-storage-volumes:
+    speakeasy-default-delete-storage-volumes:
+      parameters:
+        path:
+          id: "<id>"
+  get-tags:
+    Success:
+      responses:
+        "200":
+          application/vnd.api+json: {"data": [{"id": "tag_rrBpzxAAp3UJzrEb6z4xhW55Lx9p", "type": "tags", "attributes": {"name": "Saruman", "slug": "saruman", "description": "Odit suscipit quidem sed.", "color": "#c0c077", "team": {"id": "team_YGebYxWLAPtoWp5x4LoEHGaePgYe", "name": "569 Team", "slug": "569-team", "description": "569 Team", "address": "441 Donald Oval, New Hank, WA 86449-7808", "currency": {}, "status": "verified"}}}]}
+  create-tag:
+    Created:
+      requestBody:
+        application/json: {"data": {"type": "tags", "attributes": {"name": "Tag Name", "description": "Tag Description", "color": "#bebebe"}}}
+        application/vnd.api+json: {"data": {"type": "tags", "attributes": {"name": "Tag Name", "description": "Tag Description", "color": "#bebebe"}}}
+      responses:
+        "201":
+          application/vnd.api+json: {"data": {"id": "tag_7rE4rnrKowTjojXneKprFRjGg19", "type": "tags", "attributes": {"name": "Tag Name", "slug": "tag-name", "description": "Tag Description", "color": "#bebebe", "team": {"id": "team_MLv6NBEZrzI5a3XkP5k8cLjYG2o", "name": "570 Team", "slug": "570-team", "description": "570 Team", "address": "Apt. 638 652 Randall Neck, VonRuedenmouth, KS 94389", "currency": {}, "status": "verified"}}}}
+  destroy-tag:
+    speakeasy-default-destroy-tag:
+      parameters:
+        path:
+          tag_id: "<id>"
+  update-tag:
+    Success:
+      parameters:
+        path:
+          tag_id: "tag_k88kazkbPktNYRWa2l9ZsN6gVrrL"
+      requestBody:
+        application/json: {"data": {"id": "tag_k88kazkbPktNYRWa2l9ZsN6gVrrL", "type": "tags", "attributes": {"name": "Tag Name", "color": "#ffffff"}}}
+        application/vnd.api+json: {"data": {"id": "tag_k88kazkbPktNYRWa2l9ZsN6gVrrL", "type": "tags", "attributes": {"name": "Tag Name", "color": "#ffffff"}}}
+      responses:
+        "200":
+          application/vnd.api+json: {"data": {"id": "tag_k88kazkbPktNYRWa2l9ZsN6gVrrL", "type": "tags", "attributes": {"name": "Tag Name", "slug": "tag-name", "description": "Debitis dolorum qui alias.", "color": "#2ca5a5", "team": {"id": "team_v8ZZbARV28T0n8P05PbYFBRmMLP", "name": "575 Team", "slug": "575-team", "description": "575 Team", "address": "Suite 733 888 Wonda Mountains, Kuvalisburgh, SC 38682-0878", "currency": {}, "status": "verified"}}}}
+  get-traffic-consumption:
+    Success:
+      parameters:
+        query:
+          filter[server]: "sv_kjQwdEMXdYNVP"
+          filter[date][gte]: "2025-06-16T18:45:37Z"
+          filter[date][lte]: "2025-07-16T18:45:37Z"
+      responses:
+        "200":
+          application/vnd.api+json: {"data": {"id": "", "type": "traffic", "attributes": {"from_date": 1750099537, "to_date": 1752691537, "regions": [{"region_slug": "brazil", "total_inbound_gb": 102, "total_outbound_gb": 241, "total_inbound_95th_percentile_mbps": 1832.91, "total_outbound_95th_percentile_mbps": 1819.99, "data": [{"date": "2021-07-01T00:00:00.000+00:00", "inbound_gb": 10, "outbound_gb": 102, "avg_outbound_speed_mbps": 1.19, "avg_inbound_speed_mbps": 0.13}, {"date": "2021-07-02T00:00:00.000+00:00", "inbound_gb": 2, "outbound_gb": 6, "avg_outbound_speed_mbps": 0.08, "avg_inbound_speed_mbps": 0.02}, {"date": "2021-07-03T00:00:00.000+00:00", "inbound_gb": 5, "outbound_gb": 15, "avg_outbound_speed_mbps": 0.18, "avg_inbound_speed_mbps": 0.06}, {"date": "2021-07-04T00:00:00.000+00:00", "inbound_gb": 57, "outbound_gb": 32, "avg_outbound_speed_mbps": 0.38, "avg_inbound_speed_mbps": 0.66}, {"date": "2021-07-05T00:00:00.000+00:00", "inbound_gb": 11, "outbound_gb": 59, "avg_outbound_speed_mbps": 0.69, "avg_inbound_speed_mbps": 0.13}, {"date": "2021-07-06T00:00:00.000+00:00", "inbound_gb": 17, "outbound_gb": 27, "avg_outbound_speed_mbps": 0.32, "avg_inbound_speed_mbps": 0.2}]}], "total_inbound_gb": 102, "total_outbound_gb": 241, "total_inbound_95th_percentile_mbps": 1832.91, "total_outbound_95th_percentile_mbps": 1819.99}}}
+  get-traffic-quota:
+    Success:
+      responses:
+        "200":
+          application/vnd.api+json: {"data": {"id": "traffic_quota", "type": "traffic_quota", "attributes": {"quota_per_project": [{"project_id": "proj_e8pKq0aKDWAob", "project_slug": "synergistic-linen-computer", "billing_method": "Normal", "quota_per_region": [{"region_id": "reg_9QDB5qag", "region_slug": "brazil", "quota_in_tb": {"granted": 20, "additional": 0, "total": 20}, "quota_in_mbps": {"granted": 0, "additional": 0, "total": 0}}]}]}}}
+  get-user-profile:
+    Success:
+      responses:
+        "200":
+          application/vnd.api+json: {"data": {"id": "user_BgrNj7anj4IxA7KExoK7SzYAEmE", "attributes": {"first_name": "Ernest", "last_name": "Moen", "email": "gerard@bashirian.test", "role": {"id": "role_kpoKZwloZ9HN140lwRW3sVg20V9", "name": "owner", "created_at": "2025-06-18T00:00:00.000Z", "updated_at": "2026-05-24T00:00:00.000Z"}}}}
+  patch-user-profile:
+    Success:
+      parameters:
+        path:
+          id: "user_lGJBgAxbgeUJ4yZj56wmfrK4vag"
+      requestBody:
+        application/json: {"data": {"id": "user_lGJBgAxbgeUJ4yZj56wmfrK4vag", "type": "users", "attributes": {"role": "collaborator"}}}
+        application/vnd.api+json: {"data": {"id": "user_lGJBgAxbgeUJ4yZj56wmfrK4vag", "type": "users", "attributes": {"role": "collaborator"}}}
+      responses:
+        "200":
+          application/vnd.api+json: {"data": {"id": "user_lGJBgAxbgeUJ4yZj56wmfrK4vag", "attributes": {"first_name": "Tamesha", "last_name": "Barton", "email": "paola@halvorson.test", "role": "owner"}}}
+  get-user-teams:
+    Success:
+      responses:
+        "200":
+          application/vnd.api+json: {"data": [{"id": "team_yEMAp05jx2ule2aA1ZwVtp5GLZk4", "attributes": {"name": "625 Team", "slug": "625-team", "address": "75739 Parker Common, Murphyview, CT 54114", "currency": "BRL", "created_at": "2024-12-31T00:00:00+00:00", "updated_at": "2025-04-02T00:00:00+00:00", "owner": {"id": "user_X0j5j5Kbabhyex1g2N97HJ3p2wY", "first_name": "Cara", "last_name": "Gerlach", "email": "waylon@oberbrunner.example", "created_at": "2024-09-16T00:00:00.000Z", "updated_at": "2024-08-01T00:00:00.000Z", "role": {"id": "role_4ANgaERK0yS4wQ8lA4pLH0bAw4JW", "name": "owner", "created_at": "2025-05-23T00:00:00.000Z", "updated_at": "2026-04-24T00:00:00.000Z"}}, "billing": {"id": "bill_mw49QDB5qagKb", "customer_billing_id": "cus_oxro8kom3akzra"}}}], "meta": {}}
+  index-virtual-machine:
+    Success:
+      parameters:
+        query:
+          extra_fields[virtual_machines]: "credentials"
+  create-virtual-machine:
+    Created:
+      requestBody:
+        application/json: {"data": {"type": "virtual_machines", "attributes": {"name": "my-new-vm", "project": "enormous-wool-keyboard"}}}
+        application/vnd.api+json: {"data": {"type": "virtual_machines", "attributes": {"name": "my-new-vm", "project": "enormous-wool-keyboard"}}}
+      responses:
+        "201":
+          application/vnd.api+json: {"data": {"id": "vm_mw49QDB5qagKb", "type": "virtual_machines", "attributes": {"name": "my-new-vm", "created_at": "2025-07-16T18:37:13+00:00", "status": "Starting", "operating_system": "WebOS", "plan": {"id": "plan_KN4ydzxvDVob3", "name": "g3.l40s.medium-119"}, "specs": {"vcpu": 16, "ram": "128 GB", "storage": "100 GB", "nic": "1 x 1 Gbps", "gpu": "1 x NVIDIA H100 Tensor Core GPU"}, "team": {"id": "team_R38obnyYLkuAjexYE7ZEHMw2vB1", "name": "627 Team", "slug": "627-team", "description": "627 Team", "address": "64807 Hudson Curve, Port Anjanette, NH 53335", "currency": {}, "status": "verified"}, "project": {"id": "proj_Qkm7dXMVq8nZV", "name": "Enormous Wool Keyboard", "slug": "enormous-wool-keyboard", "description": "Durable Rubber Bench", "billing_type": "Normal", "billing_method": "Normal", "bandwidth_alert": false, "environment": "<value>", "billing": {"subscription_id": "<id>", "type": "Normal", "method": "Normal"}, "stats": {"ip_addresses": 0, "prefixes": 0, "servers": 0, "vlans": 0}}}}}
+  show-virtual-machine:
+    Success:
+      parameters:
+        path:
+          virtual_machine_id: "vm_w5AEmq7XDBkWX"
+  destroy-virtual-machine:
+    speakeasy-default-destroy-virtual-machine:
+      parameters:
+        path:
+          virtual_machine_id: "<id>"
+  create-virtual-machine-action:
+    Created:
+      parameters:
+        path:
+          virtual_machine_id: "vm_VLMmAD8EOwop2"
+      requestBody:
+        application/json: {"id": "vm_VLMmAD8EOwop2", "type": "virtual_machines", "attributes": {"action": "reboot"}}
+        application/vnd.api+json: {"id": "vm_VLMmAD8EOwop2", "type": "virtual_machines", "attributes": {"action": "reboot"}}
+  get-virtual-networks:
+    Success:
+      parameters:
+        query:
+          filter[tags]: "tag_P284pBvBEoT492NeXgv7TPaR3k8,tag_nPpEv2AnR9u9RBrGLLJ3C89nZJN"
+          page[size]: 20
+          page[number]: 1
+      responses:
+        "200":
+          application/vnd.api+json: {"data": [{"id": "vlan_AW6Q2D9lqKLpr", "type": "virtual_networks", "attributes": {"vid": 2040, "description": "Odit quod ratione exercitationem.", "region": {"city": "Santiago 3", "country": "Chile", "site": {"id": "loc_aNmodj6ZdbE8W", "facility": "Santiago 3", "name": "Santiago 3", "slug": "SAN3"}}, "created_at": "2023-08-09T01:47:06.301Z", "assignments_count": 1}}], "meta": {}}
+  create-virtual-network:
+    Created:
+      requestBody:
+        application/json: {"data": {"type": "virtual_network", "attributes": {"description": "São Paulo VLAN", "site": "MIA", "project": "incredible-granite-coat"}}}
+        application/vnd.api+json: {"data": {"type": "virtual_network", "attributes": {"description": "São Paulo VLAN", "site": "MIA", "project": "incredible-granite-coat"}}}
+      responses:
+        "201":
+          application/vnd.api+json: {"data": {"id": "vlan_3YjJOLQjdvZ87", "type": "virtual_networks", "attributes": {"vid": 2000, "name": "MIA-2000", "description": "São Paulo VLAN", "created_at": "2025-07-16T18:37:16+00:00"}}, "meta": {}}
+  get-virtual-network:
+    Success:
+      parameters:
+        path:
+          vlan_id: "vlan_W6Q2D9ordKLpr"
+      responses:
+        "200":
+          application/vnd.api+json: {"data": {}}
+  update-virtual-network:
+    Success:
+      parameters:
+        path:
+          vlan_id: "vlan_VaNmodjeObE8W"
+      requestBody:
+        application/json: {"data": {"id": "vlan_VaNmodjeObE8W", "type": "virtual_networks", "attributes": {"tags": ["tag_Mjb3aoBkXRi5nR0gBQ5EhV30voRx", "tag_QnkPzo8Wj1iWWzg24P5bhXAzrxmm"], "description": "Test virtual network update"}}}
+        application/vnd.api+json: {"data": {"id": "vlan_VaNmodjeObE8W", "type": "virtual_networks", "attributes": {"tags": ["tag_Mjb3aoBkXRi5nR0gBQ5EhV30voRx", "tag_QnkPzo8Wj1iWWzg24P5bhXAzrxmm"], "description": "Test virtual network update"}}}
+      responses:
+        "200":
+          application/vnd.api+json: {"data": {"id": "vlan_VaNmodjeObE8W", "type": "virtual_networks", "attributes": {"vid": 2040, "name": "illo", "description": "Eum voluptatem nisi et.", "created_at": "2023-04-23T16:14:50.903Z"}}, "meta": {}}
+  get-virtual-networks-assignments:
+    Success:
+      parameters:
+        query:
+          page[size]: 20
+          page[number]: 1
+      responses:
+        "200":
+          application/vnd.api+json: {"data": [{"id": "vnasg_KN4ydzavOVob3", "type": "virtual_network_assignment", "attributes": {"virtual_network_id": "vlan_0MoLqJvgq57pY", "vid": 4, "description": "Satterfield-Hirthe", "status": "connected", "server": {"id": "sv_lkg1DeZaOvZE5", "hostname": "db", "label": "BRC01", "locked": false, "status": "unknown"}}}, {"id": "vnasg_0L6WO181DPlXy", "type": "virtual_network_assignment", "attributes": {"virtual_network_id": "vlan_Z8rodmpGO1jLB", "vid": 6, "description": "Lindgren Group", "status": "connecting", "server": {"id": "sv_vYAZqGoEqMQ94", "hostname": "api", "label": "BRC02", "locked": false, "status": "unknown"}}}], "meta": {}}
+  assign-server-virtual-network:
+    Created:
+      requestBody:
+        application/json: {"data": {"type": "virtual_network_assignment", "attributes": {"server_id": "sv_pbV0DgQGd4AWz", "virtual_network_id": "vlan_3YjJOLBjqvZ87"}}}
+        application/vnd.api+json: {"data": {"type": "virtual_network_assignment", "attributes": {"server_id": "sv_pbV0DgQGd4AWz", "virtual_network_id": "vlan_3YjJOLBjqvZ87"}}}
+      responses:
+        "201":
+          application/vnd.api+json: {"data": {"id": "vnasg_W6Q2D9jEOKLpr", "type": "virtual_network_assignment", "attributes": {"virtual_network_id": "vlan_3YjJOLBjqvZ87", "vid": 1, "description": "my vlan", "status": "connecting"}}, "meta": {}}
+  delete-virtual-networks-assignments:
+    speakeasy-default-delete-virtual-networks-assignments:
+      parameters:
+        path:
+          assignment_id: "<id>"
+  destroy-virtual-network:
+    speakeasy-default-destroy-virtual-network:
+      parameters:
+        path:
+          vlan_id: "<id>"
+  get-vpn-sessions:
+    Success:
+      parameters:
+        query:
+          filter[location]: "SAO"
+      responses:
+        "200":
+          application/vnd.api+json: {"data": [{"id": "vpn_zGr47qlMDAg0m", "type": "vpn_sessions", "attributes": {"user_name": "Delana", "port": "8443", "host": "fw04-mh1.maxi.host", "region": {"city": "São Paulo", "country": "Australia", "site": {"id": "loc_W6Q2D9YEDKLpr", "name": "São Paulo", "slug": "SAO", "facility": "São Paulo"}}, "expires_at": "2025-07-16T18:46:43+00:00", "created_at": "2025-07-16T18:45:43+00:00", "updated_at": "2025-07-16T18:45:43+00:00"}}], "meta": {}}
+  post-vpn-session:
+    Created:
+      requestBody:
+        application/json: {"data": {"attributes": {"site": "SAO", "server_id": "sv_wg3ZDrKyO5QlP"}}}
+        application/vnd.api+json: {"data": {"attributes": {"site": "SAO", "server_id": "sv_wg3ZDrKyO5QlP"}}}
+      responses:
+        "201":
+          application/vnd.api+json: {"data": {"id": "vpn_xkjQwdENqYNVP", "type": "vpn_sessions", "attributes": {"user_name": "Winifred", "password": "caL1dENKqEspX", "port": "8443", "host": "fw04-mh1.maxi.host", "region": {"city": "São Paulo", "country": "Colombia", "site": {"id": "loc_w49QDBwKOagKb", "name": "São Paulo", "slug": "SAO", "facility": "São Paulo"}}, "expires_at": "2025-07-16T18:38:18+00:00", "created_at": "2025-07-16T18:37:18+00:00", "updated_at": "2025-07-16T18:37:18+00:00"}}}
+  put-vpn-session:
+    Success:
+      parameters:
+        path:
+          vpn_session_id: "vpn_6VE1Wd37dXnZJ"
+      responses:
+        "200":
+          application/vnd.api+json: {"data": {"id": "vpn_6VE1Wd37dXnZJ", "type": "vpn_sessions", "attributes": {"user_name": "Dina", "password": "5n6HCdn1wYYUC", "port": "8443", "host": "fw04-mh1.maxi.host", "region": {"city": "São Paulo", "country": "Germany", "site": {"id": "loc_LMmAD8wyqwop2", "name": "São Paulo", "slug": "SAO", "facility": "São Paulo"}}, "expires_at": "2025-07-16T18:38:19+00:00", "created_at": "2025-07-16T18:37:19+00:00", "updated_at": "2025-07-16T18:37:19+00:00"}}}
+  delete-vpn-session:
+    speakeasy-default-delete-vpn-session:
+      parameters:
+        path:
+          vpn_session_id: "<id>"
+examplesVersion: 1.0.2
+generatedTests: {}
