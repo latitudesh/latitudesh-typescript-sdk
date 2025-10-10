@@ -1,0 +1,18 @@
+workflowVersion: 1.0.0
+speakeasyVersion: latest
+sources:
+    Latitudesh-OAS:
+        inputs:
+            - location: registry.speakeasyapi.dev/latitude/latitude/latitudesh-oas:main
+        registry:
+            location: registry.speakeasyapi.dev/latitude/latitude/latitudesh-oas
+targets:
+    latitudesh:
+        target: typescript
+        source: Latitudesh-OAS
+        codeSamples:
+            registry:
+                location: registry.speakeasyapi.dev/latitude/latitude/latitudesh-oas-typescript-code-samples
+            labelOverride:
+                fixedValue: Typescript (SDK)
+            blocking: false

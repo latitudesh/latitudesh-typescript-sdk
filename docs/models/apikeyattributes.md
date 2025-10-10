@@ -1,0 +1,21 @@
+# ApiKeyAttributes
+
+## Example Usage
+
+```typescript
+import { ApiKeyAttributes } from "latitudesh-typescript-sdk/models";
+
+let value: ApiKeyAttributes = {};
+```
+
+## Fields
+
+| Field                                                                                         | Type                                                                                          | Required                                                                                      | Description                                                                                   |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `name`                                                                                        | *string*                                                                                      | :heavy_minus_sign:                                                                            | Name of the API Key                                                                           |
+| `apiVersion`                                                                                  | *string*                                                                                      | :heavy_minus_sign:                                                                            | The API version associated with this API Key                                                  |
+| `tokenLastSlice`                                                                              | *string*                                                                                      | :heavy_minus_sign:                                                                            | The last 5 characters of the token created for this API Key                                   |
+| `lastUsedAt`                                                                                  | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | The last time a request was made to the API using this API Key                                |
+| `user`                                                                                        | [models.ApiKeyUser](../models/apikeyuser.md)                                                  | :heavy_minus_sign:                                                                            | The owner of the API Key                                                                      |
+| `createdAt`                                                                                   | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | The time when the API Key was created                                                         |
+| `updatedAt`                                                                                   | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | The time when the API Key was updated                                                         |
