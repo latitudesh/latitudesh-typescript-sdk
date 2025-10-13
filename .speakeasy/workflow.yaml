@@ -10,6 +10,9 @@ targets:
     latitudesh:
         target: typescript
         source: Latitudesh-OAS
+        publish:
+            npm:
+                token: $npm_token
         codeSamples:
             registry:
                 location: registry.speakeasyapi.dev/latitude/latitude/latitudesh-oas-typescript-code-samples
