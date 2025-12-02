@@ -27,34 +27,30 @@ Latitude.sh API: The Latitude.sh API is a RESTful API to manage your Latitude.sh
 <!-- Start SDK Installation [installation] -->
 ## SDK Installation
 
-> [!TIP]
-> To finish publishing your SDK to npm and others you must [run your first generation action](https://www.speakeasy.com/docs/github-setup#step-by-step-guide).
-
-
 The SDK can be installed with either [npm](https://www.npmjs.com/), [pnpm](https://pnpm.io/), [bun](https://bun.sh/) or [yarn](https://classic.yarnpkg.com/en/) package managers.
 
 ### NPM
 
 ```bash
-npm add <UNSET>
+npm add latitudesh-typescript-sdk
 ```
 
 ### PNPM
 
 ```bash
-pnpm add <UNSET>
+pnpm add latitudesh-typescript-sdk
 ```
 
 ### Bun
 
 ```bash
-bun add <UNSET>
+bun add latitudesh-typescript-sdk
 ```
 
 ### Yarn
 
 ```bash
-yarn add <UNSET>
+yarn add latitudesh-typescript-sdk
 ```
 
 > [!NOTE]
@@ -334,9 +330,9 @@ run();
 * [updateFilesystem](docs/sdks/storage/README.md#updatefilesystem) - Update a filesystem for a project
 * [getStorageVolumes](docs/sdks/storage/README.md#getstoragevolumes) - List volumes
 * [postStorageVolumes](docs/sdks/storage/README.md#poststoragevolumes) - Create volume
-* [postStorageVolumesMount](docs/sdks/storage/README.md#poststoragevolumesmount) - Mount volume
 * [getStorageVolume](docs/sdks/storage/README.md#getstoragevolume) - Get volume
 * [deleteStorageVolumes](docs/sdks/storage/README.md#deletestoragevolumes) - Delete volume
+* [postStorageVolumesMount](docs/sdks/storage/README.md#poststoragevolumesmount) - Mount volume
 
 ### [tags](docs/sdks/tags/README.md)
 
@@ -719,8 +715,8 @@ If the selected server has variables, you may override its default values throug
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
 const latitudesh = new Latitudesh({
-  serverIdx: 1,
-  latitudeApiKey: "<value>",
+  serverIdx: 0,
+  latitudeApiKey: "<insert your api key here>",
   bearer: process.env["LATITUDESH_BEARER"] ?? "",
 });
 

@@ -1,6 +1,6 @@
 # CreateVirtualNetworkSite2
 
-Site ID or slug
+Site ID or slug (case-insensitive)
 
 ## Example Usage
 

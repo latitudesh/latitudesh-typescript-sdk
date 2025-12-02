@@ -511,6 +511,7 @@ async function run() {
       type: "user_data",
       attributes: {
         description: "User Data description",
+        project: "proj_AW6Q2D9lqKLpr",
         content: "I2Nsb3VkLWNvbmZpZwpydW5jbWQ6CiAtIFsgdG91Y2gsICAvaG9tZS91YnVudHUvdGVzdCBd",
       },
     },
@@ -542,6 +543,7 @@ async function run() {
       type: "user_data",
       attributes: {
         description: "User Data description",
+        project: "proj_AW6Q2D9lqKLpr",
         content: "I2Nsb3VkLWNvbmZpZwpydW5jbWQ6CiAtIFsgdG91Y2gsICAvaG9tZS91YnVudHUvdGVzdCBd",
       },
     },
