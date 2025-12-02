@@ -137,7 +137,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Latitudesh",
-    version: "0.0.4",
+    version: "0.1.0",
   });
 
   const client = new LatitudeshCore({
@@ -247,9 +247,9 @@ export function createMCPServer(deps: {
   tool(tool$storageUpdateFilesystem);
   tool(tool$storageGetStorageVolumes);
   tool(tool$storagePostStorageVolumes);
-  tool(tool$storagePostStorageVolumesMount);
   tool(tool$storageGetStorageVolume);
   tool(tool$storageDeleteStorageVolumes);
+  tool(tool$storagePostStorageVolumesMount);
   tool(tool$tagsList);
   tool(tool$tagsCreate);
   tool(tool$tagsDelete);

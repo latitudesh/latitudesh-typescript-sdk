@@ -90,6 +90,7 @@ async function $do(
 
   const query = encodeFormQuery({
     "extra_fields[user_data]": payload?.["extra_fields[user_data]"],
+    "filter[project]": payload?.["filter[project]"],
   });
 
   const headers = new Headers(compactMap({

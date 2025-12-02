@@ -1,19 +1,20 @@
-speakeasyVersion: 1.636.3
+speakeasyVersion: 1.666.0
 sources:
     Latitudesh-OAS:
         sourceNamespace: latitudesh-oas
-        sourceRevisionDigest: sha256:3d1c5a22023ead205263d2f0727bc73913eac45262ea2d208ae5569ed1515aa7
-        sourceBlobDigest: sha256:bd06853de43a4e735ac002acdb1e7315df380b586b5ae71c466fc8af7f6c6373
+        sourceRevisionDigest: sha256:4b9a7be9c1490a5cecc18867f7c694aba609c33b27ca5008e25ebb5e53c925ba
+        sourceBlobDigest: sha256:ca67578e3cfd0423986acee13b9dbe1ea40dabce552ad37f786dd1a78a6f33cf
         tags:
             - latest
+            - speakeasy-sdk-regen-1761179325
 targets:
     latitudesh:
         source: Latitudesh-OAS
         sourceNamespace: latitudesh-oas
-        sourceRevisionDigest: sha256:3d1c5a22023ead205263d2f0727bc73913eac45262ea2d208ae5569ed1515aa7
-        sourceBlobDigest: sha256:bd06853de43a4e735ac002acdb1e7315df380b586b5ae71c466fc8af7f6c6373
+        sourceRevisionDigest: sha256:4b9a7be9c1490a5cecc18867f7c694aba609c33b27ca5008e25ebb5e53c925ba
+        sourceBlobDigest: sha256:ca67578e3cfd0423986acee13b9dbe1ea40dabce552ad37f786dd1a78a6f33cf
         codeSamplesNamespace: latitudesh-oas-typescript-code-samples
-        codeSamplesRevisionDigest: sha256:19ac0d57d0481d9745288f587b6667a032b5aae907374122a9f5138cad95ceb0
+        codeSamplesRevisionDigest: sha256:09448881a03e250562cda36bb37b6004170b2e1c19a90221ef3593be2303d47a
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
@@ -27,6 +28,9 @@ workflow:
         latitudesh:
             target: typescript
             source: Latitudesh-OAS
+            publish:
+                npm:
+                    token: $npm_token
             codeSamples:
                 registry:
                     location: registry.speakeasyapi.dev/latitude/latitude/latitudesh-oas-typescript-code-samples
