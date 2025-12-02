@@ -3,10 +3,10 @@ id: c8245324-f3d7-42c7-8124-ce79579cbff5
 management:
   docChecksum: fa50dd760789d3bdefd7492c36894c42
   docVersion: "2023-06-01"
-  speakeasyVersion: 1.666.0
-  generationVersion: 2.768.0
-  releaseVersion: 0.1.0
-  configChecksum: 0d1edfcdb5eac10ca62e15d02b463f92
+  speakeasyVersion: 1.666.2
+  generationVersion: 2.768.1
+  releaseVersion: 0.1.1
+  configChecksum: d07454e15c6fc121f9313cfda8d91a88
   repoURL: https://github.com/latitudesh/latitudesh-typescript-sdk.git
   installationURL: https://github.com/latitudesh/latitudesh-typescript-sdk
   published: true
@@ -14,7 +14,7 @@ features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.12
-    core: 3.26.13
+    core: 3.26.14
     defaultEnabledRetries: 0.1.0
     deprecations: 2.81.1
     devContainers: 2.90.1
@@ -2078,4 +2078,3 @@ examples:
           vpn_session_id: "<id>"
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Typescript SDK Changes:\n* `latitudesh.billing.listUsage()`:  `response.data.attributes.availableCreditBalance` **Added**\n* `latitudesh.sshKeys.listAll()`: \n  *  `request.filter[project]` **Added**\n* `latitudesh.sshKeys.create()`: \n  *  `request.data.attributes.project` **Added**\n* `latitudesh.userData.list()`: \n  *  `request.filter[project]` **Added**\n* `latitudesh.userData.createNew()`: \n  *  `request.data.attributes.project` **Added**\n* `latitudesh.privateNetworks.list()`:  `response.data.[].attributes` **Changed**\n* `latitudesh.privateNetworks.create()`:  `response.data.attributes` **Changed**\n* `latitudesh.privateNetworks.get()`:  `response.data.data.attributes` **Changed**\n* `latitudesh.privateNetworks.update()`:  `response.data.attributes` **Changed**\n"
