@@ -13,4 +13,5 @@ let value: PostSshKeyAttributes2 = {};
 | Field               | Type                | Required            | Description         |
 | ------------------- | ------------------- | ------------------- | ------------------- |
 | `name`              | *string*            | :heavy_minus_sign:  | Name of the SSH Key |
+| `project`           | *string*            | :heavy_minus_sign:  | Project ID or slug  |
 | `publicKey`         | *string*            | :heavy_minus_sign:  | SSH Public Key      |

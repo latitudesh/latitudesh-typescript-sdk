@@ -1,5 +1,7 @@
 # PostVpnSessionSite2
 
+Site slug (case-insensitive)
+
 ## Example Usage
 
 ```typescript
