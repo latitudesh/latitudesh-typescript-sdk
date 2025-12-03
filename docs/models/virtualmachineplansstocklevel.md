@@ -7,11 +7,11 @@ The stock level of the plan
 ```typescript
 import { VirtualMachinePlansStockLevel } from "latitudesh-typescript-sdk/models";
 
-let value: VirtualMachinePlansStockLevel = "low";
+let value: VirtualMachinePlansStockLevel = "unavailable";
 ```
 
 ## Values
 
 ```typescript
-"low"
+"low" | "unavailable" | "medium" | "high"
 ```

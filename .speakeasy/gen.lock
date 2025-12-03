@@ -1,17 +1,20 @@
 lockVersion: 2.0.0
 id: c8245324-f3d7-42c7-8124-ce79579cbff5
 management:
-  docChecksum: 1b8e178454366605ee9bbd0d81e35a93
+  docChecksum: be09a162d825f1121abd81aad6556e96
   docVersion: "2023-06-01"
-  speakeasyVersion: 1.636.3
-  generationVersion: 2.723.11
-  releaseVersion: 0.0.4
-  configChecksum: 029073a349def2c24933c7c13005fb19
+  speakeasyVersion: 1.667.0
+  generationVersion: 2.769.1
+  releaseVersion: 0.2.0
+  configChecksum: aadc2834fd11cffa138aaf793639181c
+  repoURL: https://github.com/latitudesh/latitudesh-typescript-sdk.git
+  installationURL: https://github.com/latitudesh/latitudesh-typescript-sdk
+  published: true
 features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.12
-    core: 3.21.26
+    core: 3.26.14
     defaultEnabledRetries: 0.1.0
     deprecations: 2.81.1
     devContainers: 2.90.1
@@ -20,15 +23,16 @@ features:
     globalSecurity: 2.82.14
     globalSecurityCallbacks: 0.1.0
     globalSecurityFlattening: 0.1.0
-    globalServerURLs: 2.82.5
+    globalServerURLs: 2.83.0
     groups: 2.81.3
     mcpServer: 0.9.3
     methodArguments: 0.1.2
     nameOverrides: 2.81.2
+    nullables: 0.1.1
     pagination: 2.83.0
     responseFormat: 0.2.3
     retries: 2.83.0
-    sdkHooks: 0.3.0
+    sdkHooks: 0.4.0
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
@@ -544,6 +548,7 @@ generatedFiles:
   - docs/models/storageplandatatype.md
   - docs/models/storageplans.md
   - docs/models/storageplansmeta.md
+  - docs/models/tag.md
   - docs/models/target.md
   - docs/models/team.md
   - docs/models/teamattributes.md
@@ -1155,6 +1160,7 @@ generatedFiles:
   - src/types/operations.ts
   - src/types/rfcdate.ts
   - src/types/streams.ts
+  - src/types/unrecognized.ts
   - tsconfig.json
 examples:
   get-api-keys:
@@ -1195,7 +1201,7 @@ examples:
           filter[project]: "proj_6059EqYkOQj8p"
       responses:
         "200":
-          application/vnd.api+json: {"data": {"id": "", "attributes": {"project": {"id": "proj_6059EqYkOQj8p", "slug": "ergonomic-marble-shoes", "name": "Ergonomic Marble Shoes"}, "period": {"start": "2025-06-25T18:36:28+00:00", "end": "2025-07-26T18:36:28+00:00"}, "price": 0, "threshold": 10000, "products": []}}}
+          application/vnd.api+json: {"data": {"id": "", "attributes": {"project": {"id": "proj_6059EqYkOQj8p", "slug": "ergonomic-marble-shoes", "name": "Ergonomic Marble Shoes"}, "period": {"start": "2025-06-25T18:36:28+00:00", "end": "2025-07-26T18:36:28+00:00"}, "available_credit_balance": 123, "price": 0, "threshold": 10000, "products": []}}}
   get-events:
     Success:
       parameters:
@@ -1307,6 +1313,14 @@ examples:
       responses:
         "200":
           application/vnd.api+json: {"data": [{"id": "team_8L90z0WyLyIK0KyEknmnijV38rk", "attributes": {"name": "583 Team", "slug": "583-team", "address": "654 Selene Pines, North Noble, HI 65384", "currency": "trb", "created_at": "2025-02-21T00:00:00+00:00", "updated_at": "2025-03-07T00:00:00+00:00", "enforce_mfa": false, "users": [{"id": "user_LwnmBv6vmeILPZEj4poJuEXnegj", "first_name": "Claretta", "last_name": "Kuhic", "email": "king.morissette@nitzsche.example", "created_at": "2025-05-04T00:00:00.000Z", "updated_at": "2024-09-09T00:00:00.000Z", "role": {"id": "role_735kl6xYEVcl5Nzn0weZuoxPrmL", "name": "Neville", "created_at": "2024-10-29T00:00:00.000Z", "updated_at": "2025-12-27T00:00:00.000Z"}}], "projects": [], "owner": {}, "billing": {}, "feature_flags": ["feature_flag_1", "feature_flag_2"]}}], "meta": {}}
+    when team is recent (created within last month):
+      responses:
+        "200":
+          application/vnd.api+json: {"data": [{"id": "team_eP5489MvGWHNVrBngj35FEKVBgjp", "attributes": {"name": "610 Team", "slug": "610-team", "address": "11130 Scotty Ford, Dickiland, MT 09910", "currency": "4m9", "created_at": "2025-10-22T01:03:25+00:00", "updated_at": "2024-11-10T00:00:00+00:00", "enforce_mfa": false, "users": [{"id": "user_4X8pzYpLPQuK83LeM4k1iaxRYmZ", "first_name": "Zona", "last_name": "Emmerich", "email": "argelia_bauch@batz-will.example", "created_at": "2025-01-25T00:00:00.000Z", "updated_at": "2024-12-30T00:00:00.000Z", "role": {"id": "role_NGeVRj32WGT8oMw3L042h19705A", "name": "Julia", "created_at": "2025-03-20T00:00:00.000Z", "updated_at": "2026-06-24T00:00:00.000Z"}}], "projects": [], "owner": {}, "billing": {}, "feature_flags": ["feature_flag_1", "feature_flag_2"]}}], "meta": {}}
+    when team is older than one month:
+      responses:
+        "200":
+          application/vnd.api+json: {"data": [{"id": "team_NkrloMz69yu4Qb9wba72I33E7AmN", "attributes": {"name": "611 Team", "slug": "611-team", "address": "Suite 955 82027 Lavonda Drives, South Benny, NY 71785-6754", "currency": "cln", "created_at": "2025-08-27T01:03:25+00:00", "updated_at": "2024-10-27T00:00:00+00:00", "enforce_mfa": false, "users": [{"id": "user_Ewr0PxeMPWSg7RA4vKENSygV0wz", "first_name": "Cyril", "last_name": "Brakus", "email": "armando@zemlak.example", "created_at": "2025-02-01T00:00:00.000Z", "updated_at": "2025-04-27T00:00:00.000Z", "role": {"id": "role_2znQVMPbbAi4wy5LLp6AcLj87Mk", "name": "Agnes", "created_at": "2025-08-14T00:00:00.000Z", "updated_at": "2026-07-25T00:00:00.000Z"}}], "projects": [], "owner": {}, "billing": {}, "feature_flags": ["feature_flag_1", "feature_flag_2"]}}], "meta": {}}
   post-team:
     Created:
       requestBody:
@@ -1500,8 +1514,8 @@ examples:
   post-ssh-key:
     Created:
       requestBody:
-        application/json: {"data": {"type": "ssh_keys", "attributes": {"name": "SSH Key", "public_key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDOLFnjGP3Jsh1usHNS2EILgfqZNC9pOvNqBZqxH+qNAdZdQCzy2csMuiq+ZwLA8Mm4Vo5CvSgBHs/kuZRUKyTl+79YUMZIj8PhHzL4XbdqX1ZnAIklHWcJaveB0+UXLEPKGzFIFq+FkuwtiXQsVe5NnSpIDYgpzhqEs38NsnXvsubKphGUdARDhaxvMdUUl4YsAtLHKMzSyIvE6xwfTtIVwA9bZt/8GoBzrn9px9PEcf25Rgd2NhOYs3WYcZuwvRmfcFdi2vGhVqTPqL9n16R/n5jknxHYrTyqWNxJdpdvg2YqXpN7vnFNoOjYFD6EahJ0pF/+WL4tPCIkLfoaVaSx"}}}
-        application/vnd.api+json: {"data": {"type": "ssh_keys", "attributes": {"name": "SSH Key", "public_key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDOLFnjGP3Jsh1usHNS2EILgfqZNC9pOvNqBZqxH+qNAdZdQCzy2csMuiq+ZwLA8Mm4Vo5CvSgBHs/kuZRUKyTl+79YUMZIj8PhHzL4XbdqX1ZnAIklHWcJaveB0+UXLEPKGzFIFq+FkuwtiXQsVe5NnSpIDYgpzhqEs38NsnXvsubKphGUdARDhaxvMdUUl4YsAtLHKMzSyIvE6xwfTtIVwA9bZt/8GoBzrn9px9PEcf25Rgd2NhOYs3WYcZuwvRmfcFdi2vGhVqTPqL9n16R/n5jknxHYrTyqWNxJdpdvg2YqXpN7vnFNoOjYFD6EahJ0pF/+WL4tPCIkLfoaVaSx"}}}
+        application/json: {"data": {"type": "ssh_keys", "attributes": {"name": "SSH Key", "project": "proj_mw49QDB5qagKb", "public_key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDOLFnjGP3Jsh1usHNS2EILgfqZNC9pOvNqBZqxH+qNAdZdQCzy2csMuiq+ZwLA8Mm4Vo5CvSgBHs/kuZRUKyTl+79YUMZIj8PhHzL4XbdqX1ZnAIklHWcJaveB0+UXLEPKGzFIFq+FkuwtiXQsVe5NnSpIDYgpzhqEs38NsnXvsubKphGUdARDhaxvMdUUl4YsAtLHKMzSyIvE6xwfTtIVwA9bZt/8GoBzrn9px9PEcf25Rgd2NhOYs3WYcZuwvRmfcFdi2vGhVqTPqL9n16R/n5jknxHYrTyqWNxJdpdvg2YqXpN7vnFNoOjYFD6EahJ0pF/+WL4tPCIkLfoaVaSx"}}}
+        application/vnd.api+json: {"data": {"type": "ssh_keys", "attributes": {"name": "SSH Key", "project": "proj_mw49QDB5qagKb", "public_key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDOLFnjGP3Jsh1usHNS2EILgfqZNC9pOvNqBZqxH+qNAdZdQCzy2csMuiq+ZwLA8Mm4Vo5CvSgBHs/kuZRUKyTl+79YUMZIj8PhHzL4XbdqX1ZnAIklHWcJaveB0+UXLEPKGzFIFq+FkuwtiXQsVe5NnSpIDYgpzhqEs38NsnXvsubKphGUdARDhaxvMdUUl4YsAtLHKMzSyIvE6xwfTtIVwA9bZt/8GoBzrn9px9PEcf25Rgd2NhOYs3WYcZuwvRmfcFdi2vGhVqTPqL9n16R/n5jknxHYrTyqWNxJdpdvg2YqXpN7vnFNoOjYFD6EahJ0pF/+WL4tPCIkLfoaVaSx"}}}
       responses:
         "201":
           application/vnd.api+json: {"data": {"id": "ssh_1ZJrdxw5Og4LV", "type": "ssh_keys", "attributes": {"name": "SSH Key", "public_key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDOLFnjGP3Jsh1usHNS2EILgfqZNC9pOvNqBZqxH+qNAdZdQCzy2csMuiq+ZwLA8Mm4Vo5CvSgBHs/kuZRUKyTl+79YUMZIj8PhHzL4XbdqX1ZnAIklHWcJaveB0+UXLEPKGzFIFq+FkuwtiXQsVe5NnSpIDYgpzhqEs38NsnXvsubKphGUdARDhaxvMdUUl4YsAtLHKMzSyIvE6xwfTtIVwA9bZt/8GoBzrn9px9PEcf25Rgd2NhOYs3WYcZuwvRmfcFdi2vGhVqTPqL9n16R/n5jknxHYrTyqWNxJdpdvg2YqXpN7vnFNoOjYFD6EahJ0pF/+WL4tPCIkLfoaVaSx", "fingerprint": "0a:00:34:53:51:0e:a5:4e:06:2c:d7:16:88:96:82:f3", "user": {"id": "user_wwjA0m2L4BTXAXMw4X17hMlZl6z", "first_name": "Genevive", "last_name": "Shields", "email": "jamel_mcdermott@homenick.example", "created_at": "2025-04-28T00:00:00.000Z", "updated_at": "2024-11-18T00:00:00.000Z", "role": {"id": "role_bj5BPjB5o7iyw0QbxWZatE5K81YQ", "name": "owner", "created_at": "2024-12-04T00:00:00.000Z", "updated_at": "2026-01-16T00:00:00.000Z"}}, "created_at": "2025-07-16T18:37:07+00:00", "updated_at": "2025-07-16T18:37:07+00:00"}}}
@@ -1587,8 +1601,8 @@ examples:
   post-user-data:
     Created:
       requestBody:
-        application/json: {"data": {"type": "user_data", "attributes": {"description": "User Data description", "content": "I2Nsb3VkLWNvbmZpZwpydW5jbWQ6CiAtIFsgdG91Y2gsICAvaG9tZS91YnVudHUvdGVzdCBd"}}}
-        application/vnd.api+json: {"data": {"type": "user_data", "attributes": {"description": "User Data description", "content": "I2Nsb3VkLWNvbmZpZwpydW5jbWQ6CiAtIFsgdG91Y2gsICAvaG9tZS91YnVudHUvdGVzdCBd"}}}
+        application/json: {"data": {"type": "user_data", "attributes": {"description": "User Data description", "project": "proj_AW6Q2D9lqKLpr", "content": "I2Nsb3VkLWNvbmZpZwpydW5jbWQ6CiAtIFsgdG91Y2gsICAvaG9tZS91YnVudHUvdGVzdCBd"}}}
+        application/vnd.api+json: {"data": {"type": "user_data", "attributes": {"description": "User Data description", "project": "proj_AW6Q2D9lqKLpr", "content": "I2Nsb3VkLWNvbmZpZwpydW5jbWQ6CiAtIFsgdG91Y2gsICAvaG9tZS91YnVudHUvdGVzdCBd"}}}
       responses:
         "201":
           application/vnd.api+json: {"data": {"id": "ud_GKN4ydzgqVob3", "type": "user_data", "attributes": {"description": "User Data description", "content": "I2Nsb3VkLWNvbmZpZwpydW5jbWQ6CiAtIFsgdG91Y2gsICAvaG9tZS91YnVudHUvdGVzdCBd", "created_at": "2025-07-16T18:37:12+00:00", "updated_at": "2025-07-16T18:37:12+00:00"}}, "meta": {}}
@@ -1837,7 +1851,7 @@ examples:
           filter[project]: "proj_GnzRD5X6qM5yw"
       responses:
         "200":
-          application/vnd.api+json: {"data": [{"id": "vol_RLYV8DZ2D5QoE", "type": "volumes", "attributes": {"name": "Enormous Wool Watch", "size_in_gb": 1500, "created_at": "2025-10-03T17:09:37.415Z", "namespace_id": 722662, "connector_id": "nqn.2001-07.com.ceph:1757602476548", "initiators": [{"nqn": "nqn.2014-08.org.nvmexpress:uuid:ae717767-c0fa-56f7-ab4b-5c426b0c553f"}], "project": {"id": "proj_GnzRD5X6qM5yw", "name": "Heavy Duty Iron Shoes", "slug": "heavy-duty-iron-shoes", "description": "Sleek Wool Clock", "billing_type": "Normal", "billing_method": "Normal", "bandwidth_alert": false, "environment": "<value>", "billing": {"subscription_id": "<id>", "type": "Normal", "method": "Normal"}, "stats": {"ip_addresses": 0, "prefixes": 0, "servers": 0, "vlans": 0}}, "team": {"id": "team_QnjVypy08mCW7amJPYj0hXGZgjjg", "name": "583 Team", "slug": "583-team", "description": "583 Team", "address": "69731 Lueilwitz Spurs, Aufderharmouth, MI 93262-2199", "currency": {}, "status": "verified"}}}]}
+          application/vnd.api+json: {"data": [{"id": "vol_RLYV8DZ2D5QoE", "type": "volumes", "attributes": {"name": "Enormous Wool Watch", "size_in_gb": 1500, "created_at": "2025-10-03T17:09:37.415Z", "namespace_id": "1", "connector_id": "nqn.2001-07.com.ceph:1757602476548", "initiators": [{"nqn": "nqn.2014-08.org.nvmexpress:uuid:ae717767-c0fa-56f7-ab4b-5c426b0c553f"}], "project": {"id": "proj_GnzRD5X6qM5yw", "name": "Heavy Duty Iron Shoes", "slug": "heavy-duty-iron-shoes", "description": "Sleek Wool Clock", "billing_type": "Normal", "billing_method": "Normal", "bandwidth_alert": false, "environment": "<value>", "billing": {"subscription_id": "<id>", "type": "Normal", "method": "Normal"}, "stats": {"ip_addresses": 0, "prefixes": 0, "servers": 0, "vlans": 0}}, "team": {"id": "team_QnjVypy08mCW7amJPYj0hXGZgjjg", "name": "583 Team", "slug": "583-team", "description": "583 Team", "address": "69731 Lueilwitz Spurs, Aufderharmouth, MI 93262-2199", "currency": {}, "status": "verified"}}}]}
   post-storage-volumes:
     Created:
       requestBody:
@@ -1845,7 +1859,7 @@ examples:
         application/vnd.api+json: {"data": {"type": "volumes", "attributes": {"project": "proj_8NkvdyPXOeLpx", "name": "my-data", "size_in_gb": 1500}}}
       responses:
         "201":
-          application/vnd.api+json: {"data": {"id": "vol_Av9BVDavORm1W", "type": "volumes", "attributes": {"name": "Incredible Linen Chair", "size_in_gb": 1500, "created_at": "2025-10-03T18:09:37.000Z", "namespace_id": 767995, "connector_id": "<id>", "initiators": [{}], "project": {"id": "proj_8NkvdyPXOeLpx", "name": "Small Concrete Bag", "slug": "small-concrete-bag", "description": "Enormous Iron Shoes", "billing_type": "Normal", "billing_method": "Normal", "bandwidth_alert": false, "environment": "<value>", "billing": {"subscription_id": "<id>", "type": "Normal", "method": "Normal"}, "stats": {"ip_addresses": 0, "prefixes": 0, "servers": 0, "vlans": 0}}, "team": {"id": "team_mPzlevJWQotr05vlaQ6mu9XaWvK", "name": "578 Team", "slug": "578-team", "description": "578 Team", "address": "Suite 629 420 Lindgren Square, Mahaven, KY 74726", "currency": {}, "status": "verified"}}}}
+          application/vnd.api+json: {"data": {"id": "vol_Av9BVDavORm1W", "type": "volumes", "attributes": {"name": "Incredible Linen Chair", "size_in_gb": 1500, "created_at": "2025-10-03T18:09:37.000Z", "namespace_id": null, "connector_id": "<id>", "initiators": [{}], "project": {"id": "proj_8NkvdyPXOeLpx", "name": "Small Concrete Bag", "slug": "small-concrete-bag", "description": "Enormous Iron Shoes", "billing_type": "Normal", "billing_method": "Normal", "bandwidth_alert": false, "environment": "<value>", "billing": {"subscription_id": "<id>", "type": "Normal", "method": "Normal"}, "stats": {"ip_addresses": 0, "prefixes": 0, "servers": 0, "vlans": 0}}, "team": {"id": "team_mPzlevJWQotr05vlaQ6mu9XaWvK", "name": "578 Team", "slug": "578-team", "description": "578 Team", "address": "Suite 629 420 Lindgren Square, Mahaven, KY 74726", "currency": {}, "status": "verified"}}}}
   post-storage-volumes-mount:
     speakeasy-default-post-storage-volumes-mount:
       parameters:
@@ -1860,7 +1874,7 @@ examples:
           id: "vol_aKXgRdR3qv9k5"
       responses:
         "200":
-          application/vnd.api+json: {"data": {"id": "vol_aKXgRdR3qv9k5", "type": "volumes", "attributes": {"name": "Ergonomic Concrete Shoes", "size_in_gb": 1500, "created_at": "2025-10-03T17:09:38.006Z", "namespace_id": 580856, "connector_id": "nqn.2001-07.com.ceph:1757602476548", "initiators": [{"nqn": "nqn.2014-08.org.nvmexpress:uuid:ae717767-c0fa-56f7-ab4b-5c426b0c553f"}], "project": {"id": "proj_Z8rodmkAD1jLB", "name": "Practical Copper Bag", "slug": "practical-copper-bag", "description": "Aerodynamic Rubber Car", "billing_type": "Normal", "billing_method": "Normal", "bandwidth_alert": false, "environment": "<value>", "billing": {"subscription_id": "<id>", "type": "Normal", "method": "Normal"}, "stats": {"ip_addresses": 0, "prefixes": 0, "servers": 0, "vlans": 0}}, "team": {"id": "team_4zo3v0EbRvUKMXX1gKR2TkmXVPA", "name": "592 Team", "slug": "592-team", "description": "592 Team", "address": "58253 Schuppe Ports, Heathcoteborough, ND 34198-0887", "currency": {}, "status": "verified"}}}}
+          application/vnd.api+json: {"data": {"id": "vol_aKXgRdR3qv9k5", "type": "volumes", "attributes": {"name": "Ergonomic Concrete Shoes", "size_in_gb": 1500, "created_at": "2025-10-03T17:09:38.006Z", "namespace_id": "1", "connector_id": "nqn.2001-07.com.ceph:1757602476548", "initiators": [{"nqn": "nqn.2014-08.org.nvmexpress:uuid:ae717767-c0fa-56f7-ab4b-5c426b0c553f"}], "project": {"id": "proj_Z8rodmkAD1jLB", "name": "Practical Copper Bag", "slug": "practical-copper-bag", "description": "Aerodynamic Rubber Car", "billing_type": "Normal", "billing_method": "Normal", "bandwidth_alert": false, "environment": "<value>", "billing": {"subscription_id": "<id>", "type": "Normal", "method": "Normal"}, "stats": {"ip_addresses": 0, "prefixes": 0, "servers": 0, "vlans": 0}}, "team": {"id": "team_4zo3v0EbRvUKMXX1gKR2TkmXVPA", "name": "592 Team", "slug": "592-team", "description": "592 Team", "address": "58253 Schuppe Ports, Heathcoteborough, ND 34198-0887", "currency": {}, "status": "verified"}}}}
   delete-storage-volumes:
     speakeasy-default-delete-storage-volumes:
       parameters:
@@ -1931,6 +1945,14 @@ examples:
       responses:
         "200":
           application/vnd.api+json: {"data": [{"id": "team_yEMAp05jx2ule2aA1ZwVtp5GLZk4", "attributes": {"name": "625 Team", "slug": "625-team", "address": "75739 Parker Common, Murphyview, CT 54114", "currency": "BRL", "created_at": "2024-12-31T00:00:00+00:00", "updated_at": "2025-04-02T00:00:00+00:00", "owner": {"id": "user_X0j5j5Kbabhyex1g2N97HJ3p2wY", "first_name": "Cara", "last_name": "Gerlach", "email": "waylon@oberbrunner.example", "created_at": "2024-09-16T00:00:00.000Z", "updated_at": "2024-08-01T00:00:00.000Z", "role": {"id": "role_4ANgaERK0yS4wQ8lA4pLH0bAw4JW", "name": "owner", "created_at": "2025-05-23T00:00:00.000Z", "updated_at": "2026-04-24T00:00:00.000Z"}}, "billing": {"id": "bill_mw49QDB5qagKb", "customer_billing_id": "cus_oxro8kom3akzra"}}}], "meta": {}}
+    when team is recent (created within last month):
+      responses:
+        "200":
+          application/vnd.api+json: {"data": [{"id": "team_mQvE9R9E7ofrQVaZXn0zcWWjzZWe", "attributes": {"name": "653 Team", "slug": "653-team", "address": "Suite 853 20535 Teofila Plain, Wizaberg, NH 82567", "currency": "BRL", "created_at": "2025-10-22T01:03:28+00:00", "updated_at": "2025-10-27T01:03:28+00:00", "owner": {"id": "user_MJv1LkyeKzt5Aa7lEjj9hVVo049Z", "first_name": "Lucio", "last_name": "Veum", "email": "felix@conroy.example", "created_at": "2025-04-17T00:00:00.000Z", "updated_at": "2025-05-03T00:00:00.000Z", "role": {"id": "role_Yy4yoXz1lwFoeyw4407BTYZo4xV", "name": "owner", "created_at": "2025-08-31T00:00:00.000Z", "updated_at": "2026-05-27T00:00:00.000Z"}}, "billing": {"id": "bill_mw49QDB5qagKb", "customer_billing_id": "cus_hxy4ysqu81nnjc"}}}], "meta": {}}
+    when team is older than one month:
+      responses:
+        "200":
+          application/vnd.api+json: {"data": [{"id": "team_mmb6A0zLJbcr5JZLEA02iWaMB473", "attributes": {"name": "654 Team", "slug": "654-team", "address": "296 Veum Rapid, New Victor, SD 68288-4249", "currency": "BRL", "created_at": "2025-08-27T01:03:28+00:00", "updated_at": "2025-10-27T01:03:28+00:00", "owner": {"id": "user_Q8xm46L0K0SW9p8YY1A8um0am0l", "first_name": "Cheryle", "last_name": "Schultz", "email": "kirstie.kihn@cole.test", "created_at": "2025-06-02T00:00:00.000Z", "updated_at": "2025-06-22T00:00:00.000Z", "role": {"id": "role_G0NAYy7B0PC2nvW92L6JC8ePplze", "name": "owner", "created_at": "2024-12-13T00:00:00.000Z", "updated_at": "2026-02-17T00:00:00.000Z"}}, "billing": {"id": "bill_AW6Q2D9lqKLpr", "customer_billing_id": "cus_sh4hgql0h1v1do"}}}], "meta": {}}
   index-virtual-machine:
     Success:
       parameters:
@@ -1971,7 +1993,7 @@ examples:
           page[number]: 1
       responses:
         "200":
-          application/vnd.api+json: {"data": [{"id": "vlan_AW6Q2D9lqKLpr", "type": "virtual_networks", "attributes": {"vid": 2040, "description": "Odit quod ratione exercitationem.", "region": {"city": "Santiago 3", "country": "Chile", "site": {"id": "loc_aNmodj6ZdbE8W", "facility": "Santiago 3", "name": "Santiago 3", "slug": "SAN3"}}, "created_at": "2023-08-09T01:47:06.301Z", "assignments_count": 1}}], "meta": {}}
+          application/vnd.api+json: {"data": [{"id": "vlan_AW6Q2D9lqKLpr", "type": "virtual_networks", "attributes": {"vid": 2040, "description": "Odit quod ratione exercitationem.", "project": {"id": "proj_RMLydp5WqQKr1", "name": "Lightweight Rubber Knife", "slug": "lightweight-rubber-knife", "description": "Fantastic Copper Watch", "billing_type": "Normal", "billing_method": "Normal", "bandwidth_alert": false, "environment": "<value>", "billing": {"subscription_id": "<id>", "type": "Normal", "method": "Normal"}, "stats": {"ip_addresses": 2, "prefixes": 0, "servers": 1, "vlans": 2}}, "region": {"city": "Santiago 3", "country": "Chile", "site": {"id": "loc_aNmodj6ZdbE8W", "facility": "Santiago 3", "name": "Santiago 3", "slug": "SAN3"}}, "created_at": "2023-08-09T01:47:06.301Z", "assignments_count": 1, "tags": [{"id": "tag_Q2Ppk7YymBIWNy74NpgpTQZMRwl", "name": "tag1", "description": "Cupiditate doloremque reiciendis ut.", "color": "#030307"}]}}], "meta": {}}
   create-virtual-network:
     Created:
       requestBody:
@@ -1979,7 +2001,7 @@ examples:
         application/vnd.api+json: {"data": {"type": "virtual_network", "attributes": {"description": "São Paulo VLAN", "site": "MIA", "project": "incredible-granite-coat"}}}
       responses:
         "201":
-          application/vnd.api+json: {"data": {"id": "vlan_3YjJOLQjdvZ87", "type": "virtual_networks", "attributes": {"vid": 2000, "name": "MIA-2000", "description": "São Paulo VLAN", "created_at": "2025-07-16T18:37:16+00:00"}}, "meta": {}}
+          application/vnd.api+json: {"data": {"id": "vlan_3YjJOLQjdvZ87", "type": "virtual_networks", "attributes": {"vid": 2000, "name": "MIA-2000", "description": "São Paulo VLAN", "created_at": "2025-07-16T18:37:16+00:00", "tags": []}}, "meta": {}}
   get-virtual-network:
     Success:
       parameters:
@@ -1998,7 +2020,7 @@ examples:
         application/vnd.api+json: {"data": {"id": "vlan_VaNmodjeObE8W", "type": "virtual_networks", "attributes": {"tags": ["tag_Mjb3aoBkXRi5nR0gBQ5EhV30voRx", "tag_QnkPzo8Wj1iWWzg24P5bhXAzrxmm"], "description": "Test virtual network update"}}}
       responses:
         "200":
-          application/vnd.api+json: {"data": {"id": "vlan_VaNmodjeObE8W", "type": "virtual_networks", "attributes": {"vid": 2040, "name": "illo", "description": "Eum voluptatem nisi et.", "created_at": "2023-04-23T16:14:50.903Z"}}, "meta": {}}
+          application/vnd.api+json: {"data": {"id": "vlan_VaNmodjeObE8W", "type": "virtual_networks", "attributes": {"vid": 2040, "name": "illo", "description": "Eum voluptatem nisi et.", "created_at": "2023-04-23T16:14:50.903Z", "tags": [{"id": "tag_Mjb3aoBkXRi5nR0gBQ5EhV30voRx", "name": "Arantar", "description": "Qui rerum nihil eum.", "color": "#a7f6f6"}, {"id": "tag_QnkPzo8Wj1iWWzg24P5bhXAzrxmm", "name": "Meneldor", "description": "Et voluptate quibusdam non.", "color": "#9ecccc"}]}}, "meta": {}}
   get-virtual-networks-assignments:
     Success:
       parameters:
@@ -2057,3 +2079,4 @@ examples:
           vpn_session_id: "<id>"
 examplesVersion: 1.0.2
 generatedTests: {}
+releaseNotes: "## Typescript SDK Changes:\n* `latitudesh.billing.listUsage()`:  `response.data.attributes` **Changed** **Breaking** :warning:\n* `latitudesh.storage.getStorageVolumes()`:  `response.data.[].attributes.namespaceId` **Changed** **Breaking** :warning:\n* `latitudesh.storage.postStorageVolumes()`:  `response.data.attributes.namespaceId` **Changed** **Breaking** :warning:\n* `latitudesh.storage.getStorageVolume()`:  `response.data.attributes.namespaceId` **Changed** **Breaking** :warning:\n* `latitudesh.sshKeys.listAll()`: \n  *  `request.filter[project]` **Added**\n* `latitudesh.sshKeys.create()`: \n  *  `request.data.attributes.project` **Added**\n* `latitudesh.userData.list()`: \n  *  `request.filter[project]` **Added**\n* `latitudesh.userData.createNew()`: \n  *  `request.data.attributes.project` **Added**\n* `latitudesh.privateNetworks.list()`:  `response.data.[].attributes` **Changed**\n* `latitudesh.privateNetworks.create()`:  `response.data.attributes` **Changed**\n* `latitudesh.privateNetworks.get()`:  `response.data.data.attributes` **Changed**\n* `latitudesh.privateNetworks.update()`:  `response.data.attributes` **Changed**\n"
