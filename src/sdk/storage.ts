@@ -119,23 +119,6 @@ export class Storage extends ClientSDK {
   }
 
   /**
-   * Mount volume
-   *
-   * @remarks
-   * Mounts volume storage by adding the client to an allowed list
-   */
-  async postStorageVolumesMount(
-    request: operations.PostStorageVolumesMountRequest,
-    options?: RequestOptions,
-  ): Promise<void> {
-    return unwrapAsync(storagePostStorageVolumesMount(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
    * Get volume
    *
    * @remarks
@@ -163,6 +146,23 @@ export class Storage extends ClientSDK {
     options?: RequestOptions,
   ): Promise<void> {
     return unwrapAsync(storageDeleteStorageVolumes(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Mount volume
+   *
+   * @remarks
+   * Mounts volume storage by adding the client to an allowed list
+   */
+  async postStorageVolumesMount(
+    request: operations.PostStorageVolumesMountRequest,
+    options?: RequestOptions,
+  ): Promise<void> {
+    return unwrapAsync(storagePostStorageVolumesMount(
       this,
       request,
       options,
