@@ -33,7 +33,7 @@ export const PostVpnSessionSite2 = {
   Sao2: "SAO2",
   Syd: "SYD",
   Tyo: "TYO",
-  Tyo2: "TYO2",
+  Tyo4: "TYO4",
 } as const;
 export type PostVpnSessionSite2 = ClosedEnum<typeof PostVpnSessionSite2>;
 

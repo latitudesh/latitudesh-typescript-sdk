@@ -39,7 +39,7 @@ export function userDataGetProjectUserData(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    models.UserData,
+    models.UserDataObject,
     | LatitudeshError
     | ResponseValidationError
     | ConnectionError
@@ -64,7 +64,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      models.UserData,
+      models.UserDataObject,
       | LatitudeshError
       | ResponseValidationError
       | ConnectionError
@@ -158,7 +158,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    models.UserData,
+    models.UserDataObject,
     | LatitudeshError
     | ResponseValidationError
     | ConnectionError
@@ -168,7 +168,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, models.UserData$inboundSchema, {
+    M.json(200, models.UserDataObject$inboundSchema, {
       ctype: "application/vnd.api+json",
     }),
     M.fail("4XX"),
