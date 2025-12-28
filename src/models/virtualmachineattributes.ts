@@ -59,6 +59,21 @@ export type VirtualMachineAttributesSpecs = {
   gpu?: string | undefined;
 };
 
+/**
+ * The billing type for the virtual machine.
+ */
+export const VirtualMachineAttributesBilling = {
+  Hourly: "hourly",
+  Monthly: "monthly",
+  Yearly: "yearly",
+} as const;
+/**
+ * The billing type for the virtual machine.
+ */
+export type VirtualMachineAttributesBilling = ClosedEnum<
+  typeof VirtualMachineAttributesBilling
+>;
+
 export type VirtualMachineAttributesAttributes = {
   name?: string | undefined;
   createdAt?: string | undefined;
@@ -69,6 +84,10 @@ export type VirtualMachineAttributesAttributes = {
   specs?: VirtualMachineAttributesSpecs | undefined;
   team?: TeamInclude | undefined;
   project?: ProjectInclude | undefined;
+  /**
+   * The billing type for the virtual machine.
+   */
+  billing?: VirtualMachineAttributesBilling | undefined;
 };
 
 export type VirtualMachineAttributes = {
@@ -252,6 +271,15 @@ export function virtualMachineAttributesSpecsFromJSON(
 }
 
 /** @internal */
+export const VirtualMachineAttributesBilling$inboundSchema: z.ZodNativeEnum<
+  typeof VirtualMachineAttributesBilling
+> = z.nativeEnum(VirtualMachineAttributesBilling);
+/** @internal */
+export const VirtualMachineAttributesBilling$outboundSchema: z.ZodNativeEnum<
+  typeof VirtualMachineAttributesBilling
+> = VirtualMachineAttributesBilling$inboundSchema;
+
+/** @internal */
 export const VirtualMachineAttributesAttributes$inboundSchema: z.ZodType<
   VirtualMachineAttributesAttributes,
   z.ZodTypeDef,
@@ -267,6 +295,7 @@ export const VirtualMachineAttributesAttributes$inboundSchema: z.ZodType<
   specs: z.lazy(() => VirtualMachineAttributesSpecs$inboundSchema).optional(),
   team: TeamInclude$inboundSchema.optional(),
   project: ProjectInclude$inboundSchema.optional(),
+  billing: VirtualMachineAttributesBilling$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "created_at": "createdAt",
@@ -284,6 +313,7 @@ export type VirtualMachineAttributesAttributes$Outbound = {
   specs?: VirtualMachineAttributesSpecs$Outbound | undefined;
   team?: TeamInclude$Outbound | undefined;
   project?: ProjectInclude$Outbound | undefined;
+  billing?: string | undefined;
 };
 
 /** @internal */
@@ -302,6 +332,7 @@ export const VirtualMachineAttributesAttributes$outboundSchema: z.ZodType<
   specs: z.lazy(() => VirtualMachineAttributesSpecs$outboundSchema).optional(),
   team: TeamInclude$outboundSchema.optional(),
   project: ProjectInclude$outboundSchema.optional(),
+  billing: VirtualMachineAttributesBilling$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     createdAt: "created_at",

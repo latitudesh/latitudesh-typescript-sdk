@@ -1,5 +1,4 @@
 # VirtualMachines
-(*virtualMachines*)
 
 ## Overview
 
@@ -106,7 +105,9 @@ async function run() {
       type: "virtual_machines",
       attributes: {
         name: "my-new-vm",
+        site: "ASH",
         project: "enormous-wool-keyboard",
+        billing: "monthly",
       },
     },
   });
@@ -137,7 +138,9 @@ async function run() {
       type: "virtual_machines",
       attributes: {
         name: "my-new-vm",
+        site: "ASH",
         project: "enormous-wool-keyboard",
+        billing: "monthly",
       },
     },
   });

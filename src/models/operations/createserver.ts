@@ -60,7 +60,7 @@ export const CreateServerSite2 = {
   Sao2: "SAO2",
   Syd: "SYD",
   Tyo: "TYO",
-  Tyo2: "TYO2",
+  Tyo4: "TYO4",
 } as const;
 /**
  * The site slug to deploy the server

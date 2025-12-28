@@ -1,5 +1,4 @@
 # UserData
-(*userData*)
 
 ## Overview
 
@@ -84,7 +83,7 @@ run();
 
 ### Response
 
-**Promise\<[operations.GetProjectUsersDataResponse](../../models/operations/getprojectusersdataresponse.md)\>**
+**Promise\<[models.UserData](../../models/userdata.md)\>**
 
 ### Errors
 
@@ -162,7 +161,7 @@ run();
 
 ### Response
 
-**Promise\<[models.UserData](../../models/userdata.md)\>**
+**Promise\<[models.UserDataObject](../../models/userdataobject.md)\>**
 
 ### Errors
 
@@ -334,7 +333,7 @@ run();
 
 ### Response
 
-**Promise\<[models.UserData](../../models/userdata.md)\>**
+**Promise\<[models.UserDataObject](../../models/userdataobject.md)\>**
 
 ### Errors
 
@@ -412,7 +411,7 @@ run();
 
 ### Response
 
-**Promise\<[models.UserData](../../models/userdata.md)\>**
+**Promise\<[models.UserDataObject](../../models/userdataobject.md)\>**
 
 ### Errors
 
@@ -482,7 +481,7 @@ run();
 
 ### Response
 
-**Promise\<[operations.GetUsersDataResponse](../../models/operations/getusersdataresponse.md)\>**
+**Promise\<[models.UserData](../../models/userdata.md)\>**
 
 ### Errors
 
@@ -570,7 +569,7 @@ run();
 
 ### Response
 
-**Promise\<[models.UserData](../../models/userdata.md)\>**
+**Promise\<[models.UserDataObject](../../models/userdataobject.md)\>**
 
 ### Errors
 
@@ -644,7 +643,7 @@ run();
 
 ### Response
 
-**Promise\<[models.UserData](../../models/userdata.md)\>**
+**Promise\<[models.UserDataObject](../../models/userdataobject.md)\>**
 
 ### Errors
 
@@ -791,7 +790,7 @@ run();
 
 ### Response
 
-**Promise\<[models.UserData](../../models/userdata.md)\>**
+**Promise\<[models.UserDataObject](../../models/userdataobject.md)\>**
 
 ### Errors
 
