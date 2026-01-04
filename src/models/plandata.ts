@@ -14,6 +14,14 @@ export const TypePlans = {
 } as const;
 export type TypePlans = ClosedEnum<typeof TypePlans>;
 
+export const Feature = {
+  Ssh: "ssh",
+  Raid: "raid",
+  UserData: "user_data",
+  Sev: "sev",
+} as const;
+export type Feature = ClosedEnum<typeof Feature>;
+
 export type PlanDataCpu = {
   type?: string | undefined;
   clock?: number | undefined;
@@ -46,6 +54,14 @@ export type Nic = {
 export type PlanDataGpu = {
   count?: number | undefined;
   type?: string | undefined;
+  /**
+   * VRAM per GPU in GB
+   */
+  vramPerGpu?: number | null | undefined;
+  /**
+   * GPU interconnection type (e.g., NVLink, PCIe)
+   */
+  interconnect?: string | null | undefined;
 };
 
 export type PlanDataSpecs = {
@@ -88,6 +104,9 @@ export type PlanDataPricing = {
 
 export type PlanDataRegion = {
   name?: string | undefined;
+  /**
+   * Array of operating system slugs that support instant deployment at this location. Instant deployments are provisioned immediately without the typical deployment delay.
+   */
   deploysInstantly?: Array<string> | undefined;
   locations?: PlanDataLocations | undefined;
   stockLevel?: PlanDataStockLevel | undefined;
@@ -97,7 +116,10 @@ export type PlanDataRegion = {
 export type PlanDataAttributes = {
   slug?: string | undefined;
   name?: string | undefined;
-  features?: Array<string> | undefined;
+  /**
+   * List of available features for the plan
+   */
+  features?: Array<Feature> | undefined;
   specs?: PlanDataSpecs | undefined;
   regions?: Array<PlanDataRegion> | undefined;
 };
@@ -114,6 +136,13 @@ export const TypePlans$inboundSchema: z.ZodNativeEnum<typeof TypePlans> = z
 /** @internal */
 export const TypePlans$outboundSchema: z.ZodNativeEnum<typeof TypePlans> =
   TypePlans$inboundSchema;
+
+/** @internal */
+export const Feature$inboundSchema: z.ZodNativeEnum<typeof Feature> = z
+  .nativeEnum(Feature);
+/** @internal */
+export const Feature$outboundSchema: z.ZodNativeEnum<typeof Feature> =
+  Feature$inboundSchema;
 
 /** @internal */
 export const PlanDataCpu$inboundSchema: z.ZodType<
@@ -279,11 +308,19 @@ export const PlanDataGpu$inboundSchema: z.ZodType<
 > = z.object({
   count: z.number().optional(),
   type: z.string().optional(),
+  vram_per_gpu: z.nullable(z.number()).optional(),
+  interconnect: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "vram_per_gpu": "vramPerGpu",
+  });
 });
 /** @internal */
 export type PlanDataGpu$Outbound = {
   count?: number | undefined;
   type?: string | undefined;
+  vram_per_gpu?: number | null | undefined;
+  interconnect?: string | null | undefined;
 };
 
 /** @internal */
@@ -294,6 +331,12 @@ export const PlanDataGpu$outboundSchema: z.ZodType<
 > = z.object({
   count: z.number().optional(),
   type: z.string().optional(),
+  vramPerGpu: z.nullable(z.number()).optional(),
+  interconnect: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    vramPerGpu: "vram_per_gpu",
+  });
 });
 
 export function planDataGpuToJSON(planDataGpu: PlanDataGpu): string {
@@ -612,7 +655,7 @@ export const PlanDataAttributes$inboundSchema: z.ZodType<
 > = z.object({
   slug: z.string().optional(),
   name: z.string().optional(),
-  features: z.array(z.string()).optional(),
+  features: z.array(Feature$inboundSchema).optional(),
   specs: z.lazy(() => PlanDataSpecs$inboundSchema).optional(),
   regions: z.array(z.lazy(() => PlanDataRegion$inboundSchema)).optional(),
 });
@@ -633,7 +676,7 @@ export const PlanDataAttributes$outboundSchema: z.ZodType<
 > = z.object({
   slug: z.string().optional(),
   name: z.string().optional(),
-  features: z.array(z.string()).optional(),
+  features: z.array(Feature$outboundSchema).optional(),
   specs: z.lazy(() => PlanDataSpecs$outboundSchema).optional(),
   regions: z.array(z.lazy(() => PlanDataRegion$outboundSchema)).optional(),
 });

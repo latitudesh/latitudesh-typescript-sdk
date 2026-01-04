@@ -15,12 +15,21 @@ export type TeamMembersRole = {
   updatedAt?: string | undefined;
 };
 
-export type TeamMembersData = {
+export type TeamMembersAttributes = {
   firstName?: string | undefined;
   lastName?: string | undefined;
   email?: string | undefined;
   mfaEnabled?: boolean | undefined;
+  createdAt?: Date | undefined;
+  updatedAt?: Date | undefined;
+  lastLoginAt?: Date | null | undefined;
   role?: TeamMembersRole | undefined;
+};
+
+export type TeamMembersData = {
+  id?: string | undefined;
+  type?: string | undefined;
+  attributes?: TeamMembersAttributes | undefined;
 };
 
 export type TeamMembers = {
@@ -84,8 +93,8 @@ export function teamMembersRoleFromJSON(
 }
 
 /** @internal */
-export const TeamMembersData$inboundSchema: z.ZodType<
-  TeamMembersData,
+export const TeamMembersAttributes$inboundSchema: z.ZodType<
+  TeamMembersAttributes,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -93,21 +102,93 @@ export const TeamMembersData$inboundSchema: z.ZodType<
   last_name: z.string().optional(),
   email: z.string().optional(),
   mfa_enabled: z.boolean().optional(),
+  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
+    .optional(),
+  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
+    .optional(),
+  last_login_at: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
   role: z.lazy(() => TeamMembersRole$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "first_name": "firstName",
     "last_name": "lastName",
     "mfa_enabled": "mfaEnabled",
+    "created_at": "createdAt",
+    "updated_at": "updatedAt",
+    "last_login_at": "lastLoginAt",
   });
 });
 /** @internal */
-export type TeamMembersData$Outbound = {
+export type TeamMembersAttributes$Outbound = {
   first_name?: string | undefined;
   last_name?: string | undefined;
   email?: string | undefined;
   mfa_enabled?: boolean | undefined;
+  created_at?: string | undefined;
+  updated_at?: string | undefined;
+  last_login_at?: string | null | undefined;
   role?: TeamMembersRole$Outbound | undefined;
+};
+
+/** @internal */
+export const TeamMembersAttributes$outboundSchema: z.ZodType<
+  TeamMembersAttributes$Outbound,
+  z.ZodTypeDef,
+  TeamMembersAttributes
+> = z.object({
+  firstName: z.string().optional(),
+  lastName: z.string().optional(),
+  email: z.string().optional(),
+  mfaEnabled: z.boolean().optional(),
+  createdAt: z.date().transform(v => v.toISOString()).optional(),
+  updatedAt: z.date().transform(v => v.toISOString()).optional(),
+  lastLoginAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+  role: z.lazy(() => TeamMembersRole$outboundSchema).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    firstName: "first_name",
+    lastName: "last_name",
+    mfaEnabled: "mfa_enabled",
+    createdAt: "created_at",
+    updatedAt: "updated_at",
+    lastLoginAt: "last_login_at",
+  });
+});
+
+export function teamMembersAttributesToJSON(
+  teamMembersAttributes: TeamMembersAttributes,
+): string {
+  return JSON.stringify(
+    TeamMembersAttributes$outboundSchema.parse(teamMembersAttributes),
+  );
+}
+export function teamMembersAttributesFromJSON(
+  jsonString: string,
+): SafeParseResult<TeamMembersAttributes, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => TeamMembersAttributes$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'TeamMembersAttributes' from JSON`,
+  );
+}
+
+/** @internal */
+export const TeamMembersData$inboundSchema: z.ZodType<
+  TeamMembersData,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string().optional(),
+  type: z.string().optional(),
+  attributes: z.lazy(() => TeamMembersAttributes$inboundSchema).optional(),
+});
+/** @internal */
+export type TeamMembersData$Outbound = {
+  id?: string | undefined;
+  type?: string | undefined;
+  attributes?: TeamMembersAttributes$Outbound | undefined;
 };
 
 /** @internal */
@@ -116,17 +197,9 @@ export const TeamMembersData$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   TeamMembersData
 > = z.object({
-  firstName: z.string().optional(),
-  lastName: z.string().optional(),
-  email: z.string().optional(),
-  mfaEnabled: z.boolean().optional(),
-  role: z.lazy(() => TeamMembersRole$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    firstName: "first_name",
-    lastName: "last_name",
-    mfaEnabled: "mfa_enabled",
-  });
+  id: z.string().optional(),
+  type: z.string().optional(),
+  attributes: z.lazy(() => TeamMembersAttributes$outboundSchema).optional(),
 });
 
 export function teamMembersDataToJSON(

@@ -1,5 +1,4 @@
-# Vm
-(*plans.vm*)
+# Plans.Vm
 
 ## Overview
 

@@ -9,6 +9,12 @@ import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 import {
+  ProjectInclude,
+  ProjectInclude$inboundSchema,
+  ProjectInclude$Outbound,
+  ProjectInclude$outboundSchema,
+} from "./projectinclude.js";
+import {
   UserInclude,
   UserInclude$inboundSchema,
   UserInclude$Outbound,
@@ -36,6 +42,7 @@ export type SshKeyDataAttributes = {
   user?: UserInclude | undefined;
   createdAt?: string | undefined;
   updatedAt?: string | undefined;
+  project?: ProjectInclude | undefined;
 };
 
 export type SshKeyData = {
@@ -65,6 +72,7 @@ export const SshKeyDataAttributes$inboundSchema: z.ZodType<
   user: UserInclude$inboundSchema.optional(),
   created_at: z.string().optional(),
   updated_at: z.string().optional(),
+  project: ProjectInclude$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "public_key": "publicKey",
@@ -80,6 +88,7 @@ export type SshKeyDataAttributes$Outbound = {
   user?: UserInclude$Outbound | undefined;
   created_at?: string | undefined;
   updated_at?: string | undefined;
+  project?: ProjectInclude$Outbound | undefined;
 };
 
 /** @internal */
@@ -94,6 +103,7 @@ export const SshKeyDataAttributes$outboundSchema: z.ZodType<
   user: UserInclude$outboundSchema.optional(),
   createdAt: z.string().optional(),
   updatedAt: z.string().optional(),
+  project: ProjectInclude$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     publicKey: "public_key",

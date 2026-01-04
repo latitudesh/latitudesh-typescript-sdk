@@ -1,5 +1,4 @@
 # TeamMembers
-(*teamMembers*)
 
 ## Overview
 

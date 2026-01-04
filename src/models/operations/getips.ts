@@ -60,6 +60,10 @@ export type GetIpsRequest = {
    */
   filterAddress?: string | undefined;
   /**
+   * Filter by additional IPs (true) or management IPs (false)
+   */
+  filterAdditional?: boolean | undefined;
+  /**
    * The `region` and `server` are provided as extra attributes that are lazy loaded. To request it, just set `extra_fields[ip_addresses]=region,server` in the query string.
    */
   extraFieldsIpAddresses?: string | undefined;
@@ -103,6 +107,7 @@ export const GetIpsRequest$inboundSchema: z.ZodType<
   "filter[type]": FilterType$inboundSchema.optional(),
   "filter[location]": z.string().optional(),
   "filter[address]": z.string().optional(),
+  "filter[additional]": z.boolean().optional(),
   "extra_fields[ip_addresses]": z.string().optional(),
   "page[size]": z.number().int().default(20),
   "page[number]": z.number().int().default(1),
@@ -114,6 +119,7 @@ export const GetIpsRequest$inboundSchema: z.ZodType<
     "filter[type]": "filterType",
     "filter[location]": "filterLocation",
     "filter[address]": "filterAddress",
+    "filter[additional]": "filterAdditional",
     "extra_fields[ip_addresses]": "extraFieldsIpAddresses",
     "page[size]": "pageSize",
     "page[number]": "pageNumber",
@@ -127,6 +133,7 @@ export type GetIpsRequest$Outbound = {
   "filter[type]"?: string | undefined;
   "filter[location]"?: string | undefined;
   "filter[address]"?: string | undefined;
+  "filter[additional]"?: boolean | undefined;
   "extra_fields[ip_addresses]"?: string | undefined;
   "page[size]": number;
   "page[number]": number;
@@ -144,6 +151,7 @@ export const GetIpsRequest$outboundSchema: z.ZodType<
   filterType: FilterType$outboundSchema.optional(),
   filterLocation: z.string().optional(),
   filterAddress: z.string().optional(),
+  filterAdditional: z.boolean().optional(),
   extraFieldsIpAddresses: z.string().optional(),
   pageSize: z.number().int().default(20),
   pageNumber: z.number().int().default(1),
@@ -155,6 +163,7 @@ export const GetIpsRequest$outboundSchema: z.ZodType<
     filterType: "filter[type]",
     filterLocation: "filter[location]",
     filterAddress: "filter[address]",
+    filterAdditional: "filter[additional]",
     extraFieldsIpAddresses: "extra_fields[ip_addresses]",
     pageSize: "page[size]",
     pageNumber: "page[number]",
