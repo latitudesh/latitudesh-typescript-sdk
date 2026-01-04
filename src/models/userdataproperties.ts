@@ -8,6 +8,12 @@ import { safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
+import {
+  ProjectInclude,
+  ProjectInclude$inboundSchema,
+  ProjectInclude$Outbound,
+  ProjectInclude$outboundSchema,
+} from "./projectinclude.js";
 
 export const UserDataPropertiesType = {
   UserData: "user_data",
@@ -25,6 +31,7 @@ export type UserDataPropertiesAttributes = {
   content?: string | undefined;
   createdAt?: string | undefined;
   updatedAt?: string | undefined;
+  project?: ProjectInclude | undefined;
 };
 
 export type UserDataProperties = {
@@ -52,6 +59,7 @@ export const UserDataPropertiesAttributes$inboundSchema: z.ZodType<
   content: z.string().optional(),
   created_at: z.string().optional(),
   updated_at: z.string().optional(),
+  project: ProjectInclude$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "created_at": "createdAt",
@@ -64,6 +72,7 @@ export type UserDataPropertiesAttributes$Outbound = {
   content?: string | undefined;
   created_at?: string | undefined;
   updated_at?: string | undefined;
+  project?: ProjectInclude$Outbound | undefined;
 };
 
 /** @internal */
@@ -76,6 +85,7 @@ export const UserDataPropertiesAttributes$outboundSchema: z.ZodType<
   content: z.string().optional(),
   createdAt: z.string().optional(),
   updatedAt: z.string().optional(),
+  project: ProjectInclude$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     createdAt: "created_at",

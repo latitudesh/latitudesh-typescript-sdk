@@ -60,6 +60,7 @@ export * from "./trafficquota.js";
 export * from "./updateapikey.js";
 export * from "./user.js";
 export * from "./userdata.js";
+export * from "./userdataobject.js";
 export * from "./userdataproperties.js";
 export * from "./userinclude.js";
 export * from "./userteam.js";

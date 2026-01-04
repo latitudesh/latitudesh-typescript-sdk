@@ -91,6 +91,7 @@ async function $do(
 
   const query = encodeFormQuery({
     "filter[project]": payload?.["filter[project]"],
+    "filter[scope]": payload?.["filter[scope]"],
     "filter[tags]": payload?.["filter[tags]"],
   });
 

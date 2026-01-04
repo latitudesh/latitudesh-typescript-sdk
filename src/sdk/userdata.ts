@@ -29,7 +29,7 @@ export class UserData extends ClientSDK {
   async getProjectUsersData(
     request: operations.GetProjectUsersDataRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetProjectUsersDataResponse> {
+  ): Promise<models.UserData> {
     return unwrapAsync(userDataGetProjectUsersData(
       this,
       request,
@@ -48,7 +48,7 @@ export class UserData extends ClientSDK {
   async getProjectUserData(
     request: operations.GetProjectUserDataRequest,
     options?: RequestOptions,
-  ): Promise<models.UserData> {
+  ): Promise<models.UserDataObject> {
     return unwrapAsync(userDataGetProjectUserData(
       this,
       request,
@@ -86,7 +86,7 @@ export class UserData extends ClientSDK {
   async create(
     request: operations.PostProjectUserDataRequest,
     options?: RequestOptions,
-  ): Promise<models.UserData> {
+  ): Promise<models.UserDataObject> {
     return unwrapAsync(userDataCreate(
       this,
       request,
@@ -105,7 +105,7 @@ export class UserData extends ClientSDK {
   async updateForProject(
     request: operations.PutProjectUserDataRequest,
     options?: RequestOptions,
-  ): Promise<models.UserData> {
+  ): Promise<models.UserDataObject> {
     return unwrapAsync(userDataUpdateForProject(
       this,
       request,
@@ -122,7 +122,7 @@ export class UserData extends ClientSDK {
   async list(
     request?: operations.GetUsersDataRequest | undefined,
     options?: RequestOptions,
-  ): Promise<operations.GetUsersDataResponse> {
+  ): Promise<models.UserData> {
     return unwrapAsync(userDataList(
       this,
       request,
@@ -139,7 +139,7 @@ export class UserData extends ClientSDK {
   async createNew(
     request: operations.PostUserDataRequest,
     options?: RequestOptions,
-  ): Promise<models.UserData> {
+  ): Promise<models.UserDataObject> {
     return unwrapAsync(userDataCreateNew(
       this,
       request,
@@ -156,7 +156,7 @@ export class UserData extends ClientSDK {
   async retrieve(
     request: operations.GetUserDataRequest,
     options?: RequestOptions,
-  ): Promise<models.UserData> {
+  ): Promise<models.UserDataObject> {
     return unwrapAsync(userDataRetrieve(
       this,
       request,
@@ -187,7 +187,7 @@ export class UserData extends ClientSDK {
   async update(
     request: operations.PatchUserDataRequest,
     options?: RequestOptions,
-  ): Promise<models.UserData> {
+  ): Promise<models.UserDataObject> {
     return unwrapAsync(userDataUpdate(
       this,
       request,
