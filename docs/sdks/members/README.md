@@ -5,11 +5,11 @@
 
 ### Available Operations
 
-* [getTeamMembers](#getteammembers) - List all Team Members
+* [getTeamMembers](#getteammembers) - List members
 
 ## getTeamMembers
 
-List all Team Members
+List members
 
 ### Example Usage
 

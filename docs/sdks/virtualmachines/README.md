@@ -5,15 +5,15 @@
 
 ### Available Operations
 
-* [list](#list) - Get Teams Virtual Machines
-* [create](#create) - Create a Virtual Machine
-* [get](#get) - Get a Virtual Machine
-* [delete](#delete) - Destroy a Virtual Machine
-* [createVirtualMachineAction](#createvirtualmachineaction) - Run Virtual Machine Action
+* [list](#list) - List VMs
+* [create](#create) - Create VM
+* [get](#get) - Retrieve VM
+* [delete](#delete) - Destroy VM
+* [createVirtualMachineAction](#createvirtualmachineaction) - Run VM power action
 
 ## list
 
-Show all Team's Virtual Machines.
+Show all Team's Virtual machines.
 
 
 ### Example Usage
@@ -106,7 +106,9 @@ async function run() {
       type: "virtual_machines",
       attributes: {
         name: "my-new-vm",
+        site: "ASH",
         project: "enormous-wool-keyboard",
+        billing: "monthly",
       },
     },
   });
@@ -137,7 +139,9 @@ async function run() {
       type: "virtual_machines",
       attributes: {
         name: "my-new-vm",
+        site: "ASH",
         project: "enormous-wool-keyboard",
+        billing: "monthly",
       },
     },
   });

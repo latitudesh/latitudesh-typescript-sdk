@@ -26,7 +26,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Delete an User Data
+ * Delete user data
  */
 export function userDataDelete(
   client: LatitudeshCore,

@@ -7,7 +7,6 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import * as models from "../index.js";
 
 export type GetProjectUsersDataRequest = {
   /**
@@ -18,13 +17,6 @@ export type GetProjectUsersDataRequest = {
    * The `decoded_content` is provided as an extra attribute that shows content in decoded form.
    */
   extraFieldsUserData?: string | undefined;
-};
-
-/**
- * Success
- */
-export type GetProjectUsersDataResponse = {
-  data?: Array<models.UserData> | undefined;
 };
 
 /** @internal */
@@ -76,46 +68,5 @@ export function getProjectUsersDataRequestFromJSON(
     jsonString,
     (x) => GetProjectUsersDataRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetProjectUsersDataRequest' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetProjectUsersDataResponse$inboundSchema: z.ZodType<
-  GetProjectUsersDataResponse,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  data: z.array(models.UserData$inboundSchema).optional(),
-});
-/** @internal */
-export type GetProjectUsersDataResponse$Outbound = {
-  data?: Array<models.UserData$Outbound> | undefined;
-};
-
-/** @internal */
-export const GetProjectUsersDataResponse$outboundSchema: z.ZodType<
-  GetProjectUsersDataResponse$Outbound,
-  z.ZodTypeDef,
-  GetProjectUsersDataResponse
-> = z.object({
-  data: z.array(models.UserData$outboundSchema).optional(),
-});
-
-export function getProjectUsersDataResponseToJSON(
-  getProjectUsersDataResponse: GetProjectUsersDataResponse,
-): string {
-  return JSON.stringify(
-    GetProjectUsersDataResponse$outboundSchema.parse(
-      getProjectUsersDataResponse,
-    ),
-  );
-}
-export function getProjectUsersDataResponseFromJSON(
-  jsonString: string,
-): SafeParseResult<GetProjectUsersDataResponse, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetProjectUsersDataResponse$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetProjectUsersDataResponse' from JSON`,
   );
 }

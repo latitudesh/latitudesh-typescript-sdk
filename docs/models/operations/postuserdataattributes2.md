@@ -15,6 +15,6 @@ let value: PostUserDataAttributes2 = {
 
 | Field                                   | Type                                    | Required                                | Description                             |
 | --------------------------------------- | --------------------------------------- | --------------------------------------- | --------------------------------------- |
-| `description`                           | *string*                                | :heavy_check_mark:                      | description of the User Data            |
+| `description`                           | *string*                                | :heavy_check_mark:                      | description of the User data            |
 | `project`                               | *string*                                | :heavy_minus_sign:                      | Project ID or slug                      |
-| `content`                               | *string*                                | :heavy_check_mark:                      | base64 encoded content of the User Data |
+| `content`                               | *string*                                | :heavy_check_mark:                      | base64 encoded content of the User data |

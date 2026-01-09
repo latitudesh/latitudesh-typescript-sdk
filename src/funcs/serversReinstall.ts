@@ -26,7 +26,10 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Run Server Reinstall
+ * Reinstall server
+ *
+ * @remarks
+ * Reinstalls the server with a new operating system. All data on the server will be wiped during this process.
  */
 export function serversReinstall(
   client: LatitudeshCore,

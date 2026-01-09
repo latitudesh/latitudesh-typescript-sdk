@@ -49,6 +49,7 @@ export const CreateServerSite2 = {
   Dal: "DAL",
   Fra: "FRA",
   Lax: "LAX",
+  Lax2: "LAX2",
   Lon: "LON",
   Mex: "MEX",
   Mex2: "MEX2",
@@ -60,7 +61,7 @@ export const CreateServerSite2 = {
   Sao2: "SAO2",
   Syd: "SYD",
   Tyo: "TYO",
-  Tyo2: "TYO2",
+  Tyo4: "TYO4",
 } as const;
 /**
  * The site slug to deploy the server

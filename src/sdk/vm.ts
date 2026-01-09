@@ -9,7 +9,7 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class Vm extends ClientSDK {
   /**
-   * List all Virtual Machines Plans
+   * List VM plans
    */
   async list(
     options?: RequestOptions,

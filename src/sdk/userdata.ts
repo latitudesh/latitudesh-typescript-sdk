@@ -19,7 +19,7 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class UserData extends ClientSDK {
   /**
-   * List all Project User Data
+   * List all Project User data
    *
    * @remarks
    * List all Users Data in the project. These scripts can be used to configure servers with user data.
@@ -29,7 +29,7 @@ export class UserData extends ClientSDK {
   async getProjectUsersData(
     request: operations.GetProjectUsersDataRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetProjectUsersDataResponse> {
+  ): Promise<models.UserData> {
     return unwrapAsync(userDataGetProjectUsersData(
       this,
       request,
@@ -38,17 +38,17 @@ export class UserData extends ClientSDK {
   }
 
   /**
-   * Retrieve a Project User Data
+   * Retrieve a Project User data
    *
    * @remarks
-   * Get User Data in the project. These scripts can be used to configure servers with user data.
+   * Get User data in the project. These scripts can be used to configure servers with user data.
    *
    * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   async getProjectUserData(
     request: operations.GetProjectUserDataRequest,
     options?: RequestOptions,
-  ): Promise<models.UserData> {
+  ): Promise<models.UserDataObject> {
     return unwrapAsync(userDataGetProjectUserData(
       this,
       request,
@@ -57,10 +57,10 @@ export class UserData extends ClientSDK {
   }
 
   /**
-   * Delete a Project User Data
+   * Delete a Project User data
    *
    * @remarks
-   * Allow you remove User Data in a project.
+   * Allow you remove User data in a project.
    *
    * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
    */
@@ -76,17 +76,17 @@ export class UserData extends ClientSDK {
   }
 
   /**
-   * Create a Project User Data
+   * Create a Project User data
    *
    * @remarks
-   * Allows you to create User Data in a project, which can be used to perform custom setup on your servers after deploy and reinstall.
+   * Allows you to create User data in a project, which can be used to perform custom setup on your servers after deploy and reinstall.
    *
    * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   async create(
     request: operations.PostProjectUserDataRequest,
     options?: RequestOptions,
-  ): Promise<models.UserData> {
+  ): Promise<models.UserDataObject> {
     return unwrapAsync(userDataCreate(
       this,
       request,
@@ -95,17 +95,17 @@ export class UserData extends ClientSDK {
   }
 
   /**
-   * Update a Project User Data
+   * Update a Project User data
    *
    * @remarks
-   * Allow you update User Data in a project.
+   * Allow you update User data in a project.
    *
    * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   async updateForProject(
     request: operations.PutProjectUserDataRequest,
     options?: RequestOptions,
-  ): Promise<models.UserData> {
+  ): Promise<models.UserDataObject> {
     return unwrapAsync(userDataUpdateForProject(
       this,
       request,
@@ -114,7 +114,7 @@ export class UserData extends ClientSDK {
   }
 
   /**
-   * List all User Data
+   * List user data
    *
    * @remarks
    * List all Users Data in the project. These scripts can be used to configure servers with user data.
@@ -122,7 +122,7 @@ export class UserData extends ClientSDK {
   async list(
     request?: operations.GetUsersDataRequest | undefined,
     options?: RequestOptions,
-  ): Promise<operations.GetUsersDataResponse> {
+  ): Promise<models.UserData> {
     return unwrapAsync(userDataList(
       this,
       request,
@@ -131,15 +131,15 @@ export class UserData extends ClientSDK {
   }
 
   /**
-   * Create an User Data
+   * Create user data
    *
    * @remarks
-   * Allows you to create User Data in a team, which can be used to perform custom setup on your servers after deploy and reinstall.
+   * Allows you to create User data in a team, which can be used to perform custom setup on your servers after deploy and reinstall.
    */
   async createNew(
     request: operations.PostUserDataRequest,
     options?: RequestOptions,
-  ): Promise<models.UserData> {
+  ): Promise<models.UserDataObject> {
     return unwrapAsync(userDataCreateNew(
       this,
       request,
@@ -148,15 +148,15 @@ export class UserData extends ClientSDK {
   }
 
   /**
-   * Retrieve an User Data
+   * Retrieve user data
    *
    * @remarks
-   * Get User Data in the project. These scripts can be used to configure servers with user data.
+   * Get User data in the project. These scripts can be used to configure servers with user data.
    */
   async retrieve(
     request: operations.GetUserDataRequest,
     options?: RequestOptions,
-  ): Promise<models.UserData> {
+  ): Promise<models.UserDataObject> {
     return unwrapAsync(userDataRetrieve(
       this,
       request,
@@ -165,7 +165,7 @@ export class UserData extends ClientSDK {
   }
 
   /**
-   * Delete an User Data
+   * Delete user data
    */
   async delete(
     request: operations.DeleteUserDataRequest,
@@ -179,15 +179,15 @@ export class UserData extends ClientSDK {
   }
 
   /**
-   * Update an User Data
+   * Update user data
    *
    * @remarks
-   * Allow you update User Data in a team.
+   * Allow you update User data in a team.
    */
   async update(
     request: operations.PatchUserDataRequest,
     options?: RequestOptions,
-  ): Promise<models.UserData> {
+  ): Promise<models.UserDataObject> {
     return unwrapAsync(userDataUpdate(
       this,
       request,

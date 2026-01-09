@@ -11,5 +11,5 @@ let value: FilterLocation = "DAL";
 ## Values
 
 ```typescript
-"ASH" | "BGT" | "BUE" | "CHI" | "DAL" | "FRA" | "LAX" | "LON" | "MEX" | "MEX2" | "MIA" | "MIA2" | "NYC" | "SAN" | "SAO" | "SAO2" | "SYD" | "TYO" | "TYO2"
+"ASH" | "BGT" | "BUE" | "CHI" | "DAL" | "FRA" | "LAX" | "LAX2" | "LON" | "MEX" | "MEX2" | "MIA" | "MIA2" | "NYC" | "SAN" | "SAO" | "SAO2" | "SYD" | "TYO" | "TYO4"
 ```

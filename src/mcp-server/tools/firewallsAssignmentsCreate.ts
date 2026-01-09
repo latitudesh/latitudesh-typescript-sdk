@@ -12,9 +12,10 @@ const args = {
 
 export const tool$firewallsAssignmentsCreate: ToolDefinition<typeof args> = {
   name: "firewalls-assignments-create",
-  description: `Firewall Assignment
+  description: `Assign server to firewall
 
-Assign a server to a firewall`,
+Assigns a server to a firewall by its ID.
+`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await firewallsAssignmentsCreate(

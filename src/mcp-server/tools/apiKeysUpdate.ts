@@ -12,7 +12,7 @@ const args = {
 
 export const tool$apiKeysUpdate: ToolDefinition<typeof args> = {
   name: "api-keys-update",
-  description: `Regenerate API Key
+  description: `Rotate API key
 
 Regenerate an existing API Key that is tied to the current user. This overrides the previous key.
 `,

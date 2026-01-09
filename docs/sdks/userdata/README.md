@@ -5,16 +5,16 @@
 
 ### Available Operations
 
-* [~~getProjectUsersData~~](#getprojectusersdata) - List all Project User Data :warning: **Deprecated**
-* [~~getProjectUserData~~](#getprojectuserdata) - Retrieve a Project User Data :warning: **Deprecated**
-* [~~deleteProjectUserData~~](#deleteprojectuserdata) - Delete a Project User Data :warning: **Deprecated**
-* [~~create~~](#create) - Create a Project User Data :warning: **Deprecated**
-* [~~updateForProject~~](#updateforproject) - Update a Project User Data :warning: **Deprecated**
-* [list](#list) - List all User Data
-* [createNew](#createnew) - Create an User Data
-* [retrieve](#retrieve) - Retrieve an User Data
-* [delete](#delete) - Delete an User Data
-* [update](#update) - Update an User Data
+* [~~getProjectUsersData~~](#getprojectusersdata) - List all Project User data :warning: **Deprecated**
+* [~~getProjectUserData~~](#getprojectuserdata) - Retrieve a Project User data :warning: **Deprecated**
+* [~~deleteProjectUserData~~](#deleteprojectuserdata) - Delete a Project User data :warning: **Deprecated**
+* [~~create~~](#create) - Create a Project User data :warning: **Deprecated**
+* [~~updateForProject~~](#updateforproject) - Update a Project User data :warning: **Deprecated**
+* [list](#list) - List user data
+* [createNew](#createnew) - Create user data
+* [retrieve](#retrieve) - Retrieve user data
+* [delete](#delete) - Delete user data
+* [update](#update) - Update user data
 
 ## ~~getProjectUsersData~~
 
@@ -84,7 +84,7 @@ run();
 
 ### Response
 
-**Promise\<[operations.GetProjectUsersDataResponse](../../models/operations/getprojectusersdataresponse.md)\>**
+**Promise\<[models.UserData](../../models/userdata.md)\>**
 
 ### Errors
 
@@ -94,7 +94,7 @@ run();
 
 ## ~~getProjectUserData~~
 
-Get User Data in the project. These scripts can be used to configure servers with user data.
+Get User data in the project. These scripts can be used to configure servers with user data.
 
 
 > :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
@@ -162,7 +162,7 @@ run();
 
 ### Response
 
-**Promise\<[models.UserData](../../models/userdata.md)\>**
+**Promise\<[models.UserDataObject](../../models/userdataobject.md)\>**
 
 ### Errors
 
@@ -172,7 +172,7 @@ run();
 
 ## ~~deleteProjectUserData~~
 
-Allow you remove User Data in a project.
+Allow you remove User data in a project.
 
 
 > :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
@@ -250,7 +250,7 @@ run();
 
 ## ~~create~~
 
-Allows you to create User Data in a project, which can be used to perform custom setup on your servers after deploy and reinstall.
+Allows you to create User data in a project, which can be used to perform custom setup on your servers after deploy and reinstall.
 
 
 > :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
@@ -272,7 +272,7 @@ async function run() {
       data: {
         type: "user_data",
         attributes: {
-          description: "User Data description",
+          description: "User data description",
           content: "I2Nsb3VkLWNvbmZpZwpydW5jbWQ6CiAtIFsgdG91Y2gsICAvaG9tZS91YnVudHUvdGVzdCBd",
         },
       },
@@ -306,7 +306,7 @@ async function run() {
       data: {
         type: "user_data",
         attributes: {
-          description: "User Data description",
+          description: "User data description",
           content: "I2Nsb3VkLWNvbmZpZwpydW5jbWQ6CiAtIFsgdG91Y2gsICAvaG9tZS91YnVudHUvdGVzdCBd",
         },
       },
@@ -334,7 +334,7 @@ run();
 
 ### Response
 
-**Promise\<[models.UserData](../../models/userdata.md)\>**
+**Promise\<[models.UserDataObject](../../models/userdataobject.md)\>**
 
 ### Errors
 
@@ -344,7 +344,7 @@ run();
 
 ## ~~updateForProject~~
 
-Allow you update User Data in a project.
+Allow you update User data in a project.
 
 
 > :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
@@ -412,7 +412,7 @@ run();
 
 ### Response
 
-**Promise\<[models.UserData](../../models/userdata.md)\>**
+**Promise\<[models.UserDataObject](../../models/userdataobject.md)\>**
 
 ### Errors
 
@@ -482,7 +482,7 @@ run();
 
 ### Response
 
-**Promise\<[operations.GetUsersDataResponse](../../models/operations/getusersdataresponse.md)\>**
+**Promise\<[models.UserData](../../models/userdata.md)\>**
 
 ### Errors
 
@@ -492,7 +492,7 @@ run();
 
 ## createNew
 
-Allows you to create User Data in a team, which can be used to perform custom setup on your servers after deploy and reinstall.
+Allows you to create User data in a team, which can be used to perform custom setup on your servers after deploy and reinstall.
 
 
 ### Example Usage
@@ -510,7 +510,7 @@ async function run() {
     data: {
       type: "user_data",
       attributes: {
-        description: "User Data description",
+        description: "User data description",
         project: "proj_AW6Q2D9lqKLpr",
         content: "I2Nsb3VkLWNvbmZpZwpydW5jbWQ6CiAtIFsgdG91Y2gsICAvaG9tZS91YnVudHUvdGVzdCBd",
       },
@@ -542,7 +542,7 @@ async function run() {
     data: {
       type: "user_data",
       attributes: {
-        description: "User Data description",
+        description: "User data description",
         project: "proj_AW6Q2D9lqKLpr",
         content: "I2Nsb3VkLWNvbmZpZwpydW5jbWQ6CiAtIFsgdG91Y2gsICAvaG9tZS91YnVudHUvdGVzdCBd",
       },
@@ -570,7 +570,7 @@ run();
 
 ### Response
 
-**Promise\<[models.UserData](../../models/userdata.md)\>**
+**Promise\<[models.UserDataObject](../../models/userdataobject.md)\>**
 
 ### Errors
 
@@ -580,7 +580,7 @@ run();
 
 ## retrieve
 
-Get User Data in the project. These scripts can be used to configure servers with user data.
+Get User data in the project. These scripts can be used to configure servers with user data.
 
 
 ### Example Usage
@@ -644,7 +644,7 @@ run();
 
 ### Response
 
-**Promise\<[models.UserData](../../models/userdata.md)\>**
+**Promise\<[models.UserDataObject](../../models/userdataobject.md)\>**
 
 ### Errors
 
@@ -654,7 +654,7 @@ run();
 
 ## delete
 
-Delete an User Data
+Delete user data
 
 ### Example Usage
 
@@ -727,7 +727,7 @@ run();
 
 ## update
 
-Allow you update User Data in a team.
+Allow you update User data in a team.
 
 
 ### Example Usage
@@ -791,7 +791,7 @@ run();
 
 ### Response
 
-**Promise\<[models.UserData](../../models/userdata.md)\>**
+**Promise\<[models.UserDataObject](../../models/userdataobject.md)\>**
 
 ### Errors
 

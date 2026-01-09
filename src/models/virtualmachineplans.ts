@@ -89,14 +89,26 @@ export type VirtualMachinePlansBRL = {
   year?: number | undefined;
 };
 
+/**
+ * Pricing information for this plan in the region
+ */
 export type VirtualMachinePlansPricing = {
   usd?: VirtualMachinePlansUSD | undefined;
   brl?: VirtualMachinePlansBRL | undefined;
 };
 
 export type VirtualMachinePlansRegion = {
+  /**
+   * The name of the region
+   */
   name?: string | undefined;
+  /**
+   * List of site codes where this virtual machine plan can be deployed
+   */
   available?: Array<string> | undefined;
+  /**
+   * Pricing information for this plan in the region
+   */
   pricing?: VirtualMachinePlansPricing | undefined;
 };
 
@@ -122,6 +134,9 @@ export type VirtualMachinePlansAttributes = {
    */
   name?: string | undefined;
   specs?: VirtualMachinePlansSpecs | undefined;
+  /**
+   * List of regions where infrastructure with available stock exists for this virtual machine plan
+   */
   regions?: Array<VirtualMachinePlansRegion> | undefined;
   /**
    * The stock level of the plan

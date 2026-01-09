@@ -7,7 +7,6 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import * as models from "../index.js";
 
 export type GetUsersDataRequest = {
   /**
@@ -15,16 +14,13 @@ export type GetUsersDataRequest = {
    */
   filterProject?: string | undefined;
   /**
+   * Filter by scope: `project` (has project), `team` (no project), or empty (all)
+   */
+  filterScope?: string | undefined;
+  /**
    * The `decoded_content` is provided as an extra attribute that shows content in decoded form.
    */
   extraFieldsUserData?: string | undefined;
-};
-
-/**
- * Success
- */
-export type GetUsersDataResponse = {
-  data?: Array<models.UserData> | undefined;
 };
 
 /** @internal */
@@ -34,16 +30,19 @@ export const GetUsersDataRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   "filter[project]": z.string().optional(),
+  "filter[scope]": z.string().optional(),
   "extra_fields[user_data]": z.string().default("decoded_content"),
 }).transform((v) => {
   return remap$(v, {
     "filter[project]": "filterProject",
+    "filter[scope]": "filterScope",
     "extra_fields[user_data]": "extraFieldsUserData",
   });
 });
 /** @internal */
 export type GetUsersDataRequest$Outbound = {
   "filter[project]"?: string | undefined;
+  "filter[scope]"?: string | undefined;
   "extra_fields[user_data]": string;
 };
 
@@ -54,10 +53,12 @@ export const GetUsersDataRequest$outboundSchema: z.ZodType<
   GetUsersDataRequest
 > = z.object({
   filterProject: z.string().optional(),
+  filterScope: z.string().optional(),
   extraFieldsUserData: z.string().default("decoded_content"),
 }).transform((v) => {
   return remap$(v, {
     filterProject: "filter[project]",
+    filterScope: "filter[scope]",
     extraFieldsUserData: "extra_fields[user_data]",
   });
 });
@@ -76,44 +77,5 @@ export function getUsersDataRequestFromJSON(
     jsonString,
     (x) => GetUsersDataRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetUsersDataRequest' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetUsersDataResponse$inboundSchema: z.ZodType<
-  GetUsersDataResponse,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  data: z.array(models.UserData$inboundSchema).optional(),
-});
-/** @internal */
-export type GetUsersDataResponse$Outbound = {
-  data?: Array<models.UserData$Outbound> | undefined;
-};
-
-/** @internal */
-export const GetUsersDataResponse$outboundSchema: z.ZodType<
-  GetUsersDataResponse$Outbound,
-  z.ZodTypeDef,
-  GetUsersDataResponse
-> = z.object({
-  data: z.array(models.UserData$outboundSchema).optional(),
-});
-
-export function getUsersDataResponseToJSON(
-  getUsersDataResponse: GetUsersDataResponse,
-): string {
-  return JSON.stringify(
-    GetUsersDataResponse$outboundSchema.parse(getUsersDataResponse),
-  );
-}
-export function getUsersDataResponseFromJSON(
-  jsonString: string,
-): SafeParseResult<GetUsersDataResponse, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetUsersDataResponse$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetUsersDataResponse' from JSON`,
   );
 }

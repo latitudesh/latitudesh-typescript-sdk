@@ -26,10 +26,10 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Retrieve an User Data
+ * Retrieve user data
  *
  * @remarks
- * Get User Data in the project. These scripts can be used to configure servers with user data.
+ * Get User data in the project. These scripts can be used to configure servers with user data.
  */
 export function userDataRetrieve(
   client: LatitudeshCore,
@@ -37,7 +37,7 @@ export function userDataRetrieve(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    models.UserData,
+    models.UserDataObject,
     | LatitudeshError
     | ResponseValidationError
     | ConnectionError
@@ -62,7 +62,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      models.UserData,
+      models.UserDataObject,
       | LatitudeshError
       | ResponseValidationError
       | ConnectionError
@@ -150,7 +150,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    models.UserData,
+    models.UserDataObject,
     | LatitudeshError
     | ResponseValidationError
     | ConnectionError
@@ -160,7 +160,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, models.UserData$inboundSchema, {
+    M.json(200, models.UserDataObject$inboundSchema, {
       ctype: "application/vnd.api+json",
     }),
     M.fail("4XX"),

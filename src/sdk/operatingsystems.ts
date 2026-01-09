@@ -9,7 +9,7 @@ import { PageIterator, unwrapResultIterator } from "../types/operations.js";
 
 export class OperatingSystems extends ClientSDK {
   /**
-   * List all operating systems available
+   * List operating systems
    *
    * @remarks
    * Lists all operating systems available to deploy and reinstall.

@@ -5,24 +5,24 @@
 
 ### Available Operations
 
-* [list](#list) - List all Servers
-* [create](#create) - Deploy Server
-* [get](#get) - Retrieve a Server
-* [delete](#delete) - Remove Server
-* [update](#update) - Update Server
-* [getDeployConfig](#getdeployconfig) - Retrieve Deploy Config
-* [updateDeployConfig](#updatedeployconfig) - Update Deploy Config
-* [lock](#lock) - Lock the server
-* [unlock](#unlock) - Unlock the server
-* [getOutOfBand](#getoutofband) - List Out of Band Connections
-* [startOutOfBandConnection](#startoutofbandconnection) - Start Out of Band Connection
-* [runAction](#runaction) - Run Server Action
-* [createIpmiSession](#createipmisession) - Generate IPMI credentials
-* [startRescueMode](#startrescuemode) - Puts a Server in rescue mode
-* [exitRescueMode](#exitrescuemode) - Exits rescue mode for a Server
-* [scheduleDeletion](#scheduledeletion) - Schedule the server deletion
-* [unscheduleDeletion](#unscheduledeletion) - Unschedule the server deletion
-* [reinstall](#reinstall) - Run Server Reinstall
+* [list](#list) - List servers
+* [create](#create) - Create server
+* [get](#get) - Retrieve server
+* [delete](#delete) - Remove server
+* [update](#update) - Update server
+* [getDeployConfig](#getdeployconfig) - Retrieve deploy config
+* [updateDeployConfig](#updatedeployconfig) - Update deploy config
+* [lock](#lock) - Lock server
+* [unlock](#unlock) - Unlock server
+* [getOutOfBand](#getoutofband) - List out-of-band connections
+* [startOutOfBandConnection](#startoutofbandconnection) - Create out-of-band connection
+* [runAction](#runaction) - Run power action
+* [createIpmiSession](#createipmisession) - Create IPMI credentials
+* [startRescueMode](#startrescuemode) - Put server in rescue mode
+* [exitRescueMode](#exitrescuemode) - Exits rescue mode
+* [scheduleDeletion](#scheduledeletion) - Schedule server deletion
+* [unscheduleDeletion](#unscheduledeletion) - Unschedule server deletion
+* [reinstall](#reinstall) - Reinstall server
 
 ## list
 
@@ -104,7 +104,7 @@ run();
 
 ## create
 
-Deploy Server
+Create server
 
 ### Example Usage
 
@@ -269,7 +269,7 @@ run();
 
 ## delete
 
-Remove Server
+Remove server
 
 ### Example Usage
 
@@ -342,7 +342,7 @@ run();
 
 ## update
 
-Update Server
+Update server
 
 ### Example Usage
 
@@ -433,7 +433,7 @@ run();
 
 ## getDeployConfig
 
-Retrieve Deploy Config
+Retrieve deploy config
 
 ### Example Usage
 
@@ -506,7 +506,7 @@ run();
 
 ## updateDeployConfig
 
-Update Deploy Config
+Update deploy config
 
 ### Example Usage
 
@@ -731,7 +731,7 @@ run();
 
 ## getOutOfBand
 
-List Out of Band Connections
+List out-of-band connections
 
 ### Example Usage
 
@@ -804,7 +804,7 @@ run();
 
 ## startOutOfBandConnection
 
-Start Out of Band Connection
+Create out-of-band connection
 
 ### Example Usage
 
@@ -1355,7 +1355,8 @@ run();
 
 ## reinstall
 
-Run Server Reinstall
+Reinstalls the server with a new operating system. All data on the server will be wiped during this process.
+
 
 ### Example Usage
 

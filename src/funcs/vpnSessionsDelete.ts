@@ -26,7 +26,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Delete a VPN Session
+ * Delete VPN session
  *
  * @remarks
  * Deletes an existing VPN Session.

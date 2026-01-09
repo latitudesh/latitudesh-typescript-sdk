@@ -28,8 +28,9 @@ generation:
     generateTests: true
     generateNewTests: false
     skipResponseBodyAssertions: false
+  persistentEdits: {}
 typescript:
-  version: 0.2.0
+  version: 0.2.1
   acceptHeaderEnum: true
   additionalDependencies:
     dependencies: {}
@@ -49,6 +50,7 @@ typescript:
   enumFormat: union
   envVarPrefix: LATITUDESH
   exportZodModelNamespace: false
+  flatAdditionalProperties: false
   flattenGlobalSecurity: true
   flatteningOrder: parameters-first
   formStringArrayEncodeMode: encoded-string
@@ -75,6 +77,7 @@ typescript:
   outputModelSuffix: output
   packageName: latitudesh-typescript-sdk
   preApplyUnionDiscriminators: true
+  preserveModelFieldNames: false
   responseFormat: flat
   sseFlatResponse: false
   templateVersion: v2

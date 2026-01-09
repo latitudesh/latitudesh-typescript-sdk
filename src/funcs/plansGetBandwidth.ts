@@ -32,7 +32,7 @@ import {
 } from "../types/operations.js";
 
 /**
- * List all bandwidth plans
+ * List bandwidth plans
  *
  * @remarks
  * Lists all bandwidth plans.

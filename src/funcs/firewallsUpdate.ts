@@ -26,10 +26,10 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Update Firewall
+ * Update firewall
  *
  * @remarks
- * Update a firewall
+ * Updates a firewall by its ID.
  */
 export function firewallsUpdate(
   client: LatitudeshCore,

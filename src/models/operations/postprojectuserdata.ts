@@ -18,11 +18,11 @@ export type PostProjectUserDataType2 = ClosedEnum<
 
 export type PostProjectUserDataAttributes2 = {
   /**
-   * description of the User Data
+   * description of the User data
    */
   description: string;
   /**
-   * base64 encoded content of the User Data
+   * base64 encoded content of the User data
    */
   content: string;
 };

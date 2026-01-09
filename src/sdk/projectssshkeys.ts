@@ -9,10 +9,10 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class ProjectsSshKeys extends ClientSDK {
   /**
-   * Create a Project SSH Key
+   * Create a SSH key
    *
    * @remarks
-   * Allow you create SSH Keys in a project. These keys can be used to access servers after deploy and reinstall actions.
+   * Allow you create SSH keys in a project. These keys can be used to access servers after deploy and reinstall actions.
    *
    * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
    */

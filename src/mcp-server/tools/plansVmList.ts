@@ -7,7 +7,7 @@ import { formatResult, ToolDefinition } from "../tools.js";
 
 export const tool$plansVmList: ToolDefinition = {
   name: "plans-vm-list",
-  description: `List all Virtual Machines Plans`,
+  description: `List VM plans`,
   tool: async (client, ctx) => {
     const [result, apiCall] = await plansVmList(
       client,

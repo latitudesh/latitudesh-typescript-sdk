@@ -20,12 +20,13 @@ import {
 import { LatitudeshError } from "../models/errors/latitudesherror.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import * as models from "../models/index.js";
 import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * List all Project User Data
+ * List all Project User data
  *
  * @remarks
  * List all Users Data in the project. These scripts can be used to configure servers with user data.
@@ -38,7 +39,7 @@ export function userDataGetProjectUsersData(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetProjectUsersDataResponse,
+    models.UserData,
     | LatitudeshError
     | ResponseValidationError
     | ConnectionError
@@ -63,7 +64,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      operations.GetProjectUsersDataResponse,
+      models.UserData,
       | LatitudeshError
       | ResponseValidationError
       | ConnectionError
@@ -152,7 +153,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    operations.GetProjectUsersDataResponse,
+    models.UserData,
     | LatitudeshError
     | ResponseValidationError
     | ConnectionError
@@ -162,7 +163,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.GetProjectUsersDataResponse$inboundSchema, {
+    M.json(200, models.UserData$inboundSchema, {
       ctype: "application/vnd.api+json",
     }),
     M.fail("4XX"),
