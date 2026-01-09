@@ -26,7 +26,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Retrieve Traffic Quota
+ * Retrieve traffic quota
  */
 export function trafficGetQuota(
   client: LatitudeshCore,

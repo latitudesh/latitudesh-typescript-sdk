@@ -26,7 +26,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Assign Virtual network
+ * Assign VLAN
  */
 export function privateNetworksAssign(
   client: LatitudeshCore,

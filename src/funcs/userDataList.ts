@@ -20,12 +20,13 @@ import {
 import { LatitudeshError } from "../models/errors/latitudesherror.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import * as models from "../models/index.js";
 import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * List all User Data
+ * List user data
  *
  * @remarks
  * List all Users Data in the project. These scripts can be used to configure servers with user data.
@@ -36,7 +37,7 @@ export function userDataList(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetUsersDataResponse,
+    models.UserData,
     | LatitudeshError
     | ResponseValidationError
     | ConnectionError
@@ -61,7 +62,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      operations.GetUsersDataResponse,
+      models.UserData,
       | LatitudeshError
       | ResponseValidationError
       | ConnectionError
@@ -91,6 +92,7 @@ async function $do(
   const query = encodeFormQuery({
     "extra_fields[user_data]": payload?.["extra_fields[user_data]"],
     "filter[project]": payload?.["filter[project]"],
+    "filter[scope]": payload?.["filter[scope]"],
   });
 
   const headers = new Headers(compactMap({
@@ -144,7 +146,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    operations.GetUsersDataResponse,
+    models.UserData,
     | LatitudeshError
     | ResponseValidationError
     | ConnectionError
@@ -154,7 +156,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.GetUsersDataResponse$inboundSchema, {
+    M.json(200, models.UserData$inboundSchema, {
       ctype: "application/vnd.api+json",
     }),
     M.fail("4XX"),

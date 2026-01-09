@@ -25,7 +25,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Regenerate API Key
+ * Rotate API key
  *
  * @remarks
  * Regenerate an existing API Key that is tied to the current user. This overrides the previous key.

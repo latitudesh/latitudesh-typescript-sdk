@@ -5,18 +5,19 @@
 
 ### Available Operations
 
-* [getAllFirewallAssignments](#getallfirewallassignments) - List All Firewall Assignments
+* [getAllFirewallAssignments](#getallfirewallassignments) - Firewalls assignments
 * [list](#list) - List firewalls
 * [create](#create) - Create a firewall
-* [get](#get) - Retrieve Firewall
-* [delete](#delete) - Delete Firewall
-* [update](#update) - Update Firewall
-* [listAssignments](#listassignments) - Firewall Assignments
-* [deleteAssignment](#deleteassignment) - Delete Firewall Assignment
+* [get](#get) - Retrieve firewall
+* [delete](#delete) - Delete firewall
+* [update](#update) - Update firewall
+* [listAssignments](#listassignments) - Firewall assignments
+* [deleteAssignment](#deleteassignment) - Delete assignment
 
 ## getAllFirewallAssignments
 
-List all firewall assignments
+Returns a list of all servers assigned to one or more firewalls.
+
 
 ### Example Usage
 
@@ -295,7 +296,8 @@ run();
 
 ## get
 
-Retrieve a firewall
+Returns a single firewall by its ID.
+
 
 ### Example Usage
 
@@ -368,7 +370,7 @@ run();
 
 ## delete
 
-Delete a firewall
+Delete firewall
 
 ### Example Usage
 
@@ -441,7 +443,8 @@ run();
 
 ## update
 
-Update a firewall
+Updates a firewall by its ID.
+
 
 ### Example Usage
 
@@ -546,7 +549,8 @@ run();
 
 ## listAssignments
 
-List servers assigned to a firewall
+Returns a list of all servers assigned to a particular firewall.
+
 
 ### Example Usage
 
@@ -623,7 +627,8 @@ run();
 
 ## deleteAssignment
 
-Remove a server from a firewall
+Removes a server from a firewall by its ID.
+
 
 ### Example Usage
 

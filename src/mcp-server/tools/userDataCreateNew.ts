@@ -12,9 +12,9 @@ const args = {
 
 export const tool$userDataCreateNew: ToolDefinition<typeof args> = {
   name: "user-data-create-new",
-  description: `Create an User Data
+  description: `Create user data
 
-Allows you to create User Data in a team, which can be used to perform custom setup on your servers after deploy and reinstall.
+Allows you to create User data in a team, which can be used to perform custom setup on your servers after deploy and reinstall.
 `,
   args,
   tool: async (client, args, ctx) => {

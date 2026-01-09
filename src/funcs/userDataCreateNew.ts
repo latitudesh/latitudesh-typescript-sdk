@@ -26,10 +26,10 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Create an User Data
+ * Create user data
  *
  * @remarks
- * Allows you to create User Data in a team, which can be used to perform custom setup on your servers after deploy and reinstall.
+ * Allows you to create User data in a team, which can be used to perform custom setup on your servers after deploy and reinstall.
  */
 export function userDataCreateNew(
   client: LatitudeshCore,
@@ -37,7 +37,7 @@ export function userDataCreateNew(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    models.UserData,
+    models.UserDataObject,
     | LatitudeshError
     | ResponseValidationError
     | ConnectionError
@@ -62,7 +62,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      models.UserData,
+      models.UserDataObject,
       | LatitudeshError
       | ResponseValidationError
       | ConnectionError
@@ -139,7 +139,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    models.UserData,
+    models.UserDataObject,
     | LatitudeshError
     | ResponseValidationError
     | ConnectionError
@@ -149,7 +149,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(201, models.UserData$inboundSchema, {
+    M.json(201, models.UserDataObject$inboundSchema, {
       ctype: "application/vnd.api+json",
     }),
     M.fail("4XX"),

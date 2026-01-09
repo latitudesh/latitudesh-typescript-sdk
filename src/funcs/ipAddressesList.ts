@@ -105,6 +105,7 @@ async function $do(
 
   const query = encodeFormQuery({
     "extra_fields[ip_addresses]": payload?.["extra_fields[ip_addresses]"],
+    "filter[additional]": payload?.["filter[additional]"],
     "filter[address]": payload?.["filter[address]"],
     "filter[family]": payload?.["filter[family]"],
     "filter[location]": payload?.["filter[location]"],

@@ -12,7 +12,7 @@ import { PageIterator, unwrapResultIterator } from "../types/operations.js";
 
 export class Roles extends ClientSDK {
   /**
-   * List all Roles
+   * List roles
    *
    * @remarks
    * Returns a list of all roles that can be assigned to users
@@ -29,7 +29,7 @@ export class Roles extends ClientSDK {
   }
 
   /**
-   * Retrieve Role
+   * Retrieve role
    */
   async get(
     request: operations.GetRoleIdRequest,

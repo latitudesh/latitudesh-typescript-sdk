@@ -25,7 +25,10 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * List all Active VPN Sessions
+ * List VPN sessions
+ *
+ * @remarks
+ * List active VPN sessions.
  */
 export function vpnSessionsList(
   client: LatitudeshCore,

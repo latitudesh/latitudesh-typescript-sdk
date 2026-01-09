@@ -5,11 +5,11 @@
 
 ### Available Operations
 
-* [~~postProjectSshKey~~](#postprojectsshkey) - Create a Project SSH Key :warning: **Deprecated**
+* [~~postProjectSshKey~~](#postprojectsshkey) - Create a SSH key :warning: **Deprecated**
 
 ## ~~postProjectSshKey~~
 
-Allow you create SSH Keys in a project. These keys can be used to access servers after deploy and reinstall actions.
+Allow you create SSH keys in a project. These keys can be used to access servers after deploy and reinstall actions.
 
 
 > :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.

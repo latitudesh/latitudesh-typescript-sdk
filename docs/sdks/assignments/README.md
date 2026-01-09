@@ -5,11 +5,12 @@
 
 ### Available Operations
 
-* [create](#create) - Firewall Assignment
+* [create](#create) - Assign server to firewall
 
 ## create
 
-Assign a server to a firewall
+Assigns a server to a firewall by its ID.
+
 
 ### Example Usage
 

@@ -12,7 +12,7 @@ const args = {
 
 export const tool$plansGet: ToolDefinition<typeof args> = {
   name: "plans-get",
-  description: `Retrieve a Plan`,
+  description: `Retrieve a plan`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await plansGet(

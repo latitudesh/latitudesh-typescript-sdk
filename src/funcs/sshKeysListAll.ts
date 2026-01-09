@@ -26,7 +26,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * List all SSH Keys
+ * List SSH Keys
  *
  * @remarks
  * List all SSH Keys in the project. These keys can be used to access servers after deploy and reinstall actions.
@@ -91,6 +91,7 @@ async function $do(
 
   const query = encodeFormQuery({
     "filter[project]": payload?.["filter[project]"],
+    "filter[scope]": payload?.["filter[scope]"],
     "filter[tags]": payload?.["filter[tags]"],
   });
 

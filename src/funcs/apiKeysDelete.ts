@@ -26,7 +26,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Delete API Key
+ * Delete API key
  *
  * @remarks
  * Delete an existing API Key. Once deleted, the API Key can no longer be used to access the API.

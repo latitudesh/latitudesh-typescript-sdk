@@ -53,6 +53,7 @@ export type IpAddressAttributes = {
   type?: IpAddressType | undefined;
   public?: boolean | undefined;
   management?: boolean | undefined;
+  additional?: boolean | undefined;
   project?: IpAddressProject | undefined;
   region?: IpAddressRegion | undefined;
   available?: boolean | undefined;
@@ -271,6 +272,7 @@ export const IpAddressAttributes$inboundSchema: z.ZodType<
   type: IpAddressType$inboundSchema.optional(),
   public: z.boolean().optional(),
   management: z.boolean().optional(),
+  additional: z.boolean().optional(),
   project: z.lazy(() => IpAddressProject$inboundSchema).optional(),
   region: z.lazy(() => IpAddressRegion$inboundSchema).optional(),
   available: z.boolean().optional(),
@@ -286,6 +288,7 @@ export type IpAddressAttributes$Outbound = {
   type?: string | undefined;
   public?: boolean | undefined;
   management?: boolean | undefined;
+  additional?: boolean | undefined;
   project?: IpAddressProject$Outbound | undefined;
   region?: IpAddressRegion$Outbound | undefined;
   available?: boolean | undefined;
@@ -306,6 +309,7 @@ export const IpAddressAttributes$outboundSchema: z.ZodType<
   type: IpAddressType$outboundSchema.optional(),
   public: z.boolean().optional(),
   management: z.boolean().optional(),
+  additional: z.boolean().optional(),
   project: z.lazy(() => IpAddressProject$outboundSchema).optional(),
   region: z.lazy(() => IpAddressRegion$outboundSchema).optional(),
   available: z.boolean().optional(),

@@ -26,7 +26,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Refresh a VPN Session
+ * Refresh VPN session
  *
  * @remarks
  * Refreshing an existing VPN Session will create new credentials for that session

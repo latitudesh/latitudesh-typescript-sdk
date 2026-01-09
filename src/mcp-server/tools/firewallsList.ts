@@ -12,9 +12,7 @@ const args = {
 
 export const tool$firewallsList: ToolDefinition<typeof args> = {
   name: "firewalls-list",
-  description: `List firewalls
-
-List firewalls`,
+  description: `List firewalls`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await firewallsList(

@@ -23,7 +23,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * List all Storage Plans
+ * List storage plans
  */
 export function plansListStorage(
   client: LatitudeshCore,

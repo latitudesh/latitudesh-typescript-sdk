@@ -5,11 +5,11 @@
 
 ### Available Operations
 
-* [list](#list) - List all Virtual Machines Plans
+* [list](#list) - List VM plans
 
 ## list
 
-List all Virtual Machines Plans
+List VM plans
 
 ### Example Usage
 

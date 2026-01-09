@@ -5,12 +5,12 @@
 
 ### Available Operations
 
-* [get](#get) - Retrieve Traffic consumption
-* [getQuota](#getquota) - Retrieve Traffic Quota
+* [get](#get) - Retrieve traffic
+* [getQuota](#getquota) - Retrieve traffic quota
 
 ## get
 
-Retrieve Traffic consumption
+Retrieve traffic
 
 ### Example Usage
 
@@ -87,7 +87,7 @@ run();
 
 ## getQuota
 
-Retrieve Traffic Quota
+Retrieve traffic quota
 
 ### Example Usage
 

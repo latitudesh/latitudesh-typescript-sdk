@@ -14,6 +14,10 @@ export type GetSshKeysRequest = {
    */
   filterProject?: string | undefined;
   /**
+   * Filter by scope: `project` (has projects), `team` (no projects), or empty (all)
+   */
+  filterScope?: string | undefined;
+  /**
    * The tags ids to filter by, separated by comma, e.g. `filter[tags]=tag_1,tag_2`will return ssh keys with `tag_1` AND `tag_2`
    */
   filterTags?: string | undefined;
@@ -26,16 +30,19 @@ export const GetSshKeysRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   "filter[project]": z.string().optional(),
+  "filter[scope]": z.string().optional(),
   "filter[tags]": z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "filter[project]": "filterProject",
+    "filter[scope]": "filterScope",
     "filter[tags]": "filterTags",
   });
 });
 /** @internal */
 export type GetSshKeysRequest$Outbound = {
   "filter[project]"?: string | undefined;
+  "filter[scope]"?: string | undefined;
   "filter[tags]"?: string | undefined;
 };
 
@@ -46,10 +53,12 @@ export const GetSshKeysRequest$outboundSchema: z.ZodType<
   GetSshKeysRequest
 > = z.object({
   filterProject: z.string().optional(),
+  filterScope: z.string().optional(),
   filterTags: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     filterProject: "filter[project]",
+    filterScope: "filter[scope]",
     filterTags: "filter[tags]",
   });
 });

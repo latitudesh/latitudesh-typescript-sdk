@@ -13,4 +13,4 @@ let value: PutProjectUserDataAttributes2 = {};
 | Field                            | Type                             | Required                         | Description                      |
 | -------------------------------- | -------------------------------- | -------------------------------- | -------------------------------- |
 | `description`                    | *string*                         | :heavy_minus_sign:               | description dummy user data      |
-| `content`                        | *string*                         | :heavy_minus_sign:               | encoded content of the User Data |
+| `content`                        | *string*                         | :heavy_minus_sign:               | encoded content of the User data |
