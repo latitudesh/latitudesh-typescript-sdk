@@ -1,5 +1,4 @@
 # IpAddresses
-(*ipAddresses*)
 
 ## Overview
 

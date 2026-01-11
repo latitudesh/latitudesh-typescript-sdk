@@ -72,6 +72,7 @@ export * from "./getvirtualnetworksassignments.js";
 export * from "./getvpnsessions.js";
 export * from "./indexvirtualmachine.js";
 export * from "./listfirewalls.js";
+export * from "./patchapikey.js";
 export * from "./patchcurrentteam.js";
 export * from "./patchstoragefilesystems.js";
 export * from "./patchuserdata.js";

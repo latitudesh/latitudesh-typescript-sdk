@@ -14,13 +14,6 @@ export type UpdateApiKeyRequest = {
   updateApiKey: models.UpdateApiKey;
 };
 
-/**
- * Success
- */
-export type UpdateApiKeyResponse = {
-  data?: models.ApiKey | undefined;
-};
-
 /** @internal */
 export const UpdateApiKeyRequest$inboundSchema: z.ZodType<
   UpdateApiKeyRequest,
@@ -70,44 +63,5 @@ export function updateApiKeyRequestFromJSON(
     jsonString,
     (x) => UpdateApiKeyRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'UpdateApiKeyRequest' from JSON`,
-  );
-}
-
-/** @internal */
-export const UpdateApiKeyResponse$inboundSchema: z.ZodType<
-  UpdateApiKeyResponse,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  data: models.ApiKey$inboundSchema.optional(),
-});
-/** @internal */
-export type UpdateApiKeyResponse$Outbound = {
-  data?: models.ApiKey$Outbound | undefined;
-};
-
-/** @internal */
-export const UpdateApiKeyResponse$outboundSchema: z.ZodType<
-  UpdateApiKeyResponse$Outbound,
-  z.ZodTypeDef,
-  UpdateApiKeyResponse
-> = z.object({
-  data: models.ApiKey$outboundSchema.optional(),
-});
-
-export function updateApiKeyResponseToJSON(
-  updateApiKeyResponse: UpdateApiKeyResponse,
-): string {
-  return JSON.stringify(
-    UpdateApiKeyResponse$outboundSchema.parse(updateApiKeyResponse),
-  );
-}
-export function updateApiKeyResponseFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateApiKeyResponse, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateApiKeyResponse$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateApiKeyResponse' from JSON`,
   );
 }

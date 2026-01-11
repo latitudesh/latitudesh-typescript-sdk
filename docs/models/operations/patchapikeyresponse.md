@@ -1,13 +1,13 @@
-# UpdateApiKeyResponse
+# PatchApiKeyResponse
 
 Success
 
 ## Example Usage
 
 ```typescript
-import { UpdateApiKeyResponse } from "latitudesh-typescript-sdk/models/operations";
+import { PatchApiKeyResponse } from "latitudesh-typescript-sdk/models/operations";
 
-let value: UpdateApiKeyResponse = {};
+let value: PatchApiKeyResponse = {};
 ```
 
 ## Fields

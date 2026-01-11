@@ -1,5 +1,4 @@
 # UserData
-(*userData*)
 
 ## Overview
 

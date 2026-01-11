@@ -16,6 +16,7 @@ import { createRegisterTool } from "./tools.js";
 import { tool$apiKeysCreate } from "./tools/apiKeysCreate.js";
 import { tool$apiKeysDelete } from "./tools/apiKeysDelete.js";
 import { tool$apiKeysList } from "./tools/apiKeysList.js";
+import { tool$apiKeysPatchApiKey } from "./tools/apiKeysPatchApiKey.js";
 import { tool$apiKeysUpdate } from "./tools/apiKeysUpdate.js";
 import { tool$billingListUsage } from "./tools/billingListUsage.js";
 import { tool$eventsList } from "./tools/eventsList.js";
@@ -136,7 +137,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Latitudesh",
-    version: "0.2.1",
+    version: "0.2.2",
   });
 
   const client = new LatitudeshCore({
@@ -171,6 +172,7 @@ export function createMCPServer(deps: {
   tool(tool$apiKeysCreate);
   tool(tool$apiKeysUpdate);
   tool(tool$apiKeysDelete);
+  tool(tool$apiKeysPatchApiKey);
   tool(tool$billingListUsage);
   tool(tool$eventsList);
   tool(tool$firewallsGetAllFirewallAssignments);

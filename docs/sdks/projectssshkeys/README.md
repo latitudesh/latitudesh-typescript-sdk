@@ -1,5 +1,7 @@
-# ProjectsSshKeys
-(*projects.sshKeys*)
+# ~~Projects.SshKeys~~
+
+> [!WARNING]
+> This SDK is **DEPRECATED**
 
 ## Overview
 
