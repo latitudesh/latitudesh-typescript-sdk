@@ -129,7 +129,7 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["4XX", "5XX"],
+    errorCodes: ["401", "403", "4XX", "5XX"],
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -152,7 +152,7 @@ async function $do(
     M.json(201, operations.PostApiKeyResponse$inboundSchema, {
       ctype: "application/vnd.api+json",
     }),
-    M.fail("4XX"),
+    M.fail([401, 403, "4XX"]),
     M.fail("5XX"),
   )(response, req);
   if (!result.ok) {

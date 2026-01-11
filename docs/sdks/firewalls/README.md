@@ -1,5 +1,4 @@
 # Firewalls
-(*firewalls*)
 
 ## Overview
 
