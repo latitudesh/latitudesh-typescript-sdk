@@ -1,5 +1,4 @@
-# Members
-(*teams.members*)
+# Teams.Members
 
 ## Overview
 

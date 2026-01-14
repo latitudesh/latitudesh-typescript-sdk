@@ -1,5 +1,4 @@
-# Assignments
-(*firewalls.assignments*)
+# Firewalls.Assignments
 
 ## Overview
 

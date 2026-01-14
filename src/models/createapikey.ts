@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
@@ -18,6 +19,14 @@ export type CreateApiKeyAttributes = {
    * Name of the API Key
    */
   name?: string | undefined;
+  /**
+   * Whether the API Key is read-only. Read-only keys can only perform GET, HEAD, and OPTIONS requests.
+   */
+  readOnly?: boolean | undefined;
+  /**
+   * List of allowed IP addresses or CIDR ranges. If set, the API key can only be used from these IP addresses.
+   */
+  allowedIps?: Array<string> | undefined;
 };
 
 export type CreateApiKeyData = {
@@ -45,10 +54,19 @@ export const CreateApiKeyAttributes$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   name: z.string().default("Name of the API Key"),
+  read_only: z.boolean().optional(),
+  allowed_ips: z.array(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "read_only": "readOnly",
+    "allowed_ips": "allowedIps",
+  });
 });
 /** @internal */
 export type CreateApiKeyAttributes$Outbound = {
   name: string;
+  read_only?: boolean | undefined;
+  allowed_ips?: Array<string> | undefined;
 };
 
 /** @internal */
@@ -58,6 +76,13 @@ export const CreateApiKeyAttributes$outboundSchema: z.ZodType<
   CreateApiKeyAttributes
 > = z.object({
   name: z.string().default("Name of the API Key"),
+  readOnly: z.boolean().optional(),
+  allowedIps: z.array(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    readOnly: "read_only",
+    allowedIps: "allowed_ips",
+  });
 });
 
 export function createApiKeyAttributesToJSON(

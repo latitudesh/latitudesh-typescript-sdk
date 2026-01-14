@@ -14,7 +14,7 @@ export const tool$apiKeysUpdate: ToolDefinition<typeof args> = {
   name: "api-keys-update",
   description: `Rotate API key
 
-Regenerate an existing API Key that is tied to the current user. This overrides the previous key.
+Rotate (regenerate) an API key's token and optionally update its settings. This generates a new token and invalidates the previous one. To update settings without rotating the token, use the PATCH endpoint instead.
 `,
   args,
   tool: async (client, args, ctx) => {
@@ -31,8 +31,6 @@ Regenerate an existing API Key that is tied to the current user. This overrides 
       };
     }
 
-    const value = result.value;
-
-    return formatResult(value, apiCall);
+    return formatResult(void 0, apiCall);
   },
 };

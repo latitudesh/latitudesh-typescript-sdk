@@ -51,6 +51,14 @@ export type ApiKeyAttributes = {
    * The time when the API Key was updated
    */
   updatedAt?: Date | undefined;
+  /**
+   * Whether the API Key is read-only. Read-only keys can only perform GET, HEAD, and OPTIONS requests. Any POST, PUT, PATCH, or DELETE requests will return a 403 error.
+   */
+  readOnly?: boolean | undefined;
+  /**
+   * List of allowed IP addresses or CIDR ranges. If set, the API key can only be used from these IP addresses. Supports both IPv4 and IPv6 addresses.
+   */
+  allowedIps?: Array<string> | undefined;
 };
 
 export type ApiKey = {
@@ -121,6 +129,8 @@ export const ApiKeyAttributes$inboundSchema: z.ZodType<
     .optional(),
   updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
+  read_only: z.boolean().optional(),
+  allowed_ips: z.array(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "api_version": "apiVersion",
@@ -128,6 +138,8 @@ export const ApiKeyAttributes$inboundSchema: z.ZodType<
     "last_used_at": "lastUsedAt",
     "created_at": "createdAt",
     "updated_at": "updatedAt",
+    "read_only": "readOnly",
+    "allowed_ips": "allowedIps",
   });
 });
 /** @internal */
@@ -139,6 +151,8 @@ export type ApiKeyAttributes$Outbound = {
   user?: ApiKeyUser$Outbound | undefined;
   created_at?: string | undefined;
   updated_at?: string | undefined;
+  read_only?: boolean | undefined;
+  allowed_ips?: Array<string> | undefined;
 };
 
 /** @internal */
@@ -154,6 +168,8 @@ export const ApiKeyAttributes$outboundSchema: z.ZodType<
   user: z.lazy(() => ApiKeyUser$outboundSchema).optional(),
   createdAt: z.date().transform(v => v.toISOString()).optional(),
   updatedAt: z.date().transform(v => v.toISOString()).optional(),
+  readOnly: z.boolean().optional(),
+  allowedIps: z.array(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     apiVersion: "api_version",
@@ -161,6 +177,8 @@ export const ApiKeyAttributes$outboundSchema: z.ZodType<
     lastUsedAt: "last_used_at",
     createdAt: "created_at",
     updatedAt: "updated_at",
+    readOnly: "read_only",
+    allowedIps: "allowed_ips",
   });
 });
 

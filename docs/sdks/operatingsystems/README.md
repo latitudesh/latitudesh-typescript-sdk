@@ -1,5 +1,4 @@
 # OperatingSystems
-(*operatingSystems*)
 
 ## Overview
 

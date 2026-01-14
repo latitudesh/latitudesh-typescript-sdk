@@ -5,6 +5,7 @@
 import { apiKeysCreate } from "../funcs/apiKeysCreate.js";
 import { apiKeysDelete } from "../funcs/apiKeysDelete.js";
 import { apiKeysList } from "../funcs/apiKeysList.js";
+import { apiKeysPatchApiKey } from "../funcs/apiKeysPatchApiKey.js";
 import { apiKeysUpdate } from "../funcs/apiKeysUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as models from "../models/index.js";
@@ -48,12 +49,12 @@ export class ApiKeys extends ClientSDK {
    * Rotate API key
    *
    * @remarks
-   * Regenerate an existing API Key that is tied to the current user. This overrides the previous key.
+   * Rotate (regenerate) an API key's token and optionally update its settings. This generates a new token and invalidates the previous one. To update settings without rotating the token, use the PATCH endpoint instead.
    */
   async update(
     request: operations.UpdateApiKeyRequest,
     options?: RequestOptions,
-  ): Promise<operations.UpdateApiKeyResponse> {
+  ): Promise<void> {
     return unwrapAsync(apiKeysUpdate(
       this,
       request,
@@ -72,6 +73,23 @@ export class ApiKeys extends ClientSDK {
     options?: RequestOptions,
   ): Promise<void> {
     return unwrapAsync(apiKeysDelete(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Update API key settings
+   *
+   * @remarks
+   * Update an API key's settings (name, read_only, allowed_ips) without regenerating the token. To rotate the token, use the PUT endpoint instead.
+   */
+  async patchApiKey(
+    request: operations.PatchApiKeyRequest,
+    options?: RequestOptions,
+  ): Promise<operations.PatchApiKeyResponse> {
+    return unwrapAsync(apiKeysPatchApiKey(
       this,
       request,
       options,
