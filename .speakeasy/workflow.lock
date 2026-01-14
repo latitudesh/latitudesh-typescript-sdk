@@ -1,4 +1,4 @@
-speakeasyVersion: 1.667.0
+speakeasyVersion: 1.685.0
 sources:
     Latitudesh-OAS:
         sourceNamespace: latitudesh-oas
@@ -6,7 +6,7 @@ sources:
         sourceBlobDigest: sha256:245bfe4ef83f4baa4d3127897e7cd1405f7a4492e700e38162b82909a47a4ca0
         tags:
             - latest
-            - speakeasy-sdk-regen-1766017708
+            - speakeasy-sdk-regen-1768416088
 targets:
     latitudesh:
         source: Latitudesh-OAS
@@ -14,7 +14,7 @@ targets:
         sourceRevisionDigest: sha256:bd3b740b9de315490b6dd1ee0b5765bdf7e8c300a3dfb0b12a9a0b1af14bb3ec
         sourceBlobDigest: sha256:245bfe4ef83f4baa4d3127897e7cd1405f7a4492e700e38162b82909a47a4ca0
         codeSamplesNamespace: latitudesh-oas-typescript-code-samples
-        codeSamplesRevisionDigest: sha256:4f64340dec21103dd67340157b5bdc4914c65449fd6fdb7cf950102d718c1711
+        codeSamplesRevisionDigest: sha256:8f602372207b0ce4d0260109089357c2019fbe8764cf640b0cc7b1fc70b6d287
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
