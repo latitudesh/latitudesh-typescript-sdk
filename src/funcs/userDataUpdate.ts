@@ -26,10 +26,10 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Update user data
+ * Update an User Data
  *
  * @remarks
- * Allow you update User data in a team.
+ * Allow you update User Data in a team.
  */
 export function userDataUpdate(
   client: LatitudeshCore,

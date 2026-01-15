@@ -23,7 +23,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Retrieve team
+ * Retrieve the team
  */
 export function teamsGet(
   client: LatitudeshCore,

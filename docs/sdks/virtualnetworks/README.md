@@ -1,11 +1,10 @@
 # VirtualNetworks
-(*virtualNetworks*)
 
 ## Overview
 
 ### Available Operations
 
-* [delete](#delete) - Delete VLAN
+* [delete](#delete) - Delete a Virtual Network
 
 ## delete
 

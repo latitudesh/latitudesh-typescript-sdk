@@ -12,7 +12,7 @@ const args = {
 
 export const tool$serversGetDeployConfig: ToolDefinition<typeof args> = {
   name: "servers-get-deploy-config",
-  description: `Retrieve deploy config`,
+  description: `Retrieve Deploy Config`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await serversGetDeployConfig(

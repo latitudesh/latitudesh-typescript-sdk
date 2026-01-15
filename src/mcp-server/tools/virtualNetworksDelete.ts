@@ -12,7 +12,7 @@ const args = {
 
 export const tool$virtualNetworksDelete: ToolDefinition<typeof args> = {
   name: "virtual-networks-delete",
-  description: `Delete VLAN
+  description: `Delete a Virtual Network
 
 Delete virtual network
 `,

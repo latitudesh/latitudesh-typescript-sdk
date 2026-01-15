@@ -26,10 +26,10 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Assign server to firewall
+ * Firewall Assignment
  *
  * @remarks
- * Assigns a server to a firewall by its ID.
+ * Assign a server to a firewall
  */
 export function firewallsAssignmentsCreate(
   client: LatitudeshCore,

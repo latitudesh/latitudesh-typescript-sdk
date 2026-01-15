@@ -1,15 +1,14 @@
-# Members
-(*teams.members*)
+# Teams.Members
 
 ## Overview
 
 ### Available Operations
 
-* [getTeamMembers](#getteammembers) - List members
+* [getTeamMembers](#getteammembers) - List all Team Members
 
 ## getTeamMembers
 
-List members
+List all Team Members
 
 ### Example Usage
 

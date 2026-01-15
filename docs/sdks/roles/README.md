@@ -1,12 +1,11 @@
 # Roles
-(*roles*)
 
 ## Overview
 
 ### Available Operations
 
-* [list](#list) - List roles
-* [get](#get) - Retrieve role
+* [list](#list) - List all Roles
+* [get](#get) - Retrieve Role
 
 ## list
 
@@ -84,7 +83,7 @@ run();
 
 ## get
 
-Retrieve role
+Retrieve Role
 
 ### Example Usage
 

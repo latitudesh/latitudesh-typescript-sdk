@@ -12,7 +12,7 @@ const args = {
 
 export const tool$vpnSessionsDelete: ToolDefinition<typeof args> = {
   name: "vpn-sessions-delete",
-  description: `Delete VPN session
+  description: `Delete a VPN Session
 
 Deletes an existing VPN Session.
 `,

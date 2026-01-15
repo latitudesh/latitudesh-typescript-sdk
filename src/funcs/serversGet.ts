@@ -26,7 +26,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Retrieve server
+ * Retrieve a Server
  *
  * @remarks
  * Returns a server that belongs to the team.

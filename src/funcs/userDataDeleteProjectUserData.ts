@@ -26,10 +26,10 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Delete a Project User data
+ * Delete a Project User Data
  *
  * @remarks
- * Allow you remove User data in a project.
+ * Allow you remove User Data in a project.
  *
  * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
  */

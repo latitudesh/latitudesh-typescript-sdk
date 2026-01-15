@@ -26,7 +26,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Retrieve billing usage
+ * List Billing Usage
  *
  * @remarks
  * Returns the billing usage of a project

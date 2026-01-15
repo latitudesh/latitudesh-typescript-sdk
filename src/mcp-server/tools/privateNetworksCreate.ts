@@ -12,7 +12,7 @@ const args = {
 
 export const tool$privateNetworksCreate: ToolDefinition<typeof args> = {
   name: "private-networks-create",
-  description: `Create VLAN
+  description: `Create a Virtual Network
 
 Creates a new Virtual Network.
 `,

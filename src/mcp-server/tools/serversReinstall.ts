@@ -12,10 +12,7 @@ const args = {
 
 export const tool$serversReinstall: ToolDefinition<typeof args> = {
   name: "servers-reinstall",
-  description: `Reinstall server
-
-Reinstalls the server with a new operating system. All data on the server will be wiped during this process.
-`,
+  description: `Run Server Reinstall`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await serversReinstall(

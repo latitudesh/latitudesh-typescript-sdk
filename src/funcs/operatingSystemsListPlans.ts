@@ -32,7 +32,7 @@ import {
 } from "../types/operations.js";
 
 /**
- * List operating systems
+ * List all operating systems available
  *
  * @remarks
  * Lists all operating systems available to deploy and reinstall.

@@ -1,17 +1,16 @@
 # Teams
-(*teams*)
 
 ## Overview
 
 ### Available Operations
 
-* [get](#get) - Retrieve team
-* [create](#create) - Create team
-* [update](#update) - Update team
+* [get](#get) - Retrieve the team
+* [create](#create) - Create a team
+* [update](#update) - Update a team
 
 ## get
 
-Retrieve team
+Retrieve the team
 
 ### Example Usage
 
@@ -79,7 +78,7 @@ run();
 
 ## create
 
-Create team
+Create a team
 
 ### Example Usage
 
@@ -166,7 +165,7 @@ run();
 
 ## update
 
-Update team
+Update a team
 
 ### Example Usage
 
@@ -180,10 +179,10 @@ const latitudesh = new Latitudesh({
 
 async function run() {
   const result = await latitudesh.teams.update({
-    teamId: "team_VNoL4jAy7YTbvVV0005jI6vQylGZ",
+    teamId: "team_bVJM4y6m4VCyy101JzA3szlVGRb",
     requestBody: {
       data: {
-        id: "team_z3Qna7E2QRc3455EQ34JfAWNQ42",
+        id: "team_bVJM4y6m4VCyy101JzA3szlVGRb",
         type: "teams",
         attributes: {
           address: "Address",
@@ -215,10 +214,10 @@ const latitudesh = new LatitudeshCore({
 
 async function run() {
   const res = await teamsUpdate(latitudesh, {
-    teamId: "team_VNoL4jAy7YTbvVV0005jI6vQylGZ",
+    teamId: "team_bVJM4y6m4VCyy101JzA3szlVGRb",
     requestBody: {
       data: {
-        id: "team_z3Qna7E2QRc3455EQ34JfAWNQ42",
+        id: "team_bVJM4y6m4VCyy101JzA3szlVGRb",
         type: "teams",
         attributes: {
           address: "Address",

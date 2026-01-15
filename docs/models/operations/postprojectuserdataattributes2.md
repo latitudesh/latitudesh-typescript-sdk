@@ -15,5 +15,5 @@ let value: PostProjectUserDataAttributes2 = {
 
 | Field                                   | Type                                    | Required                                | Description                             |
 | --------------------------------------- | --------------------------------------- | --------------------------------------- | --------------------------------------- |
-| `description`                           | *string*                                | :heavy_check_mark:                      | description of the User data            |
-| `content`                               | *string*                                | :heavy_check_mark:                      | base64 encoded content of the User data |
+| `description`                           | *string*                                | :heavy_check_mark:                      | description of the User Data            |
+| `content`                               | *string*                                | :heavy_check_mark:                      | base64 encoded content of the User Data |

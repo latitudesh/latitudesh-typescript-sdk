@@ -1,6 +1,6 @@
 # UpdateApiKeyResponse
 
-Success
+Success - Update name without rotating token
 
 ## Example Usage
 

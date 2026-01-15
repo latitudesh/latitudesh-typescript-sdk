@@ -32,7 +32,7 @@ import {
 } from "../types/operations.js";
 
 /**
- * List VLAN assignments
+ * List all servers assigned to virtual networks
  *
  * @remarks
  * Returns a list of all servers assigned to virtual networks.

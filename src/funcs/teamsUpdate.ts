@@ -25,7 +25,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Update team
+ * Update a team
  */
 export function teamsUpdate(
   client: LatitudeshCore,

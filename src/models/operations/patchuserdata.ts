@@ -20,7 +20,7 @@ export type PatchUserDataAttributes2 = {
    */
   description?: string | undefined;
   /**
-   * encoded content of the User data
+   * encoded content of the User Data
    */
   content?: string | undefined;
 };

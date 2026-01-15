@@ -32,10 +32,10 @@ import {
 } from "../types/operations.js";
 
 /**
- * List events
+ * List all Events
  *
  * @remarks
- * Lists actions performed by users on your account.
+ * Lists all events.
  */
 export function eventsList(
   client: LatitudeshCore,

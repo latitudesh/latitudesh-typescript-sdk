@@ -10,7 +10,7 @@ let value: UserData = {};
 
 ## Fields
 
-| Field                                                        | Type                                                         | Required                                                     | Description                                                  |
-| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| `data`                                                       | [models.UserDataProperties](../models/userdataproperties.md) | :heavy_minus_sign:                                           | N/A                                                          |
-| `meta`                                                       | [models.UserDataMeta](../models/userdatameta.md)             | :heavy_minus_sign:                                           | N/A                                                          |
+| Field                                                  | Type                                                   | Required                                               | Description                                            |
+| ------------------------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------ |
+| `data`                                                 | [models.UserDataObject](../models/userdataobject.md)[] | :heavy_minus_sign:                                     | N/A                                                    |
+| `meta`                                                 | [models.UserDataMeta](../models/userdatameta.md)       | :heavy_minus_sign:                                     | N/A                                                    |

@@ -16,34 +16,11 @@ export type VirtualMachinePayloadType = ClosedEnum<
   typeof VirtualMachinePayloadType
 >;
 
-/**
- * The billing type for the virtual machine. Accepts `hourly` and `monthly` for on demand projects and `yearly` for reserved projects. Defaults to `monthly` for on demand projects and `yearly` for reserved projects.
- */
-export const VirtualMachinePayloadBilling = {
-  Hourly: "hourly",
-  Monthly: "monthly",
-  Yearly: "yearly",
-} as const;
-/**
- * The billing type for the virtual machine. Accepts `hourly` and `monthly` for on demand projects and `yearly` for reserved projects. Defaults to `monthly` for on demand projects and `yearly` for reserved projects.
- */
-export type VirtualMachinePayloadBilling = ClosedEnum<
-  typeof VirtualMachinePayloadBilling
->;
-
 export type VirtualMachinePayloadAttributes = {
   name?: string | undefined;
   plan?: string | undefined;
-  /**
-   * The site slug where the virtual machine will be deployed. Defaults to 'DAL' if not specified. To see which sites are available for a given plan, check the 'available' array in the plan's regions.
-   */
-  site?: string | undefined;
   sshKeys?: Array<string> | undefined;
   project?: string | undefined;
-  /**
-   * The billing type for the virtual machine. Accepts `hourly` and `monthly` for on demand projects and `yearly` for reserved projects. Defaults to `monthly` for on demand projects and `yearly` for reserved projects.
-   */
-  billing?: VirtualMachinePayloadBilling | undefined;
 };
 
 export type VirtualMachinePayloadData = {
@@ -65,15 +42,6 @@ export const VirtualMachinePayloadType$outboundSchema: z.ZodNativeEnum<
 > = VirtualMachinePayloadType$inboundSchema;
 
 /** @internal */
-export const VirtualMachinePayloadBilling$inboundSchema: z.ZodNativeEnum<
-  typeof VirtualMachinePayloadBilling
-> = z.nativeEnum(VirtualMachinePayloadBilling);
-/** @internal */
-export const VirtualMachinePayloadBilling$outboundSchema: z.ZodNativeEnum<
-  typeof VirtualMachinePayloadBilling
-> = VirtualMachinePayloadBilling$inboundSchema;
-
-/** @internal */
 export const VirtualMachinePayloadAttributes$inboundSchema: z.ZodType<
   VirtualMachinePayloadAttributes,
   z.ZodTypeDef,
@@ -81,10 +49,8 @@ export const VirtualMachinePayloadAttributes$inboundSchema: z.ZodType<
 > = z.object({
   name: z.string().default("my-vm"),
   plan: z.string().optional(),
-  site: z.string().optional(),
   ssh_keys: z.array(z.string()).optional(),
   project: z.string().default("my-project"),
-  billing: VirtualMachinePayloadBilling$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "ssh_keys": "sshKeys",
@@ -94,10 +60,8 @@ export const VirtualMachinePayloadAttributes$inboundSchema: z.ZodType<
 export type VirtualMachinePayloadAttributes$Outbound = {
   name: string;
   plan?: string | undefined;
-  site?: string | undefined;
   ssh_keys?: Array<string> | undefined;
   project: string;
-  billing?: string | undefined;
 };
 
 /** @internal */
@@ -108,10 +72,8 @@ export const VirtualMachinePayloadAttributes$outboundSchema: z.ZodType<
 > = z.object({
   name: z.string().default("my-vm"),
   plan: z.string().optional(),
-  site: z.string().optional(),
   sshKeys: z.array(z.string()).optional(),
   project: z.string().default("my-project"),
-  billing: VirtualMachinePayloadBilling$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     sshKeys: "ssh_keys",

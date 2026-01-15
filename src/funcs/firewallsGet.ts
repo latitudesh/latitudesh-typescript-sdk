@@ -26,10 +26,10 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Retrieve firewall
+ * Retrieve Firewall
  *
  * @remarks
- * Returns a single firewall by its ID.
+ * Retrieve a firewall
  */
 export function firewallsGet(
   client: LatitudeshCore,

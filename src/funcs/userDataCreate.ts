@@ -26,10 +26,10 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Create a Project User data
+ * Create a Project User Data
  *
  * @remarks
- * Allows you to create User data in a project, which can be used to perform custom setup on your servers after deploy and reinstall.
+ * Allows you to create User Data in a project, which can be used to perform custom setup on your servers after deploy and reinstall.
  *
  * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
  */

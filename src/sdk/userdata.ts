@@ -19,7 +19,7 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class UserData extends ClientSDK {
   /**
-   * List all Project User data
+   * List all Project User Data
    *
    * @remarks
    * List all Users Data in the project. These scripts can be used to configure servers with user data.
@@ -38,10 +38,10 @@ export class UserData extends ClientSDK {
   }
 
   /**
-   * Retrieve a Project User data
+   * Retrieve a Project User Data
    *
    * @remarks
-   * Get User data in the project. These scripts can be used to configure servers with user data.
+   * Get User Data in the project. These scripts can be used to configure servers with user data.
    *
    * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
    */
@@ -57,10 +57,10 @@ export class UserData extends ClientSDK {
   }
 
   /**
-   * Delete a Project User data
+   * Delete a Project User Data
    *
    * @remarks
-   * Allow you remove User data in a project.
+   * Allow you remove User Data in a project.
    *
    * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
    */
@@ -76,10 +76,10 @@ export class UserData extends ClientSDK {
   }
 
   /**
-   * Create a Project User data
+   * Create a Project User Data
    *
    * @remarks
-   * Allows you to create User data in a project, which can be used to perform custom setup on your servers after deploy and reinstall.
+   * Allows you to create User Data in a project, which can be used to perform custom setup on your servers after deploy and reinstall.
    *
    * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
    */
@@ -95,10 +95,10 @@ export class UserData extends ClientSDK {
   }
 
   /**
-   * Update a Project User data
+   * Update a Project User Data
    *
    * @remarks
-   * Allow you update User data in a project.
+   * Allow you update User Data in a project.
    *
    * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
    */
@@ -114,7 +114,7 @@ export class UserData extends ClientSDK {
   }
 
   /**
-   * List user data
+   * List all User Data
    *
    * @remarks
    * List all Users Data in the project. These scripts can be used to configure servers with user data.
@@ -131,10 +131,10 @@ export class UserData extends ClientSDK {
   }
 
   /**
-   * Create user data
+   * Create an User Data
    *
    * @remarks
-   * Allows you to create User data in a team, which can be used to perform custom setup on your servers after deploy and reinstall.
+   * Allows you to create User Data in a team, which can be used to perform custom setup on your servers after deploy and reinstall.
    */
   async createNew(
     request: operations.PostUserDataRequest,
@@ -148,10 +148,10 @@ export class UserData extends ClientSDK {
   }
 
   /**
-   * Retrieve user data
+   * Retrieve an User Data
    *
    * @remarks
-   * Get User data in the project. These scripts can be used to configure servers with user data.
+   * Get User Data in the project. These scripts can be used to configure servers with user data.
    */
   async retrieve(
     request: operations.GetUserDataRequest,
@@ -165,7 +165,7 @@ export class UserData extends ClientSDK {
   }
 
   /**
-   * Delete user data
+   * Delete an User Data
    */
   async delete(
     request: operations.DeleteUserDataRequest,
@@ -179,10 +179,10 @@ export class UserData extends ClientSDK {
   }
 
   /**
-   * Update user data
+   * Update an User Data
    *
    * @remarks
-   * Allow you update User data in a team.
+   * Allow you update User Data in a team.
    */
   async update(
     request: operations.PatchUserDataRequest,

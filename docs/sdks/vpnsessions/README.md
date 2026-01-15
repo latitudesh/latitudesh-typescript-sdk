@@ -1,18 +1,17 @@
 # VpnSessions
-(*vpnSessions*)
 
 ## Overview
 
 ### Available Operations
 
-* [list](#list) - List VPN sessions
-* [create](#create) - Create VPN session
-* [refreshPassword](#refreshpassword) - Refresh VPN session
-* [delete](#delete) - Delete VPN session
+* [list](#list) - List all Active VPN Sessions
+* [create](#create) - Create a VPN Session
+* [refreshPassword](#refreshpassword) - Refresh a VPN Session
+* [delete](#delete) - Delete a VPN Session
 
 ## list
 
-List active VPN sessions.
+List all Active VPN Sessions
 
 ### Example Usage
 
@@ -104,7 +103,7 @@ async function run() {
     data: {
       attributes: {
         site: "SAO",
-        serverId: "sv_wg3ZDrKyO5QlP",
+        serverId: "sv_LMmAD8wyqwop2",
       },
     },
   });
@@ -134,7 +133,7 @@ async function run() {
     data: {
       attributes: {
         site: "SAO",
-        serverId: "sv_wg3ZDrKyO5QlP",
+        serverId: "sv_LMmAD8wyqwop2",
       },
     },
   });
@@ -185,7 +184,7 @@ const latitudesh = new Latitudesh({
 
 async function run() {
   const result = await latitudesh.vpnSessions.refreshPassword({
-    vpnSessionId: "vpn_6VE1Wd37dXnZJ",
+    vpnSessionId: "vpn_pRMLydp0dQKr1",
   });
 
   console.log(result);
@@ -210,7 +209,7 @@ const latitudesh = new LatitudeshCore({
 
 async function run() {
   const res = await vpnSessionsRefreshPassword(latitudesh, {
-    vpnSessionId: "vpn_6VE1Wd37dXnZJ",
+    vpnSessionId: "vpn_pRMLydp0dQKr1",
   });
   if (res.ok) {
     const { value: result } = res;

@@ -12,7 +12,7 @@ const args = {
 
 export const tool$serversUnlock: ToolDefinition<typeof args> = {
   name: "servers-unlock",
-  description: `Unlock server
+  description: `Unlock the server
 
 Unlocks the server. A locked server cannot be deleted or modified and no actions can be performed on it.`,
   args,

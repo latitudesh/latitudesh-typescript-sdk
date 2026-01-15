@@ -36,9 +36,17 @@ export type ApiKeyAttributes = {
    */
   tokenLastSlice?: string | undefined;
   /**
+   * Whether this API Key is read-only
+   */
+  readOnly?: boolean | undefined;
+  /**
+   * List of allowed IP addresses for this API Key
+   */
+  allowedIps?: Array<string> | null | undefined;
+  /**
    * The last time a request was made to the API using this API Key
    */
-  lastUsedAt?: Date | undefined;
+  lastUsedAt?: Date | null | undefined;
   /**
    * The owner of the API Key
    */
@@ -113,8 +121,10 @@ export const ApiKeyAttributes$inboundSchema: z.ZodType<
   name: z.string().optional(),
   api_version: z.string().optional(),
   token_last_slice: z.string().optional(),
-  last_used_at: z.string().datetime({ offset: true }).transform(v =>
-    new Date(v)
+  read_only: z.boolean().optional(),
+  allowed_ips: z.nullable(z.array(z.string())).optional(),
+  last_used_at: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
   user: z.lazy(() => ApiKeyUser$inboundSchema).optional(),
   created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
@@ -125,6 +135,8 @@ export const ApiKeyAttributes$inboundSchema: z.ZodType<
   return remap$(v, {
     "api_version": "apiVersion",
     "token_last_slice": "tokenLastSlice",
+    "read_only": "readOnly",
+    "allowed_ips": "allowedIps",
     "last_used_at": "lastUsedAt",
     "created_at": "createdAt",
     "updated_at": "updatedAt",
@@ -135,7 +147,9 @@ export type ApiKeyAttributes$Outbound = {
   name?: string | undefined;
   api_version?: string | undefined;
   token_last_slice?: string | undefined;
-  last_used_at?: string | undefined;
+  read_only?: boolean | undefined;
+  allowed_ips?: Array<string> | null | undefined;
+  last_used_at?: string | null | undefined;
   user?: ApiKeyUser$Outbound | undefined;
   created_at?: string | undefined;
   updated_at?: string | undefined;
@@ -150,7 +164,9 @@ export const ApiKeyAttributes$outboundSchema: z.ZodType<
   name: z.string().optional(),
   apiVersion: z.string().optional(),
   tokenLastSlice: z.string().optional(),
-  lastUsedAt: z.date().transform(v => v.toISOString()).optional(),
+  readOnly: z.boolean().optional(),
+  allowedIps: z.nullable(z.array(z.string())).optional(),
+  lastUsedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   user: z.lazy(() => ApiKeyUser$outboundSchema).optional(),
   createdAt: z.date().transform(v => v.toISOString()).optional(),
   updatedAt: z.date().transform(v => v.toISOString()).optional(),
@@ -158,6 +174,8 @@ export const ApiKeyAttributes$outboundSchema: z.ZodType<
   return remap$(v, {
     apiVersion: "api_version",
     tokenLastSlice: "token_last_slice",
+    readOnly: "read_only",
+    allowedIps: "allowed_ips",
     lastUsedAt: "last_used_at",
     createdAt: "created_at",
     updatedAt: "updated_at",

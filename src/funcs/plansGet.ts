@@ -26,7 +26,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Retrieve a plan
+ * Retrieve a Plan
  */
 export function plansGet(
   client: LatitudeshCore,

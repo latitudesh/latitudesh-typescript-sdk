@@ -26,7 +26,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Delete VLAN
+ * Delete a Virtual Network
  *
  * @remarks
  * Delete virtual network

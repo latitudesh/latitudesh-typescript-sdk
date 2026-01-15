@@ -25,7 +25,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Create VM
+ * Create a Virtual Machine
  *
  * @remarks
  * Creates a new Virtual Machine.

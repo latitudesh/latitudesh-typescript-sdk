@@ -12,7 +12,7 @@ const args = {
 
 export const tool$trafficGet: ToolDefinition<typeof args> = {
   name: "traffic-get",
-  description: `Retrieve traffic`,
+  description: `Retrieve Traffic consumption`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await trafficGet(

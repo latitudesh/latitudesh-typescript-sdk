@@ -1,15 +1,14 @@
 # Events
-(*events*)
 
 ## Overview
 
 ### Available Operations
 
-* [list](#list) - List events
+* [list](#list) - List all Events
 
 ## list
 
-Lists actions performed by users on your account.
+Lists all events.
 
 
 ### Example Usage

@@ -12,7 +12,7 @@ const args = {
 
 export const tool$vpnSessionsRefreshPassword: ToolDefinition<typeof args> = {
   name: "vpn-sessions-refresh-password",
-  description: `Refresh VPN session
+  description: `Refresh a VPN Session
 
 Refreshing an existing VPN Session will create new credentials for that session
 `,

@@ -1,14 +1,13 @@
 # Projects
-(*projects*)
 
 ## Overview
 
 ### Available Operations
 
-* [list](#list) - List projects
-* [create](#create) - Create a project
-* [delete](#delete) - Delete a project
-* [update](#update) - Update a project
+* [list](#list) - List all Projects
+* [create](#create) - Create a Project
+* [delete](#delete) - Delete a Project
+* [update](#update) - Update a Project
 
 ## list
 
@@ -27,7 +26,7 @@ const latitudesh = new Latitudesh({
 
 async function run() {
   const result = await latitudesh.projects.list({
-    filterTags: "tag_GGXAB6PNQbU285ZYLP3wt3ZQyXW,tag_xR2B8J4W81TBL6YRGPJaCQRkVyn",
+    filterTags: "tag_GXeww714mRF2gZ05lnKgU8emo5RE,tag_QQkaK9JnV6tWwPG3pmLviXveVK0Y",
   });
 
   for await (const page of result) {
@@ -54,7 +53,7 @@ const latitudesh = new LatitudeshCore({
 
 async function run() {
   const res = await projectsList(latitudesh, {
-    filterTags: "tag_GGXAB6PNQbU285ZYLP3wt3ZQyXW,tag_xR2B8J4W81TBL6YRGPJaCQRkVyn",
+    filterTags: "tag_GXeww714mRF2gZ05lnKgU8emo5RE,tag_QQkaK9JnV6tWwPG3pmLviXveVK0Y",
   });
   if (res.ok) {
     const { value: result } = res;
@@ -90,7 +89,7 @@ run();
 
 ## create
 
-Create a project
+Create a Project
 
 ### Example Usage
 
@@ -107,7 +106,7 @@ async function run() {
     data: {
       type: "projects",
       attributes: {
-        name: "Kshlerin, Hand and Beer",
+        name: "Bailey and Sons",
         provisioningType: "on_demand",
         description: "Thick slices of French toast bread, brown sugar, half-and-half and vanilla, topped with powdered sugar. With two eggs served any style, and your choice of smoked bacon or smoked ham.",
         environment: "Development",
@@ -140,7 +139,7 @@ async function run() {
     data: {
       type: "projects",
       attributes: {
-        name: "Kshlerin, Hand and Beer",
+        name: "Bailey and Sons",
         provisioningType: "on_demand",
         description: "Thick slices of French toast bread, brown sugar, half-and-half and vanilla, topped with powdered sugar. With two eggs served any style, and your choice of smoked bacon or smoked ham.",
         environment: "Development",
@@ -179,7 +178,7 @@ run();
 
 ## delete
 
-Delete a project
+Delete a Project
 
 ### Example Usage
 
@@ -252,7 +251,7 @@ run();
 
 ## update
 
-Update a project
+Update a Project
 
 ### Example Usage
 
@@ -266,15 +265,15 @@ const latitudesh = new Latitudesh({
 
 async function run() {
   const result = await latitudesh.projects.update({
-    projectId: "proj_WVQJDMMwDRbyE",
+    projectId: "proj_Gr47qleMDAg0m",
     requestBody: {
       data: {
-        id: "proj_WVQJDMMwDRbyE",
+        id: "proj_Gr47qleMDAg0m",
         type: "projects",
         attributes: {
           tags: [
-            "tag_xNrKWa1ZaMtBKwaZnYaMTBE2XQb",
-            "tag_Ge9E4oboPgILP5e9aKNAUB4Gaw5",
+            "tag_VgrmvzlEGJhbGYv0z8YzHLa9PKV",
+            "tag_PEAMyKnQZEHpGAWKMpB6F7EVYyYj",
           ],
         },
       },
@@ -303,15 +302,15 @@ const latitudesh = new LatitudeshCore({
 
 async function run() {
   const res = await projectsUpdate(latitudesh, {
-    projectId: "proj_WVQJDMMwDRbyE",
+    projectId: "proj_Gr47qleMDAg0m",
     requestBody: {
       data: {
-        id: "proj_WVQJDMMwDRbyE",
+        id: "proj_Gr47qleMDAg0m",
         type: "projects",
         attributes: {
           tags: [
-            "tag_xNrKWa1ZaMtBKwaZnYaMTBE2XQb",
-            "tag_Ge9E4oboPgILP5e9aKNAUB4Gaw5",
+            "tag_VgrmvzlEGJhbGYv0z8YzHLa9PKV",
+            "tag_PEAMyKnQZEHpGAWKMpB6F7EVYyYj",
           ],
         },
       },

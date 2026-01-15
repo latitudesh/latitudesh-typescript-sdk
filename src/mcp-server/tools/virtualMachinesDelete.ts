@@ -12,7 +12,7 @@ const args = {
 
 export const tool$virtualMachinesDelete: ToolDefinition<typeof args> = {
   name: "virtual-machines-delete",
-  description: `Destroy VM
+  description: `Destroy a Virtual Machine
 
 Destroys a Virtual Machine.
 `,

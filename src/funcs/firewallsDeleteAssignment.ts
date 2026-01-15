@@ -26,10 +26,10 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Delete assignment
+ * Delete Firewall Assignment
  *
  * @remarks
- * Removes a server from a firewall by its ID.
+ * Remove a server from a firewall
  */
 export function firewallsDeleteAssignment(
   client: LatitudeshCore,

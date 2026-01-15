@@ -26,7 +26,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Run VM power action
+ * Run Virtual Machine Action
  *
  * @remarks
  * Performs a power action on a given virtual machine:

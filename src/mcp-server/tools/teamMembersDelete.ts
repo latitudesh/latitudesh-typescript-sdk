@@ -12,7 +12,7 @@ const args = {
 
 export const tool$teamMembersDelete: ToolDefinition<typeof args> = {
   name: "team-members-delete",
-  description: `Remove a member`,
+  description: `Remove a Team Member`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await teamMembersDelete(

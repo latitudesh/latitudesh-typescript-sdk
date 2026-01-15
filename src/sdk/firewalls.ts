@@ -24,10 +24,10 @@ export class Firewalls extends ClientSDK {
   }
 
   /**
-   * Firewalls assignments
+   * List All Firewall Assignments
    *
    * @remarks
-   * Returns a list of all servers assigned to one or more firewalls.
+   * List all firewall assignments
    */
   async getAllFirewallAssignments(
     request?: operations.GetAllFirewallAssignmentsRequest | undefined,
@@ -44,6 +44,9 @@ export class Firewalls extends ClientSDK {
 
   /**
    * List firewalls
+   *
+   * @remarks
+   * List firewalls
    */
   async list(
     request?: operations.ListFirewallsRequest | undefined,
@@ -58,6 +61,9 @@ export class Firewalls extends ClientSDK {
 
   /**
    * Create a firewall
+   *
+   * @remarks
+   * Create a firewall
    */
   async create(
     request: operations.CreateFirewallRequest,
@@ -71,10 +77,10 @@ export class Firewalls extends ClientSDK {
   }
 
   /**
-   * Retrieve firewall
+   * Retrieve Firewall
    *
    * @remarks
-   * Returns a single firewall by its ID.
+   * Retrieve a firewall
    */
   async get(
     request: operations.GetFirewallRequest,
@@ -88,7 +94,10 @@ export class Firewalls extends ClientSDK {
   }
 
   /**
-   * Delete firewall
+   * Delete Firewall
+   *
+   * @remarks
+   * Delete a firewall
    */
   async delete(
     request: operations.DeleteFirewallRequest,
@@ -102,10 +111,10 @@ export class Firewalls extends ClientSDK {
   }
 
   /**
-   * Update firewall
+   * Update Firewall
    *
    * @remarks
-   * Updates a firewall by its ID.
+   * Update a firewall
    */
   async update(
     request: operations.UpdateFirewallRequest,
@@ -119,10 +128,10 @@ export class Firewalls extends ClientSDK {
   }
 
   /**
-   * Firewall assignments
+   * Firewall Assignments
    *
    * @remarks
-   * Returns a list of all servers assigned to a particular firewall.
+   * List servers assigned to a firewall
    */
   async listAssignments(
     request: operations.GetFirewallAssignmentsRequest,
@@ -138,10 +147,10 @@ export class Firewalls extends ClientSDK {
   }
 
   /**
-   * Delete assignment
+   * Delete Firewall Assignment
    *
    * @remarks
-   * Removes a server from a firewall by its ID.
+   * Remove a server from a firewall
    */
   async deleteAssignment(
     request: operations.DeleteFirewallAssignmentRequest,

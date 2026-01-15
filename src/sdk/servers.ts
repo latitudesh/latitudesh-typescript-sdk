@@ -28,7 +28,7 @@ import { PageIterator, unwrapResultIterator } from "../types/operations.js";
 
 export class Servers extends ClientSDK {
   /**
-   * List servers
+   * List all Servers
    *
    * @remarks
    * Returns a list of all servers belonging to the team.
@@ -45,7 +45,7 @@ export class Servers extends ClientSDK {
   }
 
   /**
-   * Create server
+   * Deploy Server
    */
   async create(
     request: operations.CreateServerRequest,
@@ -59,7 +59,7 @@ export class Servers extends ClientSDK {
   }
 
   /**
-   * Retrieve server
+   * Retrieve a Server
    *
    * @remarks
    * Returns a server that belongs to the team.
@@ -76,7 +76,7 @@ export class Servers extends ClientSDK {
   }
 
   /**
-   * Remove server
+   * Remove Server
    */
   async delete(
     request: operations.DestroyServerRequest,
@@ -90,7 +90,7 @@ export class Servers extends ClientSDK {
   }
 
   /**
-   * Update server
+   * Update Server
    */
   async update(
     request: operations.UpdateServerRequest,
@@ -104,7 +104,7 @@ export class Servers extends ClientSDK {
   }
 
   /**
-   * Retrieve deploy config
+   * Retrieve Deploy Config
    */
   async getDeployConfig(
     request: operations.GetServerDeployConfigRequest,
@@ -118,7 +118,7 @@ export class Servers extends ClientSDK {
   }
 
   /**
-   * Update deploy config
+   * Update Deploy Config
    */
   async updateDeployConfig(
     request: operations.UpdateServerDeployConfigRequest,
@@ -132,7 +132,7 @@ export class Servers extends ClientSDK {
   }
 
   /**
-   * Lock server
+   * Lock the server
    *
    * @remarks
    * Locks the server. A locked server cannot be deleted or modified and no actions can be performed on it.
@@ -149,7 +149,7 @@ export class Servers extends ClientSDK {
   }
 
   /**
-   * Unlock server
+   * Unlock the server
    *
    * @remarks
    * Unlocks the server. A locked server cannot be deleted or modified and no actions can be performed on it.
@@ -166,7 +166,7 @@ export class Servers extends ClientSDK {
   }
 
   /**
-   * List out-of-band connections
+   * List Out of Band Connections
    */
   async getOutOfBand(
     request: operations.GetServerOutOfBandRequest,
@@ -180,7 +180,7 @@ export class Servers extends ClientSDK {
   }
 
   /**
-   * Create out-of-band connection
+   * Start Out of Band Connection
    */
   async startOutOfBandConnection(
     request: operations.CreateServerOutOfBandRequest,
@@ -194,7 +194,7 @@ export class Servers extends ClientSDK {
   }
 
   /**
-   * Run power action
+   * Run Server Action
    *
    * @remarks
    * Performs an action on a given server:
@@ -214,7 +214,7 @@ export class Servers extends ClientSDK {
   }
 
   /**
-   * Create IPMI credentials
+   * Generate IPMI credentials
    *
    * @remarks
    * Generates IPMI credentials for a given server. Remote access creates a VPN connection to the internal network of your server so you can connect to its IPMI.
@@ -234,7 +234,7 @@ export class Servers extends ClientSDK {
   }
 
   /**
-   * Put server in rescue mode
+   * Puts a Server in rescue mode
    *
    * @remarks
    * Starts rescue mode on a given server.
@@ -251,7 +251,7 @@ export class Servers extends ClientSDK {
   }
 
   /**
-   * Exits rescue mode
+   * Exits rescue mode for a Server
    *
    * @remarks
    * Exits rescue mode on a given server.
@@ -268,7 +268,7 @@ export class Servers extends ClientSDK {
   }
 
   /**
-   * Schedule server deletion
+   * Schedule the server deletion
    *
    * @remarks
    * Schedules the server to be removed at the end of the billing cycle.
@@ -285,7 +285,7 @@ export class Servers extends ClientSDK {
   }
 
   /**
-   * Unschedule server deletion
+   * Unschedule the server deletion
    *
    * @remarks
    * Unschedules the server removal at the end of the billing cycle.
@@ -302,10 +302,7 @@ export class Servers extends ClientSDK {
   }
 
   /**
-   * Reinstall server
-   *
-   * @remarks
-   * Reinstalls the server with a new operating system. All data on the server will be wiped during this process.
+   * Run Server Reinstall
    */
   async reinstall(
     request: operations.CreateServerReinstallRequest,

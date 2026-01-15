@@ -7,16 +7,16 @@ import { safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 import {
-  UserDataProperties,
-  UserDataProperties$inboundSchema,
-  UserDataProperties$Outbound,
-  UserDataProperties$outboundSchema,
-} from "./userdataproperties.js";
+  UserDataObject,
+  UserDataObject$inboundSchema,
+  UserDataObject$Outbound,
+  UserDataObject$outboundSchema,
+} from "./userdataobject.js";
 
 export type UserDataMeta = {};
 
 export type UserData = {
-  data?: UserDataProperties | undefined;
+  data?: Array<UserDataObject> | undefined;
   meta?: UserDataMeta | undefined;
 };
 
@@ -55,12 +55,12 @@ export const UserData$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  data: UserDataProperties$inboundSchema.optional(),
+  data: z.array(UserDataObject$inboundSchema).optional(),
   meta: z.lazy(() => UserDataMeta$inboundSchema).optional(),
 });
 /** @internal */
 export type UserData$Outbound = {
-  data?: UserDataProperties$Outbound | undefined;
+  data?: Array<UserDataObject$Outbound> | undefined;
   meta?: UserDataMeta$Outbound | undefined;
 };
 
@@ -70,7 +70,7 @@ export const UserData$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UserData
 > = z.object({
-  data: UserDataProperties$outboundSchema.optional(),
+  data: z.array(UserDataObject$outboundSchema).optional(),
   meta: z.lazy(() => UserDataMeta$outboundSchema).optional(),
 });
 

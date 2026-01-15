@@ -12,6 +12,7 @@ import { Params, pathToFunc } from "./url.js";
  */
 export const ServerList = [
   "https://api.latitude.sh",
+  "http://api.latitude.sh",
 ] as const;
 
 export type SDKOptions = {
@@ -50,6 +51,10 @@ export function serverURLFromOptions(options: SDKOptions): URL | null {
       "latitude_api_key": options.latitudeApiKey
         ?? "<insert your api key here>",
     },
+    {
+      "latitude_api_key": options.latitudeApiKey
+        ?? "<insert your api key here>",
+    },
   ];
   let params: Params = {};
 
@@ -69,8 +74,8 @@ export function serverURLFromOptions(options: SDKOptions): URL | null {
 export const SDK_METADATA = {
   language: "typescript",
   openapiDocVersion: "2023-06-01",
-  sdkVersion: "0.2.1",
-  genVersion: "2.769.1",
+  sdkVersion: "0.2.2",
+  genVersion: "2.795.8",
   userAgent:
-    "speakeasy-sdk/typescript 0.2.1 2.769.1 2023-06-01 latitudesh-typescript-sdk",
+    "speakeasy-sdk/typescript 0.2.2 2.795.8 2023-06-01 latitudesh-typescript-sdk",
 } as const;

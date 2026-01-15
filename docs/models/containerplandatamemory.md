@@ -1,11 +1,11 @@
-# Memory
+# ContainerPlanDataMemory
 
 ## Example Usage
 
 ```typescript
-import { Memory } from "latitudesh-typescript-sdk/models";
+import { ContainerPlanDataMemory } from "latitudesh-typescript-sdk/models";
 
-let value: Memory = {};
+let value: ContainerPlanDataMemory = {};
 ```
 
 ## Fields

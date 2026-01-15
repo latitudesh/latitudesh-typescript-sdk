@@ -7,14 +7,15 @@ import * as operations from "../../models/operations/index.js";
 import { formatResult, ToolDefinition } from "../tools.js";
 
 const args = {
-  request: operations.UpdateApiKeyRequest$inboundSchema,
+  request: operations.RotateApiKeyRequest$inboundSchema,
 };
 
 export const tool$apiKeysUpdate: ToolDefinition<typeof args> = {
   name: "api-keys-update",
-  description: `Rotate API key
+  description: `Rotate API Key
 
-Regenerate an existing API Key that is tied to the current user. This overrides the previous key.
+Rotate an existing API Key, generating a new token. This invalidates the previous key.
+Use PATCH to update settings without rotating the token.
 `,
   args,
   tool: async (client, args, ctx) => {

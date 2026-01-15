@@ -1,14 +1,13 @@
 # Tags
-(*tags*)
 
 ## Overview
 
 ### Available Operations
 
-* [list](#list) - List tags
-* [create](#create) - Create tag
-* [delete](#delete) - Delete tag
-* [update](#update) - Update tag
+* [list](#list) - List all Tags
+* [create](#create) - Create a Tag
+* [delete](#delete) - Delete Tag
+* [update](#update) - Update Tag
 
 ## list
 
@@ -258,10 +257,10 @@ const latitudesh = new Latitudesh({
 
 async function run() {
   const result = await latitudesh.tags.update({
-    tagId: "tag_k88kazkbPktNYRWa2l9ZsN6gVrrL",
+    tagId: "tag_XBlke2r5RyiyVpG9LPK8tWjalLL",
     requestBody: {
       data: {
-        id: "tag_k88kazkbPktNYRWa2l9ZsN6gVrrL",
+        id: "tag_XBlke2r5RyiyVpG9LPK8tWjalLL",
         type: "tags",
         attributes: {
           name: "Tag Name",
@@ -292,10 +291,10 @@ const latitudesh = new LatitudeshCore({
 
 async function run() {
   const res = await tagsUpdate(latitudesh, {
-    tagId: "tag_k88kazkbPktNYRWa2l9ZsN6gVrrL",
+    tagId: "tag_XBlke2r5RyiyVpG9LPK8tWjalLL",
     requestBody: {
       data: {
-        id: "tag_k88kazkbPktNYRWa2l9ZsN6gVrrL",
+        id: "tag_XBlke2r5RyiyVpG9LPK8tWjalLL",
         type: "tags",
         attributes: {
           name: "Tag Name",

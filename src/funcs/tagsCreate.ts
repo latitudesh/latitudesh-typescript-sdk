@@ -26,7 +26,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Create tag
+ * Create a Tag
  *
  * @remarks
  * Create a Tag in the team.

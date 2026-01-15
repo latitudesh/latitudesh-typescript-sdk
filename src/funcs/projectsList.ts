@@ -32,7 +32,7 @@ import {
 } from "../types/operations.js";
 
 /**
- * List projects
+ * List all Projects
  *
  * @remarks
  * Returns a list of all projects for the current team

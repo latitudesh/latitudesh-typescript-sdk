@@ -7,9 +7,9 @@ import { formatResult, ToolDefinition } from "../tools.js";
 
 export const tool$apiKeysList: ToolDefinition = {
   name: "api-keys-list",
-  description: `List API keys
+  description: `List API Keys
 
-Returns a list of all API keys.
+Returns a list of all API keys from the team members
 `,
   tool: async (client, ctx) => {
     const [result, apiCall] = await apiKeysList(

@@ -26,10 +26,10 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Retrieve user data
+ * Retrieve an User Data
  *
  * @remarks
- * Get User data in the project. These scripts can be used to configure servers with user data.
+ * Get User Data in the project. These scripts can be used to configure servers with user data.
  */
 export function userDataRetrieve(
   client: LatitudeshCore,

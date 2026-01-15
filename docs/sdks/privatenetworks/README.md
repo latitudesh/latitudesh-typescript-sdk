@@ -1,17 +1,16 @@
 # PrivateNetworks
-(*privateNetworks*)
 
 ## Overview
 
 ### Available Operations
 
-* [list](#list) - List VLANs
-* [create](#create) - Create VLAN
-* [get](#get) - Retrieve VLAN
-* [update](#update) - Update VLAN
-* [listAssignments](#listassignments) - List VLAN assignments
-* [assign](#assign) - Assign VLAN
-* [deleteAssignment](#deleteassignment) - Delete assignment
+* [list](#list) - List all Virtual Networks
+* [create](#create) - Create a Virtual Network
+* [get](#get) - Retrieve a Virtual Network
+* [update](#update) - Update a Virtual Network
+* [listAssignments](#listassignments) - List all servers assigned to virtual networks
+* [assign](#assign) - Assign Virtual network
+* [deleteAssignment](#deleteassignment) - Delete Virtual Network Assignment
 
 ## list
 
@@ -30,7 +29,7 @@ const latitudesh = new Latitudesh({
 
 async function run() {
   const result = await latitudesh.privateNetworks.list({
-    filterTags: "tag_P284pBvBEoT492NeXgv7TPaR3k8,tag_nPpEv2AnR9u9RBrGLLJ3C89nZJN",
+    filterTags: "tag_BZWAJKePr2Fx9kRyyaARImQlXmW,tag_X8yMgb8AZPFrX72lQgrwhBVnPN2",
   });
 
   for await (const page of result) {
@@ -57,7 +56,7 @@ const latitudesh = new LatitudeshCore({
 
 async function run() {
   const res = await privateNetworksList(latitudesh, {
-    filterTags: "tag_P284pBvBEoT492NeXgv7TPaR3k8,tag_nPpEv2AnR9u9RBrGLLJ3C89nZJN",
+    filterTags: "tag_BZWAJKePr2Fx9kRyyaARImQlXmW,tag_X8yMgb8AZPFrX72lQgrwhBVnPN2",
   });
   if (res.ok) {
     const { value: result } = res;
@@ -113,7 +112,7 @@ async function run() {
       attributes: {
         description: "São Paulo VLAN",
         site: "MIA",
-        project: "incredible-granite-coat",
+        project: "ergonomic-steel-bag",
       },
     },
   });
@@ -145,7 +144,7 @@ async function run() {
       attributes: {
         description: "São Paulo VLAN",
         site: "MIA",
-        project: "incredible-granite-coat",
+        project: "ergonomic-steel-bag",
       },
     },
   });
@@ -277,8 +276,8 @@ async function run() {
         type: "virtual_networks",
         attributes: {
           tags: [
-            "tag_Mjb3aoBkXRi5nR0gBQ5EhV30voRx",
-            "tag_QnkPzo8Wj1iWWzg24P5bhXAzrxmm",
+            "tag_RjLvG6oe84IAw7BxxEGaFAXK4l4",
+            "tag_lpPQ21kXEYfb9az3jRoVIVw4RBk",
           ],
         },
       },
@@ -314,8 +313,8 @@ async function run() {
         type: "virtual_networks",
         attributes: {
           tags: [
-            "tag_Mjb3aoBkXRi5nR0gBQ5EhV30voRx",
-            "tag_QnkPzo8Wj1iWWzg24P5bhXAzrxmm",
+            "tag_RjLvG6oe84IAw7BxxEGaFAXK4l4",
+            "tag_lpPQ21kXEYfb9az3jRoVIVw4RBk",
           ],
         },
       },
@@ -427,7 +426,7 @@ run();
 
 ## assign
 
-Assign VLAN
+Assign Virtual network
 
 ### Example Usage
 
@@ -444,8 +443,8 @@ async function run() {
     data: {
       type: "virtual_network_assignment",
       attributes: {
-        serverId: "sv_pbV0DgQGd4AWz",
-        virtualNetworkId: "vlan_3YjJOLBjqvZ87",
+        serverId: "sv_5xyZOn5vDWM0l",
+        virtualNetworkId: "vlan_Z8rodmpGO1jLB",
       },
     },
   });
@@ -475,8 +474,8 @@ async function run() {
     data: {
       type: "virtual_network_assignment",
       attributes: {
-        serverId: "sv_pbV0DgQGd4AWz",
-        virtualNetworkId: "vlan_3YjJOLBjqvZ87",
+        serverId: "sv_5xyZOn5vDWM0l",
+        virtualNetworkId: "vlan_Z8rodmpGO1jLB",
       },
     },
   });

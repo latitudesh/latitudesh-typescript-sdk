@@ -7,7 +7,7 @@ import { formatResult, ToolDefinition } from "../tools.js";
 
 export const tool$tagsList: ToolDefinition = {
   name: "tags-list",
-  description: `List tags
+  description: `List all Tags
 
 List all Tags in the team.
 `,

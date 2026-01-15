@@ -22,16 +22,16 @@ export type UserDataPropertiesType = ClosedEnum<typeof UserDataPropertiesType>;
 
 export type UserDataPropertiesAttributes = {
   /**
-   * description of the User data
+   * description of the User Data
    */
   description?: string | undefined;
   /**
-   * content of the User data
+   * content of the User Data
    */
   content?: string | undefined;
+  project?: ProjectInclude | undefined;
   createdAt?: string | undefined;
   updatedAt?: string | undefined;
-  project?: ProjectInclude | undefined;
 };
 
 export type UserDataProperties = {
@@ -57,9 +57,9 @@ export const UserDataPropertiesAttributes$inboundSchema: z.ZodType<
 > = z.object({
   description: z.string().optional(),
   content: z.string().optional(),
+  project: ProjectInclude$inboundSchema.optional(),
   created_at: z.string().optional(),
   updated_at: z.string().optional(),
-  project: ProjectInclude$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "created_at": "createdAt",
@@ -70,9 +70,9 @@ export const UserDataPropertiesAttributes$inboundSchema: z.ZodType<
 export type UserDataPropertiesAttributes$Outbound = {
   description?: string | undefined;
   content?: string | undefined;
+  project?: ProjectInclude$Outbound | undefined;
   created_at?: string | undefined;
   updated_at?: string | undefined;
-  project?: ProjectInclude$Outbound | undefined;
 };
 
 /** @internal */
@@ -83,9 +83,9 @@ export const UserDataPropertiesAttributes$outboundSchema: z.ZodType<
 > = z.object({
   description: z.string().optional(),
   content: z.string().optional(),
+  project: ProjectInclude$outboundSchema.optional(),
   createdAt: z.string().optional(),
   updatedAt: z.string().optional(),
-  project: ProjectInclude$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     createdAt: "created_at",

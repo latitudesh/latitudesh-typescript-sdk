@@ -1,11 +1,11 @@
-# Locations
+# ContainerPlanDataLocations
 
 ## Example Usage
 
 ```typescript
-import { Locations } from "latitudesh-typescript-sdk/models";
+import { ContainerPlanDataLocations } from "latitudesh-typescript-sdk/models";
 
-let value: Locations = {};
+let value: ContainerPlanDataLocations = {};
 ```
 
 ## Fields
