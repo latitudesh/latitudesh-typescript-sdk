@@ -1,15 +1,14 @@
 # SSHKeys
-(*sshKeys*)
 
 ## Overview
 
 ### Available Operations
 
-* [~~list~~](#list) - List SSH keys :warning: **Deprecated**
+* [~~list~~](#list) - List all Project SSH Keys :warning: **Deprecated**
 * [~~get~~](#get) - Retrieve a Project SSH Key :warning: **Deprecated**
 * [~~removeFromProject~~](#removefromproject) - Delete a Project SSH Key :warning: **Deprecated**
 * [~~modifyProjectKey~~](#modifyprojectkey) - Update a Project SSH Key :warning: **Deprecated**
-* [listAll](#listall) - List SSH Keys
+* [listAll](#listall) - List all SSH Keys
 * [create](#create) - Create a SSH Key
 * [retrieve](#retrieve) - Retrieve a SSH Key
 * [delete](#delete) - Delete a SSH Key
@@ -17,7 +16,7 @@
 
 ## ~~list~~
 
-List SSH keys in the project. These keys can be used to access servers after deploy and reinstall actions.
+List all SSH Keys in the project. These keys can be used to access servers after deploy and reinstall actions.
 
 
 > :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
@@ -34,8 +33,8 @@ const latitudesh = new Latitudesh({
 
 async function run() {
   const result = await latitudesh.sshKeys.list({
-    projectId: "proj_LMmAD8kEqwop2",
-    filterTags: "tag_K9kzXA45BEsjobKPNVEQCrrKbw4o,tag_my9K5XGPYBIr1ve257anIW4KRX2e",
+    projectId: "proj_5AEmq7wMqBkWX",
+    filterTags: "tag_5wKQ2Y9eoAi5plr4zlQ6tjl6rEw,tag_8GKKZ6B9MbtYl4K09gj4fXy9Nneg",
   });
 
   console.log(result);
@@ -60,8 +59,8 @@ const latitudesh = new LatitudeshCore({
 
 async function run() {
   const res = await sshKeysList(latitudesh, {
-    projectId: "proj_LMmAD8kEqwop2",
-    filterTags: "tag_K9kzXA45BEsjobKPNVEQCrrKbw4o,tag_my9K5XGPYBIr1ve257anIW4KRX2e",
+    projectId: "proj_5AEmq7wMqBkWX",
+    filterTags: "tag_5wKQ2Y9eoAi5plr4zlQ6tjl6rEw,tag_8GKKZ6B9MbtYl4K09gj4fXy9Nneg",
   });
   if (res.ok) {
     const { value: result } = res;
@@ -112,7 +111,7 @@ const latitudesh = new Latitudesh({
 
 async function run() {
   const result = await latitudesh.sshKeys.get({
-    projectId: "proj_g1mbDwrBqLv5B",
+    projectId: "proj_kjQwdE0XOYNVP",
     sshKeyId: "ssh_zGr47qlMDAg0m",
   });
 
@@ -138,7 +137,7 @@ const latitudesh = new LatitudeshCore({
 
 async function run() {
   const res = await sshKeysGet(latitudesh, {
-    projectId: "proj_g1mbDwrBqLv5B",
+    projectId: "proj_kjQwdE0XOYNVP",
     sshKeyId: "ssh_zGr47qlMDAg0m",
   });
   if (res.ok) {
@@ -190,7 +189,7 @@ const latitudesh = new Latitudesh({
 
 async function run() {
   await latitudesh.sshKeys.removeFromProject({
-    projectId: "proj_LMmAD8k4qwop2",
+    projectId: "proj_LA73qk4wDaJ2o",
     sshKeyId: "ssh_7vYAZqGBdMQ94",
   });
 
@@ -216,7 +215,7 @@ const latitudesh = new LatitudeshCore({
 
 async function run() {
   const res = await sshKeysRemoveFromProject(latitudesh, {
-    projectId: "proj_LMmAD8k4qwop2",
+    projectId: "proj_LA73qk4wDaJ2o",
     sshKeyId: "ssh_7vYAZqGBdMQ94",
   });
   if (res.ok) {
@@ -268,7 +267,7 @@ const latitudesh = new Latitudesh({
 
 async function run() {
   const result = await latitudesh.sshKeys.modifyProjectKey({
-    projectId: "proj_W6Q2D9lGqKLpr",
+    projectId: "proj_v9BVDaR3ORm1W",
     sshKeyId: "ssh_zlkg1DegdvZE5",
     requestBody: {
       data: {
@@ -276,8 +275,8 @@ async function run() {
         type: "ssh_keys",
         attributes: {
           tags: [
-            "tag_7YpWMjKZ8vujwmEV7blQhG87aaB",
-            "tag_E8ZoPkZPXXsgN2L46WVvTeWog1rz",
+            "tag_rB7B21L1QbiJ6yWYxQLmHWJE3GmR",
+            "tag_57nzyG0Bn3c5wooyYyeLH1w9kmN",
           ],
         },
       },
@@ -306,7 +305,7 @@ const latitudesh = new LatitudeshCore({
 
 async function run() {
   const res = await sshKeysModifyProjectKey(latitudesh, {
-    projectId: "proj_W6Q2D9lGqKLpr",
+    projectId: "proj_v9BVDaR3ORm1W",
     sshKeyId: "ssh_zlkg1DegdvZE5",
     requestBody: {
       data: {
@@ -314,8 +313,8 @@ async function run() {
         type: "ssh_keys",
         attributes: {
           tags: [
-            "tag_7YpWMjKZ8vujwmEV7blQhG87aaB",
-            "tag_E8ZoPkZPXXsgN2L46WVvTeWog1rz",
+            "tag_rB7B21L1QbiJ6yWYxQLmHWJE3GmR",
+            "tag_57nzyG0Bn3c5wooyYyeLH1w9kmN",
           ],
         },
       },
@@ -368,7 +367,7 @@ const latitudesh = new Latitudesh({
 
 async function run() {
   const result = await latitudesh.sshKeys.listAll({
-    filterTags: "tag_lYXenaknWwsJ4rryVbNoUbn6p4V,tag_ARJPX1YRrgTKQ4xpvX5YuWNG2nwW",
+    filterTags: "tag_A06EMPEmKXhKBNKgWrv0CRZMN5a,tag_P7xlGZzYNZF4w3YXRrYMU7AjQEAX",
   });
 
   console.log(result);
@@ -393,7 +392,7 @@ const latitudesh = new LatitudeshCore({
 
 async function run() {
   const res = await sshKeysListAll(latitudesh, {
-    filterTags: "tag_lYXenaknWwsJ4rryVbNoUbn6p4V,tag_ARJPX1YRrgTKQ4xpvX5YuWNG2nwW",
+    filterTags: "tag_A06EMPEmKXhKBNKgWrv0CRZMN5a,tag_P7xlGZzYNZF4w3YXRrYMU7AjQEAX",
   });
   if (res.ok) {
     const { value: result } = res;
@@ -446,7 +445,7 @@ async function run() {
       type: "ssh_keys",
       attributes: {
         name: "SSH Key",
-        project: "proj_mw49QDB5qagKb",
+        project: "proj_z2A3DV4wdnawP",
         publicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDOLFnjGP3Jsh1usHNS2EILgfqZNC9pOvNqBZqxH+qNAdZdQCzy2csMuiq+ZwLA8Mm4Vo5CvSgBHs/kuZRUKyTl+79YUMZIj8PhHzL4XbdqX1ZnAIklHWcJaveB0+UXLEPKGzFIFq+FkuwtiXQsVe5NnSpIDYgpzhqEs38NsnXvsubKphGUdARDhaxvMdUUl4YsAtLHKMzSyIvE6xwfTtIVwA9bZt/8GoBzrn9px9PEcf25Rgd2NhOYs3WYcZuwvRmfcFdi2vGhVqTPqL9n16R/n5jknxHYrTyqWNxJdpdvg2YqXpN7vnFNoOjYFD6EahJ0pF/+WL4tPCIkLfoaVaSx",
       },
     },
@@ -478,7 +477,7 @@ async function run() {
       type: "ssh_keys",
       attributes: {
         name: "SSH Key",
-        project: "proj_mw49QDB5qagKb",
+        project: "proj_z2A3DV4wdnawP",
         publicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDOLFnjGP3Jsh1usHNS2EILgfqZNC9pOvNqBZqxH+qNAdZdQCzy2csMuiq+ZwLA8Mm4Vo5CvSgBHs/kuZRUKyTl+79YUMZIj8PhHzL4XbdqX1ZnAIklHWcJaveB0+UXLEPKGzFIFq+FkuwtiXQsVe5NnSpIDYgpzhqEs38NsnXvsubKphGUdARDhaxvMdUUl4YsAtLHKMzSyIvE6xwfTtIVwA9bZt/8GoBzrn9px9PEcf25Rgd2NhOYs3WYcZuwvRmfcFdi2vGhVqTPqL9n16R/n5jknxHYrTyqWNxJdpdvg2YqXpN7vnFNoOjYFD6EahJ0pF/+WL4tPCIkLfoaVaSx",
       },
     },
@@ -530,7 +529,7 @@ const latitudesh = new Latitudesh({
 
 async function run() {
   const result = await latitudesh.sshKeys.retrieve({
-    sshKeyId: "ssh_0MK4O4Zkqa95w",
+    sshKeyId: "ssh_LYV8DZ12q5QoE",
   });
 
   console.log(result);
@@ -555,7 +554,7 @@ const latitudesh = new LatitudeshCore({
 
 async function run() {
   const res = await sshKeysRetrieve(latitudesh, {
-    sshKeyId: "ssh_0MK4O4Zkqa95w",
+    sshKeyId: "ssh_LYV8DZ12q5QoE",
   });
   if (res.ok) {
     const { value: result } = res;
@@ -604,7 +603,7 @@ const latitudesh = new Latitudesh({
 
 async function run() {
   await latitudesh.sshKeys.delete({
-    sshKeyId: "ssh_lxWpD6xKdm6rk",
+    sshKeyId: "ssh_KXgRdRa3Ov9k5",
   });
 
 
@@ -629,7 +628,7 @@ const latitudesh = new LatitudeshCore({
 
 async function run() {
   const res = await sshKeysDelete(latitudesh, {
-    sshKeyId: "ssh_lxWpD6xKdm6rk",
+    sshKeyId: "ssh_KXgRdRa3Ov9k5",
   });
   if (res.ok) {
     const { value: result } = res;
@@ -678,15 +677,15 @@ const latitudesh = new Latitudesh({
 
 async function run() {
   const result = await latitudesh.sshKeys.update({
-    sshKeyId: "ssh_8Nkvdyn1qeLpx",
+    sshKeyId: "ssh_GnzRD5xAqM5yw",
     requestBody: {
       data: {
-        id: "ssh_8Nkvdyn1qeLpx",
+        id: "ssh_GnzRD5xAqM5yw",
         type: "ssh_keys",
         attributes: {
           tags: [
-            "tag_BR6a9QPmXWCPVzLrmEYAslyroMK",
-            "tag_yxVkGz7rxMsl9M54lr71fp5XZg60",
+            "tag_JLA906BzyKHLyVJbJr8NH3QQbev",
+            "tag_Yy7PJ68y22FoQyBppnW7FjNGX1k",
           ],
         },
       },
@@ -715,15 +714,15 @@ const latitudesh = new LatitudeshCore({
 
 async function run() {
   const res = await sshKeysUpdate(latitudesh, {
-    sshKeyId: "ssh_8Nkvdyn1qeLpx",
+    sshKeyId: "ssh_GnzRD5xAqM5yw",
     requestBody: {
       data: {
-        id: "ssh_8Nkvdyn1qeLpx",
+        id: "ssh_GnzRD5xAqM5yw",
         type: "ssh_keys",
         attributes: {
           tags: [
-            "tag_BR6a9QPmXWCPVzLrmEYAslyroMK",
-            "tag_yxVkGz7rxMsl9M54lr71fp5XZg60",
+            "tag_JLA906BzyKHLyVJbJr8NH3QQbev",
+            "tag_Yy7PJ68y22FoQyBppnW7FjNGX1k",
           ],
         },
       },

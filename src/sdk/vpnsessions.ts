@@ -13,10 +13,7 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class VpnSessions extends ClientSDK {
   /**
-   * List VPN sessions
-   *
-   * @remarks
-   * List active VPN sessions.
+   * List all Active VPN Sessions
    */
   async list(
     request?: operations.GetVpnSessionsRequest | undefined,
@@ -30,7 +27,7 @@ export class VpnSessions extends ClientSDK {
   }
 
   /**
-   * Create VPN session
+   * Create a VPN Session
    *
    * @remarks
    * Creates a new VPN Session.
@@ -48,7 +45,7 @@ export class VpnSessions extends ClientSDK {
   }
 
   /**
-   * Refresh VPN session
+   * Refresh a VPN Session
    *
    * @remarks
    * Refreshing an existing VPN Session will create new credentials for that session
@@ -65,7 +62,7 @@ export class VpnSessions extends ClientSDK {
   }
 
   /**
-   * Delete VPN session
+   * Delete a VPN Session
    *
    * @remarks
    * Deletes an existing VPN Session.

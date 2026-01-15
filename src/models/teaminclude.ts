@@ -14,7 +14,7 @@ export type TeamInclude = {
   id?: string | undefined;
   name?: string | undefined;
   slug?: string | undefined;
-  description?: string | undefined;
+  description?: string | null | undefined;
   address?: string | undefined;
   currency?: Currency | undefined;
   status?: string | undefined;
@@ -59,7 +59,7 @@ export const TeamInclude$inboundSchema: z.ZodType<
   id: z.string().optional(),
   name: z.string().optional(),
   slug: z.string().optional(),
-  description: z.string().optional(),
+  description: z.nullable(z.string()).optional(),
   address: z.string().optional(),
   currency: z.lazy(() => Currency$inboundSchema).optional(),
   status: z.string().optional(),
@@ -74,7 +74,7 @@ export type TeamInclude$Outbound = {
   id?: string | undefined;
   name?: string | undefined;
   slug?: string | undefined;
-  description?: string | undefined;
+  description?: string | null | undefined;
   address?: string | undefined;
   currency?: Currency$Outbound | undefined;
   status?: string | undefined;
@@ -90,7 +90,7 @@ export const TeamInclude$outboundSchema: z.ZodType<
   id: z.string().optional(),
   name: z.string().optional(),
   slug: z.string().optional(),
-  description: z.string().optional(),
+  description: z.nullable(z.string()).optional(),
   address: z.string().optional(),
   currency: z.lazy(() => Currency$outboundSchema).optional(),
   status: z.string().optional(),

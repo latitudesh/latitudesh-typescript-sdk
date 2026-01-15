@@ -12,7 +12,7 @@ const args = {
 
 export const tool$serversGetOutOfBand: ToolDefinition<typeof args> = {
   name: "servers-get-out-of-band",
-  description: `List out-of-band connections`,
+  description: `List Out of Band Connections`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await serversGetOutOfBand(

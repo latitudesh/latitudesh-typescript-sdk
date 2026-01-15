@@ -12,7 +12,7 @@ const args = {
 
 export const tool$serversGet: ToolDefinition<typeof args> = {
   name: "servers-get",
-  description: `Retrieve server
+  description: `Retrieve a Server
 
 Returns a server that belongs to the team.
 `,

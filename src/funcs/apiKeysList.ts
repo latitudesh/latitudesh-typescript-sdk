@@ -23,17 +23,17 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * List API keys
+ * List API Keys
  *
  * @remarks
- * Returns a list of all API keys.
+ * Returns a list of all API keys from the team members
  */
 export function apiKeysList(
   client: LatitudeshCore,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    models.ApiKey,
+    models.ApiKeys,
     | LatitudeshError
     | ResponseValidationError
     | ConnectionError
@@ -56,7 +56,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      models.ApiKey,
+      models.ApiKeys,
       | LatitudeshError
       | ResponseValidationError
       | ConnectionError
@@ -120,7 +120,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    models.ApiKey,
+    models.ApiKeys,
     | LatitudeshError
     | ResponseValidationError
     | ConnectionError
@@ -130,7 +130,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, models.ApiKey$inboundSchema, {
+    M.json(200, models.ApiKeys$inboundSchema, {
       ctype: "application/vnd.api+json",
     }),
     M.fail("4XX"),

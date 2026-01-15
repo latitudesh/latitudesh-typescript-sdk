@@ -23,7 +23,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * List user teams
+ * List User Teams
  *
  * @remarks
  * Returns a list of all teams the user belongs to

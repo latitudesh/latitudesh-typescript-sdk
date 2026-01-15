@@ -1,11 +1,10 @@
 # Billing
-(*billing*)
 
 ## Overview
 
 ### Available Operations
 
-* [listUsage](#listusage) - Retrieve billing usage
+* [listUsage](#listusage) - List Billing Usage
 
 ## listUsage
 
@@ -25,11 +24,11 @@ const latitudesh = new Latitudesh({
 async function run() {
   const result = await latitudesh.billing.listUsage({
     filterProducts: [
-      "si_lvdub7r3",
-      "si_utp5nfrf",
+      "si_aslft06m",
+      "si_on0fybnq",
     ],
     filterPlan: "plan.name",
-    filterProject: "proj_6059EqYkOQj8p",
+    filterProject: "proj_r0MK4O4kDa95w",
   });
 
   console.log(result);
@@ -55,11 +54,11 @@ const latitudesh = new LatitudeshCore({
 async function run() {
   const res = await billingListUsage(latitudesh, {
     filterProducts: [
-      "si_lvdub7r3",
-      "si_utp5nfrf",
+      "si_aslft06m",
+      "si_on0fybnq",
     ],
     filterPlan: "plan.name",
-    filterProject: "proj_6059EqYkOQj8p",
+    filterProject: "proj_r0MK4O4kDa95w",
   });
   if (res.ok) {
     const { value: result } = res;

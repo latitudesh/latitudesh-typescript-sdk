@@ -1,28 +1,27 @@
 # Servers
-(*servers*)
 
 ## Overview
 
 ### Available Operations
 
-* [list](#list) - List servers
-* [create](#create) - Create server
-* [get](#get) - Retrieve server
-* [delete](#delete) - Remove server
-* [update](#update) - Update server
-* [getDeployConfig](#getdeployconfig) - Retrieve deploy config
-* [updateDeployConfig](#updatedeployconfig) - Update deploy config
-* [lock](#lock) - Lock server
-* [unlock](#unlock) - Unlock server
-* [getOutOfBand](#getoutofband) - List out-of-band connections
-* [startOutOfBandConnection](#startoutofbandconnection) - Create out-of-band connection
-* [runAction](#runaction) - Run power action
-* [createIpmiSession](#createipmisession) - Create IPMI credentials
-* [startRescueMode](#startrescuemode) - Put server in rescue mode
-* [exitRescueMode](#exitrescuemode) - Exits rescue mode
-* [scheduleDeletion](#scheduledeletion) - Schedule server deletion
-* [unscheduleDeletion](#unscheduledeletion) - Unschedule server deletion
-* [reinstall](#reinstall) - Reinstall server
+* [list](#list) - List all Servers
+* [create](#create) - Deploy Server
+* [get](#get) - Retrieve a Server
+* [delete](#delete) - Remove Server
+* [update](#update) - Update Server
+* [getDeployConfig](#getdeployconfig) - Retrieve Deploy Config
+* [updateDeployConfig](#updatedeployconfig) - Update Deploy Config
+* [lock](#lock) - Lock the server
+* [unlock](#unlock) - Unlock the server
+* [getOutOfBand](#getoutofband) - List Out of Band Connections
+* [startOutOfBandConnection](#startoutofbandconnection) - Start Out of Band Connection
+* [runAction](#runaction) - Run Server Action
+* [createIpmiSession](#createipmisession) - Generate IPMI credentials
+* [startRescueMode](#startrescuemode) - Puts a Server in rescue mode
+* [exitRescueMode](#exitrescuemode) - Exits rescue mode for a Server
+* [scheduleDeletion](#scheduledeletion) - Schedule the server deletion
+* [unscheduleDeletion](#unscheduledeletion) - Unschedule the server deletion
+* [reinstall](#reinstall) - Run Server Reinstall
 
 ## list
 
@@ -41,7 +40,7 @@ const latitudesh = new Latitudesh({
 
 async function run() {
   const result = await latitudesh.servers.list({
-    filterTags: "tag_Az0EY3zglei3jVBY1LroSWNyanye,tag_GXK6NGol1jF2xre0JrB0fK6wg0p",
+    filterTags: "tag_pjAkRjVzw0tlYBA2WX1eHzW7w79,tag_yARk1KLJAvslWY7k5wNBCaKEV7e",
   });
 
   for await (const page of result) {
@@ -68,7 +67,7 @@ const latitudesh = new LatitudeshCore({
 
 async function run() {
   const res = await serversList(latitudesh, {
-    filterTags: "tag_Az0EY3zglei3jVBY1LroSWNyanye,tag_GXK6NGol1jF2xre0JrB0fK6wg0p",
+    filterTags: "tag_pjAkRjVzw0tlYBA2WX1eHzW7w79,tag_yARk1KLJAvslWY7k5wNBCaKEV7e",
   });
   if (res.ok) {
     const { value: result } = res;
@@ -104,7 +103,7 @@ run();
 
 ## create
 
-Create server
+Deploy Server
 
 ### Example Usage
 
@@ -121,7 +120,7 @@ async function run() {
     data: {
       type: "servers",
       attributes: {
-        project: "proj_A05EdQ50dvKYQ",
+        project: "proj_lxWpD699qm6rk",
         plan: "c2-small-x86",
         site: "ASH",
         operatingSystem: "ubuntu_22_04_x64_lts",
@@ -155,7 +154,7 @@ async function run() {
     data: {
       type: "servers",
       attributes: {
-        project: "proj_A05EdQ50dvKYQ",
+        project: "proj_lxWpD699qm6rk",
         plan: "c2-small-x86",
         site: "ASH",
         operatingSystem: "ubuntu_22_04_x64_lts",
@@ -210,7 +209,7 @@ const latitudesh = new Latitudesh({
 
 async function run() {
   const result = await latitudesh.servers.get({
-    serverId: "sv_Gr47qleMDAg0m",
+    serverId: "sv_VE1Wd3aXDXnZJ",
   });
 
   console.log(result);
@@ -235,7 +234,7 @@ const latitudesh = new LatitudeshCore({
 
 async function run() {
   const res = await serversGet(latitudesh, {
-    serverId: "sv_Gr47qleMDAg0m",
+    serverId: "sv_VE1Wd3aXDXnZJ",
   });
   if (res.ok) {
     const { value: result } = res;
@@ -269,7 +268,7 @@ run();
 
 ## delete
 
-Remove server
+Remove Server
 
 ### Example Usage
 
@@ -342,7 +341,7 @@ run();
 
 ## update
 
-Update server
+Update Server
 
 ### Example Usage
 
@@ -356,13 +355,13 @@ const latitudesh = new Latitudesh({
 
 async function run() {
   const result = await latitudesh.servers.update({
-    serverId: "sv_aNmodjGyqbE8W",
+    serverId: "sv_yQrJdNAGO30gv",
     requestBody: {
       data: {
-        id: "sv_aNmodjGyqbE8W",
+        id: "sv_yQrJdNAGO30gv",
         type: "servers",
         attributes: {
-          project: "proj_aNmodjoyqbE8W",
+          project: "proj_yQrJdNMGO30gv",
         },
       },
     },
@@ -390,13 +389,13 @@ const latitudesh = new LatitudeshCore({
 
 async function run() {
   const res = await serversUpdate(latitudesh, {
-    serverId: "sv_aNmodjGyqbE8W",
+    serverId: "sv_yQrJdNAGO30gv",
     requestBody: {
       data: {
-        id: "sv_aNmodjGyqbE8W",
+        id: "sv_yQrJdNAGO30gv",
         type: "servers",
         attributes: {
-          project: "proj_aNmodjoyqbE8W",
+          project: "proj_yQrJdNMGO30gv",
         },
       },
     },
@@ -433,7 +432,7 @@ run();
 
 ## getDeployConfig
 
-Retrieve deploy config
+Retrieve Deploy Config
 
 ### Example Usage
 
@@ -447,7 +446,7 @@ const latitudesh = new Latitudesh({
 
 async function run() {
   const result = await latitudesh.servers.getDeployConfig({
-    serverId: "sv_VLMmAD8EOwop2",
+    serverId: "sv_pRMLydp0dQKr1",
   });
 
   console.log(result);
@@ -472,7 +471,7 @@ const latitudesh = new LatitudeshCore({
 
 async function run() {
   const res = await serversGetDeployConfig(latitudesh, {
-    serverId: "sv_VLMmAD8EOwop2",
+    serverId: "sv_pRMLydp0dQKr1",
   });
   if (res.ok) {
     const { value: result } = res;
@@ -506,7 +505,7 @@ run();
 
 ## updateDeployConfig
 
-Update deploy config
+Update Deploy Config
 
 ### Example Usage
 
@@ -520,7 +519,7 @@ const latitudesh = new Latitudesh({
 
 async function run() {
   const result = await latitudesh.servers.updateDeployConfig({
-    serverId: "sv_0L6WO141DPlXy",
+    serverId: "sv_lkg1DeYLDvZE5",
     requestBody: {
       type: "deploy_config",
     },
@@ -548,7 +547,7 @@ const latitudesh = new LatitudeshCore({
 
 async function run() {
   const res = await serversUpdateDeployConfig(latitudesh, {
-    serverId: "sv_0L6WO141DPlXy",
+    serverId: "sv_lkg1DeYLDvZE5",
     requestBody: {
       type: "deploy_config",
     },
@@ -599,7 +598,7 @@ const latitudesh = new Latitudesh({
 
 async function run() {
   const result = await latitudesh.servers.lock({
-    serverId: "sv_RMLydpoXOQKr1",
+    serverId: "sv_pbV0DgjKq4AWz",
   });
 
   console.log(result);
@@ -624,7 +623,7 @@ const latitudesh = new LatitudeshCore({
 
 async function run() {
   const res = await serversLock(latitudesh, {
-    serverId: "sv_RMLydpoXOQKr1",
+    serverId: "sv_pbV0DgjKq4AWz",
   });
   if (res.ok) {
     const { value: result } = res;
@@ -672,7 +671,7 @@ const latitudesh = new Latitudesh({
 
 async function run() {
   const result = await latitudesh.servers.unlock({
-    serverId: "sv_5AEmq7xMDBkWX",
+    serverId: "sv_e8pKq0xYqWAob",
   });
 
   console.log(result);
@@ -697,7 +696,7 @@ const latitudesh = new LatitudeshCore({
 
 async function run() {
   const res = await serversUnlock(latitudesh, {
-    serverId: "sv_5AEmq7xMDBkWX",
+    serverId: "sv_e8pKq0xYqWAob",
   });
   if (res.ok) {
     const { value: result } = res;
@@ -731,7 +730,7 @@ run();
 
 ## getOutOfBand
 
-List out-of-band connections
+List Out of Band Connections
 
 ### Example Usage
 
@@ -745,7 +744,7 @@ const latitudesh = new Latitudesh({
 
 async function run() {
   const result = await latitudesh.servers.getOutOfBand({
-    serverId: "sv_vYAZqGyJOMQ94",
+    serverId: "sv_GnzRD5lvqM5yw",
   });
 
   console.log(result);
@@ -770,7 +769,7 @@ const latitudesh = new LatitudeshCore({
 
 async function run() {
   const res = await serversGetOutOfBand(latitudesh, {
-    serverId: "sv_vYAZqGyJOMQ94",
+    serverId: "sv_GnzRD5lvqM5yw",
   });
   if (res.ok) {
     const { value: result } = res;
@@ -804,7 +803,7 @@ run();
 
 ## startOutOfBandConnection
 
-Create out-of-band connection
+Start Out of Band Connection
 
 ### Example Usage
 
@@ -818,12 +817,12 @@ const latitudesh = new Latitudesh({
 
 async function run() {
   const result = await latitudesh.servers.startOutOfBandConnection({
-    serverId: "sv_059EqYX2dQj8p",
+    serverId: "sv_8NkvdyGKDeLpx",
     requestBody: {
       data: {
         type: "out_of_band",
         attributes: {
-          sshKeyId: "ssh_w49QDB55qagKb",
+          sshKeyId: "ssh_3YjJOLMydvZ87",
         },
       },
     },
@@ -851,12 +850,12 @@ const latitudesh = new LatitudeshCore({
 
 async function run() {
   const res = await serversStartOutOfBandConnection(latitudesh, {
-    serverId: "sv_059EqYX2dQj8p",
+    serverId: "sv_8NkvdyGKDeLpx",
     requestBody: {
       data: {
         type: "out_of_band",
         attributes: {
-          sshKeyId: "ssh_w49QDB55qagKb",
+          sshKeyId: "ssh_3YjJOLMydvZ87",
         },
       },
     },
@@ -911,7 +910,7 @@ const latitudesh = new Latitudesh({
 
 async function run() {
   const result = await latitudesh.servers.runAction({
-    serverId: "sv_LA73qkJwdaJ2o",
+    serverId: "sv_WVQJDMVBORbyE",
     requestBody: {
       data: {
         type: "actions",
@@ -944,7 +943,7 @@ const latitudesh = new LatitudeshCore({
 
 async function run() {
   const res = await serversRunAction(latitudesh, {
-    serverId: "sv_LA73qkJwdaJ2o",
+    serverId: "sv_WVQJDMVBORbyE",
     requestBody: {
       data: {
         type: "actions",
@@ -1004,7 +1003,7 @@ const latitudesh = new Latitudesh({
 
 async function run() {
   const result = await latitudesh.servers.createIpmiSession({
-    serverId: "sv_e8pKq0xYqWAob",
+    serverId: "sv_Qkm7dXaRq8nZV",
   });
 
   console.log(result);
@@ -1029,7 +1028,7 @@ const latitudesh = new LatitudeshCore({
 
 async function run() {
   const res = await serversCreateIpmiSession(latitudesh, {
-    serverId: "sv_e8pKq0xYqWAob",
+    serverId: "sv_Qkm7dXaRq8nZV",
   });
   if (res.ok) {
     const { value: result } = res;
@@ -1077,7 +1076,7 @@ const latitudesh = new Latitudesh({
 
 async function run() {
   const result = await latitudesh.servers.startRescueMode({
-    serverId: "sv_695BdK25OevVo",
+    serverId: "sv_WeGoqAWNOP7nz",
   });
 
   console.log(result);
@@ -1102,7 +1101,7 @@ const latitudesh = new LatitudeshCore({
 
 async function run() {
   const res = await serversStartRescueMode(latitudesh, {
-    serverId: "sv_695BdK25OevVo",
+    serverId: "sv_WeGoqAWNOP7nz",
   });
   if (res.ok) {
     const { value: result } = res;
@@ -1150,7 +1149,7 @@ const latitudesh = new Latitudesh({
 
 async function run() {
   const result = await latitudesh.servers.exitRescueMode({
-    serverId: "sv_wg3ZDr0Wd5QlP",
+    serverId: "sv_3YjJOLQNdvZ87",
   });
 
   console.log(result);
@@ -1175,7 +1174,7 @@ const latitudesh = new LatitudeshCore({
 
 async function run() {
   const res = await serversExitRescueMode(latitudesh, {
-    serverId: "sv_wg3ZDr0Wd5QlP",
+    serverId: "sv_3YjJOLQNdvZ87",
   });
   if (res.ok) {
     const { value: result } = res;
@@ -1223,7 +1222,7 @@ const latitudesh = new Latitudesh({
 
 async function run() {
   const result = await latitudesh.servers.scheduleDeletion({
-    serverId: "sv_GMy1Db2NDN50m",
+    serverId: "sv_g1mbDwBZqLv5B",
   });
 
   console.log(result);
@@ -1248,7 +1247,7 @@ const latitudesh = new LatitudeshCore({
 
 async function run() {
   const res = await serversScheduleDeletion(latitudesh, {
-    serverId: "sv_GMy1Db2NDN50m",
+    serverId: "sv_g1mbDwBZqLv5B",
   });
   if (res.ok) {
     const { value: result } = res;
@@ -1355,8 +1354,7 @@ run();
 
 ## reinstall
 
-Reinstalls the server with a new operating system. All data on the server will be wiped during this process.
-
+Run Server Reinstall
 
 ### Example Usage
 
@@ -1370,7 +1368,7 @@ const latitudesh = new Latitudesh({
 
 async function run() {
   await latitudesh.servers.reinstall({
-    serverId: "sv_Z8rodmJGq1jLB",
+    serverId: "sv_aNmodj6ydbE8W",
     requestBody: {
       data: {
         type: "reinstalls",
@@ -1405,7 +1403,7 @@ const latitudesh = new LatitudeshCore({
 
 async function run() {
   const res = await serversReinstall(latitudesh, {
-    serverId: "sv_Z8rodmJGq1jLB",
+    serverId: "sv_aNmodj6ydbE8W",
     requestBody: {
       data: {
         type: "reinstalls",

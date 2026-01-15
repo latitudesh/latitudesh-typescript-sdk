@@ -1,15 +1,17 @@
-# ProjectsSshKeys
-(*projects.sshKeys*)
+# ~~Projects.SshKeys~~
+
+> [!WARNING]
+> This SDK is **DEPRECATED**
 
 ## Overview
 
 ### Available Operations
 
-* [~~postProjectSshKey~~](#postprojectsshkey) - Create a SSH key :warning: **Deprecated**
+* [~~postProjectSshKey~~](#postprojectsshkey) - Create a Project SSH Key :warning: **Deprecated**
 
 ## ~~postProjectSshKey~~
 
-Allow you create SSH keys in a project. These keys can be used to access servers after deploy and reinstall actions.
+Allow you create SSH Keys in a project. These keys can be used to access servers after deploy and reinstall actions.
 
 
 > :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
@@ -26,7 +28,7 @@ const latitudesh = new Latitudesh({
 
 async function run() {
   const result = await latitudesh.projects.sshKeys.postProjectSshKey({
-    projectId: "proj_RMLydp70OQKr1",
+    projectId: "proj_059EqYE2qQj8p",
     requestBody: {
       data: {
         type: "ssh_keys",
@@ -60,7 +62,7 @@ const latitudesh = new LatitudeshCore({
 
 async function run() {
   const res = await projectsSshKeysPostProjectSshKey(latitudesh, {
-    projectId: "proj_RMLydp70OQKr1",
+    projectId: "proj_059EqYE2qQj8p",
     requestBody: {
       data: {
         type: "ssh_keys",

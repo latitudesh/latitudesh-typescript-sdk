@@ -26,7 +26,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Destroy VM
+ * Destroy a Virtual Machine
  *
  * @remarks
  * Destroys a Virtual Machine.

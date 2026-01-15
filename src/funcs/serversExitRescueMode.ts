@@ -26,7 +26,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Exits rescue mode
+ * Exits rescue mode for a Server
  *
  * @remarks
  * Exits rescue mode on a given server.

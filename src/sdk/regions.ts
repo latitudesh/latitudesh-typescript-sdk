@@ -12,7 +12,7 @@ import { PageIterator, unwrapResultIterator } from "../types/operations.js";
 
 export class Regions extends ClientSDK {
   /**
-   * List regions
+   * List all Regions
    *
    * @remarks
    * Lists all [available locations](https://latitude.sh/locations). For server availability by location, please see the [Plans API](/reference/get-plans).
@@ -29,7 +29,7 @@ export class Regions extends ClientSDK {
   }
 
   /**
-   * Retrieve region
+   * Retrieve a Region
    */
   async fetch(
     request: operations.GetRegionRequest,

@@ -26,10 +26,10 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Create user data
+ * Create an User Data
  *
  * @remarks
- * Allows you to create User data in a team, which can be used to perform custom setup on your servers after deploy and reinstall.
+ * Allows you to create User Data in a team, which can be used to perform custom setup on your servers after deploy and reinstall.
  */
 export function userDataCreateNew(
   client: LatitudeshCore,

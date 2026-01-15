@@ -26,10 +26,10 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * List VMs
+ * Get Teams Virtual Machines
  *
  * @remarks
- * Show all Team's Virtual machines.
+ * Show all Team's Virtual Machines.
  */
 export function virtualMachinesList(
   client: LatitudeshCore,

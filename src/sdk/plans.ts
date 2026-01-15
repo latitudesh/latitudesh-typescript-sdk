@@ -4,6 +4,7 @@
 
 import { plansGet } from "../funcs/plansGet.js";
 import { plansGetBandwidth } from "../funcs/plansGetBandwidth.js";
+import { plansGetContainersPlan } from "../funcs/plansGetContainersPlan.js";
 import { plansList } from "../funcs/plansList.js";
 import { plansListStorage } from "../funcs/plansListStorage.js";
 import { plansUpdateBandwidth } from "../funcs/plansUpdateBandwidth.js";
@@ -21,7 +22,7 @@ export class Plans extends ClientSDK {
   }
 
   /**
-   * List plans
+   * List all Plans
    *
    * @remarks
    * Lists all plans. Availability by region is included in `attributes.regions.locations.available[*]` node for a given plan.
@@ -38,7 +39,7 @@ export class Plans extends ClientSDK {
   }
 
   /**
-   * Retrieve a plan
+   * Retrieve a Plan
    */
   async get(
     request: operations.GetPlanRequest,
@@ -52,7 +53,7 @@ export class Plans extends ClientSDK {
   }
 
   /**
-   * List bandwidth plans
+   * List all bandwidth plans
    *
    * @remarks
    * Lists all bandwidth plans.
@@ -71,7 +72,7 @@ export class Plans extends ClientSDK {
   }
 
   /**
-   * Update bandwidth packages
+   * Buy or remove bandwidth packages
    *
    * @remarks
    * Allows to increase or decrease bandwidth packages. Only admins and owners can request.
@@ -88,7 +89,24 @@ export class Plans extends ClientSDK {
   }
 
   /**
-   * List storage plans
+   * Retrieve container plan
+   *
+   * @remarks
+   * Retrieve a container plan.
+   */
+  async getContainersPlan(
+    request: operations.GetContainersPlanRequest,
+    options?: RequestOptions,
+  ): Promise<models.ContainerPlanData> {
+    return unwrapAsync(plansGetContainersPlan(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List all Storage Plans
    */
   async listStorage(
     options?: RequestOptions,

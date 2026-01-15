@@ -33,6 +33,9 @@ import {
 
 /**
  * List firewalls
+ *
+ * @remarks
+ * List firewalls
  */
 export function firewallsList(
   client: LatitudeshCore,

@@ -1,11 +1,11 @@
-# Gpu
+# PlanDataGpu
 
 ## Example Usage
 
 ```typescript
-import { Gpu } from "latitudesh-typescript-sdk/models";
+import { PlanDataGpu } from "latitudesh-typescript-sdk/models";
 
-let value: Gpu = {};
+let value: PlanDataGpu = {};
 ```
 
 ## Fields

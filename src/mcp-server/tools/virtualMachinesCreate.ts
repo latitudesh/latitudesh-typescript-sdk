@@ -12,7 +12,7 @@ const args = {
 
 export const tool$virtualMachinesCreate: ToolDefinition<typeof args> = {
   name: "virtual-machines-create",
-  description: `Create VM
+  description: `Create a Virtual Machine
 
 Creates a new Virtual Machine.
 `,

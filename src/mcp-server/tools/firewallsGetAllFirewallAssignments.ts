@@ -14,10 +14,9 @@ export const tool$firewallsGetAllFirewallAssignments: ToolDefinition<
   typeof args
 > = {
   name: "firewalls-get-all-firewall-assignments",
-  description: `Firewalls assignments
+  description: `List All Firewall Assignments
 
-Returns a list of all servers assigned to one or more firewalls.
-`,
+List all firewall assignments`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await firewallsGetAllFirewallAssignments(

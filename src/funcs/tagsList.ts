@@ -23,7 +23,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * List tags
+ * List all Tags
  *
  * @remarks
  * List all Tags in the team.

@@ -7,7 +7,7 @@ import { formatResult, ToolDefinition } from "../tools.js";
 
 export const tool$userProfileGet: ToolDefinition = {
   name: "user-profile-get",
-  description: `Retrieve profile
+  description: `Get user profile
 
 Retrieve the current user profile
 `,

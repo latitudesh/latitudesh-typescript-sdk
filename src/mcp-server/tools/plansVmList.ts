@@ -3,14 +3,21 @@
  */
 
 import { plansVmList } from "../../funcs/plansVmList.js";
+import * as operations from "../../models/operations/index.js";
 import { formatResult, ToolDefinition } from "../tools.js";
 
-export const tool$plansVmList: ToolDefinition = {
+const args = {
+  request: operations.GetVmPlansRequest$inboundSchema.optional(),
+};
+
+export const tool$plansVmList: ToolDefinition<typeof args> = {
   name: "plans-vm-list",
-  description: `List VM plans`,
-  tool: async (client, ctx) => {
+  description: `List all Virtual Machines Plans`,
+  args,
+  tool: async (client, args, ctx) => {
     const [result, apiCall] = await plansVmList(
       client,
+      args.request,
       { fetchOptions: { signal: ctx.signal } },
     ).$inspect();
 

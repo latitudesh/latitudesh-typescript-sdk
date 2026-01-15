@@ -15,7 +15,7 @@ export type UpdateApiKeyRequest = {
 };
 
 /**
- * Success
+ * Success - Update name without rotating token
  */
 export type UpdateApiKeyResponse = {
   data?: models.ApiKey | undefined;

@@ -26,7 +26,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Create VPN session
+ * Create a VPN Session
  *
  * @remarks
  * Creates a new VPN Session.

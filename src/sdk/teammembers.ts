@@ -11,7 +11,7 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class TeamMembers extends ClientSDK {
   /**
-   * Create member
+   * Add a Team Member
    */
   async postTeamMembers(
     request: operations.PostTeamMembersRequest,
@@ -25,7 +25,7 @@ export class TeamMembers extends ClientSDK {
   }
 
   /**
-   * Remove a member
+   * Remove a Team Member
    */
   async delete(
     request: operations.DestroyTeamMemberRequest,

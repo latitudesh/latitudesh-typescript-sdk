@@ -40,9 +40,9 @@ export type SshKeyDataAttributes = {
    */
   fingerprint?: string | undefined;
   user?: UserInclude | undefined;
+  project?: ProjectInclude | undefined;
   createdAt?: string | undefined;
   updatedAt?: string | undefined;
-  project?: ProjectInclude | undefined;
 };
 
 export type SshKeyData = {
@@ -70,9 +70,9 @@ export const SshKeyDataAttributes$inboundSchema: z.ZodType<
   public_key: z.string().optional(),
   fingerprint: z.string().optional(),
   user: UserInclude$inboundSchema.optional(),
+  project: ProjectInclude$inboundSchema.optional(),
   created_at: z.string().optional(),
   updated_at: z.string().optional(),
-  project: ProjectInclude$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "public_key": "publicKey",
@@ -86,9 +86,9 @@ export type SshKeyDataAttributes$Outbound = {
   public_key?: string | undefined;
   fingerprint?: string | undefined;
   user?: UserInclude$Outbound | undefined;
+  project?: ProjectInclude$Outbound | undefined;
   created_at?: string | undefined;
   updated_at?: string | undefined;
-  project?: ProjectInclude$Outbound | undefined;
 };
 
 /** @internal */
@@ -101,9 +101,9 @@ export const SshKeyDataAttributes$outboundSchema: z.ZodType<
   publicKey: z.string().optional(),
   fingerprint: z.string().optional(),
   user: UserInclude$outboundSchema.optional(),
+  project: ProjectInclude$outboundSchema.optional(),
   createdAt: z.string().optional(),
   updatedAt: z.string().optional(),
-  project: ProjectInclude$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     publicKey: "public_key",

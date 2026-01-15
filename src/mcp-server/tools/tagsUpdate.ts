@@ -12,7 +12,7 @@ const args = {
 
 export const tool$tagsUpdate: ToolDefinition<typeof args> = {
   name: "tags-update",
-  description: `Update tag
+  description: `Update Tag
 
 Update a Tag in the team.
 `,

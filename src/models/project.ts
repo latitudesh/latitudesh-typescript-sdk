@@ -78,11 +78,11 @@ export type ProjectAttributes = {
   /**
    * The project description
    */
-  description?: string | undefined;
+  description?: string | null | undefined;
   billingType?: BillingType | undefined;
   billingMethod?: BillingMethod | undefined;
   cost?: string | undefined;
-  environment?: Environment | undefined;
+  environment?: Environment | null | undefined;
   stats?: ProjectStats | undefined;
   billing?: ProjectBilling | undefined;
   team?: TeamInclude | undefined;
@@ -233,11 +233,11 @@ export const ProjectAttributes$inboundSchema: z.ZodType<
 > = z.object({
   name: z.string().optional(),
   slug: z.string().optional(),
-  description: z.string().optional(),
+  description: z.nullable(z.string()).optional(),
   billing_type: BillingType$inboundSchema.optional(),
   billing_method: BillingMethod$inboundSchema.optional(),
   cost: z.string().optional(),
-  environment: Environment$inboundSchema.optional(),
+  environment: z.nullable(Environment$inboundSchema).optional(),
   stats: z.lazy(() => ProjectStats$inboundSchema).optional(),
   billing: z.lazy(() => ProjectBilling$inboundSchema).optional(),
   team: TeamInclude$inboundSchema.optional(),
@@ -255,11 +255,11 @@ export const ProjectAttributes$inboundSchema: z.ZodType<
 export type ProjectAttributes$Outbound = {
   name?: string | undefined;
   slug?: string | undefined;
-  description?: string | undefined;
+  description?: string | null | undefined;
   billing_type?: string | undefined;
   billing_method?: string | undefined;
   cost?: string | undefined;
-  environment?: string | undefined;
+  environment?: string | null | undefined;
   stats?: ProjectStats$Outbound | undefined;
   billing?: ProjectBilling$Outbound | undefined;
   team?: TeamInclude$Outbound | undefined;
@@ -275,11 +275,11 @@ export const ProjectAttributes$outboundSchema: z.ZodType<
 > = z.object({
   name: z.string().optional(),
   slug: z.string().optional(),
-  description: z.string().optional(),
+  description: z.nullable(z.string()).optional(),
   billingType: BillingType$outboundSchema.optional(),
   billingMethod: BillingMethod$outboundSchema.optional(),
   cost: z.string().optional(),
-  environment: Environment$outboundSchema.optional(),
+  environment: z.nullable(Environment$outboundSchema).optional(),
   stats: z.lazy(() => ProjectStats$outboundSchema).optional(),
   billing: z.lazy(() => ProjectBilling$outboundSchema).optional(),
   team: TeamInclude$outboundSchema.optional(),

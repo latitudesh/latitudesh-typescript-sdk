@@ -18,7 +18,6 @@ export const FilterLocation = {
   Dal: "DAL",
   Fra: "FRA",
   Lax: "LAX",
-  Lax2: "LAX2",
   Lon: "LON",
   Mex: "MEX",
   Mex2: "MEX2",
@@ -30,7 +29,7 @@ export const FilterLocation = {
   Sao2: "SAO2",
   Syd: "SYD",
   Tyo: "TYO",
-  Tyo4: "TYO4",
+  Tyo2: "TYO2",
 } as const;
 export type FilterLocation = ClosedEnum<typeof FilterLocation>;
 

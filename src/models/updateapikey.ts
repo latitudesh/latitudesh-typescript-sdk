@@ -20,9 +20,13 @@ export type UpdateApiKeyAttributes = {
    */
   name?: string | undefined;
   /**
-   * The API version to use
+   * Whether the API Key is read-only. Read-only keys can only perform GET requests.
    */
-  apiVersion?: string | undefined;
+  readOnly?: boolean | undefined;
+  /**
+   * List of allowed IP addresses or CIDR ranges (e.g., "192.168.1.100", "10.0.0.0/24")
+   */
+  allowedIps?: Array<string> | undefined;
 };
 
 export type UpdateApiKeyData = {
@@ -50,17 +54,20 @@ export const UpdateApiKeyAttributes$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  name: z.string().default("Name of the API Key"),
-  api_version: z.string().default("2023-06-01"),
+  name: z.string().optional(),
+  read_only: z.boolean().optional(),
+  allowed_ips: z.array(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
-    "api_version": "apiVersion",
+    "read_only": "readOnly",
+    "allowed_ips": "allowedIps",
   });
 });
 /** @internal */
 export type UpdateApiKeyAttributes$Outbound = {
-  name: string;
-  api_version: string;
+  name?: string | undefined;
+  read_only?: boolean | undefined;
+  allowed_ips?: Array<string> | undefined;
 };
 
 /** @internal */
@@ -69,11 +76,13 @@ export const UpdateApiKeyAttributes$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateApiKeyAttributes
 > = z.object({
-  name: z.string().default("Name of the API Key"),
-  apiVersion: z.string().default("2023-06-01"),
+  name: z.string().optional(),
+  readOnly: z.boolean().optional(),
+  allowedIps: z.array(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
-    apiVersion: "api_version",
+    readOnly: "read_only",
+    allowedIps: "allowed_ips",
   });
 });
 

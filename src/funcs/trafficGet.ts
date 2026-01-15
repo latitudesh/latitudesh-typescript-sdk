@@ -26,7 +26,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Retrieve traffic
+ * Retrieve Traffic consumption
  */
 export function trafficGet(
   client: LatitudeshCore,

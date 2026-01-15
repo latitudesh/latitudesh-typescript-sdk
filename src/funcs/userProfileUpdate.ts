@@ -25,7 +25,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Update profile
+ * Update User Profile
  *
  * @remarks
  * Update the current user profile

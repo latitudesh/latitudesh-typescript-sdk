@@ -19,7 +19,7 @@ export class Projects extends ClientSDK {
   }
 
   /**
-   * List projects
+   * List all Projects
    *
    * @remarks
    * Returns a list of all projects for the current team
@@ -36,7 +36,7 @@ export class Projects extends ClientSDK {
   }
 
   /**
-   * Create a project
+   * Create a Project
    */
   async create(
     request: operations.CreateProjectRequest,
@@ -50,7 +50,7 @@ export class Projects extends ClientSDK {
   }
 
   /**
-   * Delete a project
+   * Delete a Project
    */
   async delete(
     request: operations.DeleteProjectRequest,
@@ -64,7 +64,7 @@ export class Projects extends ClientSDK {
   }
 
   /**
-   * Update a project
+   * Update a Project
    */
   async update(
     request: operations.UpdateProjectRequest,

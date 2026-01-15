@@ -5,17 +5,20 @@
 import { plansVmList } from "../funcs/plansVmList.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as models from "../models/index.js";
+import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class Vm extends ClientSDK {
   /**
-   * List VM plans
+   * List all Virtual Machines Plans
    */
   async list(
+    request?: operations.GetVmPlansRequest | undefined,
     options?: RequestOptions,
   ): Promise<models.VirtualMachinePlans> {
     return unwrapAsync(plansVmList(
       this,
+      request,
       options,
     ));
   }

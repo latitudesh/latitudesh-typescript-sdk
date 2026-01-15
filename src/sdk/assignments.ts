@@ -10,10 +10,10 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class Assignments extends ClientSDK {
   /**
-   * Assign server to firewall
+   * Firewall Assignment
    *
    * @remarks
-   * Assigns a server to a firewall by its ID.
+   * Assign a server to a firewall
    */
   async create(
     request: operations.CreateFirewallAssignmentRequest,

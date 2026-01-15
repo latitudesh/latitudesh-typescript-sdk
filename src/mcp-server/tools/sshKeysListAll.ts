@@ -12,7 +12,7 @@ const args = {
 
 export const tool$sshKeysListAll: ToolDefinition<typeof args> = {
   name: "SSH-keys-list-all",
-  description: `List SSH Keys
+  description: `List all SSH Keys
 
 List all SSH Keys in the project. These keys can be used to access servers after deploy and reinstall actions.
 `,

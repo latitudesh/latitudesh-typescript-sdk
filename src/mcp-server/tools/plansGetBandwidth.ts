@@ -12,7 +12,7 @@ const args = {
 
 export const tool$plansGetBandwidth: ToolDefinition<typeof args> = {
   name: "plans-get-bandwidth",
-  description: `List bandwidth plans
+  description: `List all bandwidth plans
 
 Lists all bandwidth plans.`,
   args,

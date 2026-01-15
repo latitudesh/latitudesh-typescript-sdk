@@ -12,7 +12,7 @@ const args = {
 
 export const tool$storageUpdateFilesystem: ToolDefinition<typeof args> = {
   name: "storage-update-filesystem",
-  description: `Update filesystem
+  description: `Update a filesystem for a project
 
 Allow you to upgrade the size of a filesystem.`,
   args,

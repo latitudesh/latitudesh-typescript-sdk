@@ -22,7 +22,6 @@ export const PostVpnSessionSite2 = {
   Dal: "DAL",
   Fra: "FRA",
   Lax: "LAX",
-  Lax2: "LAX2",
   Lon: "LON",
   Mex: "MEX",
   Mex2: "MEX2",
@@ -34,7 +33,7 @@ export const PostVpnSessionSite2 = {
   Sao2: "SAO2",
   Syd: "SYD",
   Tyo: "TYO",
-  Tyo4: "TYO4",
+  Tyo2: "TYO2",
 } as const;
 export type PostVpnSessionSite2 = ClosedEnum<typeof PostVpnSessionSite2>;
 

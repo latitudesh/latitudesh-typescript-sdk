@@ -1,12 +1,11 @@
 # Regions
-(*regions*)
 
 ## Overview
 
 ### Available Operations
 
-* [get](#get) - List regions
-* [fetch](#fetch) - Retrieve region
+* [get](#get) - List all Regions
+* [fetch](#fetch) - Retrieve a Region
 
 ## get
 
@@ -85,7 +84,7 @@ run();
 
 ## fetch
 
-Retrieve region
+Retrieve a Region
 
 ### Example Usage
 

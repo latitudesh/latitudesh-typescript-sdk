@@ -17,6 +17,7 @@ import { tool$apiKeysCreate } from "./tools/apiKeysCreate.js";
 import { tool$apiKeysDelete } from "./tools/apiKeysDelete.js";
 import { tool$apiKeysList } from "./tools/apiKeysList.js";
 import { tool$apiKeysUpdate } from "./tools/apiKeysUpdate.js";
+import { tool$apiKeysUpdateApiKey } from "./tools/apiKeysUpdateApiKey.js";
 import { tool$billingListUsage } from "./tools/billingListUsage.js";
 import { tool$eventsList } from "./tools/eventsList.js";
 import { tool$firewallsAssignmentsCreate } from "./tools/firewallsAssignmentsCreate.js";
@@ -33,6 +34,7 @@ import { tool$ipAddressesList } from "./tools/ipAddressesList.js";
 import { tool$operatingSystemsListPlans } from "./tools/operatingSystemsListPlans.js";
 import { tool$plansGet } from "./tools/plansGet.js";
 import { tool$plansGetBandwidth } from "./tools/plansGetBandwidth.js";
+import { tool$plansGetContainersPlan } from "./tools/plansGetContainersPlan.js";
 import { tool$plansList } from "./tools/plansList.js";
 import { tool$plansListStorage } from "./tools/plansListStorage.js";
 import { tool$plansUpdateBandwidth } from "./tools/plansUpdateBandwidth.js";
@@ -136,7 +138,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Latitudesh",
-    version: "0.2.1",
+    version: "0.2.2",
   });
 
   const client = new LatitudeshCore({
@@ -171,6 +173,7 @@ export function createMCPServer(deps: {
   tool(tool$apiKeysCreate);
   tool(tool$apiKeysUpdate);
   tool(tool$apiKeysDelete);
+  tool(tool$apiKeysUpdateApiKey);
   tool(tool$billingListUsage);
   tool(tool$eventsList);
   tool(tool$firewallsGetAllFirewallAssignments);
@@ -193,6 +196,7 @@ export function createMCPServer(deps: {
   tool(tool$plansGet);
   tool(tool$plansGetBandwidth);
   tool(tool$plansUpdateBandwidth);
+  tool(tool$plansGetContainersPlan);
   tool(tool$plansListStorage);
   tool(tool$projectsList);
   tool(tool$projectsCreate);

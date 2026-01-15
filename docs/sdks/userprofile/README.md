@@ -1,13 +1,12 @@
 # UserProfile
-(*userProfile*)
 
 ## Overview
 
 ### Available Operations
 
-* [get](#get) - Retrieve profile
-* [update](#update) - Update profile
-* [listTeams](#listteams) - List user teams
+* [get](#get) - Get user profile
+* [update](#update) - Update User Profile
+* [listTeams](#listteams) - List User Teams
 
 ## get
 
@@ -95,10 +94,10 @@ const latitudesh = new Latitudesh({
 
 async function run() {
   const result = await latitudesh.userProfile.update({
-    id: "user_lGJBgAxbgeUJ4yZj56wmfrK4vag",
+    id: "user_8PMvy2GL72uKKyXyANEnsjMQYMP",
     requestBody: {
       data: {
-        id: "user_lGJBgAxbgeUJ4yZj56wmfrK4vag",
+        id: "user_8PMvy2GL72uKKyXyANEnsjMQYMP",
         type: "users",
         attributes: {
           role: "collaborator",
@@ -129,10 +128,10 @@ const latitudesh = new LatitudeshCore({
 
 async function run() {
   const res = await userProfileUpdate(latitudesh, {
-    id: "user_lGJBgAxbgeUJ4yZj56wmfrK4vag",
+    id: "user_8PMvy2GL72uKKyXyANEnsjMQYMP",
     requestBody: {
       data: {
-        id: "user_lGJBgAxbgeUJ4yZj56wmfrK4vag",
+        id: "user_8PMvy2GL72uKKyXyANEnsjMQYMP",
         type: "users",
         attributes: {
           role: "collaborator",

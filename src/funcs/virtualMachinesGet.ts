@@ -26,7 +26,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Retrieve VM
+ * Get a Virtual Machine
  *
  * @remarks
  * Show a Virtual Machine.

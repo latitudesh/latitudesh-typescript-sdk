@@ -1,23 +1,21 @@
 # Firewalls
-(*firewalls*)
 
 ## Overview
 
 ### Available Operations
 
-* [getAllFirewallAssignments](#getallfirewallassignments) - Firewalls assignments
+* [getAllFirewallAssignments](#getallfirewallassignments) - List All Firewall Assignments
 * [list](#list) - List firewalls
 * [create](#create) - Create a firewall
-* [get](#get) - Retrieve firewall
-* [delete](#delete) - Delete firewall
-* [update](#update) - Update firewall
-* [listAssignments](#listassignments) - Firewall assignments
-* [deleteAssignment](#deleteassignment) - Delete assignment
+* [get](#get) - Retrieve Firewall
+* [delete](#delete) - Delete Firewall
+* [update](#update) - Update Firewall
+* [listAssignments](#listassignments) - Firewall Assignments
+* [deleteAssignment](#deleteassignment) - Delete Firewall Assignment
 
 ## getAllFirewallAssignments
 
-Returns a list of all servers assigned to one or more firewalls.
-
+List all firewall assignments
 
 ### Example Usage
 
@@ -31,7 +29,7 @@ const latitudesh = new Latitudesh({
 
 async function run() {
   const result = await latitudesh.firewalls.getAllFirewallAssignments({
-    filterServer: "sv_RLYV8DZ2D5QoE",
+    filterServer: "sv_Qk0Ryqv1dW36X",
   });
 
   for await (const page of result) {
@@ -58,7 +56,7 @@ const latitudesh = new LatitudeshCore({
 
 async function run() {
   const res = await firewallsGetAllFirewallAssignments(latitudesh, {
-    filterServer: "sv_RLYV8DZ2D5QoE",
+    filterServer: "sv_Qk0Ryqv1dW36X",
   });
   if (res.ok) {
     const { value: result } = res;
@@ -108,7 +106,7 @@ const latitudesh = new Latitudesh({
 
 async function run() {
   const result = await latitudesh.firewalls.list({
-    filterProject: "incredible-bronze-car",
+    filterProject: "intelligent-marble-lamp",
   });
 
   for await (const page of result) {
@@ -135,7 +133,7 @@ const latitudesh = new LatitudeshCore({
 
 async function run() {
   const res = await firewallsList(latitudesh, {
-    filterProject: "incredible-bronze-car",
+    filterProject: "intelligent-marble-lamp",
   });
   if (res.ok) {
     const { value: result } = res;
@@ -189,7 +187,7 @@ async function run() {
       type: "firewalls",
       attributes: {
         name: "my-firewall",
-        project: "awesome-granite-chair",
+        project: "heavy-duty-copper-watch",
         rules: [
           {
             from: "192.168.42.73",
@@ -198,8 +196,8 @@ async function run() {
             port: "80",
           },
           {
-            from: "192.168.1.0/24",
-            to: "ANY",
+            from: "192.168.1.16",
+            to: "192.168.1.30",
             protocol: "TCP",
             port: "80",
           },
@@ -240,7 +238,7 @@ async function run() {
       type: "firewalls",
       attributes: {
         name: "my-firewall",
-        project: "awesome-granite-chair",
+        project: "heavy-duty-copper-watch",
         rules: [
           {
             from: "192.168.42.73",
@@ -249,8 +247,8 @@ async function run() {
             port: "80",
           },
           {
-            from: "192.168.1.0/24",
-            to: "ANY",
+            from: "192.168.1.16",
+            to: "192.168.1.30",
             protocol: "TCP",
             port: "80",
           },
@@ -296,8 +294,7 @@ run();
 
 ## get
 
-Returns a single firewall by its ID.
-
+Retrieve a firewall
 
 ### Example Usage
 
@@ -311,7 +308,7 @@ const latitudesh = new Latitudesh({
 
 async function run() {
   const result = await latitudesh.firewalls.get({
-    firewallId: "fw_xkjQwdENqYNVP",
+    firewallId: "fw_6A05EdQ1dvKYQ",
   });
 
   console.log(result);
@@ -336,7 +333,7 @@ const latitudesh = new LatitudeshCore({
 
 async function run() {
   const res = await firewallsGet(latitudesh, {
-    firewallId: "fw_xkjQwdENqYNVP",
+    firewallId: "fw_6A05EdQ1dvKYQ",
   });
   if (res.ok) {
     const { value: result } = res;
@@ -370,7 +367,7 @@ run();
 
 ## delete
 
-Delete firewall
+Delete a firewall
 
 ### Example Usage
 
@@ -443,8 +440,7 @@ run();
 
 ## update
 
-Updates a firewall by its ID.
-
+Update a firewall
 
 ### Example Usage
 
@@ -458,7 +454,7 @@ const latitudesh = new Latitudesh({
 
 async function run() {
   const result = await latitudesh.firewalls.update({
-    firewallId: "fw_6A05EdQ1dvKYQ",
+    firewallId: "fw_r0MK4O4kDa95w",
     requestBody: {
       data: {
         type: "firewalls",
@@ -466,8 +462,8 @@ async function run() {
           name: "new-name",
           rules: [
             {
-              from: "192.168.1.0/24",
-              to: "ANY",
+              from: "192.168.42.72",
+              to: "192.168.43.51",
               protocol: "TCP",
               port: "80",
             },
@@ -499,7 +495,7 @@ const latitudesh = new LatitudeshCore({
 
 async function run() {
   const res = await firewallsUpdate(latitudesh, {
-    firewallId: "fw_6A05EdQ1dvKYQ",
+    firewallId: "fw_r0MK4O4kDa95w",
     requestBody: {
       data: {
         type: "firewalls",
@@ -507,8 +503,8 @@ async function run() {
           name: "new-name",
           rules: [
             {
-              from: "192.168.1.0/24",
-              to: "ANY",
+              from: "192.168.42.72",
+              to: "192.168.43.51",
               protocol: "TCP",
               port: "80",
             },
@@ -549,8 +545,7 @@ run();
 
 ## listAssignments
 
-Returns a list of all servers assigned to a particular firewall.
-
+List servers assigned to a firewall
 
 ### Example Usage
 
@@ -564,7 +559,7 @@ const latitudesh = new Latitudesh({
 
 async function run() {
   const result = await latitudesh.firewalls.listAssignments({
-    firewallId: "fw_z8Nkvdy1deLpx",
+    firewallId: "fw_Qk0Ryqv1dW36X",
   });
 
   for await (const page of result) {
@@ -591,7 +586,7 @@ const latitudesh = new LatitudeshCore({
 
 async function run() {
   const res = await firewallsListAssignments(latitudesh, {
-    firewallId: "fw_z8Nkvdy1deLpx",
+    firewallId: "fw_Qk0Ryqv1dW36X",
   });
   if (res.ok) {
     const { value: result } = res;
@@ -627,8 +622,7 @@ run();
 
 ## deleteAssignment
 
-Removes a server from a firewall by its ID.
-
+Remove a server from a firewall
 
 ### Example Usage
 

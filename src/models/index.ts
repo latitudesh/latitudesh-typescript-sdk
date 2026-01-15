@@ -3,10 +3,12 @@
  */
 
 export * from "./apikey.js";
+export * from "./apikeys.js";
 export * from "./bandwidthpackages.js";
 export * from "./bandwidthplandata.js";
 export * from "./bandwidthplans.js";
 export * from "./billingusage.js";
+export * from "./containerplandata.js";
 export * from "./createapikey.js";
 export * from "./customtag.js";
 export * from "./customtagdata.js";

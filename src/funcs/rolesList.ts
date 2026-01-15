@@ -32,7 +32,7 @@ import {
 } from "../types/operations.js";
 
 /**
- * List roles
+ * List all Roles
  *
  * @remarks
  * Returns a list of all roles that can be assigned to users

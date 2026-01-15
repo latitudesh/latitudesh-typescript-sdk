@@ -26,7 +26,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Run power action
+ * Run Server Action
  *
  * @remarks
  * Performs an action on a given server:

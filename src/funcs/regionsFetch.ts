@@ -26,7 +26,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Retrieve region
+ * Retrieve a Region
  */
 export function regionsFetch(
   client: LatitudeshCore,

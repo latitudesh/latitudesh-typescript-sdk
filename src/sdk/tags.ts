@@ -13,7 +13,7 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class Tags extends ClientSDK {
   /**
-   * List tags
+   * List all Tags
    *
    * @remarks
    * List all Tags in the team.
@@ -28,7 +28,7 @@ export class Tags extends ClientSDK {
   }
 
   /**
-   * Create tag
+   * Create a Tag
    *
    * @remarks
    * Create a Tag in the team.
@@ -45,7 +45,7 @@ export class Tags extends ClientSDK {
   }
 
   /**
-   * Delete tag
+   * Delete Tag
    *
    * @remarks
    * Update a Tag in the team.
@@ -62,7 +62,7 @@ export class Tags extends ClientSDK {
   }
 
   /**
-   * Update tag
+   * Update Tag
    *
    * @remarks
    * Update a Tag in the team.

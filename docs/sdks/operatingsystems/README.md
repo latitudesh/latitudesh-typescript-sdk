@@ -1,11 +1,10 @@
 # OperatingSystems
-(*operatingSystems*)
 
 ## Overview
 
 ### Available Operations
 
-* [listPlans](#listplans) - List operating systems
+* [listPlans](#listplans) - List all operating systems available
 
 ## listPlans
 

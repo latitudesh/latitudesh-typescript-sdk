@@ -12,7 +12,7 @@ const args = {
 
 export const tool$rolesGet: ToolDefinition<typeof args> = {
   name: "roles-get",
-  description: `Retrieve role`,
+  description: `Retrieve Role`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await rolesGet(

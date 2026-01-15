@@ -26,7 +26,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Update server
+ * Update Server
  */
 export function serversUpdate(
   client: LatitudeshCore,

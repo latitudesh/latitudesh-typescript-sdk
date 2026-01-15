@@ -12,7 +12,7 @@ const args = {
 
 export const tool$projectsDelete: ToolDefinition<typeof args> = {
   name: "projects-delete",
-  description: `Delete a project`,
+  description: `Delete a Project`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await projectsDelete(

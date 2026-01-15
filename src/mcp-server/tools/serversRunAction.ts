@@ -12,7 +12,7 @@ const args = {
 
 export const tool$serversRunAction: ToolDefinition<typeof args> = {
   name: "servers-run-action",
-  description: `Run power action
+  description: `Run Server Action
 
 Performs an action on a given server:
 - \`power_on\`

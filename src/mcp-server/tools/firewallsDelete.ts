@@ -12,7 +12,9 @@ const args = {
 
 export const tool$firewallsDelete: ToolDefinition<typeof args> = {
   name: "firewalls-delete",
-  description: `Delete firewall`,
+  description: `Delete Firewall
+
+Delete a firewall`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await firewallsDelete(

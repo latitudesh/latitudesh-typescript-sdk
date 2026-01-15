@@ -27,6 +27,9 @@ import { Result } from "../types/fp.js";
 
 /**
  * Create a firewall
+ *
+ * @remarks
+ * Create a firewall
  */
 export function firewallsCreate(
   client: LatitudeshCore,

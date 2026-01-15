@@ -6,6 +6,7 @@ import { apiKeysCreate } from "../funcs/apiKeysCreate.js";
 import { apiKeysDelete } from "../funcs/apiKeysDelete.js";
 import { apiKeysList } from "../funcs/apiKeysList.js";
 import { apiKeysUpdate } from "../funcs/apiKeysUpdate.js";
+import { apiKeysUpdateApiKey } from "../funcs/apiKeysUpdateApiKey.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as models from "../models/index.js";
 import * as operations from "../models/operations/index.js";
@@ -13,14 +14,14 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class ApiKeys extends ClientSDK {
   /**
-   * List API keys
+   * List API Keys
    *
    * @remarks
-   * Returns a list of all API keys.
+   * Returns a list of all API keys from the team members
    */
   async list(
     options?: RequestOptions,
-  ): Promise<models.ApiKey> {
+  ): Promise<models.ApiKeys> {
     return unwrapAsync(apiKeysList(
       this,
       options,
@@ -28,7 +29,7 @@ export class ApiKeys extends ClientSDK {
   }
 
   /**
-   * Create API key
+   * Create API Key
    *
    * @remarks
    * Create a new API Key that is tied to the current user account. The created API key is only listed ONCE upon creation. It can however be regenerated or deleted.
@@ -45,15 +46,16 @@ export class ApiKeys extends ClientSDK {
   }
 
   /**
-   * Rotate API key
+   * Rotate API Key
    *
    * @remarks
-   * Regenerate an existing API Key that is tied to the current user. This overrides the previous key.
+   * Rotate an existing API Key, generating a new token. This invalidates the previous key.
+   * Use PATCH to update settings without rotating the token.
    */
   async update(
-    request: operations.UpdateApiKeyRequest,
+    request: operations.RotateApiKeyRequest,
     options?: RequestOptions,
-  ): Promise<operations.UpdateApiKeyResponse> {
+  ): Promise<operations.RotateApiKeyResponse> {
     return unwrapAsync(apiKeysUpdate(
       this,
       request,
@@ -62,7 +64,7 @@ export class ApiKeys extends ClientSDK {
   }
 
   /**
-   * Delete API key
+   * Delete API Key
    *
    * @remarks
    * Delete an existing API Key. Once deleted, the API Key can no longer be used to access the API.
@@ -72,6 +74,24 @@ export class ApiKeys extends ClientSDK {
     options?: RequestOptions,
   ): Promise<void> {
     return unwrapAsync(apiKeysDelete(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Update API Key Settings
+   *
+   * @remarks
+   * Update API Key settings (name, read_only, allowed_ips) without rotating the token.
+   * Use PUT to rotate the token.
+   */
+  async updateApiKey(
+    request: operations.UpdateApiKeyRequest,
+    options?: RequestOptions,
+  ): Promise<operations.UpdateApiKeyResponse> {
+    return unwrapAsync(apiKeysUpdateApiKey(
       this,
       request,
       options,

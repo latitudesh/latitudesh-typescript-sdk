@@ -14,10 +14,10 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class VirtualMachines extends ClientSDK {
   /**
-   * List VMs
+   * Get Teams Virtual Machines
    *
    * @remarks
-   * Show all Team's Virtual machines.
+   * Show all Team's Virtual Machines.
    */
   async list(
     request?: operations.IndexVirtualMachineRequest | undefined,
@@ -31,7 +31,7 @@ export class VirtualMachines extends ClientSDK {
   }
 
   /**
-   * Create VM
+   * Create a Virtual Machine
    *
    * @remarks
    * Creates a new Virtual Machine.
@@ -48,7 +48,7 @@ export class VirtualMachines extends ClientSDK {
   }
 
   /**
-   * Retrieve VM
+   * Get a Virtual Machine
    *
    * @remarks
    * Show a Virtual Machine.
@@ -65,7 +65,7 @@ export class VirtualMachines extends ClientSDK {
   }
 
   /**
-   * Destroy VM
+   * Destroy a Virtual Machine
    *
    * @remarks
    * Destroys a Virtual Machine.
@@ -82,7 +82,7 @@ export class VirtualMachines extends ClientSDK {
   }
 
   /**
-   * Run VM power action
+   * Run Virtual Machine Action
    *
    * @remarks
    * Performs a power action on a given virtual machine:

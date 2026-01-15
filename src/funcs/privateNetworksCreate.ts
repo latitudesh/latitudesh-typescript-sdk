@@ -26,7 +26,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Create VLAN
+ * Create a Virtual Network
  *
  * @remarks
  * Creates a new Virtual Network.

@@ -1,16 +1,15 @@
 # TeamMembers
-(*teamMembers*)
 
 ## Overview
 
 ### Available Operations
 
-* [postTeamMembers](#postteammembers) - Create member
-* [delete](#delete) - Remove a member
+* [postTeamMembers](#postteammembers) - Add a Team Member
+* [delete](#delete) - Remove a Team Member
 
 ## postTeamMembers
 
-Create member
+Add a Team Member
 
 ### Example Usage
 
@@ -27,9 +26,9 @@ async function run() {
     data: {
       type: "memberships",
       attributes: {
-        firstName: "Bernard",
-        lastName: "Cremin",
-        email: "ernest@carter-lehner.example",
+        firstName: "Maricela",
+        lastName: "Torphy",
+        email: "maritza_schneider@mcglynn.test",
         role: "collaborator",
       },
     },
@@ -60,9 +59,9 @@ async function run() {
     data: {
       type: "memberships",
       attributes: {
-        firstName: "Bernard",
-        lastName: "Cremin",
-        email: "ernest@carter-lehner.example",
+        firstName: "Maricela",
+        lastName: "Torphy",
+        email: "maritza_schneider@mcglynn.test",
         role: "collaborator",
       },
     },
@@ -99,7 +98,7 @@ run();
 
 ## delete
 
-Remove a member
+Remove a Team Member
 
 ### Example Usage
 

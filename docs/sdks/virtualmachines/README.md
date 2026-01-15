@@ -1,19 +1,18 @@
 # VirtualMachines
-(*virtualMachines*)
 
 ## Overview
 
 ### Available Operations
 
-* [list](#list) - List VMs
-* [create](#create) - Create VM
-* [get](#get) - Retrieve VM
-* [delete](#delete) - Destroy VM
-* [createVirtualMachineAction](#createvirtualmachineaction) - Run VM power action
+* [list](#list) - Get Teams Virtual Machines
+* [create](#create) - Create a Virtual Machine
+* [get](#get) - Get a Virtual Machine
+* [delete](#delete) - Destroy a Virtual Machine
+* [createVirtualMachineAction](#createvirtualmachineaction) - Run Virtual Machine Action
 
 ## list
 
-Show all Team's Virtual machines.
+Show all Team's Virtual Machines.
 
 
 ### Example Usage
@@ -106,9 +105,7 @@ async function run() {
       type: "virtual_machines",
       attributes: {
         name: "my-new-vm",
-        site: "ASH",
-        project: "enormous-wool-keyboard",
-        billing: "monthly",
+        project: "lightweight-leather-lamp",
       },
     },
   });
@@ -139,9 +136,7 @@ async function run() {
       type: "virtual_machines",
       attributes: {
         name: "my-new-vm",
-        site: "ASH",
-        project: "enormous-wool-keyboard",
-        billing: "monthly",
+        project: "lightweight-leather-lamp",
       },
     },
   });
@@ -192,7 +187,7 @@ const latitudesh = new Latitudesh({
 
 async function run() {
   await latitudesh.virtualMachines.get({
-    virtualMachineId: "vm_w5AEmq7XDBkWX",
+    virtualMachineId: "vm_7vYAZqGBdMQ94",
   });
 
 
@@ -217,7 +212,7 @@ const latitudesh = new LatitudeshCore({
 
 async function run() {
   const res = await virtualMachinesGet(latitudesh, {
-    virtualMachineId: "vm_w5AEmq7XDBkWX",
+    virtualMachineId: "vm_7vYAZqGBdMQ94",
   });
   if (res.ok) {
     const { value: result } = res;
@@ -343,9 +338,9 @@ const latitudesh = new Latitudesh({
 
 async function run() {
   await latitudesh.virtualMachines.createVirtualMachineAction({
-    virtualMachineId: "vm_VLMmAD8EOwop2",
+    virtualMachineId: "vm_5LA73qkjdaJ2o",
     requestBody: {
-      id: "vm_VLMmAD8EOwop2",
+      id: "vm_5LA73qkjdaJ2o",
       type: "virtual_machines",
       attributes: {
         action: "reboot",
@@ -375,9 +370,9 @@ const latitudesh = new LatitudeshCore({
 
 async function run() {
   const res = await virtualMachinesCreateVirtualMachineAction(latitudesh, {
-    virtualMachineId: "vm_VLMmAD8EOwop2",
+    virtualMachineId: "vm_5LA73qkjdaJ2o",
     requestBody: {
-      id: "vm_VLMmAD8EOwop2",
+      id: "vm_5LA73qkjdaJ2o",
       type: "virtual_machines",
       attributes: {
         action: "reboot",

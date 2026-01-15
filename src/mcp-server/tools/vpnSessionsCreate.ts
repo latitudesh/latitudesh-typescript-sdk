@@ -12,7 +12,7 @@ const args = {
 
 export const tool$vpnSessionsCreate: ToolDefinition<typeof args> = {
   name: "vpn-sessions-create",
-  description: `Create VPN session
+  description: `Create a VPN Session
 
 Creates a new VPN Session.
 \`NOTE:\` The VPN credentials are only listed ONCE upon creation. They can however be refreshed or deleted.

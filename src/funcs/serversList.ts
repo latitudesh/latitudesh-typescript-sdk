@@ -32,7 +32,7 @@ import {
 } from "../types/operations.js";
 
 /**
- * List servers
+ * List all Servers
  *
  * @remarks
  * Returns a list of all servers belonging to the team.

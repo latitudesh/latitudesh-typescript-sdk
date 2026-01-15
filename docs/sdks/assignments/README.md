@@ -1,16 +1,14 @@
-# Assignments
-(*firewalls.assignments*)
+# Firewalls.Assignments
 
 ## Overview
 
 ### Available Operations
 
-* [create](#create) - Assign server to firewall
+* [create](#create) - Firewall Assignment
 
 ## create
 
-Assigns a server to a firewall by its ID.
-
+Assign a server to a firewall
 
 ### Example Usage
 
@@ -24,12 +22,12 @@ const latitudesh = new Latitudesh({
 
 async function run() {
   const result = await latitudesh.firewalls.assignments.create({
-    firewallId: "fw_Av9BVDavORm1W",
+    firewallId: "fw_Ee8pKq05DWAob",
     requestBody: {
       data: {
         type: "firewall_assignments",
         attributes: {
-          serverId: "sv_lpbV0DgRq4AWz",
+          serverId: "sv_aKXgRdR3qv9k5",
         },
       },
     },
@@ -57,12 +55,12 @@ const latitudesh = new LatitudeshCore({
 
 async function run() {
   const res = await firewallsAssignmentsCreate(latitudesh, {
-    firewallId: "fw_Av9BVDavORm1W",
+    firewallId: "fw_Ee8pKq05DWAob",
     requestBody: {
       data: {
         type: "firewall_assignments",
         attributes: {
-          serverId: "sv_lpbV0DgRq4AWz",
+          serverId: "sv_aKXgRdR3qv9k5",
         },
       },
     },

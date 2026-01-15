@@ -12,7 +12,7 @@ const args = {
 
 export const tool$tagsDelete: ToolDefinition<typeof args> = {
   name: "tags-delete",
-  description: `Delete tag
+  description: `Delete Tag
 
 Update a Tag in the team.
 `,

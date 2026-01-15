@@ -12,7 +12,7 @@ const args = {
 
 export const tool$userProfileUpdate: ToolDefinition<typeof args> = {
   name: "user-profile-update",
-  description: `Update profile
+  description: `Update User Profile
 
 Update the current user profile
 `,

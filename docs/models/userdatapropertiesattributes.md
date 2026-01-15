@@ -12,8 +12,8 @@ let value: UserDataPropertiesAttributes = {};
 
 | Field                                                | Type                                                 | Required                                             | Description                                          |
 | ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- |
-| `description`                                        | *string*                                             | :heavy_minus_sign:                                   | description of the User data                         |
-| `content`                                            | *string*                                             | :heavy_minus_sign:                                   | content of the User data                             |
+| `description`                                        | *string*                                             | :heavy_minus_sign:                                   | description of the User Data                         |
+| `content`                                            | *string*                                             | :heavy_minus_sign:                                   | content of the User Data                             |
+| `project`                                            | [models.ProjectInclude](../models/projectinclude.md) | :heavy_minus_sign:                                   | N/A                                                  |
 | `createdAt`                                          | *string*                                             | :heavy_minus_sign:                                   | N/A                                                  |
 | `updatedAt`                                          | *string*                                             | :heavy_minus_sign:                                   | N/A                                                  |
-| `project`                                            | [models.ProjectInclude](../models/projectinclude.md) | :heavy_minus_sign:                                   | N/A                                                  |

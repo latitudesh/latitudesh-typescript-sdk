@@ -15,7 +15,7 @@ export type PostUserDataType2 = ClosedEnum<typeof PostUserDataType2>;
 
 export type PostUserDataAttributes2 = {
   /**
-   * description of the User data
+   * description of the User Data
    */
   description: string;
   /**
@@ -23,7 +23,7 @@ export type PostUserDataAttributes2 = {
    */
   project?: string | undefined;
   /**
-   * base64 encoded content of the User data
+   * base64 encoded content of the User Data
    */
   content: string;
 };

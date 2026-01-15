@@ -26,7 +26,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Remove a member
+ * Remove a Team Member
  */
 export function teamMembersDelete(
   client: LatitudeshCore,

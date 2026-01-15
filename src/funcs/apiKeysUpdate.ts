@@ -25,18 +25,19 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Rotate API key
+ * Rotate API Key
  *
  * @remarks
- * Regenerate an existing API Key that is tied to the current user. This overrides the previous key.
+ * Rotate an existing API Key, generating a new token. This invalidates the previous key.
+ * Use PATCH to update settings without rotating the token.
  */
 export function apiKeysUpdate(
   client: LatitudeshCore,
-  request: operations.UpdateApiKeyRequest,
+  request: operations.RotateApiKeyRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.UpdateApiKeyResponse,
+    operations.RotateApiKeyResponse,
     | LatitudeshError
     | ResponseValidationError
     | ConnectionError
@@ -56,12 +57,12 @@ export function apiKeysUpdate(
 
 async function $do(
   client: LatitudeshCore,
-  request: operations.UpdateApiKeyRequest,
+  request: operations.RotateApiKeyRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.UpdateApiKeyResponse,
+      operations.RotateApiKeyResponse,
       | LatitudeshError
       | ResponseValidationError
       | ConnectionError
@@ -76,7 +77,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) => operations.UpdateApiKeyRequest$outboundSchema.parse(value),
+    (value) => operations.RotateApiKeyRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -106,7 +107,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "update-api-key",
+    operationID: "rotate-api-key",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -145,7 +146,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    operations.UpdateApiKeyResponse,
+    operations.RotateApiKeyResponse,
     | LatitudeshError
     | ResponseValidationError
     | ConnectionError
@@ -155,7 +156,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.UpdateApiKeyResponse$inboundSchema, {
+    M.json(200, operations.RotateApiKeyResponse$inboundSchema, {
       ctype: "application/vnd.api+json",
     }),
     M.fail("4XX"),

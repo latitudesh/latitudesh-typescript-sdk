@@ -26,7 +26,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Retrieve role
+ * Retrieve Role
  */
 export function rolesGet(
   client: LatitudeshCore,

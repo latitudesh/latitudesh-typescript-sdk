@@ -1,16 +1,15 @@
 # Traffic
-(*traffic*)
 
 ## Overview
 
 ### Available Operations
 
-* [get](#get) - Retrieve traffic
-* [getQuota](#getquota) - Retrieve traffic quota
+* [get](#get) - Retrieve Traffic consumption
+* [getQuota](#getquota) - Retrieve Traffic Quota
 
 ## get
 
-Retrieve traffic
+Retrieve Traffic consumption
 
 ### Example Usage
 
@@ -24,9 +23,9 @@ const latitudesh = new Latitudesh({
 
 async function run() {
   const result = await latitudesh.traffic.get({
-    filterServer: "sv_kjQwdEMXdYNVP",
-    filterDateGte: "2025-06-16T18:45:37Z",
-    filterDateLte: "2025-07-16T18:45:37Z",
+    filterServer: "sv_A05EdQ50dvKYQ",
+    filterDateGte: "2025-12-14T15:57:10Z",
+    filterDateLte: "2026-01-14T15:57:10Z",
   });
 
   console.log(result);
@@ -51,9 +50,9 @@ const latitudesh = new LatitudeshCore({
 
 async function run() {
   const res = await trafficGet(latitudesh, {
-    filterServer: "sv_kjQwdEMXdYNVP",
-    filterDateGte: "2025-06-16T18:45:37Z",
-    filterDateLte: "2025-07-16T18:45:37Z",
+    filterServer: "sv_A05EdQ50dvKYQ",
+    filterDateGte: "2025-12-14T15:57:10Z",
+    filterDateLte: "2026-01-14T15:57:10Z",
   });
   if (res.ok) {
     const { value: result } = res;
@@ -87,7 +86,7 @@ run();
 
 ## getQuota
 
-Retrieve traffic quota
+Retrieve Traffic Quota
 
 ### Example Usage
 

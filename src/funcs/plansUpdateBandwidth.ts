@@ -26,7 +26,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Update bandwidth packages
+ * Buy or remove bandwidth packages
  *
  * @remarks
  * Allows to increase or decrease bandwidth packages. Only admins and owners can request.

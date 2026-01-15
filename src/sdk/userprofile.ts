@@ -12,7 +12,7 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class UserProfile extends ClientSDK {
   /**
-   * Retrieve profile
+   * Get user profile
    *
    * @remarks
    * Retrieve the current user profile
@@ -27,7 +27,7 @@ export class UserProfile extends ClientSDK {
   }
 
   /**
-   * Update profile
+   * Update User Profile
    *
    * @remarks
    * Update the current user profile
@@ -44,7 +44,7 @@ export class UserProfile extends ClientSDK {
   }
 
   /**
-   * List user teams
+   * List User Teams
    *
    * @remarks
    * Returns a list of all teams the user belongs to

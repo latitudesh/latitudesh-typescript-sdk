@@ -7,7 +7,7 @@ import { formatResult, ToolDefinition } from "../tools.js";
 
 export const tool$plansListStorage: ToolDefinition = {
   name: "plans-list-storage",
-  description: `List storage plans`,
+  description: `List all Storage Plans`,
   tool: async (client, ctx) => {
     const [result, apiCall] = await plansListStorage(
       client,

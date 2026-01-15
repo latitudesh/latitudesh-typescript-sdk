@@ -1,17 +1,16 @@
 # Storage
-(*storage*)
 
 ## Overview
 
 ### Available Operations
 
 * [listFilesystems](#listfilesystems) - List filesystems
-* [createFilesystem](#createfilesystem) - Create filesystem
-* [deleteFilesystem](#deletefilesystem) - Delete filesystem
-* [updateFilesystem](#updatefilesystem) - Update filesystem
+* [createFilesystem](#createfilesystem) - Create a filesystem for a project
+* [deleteFilesystem](#deletefilesystem) - Delete a filesystem for a project
+* [updateFilesystem](#updatefilesystem) - Update a filesystem for a project
 * [getStorageVolumes](#getstoragevolumes) - List volumes
 * [postStorageVolumes](#poststoragevolumes) - Create volume
-* [getStorageVolume](#getstoragevolume) - Retrieve volume
+* [getStorageVolume](#getstoragevolume) - Get volume
 * [deleteStorageVolumes](#deletestoragevolumes) - Delete volume
 * [postStorageVolumesMount](#poststoragevolumesmount) - Mount volume
 
@@ -31,7 +30,7 @@ const latitudesh = new Latitudesh({
 
 async function run() {
   await latitudesh.storage.listFilesystems({
-    filterProject: "sleek-silk-car",
+    filterProject: "small-rubber-shirt",
   });
 
 
@@ -56,7 +55,7 @@ const latitudesh = new LatitudeshCore({
 
 async function run() {
   const res = await storageListFilesystems(latitudesh, {
-    filterProject: "sleek-silk-car",
+    filterProject: "small-rubber-shirt",
   });
   if (res.ok) {
     const { value: result } = res;
@@ -107,7 +106,7 @@ async function run() {
     data: {
       type: "filesystems",
       attributes: {
-        project: "proj_kjQwdE2bqYNVP",
+        project: "proj_lkg1De6ROvZE5",
         name: "my-data",
       },
     },
@@ -138,7 +137,7 @@ async function run() {
     data: {
       type: "filesystems",
       attributes: {
-        project: "proj_kjQwdE2bqYNVP",
+        project: "proj_lkg1De6ROvZE5",
         name: "my-data",
       },
     },
@@ -353,7 +352,7 @@ const latitudesh = new Latitudesh({
 
 async function run() {
   const result = await latitudesh.storage.getStorageVolumes({
-    filterProject: "proj_GnzRD5X6qM5yw",
+    filterProject: "proj_WeGoqA5AqP7nz",
   });
 
   console.log(result);
@@ -378,7 +377,7 @@ const latitudesh = new LatitudeshCore({
 
 async function run() {
   const res = await storageGetStorageVolumes(latitudesh, {
-    filterProject: "proj_GnzRD5X6qM5yw",
+    filterProject: "proj_WeGoqA5AqP7nz",
   });
   if (res.ok) {
     const { value: result } = res;
@@ -429,7 +428,7 @@ async function run() {
     data: {
       type: "volumes",
       attributes: {
-        project: "proj_8NkvdyPXOeLpx",
+        project: "proj_enPbqoZ6dA2MQ",
         name: "my-data",
       },
     },
@@ -460,7 +459,7 @@ async function run() {
     data: {
       type: "volumes",
       attributes: {
-        project: "proj_8NkvdyPXOeLpx",
+        project: "proj_enPbqoZ6dA2MQ",
         name: "my-data",
       },
     },

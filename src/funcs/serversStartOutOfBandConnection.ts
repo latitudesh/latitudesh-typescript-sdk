@@ -26,7 +26,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Create out-of-band connection
+ * Start Out of Band Connection
  */
 export function serversStartOutOfBandConnection(
   client: LatitudeshCore,

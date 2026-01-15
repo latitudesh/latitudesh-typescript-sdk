@@ -12,7 +12,7 @@ const args = {
 
 export const tool$billingListUsage: ToolDefinition<typeof args> = {
   name: "billing-list-usage",
-  description: `Retrieve billing usage
+  description: `List Billing Usage
 
 Returns the billing usage of a project
 `,

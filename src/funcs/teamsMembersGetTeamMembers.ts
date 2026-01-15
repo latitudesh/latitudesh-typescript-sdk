@@ -32,7 +32,7 @@ import {
 } from "../types/operations.js";
 
 /**
- * List members
+ * List all Team Members
  */
 export function teamsMembersGetTeamMembers(
   client: LatitudeshCore,
