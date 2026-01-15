@@ -1,5 +1,4 @@
 # Regions
-(*regions*)
 
 ## Overview
 

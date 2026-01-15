@@ -206,22 +206,22 @@ run();
 <details open>
 <summary>Available methods</summary>
 
-### [apiKeys](docs/sdks/apikeys/README.md)
+### [ApiKeys](docs/sdks/apikeys/README.md)
 
 * [list](docs/sdks/apikeys/README.md#list) - List API keys
 * [create](docs/sdks/apikeys/README.md#create) - Create API key
 * [update](docs/sdks/apikeys/README.md#update) - Rotate API key
 * [delete](docs/sdks/apikeys/README.md#delete) - Delete API key
 
-### [billing](docs/sdks/billing/README.md)
+### [Billing](docs/sdks/billing/README.md)
 
 * [listUsage](docs/sdks/billing/README.md#listusage) - Retrieve billing usage
 
-### [events](docs/sdks/events/README.md)
+### [Events](docs/sdks/events/README.md)
 
 * [list](docs/sdks/events/README.md#list) - List events
 
-### [firewalls](docs/sdks/firewalls/README.md)
+### [Firewalls](docs/sdks/firewalls/README.md)
 
 * [getAllFirewallAssignments](docs/sdks/firewalls/README.md#getallfirewallassignments) - Firewalls assignments
 * [list](docs/sdks/firewalls/README.md#list) - List firewalls
@@ -232,20 +232,20 @@ run();
 * [listAssignments](docs/sdks/firewalls/README.md#listassignments) - Firewall assignments
 * [deleteAssignment](docs/sdks/firewalls/README.md#deleteassignment) - Delete assignment
 
-#### [firewalls.assignments](docs/sdks/assignments/README.md)
+### [Firewalls.Assignments](docs/sdks/assignments/README.md)
 
 * [create](docs/sdks/assignments/README.md#create) - Assign server to firewall
 
-### [ipAddresses](docs/sdks/ipaddresses/README.md)
+### [IpAddresses](docs/sdks/ipaddresses/README.md)
 
 * [list](docs/sdks/ipaddresses/README.md#list) - List IPs
 * [get](docs/sdks/ipaddresses/README.md#get) - Retrieve an IP
 
-### [operatingSystems](docs/sdks/operatingsystems/README.md)
+### [OperatingSystems](docs/sdks/operatingsystems/README.md)
 
 * [listPlans](docs/sdks/operatingsystems/README.md#listplans) - List operating systems
 
-### [plans](docs/sdks/plans/README.md)
+### [Plans](docs/sdks/plans/README.md)
 
 * [list](docs/sdks/plans/README.md#list) - List plans
 * [get](docs/sdks/plans/README.md#get) - Retrieve a plan
@@ -253,11 +253,11 @@ run();
 * [updateBandwidth](docs/sdks/plans/README.md#updatebandwidth) - Update bandwidth packages
 * [listStorage](docs/sdks/plans/README.md#liststorage) - List storage plans
 
-#### [plans.vm](docs/sdks/vm/README.md)
+### [Plans.Vm](docs/sdks/vm/README.md)
 
 * [list](docs/sdks/vm/README.md#list) - List VM plans
 
-### [privateNetworks](docs/sdks/privatenetworks/README.md)
+### [PrivateNetworks](docs/sdks/privatenetworks/README.md)
 
 * [list](docs/sdks/privatenetworks/README.md#list) - List VLANs
 * [create](docs/sdks/privatenetworks/README.md#create) - Create VLAN
@@ -267,28 +267,28 @@ run();
 * [assign](docs/sdks/privatenetworks/README.md#assign) - Assign VLAN
 * [deleteAssignment](docs/sdks/privatenetworks/README.md#deleteassignment) - Delete assignment
 
-### [projects](docs/sdks/projects/README.md)
+### [Projects](docs/sdks/projects/README.md)
 
 * [list](docs/sdks/projects/README.md#list) - List projects
 * [create](docs/sdks/projects/README.md#create) - Create a project
 * [delete](docs/sdks/projects/README.md#delete) - Delete a project
 * [update](docs/sdks/projects/README.md#update) - Update a project
 
-#### [~~projects.sshKeys~~](docs/sdks/projectssshkeys/README.md)
+### [~~Projects.SshKeys~~](docs/sdks/projectssshkeys/README.md)
 
 * [~~postProjectSshKey~~](docs/sdks/projectssshkeys/README.md#postprojectsshkey) - Create a SSH key :warning: **Deprecated**
 
-### [regions](docs/sdks/regions/README.md)
+### [Regions](docs/sdks/regions/README.md)
 
 * [get](docs/sdks/regions/README.md#get) - List regions
 * [fetch](docs/sdks/regions/README.md#fetch) - Retrieve region
 
-### [roles](docs/sdks/roles/README.md)
+### [Roles](docs/sdks/roles/README.md)
 
 * [list](docs/sdks/roles/README.md#list) - List roles
 * [get](docs/sdks/roles/README.md#get) - Retrieve role
 
-### [servers](docs/sdks/servers/README.md)
+### [Servers](docs/sdks/servers/README.md)
 
 * [list](docs/sdks/servers/README.md#list) - List servers
 * [create](docs/sdks/servers/README.md#create) - Create server
@@ -309,7 +309,7 @@ run();
 * [unscheduleDeletion](docs/sdks/servers/README.md#unscheduledeletion) - Unschedule server deletion
 * [reinstall](docs/sdks/servers/README.md#reinstall) - Reinstall server
 
-### [sshKeys](docs/sdks/sshkeys/README.md)
+### [SSHKeys](docs/sdks/sshkeys/README.md)
 
 * [~~list~~](docs/sdks/sshkeys/README.md#list) - List SSH keys :warning: **Deprecated**
 * [~~get~~](docs/sdks/sshkeys/README.md#get) - Retrieve a Project SSH Key :warning: **Deprecated**
@@ -321,7 +321,7 @@ run();
 * [delete](docs/sdks/sshkeys/README.md#delete) - Delete a SSH Key
 * [update](docs/sdks/sshkeys/README.md#update) - Update a SSH Key
 
-### [storage](docs/sdks/storage/README.md)
+### [Storage](docs/sdks/storage/README.md)
 
 * [listFilesystems](docs/sdks/storage/README.md#listfilesystems) - List filesystems
 * [createFilesystem](docs/sdks/storage/README.md#createfilesystem) - Create filesystem
@@ -333,34 +333,34 @@ run();
 * [deleteStorageVolumes](docs/sdks/storage/README.md#deletestoragevolumes) - Delete volume
 * [postStorageVolumesMount](docs/sdks/storage/README.md#poststoragevolumesmount) - Mount volume
 
-### [tags](docs/sdks/tags/README.md)
+### [Tags](docs/sdks/tags/README.md)
 
 * [list](docs/sdks/tags/README.md#list) - List tags
 * [create](docs/sdks/tags/README.md#create) - Create tag
 * [delete](docs/sdks/tags/README.md#delete) - Delete tag
 * [update](docs/sdks/tags/README.md#update) - Update tag
 
-### [teamMembers](docs/sdks/teammembers/README.md)
+### [TeamMembers](docs/sdks/teammembers/README.md)
 
 * [postTeamMembers](docs/sdks/teammembers/README.md#postteammembers) - Create member
 * [delete](docs/sdks/teammembers/README.md#delete) - Remove a member
 
-### [teams](docs/sdks/teams/README.md)
+### [Teams](docs/sdks/teams/README.md)
 
 * [get](docs/sdks/teams/README.md#get) - Retrieve team
 * [create](docs/sdks/teams/README.md#create) - Create team
 * [update](docs/sdks/teams/README.md#update) - Update team
 
-#### [teams.members](docs/sdks/members/README.md)
+#### [Teams.Members](docs/sdks/members/README.md)
 
 * [getTeamMembers](docs/sdks/members/README.md#getteammembers) - List members
 
-### [traffic](docs/sdks/traffic/README.md)
+### [Traffic](docs/sdks/traffic/README.md)
 
 * [get](docs/sdks/traffic/README.md#get) - Retrieve traffic
 * [getQuota](docs/sdks/traffic/README.md#getquota) - Retrieve traffic quota
 
-### [userData](docs/sdks/userdata/README.md)
+### [UserData](docs/sdks/userdata/README.md)
 
 * [~~getProjectUsersData~~](docs/sdks/userdata/README.md#getprojectusersdata) - List all Project User data :warning: **Deprecated**
 * [~~getProjectUserData~~](docs/sdks/userdata/README.md#getprojectuserdata) - Retrieve a Project User data :warning: **Deprecated**
@@ -373,13 +373,13 @@ run();
 * [delete](docs/sdks/userdata/README.md#delete) - Delete user data
 * [update](docs/sdks/userdata/README.md#update) - Update user data
 
-### [userProfile](docs/sdks/userprofile/README.md)
+### [UserProfile](docs/sdks/userprofile/README.md)
 
 * [get](docs/sdks/userprofile/README.md#get) - Retrieve profile
 * [update](docs/sdks/userprofile/README.md#update) - Update profile
 * [listTeams](docs/sdks/userprofile/README.md#listteams) - List user teams
 
-### [virtualMachines](docs/sdks/virtualmachines/README.md)
+### [VirtualMachines](docs/sdks/virtualmachines/README.md)
 
 * [list](docs/sdks/virtualmachines/README.md#list) - List VMs
 * [create](docs/sdks/virtualmachines/README.md#create) - Create VM
@@ -387,11 +387,11 @@ run();
 * [delete](docs/sdks/virtualmachines/README.md#delete) - Destroy VM
 * [createVirtualMachineAction](docs/sdks/virtualmachines/README.md#createvirtualmachineaction) - Run VM power action
 
-### [virtualNetworks](docs/sdks/virtualnetworks/README.md)
+### [VirtualNetworks](docs/sdks/virtualnetworks/README.md)
 
 * [delete](docs/sdks/virtualnetworks/README.md#delete) - Delete VLAN
 
-### [vpnSessions](docs/sdks/vpnsessions/README.md)
+### [VpnSessions](docs/sdks/vpnsessions/README.md)
 
 * [list](docs/sdks/vpnsessions/README.md#list) - List VPN sessions
 * [create](docs/sdks/vpnsessions/README.md#create) - Create VPN session
