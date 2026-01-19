@@ -86,15 +86,15 @@ export const PlanDataStockLevel = {
 export type PlanDataStockLevel = ClosedEnum<typeof PlanDataStockLevel>;
 
 export type PlanDataUSD = {
-  hour?: number | undefined;
-  month?: number | undefined;
-  year?: number | undefined;
+  hour?: number | null | undefined;
+  month?: number | null | undefined;
+  year?: number | null | undefined;
 };
 
 export type PlanDataBRL = {
-  hour?: number | undefined;
-  month?: number | undefined;
-  year?: number | undefined;
+  hour?: number | null | undefined;
+  month?: number | null | undefined;
+  year?: number | null | undefined;
 };
 
 export type PlanDataPricing = {
@@ -461,15 +461,15 @@ export const PlanDataUSD$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  hour: z.number().optional(),
-  month: z.number().optional(),
-  year: z.number().optional(),
+  hour: z.nullable(z.number()).optional(),
+  month: z.nullable(z.number()).optional(),
+  year: z.nullable(z.number()).optional(),
 });
 /** @internal */
 export type PlanDataUSD$Outbound = {
-  hour?: number | undefined;
-  month?: number | undefined;
-  year?: number | undefined;
+  hour?: number | null | undefined;
+  month?: number | null | undefined;
+  year?: number | null | undefined;
 };
 
 /** @internal */
@@ -478,9 +478,9 @@ export const PlanDataUSD$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PlanDataUSD
 > = z.object({
-  hour: z.number().optional(),
-  month: z.number().optional(),
-  year: z.number().optional(),
+  hour: z.nullable(z.number()).optional(),
+  month: z.nullable(z.number()).optional(),
+  year: z.nullable(z.number()).optional(),
 });
 
 export function planDataUSDToJSON(planDataUSD: PlanDataUSD): string {
@@ -502,15 +502,15 @@ export const PlanDataBRL$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  hour: z.number().optional(),
-  month: z.number().optional(),
-  year: z.number().optional(),
+  hour: z.nullable(z.number()).optional(),
+  month: z.nullable(z.number()).optional(),
+  year: z.nullable(z.number()).optional(),
 });
 /** @internal */
 export type PlanDataBRL$Outbound = {
-  hour?: number | undefined;
-  month?: number | undefined;
-  year?: number | undefined;
+  hour?: number | null | undefined;
+  month?: number | null | undefined;
+  year?: number | null | undefined;
 };
 
 /** @internal */
@@ -519,9 +519,9 @@ export const PlanDataBRL$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PlanDataBRL
 > = z.object({
-  hour: z.number().optional(),
-  month: z.number().optional(),
-  year: z.number().optional(),
+  hour: z.nullable(z.number()).optional(),
+  month: z.nullable(z.number()).optional(),
+  year: z.nullable(z.number()).optional(),
 });
 
 export function planDataBRLToJSON(planDataBRL: PlanDataBRL): string {

@@ -38,7 +38,7 @@ export type ApiKeyAttributes = {
   /**
    * Whether this API Key is read-only
    */
-  readOnly?: boolean | undefined;
+  readOnly?: boolean | null | undefined;
   /**
    * List of allowed IP addresses for this API Key
    */
@@ -121,7 +121,7 @@ export const ApiKeyAttributes$inboundSchema: z.ZodType<
   name: z.string().optional(),
   api_version: z.string().optional(),
   token_last_slice: z.string().optional(),
-  read_only: z.boolean().optional(),
+  read_only: z.nullable(z.boolean()).optional(),
   allowed_ips: z.nullable(z.array(z.string())).optional(),
   last_used_at: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
@@ -147,7 +147,7 @@ export type ApiKeyAttributes$Outbound = {
   name?: string | undefined;
   api_version?: string | undefined;
   token_last_slice?: string | undefined;
-  read_only?: boolean | undefined;
+  read_only?: boolean | null | undefined;
   allowed_ips?: Array<string> | null | undefined;
   last_used_at?: string | null | undefined;
   user?: ApiKeyUser$Outbound | undefined;
@@ -164,7 +164,7 @@ export const ApiKeyAttributes$outboundSchema: z.ZodType<
   name: z.string().optional(),
   apiVersion: z.string().optional(),
   tokenLastSlice: z.string().optional(),
-  readOnly: z.boolean().optional(),
+  readOnly: z.nullable(z.boolean()).optional(),
   allowedIps: z.nullable(z.array(z.string())).optional(),
   lastUsedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   user: z.lazy(() => ApiKeyUser$outboundSchema).optional(),

@@ -9,7 +9,7 @@ import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 
 export type ProjectIncludeBilling = {
-  subscriptionId?: string | undefined;
+  subscriptionId?: string | null | undefined;
   type?: string | undefined;
   method?: string | undefined;
 };
@@ -25,12 +25,12 @@ export type ProjectInclude = {
   id?: string | undefined;
   name?: string | undefined;
   slug?: string | undefined;
-  description?: string | undefined;
-  billingType?: string | undefined;
-  provisioningType?: string | undefined;
-  billingMethod?: string | undefined;
+  description?: string | null | undefined;
+  billingType?: string | null | undefined;
+  provisioningType?: string | null | undefined;
+  billingMethod?: string | null | undefined;
   bandwidthAlert?: boolean | undefined;
-  environment?: string | undefined;
+  environment?: string | null | undefined;
   billing?: ProjectIncludeBilling | undefined;
   stats?: ProjectIncludeStats | undefined;
 };
@@ -41,7 +41,7 @@ export const ProjectIncludeBilling$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  subscription_id: z.string().optional(),
+  subscription_id: z.nullable(z.string()).optional(),
   type: z.string().optional(),
   method: z.string().optional(),
 }).transform((v) => {
@@ -51,7 +51,7 @@ export const ProjectIncludeBilling$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type ProjectIncludeBilling$Outbound = {
-  subscription_id?: string | undefined;
+  subscription_id?: string | null | undefined;
   type?: string | undefined;
   method?: string | undefined;
 };
@@ -62,7 +62,7 @@ export const ProjectIncludeBilling$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ProjectIncludeBilling
 > = z.object({
-  subscriptionId: z.string().optional(),
+  subscriptionId: z.nullable(z.string()).optional(),
   type: z.string().optional(),
   method: z.string().optional(),
 }).transform((v) => {
@@ -153,12 +153,12 @@ export const ProjectInclude$inboundSchema: z.ZodType<
   id: z.string().optional(),
   name: z.string().optional(),
   slug: z.string().optional(),
-  description: z.string().optional(),
-  billing_type: z.string().optional(),
-  provisioning_type: z.string().optional(),
-  billing_method: z.string().optional(),
+  description: z.nullable(z.string()).optional(),
+  billing_type: z.nullable(z.string()).optional(),
+  provisioning_type: z.nullable(z.string()).optional(),
+  billing_method: z.nullable(z.string()).optional(),
   bandwidth_alert: z.boolean().optional(),
-  environment: z.string().optional(),
+  environment: z.nullable(z.string()).optional(),
   billing: z.lazy(() => ProjectIncludeBilling$inboundSchema).optional(),
   stats: z.lazy(() => ProjectIncludeStats$inboundSchema).optional(),
 }).transform((v) => {
@@ -174,12 +174,12 @@ export type ProjectInclude$Outbound = {
   id?: string | undefined;
   name?: string | undefined;
   slug?: string | undefined;
-  description?: string | undefined;
-  billing_type?: string | undefined;
-  provisioning_type?: string | undefined;
-  billing_method?: string | undefined;
+  description?: string | null | undefined;
+  billing_type?: string | null | undefined;
+  provisioning_type?: string | null | undefined;
+  billing_method?: string | null | undefined;
   bandwidth_alert?: boolean | undefined;
-  environment?: string | undefined;
+  environment?: string | null | undefined;
   billing?: ProjectIncludeBilling$Outbound | undefined;
   stats?: ProjectIncludeStats$Outbound | undefined;
 };
@@ -193,12 +193,12 @@ export const ProjectInclude$outboundSchema: z.ZodType<
   id: z.string().optional(),
   name: z.string().optional(),
   slug: z.string().optional(),
-  description: z.string().optional(),
-  billingType: z.string().optional(),
-  provisioningType: z.string().optional(),
-  billingMethod: z.string().optional(),
+  description: z.nullable(z.string()).optional(),
+  billingType: z.nullable(z.string()).optional(),
+  provisioningType: z.nullable(z.string()).optional(),
+  billingMethod: z.nullable(z.string()).optional(),
   bandwidthAlert: z.boolean().optional(),
-  environment: z.string().optional(),
+  environment: z.nullable(z.string()).optional(),
   billing: z.lazy(() => ProjectIncludeBilling$outboundSchema).optional(),
   stats: z.lazy(() => ProjectIncludeStats$outboundSchema).optional(),
 }).transform((v) => {
