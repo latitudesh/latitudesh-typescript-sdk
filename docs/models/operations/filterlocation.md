@@ -5,11 +5,11 @@
 ```typescript
 import { FilterLocation } from "latitudesh-typescript-sdk/models/operations";
 
-let value: FilterLocation = "DAL";
+let value: FilterLocation = "FRA";
 ```
 
 ## Values
 
 ```typescript
-"ASH" | "BGT" | "BUE" | "CHI" | "DAL" | "FRA" | "LAX" | "LON" | "MEX" | "MEX2" | "MIA" | "MIA2" | "NYC" | "SAN" | "SAO" | "SAO2" | "SYD" | "TYO" | "TYO2"
+"ASH" | "BUE" | "CHI" | "DAL" | "FRA" | "LAX" | "LON" | "MEX" | "MEX2" | "MIA" | "MIA2" | "NYC" | "SAO" | "SAO2" | "SGP" | "SYD" | "TYO" | "TYO2"
 ```
