@@ -12,7 +12,6 @@ import * as models from "../index.js";
 
 export const FilterLocation = {
   Ash: "ASH",
-  Bgt: "BGT",
   Bue: "BUE",
   Chi: "CHI",
   Dal: "DAL",
@@ -24,9 +23,9 @@ export const FilterLocation = {
   Mia: "MIA",
   Mia2: "MIA2",
   Nyc: "NYC",
-  San: "SAN",
   Sao: "SAO",
   Sao2: "SAO2",
+  Sgp: "SGP",
   Syd: "SYD",
   Tyo: "TYO",
   Tyo2: "TYO2",
