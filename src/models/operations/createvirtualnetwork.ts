@@ -20,7 +20,6 @@ export type CreateVirtualNetworkType2 = ClosedEnum<
  */
 export const CreateVirtualNetworkSite2 = {
   Ash: "ASH",
-  Bgt: "BGT",
   Bue: "BUE",
   Chi: "CHI",
   Dal: "DAL",
@@ -32,9 +31,9 @@ export const CreateVirtualNetworkSite2 = {
   Mia: "MIA",
   Mia2: "MIA2",
   Nyc: "NYC",
-  San: "SAN",
   Sao: "SAO",
   Sao2: "SAO2",
+  Sgp: "SGP",
   Syd: "SYD",
   Tyo: "TYO",
   Tyo2: "TYO2",
