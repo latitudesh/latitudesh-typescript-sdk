@@ -20,31 +20,21 @@ export type CreateServerReinstallType2 = ClosedEnum<
  * The OS selected for the reinstall process
  */
 export const CreateServerReinstallOperatingSystem2 = {
-  Ipxe: "ipxe",
-  WindowsServer2019StdV1: "windows_server_2019_std_v1",
-  Ubuntu2204X64Lts: "ubuntu_22_04_x64_lts",
-  Debian11: "debian_11",
-  Debian10: "debian_10",
-  Rhel8: "rhel8",
-  WindowsServer2012R2StdV28: "windows_server_2012_r2_std_v28",
-  WindowsServer2012R2DcV5: "windows_server_2012_r2_dc_v5",
-  Esxi67: "esxi_6_7",
-  Debian94X64: "debian_9_4_x64",
   Centos74X64: "centos_7_4_x64",
   Centos8X64: "centos_8_x64",
-  Ubuntu1604X64Lts: "ubuntu_16_04_x64_lts",
-  Ubuntu2004X64Lts: "ubuntu_20_04_x64_lts",
-  WindowsServer2016StdV1: "windows_server_2016_std_v1",
-  WindowsServer2016DcV1: "windows_server_2016_dc_v1",
-  WindowsServer2019DcV1: "windows_server_2019_dc_v1",
+  Debian10: "debian_10",
+  Debian11: "debian_11",
   Debian12: "debian_12",
-  Ubuntu22MlInABox: "ubuntu22_ml_in_a_box",
-  Ubuntu1804X64Lts: "ubuntu_18_04_x64_lts",
-  WindowsServer2019StdUefi: "windows_server_2019_std_uefi",
-  Windows2022StdUefi: "windows_2022_std_uefi",
-  Windows2022Std: "windows_2022_std",
-  Ubuntu2404X64Lts: "ubuntu_24_04_x64_lts",
+  Ipxe: "ipxe",
+  Rhel8: "rhel8",
   Rockylinux8: "rockylinux_8",
+  Ubuntu22MlInABox: "ubuntu22_ml_in_a_box",
+  Ubuntu24MlInABox: "ubuntu24_ml_in_a_box",
+  Ubuntu2004X64Lts: "ubuntu_20_04_x64_lts",
+  Ubuntu2204X64Lts: "ubuntu_22_04_x64_lts",
+  Ubuntu2404X64Lts: "ubuntu_24_04_x64_lts",
+  Windows2022Std: "windows_2022_std",
+  WindowsServer2019StdV1: "windows_server_2019_std_v1",
 } as const;
 /**
  * The OS selected for the reinstall process
@@ -60,14 +50,14 @@ export type CreateServerReinstallPartition2 = {
 };
 
 /**
- * RAID mode for the server
+ * RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, or omit/null for no RAID configuration
  */
 export const CreateServerReinstallRaid2 = {
   Raid0: "raid-0",
   Raid1: "raid-1",
 } as const;
 /**
- * RAID mode for the server
+ * RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, or omit/null for no RAID configuration
  */
 export type CreateServerReinstallRaid2 = ClosedEnum<
   typeof CreateServerReinstallRaid2
@@ -92,7 +82,7 @@ export type CreateServerReinstallAttributes2 = {
    */
   userData?: string | undefined;
   /**
-   * RAID mode for the server
+   * RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, or omit/null for no RAID configuration
    */
   raid?: CreateServerReinstallRaid2 | undefined;
   /**
