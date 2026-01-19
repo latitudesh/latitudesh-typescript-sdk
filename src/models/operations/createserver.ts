@@ -25,11 +25,16 @@ export const Plan2 = {
   C3MediumX86: "c3-medium-x86",
   C3SmallX86: "c3-small-x86",
   C3XlargeX86: "c3-xlarge-x86",
+  G3Gh200: "g3-gh200",
   G3LargeX86: "g3-large-x86",
   G3MediumX86: "g3-medium-x86",
   G3SmallX86: "g3-small-x86",
   G3XlargeX86: "g3-xlarge-x86",
+  G4Rtx6kproLarge: "g4-rtx6kpro-large",
   M3LargeX86: "m3-large-x86",
+  M4MetalLarge: "m4-metal-large",
+  M4MetalSmall: "m4-metal-small",
+  Rs4MetalXlarge: "rs4-metal-xlarge",
   S2SmallX86: "s2-small-x86",
   S3LargeX86: "s3-large-x86",
 } as const;
@@ -43,7 +48,6 @@ export type Plan2 = ClosedEnum<typeof Plan2>;
  */
 export const CreateServerSite2 = {
   Ash: "ASH",
-  Bgt: "BGT",
   Bue: "BUE",
   Chi: "CHI",
   Dal: "DAL",
@@ -55,9 +59,9 @@ export const CreateServerSite2 = {
   Mia: "MIA",
   Mia2: "MIA2",
   Nyc: "NYC",
-  San: "SAN",
   Sao: "SAO",
   Sao2: "SAO2",
+  Sgp: "SGP",
   Syd: "SYD",
   Tyo: "TYO",
   Tyo2: "TYO2",
@@ -71,31 +75,21 @@ export type CreateServerSite2 = ClosedEnum<typeof CreateServerSite2>;
  * The operating system slug for the new server
  */
 export const CreateServerOperatingSystem2 = {
-  Ipxe: "ipxe",
-  WindowsServer2019StdV1: "windows_server_2019_std_v1",
-  Ubuntu2204X64Lts: "ubuntu_22_04_x64_lts",
-  Debian11: "debian_11",
-  Debian10: "debian_10",
-  Rhel8: "rhel8",
-  WindowsServer2012R2StdV28: "windows_server_2012_r2_std_v28",
-  WindowsServer2012R2DcV5: "windows_server_2012_r2_dc_v5",
-  Esxi67: "esxi_6_7",
-  Debian94X64: "debian_9_4_x64",
   Centos74X64: "centos_7_4_x64",
   Centos8X64: "centos_8_x64",
-  Ubuntu1604X64Lts: "ubuntu_16_04_x64_lts",
-  Ubuntu2004X64Lts: "ubuntu_20_04_x64_lts",
-  WindowsServer2016StdV1: "windows_server_2016_std_v1",
-  WindowsServer2016DcV1: "windows_server_2016_dc_v1",
-  WindowsServer2019DcV1: "windows_server_2019_dc_v1",
+  Debian10: "debian_10",
+  Debian11: "debian_11",
   Debian12: "debian_12",
-  Ubuntu22MlInABox: "ubuntu22_ml_in_a_box",
-  Ubuntu1804X64Lts: "ubuntu_18_04_x64_lts",
-  WindowsServer2019StdUefi: "windows_server_2019_std_uefi",
-  Windows2022StdUefi: "windows_2022_std_uefi",
-  Windows2022Std: "windows_2022_std",
-  Ubuntu2404X64Lts: "ubuntu_24_04_x64_lts",
+  Ipxe: "ipxe",
+  Rhel8: "rhel8",
   Rockylinux8: "rockylinux_8",
+  Ubuntu22MlInABox: "ubuntu22_ml_in_a_box",
+  Ubuntu24MlInABox: "ubuntu24_ml_in_a_box",
+  Ubuntu2004X64Lts: "ubuntu_20_04_x64_lts",
+  Ubuntu2204X64Lts: "ubuntu_22_04_x64_lts",
+  Ubuntu2404X64Lts: "ubuntu_24_04_x64_lts",
+  Windows2022Std: "windows_2022_std",
+  WindowsServer2019StdV1: "windows_server_2019_std_v1",
 } as const;
 /**
  * The operating system slug for the new server
@@ -105,14 +99,14 @@ export type CreateServerOperatingSystem2 = ClosedEnum<
 >;
 
 /**
- * RAID mode for the server
+ * RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, or omit/null for no RAID configuration
  */
 export const CreateServerRaid2 = {
   Raid0: "raid-0",
   Raid1: "raid-1",
 } as const;
 /**
- * RAID mode for the server
+ * RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, or omit/null for no RAID configuration
  */
 export type CreateServerRaid2 = ClosedEnum<typeof CreateServerRaid2>;
 
@@ -159,7 +153,7 @@ export type CreateServerAttributes2 = {
    */
   userData?: string | undefined;
   /**
-   * RAID mode for the server
+   * RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, or omit/null for no RAID configuration
    */
   raid?: CreateServerRaid2 | undefined;
   /**
