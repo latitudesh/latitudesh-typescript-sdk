@@ -67,9 +67,9 @@ export const UsageType = {
 export type UsageType = ClosedEnum<typeof UsageType>;
 
 export type Metadata = {
-  id?: string | undefined;
-  hostname?: string | undefined;
-  plan?: string | undefined;
+  id?: string | null | undefined;
+  hostname?: string | null | undefined;
+  plan?: string | null | undefined;
   tags?: Array<string> | undefined;
 };
 
@@ -83,7 +83,7 @@ export type Product = {
   description?: string | undefined;
   amountWithoutDiscount?: number | undefined;
   start?: Date | undefined;
-  end?: Date | undefined;
+  end?: Date | null | undefined;
   unit?: BillingUsageUnit | undefined;
   /**
    * The unit price of the product in cents
@@ -285,16 +285,16 @@ export const Metadata$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().optional(),
-  hostname: z.string().optional(),
-  plan: z.string().optional(),
+  id: z.nullable(z.string()).optional(),
+  hostname: z.nullable(z.string()).optional(),
+  plan: z.nullable(z.string()).optional(),
   tags: z.array(z.string()).optional(),
 });
 /** @internal */
 export type Metadata$Outbound = {
-  id?: string | undefined;
-  hostname?: string | undefined;
-  plan?: string | undefined;
+  id?: string | null | undefined;
+  hostname?: string | null | undefined;
+  plan?: string | null | undefined;
   tags?: Array<string> | undefined;
 };
 
@@ -304,9 +304,9 @@ export const Metadata$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Metadata
 > = z.object({
-  id: z.string().optional(),
-  hostname: z.string().optional(),
-  plan: z.string().optional(),
+  id: z.nullable(z.string()).optional(),
+  hostname: z.nullable(z.string()).optional(),
+  plan: z.nullable(z.string()).optional(),
   tags: z.array(z.string()).optional(),
 });
 
@@ -336,8 +336,9 @@ export const Product$inboundSchema: z.ZodType<Product, z.ZodTypeDef, unknown> =
     amount_without_discount: z.number().int().optional(),
     start: z.string().datetime({ offset: true }).transform(v => new Date(v))
       .optional(),
-    end: z.string().datetime({ offset: true }).transform(v => new Date(v))
-      .optional(),
+    end: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
     unit: BillingUsageUnit$inboundSchema.optional(),
     unit_price: z.number().optional(),
     usage_type: UsageType$inboundSchema.optional(),
@@ -362,7 +363,7 @@ export type Product$Outbound = {
   description?: string | undefined;
   amount_without_discount?: number | undefined;
   start?: string | undefined;
-  end?: string | undefined;
+  end?: string | null | undefined;
   unit?: string | undefined;
   unit_price?: number | undefined;
   usage_type?: string | undefined;
@@ -386,7 +387,7 @@ export const Product$outboundSchema: z.ZodType<
   description: z.string().optional(),
   amountWithoutDiscount: z.number().int().optional(),
   start: z.date().transform(v => v.toISOString()).optional(),
-  end: z.date().transform(v => v.toISOString()).optional(),
+  end: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   unit: BillingUsageUnit$outboundSchema.optional(),
   unitPrice: z.number().optional(),
   usageType: UsageType$outboundSchema.optional(),

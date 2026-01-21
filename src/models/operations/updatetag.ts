@@ -22,7 +22,7 @@ export type UpdateTagAttributes2 = {
   /**
    * Description of the Tag
    */
-  description?: string | undefined;
+  description?: string | null | undefined;
   /**
    * Color of the Tag
    */
@@ -60,13 +60,13 @@ export const UpdateTagAttributes2$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   name: z.string().optional(),
-  description: z.string().optional(),
+  description: z.nullable(z.string()).optional(),
   color: z.string().default("#ffffff"),
 });
 /** @internal */
 export type UpdateTagAttributes2$Outbound = {
   name?: string | undefined;
-  description?: string | undefined;
+  description?: string | null | undefined;
   color: string;
 };
 
@@ -77,7 +77,7 @@ export const UpdateTagAttributes2$outboundSchema: z.ZodType<
   UpdateTagAttributes2
 > = z.object({
   name: z.string().optional(),
-  description: z.string().optional(),
+  description: z.nullable(z.string()).optional(),
   color: z.string().default("#ffffff"),
 });
 

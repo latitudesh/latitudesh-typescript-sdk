@@ -21,7 +21,7 @@ export type CreateTagAttributes2 = {
   /**
    * Description of the Tag
    */
-  description?: string | undefined;
+  description?: string | null | undefined;
   /**
    * Color of the Tag
    */
@@ -53,13 +53,13 @@ export const CreateTagAttributes2$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   name: z.string().optional(),
-  description: z.string().optional(),
+  description: z.nullable(z.string()).optional(),
   color: z.string().default("#ffffff"),
 });
 /** @internal */
 export type CreateTagAttributes2$Outbound = {
   name?: string | undefined;
-  description?: string | undefined;
+  description?: string | null | undefined;
   color: string;
 };
 
@@ -70,7 +70,7 @@ export const CreateTagAttributes2$outboundSchema: z.ZodType<
   CreateTagAttributes2
 > = z.object({
   name: z.string().optional(),
-  description: z.string().optional(),
+  description: z.nullable(z.string()).optional(),
   color: z.string().default("#ffffff"),
 });
 

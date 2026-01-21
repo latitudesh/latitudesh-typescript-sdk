@@ -10,9 +10,9 @@ let value: VirtualMachinePayloadAttributes = {};
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `name`             | *string*           | :heavy_minus_sign: | N/A                |
-| `plan`             | *string*           | :heavy_minus_sign: | N/A                |
-| `sshKeys`          | *string*[]         | :heavy_minus_sign: | N/A                |
-| `project`          | *string*           | :heavy_minus_sign: | N/A                |
+| Field                                       | Type                                        | Required                                    | Description                                 |
+| ------------------------------------------- | ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
+| `name`                                      | *string*                                    | :heavy_minus_sign:                          | N/A                                         |
+| `plan`                                      | *string*                                    | :heavy_minus_sign:                          | The plan ID or Slug for the Virtual Machine |
+| `sshKeys`                                   | *string*[]                                  | :heavy_minus_sign:                          | N/A                                         |
+| `project`                                   | *string*                                    | :heavy_minus_sign:                          | N/A                                         |

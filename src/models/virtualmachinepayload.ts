@@ -18,8 +18,11 @@ export type VirtualMachinePayloadType = ClosedEnum<
 
 export type VirtualMachinePayloadAttributes = {
   name?: string | undefined;
-  plan?: string | undefined;
-  sshKeys?: Array<string> | undefined;
+  /**
+   * The plan ID or Slug for the Virtual Machine
+   */
+  plan?: string | null | undefined;
+  sshKeys?: Array<string> | null | undefined;
   project?: string | undefined;
 };
 
@@ -48,8 +51,8 @@ export const VirtualMachinePayloadAttributes$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   name: z.string().default("my-vm"),
-  plan: z.string().optional(),
-  ssh_keys: z.array(z.string()).optional(),
+  plan: z.nullable(z.string()).optional(),
+  ssh_keys: z.nullable(z.array(z.string())).optional(),
   project: z.string().default("my-project"),
 }).transform((v) => {
   return remap$(v, {
@@ -59,8 +62,8 @@ export const VirtualMachinePayloadAttributes$inboundSchema: z.ZodType<
 /** @internal */
 export type VirtualMachinePayloadAttributes$Outbound = {
   name: string;
-  plan?: string | undefined;
-  ssh_keys?: Array<string> | undefined;
+  plan?: string | null | undefined;
+  ssh_keys?: Array<string> | null | undefined;
   project: string;
 };
 
@@ -71,8 +74,8 @@ export const VirtualMachinePayloadAttributes$outboundSchema: z.ZodType<
   VirtualMachinePayloadAttributes
 > = z.object({
   name: z.string().default("my-vm"),
-  plan: z.string().optional(),
-  sshKeys: z.array(z.string()).optional(),
+  plan: z.nullable(z.string()).optional(),
+  sshKeys: z.nullable(z.array(z.string())).optional(),
   project: z.string().default("my-project"),
 }).transform((v) => {
   return remap$(v, {

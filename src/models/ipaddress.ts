@@ -46,9 +46,9 @@ export type Assignment = {
 
 export type IpAddressAttributes = {
   address?: string | undefined;
-  cidr?: string | undefined;
+  cidr?: string | null | undefined;
   family?: Family | undefined;
-  gateway?: string | undefined;
+  gateway?: string | null | undefined;
   netmask?: string | undefined;
   type?: IpAddressType | undefined;
   public?: boolean | undefined;
@@ -265,9 +265,9 @@ export const IpAddressAttributes$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   address: z.string().optional(),
-  cidr: z.string().optional(),
+  cidr: z.nullable(z.string()).optional(),
   family: Family$inboundSchema.optional(),
-  gateway: z.string().optional(),
+  gateway: z.nullable(z.string()).optional(),
   netmask: z.string().optional(),
   type: IpAddressType$inboundSchema.optional(),
   public: z.boolean().optional(),
@@ -281,9 +281,9 @@ export const IpAddressAttributes$inboundSchema: z.ZodType<
 /** @internal */
 export type IpAddressAttributes$Outbound = {
   address?: string | undefined;
-  cidr?: string | undefined;
+  cidr?: string | null | undefined;
   family?: string | undefined;
-  gateway?: string | undefined;
+  gateway?: string | null | undefined;
   netmask?: string | undefined;
   type?: string | undefined;
   public?: boolean | undefined;
@@ -302,9 +302,9 @@ export const IpAddressAttributes$outboundSchema: z.ZodType<
   IpAddressAttributes
 > = z.object({
   address: z.string().optional(),
-  cidr: z.string().optional(),
+  cidr: z.nullable(z.string()).optional(),
   family: Family$outboundSchema.optional(),
-  gateway: z.string().optional(),
+  gateway: z.nullable(z.string()).optional(),
   netmask: z.string().optional(),
   type: IpAddressType$outboundSchema.optional(),
   public: z.boolean().optional(),

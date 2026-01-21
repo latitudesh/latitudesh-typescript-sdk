@@ -36,7 +36,7 @@ export type QuotaPerRegion = {
 export type QuotaPerProject = {
   projectId?: string | undefined;
   projectSlug?: string | undefined;
-  price?: number | undefined;
+  price?: number | null | undefined;
   billingMethod?: string | undefined;
   quotaPerRegion?: Array<QuotaPerRegion> | undefined;
 };
@@ -212,7 +212,7 @@ export const QuotaPerProject$inboundSchema: z.ZodType<
 > = z.object({
   project_id: z.string().optional(),
   project_slug: z.string().optional(),
-  price: z.number().int().optional(),
+  price: z.nullable(z.number().int()).optional(),
   billing_method: z.string().optional(),
   quota_per_region: z.array(z.lazy(() => QuotaPerRegion$inboundSchema))
     .optional(),
@@ -228,7 +228,7 @@ export const QuotaPerProject$inboundSchema: z.ZodType<
 export type QuotaPerProject$Outbound = {
   project_id?: string | undefined;
   project_slug?: string | undefined;
-  price?: number | undefined;
+  price?: number | null | undefined;
   billing_method?: string | undefined;
   quota_per_region?: Array<QuotaPerRegion$Outbound> | undefined;
 };
@@ -241,7 +241,7 @@ export const QuotaPerProject$outboundSchema: z.ZodType<
 > = z.object({
   projectId: z.string().optional(),
   projectSlug: z.string().optional(),
-  price: z.number().int().optional(),
+  price: z.nullable(z.number().int()).optional(),
   billingMethod: z.string().optional(),
   quotaPerRegion: z.array(z.lazy(() => QuotaPerRegion$outboundSchema))
     .optional(),

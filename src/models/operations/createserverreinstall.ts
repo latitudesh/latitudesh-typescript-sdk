@@ -72,23 +72,23 @@ export type CreateServerReinstallAttributes2 = {
    * The server hostname to set upon reinstall
    */
   hostname?: string | undefined;
-  partitions?: Array<CreateServerReinstallPartition2> | undefined;
+  partitions?: Array<CreateServerReinstallPartition2> | null | undefined;
   /**
    * SSH Key IDs to set upon reinstall
    */
-  sshKeys?: Array<string> | undefined;
+  sshKeys?: Array<string> | null | undefined;
   /**
    * User data ID to set upon reinstall
    */
-  userData?: string | undefined;
+  userData?: string | null | undefined;
   /**
    * RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, or omit/null for no RAID configuration
    */
-  raid?: CreateServerReinstallRaid2 | undefined;
+  raid?: CreateServerReinstallRaid2 | null | undefined;
   /**
    * URL where iPXE script is stored on, OR the iPXE script encoded in base64. This attribute is required when operating system iPXE is selected.
    */
-  ipxe?: string | undefined;
+  ipxe?: string | null | undefined;
 };
 
 export type CreateServerReinstallData2 = {
@@ -199,13 +199,13 @@ export const CreateServerReinstallAttributes2$inboundSchema: z.ZodType<
   operating_system: CreateServerReinstallOperatingSystem2$inboundSchema
     .optional(),
   hostname: z.string().optional(),
-  partitions: z.array(
-    z.lazy(() => CreateServerReinstallPartition2$inboundSchema),
+  partitions: z.nullable(
+    z.array(z.lazy(() => CreateServerReinstallPartition2$inboundSchema)),
   ).optional(),
-  ssh_keys: z.array(z.string()).optional(),
-  user_data: z.string().optional(),
-  raid: CreateServerReinstallRaid2$inboundSchema.optional(),
-  ipxe: z.string().optional(),
+  ssh_keys: z.nullable(z.array(z.string())).optional(),
+  user_data: z.nullable(z.string()).optional(),
+  raid: z.nullable(CreateServerReinstallRaid2$inboundSchema).optional(),
+  ipxe: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "operating_system": "operatingSystem",
@@ -217,11 +217,14 @@ export const CreateServerReinstallAttributes2$inboundSchema: z.ZodType<
 export type CreateServerReinstallAttributes2$Outbound = {
   operating_system?: string | undefined;
   hostname?: string | undefined;
-  partitions?: Array<CreateServerReinstallPartition2$Outbound> | undefined;
-  ssh_keys?: Array<string> | undefined;
-  user_data?: string | undefined;
-  raid?: string | undefined;
-  ipxe?: string | undefined;
+  partitions?:
+    | Array<CreateServerReinstallPartition2$Outbound>
+    | null
+    | undefined;
+  ssh_keys?: Array<string> | null | undefined;
+  user_data?: string | null | undefined;
+  raid?: string | null | undefined;
+  ipxe?: string | null | undefined;
 };
 
 /** @internal */
@@ -233,13 +236,13 @@ export const CreateServerReinstallAttributes2$outboundSchema: z.ZodType<
   operatingSystem: CreateServerReinstallOperatingSystem2$outboundSchema
     .optional(),
   hostname: z.string().optional(),
-  partitions: z.array(
-    z.lazy(() => CreateServerReinstallPartition2$outboundSchema),
+  partitions: z.nullable(
+    z.array(z.lazy(() => CreateServerReinstallPartition2$outboundSchema)),
   ).optional(),
-  sshKeys: z.array(z.string()).optional(),
-  userData: z.string().optional(),
-  raid: CreateServerReinstallRaid2$outboundSchema.optional(),
-  ipxe: z.string().optional(),
+  sshKeys: z.nullable(z.array(z.string())).optional(),
+  userData: z.nullable(z.string()).optional(),
+  raid: z.nullable(CreateServerReinstallRaid2$outboundSchema).optional(),
+  ipxe: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     operatingSystem: "operating_system",

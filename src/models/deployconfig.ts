@@ -20,7 +20,7 @@ export type DeployConfigAttributes = {
   raid?: string | undefined;
   userData?: string | undefined;
   sshKeys?: Array<string> | undefined;
-  partitions?: Array<Partition> | undefined;
+  partitions?: Array<Partition> | null | undefined;
 };
 
 export type DeployConfigData = {
@@ -94,7 +94,8 @@ export const DeployConfigAttributes$inboundSchema: z.ZodType<
   raid: z.string().optional(),
   user_data: z.string().optional(),
   ssh_keys: z.array(z.string()).optional(),
-  partitions: z.array(z.lazy(() => Partition$inboundSchema)).optional(),
+  partitions: z.nullable(z.array(z.lazy(() => Partition$inboundSchema)))
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "operating_system": "operatingSystem",
@@ -109,7 +110,7 @@ export type DeployConfigAttributes$Outbound = {
   raid?: string | undefined;
   user_data?: string | undefined;
   ssh_keys?: Array<string> | undefined;
-  partitions?: Array<Partition$Outbound> | undefined;
+  partitions?: Array<Partition$Outbound> | null | undefined;
 };
 
 /** @internal */
@@ -123,7 +124,8 @@ export const DeployConfigAttributes$outboundSchema: z.ZodType<
   raid: z.string().optional(),
   userData: z.string().optional(),
   sshKeys: z.array(z.string()).optional(),
-  partitions: z.array(z.lazy(() => Partition$outboundSchema)).optional(),
+  partitions: z.nullable(z.array(z.lazy(() => Partition$outboundSchema)))
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     operatingSystem: "operating_system",

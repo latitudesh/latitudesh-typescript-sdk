@@ -55,13 +55,13 @@ export type ContainerPlanDataStockLevel = ClosedEnum<
 >;
 
 export type ContainerPlanDataUSD = {
-  minute?: number | undefined;
-  hour?: number | undefined;
+  minute?: number | null | undefined;
+  hour?: number | null | undefined;
 };
 
 export type ContainerPlanDataBRL = {
-  minute?: number | undefined;
-  hour?: number | undefined;
+  minute?: number | null | undefined;
+  hour?: number | null | undefined;
 };
 
 export type ContainerPlanDataPricing = {
@@ -380,13 +380,13 @@ export const ContainerPlanDataUSD$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  minute: z.number().optional(),
-  hour: z.number().optional(),
+  minute: z.nullable(z.number()).optional(),
+  hour: z.nullable(z.number()).optional(),
 });
 /** @internal */
 export type ContainerPlanDataUSD$Outbound = {
-  minute?: number | undefined;
-  hour?: number | undefined;
+  minute?: number | null | undefined;
+  hour?: number | null | undefined;
 };
 
 /** @internal */
@@ -395,8 +395,8 @@ export const ContainerPlanDataUSD$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ContainerPlanDataUSD
 > = z.object({
-  minute: z.number().optional(),
-  hour: z.number().optional(),
+  minute: z.nullable(z.number()).optional(),
+  hour: z.nullable(z.number()).optional(),
 });
 
 export function containerPlanDataUSDToJSON(
@@ -422,13 +422,13 @@ export const ContainerPlanDataBRL$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  minute: z.number().optional(),
-  hour: z.number().optional(),
+  minute: z.nullable(z.number()).optional(),
+  hour: z.nullable(z.number()).optional(),
 });
 /** @internal */
 export type ContainerPlanDataBRL$Outbound = {
-  minute?: number | undefined;
-  hour?: number | undefined;
+  minute?: number | null | undefined;
+  hour?: number | null | undefined;
 };
 
 /** @internal */
@@ -437,8 +437,8 @@ export const ContainerPlanDataBRL$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ContainerPlanDataBRL
 > = z.object({
-  minute: z.number().optional(),
-  hour: z.number().optional(),
+  minute: z.nullable(z.number()).optional(),
+  hour: z.nullable(z.number()).optional(),
 });
 
 export function containerPlanDataBRLToJSON(

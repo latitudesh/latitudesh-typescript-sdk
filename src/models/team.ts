@@ -28,8 +28,8 @@ export type TeamBilling = {
 export type TeamAttributes = {
   name?: string | undefined;
   slug?: string | undefined;
-  description?: string | undefined;
-  address?: string | undefined;
+  description?: string | null | undefined;
+  address?: string | null | undefined;
   currency?: string | undefined;
   createdAt?: string | undefined;
   updatedAt?: string | undefined;
@@ -100,8 +100,8 @@ export const TeamAttributes$inboundSchema: z.ZodType<
 > = z.object({
   name: z.string().optional(),
   slug: z.string().optional(),
-  description: z.string().optional(),
-  address: z.string().optional(),
+  description: z.nullable(z.string()).optional(),
+  address: z.nullable(z.string()).optional(),
   currency: z.string().optional(),
   created_at: z.string().optional(),
   updated_at: z.string().optional(),
@@ -123,8 +123,8 @@ export const TeamAttributes$inboundSchema: z.ZodType<
 export type TeamAttributes$Outbound = {
   name?: string | undefined;
   slug?: string | undefined;
-  description?: string | undefined;
-  address?: string | undefined;
+  description?: string | null | undefined;
+  address?: string | null | undefined;
   currency?: string | undefined;
   created_at?: string | undefined;
   updated_at?: string | undefined;
@@ -144,8 +144,8 @@ export const TeamAttributes$outboundSchema: z.ZodType<
 > = z.object({
   name: z.string().optional(),
   slug: z.string().optional(),
-  description: z.string().optional(),
-  address: z.string().optional(),
+  description: z.nullable(z.string()).optional(),
+  address: z.nullable(z.string()).optional(),
   currency: z.string().optional(),
   createdAt: z.string().optional(),
   updatedAt: z.string().optional(),

@@ -52,19 +52,19 @@ export type VirtualMachineAttributesPlan = {
 };
 
 export type VirtualMachineAttributesSpecs = {
-  vcpu?: number | undefined;
-  ram?: string | undefined;
-  storage?: string | undefined;
-  nic?: string | undefined;
-  gpu?: string | undefined;
+  vcpu?: number | null | undefined;
+  ram?: string | null | undefined;
+  storage?: string | null | undefined;
+  nic?: string | null | undefined;
+  gpu?: string | null | undefined;
 };
 
 export type VirtualMachineAttributesAttributes = {
   name?: string | undefined;
   createdAt?: string | undefined;
   status?: VirtualMachineAttributesStatus | undefined;
-  operatingSystem?: string | undefined;
-  credentials?: VirtualMachineAttributesCredentials | undefined;
+  operatingSystem?: string | null | undefined;
+  credentials?: VirtualMachineAttributesCredentials | null | undefined;
   plan?: VirtualMachineAttributesPlan | undefined;
   specs?: VirtualMachineAttributesSpecs | undefined;
   team?: TeamInclude | undefined;
@@ -204,19 +204,19 @@ export const VirtualMachineAttributesSpecs$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  vcpu: z.number().int().optional(),
-  ram: z.string().optional(),
-  storage: z.string().optional(),
-  nic: z.string().optional(),
-  gpu: z.string().optional(),
+  vcpu: z.nullable(z.number().int()).optional(),
+  ram: z.nullable(z.string()).optional(),
+  storage: z.nullable(z.string()).optional(),
+  nic: z.nullable(z.string()).optional(),
+  gpu: z.nullable(z.string()).optional(),
 });
 /** @internal */
 export type VirtualMachineAttributesSpecs$Outbound = {
-  vcpu?: number | undefined;
-  ram?: string | undefined;
-  storage?: string | undefined;
-  nic?: string | undefined;
-  gpu?: string | undefined;
+  vcpu?: number | null | undefined;
+  ram?: string | null | undefined;
+  storage?: string | null | undefined;
+  nic?: string | null | undefined;
+  gpu?: string | null | undefined;
 };
 
 /** @internal */
@@ -225,11 +225,11 @@ export const VirtualMachineAttributesSpecs$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   VirtualMachineAttributesSpecs
 > = z.object({
-  vcpu: z.number().int().optional(),
-  ram: z.string().optional(),
-  storage: z.string().optional(),
-  nic: z.string().optional(),
-  gpu: z.string().optional(),
+  vcpu: z.nullable(z.number().int()).optional(),
+  ram: z.nullable(z.string()).optional(),
+  storage: z.nullable(z.string()).optional(),
+  nic: z.nullable(z.string()).optional(),
+  gpu: z.nullable(z.string()).optional(),
 });
 
 export function virtualMachineAttributesSpecsToJSON(
@@ -260,9 +260,10 @@ export const VirtualMachineAttributesAttributes$inboundSchema: z.ZodType<
   name: z.string().optional(),
   created_at: z.string().optional(),
   status: VirtualMachineAttributesStatus$inboundSchema.optional(),
-  operating_system: z.string().optional(),
-  credentials: z.lazy(() => VirtualMachineAttributesCredentials$inboundSchema)
-    .optional(),
+  operating_system: z.nullable(z.string()).optional(),
+  credentials: z.nullable(
+    z.lazy(() => VirtualMachineAttributesCredentials$inboundSchema),
+  ).optional(),
   plan: z.lazy(() => VirtualMachineAttributesPlan$inboundSchema).optional(),
   specs: z.lazy(() => VirtualMachineAttributesSpecs$inboundSchema).optional(),
   team: TeamInclude$inboundSchema.optional(),
@@ -278,8 +279,8 @@ export type VirtualMachineAttributesAttributes$Outbound = {
   name?: string | undefined;
   created_at?: string | undefined;
   status?: string | undefined;
-  operating_system?: string | undefined;
-  credentials?: VirtualMachineAttributesCredentials$Outbound | undefined;
+  operating_system?: string | null | undefined;
+  credentials?: VirtualMachineAttributesCredentials$Outbound | null | undefined;
   plan?: VirtualMachineAttributesPlan$Outbound | undefined;
   specs?: VirtualMachineAttributesSpecs$Outbound | undefined;
   team?: TeamInclude$Outbound | undefined;
@@ -295,9 +296,10 @@ export const VirtualMachineAttributesAttributes$outboundSchema: z.ZodType<
   name: z.string().optional(),
   createdAt: z.string().optional(),
   status: VirtualMachineAttributesStatus$outboundSchema.optional(),
-  operatingSystem: z.string().optional(),
-  credentials: z.lazy(() => VirtualMachineAttributesCredentials$outboundSchema)
-    .optional(),
+  operatingSystem: z.nullable(z.string()).optional(),
+  credentials: z.nullable(
+    z.lazy(() => VirtualMachineAttributesCredentials$outboundSchema),
+  ).optional(),
   plan: z.lazy(() => VirtualMachineAttributesPlan$outboundSchema).optional(),
   specs: z.lazy(() => VirtualMachineAttributesSpecs$outboundSchema).optional(),
   team: TeamInclude$outboundSchema.optional(),

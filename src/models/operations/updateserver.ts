@@ -32,11 +32,11 @@ export type UpdateServerAttributes2 = {
   /**
    * The server billing type. Accepts `hourly` and `monthly` for on demand projects and `yearly` for reserved projects.
    */
-  billing?: UpdateServerBilling2 | undefined;
+  billing?: UpdateServerBilling2 | null | undefined;
   /**
    * List of Tag IDs
    */
-  tags?: Array<string> | undefined;
+  tags?: Array<string> | null | undefined;
   /**
    * Project ID or slug to move the server to
    */
@@ -83,15 +83,15 @@ export const UpdateServerAttributes2$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   hostname: z.string().default("new-hostname"),
-  billing: UpdateServerBilling2$inboundSchema.optional(),
-  tags: z.array(z.string()).optional(),
+  billing: z.nullable(UpdateServerBilling2$inboundSchema).optional(),
+  tags: z.nullable(z.array(z.string())).optional(),
   project: z.string().optional(),
 });
 /** @internal */
 export type UpdateServerAttributes2$Outbound = {
   hostname: string;
-  billing?: string | undefined;
-  tags?: Array<string> | undefined;
+  billing?: string | null | undefined;
+  tags?: Array<string> | null | undefined;
   project?: string | undefined;
 };
 
@@ -102,8 +102,8 @@ export const UpdateServerAttributes2$outboundSchema: z.ZodType<
   UpdateServerAttributes2
 > = z.object({
   hostname: z.string().default("new-hostname"),
-  billing: UpdateServerBilling2$outboundSchema.optional(),
-  tags: z.array(z.string()).optional(),
+  billing: z.nullable(UpdateServerBilling2$outboundSchema).optional(),
+  tags: z.nullable(z.array(z.string())).optional(),
   project: z.string().optional(),
 });
 
