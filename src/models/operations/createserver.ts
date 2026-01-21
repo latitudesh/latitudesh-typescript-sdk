@@ -147,23 +147,23 @@ export type CreateServerAttributes2 = {
   /**
    * SSH Keys to set on the server
    */
-  sshKeys?: Array<string> | undefined;
+  sshKeys?: Array<string> | null | undefined;
   /**
    * User data ID to set on the server. This is a custom script that will run after the deploy
    */
-  userData?: string | undefined;
+  userData?: string | null | undefined;
   /**
    * RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, or omit/null for no RAID configuration
    */
-  raid?: CreateServerRaid2 | undefined;
+  raid?: CreateServerRaid2 | null | undefined;
   /**
    * URL where iPXE script is stored on, OR the iPXE script encoded in base64. This attribute is required when iPXE is selected as operating system.
    */
-  ipxe?: string | undefined;
+  ipxe?: string | null | undefined;
   /**
    * The server billing type. Accepts `hourly` and `monthly` for on demand projects and `yearly` for reserved projects.
    */
-  billing?: CreateServerBilling2 | undefined;
+  billing?: CreateServerBilling2 | null | undefined;
 };
 
 export type CreateServerData2 = {
@@ -239,11 +239,11 @@ export const CreateServerAttributes2$inboundSchema: z.ZodType<
   site: CreateServerSite2$inboundSchema.optional(),
   operating_system: CreateServerOperatingSystem2$inboundSchema.optional(),
   hostname: z.string().optional(),
-  ssh_keys: z.array(z.string()).optional(),
-  user_data: z.string().optional(),
-  raid: CreateServerRaid2$inboundSchema.optional(),
-  ipxe: z.string().optional(),
-  billing: CreateServerBilling2$inboundSchema.optional(),
+  ssh_keys: z.nullable(z.array(z.string())).optional(),
+  user_data: z.nullable(z.string()).optional(),
+  raid: z.nullable(CreateServerRaid2$inboundSchema).optional(),
+  ipxe: z.nullable(z.string()).optional(),
+  billing: z.nullable(CreateServerBilling2$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "operating_system": "operatingSystem",
@@ -258,11 +258,11 @@ export type CreateServerAttributes2$Outbound = {
   site?: string | undefined;
   operating_system?: string | undefined;
   hostname?: string | undefined;
-  ssh_keys?: Array<string> | undefined;
-  user_data?: string | undefined;
-  raid?: string | undefined;
-  ipxe?: string | undefined;
-  billing?: string | undefined;
+  ssh_keys?: Array<string> | null | undefined;
+  user_data?: string | null | undefined;
+  raid?: string | null | undefined;
+  ipxe?: string | null | undefined;
+  billing?: string | null | undefined;
 };
 
 /** @internal */
@@ -276,11 +276,11 @@ export const CreateServerAttributes2$outboundSchema: z.ZodType<
   site: CreateServerSite2$outboundSchema.optional(),
   operatingSystem: CreateServerOperatingSystem2$outboundSchema.optional(),
   hostname: z.string().optional(),
-  sshKeys: z.array(z.string()).optional(),
-  userData: z.string().optional(),
-  raid: CreateServerRaid2$outboundSchema.optional(),
-  ipxe: z.string().optional(),
-  billing: CreateServerBilling2$outboundSchema.optional(),
+  sshKeys: z.nullable(z.array(z.string())).optional(),
+  userData: z.nullable(z.string()).optional(),
+  raid: z.nullable(CreateServerRaid2$outboundSchema).optional(),
+  ipxe: z.nullable(z.string()).optional(),
+  billing: z.nullable(CreateServerBilling2$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     operatingSystem: "operating_system",

@@ -23,7 +23,7 @@ export type FilesystemDataProject = {
 export type FilesystemDataAttributes = {
   name?: string | undefined;
   sizeInGb?: number | undefined;
-  createdAt?: Date | undefined;
+  createdAt?: Date | null | undefined;
   project?: FilesystemDataProject | undefined;
 };
 
@@ -95,8 +95,9 @@ export const FilesystemDataAttributes$inboundSchema: z.ZodType<
 > = z.object({
   name: z.string().optional(),
   size_in_gb: z.number().int().optional(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
+  created_at: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
   project: z.lazy(() => FilesystemDataProject$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -108,7 +109,7 @@ export const FilesystemDataAttributes$inboundSchema: z.ZodType<
 export type FilesystemDataAttributes$Outbound = {
   name?: string | undefined;
   size_in_gb?: number | undefined;
-  created_at?: string | undefined;
+  created_at?: string | null | undefined;
   project?: FilesystemDataProject$Outbound | undefined;
 };
 
@@ -120,7 +121,7 @@ export const FilesystemDataAttributes$outboundSchema: z.ZodType<
 > = z.object({
   name: z.string().optional(),
   sizeInGb: z.number().int().optional(),
-  createdAt: z.date().transform(v => v.toISOString()).optional(),
+  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   project: z.lazy(() => FilesystemDataProject$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {

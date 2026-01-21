@@ -55,7 +55,7 @@ export type VirtualNetworkDataAttributes = {
   description?: string | undefined;
   project?: ProjectInclude | undefined;
   region?: VirtualNetworkDataRegion | undefined;
-  createdAt?: Date | undefined;
+  createdAt?: Date | null | undefined;
   /**
    * Amount of devices assigned to the virtual network
    */
@@ -223,8 +223,9 @@ export const VirtualNetworkDataAttributes$inboundSchema: z.ZodType<
   description: z.string().optional(),
   project: ProjectInclude$inboundSchema.optional(),
   region: z.lazy(() => VirtualNetworkDataRegion$inboundSchema).optional(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
+  created_at: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
   assignments_count: z.number().int().optional(),
   tags: z.array(z.lazy(() => Tag$inboundSchema)).optional(),
 }).transform((v) => {
@@ -240,7 +241,7 @@ export type VirtualNetworkDataAttributes$Outbound = {
   description?: string | undefined;
   project?: ProjectInclude$Outbound | undefined;
   region?: VirtualNetworkDataRegion$Outbound | undefined;
-  created_at?: string | undefined;
+  created_at?: string | null | undefined;
   assignments_count?: number | undefined;
   tags?: Array<Tag$Outbound> | undefined;
 };
@@ -256,7 +257,7 @@ export const VirtualNetworkDataAttributes$outboundSchema: z.ZodType<
   description: z.string().optional(),
   project: ProjectInclude$outboundSchema.optional(),
   region: z.lazy(() => VirtualNetworkDataRegion$outboundSchema).optional(),
-  createdAt: z.date().transform(v => v.toISOString()).optional(),
+  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   assignmentsCount: z.number().int().optional(),
   tags: z.array(z.lazy(() => Tag$outboundSchema)).optional(),
 }).transform((v) => {

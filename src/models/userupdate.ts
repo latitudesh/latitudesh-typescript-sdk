@@ -12,7 +12,7 @@ export type UserUpdateAttributes = {
   firstName?: string | undefined;
   lastName?: string | undefined;
   email?: string | undefined;
-  authenticationFactorId?: string | undefined;
+  authenticationFactorId?: string | null | undefined;
   role?: string | undefined;
 };
 
@@ -30,7 +30,7 @@ export const UserUpdateAttributes$inboundSchema: z.ZodType<
   first_name: z.string().optional(),
   last_name: z.string().optional(),
   email: z.string().optional(),
-  authentication_factor_id: z.string().optional(),
+  authentication_factor_id: z.nullable(z.string()).optional(),
   role: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -44,7 +44,7 @@ export type UserUpdateAttributes$Outbound = {
   first_name?: string | undefined;
   last_name?: string | undefined;
   email?: string | undefined;
-  authentication_factor_id?: string | undefined;
+  authentication_factor_id?: string | null | undefined;
   role?: string | undefined;
 };
 
@@ -57,7 +57,7 @@ export const UserUpdateAttributes$outboundSchema: z.ZodType<
   firstName: z.string().optional(),
   lastName: z.string().optional(),
   email: z.string().optional(),
-  authenticationFactorId: z.string().optional(),
+  authenticationFactorId: z.nullable(z.string()).optional(),
   role: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {

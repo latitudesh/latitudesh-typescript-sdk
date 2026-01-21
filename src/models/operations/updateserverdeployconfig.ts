@@ -58,22 +58,22 @@ export type UpdateServerDeployConfigPartition2 = {
 };
 
 export type UpdateServerDeployConfigAttributes2 = {
-  hostname?: string | undefined;
-  operatingSystem?: UpdateServerDeployConfigOperatingSystem2 | undefined;
+  hostname?: string | null | undefined;
+  operatingSystem?: UpdateServerDeployConfigOperatingSystem2 | null | undefined;
   /**
    * RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, or omit/null for no RAID configuration
    */
-  raid?: UpdateServerDeployConfigRaid2 | undefined;
+  raid?: UpdateServerDeployConfigRaid2 | null | undefined;
   /**
    * User data to configure the server
    */
-  userData?: string | undefined;
-  sshKeys?: Array<string> | undefined;
-  partitions?: Array<UpdateServerDeployConfigPartition2> | undefined;
+  userData?: string | null | undefined;
+  sshKeys?: Array<string> | null | undefined;
+  partitions?: Array<UpdateServerDeployConfigPartition2> | null | undefined;
   /**
    * URL where iPXE script is stored on, necessary for custom image deployments. This attribute is required when operating system iPXE is selected.
    */
-  ipxeUrl?: string | undefined;
+  ipxeUrl?: string | null | undefined;
 };
 
 export type UpdateServerDeployConfigRequestBody2 = {
@@ -180,16 +180,17 @@ export const UpdateServerDeployConfigAttributes2$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  hostname: z.string().optional(),
-  operating_system: UpdateServerDeployConfigOperatingSystem2$inboundSchema
-    .optional(),
-  raid: UpdateServerDeployConfigRaid2$inboundSchema.optional(),
-  user_data: z.string().optional(),
-  ssh_keys: z.array(z.string()).optional(),
-  partitions: z.array(
-    z.lazy(() => UpdateServerDeployConfigPartition2$inboundSchema),
+  hostname: z.nullable(z.string()).optional(),
+  operating_system: z.nullable(
+    UpdateServerDeployConfigOperatingSystem2$inboundSchema,
   ).optional(),
-  ipxe_url: z.string().optional(),
+  raid: z.nullable(UpdateServerDeployConfigRaid2$inboundSchema).optional(),
+  user_data: z.nullable(z.string()).optional(),
+  ssh_keys: z.nullable(z.array(z.string())).optional(),
+  partitions: z.nullable(
+    z.array(z.lazy(() => UpdateServerDeployConfigPartition2$inboundSchema)),
+  ).optional(),
+  ipxe_url: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "operating_system": "operatingSystem",
@@ -200,13 +201,16 @@ export const UpdateServerDeployConfigAttributes2$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type UpdateServerDeployConfigAttributes2$Outbound = {
-  hostname?: string | undefined;
-  operating_system?: string | undefined;
-  raid?: string | undefined;
-  user_data?: string | undefined;
-  ssh_keys?: Array<string> | undefined;
-  partitions?: Array<UpdateServerDeployConfigPartition2$Outbound> | undefined;
-  ipxe_url?: string | undefined;
+  hostname?: string | null | undefined;
+  operating_system?: string | null | undefined;
+  raid?: string | null | undefined;
+  user_data?: string | null | undefined;
+  ssh_keys?: Array<string> | null | undefined;
+  partitions?:
+    | Array<UpdateServerDeployConfigPartition2$Outbound>
+    | null
+    | undefined;
+  ipxe_url?: string | null | undefined;
 };
 
 /** @internal */
@@ -215,16 +219,17 @@ export const UpdateServerDeployConfigAttributes2$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateServerDeployConfigAttributes2
 > = z.object({
-  hostname: z.string().optional(),
-  operatingSystem: UpdateServerDeployConfigOperatingSystem2$outboundSchema
-    .optional(),
-  raid: UpdateServerDeployConfigRaid2$outboundSchema.optional(),
-  userData: z.string().optional(),
-  sshKeys: z.array(z.string()).optional(),
-  partitions: z.array(
-    z.lazy(() => UpdateServerDeployConfigPartition2$outboundSchema),
+  hostname: z.nullable(z.string()).optional(),
+  operatingSystem: z.nullable(
+    UpdateServerDeployConfigOperatingSystem2$outboundSchema,
   ).optional(),
-  ipxeUrl: z.string().optional(),
+  raid: z.nullable(UpdateServerDeployConfigRaid2$outboundSchema).optional(),
+  userData: z.nullable(z.string()).optional(),
+  sshKeys: z.nullable(z.array(z.string())).optional(),
+  partitions: z.nullable(
+    z.array(z.lazy(() => UpdateServerDeployConfigPartition2$outboundSchema)),
+  ).optional(),
+  ipxeUrl: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     operatingSystem: "operating_system",

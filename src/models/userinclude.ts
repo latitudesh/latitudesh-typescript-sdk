@@ -20,7 +20,7 @@ export type UserInclude = {
   firstName?: string | undefined;
   lastName?: string | undefined;
   email?: string | undefined;
-  authenticationFactorId?: string | undefined;
+  authenticationFactorId?: string | null | undefined;
   createdAt?: string | undefined;
   updatedAt?: string | undefined;
   role?: UserIncludeRole | undefined;
@@ -92,7 +92,7 @@ export const UserInclude$inboundSchema: z.ZodType<
   first_name: z.string().optional(),
   last_name: z.string().optional(),
   email: z.string().optional(),
-  authentication_factor_id: z.string().optional(),
+  authentication_factor_id: z.nullable(z.string()).optional(),
   created_at: z.string().optional(),
   updated_at: z.string().optional(),
   role: z.lazy(() => UserIncludeRole$inboundSchema).optional(),
@@ -111,7 +111,7 @@ export type UserInclude$Outbound = {
   first_name?: string | undefined;
   last_name?: string | undefined;
   email?: string | undefined;
-  authentication_factor_id?: string | undefined;
+  authentication_factor_id?: string | null | undefined;
   created_at?: string | undefined;
   updated_at?: string | undefined;
   role?: UserIncludeRole$Outbound | undefined;
@@ -127,7 +127,7 @@ export const UserInclude$outboundSchema: z.ZodType<
   firstName: z.string().optional(),
   lastName: z.string().optional(),
   email: z.string().optional(),
-  authenticationFactorId: z.string().optional(),
+  authenticationFactorId: z.nullable(z.string()).optional(),
   createdAt: z.string().optional(),
   updatedAt: z.string().optional(),
   role: z.lazy(() => UserIncludeRole$outboundSchema).optional(),

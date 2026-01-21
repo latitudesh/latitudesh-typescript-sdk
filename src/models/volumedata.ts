@@ -33,10 +33,10 @@ export type Initiator = {
 export type VolumeDataAttributes = {
   name?: string | undefined;
   sizeInGb?: number | undefined;
-  createdAt?: Date | undefined;
+  createdAt?: Date | null | undefined;
   namespaceId?: string | null | undefined;
-  connectorId?: string | undefined;
-  initiators?: Array<Initiator> | undefined;
+  connectorId?: string | null | undefined;
+  initiators?: Array<Initiator> | null | undefined;
   project?: ProjectInclude | undefined;
   team?: TeamInclude | undefined;
 };
@@ -99,11 +99,13 @@ export const VolumeDataAttributes$inboundSchema: z.ZodType<
 > = z.object({
   name: z.string().optional(),
   size_in_gb: z.number().int().optional(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
+  created_at: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
   namespace_id: z.nullable(z.string()).optional(),
-  connector_id: z.string().optional(),
-  initiators: z.array(z.lazy(() => Initiator$inboundSchema)).optional(),
+  connector_id: z.nullable(z.string()).optional(),
+  initiators: z.nullable(z.array(z.lazy(() => Initiator$inboundSchema)))
+    .optional(),
   project: ProjectInclude$inboundSchema.optional(),
   team: TeamInclude$inboundSchema.optional(),
 }).transform((v) => {
@@ -118,10 +120,10 @@ export const VolumeDataAttributes$inboundSchema: z.ZodType<
 export type VolumeDataAttributes$Outbound = {
   name?: string | undefined;
   size_in_gb?: number | undefined;
-  created_at?: string | undefined;
+  created_at?: string | null | undefined;
   namespace_id?: string | null | undefined;
-  connector_id?: string | undefined;
-  initiators?: Array<Initiator$Outbound> | undefined;
+  connector_id?: string | null | undefined;
+  initiators?: Array<Initiator$Outbound> | null | undefined;
   project?: ProjectInclude$Outbound | undefined;
   team?: TeamInclude$Outbound | undefined;
 };
@@ -134,10 +136,11 @@ export const VolumeDataAttributes$outboundSchema: z.ZodType<
 > = z.object({
   name: z.string().optional(),
   sizeInGb: z.number().int().optional(),
-  createdAt: z.date().transform(v => v.toISOString()).optional(),
+  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   namespaceId: z.nullable(z.string()).optional(),
-  connectorId: z.string().optional(),
-  initiators: z.array(z.lazy(() => Initiator$outboundSchema)).optional(),
+  connectorId: z.nullable(z.string()).optional(),
+  initiators: z.nullable(z.array(z.lazy(() => Initiator$outboundSchema)))
+    .optional(),
   project: ProjectInclude$outboundSchema.optional(),
   team: TeamInclude$outboundSchema.optional(),
 }).transform((v) => {

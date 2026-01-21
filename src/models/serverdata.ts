@@ -86,7 +86,7 @@ export type ServerDataPlan = {
   /**
    * hourly/monthly pricing. Defaults to `hourly`. Appliable for `on_demand` projects only.
    */
-  billing?: string | undefined;
+  billing?: string | null | undefined;
 };
 
 export type ServerDataFeatures = {
@@ -147,7 +147,7 @@ export type ServerDataSpecs = {
   /**
    * GPU model and quantity, if present
    */
-  gpu?: string | undefined;
+  gpu?: string | null | undefined;
 };
 
 export const ServerDataRole = {
@@ -192,10 +192,10 @@ export type ServerDataAttributes = {
   site?: string | undefined;
   locked?: boolean | undefined;
   rescue?: boolean | undefined;
-  primaryIpv4?: string | undefined;
-  primaryIpv6?: string | undefined;
-  createdAt?: string | undefined;
-  scheduledDeletionAt?: string | undefined;
+  primaryIpv4?: string | null | undefined;
+  primaryIpv6?: string | null | undefined;
+  createdAt?: string | null | undefined;
+  scheduledDeletionAt?: string | null | undefined;
   plan?: ServerDataPlan | undefined;
   operatingSystem?: OperatingSystem | undefined;
   region?: ServerRegionResourceData | undefined;
@@ -236,14 +236,14 @@ export const ServerDataPlan$inboundSchema: z.ZodType<
   id: z.string().optional(),
   name: z.string().optional(),
   slug: z.string().optional(),
-  billing: z.string().optional(),
+  billing: z.nullable(z.string()).optional(),
 });
 /** @internal */
 export type ServerDataPlan$Outbound = {
   id?: string | undefined;
   name?: string | undefined;
   slug?: string | undefined;
-  billing?: string | undefined;
+  billing?: string | null | undefined;
 };
 
 /** @internal */
@@ -255,7 +255,7 @@ export const ServerDataPlan$outboundSchema: z.ZodType<
   id: z.string().optional(),
   name: z.string().optional(),
   slug: z.string().optional(),
-  billing: z.string().optional(),
+  billing: z.nullable(z.string()).optional(),
 });
 
 export function serverDataPlanToJSON(serverDataPlan: ServerDataPlan): string {
@@ -423,7 +423,7 @@ export const ServerDataSpecs$inboundSchema: z.ZodType<
   disk: z.string().optional(),
   ram: z.string().optional(),
   nic: z.string().optional(),
-  gpu: z.string().optional(),
+  gpu: z.nullable(z.string()).optional(),
 });
 /** @internal */
 export type ServerDataSpecs$Outbound = {
@@ -431,7 +431,7 @@ export type ServerDataSpecs$Outbound = {
   disk?: string | undefined;
   ram?: string | undefined;
   nic?: string | undefined;
-  gpu?: string | undefined;
+  gpu?: string | null | undefined;
 };
 
 /** @internal */
@@ -444,7 +444,7 @@ export const ServerDataSpecs$outboundSchema: z.ZodType<
   disk: z.string().optional(),
   ram: z.string().optional(),
   nic: z.string().optional(),
-  gpu: z.string().optional(),
+  gpu: z.nullable(z.string()).optional(),
 });
 
 export function serverDataSpecsToJSON(
@@ -537,10 +537,10 @@ export const ServerDataAttributes$inboundSchema: z.ZodType<
   site: z.string().optional(),
   locked: z.boolean().optional(),
   rescue: z.boolean().optional(),
-  primary_ipv4: z.string().optional(),
-  primary_ipv6: z.string().optional(),
-  created_at: z.string().optional(),
-  scheduled_deletion_at: z.string().optional(),
+  primary_ipv4: z.nullable(z.string()).optional(),
+  primary_ipv6: z.nullable(z.string()).optional(),
+  created_at: z.nullable(z.string()).optional(),
+  scheduled_deletion_at: z.nullable(z.string()).optional(),
   plan: z.lazy(() => ServerDataPlan$inboundSchema).optional(),
   operating_system: z.lazy(() => OperatingSystem$inboundSchema).optional(),
   region: ServerRegionResourceData$inboundSchema.optional(),
@@ -568,10 +568,10 @@ export type ServerDataAttributes$Outbound = {
   site?: string | undefined;
   locked?: boolean | undefined;
   rescue?: boolean | undefined;
-  primary_ipv4?: string | undefined;
-  primary_ipv6?: string | undefined;
-  created_at?: string | undefined;
-  scheduled_deletion_at?: string | undefined;
+  primary_ipv4?: string | null | undefined;
+  primary_ipv6?: string | null | undefined;
+  created_at?: string | null | undefined;
+  scheduled_deletion_at?: string | null | undefined;
   plan?: ServerDataPlan$Outbound | undefined;
   operating_system?: OperatingSystem$Outbound | undefined;
   region?: ServerRegionResourceData$Outbound | undefined;
@@ -595,10 +595,10 @@ export const ServerDataAttributes$outboundSchema: z.ZodType<
   site: z.string().optional(),
   locked: z.boolean().optional(),
   rescue: z.boolean().optional(),
-  primaryIpv4: z.string().optional(),
-  primaryIpv6: z.string().optional(),
-  createdAt: z.string().optional(),
-  scheduledDeletionAt: z.string().optional(),
+  primaryIpv4: z.nullable(z.string()).optional(),
+  primaryIpv6: z.nullable(z.string()).optional(),
+  createdAt: z.nullable(z.string()).optional(),
+  scheduledDeletionAt: z.nullable(z.string()).optional(),
   plan: z.lazy(() => ServerDataPlan$outboundSchema).optional(),
   operatingSystem: z.lazy(() => OperatingSystem$outboundSchema).optional(),
   region: ServerRegionResourceData$outboundSchema.optional(),
