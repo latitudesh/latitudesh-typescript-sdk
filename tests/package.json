@@ -1,0 +1,19 @@
+{
+    "name": "sdk-integration-tests",
+    "version": "1.0.0",
+    "type": "module",
+    "private": true,
+    "scripts": {
+      "test:readonly": "tsx test-readonly.ts",
+      "test:crud": "tsx test-crud.ts",
+      "test:all": "tsx run-tests.ts"
+    },
+    "dependencies": {
+      "latitudesh-typescript-sdk": "file:.."
+    },
+    "devDependencies": {
+      "@types/node": "^22.0.0",
+      "tsx": "^4.0.0",
+      "typescript": "^5.8.0"
+    }
+  }

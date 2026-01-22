@@ -1,0 +1,72 @@
+name: SDK Integration Tests
+
+on:
+  workflow_dispatch:
+    inputs:
+      skip_crud:
+        description: 'Skip CRUD tests (only run readonly tests)'
+        type: boolean
+        default: false
+  
+  push:
+    branches:
+      - feat/integration-tests
+    paths:
+      - 'src/**'
+      - 'tests/**'
+      - 'package.json'
+  
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'src/**'
+      - 'tests/**'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    environment: staging
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: Install SDK dependencies
+        run: npm ci
+      
+      - name: Build SDK
+        run: npm run build
+      
+      - name: Install test dependencies
+        working-directory: tests
+        run: npm install
+      
+      - name: Run readonly tests
+        working-directory: tests
+        env:
+          LATITUDE_API_KEY: ${{ secrets.LATITUDE_API_KEY }}
+          SERVER_URL: ${{ secrets.SERVER_URL }}
+        run: npm run test:readonly
+      
+      - name: Run CRUD tests
+        if: github.event_name != 'pull_request' && github.event.inputs.skip_crud != 'true'
+        working-directory: tests
+        env:
+          LATITUDE_API_KEY: ${{ secrets.LATITUDE_API_KEY }}
+          SERVER_URL: ${{ secrets.SERVER_URL }}
+        run: npm run test:crud
+      
+      - name: Run all tests (manual trigger)
+        if: github.event_name == 'workflow_dispatch' && github.event.inputs.skip_crud != 'true'
+        working-directory: tests
+        env:
+          LATITUDE_API_KEY: ${{ secrets.LATITUDE_API_KEY }}
+          SERVER_URL: ${{ secrets.SERVER_URL }}
+        run: npm run test:all
