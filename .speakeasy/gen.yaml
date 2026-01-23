@@ -28,8 +28,8 @@ generation:
   persistentEdits: {}
   tests:
     generateTests: true
-    generateNewTests: false
-    skipResponseBodyAssertions: false
+    generateNewTests: true
+    skipResponseBodyAssertions: true
 typescript:
   version: 0.2.4
   acceptHeaderEnum: true

@@ -1,0 +1,1952 @@
+arazzo: 1.0.1
+info:
+  title: Test Suite
+  summary: Created from /Users/perylemke/workspace/projects/latitude/latitudesh-typescript-sdk/.speakeasy/temp/0bca79/openapi/bundle/openapi.json
+  version: 0.0.1
+sourceDescriptions:
+  - name: /Users/perylemke/workspace/projects/latitude/latitudesh-typescript-sdk/.speakeasy/temp/0bca79/openapi/bundle/openapi.json
+    url: https://TBD.com
+    type: openapi
+workflows:
+  - workflowId: get-api-keys-Success
+    steps:
+      - stepId: test
+        operationId: get-api-keys
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":[{"id":"tok_6VE1Wd37dXnZJ","type":"api_keys","attributes":{"name":"Dor Daidelos","api_version":"2023-06-01","token_last_slice":"2daaa","read_only":false,"allowed_ips":null,"last_used_at":null,"user":{"id":"user_Wel4PnEAmauQYZz3Vz83CkyV2BW","email":"beckie.prosacco@willms.test"},"created_at":"2026-01-14T15:56:29+00:00","updated_at":"2026-01-14T14:56:29+00:00"}}]}
+            type: simple
+    x-speakeasy-test-group: apiKeys
+    x-speakeasy-test-rebuild: true
+  - workflowId: post-api-key-Created
+    steps:
+      - stepId: test
+        operationId: post-api-key
+        requestBody:
+          contentType: application/json
+          payload:
+            data:
+              attributes:
+                name: App Token
+              type: api_keys
+        successCriteria:
+          - condition: $statusCode == 201
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":{"id":"tok_ez2A3DVldnawP","type":"api_keys","attributes":{"name":"App Token","api_version":"2023-06-01","token_last_slice":"4d063","read_only":false,"allowed_ips":[],"last_used_at":null,"user":{"id":"user_pVkpyK2aoVUlax6Zzx1pfrGe4wr","email":"nathanael@bartoletti-streich.test"},"created_at":"2026-01-14T15:56:29+00:00","updated_at":"2026-01-14T15:56:29+00:00"}}}
+            type: simple
+    x-speakeasy-test-group: apiKeys
+    x-speakeasy-test-rebuild: true
+  - workflowId: rotate-api-key-Success
+    steps:
+      - stepId: test
+        operationId: rotate-api-key
+        parameters:
+          - name: api_key_id
+            in: path
+            value: tok_x1ZJrdx5qg4LV
+        requestBody:
+          contentType: application/json
+          payload:
+            data:
+              attributes:
+                name: App Token
+              id: tok_x1ZJrdx5qg4LV
+              type: api_keys
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":{"id":"tok_x1ZJrdx5qg4LV","type":"api_keys","attributes":{"name":"App Token","api_version":"2023-06-01","token_last_slice":"17b4c","read_only":false,"allowed_ips":null,"last_used_at":null,"user":{"id":"user_3J8PY3vz8ahap5nLXYmws36rwRE","email":"arnette@kutch.test"},"created_at":"2026-01-14T15:56:30+00:00","updated_at":"2026-01-14T15:56:30+00:00"}}}
+            type: simple
+    x-speakeasy-test-group: apiKeys
+    x-speakeasy-test-rebuild: true
+  - workflowId: update-api-key-Success
+    steps:
+      - stepId: test
+        operationId: update-api-key
+        parameters:
+          - name: api_key_id
+            in: path
+            value: tok_zlkg1DegdvZE5
+        requestBody:
+          contentType: application/json
+          payload:
+            data:
+              attributes:
+                api_version: "2023-06-01"
+                name: App Token
+              id: tok_zlkg1DegdvZE5
+              type: api_keys
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data": {"id": "tok_zlkg1DegdvZE5", "type": "api_keys", "attributes": {"name": "App Token", "api_version": "2023-06-01", "token_last_slice": "e0fd0", "last_used_at": "2025-10-18T03:22:51.570Z", "user": {"id": "user_Lp2QwzbxephLaWxAnwpouknrPzm", "email": "leland_kutch@hayes-beatty.test"}, "created_at": "2025-07-16T18:36:27+00:00", "updated_at": "2025-07-16T18:36:27+00:00"}}}
+            type: simple
+    x-speakeasy-test-group: apiKeys
+    x-speakeasy-test-rebuild: true
+  - workflowId: update-api-key-Success - Update name without rotating token
+    steps:
+      - stepId: test
+        operationId: update-api-key
+        parameters:
+          - name: api_key_id
+            in: path
+            value: tok_lpbV0DgRq4AWz
+        requestBody:
+          contentType: application/json
+          payload:
+            data:
+              attributes:
+                name: Updated Name
+              id: tok_lpbV0DgRq4AWz
+              type: api_keys
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":{"id":"tok_lpbV0DgRq4AWz","type":"api_keys","attributes":{"name":"Updated Name","api_version":"2023-06-01","token_last_slice":"c10e6","read_only":false,"allowed_ips":null,"last_used_at":null,"user":{"id":"user_YLMV5L9oYRFoe4Jo4l2PCGKr8bBa","email":"jaime@ullrich.example"},"created_at":"2026-01-14T15:56:30+00:00","updated_at":"2026-01-14T15:56:30+00:00"}}}
+            type: simple
+    x-speakeasy-test-group: apiKeys
+    x-speakeasy-test-rebuild: true
+  - workflowId: get-billing-usage-Success
+    steps:
+      - stepId: test
+        operationId: get-billing-usage
+        parameters:
+          - name: filter[products][]
+            in: query
+            value:
+              - si_aslft06m
+              - si_on0fybnq
+          - name: filter[plan]
+            in: query
+            value: plan.name
+          - name: filter[project]
+            in: query
+            value: proj_r0MK4O4kDa95w
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":{"id":"","attributes":{"project":{"id":"proj_r0MK4O4kDa95w","slug":"fantastic-iron-clock","name":"Fantastic Iron Clock"},"period":{"start":"2025-12-24T15:56:32+00:00","end":"2026-01-24T15:56:32+00:00"},"available_credit_balance":123,"price":0,"threshold":10000,"products":[]}}}
+            type: simple
+    x-speakeasy-test-group: Billing
+    x-speakeasy-test-rebuild: true
+  - workflowId: get-events-Success
+    steps:
+      - stepId: test
+        operationId: get-events
+        parameters:
+          - name: page[size]
+            in: query
+            value: 20
+          - name: page[number]
+            in: query
+            value: 1
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":[{}]}
+            type: simple
+    x-speakeasy-test-group: Events
+    x-speakeasy-test-rebuild: true
+  - workflowId: get-all-firewall-assignments-Success
+    steps:
+      - stepId: test
+        operationId: get-all-firewall-assignments
+        parameters:
+          - name: filter[server]
+            in: query
+            value: sv_Qk0Ryqv1dW36X
+          - name: page[size]
+            in: query
+            value: 20
+          - name: page[number]
+            in: query
+            value: 1
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":[{"id":"fwasg_zGr47qlMDAg0m","type":"firewall_assignments","attributes":{"server":{"id":"sv_Qk0Ryqv1dW36X","primary_ipv4":"237.198.84.1","hostname":"Heavy Duty Silk Bottle"}}}, {"id":"fwasg_w5AEmq7XDBkWX","type":"firewall_assignments","attributes":{"server":{"id":"sv_Qk0Ryqv1dW36X","primary_ipv4":"237.198.84.1","hostname":"Heavy Duty Silk Bottle"}}}]}
+            type: simple
+    x-speakeasy-test-group: Firewalls
+    x-speakeasy-test-rebuild: true
+  - workflowId: list-firewalls-Success
+    steps:
+      - stepId: test
+        operationId: list-firewalls
+        parameters:
+          - name: filter[project]
+            in: query
+            value: intelligent-marble-lamp
+          - name: page[size]
+            in: query
+            value: 20
+          - name: page[number]
+            in: query
+            value: 1
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":[{"id":"fw_VaNmodjeObE8W","type":"firewalls","attributes":{"name":"Carroll-Purdy","rules":[{"from":"150.186.180.30","to":"115.157.70.5","port":"80","protocol":"TCP"}],"project":{"id":"proj_2695BdKrOevVo","slug":"intelligent-marble-lamp","name":"Intelligent Marble Lamp"}}}]}
+            type: simple
+    x-speakeasy-test-group: Firewalls
+    x-speakeasy-test-rebuild: true
+  - workflowId: create-firewall-Created
+    steps:
+      - stepId: test
+        operationId: create-firewall
+        requestBody:
+          contentType: application/json
+          payload:
+            data:
+              attributes:
+                name: my-firewall
+                project: heavy-duty-copper-watch
+                rules:
+                  - from: 192.168.42.73
+                    port: "80"
+                    protocol: TCP
+                    to: 192.168.43.51
+                  - from: 192.168.1.16
+                    port: "80"
+                    protocol: TCP
+                    to: 192.168.1.30
+                  - from: 192.168.1.10
+                    port: 3000-4000
+                    protocol: UDP
+                    to: 192.168.1.20
+              type: firewalls
+        successCriteria:
+          - condition: $statusCode == 201
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":{"id":"fw_w5AEmq7XDBkWX","type":"firewalls","attributes":{"name":"my-firewall","rules":[{"from":"ANY","to":"ANY","port":"22","protocol":"TCP"}, {"from":"192.168.42.73","to":"192.168.43.51","port":"80","protocol":"TCP"}, {"from":"192.168.1.16","to":"192.168.1.30","port":"80","protocol":"TCP"}, {"from":"192.168.1.10","to":"192.168.1.20","port":"3000-4000","protocol":"UDP"}],"project":{"id":"proj_RLYV8DZ2D5QoE","slug":"heavy-duty-copper-watch","name":"Heavy Duty Copper Watch"}}}}
+            type: simple
+    x-speakeasy-test-group: Firewalls
+    x-speakeasy-test-rebuild: true
+  - workflowId: get-firewall-Success
+    steps:
+      - stepId: test
+        operationId: get-firewall
+        parameters:
+          - name: firewall_id
+            in: path
+            value: fw_6A05EdQ1dvKYQ
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":{"id":"fw_6A05EdQ1dvKYQ","type":"firewalls","attributes":{"name":"D'Amore-Nienow","rules":[{"from":"233.62.24.172","to":"20.231.71.178","port":"80","protocol":"TCP"}, {"from":"242.23.216.53","to":"136.56.111.45","port":"80","protocol":"TCP"}],"project":{"id":"proj_byQrJdNJd30gv","slug":"rustic-steel-plate","name":"Rustic Steel Plate"}}}}
+            type: simple
+    x-speakeasy-test-group: Firewalls
+    x-speakeasy-test-rebuild: true
+  - workflowId: update-firewall-Success
+    steps:
+      - stepId: test
+        operationId: update-firewall
+        parameters:
+          - name: firewall_id
+            in: path
+            value: fw_r0MK4O4kDa95w
+        requestBody:
+          contentType: application/json
+          payload:
+            data:
+              attributes:
+                name: new-name
+                rules:
+                  - from: 192.168.42.72
+                    port: "80"
+                    protocol: TCP
+                    to: 192.168.43.51
+              type: firewalls
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":{"id":"fw_r0MK4O4kDa95w","type":"firewalls","attributes":{"name":"new-name","rules":[{"from":"192.168.42.72","to":"192.168.43.51","port":"80","protocol":"TCP"}],"project":{"id":"proj_aKXgRdR3qv9k5","slug":"rustic-wooden-clock","name":"Rustic Wooden Clock"}}}}
+            type: simple
+    x-speakeasy-test-group: Firewalls
+    x-speakeasy-test-rebuild: true
+  - workflowId: get-firewall-assignments-Success
+    steps:
+      - stepId: test
+        operationId: get-firewall-assignments
+        parameters:
+          - name: firewall_id
+            in: path
+            value: fw_Qk0Ryqv1dW36X
+          - name: page[size]
+            in: query
+            value: 20
+          - name: page[number]
+            in: query
+            value: 1
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":[{"id":"fwasg_6A05EdQ1dvKYQ","type":"firewall_assignments","attributes":{"server":{"id":"sv_1Qkm7dXzD8nZV","primary_ipv4":"114.216.142.237","hostname":"Durable Concrete Lamp"},"firewall_id":"fw_Qk0Ryqv1dW36X"}}, {"id":"fwasg_ez2A3DVldnawP","type":"firewall_assignments","attributes":{"server":{"id":"sv_m5xyZOnNOWM0l","primary_ipv4":"27.26.3.128","hostname":"Rustic Cotton Clock"},"firewall_id":"fw_Qk0Ryqv1dW36X"}}]}
+            type: simple
+    x-speakeasy-test-group: Firewalls
+    x-speakeasy-test-rebuild: true
+  - workflowId: create-firewall-assignment-Created
+    steps:
+      - stepId: test
+        operationId: create-firewall-assignment
+        parameters:
+          - name: firewall_id
+            in: path
+            value: fw_Ee8pKq05DWAob
+        requestBody:
+          contentType: application/json
+          payload:
+            data:
+              attributes:
+                server_id: sv_aKXgRdR3qv9k5
+              type: firewall_assignments
+        successCriteria:
+          - condition: $statusCode == 201
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {}
+            type: simple
+    x-speakeasy-test-group: assignments
+    x-speakeasy-test-rebuild: true
+  - workflowId: get-ips-Success
+    steps:
+      - stepId: test
+        operationId: get-ips
+        parameters:
+          - name: page[size]
+            in: query
+            value: 20
+          - name: page[number]
+            in: query
+            value: 1
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":[{"id":"ip_5AEmq7wXqBkWX","attributes":{"address":"110.190.5.254","cidr":null,"family":"IPv4","gateway":null,"netmask":"255.255.255.255","type":"Public","public":true,"management":true,"additional":false,"project":{"id":"proj_lkg1DeVgOvZE5","name":"Incredible Silk Keyboard"},"region":{},"available":true,"assignment":{}}}, {"id":"ip_Gr47qleMDAg0m","attributes":{"address":"180.228.210.136","cidr":null,"family":"IPv4","gateway":null,"netmask":"255.255.255.255","type":"Public","public":true,"management":true,"additional":false,"project":{"id":"proj_lkg1DeVgOvZE5","name":"Incredible Silk Keyboard"},"region":{},"available":true,"assignment":{}}}]}
+            type: simple
+    x-speakeasy-test-group: ipAddresses
+    x-speakeasy-test-rebuild: true
+  - workflowId: get-ip
+    steps:
+      - stepId: test
+        operationId: get-ip
+        parameters:
+          - name: ip_id
+            in: path
+            value: <id>
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {}
+            type: simple
+    x-speakeasy-test-group: ipAddresses
+    x-speakeasy-test-rebuild: true
+  - workflowId: get-team-Success
+    steps:
+      - stepId: test
+        operationId: get-team
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data": [{"id": "team_8L90z0WyLyIK0KyEknmnijV38rk", "attributes": {"name": "583 Team", "slug": "583-team", "address": "654 Selene Pines, North Noble, HI 65384", "currency": "trb", "created_at": "2025-02-21T00:00:00+00:00", "updated_at": "2025-03-07T00:00:00+00:00", "enforce_mfa": false, "users": [{"id": "user_LwnmBv6vmeILPZEj4poJuEXnegj", "first_name": "Claretta", "last_name": "Kuhic", "email": "king.morissette@nitzsche.example", "created_at": "2025-05-04T00:00:00.000Z", "updated_at": "2024-09-09T00:00:00.000Z", "role": {"id": "role_735kl6xYEVcl5Nzn0weZuoxPrmL", "name": "Neville", "created_at": "2024-10-29T00:00:00.000Z", "updated_at": "2025-12-27T00:00:00.000Z"}}], "projects": [], "owner": {}, "billing": {}, "feature_flags": ["feature_flag_1", "feature_flag_2"]}}], "meta": {}}
+            type: simple
+    x-speakeasy-test-group: teams
+    x-speakeasy-test-rebuild: true
+  - workflowId: get-team-when team is recent (created within last month)
+    steps:
+      - stepId: test
+        operationId: get-team
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":[{"id":"team_BbQ0gXk6P1uxW7rNvg5VCM2znK2R","attributes":{"name":"641 Team","slug":"641-team","address":"8998 Murphy Fork, North Danahaven, CT 98631","currency":"1f7","created_at":"2026-01-09T15:57:10+00:00","updated_at":"2025-02-09T00:00:00+00:00","enforce_mfa":false,"users":[{"id":"user_yxLxQ7mmJehljn3RK18aILyGP17","first_name":"Russell","last_name":"Wunsch","email":"hoyt@brakus.example","created_at":"2025-03-25T00:00:00.000Z","updated_at":"2025-03-30T00:00:00.000Z","role":{"id":"role_332j3k5oxYIKGZGPpxZKCl7nrXP","name":"Steve","created_at":"2025-04-13T00:00:00.000Z","updated_at":"2026-01-23T00:00:00.000Z"}}],"projects":[],"owner":{},"billing":{},"feature_flags":["feature_flag_1","feature_flag_2"]}}],"meta":{}}
+            type: simple
+    x-speakeasy-test-group: teams
+    x-speakeasy-test-rebuild: true
+  - workflowId: get-team-when team is older than one month
+    steps:
+      - stepId: test
+        operationId: get-team
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":[{"id":"team_QzAj9782bVuWjQwwwv4guRw0lL5","attributes":{"name":"642 Team","slug":"642-team","address":"Suite 873 7622 Neal Plaza, Almetaburgh, UT 19776","currency":"7qq","created_at":"2025-11-14T15:57:10+00:00","updated_at":"2025-04-05T00:00:00+00:00","enforce_mfa":false,"users":[{"id":"user_kEXBoLzrG4tNZzJYBrV8fN6Jzvy7","first_name":"Marin","last_name":"Pollich","email":"winter.hodkiewicz@huel.test","created_at":"2025-05-19T00:00:00.000Z","updated_at":"2025-06-03T00:00:00.000Z","role":{"id":"role_gpGwBll1EzsZ5GGZ7L6aCnGWbYE","name":"Lincoln","created_at":"2025-03-26T00:00:00.000Z","updated_at":"2026-08-24T00:00:00.000Z"}}],"projects":[],"owner":{},"billing":{},"feature_flags":["feature_flag_1","feature_flag_2"]}}],"meta":{}}
+            type: simple
+    x-speakeasy-test-group: teams
+    x-speakeasy-test-rebuild: true
+  - workflowId: post-team-Created
+    steps:
+      - stepId: test
+        operationId: post-team
+        requestBody:
+          contentType: application/json
+          payload:
+            data:
+              attributes:
+                address: Address
+                currency: USD
+                name: Name
+              type: teams
+        successCriteria:
+          - condition: $statusCode == 201
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":{"id":"team_aEjv7ZKeWzCrjA5ANeMvImmKEoV","attributes":{"name":"Name","slug":"name","address":"Address","currency":"USD","enforce_mfa":false}}}
+            type: simple
+    x-speakeasy-test-group: teams
+    x-speakeasy-test-rebuild: true
+  - workflowId: patch-current-team-Success
+    steps:
+      - stepId: test
+        operationId: patch-current-team
+        parameters:
+          - name: team_id
+            in: path
+            value: team_bVJM4y6m4VCyy101JzA3szlVGRb
+        requestBody:
+          contentType: application/json
+          payload:
+            data:
+              attributes:
+                address: Address
+                currency: USD
+                name: Name
+              id: team_bVJM4y6m4VCyy101JzA3szlVGRb
+              type: teams
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":{"id":"team_bVJM4y6m4VCyy101JzA3szlVGRb","attributes":{"name":"Langworth-Langosh","slug":"langworth-langosh","address":"2746 Joe Stream","currency":"WST","enforce_mfa":false}}}
+            type: simple
+    x-speakeasy-test-group: teams
+    x-speakeasy-test-rebuild: true
+  - workflowId: get-team-members-Success
+    steps:
+      - stepId: test
+        operationId: get-team-members
+        parameters:
+          - name: page[size]
+            in: query
+            value: 20
+          - name: page[number]
+            in: query
+            value: 1
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":[{"id":"user_4V815bRpPLCKKQnvA2yESr5Q8Px","type":"users","attributes":{"first_name":"Arron","last_name":"Flatley","email":"gabrielle@carter.example","mfa_enabled":false,"created_at":"2025-10-31T00:00:00+00:00","updated_at":"2026-11-15T00:00:00+00:00","last_login_at":null,"role":{"id":"role_0W0Q8EJMrViyEkP5KBzzHNP4v48","name":"billing"}}}, {"id":"user_YLNGPAYPAotoo2mZRv59SGLKQW7n","type":"users","attributes":{"first_name":"Kathryne","last_name":"Purdy","email":"hilaria.rutherford@lowe.test","mfa_enabled":false,"created_at":"2025-05-31T00:00:00+00:00","updated_at":"2026-10-22T00:00:00+00:00","last_login_at":null,"role":{"id":"role_o41aor9xVMSzmNM5eQN4TkJbv42","name":"owner"}}}, {"id":"user_LxZl44k6rJtLBAYg67L7F5o3AkJP","type":"users","attributes":{"first_name":"Myles","last_name":"Lesch","email":"manual@marquardt-lueilwitz.example","mfa_enabled":false,"created_at":"2025-02-22T00:00:00+00:00","updated_at":"2026-09-20T00:00:00+00:00","last_login_at":"2025-08-05T00:00:00+00:00","role":{"id":"role_o41aor9xVMSzmNM5eQN4TkJbv42","name":"owner"}}}]}
+            type: simple
+    x-speakeasy-test-group: members
+    x-speakeasy-test-rebuild: true
+  - workflowId: post-team-members-Created
+    steps:
+      - stepId: test
+        operationId: post-team-members
+        requestBody:
+          contentType: application/json
+          payload:
+            data:
+              attributes:
+                email: maritza_schneider@mcglynn.test
+                first_name: Maricela
+                last_name: Torphy
+                role: collaborator
+              type: memberships
+        successCriteria:
+          - condition: $statusCode == 201
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":{"id":"user_pbV0Dgykd4AWz","attributes":{"first_name":"Maricela","last_name":"Torphy","email":"maritza_schneider@mcglynn.test","role":"collaborator","mfa_enabled":false,"created_at":"2026-01-14T15:56:36+00:00","updated_at":"2026-01-14T15:56:36+00:00"}}}
+            type: simple
+    x-speakeasy-test-group: teamMembers
+    x-speakeasy-test-rebuild: true
+  - workflowId: get-plans-operating-system-Success
+    steps:
+      - stepId: test
+        operationId: get-plans-operating-system
+        parameters:
+          - name: page[size]
+            in: query
+            value: 20
+          - name: page[number]
+            in: query
+            value: 1
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":[{}]}
+            type: simple
+    x-speakeasy-test-group: operatingSystems
+    x-speakeasy-test-rebuild: true
+  - workflowId: get-plans-Success
+    steps:
+      - stepId: test
+        operationId: get-plans
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":[{"id":"plan_g1mbDw8BOLv5B","type":"plans","attributes":{"slug":"m4-metal-small-42","name":"m4.metal.small-42","features":[],"specs":{"cpu":{"type":"E-2276G","clock":3.8,"cores":6,"count":1},"memory":{"total":32},"drives":[{"count":1,"size":"3.8TB","type":"SSD"}],"nics":[{"count":1,"type":"10 Gbps"}],"gpu":{"count":4,"type":"NVIDIA H100","vram_per_gpu":null,"interconnect":null}},"regions":[{"name":"Brazil","deploys_instantly":[],"locations":{"available":["SAO"],"in_stock":["SAO"]},"stock_level":"medium","pricing":{"USD":{"hour":10,"month":50,"year":100},"BRL":{"hour":53,"month":108.5,"year":205}}}]}}]}
+            type: simple
+    x-speakeasy-test-group: Plans
+    x-speakeasy-test-rebuild: true
+  - workflowId: get-plan-Success
+    steps:
+      - stepId: test
+        operationId: get-plan
+        parameters:
+          - name: plan_id
+            in: path
+            value: plan_RMLydp20DQKr1
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":{"id":"plan_RMLydp20DQKr1","type":"plans","attributes":{"slug":"g3-h100-medium-43","name":"g3.h100.medium-43","features":[],"specs":{"cpu":{"type":"E-2276G","clock":3.8,"cores":6,"count":1},"memory":{"total":32},"drives":[{"count":1,"size":"3.8TB","type":"SSD"}],"nics":[{"count":1,"type":"10 Gbps"}],"gpu":{"count":4,"type":"NVIDIA H100","vram_per_gpu":null,"interconnect":null}},"regions":[{"name":"Brazil","deploys_instantly":[],"locations":{"available":["SAO"],"in_stock":["SAO"]},"stock_level":"medium","pricing":{"USD":{"hour":10,"month":50,"year":100},"BRL":{"hour":53,"month":108.5,"year":205}}}]}}}
+            type: simple
+    x-speakeasy-test-group: Plans
+    x-speakeasy-test-rebuild: true
+  - workflowId: get-bandwidth-plans-Success
+    steps:
+      - stepId: test
+        operationId: get-bandwidth-plans
+        parameters:
+          - name: page[size]
+            in: query
+            value: 20
+          - name: page[number]
+            in: query
+            value: 1
+          - name: API-Version
+            in: header
+            value: "2023-06-01"
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":[{"id":"chile-54","type":"bandwidth_plan","attributes":{"region":"Chile 54","locations":["ASH","SAO"],"pricing":{"usd":{"monthly":5000},"brl":{"monthly":8000}}}}],"meta":{}}
+            type: simple
+    x-speakeasy-test-group: Plans
+    x-speakeasy-test-rebuild: true
+  - workflowId: update-plans-bandwidth-Success
+    steps:
+      - stepId: test
+        operationId: update-plans-bandwidth
+        requestBody:
+          contentType: application/json
+          payload:
+            data:
+              attributes:
+                project: proj_z2A3DVZ3DnawP
+                quantity: 5
+                region_slug: brazil
+              type: bandwidth_packages
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {}
+            type: simple
+    x-speakeasy-test-group: Plans
+    x-speakeasy-test-rebuild: true
+  - workflowId: get-containers-plan
+    steps:
+      - stepId: test
+        operationId: get-containers-plan
+        parameters:
+          - name: plan_id
+            in: path
+            value: <id>
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {}
+            type: simple
+    x-speakeasy-test-group: Plans
+    x-speakeasy-test-rebuild: true
+  - workflowId: get-storage-plans-Success
+    steps:
+      - stepId: test
+        operationId: get-storage-plans
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":[{"id":"plan_059EqY7kOQj8p","type":"storage_plans","attributes":{"name":"Filesystem"}}]}
+            type: simple
+    x-speakeasy-test-group: Plans
+    x-speakeasy-test-rebuild: true
+  - workflowId: get-vm-plans-Success
+    steps:
+      - stepId: test
+        operationId: get-vm-plans
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":[{"id":"plan_aNmodj4eDbE8W","type":"virtual_machine_plans","attributes":{"name":"vm.l40s.tiny","specs":{"memory":16,"vcpus":14,"disk":{"type":"local","size":{"amount":150,"unit":"gib"}}},"regions":[{"name":"United States","available":["DAL"],"pricing":{"USD":{"hour":1,"month":720,"year":8640},"BRL":{"hour":1,"month":720,"year":8640}}}],"stock_level":"low"}}]}
+            type: simple
+    x-speakeasy-test-group: vm
+    x-speakeasy-test-rebuild: true
+  - workflowId: get-projects-Success
+    steps:
+      - stepId: test
+        operationId: get-projects
+        parameters:
+          - name: filter[tags]
+            in: query
+            value: tag_GXeww714mRF2gZ05lnKgU8emo5RE,tag_QQkaK9JnV6tWwPG3pmLviXveVK0Y
+          - name: page[size]
+            in: query
+            value: 20
+          - name: page[number]
+            in: query
+            value: 1
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":[{"id":"proj_WeGoqAanqP7nz","attributes":{"name":"Durable Iron Gloves","slug":"durable-iron-gloves","description":"Heavy Duty Steel Computer","billing_type":"Hourly","billing_method":"Normal","cost":null,"environment":null,"stats":{"ip_addresses":0,"prefixes":0,"servers":0,"vlans":0},"billing":{},"team":{"id":"team_w03a5zVl9XsXVybw2gz7SNr1el2","name":"176 Team","slug":"176-team","description":"176 Team","address":"3253 VonRueden Creek, Jcbury, NV 21576","currency":{},"status":"verified","feature_flags":[]},"created_at":"2026-01-14T15:56:39+00:00","updated_at":"2026-01-14T15:56:39+00:00"}}]}
+            type: simple
+    x-speakeasy-test-group: Projects
+    x-speakeasy-test-rebuild: true
+  - workflowId: create-project-Created
+    steps:
+      - stepId: test
+        operationId: create-project
+        requestBody:
+          contentType: application/json
+          payload:
+            data:
+              attributes:
+                description: Thick slices of French toast bread, brown sugar, half-and-half and vanilla, topped with powdered sugar. With two eggs served any style, and your choice of smoked bacon or smoked ham.
+                environment: Development
+                name: Bailey and Sons
+                provisioning_type: on_demand
+              type: projects
+        successCriteria:
+          - condition: $statusCode == 201
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":{"id":"proj_0L6WO156OPlXy","attributes":{"name":"Bailey and Sons","slug":"bailey-and-sons","description":"Thick slices of French toast bread, brown sugar, half-and-half and vanilla, topped with powdered sugar. With two eggs served any style, and your choice of smoked bacon or smoked ham.","billing_type":"Normal","billing_method":"Normal","environment":"Development","stats":{"ip_addresses":0,"prefixes":0,"servers":0,"vlans":0},"billing":{"subscription_id":"sub_wj7zk7mu35c2yq","type":"Normal","method":"Normal"},"team":{"id":"team_72lL07N6leClEozwoxe9UVap9Aw","name":"179 Team","slug":"179-team","description":"179 Team","address":"Suite 460 74321 Nana Locks, Crystalport, TN 35908","currency":{},"status":"verified","feature_flags":[]},"created_at":"2026-01-14T15:56:39+00:00","updated_at":"2026-01-14T15:56:39+00:00"}}}
+            type: simple
+    x-speakeasy-test-group: Projects
+    x-speakeasy-test-rebuild: true
+  - workflowId: update-project-Success
+    steps:
+      - stepId: test
+        operationId: update-project
+        parameters:
+          - name: project_id
+            in: path
+            value: proj_Gr47qleMDAg0m
+        requestBody:
+          contentType: application/json
+          payload:
+            data:
+              attributes:
+                bandwidth_alert: false
+                description: A brand new description for the virtual network
+                name: A brand new name for the virtual network
+                tags:
+                  - tag_VgrmvzlEGJhbGYv0z8YzHLa9PKV
+                  - tag_PEAMyKnQZEHpGAWKMpB6F7EVYyYj
+              id: proj_Gr47qleMDAg0m
+              type: projects
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":{"id":"proj_Gr47qleMDAg0m","attributes":{"name":"Moore-Durgan","slug":"moore-durgan","description":"Sequi occaecati eaque exercitationem.","billing_type":"Normal","billing_method":"Normal","environment":"Production","stats":{"ip_addresses":0,"prefixes":0,"servers":0,"vlans":0},"billing":{"subscription_id":"sub_5sst6soyu2lzm0","type":"Normal","method":"Normal"},"team":{"id":"team_mygwarnav0hG97b9393biKZxall","name":"198 Team","slug":"198-team","description":"198 Team","address":"Apt. 401 9373 Gregg Islands, Cassinmouth, NC 33577-6685","currency":{},"status":"verified","feature_flags":[]},"created_at":"2026-01-14T15:56:40+00:00","updated_at":"2026-01-14T15:56:40+00:00"}}}
+            type: simple
+    x-speakeasy-test-group: Projects
+    x-speakeasy-test-rebuild: true
+  - workflowId: post-project-ssh-key-Created
+    steps:
+      - stepId: test
+        operationId: post-project-ssh-key
+        parameters:
+          - name: project_id
+            in: path
+            value: proj_059EqYE2qQj8p
+        requestBody:
+          contentType: application/json
+          payload:
+            data:
+              attributes:
+                name: SSH Key
+                public_key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDOLFnjGP3Jsh1usHNS2EILgfqZNC9pOvNqBZqxH+qNAdZdQCzy2csMuiq+ZwLA8Mm4Vo5CvSgBHs/kuZRUKyTl+79YUMZIj8PhHzL4XbdqX1ZnAIklHWcJaveB0+UXLEPKGzFIFq+FkuwtiXQsVe5NnSpIDYgpzhqEs38NsnXvsubKphGUdARDhaxvMdUUl4YsAtLHKMzSyIvE6xwfTtIVwA9bZt/8GoBzrn9px9PEcf25Rgd2NhOYs3WYcZuwvRmfcFdi2vGhVqTPqL9n16R/n5jknxHYrTyqWNxJdpdvg2YqXpN7vnFNoOjYFD6EahJ0pF/+WL4tPCIkLfoaVaSx
+              type: ssh_keys
+        successCriteria:
+          - condition: $statusCode == 201
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":{"id":"ssh_w5AEmq7XDBkWX","type":"ssh_keys","attributes":{"name":"SSH Key","public_key":"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDOLFnjGP3Jsh1usHNS2EILgfqZNC9pOvNqBZqxH+qNAdZdQCzy2csMuiq+ZwLA8Mm4Vo5CvSgBHs/kuZRUKyTl+79YUMZIj8PhHzL4XbdqX1ZnAIklHWcJaveB0+UXLEPKGzFIFq+FkuwtiXQsVe5NnSpIDYgpzhqEs38NsnXvsubKphGUdARDhaxvMdUUl4YsAtLHKMzSyIvE6xwfTtIVwA9bZt/8GoBzrn9px9PEcf25Rgd2NhOYs3WYcZuwvRmfcFdi2vGhVqTPqL9n16R/n5jknxHYrTyqWNxJdpdvg2YqXpN7vnFNoOjYFD6EahJ0pF/+WL4tPCIkLfoaVaSx","fingerprint":"0a:00:34:53:51:0e:a5:4e:06:2c:d7:16:88:96:82:f3","user":{"id":"user_geJbN1G962iVzBrra7R9TkaXw28","first_name":"Fletcher","last_name":"Thompson","email":"shawn@klein.example","created_at":"2025-12-31T00:00:00.000Z","updated_at":"2025-05-16T00:00:00.000Z","role":{"id":"role_QJ5olj6Jk7uWz0ybo0XkcXYZegPo","name":"owner","created_at":"2025-12-23T00:00:00.000Z","updated_at":"2026-03-20T00:00:00.000Z"}},"project":{"id":"proj_059EqYE2qQj8p","name":"Incredible Silk Pants","slug":"incredible-silk-pants","description":"Lightweight Iron Bench","billing_type":"Normal","provisioning_type":"on_demand","billing_method":"Normal","bandwidth_alert":false,"environment":null,"billing":{},"stats":{"ip_addresses":0,"prefixes":0,"servers":0,"vlans":0}},"created_at":"2026-01-14T15:56:41+00:00","updated_at":"2026-01-14T15:56:41+00:00"}}}
+            type: simple
+    x-speakeasy-test-group: Projects_sshKeys
+    x-speakeasy-test-rebuild: true
+  - workflowId: get-project-ssh-keys-Success
+    steps:
+      - stepId: test
+        operationId: get-project-ssh-keys
+        parameters:
+          - name: project_id
+            in: path
+            value: proj_5AEmq7wMqBkWX
+          - name: filter[tags]
+            in: query
+            value: tag_5wKQ2Y9eoAi5plr4zlQ6tjl6rEw,tag_8GKKZ6B9MbtYl4K09gj4fXy9Nneg
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":[{"id":"ssh_mw49QDB5qagKb","type":"ssh_keys","attributes":{"name":"hirthe-ankunding.example","public_key":"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCmmIH/Esj4Cpz6utdAJN+syqnQ9xBHMGXKEKTecy2Qn2F7riuCDe7ICRDmpVnUhWJtvWGwrnGZgJkt3/q72lRGeMfBXF68cdvrzHMl+vDpQbmd6WAyCl4ufhGJyVrsw9N5eTMm9DOALWnd6SBldR6aubGUhhITI/ODh3N/l/0YPP2Nqif0lVrBCyxFBs894uNgbG2SR1hS6g7ZA8IfrUtQE3OPXMaVyIpfbdDVSVerOB9xZu2A8J+Dx/8hV7RPeed+R8D8wt9zLul03kaC/mrwXYrQDtEjqfgzLr/DtskKu02jyL3o2aXY0PmUtUX0QVDBOD9QImXOPLJGtagDfYER","fingerprint":"59:4a:b2:bf:13:8c:e4:18:dc:49:24:4b:37:f1:5d:2e","user":{"id":"user_Gz4meW9wlVc2Q36vbgXgu05XYgo","first_name":"Tracy","last_name":"Corkery","email":"bennett@johnson-beatty.example","created_at":"2025-11-29T00:00:00.000Z","updated_at":"2025-12-07T00:00:00.000Z","role":{"id":"role_Jp9VwYlWgbTMl0Po7RpYteZX4pj","name":"owner","created_at":"2025-10-11T00:00:00.000Z","updated_at":"2026-08-03T00:00:00.000Z"}},"project":{"id":"proj_RMLydp7XOQKr1","name":"Lightweight Silk Wallet","slug":"lightweight-silk-wallet","description":"Synergistic Copper Coat","billing_type":"Normal","provisioning_type":"on_demand","billing_method":"Normal","bandwidth_alert":false,"environment":null,"billing":{},"stats":{"ip_addresses":0,"prefixes":0,"servers":0,"vlans":0}},"created_at":"2026-01-14T15:56:40+00:00","updated_at":"2026-01-14T15:56:40+00:00"}}],"meta":{}}
+            type: simple
+    x-speakeasy-test-group: SSH Keys
+    x-speakeasy-test-rebuild: true
+  - workflowId: get-project-ssh-key-Success
+    steps:
+      - stepId: test
+        operationId: get-project-ssh-key
+        parameters:
+          - name: project_id
+            in: path
+            value: proj_kjQwdE0XOYNVP
+          - name: ssh_key_id
+            in: path
+            value: ssh_zGr47qlMDAg0m
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":{"id":"ssh_zGr47qlMDAg0m","type":"ssh_keys","attributes":{"name":"breitenberg-blick.test","public_key":"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCUO+zsQdGJJGFIJT6R9PRgnfpA1NiIMBmfZK13pmAsC/aEr4TvJT+q60U2DZVeQi2AxdPwk3JrGpOgDUOKA9M6FlCXjCMWS5VINwbt6+P7ZCSThqdPPETrcDNd2wgNs+Q5kxRHqlknDu4KszIf14cXNnWCYjCly2+wV/Y17XuHGhHnzRSCf30mNtqQngKqkOHOB+G2P8RaZ6g70wOOoSlDRo3mxQ0vA62U25FeTbFdhkIrFDYsPX+4JL1bXYkRD3KIbfvH99RHtd/wtcqwpUuHoKdyiUNyJFBvtj912zVh+0n8zfe58Rmz0J9wGCTir3Qh/FwAVKB2kLpRHde7kZlv","fingerprint":"47:0f:68:b5:e7:4c:5c:32:b6:97:3d:e9:17:df:6d:93","user":{"id":"user_0VVWJmQwmzUyMYL0Zv37FwW0aWVP","first_name":"Margarete","last_name":"Huels","email":"charlie@okeefe.example","created_at":"2025-09-01T00:00:00.000Z","updated_at":"2025-12-20T00:00:00.000Z","role":{"id":"role_jZxLKXzGNXt0PYgaW4QbfKMPEgM","name":"owner","created_at":"2025-03-24T00:00:00.000Z","updated_at":"2026-06-05T00:00:00.000Z"}},"project":{"id":"proj_kjQwdE0XOYNVP","name":"Intelligent Rubber Bench","slug":"intelligent-rubber-bench","description":"Rustic Linen Clock","billing_type":"Hourly","provisioning_type":"on_demand","billing_method":"Normal","bandwidth_alert":false,"environment":null,"billing":{},"stats":{"ip_addresses":0,"prefixes":0,"servers":0,"vlans":0}},"created_at":"2026-01-14T15:56:41+00:00","updated_at":"2026-01-14T15:56:41+00:00"}}}
+            type: simple
+    x-speakeasy-test-group: SSH Keys
+    x-speakeasy-test-rebuild: true
+  - workflowId: put-project-ssh-key-Success
+    steps:
+      - stepId: test
+        operationId: put-project-ssh-key
+        parameters:
+          - name: project_id
+            in: path
+            value: proj_v9BVDaR3ORm1W
+          - name: ssh_key_id
+            in: path
+            value: ssh_zlkg1DegdvZE5
+        requestBody:
+          contentType: application/json
+          payload:
+            data:
+              attributes:
+                name: New SSH Key Name
+                tags:
+                  - tag_rB7B21L1QbiJ6yWYxQLmHWJE3GmR
+                  - tag_57nzyG0Bn3c5wooyYyeLH1w9kmN
+              id: ssh_zlkg1DegdvZE5
+              type: ssh_keys
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":{"id":"ssh_zlkg1DegdvZE5","type":"ssh_keys","attributes":{"name":"ruecker.example","public_key":"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDbDuCsEBno4lL6+lLXiBuziWK+go4/TQ2xXWNkyO9PEQSwp8t7fu5USARgUl5HxRK2K+enzTOGVYG+IGWTh8GsNQ68D+6VQZDafStcAoRX7/drrIbkMho3Fv5o5mfjIeMB9A6yT7FxsWFx4VkV8wlCLn3HSq/Q2fvuKh3j10B/ZKCG14K2Que9xrGhCbAGVzxrCozWc4yCdpXSL0CFUOOQDpOa44VzcMVkXqxyaJYDjlxMklfGQ/81YjtM5hne0kFPajeVmHZGQ7QsZZEww/P7c0pL44n9b/sYmzHOuZYFCM3MuU2pfonEJBOVfFVeXh5pPvUmis8mxxCAQhtzJE4D","fingerprint":"17:c4:55:c4:1b:a3:1f:fd:89:70:2d:c3:55:7a:4c:6e","user":{"id":"user_Rzg2JEoZNASA1bznzWJBI6GXJ0v","first_name":"Meghann","last_name":"Windler","email":"jonah_bartoletti@mueller.example","created_at":"2026-01-10T00:00:00.000Z","updated_at":"2025-03-26T00:00:00.000Z","role":{"id":"role_6noZ5alPanUpr0yoVygMCL6mK88","name":"owner","created_at":"2025-07-29T00:00:00.000Z","updated_at":"2026-05-30T00:00:00.000Z"}},"project":{"id":"proj_v9BVDaR3ORm1W","name":"Sleek Linen Lamp","slug":"sleek-linen-lamp","description":"Ergonomic Rubber Gloves","billing_type":"Normal","provisioning_type":"on_demand","billing_method":"Normal","bandwidth_alert":false,"environment":null,"billing":{},"stats":{"ip_addresses":0,"prefixes":0,"servers":0,"vlans":0}},"created_at":"2026-01-14T15:56:42+00:00","updated_at":"2026-01-14T15:56:42+00:00"}}}
+            type: simple
+    x-speakeasy-test-group: SSH Keys
+    x-speakeasy-test-rebuild: true
+  - workflowId: get-ssh-keys-Success
+    steps:
+      - stepId: test
+        operationId: get-ssh-keys
+        parameters:
+          - name: filter[tags]
+            in: query
+            value: tag_A06EMPEmKXhKBNKgWrv0CRZMN5a,tag_P7xlGZzYNZF4w3YXRrYMU7AjQEAX
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":[{"id":"ssh_VE1Wd3L7qXnZJ","type":"ssh_keys","attributes":{"name":"quigley-hudson.example","public_key":"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCuDo1r0gQTdX/8l4Ko7ZAYJLimzA1+eom99SFnMKwZmGVubhsnvQ8sCJAqjn1gO66+RrDwrWb+iqM7vlQlodiMr9VTOCxDke9MhW5peRP94vKyptquzJW8J+Y3qNcM774bOrQXpQMo92i5d4ffPYmEoifxVYEhmZrM2Yxr3zqLW0cs446RvCDRLTyGAhte6F9i1Qz95U4WqVkJ9Y5A/cSwJ1W17lK+e8ZMpjkrZXUL0gYGylM7BJRf+R6XOnXAdBEW1Dr8QN+s8ai4m5Y0htwPqTfL5/rGiVrES+QnDUJDe5mtpa3v51geAzgXTFtw3JCGpGyUbv0kITvFJBwNMvUz","fingerprint":"a5:3b:97:0c:b5:2a:a1:6d:e4:93:2f:9d:5f:a6:0e:28","user":{"id":"user_Xjm6jLAYleIy8YRwoMyLCBbXypG","first_name":"Lashawna","last_name":"Wuckert","email":"shawnee_runolfsdottir@olson-gulgowski.test","created_at":"2025-10-16T00:00:00.000Z","updated_at":"2025-04-04T00:00:00.000Z","role":{"id":"role_5QB3mJAbazs5MbgR5RkLFro6YVY","name":"owner","created_at":"2025-12-23T00:00:00.000Z","updated_at":"2026-11-24T00:00:00.000Z"}},"project":{},"created_at":"2026-01-14T15:57:04+00:00","updated_at":"2026-01-14T15:57:04+00:00"}}],"meta":{}}
+            type: simple
+    x-speakeasy-test-group: SSH Keys
+    x-speakeasy-test-rebuild: true
+  - workflowId: post-ssh-key-Created
+    steps:
+      - stepId: test
+        operationId: post-ssh-key
+        requestBody:
+          contentType: application/json
+          payload:
+            data:
+              attributes:
+                name: SSH Key
+                project: proj_z2A3DV4wdnawP
+                public_key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDOLFnjGP3Jsh1usHNS2EILgfqZNC9pOvNqBZqxH+qNAdZdQCzy2csMuiq+ZwLA8Mm4Vo5CvSgBHs/kuZRUKyTl+79YUMZIj8PhHzL4XbdqX1ZnAIklHWcJaveB0+UXLEPKGzFIFq+FkuwtiXQsVe5NnSpIDYgpzhqEs38NsnXvsubKphGUdARDhaxvMdUUl4YsAtLHKMzSyIvE6xwfTtIVwA9bZt/8GoBzrn9px9PEcf25Rgd2NhOYs3WYcZuwvRmfcFdi2vGhVqTPqL9n16R/n5jknxHYrTyqWNxJdpdvg2YqXpN7vnFNoOjYFD6EahJ0pF/+WL4tPCIkLfoaVaSx
+              type: ssh_keys
+        successCriteria:
+          - condition: $statusCode == 201
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":{"id":"ssh_QraYDPweqpjwW","type":"ssh_keys","attributes":{"name":"SSH Key","public_key":"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDOLFnjGP3Jsh1usHNS2EILgfqZNC9pOvNqBZqxH+qNAdZdQCzy2csMuiq+ZwLA8Mm4Vo5CvSgBHs/kuZRUKyTl+79YUMZIj8PhHzL4XbdqX1ZnAIklHWcJaveB0+UXLEPKGzFIFq+FkuwtiXQsVe5NnSpIDYgpzhqEs38NsnXvsubKphGUdARDhaxvMdUUl4YsAtLHKMzSyIvE6xwfTtIVwA9bZt/8GoBzrn9px9PEcf25Rgd2NhOYs3WYcZuwvRmfcFdi2vGhVqTPqL9n16R/n5jknxHYrTyqWNxJdpdvg2YqXpN7vnFNoOjYFD6EahJ0pF/+WL4tPCIkLfoaVaSx","fingerprint":"0a:00:34:53:51:0e:a5:4e:06:2c:d7:16:88:96:82:f3","user":{"id":"user_RJK9eae5KlTAKQoBReVKFGQRVJ7","first_name":"Meda","last_name":"Schowalter","email":"dana.lind@mayert-kreiger.test","created_at":"2025-04-25T00:00:00.000Z","updated_at":"2025-07-21T00:00:00.000Z","role":{"id":"role_AzG5AagWN1fKg1okmoG9uWWoN5my","name":"owner","created_at":"2025-05-15T00:00:00.000Z","updated_at":"2026-12-02T00:00:00.000Z"}},"project":{"id":"proj_z2A3DV4wdnawP","name":"Ergonomic Cotton Gloves","slug":"ergonomic-cotton-gloves","description":"Small Concrete Bottle","billing_type":"Normal","provisioning_type":"on_demand","billing_method":"Normal","bandwidth_alert":false,"environment":null,"billing":{},"stats":{"ip_addresses":0,"prefixes":0,"servers":0,"vlans":0}},"created_at":"2026-01-14T15:57:05+00:00","updated_at":"2026-01-14T15:57:05+00:00"}}}
+            type: simple
+    x-speakeasy-test-group: SSH Keys
+    x-speakeasy-test-rebuild: true
+  - workflowId: get-ssh-key-Success
+    steps:
+      - stepId: test
+        operationId: get-ssh-key
+        parameters:
+          - name: ssh_key_id
+            in: path
+            value: ssh_LYV8DZ12q5QoE
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":{"id":"ssh_LYV8DZ12q5QoE","type":"ssh_keys","attributes":{"name":"okon.test","public_key":"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDbsRT5a6prybLLxm/7kojvMNCCQ2UIM9/7UaxhOWYM8om+3IwB1EMQEyiNrIJtmJ7OYUz1mb5cd2Ra0nl0GztBFbMiqsXOFj+yiAYXEObciMNg65QxUNIe3goOJBwXdhRp/n3uRk8VePSETMTtjfVMgAiY2/LLqLgpN0eYBaZN+E7/Z3VHjh53krElLex0oJaCfIrHYb4GvtdmbZiwUpqGOlg41/cMxyEV2E/KHHhQOHm1/xCCzPlTNsf26O+oiJCRuzFaYUctrr7XC/kN1H9oH2nYNKZmZHKLKKFOdhXAf7IzI6tagL4CHInysYWaMdJ8lyHGY9+wKeSrtQQmgNoR","fingerprint":"c8:8d:f7:d8:5d:4c:fe:d4:09:85:4f:04:91:e4:0e:9c","user":{"id":"user_0A9pmoYAB8Uy5bJ6EmLVI0nKkaa","first_name":"Jonelle","last_name":"Grady","email":"irina.miller@reilly.example","created_at":"2025-04-29T00:00:00.000Z","updated_at":"2025-06-08T00:00:00.000Z","role":{"id":"role_1KvABgXK63IKBM79NjvwU55yXNoW","name":"owner","created_at":"2025-02-28T00:00:00.000Z","updated_at":"2026-12-25T00:00:00.000Z"}},"project":{},"created_at":"2026-01-14T15:57:05+00:00","updated_at":"2026-01-14T15:57:05+00:00"}}}
+            type: simple
+    x-speakeasy-test-group: SSH Keys
+    x-speakeasy-test-rebuild: true
+  - workflowId: put-ssh-key-Success
+    steps:
+      - stepId: test
+        operationId: put-ssh-key
+        parameters:
+          - name: ssh_key_id
+            in: path
+            value: ssh_GnzRD5xAqM5yw
+        requestBody:
+          contentType: application/json
+          payload:
+            data:
+              attributes:
+                name: New SSH Key Name
+                tags:
+                  - tag_JLA906BzyKHLyVJbJr8NH3QQbev
+                  - tag_Yy7PJ68y22FoQyBppnW7FjNGX1k
+              id: ssh_GnzRD5xAqM5yw
+              type: ssh_keys
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":{"id":"ssh_GnzRD5xAqM5yw","type":"ssh_keys","attributes":{"name":"bradtke.example","public_key":"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCZzuE/2myrBWwvs5ayKE/p37nbhUWBpVfKjFA/6meaIFj3pKHv7lK3rZxOz/QnrUPsTS04kXVwvOG1Ms+ZQk7irHNzSWksKIFK8mPZWf9T6Pb2DbUduela1jUnmelVKPoiF6lUVnA8IayHbeRD5kaGS1zr35WzstNhUPXoab6QI9NSakvxUxciGitJ/nMWSJlfV3y48OQ1NE9iuqoSWomWc8/NEjk5x2uJcte2ZA336hjYHQxo9+DYhLq9jRcxw3RrzqkWFDuVT4SW82x5ERIZYUKZmywOwk8gCePNaUkzRU4G6qwADfpBovbicZ4+9WBpZsJ7vj8OqM35TdFS7ZjJ","fingerprint":"52:c8:05:f4:9b:f0:42:17:40:07:64:0d:33:12:9a:47","user":{"id":"user_yReEYZlaagFl4YmjMZ6GCpvwJJJb","first_name":"Gale","last_name":"Brown","email":"willa.wunsch@veum.example","created_at":"2025-02-17T00:00:00.000Z","updated_at":"2025-05-31T00:00:00.000Z","role":{"id":"role_bBeWeR8mBLuyLVoQwzNWcng2ekv","name":"owner","created_at":"2025-11-16T00:00:00.000Z","updated_at":"2026-06-05T00:00:00.000Z"}},"project":{},"created_at":"2026-01-14T15:57:06+00:00","updated_at":"2026-01-14T15:57:06+00:00"}}}
+            type: simple
+    x-speakeasy-test-group: SSH Keys
+    x-speakeasy-test-rebuild: true
+  - workflowId: get-project-users-data-Success
+    steps:
+      - stepId: test
+        operationId: get-project-users-data
+        parameters:
+          - name: project_id
+            in: path
+            value: proj_LYV8DZYQq5QoE
+          - name: extra_fields[user_data]
+            in: query
+            value: decoded_content
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":[{}],"meta":{}}
+            type: simple
+    x-speakeasy-test-group: User Data
+    x-speakeasy-test-rebuild: true
+  - workflowId: get-project-user-data-Success
+    steps:
+      - stepId: test
+        operationId: get-project-user-data
+        parameters:
+          - name: project_id
+            in: path
+            value: proj_e8pKq0GYdWAob
+          - name: user_data_id
+            in: path
+            value: ud_VLMmAD8EOwop2
+          - name: extra_fields[user_data]
+            in: query
+            value: decoded_content
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":{"id":"ud_VLMmAD8EOwop2","type":"user_data","attributes":{"description":"Three egg omelet with Roquefort cheese, chives, and ham. With a side of roasted potatoes, and your choice of toast or croissant.","content":"Q3JlYW15IG1hc2NhcnBvbmUgY2hlZXNlIGFuZCBjdXN0YXJkIGxheWVyZWQgYmV0d2VlbiBlc3ByZXNzbyBhbmQgcnVtIHNvYWtlZCBob3VzZS1tYWRlIGxhZHlmaW5nZXJzLCB0b3BwZWQgd2l0aCBWYWxyaG9uYSBjb2NvYSBwb3dkZXIu","project":{"id":"proj_e8pKq0GYdWAob","name":"Enormous Silk Car","slug":"enormous-silk-car","description":"Aerodynamic Granite Bag","billing_type":"Normal","provisioning_type":"on_demand","billing_method":"Normal","bandwidth_alert":false,"environment":null,"billing":{},"stats":{"ip_addresses":0,"prefixes":0,"servers":0,"vlans":0}},"created_at":"2026-01-14T15:56:43+00:00","updated_at":"2026-01-14T15:56:43+00:00"}},"meta":{}}
+            type: simple
+    x-speakeasy-test-group: User Data
+    x-speakeasy-test-rebuild: true
+  - workflowId: post-project-user-data-Created
+    steps:
+      - stepId: test
+        operationId: post-project-user-data
+        parameters:
+          - name: project_id
+            in: path
+            value: proj_8NkvdyMKdeLpx
+        requestBody:
+          contentType: application/json
+          payload:
+            data:
+              attributes:
+                content: I2Nsb3VkLWNvbmZpZwpydW5jbWQ6CiAtIFsgdG91Y2gsICAvaG9tZS91YnVudHUvdGVzdCBd
+                description: User Data description
+              type: user_data
+        successCriteria:
+          - condition: $statusCode == 201
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":{"id":"ud_pRMLydp0dQKr1","type":"user_data","attributes":{"description":"User Data description","content":"I2Nsb3VkLWNvbmZpZwpydW5jbWQ6CiAtIFsgdG91Y2gsICAvaG9tZS91YnVudHUvdGVzdCBd","project":{"id":"proj_8NkvdyMKdeLpx","name":"Intelligent Bronze Car","slug":"intelligent-bronze-car","description":"Small Iron Shoes","billing_type":"Normal","provisioning_type":"on_demand","billing_method":"Normal","bandwidth_alert":false,"environment":null,"billing":{},"stats":{"ip_addresses":0,"prefixes":0,"servers":0,"vlans":0}},"created_at":"2026-01-14T15:56:43+00:00","updated_at":"2026-01-14T15:56:43+00:00"}},"meta":{}}
+            type: simple
+    x-speakeasy-test-group: User Data
+    x-speakeasy-test-rebuild: true
+  - workflowId: put-project-user-data
+    steps:
+      - stepId: test
+        operationId: put-project-user-data
+        parameters:
+          - name: project_id
+            in: path
+            value: <id>
+          - name: user_data_id
+            in: path
+            value: <id>
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {}
+            type: simple
+    x-speakeasy-test-group: User Data
+    x-speakeasy-test-rebuild: true
+  - workflowId: get-users-data-Success
+    steps:
+      - stepId: test
+        operationId: get-users-data
+        parameters:
+          - name: extra_fields[user_data]
+            in: query
+            value: decoded_content
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":[{}],"meta":{}}
+            type: simple
+    x-speakeasy-test-group: User Data
+    x-speakeasy-test-rebuild: true
+  - workflowId: post-user-data-Created
+    steps:
+      - stepId: test
+        operationId: post-user-data
+        requestBody:
+          contentType: application/json
+          payload:
+            data:
+              attributes:
+                content: I2Nsb3VkLWNvbmZpZwpydW5jbWQ6CiAtIFsgdG91Y2gsICAvaG9tZS91YnVudHUvdGVzdCBd
+                description: User Data description
+                project: proj_QraYDPW3qpjwW
+              type: user_data
+        successCriteria:
+          - condition: $statusCode == 201
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":{"id":"ud_w49QDB55qagKb","type":"user_data","attributes":{"description":"User Data description","content":"I2Nsb3VkLWNvbmZpZwpydW5jbWQ6CiAtIFsgdG91Y2gsICAvaG9tZS91YnVudHUvdGVzdCBd","project":{"id":"proj_QraYDPW3qpjwW","name":"Rustic Granite Gloves","slug":"rustic-granite-gloves","description":"Heavy Duty Leather Wallet","billing_type":"Normal","provisioning_type":"on_demand","billing_method":"Normal","bandwidth_alert":false,"environment":null,"billing":{},"stats":{"ip_addresses":0,"prefixes":0,"servers":0,"vlans":0}},"created_at":"2026-01-14T15:57:11+00:00","updated_at":"2026-01-14T15:57:11+00:00"}},"meta":{}}
+            type: simple
+    x-speakeasy-test-group: User Data
+    x-speakeasy-test-rebuild: true
+  - workflowId: get-user-data-Success
+    steps:
+      - stepId: test
+        operationId: get-user-data
+        parameters:
+          - name: user_data_id
+            in: path
+            value: ud_MLGXPdWgdnNWk
+          - name: extra_fields[user_data]
+            in: query
+            value: decoded_content
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":{"id":"ud_MLGXPdWgdnNWk","type":"user_data","attributes":{"description":"Three egg whites with spinach, mushrooms, caramelized onions, tomatoes and low-fat feta cheese. With herbed quinoa, and your choice of rye or whole-grain toast.","content":"VHdvIGJ1dHRlcm1pbGsgd2FmZmxlcywgdG9wcGVkIHdpdGggd2hpcHBlZCBjcmVhbSBhbmQgbWFwbGUgc3lydXAsIGEgc2lkZSBvZiB0d28gZWdncyBzZXJ2ZWQgYW55IHN0eWxlLCBhbmQgeW91ciBjaG9pY2Ugb2Ygc21va2VkIGJhY29uIG9yIHNtb2tlZCBoYW0u","project":{"id":"proj_pbV0DgkzD4AWz","name":"Sleek Iron Wallet","slug":"sleek-iron-wallet","description":"Small Silk Shoes","billing_type":"Normal","provisioning_type":"on_demand","billing_method":"Normal","bandwidth_alert":false,"environment":null,"billing":{},"stats":{"ip_addresses":0,"prefixes":0,"servers":0,"vlans":0}},"created_at":"2026-01-14T15:57:11+00:00","updated_at":"2026-01-14T15:57:11+00:00"}},"meta":{}}
+            type: simple
+    x-speakeasy-test-group: User Data
+    x-speakeasy-test-rebuild: true
+  - workflowId: patch-user-data
+    steps:
+      - stepId: test
+        operationId: patch-user-data
+        parameters:
+          - name: user_data_id
+            in: path
+            value: <id>
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {}
+            type: simple
+    x-speakeasy-test-group: User Data
+    x-speakeasy-test-rebuild: true
+  - workflowId: get-regions-Success
+    steps:
+      - stepId: test
+        operationId: get-regions
+        parameters:
+          - name: page[size]
+            in: query
+            value: 20
+          - name: page[number]
+            in: query
+            value: 1
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":[{"id":"loc_k0RyqvNvqW36X","attributes":{"slug":"luettgen-group","name":"Luettgen Group","country":{"slug":"grant-and-sons","name":"Grant and Sons"}}}]}
+            type: simple
+    x-speakeasy-test-group: Regions
+    x-speakeasy-test-rebuild: true
+  - workflowId: get-region-Success
+    steps:
+      - stepId: test
+        operationId: get-region
+        parameters:
+          - name: region_id
+            in: path
+            value: reg_GMy1DbYLqN50m
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":{"id":"loc_WVQJDMQlDRbyE","attributes":{"slug":"durgan-wunsch","name":"Durgan-Wunsch","country":{"slug":"kreiger-muller","name":"Kreiger-Muller"}}}}
+            type: simple
+    x-speakeasy-test-group: Regions
+    x-speakeasy-test-rebuild: true
+  - workflowId: get-roles-Success
+    steps:
+      - stepId: test
+        operationId: get-roles
+        parameters:
+          - name: page[size]
+            in: query
+            value: 20
+          - name: page[number]
+            in: query
+            value: 1
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":[{"id":"role_0L6WO1vEdPlXy","type":"roles","attributes":{"name":"collaborator"}}]}
+            type: simple
+    x-speakeasy-test-group: Roles
+    x-speakeasy-test-rebuild: true
+  - workflowId: get-role-id-Success
+    steps:
+      - stepId: test
+        operationId: get-role-id
+        parameters:
+          - name: role_id
+            in: path
+            value: role_LMmAD8vldwop2
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":{"id":"role_LMmAD8vldwop2","type":"roles","attributes":{"name":"billing"}},"meta":{}}
+            type: simple
+    x-speakeasy-test-group: Roles
+    x-speakeasy-test-rebuild: true
+  - workflowId: get-servers-Success
+    steps:
+      - stepId: test
+        operationId: get-servers
+        parameters:
+          - name: filter[tags]
+            in: query
+            value: tag_pjAkRjVzw0tlYBA2WX1eHzW7w79,tag_yARk1KLJAvslWY7k5wNBCaKEV7e
+          - name: page[size]
+            in: query
+            value: 20
+          - name: page[number]
+            in: query
+            value: 1
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":[{"id":"sv_WeGoqAanqP7nz","type":"servers","attributes":{"hostname":"Hostname","label":"832845NODEKG","status":"on","ipmi_status":"Normal","role":"Bare Metal","locked":false,"primary_ipv4":"19.98.98.65","primary_ipv6":"49e5:fef3:7891:16df:ccf6:93bb:a930:4dc0","created_at":null,"scheduled_deletion_at":null,"plan":{"id":"plan_pbV0Dg1Rd4AWz","name":"g3.h100.small-51","slug":"plan-slug","billing":"hourly"},"operating_system":{"name":"Ubuntu (18.04 x64 LTS)","slug":"ubuntu_18_04_x64_lts","version":"18.04 x64 LTS","features":{"raid":true,"ssh_keys":true},"distro":{"name":"Ubuntu","slug":"ubuntu","series":"bionic"}},"region":{"city":"São Paulo 74","country":"Singapore 66","site":{"id":"loc_695BdKjrOevVo","name":"São Paulo 74","slug":"SAO","facility":"São Paulo 74","rack_id":"rack_VLMmAD8EOwop2"}},"specs":{"cpu":"Xeon E-2186G CPU @ 3.80GHz (6 cores)","disk":"500 GB SSD","ram":"32 GB","nic":"","gpu":null},"interfaces":[{"role":"ipmi","name":"IPMI","mac_address":"00:11:22:33:44:55","description":"IPMI Interface"}, {"role":"internal","name":"PXE","mac_address":"66:77:88:99:aa:bb","description":"PXE Interface"}],"project":{"id":"proj_Z8rodmnGq1jLB","name":"Incredible Linen Car","slug":"incredible-linen-car","description":"Lightweight Iron Chair","billing_type":"Normal","provisioning_type":"on_demand","billing_method":"Normal","bandwidth_alert":false,"environment":null,"billing":{},"stats":{"ip_addresses":8,"prefixes":0,"servers":3,"vlans":0}},"team":{"id":"team_Ygapr2KkrMur4QneZ00yUEGl4W2","name":"292 Team","slug":"292-team","description":"292 Team","address":"Apt. 180 27016 Chi Prairie, Kenyaport, CA 12866","currency":{},"status":"verified","feature_flags":[]}}}],"meta":{}}
+            type: simple
+    x-speakeasy-test-group: Servers
+    x-speakeasy-test-rebuild: true
+  - workflowId: get-servers-SuccessWithCredentials
+    steps:
+      - stepId: test
+        operationId: get-servers
+        parameters:
+          - name: page[size]
+            in: query
+            value: 20
+          - name: page[number]
+            in: query
+            value: 1
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data": [{"id": "sv_lxWpD6xKdm6rk", "type": "servers", "attributes": {"hostname": "Hostname", "label": "474495NODEMC", "status": "on", "ipmi_status": "Normal", "role": "Bare Metal", "locked": false, "primary_ipv4": "204.198.2.102", "primary_ipv6": "941c:f42a:460b:db1e:bde3:f7d4:c0cd:fd66", "created_at": "1720608931604", "scheduled_deletion_at": "<value>", "plan": {"id": "plan_g1mbDw8BOLv5B", "name": "g3.h100.large-38", "slug": "plan-slug", "billing": "hourly"}, "operating_system": {"name": "Ubuntu (18.04 x64 LTS)", "slug": "ubuntu_18_04_x64_lts", "version": "18.04 x64 LTS", "features": {"raid": true, "ssh_keys": true}, "distro": {"name": "Ubuntu", "slug": "ubuntu", "series": "bionic"}}, "region": {"city": "São Paulo", "country": "United States", "site": {"id": "loc_RMLydp20DQKr1", "name": "São Paulo", "slug": "SAO", "facility": "São Paulo", "rack_id": "rack_VLMmAD8EOwop2"}}, "specs": {"cpu": "Xeon E-2186G CPU @ 3.80GHz (6 cores)", "disk": "500 GB SSD", "ram": "32 GB", "nic": "", "gpu": "<value>"}, "interfaces": [{"role": "ipmi", "name": "IPMI", "mac_address": "00:11:22:33:44:55", "description": "IPMI Interface"}, {"role": "internal", "name": "PXE", "mac_address": "66:77:88:99:aa:bb", "description": "PXE Interface"}], "project": {"id": "proj_8NkvdyMKdeLpx", "name": "Incredible Bronze Bench", "slug": "incredible-bronze-bench", "description": "Practical Silk Gloves", "billing_type": "Normal", "provisioning_type": "on_demand", "billing_method": "Normal", "bandwidth_alert": false, "environment": "<value>", "billing": {}, "stats": {"ip_addresses": 8, "prefixes": 0, "servers": 3, "vlans": 0}}, "team": {"id": "team_JrVbpk7aNltMLVVPwmWkfyZb5Q1", "name": "254 Team", "slug": "254-team", "description": "254 Team", "address": "95005 Krajcik Trace, Rennerview, DE 88944", "currency": {}, "status": "verified", "feature_flags": []}}}], "meta": {}}
+            type: simple
+    x-speakeasy-test-group: Servers
+    x-speakeasy-test-rebuild: true
+  - workflowId: create-server-Created
+    steps:
+      - stepId: test
+        operationId: create-server
+        requestBody:
+          contentType: application/json
+          payload:
+            data:
+              attributes:
+                hostname: BRC1
+                operating_system: ubuntu_22_04_x64_lts
+                plan: c2-small-x86
+                project: proj_lxWpD699qm6rk
+                site: ASH
+              type: servers
+        successCriteria:
+          - condition: $statusCode == 201
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":{"id":"sv_W6Q2D9xGqKLpr","type":"servers","attributes":{"hostname":"BRC1","label":"846419NODEME","status":"off","role":"Bare Metal","primary_ipv4":"171.189.35.253","primary_ipv6":"7d69:748d:26cc:796a:1248:b6be:a658:96a4","plan":{"id":"plan_8NkvdyMKdeLpx","name":"c2.small.x86","slug":"c2-small-x86","billing":"hourly"},"specs":{"cpu":"Xeon E-2186G CPU @ 3.80GHz (6 cores)","disk":"500 GB SSD","ram":"32 GB","nic":""},"interfaces":[{"role":"ipmi","name":"IPMI","mac_address":"00:11:22:33:44:55","description":"IPMI Interface"}, {"role":"internal","name":"PXE","mac_address":"66:77:88:99:aa:bb","description":"PXE Interface"}]}},"meta":{}}
+            type: simple
+    x-speakeasy-test-group: Servers
+    x-speakeasy-test-rebuild: true
+  - workflowId: get-server-Success
+    steps:
+      - stepId: test
+        operationId: get-server
+        parameters:
+          - name: server_id
+            in: path
+            value: sv_VE1Wd3aXDXnZJ
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":{"id":"sv_VE1Wd3aXDXnZJ","type":"servers","attributes":{"hostname":"Hostname","label":"327106NODEQI","status":"on","ipmi_status":"Normal","role":"Bare Metal","locked":false,"primary_ipv4":"9.120.132.45","primary_ipv6":"889e:8540:973b:5c04:abce:2551:47ae:a67e","created_at":null,"scheduled_deletion_at":null,"plan":{"id":"plan_yQrJdN9JO30gv","name":"c2.large.arm","slug":"c2-large-arm","billing":"hourly"},"operating_system":{"name":"Ubuntu (18.04 x64 LTS)","slug":"ubuntu_18_04_x64_lts","version":"18.04 x64 LTS","features":{"raid":true,"ssh_keys":true},"distro":{"name":"Ubuntu","slug":"ubuntu","series":"bionic"}},"region":{"city":"São Paulo 81","country":"Mexico 73","site":{"id":"loc_GMy1DbNgDN50m","name":"São Paulo 81","slug":"SAO","facility":"São Paulo 81","rack_id":"rack_6VE1Wd37dXnZJ"}},"specs":{"cpu":"","disk":"","ram":"","nic":"","gpu":null},"interfaces":[{"role":"ipmi","name":"IPMI","mac_address":"00:11:22:33:44:55","description":"IPMI Interface"}, {"role":"internal","name":"PXE","mac_address":"66:77:88:99:aa:bb","description":"PXE Interface"}],"project":{"id":"proj_LMmAD8E4Owop2","name":"Awesome Granite Chair","slug":"awesome-granite-chair","description":"Mediocre Paper Wallet","billing_type":"Normal","provisioning_type":"on_demand","billing_method":"Normal","bandwidth_alert":false,"environment":null,"billing":{},"stats":{"ip_addresses":2,"prefixes":0,"servers":1,"vlans":0}},"team":{"id":"team_M2WyX3zpQMf5Wvaw6zkotLZx0Ne","name":"308 Team","slug":"308-team","description":"308 Team","address":"Suite 667 299 Enoch Lights, Lake Lilli, MT 24573-1532","currency":{},"status":"verified","feature_flags":[]}}},"meta":{}}
+            type: simple
+    x-speakeasy-test-group: Servers
+    x-speakeasy-test-rebuild: true
+  - workflowId: get-server-SuccessWithCredentials
+    steps:
+      - stepId: test
+        operationId: get-server
+        parameters:
+          - name: server_id
+            in: path
+            value: <id>
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data": {"id": "sv_Gr47qleMDAg0m", "type": "servers", "attributes": {"hostname": "Hostname", "label": "203126NODEEM", "status": "on", "ipmi_status": "Normal", "role": "Bare Metal", "locked": false, "primary_ipv4": "171.105.213.73", "primary_ipv6": "539e:7347:6e9a:c432:bb5a:87b4:2ce1:4566", "created_at": "1707555929429", "scheduled_deletion_at": "<value>", "plan": {"id": "plan_aNmodj4eDbE8W", "name": "c2.large.arm", "slug": "c2-large-arm", "billing": "hourly"}, "operating_system": {"name": "Ubuntu (18.04 x64 LTS)", "slug": "ubuntu_18_04_x64_lts", "version": "18.04 x64 LTS", "features": {"raid": true, "ssh_keys": true}, "distro": {"name": "Ubuntu", "slug": "ubuntu", "series": "bionic"}}, "region": {"city": "São Paulo", "country": "Mexico", "site": {"id": "loc_A05EdQL1OvKYQ", "name": "São Paulo", "slug": "SAO", "facility": "São Paulo", "rack_id": "rack_6VE1Wd37dXnZJ"}}, "specs": {"cpu": "", "disk": "", "ram": "", "nic": "", "gpu": "<value>"}, "interfaces": [{"role": "ipmi", "name": "IPMI", "mac_address": "00:11:22:33:44:55", "description": "IPMI Interface"}, {"role": "internal", "name": "PXE", "mac_address": "66:77:88:99:aa:bb", "description": "PXE Interface"}], "project": {"id": "proj_KXgRdRyoOv9k5", "name": "Rustic Silk Knife", "slug": "rustic-silk-knife", "description": "Heavy Duty Concrete Keyboard", "billing_type": "Normal", "provisioning_type": "on_demand", "billing_method": "Normal", "bandwidth_alert": false, "environment": "<value>", "billing": {}, "stats": {"ip_addresses": 2, "prefixes": 0, "servers": 1, "vlans": 0}}, "team": {"id": "team_8mKNxlmL2McYo7Jz87KlCXynmenj", "name": "270 Team", "slug": "270-team", "description": "270 Team", "address": "Apt. 279 839 Boehm Street, South Randall, OH 69160", "currency": {}, "status": "verified", "feature_flags": []}}}, "meta": {}}
+            type: simple
+    x-speakeasy-test-group: Servers
+    x-speakeasy-test-rebuild: true
+  - workflowId: update-server-Success
+    steps:
+      - stepId: test
+        operationId: update-server
+        parameters:
+          - name: server_id
+            in: path
+            value: sv_yQrJdNAGO30gv
+        requestBody:
+          contentType: application/json
+          payload:
+            data:
+              attributes:
+                hostname: new-hostname
+                project: proj_yQrJdNMGO30gv
+              id: sv_yQrJdNAGO30gv
+              type: servers
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":{"id":"sv_yQrJdNAGO30gv","type":"servers","attributes":{"hostname":"Lightweight Wooden Knife","label":"136877NODEKM","status":"unknown","ipmi_status":"Normal","role":"Bare Metal","locked":false,"primary_ipv4":"214.249.69.62","primary_ipv6":"b0c8:139:6f83:7f0c:6e2:33a3:78e4:e03f","created_at":null,"scheduled_deletion_at":null,"plan":{"id":"plan_3YjJOLLyOvZ87","name":"c2.large.arm","slug":"c2-large-arm","billing":"hourly"},"operating_system":{},"region":{"city":"Frankfurt 115","country":"Germany 107","site":{"id":"loc_aNmodjGyqbE8W","name":"Frankfurt 115","slug":"FRA96","facility":"Frankfurt 115","rack_id":"rack_byQrJdNJd30gv"}},"specs":{"cpu":"","disk":"","ram":"","nic":"","gpu":null},"interfaces":[],"project":{"id":"proj_yQrJdNMGO30gv","name":"Awesome Wool Computer","slug":"awesome-wool-computer","description":"Practical Rubber Shirt","billing_type":"Normal","provisioning_type":"on_demand","billing_method":"Normal","bandwidth_alert":false,"environment":null,"billing":{},"stats":{"ip_addresses":0,"prefixes":0,"servers":1,"vlans":0}},"team":{"id":"team_YQZmYB34Nxso86ZgyKj2UEPEnyA","name":"348 Team","slug":"348-team","description":"348 Team","address":"51588 Goodwin Mission, Port Oswaldo, KS 14871-0638","currency":{},"status":"verified","feature_flags":[]}}},"meta":{}}
+            type: simple
+    x-speakeasy-test-group: Servers
+    x-speakeasy-test-rebuild: true
+  - workflowId: get-server-deploy-config-Success
+    steps:
+      - stepId: test
+        operationId: get-server-deploy-config
+        parameters:
+          - name: server_id
+            in: path
+            value: sv_pRMLydp0dQKr1
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":{"id":"sv_pRMLydp0dQKr1","attributes":{"operating_system":"debian_10","hostname":"Asoka","raid":"raid-0","user_data":"ud_0g1mbDwBqLv5B","ssh_keys":["ssh_0g1mbDwBqLv5B"],"partitions":[{"path":"/","size_in_gb":300,"filesystem_type":"ext4"}]}}}
+            type: simple
+    x-speakeasy-test-group: Servers
+    x-speakeasy-test-rebuild: true
+  - workflowId: update-server-deploy-config-Success
+    steps:
+      - stepId: test
+        operationId: update-server-deploy-config
+        parameters:
+          - name: server_id
+            in: path
+            value: sv_lkg1DeYLDvZE5
+        requestBody:
+          contentType: application/json
+          payload:
+            type: deploy_config
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":{"id":"sv_lkg1DeYLDvZE5","attributes":{"operating_system":"ubuntu_20_04_x64_lts","hostname":"my-hostname","raid":"raid-1","user_data":"ud_5LA73qkjdaJ2o","ssh_keys":["ssh_m5xyZOnNOWM0l"],"partitions":[{"path":"/","size_in_gb":300,"filesystem_type":"ext4"}]}}}
+            type: simple
+    x-speakeasy-test-group: Servers
+    x-speakeasy-test-rebuild: true
+  - workflowId: server-lock-Success
+    steps:
+      - stepId: test
+        operationId: server-lock
+        parameters:
+          - name: server_id
+            in: path
+            value: sv_pbV0DgjKq4AWz
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":{"id":"sv_pbV0DgjKq4AWz","type":"servers","attributes":{"hostname":"Heavy Duty Concrete Chair","label":"946654NODEUT","status":"unknown","ipmi_status":"Normal","role":"Enclosure","locked":true,"primary_ipv4":"150.158.19.54","created_at":null,"scheduled_deletion_at":null,"region":{"city":"Frankfurt 132","country":"Germany 147","site":{"id":"loc_Gr47ql4vqAg0m","name":"Frankfurt 132","slug":"FRA113","facility":"Frankfurt 132"}},"project":{"id":"proj_Gr47qloZdAg0m","name":"Heavy Duty Linen Bottle","slug":"heavy-duty-linen-bottle","description":"Awesome Copper Lamp","billing_type":"Normal","billing_method":"Normal","bandwidth_alert":false,"environment":null,"billing":{"subscription_id":"sub_6rq7u7562p9hap","type":"Normal","method":"Normal"},"stats":{"ip_addresses":0,"prefixes":0,"servers":1,"vlans":0}},"team":{"id":"team_zAoElw92Z1c36A13Vx9EF71RlMl","name":"467 Team","slug":"467-team","description":"467 Team","address":"Suite 277 939 Hermann Mall, Hongshire, NH 77247-8873","currency":{},"status":"verified"}}}}
+            type: simple
+    x-speakeasy-test-group: Servers
+    x-speakeasy-test-rebuild: true
+  - workflowId: server-unlock-Success
+    steps:
+      - stepId: test
+        operationId: server-unlock
+        parameters:
+          - name: server_id
+            in: path
+            value: sv_e8pKq0xYqWAob
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":{"id":"sv_e8pKq0xYqWAob","type":"servers","attributes":{"hostname":"Fantastic Copper Shirt","label":"275299NODEZB","status":"unknown","ipmi_status":"Normal","role":"Storage","locked":false,"primary_ipv4":"95.231.106.4","created_at":null,"scheduled_deletion_at":null,"region":{"city":"Sydney 134","country":"Australia 149","site":{"id":"loc_kjQwdEmXdYNVP","name":"Sydney 134","slug":"SYD115","facility":"Sydney 134"}},"project":{"id":"proj_aNmodjQZObE8W","name":"Enormous Marble Clock","slug":"enormous-marble-clock","description":"Synergistic Granite Gloves","billing_type":"Normal","billing_method":"Normal","bandwidth_alert":false,"environment":null,"billing":{"subscription_id":"sub_qmelg7r2lao5z3","type":"Normal","method":"Normal"},"stats":{"ip_addresses":0,"prefixes":0,"servers":1,"vlans":0}},"team":{"id":"team_L8E8kyLxxotB4WNL0Pnrhbla8NW","name":"472 Team","slug":"472-team","description":"472 Team","address":"992 Noe Neck, Lake Germanberg, FL 06343","currency":{},"status":"verified"}}}}
+            type: simple
+    x-speakeasy-test-group: Servers
+    x-speakeasy-test-rebuild: true
+  - workflowId: get-server-out-of-band-Success
+    steps:
+      - stepId: test
+        operationId: get-server-out-of-band
+        parameters:
+          - name: server_id
+            in: path
+            value: sv_GnzRD5lvqM5yw
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":{"id":"obc_AW6Q2D9lqKLpr","type":"out_of_band","attributes":{"ssh_key":{"id":"ssh_Gr47qlNMOAg0m","description":"raynor-dubuque.example","fingerprint":"d5:d6:ac:44:54:1a:d9:c3:0a:1e:c6:2a:9b:66:d5:90"},"created_at":"2026-01-14T15:56:58+00:00","username":"server-1","credentials":{"user":"vonda_littel","password":"8i97d81tjq"},"port":"2222","access_ip":"189.1.2.0","server_id":"sv_GnzRD5lvqM5yw","status":"connected"}}}
+            type: simple
+    x-speakeasy-test-group: Servers
+    x-speakeasy-test-rebuild: true
+  - workflowId: create-server-out-of-band-Created
+    steps:
+      - stepId: test
+        operationId: create-server-out-of-band
+        parameters:
+          - name: server_id
+            in: path
+            value: sv_8NkvdyGKDeLpx
+        requestBody:
+          contentType: application/json
+          payload:
+            data:
+              attributes:
+                ssh_key_id: ssh_3YjJOLMydvZ87
+              type: out_of_band
+        successCriteria:
+          - condition: $statusCode == 201
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":{"id":"obc_mw49QDB5qagKb","type":"out_of_band","attributes":{"ssh_key":{"id":"ssh_3YjJOLMydvZ87","description":"wisozk-gislason.example","fingerprint":"14:e2:8e:b3:9e:f5:08:31:b6:c7:43:6d:f5:1e:6d:b2"},"created_at":"2026-01-14T15:56:58+00:00","username":"server-1","credentials":{"user":"donn","password":"398ig362ci"},"port":"2222","access_ip":"189.1.2.0","server_id":"sv_8NkvdyGKDeLpx","status":"connected"}}}
+            type: simple
+    x-speakeasy-test-group: Servers
+    x-speakeasy-test-rebuild: true
+  - workflowId: create-server-action-Created
+    steps:
+      - stepId: test
+        operationId: create-server-action
+        parameters:
+          - name: server_id
+            in: path
+            value: sv_WVQJDMVBORbyE
+        requestBody:
+          contentType: application/json
+          payload:
+            data:
+              attributes:
+                action: reboot
+              type: actions
+        successCriteria:
+          - condition: $statusCode == 201
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":{"id":"act_73qkbw0QmjdaJ","type":"actions","attributes":{"status":"Rebooting device"}},"meta":{}}
+            type: simple
+    x-speakeasy-test-group: Servers
+    x-speakeasy-test-rebuild: true
+  - workflowId: create-ipmi-session-Created
+    steps:
+      - stepId: test
+        operationId: create-ipmi-session
+        parameters:
+          - name: server_id
+            in: path
+            value: sv_Qkm7dXaRq8nZV
+        successCriteria:
+          - condition: $statusCode == 201
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":{"id":"ipmi_mw49QDB5qagKb","type":"ipmi_sessions","attributes":{"ipmi_address":"10.0.10.1","ipmi_username":"customer_access","ipmi_password":"ipmi_password"}}}
+            type: simple
+    x-speakeasy-test-group: Servers
+    x-speakeasy-test-rebuild: true
+  - workflowId: server-start-rescue-mode-Created
+    steps:
+      - stepId: test
+        operationId: server-start-rescue-mode
+        parameters:
+          - name: server_id
+            in: path
+            value: sv_WeGoqAWNOP7nz
+        successCriteria:
+          - condition: $statusCode == 201
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"meta":{}}
+            type: simple
+    x-speakeasy-test-group: Servers
+    x-speakeasy-test-rebuild: true
+  - workflowId: server-exit-rescue-mode-Success
+    steps:
+      - stepId: test
+        operationId: server-exit-rescue-mode
+        parameters:
+          - name: server_id
+            in: path
+            value: sv_3YjJOLQNdvZ87
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"meta":{}}
+            type: simple
+    x-speakeasy-test-group: Servers
+    x-speakeasy-test-rebuild: true
+  - workflowId: server-schedule-deletion-Created
+    steps:
+      - stepId: test
+        operationId: server-schedule-deletion
+        parameters:
+          - name: server_id
+            in: path
+            value: sv_g1mbDwBZqLv5B
+        successCriteria:
+          - condition: $statusCode == 201
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":{"id":"sv_g1mbDwBZqLv5B","type":"schedule_deletion","attributes":{"server_id":"sv_g1mbDwBZqLv5B","scheduled_deletion_at":"2026-02-14T09:57:01Z"}}}
+            type: simple
+    x-speakeasy-test-group: Servers
+    x-speakeasy-test-rebuild: true
+  - workflowId: post-storage-filesystems-Created
+    steps:
+      - stepId: test
+        operationId: post-storage-filesystems
+        requestBody:
+          contentType: application/json
+          payload:
+            data:
+              attributes:
+                name: my-data
+                project: proj_lkg1De6ROvZE5
+                size_in_gb: 1500
+              type: filesystems
+        successCriteria:
+          - condition: $statusCode == 201
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":{"id":"fs_AW6Q2D9lqKLpr","type":"filesystems","attributes":{"name":"my-data","size_in_gb":1500,"created_at":"2026-01-14T15:57:07.000Z","project":{"id":"proj_lkg1De6ROvZE5","name":"Small Leather Plate","slug":"small-leather-plate"}}}}
+            type: simple
+    x-speakeasy-test-group: Storage
+    x-speakeasy-test-rebuild: true
+  - workflowId: patch-storage-filesystems-Success
+    steps:
+      - stepId: test
+        operationId: patch-storage-filesystems
+        parameters:
+          - name: filesystem_id
+            in: path
+            value: fs_7vYAZqGBdMQ94
+        requestBody:
+          contentType: application/json
+          payload:
+            data:
+              attributes:
+                size_in_gb: 1501
+              id: fs_7vYAZqGBdMQ94
+              type: filesystems
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":{"id":"fs_7vYAZqGBdMQ94","type":"filesystems","attributes":{"name":"Lightweight Aluminum Computer","size_in_gb":1501,"created_at":"2026-01-14T15:57:08.000Z","project":{"id":"proj_1R3zq2VvqWxyn","name":"Enormous Iron Plate","slug":"enormous-iron-plate"}}}}
+            type: simple
+    x-speakeasy-test-group: Storage
+    x-speakeasy-test-rebuild: true
+  - workflowId: get-storage-volumes-Success
+    steps:
+      - stepId: test
+        operationId: get-storage-volumes
+        parameters:
+          - name: filter[project]
+            in: query
+            value: proj_WeGoqA5AqP7nz
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":[{"id":"vol_RLYV8DZ2D5QoE","type":"volumes","attributes":{"name":"Incredible Paper Computer","size_in_gb":1500,"created_at":"2026-01-14T14:57:08.628Z","namespace_id":"1","connector_id":"nqn.2001-07.com.ceph:1757602476548","initiators":[{"nqn":"nqn.2014-08.org.nvmexpress:uuid:ae717767-c0fa-56f7-ab4b-5c426b0c553f"}],"project":{"id":"proj_WeGoqA5AqP7nz","name":"Gorgeous Concrete Clock","slug":"gorgeous-concrete-clock","description":"Small Wooden Shirt","billing_type":"Normal","billing_method":"Normal","bandwidth_alert":false,"environment":null,"billing":{"subscription_id":null,"type":"Normal","method":"Normal"},"stats":{"ip_addresses":0,"prefixes":0,"servers":0,"vlans":0}},"team":{"id":"team_nYRYZR4lwzSJpMxzmrnKSe8P79E","name":"614 Team","slug":"614-team","description":"614 Team","address":"Suite 444 21815 Angel Falls, North Jarvis, LA 68902","currency":{},"status":"verified"}}}]}
+            type: simple
+    x-speakeasy-test-group: Storage
+    x-speakeasy-test-rebuild: true
+  - workflowId: post-storage-volumes-Created
+    steps:
+      - stepId: test
+        operationId: post-storage-volumes
+        requestBody:
+          contentType: application/json
+          payload:
+            data:
+              attributes:
+                name: my-data
+                project: proj_enPbqoZ6dA2MQ
+                size_in_gb: 1500
+              type: volumes
+        successCriteria:
+          - condition: $statusCode == 201
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":{"id":"vol_Av9BVDavORm1W","type":"volumes","attributes":{"name":"Rustic Aluminum Shoes","size_in_gb":1500,"created_at":"2026-01-14T15:57:08.000Z","namespace_id":null,"connector_id":null,"initiators":null,"project":{"id":"proj_enPbqoZ6dA2MQ","name":"Mediocre Aluminum Car","slug":"mediocre-aluminum-car","description":"Rustic Linen Shoes","billing_type":"Normal","billing_method":"Normal","bandwidth_alert":false,"environment":null,"billing":{"subscription_id":null,"type":"Normal","method":"Normal"},"stats":{"ip_addresses":0,"prefixes":0,"servers":0,"vlans":0}},"team":{"id":"team_geEQyBL2bJiVpXJgmw1YTgneKVb","name":"609 Team","slug":"609-team","description":"609 Team","address":"Apt. 590 415 Kirlin Pass, South Trenton, MT 96944","currency":{},"status":"verified"}}}}
+            type: simple
+    x-speakeasy-test-group: Storage
+    x-speakeasy-test-rebuild: true
+  - workflowId: get-storage-volume-Success
+    steps:
+      - stepId: test
+        operationId: get-storage-volume
+        parameters:
+          - name: id
+            in: path
+            value: vol_aKXgRdR3qv9k5
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":{"id":"vol_aKXgRdR3qv9k5","type":"volumes","attributes":{"name":"Synergistic Concrete Shoes","size_in_gb":1500,"created_at":"2026-01-14T14:57:09.251Z","namespace_id":"1","connector_id":"nqn.2001-07.com.ceph:1757602476548","initiators":[{"nqn":"nqn.2014-08.org.nvmexpress:uuid:ae717767-c0fa-56f7-ab4b-5c426b0c553f"}],"project":{"id":"proj_5AEmq7XyDBkWX","name":"Sleek Wool Computer","slug":"sleek-wool-computer","description":"Awesome Marble Wallet","billing_type":"Normal","billing_method":"Normal","bandwidth_alert":false,"environment":null,"billing":{"subscription_id":null,"type":"Normal","method":"Normal"},"stats":{"ip_addresses":0,"prefixes":0,"servers":0,"vlans":0}},"team":{"id":"team_2KyxrrLkeRtKVLNKv5yNhMWXPnyw","name":"623 Team","slug":"623-team","description":"623 Team","address":"Apt. 955 6672 Otto Mountain, Phillipfurt, CA 84225","currency":{},"status":"verified"}}}}
+            type: simple
+    x-speakeasy-test-group: Storage
+    x-speakeasy-test-rebuild: true
+  - workflowId: get-tags-Success
+    steps:
+      - stepId: test
+        operationId: get-tags
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":[{"id":"tag_br3pyBM8YeIyBQGR0rbocVrmJnE","type":"tags","attributes":{"name":"Angrod","slug":"angrod","description":"Dolorem vel distinctio et.","color":"#141515","team":{"id":"team_RPp3R8oZyjSAGGP7oeMEsR8yPNgo","name":"627 Team","slug":"627-team","description":"627 Team","address":"977 Julietta Views, West Ocie, KS 10398-1982","currency":{},"status":"verified"}}}]}
+            type: simple
+    x-speakeasy-test-group: Tags
+    x-speakeasy-test-rebuild: true
+  - workflowId: create-tag-Created
+    steps:
+      - stepId: test
+        operationId: create-tag
+        requestBody:
+          contentType: application/json
+          payload:
+            data:
+              attributes:
+                color: '#bebebe'
+                description: Tag Description
+                name: Tag Name
+              type: tags
+        successCriteria:
+          - condition: $statusCode == 201
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":{"id":"tag_Rz8Ka32gLoUAZJYxkMrxiR8j9Ppa","type":"tags","attributes":{"name":"Tag Name","slug":"tag-name","description":"Tag Description","color":"#bebebe","team":{"id":"team_P5gz2MnmXoT4JXGwobmvf8bVoV3","name":"628 Team","slug":"628-team","description":"628 Team","address":"300 Jacqueline Village, Lake Shaunmouth, NH 56746","currency":{},"status":"verified"}}}}
+            type: simple
+    x-speakeasy-test-group: Tags
+    x-speakeasy-test-rebuild: true
+  - workflowId: update-tag-Success
+    steps:
+      - stepId: test
+        operationId: update-tag
+        parameters:
+          - name: tag_id
+            in: path
+            value: tag_XBlke2r5RyiyVpG9LPK8tWjalLL
+        requestBody:
+          contentType: application/json
+          payload:
+            data:
+              attributes:
+                color: '#ffffff'
+                name: Tag Name
+              id: tag_XBlke2r5RyiyVpG9LPK8tWjalLL
+              type: tags
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":{"id":"tag_XBlke2r5RyiyVpG9LPK8tWjalLL","type":"tags","attributes":{"name":"Tag Name","slug":"tag-name","description":"Aliquam ducimus atque et.","color":"#73ba73","team":{"id":"team_GplL3jvZnNS2BXLAmWQpf8z354ll","name":"633 Team","slug":"633-team","description":"633 Team","address":"2092 Loreta Summit, West Hershelmouth, WY 97161-6201","currency":{},"status":"verified"}}}}
+            type: simple
+    x-speakeasy-test-group: Tags
+    x-speakeasy-test-rebuild: true
+  - workflowId: get-traffic-consumption-Success
+    steps:
+      - stepId: test
+        operationId: get-traffic-consumption
+        parameters:
+          - name: filter[server]
+            in: query
+            value: sv_A05EdQ50dvKYQ
+          - name: filter[date][gte]
+            in: query
+            value: "2025-12-14T15:57:10Z"
+          - name: filter[date][lte]
+            in: query
+            value: "2026-01-14T15:57:10Z"
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":{"id":"","type":"traffic","attributes":{"from_date":1765727830,"to_date":1768406230,"regions":[{"region_slug":"brazil","total_inbound_gb":102,"total_outbound_gb":241,"total_inbound_95th_percentile_mbps":1832.91,"total_outbound_95th_percentile_mbps":1819.99,"data":[{"date":"2021-07-01T00:00:00.000+00:00","inbound_gb":10,"outbound_gb":102,"avg_outbound_speed_mbps":1.19,"avg_inbound_speed_mbps":0.13}, {"date":"2021-07-02T00:00:00.000+00:00","inbound_gb":2,"outbound_gb":6,"avg_outbound_speed_mbps":0.08,"avg_inbound_speed_mbps":0.02}, {"date":"2021-07-03T00:00:00.000+00:00","inbound_gb":5,"outbound_gb":15,"avg_outbound_speed_mbps":0.18,"avg_inbound_speed_mbps":0.06}, {"date":"2021-07-04T00:00:00.000+00:00","inbound_gb":57,"outbound_gb":32,"avg_outbound_speed_mbps":0.38,"avg_inbound_speed_mbps":0.66}, {"date":"2021-07-05T00:00:00.000+00:00","inbound_gb":11,"outbound_gb":59,"avg_outbound_speed_mbps":0.69,"avg_inbound_speed_mbps":0.13}, {"date":"2021-07-06T00:00:00.000+00:00","inbound_gb":17,"outbound_gb":27,"avg_outbound_speed_mbps":0.32,"avg_inbound_speed_mbps":0.2}]}],"total_inbound_gb":102,"total_outbound_gb":241,"total_inbound_95th_percentile_mbps":1832.91,"total_outbound_95th_percentile_mbps":1819.99}}}
+            type: simple
+    x-speakeasy-test-group: Traffic
+    x-speakeasy-test-rebuild: true
+  - workflowId: get-traffic-quota-Success
+    steps:
+      - stepId: test
+        operationId: get-traffic-quota
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":{"id":"traffic_quota","type":"traffic_quota","attributes":{"quota_per_project":[{"project_id":"proj_lkg1DekRdvZE5","project_slug":"incredible-bronze-knife","billing_method":"Normal","quota_per_region":[{"region_id":"reg_9QDB5qag","region_slug":"brazil","quota_in_tb":{"granted":20,"additional":0,"total":20},"quota_in_mbps":{"granted":0,"additional":0,"total":0}}]}]}}}
+            type: simple
+    x-speakeasy-test-group: Traffic
+    x-speakeasy-test-rebuild: true
+  - workflowId: get-user-profile-Success
+    steps:
+      - stepId: test
+        operationId: get-user-profile
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":{"id":"user_L9B4LNaW0xiLXYQoaoPyt5oL9EN0","attributes":{"first_name":"Jefferey","last_name":"Boyer","email":"lea@crona-hahn.test","role":{"id":"role_B48kwVxyWkuxNJ2ZjpoJcx1Bnlo","name":"owner","created_at":"2025-05-05T00:00:00.000Z","updated_at":"2026-11-10T00:00:00.000Z"}}}}
+            type: simple
+    x-speakeasy-test-group: userProfile
+    x-speakeasy-test-rebuild: true
+  - workflowId: patch-user-profile-Success
+    steps:
+      - stepId: test
+        operationId: patch-user-profile
+        parameters:
+          - name: id
+            in: path
+            value: user_8PMvy2GL72uKKyXyANEnsjMQYMP
+        requestBody:
+          contentType: application/json
+          payload:
+            data:
+              attributes:
+                role: collaborator
+              id: user_8PMvy2GL72uKKyXyANEnsjMQYMP
+              type: users
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":{"id":"user_8PMvy2GL72uKKyXyANEnsjMQYMP","attributes":{"first_name":"Sherwood","last_name":"Ward","email":"deeann_kuhlman@leffler.test","role":"collaborator"}}}
+            type: simple
+    x-speakeasy-test-group: userProfile
+    x-speakeasy-test-rebuild: true
+  - workflowId: get-user-teams-Success
+    steps:
+      - stepId: test
+        operationId: get-user-teams
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data": [{"id": "team_yEMAp05jx2ule2aA1ZwVtp5GLZk4", "attributes": {"name": "625 Team", "slug": "625-team", "address": "75739 Parker Common, Murphyview, CT 54114", "currency": "BRL", "created_at": "2024-12-31T00:00:00+00:00", "updated_at": "2025-04-02T00:00:00+00:00", "owner": {"id": "user_X0j5j5Kbabhyex1g2N97HJ3p2wY", "first_name": "Cara", "last_name": "Gerlach", "email": "waylon@oberbrunner.example", "created_at": "2024-09-16T00:00:00.000Z", "updated_at": "2024-08-01T00:00:00.000Z", "role": {"id": "role_4ANgaERK0yS4wQ8lA4pLH0bAw4JW", "name": "owner", "created_at": "2025-05-23T00:00:00.000Z", "updated_at": "2026-04-24T00:00:00.000Z"}}, "billing": {"id": "bill_mw49QDB5qagKb", "customer_billing_id": "cus_oxro8kom3akzra"}}}], "meta": {}}
+            type: simple
+    x-speakeasy-test-group: userProfile
+    x-speakeasy-test-rebuild: true
+  - workflowId: get-user-teams-when team is recent (created within last month)
+    steps:
+      - stepId: test
+        operationId: get-user-teams
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":[{"id":"team_NYGwel1RnbC44GX83lamhRe8Jjw","attributes":{"name":"687 Team","slug":"687-team","address":"595 Schmitt Mountains, West Frances, NJ 39049-3937","currency":"BRL","created_at":"2026-01-09T15:57:13+00:00","updated_at":"2026-01-14T15:57:13+00:00","owner":{"id":"user_Mzw8rQR7yyS9p5pyWrzBfyxrMV4","first_name":"Jaime","last_name":"Ziemann","email":"codi_hand@miller.test","created_at":"2026-01-08T00:00:00.000Z","updated_at":"2025-01-27T00:00:00.000Z","role":{"id":"role_V1aYWNZmvlhrk9eoK58JSrY0MX4","name":"owner","created_at":"2025-05-01T00:00:00.000Z","updated_at":"2026-11-05T00:00:00.000Z"}},"billing":{"id":"bill_mw49QDB5qagKb","customer_billing_id":"cus_dluxyhyhjii4qk"}}}],"meta":{}}
+            type: simple
+    x-speakeasy-test-group: userProfile
+    x-speakeasy-test-rebuild: true
+  - workflowId: get-user-teams-when team is older than one month
+    steps:
+      - stepId: test
+        operationId: get-user-teams
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":[{"id":"team_NXK2MpJXgzU8AGjryZ09Hper7l5","attributes":{"name":"688 Team","slug":"688-team","address":"Apt. 492 6439 Salvatore Lodge, Denatown, MD 56634-2611","currency":"BRL","created_at":"2025-11-14T15:57:13+00:00","updated_at":"2026-01-14T15:57:13+00:00","owner":{"id":"user_MbwWpJ37LMt9rBj1E47PFVomyzB7","first_name":"Nieves","last_name":"Huel","email":"nickolas@weimann.example","created_at":"2025-11-16T00:00:00.000Z","updated_at":"2025-04-20T00:00:00.000Z","role":{"id":"role_97mkkRl14RCEzQbYeXJ0t905XMN","name":"owner","created_at":"2025-08-08T00:00:00.000Z","updated_at":"2026-10-14T00:00:00.000Z"}},"billing":{"id":"bill_AW6Q2D9lqKLpr","customer_billing_id":"cus_nnflz4ow2j6zv9"}}}],"meta":{}}
+            type: simple
+    x-speakeasy-test-group: userProfile
+    x-speakeasy-test-rebuild: true
+  - workflowId: create-virtual-machine-Created
+    steps:
+      - stepId: test
+        operationId: create-virtual-machine
+        requestBody:
+          contentType: application/json
+          payload:
+            data:
+              attributes:
+                name: my-new-vm
+                project: lightweight-leather-lamp
+              type: virtual_machines
+        successCriteria:
+          - condition: $statusCode == 201
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":{"id":"vm_mw49QDB5qagKb","type":"virtual_machines","attributes":{"name":"my-new-vm","created_at":"2026-01-14T15:57:13+00:00","status":"Starting","operating_system":null,"plan":{"id":"plan_VE1Wd3VXOXnZJ","name":"g3.h100.large-131"},"specs":{"vcpu":16,"ram":"128 GB","storage":"100 GB","nic":"1 x 1 Gbps","gpu":"1 x NVIDIA H100 Tensor Core GPU"},"team":{"id":"team_zAbb72Zm3VS3N0o89Y48sGXv3mZ","name":"690 Team","slug":"690-team","description":"690 Team","address":"Apt. 922 405 Ondricka Lights, Lake Jennineview, SC 58925-4625","currency":{},"status":"verified"},"project":{"id":"proj_GMy1Dbk1ON50m","name":"Lightweight Leather Lamp","slug":"lightweight-leather-lamp","description":"Sleek Wool Plate","billing_type":"Normal","billing_method":"Normal","bandwidth_alert":false,"environment":null,"billing":{"subscription_id":null,"type":"Normal","method":"Normal"},"stats":{"ip_addresses":0,"prefixes":0,"servers":0,"vlans":0}}}}}
+            type: simple
+    x-speakeasy-test-group: virtualMachines
+    x-speakeasy-test-rebuild: true
+  - workflowId: get-virtual-networks-Success
+    steps:
+      - stepId: test
+        operationId: get-virtual-networks
+        parameters:
+          - name: filter[tags]
+            in: query
+            value: tag_BZWAJKePr2Fx9kRyyaARImQlXmW,tag_X8yMgb8AZPFrX72lQgrwhBVnPN2
+          - name: page[size]
+            in: query
+            value: 20
+          - name: page[number]
+            in: query
+            value: 1
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":[{"id":"vlan_AW6Q2D9lqKLpr","type":"virtual_networks","attributes":{"vid":2040,"description":"Consequatur quo aut quia.","project":{"id":"proj_W6Q2D9ordKLpr","name":"Sleek Leather Hat","slug":"sleek-leather-hat","description":"Enormous Copper Lamp","billing_type":"Normal","billing_method":"Normal","bandwidth_alert":false,"environment":null,"billing":{"subscription_id":null,"type":"Normal","method":"Normal"},"stats":{"ip_addresses":2,"prefixes":0,"servers":1,"vlans":2}},"region":{"city":"Sydney 243","country":"Australia 253","site":{"id":"loc_1ZJrdxnWDg4LV","facility":"Sydney 243","name":"Sydney 243","slug":"SYD204"}},"created_at":null,"assignments_count":1,"tags":[{"id":"tag_rNk62XV5ewSV52K5oAv5FbENl1R","name":"tag1","description":"Quia quia natus numquam.","color":"#ead6ea"}]}}],"meta":{}}
+            type: simple
+    x-speakeasy-test-group: privateNetworks
+    x-speakeasy-test-rebuild: true
+  - workflowId: create-virtual-network-Created
+    steps:
+      - stepId: test
+        operationId: create-virtual-network
+        requestBody:
+          contentType: application/json
+          payload:
+            data:
+              attributes:
+                description: São Paulo VLAN
+                project: ergonomic-steel-bag
+                site: MIA
+              type: virtual_network
+        successCriteria:
+          - condition: $statusCode == 201
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":{"id":"vlan_3YjJOLQjdvZ87","type":"virtual_networks","attributes":{"vid":2000,"name":"MIA-2000","description":"São Paulo VLAN","created_at":"2026-01-14T15:57:17+00:00","tags":[]}},"meta":{}}
+            type: simple
+    x-speakeasy-test-group: privateNetworks
+    x-speakeasy-test-rebuild: true
+  - workflowId: get-virtual-network-Success
+    steps:
+      - stepId: test
+        operationId: get-virtual-network
+        parameters:
+          - name: vlan_id
+            in: path
+            value: vlan_W6Q2D9ordKLpr
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":{}}
+            type: simple
+    x-speakeasy-test-group: privateNetworks
+    x-speakeasy-test-rebuild: true
+  - workflowId: update-virtual-network-Success
+    steps:
+      - stepId: test
+        operationId: update-virtual-network
+        parameters:
+          - name: vlan_id
+            in: path
+            value: vlan_VaNmodjeObE8W
+        requestBody:
+          contentType: application/json
+          payload:
+            data:
+              attributes:
+                description: Test virtual network update
+                tags:
+                  - tag_RjLvG6oe84IAw7BxxEGaFAXK4l4
+                  - tag_lpPQ21kXEYfb9az3jRoVIVw4RBk
+              id: vlan_VaNmodjeObE8W
+              type: virtual_networks
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":{"id":"vlan_VaNmodjeObE8W","type":"virtual_networks","attributes":{"vid":2040,"name":"cupiditate","description":"Perspiciatis molestiae laborum quae.","created_at":null,"tags":[{"id":"tag_RjLvG6oe84IAw7BxxEGaFAXK4l4","name":"Tal-Elmar","description":"Placeat non sit velit.","color":"#e5e53e"}, {"id":"tag_lpPQ21kXEYfb9az3jRoVIVw4RBk","name":"Great Eagle","description":"Voluptatem aut in corrupti.","color":"#502f50"}]}},"meta":{}}
+            type: simple
+    x-speakeasy-test-group: privateNetworks
+    x-speakeasy-test-rebuild: true
+  - workflowId: get-virtual-networks-assignments-Success
+    steps:
+      - stepId: test
+        operationId: get-virtual-networks-assignments
+        parameters:
+          - name: page[size]
+            in: query
+            value: 20
+          - name: page[number]
+            in: query
+            value: 1
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":[{"id":"vnasg_6VE1Wd37dXnZJ","type":"virtual_network_assignment","attributes":{"virtual_network_id":"vlan_7vYAZqGBdMQ94","vid":1,"description":"West Inc","status":"connected","server":{"id":"sv_GnzRD5BYOM5yw","hostname":"db","label":"BRC01","locked":false,"status":"unknown"}}}, {"id":"vnasg_VaNmodjeObE8W","type":"virtual_network_assignment","attributes":{"virtual_network_id":"vlan_r0MK4O4kDa95w","vid":2,"description":"Reynolds-Steuber","status":"connecting","server":{"id":"sv_KXgRdRLKDv9k5","hostname":"api","label":"BRC02","locked":false,"status":"unknown"}}}],"meta":{}}
+            type: simple
+    x-speakeasy-test-group: privateNetworks
+    x-speakeasy-test-rebuild: true
+  - workflowId: assign-server-virtual-network-Created
+    steps:
+      - stepId: test
+        operationId: assign-server-virtual-network
+        requestBody:
+          contentType: application/json
+          payload:
+            data:
+              attributes:
+                server_id: sv_5xyZOn5vDWM0l
+                virtual_network_id: vlan_Z8rodmpGO1jLB
+              type: virtual_network_assignment
+        successCriteria:
+          - condition: $statusCode == 201
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":{"id":"vnasg_LGXPdWQ8DnNWk","type":"virtual_network_assignment","attributes":{"virtual_network_id":"vlan_Z8rodmpGO1jLB","vid":3,"description":"my vlan","status":"connecting"}},"meta":{}}
+            type: simple
+    x-speakeasy-test-group: privateNetworks
+    x-speakeasy-test-rebuild: true
+  - workflowId: get-vpn-sessions-Success
+    steps:
+      - stepId: test
+        operationId: get-vpn-sessions
+        parameters:
+          - name: filter[location]
+            in: query
+            value: SAO
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":[{"id":"vpn_mw49QDB5qagKb","type":"vpn_sessions","attributes":{"user_name":"Alvaro","port":"8443","host":"fw04-mh1.maxi.host","region":{"city":"São Paulo 275","country":"United States 288","site":{"id":"loc_kjQwdE2bqYNVP","name":"São Paulo 275","slug":"SAO","facility":"São Paulo 275"}},"expires_at":"2026-01-14T15:58:19+00:00","created_at":"2026-01-14T15:57:19+00:00","updated_at":"2026-01-14T15:57:19+00:00"}}],"meta":{}}
+            type: simple
+    x-speakeasy-test-group: vpnSessions
+    x-speakeasy-test-rebuild: true
+  - workflowId: post-vpn-session-Created
+    steps:
+      - stepId: test
+        operationId: post-vpn-session
+        requestBody:
+          contentType: application/json
+          payload:
+            data:
+              attributes:
+                server_id: sv_LMmAD8wyqwop2
+                site: SAO
+        successCriteria:
+          - condition: $statusCode == 201
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":{"id":"vpn_VLMmAD8EOwop2","type":"vpn_sessions","attributes":{"user_name":"Cameron","password":"8EqcGL2tsQngWe","port":"8443","host":"fw04-mh1.maxi.host","region":{"city":"São Paulo 277","country":"Brazil 290","site":{"id":"loc_VE1Wd3wQdXnZJ","name":"São Paulo 277","slug":"SAO","facility":"São Paulo 277"}},"expires_at":"2026-01-14T15:58:20+00:00","created_at":"2026-01-14T15:57:20+00:00","updated_at":"2026-01-14T15:57:20+00:00"}}}
+            type: simple
+    x-speakeasy-test-group: vpnSessions
+    x-speakeasy-test-rebuild: true
+  - workflowId: put-vpn-session-Success
+    steps:
+      - stepId: test
+        operationId: put-vpn-session
+        parameters:
+          - name: vpn_session_id
+            in: path
+            value: vpn_pRMLydp0dQKr1
+        successCriteria:
+          - condition: $statusCode == 200
+          - condition: $response.header.Content-Type == application/vnd.api+json
+          - context: $response.body
+            condition: |
+              {"data":{"id":"vpn_pRMLydp0dQKr1","type":"vpn_sessions","attributes":{"user_name":"Alexis","password":"34xr0yTqaTrNyJFI","port":"8443","host":"fw04-mh1.maxi.host","region":{"city":"São Paulo 279","country":"Germany 292","site":{"id":"loc_3YjJOLexdvZ87","name":"São Paulo 279","slug":"SAO","facility":"São Paulo 279"}},"expires_at":"2026-01-14T15:58:20+00:00","created_at":"2026-01-14T15:57:20+00:00","updated_at":"2026-01-14T15:57:20+00:00"}}}
+            type: simple
+    x-speakeasy-test-group: vpnSessions
+    x-speakeasy-test-rebuild: true

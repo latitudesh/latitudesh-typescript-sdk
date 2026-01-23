@@ -1,4 +1,4 @@
-speakeasyVersion: 1.692.0
+speakeasyVersion: 1.697.2
 sources:
     Latitudesh-OAS:
         sourceNamespace: latitudesh-oas
@@ -6,7 +6,6 @@ sources:
         sourceBlobDigest: sha256:e0bca79a0dfc751f00bf2e5415da72d17a321070eda50a7257f5dea6c7f5095d
         tags:
             - latest
-            - speakeasy-sdk-regen-1769024142
 targets:
     latitudesh:
         source: Latitudesh-OAS
@@ -14,7 +13,7 @@ targets:
         sourceRevisionDigest: sha256:6c3877f43fb55f18cd25a5860bd7d16e036362595e3b1ebe7cc8fb3ee28d00ea
         sourceBlobDigest: sha256:e0bca79a0dfc751f00bf2e5415da72d17a321070eda50a7257f5dea6c7f5095d
         codeSamplesNamespace: latitudesh-oas-typescript-code-samples
-        codeSamplesRevisionDigest: sha256:9abc86c9838bde1f486879138f51af1da68e78ff07e25d7b4034a24e1c4de900
+        codeSamplesRevisionDigest: sha256:e05ef6ccaa1386d4c7264cab947a9a5677afdd2b5a4f13df19a43160ed44c5ec
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
@@ -37,3 +36,5 @@ workflow:
                 labelOverride:
                     fixedValue: Typescript (SDK)
                 blocking: false
+            testing:
+                enabled: true

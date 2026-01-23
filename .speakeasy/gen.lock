@@ -3,17 +3,17 @@ id: c8245324-f3d7-42c7-8124-ce79579cbff5
 management:
   docChecksum: 61c6ffd49fcf64e2833a8faa68fe5b87
   docVersion: "2023-06-01"
-  speakeasyVersion: 1.692.0
-  generationVersion: 2.797.1
+  speakeasyVersion: 1.697.2
+  generationVersion: 2.799.0
   releaseVersion: 0.2.4
-  configChecksum: d764cc7e862ad966a3cc0855d18af437
+  configChecksum: b528da850fca9d58e1cfba0901e53dd7
   repoURL: https://github.com/latitudesh/latitudesh-typescript-sdk.git
   installationURL: https://github.com/latitudesh/latitudesh-typescript-sdk
   published: true
 persistentEdits:
-  generation_id: 36afc2c1-10fe-4686-a652-5cf36da44e7e
-  pristine_commit_hash: cbf875ddcaa9477e2d786c5f9b263a6bf4760912
-  pristine_tree_hash: 2e0a898991ffa184620dfccaef2aef9576761c46
+  generation_id: df35261f-de42-4c99-8f4c-dc8e1b086617
+  pristine_commit_hash: ea0c725ef9dd9c2882b22ad343b9134589bb4ef0
+  pristine_tree_hash: ed4a1be25b349970fce266a182159831ec61854e
 features:
   typescript:
     additionalDependencies: 0.1.0
@@ -31,12 +31,14 @@ features:
     groups: 2.81.3
     mcpServer: 0.9.4
     methodArguments: 0.1.2
+    mockServer: 0.1.1
     nameOverrides: 2.81.2
     nullables: 0.1.1
     pagination: 2.83.0
     responseFormat: 0.2.3
     retries: 2.83.0
     sdkHooks: 0.4.0
+    tests: 0.17.4
 trackedFiles:
   .devcontainer/README.md:
     id: b170c0f184ac
@@ -2624,8 +2626,770 @@ trackedFiles:
     pristine_git_object: d6856559b11628b81f6fe3ef721f24731f846ef2
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:1883344358723b94edcf740b5bc30188052f2be7
-    pristine_git_object: f21fb644e9e5efce28986465d2cd49660dd649e3
+    last_write_checksum: sha1:6e5fedb07887fbb9c45924d5863f8a22f6ed6528
+    pristine_git_object: 7cd2ece0a65889434266aa16180941aee8326114
+  src/__tests__/apikeys.test.ts:
+    id: 4fd89b01538d
+    last_write_checksum: sha1:f7c76d34a4fc0f0fffe106c6b6948b7ac86caedd
+    pristine_git_object: 131b423c350cff998435eb34279b8a482e19af3e
+  src/__tests__/assertions.ts:
+    id: 23e6ed08eb14
+    last_write_checksum: sha1:f89afdb1173560667909423fa438e55e3f9ed1aa
+    pristine_git_object: c05351d0d86e17b39957f19ef348f2942222281b
+  src/__tests__/assignments.test.ts:
+    id: c82b29572e8a
+    last_write_checksum: sha1:b1f0861d7e5c4109ff908e4ef0c04d38b7d4300a
+    pristine_git_object: 8e268bbf82bbf6599304da0d1ad0ce9ca695f636
+  src/__tests__/billing.test.ts:
+    id: c3e00417d3d5
+    last_write_checksum: sha1:6f7500302ca4b6a920220f6b94a98cb35aab5545
+    pristine_git_object: 5cd92cb75e4a348b5b72c2045a48a9cfac19709f
+  src/__tests__/events.test.ts:
+    id: ad6a1f1ebf69
+    last_write_checksum: sha1:6c116c90288ef0b65f5ecd7bffd850147abfbed1
+    pristine_git_object: 2e288dc03928782be6fb556c08b26549108c14d5
+  src/__tests__/files.ts:
+    id: 0d6c3f8fc578
+    last_write_checksum: sha1:db877759506b01222db50fab21434463f0a941e9
+    pristine_git_object: f1df32f8ef8a60b81a4955262908b27a8034ccae
+  src/__tests__/firewalls.test.ts:
+    id: 611dcbcc2399
+    last_write_checksum: sha1:cec6151caf8e09db96352029e44e71858980fe64
+    pristine_git_object: e6ef50fd8d0ce40c8e53d5b25c2d698687e2d4bc
+  src/__tests__/ipaddresses.test.ts:
+    id: ec9429b35a5e
+    last_write_checksum: sha1:a23041791a1583e896bfa710af47a24b614494b6
+    pristine_git_object: 8f46d4e946a1da858e5747f298bda87f1601b6ce
+  src/__tests__/members.test.ts:
+    id: ee06b3e5fbdd
+    last_write_checksum: sha1:3cbeb19378eecf23ba61140d8c0edf756482b872
+    pristine_git_object: 473019aa38eccd190ade3826265662ed428f96cc
+  src/__tests__/mockserver/.gitignore:
+    last_write_checksum: sha1:228e1b05712a973948fd771323a2140a3b355ff4
+  src/__tests__/mockserver/Dockerfile:
+    last_write_checksum: sha1:72b74bf83cc79b4436ffe1a33211198ea447f06a
+  src/__tests__/mockserver/Makefile:
+    last_write_checksum: sha1:f2619d7634d211c3c01dd68668635b0ebdbfc1ea
+  src/__tests__/mockserver/README.md:
+    last_write_checksum: sha1:aa2bb9124570a1c12a3c81d728100c305a59220c
+  src/__tests__/mockserver/go.mod:
+    last_write_checksum: sha1:44fa2062991ca9acb37a7ade5fb75d0b7731154a
+  src/__tests__/mockserver/go.sum:
+    last_write_checksum: sha1:d487c9e78318f86734588c530c3dfd01d02dd044
+  src/__tests__/mockserver/internal/handler/assert/contenttype.go:
+    last_write_checksum: sha1:2d059a68e53e70b269ddf897f8c6017f94434e18
+  src/__tests__/mockserver/internal/handler/assert/header.go:
+    last_write_checksum: sha1:a0866dfd740d218b5b94741ac92db4cdf5a2acd9
+  src/__tests__/mockserver/internal/handler/assert/parameter.go:
+    last_write_checksum: sha1:0df39c0981a929c99ae767201b628d8c9e31f288
+  src/__tests__/mockserver/internal/handler/assert/pointer.go:
+    last_write_checksum: sha1:48714196fb47649be28e8df031761038a9e10ee6
+  src/__tests__/mockserver/internal/handler/assert/security.go:
+    last_write_checksum: sha1:3cee6e3d2babea02486fd2df08eb00840f5ddea9
+  src/__tests__/mockserver/internal/handler/doc.go:
+    last_write_checksum: sha1:a49b83f9fc775d3cc6f558b0f52b2fc9cf04f863
+  src/__tests__/mockserver/internal/handler/generated_handler.go:
+    last_write_checksum: sha1:32101ddff940c59f43a805af303cf645a2bcca0d
+  src/__tests__/mockserver/internal/handler/generated_handlers.go:
+    last_write_checksum: sha1:f2fd579b309b320d5c7b30ed44f8786cf1536c5b
+  src/__tests__/mockserver/internal/handler/pathgetauthapikeys.go:
+    last_write_checksum: sha1:2a48c0525a9c02b34d40162d5f25f07fb4c24ece
+  src/__tests__/mockserver/internal/handler/pathgetbillingusage.go:
+    last_write_checksum: sha1:e94d21228c04a479936bb8593c2bde8a32244c46
+  src/__tests__/mockserver/internal/handler/pathgetevents.go:
+    last_write_checksum: sha1:a22a219258439b9fc70bba0e2eabc20b57906422
+  src/__tests__/mockserver/internal/handler/pathgetfirewalls.go:
+    last_write_checksum: sha1:ed540b2b91a47058070715e38531fc9d4615a664
+  src/__tests__/mockserver/internal/handler/pathgetfirewallsassignments.go:
+    last_write_checksum: sha1:30bc834e688b3edb3e3469bc583ed45c1c8bd832
+  src/__tests__/mockserver/internal/handler/pathgetfirewallsfirewallid.go:
+    last_write_checksum: sha1:b4c73419b10687fe1266793c6c21065aebafcbee
+  src/__tests__/mockserver/internal/handler/pathgetfirewallsfirewallidassignments.go:
+    last_write_checksum: sha1:8098264b0e1919cd67a6aacd9ce75b8b06e8880d
+  src/__tests__/mockserver/internal/handler/pathgetips.go:
+    last_write_checksum: sha1:c792b581f5c78dac3d87e28ea38b7031d67ce76d
+  src/__tests__/mockserver/internal/handler/pathgetipsipid.go:
+    last_write_checksum: sha1:99234521f5ad34d5b555a2cb024d14b5e1d040e9
+  src/__tests__/mockserver/internal/handler/pathgetplans.go:
+    last_write_checksum: sha1:faf606167c986e77c25551ae461ccbaa07a5afc6
+  src/__tests__/mockserver/internal/handler/pathgetplansbandwidth.go:
+    last_write_checksum: sha1:add19a2391570c0e0f4bf9d0e4c974a79840a848
+  src/__tests__/mockserver/internal/handler/pathgetplanscontainersplanid.go:
+    last_write_checksum: sha1:41d32a7bef6d11fd70039bd5df06c4879847721f
+  src/__tests__/mockserver/internal/handler/pathgetplansoperatingsystems.go:
+    last_write_checksum: sha1:7664ef7f7a08212947814050d4151b0f88ff3936
+  src/__tests__/mockserver/internal/handler/pathgetplansplanid.go:
+    last_write_checksum: sha1:97b6acc86bd9606c13131404893346d57821106d
+  src/__tests__/mockserver/internal/handler/pathgetplansstorage.go:
+    last_write_checksum: sha1:a680e58aa50f586fed45c92c5f5bee8f995211bf
+  src/__tests__/mockserver/internal/handler/pathgetplansvirtualmachines.go:
+    last_write_checksum: sha1:8c6c458df0c1a3b6b2057576b21c4d8179ae2f13
+  src/__tests__/mockserver/internal/handler/pathgetprojects.go:
+    last_write_checksum: sha1:6c0083024c181a59b7146e881d5b75d6438179aa
+  src/__tests__/mockserver/internal/handler/pathgetprojectsprojectidsshkeys.go:
+    last_write_checksum: sha1:1737f7f0e3e964fa74488f82d6d7fa1866836161
+  src/__tests__/mockserver/internal/handler/pathgetprojectsprojectidsshkeyssshkeyid.go:
+    last_write_checksum: sha1:178b767f5244c1b46d5dde1edcb40505a0f39f61
+  src/__tests__/mockserver/internal/handler/pathgetprojectsprojectiduserdata.go:
+    last_write_checksum: sha1:e97e9f0de1183fda3af2f58805c3d0369a18207d
+  src/__tests__/mockserver/internal/handler/pathgetprojectsprojectiduserdatauserdataid.go:
+    last_write_checksum: sha1:3570396af53a1c6f325df96e94541cafdc2cae2d
+  src/__tests__/mockserver/internal/handler/pathgetregions.go:
+    last_write_checksum: sha1:47953e2b90b5daeb5eba55af59d94b7c6b26c79d
+  src/__tests__/mockserver/internal/handler/pathgetregionsregionid.go:
+    last_write_checksum: sha1:6b48741e6a193168d9a498812a69cdcbe67422e4
+  src/__tests__/mockserver/internal/handler/pathgetroles.go:
+    last_write_checksum: sha1:6419b2521579385892c2dfc51dadd24fb00d9056
+  src/__tests__/mockserver/internal/handler/pathgetrolesroleid.go:
+    last_write_checksum: sha1:ff49b7b6f832bfb2433c1c90621d8b93368b29d1
+  src/__tests__/mockserver/internal/handler/pathgetservers.go:
+    last_write_checksum: sha1:9d8f5280ee691903244cbe04da21310fe1d0cdef
+  src/__tests__/mockserver/internal/handler/pathgetserversserverid.go:
+    last_write_checksum: sha1:55bb101ce4ed8b05c3a7d159e627678220328152
+  src/__tests__/mockserver/internal/handler/pathgetserversserveriddeployconfig.go:
+    last_write_checksum: sha1:537cc3069be5b0c2c3dd0d8a3f6a496548bc98a8
+  src/__tests__/mockserver/internal/handler/pathgetserversserveridoutofbandconnection.go:
+    last_write_checksum: sha1:3cfd6428241e14e94f6db3f939232de99f4085c4
+  src/__tests__/mockserver/internal/handler/pathgetsshkeys.go:
+    last_write_checksum: sha1:0f6ba61b9f13736aaac640fea2a707ceab75fe77
+  src/__tests__/mockserver/internal/handler/pathgetsshkeyssshkeyid.go:
+    last_write_checksum: sha1:90e477c3c07f243de717bf75fa2eb5699e4be9d1
+  src/__tests__/mockserver/internal/handler/pathgetstoragevolumes.go:
+    last_write_checksum: sha1:6fcfce36485d79b830d096b286e65ff676e92fb0
+  src/__tests__/mockserver/internal/handler/pathgetstoragevolumesid.go:
+    last_write_checksum: sha1:31a1531cd5d6812eeaa2a8c76a2128dad0156dc4
+  src/__tests__/mockserver/internal/handler/pathgettags.go:
+    last_write_checksum: sha1:f03edf5eb0743ce67e091826f4dc37a9892edd81
+  src/__tests__/mockserver/internal/handler/pathgetteam.go:
+    last_write_checksum: sha1:c7c4903ba4e071565fc113c3d7222bfe857dc43a
+  src/__tests__/mockserver/internal/handler/pathgetteammembers.go:
+    last_write_checksum: sha1:ea0cd4ae2e6e55a9d97783ea21024dc3b1fdeda8
+  src/__tests__/mockserver/internal/handler/pathgettraffic.go:
+    last_write_checksum: sha1:357bfc379a71bc6d8b08327bdd53e8727055d6b9
+  src/__tests__/mockserver/internal/handler/pathgettrafficquota.go:
+    last_write_checksum: sha1:46529cf83629d4cf73229c738c9c6192d28c2353
+  src/__tests__/mockserver/internal/handler/pathgetuserdata.go:
+    last_write_checksum: sha1:164ea49eccbbfe31d7ad169b8fb02a86cf0f43b5
+  src/__tests__/mockserver/internal/handler/pathgetuserdatauserdataid.go:
+    last_write_checksum: sha1:87f06b6844474c1455e5f2aa5f35c4dc80e5dc47
+  src/__tests__/mockserver/internal/handler/pathgetuserprofile.go:
+    last_write_checksum: sha1:095b6a025b2e0887ccb855b64d3b9de8d13520cd
+  src/__tests__/mockserver/internal/handler/pathgetuserteams.go:
+    last_write_checksum: sha1:c4d907d5083752bfb5b4280f05ba74ec39f72876
+  src/__tests__/mockserver/internal/handler/pathgetvirtualnetworks.go:
+    last_write_checksum: sha1:12dfe8c68fbf2608f9cab67e3e8154b5038fbe6c
+  src/__tests__/mockserver/internal/handler/pathgetvirtualnetworksassignments.go:
+    last_write_checksum: sha1:620d3f89ec362da49092209d641ed9bbf125e9d0
+  src/__tests__/mockserver/internal/handler/pathgetvirtualnetworksvlanid.go:
+    last_write_checksum: sha1:94b20ab923d4d9a228de7a50b1a12570f24b968f
+  src/__tests__/mockserver/internal/handler/pathgetvpnsessions.go:
+    last_write_checksum: sha1:caca39bb29875039980571b2c06485a7e4946450
+  src/__tests__/mockserver/internal/handler/pathpatchauthapikeysapikeyid.go:
+    last_write_checksum: sha1:9d69568439ab5e352c7a5cc2167fdf6d7e35efe0
+  src/__tests__/mockserver/internal/handler/pathpatchfirewallsfirewallid.go:
+    last_write_checksum: sha1:3fb011ce4c39e0a654572bc7298628a8b526360e
+  src/__tests__/mockserver/internal/handler/pathpatchprojectsprojectid.go:
+    last_write_checksum: sha1:0d992a2f4555c51dfb1ea1c464b263026fc1b4ce
+  src/__tests__/mockserver/internal/handler/pathpatchprojectsprojectidsshkeyssshkeyid.go:
+    last_write_checksum: sha1:bdbce25b90195b8fe3c976a9e5daee1edd50d98c
+  src/__tests__/mockserver/internal/handler/pathpatchprojectsprojectiduserdatauserdataid.go:
+    last_write_checksum: sha1:4a2f0414f50565d25c223088d011e3cab8c11533
+  src/__tests__/mockserver/internal/handler/pathpatchserversserverid.go:
+    last_write_checksum: sha1:f9f9f72d141e56fd41821b789a17ad1711703e64
+  src/__tests__/mockserver/internal/handler/pathpatchserversserveriddeployconfig.go:
+    last_write_checksum: sha1:49c45fe413fe4031a3c8bd9e0f5b0737aee7b7e1
+  src/__tests__/mockserver/internal/handler/pathpatchsshkeyssshkeyid.go:
+    last_write_checksum: sha1:1168a08c2d02a49b05aec836aaa79f564ea8ea81
+  src/__tests__/mockserver/internal/handler/pathpatchstoragefilesystemsfilesystemid.go:
+    last_write_checksum: sha1:8a7a80f559b3ec0daf8d85905b1f37f9dac2faee
+  src/__tests__/mockserver/internal/handler/pathpatchtagstagid.go:
+    last_write_checksum: sha1:c87f0cb1dbc7fbf90a5d1ebcaa55c2312fb9fdf3
+  src/__tests__/mockserver/internal/handler/pathpatchteamteamid.go:
+    last_write_checksum: sha1:12eb1806a20d2c123653d5de6d0e7b581b3a9b73
+  src/__tests__/mockserver/internal/handler/pathpatchuserdatauserdataid.go:
+    last_write_checksum: sha1:b8ff10bd19e2e745ce945b3127b5a26b4a99d5e5
+  src/__tests__/mockserver/internal/handler/pathpatchuserprofileid.go:
+    last_write_checksum: sha1:ccdf66284bc046787c16ef41db4c9a5c67062d96
+  src/__tests__/mockserver/internal/handler/pathpatchvirtualnetworksvlanid.go:
+    last_write_checksum: sha1:ce5184f06b514cadc0a0ab7ca3f892fc4ad5e98c
+  src/__tests__/mockserver/internal/handler/pathpatchvpnsessionsvpnsessionidrefreshpassword.go:
+    last_write_checksum: sha1:925d4b0dacdabbe467b695e5a010ccb35d59e73a
+  src/__tests__/mockserver/internal/handler/pathpostauthapikeys.go:
+    last_write_checksum: sha1:2480025e3da5a742c78bd2815ade26fcfb6d0bc7
+  src/__tests__/mockserver/internal/handler/pathpostfirewalls.go:
+    last_write_checksum: sha1:1495ba560973920d0aa37a5dc3535e6943ce2007
+  src/__tests__/mockserver/internal/handler/pathpostfirewallsfirewallidassignments.go:
+    last_write_checksum: sha1:9732480e8442387179263cba6491995942ff3238
+  src/__tests__/mockserver/internal/handler/pathpostplansbandwidth.go:
+    last_write_checksum: sha1:79bfed93375a371698bd96dd4ae1886658592cf1
+  src/__tests__/mockserver/internal/handler/pathpostprojects.go:
+    last_write_checksum: sha1:8f61612469967b6652f1aaeafcf08c23755c297a
+  src/__tests__/mockserver/internal/handler/pathpostprojectsprojectidsshkeys.go:
+    last_write_checksum: sha1:5b2cc62d8dd1142582298509d7889b237993f26b
+  src/__tests__/mockserver/internal/handler/pathpostprojectsprojectiduserdata.go:
+    last_write_checksum: sha1:b432c8b8f7715b8518da08f9534c32c8537ccbd8
+  src/__tests__/mockserver/internal/handler/pathpostservers.go:
+    last_write_checksum: sha1:d2da07d46c54aff369d30c395455d711509c97ff
+  src/__tests__/mockserver/internal/handler/pathpostserversserveridactions.go:
+    last_write_checksum: sha1:8c9efc49c26d6685abeca03e63220f1b783b41c7
+  src/__tests__/mockserver/internal/handler/pathpostserversserveridexitrescuemode.go:
+    last_write_checksum: sha1:3cbf666507a08a0bd324f4ef06388dfcddd04552
+  src/__tests__/mockserver/internal/handler/pathpostserversserveridlock.go:
+    last_write_checksum: sha1:d895b0c1e87b600de0d1ae0e9b8c81b141e737b9
+  src/__tests__/mockserver/internal/handler/pathpostserversserveridoutofbandconnection.go:
+    last_write_checksum: sha1:3d322b8b8a9f27217815e74893befd691bc3ee1b
+  src/__tests__/mockserver/internal/handler/pathpostserversserveridremoteaccess.go:
+    last_write_checksum: sha1:7114349a7c7ba8575e9cfa69cca0c58c48dce738
+  src/__tests__/mockserver/internal/handler/pathpostserversserveridrescuemode.go:
+    last_write_checksum: sha1:c12a7bf418021266423e9e5b78fe98c7ca414fd8
+  src/__tests__/mockserver/internal/handler/pathpostserversserveridscheduledeletion.go:
+    last_write_checksum: sha1:127fa3c063c8a8b0a234ba9afc537203e9bd8524
+  src/__tests__/mockserver/internal/handler/pathpostserversserveridunlock.go:
+    last_write_checksum: sha1:68adbc5a92a756e818acaa035b2dec196dcc89aa
+  src/__tests__/mockserver/internal/handler/pathpostsshkeys.go:
+    last_write_checksum: sha1:5dbe95fdfcd6192acbfcd82fd1408a2b3cfec7ad
+  src/__tests__/mockserver/internal/handler/pathpoststoragefilesystems.go:
+    last_write_checksum: sha1:3d53ff265b2172d002e053006f7598027e7d4db0
+  src/__tests__/mockserver/internal/handler/pathpoststoragevolumes.go:
+    last_write_checksum: sha1:20b4cde505ef02ce865184dcecac4ef493ea8d3f
+  src/__tests__/mockserver/internal/handler/pathposttags.go:
+    last_write_checksum: sha1:8ed8638a3d00f3239468d32ffa8f5fbe35922445
+  src/__tests__/mockserver/internal/handler/pathpostteam.go:
+    last_write_checksum: sha1:7d01b2e00626c0f5dfdc4ceb90798992c3282add
+  src/__tests__/mockserver/internal/handler/pathpostteammembers.go:
+    last_write_checksum: sha1:b2ecba36bc7a5a8ffe3fc139f16c71e39ce7b38f
+  src/__tests__/mockserver/internal/handler/pathpostuserdata.go:
+    last_write_checksum: sha1:44b102b0208e28a99287494d9d8419c9f78d3840
+  src/__tests__/mockserver/internal/handler/pathpostvirtualmachines.go:
+    last_write_checksum: sha1:96f7aca31b85e32390f57bd1a5a3f7d374040b7f
+  src/__tests__/mockserver/internal/handler/pathpostvirtualnetworks.go:
+    last_write_checksum: sha1:60d9285a003fbdb7b86fc6a3af6916f6943a2e7c
+  src/__tests__/mockserver/internal/handler/pathpostvirtualnetworksassignments.go:
+    last_write_checksum: sha1:262428fce7bbd5c7ed19849e763e3395c067cce3
+  src/__tests__/mockserver/internal/handler/pathpostvpnsessions.go:
+    last_write_checksum: sha1:3946ea1986f89bd47ae79a6ef44da3c570f34b30
+  src/__tests__/mockserver/internal/handler/pathputauthapikeysapikeyid.go:
+    last_write_checksum: sha1:0bf41a3c193193634d2be92909b4da64e66c6903
+  src/__tests__/mockserver/internal/handler/values/files.go:
+    last_write_checksum: sha1:e1e9d78c165e2a35d165f120bd8dcd7b42c33a33
+  src/__tests__/mockserver/internal/logging/doc.go:
+    last_write_checksum: sha1:63a119620f179826356304b8205756248caa370e
+  src/__tests__/mockserver/internal/logging/formats.go:
+    last_write_checksum: sha1:e84e84e6e62a4dc3b9ad3a7f2a95eb77374f2fcd
+  src/__tests__/mockserver/internal/logging/http_file.go:
+    last_write_checksum: sha1:e948142b98821c23bd21c128e007e79a193114a2
+  src/__tests__/mockserver/internal/logging/http_logger.go:
+    last_write_checksum: sha1:7a2267a61cb1282405ed7f406f9bd95fbf796b5b
+  src/__tests__/mockserver/internal/logging/levels.go:
+    last_write_checksum: sha1:164f3aee47030d3534e4ef2df31192304e9ea97b
+  src/__tests__/mockserver/internal/logging/logger.go:
+    last_write_checksum: sha1:92027a7d11dd84831bc444aa2d018cbb7195542f
+  src/__tests__/mockserver/internal/logging/oas_operation.go:
+    last_write_checksum: sha1:af9187f31972ef308fb4bc82de73d6dd71b9fb64
+  src/__tests__/mockserver/internal/logging/oas_operation_call.go:
+    last_write_checksum: sha1:1ec2244b5fc171dfe7e4e339420b2b17f0df48c9
+  src/__tests__/mockserver/internal/sdk/models/components/apikey.go:
+    last_write_checksum: sha1:4e3e0704721f53379fadfcb274199303f8bbf819
+  src/__tests__/mockserver/internal/sdk/models/components/apikeys.go:
+    last_write_checksum: sha1:b90946a92bccf3b32b93f2119dd9410893bdb0fa
+  src/__tests__/mockserver/internal/sdk/models/components/bandwidthpackages.go:
+    last_write_checksum: sha1:0129546794a37586c289a37ba9beb363bca5b7a9
+  src/__tests__/mockserver/internal/sdk/models/components/bandwidthplandata.go:
+    last_write_checksum: sha1:9072f08f31e0a0fa6424d7bae53e1fcf02f4be3b
+  src/__tests__/mockserver/internal/sdk/models/components/bandwidthplans.go:
+    last_write_checksum: sha1:b57f47b684b9e76a8b70e676dfeb950da50e53aa
+  src/__tests__/mockserver/internal/sdk/models/components/billingusage.go:
+    last_write_checksum: sha1:dfedd67ae09b9fdc9661c15a307c1956e44d0629
+  src/__tests__/mockserver/internal/sdk/models/components/containerplandata.go:
+    last_write_checksum: sha1:e17c7fe6eeb899276ef1705f17d4f829a1dd914d
+  src/__tests__/mockserver/internal/sdk/models/components/createapikey.go:
+    last_write_checksum: sha1:e58d2b7226e76355e09670113e5cc1283a638226
+  src/__tests__/mockserver/internal/sdk/models/components/customtag.go:
+    last_write_checksum: sha1:9fce10e9e0bc5788e5f9deaa8a3c767433be92b5
+  src/__tests__/mockserver/internal/sdk/models/components/customtagdata.go:
+    last_write_checksum: sha1:fb97395d66cb522d37377e28829aeb50f13cdcd6
+  src/__tests__/mockserver/internal/sdk/models/components/customtags.go:
+    last_write_checksum: sha1:64e8412f72cfdff50fbc5c3fe5e0cd95e927f1e6
+  src/__tests__/mockserver/internal/sdk/models/components/deployconfig.go:
+    last_write_checksum: sha1:30734598a9afb7fbc1faa4a2337130b71ff65d64
+  src/__tests__/mockserver/internal/sdk/models/components/eventdata.go:
+    last_write_checksum: sha1:5e6558c1e9e071c15d41f196e083f6fc1246d15e
+  src/__tests__/mockserver/internal/sdk/models/components/events.go:
+    last_write_checksum: sha1:e26ba1f069e25057d993106aafce24772ee1bc86
+  src/__tests__/mockserver/internal/sdk/models/components/filesystemdata.go:
+    last_write_checksum: sha1:3243ef4e0b520de7ce57330a29ccc043b5033d64
+  src/__tests__/mockserver/internal/sdk/models/components/firewall.go:
+    last_write_checksum: sha1:a71c3f9fcd93f7f388f0a5914bcce48cb549734d
+  src/__tests__/mockserver/internal/sdk/models/components/firewallassignmentdata.go:
+    last_write_checksum: sha1:fd0330edd3830b2b0f84e5b347eb0cd7a70308aa
+  src/__tests__/mockserver/internal/sdk/models/components/firewallassignments.go:
+    last_write_checksum: sha1:a72e519613046d10335b1b94304ff37f21e103d3
+  src/__tests__/mockserver/internal/sdk/models/components/firewalldata.go:
+    last_write_checksum: sha1:0c3a76fe9c1dd0fd9ff40b09ba6fb19b1fe0c05f
+  src/__tests__/mockserver/internal/sdk/models/components/firewalls.go:
+    last_write_checksum: sha1:8a4ebf79f2709efb87c9c6f24dbcfdea1b35e413
+  src/__tests__/mockserver/internal/sdk/models/components/firewallserver.go:
+    last_write_checksum: sha1:7bae187e2815487bee4c3f99e7e71d16fa1fa265
+  src/__tests__/mockserver/internal/sdk/models/components/httpmetadata.go:
+    last_write_checksum: sha1:9e4b58e3bb54db4360421109c2e169741499be16
+  src/__tests__/mockserver/internal/sdk/models/components/ipaddress.go:
+    last_write_checksum: sha1:d2e4e698e0169b9e0ead55cc4308cb4ca7f29255
+  src/__tests__/mockserver/internal/sdk/models/components/ipaddresses.go:
+    last_write_checksum: sha1:a5a3dca09744e4fda5b3b186aad58c759d6237a0
+  src/__tests__/mockserver/internal/sdk/models/components/ipmisession.go:
+    last_write_checksum: sha1:7f41fae66a8f7b1b27550c804522989ce9e66794
+  src/__tests__/mockserver/internal/sdk/models/components/membership.go:
+    last_write_checksum: sha1:df6d2cc4d11dc8861276a903ee038c0a7bdb2226
+  src/__tests__/mockserver/internal/sdk/models/components/operatingsystemdata.go:
+    last_write_checksum: sha1:dae28a0e4174af8e50dff34130a717cf69a71090
+  src/__tests__/mockserver/internal/sdk/models/components/operatingsystems.go:
+    last_write_checksum: sha1:fdd494781ac8e416167064acd74c6cab345a2326
+  src/__tests__/mockserver/internal/sdk/models/components/outofbandconnection.go:
+    last_write_checksum: sha1:cb3f78635b584d134eaf7a122d9c6c7a4f6a8b13
+  src/__tests__/mockserver/internal/sdk/models/components/plan.go:
+    last_write_checksum: sha1:e2d92d242069e40c4a329279a3e0502d3a0a7c8c
+  src/__tests__/mockserver/internal/sdk/models/components/plandata.go:
+    last_write_checksum: sha1:d52fb6ac4ca845df774e143c7de1e0551d73fbfd
+  src/__tests__/mockserver/internal/sdk/models/components/project.go:
+    last_write_checksum: sha1:9ac21bf955b52f66ed1cbb7d2d5faf243f2e9888
+  src/__tests__/mockserver/internal/sdk/models/components/projectinclude.go:
+    last_write_checksum: sha1:d8516930e89eda5424b0260e9e0d97359b56f32a
+  src/__tests__/mockserver/internal/sdk/models/components/projects.go:
+    last_write_checksum: sha1:c70ce17bf0a8af5605d3ae4e9dc849fa29cd591f
+  src/__tests__/mockserver/internal/sdk/models/components/region.go:
+    last_write_checksum: sha1:b01a3060690b82c5c86662a055a6d4fc2b04abeb
+  src/__tests__/mockserver/internal/sdk/models/components/regionresourcedata.go:
+    last_write_checksum: sha1:6fb5df4790e4d77aaf2f9da07584c0552f6857b7
+  src/__tests__/mockserver/internal/sdk/models/components/regions.go:
+    last_write_checksum: sha1:40a10237c7244331f37c264162f8c96cc357f331
+  src/__tests__/mockserver/internal/sdk/models/components/role.go:
+    last_write_checksum: sha1:1517fd8cc92034aee6118d80f2f896fb722f1941
+  src/__tests__/mockserver/internal/sdk/models/components/roledata.go:
+    last_write_checksum: sha1:e027bf0b9353700207f43907d9eb8077c4077157
+  src/__tests__/mockserver/internal/sdk/models/components/security.go:
+    last_write_checksum: sha1:a5f59e260447dd376766963707091c0685485ba8
+  src/__tests__/mockserver/internal/sdk/models/components/server.go:
+    last_write_checksum: sha1:139fca53cd92d0cd740764a61f9eb3159091929c
+  src/__tests__/mockserver/internal/sdk/models/components/serveraction.go:
+    last_write_checksum: sha1:8129ef2fe085b9ca287e02cc3d935fa9caf5ae6b
+  src/__tests__/mockserver/internal/sdk/models/components/serverdata.go:
+    last_write_checksum: sha1:35e28ca04d89a6dbc8b8d5f3ed2e5ba9393110e5
+  src/__tests__/mockserver/internal/sdk/models/components/serverregionresourcedata.go:
+    last_write_checksum: sha1:e9cea9ae54242cbc60026df3bbf3942718d1eb50
+  src/__tests__/mockserver/internal/sdk/models/components/serverrescue.go:
+    last_write_checksum: sha1:dfd4976a9969c1dc315a11e93f3253048bf71440
+  src/__tests__/mockserver/internal/sdk/models/components/servers.go:
+    last_write_checksum: sha1:42278dafb52bb2ebf4b21170b77e313648e2615c
+  src/__tests__/mockserver/internal/sdk/models/components/serverscheduledeletion.go:
+    last_write_checksum: sha1:b1c47b886d04d6f847cf3e9a7d6b58df0aaee93a
+  src/__tests__/mockserver/internal/sdk/models/components/sshkeydata.go:
+    last_write_checksum: sha1:614285ff6dd263ee30119d36b9c204e97d3b4a3f
+  src/__tests__/mockserver/internal/sdk/models/components/sshkeys.go:
+    last_write_checksum: sha1:def65d399fd947fa6e7d7ddcd23dd7962a045f81
+  src/__tests__/mockserver/internal/sdk/models/components/storageplandata.go:
+    last_write_checksum: sha1:915c5bf8b23c57763dd4b1dae6250f3a0dd46e38
+  src/__tests__/mockserver/internal/sdk/models/components/storageplans.go:
+    last_write_checksum: sha1:372027a961c87a4adb7357de5ee42ffd50581519
+  src/__tests__/mockserver/internal/sdk/models/components/team.go:
+    last_write_checksum: sha1:c26c0765272d294b38e5c86157e715b0009c7b0a
+  src/__tests__/mockserver/internal/sdk/models/components/teaminclude.go:
+    last_write_checksum: sha1:2bd918048636667fede45395ec1d1330b8e0c59e
+  src/__tests__/mockserver/internal/sdk/models/components/teammembers.go:
+    last_write_checksum: sha1:2ad4e26ccefa54506125666d57e0a3aa697f743b
+  src/__tests__/mockserver/internal/sdk/models/components/teams.go:
+    last_write_checksum: sha1:1ddb1850d006e45c6d3009697e5bd3ef6a580ede
+  src/__tests__/mockserver/internal/sdk/models/components/traffic.go:
+    last_write_checksum: sha1:3ceb4eb2101bfd6ae059b5e4e94c063205a474d7
+  src/__tests__/mockserver/internal/sdk/models/components/trafficquota.go:
+    last_write_checksum: sha1:91a4d0f7f1e987f7a6b193f7409a638c7f4d9bfa
+  src/__tests__/mockserver/internal/sdk/models/components/updateapikey.go:
+    last_write_checksum: sha1:0269c46c6a29b78fb2c0d1dda896b56a408965ba
+  src/__tests__/mockserver/internal/sdk/models/components/user.go:
+    last_write_checksum: sha1:cf357dfe37a96e1aa65e8f8be3f065edc23024e0
+  src/__tests__/mockserver/internal/sdk/models/components/userdata.go:
+    last_write_checksum: sha1:2518bdc38cfd3592f4e8a0bac5e462877fa9272d
+  src/__tests__/mockserver/internal/sdk/models/components/userdataobject.go:
+    last_write_checksum: sha1:de0ba84dbabf68348140c7315b6716db853f7448
+  src/__tests__/mockserver/internal/sdk/models/components/userdataproperties.go:
+    last_write_checksum: sha1:3da3fd7f45e017a5072e5e4d3871958cc96581a4
+  src/__tests__/mockserver/internal/sdk/models/components/userinclude.go:
+    last_write_checksum: sha1:70016b0d811f675cea4cf686678c8bb0abad8e54
+  src/__tests__/mockserver/internal/sdk/models/components/userteam.go:
+    last_write_checksum: sha1:5e0c88234f091a0b3d9f5f7c4f73a1885f9b078a
+  src/__tests__/mockserver/internal/sdk/models/components/userteams.go:
+    last_write_checksum: sha1:65ab140a4194a4f691f6facb4928b313e4de4e85
+  src/__tests__/mockserver/internal/sdk/models/components/userupdate.go:
+    last_write_checksum: sha1:6b9e8df8f2dd66570870fd06bdb3be60536c6470
+  src/__tests__/mockserver/internal/sdk/models/components/virtualmachine.go:
+    last_write_checksum: sha1:d89f44338d1c49b944286ffac5a7e88c15cbdae8
+  src/__tests__/mockserver/internal/sdk/models/components/virtualmachineattributes.go:
+    last_write_checksum: sha1:a48fe2e4f8434d3e97f6dfebff350b5d9452222c
+  src/__tests__/mockserver/internal/sdk/models/components/virtualmachinepayload.go:
+    last_write_checksum: sha1:adc0bdfa165a950a35812816da05419d8cb19331
+  src/__tests__/mockserver/internal/sdk/models/components/virtualmachineplans.go:
+    last_write_checksum: sha1:4bb1499e73c2aaf0311f629c15e4e931da71bbad
+  src/__tests__/mockserver/internal/sdk/models/components/virtualnetwork.go:
+    last_write_checksum: sha1:4a58756cfb2300eb3ad3483eb56f68be06b707d1
+  src/__tests__/mockserver/internal/sdk/models/components/virtualnetworkassignment.go:
+    last_write_checksum: sha1:82b569f1314bac8e4d08fd8babd46a78f296fcee
+  src/__tests__/mockserver/internal/sdk/models/components/virtualnetworkassignmentdata.go:
+    last_write_checksum: sha1:f267c2ac3d914e0c7b63b17aa168b345f8af3ab8
+  src/__tests__/mockserver/internal/sdk/models/components/virtualnetworkassignments.go:
+    last_write_checksum: sha1:05d9ec7ece5a2424fb06d2bc15b546e9287a89e0
+  src/__tests__/mockserver/internal/sdk/models/components/virtualnetworkdata.go:
+    last_write_checksum: sha1:475cb54765e4861a7e60e58688ac5dea634138b0
+  src/__tests__/mockserver/internal/sdk/models/components/virtualnetworks.go:
+    last_write_checksum: sha1:5018517b51566e39d20bd4753c9b2100d665be79
+  src/__tests__/mockserver/internal/sdk/models/components/volumedata.go:
+    last_write_checksum: sha1:c35788123b974405382a00952aa4aa6954df4d81
+  src/__tests__/mockserver/internal/sdk/models/components/vpnsessiondatawithpassword.go:
+    last_write_checksum: sha1:b36f61ba9161415469d5e09507fc1f0e052a1fe8
+  src/__tests__/mockserver/internal/sdk/models/components/vpnsessionwithpassword.go:
+    last_write_checksum: sha1:8f13f38af3f82af6ac2733ea6cbd7df3004a6200
+  src/__tests__/mockserver/internal/sdk/models/operations/assignservervirtualnetwork.go:
+    last_write_checksum: sha1:26b0b9de24507c20c8f7553e916d366b85c094d3
+  src/__tests__/mockserver/internal/sdk/models/operations/createfirewall.go:
+    last_write_checksum: sha1:94b9472255d836cc302e77d07d31e85c9b9ef736
+  src/__tests__/mockserver/internal/sdk/models/operations/createfirewallassignment.go:
+    last_write_checksum: sha1:f96a3fd58396729346150c69d17fb8b3cbedaf3c
+  src/__tests__/mockserver/internal/sdk/models/operations/createipmisession.go:
+    last_write_checksum: sha1:0f78d1b24f4a9a53b55fdb84e11e64c8d1eb20c9
+  src/__tests__/mockserver/internal/sdk/models/operations/createproject.go:
+    last_write_checksum: sha1:1bced111b2c756cccb010e0446540d4261e15c0f
+  src/__tests__/mockserver/internal/sdk/models/operations/createserver.go:
+    last_write_checksum: sha1:4370a66da2a7204b4f3706a9c1ec98fa75977701
+  src/__tests__/mockserver/internal/sdk/models/operations/createserveraction.go:
+    last_write_checksum: sha1:63c9d3171f509f4a4c52896988c4a59e6eb00c79
+  src/__tests__/mockserver/internal/sdk/models/operations/createserveroutofband.go:
+    last_write_checksum: sha1:3b13d954ec71f204bfcd923eab70394af7e3ebad
+  src/__tests__/mockserver/internal/sdk/models/operations/createserverreinstall.go:
+    last_write_checksum: sha1:7c3d2e27b4c224fd70e1218340f1d0de37d581b0
+  src/__tests__/mockserver/internal/sdk/models/operations/createtag.go:
+    last_write_checksum: sha1:e02809cb8771b7d18a68944f27224340477a0655
+  src/__tests__/mockserver/internal/sdk/models/operations/createvirtualmachine.go:
+    last_write_checksum: sha1:0147f3f17cde8c30ddcb1c77ab334ecc5be7b974
+  src/__tests__/mockserver/internal/sdk/models/operations/createvirtualmachineaction.go:
+    last_write_checksum: sha1:77fe67e50c2421099d682f1fb3cfccb377360da2
+  src/__tests__/mockserver/internal/sdk/models/operations/createvirtualnetwork.go:
+    last_write_checksum: sha1:42eb5bc97d86c363c1f73e1299d8d1b00d350386
+  src/__tests__/mockserver/internal/sdk/models/operations/deleteapikey.go:
+    last_write_checksum: sha1:95458e429300dd01ab13caf27dda2e9d6c82d129
+  src/__tests__/mockserver/internal/sdk/models/operations/deletefirewall.go:
+    last_write_checksum: sha1:4022766cb65d63650c993cd3b07a9fd9f47cd0e2
+  src/__tests__/mockserver/internal/sdk/models/operations/deletefirewallassignment.go:
+    last_write_checksum: sha1:24cba61b7289ceef642bee2fd57d705de444df79
+  src/__tests__/mockserver/internal/sdk/models/operations/deleteproject.go:
+    last_write_checksum: sha1:48ff84b7f618e380f73e24cf36e61f46d1cc89cc
+  src/__tests__/mockserver/internal/sdk/models/operations/deleteprojectsshkey.go:
+    last_write_checksum: sha1:4ff1b193f01a64b3e2b835a35004f6bd77b1edff
+  src/__tests__/mockserver/internal/sdk/models/operations/deleteprojectuserdata.go:
+    last_write_checksum: sha1:32309b782984b93d34421475e96b3e7b401c5911
+  src/__tests__/mockserver/internal/sdk/models/operations/deletesshkey.go:
+    last_write_checksum: sha1:b8cb538b6567af059ea3cca337f12a52a32791ad
+  src/__tests__/mockserver/internal/sdk/models/operations/deletestoragefilesystems.go:
+    last_write_checksum: sha1:f0ca1e23b6b3638e5210b9480d098a8e84452174
+  src/__tests__/mockserver/internal/sdk/models/operations/deletestoragevolumes.go:
+    last_write_checksum: sha1:5abb164e3e120cc1db39880e80c175d1ffc5c848
+  src/__tests__/mockserver/internal/sdk/models/operations/deleteuserdata.go:
+    last_write_checksum: sha1:dd95a34d07ebed26a7502eebaa261d21c0004dec
+  src/__tests__/mockserver/internal/sdk/models/operations/deletevirtualnetworksassignments.go:
+    last_write_checksum: sha1:000c81c99f959aae0c52962f180e8d5bc968833a
+  src/__tests__/mockserver/internal/sdk/models/operations/deletevpnsession.go:
+    last_write_checksum: sha1:06d247a46b80fe8ed56d84524e0f5ff3e0fdb8da
+  src/__tests__/mockserver/internal/sdk/models/operations/destroyserver.go:
+    last_write_checksum: sha1:7af6182b8b4fa117d374084d59f7e74099a718c1
+  src/__tests__/mockserver/internal/sdk/models/operations/destroytag.go:
+    last_write_checksum: sha1:ac5509e91f37a2ac254f478561097ce977e3ca6c
+  src/__tests__/mockserver/internal/sdk/models/operations/destroyteammember.go:
+    last_write_checksum: sha1:b53265d64c4a7e452db27604f0ac73a8b352cfd9
+  src/__tests__/mockserver/internal/sdk/models/operations/destroyvirtualmachine.go:
+    last_write_checksum: sha1:8a8ef8c7322a6e242dd966aafe0f82004fa28326
+  src/__tests__/mockserver/internal/sdk/models/operations/destroyvirtualnetwork.go:
+    last_write_checksum: sha1:848674ead2319e35567f46db2bd859efa6dabbef
+  src/__tests__/mockserver/internal/sdk/models/operations/getallfirewallassignments.go:
+    last_write_checksum: sha1:e1f981466833eaf7b5b53d76d58c142683513442
+  src/__tests__/mockserver/internal/sdk/models/operations/getapikeys.go:
+    last_write_checksum: sha1:fef019dba1d2c6e4a20ac03825db7b35dfd8fb99
+  src/__tests__/mockserver/internal/sdk/models/operations/getbandwidthplans.go:
+    last_write_checksum: sha1:7ddd2f32171de9052c993b2eb772a835784d15cf
+  src/__tests__/mockserver/internal/sdk/models/operations/getbillingusage.go:
+    last_write_checksum: sha1:a6a4569aaaa5f34c6121692a7a67e1297739b11f
+  src/__tests__/mockserver/internal/sdk/models/operations/getcontainersplan.go:
+    last_write_checksum: sha1:7c1c7f04a82092524c13699c399b2c1f6acf1191
+  src/__tests__/mockserver/internal/sdk/models/operations/getevents.go:
+    last_write_checksum: sha1:fb923d070bf7db46a8f5956e228e51cadd040a21
+  src/__tests__/mockserver/internal/sdk/models/operations/getfirewall.go:
+    last_write_checksum: sha1:880ca34d51e93e127ae652ec3d10a1f3437c8916
+  src/__tests__/mockserver/internal/sdk/models/operations/getfirewallassignments.go:
+    last_write_checksum: sha1:8cdb32a4be48bca557978abb03f720f5841af1e6
+  src/__tests__/mockserver/internal/sdk/models/operations/getip.go:
+    last_write_checksum: sha1:9f8e3b8c6adebc3a2052ce326dfe2fdcd941b176
+  src/__tests__/mockserver/internal/sdk/models/operations/getips.go:
+    last_write_checksum: sha1:96c3f91519694d6b9003f2e40968522cc60bf217
+  src/__tests__/mockserver/internal/sdk/models/operations/getplan.go:
+    last_write_checksum: sha1:10ef35e134f706c2c247d51bda43e33846a45d5b
+  src/__tests__/mockserver/internal/sdk/models/operations/getplans.go:
+    last_write_checksum: sha1:65be5b3726826dd55c30fa5064c573e582adab32
+  src/__tests__/mockserver/internal/sdk/models/operations/getplansoperatingsystem.go:
+    last_write_checksum: sha1:add7ffc87cc9fcdc7bac4c25b68406c2d0ef3ecd
+  src/__tests__/mockserver/internal/sdk/models/operations/getprojects.go:
+    last_write_checksum: sha1:2ba97b4e24437d35a09fb7a0d5d01fcdc3944bfa
+  src/__tests__/mockserver/internal/sdk/models/operations/getprojectsshkey.go:
+    last_write_checksum: sha1:c60935b7cc7083fc178ddf73c7469dfc2458048e
+  src/__tests__/mockserver/internal/sdk/models/operations/getprojectsshkeys.go:
+    last_write_checksum: sha1:14a7cba7d129ef63ec70abf8201c63f2d2e19698
+  src/__tests__/mockserver/internal/sdk/models/operations/getprojectuserdata.go:
+    last_write_checksum: sha1:2c463c317fcca4f7b78bc00c815ababbeb4fea62
+  src/__tests__/mockserver/internal/sdk/models/operations/getprojectusersdata.go:
+    last_write_checksum: sha1:a6bbefa6e10c74a6951c12a47e4e3edd581ac655
+  src/__tests__/mockserver/internal/sdk/models/operations/getregion.go:
+    last_write_checksum: sha1:8605492523bb5e3e6e1773a98019f3ffd60e1e64
+  src/__tests__/mockserver/internal/sdk/models/operations/getregions.go:
+    last_write_checksum: sha1:172cffe2504083fda135e42b1ff53b1403e9cf22
+  src/__tests__/mockserver/internal/sdk/models/operations/getroleid.go:
+    last_write_checksum: sha1:d6710dba75053320d0a074d6fea55faf57d66a42
+  src/__tests__/mockserver/internal/sdk/models/operations/getroles.go:
+    last_write_checksum: sha1:e096f60c4a840b3d7613b3ef7b343a7ebe10d3b4
+  src/__tests__/mockserver/internal/sdk/models/operations/getserver.go:
+    last_write_checksum: sha1:5799533431b3f23dad47fb635c192767b6de4c46
+  src/__tests__/mockserver/internal/sdk/models/operations/getserverdeployconfig.go:
+    last_write_checksum: sha1:5e898a855d0328abf28128ecac69b54f46a292dc
+  src/__tests__/mockserver/internal/sdk/models/operations/getserveroutofband.go:
+    last_write_checksum: sha1:4afa0ef3cedcf5a869ca1a35dd7ada4418832b71
+  src/__tests__/mockserver/internal/sdk/models/operations/getservers.go:
+    last_write_checksum: sha1:94a3988b5ecd9c3688aa2fd05ae566ac661f8a8f
+  src/__tests__/mockserver/internal/sdk/models/operations/getsshkey.go:
+    last_write_checksum: sha1:34fd475a1682f50d94e8045047d79e5ece38e4f0
+  src/__tests__/mockserver/internal/sdk/models/operations/getsshkeys.go:
+    last_write_checksum: sha1:b60943126883e9618422a40bd9ca034e8af26422
+  src/__tests__/mockserver/internal/sdk/models/operations/getstoragefilesystems.go:
+    last_write_checksum: sha1:548acd6eb02ba5d6871516d98b570c66a55550f5
+  src/__tests__/mockserver/internal/sdk/models/operations/getstorageplans.go:
+    last_write_checksum: sha1:42783d423b7293fdc36ac8075e4aba929ded8566
+  src/__tests__/mockserver/internal/sdk/models/operations/getstoragevolume.go:
+    last_write_checksum: sha1:2098997f6b63c0a817be2933318aa622af8417c9
+  src/__tests__/mockserver/internal/sdk/models/operations/getstoragevolumes.go:
+    last_write_checksum: sha1:6e5adb993f97f9683eb5d8ec7fa8d8dd8aeeb0fd
+  src/__tests__/mockserver/internal/sdk/models/operations/gettags.go:
+    last_write_checksum: sha1:1e23c19ebd04ab0243330ed1011cae7342daf2ce
+  src/__tests__/mockserver/internal/sdk/models/operations/getteam.go:
+    last_write_checksum: sha1:5b41089c492120ac24e1804086b79a64e7d68676
+  src/__tests__/mockserver/internal/sdk/models/operations/getteammembers.go:
+    last_write_checksum: sha1:936efcd9db8b031792a38d05807a795e828b9398
+  src/__tests__/mockserver/internal/sdk/models/operations/gettrafficconsumption.go:
+    last_write_checksum: sha1:3abed02fa79e4dd24e30dc812134776631113574
+  src/__tests__/mockserver/internal/sdk/models/operations/gettrafficquota.go:
+    last_write_checksum: sha1:3f9efc97e67fd187d67e003d705fb563b31d11d6
+  src/__tests__/mockserver/internal/sdk/models/operations/getuserdata.go:
+    last_write_checksum: sha1:8d079825bb18005a2deb89fe91e54aa236ca56bb
+  src/__tests__/mockserver/internal/sdk/models/operations/getuserprofile.go:
+    last_write_checksum: sha1:e609edbcc8dd00a62e9386acbe3f6676338510ee
+  src/__tests__/mockserver/internal/sdk/models/operations/getusersdata.go:
+    last_write_checksum: sha1:0796c27fdb34fe02385441da41a3659b2235afd0
+  src/__tests__/mockserver/internal/sdk/models/operations/getuserteams.go:
+    last_write_checksum: sha1:71c1fb78f206455dc394fedf1f4e26e731986696
+  src/__tests__/mockserver/internal/sdk/models/operations/getvirtualnetwork.go:
+    last_write_checksum: sha1:2d15561e8370f6d8dcfcfebe6e5331fe8b5305eb
+  src/__tests__/mockserver/internal/sdk/models/operations/getvirtualnetworks.go:
+    last_write_checksum: sha1:8f479c4bf0ebeeef0c141604c8628f933203b05b
+  src/__tests__/mockserver/internal/sdk/models/operations/getvirtualnetworksassignments.go:
+    last_write_checksum: sha1:a1bba449322b2017fc4f08eed645611562bdf939
+  src/__tests__/mockserver/internal/sdk/models/operations/getvmplans.go:
+    last_write_checksum: sha1:2727430baa5e9af7ef74e336c1a0d30470e5ba95
+  src/__tests__/mockserver/internal/sdk/models/operations/getvpnsessions.go:
+    last_write_checksum: sha1:1a81c8afe7148abc5bc3c2f64589329edcbd0b28
+  src/__tests__/mockserver/internal/sdk/models/operations/indexvirtualmachine.go:
+    last_write_checksum: sha1:69a4b786ec779dd3b198737329960258c46a6f14
+  src/__tests__/mockserver/internal/sdk/models/operations/listfirewalls.go:
+    last_write_checksum: sha1:ac777fb7b91d52a3e1147979521c2814be361216
+  src/__tests__/mockserver/internal/sdk/models/operations/patchcurrentteam.go:
+    last_write_checksum: sha1:7bb037c514919a41e3a9c242ec2ec0fdd6180015
+  src/__tests__/mockserver/internal/sdk/models/operations/patchstoragefilesystems.go:
+    last_write_checksum: sha1:823c60377e375192256436ef14863916b0f3c26e
+  src/__tests__/mockserver/internal/sdk/models/operations/patchuserdata.go:
+    last_write_checksum: sha1:6d91b0b8cb719984c4847aa6ae3b84a79c8edcff
+  src/__tests__/mockserver/internal/sdk/models/operations/patchuserprofile.go:
+    last_write_checksum: sha1:9832a18893a3e9a20d7441cb8aca2a40e8dd4dc9
+  src/__tests__/mockserver/internal/sdk/models/operations/postapikey.go:
+    last_write_checksum: sha1:850ceee92245dfe8e72e365c4878d5232cfeba5f
+  src/__tests__/mockserver/internal/sdk/models/operations/postprojectsshkey.go:
+    last_write_checksum: sha1:0c30dc31ff999675d442496a5a8a090b2da9fe4b
+  src/__tests__/mockserver/internal/sdk/models/operations/postprojectuserdata.go:
+    last_write_checksum: sha1:af4c19426ab78b14c234c895c37efd5e74f98597
+  src/__tests__/mockserver/internal/sdk/models/operations/postsshkey.go:
+    last_write_checksum: sha1:dafa8707b054f918e44707a1d7835b752d9a0b17
+  src/__tests__/mockserver/internal/sdk/models/operations/poststoragefilesystems.go:
+    last_write_checksum: sha1:fc31c5c5601de6a411488681fd10326fcede9738
+  src/__tests__/mockserver/internal/sdk/models/operations/poststoragevolumes.go:
+    last_write_checksum: sha1:35ca0512914bef24629837d1a5954323949a89b9
+  src/__tests__/mockserver/internal/sdk/models/operations/poststoragevolumesmount.go:
+    last_write_checksum: sha1:be0bb91be27cee5795835df78feac3140f9627e9
+  src/__tests__/mockserver/internal/sdk/models/operations/postteam.go:
+    last_write_checksum: sha1:05d96ac37f8500dd4cf53208068339f6c9d6b27a
+  src/__tests__/mockserver/internal/sdk/models/operations/postteammembers.go:
+    last_write_checksum: sha1:7ab48b37a2b0a1a73bc4e61cd11994a16af2b8a2
+  src/__tests__/mockserver/internal/sdk/models/operations/postuserdata.go:
+    last_write_checksum: sha1:99604a390e009f9eeb72a9b87adaaa2709920755
+  src/__tests__/mockserver/internal/sdk/models/operations/postvpnsession.go:
+    last_write_checksum: sha1:eda5a89a9d9600036eef7ad3524f16f901df0062
+  src/__tests__/mockserver/internal/sdk/models/operations/putprojectsshkey.go:
+    last_write_checksum: sha1:dfd02ee329ea3243dd1590c041bbfcd0f2823354
+  src/__tests__/mockserver/internal/sdk/models/operations/putprojectuserdata.go:
+    last_write_checksum: sha1:0fac16c4bd12f61023af9ac56a399ebbf2a50a25
+  src/__tests__/mockserver/internal/sdk/models/operations/putsshkey.go:
+    last_write_checksum: sha1:2a48ba4eaf97e0f0a04933a86be2088d9ef92eef
+  src/__tests__/mockserver/internal/sdk/models/operations/putvpnsession.go:
+    last_write_checksum: sha1:75708321707529eb38daaf787d51813e96e7aa51
+  src/__tests__/mockserver/internal/sdk/models/operations/rotateapikey.go:
+    last_write_checksum: sha1:83f5f32af6f945cc7a48d0249befd304ad402115
+  src/__tests__/mockserver/internal/sdk/models/operations/serverexitrescuemode.go:
+    last_write_checksum: sha1:078d565daac12fa81e14c6f88ab24ff9119238d5
+  src/__tests__/mockserver/internal/sdk/models/operations/serverlock.go:
+    last_write_checksum: sha1:d6ccedd3e06c0cd72546bd69aab80d408685a756
+  src/__tests__/mockserver/internal/sdk/models/operations/serverscheduledeletion.go:
+    last_write_checksum: sha1:0c9304e6800006232b93c94d1a98ac215f8a10fc
+  src/__tests__/mockserver/internal/sdk/models/operations/serverstartrescuemode.go:
+    last_write_checksum: sha1:2043ac3e78d1e5dad28264caef22c6c89a0866c8
+  src/__tests__/mockserver/internal/sdk/models/operations/serverunlock.go:
+    last_write_checksum: sha1:d96069631effa78d7e5a48634e947b79f354c58a
+  src/__tests__/mockserver/internal/sdk/models/operations/serverunscheduledeletion.go:
+    last_write_checksum: sha1:2d40155756b9ab1365fe59c1c6d49f9e8a7fabff
+  src/__tests__/mockserver/internal/sdk/models/operations/showvirtualmachine.go:
+    last_write_checksum: sha1:a18a098d622f1ddf0f871a76394e4cdbed223d37
+  src/__tests__/mockserver/internal/sdk/models/operations/updateapikey.go:
+    last_write_checksum: sha1:2cd5d7c551bc07769c634a6f403693eb47595414
+  src/__tests__/mockserver/internal/sdk/models/operations/updatefirewall.go:
+    last_write_checksum: sha1:08c14566fa612395080e4eff61a27a6b40ff2287
+  src/__tests__/mockserver/internal/sdk/models/operations/updateplansbandwidth.go:
+    last_write_checksum: sha1:6be163c101d9164dc4ef30198018c9e648016be9
+  src/__tests__/mockserver/internal/sdk/models/operations/updateproject.go:
+    last_write_checksum: sha1:bf591de411da73580222a2ae2353467f6d9bdad5
+  src/__tests__/mockserver/internal/sdk/models/operations/updateserver.go:
+    last_write_checksum: sha1:28c4245f9b77956b8d102ff5dbb8098542fdec85
+  src/__tests__/mockserver/internal/sdk/models/operations/updateserverdeployconfig.go:
+    last_write_checksum: sha1:b0321d869e15e970858a0d8d523517615885fe2c
+  src/__tests__/mockserver/internal/sdk/models/operations/updatetag.go:
+    last_write_checksum: sha1:8aa95ae336671b4b35cbc116affb8c012030704f
+  src/__tests__/mockserver/internal/sdk/models/operations/updatevirtualnetwork.go:
+    last_write_checksum: sha1:5df5342218323f52c79357149352b5ce4ef12057
+  src/__tests__/mockserver/internal/sdk/types/bigint.go:
+    last_write_checksum: sha1:49b004005d0461fb04b846eca062b070b0360b31
+  src/__tests__/mockserver/internal/sdk/types/date.go:
+    last_write_checksum: sha1:3036a2e1ed15a1d484c093367eba000c38f384d0
+  src/__tests__/mockserver/internal/sdk/types/datetime.go:
+    last_write_checksum: sha1:196d050af6450669214e9ae4fd28e56263ae2b5d
+  src/__tests__/mockserver/internal/sdk/types/decimal.go:
+    last_write_checksum: sha1:54f1f8c0d89d6ef048805121f97c6937404c5d51
+  src/__tests__/mockserver/internal/sdk/types/jsonl/jsonl.go:
+    last_write_checksum: sha1:15fb778e0fa6c7b4c228431af3d03b9819b8fd94
+  src/__tests__/mockserver/internal/sdk/types/pointers.go:
+    last_write_checksum: sha1:fc2275ea006257ba9ba4ff6f2a2cdb6205371eef
+  src/__tests__/mockserver/internal/sdk/utils/json.go:
+    last_write_checksum: sha1:6c771a2a3442f04ef7f925fc37b3e16655cd6ab4
+  src/__tests__/mockserver/internal/sdk/utils/reflect.go:
+    last_write_checksum: sha1:2e555f970ae33dd41130199d1b87c9864b485fdf
+  src/__tests__/mockserver/internal/sdk/utils/sort.go:
+    last_write_checksum: sha1:a9d390de086ad13841c7d154e97d314e6ae2d285
+  src/__tests__/mockserver/internal/server/doc.go:
+    last_write_checksum: sha1:71ca1bebc409ffcb7ed573f4bfc85f1d2cb76252
+  src/__tests__/mockserver/internal/server/generated_handlers.go:
+    last_write_checksum: sha1:dbaa2e7beedda2a3e0ef373939f0424577cb2666
+  src/__tests__/mockserver/internal/server/internal_handlers.go:
+    last_write_checksum: sha1:1c79af9ee45c9bde435f5acc711bc48c9f66315e
+  src/__tests__/mockserver/internal/server/server.go:
+    last_write_checksum: sha1:d97000314c64b937ff7a243cbc051c5591ab8722
+  src/__tests__/mockserver/internal/server/server_option.go:
+    last_write_checksum: sha1:f787e17525cbaed4d6881d02562da66a1deda9c0
+  src/__tests__/mockserver/internal/server/templates/log/index.html.tmpl:
+    last_write_checksum: sha1:7c3fc6e6b03d80e05bc586ade52ddcb8adaee148
+  src/__tests__/mockserver/internal/server/templates/log/operation.html.tmpl:
+    last_write_checksum: sha1:ab2894028c76b25dfe613d743a243bfd04fb279c
+  src/__tests__/mockserver/internal/server/templates/log/style.css.tmpl:
+    last_write_checksum: sha1:474c79a94fa7d2671135e078a71c51b11f38bfae
+  src/__tests__/mockserver/internal/tracking/requesttracker.go:
+    last_write_checksum: sha1:09963693aae5446c247cac171c284f2cdf7cfa4d
+  src/__tests__/mockserver/main.go:
+    last_write_checksum: sha1:1267817b54decac7af35c5db3f4d865eb628547d
+  src/__tests__/operatingsystems.test.ts:
+    id: d7c2210e9aaf
+    last_write_checksum: sha1:417e360a59deeca71b93fdad93bb97a8e5c79eae
+    pristine_git_object: 3e297ae1cdf76d653dfbe10f931046b970c439bd
+  src/__tests__/plans.test.ts:
+    id: 1d9fbd8cd50c
+    last_write_checksum: sha1:fff03a77c042c50530d23f746de5d05cd2e6e171
+    pristine_git_object: dc9d6cc76c91a16238defff7f875f08720204f40
+  src/__tests__/privatenetworks.test.ts:
+    id: de4c2f063e32
+    last_write_checksum: sha1:4f1ac36b4ef4280bc0443e79665d2d4534c777c5
+    pristine_git_object: 39494ff58e69721c52f3e0f4933d3822fbfd5b50
+  src/__tests__/projects.test.ts:
+    id: c3efd228934b
+    last_write_checksum: sha1:c324fd8c977c6adf9e905258133db45e7adb849d
+    pristine_git_object: 1881dbdf53e5ae1bc081c05f3ca82eed3e87993e
+  src/__tests__/projectssshkeys.test.ts:
+    id: 57958629eeea
+    last_write_checksum: sha1:2fa39dc4bee5f7a0cba44f03913863f82e8db918
+    pristine_git_object: 103beeea53ab3b5ab356305dbdda1baf84b2575b
+  src/__tests__/regions.test.ts:
+    id: f1b7a8c64217
+    last_write_checksum: sha1:55fc8210333a5a82454f24eef0a403495c069572
+    pristine_git_object: 23a6589e0f14904422ccec34da914b64e3affeed
+  src/__tests__/roles.test.ts:
+    id: 110304c3cf87
+    last_write_checksum: sha1:1d197a8a675a70bff56f7de5fa665c8901620859
+    pristine_git_object: 66a25317f450c94b62daffda82dc0eb2d46087c5
+  src/__tests__/servers.test.ts:
+    id: 3b219aa0babb
+    last_write_checksum: sha1:e902d100abc01bba20d11b7666fdbc80e04bfd45
+    pristine_git_object: 896ff07e63c2b6d5cc3b77b98eec08d73d5bc32f
+  src/__tests__/sshkeys.test.ts:
+    id: b03713bedc2f
+    last_write_checksum: sha1:aaa950587fe7b22e153c17d95b82ab53e50735ea
+    pristine_git_object: 99070d284fe323b95c7eb563f5b023fa1c4d8a33
+  src/__tests__/storage.test.ts:
+    id: 19cc62b8b559
+    last_write_checksum: sha1:f7ade6023c044ffb643d1f4b5eac464b41f1ec2d
+    pristine_git_object: 8d537c11dee116df67a6d0d45c41638806da508a
+  src/__tests__/tags.test.ts:
+    id: 8f2b5dc6381e
+    last_write_checksum: sha1:1a0975238fa79add35a9f1c4115ddc0732275038
+    pristine_git_object: 4b08726226c3c0465e1d7eac46cad6bdd1a72fc7
+  src/__tests__/teammembers.test.ts:
+    id: 48c096d8a19c
+    last_write_checksum: sha1:3e191274201cab6ebecf9d1a6408a093b0ea60b9
+    pristine_git_object: 4d713c49392c24ddebf49658128206c11da27789
+  src/__tests__/teams.test.ts:
+    id: af4aa38e263e
+    last_write_checksum: sha1:e40edcce71b43077c96c249a5f1d54565730e281
+    pristine_git_object: b8043a43fe5bc27714e4a5fd4f8b86b615d07f28
+  src/__tests__/testclient.ts:
+    id: f142c080bff8
+    last_write_checksum: sha1:a62cc200f8a9f9c0310ce1b8ba6392d480ab5569
+    pristine_git_object: 0dd5b597b62ed7e3e9b2fb5a66ee9280dceb41f4
+  src/__tests__/traffic.test.ts:
+    id: c662c49cacd2
+    last_write_checksum: sha1:d0993c833498defcf78a3492f2f7bba4f5237446
+    pristine_git_object: 646643630972240f21d02737295b670cffe735eb
+  src/__tests__/userdata.test.ts:
+    id: 98af9c5c9157
+    last_write_checksum: sha1:5df3e299e286082e5b3d09ff771688dea90948f3
+    pristine_git_object: c90205ae9f5a5c7db0c51715dbbb77258e2dd15c
+  src/__tests__/userprofile.test.ts:
+    id: 817c5faa3e45
+    last_write_checksum: sha1:68502129a99dcfd5741edde853c6ce39f9dada78
+    pristine_git_object: 356baa71288eff45141684bb9b51051c9fe87af5
+  src/__tests__/virtualmachines.test.ts:
+    id: 347a6c584f54
+    last_write_checksum: sha1:159df5a99de76e30a21135eac0e3ef828a2fa74a
+    pristine_git_object: 3c31186b470ae3da9fa77249f661cf97f370e69b
+  src/__tests__/vm.test.ts:
+    id: 46dda0a3c3c0
+    last_write_checksum: sha1:9794376e88b7a5d34099ab8f2240beaf51e57c03
+    pristine_git_object: d828761aa007c6956d942226e56af23e415e08d9
+  src/__tests__/vpnsessions.test.ts:
+    id: d8c61cfff62d
+    last_write_checksum: sha1:dd6f0b21eae033dfbc7e82797e688279d9470c2c
+    pristine_git_object: 4fa2743d76a27ce610a01ea846d28fcbb9b22836
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:9bb7b3807363b77f27dbdb87d6d10e9605f723d6
@@ -3104,8 +3868,8 @@ trackedFiles:
     pristine_git_object: 0aebd8b0a4867e35cb3348fc52921c3c0b4725b7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:f356351fe8df440136aa668ed32da5cc8d1daec8
-    pristine_git_object: 4065d029352ba469de5ee0cc5e04ff6dab3c1eff
+    last_write_checksum: sha1:d2143c1d65a4bc81d37d75643f41d31df77b4690
+    pristine_git_object: 67a2a16219a28374220df3c170e7d858cde0f905
   src/lib/dlv.ts:
     id: b1988214835a
     last_write_checksum: sha1:1dd3e3fbb4550c4bf31f5ef997faff355d6f3250
@@ -5585,8 +6349,103 @@ examples:
         "200":
           application/vnd.api+json: {"data": {"id": "tok_x1ZJrdx5qg4LV", "type": "api_keys", "attributes": {"name": "App Token", "api_version": "2023-06-01", "token_last_slice": "17b4c", "read_only": false, "allowed_ips": null, "last_used_at": null, "user": {"id": "user_3J8PY3vz8ahap5nLXYmws36rwRE", "email": "arnette@kutch.test"}, "created_at": "2026-01-14T15:56:30+00:00", "updated_at": "2026-01-14T15:56:30+00:00"}}}
 examplesVersion: 1.0.2
-generatedTests: {}
-releaseNotes: "## Typescript SDK Changes:\n* `latitudesh.servers.update()`: \n  *  `request.requestBody.data.attributes` **Changed**\n  *  `response.data.attributes` **Changed** **Breaking** :warning:\n* `latitudesh.servers.create()`: \n  *  `request.data.attributes` **Changed**\n  *  `response.data.attributes` **Changed** **Breaking** :warning:\n* `latitudesh.ipAddresses.get()`:  `response.attributes` **Changed** **Breaking** :warning:\n* `latitudesh.teams.get()`:  `response.data.[].attributes` **Changed** **Breaking** :warning:\n* `latitudesh.teams.create()`:  `response.data.attributes` **Changed** **Breaking** :warning:\n* `latitudesh.teams.update()`:  `response.data.attributes` **Changed** **Breaking** :warning:\n* `latitudesh.plans.getContainersPlan()`:  `response.attributes.regions.[].pricing` **Changed** **Breaking** :warning:\n* `latitudesh.projects.sshKeys.postProjectSshKey()`:  `response.data.attributes.user.authenticationFactorId` **Changed** **Breaking** :warning:\n* `latitudesh.sshKeys.list()`:  `response.data.[].attributes.user.authenticationFactorId` **Changed** **Breaking** :warning:\n* `latitudesh.sshKeys.get()`:  `response.data.attributes.user.authenticationFactorId` **Changed** **Breaking** :warning:\n* `latitudesh.sshKeys.modifyProjectKey()`:  `response.data.attributes.user.authenticationFactorId` **Changed** **Breaking** :warning:\n* `latitudesh.sshKeys.listAll()`:  `response.data.[].attributes.user.authenticationFactorId` **Changed** **Breaking** :warning:\n* `latitudesh.sshKeys.create()`:  `response.data.attributes.user.authenticationFactorId` **Changed** **Breaking** :warning:\n* `latitudesh.sshKeys.retrieve()`:  `response.data.attributes.user.authenticationFactorId` **Changed** **Breaking** :warning:\n* `latitudesh.sshKeys.update()`:  `response.data.attributes.user.authenticationFactorId` **Changed** **Breaking** :warning:\n* `latitudesh.servers.list()`:  `response.data.[].attributes` **Changed** **Breaking** :warning:\n* `latitudesh.servers.getDeployConfig()`:  `response.data.attributes.partitions` **Changed** **Breaking** :warning:\n* `latitudesh.servers.get()`:  `response.data.attributes` **Changed** **Breaking** :warning:\n* `latitudesh.ipAddresses.list()`:  `response.data.[].attributes` **Changed** **Breaking** :warning:\n* `latitudesh.billing.listUsage()`:  `response.data.attributes.products.[]` **Changed** **Breaking** :warning:\n* `latitudesh.privateNetworks.update()`:  `response.data.attributes.createdAt` **Changed** **Breaking** :warning:\n* `latitudesh.servers.lock()`:  `response.data.attributes` **Changed** **Breaking** :warning:\n* `latitudesh.servers.unlock()`:  `response.data.attributes` **Changed** **Breaking** :warning:\n* `latitudesh.servers.updateDeployConfig()`: \n  *  `request.requestBody.attributes` **Changed**\n  *  `response.data.attributes.partitions` **Changed** **Breaking** :warning:\n* `latitudesh.storage.createFilesystem()`:  `response.data.attributes.createdAt` **Changed** **Breaking** :warning:\n* `latitudesh.storage.updateFilesystem()`:  `response.data.attributes.createdAt` **Changed** **Breaking** :warning:\n* `latitudesh.storage.getStorageVolumes()`:  `response.data.[].attributes` **Changed** **Breaking** :warning:\n* `latitudesh.storage.postStorageVolumes()`:  `response.data.attributes` **Changed** **Breaking** :warning:\n* `latitudesh.storage.getStorageVolume()`:  `response.data.attributes` **Changed** **Breaking** :warning:\n* `latitudesh.privateNetworks.get()`:  `response.data.data.attributes.createdAt` **Changed** **Breaking** :warning:\n* `latitudesh.privateNetworks.create()`:  `response.data.attributes.createdAt` **Changed** **Breaking** :warning:\n* `latitudesh.traffic.getQuota()`:  `response.data.attributes.quotaPerProject.[].price` **Changed** **Breaking** :warning:\n* `latitudesh.userProfile.update()`:  `response.data.attributes.authenticationFactorId` **Changed** **Breaking** :warning:\n* `latitudesh.userProfile.listTeams()`:  `response.data.[].attributes` **Changed** **Breaking** :warning:\n* `latitudesh.virtualMachines.create()`: \n  *  `request.data.attributes` **Changed**\n  *  `response.data.attributes` **Changed** **Breaking** :warning:\n* `latitudesh.privateNetworks.list()`:  `response.data.[].attributes.createdAt` **Changed** **Breaking** :warning:\n* `latitudesh.tags.update()`: \n  *  `request.requestBody.data.attributes.description` **Changed**\n* `latitudesh.tags.create()`: \n  *  `request.data.attributes.description` **Changed**\n* `latitudesh.servers.reinstall()`: \n  *  `request.requestBody.data.attributes` **Changed**\n"
+generatedTests:
+  get-api-keys-Success: "2026-01-23T13:07:54-03:00"
+  post-api-key-Created: "2026-01-23T13:07:54-03:00"
+  rotate-api-key-Success: "2026-01-23T13:07:54-03:00"
+  update-api-key-Success: "2026-01-23T13:07:54-03:00"
+  update-api-key-Success - Update name without rotating token: "2026-01-23T13:07:54-03:00"
+  get-billing-usage-Success: "2026-01-23T13:07:54-03:00"
+  get-events-Success: "2026-01-23T13:07:54-03:00"
+  get-all-firewall-assignments-Success: "2026-01-23T13:07:54-03:00"
+  list-firewalls-Success: "2026-01-23T13:07:54-03:00"
+  create-firewall-Created: "2026-01-23T13:07:54-03:00"
+  get-firewall-Success: "2026-01-23T13:07:54-03:00"
+  update-firewall-Success: "2026-01-23T13:07:54-03:00"
+  get-firewall-assignments-Success: "2026-01-23T13:07:54-03:00"
+  create-firewall-assignment-Created: "2026-01-23T13:07:54-03:00"
+  get-ips-Success: "2026-01-23T13:07:54-03:00"
+  get-ip: "2026-01-23T13:07:54-03:00"
+  get-team-Success: "2026-01-23T13:07:54-03:00"
+  get-team-when team is recent (created within last month): "2026-01-23T13:07:54-03:00"
+  get-team-when team is older than one month: "2026-01-23T13:07:54-03:00"
+  post-team-Created: "2026-01-23T13:07:54-03:00"
+  patch-current-team-Success: "2026-01-23T13:07:54-03:00"
+  get-team-members-Success: "2026-01-23T13:07:54-03:00"
+  post-team-members-Created: "2026-01-23T13:07:54-03:00"
+  get-plans-operating-system-Success: "2026-01-23T13:07:54-03:00"
+  get-plans-Success: "2026-01-23T13:07:54-03:00"
+  get-plan-Success: "2026-01-23T13:07:54-03:00"
+  get-bandwidth-plans-Success: "2026-01-23T13:07:54-03:00"
+  update-plans-bandwidth-Success: "2026-01-23T13:07:54-03:00"
+  get-containers-plan: "2026-01-23T13:07:54-03:00"
+  get-storage-plans-Success: "2026-01-23T13:07:54-03:00"
+  get-vm-plans-Success: "2026-01-23T13:07:54-03:00"
+  get-projects-Success: "2026-01-23T13:07:54-03:00"
+  create-project-Created: "2026-01-23T13:07:54-03:00"
+  update-project-Success: "2026-01-23T13:07:54-03:00"
+  post-project-ssh-key-Created: "2026-01-23T13:07:54-03:00"
+  get-project-ssh-keys-Success: "2026-01-23T13:07:54-03:00"
+  get-project-ssh-key-Success: "2026-01-23T13:07:54-03:00"
+  put-project-ssh-key-Success: "2026-01-23T13:07:54-03:00"
+  get-ssh-keys-Success: "2026-01-23T13:07:54-03:00"
+  post-ssh-key-Created: "2026-01-23T13:07:54-03:00"
+  get-ssh-key-Success: "2026-01-23T13:07:54-03:00"
+  put-ssh-key-Success: "2026-01-23T13:07:54-03:00"
+  get-project-users-data-Success: "2026-01-23T13:07:54-03:00"
+  get-project-user-data-Success: "2026-01-23T13:07:54-03:00"
+  post-project-user-data-Created: "2026-01-23T13:07:54-03:00"
+  put-project-user-data: "2026-01-23T13:07:54-03:00"
+  get-users-data-Success: "2026-01-23T13:07:54-03:00"
+  post-user-data-Created: "2026-01-23T13:07:54-03:00"
+  get-user-data-Success: "2026-01-23T13:07:54-03:00"
+  patch-user-data: "2026-01-23T13:07:54-03:00"
+  get-regions-Success: "2026-01-23T13:07:54-03:00"
+  get-region-Success: "2026-01-23T13:07:54-03:00"
+  get-roles-Success: "2026-01-23T13:07:54-03:00"
+  get-role-id-Success: "2026-01-23T13:07:54-03:00"
+  get-servers-Success: "2026-01-23T13:07:54-03:00"
+  get-servers-SuccessWithCredentials: "2026-01-23T13:07:54-03:00"
+  create-server-Created: "2026-01-23T13:07:54-03:00"
+  get-server-Success: "2026-01-23T13:07:54-03:00"
+  get-server-SuccessWithCredentials: "2026-01-23T13:07:54-03:00"
+  update-server-Success: "2026-01-23T13:07:54-03:00"
+  get-server-deploy-config-Success: "2026-01-23T13:07:54-03:00"
+  update-server-deploy-config-Success: "2026-01-23T13:07:54-03:00"
+  server-lock-Success: "2026-01-23T13:07:54-03:00"
+  server-unlock-Success: "2026-01-23T13:07:54-03:00"
+  get-server-out-of-band-Success: "2026-01-23T13:07:54-03:00"
+  create-server-out-of-band-Created: "2026-01-23T13:07:54-03:00"
+  create-server-action-Created: "2026-01-23T13:07:54-03:00"
+  create-ipmi-session-Created: "2026-01-23T13:07:54-03:00"
+  server-start-rescue-mode-Created: "2026-01-23T13:07:54-03:00"
+  server-exit-rescue-mode-Success: "2026-01-23T13:07:54-03:00"
+  server-schedule-deletion-Created: "2026-01-23T13:07:54-03:00"
+  post-storage-filesystems-Created: "2026-01-23T13:07:54-03:00"
+  patch-storage-filesystems-Success: "2026-01-23T13:07:54-03:00"
+  get-storage-volumes-Success: "2026-01-23T13:07:54-03:00"
+  post-storage-volumes-Created: "2026-01-23T13:07:54-03:00"
+  get-storage-volume-Success: "2026-01-23T13:07:54-03:00"
+  get-tags-Success: "2026-01-23T13:07:54-03:00"
+  create-tag-Created: "2026-01-23T13:07:54-03:00"
+  update-tag-Success: "2026-01-23T13:07:54-03:00"
+  get-traffic-consumption-Success: "2026-01-23T13:07:54-03:00"
+  get-traffic-quota-Success: "2026-01-23T13:07:54-03:00"
+  get-user-profile-Success: "2026-01-23T13:07:54-03:00"
+  patch-user-profile-Success: "2026-01-23T13:07:54-03:00"
+  get-user-teams-Success: "2026-01-23T13:07:54-03:00"
+  get-user-teams-when team is recent (created within last month): "2026-01-23T13:07:54-03:00"
+  get-user-teams-when team is older than one month: "2026-01-23T13:07:54-03:00"
+  create-virtual-machine-Created: "2026-01-23T13:07:54-03:00"
+  get-virtual-networks-Success: "2026-01-23T13:07:54-03:00"
+  create-virtual-network-Created: "2026-01-23T13:07:54-03:00"
+  get-virtual-network-Success: "2026-01-23T13:07:54-03:00"
+  update-virtual-network-Success: "2026-01-23T13:07:54-03:00"
+  get-virtual-networks-assignments-Success: "2026-01-23T13:07:54-03:00"
+  assign-server-virtual-network-Created: "2026-01-23T13:07:54-03:00"
+  get-vpn-sessions-Success: "2026-01-23T13:07:54-03:00"
+  post-vpn-session-Created: "2026-01-23T13:07:54-03:00"
+  put-vpn-session-Success: "2026-01-23T13:07:54-03:00"
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
