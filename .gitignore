@@ -24,6 +24,11 @@
 /.tshy-*
 /__tests__
 .DS_Store
+
+# Test coverage
+/coverage
+*.lcov
+/.nyc_output
 **/.speakeasy/temp/
 **/.speakeasy/logs/
 .DS_Store
