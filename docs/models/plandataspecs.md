@@ -15,5 +15,5 @@ let value: PlanDataSpecs = {};
 | `cpu`                                                | [models.PlanDataCpu](../models/plandatacpu.md)       | :heavy_minus_sign:                                   | N/A                                                  |
 | `memory`                                             | [models.PlanDataMemory](../models/plandatamemory.md) | :heavy_minus_sign:                                   | N/A                                                  |
 | `drives`                                             | [models.Drive](../models/drive.md)[]                 | :heavy_minus_sign:                                   | N/A                                                  |
-| `nics`                                               | [models.Nic](../models/nic.md)[]                     | :heavy_minus_sign:                                   | N/A                                                  |
+| `nics`                                               | [models.PlanDataNic](../models/plandatanic.md)[]     | :heavy_minus_sign:                                   | N/A                                                  |
 | `gpu`                                                | [models.PlanDataGpu](../models/plandatagpu.md)       | :heavy_minus_sign:                                   | N/A                                                  |

@@ -1,24 +1,24 @@
 lockVersion: 2.0.0
 id: c8245324-f3d7-42c7-8124-ce79579cbff5
 management:
-  docChecksum: 61c6ffd49fcf64e2833a8faa68fe5b87
+  docChecksum: 4239627b8b539cbb63804da9d20f7899
   docVersion: "2023-06-01"
-  speakeasyVersion: 1.692.0
-  generationVersion: 2.797.1
-  releaseVersion: 0.2.4
-  configChecksum: d764cc7e862ad966a3cc0855d18af437
+  speakeasyVersion: 1.700.2
+  generationVersion: 2.801.2
+  releaseVersion: 0.2.5
+  configChecksum: 4e7b578384f84f3403f85b90d51448f4
   repoURL: https://github.com/latitudesh/latitudesh-typescript-sdk.git
   installationURL: https://github.com/latitudesh/latitudesh-typescript-sdk
   published: true
 persistentEdits:
-  generation_id: 36afc2c1-10fe-4686-a652-5cf36da44e7e
-  pristine_commit_hash: cbf875ddcaa9477e2d786c5f9b263a6bf4760912
-  pristine_tree_hash: 2e0a898991ffa184620dfccaef2aef9576761c46
+  generation_id: 7c47cccf-506d-45c6-82b5-118019995662
+  pristine_commit_hash: ea1c0c588b60ede60c3eb12dda062d48dbc51bf2
+  pristine_tree_hash: b08474a1149bfa718ab5b890721c6ff8d0ef777d
 features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.12
-    core: 3.26.22
+    core: 3.26.23
     defaultEnabledRetries: 0.1.0
     deprecations: 2.81.1
     devContainers: 2.90.1
@@ -304,8 +304,8 @@ trackedFiles:
     pristine_git_object: 7c9e60416ca4a6fd3698ce6e069774bcd7619f16
   docs/models/disk.md:
     id: 7fb99df10d50
-    last_write_checksum: sha1:e8867caf603e0420c53d3e108d617d38bda526d9
-    pristine_git_object: 4c83d90e43cf8eed3ff9a4968d909af19007a69d
+    last_write_checksum: sha1:4570bedbcf9eff6c3d14b1cac4741b3c55edccc3
+    pristine_git_object: f4fb540f05f760eb0653c5e338b30bd86e0c26ac
   docs/models/distro.md:
     id: 9c9b2e90c202
     last_write_checksum: sha1:5ce2f88901c0504c899407ef494a32c8360fdd6b
@@ -522,10 +522,6 @@ trackedFiles:
     id: ad63dba5a4f8
     last_write_checksum: sha1:884d43753f6f841ea3349e4eefbadf7e263b5fb3
     pristine_git_object: 91e0877d5030cc1b71c8d40b3b7ddf55f79a6921
-  docs/models/nic.md:
-    id: 97ac4e7870a3
-    last_write_checksum: sha1:9e16552563196f76746f278e8fc05c2f09221de2
-    pristine_git_object: ae0fd82b0164464189646aabfa97205a21b152d5
   docs/models/operatingsystem.md:
     id: 7f2cbe83e9ba
     last_write_checksum: sha1:ca8f7416e7ed202acdd0e4464cf0d11f198a0534
@@ -608,8 +604,8 @@ trackedFiles:
     pristine_git_object: e360762dfc2db4ce389d79e3136b82a2efff0d47
   docs/models/operations/createfirewallrule2.md:
     id: 0f4a4058cd63
-    last_write_checksum: sha1:540007f96a6a352e6fb082f7ae982664ebfc9217
-    pristine_git_object: 0b26323c8a5d6e2a395c736de20e6aa6be83effa
+    last_write_checksum: sha1:5e3c6b5a01134658bee4d8c29583e00d0025ce7c
+    pristine_git_object: bda339c89d5f216155a9f270d16e823a2b3e553a
   docs/models/operations/createfirewalltype2.md:
     id: 739b073e9bcf
     last_write_checksum: sha1:b033f416c82e385c9f1e0278d63182c342c47882
@@ -1616,8 +1612,8 @@ trackedFiles:
     pristine_git_object: ad6e93023848ad41873fec1ebc8d393e2e15c71d
   docs/models/operations/updatefirewallrule2.md:
     id: 3a87ac16063d
-    last_write_checksum: sha1:a476621a6d1188b4db42d02610c95538e876913e
-    pristine_git_object: ec86f392125c05270d09554ad32d9938b4be6d8e
+    last_write_checksum: sha1:031a922579e055e6d1c5eb5aba2ef6434e20a9eb
+    pristine_git_object: a3456abe9e6545f75d8e651115a24550724096d4
   docs/models/operations/updatefirewalltype2.md:
     id: 9df19ca475b4
     last_write_checksum: sha1:c3b24fc5aec8050692f6b2bd6e58b2201a41bcad
@@ -1818,6 +1814,10 @@ trackedFiles:
     id: fb8192d9056c
     last_write_checksum: sha1:6b17ccaad7029374598960600730721737601e82
     pristine_git_object: a8b9aa000130cf466fe9bf782987746cf4df7d47
+  docs/models/plandatanic.md:
+    id: 823d42ecb18d
+    last_write_checksum: sha1:aa138cc3150b1057575ff8eb28d663b8e928c97c
+    pristine_git_object: bc18ac39f8051bc2b38c4179efbfec6399ace142
   docs/models/plandatapricing.md:
     id: 9715286f4952
     last_write_checksum: sha1:da03e4f1c95b03be735c32f6f59ae3923ecd042d
@@ -1828,8 +1828,8 @@ trackedFiles:
     pristine_git_object: b0db2a06d54fab6b4c5db843ade6e44af9355c64
   docs/models/plandataspecs.md:
     id: 09ed397068ec
-    last_write_checksum: sha1:5e5c63e9e0ef5f5516a400bf08ce16bef6c16baa
-    pristine_git_object: 3ccc2224960f89560e7fb0affc66e569ad207979
+    last_write_checksum: sha1:301596aa36e09e0bf3b7434950e6ccbea5d01725
+    pristine_git_object: f61fd8c010559f93cf75a1b86ee3323fd7198757
   docs/models/plandatastocklevel.md:
     id: 5d88a7a01dde
     last_write_checksum: sha1:25cca8547c114f495dda3ef1362583103551d1f8
@@ -1952,8 +1952,8 @@ trackedFiles:
     pristine_git_object: 51e9c8c0e43fd1480fb29e028bb995fc71f9c6e5
   docs/models/rule.md:
     id: be98fe6aadca
-    last_write_checksum: sha1:4c32bff041e5d71efa8e417006a7bb48b0a147ed
-    pristine_git_object: ced7c6bf8deb5afc11c411f10d382f014e7ebee0
+    last_write_checksum: sha1:a85d9577a4380ffe3285f5a36a63fb90f0226a79
+    pristine_git_object: b3615fa4f3010c6c75c217238e724f4edf1e5a38
   docs/models/security.md:
     id: 452e4d4eb67a
     last_write_checksum: sha1:f5dbd48861c7cd643515f5a1c1e641ca735427c7
@@ -1988,8 +1988,8 @@ trackedFiles:
     pristine_git_object: 8bdcb5baf242640f2d9db4b32334e533d87cf8aa
   docs/models/serverdataattributes.md:
     id: f7a667a39ce7
-    last_write_checksum: sha1:f1de74c06e5e5bde17ab3a4070948c3ff5115f41
-    pristine_git_object: b4117b471dbc0940bdeccb9ad5dfa386c7bc59f7
+    last_write_checksum: sha1:67a008bb3bb72135365be221f13be787d8d7af18
+    pristine_git_object: 1e9ae70a0c289cf4da0ac0a09f9a4b14ae275c46
   docs/models/serverdatafeatures.md:
     id: 88e420f3a34d
     last_write_checksum: sha1:77b3f219b8007da035500acf1c6bd1444e1f2d23
@@ -2008,8 +2008,8 @@ trackedFiles:
     pristine_git_object: dbeb5ca61e6ec08196bbf826ac5200070effc638
   docs/models/serverdatastatus.md:
     id: cd37a499f7ef
-    last_write_checksum: sha1:6bdf3acd1f5497a4d1b6075b4a70e220605ef19b
-    pristine_git_object: d76528bf4dd56aca516e3a476a8bb94877f83a24
+    last_write_checksum: sha1:d91da884eeabffead0ffa6c425c5815b537cb9a7
+    pristine_git_object: 897d12c6be1988db56815e39444a54e96e30e7ea
   docs/models/servermeta.md:
     id: 1940faa805d6
     last_write_checksum: sha1:0002b9a40f32a9cdace055751c48bd5fab1066bc
@@ -2190,10 +2190,6 @@ trackedFiles:
     id: f4a91154562e
     last_write_checksum: sha1:8fe082af3ac1d83b361825803afe178aa8f046fe
     pristine_git_object: 1be1f147072d735c3fb54b14ede5d081624c9fcd
-  docs/models/typelocal.md:
-    id: 390026b1074c
-    last_write_checksum: sha1:d3b84e69ba17c250c88f76ad6de734962c1936e4
-    pristine_git_object: 2edc54ce09089b8876aab8329a430e635ec6aa83
   docs/models/typeplans.md:
     id: d898fd2046ae
     last_write_checksum: sha1:7681e7f40e2943bee9ecfc2d92ce364e8165c709
@@ -2294,6 +2290,10 @@ trackedFiles:
     id: 8c3ff325c18b
     last_write_checksum: sha1:a3af999ed86ff5e5ef09a8e6113bb9394f8d17b9
     pristine_git_object: 99ac5b54640e65264e5fd3a09cc820996693693c
+  docs/models/vcpu.md:
+    id: 48c95f5c134a
+    last_write_checksum: sha1:44d1e35e754757522efe27150f1ca8629ee117a6
+    pristine_git_object: 499022a5edb32de1b08c0173d66ff13383fa4473
   docs/models/virtualmachine.md:
     id: d1eaf9b931a9
     last_write_checksum: sha1:0e93da2d6e0a0409094a8775f04b98c9e1508788
@@ -2362,18 +2362,30 @@ trackedFiles:
     id: fc3c61be96c4
     last_write_checksum: sha1:adeacdd608a0fba01153f6564479d275d0f24d33
     pristine_git_object: 3735e9e1f54e5cb5d5bfbf125912a38d3aec0725
+  docs/models/virtualmachineplanslocations.md:
+    id: 15da327a0c3a
+    last_write_checksum: sha1:faa73f1520fc90c7ef00586f4ce674757ed3946d
+    pristine_git_object: 57752df8bb4ba7456443ce93903b7710eb9f46b3
+  docs/models/virtualmachineplansnic.md:
+    id: 3ec4f8f6564a
+    last_write_checksum: sha1:ef50836dc670b5f98cabd1782816c5ba63a2f771
+    pristine_git_object: d7ac9ff6831b955b6b11c23c8fa702462b7ce78d
   docs/models/virtualmachineplanspricing.md:
     id: 27aab41f36bd
     last_write_checksum: sha1:d480ebc4ba827657823725c55dad7c9b5bff2d19
     pristine_git_object: d55df582dc8ce2298b88d0cd6498eeb30620e359
   docs/models/virtualmachineplansregion.md:
     id: 70a06ce28725
-    last_write_checksum: sha1:bbe17c8ed57ede665a74396a9d89221d962b361f
-    pristine_git_object: 763faf4ed5916872401a521a90db1c8b661a4aba
+    last_write_checksum: sha1:656f15152ff2ba4370d9d25071c0cbfc8d29ce01
+    pristine_git_object: ac4c0cb7257326917628d537371f2917e590f921
+  docs/models/virtualmachineplansregionstocklevel.md:
+    id: 96e5758557ce
+    last_write_checksum: sha1:919784197aa973bb9a39c2131757ee80f7b4ec32
+    pristine_git_object: e7e26527059a41880978c044afd907a24c2bce22
   docs/models/virtualmachineplansspecs.md:
     id: f8fcb9b4db99
-    last_write_checksum: sha1:c5e287868bbd56b1830bad8f7ab3d35e69a01ebf
-    pristine_git_object: 59fec4d0fbc6cc208e075a23fc0a6c173c3aa762
+    last_write_checksum: sha1:f8e963f4e4949c108e63c150edd867f50896d48b
+    pristine_git_object: bba57ffca7657350e55bceab2715daf54e586d4d
   docs/models/virtualmachineplansstocklevel.md:
     id: 54d4e27ddec5
     last_write_checksum: sha1:3014cb809642abc742836952b7686cb58b9c82dd
@@ -2508,8 +2520,8 @@ trackedFiles:
     pristine_git_object: c688e70be13d7020bc46d787313a1428419bfe74
   docs/sdks/firewalls/README.md:
     id: 128bc40d5beb
-    last_write_checksum: sha1:4219263aa8f9d679e2e2973fc976e09f160bd9fd
-    pristine_git_object: 5e382a1dee34af4bc989e0f759a2eb88de8bfd79
+    last_write_checksum: sha1:843d6b12296f9f8e89c9fdd4b3949948777c66e5
+    pristine_git_object: a761a299889c7652d7ee0a58c1b71daf2453c352
   docs/sdks/ipaddresses/README.md:
     id: be16ccaa04c0
     last_write_checksum: sha1:713476c853362047c4ecb39e7f424a5e753fba54
@@ -2620,12 +2632,12 @@ trackedFiles:
     pristine_git_object: 249e5d9837dbad499fc14718cebf96fd4875a9e8
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:68898425ad101a78596506f003c9d75939f84a4d
-    pristine_git_object: d6856559b11628b81f6fe3ef721f24731f846ef2
+    last_write_checksum: sha1:74ed2992513021997074a73680a92070630efaad
+    pristine_git_object: ea23e44e811eb17b5231661f78ae7d9291332179
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:1883344358723b94edcf740b5bc30188052f2be7
-    pristine_git_object: f21fb644e9e5efce28986465d2cd49660dd649e3
+    last_write_checksum: sha1:c9fc059cffacb1c3b513f7a2f0f5e7cef7c21093
+    pristine_git_object: 2c357788bc0c1878592b730d4819a372c4863f42
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:9bb7b3807363b77f27dbdb87d6d10e9605f723d6
@@ -3104,8 +3116,8 @@ trackedFiles:
     pristine_git_object: 0aebd8b0a4867e35cb3348fc52921c3c0b4725b7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:f356351fe8df440136aa668ed32da5cc8d1daec8
-    pristine_git_object: 4065d029352ba469de5ee0cc5e04ff6dab3c1eff
+    last_write_checksum: sha1:a1893586aa11b9a9c702b8c2940d5a004115e0a9
+    pristine_git_object: fe860f624f5da75946b6cef14c1591d108878447
   src/lib/dlv.ts:
     id: b1988214835a
     last_write_checksum: sha1:1dd3e3fbb4550c4bf31f5ef997faff355d6f3250
@@ -3188,8 +3200,8 @@ trackedFiles:
     pristine_git_object: 0955a573c2ce989d63c737410ab8cc28706d9f74
   src/mcp-server/mcp-server.ts:
     id: aabbc4ab07c1
-    last_write_checksum: sha1:579122ab511a516414d8122308fb33d0bea80688
-    pristine_git_object: 6547173f4014c1d86a81c92ccc5e83d16e30da2a
+    last_write_checksum: sha1:4bba876fc078f037357cc2c56b1893e5f6b89c05
+    pristine_git_object: bd00776e359aa55199aa34c53c33bafe394c7526
   src/mcp-server/prompts.ts:
     id: 26f3d73cbf31
     last_write_checksum: sha1:3e8d60ab7f8078d83fa9528f2e831050c1fd119c
@@ -3204,8 +3216,8 @@ trackedFiles:
     pristine_git_object: c25696d4c4f70e081fa5d87ad6891874c509a577
   src/mcp-server/server.ts:
     id: 2784dd48e82a
-    last_write_checksum: sha1:90ac05d28194b7bcba8a203ba630cbcbd80ae875
-    pristine_git_object: 1b66388bb3be1df7cc0573776fc0cb9dbfba71cc
+    last_write_checksum: sha1:b9b73bdf222fc6d5df3016f58d7b3e6ee15ab8b9
+    pristine_git_object: 62d9280336b5470c19d26454519e13c6ddd74cad
   src/mcp-server/shared.ts:
     id: 074e80d4be1e
     last_write_checksum: sha1:56c73d4429691516e35541825e759a0285747a2b
@@ -3764,8 +3776,8 @@ trackedFiles:
     pristine_git_object: 8d327ac47f4565154b558f0bcfcb158b8bbf24b3
   src/models/firewalldata.ts:
     id: 1e9ad64c7ea6
-    last_write_checksum: sha1:3fdaac89fe3925e9e28c29ac807e9c7cde9c1311
-    pristine_git_object: 50d5692210080d2d3f7ec2da6b979f211d520dae
+    last_write_checksum: sha1:9fb1abf4c3f6e20253c6897d36cf5c24a42a2de4
+    pristine_git_object: 49ce7589aa8dcbb73e20aa3439f8e444557048e2
   src/models/firewalls.ts:
     id: c990a34bc3de
     last_write_checksum: sha1:aeff72488d876d05756f3862adcb7c2f1ddc46c4
@@ -3808,8 +3820,8 @@ trackedFiles:
     pristine_git_object: 2b2b1c2a38f36ef5557f9fb8d5751dded17fb6cf
   src/models/operations/createfirewall.ts:
     id: a137f10b3a36
-    last_write_checksum: sha1:0abf4ac694b1674c761e069e1f9414b1ef579c53
-    pristine_git_object: f1d22c5135893e77fdc6e75a0f24aab28111846a
+    last_write_checksum: sha1:71a39d814f2b2c052b72cb49d5afdd5a89b43d27
+    pristine_git_object: 08bd63b7e637992de183df946aa4be045ef99f95
   src/models/operations/createfirewallassignment.ts:
     id: 4fc304ce2be2
     last_write_checksum: sha1:fadf10a42c5261592d5903e1a015bfcb4d71452d
@@ -4208,8 +4220,8 @@ trackedFiles:
     pristine_git_object: 1737ff946f2899983d2c232c63b88f25e6ababc3
   src/models/operations/updatefirewall.ts:
     id: 8319c5f3afff
-    last_write_checksum: sha1:ffcb92e345158c213692f28d560bd6923b490ca1
-    pristine_git_object: 4be01f2902ce66cfa692c96fff984a0a332fd1df
+    last_write_checksum: sha1:8800ae868fcee5c5a0324cd1c8a7dc6ca4b1201a
+    pristine_git_object: 61327919279155b8d0cb22ecf917dfb59603f210
   src/models/operations/updateplansbandwidth.ts:
     id: bb373e2d90e5
     last_write_checksum: sha1:9a3773effd0e61c041d66d7c04251ed6e417fe1c
@@ -4244,8 +4256,8 @@ trackedFiles:
     pristine_git_object: 5a1e7d7926f0b8a67377b96a64adbb77199a3be3
   src/models/plandata.ts:
     id: 429ee45e0934
-    last_write_checksum: sha1:6d37a31fecb8bef00ea0cbb2362f15b7c341143f
-    pristine_git_object: 9a6ff54e2d7aef8a0997ee49c5fb6e0dddaf7bb5
+    last_write_checksum: sha1:c228b85505edf5b0c9b27ae95ed8537d778f6685
+    pristine_git_object: 86fc8de1e3306111e077c5d79755baa9ec282f48
   src/models/project.ts:
     id: 6d341934d773
     last_write_checksum: sha1:e1780af44e55423d2b084ee5112e62820c97a3e8
@@ -4292,8 +4304,8 @@ trackedFiles:
     pristine_git_object: 85cf946f6c31a26d7c8a4d63bab86e47f4e012f7
   src/models/serverdata.ts:
     id: 23acce331ec3
-    last_write_checksum: sha1:55132e51fe63feff29806ebddc5b2c487850002e
-    pristine_git_object: 6c83c649640e483cc0a0ee45a2a9355eb417b26f
+    last_write_checksum: sha1:37e2b1a0933ce9984d902208e44b2d62208c7363
+    pristine_git_object: 75e81c17c95ffb1dbbc098812e25d1d9800f25dd
   src/models/serverregionresourcedata.ts:
     id: 91add7e02d4f
     last_write_checksum: sha1:9dc1dc4978f7030436a35def3ab57242899a2a57
@@ -4400,8 +4412,8 @@ trackedFiles:
     pristine_git_object: ef48a31f23826f78af589b79505d0e5e855432c0
   src/models/virtualmachineplans.ts:
     id: e97f2cade30a
-    last_write_checksum: sha1:8d986c1f29818e3d1ab583f8f4223c882a23eb0e
-    pristine_git_object: d9442afa0741f8030eb7c0709e0f9b4daecc16be
+    last_write_checksum: sha1:a80fda0c9de8b193561478eec0ef7a7e74ea51ce
+    pristine_git_object: f46051fb7bafd5d1dc207ec3f3170c9a659f8fa1
   src/models/virtualnetwork.ts:
     id: 031d6ceaf0bd
     last_write_checksum: sha1:d7ea31c851ddd8f9af6083578b3e137b0d89f73c
@@ -4603,7 +4615,7 @@ examples:
     Success:
       responses:
         "200":
-          application/vnd.api+json: {"data": [{"id": "tok_6VE1Wd37dXnZJ", "type": "api_keys", "attributes": {"name": "Dor Daidelos", "api_version": "2023-06-01", "token_last_slice": "2daaa", "read_only": false, "allowed_ips": null, "last_used_at": null, "user": {"id": "user_Wel4PnEAmauQYZz3Vz83CkyV2BW", "email": "beckie.prosacco@willms.test"}, "created_at": "2026-01-14T15:56:29+00:00", "updated_at": "2026-01-14T14:56:29+00:00"}}]}
+          application/vnd.api+json: {"data": [{"id": "tok_6VE1Wd37dXnZJ", "type": "api_keys", "attributes": {"name": "Dor Daidelos", "api_version": "2023-06-01", "token_last_slice": "2daaa", "read_only": false, "allowed_ips": [], "last_used_at": null, "user": {"id": "user_Wel4PnEAmauQYZz3Vz83CkyV2BW", "email": "beckie.prosacco@willms.test"}, "created_at": "2026-01-14T15:56:29+00:00", "updated_at": "2026-01-14T14:56:29+00:00"}}]}
   post-api-key:
     Created:
       requestBody:
@@ -4684,8 +4696,8 @@ examples:
   create-firewall:
     Created:
       requestBody:
-        application/json: {"data": {"type": "firewalls", "attributes": {"name": "my-firewall", "project": "heavy-duty-copper-watch", "rules": [{"from": "192.168.42.73", "to": "192.168.43.51", "protocol": "TCP", "port": "80"}, {"from": "192.168.1.16", "to": "192.168.1.30", "protocol": "TCP", "port": "80"}, {"from": "192.168.1.10", "to": "192.168.1.20", "protocol": "UDP", "port": "3000-4000"}]}}}
-        application/vnd.api+json: {"data": {"type": "firewalls", "attributes": {"name": "my-firewall", "project": "heavy-duty-copper-watch", "rules": [{"from": "192.168.42.73", "to": "192.168.43.51", "protocol": "TCP", "port": "80"}, {"from": "192.168.1.16", "to": "192.168.1.30", "protocol": "TCP", "port": "80"}, {"from": "192.168.1.10", "to": "192.168.1.20", "protocol": "UDP", "port": "3000-4000"}]}}}
+        application/json: {"data": {"type": "firewalls", "attributes": {"name": "my-firewall", "project": "heavy-duty-copper-watch", "rules": [{"from": "192.168.42.73", "to": "192.168.43.51", "protocol": "TCP", "port": "80", "description": "Allow HTTP traffic"}, {"from": "192.168.1.16", "to": "192.168.1.30", "protocol": "TCP", "port": "80"}, {"from": "192.168.1.10", "to": "192.168.1.20", "protocol": "UDP", "port": "3000-4000", "description": "Application ports"}]}}}
+        application/vnd.api+json: {"data": {"type": "firewalls", "attributes": {"name": "my-firewall", "project": "heavy-duty-copper-watch", "rules": [{"from": "192.168.42.73", "to": "192.168.43.51", "protocol": "TCP", "port": "80", "description": "Allow HTTP traffic"}, {"from": "192.168.1.16", "to": "192.168.1.30", "protocol": "TCP", "port": "80"}, {"from": "192.168.1.10", "to": "192.168.1.20", "protocol": "UDP", "port": "3000-4000", "description": "Application ports"}]}}}
       responses:
         "201":
           application/vnd.api+json: {"data": {"id": "fw_w5AEmq7XDBkWX", "type": "firewalls", "attributes": {"name": "my-firewall", "rules": [{"from": "ANY", "to": "ANY", "port": "22", "protocol": "TCP"}, {"from": "192.168.42.73", "to": "192.168.43.51", "port": "80", "protocol": "TCP"}, {"from": "192.168.1.16", "to": "192.168.1.30", "port": "80", "protocol": "TCP"}, {"from": "192.168.1.10", "to": "192.168.1.20", "port": "3000-4000", "protocol": "UDP"}], "project": {"id": "proj_RLYV8DZ2D5QoE", "slug": "heavy-duty-copper-watch", "name": "Heavy Duty Copper Watch"}}}}
@@ -4708,8 +4720,8 @@ examples:
         path:
           firewall_id: "fw_r0MK4O4kDa95w"
       requestBody:
-        application/json: {"data": {"type": "firewalls", "attributes": {"name": "new-name", "rules": [{"from": "192.168.42.72", "to": "192.168.43.51", "protocol": "TCP", "port": "80"}]}}}
-        application/vnd.api+json: {"data": {"type": "firewalls", "attributes": {"name": "new-name", "rules": [{"from": "192.168.42.72", "to": "192.168.43.51", "protocol": "TCP", "port": "80"}]}}}
+        application/json: {"data": {"type": "firewalls", "attributes": {"name": "new-name", "rules": [{"from": "192.168.42.72", "to": "192.168.43.51", "protocol": "TCP", "port": "80", "description": "Allow HTTP"}]}}}
+        application/vnd.api+json: {"data": {"type": "firewalls", "attributes": {"name": "new-name", "rules": [{"from": "192.168.42.72", "to": "192.168.43.51", "protocol": "TCP", "port": "80", "description": "Allow HTTP"}]}}}
       responses:
         "200":
           application/vnd.api+json: {"data": {"id": "fw_r0MK4O4kDa95w", "type": "firewalls", "attributes": {"name": "new-name", "rules": [{"from": "192.168.42.72", "to": "192.168.43.51", "port": "80", "protocol": "TCP"}], "project": {"id": "proj_aKXgRdR3qv9k5", "slug": "rustic-wooden-clock", "name": "Rustic Wooden Clock"}}}}
@@ -4874,7 +4886,7 @@ examples:
     Success:
       responses:
         "200":
-          application/vnd.api+json: {"data": [{"id": "plan_aNmodj4eDbE8W", "type": "virtual_machine_plans", "attributes": {"name": "vm.l40s.tiny", "specs": {"memory": 16, "vcpus": 14, "disk": {"type": "local", "size": {"amount": 150, "unit": "gib"}}}, "regions": [{"name": "United States", "available": ["DAL"], "pricing": {"USD": {"hour": 1, "month": 720, "year": 8640}, "BRL": {"hour": 1, "month": 720, "year": 8640}}}], "stock_level": "low"}}]}
+          application/vnd.api+json: {"data": [{"id": "plan_aNmodj4eDbE8W", "type": "virtual_machine_plans", "attributes": {"name": "vm.l40s.tiny", "specs": {"memory": 16, "gpu": "NVIDIA H100 Tensor Core GPU", "vram_per_gpu": 80, "vcpus": 14, "vcpu": {"count": 14, "clock": 3.8, "type": "Intel Xeon"}, "nics": [{"type": "1 Gbps", "count": "1"}], "disk": {"type": "local NVMe", "size": {"amount": 150, "unit": "gib"}}}, "regions": [{"name": "United States", "pricing": {"USD": {"hour": 1, "month": 720, "year": 8640}, "BRL": {"hour": 1, "month": 720, "year": 8640}}, "locations": {"available": ["DAL"], "in_stock": ["DAL"]}, "stock_level": "low"}], "stock_level": "low"}}]}
   get-projects:
     Success:
       parameters:
@@ -5135,7 +5147,7 @@ examples:
           page[number]: 1
       responses:
         "200":
-          application/vnd.api+json: {"data": [{"id": "sv_WeGoqAanqP7nz", "type": "servers", "attributes": {"hostname": "Hostname", "label": "832845NODEKG", "status": "on", "ipmi_status": "Normal", "role": "Bare Metal", "locked": false, "primary_ipv4": "19.98.98.65", "primary_ipv6": "49e5:fef3:7891:16df:ccf6:93bb:a930:4dc0", "created_at": null, "scheduled_deletion_at": null, "plan": {"id": "plan_pbV0Dg1Rd4AWz", "name": "g3.h100.small-51", "slug": "plan-slug", "billing": "hourly"}, "operating_system": {"name": "Ubuntu (18.04 x64 LTS)", "slug": "ubuntu_18_04_x64_lts", "version": "18.04 x64 LTS", "features": {"raid": true, "ssh_keys": true}, "distro": {"name": "Ubuntu", "slug": "ubuntu", "series": "bionic"}}, "region": {"city": "São Paulo 74", "country": "Singapore 66", "site": {"id": "loc_695BdKjrOevVo", "name": "São Paulo 74", "slug": "SAO", "facility": "São Paulo 74", "rack_id": "rack_VLMmAD8EOwop2"}}, "specs": {"cpu": "Xeon E-2186G CPU @ 3.80GHz (6 cores)", "disk": "500 GB SSD", "ram": "32 GB", "nic": "", "gpu": null}, "interfaces": [{"role": "ipmi", "name": "IPMI", "mac_address": "00:11:22:33:44:55", "description": "IPMI Interface"}, {"role": "internal", "name": "PXE", "mac_address": "66:77:88:99:aa:bb", "description": "PXE Interface"}], "project": {"id": "proj_Z8rodmnGq1jLB", "name": "Incredible Linen Car", "slug": "incredible-linen-car", "description": "Lightweight Iron Chair", "billing_type": "Normal", "provisioning_type": "on_demand", "billing_method": "Normal", "bandwidth_alert": false, "environment": null, "billing": {}, "stats": {"ip_addresses": 8, "prefixes": 0, "servers": 3, "vlans": 0}}, "team": {"id": "team_Ygapr2KkrMur4QneZ00yUEGl4W2", "name": "292 Team", "slug": "292-team", "description": "292 Team", "address": "Apt. 180 27016 Chi Prairie, Kenyaport, CA 12866", "currency": {}, "status": "verified", "feature_flags": []}}}], "meta": {}}
+          application/vnd.api+json: {"data": [{"id": "sv_WeGoqAanqP7nz", "type": "servers", "attributes": {"hostname": "Hostname", "label": "832845NODEKG", "status": "on", "ipmi_status": "Normal", "role": "Bare Metal", "locked": false, "rescue_allowed": false, "primary_ipv4": "19.98.98.65", "primary_ipv6": "49e5:fef3:7891:16df:ccf6:93bb:a930:4dc0", "created_at": null, "scheduled_deletion_at": null, "plan": {"id": "plan_pbV0Dg1Rd4AWz", "name": "g3.h100.small-51", "slug": "plan-slug", "billing": "hourly"}, "operating_system": {"name": "Ubuntu (18.04 x64 LTS)", "slug": "ubuntu_18_04_x64_lts", "version": "18.04 x64 LTS", "features": {"raid": true, "ssh_keys": true}, "distro": {"name": "Ubuntu", "slug": "ubuntu", "series": "bionic"}}, "region": {"city": "São Paulo 74", "country": "Singapore 66", "site": {"id": "loc_695BdKjrOevVo", "name": "São Paulo 74", "slug": "SAO", "facility": "São Paulo 74", "rack_id": "rack_VLMmAD8EOwop2"}}, "specs": {"cpu": "Xeon E-2186G CPU @ 3.80GHz (6 cores)", "disk": "500 GB SSD", "ram": "32 GB", "nic": "", "gpu": null}, "interfaces": [{"role": "ipmi", "name": "IPMI", "mac_address": "00:11:22:33:44:55", "description": "IPMI Interface"}, {"role": "internal", "name": "PXE", "mac_address": "66:77:88:99:aa:bb", "description": "PXE Interface"}], "project": {"id": "proj_Z8rodmnGq1jLB", "name": "Incredible Linen Car", "slug": "incredible-linen-car", "description": "Lightweight Iron Chair", "billing_type": "Normal", "provisioning_type": "on_demand", "billing_method": "Normal", "bandwidth_alert": false, "environment": null, "billing": {}, "stats": {"ip_addresses": 8, "prefixes": 0, "servers": 3, "vlans": 0}}, "team": {"id": "team_Ygapr2KkrMur4QneZ00yUEGl4W2", "name": "292 Team", "slug": "292-team", "description": "292 Team", "address": "Apt. 180 27016 Chi Prairie, Kenyaport, CA 12866", "currency": {}, "status": "verified", "feature_flags": []}}}], "meta": {}}
     SuccessWithCredentials:
       parameters:
         query:
@@ -5159,7 +5171,7 @@ examples:
           server_id: "sv_VE1Wd3aXDXnZJ"
       responses:
         "200":
-          application/vnd.api+json: {"data": {"id": "sv_VE1Wd3aXDXnZJ", "type": "servers", "attributes": {"hostname": "Hostname", "label": "327106NODEQI", "status": "on", "ipmi_status": "Normal", "role": "Bare Metal", "locked": false, "primary_ipv4": "9.120.132.45", "primary_ipv6": "889e:8540:973b:5c04:abce:2551:47ae:a67e", "created_at": null, "scheduled_deletion_at": null, "plan": {"id": "plan_yQrJdN9JO30gv", "name": "c2.large.arm", "slug": "c2-large-arm", "billing": "hourly"}, "operating_system": {"name": "Ubuntu (18.04 x64 LTS)", "slug": "ubuntu_18_04_x64_lts", "version": "18.04 x64 LTS", "features": {"raid": true, "ssh_keys": true}, "distro": {"name": "Ubuntu", "slug": "ubuntu", "series": "bionic"}}, "region": {"city": "São Paulo 81", "country": "Mexico 73", "site": {"id": "loc_GMy1DbNgDN50m", "name": "São Paulo 81", "slug": "SAO", "facility": "São Paulo 81", "rack_id": "rack_6VE1Wd37dXnZJ"}}, "specs": {"cpu": "", "disk": "", "ram": "", "nic": "", "gpu": null}, "interfaces": [{"role": "ipmi", "name": "IPMI", "mac_address": "00:11:22:33:44:55", "description": "IPMI Interface"}, {"role": "internal", "name": "PXE", "mac_address": "66:77:88:99:aa:bb", "description": "PXE Interface"}], "project": {"id": "proj_LMmAD8E4Owop2", "name": "Awesome Granite Chair", "slug": "awesome-granite-chair", "description": "Mediocre Paper Wallet", "billing_type": "Normal", "provisioning_type": "on_demand", "billing_method": "Normal", "bandwidth_alert": false, "environment": null, "billing": {}, "stats": {"ip_addresses": 2, "prefixes": 0, "servers": 1, "vlans": 0}}, "team": {"id": "team_M2WyX3zpQMf5Wvaw6zkotLZx0Ne", "name": "308 Team", "slug": "308-team", "description": "308 Team", "address": "Suite 667 299 Enoch Lights, Lake Lilli, MT 24573-1532", "currency": {}, "status": "verified", "feature_flags": []}}}, "meta": {}}
+          application/vnd.api+json: {"data": {"id": "sv_VE1Wd3aXDXnZJ", "type": "servers", "attributes": {"hostname": "Hostname", "label": "327106NODEQI", "status": "on", "ipmi_status": "Normal", "role": "Bare Metal", "locked": false, "rescue_allowed": false, "primary_ipv4": "9.120.132.45", "primary_ipv6": "889e:8540:973b:5c04:abce:2551:47ae:a67e", "created_at": null, "scheduled_deletion_at": null, "plan": {"id": "plan_yQrJdN9JO30gv", "name": "c2.large.arm", "slug": "c2-large-arm", "billing": "hourly"}, "operating_system": {"name": "Ubuntu (18.04 x64 LTS)", "slug": "ubuntu_18_04_x64_lts", "version": "18.04 x64 LTS", "features": {"raid": true, "ssh_keys": true}, "distro": {"name": "Ubuntu", "slug": "ubuntu", "series": "bionic"}}, "region": {"city": "São Paulo 81", "country": "Mexico 73", "site": {"id": "loc_GMy1DbNgDN50m", "name": "São Paulo 81", "slug": "SAO", "facility": "São Paulo 81", "rack_id": "rack_6VE1Wd37dXnZJ"}}, "specs": {"cpu": "", "disk": "", "ram": "", "nic": "", "gpu": null}, "interfaces": [{"role": "ipmi", "name": "IPMI", "mac_address": "00:11:22:33:44:55", "description": "IPMI Interface"}, {"role": "internal", "name": "PXE", "mac_address": "66:77:88:99:aa:bb", "description": "PXE Interface"}], "project": {"id": "proj_LMmAD8E4Owop2", "name": "Awesome Granite Chair", "slug": "awesome-granite-chair", "description": "Mediocre Paper Wallet", "billing_type": "Normal", "provisioning_type": "on_demand", "billing_method": "Normal", "bandwidth_alert": false, "environment": null, "billing": {}, "stats": {"ip_addresses": 2, "prefixes": 0, "servers": 1, "vlans": 0}}, "team": {"id": "team_M2WyX3zpQMf5Wvaw6zkotLZx0Ne", "name": "308 Team", "slug": "308-team", "description": "308 Team", "address": "Suite 667 299 Enoch Lights, Lake Lilli, MT 24573-1532", "currency": {}, "status": "verified", "feature_flags": []}}}, "meta": {}}
     SuccessWithCredentials:
       parameters:
         path:
@@ -5182,7 +5194,7 @@ examples:
         application/vnd.api+json: {"data": {"id": "sv_yQrJdNAGO30gv", "type": "servers", "attributes": {"hostname": "new-hostname", "project": "proj_yQrJdNMGO30gv"}}}
       responses:
         "200":
-          application/vnd.api+json: {"data": {"id": "sv_yQrJdNAGO30gv", "type": "servers", "attributes": {"hostname": "Lightweight Wooden Knife", "label": "136877NODEKM", "status": "unknown", "ipmi_status": "Normal", "role": "Bare Metal", "locked": false, "primary_ipv4": "214.249.69.62", "primary_ipv6": "b0c8:139:6f83:7f0c:6e2:33a3:78e4:e03f", "created_at": null, "scheduled_deletion_at": null, "plan": {"id": "plan_3YjJOLLyOvZ87", "name": "c2.large.arm", "slug": "c2-large-arm", "billing": "hourly"}, "operating_system": {}, "region": {"city": "Frankfurt 115", "country": "Germany 107", "site": {"id": "loc_aNmodjGyqbE8W", "name": "Frankfurt 115", "slug": "FRA96", "facility": "Frankfurt 115", "rack_id": "rack_byQrJdNJd30gv"}}, "specs": {"cpu": "", "disk": "", "ram": "", "nic": "", "gpu": null}, "interfaces": [], "project": {"id": "proj_yQrJdNMGO30gv", "name": "Awesome Wool Computer", "slug": "awesome-wool-computer", "description": "Practical Rubber Shirt", "billing_type": "Normal", "provisioning_type": "on_demand", "billing_method": "Normal", "bandwidth_alert": false, "environment": null, "billing": {}, "stats": {"ip_addresses": 0, "prefixes": 0, "servers": 1, "vlans": 0}}, "team": {"id": "team_YQZmYB34Nxso86ZgyKj2UEPEnyA", "name": "348 Team", "slug": "348-team", "description": "348 Team", "address": "51588 Goodwin Mission, Port Oswaldo, KS 14871-0638", "currency": {}, "status": "verified", "feature_flags": []}}}, "meta": {}}
+          application/vnd.api+json: {"data": {"id": "sv_yQrJdNAGO30gv", "type": "servers", "attributes": {"hostname": "Lightweight Wooden Knife", "label": "136877NODEKM", "status": "unknown", "ipmi_status": "Normal", "role": "Bare Metal", "locked": false, "rescue_allowed": false, "primary_ipv4": "214.249.69.62", "primary_ipv6": "b0c8:139:6f83:7f0c:6e2:33a3:78e4:e03f", "created_at": null, "scheduled_deletion_at": null, "plan": {"id": "plan_3YjJOLLyOvZ87", "name": "c2.large.arm", "slug": "c2-large-arm", "billing": "hourly"}, "operating_system": {}, "region": {"city": "Frankfurt 115", "country": "Germany 107", "site": {"id": "loc_aNmodjGyqbE8W", "name": "Frankfurt 115", "slug": "FRA96", "facility": "Frankfurt 115", "rack_id": "rack_byQrJdNJd30gv"}}, "specs": {"cpu": "", "disk": "", "ram": "", "nic": "", "gpu": null}, "interfaces": [], "project": {"id": "proj_yQrJdNMGO30gv", "name": "Awesome Wool Computer", "slug": "awesome-wool-computer", "description": "Practical Rubber Shirt", "billing_type": "Normal", "provisioning_type": "on_demand", "billing_method": "Normal", "bandwidth_alert": false, "environment": null, "billing": {}, "stats": {"ip_addresses": 0, "prefixes": 0, "servers": 1, "vlans": 0}}, "team": {"id": "team_YQZmYB34Nxso86ZgyKj2UEPEnyA", "name": "348 Team", "slug": "348-team", "description": "348 Team", "address": "51588 Goodwin Mission, Port Oswaldo, KS 14871-0638", "currency": {}, "status": "verified", "feature_flags": []}}}, "meta": {}}
   get-server-deploy-config:
     Success:
       parameters:
@@ -5586,7 +5598,7 @@ examples:
           application/vnd.api+json: {"data": {"id": "tok_x1ZJrdx5qg4LV", "type": "api_keys", "attributes": {"name": "App Token", "api_version": "2023-06-01", "token_last_slice": "17b4c", "read_only": false, "allowed_ips": null, "last_used_at": null, "user": {"id": "user_3J8PY3vz8ahap5nLXYmws36rwRE", "email": "arnette@kutch.test"}, "created_at": "2026-01-14T15:56:30+00:00", "updated_at": "2026-01-14T15:56:30+00:00"}}}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Typescript SDK Changes:\n* `latitudesh.servers.update()`: \n  *  `request.requestBody.data.attributes` **Changed**\n  *  `response.data.attributes` **Changed** **Breaking** :warning:\n* `latitudesh.servers.create()`: \n  *  `request.data.attributes` **Changed**\n  *  `response.data.attributes` **Changed** **Breaking** :warning:\n* `latitudesh.ipAddresses.get()`:  `response.attributes` **Changed** **Breaking** :warning:\n* `latitudesh.teams.get()`:  `response.data.[].attributes` **Changed** **Breaking** :warning:\n* `latitudesh.teams.create()`:  `response.data.attributes` **Changed** **Breaking** :warning:\n* `latitudesh.teams.update()`:  `response.data.attributes` **Changed** **Breaking** :warning:\n* `latitudesh.plans.getContainersPlan()`:  `response.attributes.regions.[].pricing` **Changed** **Breaking** :warning:\n* `latitudesh.projects.sshKeys.postProjectSshKey()`:  `response.data.attributes.user.authenticationFactorId` **Changed** **Breaking** :warning:\n* `latitudesh.sshKeys.list()`:  `response.data.[].attributes.user.authenticationFactorId` **Changed** **Breaking** :warning:\n* `latitudesh.sshKeys.get()`:  `response.data.attributes.user.authenticationFactorId` **Changed** **Breaking** :warning:\n* `latitudesh.sshKeys.modifyProjectKey()`:  `response.data.attributes.user.authenticationFactorId` **Changed** **Breaking** :warning:\n* `latitudesh.sshKeys.listAll()`:  `response.data.[].attributes.user.authenticationFactorId` **Changed** **Breaking** :warning:\n* `latitudesh.sshKeys.create()`:  `response.data.attributes.user.authenticationFactorId` **Changed** **Breaking** :warning:\n* `latitudesh.sshKeys.retrieve()`:  `response.data.attributes.user.authenticationFactorId` **Changed** **Breaking** :warning:\n* `latitudesh.sshKeys.update()`:  `response.data.attributes.user.authenticationFactorId` **Changed** **Breaking** :warning:\n* `latitudesh.servers.list()`:  `response.data.[].attributes` **Changed** **Breaking** :warning:\n* `latitudesh.servers.getDeployConfig()`:  `response.data.attributes.partitions` **Changed** **Breaking** :warning:\n* `latitudesh.servers.get()`:  `response.data.attributes` **Changed** **Breaking** :warning:\n* `latitudesh.ipAddresses.list()`:  `response.data.[].attributes` **Changed** **Breaking** :warning:\n* `latitudesh.billing.listUsage()`:  `response.data.attributes.products.[]` **Changed** **Breaking** :warning:\n* `latitudesh.privateNetworks.update()`:  `response.data.attributes.createdAt` **Changed** **Breaking** :warning:\n* `latitudesh.servers.lock()`:  `response.data.attributes` **Changed** **Breaking** :warning:\n* `latitudesh.servers.unlock()`:  `response.data.attributes` **Changed** **Breaking** :warning:\n* `latitudesh.servers.updateDeployConfig()`: \n  *  `request.requestBody.attributes` **Changed**\n  *  `response.data.attributes.partitions` **Changed** **Breaking** :warning:\n* `latitudesh.storage.createFilesystem()`:  `response.data.attributes.createdAt` **Changed** **Breaking** :warning:\n* `latitudesh.storage.updateFilesystem()`:  `response.data.attributes.createdAt` **Changed** **Breaking** :warning:\n* `latitudesh.storage.getStorageVolumes()`:  `response.data.[].attributes` **Changed** **Breaking** :warning:\n* `latitudesh.storage.postStorageVolumes()`:  `response.data.attributes` **Changed** **Breaking** :warning:\n* `latitudesh.storage.getStorageVolume()`:  `response.data.attributes` **Changed** **Breaking** :warning:\n* `latitudesh.privateNetworks.get()`:  `response.data.data.attributes.createdAt` **Changed** **Breaking** :warning:\n* `latitudesh.privateNetworks.create()`:  `response.data.attributes.createdAt` **Changed** **Breaking** :warning:\n* `latitudesh.traffic.getQuota()`:  `response.data.attributes.quotaPerProject.[].price` **Changed** **Breaking** :warning:\n* `latitudesh.userProfile.update()`:  `response.data.attributes.authenticationFactorId` **Changed** **Breaking** :warning:\n* `latitudesh.userProfile.listTeams()`:  `response.data.[].attributes` **Changed** **Breaking** :warning:\n* `latitudesh.virtualMachines.create()`: \n  *  `request.data.attributes` **Changed**\n  *  `response.data.attributes` **Changed** **Breaking** :warning:\n* `latitudesh.privateNetworks.list()`:  `response.data.[].attributes.createdAt` **Changed** **Breaking** :warning:\n* `latitudesh.tags.update()`: \n  *  `request.requestBody.data.attributes.description` **Changed**\n* `latitudesh.tags.create()`: \n  *  `request.data.attributes.description` **Changed**\n* `latitudesh.servers.reinstall()`: \n  *  `request.requestBody.data.attributes` **Changed**\n"
+releaseNotes: "## Typescript SDK Changes:\n* `latitudesh.plans.vm.list()`:  `response.data[].attributes` **Changed** **Breaking** ⚠️\n* `latitudesh.servers.list()`:  `response.data[].attributes` **Changed** **Breaking** ⚠️\n* `latitudesh.servers.create()`:  `response.data.attributes` **Changed** **Breaking** ⚠️\n* `latitudesh.servers.get()`:  `response.data.attributes` **Changed** **Breaking** ⚠️\n* `latitudesh.servers.update()`:  `response.data.attributes` **Changed** **Breaking** ⚠️\n* `latitudesh.servers.lock()`:  `response.data.attributes` **Changed** **Breaking** ⚠️\n* `latitudesh.servers.unlock()`:  `response.data.attributes` **Changed** **Breaking** ⚠️\n* `latitudesh.firewalls.list()`:  `response.data[].attributes.rules[].description` **Added**\n* `latitudesh.firewalls.create()`: \n  *  `request.data.attributes.rules[].description` **Added**\n  *  `response.data.attributes.rules[].description` **Added**\n* `latitudesh.firewalls.get()`:  `response.data.attributes.rules[].description` **Added**\n* `latitudesh.firewalls.update()`: \n  *  `request.requestBody.data.attributes.rules[].description` **Added**\n  *  `response.data.attributes.rules[].description` **Added**\n"
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
