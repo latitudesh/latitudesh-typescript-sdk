@@ -46,7 +46,7 @@ export type Drive = {
   type?: DriveType | undefined;
 };
 
-export type Nic = {
+export type PlanDataNic = {
   count?: number | undefined;
   type?: string | undefined;
 };
@@ -68,7 +68,7 @@ export type PlanDataSpecs = {
   cpu?: PlanDataCpu | undefined;
   memory?: PlanDataMemory | undefined;
   drives?: Array<Drive> | undefined;
-  nics?: Array<Nic> | undefined;
+  nics?: Array<PlanDataNic> | undefined;
   gpu?: PlanDataGpu | undefined;
 };
 
@@ -266,34 +266,40 @@ export function driveFromJSON(
 }
 
 /** @internal */
-export const Nic$inboundSchema: z.ZodType<Nic, z.ZodTypeDef, unknown> = z
-  .object({
-    count: z.number().optional(),
-    type: z.string().optional(),
-  });
+export const PlanDataNic$inboundSchema: z.ZodType<
+  PlanDataNic,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  count: z.number().optional(),
+  type: z.string().optional(),
+});
 /** @internal */
-export type Nic$Outbound = {
+export type PlanDataNic$Outbound = {
   count?: number | undefined;
   type?: string | undefined;
 };
 
 /** @internal */
-export const Nic$outboundSchema: z.ZodType<Nic$Outbound, z.ZodTypeDef, Nic> = z
-  .object({
-    count: z.number().optional(),
-    type: z.string().optional(),
-  });
+export const PlanDataNic$outboundSchema: z.ZodType<
+  PlanDataNic$Outbound,
+  z.ZodTypeDef,
+  PlanDataNic
+> = z.object({
+  count: z.number().optional(),
+  type: z.string().optional(),
+});
 
-export function nicToJSON(nic: Nic): string {
-  return JSON.stringify(Nic$outboundSchema.parse(nic));
+export function planDataNicToJSON(planDataNic: PlanDataNic): string {
+  return JSON.stringify(PlanDataNic$outboundSchema.parse(planDataNic));
 }
-export function nicFromJSON(
+export function planDataNicFromJSON(
   jsonString: string,
-): SafeParseResult<Nic, SDKValidationError> {
+): SafeParseResult<PlanDataNic, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Nic$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Nic' from JSON`,
+    (x) => PlanDataNic$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PlanDataNic' from JSON`,
   );
 }
 
@@ -358,7 +364,7 @@ export const PlanDataSpecs$inboundSchema: z.ZodType<
   cpu: z.lazy(() => PlanDataCpu$inboundSchema).optional(),
   memory: z.lazy(() => PlanDataMemory$inboundSchema).optional(),
   drives: z.array(z.lazy(() => Drive$inboundSchema)).optional(),
-  nics: z.array(z.lazy(() => Nic$inboundSchema)).optional(),
+  nics: z.array(z.lazy(() => PlanDataNic$inboundSchema)).optional(),
   gpu: z.lazy(() => PlanDataGpu$inboundSchema).optional(),
 });
 /** @internal */
@@ -366,7 +372,7 @@ export type PlanDataSpecs$Outbound = {
   cpu?: PlanDataCpu$Outbound | undefined;
   memory?: PlanDataMemory$Outbound | undefined;
   drives?: Array<Drive$Outbound> | undefined;
-  nics?: Array<Nic$Outbound> | undefined;
+  nics?: Array<PlanDataNic$Outbound> | undefined;
   gpu?: PlanDataGpu$Outbound | undefined;
 };
 
@@ -379,7 +385,7 @@ export const PlanDataSpecs$outboundSchema: z.ZodType<
   cpu: z.lazy(() => PlanDataCpu$outboundSchema).optional(),
   memory: z.lazy(() => PlanDataMemory$outboundSchema).optional(),
   drives: z.array(z.lazy(() => Drive$outboundSchema)).optional(),
-  nics: z.array(z.lazy(() => Nic$outboundSchema)).optional(),
+  nics: z.array(z.lazy(() => PlanDataNic$outboundSchema)).optional(),
   gpu: z.lazy(() => PlanDataGpu$outboundSchema).optional(),
 });
 

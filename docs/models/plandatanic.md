@@ -1,11 +1,11 @@
-# Nic
+# PlanDataNic
 
 ## Example Usage
 
 ```typescript
-import { Nic } from "latitudesh-typescript-sdk/models";
+import { PlanDataNic } from "latitudesh-typescript-sdk/models";
 
-let value: Nic = {};
+let value: PlanDataNic = {};
 ```
 
 ## Fields
