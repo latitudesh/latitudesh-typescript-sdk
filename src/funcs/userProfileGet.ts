@@ -23,7 +23,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Get user profile
+ * Retrieve profile
  *
  * @remarks
  * Retrieve the current user profile

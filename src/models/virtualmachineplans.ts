@@ -23,15 +23,33 @@ export type VirtualMachinePlansType = ClosedEnum<
 >;
 
 /**
- * The type of the disk
+ * Detailed vCPU specifications
  */
-export const TypeLocal = {
-  Local: "local",
-} as const;
-/**
- * The type of the disk
- */
-export type TypeLocal = ClosedEnum<typeof TypeLocal>;
+export type Vcpu = {
+  /**
+   * The number of virtual CPUs
+   */
+  count?: number | null | undefined;
+  /**
+   * The CPU clock speed in GHz
+   */
+  clock?: number | null | undefined;
+  /**
+   * The CPU type/model
+   */
+  type?: string | null | undefined;
+};
+
+export type VirtualMachinePlansNic = {
+  /**
+   * NIC speed/type
+   */
+  type?: string | undefined;
+  /**
+   * Number of NICs
+   */
+  count?: string | undefined;
+};
 
 /**
  * The unit of the disk size
@@ -59,9 +77,9 @@ export type Size = {
 
 export type Disk = {
   /**
-   * The type of the disk
+   * The type of the disk (e.g., local SSD, local NVMe)
    */
-  type?: TypeLocal | undefined;
+  type?: string | undefined;
   size?: Size | undefined;
 };
 
@@ -71,9 +89,25 @@ export type VirtualMachinePlansSpecs = {
    */
   memory?: number | undefined;
   /**
-   * The number of virtual CPUs
+   * The GPU type
+   */
+  gpu?: string | undefined;
+  /**
+   * VRAM per GPU in GB
+   */
+  vramPerGpu?: number | null | undefined;
+  /**
+   * The number of virtual CPUs (legacy field)
    */
   vcpus?: number | undefined;
+  /**
+   * Detailed vCPU specifications
+   */
+  vcpu?: Vcpu | undefined;
+  /**
+   * Network interface cards
+   */
+  nics?: Array<VirtualMachinePlansNic> | null | undefined;
   disk?: Disk | undefined;
 };
 
@@ -94,10 +128,42 @@ export type VirtualMachinePlansPricing = {
   brl?: VirtualMachinePlansBRL | undefined;
 };
 
+export type VirtualMachinePlansLocations = {
+  /**
+   * Sites with clusters that support this plan
+   */
+  available?: Array<string> | undefined;
+  /**
+   * Sites with available capacity for this plan
+   */
+  inStock?: Array<string> | undefined;
+};
+
+/**
+ * The stock level in this region
+ */
+export const VirtualMachinePlansRegionStockLevel = {
+  Low: "low",
+  Unavailable: "unavailable",
+  Medium: "medium",
+  High: "high",
+} as const;
+/**
+ * The stock level in this region
+ */
+export type VirtualMachinePlansRegionStockLevel = ClosedEnum<
+  typeof VirtualMachinePlansRegionStockLevel
+>;
+
 export type VirtualMachinePlansRegion = {
   name?: string | undefined;
   available?: Array<string> | undefined;
   pricing?: VirtualMachinePlansPricing | undefined;
+  locations?: VirtualMachinePlansLocations | undefined;
+  /**
+   * The stock level in this region
+   */
+  stockLevel?: VirtualMachinePlansRegionStockLevel | undefined;
 };
 
 /**
@@ -155,11 +221,81 @@ export const VirtualMachinePlansType$outboundSchema: z.ZodNativeEnum<
 > = VirtualMachinePlansType$inboundSchema;
 
 /** @internal */
-export const TypeLocal$inboundSchema: z.ZodNativeEnum<typeof TypeLocal> = z
-  .nativeEnum(TypeLocal);
+export const Vcpu$inboundSchema: z.ZodType<Vcpu, z.ZodTypeDef, unknown> = z
+  .object({
+    count: z.nullable(z.number().int()).optional(),
+    clock: z.nullable(z.number()).optional(),
+    type: z.nullable(z.string()).optional(),
+  });
 /** @internal */
-export const TypeLocal$outboundSchema: z.ZodNativeEnum<typeof TypeLocal> =
-  TypeLocal$inboundSchema;
+export type Vcpu$Outbound = {
+  count?: number | null | undefined;
+  clock?: number | null | undefined;
+  type?: string | null | undefined;
+};
+
+/** @internal */
+export const Vcpu$outboundSchema: z.ZodType<Vcpu$Outbound, z.ZodTypeDef, Vcpu> =
+  z.object({
+    count: z.nullable(z.number().int()).optional(),
+    clock: z.nullable(z.number()).optional(),
+    type: z.nullable(z.string()).optional(),
+  });
+
+export function vcpuToJSON(vcpu: Vcpu): string {
+  return JSON.stringify(Vcpu$outboundSchema.parse(vcpu));
+}
+export function vcpuFromJSON(
+  jsonString: string,
+): SafeParseResult<Vcpu, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Vcpu$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Vcpu' from JSON`,
+  );
+}
+
+/** @internal */
+export const VirtualMachinePlansNic$inboundSchema: z.ZodType<
+  VirtualMachinePlansNic,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: z.string().optional(),
+  count: z.string().optional(),
+});
+/** @internal */
+export type VirtualMachinePlansNic$Outbound = {
+  type?: string | undefined;
+  count?: string | undefined;
+};
+
+/** @internal */
+export const VirtualMachinePlansNic$outboundSchema: z.ZodType<
+  VirtualMachinePlansNic$Outbound,
+  z.ZodTypeDef,
+  VirtualMachinePlansNic
+> = z.object({
+  type: z.string().optional(),
+  count: z.string().optional(),
+});
+
+export function virtualMachinePlansNicToJSON(
+  virtualMachinePlansNic: VirtualMachinePlansNic,
+): string {
+  return JSON.stringify(
+    VirtualMachinePlansNic$outboundSchema.parse(virtualMachinePlansNic),
+  );
+}
+export function virtualMachinePlansNicFromJSON(
+  jsonString: string,
+): SafeParseResult<VirtualMachinePlansNic, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => VirtualMachinePlansNic$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'VirtualMachinePlansNic' from JSON`,
+  );
+}
 
 /** @internal */
 export const VirtualMachinePlansUnit$inboundSchema: z.ZodNativeEnum<
@@ -205,7 +341,7 @@ export function sizeFromJSON(
 /** @internal */
 export const Disk$inboundSchema: z.ZodType<Disk, z.ZodTypeDef, unknown> = z
   .object({
-    type: TypeLocal$inboundSchema.optional(),
+    type: z.string().optional(),
     size: z.lazy(() => Size$inboundSchema).optional(),
   });
 /** @internal */
@@ -217,7 +353,7 @@ export type Disk$Outbound = {
 /** @internal */
 export const Disk$outboundSchema: z.ZodType<Disk$Outbound, z.ZodTypeDef, Disk> =
   z.object({
-    type: TypeLocal$outboundSchema.optional(),
+    type: z.string().optional(),
     size: z.lazy(() => Size$outboundSchema).optional(),
   });
 
@@ -241,13 +377,26 @@ export const VirtualMachinePlansSpecs$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   memory: z.number().int().optional(),
+  gpu: z.string().optional(),
+  vram_per_gpu: z.nullable(z.number().int()).optional(),
   vcpus: z.number().int().optional(),
+  vcpu: z.lazy(() => Vcpu$inboundSchema).optional(),
+  nics: z.nullable(z.array(z.lazy(() => VirtualMachinePlansNic$inboundSchema)))
+    .optional(),
   disk: z.lazy(() => Disk$inboundSchema).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "vram_per_gpu": "vramPerGpu",
+  });
 });
 /** @internal */
 export type VirtualMachinePlansSpecs$Outbound = {
   memory?: number | undefined;
+  gpu?: string | undefined;
+  vram_per_gpu?: number | null | undefined;
   vcpus?: number | undefined;
+  vcpu?: Vcpu$Outbound | undefined;
+  nics?: Array<VirtualMachinePlansNic$Outbound> | null | undefined;
   disk?: Disk$Outbound | undefined;
 };
 
@@ -258,8 +407,17 @@ export const VirtualMachinePlansSpecs$outboundSchema: z.ZodType<
   VirtualMachinePlansSpecs
 > = z.object({
   memory: z.number().int().optional(),
+  gpu: z.string().optional(),
+  vramPerGpu: z.nullable(z.number().int()).optional(),
   vcpus: z.number().int().optional(),
+  vcpu: z.lazy(() => Vcpu$outboundSchema).optional(),
+  nics: z.nullable(z.array(z.lazy(() => VirtualMachinePlansNic$outboundSchema)))
+    .optional(),
   disk: z.lazy(() => Disk$outboundSchema).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    vramPerGpu: "vram_per_gpu",
+  });
 });
 
 export function virtualMachinePlansSpecsToJSON(
@@ -422,6 +580,67 @@ export function virtualMachinePlansPricingFromJSON(
 }
 
 /** @internal */
+export const VirtualMachinePlansLocations$inboundSchema: z.ZodType<
+  VirtualMachinePlansLocations,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  available: z.array(z.string()).optional(),
+  in_stock: z.array(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "in_stock": "inStock",
+  });
+});
+/** @internal */
+export type VirtualMachinePlansLocations$Outbound = {
+  available?: Array<string> | undefined;
+  in_stock?: Array<string> | undefined;
+};
+
+/** @internal */
+export const VirtualMachinePlansLocations$outboundSchema: z.ZodType<
+  VirtualMachinePlansLocations$Outbound,
+  z.ZodTypeDef,
+  VirtualMachinePlansLocations
+> = z.object({
+  available: z.array(z.string()).optional(),
+  inStock: z.array(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    inStock: "in_stock",
+  });
+});
+
+export function virtualMachinePlansLocationsToJSON(
+  virtualMachinePlansLocations: VirtualMachinePlansLocations,
+): string {
+  return JSON.stringify(
+    VirtualMachinePlansLocations$outboundSchema.parse(
+      virtualMachinePlansLocations,
+    ),
+  );
+}
+export function virtualMachinePlansLocationsFromJSON(
+  jsonString: string,
+): SafeParseResult<VirtualMachinePlansLocations, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => VirtualMachinePlansLocations$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'VirtualMachinePlansLocations' from JSON`,
+  );
+}
+
+/** @internal */
+export const VirtualMachinePlansRegionStockLevel$inboundSchema: z.ZodNativeEnum<
+  typeof VirtualMachinePlansRegionStockLevel
+> = z.nativeEnum(VirtualMachinePlansRegionStockLevel);
+/** @internal */
+export const VirtualMachinePlansRegionStockLevel$outboundSchema:
+  z.ZodNativeEnum<typeof VirtualMachinePlansRegionStockLevel> =
+    VirtualMachinePlansRegionStockLevel$inboundSchema;
+
+/** @internal */
 export const VirtualMachinePlansRegion$inboundSchema: z.ZodType<
   VirtualMachinePlansRegion,
   z.ZodTypeDef,
@@ -430,12 +649,21 @@ export const VirtualMachinePlansRegion$inboundSchema: z.ZodType<
   name: z.string().optional(),
   available: z.array(z.string()).optional(),
   pricing: z.lazy(() => VirtualMachinePlansPricing$inboundSchema).optional(),
+  locations: z.lazy(() => VirtualMachinePlansLocations$inboundSchema)
+    .optional(),
+  stock_level: VirtualMachinePlansRegionStockLevel$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "stock_level": "stockLevel",
+  });
 });
 /** @internal */
 export type VirtualMachinePlansRegion$Outbound = {
   name?: string | undefined;
   available?: Array<string> | undefined;
   pricing?: VirtualMachinePlansPricing$Outbound | undefined;
+  locations?: VirtualMachinePlansLocations$Outbound | undefined;
+  stock_level?: string | undefined;
 };
 
 /** @internal */
@@ -447,6 +675,13 @@ export const VirtualMachinePlansRegion$outboundSchema: z.ZodType<
   name: z.string().optional(),
   available: z.array(z.string()).optional(),
   pricing: z.lazy(() => VirtualMachinePlansPricing$outboundSchema).optional(),
+  locations: z.lazy(() => VirtualMachinePlansLocations$outboundSchema)
+    .optional(),
+  stockLevel: VirtualMachinePlansRegionStockLevel$outboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    stockLevel: "stock_level",
+  });
 });
 
 export function virtualMachinePlansRegionToJSON(

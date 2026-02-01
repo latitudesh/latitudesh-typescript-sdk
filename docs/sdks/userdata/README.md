@@ -4,16 +4,16 @@
 
 ### Available Operations
 
-* [~~getProjectUsersData~~](#getprojectusersdata) - List all Project User Data :warning: **Deprecated**
-* [~~getProjectUserData~~](#getprojectuserdata) - Retrieve a Project User Data :warning: **Deprecated**
-* [~~deleteProjectUserData~~](#deleteprojectuserdata) - Delete a Project User Data :warning: **Deprecated**
-* [~~create~~](#create) - Create a Project User Data :warning: **Deprecated**
-* [~~updateForProject~~](#updateforproject) - Update a Project User Data :warning: **Deprecated**
-* [list](#list) - List all User Data
-* [createNew](#createnew) - Create an User Data
-* [retrieve](#retrieve) - Retrieve an User Data
-* [delete](#delete) - Delete an User Data
-* [update](#update) - Update an User Data
+* [~~getProjectUsersData~~](#getprojectusersdata) - List Project user data :warning: **Deprecated**
+* [~~getProjectUserData~~](#getprojectuserdata) - Retrieve Project user data :warning: **Deprecated**
+* [~~deleteProjectUserData~~](#deleteprojectuserdata) - Delete Project user data :warning: **Deprecated**
+* [~~create~~](#create) - Create Project user data :warning: **Deprecated**
+* [~~updateForProject~~](#updateforproject) - Update Project user data :warning: **Deprecated**
+* [list](#list) - List user data
+* [createNew](#createnew) - Create user data
+* [retrieve](#retrieve) - Retrieve user data
+* [delete](#delete) - Delete user data
+* [update](#update) - Update user data
 
 ## ~~getProjectUsersData~~
 
@@ -653,7 +653,7 @@ run();
 
 ## delete
 
-Delete an User Data
+Delete user data
 
 ### Example Usage
 

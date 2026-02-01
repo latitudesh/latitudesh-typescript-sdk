@@ -4,11 +4,11 @@
 
 ### Available Operations
 
-* [list](#list) - Get Teams Virtual Machines
-* [create](#create) - Create a Virtual Machine
-* [get](#get) - Get a Virtual Machine
-* [delete](#delete) - Destroy a Virtual Machine
-* [createVirtualMachineAction](#createvirtualmachineaction) - Run Virtual Machine Action
+* [list](#list) - List VMs
+* [create](#create) - Create VM
+* [get](#get) - Retrieve VM
+* [delete](#delete) - Destroy VM
+* [createVirtualMachineAction](#createvirtualmachineaction) - Run VM power action
 
 ## list
 

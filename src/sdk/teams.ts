@@ -18,7 +18,7 @@ export class Teams extends ClientSDK {
   }
 
   /**
-   * Retrieve the team
+   * Retrieve team
    */
   async get(
     options?: RequestOptions,
@@ -30,7 +30,7 @@ export class Teams extends ClientSDK {
   }
 
   /**
-   * Create a team
+   * Create team
    */
   async create(
     request: operations.PostTeamRequest,
@@ -44,7 +44,7 @@ export class Teams extends ClientSDK {
   }
 
   /**
-   * Update a team
+   * Update team
    */
   async update(
     request: operations.PatchCurrentTeamRequest,

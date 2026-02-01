@@ -34,7 +34,6 @@ import { tool$ipAddressesList } from "./tools/ipAddressesList.js";
 import { tool$operatingSystemsListPlans } from "./tools/operatingSystemsListPlans.js";
 import { tool$plansGet } from "./tools/plansGet.js";
 import { tool$plansGetBandwidth } from "./tools/plansGetBandwidth.js";
-import { tool$plansGetContainersPlan } from "./tools/plansGetContainersPlan.js";
 import { tool$plansList } from "./tools/plansList.js";
 import { tool$plansListStorage } from "./tools/plansListStorage.js";
 import { tool$plansUpdateBandwidth } from "./tools/plansUpdateBandwidth.js";
@@ -138,7 +137,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Latitudesh",
-    version: "0.2.4",
+    version: "0.2.5",
   });
 
   const client = new LatitudeshCore({
@@ -196,7 +195,6 @@ export function createMCPServer(deps: {
   tool(tool$plansGet);
   tool(tool$plansGetBandwidth);
   tool(tool$plansUpdateBandwidth);
-  tool(tool$plansGetContainersPlan);
   tool(tool$plansListStorage);
   tool(tool$projectsList);
   tool(tool$projectsCreate);
