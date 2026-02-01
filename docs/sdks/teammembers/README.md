@@ -4,12 +4,12 @@
 
 ### Available Operations
 
-* [postTeamMembers](#postteammembers) - Add a Team Member
-* [delete](#delete) - Remove a Team Member
+* [postTeamMembers](#postteammembers) - Create member
+* [delete](#delete) - Remove a member
 
 ## postTeamMembers
 
-Add a Team Member
+Create member
 
 ### Example Usage
 
@@ -98,7 +98,7 @@ run();
 
 ## delete
 
-Remove a Team Member
+Remove a member
 
 ### Example Usage
 

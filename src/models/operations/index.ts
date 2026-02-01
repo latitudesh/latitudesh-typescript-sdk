@@ -34,7 +34,6 @@ export * from "./destroyvirtualnetwork.js";
 export * from "./getallfirewallassignments.js";
 export * from "./getbandwidthplans.js";
 export * from "./getbillingusage.js";
-export * from "./getcontainersplan.js";
 export * from "./getevents.js";
 export * from "./getfirewall.js";
 export * from "./getfirewallassignments.js";

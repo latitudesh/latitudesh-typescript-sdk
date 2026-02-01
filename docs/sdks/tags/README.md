@@ -4,10 +4,10 @@
 
 ### Available Operations
 
-* [list](#list) - List all Tags
-* [create](#create) - Create a Tag
-* [delete](#delete) - Delete Tag
-* [update](#update) - Update Tag
+* [list](#list) - List tags
+* [create](#create) - Create tag
+* [delete](#delete) - Delete tag
+* [update](#update) - Update tag
 
 ## list
 

@@ -34,7 +34,7 @@ export class Storage extends ClientSDK {
   }
 
   /**
-   * Create a filesystem for a project
+   * Create filesystem
    *
    * @remarks
    * Allows you to add persistent storage to a project. These filesystems can be used to store data across your servers.
@@ -51,7 +51,7 @@ export class Storage extends ClientSDK {
   }
 
   /**
-   * Delete a filesystem for a project
+   * Delete filesystem
    *
    * @remarks
    * Allows you to remove persistent storage from a project.
@@ -68,7 +68,7 @@ export class Storage extends ClientSDK {
   }
 
   /**
-   * Update a filesystem for a project
+   * Update filesystem
    *
    * @remarks
    * Allow you to upgrade the size of a filesystem.
@@ -119,7 +119,7 @@ export class Storage extends ClientSDK {
   }
 
   /**
-   * Get volume
+   * Retrieve volume
    *
    * @remarks
    * Shows details of a specific volume storage.

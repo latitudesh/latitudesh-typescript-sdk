@@ -4,10 +4,10 @@
 
 ### Available Operations
 
-* [list](#list) - List all Projects
-* [create](#create) - Create a Project
-* [delete](#delete) - Delete a Project
-* [update](#update) - Update a Project
+* [list](#list) - List projects
+* [create](#create) - Create project
+* [delete](#delete) - Delete project
+* [update](#update) - Update project
 
 ## list
 
@@ -89,7 +89,7 @@ run();
 
 ## create
 
-Create a Project
+Create project
 
 ### Example Usage
 
@@ -178,7 +178,7 @@ run();
 
 ## delete
 
-Delete a Project
+Delete project
 
 ### Example Usage
 
@@ -251,7 +251,7 @@ run();
 
 ## update
 
-Update a Project
+Update project
 
 ### Example Usage
 

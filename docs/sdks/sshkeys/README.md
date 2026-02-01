@@ -4,7 +4,7 @@
 
 ### Available Operations
 
-* [~~list~~](#list) - List all Project SSH Keys :warning: **Deprecated**
+* [~~list~~](#list) - List SSH keys :warning: **Deprecated**
 * [~~get~~](#get) - Retrieve a Project SSH Key :warning: **Deprecated**
 * [~~removeFromProject~~](#removefromproject) - Delete a Project SSH Key :warning: **Deprecated**
 * [~~modifyProjectKey~~](#modifyprojectkey) - Update a Project SSH Key :warning: **Deprecated**

@@ -4,13 +4,13 @@
 
 ### Available Operations
 
-* [list](#list) - List all Virtual Networks
-* [create](#create) - Create a Virtual Network
-* [get](#get) - Retrieve a Virtual Network
-* [update](#update) - Update a Virtual Network
-* [listAssignments](#listassignments) - List all servers assigned to virtual networks
-* [assign](#assign) - Assign Virtual network
-* [deleteAssignment](#deleteassignment) - Delete Virtual Network Assignment
+* [list](#list) - List VLANs
+* [create](#create) - Create VLAN
+* [get](#get) - Retrieve VLAN
+* [update](#update) - Update VLAN
+* [listAssignments](#listassignments) - List VLAN assignments
+* [assign](#assign) - Assign VLAN
+* [deleteAssignment](#deleteassignment) - Delete VLAN assignment
 
 ## list
 
@@ -426,7 +426,7 @@ run();
 
 ## assign
 
-Assign Virtual network
+Assign VLAN
 
 ### Example Usage
 

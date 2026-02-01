@@ -18,7 +18,7 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class SSHKeys extends ClientSDK {
   /**
-   * List all Project SSH Keys
+   * List SSH keys
    *
    * @remarks
    * List all SSH Keys in the project. These keys can be used to access servers after deploy and reinstall actions.

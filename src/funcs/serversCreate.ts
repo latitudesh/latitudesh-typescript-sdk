@@ -26,7 +26,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Deploy Server
+ * Create server
  */
 export function serversCreate(
   client: LatitudeshCore,
