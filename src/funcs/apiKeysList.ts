@@ -23,10 +23,10 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * List API Keys
+ * List API keys
  *
  * @remarks
- * Returns a list of all API keys from the team members
+ * Returns a list of all API keys.
  */
 export function apiKeysList(
   client: LatitudeshCore,

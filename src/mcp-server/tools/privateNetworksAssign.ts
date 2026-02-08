@@ -12,7 +12,7 @@ const args = {
 
 export const tool$privateNetworksAssign: ToolDefinition<typeof args> = {
   name: "private-networks-assign",
-  description: `Assign Virtual network`,
+  description: `Assign VLAN`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await privateNetworksAssign(

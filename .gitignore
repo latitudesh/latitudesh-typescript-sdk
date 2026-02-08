@@ -24,7 +24,6 @@
 /.tshy-*
 /__tests__
 .DS_Store
-
 # Test coverage
 /coverage
 *.lcov

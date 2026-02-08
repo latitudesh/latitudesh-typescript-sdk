@@ -4,12 +4,11 @@
 
 ### Available Operations
 
-* [list](#list) - List all Plans
-* [get](#get) - Retrieve a Plan
-* [getBandwidth](#getbandwidth) - List all bandwidth plans
-* [updateBandwidth](#updatebandwidth) - Buy or remove bandwidth packages
-* [getContainersPlan](#getcontainersplan) - Retrieve container plan
-* [listStorage](#liststorage) - List all Storage Plans
+* [list](#list) - List plans
+* [get](#get) - Retrieve plan
+* [getBandwidth](#getbandwidth) - List bandwidth plans
+* [updateBandwidth](#updatebandwidth) - Update bandwidth packages
+* [listStorage](#liststorage) - List storage plans
 
 ## list
 
@@ -18,7 +17,7 @@ Lists all plans. Availability by region is included in `attributes.regions.locat
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-plans" method="get" path="/plans" -->
+<!-- UsageSnippet language="typescript" operationID="get-plans" method="get" path="/plans" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -83,11 +82,11 @@ run();
 
 ## get
 
-Retrieve a Plan
+Retrieve plan
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-plan" method="get" path="/plans/{plan_id}" -->
+<!-- UsageSnippet language="typescript" operationID="get-plan" method="get" path="/plans/{plan_id}" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -160,7 +159,7 @@ Lists all bandwidth plans.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-bandwidth-plans" method="get" path="/plans/bandwidth" -->
+<!-- UsageSnippet language="typescript" operationID="get-bandwidth-plans" method="get" path="/plans/bandwidth" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -234,7 +233,7 @@ Allows to increase or decrease bandwidth packages. Only admins and owners can re
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="update-plans-bandwidth" method="post" path="/plans/bandwidth" -->
+<!-- UsageSnippet language="typescript" operationID="update-plans-bandwidth" method="post" path="/plans/bandwidth" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -315,87 +314,13 @@ run();
 | ----------------------------- | ----------------------------- | ----------------------------- |
 | errors.LatitudeshDefaultError | 4XX, 5XX                      | \*/\*                         |
 
-## getContainersPlan
-
-Retrieve a container plan.
-
-
-### Example Usage
-
-<!-- UsageSnippet language="typescript" operationID="get-containers-plan" method="get" path="/plans/containers/{plan_id}" -->
-```typescript
-import { Latitudesh } from "latitudesh-typescript-sdk";
-
-const latitudesh = new Latitudesh({
-  bearer: process.env["LATITUDESH_BEARER"] ?? "",
-});
-
-async function run() {
-  const result = await latitudesh.plans.getContainersPlan({
-    planId: "<id>",
-  });
-
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
-import { plansGetContainersPlan } from "latitudesh-typescript-sdk/funcs/plansGetContainersPlan.js";
-
-// Use `LatitudeshCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const latitudesh = new LatitudeshCore({
-  bearer: process.env["LATITUDESH_BEARER"] ?? "",
-});
-
-async function run() {
-  const res = await plansGetContainersPlan(latitudesh, {
-    planId: "<id>",
-  });
-  if (res.ok) {
-    const { value: result } = res;
-    console.log(result);
-  } else {
-    console.log("plansGetContainersPlan failed:", res.error);
-  }
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.GetContainersPlanRequest](../../models/operations/getcontainersplanrequest.md)                                                                                     | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[models.ContainerPlanData](../../models/containerplandata.md)\>**
-
-### Errors
-
-| Error Type                    | Status Code                   | Content Type                  |
-| ----------------------------- | ----------------------------- | ----------------------------- |
-| errors.LatitudeshDefaultError | 4XX, 5XX                      | \*/\*                         |
-
 ## listStorage
 
-List all Storage Plans
+List storage plans
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-storage-plans" method="get" path="/plans/storage" -->
+<!-- UsageSnippet language="typescript" operationID="get-storage-plans" method="get" path="/plans/storage" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 

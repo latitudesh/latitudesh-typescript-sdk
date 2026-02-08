@@ -26,7 +26,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * List all User Data
+ * List user data
  *
  * @remarks
  * List all Users Data in the project. These scripts can be used to configure servers with user data.

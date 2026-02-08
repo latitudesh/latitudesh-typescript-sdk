@@ -32,10 +32,10 @@ import {
 } from "../types/operations.js";
 
 /**
- * List All Firewall Assignments
+ * List firewall assignments
  *
  * @remarks
- * List all firewall assignments
+ * Returns a list of all servers assigned to one or more firewalls.
  */
 export function firewallsGetAllFirewallAssignments(
   client: LatitudeshCore,
