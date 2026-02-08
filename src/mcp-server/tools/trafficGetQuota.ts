@@ -12,7 +12,7 @@ const args = {
 
 export const tool$trafficGetQuota: ToolDefinition<typeof args> = {
   name: "traffic-get-quota",
-  description: `Retrieve Traffic Quota`,
+  description: `Retrieve traffic quota`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await trafficGetQuota(

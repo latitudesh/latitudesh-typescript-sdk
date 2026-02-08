@@ -32,7 +32,7 @@ import {
 } from "../types/operations.js";
 
 /**
- * List all Virtual Networks
+ * List VLANs
  *
  * @remarks
  * Lists virtual networks assigned to a project

@@ -4,10 +4,10 @@
 
 ### Available Operations
 
-* [list](#list) - List all Tags
-* [create](#create) - Create a Tag
-* [delete](#delete) - Delete Tag
-* [update](#update) - Update Tag
+* [list](#list) - List tags
+* [create](#create) - Create tag
+* [delete](#delete) - Delete tag
+* [update](#update) - Update tag
 
 ## list
 
@@ -16,7 +16,7 @@ List all Tags in the team.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-tags" method="get" path="/tags" -->
+<!-- UsageSnippet language="typescript" operationID="get-tags" method="get" path="/tags" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -85,7 +85,7 @@ Create a Tag in the team.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="create-tag" method="post" path="/tags" -->
+<!-- UsageSnippet language="typescript" operationID="create-tag" method="post" path="/tags" example="Created" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -247,7 +247,7 @@ Update a Tag in the team.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="update-tag" method="patch" path="/tags/{tag_id}" -->
+<!-- UsageSnippet language="typescript" operationID="update-tag" method="patch" path="/tags/{tag_id}" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 

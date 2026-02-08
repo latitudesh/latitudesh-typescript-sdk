@@ -9,10 +9,10 @@ import { PageIterator, unwrapResultIterator } from "../types/operations.js";
 
 export class Events extends ClientSDK {
   /**
-   * List all Events
+   * List events
    *
    * @remarks
-   * Lists all events.
+   * Lists actions performed by users on your account.
    */
   async list(
     request?: operations.GetEventsRequest | undefined,

@@ -4,22 +4,22 @@
 
 ### Available Operations
 
-* [getAllFirewallAssignments](#getallfirewallassignments) - List All Firewall Assignments
+* [getAllFirewallAssignments](#getallfirewallassignments) - List firewall assignments
 * [list](#list) - List firewalls
-* [create](#create) - Create a firewall
-* [get](#get) - Retrieve Firewall
-* [delete](#delete) - Delete Firewall
-* [update](#update) - Update Firewall
-* [listAssignments](#listassignments) - Firewall Assignments
-* [deleteAssignment](#deleteassignment) - Delete Firewall Assignment
+* [create](#create) - Create firewall
+* [get](#get) - Retrieve firewall
+* [delete](#delete) - Delete firewall
+* [update](#update) - Update firewall
+* [listAssignments](#listassignments) - Firewall assignments
+* [deleteAssignment](#deleteassignment) - Delete assignment
 
 ## getAllFirewallAssignments
 
-List all firewall assignments
+Returns a list of all servers assigned to one or more firewalls.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-all-firewall-assignments" method="get" path="/firewalls/assignments" -->
+<!-- UsageSnippet language="typescript" operationID="get-all-firewall-assignments" method="get" path="/firewalls/assignments" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -96,7 +96,7 @@ List firewalls
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="list-firewalls" method="get" path="/firewalls" -->
+<!-- UsageSnippet language="typescript" operationID="list-firewalls" method="get" path="/firewalls" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -173,7 +173,7 @@ Create a firewall
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="create-firewall" method="post" path="/firewalls" -->
+<!-- UsageSnippet language="typescript" operationID="create-firewall" method="post" path="/firewalls" example="Created" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -194,6 +194,7 @@ async function run() {
             to: "192.168.43.51",
             protocol: "TCP",
             port: "80",
+            description: "Allow HTTP traffic",
           },
           {
             from: "192.168.1.16",
@@ -206,6 +207,7 @@ async function run() {
             to: "192.168.1.20",
             protocol: "UDP",
             port: "3000-4000",
+            description: "Application ports",
           },
         ],
       },
@@ -245,6 +247,7 @@ async function run() {
             to: "192.168.43.51",
             protocol: "TCP",
             port: "80",
+            description: "Allow HTTP traffic",
           },
           {
             from: "192.168.1.16",
@@ -257,6 +260,7 @@ async function run() {
             to: "192.168.1.20",
             protocol: "UDP",
             port: "3000-4000",
+            description: "Application ports",
           },
         ],
       },
@@ -294,11 +298,11 @@ run();
 
 ## get
 
-Retrieve a firewall
+Returns a single firewall by its ID.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-firewall" method="get" path="/firewalls/{firewall_id}" -->
+<!-- UsageSnippet language="typescript" operationID="get-firewall" method="get" path="/firewalls/{firewall_id}" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -367,7 +371,7 @@ run();
 
 ## delete
 
-Delete a firewall
+Delete firewall
 
 ### Example Usage
 
@@ -440,11 +444,11 @@ run();
 
 ## update
 
-Update a firewall
+Updates a firewall by its ID.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="update-firewall" method="patch" path="/firewalls/{firewall_id}" -->
+<!-- UsageSnippet language="typescript" operationID="update-firewall" method="patch" path="/firewalls/{firewall_id}" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -466,6 +470,7 @@ async function run() {
               to: "192.168.43.51",
               protocol: "TCP",
               port: "80",
+              description: "Allow HTTP",
             },
           ],
         },
@@ -507,6 +512,7 @@ async function run() {
               to: "192.168.43.51",
               protocol: "TCP",
               port: "80",
+              description: "Allow HTTP",
             },
           ],
         },
@@ -545,11 +551,11 @@ run();
 
 ## listAssignments
 
-List servers assigned to a firewall
+Returns a list of all servers assigned to a particular firewall.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-firewall-assignments" method="get" path="/firewalls/{firewall_id}/assignments" -->
+<!-- UsageSnippet language="typescript" operationID="get-firewall-assignments" method="get" path="/firewalls/{firewall_id}/assignments" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -622,7 +628,7 @@ run();
 
 ## deleteAssignment
 
-Remove a server from a firewall
+Removes a server from a firewall by its ID.
 
 ### Example Usage
 

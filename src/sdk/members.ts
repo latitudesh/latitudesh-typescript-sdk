@@ -9,7 +9,7 @@ import { PageIterator, unwrapResultIterator } from "../types/operations.js";
 
 export class Members extends ClientSDK {
   /**
-   * List all Team Members
+   * List members
    */
   async getTeamMembers(
     request?: operations.GetTeamMembersRequest | undefined,
