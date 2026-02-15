@@ -7,7 +7,7 @@
 
 ### Available Operations
 
-* [~~postProjectSshKey~~](#postprojectsshkey) - Create a Project SSH Key :warning: **Deprecated**
+* [~~postProjectSshKey~~](#postprojectsshkey) - Create SSH Key :warning: **Deprecated**
 
 ## ~~postProjectSshKey~~
 
@@ -18,7 +18,7 @@ Allow you create SSH Keys in a project. These keys can be used to access servers
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="post-project-ssh-key" method="post" path="/projects/{project_id}/ssh_keys" -->
+<!-- UsageSnippet language="typescript" operationID="post-project-ssh-key" method="post" path="/projects/{project_id}/ssh_keys" example="Created" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 

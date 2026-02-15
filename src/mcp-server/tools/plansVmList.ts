@@ -12,7 +12,7 @@ const args = {
 
 export const tool$plansVmList: ToolDefinition<typeof args> = {
   name: "plans-vm-list",
-  description: `List all Virtual Machines Plans`,
+  description: `List VM plans`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await plansVmList(

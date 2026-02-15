@@ -25,7 +25,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Rotate API Key
+ * Rotate API key
  *
  * @remarks
  * Rotate an existing API Key, generating a new token. This invalidates the previous key.

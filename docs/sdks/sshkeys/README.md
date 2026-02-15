@@ -4,15 +4,15 @@
 
 ### Available Operations
 
-* [~~list~~](#list) - List all Project SSH Keys :warning: **Deprecated**
-* [~~get~~](#get) - Retrieve a Project SSH Key :warning: **Deprecated**
-* [~~removeFromProject~~](#removefromproject) - Delete a Project SSH Key :warning: **Deprecated**
-* [~~modifyProjectKey~~](#modifyprojectkey) - Update a Project SSH Key :warning: **Deprecated**
-* [listAll](#listall) - List all SSH Keys
-* [create](#create) - Create a SSH Key
-* [retrieve](#retrieve) - Retrieve a SSH Key
-* [delete](#delete) - Delete a SSH Key
-* [update](#update) - Update a SSH Key
+* [~~list~~](#list) - List SSH Keys :warning: **Deprecated**
+* [~~get~~](#get) - Retrieve Project SSH Key :warning: **Deprecated**
+* [~~removeFromProject~~](#removefromproject) - Delete Project SSH Key :warning: **Deprecated**
+* [~~modifyProjectKey~~](#modifyprojectkey) - Update Project SSH Key :warning: **Deprecated**
+* [listAll](#listall) - List SSH Keys
+* [create](#create) - Create SSH Key
+* [retrieve](#retrieve) - Retrieve SSH Key
+* [delete](#delete) - Delete SSH Key
+* [update](#update) - Update SSH Key
 
 ## ~~list~~
 
@@ -23,7 +23,7 @@ List all SSH Keys in the project. These keys can be used to access servers after
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-project-ssh-keys" method="get" path="/projects/{project_id}/ssh_keys" -->
+<!-- UsageSnippet language="typescript" operationID="get-project-ssh-keys" method="get" path="/projects/{project_id}/ssh_keys" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -101,7 +101,7 @@ List all SSH Keys in the project. These keys can be used to access servers after
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-project-ssh-key" method="get" path="/projects/{project_id}/ssh_keys/{ssh_key_id}" -->
+<!-- UsageSnippet language="typescript" operationID="get-project-ssh-key" method="get" path="/projects/{project_id}/ssh_keys/{ssh_key_id}" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -257,7 +257,7 @@ Allow you update SSH Key in a project. These keys can be used to access servers 
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="put-project-ssh-key" method="patch" path="/projects/{project_id}/ssh_keys/{ssh_key_id}" -->
+<!-- UsageSnippet language="typescript" operationID="put-project-ssh-key" method="patch" path="/projects/{project_id}/ssh_keys/{ssh_key_id}" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -357,7 +357,7 @@ List all SSH Keys in the project. These keys can be used to access servers after
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-ssh-keys" method="get" path="/ssh_keys" -->
+<!-- UsageSnippet language="typescript" operationID="get-ssh-keys" method="get" path="/ssh_keys" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -431,7 +431,7 @@ Allows you create SSH Keys. These keys can be used to access servers after deplo
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="post-ssh-key" method="post" path="/ssh_keys" -->
+<!-- UsageSnippet language="typescript" operationID="post-ssh-key" method="post" path="/ssh_keys" example="Created" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -519,7 +519,7 @@ List all SSH Keys in the project. These keys can be used to access servers after
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-ssh-key" method="get" path="/ssh_keys/{ssh_key_id}" -->
+<!-- UsageSnippet language="typescript" operationID="get-ssh-key" method="get" path="/ssh_keys/{ssh_key_id}" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -667,7 +667,7 @@ Allows you update SSH Key in a project. These keys can be used to access servers
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="put-ssh-key" method="patch" path="/ssh_keys/{ssh_key_id}" -->
+<!-- UsageSnippet language="typescript" operationID="put-ssh-key" method="patch" path="/ssh_keys/{ssh_key_id}" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 

@@ -4,17 +4,107 @@
 
 ### Available Operations
 
-* [get](#get) - Retrieve the team
-* [create](#create) - Create a team
-* [update](#update) - Update a team
+* [get](#get) - Retrieve team
+* [create](#create) - Create team
+* [update](#update) - Update team
 
 ## get
 
-Retrieve the team
+Retrieve team
 
-### Example Usage
+### Example Usage: Success
 
-<!-- UsageSnippet language="typescript" operationID="get-team" method="get" path="/team" -->
+<!-- UsageSnippet language="typescript" operationID="get-team" method="get" path="/team" example="Success" -->
+```typescript
+import { Latitudesh } from "latitudesh-typescript-sdk";
+
+const latitudesh = new Latitudesh({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const result = await latitudesh.teams.get();
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
+import { teamsGet } from "latitudesh-typescript-sdk/funcs/teamsGet.js";
+
+// Use `LatitudeshCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const latitudesh = new LatitudeshCore({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const res = await teamsGet(latitudesh);
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("teamsGet failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: when team is older than one month
+
+<!-- UsageSnippet language="typescript" operationID="get-team" method="get" path="/team" example="when team is older than one month" -->
+```typescript
+import { Latitudesh } from "latitudesh-typescript-sdk";
+
+const latitudesh = new Latitudesh({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const result = await latitudesh.teams.get();
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
+import { teamsGet } from "latitudesh-typescript-sdk/funcs/teamsGet.js";
+
+// Use `LatitudeshCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const latitudesh = new LatitudeshCore({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const res = await teamsGet(latitudesh);
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("teamsGet failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: when team is recent (created within last month)
+
+<!-- UsageSnippet language="typescript" operationID="get-team" method="get" path="/team" example="when team is recent (created within last month)" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -78,11 +168,11 @@ run();
 
 ## create
 
-Create a team
+Create team
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="post-team" method="post" path="/team" -->
+<!-- UsageSnippet language="typescript" operationID="post-team" method="post" path="/team" example="Created" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -165,11 +255,11 @@ run();
 
 ## update
 
-Update a team
+Update team
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="patch-current-team" method="patch" path="/team/{team_id}" -->
+<!-- UsageSnippet language="typescript" operationID="patch-current-team" method="patch" path="/team/{team_id}" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 

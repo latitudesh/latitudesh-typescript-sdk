@@ -14,10 +14,10 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class ApiKeys extends ClientSDK {
   /**
-   * List API Keys
+   * List API keys
    *
    * @remarks
-   * Returns a list of all API keys from the team members
+   * Returns a list of all API keys.
    */
   async list(
     options?: RequestOptions,
@@ -29,7 +29,7 @@ export class ApiKeys extends ClientSDK {
   }
 
   /**
-   * Create API Key
+   * Create API key
    *
    * @remarks
    * Create a new API Key that is tied to the current user account. The created API key is only listed ONCE upon creation. It can however be regenerated or deleted.
@@ -46,7 +46,7 @@ export class ApiKeys extends ClientSDK {
   }
 
   /**
-   * Rotate API Key
+   * Rotate API key
    *
    * @remarks
    * Rotate an existing API Key, generating a new token. This invalidates the previous key.
@@ -64,7 +64,7 @@ export class ApiKeys extends ClientSDK {
   }
 
   /**
-   * Delete API Key
+   * Delete API key
    *
    * @remarks
    * Delete an existing API Key. Once deleted, the API Key can no longer be used to access the API.
@@ -81,7 +81,7 @@ export class ApiKeys extends ClientSDK {
   }
 
   /**
-   * Update API Key Settings
+   * Update API key settings
    *
    * @remarks
    * Update API Key settings (name, read_only, allowed_ips) without rotating the token.

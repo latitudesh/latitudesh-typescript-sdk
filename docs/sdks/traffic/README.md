@@ -4,16 +4,16 @@
 
 ### Available Operations
 
-* [get](#get) - Retrieve Traffic consumption
-* [getQuota](#getquota) - Retrieve Traffic Quota
+* [get](#get) - Retrieve traffic
+* [getQuota](#getquota) - Retrieve traffic quota
 
 ## get
 
-Retrieve Traffic consumption
+Retrieve traffic
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-traffic-consumption" method="get" path="/traffic" -->
+<!-- UsageSnippet language="typescript" operationID="get-traffic-consumption" method="get" path="/traffic" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -86,11 +86,11 @@ run();
 
 ## getQuota
 
-Retrieve Traffic Quota
+Retrieve traffic quota
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-traffic-quota" method="get" path="/traffic/quota" -->
+<!-- UsageSnippet language="typescript" operationID="get-traffic-quota" method="get" path="/traffic/quota" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 

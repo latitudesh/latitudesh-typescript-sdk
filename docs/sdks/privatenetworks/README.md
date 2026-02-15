@@ -4,13 +4,13 @@
 
 ### Available Operations
 
-* [list](#list) - List all Virtual Networks
-* [create](#create) - Create a Virtual Network
-* [get](#get) - Retrieve a Virtual Network
-* [update](#update) - Update a Virtual Network
-* [listAssignments](#listassignments) - List all servers assigned to virtual networks
-* [assign](#assign) - Assign Virtual network
-* [deleteAssignment](#deleteassignment) - Delete Virtual Network Assignment
+* [list](#list) - List VLANs
+* [create](#create) - Create VLAN
+* [get](#get) - Retrieve VLAN
+* [update](#update) - Update VLAN
+* [listAssignments](#listassignments) - List VLAN assignments
+* [assign](#assign) - Assign VLAN
+* [deleteAssignment](#deleteassignment) - Delete VLAN assignment
 
 ## list
 
@@ -19,7 +19,7 @@ Lists virtual networks assigned to a project
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-virtual-networks" method="get" path="/virtual_networks" -->
+<!-- UsageSnippet language="typescript" operationID="get-virtual-networks" method="get" path="/virtual_networks" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -97,7 +97,7 @@ Creates a new Virtual Network.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="create-virtual-network" method="post" path="/virtual_networks" -->
+<!-- UsageSnippet language="typescript" operationID="create-virtual-network" method="post" path="/virtual_networks" example="Created" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -185,7 +185,7 @@ Retrieve a Virtual Network.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-virtual-network" method="get" path="/virtual_networks/{vlan_id}" -->
+<!-- UsageSnippet language="typescript" operationID="get-virtual-network" method="get" path="/virtual_networks/{vlan_id}" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -259,7 +259,7 @@ Update a Virtual Network.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="update-virtual-network" method="patch" path="/virtual_networks/{vlan_id}" -->
+<!-- UsageSnippet language="typescript" operationID="update-virtual-network" method="patch" path="/virtual_networks/{vlan_id}" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -357,7 +357,7 @@ Returns a list of all servers assigned to virtual networks.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-virtual-networks-assignments" method="get" path="/virtual_networks/assignments" -->
+<!-- UsageSnippet language="typescript" operationID="get-virtual-networks-assignments" method="get" path="/virtual_networks/assignments" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -426,11 +426,11 @@ run();
 
 ## assign
 
-Assign Virtual network
+Assign VLAN
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="assign-server-virtual-network" method="post" path="/virtual_networks/assignments" -->
+<!-- UsageSnippet language="typescript" operationID="assign-server-virtual-network" method="post" path="/virtual_networks/assignments" example="Created" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 

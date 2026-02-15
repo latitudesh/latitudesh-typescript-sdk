@@ -4,23 +4,23 @@
 
 ### Available Operations
 
-* [list](#list) - List all Servers
-* [create](#create) - Deploy Server
-* [get](#get) - Retrieve a Server
-* [delete](#delete) - Remove Server
-* [update](#update) - Update Server
-* [getDeployConfig](#getdeployconfig) - Retrieve Deploy Config
-* [updateDeployConfig](#updatedeployconfig) - Update Deploy Config
-* [lock](#lock) - Lock the server
-* [unlock](#unlock) - Unlock the server
-* [getOutOfBand](#getoutofband) - List Out of Band Connections
-* [startOutOfBandConnection](#startoutofbandconnection) - Start Out of Band Connection
-* [runAction](#runaction) - Run Server Action
-* [createIpmiSession](#createipmisession) - Generate IPMI credentials
-* [startRescueMode](#startrescuemode) - Puts a Server in rescue mode
-* [exitRescueMode](#exitrescuemode) - Exits rescue mode for a Server
-* [scheduleDeletion](#scheduledeletion) - Schedule the server deletion
-* [unscheduleDeletion](#unscheduledeletion) - Unschedule the server deletion
+* [list](#list) - List servers
+* [create](#create) - Create server
+* [get](#get) - Retrieve server
+* [delete](#delete) - Remove server
+* [update](#update) - Update server
+* [getDeployConfig](#getdeployconfig) - Retrieve deploy config
+* [updateDeployConfig](#updatedeployconfig) - Update deploy config
+* [lock](#lock) - Lock server
+* [unlock](#unlock) - Unlock server
+* [getOutOfBand](#getoutofband) - List out-of-band connections
+* [startOutOfBandConnection](#startoutofbandconnection) - Create out-of-band connection
+* [runAction](#runaction) - Run power action
+* [createIpmiSession](#createipmisession) - Create IPMI credentials
+* [startRescueMode](#startrescuemode) - Put server in rescue mode
+* [exitRescueMode](#exitrescuemode) - Exits rescue mode
+* [scheduleDeletion](#scheduledeletion) - Schedule server deletion
+* [unscheduleDeletion](#unscheduledeletion) - Unschedule server deletion
 * [reinstall](#reinstall) - Run Server Reinstall
 
 ## list
@@ -28,9 +28,9 @@
 Returns a list of all servers belonging to the team.
 
 
-### Example Usage
+### Example Usage: Success
 
-<!-- UsageSnippet language="typescript" operationID="get-servers" method="get" path="/servers" -->
+<!-- UsageSnippet language="typescript" operationID="get-servers" method="get" path="/servers" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -81,6 +81,55 @@ async function run() {
 
 run();
 ```
+### Example Usage: SuccessWithCredentials
+
+<!-- UsageSnippet language="typescript" operationID="get-servers" method="get" path="/servers" example="SuccessWithCredentials" -->
+```typescript
+import { Latitudesh } from "latitudesh-typescript-sdk";
+
+const latitudesh = new Latitudesh({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const result = await latitudesh.servers.list({});
+
+  for await (const page of result) {
+    console.log(page);
+  }
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
+import { serversList } from "latitudesh-typescript-sdk/funcs/serversList.js";
+
+// Use `LatitudeshCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const latitudesh = new LatitudeshCore({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const res = await serversList(latitudesh, {});
+  if (res.ok) {
+    const { value: result } = res;
+    for await (const page of result) {
+    console.log(page);
+  }
+  } else {
+    console.log("serversList failed:", res.error);
+  }
+}
+
+run();
+```
 
 ### Parameters
 
@@ -103,11 +152,11 @@ run();
 
 ## create
 
-Deploy Server
+Create server
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="create-server" method="post" path="/servers" -->
+<!-- UsageSnippet language="typescript" operationID="create-server" method="post" path="/servers" example="Created" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -197,9 +246,9 @@ run();
 Returns a server that belongs to the team.
 
 
-### Example Usage
+### Example Usage: Success
 
-<!-- UsageSnippet language="typescript" operationID="get-server" method="get" path="/servers/{server_id}" -->
+<!-- UsageSnippet language="typescript" operationID="get-server" method="get" path="/servers/{server_id}" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -246,6 +295,55 @@ async function run() {
 
 run();
 ```
+### Example Usage: SuccessWithCredentials
+
+<!-- UsageSnippet language="typescript" operationID="get-server" method="get" path="/servers/{server_id}" example="SuccessWithCredentials" -->
+```typescript
+import { Latitudesh } from "latitudesh-typescript-sdk";
+
+const latitudesh = new Latitudesh({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const result = await latitudesh.servers.get({
+    serverId: "<id>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
+import { serversGet } from "latitudesh-typescript-sdk/funcs/serversGet.js";
+
+// Use `LatitudeshCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const latitudesh = new LatitudeshCore({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const res = await serversGet(latitudesh, {
+    serverId: "<id>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("serversGet failed:", res.error);
+  }
+}
+
+run();
+```
 
 ### Parameters
 
@@ -268,7 +366,7 @@ run();
 
 ## delete
 
-Remove Server
+Remove server
 
 ### Example Usage
 
@@ -341,11 +439,11 @@ run();
 
 ## update
 
-Update Server
+Update server
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="update-server" method="patch" path="/servers/{server_id}" -->
+<!-- UsageSnippet language="typescript" operationID="update-server" method="patch" path="/servers/{server_id}" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -432,11 +530,11 @@ run();
 
 ## getDeployConfig
 
-Retrieve Deploy Config
+Retrieve deploy config
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-server-deploy-config" method="get" path="/servers/{server_id}/deploy_config" -->
+<!-- UsageSnippet language="typescript" operationID="get-server-deploy-config" method="get" path="/servers/{server_id}/deploy_config" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -505,11 +603,11 @@ run();
 
 ## updateDeployConfig
 
-Update Deploy Config
+Update deploy config
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="update-server-deploy-config" method="patch" path="/servers/{server_id}/deploy_config" -->
+<!-- UsageSnippet language="typescript" operationID="update-server-deploy-config" method="patch" path="/servers/{server_id}/deploy_config" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -588,7 +686,7 @@ Locks the server. A locked server cannot be deleted or modified and no actions c
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="server-lock" method="post" path="/servers/{server_id}/lock" -->
+<!-- UsageSnippet language="typescript" operationID="server-lock" method="post" path="/servers/{server_id}/lock" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -661,7 +759,7 @@ Unlocks the server. A locked server cannot be deleted or modified and no actions
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="server-unlock" method="post" path="/servers/{server_id}/unlock" -->
+<!-- UsageSnippet language="typescript" operationID="server-unlock" method="post" path="/servers/{server_id}/unlock" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -730,11 +828,11 @@ run();
 
 ## getOutOfBand
 
-List Out of Band Connections
+List out-of-band connections
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-server-out-of-band" method="get" path="/servers/{server_id}/out_of_band_connection" -->
+<!-- UsageSnippet language="typescript" operationID="get-server-out-of-band" method="get" path="/servers/{server_id}/out_of_band_connection" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -803,11 +901,11 @@ run();
 
 ## startOutOfBandConnection
 
-Start Out of Band Connection
+Create out-of-band connection
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="create-server-out-of-band" method="post" path="/servers/{server_id}/out_of_band_connection" -->
+<!-- UsageSnippet language="typescript" operationID="create-server-out-of-band" method="post" path="/servers/{server_id}/out_of_band_connection" example="Created" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -900,7 +998,7 @@ Performs an action on a given server:
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="create-server-action" method="post" path="/servers/{server_id}/actions" -->
+<!-- UsageSnippet language="typescript" operationID="create-server-action" method="post" path="/servers/{server_id}/actions" example="Created" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -993,7 +1091,7 @@ Related guide: https://docs.latitude.sh/docs/ipmi
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="create-ipmi-session" method="post" path="/servers/{server_id}/remote_access" -->
+<!-- UsageSnippet language="typescript" operationID="create-ipmi-session" method="post" path="/servers/{server_id}/remote_access" example="Created" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -1066,7 +1164,7 @@ Starts rescue mode on a given server.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="server-start-rescue-mode" method="post" path="/servers/{server_id}/rescue_mode" -->
+<!-- UsageSnippet language="typescript" operationID="server-start-rescue-mode" method="post" path="/servers/{server_id}/rescue_mode" example="Created" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -1139,7 +1237,7 @@ Exits rescue mode on a given server.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="server-exit-rescue-mode" method="post" path="/servers/{server_id}/exit_rescue_mode" -->
+<!-- UsageSnippet language="typescript" operationID="server-exit-rescue-mode" method="post" path="/servers/{server_id}/exit_rescue_mode" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -1212,7 +1310,7 @@ Schedules the server to be removed at the end of the billing cycle.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="server-schedule-deletion" method="post" path="/servers/{server_id}/schedule_deletion" -->
+<!-- UsageSnippet language="typescript" operationID="server-schedule-deletion" method="post" path="/servers/{server_id}/schedule_deletion" example="Created" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -1358,7 +1456,7 @@ Run Server Reinstall
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="create-server-reinstall" method="post" path="/servers/{server_id}/reinstall" -->
+<!-- UsageSnippet language="typescript" operationID="create-server-reinstall" method="post" path="/servers/{server_id}/reinstall" example="Created" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 

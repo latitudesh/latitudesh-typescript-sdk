@@ -12,7 +12,7 @@ const args = {
 
 export const tool$regionsFetch: ToolDefinition<typeof args> = {
   name: "regions-fetch",
-  description: `Retrieve a Region`,
+  description: `Retrieve region`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await regionsFetch(

@@ -4,10 +4,10 @@
 
 ### Available Operations
 
-* [list](#list) - List all Projects
-* [create](#create) - Create a Project
-* [delete](#delete) - Delete a Project
-* [update](#update) - Update a Project
+* [list](#list) - List projects
+* [create](#create) - Create project
+* [delete](#delete) - Delete project
+* [update](#update) - Update project
 
 ## list
 
@@ -16,7 +16,7 @@ Returns a list of all projects for the current team
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-projects" method="get" path="/projects" -->
+<!-- UsageSnippet language="typescript" operationID="get-projects" method="get" path="/projects" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -89,11 +89,11 @@ run();
 
 ## create
 
-Create a Project
+Create project
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="create-project" method="post" path="/projects" -->
+<!-- UsageSnippet language="typescript" operationID="create-project" method="post" path="/projects" example="Created" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -178,7 +178,7 @@ run();
 
 ## delete
 
-Delete a Project
+Delete project
 
 ### Example Usage
 
@@ -251,11 +251,11 @@ run();
 
 ## update
 
-Update a Project
+Update project
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="update-project" method="patch" path="/projects/{project_id}" -->
+<!-- UsageSnippet language="typescript" operationID="update-project" method="patch" path="/projects/{project_id}" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 

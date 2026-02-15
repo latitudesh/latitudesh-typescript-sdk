@@ -22,14 +22,14 @@ export const Feature = {
 } as const;
 export type Feature = ClosedEnum<typeof Feature>;
 
-export type PlanDataCpu = {
+export type Cpu = {
   type?: string | undefined;
   clock?: number | undefined;
   cores?: number | undefined;
   count?: number | undefined;
 };
 
-export type PlanDataMemory = {
+export type Memory = {
   total?: number | undefined;
 };
 
@@ -46,12 +46,12 @@ export type Drive = {
   type?: DriveType | undefined;
 };
 
-export type Nic = {
+export type PlanDataNic = {
   count?: number | undefined;
   type?: string | undefined;
 };
 
-export type PlanDataGpu = {
+export type Gpu = {
   count?: number | undefined;
   type?: string | undefined;
   /**
@@ -65,11 +65,11 @@ export type PlanDataGpu = {
 };
 
 export type PlanDataSpecs = {
-  cpu?: PlanDataCpu | undefined;
-  memory?: PlanDataMemory | undefined;
+  cpu?: Cpu | undefined;
+  memory?: Memory | undefined;
   drives?: Array<Drive> | undefined;
-  nics?: Array<Nic> | undefined;
-  gpu?: PlanDataGpu | undefined;
+  nics?: Array<PlanDataNic> | undefined;
+  gpu?: Gpu | undefined;
 };
 
 export type PlanDataLocations = {
@@ -142,18 +142,15 @@ export const Feature$outboundSchema: z.ZodNativeEnum<typeof Feature> =
   Feature$inboundSchema;
 
 /** @internal */
-export const PlanDataCpu$inboundSchema: z.ZodType<
-  PlanDataCpu,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: z.string().optional(),
-  clock: z.number().optional(),
-  cores: z.number().optional(),
-  count: z.number().optional(),
-});
+export const Cpu$inboundSchema: z.ZodType<Cpu, z.ZodTypeDef, unknown> = z
+  .object({
+    type: z.string().optional(),
+    clock: z.number().optional(),
+    cores: z.number().optional(),
+    count: z.number().optional(),
+  });
 /** @internal */
-export type PlanDataCpu$Outbound = {
+export type Cpu$Outbound = {
   type?: string | undefined;
   clock?: number | undefined;
   cores?: number | undefined;
@@ -161,62 +158,56 @@ export type PlanDataCpu$Outbound = {
 };
 
 /** @internal */
-export const PlanDataCpu$outboundSchema: z.ZodType<
-  PlanDataCpu$Outbound,
-  z.ZodTypeDef,
-  PlanDataCpu
-> = z.object({
-  type: z.string().optional(),
-  clock: z.number().optional(),
-  cores: z.number().optional(),
-  count: z.number().optional(),
-});
+export const Cpu$outboundSchema: z.ZodType<Cpu$Outbound, z.ZodTypeDef, Cpu> = z
+  .object({
+    type: z.string().optional(),
+    clock: z.number().optional(),
+    cores: z.number().optional(),
+    count: z.number().optional(),
+  });
 
-export function planDataCpuToJSON(planDataCpu: PlanDataCpu): string {
-  return JSON.stringify(PlanDataCpu$outboundSchema.parse(planDataCpu));
+export function cpuToJSON(cpu: Cpu): string {
+  return JSON.stringify(Cpu$outboundSchema.parse(cpu));
 }
-export function planDataCpuFromJSON(
+export function cpuFromJSON(
   jsonString: string,
-): SafeParseResult<PlanDataCpu, SDKValidationError> {
+): SafeParseResult<Cpu, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => PlanDataCpu$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PlanDataCpu' from JSON`,
+    (x) => Cpu$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Cpu' from JSON`,
   );
 }
 
 /** @internal */
-export const PlanDataMemory$inboundSchema: z.ZodType<
-  PlanDataMemory,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  total: z.number().optional(),
-});
+export const Memory$inboundSchema: z.ZodType<Memory, z.ZodTypeDef, unknown> = z
+  .object({
+    total: z.number().optional(),
+  });
 /** @internal */
-export type PlanDataMemory$Outbound = {
+export type Memory$Outbound = {
   total?: number | undefined;
 };
 
 /** @internal */
-export const PlanDataMemory$outboundSchema: z.ZodType<
-  PlanDataMemory$Outbound,
+export const Memory$outboundSchema: z.ZodType<
+  Memory$Outbound,
   z.ZodTypeDef,
-  PlanDataMemory
+  Memory
 > = z.object({
   total: z.number().optional(),
 });
 
-export function planDataMemoryToJSON(planDataMemory: PlanDataMemory): string {
-  return JSON.stringify(PlanDataMemory$outboundSchema.parse(planDataMemory));
+export function memoryToJSON(memory: Memory): string {
+  return JSON.stringify(Memory$outboundSchema.parse(memory));
 }
-export function planDataMemoryFromJSON(
+export function memoryFromJSON(
   jsonString: string,
-): SafeParseResult<PlanDataMemory, SDKValidationError> {
+): SafeParseResult<Memory, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => PlanDataMemory$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PlanDataMemory' from JSON`,
+    (x) => Memory$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Memory' from JSON`,
   );
 }
 
@@ -266,54 +257,57 @@ export function driveFromJSON(
 }
 
 /** @internal */
-export const Nic$inboundSchema: z.ZodType<Nic, z.ZodTypeDef, unknown> = z
-  .object({
-    count: z.number().optional(),
-    type: z.string().optional(),
-  });
-/** @internal */
-export type Nic$Outbound = {
-  count?: number | undefined;
-  type?: string | undefined;
-};
-
-/** @internal */
-export const Nic$outboundSchema: z.ZodType<Nic$Outbound, z.ZodTypeDef, Nic> = z
-  .object({
-    count: z.number().optional(),
-    type: z.string().optional(),
-  });
-
-export function nicToJSON(nic: Nic): string {
-  return JSON.stringify(Nic$outboundSchema.parse(nic));
-}
-export function nicFromJSON(
-  jsonString: string,
-): SafeParseResult<Nic, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Nic$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Nic' from JSON`,
-  );
-}
-
-/** @internal */
-export const PlanDataGpu$inboundSchema: z.ZodType<
-  PlanDataGpu,
+export const PlanDataNic$inboundSchema: z.ZodType<
+  PlanDataNic,
   z.ZodTypeDef,
   unknown
 > = z.object({
   count: z.number().optional(),
   type: z.string().optional(),
-  vram_per_gpu: z.nullable(z.number()).optional(),
-  interconnect: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "vram_per_gpu": "vramPerGpu",
-  });
 });
 /** @internal */
-export type PlanDataGpu$Outbound = {
+export type PlanDataNic$Outbound = {
+  count?: number | undefined;
+  type?: string | undefined;
+};
+
+/** @internal */
+export const PlanDataNic$outboundSchema: z.ZodType<
+  PlanDataNic$Outbound,
+  z.ZodTypeDef,
+  PlanDataNic
+> = z.object({
+  count: z.number().optional(),
+  type: z.string().optional(),
+});
+
+export function planDataNicToJSON(planDataNic: PlanDataNic): string {
+  return JSON.stringify(PlanDataNic$outboundSchema.parse(planDataNic));
+}
+export function planDataNicFromJSON(
+  jsonString: string,
+): SafeParseResult<PlanDataNic, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PlanDataNic$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PlanDataNic' from JSON`,
+  );
+}
+
+/** @internal */
+export const Gpu$inboundSchema: z.ZodType<Gpu, z.ZodTypeDef, unknown> = z
+  .object({
+    count: z.number().optional(),
+    type: z.string().optional(),
+    vram_per_gpu: z.nullable(z.number()).optional(),
+    interconnect: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "vram_per_gpu": "vramPerGpu",
+    });
+  });
+/** @internal */
+export type Gpu$Outbound = {
   count?: number | undefined;
   type?: string | undefined;
   vram_per_gpu?: number | null | undefined;
@@ -321,31 +315,28 @@ export type PlanDataGpu$Outbound = {
 };
 
 /** @internal */
-export const PlanDataGpu$outboundSchema: z.ZodType<
-  PlanDataGpu$Outbound,
-  z.ZodTypeDef,
-  PlanDataGpu
-> = z.object({
-  count: z.number().optional(),
-  type: z.string().optional(),
-  vramPerGpu: z.nullable(z.number()).optional(),
-  interconnect: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    vramPerGpu: "vram_per_gpu",
+export const Gpu$outboundSchema: z.ZodType<Gpu$Outbound, z.ZodTypeDef, Gpu> = z
+  .object({
+    count: z.number().optional(),
+    type: z.string().optional(),
+    vramPerGpu: z.nullable(z.number()).optional(),
+    interconnect: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      vramPerGpu: "vram_per_gpu",
+    });
   });
-});
 
-export function planDataGpuToJSON(planDataGpu: PlanDataGpu): string {
-  return JSON.stringify(PlanDataGpu$outboundSchema.parse(planDataGpu));
+export function gpuToJSON(gpu: Gpu): string {
+  return JSON.stringify(Gpu$outboundSchema.parse(gpu));
 }
-export function planDataGpuFromJSON(
+export function gpuFromJSON(
   jsonString: string,
-): SafeParseResult<PlanDataGpu, SDKValidationError> {
+): SafeParseResult<Gpu, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => PlanDataGpu$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PlanDataGpu' from JSON`,
+    (x) => Gpu$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Gpu' from JSON`,
   );
 }
 
@@ -355,19 +346,19 @@ export const PlanDataSpecs$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  cpu: z.lazy(() => PlanDataCpu$inboundSchema).optional(),
-  memory: z.lazy(() => PlanDataMemory$inboundSchema).optional(),
+  cpu: z.lazy(() => Cpu$inboundSchema).optional(),
+  memory: z.lazy(() => Memory$inboundSchema).optional(),
   drives: z.array(z.lazy(() => Drive$inboundSchema)).optional(),
-  nics: z.array(z.lazy(() => Nic$inboundSchema)).optional(),
-  gpu: z.lazy(() => PlanDataGpu$inboundSchema).optional(),
+  nics: z.array(z.lazy(() => PlanDataNic$inboundSchema)).optional(),
+  gpu: z.lazy(() => Gpu$inboundSchema).optional(),
 });
 /** @internal */
 export type PlanDataSpecs$Outbound = {
-  cpu?: PlanDataCpu$Outbound | undefined;
-  memory?: PlanDataMemory$Outbound | undefined;
+  cpu?: Cpu$Outbound | undefined;
+  memory?: Memory$Outbound | undefined;
   drives?: Array<Drive$Outbound> | undefined;
-  nics?: Array<Nic$Outbound> | undefined;
-  gpu?: PlanDataGpu$Outbound | undefined;
+  nics?: Array<PlanDataNic$Outbound> | undefined;
+  gpu?: Gpu$Outbound | undefined;
 };
 
 /** @internal */
@@ -376,11 +367,11 @@ export const PlanDataSpecs$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PlanDataSpecs
 > = z.object({
-  cpu: z.lazy(() => PlanDataCpu$outboundSchema).optional(),
-  memory: z.lazy(() => PlanDataMemory$outboundSchema).optional(),
+  cpu: z.lazy(() => Cpu$outboundSchema).optional(),
+  memory: z.lazy(() => Memory$outboundSchema).optional(),
   drives: z.array(z.lazy(() => Drive$outboundSchema)).optional(),
-  nics: z.array(z.lazy(() => Nic$outboundSchema)).optional(),
-  gpu: z.lazy(() => PlanDataGpu$outboundSchema).optional(),
+  nics: z.array(z.lazy(() => PlanDataNic$outboundSchema)).optional(),
+  gpu: z.lazy(() => Gpu$outboundSchema).optional(),
 });
 
 export function planDataSpecsToJSON(planDataSpecs: PlanDataSpecs): string {
