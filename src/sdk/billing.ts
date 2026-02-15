@@ -10,7 +10,7 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class Billing extends ClientSDK {
   /**
-   * List Billing Usage
+   * Retrieve billing usage
    *
    * @remarks
    * Returns the billing usage of a project

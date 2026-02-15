@@ -5,12 +5,12 @@
 ### Available Operations
 
 * [listFilesystems](#listfilesystems) - List filesystems
-* [createFilesystem](#createfilesystem) - Create a filesystem for a project
-* [deleteFilesystem](#deletefilesystem) - Delete a filesystem for a project
-* [updateFilesystem](#updatefilesystem) - Update a filesystem for a project
+* [createFilesystem](#createfilesystem) - Create filesystem
+* [deleteFilesystem](#deletefilesystem) - Delete filesystem
+* [updateFilesystem](#updatefilesystem) - Update filesystem
 * [getStorageVolumes](#getstoragevolumes) - List volumes
 * [postStorageVolumes](#poststoragevolumes) - Create volume
-* [getStorageVolume](#getstoragevolume) - Get volume
+* [getStorageVolume](#getstoragevolume) - Retrieve volume
 * [deleteStorageVolumes](#deletestoragevolumes) - Delete volume
 * [postStorageVolumesMount](#poststoragevolumesmount) - Mount volume
 
@@ -93,7 +93,7 @@ Allows you to add persistent storage to a project. These filesystems can be used
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="post-storage-filesystems" method="post" path="/storage/filesystems" -->
+<!-- UsageSnippet language="typescript" operationID="post-storage-filesystems" method="post" path="/storage/filesystems" example="Created" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -251,7 +251,7 @@ Allow you to upgrade the size of a filesystem.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="patch-storage-filesystems" method="patch" path="/storage/filesystems/{filesystem_id}" -->
+<!-- UsageSnippet language="typescript" operationID="patch-storage-filesystems" method="patch" path="/storage/filesystems/{filesystem_id}" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -342,7 +342,7 @@ Lists all the volumes from a team.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-storage-volumes" method="get" path="/storage/volumes" -->
+<!-- UsageSnippet language="typescript" operationID="get-storage-volumes" method="get" path="/storage/volumes" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -415,7 +415,7 @@ Allows you to add persistent storage to a project. These volumes can be used to 
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="post-storage-volumes" method="post" path="/storage/volumes" -->
+<!-- UsageSnippet language="typescript" operationID="post-storage-volumes" method="post" path="/storage/volumes" example="Created" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -500,7 +500,7 @@ Shows details of a specific volume storage.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-storage-volume" method="get" path="/storage/volumes/{id}" -->
+<!-- UsageSnippet language="typescript" operationID="get-storage-volume" method="get" path="/storage/volumes/{id}" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 

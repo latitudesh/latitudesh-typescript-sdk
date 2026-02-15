@@ -7,6 +7,7 @@ import { virtualMachinesCreateVirtualMachineAction } from "../funcs/virtualMachi
 import { virtualMachinesDelete } from "../funcs/virtualMachinesDelete.js";
 import { virtualMachinesGet } from "../funcs/virtualMachinesGet.js";
 import { virtualMachinesList } from "../funcs/virtualMachinesList.js";
+import { virtualMachinesUpdateVirtualMachine } from "../funcs/virtualMachinesUpdateVirtualMachine.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as models from "../models/index.js";
 import * as operations from "../models/operations/index.js";
@@ -14,7 +15,7 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class VirtualMachines extends ClientSDK {
   /**
-   * Get Teams Virtual Machines
+   * List VMs
    *
    * @remarks
    * Show all Team's Virtual Machines.
@@ -31,7 +32,7 @@ export class VirtualMachines extends ClientSDK {
   }
 
   /**
-   * Create a Virtual Machine
+   * Create VM
    *
    * @remarks
    * Creates a new Virtual Machine.
@@ -48,7 +49,7 @@ export class VirtualMachines extends ClientSDK {
   }
 
   /**
-   * Get a Virtual Machine
+   * Retrieve VM
    *
    * @remarks
    * Show a Virtual Machine.
@@ -65,7 +66,7 @@ export class VirtualMachines extends ClientSDK {
   }
 
   /**
-   * Destroy a Virtual Machine
+   * Destroy VM
    *
    * @remarks
    * Destroys a Virtual Machine.
@@ -82,7 +83,24 @@ export class VirtualMachines extends ClientSDK {
   }
 
   /**
-   * Run Virtual Machine Action
+   * Update VM
+   *
+   * @remarks
+   * Updates a Virtual Machine's display name (hostname).
+   */
+  async updateVirtualMachine(
+    request: operations.UpdateVirtualMachineRequest,
+    options?: RequestOptions,
+  ): Promise<models.VirtualMachine> {
+    return unwrapAsync(virtualMachinesUpdateVirtualMachine(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Run VM power action
    *
    * @remarks
    * Performs a power action on a given virtual machine:

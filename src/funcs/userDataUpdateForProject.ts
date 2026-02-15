@@ -26,7 +26,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Update a Project User Data
+ * Update Project user data
  *
  * @remarks
  * Allow you update User Data in a project.

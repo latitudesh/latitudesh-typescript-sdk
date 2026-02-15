@@ -36,6 +36,11 @@ export type Target = {
   name?: string | undefined;
 };
 
+/**
+ * Additional event-specific data
+ */
+export type Properties = {};
+
 export type EventDataAttributes = {
   action?: string | undefined;
   createdAt?: string | undefined;
@@ -43,6 +48,10 @@ export type EventDataAttributes = {
   project?: EventDataProject | undefined;
   team?: EventDataTeam | undefined;
   target?: Target | undefined;
+  /**
+   * Additional event-specific data
+   */
+  properties?: Properties | null | undefined;
 };
 
 export type EventData = {
@@ -217,6 +226,35 @@ export function targetFromJSON(
 }
 
 /** @internal */
+export const Properties$inboundSchema: z.ZodType<
+  Properties,
+  z.ZodTypeDef,
+  unknown
+> = z.object({});
+/** @internal */
+export type Properties$Outbound = {};
+
+/** @internal */
+export const Properties$outboundSchema: z.ZodType<
+  Properties$Outbound,
+  z.ZodTypeDef,
+  Properties
+> = z.object({});
+
+export function propertiesToJSON(properties: Properties): string {
+  return JSON.stringify(Properties$outboundSchema.parse(properties));
+}
+export function propertiesFromJSON(
+  jsonString: string,
+): SafeParseResult<Properties, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Properties$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Properties' from JSON`,
+  );
+}
+
+/** @internal */
 export const EventDataAttributes$inboundSchema: z.ZodType<
   EventDataAttributes,
   z.ZodTypeDef,
@@ -228,6 +266,7 @@ export const EventDataAttributes$inboundSchema: z.ZodType<
   project: z.lazy(() => EventDataProject$inboundSchema).optional(),
   team: z.lazy(() => EventDataTeam$inboundSchema).optional(),
   target: z.lazy(() => Target$inboundSchema).optional(),
+  properties: z.nullable(z.lazy(() => Properties$inboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     "created_at": "createdAt",
@@ -241,6 +280,7 @@ export type EventDataAttributes$Outbound = {
   project?: EventDataProject$Outbound | undefined;
   team?: EventDataTeam$Outbound | undefined;
   target?: Target$Outbound | undefined;
+  properties?: Properties$Outbound | null | undefined;
 };
 
 /** @internal */
@@ -255,6 +295,7 @@ export const EventDataAttributes$outboundSchema: z.ZodType<
   project: z.lazy(() => EventDataProject$outboundSchema).optional(),
   team: z.lazy(() => EventDataTeam$outboundSchema).optional(),
   target: z.lazy(() => Target$outboundSchema).optional(),
+  properties: z.nullable(z.lazy(() => Properties$outboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     createdAt: "created_at",

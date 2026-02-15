@@ -4,16 +4,16 @@
 
 ### Available Operations
 
-* [~~getProjectUsersData~~](#getprojectusersdata) - List all Project User Data :warning: **Deprecated**
-* [~~getProjectUserData~~](#getprojectuserdata) - Retrieve a Project User Data :warning: **Deprecated**
-* [~~deleteProjectUserData~~](#deleteprojectuserdata) - Delete a Project User Data :warning: **Deprecated**
-* [~~create~~](#create) - Create a Project User Data :warning: **Deprecated**
-* [~~updateForProject~~](#updateforproject) - Update a Project User Data :warning: **Deprecated**
-* [list](#list) - List all User Data
-* [createNew](#createnew) - Create an User Data
-* [retrieve](#retrieve) - Retrieve an User Data
-* [delete](#delete) - Delete an User Data
-* [update](#update) - Update an User Data
+* [~~getProjectUsersData~~](#getprojectusersdata) - List Project user data :warning: **Deprecated**
+* [~~getProjectUserData~~](#getprojectuserdata) - Retrieve Project user data :warning: **Deprecated**
+* [~~deleteProjectUserData~~](#deleteprojectuserdata) - Delete Project user data :warning: **Deprecated**
+* [~~create~~](#create) - Create Project user data :warning: **Deprecated**
+* [~~updateForProject~~](#updateforproject) - Update Project user data :warning: **Deprecated**
+* [list](#list) - List user data
+* [createNew](#createnew) - Create user data
+* [retrieve](#retrieve) - Retrieve user data
+* [delete](#delete) - Delete user data
+* [update](#update) - Update user data
 
 ## ~~getProjectUsersData~~
 
@@ -24,7 +24,7 @@ List all Users Data in the project. These scripts can be used to configure serve
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-project-users-data" method="get" path="/projects/{project_id}/user_data" -->
+<!-- UsageSnippet language="typescript" operationID="get-project-users-data" method="get" path="/projects/{project_id}/user_data" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -100,7 +100,7 @@ Get User Data in the project. These scripts can be used to configure servers wit
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-project-user-data" method="get" path="/projects/{project_id}/user_data/{user_data_id}" -->
+<!-- UsageSnippet language="typescript" operationID="get-project-user-data" method="get" path="/projects/{project_id}/user_data/{user_data_id}" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -256,7 +256,7 @@ Allows you to create User Data in a project, which can be used to perform custom
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="post-project-user-data" method="post" path="/projects/{project_id}/user_data" -->
+<!-- UsageSnippet language="typescript" operationID="post-project-user-data" method="post" path="/projects/{project_id}/user_data" example="Created" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -426,7 +426,7 @@ List all Users Data in the project. These scripts can be used to configure serve
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-users-data" method="get" path="/user_data" -->
+<!-- UsageSnippet language="typescript" operationID="get-users-data" method="get" path="/user_data" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -496,7 +496,7 @@ Allows you to create User Data in a team, which can be used to perform custom se
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="post-user-data" method="post" path="/user_data" -->
+<!-- UsageSnippet language="typescript" operationID="post-user-data" method="post" path="/user_data" example="Created" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -584,7 +584,7 @@ Get User Data in the project. These scripts can be used to configure servers wit
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-user-data" method="get" path="/user_data/{user_data_id}" -->
+<!-- UsageSnippet language="typescript" operationID="get-user-data" method="get" path="/user_data/{user_data_id}" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -653,7 +653,7 @@ run();
 
 ## delete
 
-Delete an User Data
+Delete user data
 
 ### Example Usage
 

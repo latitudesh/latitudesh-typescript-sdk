@@ -24,10 +24,10 @@ export class Firewalls extends ClientSDK {
   }
 
   /**
-   * List All Firewall Assignments
+   * List firewall assignments
    *
    * @remarks
-   * List all firewall assignments
+   * Returns a list of all servers assigned to one or more firewalls.
    */
   async getAllFirewallAssignments(
     request?: operations.GetAllFirewallAssignmentsRequest | undefined,
@@ -60,7 +60,7 @@ export class Firewalls extends ClientSDK {
   }
 
   /**
-   * Create a firewall
+   * Create firewall
    *
    * @remarks
    * Create a firewall
@@ -77,10 +77,10 @@ export class Firewalls extends ClientSDK {
   }
 
   /**
-   * Retrieve Firewall
+   * Retrieve firewall
    *
    * @remarks
-   * Retrieve a firewall
+   * Returns a single firewall by its ID.
    */
   async get(
     request: operations.GetFirewallRequest,
@@ -94,10 +94,7 @@ export class Firewalls extends ClientSDK {
   }
 
   /**
-   * Delete Firewall
-   *
-   * @remarks
-   * Delete a firewall
+   * Delete firewall
    */
   async delete(
     request: operations.DeleteFirewallRequest,
@@ -111,10 +108,10 @@ export class Firewalls extends ClientSDK {
   }
 
   /**
-   * Update Firewall
+   * Update firewall
    *
    * @remarks
-   * Update a firewall
+   * Updates a firewall by its ID.
    */
   async update(
     request: operations.UpdateFirewallRequest,
@@ -128,10 +125,10 @@ export class Firewalls extends ClientSDK {
   }
 
   /**
-   * Firewall Assignments
+   * Firewall assignments
    *
    * @remarks
-   * List servers assigned to a firewall
+   * Returns a list of all servers assigned to a particular firewall.
    */
   async listAssignments(
     request: operations.GetFirewallAssignmentsRequest,
@@ -147,10 +144,10 @@ export class Firewalls extends ClientSDK {
   }
 
   /**
-   * Delete Firewall Assignment
+   * Delete assignment
    *
    * @remarks
-   * Remove a server from a firewall
+   * Removes a server from a firewall by its ID.
    */
   async deleteAssignment(
     request: operations.DeleteFirewallAssignmentRequest,

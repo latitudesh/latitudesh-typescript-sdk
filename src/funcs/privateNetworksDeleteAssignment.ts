@@ -26,7 +26,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Delete Virtual Network Assignment
+ * Delete VLAN assignment
  *
  * @remarks
  * Allow you to remove a Virtual Network assignment.

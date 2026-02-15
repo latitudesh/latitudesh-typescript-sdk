@@ -4,7 +4,7 @@
 
 ### Available Operations
 
-* [listUsage](#listusage) - List Billing Usage
+* [listUsage](#listusage) - Retrieve billing usage
 
 ## listUsage
 
@@ -13,7 +13,7 @@ Returns the billing usage of a project
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-billing-usage" method="get" path="/billing/usage" -->
+<!-- UsageSnippet language="typescript" operationID="get-billing-usage" method="get" path="/billing/usage" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 

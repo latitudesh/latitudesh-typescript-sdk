@@ -26,7 +26,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Get Teams Virtual Machines
+ * List VMs
  *
  * @remarks
  * Show all Team's Virtual Machines.
