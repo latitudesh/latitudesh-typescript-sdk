@@ -26,7 +26,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Delete a Project User Data
+ * Delete Project user data
  *
  * @remarks
  * Allow you remove User Data in a project.

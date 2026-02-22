@@ -17,7 +17,7 @@ List all Management and Additional IP Addresses.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-ips" method="get" path="/ips" -->
+<!-- UsageSnippet language="typescript" operationID="get-ips" method="get" path="/ips" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 

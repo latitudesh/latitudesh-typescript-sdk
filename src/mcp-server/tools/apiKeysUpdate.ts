@@ -12,7 +12,7 @@ const args = {
 
 export const tool$apiKeysUpdate: ToolDefinition<typeof args> = {
   name: "api-keys-update",
-  description: `Rotate API Key
+  description: `Rotate API key
 
 Rotate an existing API Key, generating a new token. This invalidates the previous key.
 Use PATCH to update settings without rotating the token.

@@ -4,13 +4,13 @@
 
 ### Available Operations
 
-* [list](#list) - List all Virtual Networks
-* [create](#create) - Create a Virtual Network
-* [get](#get) - Retrieve a Virtual Network
-* [update](#update) - Update a Virtual Network
-* [listAssignments](#listassignments) - List all servers assigned to virtual networks
-* [assign](#assign) - Assign Virtual network
-* [deleteAssignment](#deleteassignment) - Delete Virtual Network Assignment
+* [list](#list) - List VLANs
+* [create](#create) - Create VLAN
+* [update](#update) - Update VLAN
+* [get](#get) - Retrieve VLAN
+* [listAssignments](#listassignments) - List VLAN assignments
+* [assign](#assign) - Assign VLAN
+* [deleteAssignment](#deleteassignment) - Delete VLAN assignment
 
 ## list
 
@@ -19,7 +19,7 @@ Lists virtual networks assigned to a project
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-virtual-networks" method="get" path="/virtual_networks" -->
+<!-- UsageSnippet language="typescript" operationID="get-virtual-networks" method="get" path="/virtual_networks" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -97,7 +97,7 @@ Creates a new Virtual Network.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="create-virtual-network" method="post" path="/virtual_networks" -->
+<!-- UsageSnippet language="typescript" operationID="create-virtual-network" method="post" path="/virtual_networks" example="Created" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -178,80 +178,6 @@ run();
 | ----------------------------- | ----------------------------- | ----------------------------- |
 | errors.LatitudeshDefaultError | 4XX, 5XX                      | \*/\*                         |
 
-## get
-
-Retrieve a Virtual Network.
-
-
-### Example Usage
-
-<!-- UsageSnippet language="typescript" operationID="get-virtual-network" method="get" path="/virtual_networks/{vlan_id}" -->
-```typescript
-import { Latitudesh } from "latitudesh-typescript-sdk";
-
-const latitudesh = new Latitudesh({
-  bearer: process.env["LATITUDESH_BEARER"] ?? "",
-});
-
-async function run() {
-  const result = await latitudesh.privateNetworks.get({
-    vlanId: "vlan_W6Q2D9ordKLpr",
-  });
-
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
-import { privateNetworksGet } from "latitudesh-typescript-sdk/funcs/privateNetworksGet.js";
-
-// Use `LatitudeshCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const latitudesh = new LatitudeshCore({
-  bearer: process.env["LATITUDESH_BEARER"] ?? "",
-});
-
-async function run() {
-  const res = await privateNetworksGet(latitudesh, {
-    vlanId: "vlan_W6Q2D9ordKLpr",
-  });
-  if (res.ok) {
-    const { value: result } = res;
-    console.log(result);
-  } else {
-    console.log("privateNetworksGet failed:", res.error);
-  }
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.GetVirtualNetworkRequest](../../models/operations/getvirtualnetworkrequest.md)                                                                                     | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[operations.GetVirtualNetworkResponse](../../models/operations/getvirtualnetworkresponse.md)\>**
-
-### Errors
-
-| Error Type                    | Status Code                   | Content Type                  |
-| ----------------------------- | ----------------------------- | ----------------------------- |
-| errors.LatitudeshDefaultError | 4XX, 5XX                      | \*/\*                         |
-
 ## update
 
 Update a Virtual Network.
@@ -259,7 +185,7 @@ Update a Virtual Network.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="update-virtual-network" method="patch" path="/virtual_networks/{vlan_id}" -->
+<!-- UsageSnippet language="typescript" operationID="update-virtual-network" method="patch" path="/virtual_networks/{vlan_id}" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -350,6 +276,80 @@ run();
 | ----------------------------- | ----------------------------- | ----------------------------- |
 | errors.LatitudeshDefaultError | 4XX, 5XX                      | \*/\*                         |
 
+## get
+
+Retrieve a Virtual Network.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="get-virtual-network" method="get" path="/virtual_networks/{vlan_id}" example="Success" -->
+```typescript
+import { Latitudesh } from "latitudesh-typescript-sdk";
+
+const latitudesh = new Latitudesh({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const result = await latitudesh.privateNetworks.get({
+    vlanId: "vlan_W6Q2D9ordKLpr",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
+import { privateNetworksGet } from "latitudesh-typescript-sdk/funcs/privateNetworksGet.js";
+
+// Use `LatitudeshCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const latitudesh = new LatitudeshCore({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const res = await privateNetworksGet(latitudesh, {
+    vlanId: "vlan_W6Q2D9ordKLpr",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("privateNetworksGet failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.GetVirtualNetworkRequest](../../models/operations/getvirtualnetworkrequest.md)                                                                                     | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[models.VirtualNetwork](../../models/virtualnetwork.md)\>**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| errors.LatitudeshDefaultError | 4XX, 5XX                      | \*/\*                         |
+
 ## listAssignments
 
 Returns a list of all servers assigned to virtual networks.
@@ -357,7 +357,7 @@ Returns a list of all servers assigned to virtual networks.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-virtual-networks-assignments" method="get" path="/virtual_networks/assignments" -->
+<!-- UsageSnippet language="typescript" operationID="get-virtual-networks-assignments" method="get" path="/virtual_networks/assignments" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -426,11 +426,11 @@ run();
 
 ## assign
 
-Assign Virtual network
+Assign VLAN
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="assign-server-virtual-network" method="post" path="/virtual_networks/assignments" -->
+<!-- UsageSnippet language="typescript" operationID="assign-server-virtual-network" method="post" path="/virtual_networks/assignments" example="Created" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 

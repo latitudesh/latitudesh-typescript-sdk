@@ -4,8 +4,8 @@
 
 ### Available Operations
 
-* [list](#list) - List all Roles
-* [get](#get) - Retrieve Role
+* [list](#list) - List roles
+* [get](#get) - Retrieve role
 
 ## list
 
@@ -14,7 +14,7 @@ Returns a list of all roles that can be assigned to users
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-roles" method="get" path="/roles" -->
+<!-- UsageSnippet language="typescript" operationID="get-roles" method="get" path="/roles" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -83,11 +83,11 @@ run();
 
 ## get
 
-Retrieve Role
+Retrieve role
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-role-id" method="get" path="/roles/{role_id}" -->
+<!-- UsageSnippet language="typescript" operationID="get-role-id" method="get" path="/roles/{role_id}" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 

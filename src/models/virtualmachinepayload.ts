@@ -24,6 +24,10 @@ export type VirtualMachinePayloadAttributes = {
   plan?: string | null | undefined;
   sshKeys?: Array<string> | null | undefined;
   project?: string | undefined;
+  /**
+   * The operating system slug for the Virtual Machine. Defaults to ubuntu_24_04_x64_lts if not specified.
+   */
+  operatingSystem?: string | null | undefined;
 };
 
 export type VirtualMachinePayloadData = {
@@ -54,9 +58,11 @@ export const VirtualMachinePayloadAttributes$inboundSchema: z.ZodType<
   plan: z.nullable(z.string()).optional(),
   ssh_keys: z.nullable(z.array(z.string())).optional(),
   project: z.string().default("my-project"),
+  operating_system: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "ssh_keys": "sshKeys",
+    "operating_system": "operatingSystem",
   });
 });
 /** @internal */
@@ -65,6 +71,7 @@ export type VirtualMachinePayloadAttributes$Outbound = {
   plan?: string | null | undefined;
   ssh_keys?: Array<string> | null | undefined;
   project: string;
+  operating_system?: string | null | undefined;
 };
 
 /** @internal */
@@ -77,9 +84,11 @@ export const VirtualMachinePayloadAttributes$outboundSchema: z.ZodType<
   plan: z.nullable(z.string()).optional(),
   sshKeys: z.nullable(z.array(z.string())).optional(),
   project: z.string().default("my-project"),
+  operatingSystem: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     sshKeys: "ssh_keys",
+    operatingSystem: "operating_system",
   });
 });
 

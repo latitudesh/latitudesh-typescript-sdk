@@ -12,9 +12,9 @@ const args = {
 
 export const tool$firewallsUpdate: ToolDefinition<typeof args> = {
   name: "firewalls-update",
-  description: `Update Firewall
+  description: `Update firewall
 
-Update a firewall`,
+Updates a firewall by its ID.`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await firewallsUpdate(

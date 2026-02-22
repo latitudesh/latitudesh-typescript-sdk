@@ -4,15 +4,15 @@
 
 ### Available Operations
 
-* [create](#create) - Firewall Assignment
+* [create](#create) - Assign server to firewall
 
 ## create
 
-Assign a server to a firewall
+Assigns a server to a firewall by its ID.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="create-firewall-assignment" method="post" path="/firewalls/{firewall_id}/assignments" -->
+<!-- UsageSnippet language="typescript" operationID="create-firewall-assignment" method="post" path="/firewalls/{firewall_id}/assignments" example="Created" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 

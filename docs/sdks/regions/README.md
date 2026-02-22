@@ -4,8 +4,8 @@
 
 ### Available Operations
 
-* [get](#get) - List all Regions
-* [fetch](#fetch) - Retrieve a Region
+* [get](#get) - List regions
+* [fetch](#fetch) - Retrieve region
 
 ## get
 
@@ -15,7 +15,7 @@ Lists all [available locations](https://latitude.sh/locations). For server avail
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-regions" method="get" path="/regions" -->
+<!-- UsageSnippet language="typescript" operationID="get-regions" method="get" path="/regions" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -84,11 +84,11 @@ run();
 
 ## fetch
 
-Retrieve a Region
+Retrieve region
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-region" method="get" path="/regions/{region_id}" -->
+<!-- UsageSnippet language="typescript" operationID="get-region" method="get" path="/regions/{region_id}" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 

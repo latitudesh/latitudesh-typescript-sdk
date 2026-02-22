@@ -208,34 +208,34 @@ run();
 
 ### [ApiKeys](docs/sdks/apikeys/README.md)
 
-* [list](docs/sdks/apikeys/README.md#list) - List API Keys
-* [create](docs/sdks/apikeys/README.md#create) - Create API Key
-* [update](docs/sdks/apikeys/README.md#update) - Rotate API Key
-* [delete](docs/sdks/apikeys/README.md#delete) - Delete API Key
-* [updateApiKey](docs/sdks/apikeys/README.md#updateapikey) - Update API Key Settings
+* [list](docs/sdks/apikeys/README.md#list) - List API keys
+* [create](docs/sdks/apikeys/README.md#create) - Create API key
+* [update](docs/sdks/apikeys/README.md#update) - Rotate API key
+* [delete](docs/sdks/apikeys/README.md#delete) - Delete API key
+* [updateApiKey](docs/sdks/apikeys/README.md#updateapikey) - Update API key settings
 
 ### [Billing](docs/sdks/billing/README.md)
 
-* [listUsage](docs/sdks/billing/README.md#listusage) - List Billing Usage
+* [listUsage](docs/sdks/billing/README.md#listusage) - Retrieve billing usage
 
 ### [Events](docs/sdks/events/README.md)
 
-* [list](docs/sdks/events/README.md#list) - List all Events
+* [list](docs/sdks/events/README.md#list) - List events
 
 ### [Firewalls](docs/sdks/firewalls/README.md)
 
-* [getAllFirewallAssignments](docs/sdks/firewalls/README.md#getallfirewallassignments) - List All Firewall Assignments
+* [getAllFirewallAssignments](docs/sdks/firewalls/README.md#getallfirewallassignments) - List firewall assignments
+* [create](docs/sdks/firewalls/README.md#create) - Create firewall
 * [list](docs/sdks/firewalls/README.md#list) - List firewalls
-* [create](docs/sdks/firewalls/README.md#create) - Create a firewall
-* [get](docs/sdks/firewalls/README.md#get) - Retrieve Firewall
-* [delete](docs/sdks/firewalls/README.md#delete) - Delete Firewall
-* [update](docs/sdks/firewalls/README.md#update) - Update Firewall
-* [listAssignments](docs/sdks/firewalls/README.md#listassignments) - Firewall Assignments
-* [deleteAssignment](docs/sdks/firewalls/README.md#deleteassignment) - Delete Firewall Assignment
+* [get](docs/sdks/firewalls/README.md#get) - Retrieve firewall
+* [update](docs/sdks/firewalls/README.md#update) - Update firewall
+* [delete](docs/sdks/firewalls/README.md#delete) - Delete firewall
+* [listAssignments](docs/sdks/firewalls/README.md#listassignments) - Firewall assignments
+* [deleteAssignment](docs/sdks/firewalls/README.md#deleteassignment) - Delete assignment
 
 ### [Firewalls.Assignments](docs/sdks/assignments/README.md)
 
-* [create](docs/sdks/assignments/README.md#create) - Firewall Assignment
+* [create](docs/sdks/assignments/README.md#create) - Assign server to firewall
 
 ### [IpAddresses](docs/sdks/ipaddresses/README.md)
 
@@ -244,161 +244,161 @@ run();
 
 ### [OperatingSystems](docs/sdks/operatingsystems/README.md)
 
-* [listPlans](docs/sdks/operatingsystems/README.md#listplans) - List all operating systems available
+* [listPlans](docs/sdks/operatingsystems/README.md#listplans) - List operating systems
 
 ### [Plans](docs/sdks/plans/README.md)
 
-* [list](docs/sdks/plans/README.md#list) - List all Plans
-* [get](docs/sdks/plans/README.md#get) - Retrieve a Plan
-* [getBandwidth](docs/sdks/plans/README.md#getbandwidth) - List all bandwidth plans
-* [updateBandwidth](docs/sdks/plans/README.md#updatebandwidth) - Buy or remove bandwidth packages
-* [getContainersPlan](docs/sdks/plans/README.md#getcontainersplan) - Retrieve container plan
-* [listStorage](docs/sdks/plans/README.md#liststorage) - List all Storage Plans
+* [list](docs/sdks/plans/README.md#list) - List plans
+* [get](docs/sdks/plans/README.md#get) - Retrieve plan
+* [getBandwidth](docs/sdks/plans/README.md#getbandwidth) - List bandwidth plans
+* [updateBandwidth](docs/sdks/plans/README.md#updatebandwidth) - Update bandwidth packages
+* [listStorage](docs/sdks/plans/README.md#liststorage) - List storage plans
 
 ### [Plans.Vm](docs/sdks/vm/README.md)
 
-* [list](docs/sdks/vm/README.md#list) - List all Virtual Machines Plans
+* [list](docs/sdks/vm/README.md#list) - List VM plans
 
 ### [PrivateNetworks](docs/sdks/privatenetworks/README.md)
 
-* [list](docs/sdks/privatenetworks/README.md#list) - List all Virtual Networks
-* [create](docs/sdks/privatenetworks/README.md#create) - Create a Virtual Network
-* [get](docs/sdks/privatenetworks/README.md#get) - Retrieve a Virtual Network
-* [update](docs/sdks/privatenetworks/README.md#update) - Update a Virtual Network
-* [listAssignments](docs/sdks/privatenetworks/README.md#listassignments) - List all servers assigned to virtual networks
-* [assign](docs/sdks/privatenetworks/README.md#assign) - Assign Virtual network
-* [deleteAssignment](docs/sdks/privatenetworks/README.md#deleteassignment) - Delete Virtual Network Assignment
+* [list](docs/sdks/privatenetworks/README.md#list) - List VLANs
+* [create](docs/sdks/privatenetworks/README.md#create) - Create VLAN
+* [update](docs/sdks/privatenetworks/README.md#update) - Update VLAN
+* [get](docs/sdks/privatenetworks/README.md#get) - Retrieve VLAN
+* [listAssignments](docs/sdks/privatenetworks/README.md#listassignments) - List VLAN assignments
+* [assign](docs/sdks/privatenetworks/README.md#assign) - Assign VLAN
+* [deleteAssignment](docs/sdks/privatenetworks/README.md#deleteassignment) - Delete VLAN assignment
 
 ### [Projects](docs/sdks/projects/README.md)
 
-* [list](docs/sdks/projects/README.md#list) - List all Projects
-* [create](docs/sdks/projects/README.md#create) - Create a Project
-* [delete](docs/sdks/projects/README.md#delete) - Delete a Project
-* [update](docs/sdks/projects/README.md#update) - Update a Project
+* [list](docs/sdks/projects/README.md#list) - List projects
+* [create](docs/sdks/projects/README.md#create) - Create project
+* [update](docs/sdks/projects/README.md#update) - Update project
+* [delete](docs/sdks/projects/README.md#delete) - Delete project
 
 ### [~~Projects.SshKeys~~](docs/sdks/projectssshkeys/README.md)
 
-* [~~postProjectSshKey~~](docs/sdks/projectssshkeys/README.md#postprojectsshkey) - Create a Project SSH Key :warning: **Deprecated**
+* [~~postProjectSshKey~~](docs/sdks/projectssshkeys/README.md#postprojectsshkey) - Create SSH Key :warning: **Deprecated**
 
 ### [Regions](docs/sdks/regions/README.md)
 
-* [get](docs/sdks/regions/README.md#get) - List all Regions
-* [fetch](docs/sdks/regions/README.md#fetch) - Retrieve a Region
+* [get](docs/sdks/regions/README.md#get) - List regions
+* [fetch](docs/sdks/regions/README.md#fetch) - Retrieve region
 
 ### [Roles](docs/sdks/roles/README.md)
 
-* [list](docs/sdks/roles/README.md#list) - List all Roles
-* [get](docs/sdks/roles/README.md#get) - Retrieve Role
+* [list](docs/sdks/roles/README.md#list) - List roles
+* [get](docs/sdks/roles/README.md#get) - Retrieve role
 
 ### [Servers](docs/sdks/servers/README.md)
 
-* [list](docs/sdks/servers/README.md#list) - List all Servers
-* [create](docs/sdks/servers/README.md#create) - Deploy Server
-* [get](docs/sdks/servers/README.md#get) - Retrieve a Server
-* [delete](docs/sdks/servers/README.md#delete) - Remove Server
-* [update](docs/sdks/servers/README.md#update) - Update Server
-* [getDeployConfig](docs/sdks/servers/README.md#getdeployconfig) - Retrieve Deploy Config
-* [updateDeployConfig](docs/sdks/servers/README.md#updatedeployconfig) - Update Deploy Config
-* [lock](docs/sdks/servers/README.md#lock) - Lock the server
-* [unlock](docs/sdks/servers/README.md#unlock) - Unlock the server
-* [getOutOfBand](docs/sdks/servers/README.md#getoutofband) - List Out of Band Connections
-* [startOutOfBandConnection](docs/sdks/servers/README.md#startoutofbandconnection) - Start Out of Band Connection
-* [runAction](docs/sdks/servers/README.md#runaction) - Run Server Action
-* [createIpmiSession](docs/sdks/servers/README.md#createipmisession) - Generate IPMI credentials
-* [startRescueMode](docs/sdks/servers/README.md#startrescuemode) - Puts a Server in rescue mode
-* [exitRescueMode](docs/sdks/servers/README.md#exitrescuemode) - Exits rescue mode for a Server
-* [scheduleDeletion](docs/sdks/servers/README.md#scheduledeletion) - Schedule the server deletion
-* [unscheduleDeletion](docs/sdks/servers/README.md#unscheduledeletion) - Unschedule the server deletion
+* [list](docs/sdks/servers/README.md#list) - List servers
+* [create](docs/sdks/servers/README.md#create) - Create server
+* [get](docs/sdks/servers/README.md#get) - Retrieve server
+* [update](docs/sdks/servers/README.md#update) - Update server
+* [delete](docs/sdks/servers/README.md#delete) - Remove server
+* [getDeployConfig](docs/sdks/servers/README.md#getdeployconfig) - Retrieve deploy config
+* [updateDeployConfig](docs/sdks/servers/README.md#updatedeployconfig) - Update deploy config
+* [lock](docs/sdks/servers/README.md#lock) - Lock server
+* [unlock](docs/sdks/servers/README.md#unlock) - Unlock server
+* [startOutOfBandConnection](docs/sdks/servers/README.md#startoutofbandconnection) - Create out-of-band connection
+* [getOutOfBand](docs/sdks/servers/README.md#getoutofband) - List out-of-band connections
+* [runAction](docs/sdks/servers/README.md#runaction) - Run power action
+* [createIpmiSession](docs/sdks/servers/README.md#createipmisession) - Create IPMI credentials
+* [startRescueMode](docs/sdks/servers/README.md#startrescuemode) - Put server in rescue mode
+* [exitRescueMode](docs/sdks/servers/README.md#exitrescuemode) - Exits rescue mode
+* [scheduleDeletion](docs/sdks/servers/README.md#scheduledeletion) - Schedule server deletion
+* [unscheduleDeletion](docs/sdks/servers/README.md#unscheduledeletion) - Unschedule server deletion
 * [reinstall](docs/sdks/servers/README.md#reinstall) - Run Server Reinstall
 
 ### [SSHKeys](docs/sdks/sshkeys/README.md)
 
-* [~~list~~](docs/sdks/sshkeys/README.md#list) - List all Project SSH Keys :warning: **Deprecated**
-* [~~get~~](docs/sdks/sshkeys/README.md#get) - Retrieve a Project SSH Key :warning: **Deprecated**
-* [~~removeFromProject~~](docs/sdks/sshkeys/README.md#removefromproject) - Delete a Project SSH Key :warning: **Deprecated**
-* [~~modifyProjectKey~~](docs/sdks/sshkeys/README.md#modifyprojectkey) - Update a Project SSH Key :warning: **Deprecated**
-* [listAll](docs/sdks/sshkeys/README.md#listall) - List all SSH Keys
-* [create](docs/sdks/sshkeys/README.md#create) - Create a SSH Key
-* [retrieve](docs/sdks/sshkeys/README.md#retrieve) - Retrieve a SSH Key
-* [delete](docs/sdks/sshkeys/README.md#delete) - Delete a SSH Key
-* [update](docs/sdks/sshkeys/README.md#update) - Update a SSH Key
+* [~~list~~](docs/sdks/sshkeys/README.md#list) - List SSH Keys :warning: **Deprecated**
+* [~~get~~](docs/sdks/sshkeys/README.md#get) - Retrieve Project SSH Key :warning: **Deprecated**
+* [~~modifyProjectKey~~](docs/sdks/sshkeys/README.md#modifyprojectkey) - Update Project SSH Key :warning: **Deprecated**
+* [~~removeFromProject~~](docs/sdks/sshkeys/README.md#removefromproject) - Delete Project SSH Key :warning: **Deprecated**
+* [listAll](docs/sdks/sshkeys/README.md#listall) - List SSH Keys
+* [create](docs/sdks/sshkeys/README.md#create) - Create SSH Key
+* [retrieve](docs/sdks/sshkeys/README.md#retrieve) - Retrieve SSH Key
+* [update](docs/sdks/sshkeys/README.md#update) - Update SSH Key
+* [delete](docs/sdks/sshkeys/README.md#delete) - Delete SSH Key
 
 ### [Storage](docs/sdks/storage/README.md)
 
+* [createFilesystem](docs/sdks/storage/README.md#createfilesystem) - Create filesystem
 * [listFilesystems](docs/sdks/storage/README.md#listfilesystems) - List filesystems
-* [createFilesystem](docs/sdks/storage/README.md#createfilesystem) - Create a filesystem for a project
-* [deleteFilesystem](docs/sdks/storage/README.md#deletefilesystem) - Delete a filesystem for a project
-* [updateFilesystem](docs/sdks/storage/README.md#updatefilesystem) - Update a filesystem for a project
+* [deleteFilesystem](docs/sdks/storage/README.md#deletefilesystem) - Delete filesystem
+* [updateFilesystem](docs/sdks/storage/README.md#updatefilesystem) - Update filesystem
 * [getStorageVolumes](docs/sdks/storage/README.md#getstoragevolumes) - List volumes
 * [postStorageVolumes](docs/sdks/storage/README.md#poststoragevolumes) - Create volume
-* [getStorageVolume](docs/sdks/storage/README.md#getstoragevolume) - Get volume
+* [getStorageVolume](docs/sdks/storage/README.md#getstoragevolume) - Retrieve volume
 * [deleteStorageVolumes](docs/sdks/storage/README.md#deletestoragevolumes) - Delete volume
 * [postStorageVolumesMount](docs/sdks/storage/README.md#poststoragevolumesmount) - Mount volume
 
 ### [Tags](docs/sdks/tags/README.md)
 
-* [list](docs/sdks/tags/README.md#list) - List all Tags
-* [create](docs/sdks/tags/README.md#create) - Create a Tag
-* [delete](docs/sdks/tags/README.md#delete) - Delete Tag
-* [update](docs/sdks/tags/README.md#update) - Update Tag
+* [list](docs/sdks/tags/README.md#list) - List tags
+* [create](docs/sdks/tags/README.md#create) - Create tag
+* [update](docs/sdks/tags/README.md#update) - Update tag
+* [delete](docs/sdks/tags/README.md#delete) - Delete tag
 
 ### [TeamMembers](docs/sdks/teammembers/README.md)
 
-* [postTeamMembers](docs/sdks/teammembers/README.md#postteammembers) - Add a Team Member
-* [delete](docs/sdks/teammembers/README.md#delete) - Remove a Team Member
+* [postTeamMembers](docs/sdks/teammembers/README.md#postteammembers) - Create member
+* [delete](docs/sdks/teammembers/README.md#delete) - Remove a member
 
 ### [Teams](docs/sdks/teams/README.md)
 
-* [get](docs/sdks/teams/README.md#get) - Retrieve the team
-* [create](docs/sdks/teams/README.md#create) - Create a team
-* [update](docs/sdks/teams/README.md#update) - Update a team
+* [get](docs/sdks/teams/README.md#get) - Retrieve team
+* [create](docs/sdks/teams/README.md#create) - Create team
+* [update](docs/sdks/teams/README.md#update) - Update team
 
 #### [Teams.Members](docs/sdks/members/README.md)
 
-* [getTeamMembers](docs/sdks/members/README.md#getteammembers) - List all Team Members
+* [getTeamMembers](docs/sdks/members/README.md#getteammembers) - List members
 
 ### [Traffic](docs/sdks/traffic/README.md)
 
-* [get](docs/sdks/traffic/README.md#get) - Retrieve Traffic consumption
-* [getQuota](docs/sdks/traffic/README.md#getquota) - Retrieve Traffic Quota
+* [get](docs/sdks/traffic/README.md#get) - Retrieve traffic
+* [getQuota](docs/sdks/traffic/README.md#getquota) - Retrieve traffic quota
 
 ### [UserData](docs/sdks/userdata/README.md)
 
-* [~~getProjectUsersData~~](docs/sdks/userdata/README.md#getprojectusersdata) - List all Project User Data :warning: **Deprecated**
-* [~~getProjectUserData~~](docs/sdks/userdata/README.md#getprojectuserdata) - Retrieve a Project User Data :warning: **Deprecated**
-* [~~deleteProjectUserData~~](docs/sdks/userdata/README.md#deleteprojectuserdata) - Delete a Project User Data :warning: **Deprecated**
-* [~~create~~](docs/sdks/userdata/README.md#create) - Create a Project User Data :warning: **Deprecated**
-* [~~updateForProject~~](docs/sdks/userdata/README.md#updateforproject) - Update a Project User Data :warning: **Deprecated**
-* [list](docs/sdks/userdata/README.md#list) - List all User Data
-* [createNew](docs/sdks/userdata/README.md#createnew) - Create an User Data
-* [retrieve](docs/sdks/userdata/README.md#retrieve) - Retrieve an User Data
-* [delete](docs/sdks/userdata/README.md#delete) - Delete an User Data
-* [update](docs/sdks/userdata/README.md#update) - Update an User Data
+* [~~getProjectUsersData~~](docs/sdks/userdata/README.md#getprojectusersdata) - List Project user data :warning: **Deprecated**
+* [~~getProjectUserData~~](docs/sdks/userdata/README.md#getprojectuserdata) - Retrieve Project user data :warning: **Deprecated**
+* [~~deleteProjectUserData~~](docs/sdks/userdata/README.md#deleteprojectuserdata) - Delete Project user data :warning: **Deprecated**
+* [~~create~~](docs/sdks/userdata/README.md#create) - Create Project user data :warning: **Deprecated**
+* [~~updateForProject~~](docs/sdks/userdata/README.md#updateforproject) - Update Project user data :warning: **Deprecated**
+* [list](docs/sdks/userdata/README.md#list) - List user data
+* [createNew](docs/sdks/userdata/README.md#createnew) - Create user data
+* [retrieve](docs/sdks/userdata/README.md#retrieve) - Retrieve user data
+* [update](docs/sdks/userdata/README.md#update) - Update user data
+* [delete](docs/sdks/userdata/README.md#delete) - Delete user data
 
 ### [UserProfile](docs/sdks/userprofile/README.md)
 
-* [get](docs/sdks/userprofile/README.md#get) - Get user profile
-* [update](docs/sdks/userprofile/README.md#update) - Update User Profile
-* [listTeams](docs/sdks/userprofile/README.md#listteams) - List User Teams
+* [get](docs/sdks/userprofile/README.md#get) - Retrieve profile
+* [update](docs/sdks/userprofile/README.md#update) - Update profile
+* [listTeams](docs/sdks/userprofile/README.md#listteams) - List user teams
 
 ### [VirtualMachines](docs/sdks/virtualmachines/README.md)
 
-* [list](docs/sdks/virtualmachines/README.md#list) - Get Teams Virtual Machines
-* [create](docs/sdks/virtualmachines/README.md#create) - Create a Virtual Machine
-* [get](docs/sdks/virtualmachines/README.md#get) - Get a Virtual Machine
-* [delete](docs/sdks/virtualmachines/README.md#delete) - Destroy a Virtual Machine
-* [createVirtualMachineAction](docs/sdks/virtualmachines/README.md#createvirtualmachineaction) - Run Virtual Machine Action
+* [create](docs/sdks/virtualmachines/README.md#create) - Create VM
+* [list](docs/sdks/virtualmachines/README.md#list) - List VMs
+* [get](docs/sdks/virtualmachines/README.md#get) - Retrieve VM
+* [delete](docs/sdks/virtualmachines/README.md#delete) - Destroy VM
+* [updateVirtualMachine](docs/sdks/virtualmachines/README.md#updatevirtualmachine) - Update VM
+* [createVirtualMachineAction](docs/sdks/virtualmachines/README.md#createvirtualmachineaction) - Run VM power action
 
 ### [VirtualNetworks](docs/sdks/virtualnetworks/README.md)
 
-* [delete](docs/sdks/virtualnetworks/README.md#delete) - Delete a Virtual Network
+* [delete](docs/sdks/virtualnetworks/README.md#delete) - Delete VLAN
 
 ### [VpnSessions](docs/sdks/vpnsessions/README.md)
 
-* [list](docs/sdks/vpnsessions/README.md#list) - List all Active VPN Sessions
-* [create](docs/sdks/vpnsessions/README.md#create) - Create a VPN Session
-* [refreshPassword](docs/sdks/vpnsessions/README.md#refreshpassword) - Refresh a VPN Session
-* [delete](docs/sdks/vpnsessions/README.md#delete) - Delete a VPN Session
+* [list](docs/sdks/vpnsessions/README.md#list) - List VPN sessions
+* [create](docs/sdks/vpnsessions/README.md#create) - Create VPN session
+* [refreshPassword](docs/sdks/vpnsessions/README.md#refreshpassword) - Refresh VPN session
+* [delete](docs/sdks/vpnsessions/README.md#delete) - Delete VPN session
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
@@ -418,119 +418,119 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 
 <summary>Available standalone functions</summary>
 
-- [`apiKeysCreate`](docs/sdks/apikeys/README.md#create) - Create API Key
-- [`apiKeysDelete`](docs/sdks/apikeys/README.md#delete) - Delete API Key
-- [`apiKeysList`](docs/sdks/apikeys/README.md#list) - List API Keys
-- [`apiKeysUpdate`](docs/sdks/apikeys/README.md#update) - Rotate API Key
-- [`apiKeysUpdateApiKey`](docs/sdks/apikeys/README.md#updateapikey) - Update API Key Settings
-- [`billingListUsage`](docs/sdks/billing/README.md#listusage) - List Billing Usage
-- [`eventsList`](docs/sdks/events/README.md#list) - List all Events
-- [`firewallsAssignmentsCreate`](docs/sdks/assignments/README.md#create) - Firewall Assignment
-- [`firewallsCreate`](docs/sdks/firewalls/README.md#create) - Create a firewall
-- [`firewallsDelete`](docs/sdks/firewalls/README.md#delete) - Delete Firewall
-- [`firewallsDeleteAssignment`](docs/sdks/firewalls/README.md#deleteassignment) - Delete Firewall Assignment
-- [`firewallsGet`](docs/sdks/firewalls/README.md#get) - Retrieve Firewall
-- [`firewallsGetAllFirewallAssignments`](docs/sdks/firewalls/README.md#getallfirewallassignments) - List All Firewall Assignments
+- [`apiKeysCreate`](docs/sdks/apikeys/README.md#create) - Create API key
+- [`apiKeysDelete`](docs/sdks/apikeys/README.md#delete) - Delete API key
+- [`apiKeysList`](docs/sdks/apikeys/README.md#list) - List API keys
+- [`apiKeysUpdate`](docs/sdks/apikeys/README.md#update) - Rotate API key
+- [`apiKeysUpdateApiKey`](docs/sdks/apikeys/README.md#updateapikey) - Update API key settings
+- [`billingListUsage`](docs/sdks/billing/README.md#listusage) - Retrieve billing usage
+- [`eventsList`](docs/sdks/events/README.md#list) - List events
+- [`firewallsAssignmentsCreate`](docs/sdks/assignments/README.md#create) - Assign server to firewall
+- [`firewallsCreate`](docs/sdks/firewalls/README.md#create) - Create firewall
+- [`firewallsDelete`](docs/sdks/firewalls/README.md#delete) - Delete firewall
+- [`firewallsDeleteAssignment`](docs/sdks/firewalls/README.md#deleteassignment) - Delete assignment
+- [`firewallsGet`](docs/sdks/firewalls/README.md#get) - Retrieve firewall
+- [`firewallsGetAllFirewallAssignments`](docs/sdks/firewalls/README.md#getallfirewallassignments) - List firewall assignments
 - [`firewallsList`](docs/sdks/firewalls/README.md#list) - List firewalls
-- [`firewallsListAssignments`](docs/sdks/firewalls/README.md#listassignments) - Firewall Assignments
-- [`firewallsUpdate`](docs/sdks/firewalls/README.md#update) - Update Firewall
+- [`firewallsListAssignments`](docs/sdks/firewalls/README.md#listassignments) - Firewall assignments
+- [`firewallsUpdate`](docs/sdks/firewalls/README.md#update) - Update firewall
 - [`ipAddressesGet`](docs/sdks/ipaddresses/README.md#get) - Retrieve an IP
 - [`ipAddressesList`](docs/sdks/ipaddresses/README.md#list) - List IPs
-- [`operatingSystemsListPlans`](docs/sdks/operatingsystems/README.md#listplans) - List all operating systems available
-- [`plansGet`](docs/sdks/plans/README.md#get) - Retrieve a Plan
-- [`plansGetBandwidth`](docs/sdks/plans/README.md#getbandwidth) - List all bandwidth plans
-- [`plansGetContainersPlan`](docs/sdks/plans/README.md#getcontainersplan) - Retrieve container plan
-- [`plansList`](docs/sdks/plans/README.md#list) - List all Plans
-- [`plansListStorage`](docs/sdks/plans/README.md#liststorage) - List all Storage Plans
-- [`plansUpdateBandwidth`](docs/sdks/plans/README.md#updatebandwidth) - Buy or remove bandwidth packages
-- [`plansVmList`](docs/sdks/vm/README.md#list) - List all Virtual Machines Plans
-- [`privateNetworksAssign`](docs/sdks/privatenetworks/README.md#assign) - Assign Virtual network
-- [`privateNetworksCreate`](docs/sdks/privatenetworks/README.md#create) - Create a Virtual Network
-- [`privateNetworksDeleteAssignment`](docs/sdks/privatenetworks/README.md#deleteassignment) - Delete Virtual Network Assignment
-- [`privateNetworksGet`](docs/sdks/privatenetworks/README.md#get) - Retrieve a Virtual Network
-- [`privateNetworksList`](docs/sdks/privatenetworks/README.md#list) - List all Virtual Networks
-- [`privateNetworksListAssignments`](docs/sdks/privatenetworks/README.md#listassignments) - List all servers assigned to virtual networks
-- [`privateNetworksUpdate`](docs/sdks/privatenetworks/README.md#update) - Update a Virtual Network
-- [`projectsCreate`](docs/sdks/projects/README.md#create) - Create a Project
-- [`projectsDelete`](docs/sdks/projects/README.md#delete) - Delete a Project
-- [`projectsList`](docs/sdks/projects/README.md#list) - List all Projects
-- [`projectsUpdate`](docs/sdks/projects/README.md#update) - Update a Project
-- [`regionsFetch`](docs/sdks/regions/README.md#fetch) - Retrieve a Region
-- [`regionsGet`](docs/sdks/regions/README.md#get) - List all Regions
-- [`rolesGet`](docs/sdks/roles/README.md#get) - Retrieve Role
-- [`rolesList`](docs/sdks/roles/README.md#list) - List all Roles
-- [`serversCreate`](docs/sdks/servers/README.md#create) - Deploy Server
-- [`serversCreateIpmiSession`](docs/sdks/servers/README.md#createipmisession) - Generate IPMI credentials
-- [`serversDelete`](docs/sdks/servers/README.md#delete) - Remove Server
-- [`serversExitRescueMode`](docs/sdks/servers/README.md#exitrescuemode) - Exits rescue mode for a Server
-- [`serversGet`](docs/sdks/servers/README.md#get) - Retrieve a Server
-- [`serversGetDeployConfig`](docs/sdks/servers/README.md#getdeployconfig) - Retrieve Deploy Config
-- [`serversGetOutOfBand`](docs/sdks/servers/README.md#getoutofband) - List Out of Band Connections
-- [`serversList`](docs/sdks/servers/README.md#list) - List all Servers
-- [`serversLock`](docs/sdks/servers/README.md#lock) - Lock the server
+- [`operatingSystemsListPlans`](docs/sdks/operatingsystems/README.md#listplans) - List operating systems
+- [`plansGet`](docs/sdks/plans/README.md#get) - Retrieve plan
+- [`plansGetBandwidth`](docs/sdks/plans/README.md#getbandwidth) - List bandwidth plans
+- [`plansList`](docs/sdks/plans/README.md#list) - List plans
+- [`plansListStorage`](docs/sdks/plans/README.md#liststorage) - List storage plans
+- [`plansUpdateBandwidth`](docs/sdks/plans/README.md#updatebandwidth) - Update bandwidth packages
+- [`plansVmList`](docs/sdks/vm/README.md#list) - List VM plans
+- [`privateNetworksAssign`](docs/sdks/privatenetworks/README.md#assign) - Assign VLAN
+- [`privateNetworksCreate`](docs/sdks/privatenetworks/README.md#create) - Create VLAN
+- [`privateNetworksDeleteAssignment`](docs/sdks/privatenetworks/README.md#deleteassignment) - Delete VLAN assignment
+- [`privateNetworksGet`](docs/sdks/privatenetworks/README.md#get) - Retrieve VLAN
+- [`privateNetworksList`](docs/sdks/privatenetworks/README.md#list) - List VLANs
+- [`privateNetworksListAssignments`](docs/sdks/privatenetworks/README.md#listassignments) - List VLAN assignments
+- [`privateNetworksUpdate`](docs/sdks/privatenetworks/README.md#update) - Update VLAN
+- [`projectsCreate`](docs/sdks/projects/README.md#create) - Create project
+- [`projectsDelete`](docs/sdks/projects/README.md#delete) - Delete project
+- [`projectsList`](docs/sdks/projects/README.md#list) - List projects
+- [`projectsUpdate`](docs/sdks/projects/README.md#update) - Update project
+- [`regionsFetch`](docs/sdks/regions/README.md#fetch) - Retrieve region
+- [`regionsGet`](docs/sdks/regions/README.md#get) - List regions
+- [`rolesGet`](docs/sdks/roles/README.md#get) - Retrieve role
+- [`rolesList`](docs/sdks/roles/README.md#list) - List roles
+- [`serversCreate`](docs/sdks/servers/README.md#create) - Create server
+- [`serversCreateIpmiSession`](docs/sdks/servers/README.md#createipmisession) - Create IPMI credentials
+- [`serversDelete`](docs/sdks/servers/README.md#delete) - Remove server
+- [`serversExitRescueMode`](docs/sdks/servers/README.md#exitrescuemode) - Exits rescue mode
+- [`serversGet`](docs/sdks/servers/README.md#get) - Retrieve server
+- [`serversGetDeployConfig`](docs/sdks/servers/README.md#getdeployconfig) - Retrieve deploy config
+- [`serversGetOutOfBand`](docs/sdks/servers/README.md#getoutofband) - List out-of-band connections
+- [`serversList`](docs/sdks/servers/README.md#list) - List servers
+- [`serversLock`](docs/sdks/servers/README.md#lock) - Lock server
 - [`serversReinstall`](docs/sdks/servers/README.md#reinstall) - Run Server Reinstall
-- [`serversRunAction`](docs/sdks/servers/README.md#runaction) - Run Server Action
-- [`serversScheduleDeletion`](docs/sdks/servers/README.md#scheduledeletion) - Schedule the server deletion
-- [`serversStartOutOfBandConnection`](docs/sdks/servers/README.md#startoutofbandconnection) - Start Out of Band Connection
-- [`serversStartRescueMode`](docs/sdks/servers/README.md#startrescuemode) - Puts a Server in rescue mode
-- [`serversUnlock`](docs/sdks/servers/README.md#unlock) - Unlock the server
-- [`serversUnscheduleDeletion`](docs/sdks/servers/README.md#unscheduledeletion) - Unschedule the server deletion
-- [`serversUpdate`](docs/sdks/servers/README.md#update) - Update Server
-- [`serversUpdateDeployConfig`](docs/sdks/servers/README.md#updatedeployconfig) - Update Deploy Config
-- [`sshKeysCreate`](docs/sdks/sshkeys/README.md#create) - Create a SSH Key
-- [`sshKeysDelete`](docs/sdks/sshkeys/README.md#delete) - Delete a SSH Key
-- [`sshKeysListAll`](docs/sdks/sshkeys/README.md#listall) - List all SSH Keys
-- [`sshKeysRetrieve`](docs/sdks/sshkeys/README.md#retrieve) - Retrieve a SSH Key
-- [`sshKeysUpdate`](docs/sdks/sshkeys/README.md#update) - Update a SSH Key
-- [`storageCreateFilesystem`](docs/sdks/storage/README.md#createfilesystem) - Create a filesystem for a project
-- [`storageDeleteFilesystem`](docs/sdks/storage/README.md#deletefilesystem) - Delete a filesystem for a project
+- [`serversRunAction`](docs/sdks/servers/README.md#runaction) - Run power action
+- [`serversScheduleDeletion`](docs/sdks/servers/README.md#scheduledeletion) - Schedule server deletion
+- [`serversStartOutOfBandConnection`](docs/sdks/servers/README.md#startoutofbandconnection) - Create out-of-band connection
+- [`serversStartRescueMode`](docs/sdks/servers/README.md#startrescuemode) - Put server in rescue mode
+- [`serversUnlock`](docs/sdks/servers/README.md#unlock) - Unlock server
+- [`serversUnscheduleDeletion`](docs/sdks/servers/README.md#unscheduledeletion) - Unschedule server deletion
+- [`serversUpdate`](docs/sdks/servers/README.md#update) - Update server
+- [`serversUpdateDeployConfig`](docs/sdks/servers/README.md#updatedeployconfig) - Update deploy config
+- [`sshKeysCreate`](docs/sdks/sshkeys/README.md#create) - Create SSH Key
+- [`sshKeysDelete`](docs/sdks/sshkeys/README.md#delete) - Delete SSH Key
+- [`sshKeysListAll`](docs/sdks/sshkeys/README.md#listall) - List SSH Keys
+- [`sshKeysRetrieve`](docs/sdks/sshkeys/README.md#retrieve) - Retrieve SSH Key
+- [`sshKeysUpdate`](docs/sdks/sshkeys/README.md#update) - Update SSH Key
+- [`storageCreateFilesystem`](docs/sdks/storage/README.md#createfilesystem) - Create filesystem
+- [`storageDeleteFilesystem`](docs/sdks/storage/README.md#deletefilesystem) - Delete filesystem
 - [`storageDeleteStorageVolumes`](docs/sdks/storage/README.md#deletestoragevolumes) - Delete volume
-- [`storageGetStorageVolume`](docs/sdks/storage/README.md#getstoragevolume) - Get volume
+- [`storageGetStorageVolume`](docs/sdks/storage/README.md#getstoragevolume) - Retrieve volume
 - [`storageGetStorageVolumes`](docs/sdks/storage/README.md#getstoragevolumes) - List volumes
 - [`storageListFilesystems`](docs/sdks/storage/README.md#listfilesystems) - List filesystems
 - [`storagePostStorageVolumes`](docs/sdks/storage/README.md#poststoragevolumes) - Create volume
 - [`storagePostStorageVolumesMount`](docs/sdks/storage/README.md#poststoragevolumesmount) - Mount volume
-- [`storageUpdateFilesystem`](docs/sdks/storage/README.md#updatefilesystem) - Update a filesystem for a project
-- [`tagsCreate`](docs/sdks/tags/README.md#create) - Create a Tag
-- [`tagsDelete`](docs/sdks/tags/README.md#delete) - Delete Tag
-- [`tagsList`](docs/sdks/tags/README.md#list) - List all Tags
-- [`tagsUpdate`](docs/sdks/tags/README.md#update) - Update Tag
-- [`teamMembersDelete`](docs/sdks/teammembers/README.md#delete) - Remove a Team Member
-- [`teamMembersPostTeamMembers`](docs/sdks/teammembers/README.md#postteammembers) - Add a Team Member
-- [`teamsCreate`](docs/sdks/teams/README.md#create) - Create a team
-- [`teamsGet`](docs/sdks/teams/README.md#get) - Retrieve the team
-- [`teamsMembersGetTeamMembers`](docs/sdks/members/README.md#getteammembers) - List all Team Members
-- [`teamsUpdate`](docs/sdks/teams/README.md#update) - Update a team
-- [`trafficGet`](docs/sdks/traffic/README.md#get) - Retrieve Traffic consumption
-- [`trafficGetQuota`](docs/sdks/traffic/README.md#getquota) - Retrieve Traffic Quota
-- [`userDataCreateNew`](docs/sdks/userdata/README.md#createnew) - Create an User Data
-- [`userDataDelete`](docs/sdks/userdata/README.md#delete) - Delete an User Data
-- [`userDataList`](docs/sdks/userdata/README.md#list) - List all User Data
-- [`userDataRetrieve`](docs/sdks/userdata/README.md#retrieve) - Retrieve an User Data
-- [`userDataUpdate`](docs/sdks/userdata/README.md#update) - Update an User Data
-- [`userProfileGet`](docs/sdks/userprofile/README.md#get) - Get user profile
-- [`userProfileListTeams`](docs/sdks/userprofile/README.md#listteams) - List User Teams
-- [`userProfileUpdate`](docs/sdks/userprofile/README.md#update) - Update User Profile
-- [`virtualMachinesCreate`](docs/sdks/virtualmachines/README.md#create) - Create a Virtual Machine
-- [`virtualMachinesCreateVirtualMachineAction`](docs/sdks/virtualmachines/README.md#createvirtualmachineaction) - Run Virtual Machine Action
-- [`virtualMachinesDelete`](docs/sdks/virtualmachines/README.md#delete) - Destroy a Virtual Machine
-- [`virtualMachinesGet`](docs/sdks/virtualmachines/README.md#get) - Get a Virtual Machine
-- [`virtualMachinesList`](docs/sdks/virtualmachines/README.md#list) - Get Teams Virtual Machines
-- [`virtualNetworksDelete`](docs/sdks/virtualnetworks/README.md#delete) - Delete a Virtual Network
-- [`vpnSessionsCreate`](docs/sdks/vpnsessions/README.md#create) - Create a VPN Session
-- [`vpnSessionsDelete`](docs/sdks/vpnsessions/README.md#delete) - Delete a VPN Session
-- [`vpnSessionsList`](docs/sdks/vpnsessions/README.md#list) - List all Active VPN Sessions
-- [`vpnSessionsRefreshPassword`](docs/sdks/vpnsessions/README.md#refreshpassword) - Refresh a VPN Session
-- ~~[`projectsSshKeysPostProjectSshKey`](docs/sdks/projectssshkeys/README.md#postprojectsshkey)~~ - Create a Project SSH Key :warning: **Deprecated**
-- ~~[`sshKeysGet`](docs/sdks/sshkeys/README.md#get)~~ - Retrieve a Project SSH Key :warning: **Deprecated**
-- ~~[`sshKeysList`](docs/sdks/sshkeys/README.md#list)~~ - List all Project SSH Keys :warning: **Deprecated**
-- ~~[`sshKeysModifyProjectKey`](docs/sdks/sshkeys/README.md#modifyprojectkey)~~ - Update a Project SSH Key :warning: **Deprecated**
-- ~~[`sshKeysRemoveFromProject`](docs/sdks/sshkeys/README.md#removefromproject)~~ - Delete a Project SSH Key :warning: **Deprecated**
-- ~~[`userDataCreate`](docs/sdks/userdata/README.md#create)~~ - Create a Project User Data :warning: **Deprecated**
-- ~~[`userDataDeleteProjectUserData`](docs/sdks/userdata/README.md#deleteprojectuserdata)~~ - Delete a Project User Data :warning: **Deprecated**
-- ~~[`userDataGetProjectUserData`](docs/sdks/userdata/README.md#getprojectuserdata)~~ - Retrieve a Project User Data :warning: **Deprecated**
-- ~~[`userDataGetProjectUsersData`](docs/sdks/userdata/README.md#getprojectusersdata)~~ - List all Project User Data :warning: **Deprecated**
-- ~~[`userDataUpdateForProject`](docs/sdks/userdata/README.md#updateforproject)~~ - Update a Project User Data :warning: **Deprecated**
+- [`storageUpdateFilesystem`](docs/sdks/storage/README.md#updatefilesystem) - Update filesystem
+- [`tagsCreate`](docs/sdks/tags/README.md#create) - Create tag
+- [`tagsDelete`](docs/sdks/tags/README.md#delete) - Delete tag
+- [`tagsList`](docs/sdks/tags/README.md#list) - List tags
+- [`tagsUpdate`](docs/sdks/tags/README.md#update) - Update tag
+- [`teamMembersDelete`](docs/sdks/teammembers/README.md#delete) - Remove a member
+- [`teamMembersPostTeamMembers`](docs/sdks/teammembers/README.md#postteammembers) - Create member
+- [`teamsCreate`](docs/sdks/teams/README.md#create) - Create team
+- [`teamsGet`](docs/sdks/teams/README.md#get) - Retrieve team
+- [`teamsMembersGetTeamMembers`](docs/sdks/members/README.md#getteammembers) - List members
+- [`teamsUpdate`](docs/sdks/teams/README.md#update) - Update team
+- [`trafficGet`](docs/sdks/traffic/README.md#get) - Retrieve traffic
+- [`trafficGetQuota`](docs/sdks/traffic/README.md#getquota) - Retrieve traffic quota
+- [`userDataCreateNew`](docs/sdks/userdata/README.md#createnew) - Create user data
+- [`userDataDelete`](docs/sdks/userdata/README.md#delete) - Delete user data
+- [`userDataList`](docs/sdks/userdata/README.md#list) - List user data
+- [`userDataRetrieve`](docs/sdks/userdata/README.md#retrieve) - Retrieve user data
+- [`userDataUpdate`](docs/sdks/userdata/README.md#update) - Update user data
+- [`userProfileGet`](docs/sdks/userprofile/README.md#get) - Retrieve profile
+- [`userProfileListTeams`](docs/sdks/userprofile/README.md#listteams) - List user teams
+- [`userProfileUpdate`](docs/sdks/userprofile/README.md#update) - Update profile
+- [`virtualMachinesCreate`](docs/sdks/virtualmachines/README.md#create) - Create VM
+- [`virtualMachinesCreateVirtualMachineAction`](docs/sdks/virtualmachines/README.md#createvirtualmachineaction) - Run VM power action
+- [`virtualMachinesDelete`](docs/sdks/virtualmachines/README.md#delete) - Destroy VM
+- [`virtualMachinesGet`](docs/sdks/virtualmachines/README.md#get) - Retrieve VM
+- [`virtualMachinesList`](docs/sdks/virtualmachines/README.md#list) - List VMs
+- [`virtualMachinesUpdateVirtualMachine`](docs/sdks/virtualmachines/README.md#updatevirtualmachine) - Update VM
+- [`virtualNetworksDelete`](docs/sdks/virtualnetworks/README.md#delete) - Delete VLAN
+- [`vpnSessionsCreate`](docs/sdks/vpnsessions/README.md#create) - Create VPN session
+- [`vpnSessionsDelete`](docs/sdks/vpnsessions/README.md#delete) - Delete VPN session
+- [`vpnSessionsList`](docs/sdks/vpnsessions/README.md#list) - List VPN sessions
+- [`vpnSessionsRefreshPassword`](docs/sdks/vpnsessions/README.md#refreshpassword) - Refresh VPN session
+- ~~[`projectsSshKeysPostProjectSshKey`](docs/sdks/projectssshkeys/README.md#postprojectsshkey)~~ - Create SSH Key :warning: **Deprecated**
+- ~~[`sshKeysGet`](docs/sdks/sshkeys/README.md#get)~~ - Retrieve Project SSH Key :warning: **Deprecated**
+- ~~[`sshKeysList`](docs/sdks/sshkeys/README.md#list)~~ - List SSH Keys :warning: **Deprecated**
+- ~~[`sshKeysModifyProjectKey`](docs/sdks/sshkeys/README.md#modifyprojectkey)~~ - Update Project SSH Key :warning: **Deprecated**
+- ~~[`sshKeysRemoveFromProject`](docs/sdks/sshkeys/README.md#removefromproject)~~ - Delete Project SSH Key :warning: **Deprecated**
+- ~~[`userDataCreate`](docs/sdks/userdata/README.md#create)~~ - Create Project user data :warning: **Deprecated**
+- ~~[`userDataDeleteProjectUserData`](docs/sdks/userdata/README.md#deleteprojectuserdata)~~ - Delete Project user data :warning: **Deprecated**
+- ~~[`userDataGetProjectUserData`](docs/sdks/userdata/README.md#getprojectuserdata)~~ - Retrieve Project user data :warning: **Deprecated**
+- ~~[`userDataGetProjectUsersData`](docs/sdks/userdata/README.md#getprojectusersdata)~~ - List Project user data :warning: **Deprecated**
+- ~~[`userDataUpdateForProject`](docs/sdks/userdata/README.md#updateforproject)~~ - Update Project user data :warning: **Deprecated**
 
 </details>
 <!-- End Standalone functions [standalone-funcs] -->
@@ -635,13 +635,14 @@ run();
 
 [`LatitudeshError`](./src/models/errors/latitudesherror.ts) is the base class for all HTTP error responses. It has the following properties:
 
-| Property            | Type       | Description                                            |
-| ------------------- | ---------- | ------------------------------------------------------ |
-| `error.message`     | `string`   | Error message                                          |
-| `error.statusCode`  | `number`   | HTTP response status code eg `404`                     |
-| `error.headers`     | `Headers`  | HTTP response headers                                  |
-| `error.body`        | `string`   | HTTP body. Can be empty string if no body is returned. |
-| `error.rawResponse` | `Response` | Raw HTTP response                                      |
+| Property            | Type       | Description                                                                             |
+| ------------------- | ---------- | --------------------------------------------------------------------------------------- |
+| `error.message`     | `string`   | Error message                                                                           |
+| `error.statusCode`  | `number`   | HTTP response status code eg `404`                                                      |
+| `error.headers`     | `Headers`  | HTTP response headers                                                                   |
+| `error.body`        | `string`   | HTTP body. Can be empty string if no body is returned.                                  |
+| `error.rawResponse` | `Response` | Raw HTTP response                                                                       |
+| `error.data$`       |            | Optional. Some errors may contain structured data. [See Error Classes](#error-classes). |
 
 ### Example
 ```typescript
@@ -654,15 +655,29 @@ const latitudesh = new Latitudesh({
 
 async function run() {
   try {
-    const result = await latitudesh.apiKeys.list();
+    const result = await latitudesh.storage.createFilesystem({
+      data: {
+        type: "filesystems",
+        attributes: {
+          project: "proj_lkg1De6ROvZE5",
+          name: "my-data",
+        },
+      },
+    });
 
     console.log(result);
   } catch (error) {
+    // The base class for HTTP error responses
     if (error instanceof errors.LatitudeshError) {
       console.log(error.message);
       console.log(error.statusCode);
       console.log(error.body);
       console.log(error.headers);
+
+      // Depending on the method different errors may be thrown
+      if (error instanceof errors.ErrorObject) {
+        console.log(error.data$.errors); // ErrorT[]
+      }
     }
   }
 }
@@ -675,7 +690,7 @@ run();
 **Primary error:**
 * [`LatitudeshError`](./src/models/errors/latitudesherror.ts): The base class for HTTP error responses.
 
-<details><summary>Less common errors (6)</summary>
+<details><summary>Less common errors (7)</summary>
 
 <br />
 
@@ -688,9 +703,12 @@ run();
 
 
 **Inherit from [`LatitudeshError`](./src/models/errors/latitudesherror.ts)**:
+* [`ErrorObject`](./src/models/errors/errorobject.ts): Service Unavailable - Storage creation temporarily frozen. Status code `503`. Applicable to 2 of 113 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>
+
+\* Check [the method documentation](#available-resources-and-operations) to see if the error is applicable.
 <!-- End Error Handling [errors] -->
 
 <!-- Start Server Selection [server] -->
@@ -767,19 +785,23 @@ The `HTTPClient` constructor takes an optional `fetcher` argument that can be
 used to integrate a third-party HTTP client or when writing tests to mock out
 the HTTP client and feed in fixtures.
 
-The following example shows how to use the `"beforeRequest"` hook to to add a
-custom header and a timeout to requests and how to use the `"requestError"` hook
-to log errors:
+The following example shows how to:
+- route requests through a proxy server using [undici](https://www.npmjs.com/package/undici)'s ProxyAgent
+- use the `"beforeRequest"` hook to add a custom header and a timeout to requests
+- use the `"requestError"` hook to log errors
 
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
+import { ProxyAgent } from "undici";
 import { HTTPClient } from "latitudesh-typescript-sdk/lib/http";
 
+const dispatcher = new ProxyAgent("http://proxy.example.com:8080");
+
 const httpClient = new HTTPClient({
-  // fetcher takes a function that has the same signature as native `fetch`.
-  fetcher: (request) => {
-    return fetch(request);
-  }
+  // 'fetcher' takes a function that has the same signature as native 'fetch'.
+  fetcher: (input, init) =>
+    // 'dispatcher' is specific to undici and not part of the standard Fetch API.
+    fetch(input, { ...init, dispatcher } as RequestInit),
 });
 
 httpClient.addHook("beforeRequest", (request) => {

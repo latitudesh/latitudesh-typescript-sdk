@@ -7,20 +7,12 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import * as models from "../index.js";
 
 export type GetVirtualNetworkRequest = {
   /**
    * Virtual Network ID
    */
   vlanId: string;
-};
-
-/**
- * Success
- */
-export type GetVirtualNetworkResponse = {
-  data?: models.VirtualNetwork | undefined;
 };
 
 /** @internal */
@@ -67,44 +59,5 @@ export function getVirtualNetworkRequestFromJSON(
     jsonString,
     (x) => GetVirtualNetworkRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetVirtualNetworkRequest' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetVirtualNetworkResponse$inboundSchema: z.ZodType<
-  GetVirtualNetworkResponse,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  data: models.VirtualNetwork$inboundSchema.optional(),
-});
-/** @internal */
-export type GetVirtualNetworkResponse$Outbound = {
-  data?: models.VirtualNetwork$Outbound | undefined;
-};
-
-/** @internal */
-export const GetVirtualNetworkResponse$outboundSchema: z.ZodType<
-  GetVirtualNetworkResponse$Outbound,
-  z.ZodTypeDef,
-  GetVirtualNetworkResponse
-> = z.object({
-  data: models.VirtualNetwork$outboundSchema.optional(),
-});
-
-export function getVirtualNetworkResponseToJSON(
-  getVirtualNetworkResponse: GetVirtualNetworkResponse,
-): string {
-  return JSON.stringify(
-    GetVirtualNetworkResponse$outboundSchema.parse(getVirtualNetworkResponse),
-  );
-}
-export function getVirtualNetworkResponseFromJSON(
-  jsonString: string,
-): SafeParseResult<GetVirtualNetworkResponse, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetVirtualNetworkResponse$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetVirtualNetworkResponse' from JSON`,
   );
 }

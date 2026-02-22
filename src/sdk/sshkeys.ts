@@ -18,7 +18,7 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class SSHKeys extends ClientSDK {
   /**
-   * List all Project SSH Keys
+   * List SSH Keys
    *
    * @remarks
    * List all SSH Keys in the project. These keys can be used to access servers after deploy and reinstall actions.
@@ -37,7 +37,7 @@ export class SSHKeys extends ClientSDK {
   }
 
   /**
-   * Retrieve a Project SSH Key
+   * Retrieve Project SSH Key
    *
    * @remarks
    * List all SSH Keys in the project. These keys can be used to access servers after deploy and reinstall actions.
@@ -56,26 +56,7 @@ export class SSHKeys extends ClientSDK {
   }
 
   /**
-   * Delete a Project SSH Key
-   *
-   * @remarks
-   * Allow you remove SSH Keys in a project. Remove a SSH Key from the project won't revoke the SSH Keys access for previously deploy and reinstall actions.
-   *
-   * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
-   */
-  async removeFromProject(
-    request: operations.DeleteProjectSshKeyRequest,
-    options?: RequestOptions,
-  ): Promise<void> {
-    return unwrapAsync(sshKeysRemoveFromProject(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Update a Project SSH Key
+   * Update Project SSH Key
    *
    * @remarks
    * Allow you update SSH Key in a project. These keys can be used to access servers after deploy and reinstall actions.
@@ -94,7 +75,26 @@ export class SSHKeys extends ClientSDK {
   }
 
   /**
-   * List all SSH Keys
+   * Delete Project SSH Key
+   *
+   * @remarks
+   * Allow you remove SSH Keys in a project. Remove a SSH Key from the project won't revoke the SSH Keys access for previously deploy and reinstall actions.
+   *
+   * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
+   */
+  async removeFromProject(
+    request: operations.DeleteProjectSshKeyRequest,
+    options?: RequestOptions,
+  ): Promise<void> {
+    return unwrapAsync(sshKeysRemoveFromProject(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List SSH Keys
    *
    * @remarks
    * List all SSH Keys in the project. These keys can be used to access servers after deploy and reinstall actions.
@@ -111,7 +111,7 @@ export class SSHKeys extends ClientSDK {
   }
 
   /**
-   * Create a SSH Key
+   * Create SSH Key
    *
    * @remarks
    * Allows you create SSH Keys. These keys can be used to access servers after deploy and reinstall actions.
@@ -128,7 +128,7 @@ export class SSHKeys extends ClientSDK {
   }
 
   /**
-   * Retrieve a SSH Key
+   * Retrieve SSH Key
    *
    * @remarks
    * List all SSH Keys in the project. These keys can be used to access servers after deploy and reinstall actions.
@@ -145,24 +145,7 @@ export class SSHKeys extends ClientSDK {
   }
 
   /**
-   * Delete a SSH Key
-   *
-   * @remarks
-   * Allows you remove SSH Keys in a project. Remove a SSH Key from the project won't revoke the SSH Keys access for previously deploy and reinstall actions.
-   */
-  async delete(
-    request: operations.DeleteSshKeyRequest,
-    options?: RequestOptions,
-  ): Promise<void> {
-    return unwrapAsync(sshKeysDelete(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Update a SSH Key
+   * Update SSH Key
    *
    * @remarks
    * Allows you update SSH Key in a project. These keys can be used to access servers after deploy and reinstall actions.
@@ -172,6 +155,23 @@ export class SSHKeys extends ClientSDK {
     options?: RequestOptions,
   ): Promise<operations.PutSshKeyResponse> {
     return unwrapAsync(sshKeysUpdate(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Delete SSH Key
+   *
+   * @remarks
+   * Allows you remove SSH Keys in a project. Remove a SSH Key from the project won't revoke the SSH Keys access for previously deploy and reinstall actions.
+   */
+  async delete(
+    request: operations.DeleteSshKeyRequest,
+    options?: RequestOptions,
+  ): Promise<void> {
+    return unwrapAsync(sshKeysDelete(
       this,
       request,
       options,

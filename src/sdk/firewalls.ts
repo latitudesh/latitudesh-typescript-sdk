@@ -24,10 +24,10 @@ export class Firewalls extends ClientSDK {
   }
 
   /**
-   * List All Firewall Assignments
+   * List firewall assignments
    *
    * @remarks
-   * List all firewall assignments
+   * Returns a list of all servers assigned to one or more firewalls.
    */
   async getAllFirewallAssignments(
     request?: operations.GetAllFirewallAssignmentsRequest | undefined,
@@ -36,6 +36,23 @@ export class Firewalls extends ClientSDK {
     PageIterator<operations.GetAllFirewallAssignmentsResponse, { page: number }>
   > {
     return unwrapResultIterator(firewallsGetAllFirewallAssignments(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Create firewall
+   *
+   * @remarks
+   * Create a firewall
+   */
+  async create(
+    request: operations.CreateFirewallRequest,
+    options?: RequestOptions,
+  ): Promise<models.Firewall> {
+    return unwrapAsync(firewallsCreate(
       this,
       request,
       options,
@@ -60,27 +77,10 @@ export class Firewalls extends ClientSDK {
   }
 
   /**
-   * Create a firewall
+   * Retrieve firewall
    *
    * @remarks
-   * Create a firewall
-   */
-  async create(
-    request: operations.CreateFirewallRequest,
-    options?: RequestOptions,
-  ): Promise<models.Firewall> {
-    return unwrapAsync(firewallsCreate(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Retrieve Firewall
-   *
-   * @remarks
-   * Retrieve a firewall
+   * Returns a single firewall by its ID.
    */
   async get(
     request: operations.GetFirewallRequest,
@@ -94,27 +94,10 @@ export class Firewalls extends ClientSDK {
   }
 
   /**
-   * Delete Firewall
+   * Update firewall
    *
    * @remarks
-   * Delete a firewall
-   */
-  async delete(
-    request: operations.DeleteFirewallRequest,
-    options?: RequestOptions,
-  ): Promise<void> {
-    return unwrapAsync(firewallsDelete(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Update Firewall
-   *
-   * @remarks
-   * Update a firewall
+   * Updates a firewall by its ID.
    */
   async update(
     request: operations.UpdateFirewallRequest,
@@ -128,10 +111,24 @@ export class Firewalls extends ClientSDK {
   }
 
   /**
-   * Firewall Assignments
+   * Delete firewall
+   */
+  async delete(
+    request: operations.DeleteFirewallRequest,
+    options?: RequestOptions,
+  ): Promise<void> {
+    return unwrapAsync(firewallsDelete(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Firewall assignments
    *
    * @remarks
-   * List servers assigned to a firewall
+   * Returns a list of all servers assigned to a particular firewall.
    */
   async listAssignments(
     request: operations.GetFirewallAssignmentsRequest,
@@ -147,10 +144,10 @@ export class Firewalls extends ClientSDK {
   }
 
   /**
-   * Delete Firewall Assignment
+   * Delete assignment
    *
    * @remarks
-   * Remove a server from a firewall
+   * Removes a server from a firewall by its ID.
    */
   async deleteAssignment(
     request: operations.DeleteFirewallAssignmentRequest,

@@ -17,6 +17,23 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class Storage extends ClientSDK {
   /**
+   * Create filesystem
+   *
+   * @remarks
+   * Allows you to add persistent storage to a project. These filesystems can be used to store data across your servers.
+   */
+  async createFilesystem(
+    request: operations.PostStorageFilesystemsRequest,
+    options?: RequestOptions,
+  ): Promise<operations.PostStorageFilesystemsResponse> {
+    return unwrapAsync(storageCreateFilesystem(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
    * List filesystems
    *
    * @remarks
@@ -34,24 +51,7 @@ export class Storage extends ClientSDK {
   }
 
   /**
-   * Create a filesystem for a project
-   *
-   * @remarks
-   * Allows you to add persistent storage to a project. These filesystems can be used to store data across your servers.
-   */
-  async createFilesystem(
-    request: operations.PostStorageFilesystemsRequest,
-    options?: RequestOptions,
-  ): Promise<operations.PostStorageFilesystemsResponse> {
-    return unwrapAsync(storageCreateFilesystem(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Delete a filesystem for a project
+   * Delete filesystem
    *
    * @remarks
    * Allows you to remove persistent storage from a project.
@@ -68,7 +68,7 @@ export class Storage extends ClientSDK {
   }
 
   /**
-   * Update a filesystem for a project
+   * Update filesystem
    *
    * @remarks
    * Allow you to upgrade the size of a filesystem.
@@ -119,7 +119,7 @@ export class Storage extends ClientSDK {
   }
 
   /**
-   * Get volume
+   * Retrieve volume
    *
    * @remarks
    * Shows details of a specific volume storage.

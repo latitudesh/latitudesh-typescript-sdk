@@ -4,18 +4,18 @@
 
 ### Available Operations
 
-* [list](#list) - List all Active VPN Sessions
-* [create](#create) - Create a VPN Session
-* [refreshPassword](#refreshpassword) - Refresh a VPN Session
-* [delete](#delete) - Delete a VPN Session
+* [list](#list) - List VPN sessions
+* [create](#create) - Create VPN session
+* [refreshPassword](#refreshpassword) - Refresh VPN session
+* [delete](#delete) - Delete VPN session
 
 ## list
 
-List all Active VPN Sessions
+List VPN sessions
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-vpn-sessions" method="get" path="/vpn_sessions" -->
+<!-- UsageSnippet language="typescript" operationID="get-vpn-sessions" method="get" path="/vpn_sessions" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -90,7 +90,7 @@ Creates a new VPN Session.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="post-vpn-session" method="post" path="/vpn_sessions" -->
+<!-- UsageSnippet language="typescript" operationID="post-vpn-session" method="post" path="/vpn_sessions" example="Created" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -174,7 +174,7 @@ Refreshing an existing VPN Session will create new credentials for that session
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="put-vpn-session" method="patch" path="/vpn_sessions/{vpn_session_id}/refresh_password" -->
+<!-- UsageSnippet language="typescript" operationID="put-vpn-session" method="patch" path="/vpn_sessions/{vpn_session_id}/refresh_password" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 

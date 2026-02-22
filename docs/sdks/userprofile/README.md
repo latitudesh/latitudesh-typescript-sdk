@@ -4,9 +4,9 @@
 
 ### Available Operations
 
-* [get](#get) - Get user profile
-* [update](#update) - Update User Profile
-* [listTeams](#listteams) - List User Teams
+* [get](#get) - Retrieve profile
+* [update](#update) - Update profile
+* [listTeams](#listteams) - List user teams
 
 ## get
 
@@ -15,7 +15,7 @@ Retrieve the current user profile
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-user-profile" method="get" path="/user/profile" -->
+<!-- UsageSnippet language="typescript" operationID="get-user-profile" method="get" path="/user/profile" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -84,7 +84,7 @@ Update the current user profile
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="patch-user-profile" method="patch" path="/user/profile/{id}" -->
+<!-- UsageSnippet language="typescript" operationID="patch-user-profile" method="patch" path="/user/profile/{id}" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -174,9 +174,99 @@ run();
 Returns a list of all teams the user belongs to
 
 
-### Example Usage
+### Example Usage: Success
 
-<!-- UsageSnippet language="typescript" operationID="get-user-teams" method="get" path="/user/teams" -->
+<!-- UsageSnippet language="typescript" operationID="get-user-teams" method="get" path="/user/teams" example="Success" -->
+```typescript
+import { Latitudesh } from "latitudesh-typescript-sdk";
+
+const latitudesh = new Latitudesh({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const result = await latitudesh.userProfile.listTeams();
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
+import { userProfileListTeams } from "latitudesh-typescript-sdk/funcs/userProfileListTeams.js";
+
+// Use `LatitudeshCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const latitudesh = new LatitudeshCore({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const res = await userProfileListTeams(latitudesh);
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("userProfileListTeams failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: when team is older than one month
+
+<!-- UsageSnippet language="typescript" operationID="get-user-teams" method="get" path="/user/teams" example="when team is older than one month" -->
+```typescript
+import { Latitudesh } from "latitudesh-typescript-sdk";
+
+const latitudesh = new Latitudesh({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const result = await latitudesh.userProfile.listTeams();
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
+import { userProfileListTeams } from "latitudesh-typescript-sdk/funcs/userProfileListTeams.js";
+
+// Use `LatitudeshCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const latitudesh = new LatitudeshCore({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const res = await userProfileListTeams(latitudesh);
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("userProfileListTeams failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: when team is recent (created within last month)
+
+<!-- UsageSnippet language="typescript" operationID="get-user-teams" method="get" path="/user/teams" example="when team is recent (created within last month)" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 

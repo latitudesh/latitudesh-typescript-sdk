@@ -1,17 +1,17 @@
-# GetVirtualNetworkResponse
-
-Success
+# VirtualMachineUpdatePayloadAttributes
 
 ## Example Usage
 
 ```typescript
-import { GetVirtualNetworkResponse } from "latitudesh-typescript-sdk/models/operations";
+import { VirtualMachineUpdatePayloadAttributes } from "latitudesh-typescript-sdk/models";
 
-let value: GetVirtualNetworkResponse = {};
+let value: VirtualMachineUpdatePayloadAttributes = {
+  name: "<value>",
+};
 ```
 
 ## Fields
 
 | Field                                                   | Type                                                    | Required                                                | Description                                             |
 | ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- |
-| `data`                                                  | [models.VirtualNetwork](../../models/virtualnetwork.md) | :heavy_minus_sign:                                      | N/A                                                     |
+| `name`                                                  | *string*                                                | :heavy_check_mark:                                      | The new display name (hostname) for the Virtual Machine |

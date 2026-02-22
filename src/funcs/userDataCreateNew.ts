@@ -26,7 +26,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Create an User Data
+ * Create user data
  *
  * @remarks
  * Allows you to create User Data in a team, which can be used to perform custom setup on your servers after deploy and reinstall.

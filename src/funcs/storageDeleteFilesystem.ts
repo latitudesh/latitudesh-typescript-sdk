@@ -26,7 +26,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Delete a filesystem for a project
+ * Delete filesystem
  *
  * @remarks
  * Allows you to remove persistent storage from a project.

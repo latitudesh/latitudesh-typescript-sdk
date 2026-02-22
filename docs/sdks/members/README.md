@@ -4,15 +4,15 @@
 
 ### Available Operations
 
-* [getTeamMembers](#getteammembers) - List all Team Members
+* [getTeamMembers](#getteammembers) - List members
 
 ## getTeamMembers
 
-List all Team Members
+List members
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-team-members" method="get" path="/team/members" -->
+<!-- UsageSnippet language="typescript" operationID="get-team-members" method="get" path="/team/members" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
