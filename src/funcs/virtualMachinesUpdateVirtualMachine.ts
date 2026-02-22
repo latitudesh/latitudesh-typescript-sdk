@@ -3,7 +3,7 @@
  */
 
 import { LatitudeshCore } from "../core.js";
-import { encodeSimple } from "../lib/encodings.js";
+import { encodeJSON, encodeSimple } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -26,18 +26,18 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Retrieve container plan
+ * Update VM
  *
  * @remarks
- * Retrieve a container plan.
+ * Updates a Virtual Machine's display name (hostname).
  */
-export function plansGetContainersPlan(
+export function virtualMachinesUpdateVirtualMachine(
   client: LatitudeshCore,
-  request: operations.GetContainersPlanRequest,
+  request: operations.UpdateVirtualMachineRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    models.ContainerPlanData,
+    models.VirtualMachine,
     | LatitudeshError
     | ResponseValidationError
     | ConnectionError
@@ -57,12 +57,12 @@ export function plansGetContainersPlan(
 
 async function $do(
   client: LatitudeshCore,
-  request: operations.GetContainersPlanRequest,
+  request: operations.UpdateVirtualMachineRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      models.ContainerPlanData,
+      models.VirtualMachine,
       | LatitudeshError
       | ResponseValidationError
       | ConnectionError
@@ -77,25 +77,30 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) => operations.GetContainersPlanRequest$outboundSchema.parse(value),
+    (value) =>
+      operations.UpdateVirtualMachineRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = null;
+  const body = encodeJSON("body", payload.virtual_machine_update_payload, {
+    explode: true,
+  });
 
   const pathParams = {
-    plan_id: encodeSimple("plan_id", payload.plan_id, {
-      explode: false,
-      charEncoding: "percent",
-    }),
+    virtual_machine_id: encodeSimple(
+      "virtual_machine_id",
+      payload.virtual_machine_id,
+      { explode: false, charEncoding: "percent" },
+    ),
   };
 
-  const path = pathToFunc("/plans/containers/{plan_id}")(pathParams);
+  const path = pathToFunc("/virtual_machines/{virtual_machine_id}")(pathParams);
 
   const headers = new Headers(compactMap({
+    "Content-Type": "application/json",
     Accept: "application/vnd.api+json",
   }));
 
@@ -106,7 +111,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "get-containers-plan",
+    operationID: "update-virtual-machine",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -120,7 +125,7 @@ async function $do(
 
   const requestRes = client._createRequest(context, {
     security: requestSecurity,
-    method: "GET",
+    method: "PATCH",
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
@@ -135,7 +140,7 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["4XX", "5XX"],
+    errorCodes: ["404", "422", "4XX", "5XX"],
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -145,7 +150,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    models.ContainerPlanData,
+    models.VirtualMachine,
     | LatitudeshError
     | ResponseValidationError
     | ConnectionError
@@ -155,10 +160,10 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, models.ContainerPlanData$inboundSchema, {
+    M.json(200, models.VirtualMachine$inboundSchema, {
       ctype: "application/vnd.api+json",
     }),
-    M.fail("4XX"),
+    M.fail([404, 422, "4XX"]),
     M.fail("5XX"),
   )(response, req);
   if (!result.ok) {

@@ -28,7 +28,7 @@ import { PageIterator, unwrapResultIterator } from "../types/operations.js";
 
 export class Servers extends ClientSDK {
   /**
-   * List all Servers
+   * List servers
    *
    * @remarks
    * Returns a list of all servers belonging to the team.
@@ -45,7 +45,7 @@ export class Servers extends ClientSDK {
   }
 
   /**
-   * Deploy Server
+   * Create server
    */
   async create(
     request: operations.CreateServerRequest,
@@ -59,7 +59,7 @@ export class Servers extends ClientSDK {
   }
 
   /**
-   * Retrieve a Server
+   * Retrieve server
    *
    * @remarks
    * Returns a server that belongs to the team.
@@ -76,21 +76,7 @@ export class Servers extends ClientSDK {
   }
 
   /**
-   * Remove Server
-   */
-  async delete(
-    request: operations.DestroyServerRequest,
-    options?: RequestOptions,
-  ): Promise<void> {
-    return unwrapAsync(serversDelete(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Update Server
+   * Update server
    */
   async update(
     request: operations.UpdateServerRequest,
@@ -104,7 +90,21 @@ export class Servers extends ClientSDK {
   }
 
   /**
-   * Retrieve Deploy Config
+   * Remove server
+   */
+  async delete(
+    request: operations.DestroyServerRequest,
+    options?: RequestOptions,
+  ): Promise<void> {
+    return unwrapAsync(serversDelete(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Retrieve deploy config
    */
   async getDeployConfig(
     request: operations.GetServerDeployConfigRequest,
@@ -118,7 +118,7 @@ export class Servers extends ClientSDK {
   }
 
   /**
-   * Update Deploy Config
+   * Update deploy config
    */
   async updateDeployConfig(
     request: operations.UpdateServerDeployConfigRequest,
@@ -132,7 +132,7 @@ export class Servers extends ClientSDK {
   }
 
   /**
-   * Lock the server
+   * Lock server
    *
    * @remarks
    * Locks the server. A locked server cannot be deleted or modified and no actions can be performed on it.
@@ -149,7 +149,7 @@ export class Servers extends ClientSDK {
   }
 
   /**
-   * Unlock the server
+   * Unlock server
    *
    * @remarks
    * Unlocks the server. A locked server cannot be deleted or modified and no actions can be performed on it.
@@ -166,21 +166,7 @@ export class Servers extends ClientSDK {
   }
 
   /**
-   * List Out of Band Connections
-   */
-  async getOutOfBand(
-    request: operations.GetServerOutOfBandRequest,
-    options?: RequestOptions,
-  ): Promise<models.OutOfBandConnection> {
-    return unwrapAsync(serversGetOutOfBand(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Start Out of Band Connection
+   * Create out-of-band connection
    */
   async startOutOfBandConnection(
     request: operations.CreateServerOutOfBandRequest,
@@ -194,7 +180,21 @@ export class Servers extends ClientSDK {
   }
 
   /**
-   * Run Server Action
+   * List out-of-band connections
+   */
+  async getOutOfBand(
+    request: operations.GetServerOutOfBandRequest,
+    options?: RequestOptions,
+  ): Promise<models.OutOfBandConnection> {
+    return unwrapAsync(serversGetOutOfBand(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Run power action
    *
    * @remarks
    * Performs an action on a given server:
@@ -214,7 +214,7 @@ export class Servers extends ClientSDK {
   }
 
   /**
-   * Generate IPMI credentials
+   * Create IPMI credentials
    *
    * @remarks
    * Generates IPMI credentials for a given server. Remote access creates a VPN connection to the internal network of your server so you can connect to its IPMI.
@@ -234,7 +234,7 @@ export class Servers extends ClientSDK {
   }
 
   /**
-   * Puts a Server in rescue mode
+   * Put server in rescue mode
    *
    * @remarks
    * Starts rescue mode on a given server.
@@ -251,7 +251,7 @@ export class Servers extends ClientSDK {
   }
 
   /**
-   * Exits rescue mode for a Server
+   * Exits rescue mode
    *
    * @remarks
    * Exits rescue mode on a given server.
@@ -268,7 +268,7 @@ export class Servers extends ClientSDK {
   }
 
   /**
-   * Schedule the server deletion
+   * Schedule server deletion
    *
    * @remarks
    * Schedules the server to be removed at the end of the billing cycle.
@@ -285,7 +285,7 @@ export class Servers extends ClientSDK {
   }
 
   /**
-   * Unschedule the server deletion
+   * Unschedule server deletion
    *
    * @remarks
    * Unschedules the server removal at the end of the billing cycle.

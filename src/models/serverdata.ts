@@ -33,21 +33,19 @@ import {
  * @remarks
  * `off` - The server is powered OFF
  * `unknown` - The server power status is unknown
- * `ready` - The server is in reinstalling state `ready` and should start `disk_erasing` shortly
  * `disk_erasing` - The server is in reinstalling state `disk_erasing`
- * `failed_disk_erasing` - The server has failed disk erasing in reinstall
- * `deploying` - The server is in the last reinstalling stage and is `deploying`
- * `failed_deployment` - The server has failed deployment in reinstall
+ * `deploying` - The server is deploying or reinstalling
+ * `failed_deployment` - The server has failed deployment or reinstall
+ * `rescue_mode` - The server is in rescue mode
  */
 export const ServerDataStatus = {
   On: "on",
   Off: "off",
   Unknown: "unknown",
-  Ready: "ready",
   DiskErasing: "disk_erasing",
-  FailedDiskErasing: "failed_disk_erasing",
   Deploying: "deploying",
   FailedDeployment: "failed_deployment",
+  RescueMode: "rescue_mode",
 } as const;
 /**
  * `on` - The server is powered ON
@@ -55,11 +53,10 @@ export const ServerDataStatus = {
  * @remarks
  * `off` - The server is powered OFF
  * `unknown` - The server power status is unknown
- * `ready` - The server is in reinstalling state `ready` and should start `disk_erasing` shortly
  * `disk_erasing` - The server is in reinstalling state `disk_erasing`
- * `failed_disk_erasing` - The server has failed disk erasing in reinstall
- * `deploying` - The server is in the last reinstalling stage and is `deploying`
- * `failed_deployment` - The server has failed deployment in reinstall
+ * `deploying` - The server is deploying or reinstalling
+ * `failed_deployment` - The server has failed deployment or reinstall
+ * `rescue_mode` - The server is in rescue mode
  */
 export type ServerDataStatus = ClosedEnum<typeof ServerDataStatus>;
 
@@ -177,11 +174,10 @@ export type ServerDataAttributes = {
    * @remarks
    * `off` - The server is powered OFF
    * `unknown` - The server power status is unknown
-   * `ready` - The server is in reinstalling state `ready` and should start `disk_erasing` shortly
    * `disk_erasing` - The server is in reinstalling state `disk_erasing`
-   * `failed_disk_erasing` - The server has failed disk erasing in reinstall
-   * `deploying` - The server is in the last reinstalling stage and is `deploying`
-   * `failed_deployment` - The server has failed deployment in reinstall
+   * `deploying` - The server is deploying or reinstalling
+   * `failed_deployment` - The server has failed deployment or reinstall
+   * `rescue_mode` - The server is in rescue mode
    */
   status?: ServerDataStatus | undefined;
   ipmiStatus?: IpmiStatus | undefined;
@@ -191,7 +187,7 @@ export type ServerDataAttributes = {
   role?: string | undefined;
   site?: string | undefined;
   locked?: boolean | undefined;
-  rescue?: boolean | undefined;
+  rescueAllowed?: boolean | undefined;
   primaryIpv4?: string | null | undefined;
   primaryIpv6?: string | null | undefined;
   createdAt?: string | null | undefined;
@@ -536,7 +532,7 @@ export const ServerDataAttributes$inboundSchema: z.ZodType<
   role: z.string().optional(),
   site: z.string().optional(),
   locked: z.boolean().optional(),
-  rescue: z.boolean().optional(),
+  rescue_allowed: z.boolean().optional(),
   primary_ipv4: z.nullable(z.string()).optional(),
   primary_ipv6: z.nullable(z.string()).optional(),
   created_at: z.nullable(z.string()).optional(),
@@ -551,6 +547,7 @@ export const ServerDataAttributes$inboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     "ipmi_status": "ipmiStatus",
+    "rescue_allowed": "rescueAllowed",
     "primary_ipv4": "primaryIpv4",
     "primary_ipv6": "primaryIpv6",
     "created_at": "createdAt",
@@ -567,7 +564,7 @@ export type ServerDataAttributes$Outbound = {
   role?: string | undefined;
   site?: string | undefined;
   locked?: boolean | undefined;
-  rescue?: boolean | undefined;
+  rescue_allowed?: boolean | undefined;
   primary_ipv4?: string | null | undefined;
   primary_ipv6?: string | null | undefined;
   created_at?: string | null | undefined;
@@ -594,7 +591,7 @@ export const ServerDataAttributes$outboundSchema: z.ZodType<
   role: z.string().optional(),
   site: z.string().optional(),
   locked: z.boolean().optional(),
-  rescue: z.boolean().optional(),
+  rescueAllowed: z.boolean().optional(),
   primaryIpv4: z.nullable(z.string()).optional(),
   primaryIpv6: z.nullable(z.string()).optional(),
   createdAt: z.nullable(z.string()).optional(),
@@ -609,6 +606,7 @@ export const ServerDataAttributes$outboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     ipmiStatus: "ipmi_status",
+    rescueAllowed: "rescue_allowed",
     primaryIpv4: "primary_ipv4",
     primaryIpv6: "primary_ipv6",
     createdAt: "created_at",

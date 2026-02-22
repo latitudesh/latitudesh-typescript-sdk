@@ -25,7 +25,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Create a Project
+ * Create project
  */
 export function projectsCreate(
   client: LatitudeshCore,

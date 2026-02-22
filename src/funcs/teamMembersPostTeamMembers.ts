@@ -26,7 +26,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Add a Team Member
+ * Create member
  */
 export function teamMembersPostTeamMembers(
   client: LatitudeshCore,

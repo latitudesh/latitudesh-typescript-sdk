@@ -19,7 +19,7 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class UserData extends ClientSDK {
   /**
-   * List all Project User Data
+   * List Project user data
    *
    * @remarks
    * List all Users Data in the project. These scripts can be used to configure servers with user data.
@@ -38,7 +38,7 @@ export class UserData extends ClientSDK {
   }
 
   /**
-   * Retrieve a Project User Data
+   * Retrieve Project user data
    *
    * @remarks
    * Get User Data in the project. These scripts can be used to configure servers with user data.
@@ -57,7 +57,7 @@ export class UserData extends ClientSDK {
   }
 
   /**
-   * Delete a Project User Data
+   * Delete Project user data
    *
    * @remarks
    * Allow you remove User Data in a project.
@@ -76,7 +76,7 @@ export class UserData extends ClientSDK {
   }
 
   /**
-   * Create a Project User Data
+   * Create Project user data
    *
    * @remarks
    * Allows you to create User Data in a project, which can be used to perform custom setup on your servers after deploy and reinstall.
@@ -95,7 +95,7 @@ export class UserData extends ClientSDK {
   }
 
   /**
-   * Update a Project User Data
+   * Update Project user data
    *
    * @remarks
    * Allow you update User Data in a project.
@@ -114,7 +114,7 @@ export class UserData extends ClientSDK {
   }
 
   /**
-   * List all User Data
+   * List user data
    *
    * @remarks
    * List all Users Data in the project. These scripts can be used to configure servers with user data.
@@ -131,7 +131,7 @@ export class UserData extends ClientSDK {
   }
 
   /**
-   * Create an User Data
+   * Create user data
    *
    * @remarks
    * Allows you to create User Data in a team, which can be used to perform custom setup on your servers after deploy and reinstall.
@@ -148,7 +148,7 @@ export class UserData extends ClientSDK {
   }
 
   /**
-   * Retrieve an User Data
+   * Retrieve user data
    *
    * @remarks
    * Get User Data in the project. These scripts can be used to configure servers with user data.
@@ -165,21 +165,7 @@ export class UserData extends ClientSDK {
   }
 
   /**
-   * Delete an User Data
-   */
-  async delete(
-    request: operations.DeleteUserDataRequest,
-    options?: RequestOptions,
-  ): Promise<void> {
-    return unwrapAsync(userDataDelete(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Update an User Data
+   * Update user data
    *
    * @remarks
    * Allow you update User Data in a team.
@@ -189,6 +175,20 @@ export class UserData extends ClientSDK {
     options?: RequestOptions,
   ): Promise<models.UserDataObject> {
     return unwrapAsync(userDataUpdate(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Delete user data
+   */
+  async delete(
+    request: operations.DeleteUserDataRequest,
+    options?: RequestOptions,
+  ): Promise<void> {
+    return unwrapAsync(userDataDelete(
       this,
       request,
       options,

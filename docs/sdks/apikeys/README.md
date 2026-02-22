@@ -4,20 +4,20 @@
 
 ### Available Operations
 
-* [list](#list) - List API Keys
-* [create](#create) - Create API Key
-* [update](#update) - Rotate API Key
-* [delete](#delete) - Delete API Key
-* [updateApiKey](#updateapikey) - Update API Key Settings
+* [list](#list) - List API keys
+* [create](#create) - Create API key
+* [update](#update) - Rotate API key
+* [delete](#delete) - Delete API key
+* [updateApiKey](#updateapikey) - Update API key settings
 
 ## list
 
-Returns a list of all API keys from the team members
+Returns a list of all API keys.
 
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-api-keys" method="get" path="/auth/api_keys" -->
+<!-- UsageSnippet language="typescript" operationID="get-api-keys" method="get" path="/auth/api_keys" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -86,7 +86,7 @@ Create a new API Key that is tied to the current user account. The created API k
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="post-api-key" method="post" path="/auth/api_keys" -->
+<!-- UsageSnippet language="typescript" operationID="post-api-key" method="post" path="/auth/api_keys" example="Created" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -171,7 +171,7 @@ Use PATCH to update settings without rotating the token.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="rotate-api-key" method="put" path="/auth/api_keys/{api_key_id}" -->
+<!-- UsageSnippet language="typescript" operationID="rotate-api-key" method="put" path="/auth/api_keys/{api_key_id}" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -336,9 +336,76 @@ Update API Key settings (name, read_only, allowed_ips) without rotating the toke
 Use PUT to rotate the token.
 
 
-### Example Usage
+### Example Usage: Success
 
-<!-- UsageSnippet language="typescript" operationID="update-api-key" method="patch" path="/auth/api_keys/{api_key_id}" -->
+<!-- UsageSnippet language="typescript" operationID="update-api-key" method="patch" path="/auth/api_keys/{api_key_id}" example="Success" -->
+```typescript
+import { Latitudesh } from "latitudesh-typescript-sdk";
+
+const latitudesh = new Latitudesh({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const result = await latitudesh.apiKeys.updateApiKey({
+    apiKeyId: "tok_zlkg1DegdvZE5",
+    updateApiKey: {
+      data: {
+        id: "tok_zlkg1DegdvZE5",
+        type: "api_keys",
+        attributes: {
+          name: "App Token",
+        },
+      },
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
+import { apiKeysUpdateApiKey } from "latitudesh-typescript-sdk/funcs/apiKeysUpdateApiKey.js";
+
+// Use `LatitudeshCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const latitudesh = new LatitudeshCore({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const res = await apiKeysUpdateApiKey(latitudesh, {
+    apiKeyId: "tok_zlkg1DegdvZE5",
+    updateApiKey: {
+      data: {
+        id: "tok_zlkg1DegdvZE5",
+        type: "api_keys",
+        attributes: {
+          name: "App Token",
+        },
+      },
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("apiKeysUpdateApiKey failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: Success - Update name without rotating token
+
+<!-- UsageSnippet language="typescript" operationID="update-api-key" method="patch" path="/auth/api_keys/{api_key_id}" example="Success - Update name without rotating token" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 

@@ -26,7 +26,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Update Deploy Config
+ * Update deploy config
  */
 export function serversUpdateDeployConfig(
   client: LatitudeshCore,

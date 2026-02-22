@@ -4,11 +4,161 @@
 
 ### Available Operations
 
-* [list](#list) - Get Teams Virtual Machines
-* [create](#create) - Create a Virtual Machine
-* [get](#get) - Get a Virtual Machine
-* [delete](#delete) - Destroy a Virtual Machine
-* [createVirtualMachineAction](#createvirtualmachineaction) - Run Virtual Machine Action
+* [create](#create) - Create VM
+* [list](#list) - List VMs
+* [get](#get) - Retrieve VM
+* [delete](#delete) - Destroy VM
+* [updateVirtualMachine](#updatevirtualmachine) - Update VM
+* [createVirtualMachineAction](#createvirtualmachineaction) - Run VM power action
+
+## create
+
+Creates a new Virtual Machine.
+
+
+### Example Usage: Created
+
+<!-- UsageSnippet language="typescript" operationID="create-virtual-machine" method="post" path="/virtual_machines" example="Created" -->
+```typescript
+import { Latitudesh } from "latitudesh-typescript-sdk";
+
+const latitudesh = new Latitudesh({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const result = await latitudesh.virtualMachines.create({
+    data: {
+      type: "virtual_machines",
+      attributes: {
+        name: "my-new-vm",
+        project: "lightweight-leather-lamp",
+      },
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
+import { virtualMachinesCreate } from "latitudesh-typescript-sdk/funcs/virtualMachinesCreate.js";
+
+// Use `LatitudeshCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const latitudesh = new LatitudeshCore({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const res = await virtualMachinesCreate(latitudesh, {
+    data: {
+      type: "virtual_machines",
+      attributes: {
+        name: "my-new-vm",
+        project: "lightweight-leather-lamp",
+      },
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("virtualMachinesCreate failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: CreatedWithOS
+
+<!-- UsageSnippet language="typescript" operationID="create-virtual-machine" method="post" path="/virtual_machines" example="CreatedWithOS" -->
+```typescript
+import { Latitudesh } from "latitudesh-typescript-sdk";
+
+const latitudesh = new Latitudesh({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const result = await latitudesh.virtualMachines.create({
+    data: {
+      type: "virtual_machines",
+      attributes: {
+        name: "my-new-vm",
+        project: "lightweight-leather-lamp",
+        operatingSystem: "ubuntu_24_04_x64_lts",
+      },
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
+import { virtualMachinesCreate } from "latitudesh-typescript-sdk/funcs/virtualMachinesCreate.js";
+
+// Use `LatitudeshCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const latitudesh = new LatitudeshCore({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const res = await virtualMachinesCreate(latitudesh, {
+    data: {
+      type: "virtual_machines",
+      attributes: {
+        name: "my-new-vm",
+        project: "lightweight-leather-lamp",
+        operatingSystem: "ubuntu_24_04_x64_lts",
+      },
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("virtualMachinesCreate failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [models.VirtualMachinePayload](../../models/virtualmachinepayload.md)                                                                                                          | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[models.VirtualMachine](../../models/virtualmachine.md)\>**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| errors.LatitudeshDefaultError | 4XX, 5XX                      | \*/\*                         |
 
 ## list
 
@@ -77,92 +227,6 @@ run();
 ### Response
 
 **Promise\<void\>**
-
-### Errors
-
-| Error Type                    | Status Code                   | Content Type                  |
-| ----------------------------- | ----------------------------- | ----------------------------- |
-| errors.LatitudeshDefaultError | 4XX, 5XX                      | \*/\*                         |
-
-## create
-
-Creates a new Virtual Machine.
-
-
-### Example Usage
-
-<!-- UsageSnippet language="typescript" operationID="create-virtual-machine" method="post" path="/virtual_machines" -->
-```typescript
-import { Latitudesh } from "latitudesh-typescript-sdk";
-
-const latitudesh = new Latitudesh({
-  bearer: process.env["LATITUDESH_BEARER"] ?? "",
-});
-
-async function run() {
-  const result = await latitudesh.virtualMachines.create({
-    data: {
-      type: "virtual_machines",
-      attributes: {
-        name: "my-new-vm",
-        project: "lightweight-leather-lamp",
-      },
-    },
-  });
-
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
-import { virtualMachinesCreate } from "latitudesh-typescript-sdk/funcs/virtualMachinesCreate.js";
-
-// Use `LatitudeshCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const latitudesh = new LatitudeshCore({
-  bearer: process.env["LATITUDESH_BEARER"] ?? "",
-});
-
-async function run() {
-  const res = await virtualMachinesCreate(latitudesh, {
-    data: {
-      type: "virtual_machines",
-      attributes: {
-        name: "my-new-vm",
-        project: "lightweight-leather-lamp",
-      },
-    },
-  });
-  if (res.ok) {
-    const { value: result } = res;
-    console.log(result);
-  } else {
-    console.log("virtualMachinesCreate failed:", res.error);
-  }
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [models.VirtualMachinePayload](../../models/virtualmachinepayload.md)                                                                                                          | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[models.VirtualMachine](../../models/virtualmachine.md)\>**
 
 ### Errors
 
@@ -318,6 +382,98 @@ run();
 | ----------------------------- | ----------------------------- | ----------------------------- |
 | errors.LatitudeshDefaultError | 4XX, 5XX                      | \*/\*                         |
 
+## updateVirtualMachine
+
+Updates a Virtual Machine's display name (hostname).
+
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="update-virtual-machine" method="patch" path="/virtual_machines/{virtual_machine_id}" example="Success" -->
+```typescript
+import { Latitudesh } from "latitudesh-typescript-sdk";
+
+const latitudesh = new Latitudesh({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const result = await latitudesh.virtualMachines.updateVirtualMachine({
+    virtualMachineId: "vm_7vYAZqGBdMQ94",
+    virtualMachineUpdatePayload: {
+      data: {
+        type: "virtual_machines",
+        id: "vm_7vYAZqGBdMQ94",
+        attributes: {
+          name: "my-updated-vm",
+        },
+      },
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
+import { virtualMachinesUpdateVirtualMachine } from "latitudesh-typescript-sdk/funcs/virtualMachinesUpdateVirtualMachine.js";
+
+// Use `LatitudeshCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const latitudesh = new LatitudeshCore({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const res = await virtualMachinesUpdateVirtualMachine(latitudesh, {
+    virtualMachineId: "vm_7vYAZqGBdMQ94",
+    virtualMachineUpdatePayload: {
+      data: {
+        type: "virtual_machines",
+        id: "vm_7vYAZqGBdMQ94",
+        attributes: {
+          name: "my-updated-vm",
+        },
+      },
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("virtualMachinesUpdateVirtualMachine failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.UpdateVirtualMachineRequest](../../models/operations/updatevirtualmachinerequest.md)                                                                               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[models.VirtualMachine](../../models/virtualmachine.md)\>**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| errors.LatitudeshDefaultError | 4XX, 5XX                      | \*/\*                         |
+
 ## createVirtualMachineAction
 
 Performs a power action on a given virtual machine:
@@ -328,7 +484,7 @@ Performs a power action on a given virtual machine:
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="create-virtual-machine-action" method="post" path="/virtual_machines/{virtual_machine_id}/actions" -->
+<!-- UsageSnippet language="typescript" operationID="create-virtual-machine-action" method="post" path="/virtual_machines/{virtual_machine_id}/actions" example="Created" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 

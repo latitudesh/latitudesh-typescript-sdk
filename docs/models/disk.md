@@ -10,7 +10,7 @@ let value: Disk = {};
 
 ## Fields
 
-| Field                                      | Type                                       | Required                                   | Description                                |
-| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
-| `type`                                     | [models.TypeLocal](../models/typelocal.md) | :heavy_minus_sign:                         | The type of the disk                       |
-| `size`                                     | [models.Size](../models/size.md)           | :heavy_minus_sign:                         | N/A                                        |
+| Field                                              | Type                                               | Required                                           | Description                                        |
+| -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- |
+| `type`                                             | *string*                                           | :heavy_minus_sign:                                 | The type of the disk (e.g., local SSD, local NVMe) |
+| `size`                                             | [models.Size](../models/size.md)                   | :heavy_minus_sign:                                 | N/A                                                |

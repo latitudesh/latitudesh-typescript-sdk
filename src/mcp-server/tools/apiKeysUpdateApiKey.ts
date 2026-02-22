@@ -12,7 +12,7 @@ const args = {
 
 export const tool$apiKeysUpdateApiKey: ToolDefinition<typeof args> = {
   name: "api-keys-update-api-key",
-  description: `Update API Key Settings
+  description: `Update API key settings
 
 Update API Key settings (name, read_only, allowed_ips) without rotating the token.
 Use PUT to rotate the token.

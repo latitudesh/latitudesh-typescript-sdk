@@ -32,6 +32,10 @@ export type ApiKeyAttributes = {
    */
   apiVersion?: string | undefined;
   /**
+   * The full token (only returned on create or rotate)
+   */
+  token?: string | undefined;
+  /**
    * The last 5 characters of the token created for this API Key
    */
   tokenLastSlice?: string | undefined;
@@ -120,6 +124,7 @@ export const ApiKeyAttributes$inboundSchema: z.ZodType<
 > = z.object({
   name: z.string().optional(),
   api_version: z.string().optional(),
+  token: z.string().optional(),
   token_last_slice: z.string().optional(),
   read_only: z.nullable(z.boolean()).optional(),
   allowed_ips: z.nullable(z.array(z.string())).optional(),
@@ -146,6 +151,7 @@ export const ApiKeyAttributes$inboundSchema: z.ZodType<
 export type ApiKeyAttributes$Outbound = {
   name?: string | undefined;
   api_version?: string | undefined;
+  token?: string | undefined;
   token_last_slice?: string | undefined;
   read_only?: boolean | null | undefined;
   allowed_ips?: Array<string> | null | undefined;
@@ -163,6 +169,7 @@ export const ApiKeyAttributes$outboundSchema: z.ZodType<
 > = z.object({
   name: z.string().optional(),
   apiVersion: z.string().optional(),
+  token: z.string().optional(),
   tokenLastSlice: z.string().optional(),
   readOnly: z.nullable(z.boolean()).optional(),
   allowedIps: z.nullable(z.array(z.string())).optional(),

@@ -4,16 +4,16 @@
 
 ### Available Operations
 
-* [postTeamMembers](#postteammembers) - Add a Team Member
-* [delete](#delete) - Remove a Team Member
+* [postTeamMembers](#postteammembers) - Create member
+* [delete](#delete) - Remove a member
 
 ## postTeamMembers
 
-Add a Team Member
+Create member
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="post-team-members" method="post" path="/team/members" -->
+<!-- UsageSnippet language="typescript" operationID="post-team-members" method="post" path="/team/members" example="Created" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -98,7 +98,7 @@ run();
 
 ## delete
 
-Remove a Team Member
+Remove a member
 
 ### Example Usage
 

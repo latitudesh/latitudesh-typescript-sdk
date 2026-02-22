@@ -35,6 +35,10 @@ export type CreateFirewallRule2 = {
    * Port number or range (e.g., "80", "80-443")
    */
   port?: string | undefined;
+  /**
+   * Optional description explaining the purpose of this rule
+   */
+  description?: string | null | undefined;
 };
 
 export type CreateFirewallAttributes2 = {
@@ -80,6 +84,7 @@ export const CreateFirewallRule2$inboundSchema: z.ZodType<
   to: z.string().optional(),
   protocol: CreateFirewallProtocol2$inboundSchema.optional(),
   port: z.string().optional(),
+  description: z.nullable(z.string()).optional(),
 });
 /** @internal */
 export type CreateFirewallRule2$Outbound = {
@@ -87,6 +92,7 @@ export type CreateFirewallRule2$Outbound = {
   to?: string | undefined;
   protocol?: string | undefined;
   port?: string | undefined;
+  description?: string | null | undefined;
 };
 
 /** @internal */
@@ -99,6 +105,7 @@ export const CreateFirewallRule2$outboundSchema: z.ZodType<
   to: z.string().optional(),
   protocol: CreateFirewallProtocol2$outboundSchema.optional(),
   port: z.string().optional(),
+  description: z.nullable(z.string()).optional(),
 });
 
 export function createFirewallRule2ToJSON(

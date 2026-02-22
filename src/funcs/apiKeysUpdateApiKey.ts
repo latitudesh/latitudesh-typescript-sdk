@@ -25,7 +25,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Update API Key Settings
+ * Update API key settings
  *
  * @remarks
  * Update API Key settings (name, read_only, allowed_ips) without rotating the token.

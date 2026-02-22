@@ -34,7 +34,6 @@ import { tool$ipAddressesList } from "./tools/ipAddressesList.js";
 import { tool$operatingSystemsListPlans } from "./tools/operatingSystemsListPlans.js";
 import { tool$plansGet } from "./tools/plansGet.js";
 import { tool$plansGetBandwidth } from "./tools/plansGetBandwidth.js";
-import { tool$plansGetContainersPlan } from "./tools/plansGetContainersPlan.js";
 import { tool$plansList } from "./tools/plansList.js";
 import { tool$plansListStorage } from "./tools/plansListStorage.js";
 import { tool$plansUpdateBandwidth } from "./tools/plansUpdateBandwidth.js";
@@ -121,6 +120,7 @@ import { tool$virtualMachinesCreateVirtualMachineAction } from "./tools/virtualM
 import { tool$virtualMachinesDelete } from "./tools/virtualMachinesDelete.js";
 import { tool$virtualMachinesGet } from "./tools/virtualMachinesGet.js";
 import { tool$virtualMachinesList } from "./tools/virtualMachinesList.js";
+import { tool$virtualMachinesUpdateVirtualMachine } from "./tools/virtualMachinesUpdateVirtualMachine.js";
 import { tool$virtualNetworksDelete } from "./tools/virtualNetworksDelete.js";
 import { tool$vpnSessionsCreate } from "./tools/vpnSessionsCreate.js";
 import { tool$vpnSessionsDelete } from "./tools/vpnSessionsDelete.js";
@@ -138,7 +138,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Latitudesh",
-    version: "0.2.4",
+    version: "0.3.0",
   });
 
   const client = new LatitudeshCore({
@@ -177,11 +177,11 @@ export function createMCPServer(deps: {
   tool(tool$billingListUsage);
   tool(tool$eventsList);
   tool(tool$firewallsGetAllFirewallAssignments);
-  tool(tool$firewallsList);
   tool(tool$firewallsCreate);
+  tool(tool$firewallsList);
   tool(tool$firewallsGet);
-  tool(tool$firewallsDelete);
   tool(tool$firewallsUpdate);
+  tool(tool$firewallsDelete);
   tool(tool$firewallsListAssignments);
   tool(tool$firewallsDeleteAssignment);
   tool(tool$ipAddressesList);
@@ -196,21 +196,20 @@ export function createMCPServer(deps: {
   tool(tool$plansGet);
   tool(tool$plansGetBandwidth);
   tool(tool$plansUpdateBandwidth);
-  tool(tool$plansGetContainersPlan);
   tool(tool$plansListStorage);
   tool(tool$projectsList);
   tool(tool$projectsCreate);
-  tool(tool$projectsDelete);
   tool(tool$projectsUpdate);
+  tool(tool$projectsDelete);
   tool(tool$sshKeysList);
   tool(tool$sshKeysGet);
-  tool(tool$sshKeysRemoveFromProject);
   tool(tool$sshKeysModifyProjectKey);
+  tool(tool$sshKeysRemoveFromProject);
   tool(tool$sshKeysListAll);
   tool(tool$sshKeysCreate);
   tool(tool$sshKeysRetrieve);
-  tool(tool$sshKeysDelete);
   tool(tool$sshKeysUpdate);
+  tool(tool$sshKeysDelete);
   tool(tool$userDataGetProjectUsersData);
   tool(tool$userDataGetProjectUserData);
   tool(tool$userDataDeleteProjectUserData);
@@ -219,8 +218,8 @@ export function createMCPServer(deps: {
   tool(tool$userDataList);
   tool(tool$userDataCreateNew);
   tool(tool$userDataRetrieve);
-  tool(tool$userDataDelete);
   tool(tool$userDataUpdate);
+  tool(tool$userDataDelete);
   tool(tool$regionsGet);
   tool(tool$regionsFetch);
   tool(tool$rolesList);
@@ -228,14 +227,14 @@ export function createMCPServer(deps: {
   tool(tool$serversList);
   tool(tool$serversCreate);
   tool(tool$serversGet);
-  tool(tool$serversDelete);
   tool(tool$serversUpdate);
+  tool(tool$serversDelete);
   tool(tool$serversGetDeployConfig);
   tool(tool$serversUpdateDeployConfig);
   tool(tool$serversLock);
   tool(tool$serversUnlock);
-  tool(tool$serversGetOutOfBand);
   tool(tool$serversStartOutOfBandConnection);
+  tool(tool$serversGetOutOfBand);
   tool(tool$serversRunAction);
   tool(tool$serversCreateIpmiSession);
   tool(tool$serversStartRescueMode);
@@ -243,8 +242,8 @@ export function createMCPServer(deps: {
   tool(tool$serversScheduleDeletion);
   tool(tool$serversUnscheduleDeletion);
   tool(tool$serversReinstall);
-  tool(tool$storageListFilesystems);
   tool(tool$storageCreateFilesystem);
+  tool(tool$storageListFilesystems);
   tool(tool$storageDeleteFilesystem);
   tool(tool$storageUpdateFilesystem);
   tool(tool$storageGetStorageVolumes);
@@ -254,22 +253,23 @@ export function createMCPServer(deps: {
   tool(tool$storagePostStorageVolumesMount);
   tool(tool$tagsList);
   tool(tool$tagsCreate);
-  tool(tool$tagsDelete);
   tool(tool$tagsUpdate);
+  tool(tool$tagsDelete);
   tool(tool$trafficGet);
   tool(tool$trafficGetQuota);
   tool(tool$userProfileGet);
   tool(tool$userProfileUpdate);
   tool(tool$userProfileListTeams);
-  tool(tool$virtualMachinesList);
   tool(tool$virtualMachinesCreate);
+  tool(tool$virtualMachinesList);
   tool(tool$virtualMachinesGet);
   tool(tool$virtualMachinesDelete);
+  tool(tool$virtualMachinesUpdateVirtualMachine);
   tool(tool$virtualMachinesCreateVirtualMachineAction);
   tool(tool$privateNetworksList);
   tool(tool$privateNetworksCreate);
-  tool(tool$privateNetworksGet);
   tool(tool$privateNetworksUpdate);
+  tool(tool$privateNetworksGet);
   tool(tool$privateNetworksListAssignments);
   tool(tool$privateNetworksAssign);
   tool(tool$privateNetworksDeleteAssignment);

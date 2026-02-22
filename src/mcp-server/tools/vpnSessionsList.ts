@@ -12,7 +12,7 @@ const args = {
 
 export const tool$vpnSessionsList: ToolDefinition<typeof args> = {
   name: "vpn-sessions-list",
-  description: `List all Active VPN Sessions`,
+  description: `List VPN sessions`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await vpnSessionsList(

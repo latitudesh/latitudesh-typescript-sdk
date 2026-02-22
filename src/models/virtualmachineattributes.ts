@@ -63,6 +63,7 @@ export type VirtualMachineAttributesAttributes = {
   name?: string | undefined;
   createdAt?: string | undefined;
   status?: VirtualMachineAttributesStatus | undefined;
+  primaryIpv4?: string | null | undefined;
   operatingSystem?: string | null | undefined;
   credentials?: VirtualMachineAttributesCredentials | null | undefined;
   plan?: VirtualMachineAttributesPlan | undefined;
@@ -260,6 +261,7 @@ export const VirtualMachineAttributesAttributes$inboundSchema: z.ZodType<
   name: z.string().optional(),
   created_at: z.string().optional(),
   status: VirtualMachineAttributesStatus$inboundSchema.optional(),
+  primary_ipv4: z.nullable(z.string()).optional(),
   operating_system: z.nullable(z.string()).optional(),
   credentials: z.nullable(
     z.lazy(() => VirtualMachineAttributesCredentials$inboundSchema),
@@ -271,6 +273,7 @@ export const VirtualMachineAttributesAttributes$inboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     "created_at": "createdAt",
+    "primary_ipv4": "primaryIpv4",
     "operating_system": "operatingSystem",
   });
 });
@@ -279,6 +282,7 @@ export type VirtualMachineAttributesAttributes$Outbound = {
   name?: string | undefined;
   created_at?: string | undefined;
   status?: string | undefined;
+  primary_ipv4?: string | null | undefined;
   operating_system?: string | null | undefined;
   credentials?: VirtualMachineAttributesCredentials$Outbound | null | undefined;
   plan?: VirtualMachineAttributesPlan$Outbound | undefined;
@@ -296,6 +300,7 @@ export const VirtualMachineAttributesAttributes$outboundSchema: z.ZodType<
   name: z.string().optional(),
   createdAt: z.string().optional(),
   status: VirtualMachineAttributesStatus$outboundSchema.optional(),
+  primaryIpv4: z.nullable(z.string()).optional(),
   operatingSystem: z.nullable(z.string()).optional(),
   credentials: z.nullable(
     z.lazy(() => VirtualMachineAttributesCredentials$outboundSchema),
@@ -307,6 +312,7 @@ export const VirtualMachineAttributesAttributes$outboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     createdAt: "created_at",
+    primaryIpv4: "primary_ipv4",
     operatingSystem: "operating_system",
   });
 });

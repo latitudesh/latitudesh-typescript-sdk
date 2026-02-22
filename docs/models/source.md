@@ -1,15 +1,15 @@
-# EphemeralStorage
+# Source
 
 ## Example Usage
 
 ```typescript
-import { EphemeralStorage } from "latitudesh-typescript-sdk/models";
+import { Source } from "latitudesh-typescript-sdk/models";
 
-let value: EphemeralStorage = {};
+let value: Source = {};
 ```
 
 ## Fields
 
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
-| `size`             | *number*           | :heavy_minus_sign: | N/A                |
+| `pointer`          | *string*           | :heavy_minus_sign: | N/A                |

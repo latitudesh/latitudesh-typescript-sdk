@@ -9,7 +9,7 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class VirtualNetworks extends ClientSDK {
   /**
-   * Delete a Virtual Network
+   * Delete VLAN
    *
    * @remarks
    * Delete virtual network

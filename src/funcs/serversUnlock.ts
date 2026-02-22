@@ -26,7 +26,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Unlock the server
+ * Unlock server
  *
  * @remarks
  * Unlocks the server. A locked server cannot be deleted or modified and no actions can be performed on it.
