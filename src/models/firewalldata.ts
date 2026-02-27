@@ -24,6 +24,10 @@ export type Rule = {
   to?: string | undefined;
   port?: string | undefined;
   protocol?: string | undefined;
+  /**
+   * Optional description explaining the purpose of this rule
+   */
+  description?: string | null | undefined;
 };
 
 export type FirewallDataProject = {
@@ -60,6 +64,7 @@ export const Rule$inboundSchema: z.ZodType<Rule, z.ZodTypeDef, unknown> = z
     to: z.string().optional(),
     port: z.string().optional(),
     protocol: z.string().optional(),
+    description: z.nullable(z.string()).optional(),
   });
 /** @internal */
 export type Rule$Outbound = {
@@ -67,6 +72,7 @@ export type Rule$Outbound = {
   to?: string | undefined;
   port?: string | undefined;
   protocol?: string | undefined;
+  description?: string | null | undefined;
 };
 
 /** @internal */
@@ -76,6 +82,7 @@ export const Rule$outboundSchema: z.ZodType<Rule$Outbound, z.ZodTypeDef, Rule> =
     to: z.string().optional(),
     port: z.string().optional(),
     protocol: z.string().optional(),
+    description: z.nullable(z.string()).optional(),
   });
 
 export function ruleToJSON(rule: Rule): string {

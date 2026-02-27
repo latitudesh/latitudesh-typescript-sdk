@@ -9,11 +9,11 @@ import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 
-export const Family = {
+export const IpAddressFamily = {
   IPv4: "IPv4",
   IPv6: "IPv6",
 } as const;
-export type Family = ClosedEnum<typeof Family>;
+export type IpAddressFamily = ClosedEnum<typeof IpAddressFamily>;
 
 export const IpAddressType = {
   Public: "Public",
@@ -47,7 +47,7 @@ export type Assignment = {
 export type IpAddressAttributes = {
   address?: string | undefined;
   cidr?: string | null | undefined;
-  family?: Family | undefined;
+  family?: IpAddressFamily | undefined;
   gateway?: string | null | undefined;
   netmask?: string | undefined;
   type?: IpAddressType | undefined;
@@ -66,11 +66,13 @@ export type IpAddress = {
 };
 
 /** @internal */
-export const Family$inboundSchema: z.ZodNativeEnum<typeof Family> = z
-  .nativeEnum(Family);
+export const IpAddressFamily$inboundSchema: z.ZodNativeEnum<
+  typeof IpAddressFamily
+> = z.nativeEnum(IpAddressFamily);
 /** @internal */
-export const Family$outboundSchema: z.ZodNativeEnum<typeof Family> =
-  Family$inboundSchema;
+export const IpAddressFamily$outboundSchema: z.ZodNativeEnum<
+  typeof IpAddressFamily
+> = IpAddressFamily$inboundSchema;
 
 /** @internal */
 export const IpAddressType$inboundSchema: z.ZodNativeEnum<
@@ -266,7 +268,7 @@ export const IpAddressAttributes$inboundSchema: z.ZodType<
 > = z.object({
   address: z.string().optional(),
   cidr: z.nullable(z.string()).optional(),
-  family: Family$inboundSchema.optional(),
+  family: IpAddressFamily$inboundSchema.optional(),
   gateway: z.nullable(z.string()).optional(),
   netmask: z.string().optional(),
   type: IpAddressType$inboundSchema.optional(),
@@ -303,7 +305,7 @@ export const IpAddressAttributes$outboundSchema: z.ZodType<
 > = z.object({
   address: z.string().optional(),
   cidr: z.nullable(z.string()).optional(),
-  family: Family$outboundSchema.optional(),
+  family: IpAddressFamily$outboundSchema.optional(),
   gateway: z.nullable(z.string()).optional(),
   netmask: z.string().optional(),
   type: IpAddressType$outboundSchema.optional(),

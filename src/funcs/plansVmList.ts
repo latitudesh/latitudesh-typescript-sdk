@@ -26,7 +26,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * List all Virtual Machines Plans
+ * List VM plans
  */
 export function plansVmList(
   client: LatitudeshCore,

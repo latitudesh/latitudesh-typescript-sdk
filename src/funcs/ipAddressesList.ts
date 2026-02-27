@@ -233,7 +233,7 @@ async function $do(
       ipAddressesList(
         client,
         {
-          ...request,
+          ...request!,
           pageNumber: nextPage,
         },
         options,

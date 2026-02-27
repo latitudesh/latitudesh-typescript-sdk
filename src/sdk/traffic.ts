@@ -11,7 +11,7 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class Traffic extends ClientSDK {
   /**
-   * Retrieve Traffic consumption
+   * Retrieve traffic
    */
   async get(
     request: operations.GetTrafficConsumptionRequest,
@@ -25,7 +25,7 @@ export class Traffic extends ClientSDK {
   }
 
   /**
-   * Retrieve Traffic Quota
+   * Retrieve traffic quota
    */
   async getQuota(
     request?: operations.GetTrafficQuotaRequest | undefined,

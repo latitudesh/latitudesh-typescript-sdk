@@ -17,7 +17,7 @@ import { PageIterator, unwrapResultIterator } from "../types/operations.js";
 
 export class PrivateNetworks extends ClientSDK {
   /**
-   * List all Virtual Networks
+   * List VLANs
    *
    * @remarks
    * Lists virtual networks assigned to a project
@@ -36,7 +36,7 @@ export class PrivateNetworks extends ClientSDK {
   }
 
   /**
-   * Create a Virtual Network
+   * Create VLAN
    *
    * @remarks
    * Creates a new Virtual Network.
@@ -53,24 +53,7 @@ export class PrivateNetworks extends ClientSDK {
   }
 
   /**
-   * Retrieve a Virtual Network
-   *
-   * @remarks
-   * Retrieve a Virtual Network.
-   */
-  async get(
-    request: operations.GetVirtualNetworkRequest,
-    options?: RequestOptions,
-  ): Promise<operations.GetVirtualNetworkResponse> {
-    return unwrapAsync(privateNetworksGet(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Update a Virtual Network
+   * Update VLAN
    *
    * @remarks
    * Update a Virtual Network.
@@ -87,7 +70,24 @@ export class PrivateNetworks extends ClientSDK {
   }
 
   /**
-   * List all servers assigned to virtual networks
+   * Retrieve VLAN
+   *
+   * @remarks
+   * Retrieve a Virtual Network.
+   */
+  async get(
+    request: operations.GetVirtualNetworkRequest,
+    options?: RequestOptions,
+  ): Promise<models.VirtualNetwork> {
+    return unwrapAsync(privateNetworksGet(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List VLAN assignments
    *
    * @remarks
    * Returns a list of all servers assigned to virtual networks.
@@ -109,7 +109,7 @@ export class PrivateNetworks extends ClientSDK {
   }
 
   /**
-   * Assign Virtual network
+   * Assign VLAN
    */
   async assign(
     request: operations.AssignServerVirtualNetworkRequest,
@@ -123,7 +123,7 @@ export class PrivateNetworks extends ClientSDK {
   }
 
   /**
-   * Delete Virtual Network Assignment
+   * Delete VLAN assignment
    *
    * @remarks
    * Allow you to remove a Virtual Network assignment.

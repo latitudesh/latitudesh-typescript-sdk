@@ -1,0 +1,23 @@
+# ElasticIpDataAttributes
+
+## Example Usage
+
+```typescript
+import { ElasticIpDataAttributes } from "latitudesh-typescript-sdk/models";
+
+let value: ElasticIpDataAttributes = {};
+```
+
+## Fields
+
+| Field                                                                                         | Type                                                                                          | Required                                                                                      | Description                                                                                   |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `address`                                                                                     | *string*                                                                                      | :heavy_minus_sign:                                                                            | The IP address                                                                                |
+| `family`                                                                                      | [models.ElasticIpDataFamily](../models/elasticipdatafamily.md)                                | :heavy_minus_sign:                                                                            | The IP address family                                                                         |
+| `prefixLength`                                                                                | *number*                                                                                      | :heavy_minus_sign:                                                                            | The prefix length (e.g., 32 for a single IP)                                                  |
+| `mode`                                                                                        | [models.Mode](../models/mode.md)                                                              | :heavy_minus_sign:                                                                            | The routing mode for this Elastic IP                                                          |
+| `status`                                                                                      | [models.ElasticIpDataStatus](../models/elasticipdatastatus.md)                                | :heavy_minus_sign:                                                                            | The current status of the Elastic IP                                                          |
+| `createdAt`                                                                                   | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | The timestamp when the Elastic IP was created                                                 |
+| `server`                                                                                      | [models.ElasticIpDataServer](../models/elasticipdataserver.md)                                | :heavy_minus_sign:                                                                            | The server this Elastic IP is assigned to                                                     |
+| `project`                                                                                     | [models.ElasticIpDataProject](../models/elasticipdataproject.md)                              | :heavy_minus_sign:                                                                            | The project this Elastic IP belongs to                                                        |
+| `region`                                                                                      | [models.ElasticIpDataRegion](../models/elasticipdataregion.md)                                | :heavy_minus_sign:                                                                            | The region where this Elastic IP is located                                                   |

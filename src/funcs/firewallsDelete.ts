@@ -26,10 +26,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Delete Firewall
- *
- * @remarks
- * Delete a firewall
+ * Delete firewall
  */
 export function firewallsDelete(
   client: LatitudeshCore,

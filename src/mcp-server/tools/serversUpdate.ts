@@ -12,7 +12,7 @@ const args = {
 
 export const tool$serversUpdate: ToolDefinition<typeof args> = {
   name: "servers-update",
-  description: `Update Server`,
+  description: `Update server`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await serversUpdate(

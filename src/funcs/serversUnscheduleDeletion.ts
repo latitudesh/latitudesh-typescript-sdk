@@ -26,7 +26,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Unschedule the server deletion
+ * Unschedule server deletion
  *
  * @remarks
  * Unschedules the server removal at the end of the billing cycle.

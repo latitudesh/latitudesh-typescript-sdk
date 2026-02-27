@@ -32,7 +32,7 @@ import {
 } from "../types/operations.js";
 
 /**
- * List all servers assigned to virtual networks
+ * List VLAN assignments
  *
  * @remarks
  * Returns a list of all servers assigned to virtual networks.
@@ -228,7 +228,7 @@ async function $do(
       privateNetworksListAssignments(
         client,
         {
-          ...request,
+          ...request!,
           pageNumber: nextPage,
         },
         options,
