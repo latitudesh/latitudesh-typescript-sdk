@@ -5,9 +5,11 @@
 import { ClientSDK } from "../lib/sdks.js";
 import { ApiKeys } from "./apikeys.js";
 import { Billing } from "./billing.js";
+import { ElasticIPs } from "./elasticips.js";
 import { Events } from "./events.js";
 import { Firewalls } from "./firewalls.js";
 import { IpAddresses } from "./ipaddresses.js";
+import { KubernetesClusters } from "./kubernetesclusters.js";
 import { OperatingSystems } from "./operatingsystems.js";
 import { Plans } from "./plans.js";
 import { PrivateNetworks } from "./privatenetworks.js";
@@ -48,6 +50,11 @@ export class Latitudesh extends ClientSDK {
     return (this._firewalls ??= new Firewalls(this._options));
   }
 
+  private _elasticIPs?: ElasticIPs;
+  get elasticIPs(): ElasticIPs {
+    return (this._elasticIPs ??= new ElasticIPs(this._options));
+  }
+
   private _ipAddresses?: IpAddresses;
   get ipAddresses(): IpAddresses {
     return (this._ipAddresses ??= new IpAddresses(this._options));
@@ -66,6 +73,11 @@ export class Latitudesh extends ClientSDK {
   private _operatingSystems?: OperatingSystems;
   get operatingSystems(): OperatingSystems {
     return (this._operatingSystems ??= new OperatingSystems(this._options));
+  }
+
+  private _kubernetesClusters?: KubernetesClusters;
+  get kubernetesClusters(): KubernetesClusters {
+    return (this._kubernetesClusters ??= new KubernetesClusters(this._options));
   }
 
   private _plans?: Plans;

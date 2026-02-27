@@ -19,7 +19,7 @@ export class Projects extends ClientSDK {
   }
 
   /**
-   * List all Projects
+   * List projects
    *
    * @remarks
    * Returns a list of all projects for the current team
@@ -36,7 +36,7 @@ export class Projects extends ClientSDK {
   }
 
   /**
-   * Create a Project
+   * Create project
    */
   async create(
     request: operations.CreateProjectRequest,
@@ -50,13 +50,13 @@ export class Projects extends ClientSDK {
   }
 
   /**
-   * Delete a Project
+   * Update project
    */
-  async delete(
-    request: operations.DeleteProjectRequest,
+  async update(
+    request: operations.UpdateProjectRequest,
     options?: RequestOptions,
-  ): Promise<void> {
-    return unwrapAsync(projectsDelete(
+  ): Promise<operations.UpdateProjectResponse> {
+    return unwrapAsync(projectsUpdate(
       this,
       request,
       options,
@@ -64,13 +64,13 @@ export class Projects extends ClientSDK {
   }
 
   /**
-   * Update a Project
+   * Delete project
    */
-  async update(
-    request: operations.UpdateProjectRequest,
+  async delete(
+    request: operations.DeleteProjectRequest,
     options?: RequestOptions,
-  ): Promise<operations.UpdateProjectResponse> {
-    return unwrapAsync(projectsUpdate(
+  ): Promise<void> {
+    return unwrapAsync(projectsDelete(
       this,
       request,
       options,

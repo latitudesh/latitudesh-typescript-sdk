@@ -30,6 +30,10 @@ export type UpdateFirewallRule2 = {
    * Port number or range (e.g., "80", "80-443")
    */
   port?: string | undefined;
+  /**
+   * Optional description explaining the purpose of this rule
+   */
+  description?: string | null | undefined;
 };
 
 export type UpdateFirewallAttributes2 = {
@@ -82,6 +86,7 @@ export const UpdateFirewallRule2$inboundSchema: z.ZodType<
   to: z.string().optional(),
   protocol: UpdateFirewallProtocol2$inboundSchema.optional(),
   port: z.string().optional(),
+  description: z.nullable(z.string()).optional(),
 });
 /** @internal */
 export type UpdateFirewallRule2$Outbound = {
@@ -89,6 +94,7 @@ export type UpdateFirewallRule2$Outbound = {
   to?: string | undefined;
   protocol?: string | undefined;
   port?: string | undefined;
+  description?: string | null | undefined;
 };
 
 /** @internal */
@@ -101,6 +107,7 @@ export const UpdateFirewallRule2$outboundSchema: z.ZodType<
   to: z.string().optional(),
   protocol: UpdateFirewallProtocol2$outboundSchema.optional(),
   port: z.string().optional(),
+  description: z.nullable(z.string()).optional(),
 });
 
 export function updateFirewallRule2ToJSON(

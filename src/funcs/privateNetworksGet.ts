@@ -20,12 +20,13 @@ import {
 import { LatitudeshError } from "../models/errors/latitudesherror.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import * as models from "../models/index.js";
 import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Retrieve a Virtual Network
+ * Retrieve VLAN
  *
  * @remarks
  * Retrieve a Virtual Network.
@@ -36,7 +37,7 @@ export function privateNetworksGet(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetVirtualNetworkResponse,
+    models.VirtualNetwork,
     | LatitudeshError
     | ResponseValidationError
     | ConnectionError
@@ -61,7 +62,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      operations.GetVirtualNetworkResponse,
+      models.VirtualNetwork,
       | LatitudeshError
       | ResponseValidationError
       | ConnectionError
@@ -144,7 +145,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    operations.GetVirtualNetworkResponse,
+    models.VirtualNetwork,
     | LatitudeshError
     | ResponseValidationError
     | ConnectionError
@@ -154,7 +155,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.GetVirtualNetworkResponse$inboundSchema, {
+    M.json(200, models.VirtualNetwork$inboundSchema, {
       ctype: "application/vnd.api+json",
     }),
     M.fail("4XX"),

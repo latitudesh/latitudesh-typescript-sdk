@@ -224,7 +224,7 @@ async function $do(
       firewallsList(
         client,
         {
-          ...request,
+          ...request!,
           pageNumber: nextPage,
         },
         options,

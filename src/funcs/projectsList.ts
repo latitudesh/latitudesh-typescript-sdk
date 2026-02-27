@@ -32,7 +32,7 @@ import {
 } from "../types/operations.js";
 
 /**
- * List all Projects
+ * List projects
  *
  * @remarks
  * Returns a list of all projects for the current team
@@ -230,7 +230,7 @@ async function $do(
       projectsList(
         client,
         {
-          ...request,
+          ...request!,
           pageNumber: nextPage,
         },
         options,

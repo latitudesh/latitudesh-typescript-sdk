@@ -4,15 +4,162 @@
 
 ### Available Operations
 
+* [createFilesystem](#createfilesystem) - Create filesystem
 * [listFilesystems](#listfilesystems) - List filesystems
-* [createFilesystem](#createfilesystem) - Create a filesystem for a project
-* [deleteFilesystem](#deletefilesystem) - Delete a filesystem for a project
-* [updateFilesystem](#updatefilesystem) - Update a filesystem for a project
+* [deleteFilesystem](#deletefilesystem) - Delete filesystem
+* [updateFilesystem](#updatefilesystem) - Update filesystem
 * [getStorageVolumes](#getstoragevolumes) - List volumes
 * [postStorageVolumes](#poststoragevolumes) - Create volume
-* [getStorageVolume](#getstoragevolume) - Get volume
+* [getStorageVolume](#getstoragevolume) - Retrieve volume
 * [deleteStorageVolumes](#deletestoragevolumes) - Delete volume
 * [postStorageVolumesMount](#poststoragevolumesmount) - Mount volume
+
+## createFilesystem
+
+Allows you to add persistent storage to a project. These filesystems can be used to store data across your servers.
+
+### Example Usage: Created
+
+<!-- UsageSnippet language="typescript" operationID="post-storage-filesystems" method="post" path="/storage/filesystems" example="Created" -->
+```typescript
+import { Latitudesh } from "latitudesh-typescript-sdk";
+
+const latitudesh = new Latitudesh({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const result = await latitudesh.storage.createFilesystem({
+    data: {
+      type: "filesystems",
+      attributes: {
+        project: "proj_lkg1De6ROvZE5",
+        name: "my-data",
+      },
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
+import { storageCreateFilesystem } from "latitudesh-typescript-sdk/funcs/storageCreateFilesystem.js";
+
+// Use `LatitudeshCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const latitudesh = new LatitudeshCore({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const res = await storageCreateFilesystem(latitudesh, {
+    data: {
+      type: "filesystems",
+      attributes: {
+        project: "proj_lkg1De6ROvZE5",
+        name: "my-data",
+      },
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("storageCreateFilesystem failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: Storage creation frozen
+
+<!-- UsageSnippet language="typescript" operationID="post-storage-filesystems" method="post" path="/storage/filesystems" example="Storage creation frozen" -->
+```typescript
+import { Latitudesh } from "latitudesh-typescript-sdk";
+
+const latitudesh = new Latitudesh({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const result = await latitudesh.storage.createFilesystem({
+    data: {
+      type: "filesystems",
+      attributes: {
+        project: "<value>",
+        name: "<value>",
+      },
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
+import { storageCreateFilesystem } from "latitudesh-typescript-sdk/funcs/storageCreateFilesystem.js";
+
+// Use `LatitudeshCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const latitudesh = new LatitudeshCore({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const res = await storageCreateFilesystem(latitudesh, {
+    data: {
+      type: "filesystems",
+      attributes: {
+        project: "<value>",
+        name: "<value>",
+      },
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("storageCreateFilesystem failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.PostStorageFilesystemsRequest](../../models/operations/poststoragefilesystemsrequest.md)                                                                           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.PostStorageFilesystemsResponse](../../models/operations/poststoragefilesystemsresponse.md)\>**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| errors.ErrorObject            | 503                           | application/vnd.api+json      |
+| errors.LatitudeshDefaultError | 4XX, 5XX                      | \*/\*                         |
 
 ## listFilesystems
 
@@ -80,91 +227,6 @@ run();
 ### Response
 
 **Promise\<void\>**
-
-### Errors
-
-| Error Type                    | Status Code                   | Content Type                  |
-| ----------------------------- | ----------------------------- | ----------------------------- |
-| errors.LatitudeshDefaultError | 4XX, 5XX                      | \*/\*                         |
-
-## createFilesystem
-
-Allows you to add persistent storage to a project. These filesystems can be used to store data across your servers.
-
-### Example Usage
-
-<!-- UsageSnippet language="typescript" operationID="post-storage-filesystems" method="post" path="/storage/filesystems" -->
-```typescript
-import { Latitudesh } from "latitudesh-typescript-sdk";
-
-const latitudesh = new Latitudesh({
-  bearer: process.env["LATITUDESH_BEARER"] ?? "",
-});
-
-async function run() {
-  const result = await latitudesh.storage.createFilesystem({
-    data: {
-      type: "filesystems",
-      attributes: {
-        project: "proj_lkg1De6ROvZE5",
-        name: "my-data",
-      },
-    },
-  });
-
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
-import { storageCreateFilesystem } from "latitudesh-typescript-sdk/funcs/storageCreateFilesystem.js";
-
-// Use `LatitudeshCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const latitudesh = new LatitudeshCore({
-  bearer: process.env["LATITUDESH_BEARER"] ?? "",
-});
-
-async function run() {
-  const res = await storageCreateFilesystem(latitudesh, {
-    data: {
-      type: "filesystems",
-      attributes: {
-        project: "proj_lkg1De6ROvZE5",
-        name: "my-data",
-      },
-    },
-  });
-  if (res.ok) {
-    const { value: result } = res;
-    console.log(result);
-  } else {
-    console.log("storageCreateFilesystem failed:", res.error);
-  }
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.PostStorageFilesystemsRequest](../../models/operations/poststoragefilesystemsrequest.md)                                                                           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[operations.PostStorageFilesystemsResponse](../../models/operations/poststoragefilesystemsresponse.md)\>**
 
 ### Errors
 
@@ -251,7 +313,7 @@ Allow you to upgrade the size of a filesystem.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="patch-storage-filesystems" method="patch" path="/storage/filesystems/{filesystem_id}" -->
+<!-- UsageSnippet language="typescript" operationID="patch-storage-filesystems" method="patch" path="/storage/filesystems/{filesystem_id}" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -342,7 +404,7 @@ Lists all the volumes from a team.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-storage-volumes" method="get" path="/storage/volumes" -->
+<!-- UsageSnippet language="typescript" operationID="get-storage-volumes" method="get" path="/storage/volumes" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -413,9 +475,9 @@ run();
 
 Allows you to add persistent storage to a project. These volumes can be used to store data across your servers.
 
-### Example Usage
+### Example Usage: Created
 
-<!-- UsageSnippet language="typescript" operationID="post-storage-volumes" method="post" path="/storage/volumes" -->
+<!-- UsageSnippet language="typescript" operationID="post-storage-volumes" method="post" path="/storage/volumes" example="Created" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -474,6 +536,67 @@ async function run() {
 
 run();
 ```
+### Example Usage: Storage creation frozen
+
+<!-- UsageSnippet language="typescript" operationID="post-storage-volumes" method="post" path="/storage/volumes" example="Storage creation frozen" -->
+```typescript
+import { Latitudesh } from "latitudesh-typescript-sdk";
+
+const latitudesh = new Latitudesh({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const result = await latitudesh.storage.postStorageVolumes({
+    data: {
+      type: "volumes",
+      attributes: {
+        project: "<value>",
+        name: "<value>",
+      },
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
+import { storagePostStorageVolumes } from "latitudesh-typescript-sdk/funcs/storagePostStorageVolumes.js";
+
+// Use `LatitudeshCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const latitudesh = new LatitudeshCore({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const res = await storagePostStorageVolumes(latitudesh, {
+    data: {
+      type: "volumes",
+      attributes: {
+        project: "<value>",
+        name: "<value>",
+      },
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("storagePostStorageVolumes failed:", res.error);
+  }
+}
+
+run();
+```
 
 ### Parameters
 
@@ -492,6 +615,7 @@ run();
 
 | Error Type                    | Status Code                   | Content Type                  |
 | ----------------------------- | ----------------------------- | ----------------------------- |
+| errors.ErrorObject            | 503                           | application/vnd.api+json      |
 | errors.LatitudeshDefaultError | 4XX, 5XX                      | \*/\*                         |
 
 ## getStorageVolume
@@ -500,7 +624,7 @@ Shows details of a specific volume storage.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-storage-volume" method="get" path="/storage/volumes/{id}" -->
+<!-- UsageSnippet language="typescript" operationID="get-storage-volume" method="get" path="/storage/volumes/{id}" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 

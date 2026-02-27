@@ -32,10 +32,10 @@ import {
 } from "../types/operations.js";
 
 /**
- * List all Events
+ * List events
  *
  * @remarks
- * Lists all events.
+ * Lists actions performed by users on your account.
  */
 export function eventsList(
   client: LatitudeshCore,
@@ -231,7 +231,7 @@ async function $do(
       eventsList(
         client,
         {
-          ...request,
+          ...request!,
           pageNumber: nextPage,
         },
         options,

@@ -4,15 +4,15 @@
 
 ### Available Operations
 
-* [list](#list) - List all Virtual Machines Plans
+* [list](#list) - List VM plans
 
 ## list
 
-List all Virtual Machines Plans
+List VM plans
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-vm-plans" method="get" path="/plans/virtual_machines" -->
+<!-- UsageSnippet language="typescript" operationID="get-vm-plans" method="get" path="/plans/virtual_machines" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 

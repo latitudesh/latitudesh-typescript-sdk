@@ -13,18 +13,52 @@ import {
 } from "./apikey.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 
+export type ApiKeysMeta = {};
+
 export type ApiKeys = {
   data?: Array<ApiKey> | undefined;
+  meta?: ApiKeysMeta | undefined;
 };
+
+/** @internal */
+export const ApiKeysMeta$inboundSchema: z.ZodType<
+  ApiKeysMeta,
+  z.ZodTypeDef,
+  unknown
+> = z.object({});
+/** @internal */
+export type ApiKeysMeta$Outbound = {};
+
+/** @internal */
+export const ApiKeysMeta$outboundSchema: z.ZodType<
+  ApiKeysMeta$Outbound,
+  z.ZodTypeDef,
+  ApiKeysMeta
+> = z.object({});
+
+export function apiKeysMetaToJSON(apiKeysMeta: ApiKeysMeta): string {
+  return JSON.stringify(ApiKeysMeta$outboundSchema.parse(apiKeysMeta));
+}
+export function apiKeysMetaFromJSON(
+  jsonString: string,
+): SafeParseResult<ApiKeysMeta, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ApiKeysMeta$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ApiKeysMeta' from JSON`,
+  );
+}
 
 /** @internal */
 export const ApiKeys$inboundSchema: z.ZodType<ApiKeys, z.ZodTypeDef, unknown> =
   z.object({
     data: z.array(ApiKey$inboundSchema).optional(),
+    meta: z.lazy(() => ApiKeysMeta$inboundSchema).optional(),
   });
 /** @internal */
 export type ApiKeys$Outbound = {
   data?: Array<ApiKey$Outbound> | undefined;
+  meta?: ApiKeysMeta$Outbound | undefined;
 };
 
 /** @internal */
@@ -34,6 +68,7 @@ export const ApiKeys$outboundSchema: z.ZodType<
   ApiKeys
 > = z.object({
   data: z.array(ApiKey$outboundSchema).optional(),
+  meta: z.lazy(() => ApiKeysMeta$outboundSchema).optional(),
 });
 
 export function apiKeysToJSON(apiKeys: ApiKeys): string {

@@ -12,7 +12,7 @@ const args = {
 
 export const tool$teamsCreate: ToolDefinition<typeof args> = {
   name: "teams-create",
-  description: `Create a team`,
+  description: `Create team`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await teamsCreate(

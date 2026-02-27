@@ -32,7 +32,7 @@ import {
 } from "../types/operations.js";
 
 /**
- * List all Roles
+ * List roles
  *
  * @remarks
  * Returns a list of all roles that can be assigned to users
@@ -223,7 +223,7 @@ async function $do(
       rolesList(
         client,
         {
-          ...request,
+          ...request!,
           pageNumber: nextPage,
         },
         options,

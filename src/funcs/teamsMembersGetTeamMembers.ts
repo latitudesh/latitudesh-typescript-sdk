@@ -32,7 +32,7 @@ import {
 } from "../types/operations.js";
 
 /**
- * List all Team Members
+ * List members
  */
 export function teamsMembersGetTeamMembers(
   client: LatitudeshCore,
@@ -220,7 +220,7 @@ async function $do(
       teamsMembersGetTeamMembers(
         client,
         {
-          ...request,
+          ...request!,
           pageNumber: nextPage,
         },
         options,

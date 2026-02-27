@@ -7,7 +7,7 @@ import { formatResult, ToolDefinition } from "../tools.js";
 
 export const tool$teamsGet: ToolDefinition = {
   name: "teams-get",
-  description: `Retrieve the team`,
+  description: `Retrieve team`,
   tool: async (client, ctx) => {
     const [result, apiCall] = await teamsGet(
       client,

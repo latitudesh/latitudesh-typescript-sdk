@@ -13,7 +13,7 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class Tags extends ClientSDK {
   /**
-   * List all Tags
+   * List tags
    *
    * @remarks
    * List all Tags in the team.
@@ -28,7 +28,7 @@ export class Tags extends ClientSDK {
   }
 
   /**
-   * Create a Tag
+   * Create tag
    *
    * @remarks
    * Create a Tag in the team.
@@ -45,24 +45,7 @@ export class Tags extends ClientSDK {
   }
 
   /**
-   * Delete Tag
-   *
-   * @remarks
-   * Update a Tag in the team.
-   */
-  async delete(
-    request: operations.DestroyTagRequest,
-    options?: RequestOptions,
-  ): Promise<void> {
-    return unwrapAsync(tagsDelete(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Update Tag
+   * Update tag
    *
    * @remarks
    * Update a Tag in the team.
@@ -72,6 +55,23 @@ export class Tags extends ClientSDK {
     options?: RequestOptions,
   ): Promise<models.CustomTag> {
     return unwrapAsync(tagsUpdate(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Delete tag
+   *
+   * @remarks
+   * Update a Tag in the team.
+   */
+  async delete(
+    request: operations.DestroyTagRequest,
+    options?: RequestOptions,
+  ): Promise<void> {
+    return unwrapAsync(tagsDelete(
       this,
       request,
       options,

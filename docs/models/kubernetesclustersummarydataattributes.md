@@ -1,0 +1,23 @@
+# KubernetesClusterSummaryDataAttributes
+
+## Example Usage
+
+```typescript
+import { KubernetesClusterSummaryDataAttributes } from "latitudesh-typescript-sdk/models";
+
+let value: KubernetesClusterSummaryDataAttributes = {};
+```
+
+## Fields
+
+| Field                                                                                         | Type                                                                                          | Required                                                                                      | Description                                                                                   |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `name`                                                                                        | *string*                                                                                      | :heavy_minus_sign:                                                                            | The cluster name                                                                              |
+| `phase`                                                                                       | [models.KubernetesClusterSummaryDataPhase](../models/kubernetesclustersummarydataphase.md)    | :heavy_minus_sign:                                                                            | The current phase of the cluster lifecycle                                                    |
+| `ready`                                                                                       | *boolean*                                                                                     | :heavy_minus_sign:                                                                            | Whether the cluster is ready to accept workloads                                              |
+| `infrastructureReady`                                                                         | *boolean*                                                                                     | :heavy_minus_sign:                                                                            | Whether the underlying infrastructure is ready                                                |
+| `controlPlaneReady`                                                                           | *boolean*                                                                                     | :heavy_minus_sign:                                                                            | Whether the control plane is ready                                                            |
+| `message`                                                                                     | *string*                                                                                      | :heavy_minus_sign:                                                                            | Human-readable status message describing the current provisioning state                       |
+| `steps`                                                                                       | [models.KubernetesClusterSummaryDataStep](../models/kubernetesclustersummarydatastep.md)[]    | :heavy_minus_sign:                                                                            | Provisioning progress steps for dashboard display                                             |
+| `lastStatusChange`                                                                            | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | Timestamp of the most recent status condition change                                          |
+| `createdAt`                                                                                   | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | When the cluster was created                                                                  |
