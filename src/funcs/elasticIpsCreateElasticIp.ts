@@ -29,11 +29,11 @@ import { Result } from "../types/fp.js";
  * Create an Elastic IP
  *
  * @remarks
- * Creates a new Elastic IP and assigns it to the specified server. The IP is provisioned asynchronously—the response will show status `provisioning` and the `id` will be `null` until provisioning completes.
+ * Creates a new Elastic IP and assigns it to the specified server. The IP is provisioned asynchronously—the response will show status `configuring` and the `id` will be `null` until provisioning completes.
  *
  * **Note:** This feature requires the `elastic_ips` feature flag to be enabled for your team. Currently only IPv4 /32 addresses in routed mode are supported.
  */
-export function elasticIPsCreateElasticIp(
+export function elasticIpsCreateElasticIp(
   client: LatitudeshCore,
   request: models.CreateElasticIp,
   options?: RequestOptions,

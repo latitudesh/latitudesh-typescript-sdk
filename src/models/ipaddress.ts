@@ -26,7 +26,7 @@ export type IpAddressProject = {
   name?: string | undefined;
 };
 
-export type Location = {
+export type IpAddressLocation = {
   id?: string | undefined;
   name?: string | undefined;
   slug?: string | undefined;
@@ -35,7 +35,7 @@ export type Location = {
 export type IpAddressRegion = {
   id?: string | undefined;
   name?: string | undefined;
-  location?: Location | undefined;
+  location?: IpAddressLocation | undefined;
 };
 
 export type Assignment = {
@@ -126,8 +126,8 @@ export function ipAddressProjectFromJSON(
 }
 
 /** @internal */
-export const Location$inboundSchema: z.ZodType<
-  Location,
+export const IpAddressLocation$inboundSchema: z.ZodType<
+  IpAddressLocation,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -136,33 +136,37 @@ export const Location$inboundSchema: z.ZodType<
   slug: z.string().optional(),
 });
 /** @internal */
-export type Location$Outbound = {
+export type IpAddressLocation$Outbound = {
   id?: string | undefined;
   name?: string | undefined;
   slug?: string | undefined;
 };
 
 /** @internal */
-export const Location$outboundSchema: z.ZodType<
-  Location$Outbound,
+export const IpAddressLocation$outboundSchema: z.ZodType<
+  IpAddressLocation$Outbound,
   z.ZodTypeDef,
-  Location
+  IpAddressLocation
 > = z.object({
   id: z.string().optional(),
   name: z.string().optional(),
   slug: z.string().optional(),
 });
 
-export function locationToJSON(location: Location): string {
-  return JSON.stringify(Location$outboundSchema.parse(location));
+export function ipAddressLocationToJSON(
+  ipAddressLocation: IpAddressLocation,
+): string {
+  return JSON.stringify(
+    IpAddressLocation$outboundSchema.parse(ipAddressLocation),
+  );
 }
-export function locationFromJSON(
+export function ipAddressLocationFromJSON(
   jsonString: string,
-): SafeParseResult<Location, SDKValidationError> {
+): SafeParseResult<IpAddressLocation, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Location$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Location' from JSON`,
+    (x) => IpAddressLocation$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'IpAddressLocation' from JSON`,
   );
 }
 
@@ -174,13 +178,13 @@ export const IpAddressRegion$inboundSchema: z.ZodType<
 > = z.object({
   id: z.string().optional(),
   name: z.string().optional(),
-  location: z.lazy(() => Location$inboundSchema).optional(),
+  location: z.lazy(() => IpAddressLocation$inboundSchema).optional(),
 });
 /** @internal */
 export type IpAddressRegion$Outbound = {
   id?: string | undefined;
   name?: string | undefined;
-  location?: Location$Outbound | undefined;
+  location?: IpAddressLocation$Outbound | undefined;
 };
 
 /** @internal */
@@ -191,7 +195,7 @@ export const IpAddressRegion$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string().optional(),
   name: z.string().optional(),
-  location: z.lazy(() => Location$outboundSchema).optional(),
+  location: z.lazy(() => IpAddressLocation$outboundSchema).optional(),
 });
 
 export function ipAddressRegionToJSON(

@@ -1,15 +1,17 @@
-# ElasticIpDataSite
+# IpAddressLocation
 
 ## Example Usage
 
 ```typescript
-import { ElasticIpDataSite } from "latitudesh-typescript-sdk/models";
+import { IpAddressLocation } from "latitudesh-typescript-sdk/models";
 
-let value: ElasticIpDataSite = {};
+let value: IpAddressLocation = {};
 ```
 
 ## Fields
 
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
+| `id`               | *string*           | :heavy_minus_sign: | N/A                |
+| `name`             | *string*           | :heavy_minus_sign: | N/A                |
 | `slug`             | *string*           | :heavy_minus_sign: | N/A                |

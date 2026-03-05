@@ -17,3 +17,4 @@ let value: ElasticIpDataServer = {};
 | `id`               | *string*           | :heavy_minus_sign: | N/A                |
 | `hostname`         | *string*           | :heavy_minus_sign: | N/A                |
 | `primaryIpv4`      | *string*           | :heavy_minus_sign: | N/A                |
+| `operatingSystem`  | *string*           | :heavy_minus_sign: | N/A                |

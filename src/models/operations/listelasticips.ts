@@ -14,8 +14,9 @@ import * as models from "../index.js";
  * The status to filter by
  */
 export const FilterStatus = {
-  Provisioning: "provisioning",
+  Configuring: "configuring",
   Active: "active",
+  Moving: "moving",
   Releasing: "releasing",
   Error: "error",
 } as const;
