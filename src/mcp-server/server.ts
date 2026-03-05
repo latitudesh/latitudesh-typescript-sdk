@@ -19,11 +19,11 @@ import { tool$apiKeysList } from "./tools/apiKeysList.js";
 import { tool$apiKeysUpdate } from "./tools/apiKeysUpdate.js";
 import { tool$apiKeysUpdateApiKey } from "./tools/apiKeysUpdateApiKey.js";
 import { tool$billingListUsage } from "./tools/billingListUsage.js";
-import { tool$elasticIPsCreateElasticIp } from "./tools/elasticIPsCreateElasticIp.js";
-import { tool$elasticIPsDeleteElasticIp } from "./tools/elasticIPsDeleteElasticIp.js";
-import { tool$elasticIPsGetElasticIp } from "./tools/elasticIPsGetElasticIp.js";
-import { tool$elasticIPsListElasticIps } from "./tools/elasticIPsListElasticIps.js";
-import { tool$elasticIPsUpdateElasticIp } from "./tools/elasticIPsUpdateElasticIp.js";
+import { tool$elasticIpsCreateElasticIp } from "./tools/elasticIpsCreateElasticIp.js";
+import { tool$elasticIpsDeleteElasticIp } from "./tools/elasticIpsDeleteElasticIp.js";
+import { tool$elasticIpsGetElasticIp } from "./tools/elasticIpsGetElasticIp.js";
+import { tool$elasticIpsListElasticIps } from "./tools/elasticIpsListElasticIps.js";
+import { tool$elasticIpsUpdateElasticIp } from "./tools/elasticIpsUpdateElasticIp.js";
 import { tool$eventsList } from "./tools/eventsList.js";
 import { tool$firewallsAssignmentsCreate } from "./tools/firewallsAssignmentsCreate.js";
 import { tool$firewallsCreate } from "./tools/firewallsCreate.js";
@@ -148,7 +148,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Latitudesh",
-    version: "0.3.0",
+    version: "0.3.1",
   });
 
   const client = new LatitudeshCore({
@@ -194,11 +194,11 @@ export function createMCPServer(deps: {
   tool(tool$firewallsDelete);
   tool(tool$firewallsListAssignments);
   tool(tool$firewallsDeleteAssignment);
-  tool(tool$elasticIPsListElasticIps);
-  tool(tool$elasticIPsCreateElasticIp);
-  tool(tool$elasticIPsGetElasticIp);
-  tool(tool$elasticIPsDeleteElasticIp);
-  tool(tool$elasticIPsUpdateElasticIp);
+  tool(tool$elasticIpsListElasticIps);
+  tool(tool$elasticIpsCreateElasticIp);
+  tool(tool$elasticIpsGetElasticIp);
+  tool(tool$elasticIpsDeleteElasticIp);
+  tool(tool$elasticIpsUpdateElasticIp);
   tool(tool$ipAddressesList);
   tool(tool$ipAddressesGet);
   tool(tool$teamsGet);

@@ -3,7 +3,7 @@
  */
 
 import { LatitudeshCore } from "../core.js";
-import { encodeJSON, encodeSimple } from "../lib/encodings.js";
+import { encodeSimple } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -27,16 +27,16 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Move an Elastic IP
+ * Retrieve an Elastic IP
  *
  * @remarks
- * Moves an Elastic IP to a different server within the same project. The reassignment is performed asynchronously.
+ * Returns a single Elastic IP by its ID.
  *
- * **Note:** This feature requires the `elastic_ips` feature flag to be enabled for your team. The Elastic IP must be in `active` status and the target server must belong to the same project.
+ * **Note:** This feature requires the `elastic_ips` feature flag to be enabled for your team.
  */
-export function elasticIPsUpdateElasticIp(
+export function elasticIpsGetElasticIp(
   client: LatitudeshCore,
-  request: operations.UpdateElasticIpRequest,
+  request: operations.GetElasticIpRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -61,7 +61,7 @@ export function elasticIPsUpdateElasticIp(
 
 async function $do(
   client: LatitudeshCore,
-  request: operations.UpdateElasticIpRequest,
+  request: operations.GetElasticIpRequest,
   options?: RequestOptions,
 ): Promise<
   [
@@ -82,14 +82,14 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) => operations.UpdateElasticIpRequest$outboundSchema.parse(value),
+    (value) => operations.GetElasticIpRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.update_elastic_ip, { explode: true });
+  const body = null;
 
   const pathParams = {
     elastic_ip_id: encodeSimple("elastic_ip_id", payload.elastic_ip_id, {
@@ -101,7 +101,6 @@ async function $do(
   const path = pathToFunc("/elastic_ips/{elastic_ip_id}")(pathParams);
 
   const headers = new Headers(compactMap({
-    "Content-Type": "application/json",
     Accept: "application/vnd.api+json",
   }));
 
@@ -112,7 +111,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "update-elastic-ip",
+    operationID: "get-elastic-ip",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -126,7 +125,7 @@ async function $do(
 
   const requestRes = client._createRequest(context, {
     security: requestSecurity,
-    method: "PATCH",
+    method: "GET",
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
@@ -141,7 +140,7 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["403", "404", "422", "4XX", "5XX"],
+    errorCodes: ["403", "404", "4XX", "5XX"],
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -169,7 +168,7 @@ async function $do(
     M.json(200, models.ElasticIp$inboundSchema, {
       ctype: "application/vnd.api+json",
     }),
-    M.jsonErr([403, 404, 422], errors.ErrorObject$inboundSchema, {
+    M.jsonErr([403, 404], errors.ErrorObject$inboundSchema, {
       ctype: "application/vnd.api+json",
     }),
     M.fail("4XX"),

@@ -218,7 +218,7 @@ run();
 
 * [listUsage](docs/sdks/billing/README.md#listusage) - Retrieve billing usage
 
-### [ElasticIPs](docs/sdks/elasticips/README.md)
+### [ElasticIps](docs/sdks/elasticips/README.md)
 
 * [listElasticIps](docs/sdks/elasticips/README.md#listelasticips) - List Elastic IPs
 * [createElasticIp](docs/sdks/elasticips/README.md#createelasticip) - Create an Elastic IP
@@ -440,11 +440,11 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`apiKeysUpdate`](docs/sdks/apikeys/README.md#update) - Rotate API key
 - [`apiKeysUpdateApiKey`](docs/sdks/apikeys/README.md#updateapikey) - Update API key settings
 - [`billingListUsage`](docs/sdks/billing/README.md#listusage) - Retrieve billing usage
-- [`elasticIPsCreateElasticIp`](docs/sdks/elasticips/README.md#createelasticip) - Create an Elastic IP
-- [`elasticIPsDeleteElasticIp`](docs/sdks/elasticips/README.md#deleteelasticip) - Release an Elastic IP
-- [`elasticIPsGetElasticIp`](docs/sdks/elasticips/README.md#getelasticip) - Retrieve an Elastic IP
-- [`elasticIPsListElasticIps`](docs/sdks/elasticips/README.md#listelasticips) - List Elastic IPs
-- [`elasticIPsUpdateElasticIp`](docs/sdks/elasticips/README.md#updateelasticip) - Move an Elastic IP
+- [`elasticIpsCreateElasticIp`](docs/sdks/elasticips/README.md#createelasticip) - Create an Elastic IP
+- [`elasticIpsDeleteElasticIp`](docs/sdks/elasticips/README.md#deleteelasticip) - Release an Elastic IP
+- [`elasticIpsGetElasticIp`](docs/sdks/elasticips/README.md#getelasticip) - Retrieve an Elastic IP
+- [`elasticIpsListElasticIps`](docs/sdks/elasticips/README.md#listelasticips) - List Elastic IPs
+- [`elasticIpsUpdateElasticIp`](docs/sdks/elasticips/README.md#updateelasticip) - Move an Elastic IP
 - [`eventsList`](docs/sdks/events/README.md#list) - List events
 - [`firewallsAssignmentsCreate`](docs/sdks/assignments/README.md#create) - Assign server to firewall
 - [`firewallsCreate`](docs/sdks/firewalls/README.md#create) - Create firewall
@@ -681,7 +681,7 @@ const latitudesh = new Latitudesh({
 
 async function run() {
   try {
-    const result = await latitudesh.elasticIPs.createElasticIp({
+    const result = await latitudesh.elasticIps.createElasticIp({
       data: {
         type: "elastic_ips",
         attributes: {

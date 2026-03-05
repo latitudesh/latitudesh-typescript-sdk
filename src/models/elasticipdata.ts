@@ -40,8 +40,9 @@ export type Mode = ClosedEnum<typeof Mode>;
  * The current status of the Elastic IP
  */
 export const ElasticIpDataStatus = {
-  Provisioning: "provisioning",
+  Configuring: "configuring",
   Active: "active",
+  Moving: "moving",
   Releasing: "releasing",
   Error: "error",
 } as const;
@@ -57,6 +58,7 @@ export type ElasticIpDataServer = {
   id?: string | undefined;
   hostname?: string | undefined;
   primaryIpv4?: string | undefined;
+  operatingSystem?: string | null | undefined;
 };
 
 /**
@@ -68,7 +70,21 @@ export type ElasticIpDataProject = {
   slug?: string | undefined;
 };
 
-export type ElasticIpDataSite = {
+/**
+ * The site/location within the region
+ */
+export type ElasticIpDataLocation = {
+  /**
+   * The site ID
+   */
+  id?: string | undefined;
+  /**
+   * The site name
+   */
+  name?: string | undefined;
+  /**
+   * The site slug
+   */
   slug?: string | undefined;
 };
 
@@ -76,8 +92,18 @@ export type ElasticIpDataSite = {
  * The region where this Elastic IP is located
  */
 export type ElasticIpDataRegion = {
-  city?: string | undefined;
-  site?: ElasticIpDataSite | undefined;
+  /**
+   * The region ID
+   */
+  id?: string | undefined;
+  /**
+   * The region name
+   */
+  name?: string | undefined;
+  /**
+   * The site/location within the region
+   */
+  location?: ElasticIpDataLocation | undefined;
 };
 
 export type ElasticIpDataAttributes = {
@@ -172,9 +198,11 @@ export const ElasticIpDataServer$inboundSchema: z.ZodType<
   id: z.string().optional(),
   hostname: z.string().optional(),
   primary_ipv4: z.string().optional(),
+  operating_system: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "primary_ipv4": "primaryIpv4",
+    "operating_system": "operatingSystem",
   });
 });
 /** @internal */
@@ -182,6 +210,7 @@ export type ElasticIpDataServer$Outbound = {
   id?: string | undefined;
   hostname?: string | undefined;
   primary_ipv4?: string | undefined;
+  operating_system?: string | null | undefined;
 };
 
 /** @internal */
@@ -193,9 +222,11 @@ export const ElasticIpDataServer$outboundSchema: z.ZodType<
   id: z.string().optional(),
   hostname: z.string().optional(),
   primaryIpv4: z.string().optional(),
+  operatingSystem: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     primaryIpv4: "primary_ipv4",
+    operatingSystem: "operating_system",
   });
 });
 
@@ -262,41 +293,47 @@ export function elasticIpDataProjectFromJSON(
 }
 
 /** @internal */
-export const ElasticIpDataSite$inboundSchema: z.ZodType<
-  ElasticIpDataSite,
+export const ElasticIpDataLocation$inboundSchema: z.ZodType<
+  ElasticIpDataLocation,
   z.ZodTypeDef,
   unknown
 > = z.object({
+  id: z.string().optional(),
+  name: z.string().optional(),
   slug: z.string().optional(),
 });
 /** @internal */
-export type ElasticIpDataSite$Outbound = {
+export type ElasticIpDataLocation$Outbound = {
+  id?: string | undefined;
+  name?: string | undefined;
   slug?: string | undefined;
 };
 
 /** @internal */
-export const ElasticIpDataSite$outboundSchema: z.ZodType<
-  ElasticIpDataSite$Outbound,
+export const ElasticIpDataLocation$outboundSchema: z.ZodType<
+  ElasticIpDataLocation$Outbound,
   z.ZodTypeDef,
-  ElasticIpDataSite
+  ElasticIpDataLocation
 > = z.object({
+  id: z.string().optional(),
+  name: z.string().optional(),
   slug: z.string().optional(),
 });
 
-export function elasticIpDataSiteToJSON(
-  elasticIpDataSite: ElasticIpDataSite,
+export function elasticIpDataLocationToJSON(
+  elasticIpDataLocation: ElasticIpDataLocation,
 ): string {
   return JSON.stringify(
-    ElasticIpDataSite$outboundSchema.parse(elasticIpDataSite),
+    ElasticIpDataLocation$outboundSchema.parse(elasticIpDataLocation),
   );
 }
-export function elasticIpDataSiteFromJSON(
+export function elasticIpDataLocationFromJSON(
   jsonString: string,
-): SafeParseResult<ElasticIpDataSite, SDKValidationError> {
+): SafeParseResult<ElasticIpDataLocation, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ElasticIpDataSite$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ElasticIpDataSite' from JSON`,
+    (x) => ElasticIpDataLocation$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ElasticIpDataLocation' from JSON`,
   );
 }
 
@@ -306,13 +343,15 @@ export const ElasticIpDataRegion$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  city: z.string().optional(),
-  site: z.lazy(() => ElasticIpDataSite$inboundSchema).optional(),
+  id: z.string().optional(),
+  name: z.string().optional(),
+  location: z.lazy(() => ElasticIpDataLocation$inboundSchema).optional(),
 });
 /** @internal */
 export type ElasticIpDataRegion$Outbound = {
-  city?: string | undefined;
-  site?: ElasticIpDataSite$Outbound | undefined;
+  id?: string | undefined;
+  name?: string | undefined;
+  location?: ElasticIpDataLocation$Outbound | undefined;
 };
 
 /** @internal */
@@ -321,8 +360,9 @@ export const ElasticIpDataRegion$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ElasticIpDataRegion
 > = z.object({
-  city: z.string().optional(),
-  site: z.lazy(() => ElasticIpDataSite$outboundSchema).optional(),
+  id: z.string().optional(),
+  name: z.string().optional(),
+  location: z.lazy(() => ElasticIpDataLocation$outboundSchema).optional(),
 });
 
 export function elasticIpDataRegionToJSON(

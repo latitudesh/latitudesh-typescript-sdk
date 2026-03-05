@@ -1,4 +1,4 @@
-# ElasticIPs
+# ElasticIps
 
 ## Overview
 
@@ -28,7 +28,7 @@ const latitudesh = new Latitudesh({
 });
 
 async function run() {
-  const result = await latitudesh.elasticIPs.listElasticIps({});
+  const result = await latitudesh.elasticIps.listElasticIps({});
 
   for await (const page of result) {
     console.log(page);
@@ -44,7 +44,7 @@ The standalone function version of this method:
 
 ```typescript
 import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
-import { elasticIPsListElasticIps } from "latitudesh-typescript-sdk/funcs/elasticIPsListElasticIps.js";
+import { elasticIpsListElasticIps } from "latitudesh-typescript-sdk/funcs/elasticIpsListElasticIps.js";
 
 // Use `LatitudeshCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -53,14 +53,14 @@ const latitudesh = new LatitudeshCore({
 });
 
 async function run() {
-  const res = await elasticIPsListElasticIps(latitudesh, {});
+  const res = await elasticIpsListElasticIps(latitudesh, {});
   if (res.ok) {
     const { value: result } = res;
     for await (const page of result) {
     console.log(page);
   }
   } else {
-    console.log("elasticIPsListElasticIps failed:", res.error);
+    console.log("elasticIpsListElasticIps failed:", res.error);
   }
 }
 
@@ -88,7 +88,7 @@ run();
 
 ## createElasticIp
 
-Creates a new Elastic IP and assigns it to the specified server. The IP is provisioned asynchronously—the response will show status `provisioning` and the `id` will be `null` until provisioning completes.
+Creates a new Elastic IP and assigns it to the specified server. The IP is provisioned asynchronously—the response will show status `configuring` and the `id` will be `null` until provisioning completes.
 
 **Note:** This feature requires the `elastic_ips` feature flag to be enabled for your team. Currently only IPv4 /32 addresses in routed mode are supported.
 
@@ -104,7 +104,7 @@ const latitudesh = new Latitudesh({
 });
 
 async function run() {
-  const result = await latitudesh.elasticIPs.createElasticIp({
+  const result = await latitudesh.elasticIps.createElasticIp({
     data: {
       type: "elastic_ips",
       attributes: {
@@ -126,7 +126,7 @@ The standalone function version of this method:
 
 ```typescript
 import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
-import { elasticIPsCreateElasticIp } from "latitudesh-typescript-sdk/funcs/elasticIPsCreateElasticIp.js";
+import { elasticIpsCreateElasticIp } from "latitudesh-typescript-sdk/funcs/elasticIpsCreateElasticIp.js";
 
 // Use `LatitudeshCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -135,7 +135,7 @@ const latitudesh = new LatitudeshCore({
 });
 
 async function run() {
-  const res = await elasticIPsCreateElasticIp(latitudesh, {
+  const res = await elasticIpsCreateElasticIp(latitudesh, {
     data: {
       type: "elastic_ips",
       attributes: {
@@ -148,7 +148,7 @@ async function run() {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("elasticIPsCreateElasticIp failed:", res.error);
+    console.log("elasticIpsCreateElasticIp failed:", res.error);
   }
 }
 
@@ -165,7 +165,7 @@ const latitudesh = new Latitudesh({
 });
 
 async function run() {
-  const result = await latitudesh.elasticIPs.createElasticIp({
+  const result = await latitudesh.elasticIps.createElasticIp({
     data: {
       type: "elastic_ips",
       attributes: {
@@ -187,7 +187,7 @@ The standalone function version of this method:
 
 ```typescript
 import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
-import { elasticIPsCreateElasticIp } from "latitudesh-typescript-sdk/funcs/elasticIPsCreateElasticIp.js";
+import { elasticIpsCreateElasticIp } from "latitudesh-typescript-sdk/funcs/elasticIpsCreateElasticIp.js";
 
 // Use `LatitudeshCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -196,7 +196,7 @@ const latitudesh = new LatitudeshCore({
 });
 
 async function run() {
-  const res = await elasticIPsCreateElasticIp(latitudesh, {
+  const res = await elasticIpsCreateElasticIp(latitudesh, {
     data: {
       type: "elastic_ips",
       attributes: {
@@ -209,7 +209,7 @@ async function run() {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("elasticIPsCreateElasticIp failed:", res.error);
+    console.log("elasticIpsCreateElasticIp failed:", res.error);
   }
 }
 
@@ -226,7 +226,7 @@ const latitudesh = new Latitudesh({
 });
 
 async function run() {
-  const result = await latitudesh.elasticIPs.createElasticIp({
+  const result = await latitudesh.elasticIps.createElasticIp({
     data: {
       type: "elastic_ips",
       attributes: {
@@ -248,7 +248,7 @@ The standalone function version of this method:
 
 ```typescript
 import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
-import { elasticIPsCreateElasticIp } from "latitudesh-typescript-sdk/funcs/elasticIPsCreateElasticIp.js";
+import { elasticIpsCreateElasticIp } from "latitudesh-typescript-sdk/funcs/elasticIpsCreateElasticIp.js";
 
 // Use `LatitudeshCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -257,7 +257,7 @@ const latitudesh = new LatitudeshCore({
 });
 
 async function run() {
-  const res = await elasticIPsCreateElasticIp(latitudesh, {
+  const res = await elasticIpsCreateElasticIp(latitudesh, {
     data: {
       type: "elastic_ips",
       attributes: {
@@ -270,7 +270,7 @@ async function run() {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("elasticIPsCreateElasticIp failed:", res.error);
+    console.log("elasticIpsCreateElasticIp failed:", res.error);
   }
 }
 
@@ -315,7 +315,7 @@ const latitudesh = new Latitudesh({
 });
 
 async function run() {
-  const result = await latitudesh.elasticIPs.getElasticIp({
+  const result = await latitudesh.elasticIps.getElasticIp({
     elasticIpId: "eip_KeQbB4BoO6x10",
   });
 
@@ -331,7 +331,7 @@ The standalone function version of this method:
 
 ```typescript
 import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
-import { elasticIPsGetElasticIp } from "latitudesh-typescript-sdk/funcs/elasticIPsGetElasticIp.js";
+import { elasticIpsGetElasticIp } from "latitudesh-typescript-sdk/funcs/elasticIpsGetElasticIp.js";
 
 // Use `LatitudeshCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -340,14 +340,14 @@ const latitudesh = new LatitudeshCore({
 });
 
 async function run() {
-  const res = await elasticIPsGetElasticIp(latitudesh, {
+  const res = await elasticIpsGetElasticIp(latitudesh, {
     elasticIpId: "eip_KeQbB4BoO6x10",
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("elasticIPsGetElasticIp failed:", res.error);
+    console.log("elasticIpsGetElasticIp failed:", res.error);
   }
 }
 
@@ -392,7 +392,7 @@ const latitudesh = new Latitudesh({
 });
 
 async function run() {
-  await latitudesh.elasticIPs.deleteElasticIp({
+  await latitudesh.elasticIps.deleteElasticIp({
     elasticIpId: "<id>",
   });
 
@@ -408,7 +408,7 @@ The standalone function version of this method:
 
 ```typescript
 import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
-import { elasticIPsDeleteElasticIp } from "latitudesh-typescript-sdk/funcs/elasticIPsDeleteElasticIp.js";
+import { elasticIpsDeleteElasticIp } from "latitudesh-typescript-sdk/funcs/elasticIpsDeleteElasticIp.js";
 
 // Use `LatitudeshCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -417,14 +417,14 @@ const latitudesh = new LatitudeshCore({
 });
 
 async function run() {
-  const res = await elasticIPsDeleteElasticIp(latitudesh, {
+  const res = await elasticIpsDeleteElasticIp(latitudesh, {
     elasticIpId: "<id>",
   });
   if (res.ok) {
     const { value: result } = res;
     
   } else {
-    console.log("elasticIPsDeleteElasticIp failed:", res.error);
+    console.log("elasticIpsDeleteElasticIp failed:", res.error);
   }
 }
 
@@ -469,7 +469,7 @@ const latitudesh = new Latitudesh({
 });
 
 async function run() {
-  const result = await latitudesh.elasticIPs.updateElasticIp({
+  const result = await latitudesh.elasticIps.updateElasticIp({
     elasticIpId: "<id>",
     updateElasticIp: {
       data: {
@@ -493,7 +493,7 @@ The standalone function version of this method:
 
 ```typescript
 import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
-import { elasticIPsUpdateElasticIp } from "latitudesh-typescript-sdk/funcs/elasticIPsUpdateElasticIp.js";
+import { elasticIpsUpdateElasticIp } from "latitudesh-typescript-sdk/funcs/elasticIpsUpdateElasticIp.js";
 
 // Use `LatitudeshCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -502,7 +502,7 @@ const latitudesh = new LatitudeshCore({
 });
 
 async function run() {
-  const res = await elasticIPsUpdateElasticIp(latitudesh, {
+  const res = await elasticIpsUpdateElasticIp(latitudesh, {
     elasticIpId: "<id>",
     updateElasticIp: {
       data: {
@@ -517,7 +517,7 @@ async function run() {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("elasticIPsUpdateElasticIp failed:", res.error);
+    console.log("elasticIpsUpdateElasticIp failed:", res.error);
   }
 }
 
@@ -534,7 +534,7 @@ const latitudesh = new Latitudesh({
 });
 
 async function run() {
-  const result = await latitudesh.elasticIPs.updateElasticIp({
+  const result = await latitudesh.elasticIps.updateElasticIp({
     elasticIpId: "<id>",
     updateElasticIp: {
       data: {
@@ -558,7 +558,7 @@ The standalone function version of this method:
 
 ```typescript
 import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
-import { elasticIPsUpdateElasticIp } from "latitudesh-typescript-sdk/funcs/elasticIPsUpdateElasticIp.js";
+import { elasticIpsUpdateElasticIp } from "latitudesh-typescript-sdk/funcs/elasticIpsUpdateElasticIp.js";
 
 // Use `LatitudeshCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -567,7 +567,7 @@ const latitudesh = new LatitudeshCore({
 });
 
 async function run() {
-  const res = await elasticIPsUpdateElasticIp(latitudesh, {
+  const res = await elasticIpsUpdateElasticIp(latitudesh, {
     elasticIpId: "<id>",
     updateElasticIp: {
       data: {
@@ -582,7 +582,7 @@ async function run() {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("elasticIPsUpdateElasticIp failed:", res.error);
+    console.log("elasticIpsUpdateElasticIp failed:", res.error);
   }
 }
 
@@ -599,7 +599,7 @@ const latitudesh = new Latitudesh({
 });
 
 async function run() {
-  const result = await latitudesh.elasticIPs.updateElasticIp({
+  const result = await latitudesh.elasticIps.updateElasticIp({
     elasticIpId: "eip_KeQbB4BoO6x10",
     updateElasticIp: {
       data: {
@@ -623,7 +623,7 @@ The standalone function version of this method:
 
 ```typescript
 import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
-import { elasticIPsUpdateElasticIp } from "latitudesh-typescript-sdk/funcs/elasticIPsUpdateElasticIp.js";
+import { elasticIpsUpdateElasticIp } from "latitudesh-typescript-sdk/funcs/elasticIpsUpdateElasticIp.js";
 
 // Use `LatitudeshCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -632,7 +632,7 @@ const latitudesh = new LatitudeshCore({
 });
 
 async function run() {
-  const res = await elasticIPsUpdateElasticIp(latitudesh, {
+  const res = await elasticIpsUpdateElasticIp(latitudesh, {
     elasticIpId: "eip_KeQbB4BoO6x10",
     updateElasticIp: {
       data: {
@@ -647,7 +647,7 @@ async function run() {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("elasticIPsUpdateElasticIp failed:", res.error);
+    console.log("elasticIpsUpdateElasticIp failed:", res.error);
   }
 }
 

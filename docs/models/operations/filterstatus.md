@@ -13,5 +13,5 @@ let value: FilterStatus = "error";
 ## Values
 
 ```typescript
-"provisioning" | "active" | "releasing" | "error"
+"configuring" | "active" | "moving" | "releasing" | "error"
 ```

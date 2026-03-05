@@ -10,8 +10,8 @@ let value: IpAddressRegion = {};
 
 ## Fields
 
-| Field                                    | Type                                     | Required                                 | Description                              |
-| ---------------------------------------- | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
-| `id`                                     | *string*                                 | :heavy_minus_sign:                       | N/A                                      |
-| `name`                                   | *string*                                 | :heavy_minus_sign:                       | N/A                                      |
-| `location`                               | [models.Location](../models/location.md) | :heavy_minus_sign:                       | N/A                                      |
+| Field                                                      | Type                                                       | Required                                                   | Description                                                |
+| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| `id`                                                       | *string*                                                   | :heavy_minus_sign:                                         | N/A                                                        |
+| `name`                                                     | *string*                                                   | :heavy_minus_sign:                                         | N/A                                                        |
+| `location`                                                 | [models.IpAddressLocation](../models/ipaddresslocation.md) | :heavy_minus_sign:                                         | N/A                                                        |

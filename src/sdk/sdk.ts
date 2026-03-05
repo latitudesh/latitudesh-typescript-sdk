@@ -5,7 +5,7 @@
 import { ClientSDK } from "../lib/sdks.js";
 import { ApiKeys } from "./apikeys.js";
 import { Billing } from "./billing.js";
-import { ElasticIPs } from "./elasticips.js";
+import { ElasticIps } from "./elasticips.js";
 import { Events } from "./events.js";
 import { Firewalls } from "./firewalls.js";
 import { IpAddresses } from "./ipaddresses.js";
@@ -50,9 +50,9 @@ export class Latitudesh extends ClientSDK {
     return (this._firewalls ??= new Firewalls(this._options));
   }
 
-  private _elasticIPs?: ElasticIPs;
-  get elasticIPs(): ElasticIPs {
-    return (this._elasticIPs ??= new ElasticIPs(this._options));
+  private _elasticIps?: ElasticIps;
+  get elasticIps(): ElasticIps {
+    return (this._elasticIps ??= new ElasticIps(this._options));
   }
 
   private _ipAddresses?: IpAddresses;

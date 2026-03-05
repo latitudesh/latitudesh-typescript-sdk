@@ -39,7 +39,7 @@ import {
  *
  * **Note:** This feature requires the `elastic_ips` feature flag to be enabled for your team. When the flag is disabled, the endpoint returns an empty list.
  */
-export function elasticIPsListElasticIps(
+export function elasticIpsListElasticIps(
   client: LatitudeshCore,
   request?: operations.ListElasticIpsRequest | undefined,
   options?: RequestOptions,
@@ -225,7 +225,7 @@ async function $do(
     }
 
     const nextVal = () =>
-      elasticIPsListElasticIps(
+      elasticIpsListElasticIps(
         client,
         {
           ...request!,

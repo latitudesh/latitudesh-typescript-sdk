@@ -1,24 +1,24 @@
 lockVersion: 2.0.0
 id: c8245324-f3d7-42c7-8124-ce79579cbff5
 management:
-  docChecksum: d9ef9bd1101b6656b15b2ec4d12bafc9
+  docChecksum: 15cae4f4ee8afa9c2590020120db2d6f
   docVersion: "2023-06-01"
-  speakeasyVersion: 1.733.4
-  generationVersion: 2.845.12
-  releaseVersion: 0.3.0
-  configChecksum: 6baece843c27ec9a8bd356be2091e444
+  speakeasyVersion: 1.741.6
+  generationVersion: 2.849.8
+  releaseVersion: 0.3.1
+  configChecksum: 69c8648dcaeadf9593c951390ed79c08
   repoURL: https://github.com/latitudesh/latitudesh-typescript-sdk.git
   installationURL: https://github.com/latitudesh/latitudesh-typescript-sdk
   published: true
 persistentEdits:
-  generation_id: 86f687ac-58e5-43be-b818-f20324475b2e
-  pristine_commit_hash: 8caddb4a9030bf5643fe77b2e48edbdedd2cd2cc
-  pristine_tree_hash: 8d733dc0091d697785b1b4ae2e9cfe7ababa3ff9
+  generation_id: 51b31420-4db1-45fe-b82c-b5501689401c
+  pristine_commit_hash: 0f5a37a589868d2391ef5df6ab0a2b40019c3e4b
+  pristine_tree_hash: be5163a22b9f74fbb35721633772b2b67714327b
 features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.14
-    core: 3.26.38
+    core: 3.26.40
     defaultEnabledRetries: 0.1.0
     deprecations: 2.81.1
     devContainers: 2.90.1
@@ -56,8 +56,8 @@ trackedFiles:
     pristine_git_object: 113eead5093c17d43a46159132885318f281a68a
   .npmignore:
     id: aa70c1f807c3
-    last_write_checksum: sha1:425e91786e3b6cddd2b364bf3f9f9cd38e3c3e1a
-    pristine_git_object: 134e78a629b846b88e408199011801852bacc600
+    last_write_checksum: sha1:6572da81f2e7a978ec29c22c2210bf461c5897b2
+    pristine_git_object: 670ac0a62d7e568c9d44a14f5deafb8442a255d8
   FUNCTIONS.md:
     id: 21b9df02aaeb
     last_write_checksum: sha1:b34eb3ed5c57fc114d738afbe82b4e8b967749ee
@@ -326,26 +326,26 @@ trackedFiles:
     id: 729760457af4
     last_write_checksum: sha1:159cbf7325aba76709959e77d5620f3e70e11cfe
     pristine_git_object: 073d9b411adf1dfb270df9e53ee7a49aaa7f9168
+  docs/models/elasticipdatalocation.md:
+    id: d22f5fe4cf66
+    last_write_checksum: sha1:11f4bea324edae814e231023cd31a375ec571e97
+    pristine_git_object: 5e55e25fc5db3b95dd05168c4423688b6ab1674a
   docs/models/elasticipdataproject.md:
     id: 8a3318093c18
     last_write_checksum: sha1:00920b3282c5fb6e0c380dace95abf19d7747472
     pristine_git_object: dd4d6a795e533a02f76c47fe2191810c9125985d
   docs/models/elasticipdataregion.md:
     id: e5e7de0d7702
-    last_write_checksum: sha1:351b8ab04a40f32fb47a85501b71af2ab4b3112c
-    pristine_git_object: d6d70ae54958f9cb67b9f6af38a94f518c34ae73
+    last_write_checksum: sha1:887e4d45cf5cf7125b2f481cde83670f57c3b09e
+    pristine_git_object: 64c00019bb006cb08f9c6df51d678a8857401b55
   docs/models/elasticipdataserver.md:
     id: 100e669f8406
-    last_write_checksum: sha1:bb7ad3eb612beacbae0979b139227099fa72b737
-    pristine_git_object: 8a1af10bffffa3a62e9cde75390d974a2af15006
-  docs/models/elasticipdatasite.md:
-    id: b6b4dab9f830
-    last_write_checksum: sha1:63e19fbca9e776ba42c2989a4771dfa96015d3d4
-    pristine_git_object: 4989f8a7e21bc5fcaff776f2088fb02bddd267b2
+    last_write_checksum: sha1:f776302369292a830a0ff7677ce4f32cbee4bc6a
+    pristine_git_object: 9e8f46acb4f8cdb43ccb66cdedef52dfefb4bc7c
   docs/models/elasticipdatastatus.md:
     id: 93e9000c07a1
-    last_write_checksum: sha1:b18b036ce4d135d69a7df486ec220cb37c161f6a
-    pristine_git_object: 19a28e77473791607c03cd7e20b4beee1b1fe8a8
+    last_write_checksum: sha1:b2b84aec3f9a4bd9e8ee22f08f978da0bea7f3fd
+    pristine_git_object: 20d846cff9ff0829bf84d16f9677df6496bb716b
   docs/models/elasticipdatatype.md:
     id: a81a0696adff
     last_write_checksum: sha1:f6b09bc2f610eaa4cc56970c9b6837e0455425e5
@@ -522,14 +522,18 @@ trackedFiles:
     id: 94e805a1d19f
     last_write_checksum: sha1:0f07b28e907bbb2bee084f6a214bd78f426999d4
     pristine_git_object: 73b751fa04e447313ac6c9085406797da526a378
+  docs/models/ipaddresslocation.md:
+    id: dbe1289a987d
+    last_write_checksum: sha1:6d6eae7633e719c3dea1a40d63f7af5c41f9fa98
+    pristine_git_object: 2dcf5eaff1af2dcd42008bc78fadc11db10273da
   docs/models/ipaddressproject.md:
     id: f8ee5e38dda5
     last_write_checksum: sha1:c515f7dc1422d1d53058bf66586887a6deab56fc
     pristine_git_object: 3b6701893642511613198d4fea24fc917fe1cf9b
   docs/models/ipaddressregion.md:
     id: 149bce6e609a
-    last_write_checksum: sha1:b6b787129b1f091807899ec54e4cc4353d246063
-    pristine_git_object: d1107f37dd1f2fceba7a772effadb3acaa392884
+    last_write_checksum: sha1:e0cd26d49bdb22736441b4585128d76f34bc9f11
+    pristine_git_object: 299f6b7b69dd7bed72e3eac2b9fede18854573ec
   docs/models/ipaddresstype.md:
     id: 42304145320b
     last_write_checksum: sha1:8e220d1375370a9546f782cb07431b6c9df25e0a
@@ -634,10 +638,6 @@ trackedFiles:
     id: 7d69eff16bff
     last_write_checksum: sha1:3f16015b7a51ee0aaf440ce06ba1f852ef924fbe
     pristine_git_object: 4d022649421dd4a1269ece5d58ac22599a07d7df
-  docs/models/location.md:
-    id: d96a7d2fb391
-    last_write_checksum: sha1:604f46521cc0c5f971688655b2edbf686dfaa22a
-    pristine_git_object: ec9e2adfaee75a7c471326ad868d3d6ea6cee2da
   docs/models/membership.md:
     id: cc319e98ebbd
     last_write_checksum: sha1:206893e9c1de7a30fc8a8248d04684576048fc96
@@ -1032,8 +1032,8 @@ trackedFiles:
     pristine_git_object: 4d770b0733e9eed5fdaa8a070441436474e91558
   docs/models/operations/filterstatus.md:
     id: 1e8979e4d90a
-    last_write_checksum: sha1:da5468b616e75223dd6020b444372a2b4ebb4147
-    pristine_git_object: fb731e36579accd5265c8b59e9c97942136cd108
+    last_write_checksum: sha1:2595dce28f8a57379ea1b933d8a4afdf9248c305
+    pristine_git_object: f6be3f41993790d38915e79d7b77e05c48ef4ca9
   docs/models/operations/filterstocklevel.md:
     id: e98eeec87c20
     last_write_checksum: sha1:ca50926c9dc21164724696eb237fd5b36455a78a
@@ -2728,8 +2728,8 @@ trackedFiles:
     pristine_git_object: 0ceb1bc42f1321fc06caebb609883b87386abe9f
   docs/sdks/elasticips/README.md:
     id: d3a0d795d883
-    last_write_checksum: sha1:380567a59470cb7ded10aea227449b7cecf05f87
-    pristine_git_object: 2840c6e92724349b0a169f095ed84282c2cbc9c4
+    last_write_checksum: sha1:05aae48ee711622255773cbe023331536b6418b3
+    pristine_git_object: cd37c676c2435bf3502a1fe2c7dd35741dcda6bf
   docs/sdks/events/README.md:
     id: cf45a4390b9b
     last_write_checksum: sha1:8cd0f2f29b4a720127f6d38d4041843ccb38d7b3
@@ -2852,12 +2852,12 @@ trackedFiles:
     pristine_git_object: 249e5d9837dbad499fc14718cebf96fd4875a9e8
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:499915ad8dfe6531370cda598fdc1d6ff3460a7b
-    pristine_git_object: 226ba6b836fa746c9d29f0093b7147361842e921
+    last_write_checksum: sha1:a77210b1b194342e0bccabf677e7f16caf7e06f7
+    pristine_git_object: a48f5b9d598accaf75163fa4922e58b2ad1be689
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:c7bda0953da9d51956745db5593ea6994284e6b0
-    pristine_git_object: 6c423cc9415cef84c7c46f036f21977c0e8ccc05
+    last_write_checksum: sha1:b7c0bae5ac774c038705cefe97afda2c3a02affd
+    pristine_git_object: c3bf2b1fbc1c62c8909f7b917a1bdc9e67d67167
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:9bb7b3807363b77f27dbdb87d6d10e9605f723d6
@@ -2886,26 +2886,26 @@ trackedFiles:
     id: 261c18df2bf8
     last_write_checksum: sha1:97f5c7bfbc6bb91d7a8f23b79a3c72bb6778045e
     pristine_git_object: 2e5d1dde3f835b81838182284b2cc94f926ca08b
-  src/funcs/elasticIPsCreateElasticIp.ts:
-    id: b7e693120aaa
-    last_write_checksum: sha1:a6eefc4ec961c8842323b0a775217309386e39e3
-    pristine_git_object: c741827cb7ccc89d4075f0ea5efe5d1723034460
-  src/funcs/elasticIPsDeleteElasticIp.ts:
-    id: f10649bb132d
-    last_write_checksum: sha1:58f6bae2d01f2c7b1181ecef5bd722724ca64b9b
-    pristine_git_object: 828835792aec26cbc306cfa9ce51ed20d796cba0
-  src/funcs/elasticIPsGetElasticIp.ts:
-    id: 9ff8d8c898a5
-    last_write_checksum: sha1:33dddbe5ce419b353c68f39711121e54a69bebaf
-    pristine_git_object: 915e6f0f45d18c0a0e2a1d5766d6f09518e73da7
-  src/funcs/elasticIPsListElasticIps.ts:
-    id: 5dad39fce9d2
-    last_write_checksum: sha1:d71192f7bb8148a7876c7bef620cad870cf5ad2e
-    pristine_git_object: 2279c43d4b9915fca808a9a4f827bb6ead5ecebd
-  src/funcs/elasticIPsUpdateElasticIp.ts:
-    id: f69f8c7c06fc
-    last_write_checksum: sha1:03e024a7f07e17c9c2d55d6dc03404edbd5eaeaf
-    pristine_git_object: deae62a10314ee1f84abfba4a11a022776cebe7c
+  src/funcs/elasticIpsCreateElasticIp.ts:
+    id: 4da44e329a88
+    last_write_checksum: sha1:dd645fc819eba36b68a419eea00554a98e59005b
+    pristine_git_object: c69c4ef14afd3a93bd6d5ff8837db04beb7c6720
+  src/funcs/elasticIpsDeleteElasticIp.ts:
+    id: e7767365ae4c
+    last_write_checksum: sha1:5943d11ce1231640b08469f127c50150ae8e642f
+    pristine_git_object: c41d1a3c3a33f866ce6b09158e8cf78785895fb0
+  src/funcs/elasticIpsGetElasticIp.ts:
+    id: 16225c4b3618
+    last_write_checksum: sha1:6257f3815c07cc2e8615dfaa6bf9c124bd41d907
+    pristine_git_object: e858627a0aaafb8e3ed686d6a8631dcd9c9312a9
+  src/funcs/elasticIpsListElasticIps.ts:
+    id: 5f4b4f5a65eb
+    last_write_checksum: sha1:60410bffae2b34f93110ce5daaa526c5786ff269
+    pristine_git_object: 1768f90a9b97be402f18ceaef88c71dc0083c216
+  src/funcs/elasticIpsUpdateElasticIp.ts:
+    id: 2f9f10f59fd2
+    last_write_checksum: sha1:9e1f6ec2bc236651c266aa53dd58f9b597ed036c
+    pristine_git_object: 15eb1a0a81fd6a27bbc78e14e86ee568a5624d39
   src/funcs/eventsList.ts:
     id: 4522a8542985
     last_write_checksum: sha1:40f32084213f5d380ea3112b1e1eaf125150729c
@@ -3376,8 +3376,8 @@ trackedFiles:
     pristine_git_object: 0aebd8b0a4867e35cb3348fc52921c3c0b4725b7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:023fdb61e4c00f4cfdbbae369d90aa1407311930
-    pristine_git_object: ef3c994e0b4e0e066a4501751f532e2416d41b49
+    last_write_checksum: sha1:5a98991eb06cb3a0ba90156efaa9b1250b17f1ab
+    pristine_git_object: 73fd7d1ecabdf48b1918fe6144dde2db7cc66168
   src/lib/dlv.ts:
     id: b1988214835a
     last_write_checksum: sha1:1dd3e3fbb4550c4bf31f5ef997faff355d6f3250
@@ -3408,8 +3408,8 @@ trackedFiles:
     pristine_git_object: d181f2937d4128afbe9b0327e0f81d1fa9c877b7
   src/lib/matchers.ts:
     id: d54b2253b719
-    last_write_checksum: sha1:a4dd0feaa95854211ac4d4146ba1b9815d88a449
-    pristine_git_object: b2ed6ab4ff8137d499337e00e1fe3d296ae40670
+    last_write_checksum: sha1:f79a5243108af9d659b8c38bb6fbe8f6cc108a94
+    pristine_git_object: ebf71108a53f86150ff3d606a32a1a42e6e5dea7
   src/lib/primitives.ts:
     id: 74859f750b28
     last_write_checksum: sha1:987869fc54790b9c22e9182099103d6aa7c67016
@@ -3428,8 +3428,8 @@ trackedFiles:
     pristine_git_object: ea2fe0d2c7573f4a785c8540627858767c8af792
   src/lib/security.ts:
     id: 0502afa7922e
-    last_write_checksum: sha1:465d9933d03420574f473e15fe1e71758f41577c
-    pristine_git_object: c362ee19a6931f541535cdbca0e4face82b999c4
+    last_write_checksum: sha1:4369fc48b8645a7a896897abec174faacb78cd8b
+    pristine_git_object: 37262a73e003fd09603e104f1441aa8a32521e5d
   src/lib/url.ts:
     id: b0057e24ed76
     last_write_checksum: sha1:d124050c7e755c0cce233b9e029afb584ff65201
@@ -3448,8 +3448,8 @@ trackedFiles:
     pristine_git_object: 2af192fb4e8b75f7202d65f23ee413826a5f50fa
   src/mcp-server/cli/start/impl.ts:
     id: 37494f674015
-    last_write_checksum: sha1:fa2514c301797ab9597187f06bd637883dac6595
-    pristine_git_object: f9e4738d1e302d5360b82d88420ee5bf95274067
+    last_write_checksum: sha1:be3615940d88549d44e026b61896d63562bb173f
+    pristine_git_object: 78d3add4cb3ce7299de8272692975173a8a0d2a6
   src/mcp-server/console-logger.ts:
     id: 57aff4ff2e15
     last_write_checksum: sha1:66e945860c8318f2a6bb9604a7720a979dacce4b
@@ -3460,8 +3460,8 @@ trackedFiles:
     pristine_git_object: 0955a573c2ce989d63c737410ab8cc28706d9f74
   src/mcp-server/mcp-server.ts:
     id: aabbc4ab07c1
-    last_write_checksum: sha1:0f38fe13361c0de68b7c79c640c323cb90f4ce82
-    pristine_git_object: a70686a7cb0f3de72b35d4fc1a3152b2cebab6a2
+    last_write_checksum: sha1:528c3183b2ce00e2e3702f5d6c6c569b8275bc49
+    pristine_git_object: e46fad1bc1793a8c889698a27b169edae91ede1d
   src/mcp-server/prompts.ts:
     id: 26f3d73cbf31
     last_write_checksum: sha1:3e8d60ab7f8078d83fa9528f2e831050c1fd119c
@@ -3476,12 +3476,12 @@ trackedFiles:
     pristine_git_object: c25696d4c4f70e081fa5d87ad6891874c509a577
   src/mcp-server/server.ts:
     id: 2784dd48e82a
-    last_write_checksum: sha1:1af0407256875f4d70c7a04e7961671022387e71
-    pristine_git_object: 691ea262d79b3899c5349e816a2d93244e036b78
+    last_write_checksum: sha1:0686269b15fb2bf1588f4c19d08f2d8643dcf6f0
+    pristine_git_object: 505a5dc4484370b33b8a381520964213fd249030
   src/mcp-server/shared.ts:
     id: 074e80d4be1e
-    last_write_checksum: sha1:56c73d4429691516e35541825e759a0285747a2b
-    pristine_git_object: 3e94144d13f0707bc300183ebb4325b367c297dd
+    last_write_checksum: sha1:d89576cea2bef3856b7fc3e65b868875528be042
+    pristine_git_object: bef212f002cac28cb23333a5f291a4ee5ba08521
   src/mcp-server/tools.ts:
     id: 654d5d1f2062
     last_write_checksum: sha1:539a18fbd1dd2022efeb215c3ccc78870c974785
@@ -3510,26 +3510,26 @@ trackedFiles:
     id: c24c3a805eb0
     last_write_checksum: sha1:c9aba7436491b1e96abe750a8f2c19f176ec8aee
     pristine_git_object: 4431f5265b471b6a3d698acceeb6cdb9f0e846a7
-  src/mcp-server/tools/elasticIPsCreateElasticIp.ts:
-    id: d431c50c18fe
-    last_write_checksum: sha1:5e2243526158c2c4d1b266489cf4deb2d4a1c4ec
-    pristine_git_object: 8c6be710b0f1e34a2f714d7350dfa90bb9d30d45
-  src/mcp-server/tools/elasticIPsDeleteElasticIp.ts:
-    id: f4a4da17f976
-    last_write_checksum: sha1:a4d1a2efa07661636ac2f5aa17e79e7d0e794d7f
-    pristine_git_object: 06f9a73c88034993d0fc755c6af635bf62371f88
-  src/mcp-server/tools/elasticIPsGetElasticIp.ts:
-    id: 606af6402fe2
-    last_write_checksum: sha1:66b9412b6f87f262418086580df7d2845772e4d7
-    pristine_git_object: 005a6627b2fcf300dd6954ed96ae56151aed2349
-  src/mcp-server/tools/elasticIPsListElasticIps.ts:
-    id: 090b82c91503
-    last_write_checksum: sha1:ecd3ffe0de0b5643ccc5274e0063caf14ff4217d
-    pristine_git_object: 56dbb3071f15ab96fba76627eb40165b64f25f8a
-  src/mcp-server/tools/elasticIPsUpdateElasticIp.ts:
-    id: 0c4406ea8b5d
-    last_write_checksum: sha1:c8965742181460caa00e3a8a4927135e2cdf4d5e
-    pristine_git_object: d76cae7b6953b8b7a201cbac6810026ac3a5726a
+  src/mcp-server/tools/elasticIpsCreateElasticIp.ts:
+    id: 9c8dacae84de
+    last_write_checksum: sha1:7f3feea046e507fab5c7a4e4a06fba3972b231cc
+    pristine_git_object: cff1e693f76dc070534f5c296a72b46803934d25
+  src/mcp-server/tools/elasticIpsDeleteElasticIp.ts:
+    id: 29eb7aa7467b
+    last_write_checksum: sha1:e274c1d1b11a98f54643d8118e0681d0fb7ef8cc
+    pristine_git_object: 9fffb3852f0093bc95d5c0be6250af95f286209d
+  src/mcp-server/tools/elasticIpsGetElasticIp.ts:
+    id: 114e530353ce
+    last_write_checksum: sha1:90f4986a7474e11bdfe6886aa8164c0d57a64683
+    pristine_git_object: a81c7a0f1a0c91628610805f9550e7e7d22a80cc
+  src/mcp-server/tools/elasticIpsListElasticIps.ts:
+    id: 83872069f9df
+    last_write_checksum: sha1:49c923144e45f5c038b118a29a4c2795f51a351b
+    pristine_git_object: ba4eb402560b21651b6e2ff31e25c8363368083a
+  src/mcp-server/tools/elasticIpsUpdateElasticIp.ts:
+    id: 6d53b3586553
+    last_write_checksum: sha1:2a56bc6188872c1789de541e09dc62254f5749c1
+    pristine_git_object: 74c79532e4f070e218f922cad5f430ec65c932a7
   src/mcp-server/tools/eventsList.ts:
     id: 1e923bcfb035
     last_write_checksum: sha1:f1facec1b0900dc1ed6a65c52cfa79ee1e0de0d8
@@ -4036,8 +4036,8 @@ trackedFiles:
     pristine_git_object: b8a86bd815a72f518dbc04f9346ad06ac5c3670b
   src/models/elasticipdata.ts:
     id: 5d4180fc34a4
-    last_write_checksum: sha1:61ae8a6b8d5d83da21732d46e2876a76f39b9211
-    pristine_git_object: 2195cb34e91d8008773c2e41e7ed589981e49bb9
+    last_write_checksum: sha1:6c5426a44c0d2e56c3ec3325e50980c990677288
+    pristine_git_object: ffeecc0443d56c68609f382ee94ee86d3a10eaa7
   src/models/elasticips.ts:
     id: d0a361d53282
     last_write_checksum: sha1:9c0378c591009468783b42ea13a21f4904a9a4db
@@ -4116,8 +4116,8 @@ trackedFiles:
     pristine_git_object: a418090bc9f575bc7e7351d11b7a7cb2b8cdf585
   src/models/ipaddress.ts:
     id: b0e9d5e076cc
-    last_write_checksum: sha1:31f5a801c0338763583471ace0ec548178dbf5d6
-    pristine_git_object: 4bbcd2df8e0c6f37c26b305f36ae7d9e8a39e70f
+    last_write_checksum: sha1:e5d97ecf8d47becad57d55e0aaf5e305605131c0
+    pristine_git_object: 785285a0d63e778de74ffe67935ef6d506ef5b1f
   src/models/ipaddresses.ts:
     id: 2f142835b4b2
     last_write_checksum: sha1:0ce62479549d31a2c5fa37f89e9a7a18d9b2fe6c
@@ -4468,8 +4468,8 @@ trackedFiles:
     pristine_git_object: 1950d3da56209ee6d766528803752689fde4d65d
   src/models/operations/listelasticips.ts:
     id: 668e3c7dc5d3
-    last_write_checksum: sha1:8c282892ad54a54b32f0a6f4055e258438238704
-    pristine_git_object: 4645d374eb978dd5e62b3075abc575159910f351
+    last_write_checksum: sha1:36dc667b6ac2445df958a9a5ca4b5a80c35a1a76
+    pristine_git_object: 812e797cdc87a3be15ad8702b652d86e2362b007
   src/models/operations/listfirewalls.ts:
     id: 8d57affb26b4
     last_write_checksum: sha1:8d2c56d21f8303a14acd1da6c33c0eb53df899c2
@@ -4852,8 +4852,8 @@ trackedFiles:
     pristine_git_object: 9d04d8adfe249fea2680dc66f84883f5111afcec
   src/sdk/elasticips.ts:
     id: 1b68e099f525
-    last_write_checksum: sha1:a8e3892c82f5edfb15c43eb302da96aa3d3f5aa6
-    pristine_git_object: be803c0510536d0bacf9a148614b69106b84b255
+    last_write_checksum: sha1:3d92c15c2b39e4487b08b5cfa96353d81d5720da
+    pristine_git_object: 71e41f9c4bf655e80e8dbfc1e44c13af20601af1
   src/sdk/events.ts:
     id: c7d130088b17
     last_write_checksum: sha1:d17f1758b983847c5d0d9170bdbe2ac3e5462378
@@ -4908,8 +4908,8 @@ trackedFiles:
     pristine_git_object: d273e59a718d2186c44dcbbcff7e74e342b81a8c
   src/sdk/sdk.ts:
     id: 784571af2f69
-    last_write_checksum: sha1:252a27c03da430a6001754673d85f174e03cfb90
-    pristine_git_object: a16e18ef06b9c9667d8fa0668cecfa56a4198494
+    last_write_checksum: sha1:af284bf8cb033f9e66537b93fd481bbda5a2b9c7
+    pristine_git_object: 4cf54162d9d4f268f8671a29d856528741c5327d
   src/sdk/servers.ts:
     id: 6b55195105a0
     last_write_checksum: sha1:949fc5302e4685fdf908e7666d4238fa5af59f02
@@ -5004,8 +5004,8 @@ trackedFiles:
     pristine_git_object: b7a2a13f3dff50663429df24ae2f55b647ff1084
   tsconfig.json:
     id: 61ebb9fd6e8c
-    last_write_checksum: sha1:c3ec7996536cdb9a54319e7d1eb3b199b733d34c
-    pristine_git_object: 0ccdbe286a8780e06a469a9eb7e2fb95322fd507
+    last_write_checksum: sha1:79dc1550d921fefec69f8632ed3b24dad41ca2f6
+    pristine_git_object: 76110f883cac40bb04fb2f376cd69ea8c8d6d215
 examples:
   get-api-keys:
     Success:
@@ -6069,7 +6069,7 @@ examples:
           page[number]: 1
       responses:
         "200":
-          application/vnd.api+json: {"data": [{"id": "eip_KeQbB4BoO6x10", "type": "elastic_ips", "attributes": {"address": "177.54.156.7", "family": "IPv4", "prefix_length": 32, "mode": "routed", "status": "active", "created_at": "2026-02-24T17:06:28.108Z", "server": {"id": "sv_2GmAlJ6BXlK1a", "hostname": "my-server", "primary_ipv4": "177.54.157.75"}, "project": {"id": "proj_AoW6vRnwkvLn0", "name": "My Project", "slug": "my-project"}, "region": {"city": "São Paulo", "site": {"slug": "SAO"}}}}], "meta": {}}
+          application/vnd.api+json: {"data": [{"id": "eip_KeQbB4BoO6x10", "type": "elastic_ips", "attributes": {"address": "177.54.156.7", "family": "IPv4", "prefix_length": 32, "mode": "routed", "status": "active", "created_at": "2026-02-24T17:06:28.108Z", "server": {"id": "sv_2GmAlJ6BXlK1a", "hostname": "my-server", "primary_ipv4": "177.54.157.75"}, "project": {"id": "proj_AoW6vRnwkvLn0", "name": "My Project", "slug": "my-project"}, "region": {"id": "region_sa_sao_paulo", "name": "São Paulo", "location": {"id": "site_sao", "name": "São Paulo", "slug": "SAO"}}}}], "meta": {}}
   create-elastic-ip:
     Create:
       requestBody:
@@ -6086,7 +6086,7 @@ examples:
         application/vnd.api+json: {"data": {"type": "elastic_ips", "attributes": {"project_id": "<id>", "server_id": "<id>"}}}
       responses:
         "202":
-          application/vnd.api+json: {"data": {"id": null, "type": "elastic_ips", "attributes": {"address": "177.54.156.7", "status": "provisioning", "project": {"id": "proj_AoW6vRnwkvLn0", "name": "My Project", "slug": "my-project"}}}}
+          application/vnd.api+json: {"data": {"id": null, "type": "elastic_ips", "attributes": {"address": "177.54.156.7", "status": "configuring", "project": {"id": "proj_AoW6vRnwkvLn0", "name": "My Project", "slug": "my-project"}}}}
     FeatureNotEnabled:
       requestBody:
         application/json: {"data": {"type": "elastic_ips", "attributes": {"project_id": "<id>", "server_id": "<id>"}}}
@@ -6101,7 +6101,7 @@ examples:
           elastic_ip_id: "eip_KeQbB4BoO6x10"
       responses:
         "200":
-          application/vnd.api+json: {"data": {"id": "eip_KeQbB4BoO6x10", "type": "elastic_ips", "attributes": {"address": "177.54.156.7", "family": "IPv4", "prefix_length": 32, "mode": "routed", "status": "active", "created_at": "2026-02-24T17:06:28.108Z", "server": {"id": "sv_2GmAlJ6BXlK1a", "hostname": "my-server", "primary_ipv4": "177.54.157.75"}, "project": {"id": "proj_AoW6vRnwkvLn0", "name": "My Project", "slug": "my-project"}, "region": {"city": "São Paulo", "site": {"slug": "SAO"}}}}}
+          application/vnd.api+json: {"data": {"id": "eip_KeQbB4BoO6x10", "type": "elastic_ips", "attributes": {"address": "177.54.156.7", "family": "IPv4", "prefix_length": 32, "mode": "routed", "status": "active", "created_at": "2026-02-24T17:06:28.108Z", "server": {"id": "sv_2GmAlJ6BXlK1a", "hostname": "my-server", "primary_ipv4": "177.54.157.75"}, "project": {"id": "proj_AoW6vRnwkvLn0", "name": "My Project", "slug": "my-project"}, "region": {"id": "region_sa_sao_paulo", "name": "São Paulo", "location": {"id": "site_sao", "name": "São Paulo", "slug": "SAO"}}}}}
     FeatureNotEnabled:
       parameters:
         path:
@@ -6137,6 +6137,8 @@ examples:
           application/vnd.api+json: {}
         "403":
           application/vnd.api+json: {}
+        "202":
+          application/vnd.api+json: {}
     Success:
       parameters:
         path:
@@ -6147,6 +6149,8 @@ examples:
       responses:
         "200":
           application/vnd.api+json: {"data": {"id": "eip_KeQbB4BoO6x10", "type": "elastic_ips", "attributes": {"address": "177.54.156.7", "family": "IPv4", "prefix_length": 32, "mode": "routed", "status": "active", "created_at": "2026-02-24T17:06:28.108Z", "server": {"id": "sv_oDEBlwBGRO2me", "hostname": "new-server", "primary_ipv4": "177.54.157.180"}, "project": {"id": "proj_AoW6vRnwkvLn0", "name": "My Project", "slug": "my-project"}, "region": {"city": "São Paulo", "site": {"slug": "SAO"}}}}}
+        "202":
+          application/vnd.api+json: {"data": {"id": "eip_KeQbB4BoO6x10", "type": "elastic_ips", "attributes": {"address": "177.54.156.7", "family": "IPv4", "prefix_length": 32, "mode": "routed", "status": "moving", "created_at": "2026-02-24T17:06:28.108Z", "server": {"id": "sv_oDEBlwBGRO2me", "hostname": "new-server", "primary_ipv4": "177.54.157.180", "operating_system": "ubuntu_24_04_x64_lts"}, "project": {"id": "proj_AoW6vRnwkvLn0", "name": "My Project", "slug": "my-project"}, "region": {"id": "region_sa_sao_paulo", "name": "São Paulo", "location": {"id": "site_sao", "name": "São Paulo", "slug": "SAO"}}}}}
     FeatureNotEnabled:
       parameters:
         path:
@@ -6259,7 +6263,18 @@ examples:
           application/vnd.api+json: {"data": {"id": "vm_7vYAZqGBdMQ94", "type": "virtual_machines", "attributes": {"name": "my-updated-vm", "created_at": "2026-01-14T15:57:15+00:00", "status": "Running", "primary_ipv4": "10.0.0.25", "operating_system": null, "plan": {"id": "plan_VE1Wd3VQOXnZJ", "name": "c3.small.x86-143"}, "specs": {"vcpu": 16, "ram": "128 GB", "storage": "100 GB", "nic": "1 x 1 Gbps", "gpu": "1 x NVIDIA H100 Tensor Core GPU"}, "team": {"id": "team_GpZboxNev1U2pxpmKwWAc8e01vpp", "name": "702 Team", "slug": "702-team", "description": "702 Team", "address": "Suite 729 8171 Albina Forges, Eldridgeberg, CA 26345-3293", "currency": {}, "status": "verified"}, "project": {"id": "proj_W6Q2D9ZQOKLpr", "name": "Aerodynamic Wool Watch", "slug": "aerodynamic-wool-watch", "description": "Intelligent Paper Shirt", "billing_type": "Normal", "billing_method": "Normal", "bandwidth_alert": false, "environment": null, "billing": {"subscription_id": null, "type": "Normal", "method": "Normal"}, "stats": {"ip_addresses": 0, "prefixes": 0, "servers": 0, "vlans": 0}}}}}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Typescript SDK Changes:\n* `latitudesh.plans.vm.list()`:  `response.data[].attributes` **Changed** (Breaking ⚠️)\n* `latitudesh.servers.list()`:  `response.data[].attributes` **Changed** (Breaking ⚠️)\n* `latitudesh.servers.create()`:  `response.data.attributes` **Changed** (Breaking ⚠️)\n* `latitudesh.servers.get()`:  `response.data.attributes` **Changed** (Breaking ⚠️)\n* `latitudesh.servers.update()`:  `response.data.attributes` **Changed** (Breaking ⚠️)\n* `latitudesh.privateNetworks.get()`:  `response` **Changed** (Breaking ⚠️)\n* `latitudesh.servers.unlock()`:  `response.data.attributes` **Changed** (Breaking ⚠️)\n* `latitudesh.servers.lock()`:  `response.data.attributes` **Changed** (Breaking ⚠️)\n* `latitudesh.plans.getContainersPlan()`: **Removed** (Breaking ⚠️)\n* `latitudesh.userData.deleteProjectUserData()`: **Removed** (Breaking ⚠️)\n* `latitudesh.kubernetesClusters.listKubernetesClusters()`: **Added**\n* `latitudesh.kubernetesClusters.createKubernetesCluster()`: **Added**\n* `latitudesh.kubernetesClusters.getKubernetesCluster()`: **Added**\n* `latitudesh.kubernetesClusters.deleteKubernetesCluster()`: **Added**\n* `latitudesh.kubernetesClusters.getKubernetesClusterKubeconfig()`: **Added**\n* `latitudesh.userData.getProjectUsersData()`: **Added**\n* `latitudesh.userData.getProjectUserData()`: **Added**\n* `latitudesh.userData.deleteProjectUserData()`: **Added**\n* `latitudesh.userData.create()`: **Added**\n* `latitudesh.userData.updateForProject()`: **Added**\n* `latitudesh.userData.list()`: **Added**\n* `latitudesh.userData.createNew()`: **Added**\n* `latitudesh.userData.retrieve()`: **Added**\n* `latitudesh.userData.update()`: **Added**\n* `latitudesh.userData.delete()`: **Added**\n* `latitudesh.virtualMachines.updateVirtualMachine()`: **Added**\n* `latitudesh.elasticIPs.deleteElasticIp()`: **Added**\n* `latitudesh.userData.getProjectUsersData()`: **Removed** (Breaking ⚠️)\n* `latitudesh.userData.getProjectUserData()`: **Removed** (Breaking ⚠️)\n* `latitudesh.elasticIPs.updateElasticIp()`: **Added**\n* `latitudesh.userData.create()`: **Removed** (Breaking ⚠️)\n* `latitudesh.userData.updateForProject()`: **Removed** (Breaking ⚠️)\n* `latitudesh.userData.list()`: **Removed** (Breaking ⚠️)\n* `latitudesh.userData.createNew()`: **Removed** (Breaking ⚠️)\n* `latitudesh.userData.retrieve()`: **Removed** (Breaking ⚠️)\n* `latitudesh.userData.delete()`: **Removed** (Breaking ⚠️)\n* `latitudesh.userData.update()`: **Removed** (Breaking ⚠️)\n* `latitudesh.apiKeys.list()`:  `response` **Changed**\n* `latitudesh.apiKeys.create()`:  `response.data.attributes.token` **Added**\n* `latitudesh.apiKeys.update()`:  `response.data.attributes.token` **Added**\n* `latitudesh.apiKeys.updateApiKey()`:  `response.data.attributes.token` **Added**\n* `latitudesh.elasticIPs.getElasticIp()`: **Added**\n* `latitudesh.elasticIPs.createElasticIp()`: **Added**\n* `latitudesh.events.list()`:  `response.data[].data[].attributes.properties` **Added**\n* `latitudesh.firewalls.list()`:  `response.data[].attributes.rules[].description` **Added**\n* `latitudesh.firewalls.create()`: \n  *  `request.data.attributes.rules[].description` **Added**\n  *  `response.data.attributes.rules[].description` **Added**\n* `latitudesh.firewalls.get()`:  `response.data.attributes.rules[].description` **Added**\n* `latitudesh.firewalls.update()`: \n  *  `request.requestBody.data.attributes.rules[].description` **Added**\n  *  `response.data.attributes.rules[].description` **Added**\n* `latitudesh.storage.createFilesystem()`:  `error.status[503]` **Added**\n* `latitudesh.storage.postStorageVolumes()`:  `error.status[503]` **Added**\n* `latitudesh.virtualMachines.create()`: \n  *  `request.data.attributes.operatingSystem` **Added**\n  *  `response.data.attributes.primaryIpv4` **Added**\n* `latitudesh.elasticIPs.listElasticIps()`: **Added**\n"
+releaseNotes: |
+  ## Typescript SDK Changes:
+  * `latitudesh.elasticIps.listElasticIps()`: **Added**
+  * `latitudesh.elasticIps.createElasticIp()`: **Added**
+  * `latitudesh.elasticIps.getElasticIp()`: **Added**
+  * `latitudesh.elasticIps.deleteElasticIp()`: **Added**
+  * `latitudesh.elasticIps.updateElasticIp()`: **Added**
+  * `latitudesh.elasticIPs.listElasticIps()`: **Removed** (Breaking ⚠️)
+  * `latitudesh.elasticIPs.createElasticIp()`: **Removed** (Breaking ⚠️)
+  * `latitudesh.elasticIPs.getElasticIp()`: **Removed** (Breaking ⚠️)
+  * `latitudesh.elasticIPs.deleteElasticIp()`: **Removed** (Breaking ⚠️)
+  * `latitudesh.elasticIPs.updateElasticIp()`: **Removed** (Breaking ⚠️)
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
