@@ -40,7 +40,9 @@ typescript:
     devDependencies: {}
     peerDependencies: {}
   additionalPackageJSON: {}
-  additionalScripts: {}
+  additionalScripts:
+    test:integration: bun test tests/integration
+    test:coverage: bun test --coverage tests/integration
   alwaysIncludeInboundAndOutbound: false
   author: Speakeasy
   baseErrorName: LatitudeshError
