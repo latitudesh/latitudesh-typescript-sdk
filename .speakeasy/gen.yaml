@@ -33,14 +33,16 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 typescript:
-  version: 0.3.1
+  version: 0.3.2
   acceptHeaderEnum: true
   additionalDependencies:
     dependencies: {}
     devDependencies: {}
     peerDependencies: {}
   additionalPackageJSON: {}
-  additionalScripts: {}
+  additionalScripts:
+    test:integration: bun test tests/integration
+    test:coverage: bun test --coverage tests/integration
   alwaysIncludeInboundAndOutbound: false
   author: Speakeasy
   baseErrorName: LatitudeshError

@@ -9,11 +9,9 @@ let value: CreateKubernetesCluster = {
   data: {
     type: "kubernetes_clusters",
     attributes: {
-      name: "<value>",
       projectId: "<id>",
       site: "<value>",
       plan: "<value>",
-      sshKeyId: "<id>",
     },
   },
 };
