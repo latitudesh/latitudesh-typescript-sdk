@@ -1,6 +1,6 @@
 {
   "name": "latitudesh-typescript-sdk",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "author": "Speakeasy",
   "type": "module",
   "bin": {
@@ -27,8 +27,6 @@
     "url": "https://github.com/latitudesh/latitudesh-typescript-sdk.git"
   },
   "scripts": {
-    "test:integration": "bun test tests/integration",
-    "test:coverage": "bun test --coverage tests/integration",
     "lint": "eslint --cache --max-warnings=0 src",
     "build:mcp": "bun src/mcp-server/build.mts",
     "build": "npm run build:mcp && tshy",

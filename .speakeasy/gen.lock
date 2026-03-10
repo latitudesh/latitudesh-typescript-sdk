@@ -1,24 +1,24 @@
 lockVersion: 2.0.0
 id: c8245324-f3d7-42c7-8124-ce79579cbff5
 management:
-  docChecksum: 15cae4f4ee8afa9c2590020120db2d6f
+  docChecksum: ae9fecd0be4153977f757be2506cacfb
   docVersion: "2023-06-01"
-  speakeasyVersion: 1.741.6
-  generationVersion: 2.849.8
-  releaseVersion: 0.3.1
-  configChecksum: 69c8648dcaeadf9593c951390ed79c08
+  speakeasyVersion: 1.750.0
+  generationVersion: 2.856.1
+  releaseVersion: 0.3.2
+  configChecksum: a9ea1deb3e79cc62cc18ca709f112468
   repoURL: https://github.com/latitudesh/latitudesh-typescript-sdk.git
   installationURL: https://github.com/latitudesh/latitudesh-typescript-sdk
   published: true
 persistentEdits:
-  generation_id: 51b31420-4db1-45fe-b82c-b5501689401c
-  pristine_commit_hash: 0f5a37a589868d2391ef5df6ab0a2b40019c3e4b
-  pristine_tree_hash: be5163a22b9f74fbb35721633772b2b67714327b
+  generation_id: b4ebc752-57bb-4c78-aaff-90a525e7fe0a
+  pristine_commit_hash: 20d3af168251d9cb8edeb4acb833b04f3c0bb991
+  pristine_tree_hash: 5451e13df7bd0988ab43c0abe6c3d3175df801d2
 features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.14
-    core: 3.26.40
+    core: 3.26.41
     defaultEnabledRetries: 0.1.0
     deprecations: 2.81.1
     devContainers: 2.90.1
@@ -232,16 +232,16 @@ trackedFiles:
     pristine_git_object: 8405b3a60ab71eaf87274378f20930507efa3a1c
   docs/models/createkubernetescluster.md:
     id: bbed44c69de8
-    last_write_checksum: sha1:b83797c4a92f8201809b21cec4b6c65af97cd372
-    pristine_git_object: ff55fde50497fd60f5ad949b8cdfc63e2bfb199c
+    last_write_checksum: sha1:3cec8d62f4911b1729340d8b2ef0f203af181865
+    pristine_git_object: 541e7158afa91c063733f50fc579a2e130049349
   docs/models/createkubernetesclusterattributes.md:
     id: 23ceba62ef48
-    last_write_checksum: sha1:1cf1378bafa9e66c034968600cc14b3123a762c1
-    pristine_git_object: a3f12829a1dc59fdf7bad0ecc76765a3b4e0d434
+    last_write_checksum: sha1:62a24677f47bb8750f7a9fa2eacae43d473e5b9b
+    pristine_git_object: 4a03327d10c1c320216692737d8d43043ea175d8
   docs/models/createkubernetesclusterdata.md:
     id: 937081ea2da6
-    last_write_checksum: sha1:4b8a378d3db5eb54fa7132d626632571ad7c3c34
-    pristine_git_object: 3a46130b114284bef3b6fd0a1d605c36bcfb5b19
+    last_write_checksum: sha1:9d312479b05bb40c265b42e224eff430413be2f9
+    pristine_git_object: 4edc4291defd64b7849d86d317b591c9fd387749
   docs/models/createkubernetesclustertype.md:
     id: 9c4bc4cd3d4b
     last_write_checksum: sha1:edd1b2c8a92864c87d4da7d56690d79d5c5c44b3
@@ -2744,8 +2744,8 @@ trackedFiles:
     pristine_git_object: 1b0254cd0ebcc4c2de364bd390c6a2bc6ba4969e
   docs/sdks/kubernetesclusters/README.md:
     id: 93994c21c7b4
-    last_write_checksum: sha1:16ecb4b7c5abbef68a74bc98cbbc1fab9a379493
-    pristine_git_object: 30f7fb3ded1b492cd963ea08215fb442922ff55e
+    last_write_checksum: sha1:758c8f94ce857f439a336cf304e71b951cd1a82a
+    pristine_git_object: b9d40824b381568b4b6302e04aadbd0f05665998
   docs/sdks/members/README.md:
     id: efb92d440525
     last_write_checksum: sha1:995e151541f1244f26568941418d0993fbbb67a3
@@ -2852,12 +2852,12 @@ trackedFiles:
     pristine_git_object: 249e5d9837dbad499fc14718cebf96fd4875a9e8
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:a77210b1b194342e0bccabf677e7f16caf7e06f7
-    pristine_git_object: a48f5b9d598accaf75163fa4922e58b2ad1be689
+    last_write_checksum: sha1:458526594742ad4d1d6a8fb0748a19f51bc4f5e6
+    pristine_git_object: 0406f761c7762b4b47a20f2e2c84215081e864e1
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:b7c0bae5ac774c038705cefe97afda2c3a02affd
-    pristine_git_object: c3bf2b1fbc1c62c8909f7b917a1bdc9e67d67167
+    last_write_checksum: sha1:0b58f78565be9b84f066806db1270179ff92b475
+    pristine_git_object: fdd0a28b6a84911bdf7ebe14efc18ac67c19dcea
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:9bb7b3807363b77f27dbdb87d6d10e9605f723d6
@@ -3376,8 +3376,8 @@ trackedFiles:
     pristine_git_object: 0aebd8b0a4867e35cb3348fc52921c3c0b4725b7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:5a98991eb06cb3a0ba90156efaa9b1250b17f1ab
-    pristine_git_object: 73fd7d1ecabdf48b1918fe6144dde2db7cc66168
+    last_write_checksum: sha1:c7fb491d46ac40b4ebfb2c6864c2d1b542889c81
+    pristine_git_object: e2f7ec7c9fda91b7af6e5f48f19e4b5f49cfdaa5
   src/lib/dlv.ts:
     id: b1988214835a
     last_write_checksum: sha1:1dd3e3fbb4550c4bf31f5ef997faff355d6f3250
@@ -3460,8 +3460,8 @@ trackedFiles:
     pristine_git_object: 0955a573c2ce989d63c737410ab8cc28706d9f74
   src/mcp-server/mcp-server.ts:
     id: aabbc4ab07c1
-    last_write_checksum: sha1:528c3183b2ce00e2e3702f5d6c6c569b8275bc49
-    pristine_git_object: e46fad1bc1793a8c889698a27b169edae91ede1d
+    last_write_checksum: sha1:fc194e568ecc68f60c2849055ac0b447c9099c91
+    pristine_git_object: 84bb06775d23fbdbbe5f757885f906e005550221
   src/mcp-server/prompts.ts:
     id: 26f3d73cbf31
     last_write_checksum: sha1:3e8d60ab7f8078d83fa9528f2e831050c1fd119c
@@ -3476,8 +3476,8 @@ trackedFiles:
     pristine_git_object: c25696d4c4f70e081fa5d87ad6891874c509a577
   src/mcp-server/server.ts:
     id: 2784dd48e82a
-    last_write_checksum: sha1:0686269b15fb2bf1588f4c19d08f2d8643dcf6f0
-    pristine_git_object: 505a5dc4484370b33b8a381520964213fd249030
+    last_write_checksum: sha1:67fc30514ed97ea51d96e11527ae1a8d18b0b129
+    pristine_git_object: 148770fcbff36aece20885ac453da178a7ac9f16
   src/mcp-server/shared.ts:
     id: 074e80d4be1e
     last_write_checksum: sha1:d89576cea2bef3856b7fc3e65b868875528be042
@@ -4012,8 +4012,8 @@ trackedFiles:
     pristine_git_object: 2cc781fe52bc5b11d2e8a3b1d0a7455b4d6e478b
   src/models/createkubernetescluster.ts:
     id: 517b1dba9c81
-    last_write_checksum: sha1:5d2df17dc965cfaa550b26cead81d802a1ca0401
-    pristine_git_object: 020cd54f9a408690f9bc6adc152516ec8682d538
+    last_write_checksum: sha1:6a43d742bd29f3974dc5097f1d6d8fcd76877fdd
+    pristine_git_object: 0ce84a3b6f95ecb5f16266241e62ecdfb851b495
   src/models/customtag.ts:
     id: a0746fef8163
     last_write_checksum: sha1:1493586230d16ae69b82edce90d1919fc395d680
@@ -6186,13 +6186,21 @@ examples:
   create-kubernetes-cluster:
     Created:
       requestBody:
-        application/vnd.api+json: {"data": {"type": "kubernetes_clusters", "attributes": {"name": "my-cluster", "project_id": "proj_6059EqYkOQj8p", "site": "SAN3", "plan": "c2-small-x86", "ssh_key_id": "ssh_VkE1DwV37dnZJ"}}}
+        application/vnd.api+json: {"data": {"type": "kubernetes_clusters", "attributes": {"name": "my-cluster", "project_id": "proj_6059EqYkOQj8p", "site": "SAN3", "plan": "c2-small-x86", "ssh_keys": ["ssh_VkE1DwV37dnZJ"]}}}
       responses:
         "201":
           application/vnd.api+json: {"data": {"id": "my-cluster", "type": "kubernetes_clusters", "attributes": {"name": "my-cluster", "status": "provisioning", "control_plane_endpoint": "https://api.my-cluster.example.com:6443"}}}
     ValidationError:
       requestBody:
-        application/vnd.api+json: {"data": {"type": "kubernetes_clusters", "attributes": {"name": "<value>", "project_id": "<id>", "site": "<value>", "plan": "<value>", "ssh_key_id": "<id>"}}}
+        application/vnd.api+json: {"data": {"type": "kubernetes_clusters", "attributes": {"project_id": "<id>", "site": "<value>", "plan": "<value>"}}}
+      responses:
+        "400":
+          application/vnd.api+json: {"errors": [{"code": "VALIDATION_ERROR"}]}
+        "503":
+          application/vnd.api+json: {"errors": [{"code": "VALIDATION_ERROR"}]}
+    InvalidSshKeys:
+      requestBody:
+        application/vnd.api+json: {"data": {"type": "kubernetes_clusters", "attributes": {"project_id": "<id>", "site": "<value>", "plan": "<value>"}}}
       responses:
         "400":
           application/vnd.api+json: {"errors": [{"code": "VALIDATION_ERROR"}]}
@@ -6263,18 +6271,7 @@ examples:
           application/vnd.api+json: {"data": {"id": "vm_7vYAZqGBdMQ94", "type": "virtual_machines", "attributes": {"name": "my-updated-vm", "created_at": "2026-01-14T15:57:15+00:00", "status": "Running", "primary_ipv4": "10.0.0.25", "operating_system": null, "plan": {"id": "plan_VE1Wd3VQOXnZJ", "name": "c3.small.x86-143"}, "specs": {"vcpu": 16, "ram": "128 GB", "storage": "100 GB", "nic": "1 x 1 Gbps", "gpu": "1 x NVIDIA H100 Tensor Core GPU"}, "team": {"id": "team_GpZboxNev1U2pxpmKwWAc8e01vpp", "name": "702 Team", "slug": "702-team", "description": "702 Team", "address": "Suite 729 8171 Albina Forges, Eldridgeberg, CA 26345-3293", "currency": {}, "status": "verified"}, "project": {"id": "proj_W6Q2D9ZQOKLpr", "name": "Aerodynamic Wool Watch", "slug": "aerodynamic-wool-watch", "description": "Intelligent Paper Shirt", "billing_type": "Normal", "billing_method": "Normal", "bandwidth_alert": false, "environment": null, "billing": {"subscription_id": null, "type": "Normal", "method": "Normal"}, "stats": {"ip_addresses": 0, "prefixes": 0, "servers": 0, "vlans": 0}}}}}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: |
-  ## Typescript SDK Changes:
-  * `latitudesh.elasticIps.listElasticIps()`: **Added**
-  * `latitudesh.elasticIps.createElasticIp()`: **Added**
-  * `latitudesh.elasticIps.getElasticIp()`: **Added**
-  * `latitudesh.elasticIps.deleteElasticIp()`: **Added**
-  * `latitudesh.elasticIps.updateElasticIp()`: **Added**
-  * `latitudesh.elasticIPs.listElasticIps()`: **Removed** (Breaking ⚠️)
-  * `latitudesh.elasticIPs.createElasticIp()`: **Removed** (Breaking ⚠️)
-  * `latitudesh.elasticIPs.getElasticIp()`: **Removed** (Breaking ⚠️)
-  * `latitudesh.elasticIPs.deleteElasticIp()`: **Removed** (Breaking ⚠️)
-  * `latitudesh.elasticIPs.updateElasticIp()`: **Removed** (Breaking ⚠️)
+releaseNotes: "## Typescript SDK Changes:\n* `latitudesh.kubernetesClusters.createKubernetesCluster()`: \n  *  `request.data.attributes` **Changed** (Breaking ⚠️)\n"
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json

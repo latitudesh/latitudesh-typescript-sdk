@@ -162,7 +162,9 @@ async function run() {
         projectId: "proj_6059EqYkOQj8p",
         site: "SAN3",
         plan: "c2-small-x86",
-        sshKeyId: "ssh_VkE1DwV37dnZJ",
+        sshKeys: [
+          "ssh_VkE1DwV37dnZJ",
+        ],
       },
     },
   });
@@ -196,7 +198,9 @@ async function run() {
         projectId: "proj_6059EqYkOQj8p",
         site: "SAN3",
         plan: "c2-small-x86",
-        sshKeyId: "ssh_VkE1DwV37dnZJ",
+        sshKeys: [
+          "ssh_VkE1DwV37dnZJ",
+        ],
       },
     },
   });
@@ -210,9 +214,9 @@ async function run() {
 
 run();
 ```
-### Example Usage: ValidationError
+### Example Usage: InvalidSshKeys
 
-<!-- UsageSnippet language="typescript" operationID="create-kubernetes-cluster" method="post" path="/kubernetes_clusters" example="ValidationError" -->
+<!-- UsageSnippet language="typescript" operationID="create-kubernetes-cluster" method="post" path="/kubernetes_clusters" example="InvalidSshKeys" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -225,11 +229,9 @@ async function run() {
     data: {
       type: "kubernetes_clusters",
       attributes: {
-        name: "<value>",
         projectId: "<id>",
         site: "<value>",
         plan: "<value>",
-        sshKeyId: "<id>",
       },
     },
   });
@@ -259,11 +261,72 @@ async function run() {
     data: {
       type: "kubernetes_clusters",
       attributes: {
-        name: "<value>",
         projectId: "<id>",
         site: "<value>",
         plan: "<value>",
-        sshKeyId: "<id>",
+      },
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("kubernetesClustersCreateKubernetesCluster failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: ValidationError
+
+<!-- UsageSnippet language="typescript" operationID="create-kubernetes-cluster" method="post" path="/kubernetes_clusters" example="ValidationError" -->
+```typescript
+import { Latitudesh } from "latitudesh-typescript-sdk";
+
+const latitudesh = new Latitudesh({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const result = await latitudesh.kubernetesClusters.createKubernetesCluster({
+    data: {
+      type: "kubernetes_clusters",
+      attributes: {
+        projectId: "<id>",
+        site: "<value>",
+        plan: "<value>",
+      },
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
+import { kubernetesClustersCreateKubernetesCluster } from "latitudesh-typescript-sdk/funcs/kubernetesClustersCreateKubernetesCluster.js";
+
+// Use `LatitudeshCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const latitudesh = new LatitudeshCore({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const res = await kubernetesClustersCreateKubernetesCluster(latitudesh, {
+    data: {
+      type: "kubernetes_clusters",
+      attributes: {
+        projectId: "<id>",
+        site: "<value>",
+        plan: "<value>",
       },
     },
   });

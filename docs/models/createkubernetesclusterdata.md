@@ -8,11 +8,9 @@ import { CreateKubernetesClusterData } from "latitudesh-typescript-sdk/models";
 let value: CreateKubernetesClusterData = {
   type: "kubernetes_clusters",
   attributes: {
-    name: "<value>",
     projectId: "<id>",
     site: "<value>",
     plan: "<value>",
-    sshKeyId: "<id>",
   },
 };
 ```

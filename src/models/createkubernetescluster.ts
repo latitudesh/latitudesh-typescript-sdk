@@ -18,9 +18,9 @@ export type CreateKubernetesClusterType = ClosedEnum<
 
 export type CreateKubernetesClusterAttributes = {
   /**
-   * The cluster name. Must follow Kubernetes naming rules: lowercase alphanumeric or hyphens, must start and end with alphanumeric, max 63 characters.
+   * The cluster name. Must follow Kubernetes naming rules: lowercase alphanumeric or hyphens, must start and end with alphanumeric, max 63 characters. Auto-generated if omitted.
    */
-  name: string;
+  name?: string | null | undefined;
   /**
    * The project ID where the cluster will be created
    */
@@ -34,9 +34,9 @@ export type CreateKubernetesClusterAttributes = {
    */
   plan: string;
   /**
-   * The SSH key ID to use for node access
+   * Array of SSH key IDs to use for node access. All keys must exist and belong to your team.
    */
-  sshKeyId: string;
+  sshKeys?: Array<string> | null | undefined;
   /**
    * The machine plan for worker nodes. Defaults to the control plane plan if not specified.
    */
@@ -83,11 +83,11 @@ export const CreateKubernetesClusterAttributes$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  name: z.string(),
+  name: z.nullable(z.string()).optional(),
   project_id: z.string(),
   site: z.string(),
   plan: z.string(),
-  ssh_key_id: z.string(),
+  ssh_keys: z.nullable(z.array(z.string())).optional(),
   worker_plan: z.nullable(z.string()).optional(),
   kubernetes_version: z.nullable(z.string()).optional(),
   control_plane_count: z.nullable(z.number().int()).optional(),
@@ -96,7 +96,7 @@ export const CreateKubernetesClusterAttributes$inboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     "project_id": "projectId",
-    "ssh_key_id": "sshKeyId",
+    "ssh_keys": "sshKeys",
     "worker_plan": "workerPlan",
     "kubernetes_version": "kubernetesVersion",
     "control_plane_count": "controlPlaneCount",
@@ -106,11 +106,11 @@ export const CreateKubernetesClusterAttributes$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type CreateKubernetesClusterAttributes$Outbound = {
-  name: string;
+  name?: string | null | undefined;
   project_id: string;
   site: string;
   plan: string;
-  ssh_key_id: string;
+  ssh_keys?: Array<string> | null | undefined;
   worker_plan?: string | null | undefined;
   kubernetes_version?: string | null | undefined;
   control_plane_count?: number | null | undefined;
@@ -124,11 +124,11 @@ export const CreateKubernetesClusterAttributes$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateKubernetesClusterAttributes
 > = z.object({
-  name: z.string(),
+  name: z.nullable(z.string()).optional(),
   projectId: z.string(),
   site: z.string(),
   plan: z.string(),
-  sshKeyId: z.string(),
+  sshKeys: z.nullable(z.array(z.string())).optional(),
   workerPlan: z.nullable(z.string()).optional(),
   kubernetesVersion: z.nullable(z.string()).optional(),
   controlPlaneCount: z.nullable(z.number().int()).optional(),
@@ -137,7 +137,7 @@ export const CreateKubernetesClusterAttributes$outboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     projectId: "project_id",
-    sshKeyId: "ssh_key_id",
+    sshKeys: "ssh_keys",
     workerPlan: "worker_plan",
     kubernetesVersion: "kubernetes_version",
     controlPlaneCount: "control_plane_count",
