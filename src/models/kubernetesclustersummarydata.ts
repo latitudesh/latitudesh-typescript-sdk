@@ -111,7 +111,7 @@ export type KubernetesClusterSummaryDataAttributes = {
  */
 export type KubernetesClusterSummaryData = {
   /**
-   * The cluster name used as identifier
+   * The cluster ID in hashed format (kc_<hash>)
    */
   id?: string | undefined;
   type?: string | undefined;

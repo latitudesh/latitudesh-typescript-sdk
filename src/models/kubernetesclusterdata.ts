@@ -85,6 +85,24 @@ export type KubernetesClusterDataStep = {
   status?: KubernetesClusterDataStatus | undefined;
 };
 
+/**
+ * The project this cluster belongs to
+ */
+export type KubernetesClusterDataProject = {
+  /**
+   * The project ID
+   */
+  id?: string | undefined;
+  /**
+   * The project name
+   */
+  name?: string | undefined;
+  /**
+   * The project slug
+   */
+  slug?: string | undefined;
+};
+
 export type KubernetesClusterDataAttributes = {
   /**
    * The cluster name
@@ -111,6 +129,10 @@ export type KubernetesClusterDataAttributes = {
    */
   location?: string | undefined;
   /**
+   * IP addresses assigned to the cluster's load balancer
+   */
+  loadBalancerIps?: Array<string> | undefined;
+  /**
    * The Kubernetes version running on the cluster
    */
   kubernetesVersion?: string | undefined;
@@ -118,6 +140,22 @@ export type KubernetesClusterDataAttributes = {
    * When the cluster was created
    */
   createdAt?: Date | undefined;
+  /**
+   * The machine plan slug for control plane nodes
+   */
+  plan?: string | undefined;
+  /**
+   * The machine plan slug for worker nodes. Null if no workers exist.
+   */
+  workerPlan?: string | null | undefined;
+  /**
+   * Number of control plane node replicas
+   */
+  controlPlaneCount?: number | undefined;
+  /**
+   * Number of worker node replicas. Returns 0 if no workers exist.
+   */
+  workerCount?: number | undefined;
   /**
    * Control plane status information
    */
@@ -154,11 +192,15 @@ export type KubernetesClusterDataAttributes = {
    * Reason code for cluster failure
    */
   failureReason?: string | null | undefined;
+  /**
+   * The project this cluster belongs to
+   */
+  project?: KubernetesClusterDataProject | undefined;
 };
 
 export type KubernetesClusterData = {
   /**
-   * The cluster name used as identifier
+   * The cluster ID in hashed format (kc_<hash>)
    */
   id?: string | undefined;
   type?: string | undefined;
@@ -332,6 +374,53 @@ export function kubernetesClusterDataStepFromJSON(
 }
 
 /** @internal */
+export const KubernetesClusterDataProject$inboundSchema: z.ZodType<
+  KubernetesClusterDataProject,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string().optional(),
+  name: z.string().optional(),
+  slug: z.string().optional(),
+});
+/** @internal */
+export type KubernetesClusterDataProject$Outbound = {
+  id?: string | undefined;
+  name?: string | undefined;
+  slug?: string | undefined;
+};
+
+/** @internal */
+export const KubernetesClusterDataProject$outboundSchema: z.ZodType<
+  KubernetesClusterDataProject$Outbound,
+  z.ZodTypeDef,
+  KubernetesClusterDataProject
+> = z.object({
+  id: z.string().optional(),
+  name: z.string().optional(),
+  slug: z.string().optional(),
+});
+
+export function kubernetesClusterDataProjectToJSON(
+  kubernetesClusterDataProject: KubernetesClusterDataProject,
+): string {
+  return JSON.stringify(
+    KubernetesClusterDataProject$outboundSchema.parse(
+      kubernetesClusterDataProject,
+    ),
+  );
+}
+export function kubernetesClusterDataProjectFromJSON(
+  jsonString: string,
+): SafeParseResult<KubernetesClusterDataProject, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => KubernetesClusterDataProject$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'KubernetesClusterDataProject' from JSON`,
+  );
+}
+
+/** @internal */
 export const KubernetesClusterDataAttributes$inboundSchema: z.ZodType<
   KubernetesClusterDataAttributes,
   z.ZodTypeDef,
@@ -343,9 +432,14 @@ export const KubernetesClusterDataAttributes$inboundSchema: z.ZodType<
   control_plane_endpoint: z.nullable(z.string()).optional(),
   kubeconfig_url: z.nullable(z.string()).optional(),
   location: z.string().optional(),
+  load_balancer_ips: z.array(z.string()).optional(),
   kubernetes_version: z.string().optional(),
   created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
+  plan: z.string().optional(),
+  worker_plan: z.nullable(z.string()).optional(),
+  control_plane_count: z.number().int().optional(),
+  worker_count: z.number().int().optional(),
   control_plane: z.nullable(z.lazy(() => ControlPlane$inboundSchema))
     .optional(),
   workers: z.nullable(z.lazy(() => Workers$inboundSchema)).optional(),
@@ -359,12 +453,17 @@ export const KubernetesClusterDataAttributes$inboundSchema: z.ZodType<
   ).optional(),
   failure_message: z.nullable(z.string()).optional(),
   failure_reason: z.nullable(z.string()).optional(),
+  project: z.lazy(() => KubernetesClusterDataProject$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "control_plane_endpoint": "controlPlaneEndpoint",
     "kubeconfig_url": "kubeconfigUrl",
+    "load_balancer_ips": "loadBalancerIps",
     "kubernetes_version": "kubernetesVersion",
     "created_at": "createdAt",
+    "worker_plan": "workerPlan",
+    "control_plane_count": "controlPlaneCount",
+    "worker_count": "workerCount",
     "control_plane": "controlPlane",
     "infrastructure_ready": "infrastructureReady",
     "control_plane_ready": "controlPlaneReady",
@@ -381,8 +480,13 @@ export type KubernetesClusterDataAttributes$Outbound = {
   control_plane_endpoint?: string | null | undefined;
   kubeconfig_url?: string | null | undefined;
   location?: string | undefined;
+  load_balancer_ips?: Array<string> | undefined;
   kubernetes_version?: string | undefined;
   created_at?: string | undefined;
+  plan?: string | undefined;
+  worker_plan?: string | null | undefined;
+  control_plane_count?: number | undefined;
+  worker_count?: number | undefined;
   control_plane?: ControlPlane$Outbound | null | undefined;
   workers?: Workers$Outbound | null | undefined;
   infrastructure_ready?: boolean | undefined;
@@ -392,6 +496,7 @@ export type KubernetesClusterDataAttributes$Outbound = {
   last_status_change?: string | null | undefined;
   failure_message?: string | null | undefined;
   failure_reason?: string | null | undefined;
+  project?: KubernetesClusterDataProject$Outbound | undefined;
 };
 
 /** @internal */
@@ -406,8 +511,13 @@ export const KubernetesClusterDataAttributes$outboundSchema: z.ZodType<
   controlPlaneEndpoint: z.nullable(z.string()).optional(),
   kubeconfigUrl: z.nullable(z.string()).optional(),
   location: z.string().optional(),
+  loadBalancerIps: z.array(z.string()).optional(),
   kubernetesVersion: z.string().optional(),
   createdAt: z.date().transform(v => v.toISOString()).optional(),
+  plan: z.string().optional(),
+  workerPlan: z.nullable(z.string()).optional(),
+  controlPlaneCount: z.number().int().optional(),
+  workerCount: z.number().int().optional(),
   controlPlane: z.nullable(z.lazy(() => ControlPlane$outboundSchema))
     .optional(),
   workers: z.nullable(z.lazy(() => Workers$outboundSchema)).optional(),
@@ -420,12 +530,17 @@ export const KubernetesClusterDataAttributes$outboundSchema: z.ZodType<
     .optional(),
   failureMessage: z.nullable(z.string()).optional(),
   failureReason: z.nullable(z.string()).optional(),
+  project: z.lazy(() => KubernetesClusterDataProject$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     controlPlaneEndpoint: "control_plane_endpoint",
     kubeconfigUrl: "kubeconfig_url",
+    loadBalancerIps: "load_balancer_ips",
     kubernetesVersion: "kubernetes_version",
     createdAt: "created_at",
+    workerPlan: "worker_plan",
+    controlPlaneCount: "control_plane_count",
+    workerCount: "worker_count",
     controlPlane: "control_plane",
     infrastructureReady: "infrastructure_ready",
     controlPlaneReady: "control_plane_ready",

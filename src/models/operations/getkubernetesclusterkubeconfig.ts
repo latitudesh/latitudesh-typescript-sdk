@@ -10,7 +10,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetKubernetesClusterKubeconfigRequest = {
   /**
-   * The cluster name
+   * The cluster ID (format: kc_<hash>) or cluster name. Both formats are accepted for backward compatibility.
    */
   kubernetesClusterId: string;
 };
