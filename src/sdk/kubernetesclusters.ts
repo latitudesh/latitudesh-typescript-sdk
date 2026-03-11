@@ -55,7 +55,7 @@ export class KubernetesClusters extends ClientSDK {
    * Get a Kubernetes Cluster
    *
    * @remarks
-   * Retrieves detailed information about a Kubernetes cluster including its status, control plane, and worker node details.
+   * Retrieves detailed information about a Kubernetes cluster including its status, control plane, worker node details, and individual node information.
    */
   async getKubernetesCluster(
     request: operations.GetKubernetesClusterRequest,
