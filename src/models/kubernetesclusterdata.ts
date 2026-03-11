@@ -62,7 +62,7 @@ export type KubernetesClusterDataName = ClosedEnum<
 /**
  * Current status of this step
  */
-export const KubernetesClusterDataStatus = {
+export const KubernetesClusterDataStepStatus = {
   Pending: "pending",
   InProgress: "in_progress",
   Completed: "completed",
@@ -70,8 +70,8 @@ export const KubernetesClusterDataStatus = {
 /**
  * Current status of this step
  */
-export type KubernetesClusterDataStatus = ClosedEnum<
-  typeof KubernetesClusterDataStatus
+export type KubernetesClusterDataStepStatus = ClosedEnum<
+  typeof KubernetesClusterDataStepStatus
 >;
 
 export type KubernetesClusterDataStep = {
@@ -82,7 +82,74 @@ export type KubernetesClusterDataStep = {
   /**
    * Current status of this step
    */
-  status?: KubernetesClusterDataStatus | undefined;
+  status?: KubernetesClusterDataStepStatus | undefined;
+};
+
+/**
+ * The role of this node in the cluster
+ */
+export const KubernetesClusterDataType = {
+  ControlPlane: "control_plane",
+  Worker: "worker",
+} as const;
+/**
+ * The role of this node in the cluster
+ */
+export type KubernetesClusterDataType = ClosedEnum<
+  typeof KubernetesClusterDataType
+>;
+
+/**
+ * Current status of the node
+ */
+export const NodeStatus = {
+  Ready: "ready",
+  Pending: "pending",
+  Failed: "failed",
+  Deleting: "deleting",
+} as const;
+/**
+ * Current status of the node
+ */
+export type NodeStatus = ClosedEnum<typeof NodeStatus>;
+
+export type Node = {
+  /**
+   * Unique identifier for the node (machine name)
+   */
+  id?: string | undefined;
+  /**
+   * Name of the node
+   */
+  name?: string | undefined;
+  /**
+   * Hostname of the node
+   */
+  hostname?: string | null | undefined;
+  /**
+   * The Latitude server ID associated with this node
+   */
+  serverId?: string | null | undefined;
+  /**
+   * The role of this node in the cluster
+   */
+  type?: KubernetesClusterDataType | undefined;
+  /**
+   * Current status of the node
+   */
+  status?: NodeStatus | undefined;
+  /**
+   * Primary IP address (external if available, otherwise internal)
+   */
+  ip?: string | null | undefined;
+  /**
+   * Internal/private IP address
+   */
+  internalIp?: string | null | undefined;
+  /**
+   * External/public IP address
+   */
+  externalIp?: string | null | undefined;
 };
 
 /**
@@ -192,6 +259,10 @@ export type KubernetesClusterDataAttributes = {
    * Reason code for cluster failure
    */
   failureReason?: string | null | undefined;
+  /**
+   * List of nodes (servers) in the cluster
+   */
+  nodes?: Array<Node> | undefined;
   /**
    * The project this cluster belongs to
    */
@@ -323,13 +394,13 @@ export const KubernetesClusterDataName$outboundSchema: z.ZodNativeEnum<
 > = KubernetesClusterDataName$inboundSchema;
 
 /** @internal */
-export const KubernetesClusterDataStatus$inboundSchema: z.ZodNativeEnum<
-  typeof KubernetesClusterDataStatus
-> = z.nativeEnum(KubernetesClusterDataStatus);
+export const KubernetesClusterDataStepStatus$inboundSchema: z.ZodNativeEnum<
+  typeof KubernetesClusterDataStepStatus
+> = z.nativeEnum(KubernetesClusterDataStepStatus);
 /** @internal */
-export const KubernetesClusterDataStatus$outboundSchema: z.ZodNativeEnum<
-  typeof KubernetesClusterDataStatus
-> = KubernetesClusterDataStatus$inboundSchema;
+export const KubernetesClusterDataStepStatus$outboundSchema: z.ZodNativeEnum<
+  typeof KubernetesClusterDataStepStatus
+> = KubernetesClusterDataStepStatus$inboundSchema;
 
 /** @internal */
 export const KubernetesClusterDataStep$inboundSchema: z.ZodType<
@@ -338,7 +409,7 @@ export const KubernetesClusterDataStep$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   name: KubernetesClusterDataName$inboundSchema.optional(),
-  status: KubernetesClusterDataStatus$inboundSchema.optional(),
+  status: KubernetesClusterDataStepStatus$inboundSchema.optional(),
 });
 /** @internal */
 export type KubernetesClusterDataStep$Outbound = {
@@ -353,7 +424,7 @@ export const KubernetesClusterDataStep$outboundSchema: z.ZodType<
   KubernetesClusterDataStep
 > = z.object({
   name: KubernetesClusterDataName$outboundSchema.optional(),
-  status: KubernetesClusterDataStatus$outboundSchema.optional(),
+  status: KubernetesClusterDataStepStatus$outboundSchema.optional(),
 });
 
 export function kubernetesClusterDataStepToJSON(
@@ -370,6 +441,87 @@ export function kubernetesClusterDataStepFromJSON(
     jsonString,
     (x) => KubernetesClusterDataStep$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'KubernetesClusterDataStep' from JSON`,
+  );
+}
+
+/** @internal */
+export const KubernetesClusterDataType$inboundSchema: z.ZodNativeEnum<
+  typeof KubernetesClusterDataType
+> = z.nativeEnum(KubernetesClusterDataType);
+/** @internal */
+export const KubernetesClusterDataType$outboundSchema: z.ZodNativeEnum<
+  typeof KubernetesClusterDataType
+> = KubernetesClusterDataType$inboundSchema;
+
+/** @internal */
+export const NodeStatus$inboundSchema: z.ZodNativeEnum<typeof NodeStatus> = z
+  .nativeEnum(NodeStatus);
+/** @internal */
+export const NodeStatus$outboundSchema: z.ZodNativeEnum<typeof NodeStatus> =
+  NodeStatus$inboundSchema;
+
+/** @internal */
+export const Node$inboundSchema: z.ZodType<Node, z.ZodTypeDef, unknown> = z
+  .object({
+    id: z.string().optional(),
+    name: z.string().optional(),
+    hostname: z.nullable(z.string()).optional(),
+    server_id: z.nullable(z.string()).optional(),
+    type: KubernetesClusterDataType$inboundSchema.optional(),
+    status: NodeStatus$inboundSchema.optional(),
+    ip: z.nullable(z.string()).optional(),
+    internal_ip: z.nullable(z.string()).optional(),
+    external_ip: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "server_id": "serverId",
+      "internal_ip": "internalIp",
+      "external_ip": "externalIp",
+    });
+  });
+/** @internal */
+export type Node$Outbound = {
+  id?: string | undefined;
+  name?: string | undefined;
+  hostname?: string | null | undefined;
+  server_id?: string | null | undefined;
+  type?: string | undefined;
+  status?: string | undefined;
+  ip?: string | null | undefined;
+  internal_ip?: string | null | undefined;
+  external_ip?: string | null | undefined;
+};
+
+/** @internal */
+export const Node$outboundSchema: z.ZodType<Node$Outbound, z.ZodTypeDef, Node> =
+  z.object({
+    id: z.string().optional(),
+    name: z.string().optional(),
+    hostname: z.nullable(z.string()).optional(),
+    serverId: z.nullable(z.string()).optional(),
+    type: KubernetesClusterDataType$outboundSchema.optional(),
+    status: NodeStatus$outboundSchema.optional(),
+    ip: z.nullable(z.string()).optional(),
+    internalIp: z.nullable(z.string()).optional(),
+    externalIp: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      serverId: "server_id",
+      internalIp: "internal_ip",
+      externalIp: "external_ip",
+    });
+  });
+
+export function nodeToJSON(node: Node): string {
+  return JSON.stringify(Node$outboundSchema.parse(node));
+}
+export function nodeFromJSON(
+  jsonString: string,
+): SafeParseResult<Node, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Node$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Node' from JSON`,
   );
 }
 
@@ -453,6 +605,7 @@ export const KubernetesClusterDataAttributes$inboundSchema: z.ZodType<
   ).optional(),
   failure_message: z.nullable(z.string()).optional(),
   failure_reason: z.nullable(z.string()).optional(),
+  nodes: z.array(z.lazy(() => Node$inboundSchema)).optional(),
   project: z.lazy(() => KubernetesClusterDataProject$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -496,6 +649,7 @@ export type KubernetesClusterDataAttributes$Outbound = {
   last_status_change?: string | null | undefined;
   failure_message?: string | null | undefined;
   failure_reason?: string | null | undefined;
+  nodes?: Array<Node$Outbound> | undefined;
   project?: KubernetesClusterDataProject$Outbound | undefined;
 };
 
@@ -530,6 +684,7 @@ export const KubernetesClusterDataAttributes$outboundSchema: z.ZodType<
     .optional(),
   failureMessage: z.nullable(z.string()).optional(),
   failureReason: z.nullable(z.string()).optional(),
+  nodes: z.array(z.lazy(() => Node$outboundSchema)).optional(),
   project: z.lazy(() => KubernetesClusterDataProject$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
