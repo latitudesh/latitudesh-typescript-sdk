@@ -349,6 +349,10 @@ run();
 * [getStorageVolume](docs/sdks/storage/README.md#getstoragevolume) - Retrieve volume
 * [deleteStorageVolumes](docs/sdks/storage/README.md#deletestoragevolumes) - Delete volume
 * [postStorageVolumesMount](docs/sdks/storage/README.md#poststoragevolumesmount) - Mount volume
+* [getStorageObjects](docs/sdks/storage/README.md#getstorageobjects) - List object storages
+* [postStorageObjects](docs/sdks/storage/README.md#poststorageobjects) - Create object storage
+* [getStorageObject](docs/sdks/storage/README.md#getstorageobject) - Retrieve object storage
+* [deleteStorageObjects](docs/sdks/storage/README.md#deletestorageobjects) - Delete object storage
 
 ### [Tags](docs/sdks/tags/README.md)
 
@@ -509,10 +513,14 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`sshKeysUpdate`](docs/sdks/sshkeys/README.md#update) - Update SSH Key
 - [`storageCreateFilesystem`](docs/sdks/storage/README.md#createfilesystem) - Create filesystem
 - [`storageDeleteFilesystem`](docs/sdks/storage/README.md#deletefilesystem) - Delete filesystem
+- [`storageDeleteStorageObjects`](docs/sdks/storage/README.md#deletestorageobjects) - Delete object storage
 - [`storageDeleteStorageVolumes`](docs/sdks/storage/README.md#deletestoragevolumes) - Delete volume
+- [`storageGetStorageObject`](docs/sdks/storage/README.md#getstorageobject) - Retrieve object storage
+- [`storageGetStorageObjects`](docs/sdks/storage/README.md#getstorageobjects) - List object storages
 - [`storageGetStorageVolume`](docs/sdks/storage/README.md#getstoragevolume) - Retrieve volume
 - [`storageGetStorageVolumes`](docs/sdks/storage/README.md#getstoragevolumes) - List volumes
 - [`storageListFilesystems`](docs/sdks/storage/README.md#listfilesystems) - List filesystems
+- [`storagePostStorageObjects`](docs/sdks/storage/README.md#poststorageobjects) - Create object storage
 - [`storagePostStorageVolumes`](docs/sdks/storage/README.md#poststoragevolumes) - Create volume
 - [`storagePostStorageVolumesMount`](docs/sdks/storage/README.md#poststoragevolumesmount) - Mount volume
 - [`storageUpdateFilesystem`](docs/sdks/storage/README.md#updatefilesystem) - Update filesystem
@@ -729,7 +737,7 @@ run();
 
 
 **Inherit from [`LatitudeshError`](./src/models/errors/latitudesherror.ts)**:
-* [`ErrorObject`](./src/models/errors/errorobject.ts): Applicable to 11 of 123 methods.*
+* [`ErrorObject`](./src/models/errors/errorobject.ts): Applicable to 17 of 127 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>

@@ -93,7 +93,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/servers/{server_id}/rescue_mode")(pathParams);
 
   const headers = new Headers(compactMap({

@@ -93,10 +93,14 @@ import { tool$sshKeysRetrieve } from "./tools/sshKeysRetrieve.js";
 import { tool$sshKeysUpdate } from "./tools/sshKeysUpdate.js";
 import { tool$storageCreateFilesystem } from "./tools/storageCreateFilesystem.js";
 import { tool$storageDeleteFilesystem } from "./tools/storageDeleteFilesystem.js";
+import { tool$storageDeleteStorageObjects } from "./tools/storageDeleteStorageObjects.js";
 import { tool$storageDeleteStorageVolumes } from "./tools/storageDeleteStorageVolumes.js";
+import { tool$storageGetStorageObject } from "./tools/storageGetStorageObject.js";
+import { tool$storageGetStorageObjects } from "./tools/storageGetStorageObjects.js";
 import { tool$storageGetStorageVolume } from "./tools/storageGetStorageVolume.js";
 import { tool$storageGetStorageVolumes } from "./tools/storageGetStorageVolumes.js";
 import { tool$storageListFilesystems } from "./tools/storageListFilesystems.js";
+import { tool$storagePostStorageObjects } from "./tools/storagePostStorageObjects.js";
 import { tool$storagePostStorageVolumes } from "./tools/storagePostStorageVolumes.js";
 import { tool$storagePostStorageVolumesMount } from "./tools/storagePostStorageVolumesMount.js";
 import { tool$storageUpdateFilesystem } from "./tools/storageUpdateFilesystem.js";
@@ -148,7 +152,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Latitudesh",
-    version: "0.3.4",
+    version: "0.3.5",
   });
 
   const client = new LatitudeshCore({
@@ -271,6 +275,10 @@ export function createMCPServer(deps: {
   tool(tool$storageGetStorageVolume);
   tool(tool$storageDeleteStorageVolumes);
   tool(tool$storagePostStorageVolumesMount);
+  tool(tool$storageGetStorageObjects);
+  tool(tool$storagePostStorageObjects);
+  tool(tool$storageGetStorageObject);
+  tool(tool$storageDeleteStorageObjects);
   tool(tool$tagsList);
   tool(tool$tagsCreate);
   tool(tool$tagsUpdate);

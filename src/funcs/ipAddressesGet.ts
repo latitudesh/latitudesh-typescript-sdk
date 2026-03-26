@@ -92,7 +92,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/ips/{ip_id}")(pathParams);
 
   const query = encodeFormQuery({

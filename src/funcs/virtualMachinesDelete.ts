@@ -94,7 +94,6 @@ async function $do(
       { explode: false, charEncoding: "percent" },
     ),
   };
-
   const path = pathToFunc("/virtual_machines/{virtual_machine_id}")(pathParams);
 
   const headers = new Headers(compactMap({

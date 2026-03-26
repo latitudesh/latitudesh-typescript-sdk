@@ -17,6 +17,7 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import * as errors from "../models/errors/index.js";
 import { LatitudeshError } from "../models/errors/latitudesherror.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
@@ -38,6 +39,7 @@ export function tagsUpdate(
 ): APIPromise<
   Result<
     models.CustomTag,
+    | errors.ErrorObject
     | LatitudeshError
     | ResponseValidationError
     | ConnectionError
@@ -63,6 +65,7 @@ async function $do(
   [
     Result<
       models.CustomTag,
+      | errors.ErrorObject
       | LatitudeshError
       | ResponseValidationError
       | ConnectionError
@@ -92,7 +95,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/tags/{tag_id}")(pathParams);
 
   const headers = new Headers(compactMap({
@@ -136,7 +138,7 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["4XX", "5XX"],
+    errorCodes: ["422", "4XX", "5XX"],
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -145,8 +147,13 @@ async function $do(
   }
   const response = doResult.value;
 
+  const responseFields = {
+    HttpMeta: { Response: response, Request: req },
+  };
+
   const [result] = await M.match<
     models.CustomTag,
+    | errors.ErrorObject
     | LatitudeshError
     | ResponseValidationError
     | ConnectionError
@@ -159,9 +166,12 @@ async function $do(
     M.json(200, models.CustomTag$inboundSchema, {
       ctype: "application/vnd.api+json",
     }),
+    M.jsonErr(422, errors.ErrorObject$inboundSchema, {
+      ctype: "application/vnd.api+json",
+    }),
     M.fail("4XX"),
     M.fail("5XX"),
-  )(response, req);
+  )(response, req, { extraFields: responseFields });
   if (!result.ok) {
     return [result, { status: "complete", request: req, response }];
   }

@@ -97,7 +97,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/projects/{project_id}/ssh_keys/{ssh_key_id}")(
     pathParams,
   );

@@ -167,7 +167,7 @@ Show all Team's Virtual Machines.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="index-virtual-machine" method="get" path="/virtual_machines" -->
+<!-- UsageSnippet language="typescript" operationID="index-virtual-machine" method="get" path="/virtual_machines" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -176,11 +176,11 @@ const latitudesh = new Latitudesh({
 });
 
 async function run() {
-  await latitudesh.virtualMachines.list({
+  const result = await latitudesh.virtualMachines.list({
     extraFieldsVirtualMachines: "credentials",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -206,7 +206,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("virtualMachinesList failed:", res.error);
   }
@@ -226,7 +226,7 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[models.VirtualMachines](../../models/virtualmachines.md)\>**
 
 ### Errors
 
@@ -241,7 +241,7 @@ Show a Virtual Machine.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="show-virtual-machine" method="get" path="/virtual_machines/{virtual_machine_id}" -->
+<!-- UsageSnippet language="typescript" operationID="show-virtual-machine" method="get" path="/virtual_machines/{virtual_machine_id}" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -250,11 +250,11 @@ const latitudesh = new Latitudesh({
 });
 
 async function run() {
-  await latitudesh.virtualMachines.get({
+  const result = await latitudesh.virtualMachines.get({
     virtualMachineId: "vm_7vYAZqGBdMQ94",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -280,7 +280,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("virtualMachinesGet failed:", res.error);
   }
@@ -300,7 +300,7 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[models.VirtualMachine](../../models/virtualmachine.md)\>**
 
 ### Errors
 

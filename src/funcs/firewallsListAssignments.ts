@@ -105,7 +105,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/firewalls/{firewall_id}/assignments")(pathParams);
 
   const query = encodeFormQuery({

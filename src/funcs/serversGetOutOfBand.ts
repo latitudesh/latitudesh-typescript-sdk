@@ -89,7 +89,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/servers/{server_id}/out_of_band_connection")(
     pathParams,
   );

@@ -13,3 +13,4 @@ let value: Source = {};
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
 | `pointer`          | *string*           | :heavy_minus_sign: | N/A                |
+| `parameter`        | *string*           | :heavy_minus_sign: | N/A                |

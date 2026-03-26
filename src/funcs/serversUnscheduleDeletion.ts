@@ -93,7 +93,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/servers/{server_id}/schedule_deletion")(pathParams);
 
   const headers = new Headers(compactMap({

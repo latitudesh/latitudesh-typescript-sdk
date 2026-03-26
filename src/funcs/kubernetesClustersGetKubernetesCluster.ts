@@ -97,7 +97,6 @@ async function $do(
       { explode: false, charEncoding: "percent" },
     ),
   };
-
   const path = pathToFunc("/kubernetes_clusters/{kubernetes_cluster_id}")(
     pathParams,
   );

@@ -4,14 +4,19 @@
 
 import { storageCreateFilesystem } from "../funcs/storageCreateFilesystem.js";
 import { storageDeleteFilesystem } from "../funcs/storageDeleteFilesystem.js";
+import { storageDeleteStorageObjects } from "../funcs/storageDeleteStorageObjects.js";
 import { storageDeleteStorageVolumes } from "../funcs/storageDeleteStorageVolumes.js";
+import { storageGetStorageObject } from "../funcs/storageGetStorageObject.js";
+import { storageGetStorageObjects } from "../funcs/storageGetStorageObjects.js";
 import { storageGetStorageVolume } from "../funcs/storageGetStorageVolume.js";
 import { storageGetStorageVolumes } from "../funcs/storageGetStorageVolumes.js";
 import { storageListFilesystems } from "../funcs/storageListFilesystems.js";
+import { storagePostStorageObjects } from "../funcs/storagePostStorageObjects.js";
 import { storagePostStorageVolumes } from "../funcs/storagePostStorageVolumes.js";
 import { storagePostStorageVolumesMount } from "../funcs/storagePostStorageVolumesMount.js";
 import { storageUpdateFilesystem } from "../funcs/storageUpdateFilesystem.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
+import * as models from "../models/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -163,6 +168,74 @@ export class Storage extends ClientSDK {
     options?: RequestOptions,
   ): Promise<void> {
     return unwrapAsync(storagePostStorageVolumesMount(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List object storages
+   *
+   * @remarks
+   * Lists all object storages from a team.
+   */
+  async getStorageObjects(
+    request?: operations.GetStorageObjectsRequest | undefined,
+    options?: RequestOptions,
+  ): Promise<models.ObjectStorages> {
+    return unwrapAsync(storageGetStorageObjects(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Create object storage
+   *
+   * @remarks
+   * Creates a new object storage bucket for a project.
+   */
+  async postStorageObjects(
+    request: operations.PostStorageObjectsRequest,
+    options?: RequestOptions,
+  ): Promise<operations.PostStorageObjectsResponse> {
+    return unwrapAsync(storagePostStorageObjects(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Retrieve object storage
+   *
+   * @remarks
+   * Shows details of a specific object storage.
+   */
+  async getStorageObject(
+    request: operations.GetStorageObjectRequest,
+    options?: RequestOptions,
+  ): Promise<operations.GetStorageObjectResponse> {
+    return unwrapAsync(storageGetStorageObject(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Delete object storage
+   *
+   * @remarks
+   * Allows you to remove an object storage from a project.
+   */
+  async deleteStorageObjects(
+    request: operations.DeleteStorageObjectsRequest,
+    options?: RequestOptions,
+  ): Promise<void> {
+    return unwrapAsync(storageDeleteStorageObjects(
       this,
       request,
       options,

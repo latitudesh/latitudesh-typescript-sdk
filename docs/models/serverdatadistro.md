@@ -1,11 +1,11 @@
-# Distro
+# ServerDataDistro
 
 ## Example Usage
 
 ```typescript
-import { Distro } from "latitudesh-typescript-sdk/models";
+import { ServerDataDistro } from "latitudesh-typescript-sdk/models";
 
-let value: Distro = {};
+let value: ServerDataDistro = {};
 ```
 
 ## Fields

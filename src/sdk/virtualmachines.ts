@@ -40,7 +40,7 @@ export class VirtualMachines extends ClientSDK {
   async list(
     request?: operations.IndexVirtualMachineRequest | undefined,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<models.VirtualMachines> {
     return unwrapAsync(virtualMachinesList(
       this,
       request,
@@ -57,7 +57,7 @@ export class VirtualMachines extends ClientSDK {
   async get(
     request: operations.ShowVirtualMachineRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<models.VirtualMachine> {
     return unwrapAsync(virtualMachinesGet(
       this,
       request,
