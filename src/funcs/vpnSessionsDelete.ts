@@ -92,7 +92,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/vpn_sessions/{vpn_session_id}")(pathParams);
 
   const headers = new Headers(compactMap({

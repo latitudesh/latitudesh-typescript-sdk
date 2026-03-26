@@ -93,7 +93,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/firewalls/{firewall_id}/assignments")(pathParams);
 
   const headers = new Headers(compactMap({

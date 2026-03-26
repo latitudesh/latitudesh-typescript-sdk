@@ -91,7 +91,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/ssh_keys/{ssh_key_id}")(pathParams);
 
   const headers = new Headers(compactMap({

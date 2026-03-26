@@ -83,7 +83,7 @@ run();
 Create a Tag in the team.
 
 
-### Example Usage
+### Example Usage: Created
 
 <!-- UsageSnippet language="typescript" operationID="create-tag" method="post" path="/tags" example="Created" -->
 ```typescript
@@ -146,6 +146,96 @@ async function run() {
 
 run();
 ```
+### Example Usage: NameAlreadyTaken
+
+<!-- UsageSnippet language="typescript" operationID="create-tag" method="post" path="/tags" example="NameAlreadyTaken" -->
+```typescript
+import { Latitudesh } from "latitudesh-typescript-sdk";
+
+const latitudesh = new Latitudesh({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const result = await latitudesh.tags.create({});
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
+import { tagsCreate } from "latitudesh-typescript-sdk/funcs/tagsCreate.js";
+
+// Use `LatitudeshCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const latitudesh = new LatitudeshCore({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const res = await tagsCreate(latitudesh, {});
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("tagsCreate failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: NameTooSimilar
+
+<!-- UsageSnippet language="typescript" operationID="create-tag" method="post" path="/tags" example="NameTooSimilar" -->
+```typescript
+import { Latitudesh } from "latitudesh-typescript-sdk";
+
+const latitudesh = new Latitudesh({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const result = await latitudesh.tags.create({});
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
+import { tagsCreate } from "latitudesh-typescript-sdk/funcs/tagsCreate.js";
+
+// Use `LatitudeshCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const latitudesh = new LatitudeshCore({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const res = await tagsCreate(latitudesh, {});
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("tagsCreate failed:", res.error);
+  }
+}
+
+run();
+```
 
 ### Parameters
 
@@ -164,6 +254,7 @@ run();
 
 | Error Type                    | Status Code                   | Content Type                  |
 | ----------------------------- | ----------------------------- | ----------------------------- |
+| errors.ErrorObject            | 422                           | application/vnd.api+json      |
 | errors.LatitudeshDefaultError | 4XX, 5XX                      | \*/\*                         |
 
 ## update
@@ -171,7 +262,109 @@ run();
 Update a Tag in the team.
 
 
-### Example Usage
+### Example Usage: NameAlreadyTaken
+
+<!-- UsageSnippet language="typescript" operationID="update-tag" method="patch" path="/tags/{tag_id}" example="NameAlreadyTaken" -->
+```typescript
+import { Latitudesh } from "latitudesh-typescript-sdk";
+
+const latitudesh = new Latitudesh({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const result = await latitudesh.tags.update({
+    tagId: "<id>",
+    requestBody: {},
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
+import { tagsUpdate } from "latitudesh-typescript-sdk/funcs/tagsUpdate.js";
+
+// Use `LatitudeshCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const latitudesh = new LatitudeshCore({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const res = await tagsUpdate(latitudesh, {
+    tagId: "<id>",
+    requestBody: {},
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("tagsUpdate failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: NameTooSimilar
+
+<!-- UsageSnippet language="typescript" operationID="update-tag" method="patch" path="/tags/{tag_id}" example="NameTooSimilar" -->
+```typescript
+import { Latitudesh } from "latitudesh-typescript-sdk";
+
+const latitudesh = new Latitudesh({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const result = await latitudesh.tags.update({
+    tagId: "<id>",
+    requestBody: {},
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
+import { tagsUpdate } from "latitudesh-typescript-sdk/funcs/tagsUpdate.js";
+
+// Use `LatitudeshCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const latitudesh = new LatitudeshCore({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const res = await tagsUpdate(latitudesh, {
+    tagId: "<id>",
+    requestBody: {},
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("tagsUpdate failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: Success
 
 <!-- UsageSnippet language="typescript" operationID="update-tag" method="patch" path="/tags/{tag_id}" example="Success" -->
 ```typescript
@@ -256,6 +449,7 @@ run();
 
 | Error Type                    | Status Code                   | Content Type                  |
 | ----------------------------- | ----------------------------- | ----------------------------- |
+| errors.ErrorObject            | 422                           | application/vnd.api+json      |
 | errors.LatitudeshDefaultError | 4XX, 5XX                      | \*/\*                         |
 
 ## delete

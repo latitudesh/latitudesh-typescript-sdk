@@ -15,5 +15,5 @@ let value: AttributesData = {};
 | `date`                  | *string*                | :heavy_minus_sign:      | The datetime of the day |
 | `inboundGb`             | *number*                | :heavy_minus_sign:      | Value in GB             |
 | `outboundGb`            | *number*                | :heavy_minus_sign:      | Value in GB             |
-| `avgOutboundSpeedMbps`  | *number*                | :heavy_minus_sign:      | Value in MBps           |
-| `avgInboundSpeedMbps`   | *number*                | :heavy_minus_sign:      | Value in MBps           |
+| `avgOutboundSpeedMbps`  | *number*                | :heavy_minus_sign:      | Value in Mbps           |
+| `avgInboundSpeedMbps`   | *number*                | :heavy_minus_sign:      | Value in Mbps           |

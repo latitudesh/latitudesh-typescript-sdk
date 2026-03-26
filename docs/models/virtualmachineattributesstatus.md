@@ -11,5 +11,5 @@ let value: VirtualMachineAttributesStatus = "Running";
 ## Values
 
 ```typescript
-"Running" | "Configuring network" | "Starting" | "Scheduling" | "Scheduled"
+"Running" | "Configuring network" | "Starting" | "Scheduling" | "Scheduled" | "Destroying"
 ```

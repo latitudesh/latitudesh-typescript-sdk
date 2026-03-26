@@ -92,7 +92,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/vpn_sessions/{vpn_session_id}/refresh_password")(
     pathParams,
   );

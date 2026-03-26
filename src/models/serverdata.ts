@@ -92,7 +92,7 @@ export type ServerDataFeatures = {
   userData?: boolean | undefined;
 };
 
-export type Distro = {
+export type ServerDataDistro = {
   /**
    * The OS Distro name
    */
@@ -107,7 +107,7 @@ export type Distro = {
   series?: string | undefined;
 };
 
-export type OperatingSystem = {
+export type ServerDataOperatingSystem = {
   /**
    * The OS name
    */
@@ -121,7 +121,7 @@ export type OperatingSystem = {
    */
   version?: string | undefined;
   features?: ServerDataFeatures | undefined;
-  distro?: Distro | undefined;
+  distro?: ServerDataDistro | undefined;
 };
 
 export type ServerDataSpecs = {
@@ -193,7 +193,7 @@ export type ServerDataAttributes = {
   createdAt?: string | null | undefined;
   scheduledDeletionAt?: string | null | undefined;
   plan?: ServerDataPlan | undefined;
-  operatingSystem?: OperatingSystem | undefined;
+  operatingSystem?: ServerDataOperatingSystem | undefined;
   region?: ServerRegionResourceData | undefined;
   specs?: ServerDataSpecs | undefined;
   interfaces?: Array<Interface> | undefined;
@@ -323,46 +323,53 @@ export function serverDataFeaturesFromJSON(
 }
 
 /** @internal */
-export const Distro$inboundSchema: z.ZodType<Distro, z.ZodTypeDef, unknown> = z
-  .object({
-    name: z.string().optional(),
-    slug: z.string().optional(),
-    series: z.string().optional(),
-  });
+export const ServerDataDistro$inboundSchema: z.ZodType<
+  ServerDataDistro,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  name: z.string().optional(),
+  slug: z.string().optional(),
+  series: z.string().optional(),
+});
 /** @internal */
-export type Distro$Outbound = {
+export type ServerDataDistro$Outbound = {
   name?: string | undefined;
   slug?: string | undefined;
   series?: string | undefined;
 };
 
 /** @internal */
-export const Distro$outboundSchema: z.ZodType<
-  Distro$Outbound,
+export const ServerDataDistro$outboundSchema: z.ZodType<
+  ServerDataDistro$Outbound,
   z.ZodTypeDef,
-  Distro
+  ServerDataDistro
 > = z.object({
   name: z.string().optional(),
   slug: z.string().optional(),
   series: z.string().optional(),
 });
 
-export function distroToJSON(distro: Distro): string {
-  return JSON.stringify(Distro$outboundSchema.parse(distro));
+export function serverDataDistroToJSON(
+  serverDataDistro: ServerDataDistro,
+): string {
+  return JSON.stringify(
+    ServerDataDistro$outboundSchema.parse(serverDataDistro),
+  );
 }
-export function distroFromJSON(
+export function serverDataDistroFromJSON(
   jsonString: string,
-): SafeParseResult<Distro, SDKValidationError> {
+): SafeParseResult<ServerDataDistro, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Distro$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Distro' from JSON`,
+    (x) => ServerDataDistro$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ServerDataDistro' from JSON`,
   );
 }
 
 /** @internal */
-export const OperatingSystem$inboundSchema: z.ZodType<
-  OperatingSystem,
+export const ServerDataOperatingSystem$inboundSchema: z.ZodType<
+  ServerDataOperatingSystem,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -370,42 +377,44 @@ export const OperatingSystem$inboundSchema: z.ZodType<
   slug: z.string().optional(),
   version: z.string().optional(),
   features: z.lazy(() => ServerDataFeatures$inboundSchema).optional(),
-  distro: z.lazy(() => Distro$inboundSchema).optional(),
+  distro: z.lazy(() => ServerDataDistro$inboundSchema).optional(),
 });
 /** @internal */
-export type OperatingSystem$Outbound = {
+export type ServerDataOperatingSystem$Outbound = {
   name?: string | undefined;
   slug?: string | undefined;
   version?: string | undefined;
   features?: ServerDataFeatures$Outbound | undefined;
-  distro?: Distro$Outbound | undefined;
+  distro?: ServerDataDistro$Outbound | undefined;
 };
 
 /** @internal */
-export const OperatingSystem$outboundSchema: z.ZodType<
-  OperatingSystem$Outbound,
+export const ServerDataOperatingSystem$outboundSchema: z.ZodType<
+  ServerDataOperatingSystem$Outbound,
   z.ZodTypeDef,
-  OperatingSystem
+  ServerDataOperatingSystem
 > = z.object({
   name: z.string().optional(),
   slug: z.string().optional(),
   version: z.string().optional(),
   features: z.lazy(() => ServerDataFeatures$outboundSchema).optional(),
-  distro: z.lazy(() => Distro$outboundSchema).optional(),
+  distro: z.lazy(() => ServerDataDistro$outboundSchema).optional(),
 });
 
-export function operatingSystemToJSON(
-  operatingSystem: OperatingSystem,
+export function serverDataOperatingSystemToJSON(
+  serverDataOperatingSystem: ServerDataOperatingSystem,
 ): string {
-  return JSON.stringify(OperatingSystem$outboundSchema.parse(operatingSystem));
+  return JSON.stringify(
+    ServerDataOperatingSystem$outboundSchema.parse(serverDataOperatingSystem),
+  );
 }
-export function operatingSystemFromJSON(
+export function serverDataOperatingSystemFromJSON(
   jsonString: string,
-): SafeParseResult<OperatingSystem, SDKValidationError> {
+): SafeParseResult<ServerDataOperatingSystem, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => OperatingSystem$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'OperatingSystem' from JSON`,
+    (x) => ServerDataOperatingSystem$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ServerDataOperatingSystem' from JSON`,
   );
 }
 
@@ -538,7 +547,8 @@ export const ServerDataAttributes$inboundSchema: z.ZodType<
   created_at: z.nullable(z.string()).optional(),
   scheduled_deletion_at: z.nullable(z.string()).optional(),
   plan: z.lazy(() => ServerDataPlan$inboundSchema).optional(),
-  operating_system: z.lazy(() => OperatingSystem$inboundSchema).optional(),
+  operating_system: z.lazy(() => ServerDataOperatingSystem$inboundSchema)
+    .optional(),
   region: ServerRegionResourceData$inboundSchema.optional(),
   specs: z.lazy(() => ServerDataSpecs$inboundSchema).optional(),
   interfaces: z.array(z.lazy(() => Interface$inboundSchema)).optional(),
@@ -570,7 +580,7 @@ export type ServerDataAttributes$Outbound = {
   created_at?: string | null | undefined;
   scheduled_deletion_at?: string | null | undefined;
   plan?: ServerDataPlan$Outbound | undefined;
-  operating_system?: OperatingSystem$Outbound | undefined;
+  operating_system?: ServerDataOperatingSystem$Outbound | undefined;
   region?: ServerRegionResourceData$Outbound | undefined;
   specs?: ServerDataSpecs$Outbound | undefined;
   interfaces?: Array<Interface$Outbound> | undefined;
@@ -597,7 +607,8 @@ export const ServerDataAttributes$outboundSchema: z.ZodType<
   createdAt: z.nullable(z.string()).optional(),
   scheduledDeletionAt: z.nullable(z.string()).optional(),
   plan: z.lazy(() => ServerDataPlan$outboundSchema).optional(),
-  operatingSystem: z.lazy(() => OperatingSystem$outboundSchema).optional(),
+  operatingSystem: z.lazy(() => ServerDataOperatingSystem$outboundSchema)
+    .optional(),
   region: ServerRegionResourceData$outboundSchema.optional(),
   specs: z.lazy(() => ServerDataSpecs$outboundSchema).optional(),
   interfaces: z.array(z.lazy(() => Interface$outboundSchema)).optional(),

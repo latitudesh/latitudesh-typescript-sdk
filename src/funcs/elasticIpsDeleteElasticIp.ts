@@ -97,7 +97,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/elastic_ips/{elastic_ip_id}")(pathParams);
 
   const headers = new Headers(compactMap({

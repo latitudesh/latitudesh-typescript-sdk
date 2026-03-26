@@ -34,10 +34,73 @@ export const VirtualMachineAttributesStatus = {
   Starting: "Starting",
   Scheduling: "Scheduling",
   Scheduled: "Scheduled",
+  Destroying: "Destroying",
 } as const;
 export type VirtualMachineAttributesStatus = ClosedEnum<
   typeof VirtualMachineAttributesStatus
 >;
+
+/**
+ * Features supported by this operating system
+ */
+export type VirtualMachineAttributesFeatures = {
+  /**
+   * Whether RAID is supported
+   */
+  raid?: boolean | undefined;
+  /**
+   * Whether SSH keys are supported
+   */
+  sshKeys?: boolean | undefined;
+  /**
+   * Whether user data is supported
+   */
+  userData?: boolean | undefined;
+};
+
+/**
+ * Distribution information
+ */
+export type VirtualMachineAttributesDistro = {
+  /**
+   * The name of the Linux distribution
+   */
+  name?: string | undefined;
+  /**
+   * The slug of the Linux distribution
+   */
+  slug?: string | undefined;
+  /**
+   * The distribution series code name
+   */
+  series?: string | undefined;
+};
+
+/**
+ * The operating system installed on the virtual machine
+ */
+export type VirtualMachineAttributesOperatingSystem = {
+  /**
+   * The full name of the operating system
+   */
+  name?: string | undefined;
+  /**
+   * The unique slug identifier for the operating system
+   */
+  slug?: string | undefined;
+  /**
+   * The version of the operating system
+   */
+  version?: string | undefined;
+  /**
+   * Features supported by this operating system
+   */
+  features?: VirtualMachineAttributesFeatures | undefined;
+  /**
+   * Distribution information
+   */
+  distro?: VirtualMachineAttributesDistro | undefined;
+};
 
 export type VirtualMachineAttributesCredentials = {
   username?: string | undefined;
@@ -64,7 +127,10 @@ export type VirtualMachineAttributesAttributes = {
   createdAt?: string | undefined;
   status?: VirtualMachineAttributesStatus | undefined;
   primaryIpv4?: string | null | undefined;
-  operatingSystem?: string | null | undefined;
+  /**
+   * The operating system installed on the virtual machine
+   */
+  operatingSystem?: VirtualMachineAttributesOperatingSystem | null | undefined;
   credentials?: VirtualMachineAttributesCredentials | null | undefined;
   plan?: VirtualMachineAttributesPlan | undefined;
   specs?: VirtualMachineAttributesSpecs | undefined;
@@ -95,6 +161,173 @@ export const VirtualMachineAttributesStatus$inboundSchema: z.ZodNativeEnum<
 export const VirtualMachineAttributesStatus$outboundSchema: z.ZodNativeEnum<
   typeof VirtualMachineAttributesStatus
 > = VirtualMachineAttributesStatus$inboundSchema;
+
+/** @internal */
+export const VirtualMachineAttributesFeatures$inboundSchema: z.ZodType<
+  VirtualMachineAttributesFeatures,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  raid: z.boolean().optional(),
+  ssh_keys: z.boolean().optional(),
+  user_data: z.boolean().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "ssh_keys": "sshKeys",
+    "user_data": "userData",
+  });
+});
+/** @internal */
+export type VirtualMachineAttributesFeatures$Outbound = {
+  raid?: boolean | undefined;
+  ssh_keys?: boolean | undefined;
+  user_data?: boolean | undefined;
+};
+
+/** @internal */
+export const VirtualMachineAttributesFeatures$outboundSchema: z.ZodType<
+  VirtualMachineAttributesFeatures$Outbound,
+  z.ZodTypeDef,
+  VirtualMachineAttributesFeatures
+> = z.object({
+  raid: z.boolean().optional(),
+  sshKeys: z.boolean().optional(),
+  userData: z.boolean().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    sshKeys: "ssh_keys",
+    userData: "user_data",
+  });
+});
+
+export function virtualMachineAttributesFeaturesToJSON(
+  virtualMachineAttributesFeatures: VirtualMachineAttributesFeatures,
+): string {
+  return JSON.stringify(
+    VirtualMachineAttributesFeatures$outboundSchema.parse(
+      virtualMachineAttributesFeatures,
+    ),
+  );
+}
+export function virtualMachineAttributesFeaturesFromJSON(
+  jsonString: string,
+): SafeParseResult<VirtualMachineAttributesFeatures, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => VirtualMachineAttributesFeatures$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'VirtualMachineAttributesFeatures' from JSON`,
+  );
+}
+
+/** @internal */
+export const VirtualMachineAttributesDistro$inboundSchema: z.ZodType<
+  VirtualMachineAttributesDistro,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  name: z.string().optional(),
+  slug: z.string().optional(),
+  series: z.string().optional(),
+});
+/** @internal */
+export type VirtualMachineAttributesDistro$Outbound = {
+  name?: string | undefined;
+  slug?: string | undefined;
+  series?: string | undefined;
+};
+
+/** @internal */
+export const VirtualMachineAttributesDistro$outboundSchema: z.ZodType<
+  VirtualMachineAttributesDistro$Outbound,
+  z.ZodTypeDef,
+  VirtualMachineAttributesDistro
+> = z.object({
+  name: z.string().optional(),
+  slug: z.string().optional(),
+  series: z.string().optional(),
+});
+
+export function virtualMachineAttributesDistroToJSON(
+  virtualMachineAttributesDistro: VirtualMachineAttributesDistro,
+): string {
+  return JSON.stringify(
+    VirtualMachineAttributesDistro$outboundSchema.parse(
+      virtualMachineAttributesDistro,
+    ),
+  );
+}
+export function virtualMachineAttributesDistroFromJSON(
+  jsonString: string,
+): SafeParseResult<VirtualMachineAttributesDistro, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => VirtualMachineAttributesDistro$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'VirtualMachineAttributesDistro' from JSON`,
+  );
+}
+
+/** @internal */
+export const VirtualMachineAttributesOperatingSystem$inboundSchema: z.ZodType<
+  VirtualMachineAttributesOperatingSystem,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  name: z.string().optional(),
+  slug: z.string().optional(),
+  version: z.string().optional(),
+  features: z.lazy(() => VirtualMachineAttributesFeatures$inboundSchema)
+    .optional(),
+  distro: z.lazy(() => VirtualMachineAttributesDistro$inboundSchema).optional(),
+});
+/** @internal */
+export type VirtualMachineAttributesOperatingSystem$Outbound = {
+  name?: string | undefined;
+  slug?: string | undefined;
+  version?: string | undefined;
+  features?: VirtualMachineAttributesFeatures$Outbound | undefined;
+  distro?: VirtualMachineAttributesDistro$Outbound | undefined;
+};
+
+/** @internal */
+export const VirtualMachineAttributesOperatingSystem$outboundSchema: z.ZodType<
+  VirtualMachineAttributesOperatingSystem$Outbound,
+  z.ZodTypeDef,
+  VirtualMachineAttributesOperatingSystem
+> = z.object({
+  name: z.string().optional(),
+  slug: z.string().optional(),
+  version: z.string().optional(),
+  features: z.lazy(() => VirtualMachineAttributesFeatures$outboundSchema)
+    .optional(),
+  distro: z.lazy(() => VirtualMachineAttributesDistro$outboundSchema)
+    .optional(),
+});
+
+export function virtualMachineAttributesOperatingSystemToJSON(
+  virtualMachineAttributesOperatingSystem:
+    VirtualMachineAttributesOperatingSystem,
+): string {
+  return JSON.stringify(
+    VirtualMachineAttributesOperatingSystem$outboundSchema.parse(
+      virtualMachineAttributesOperatingSystem,
+    ),
+  );
+}
+export function virtualMachineAttributesOperatingSystemFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  VirtualMachineAttributesOperatingSystem,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      VirtualMachineAttributesOperatingSystem$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'VirtualMachineAttributesOperatingSystem' from JSON`,
+  );
+}
 
 /** @internal */
 export const VirtualMachineAttributesCredentials$inboundSchema: z.ZodType<
@@ -262,7 +495,9 @@ export const VirtualMachineAttributesAttributes$inboundSchema: z.ZodType<
   created_at: z.string().optional(),
   status: VirtualMachineAttributesStatus$inboundSchema.optional(),
   primary_ipv4: z.nullable(z.string()).optional(),
-  operating_system: z.nullable(z.string()).optional(),
+  operating_system: z.nullable(
+    z.lazy(() => VirtualMachineAttributesOperatingSystem$inboundSchema),
+  ).optional(),
   credentials: z.nullable(
     z.lazy(() => VirtualMachineAttributesCredentials$inboundSchema),
   ).optional(),
@@ -283,7 +518,10 @@ export type VirtualMachineAttributesAttributes$Outbound = {
   created_at?: string | undefined;
   status?: string | undefined;
   primary_ipv4?: string | null | undefined;
-  operating_system?: string | null | undefined;
+  operating_system?:
+    | VirtualMachineAttributesOperatingSystem$Outbound
+    | null
+    | undefined;
   credentials?: VirtualMachineAttributesCredentials$Outbound | null | undefined;
   plan?: VirtualMachineAttributesPlan$Outbound | undefined;
   specs?: VirtualMachineAttributesSpecs$Outbound | undefined;
@@ -301,7 +539,9 @@ export const VirtualMachineAttributesAttributes$outboundSchema: z.ZodType<
   createdAt: z.string().optional(),
   status: VirtualMachineAttributesStatus$outboundSchema.optional(),
   primaryIpv4: z.nullable(z.string()).optional(),
-  operatingSystem: z.nullable(z.string()).optional(),
+  operatingSystem: z.nullable(
+    z.lazy(() => VirtualMachineAttributesOperatingSystem$outboundSchema),
+  ).optional(),
   credentials: z.nullable(
     z.lazy(() => VirtualMachineAttributesCredentials$outboundSchema),
   ).optional(),

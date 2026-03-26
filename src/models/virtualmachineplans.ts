@@ -193,6 +193,10 @@ export type VirtualMachinePlansAttributes = {
    * The stock level of the plan
    */
   stockLevel?: VirtualMachinePlansStockLevel | undefined;
+  /**
+   * List of operating system slugs that are compatible with this plan
+   */
+  availableOperatingSystems?: Array<string> | undefined;
 };
 
 export type VirtualMachinePlansData = {
@@ -721,9 +725,11 @@ export const VirtualMachinePlansAttributes$inboundSchema: z.ZodType<
   regions: z.array(z.lazy(() => VirtualMachinePlansRegion$inboundSchema))
     .optional(),
   stock_level: VirtualMachinePlansStockLevel$inboundSchema.optional(),
+  available_operating_systems: z.array(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "stock_level": "stockLevel",
+    "available_operating_systems": "availableOperatingSystems",
   });
 });
 /** @internal */
@@ -732,6 +738,7 @@ export type VirtualMachinePlansAttributes$Outbound = {
   specs?: VirtualMachinePlansSpecs$Outbound | undefined;
   regions?: Array<VirtualMachinePlansRegion$Outbound> | undefined;
   stock_level?: string | undefined;
+  available_operating_systems?: Array<string> | undefined;
 };
 
 /** @internal */
@@ -745,9 +752,11 @@ export const VirtualMachinePlansAttributes$outboundSchema: z.ZodType<
   regions: z.array(z.lazy(() => VirtualMachinePlansRegion$outboundSchema))
     .optional(),
   stockLevel: VirtualMachinePlansStockLevel$outboundSchema.optional(),
+  availableOperatingSystems: z.array(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     stockLevel: "stock_level",
+    availableOperatingSystems: "available_operating_systems",
   });
 });
 

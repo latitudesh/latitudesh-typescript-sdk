@@ -9,6 +9,7 @@ import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 
 export type Source = {
   pointer?: string | undefined;
+  parameter?: string | undefined;
 };
 
 export type ErrorObjectMeta = {};
@@ -26,10 +27,12 @@ export type ErrorT = {
 export const Source$inboundSchema: z.ZodType<Source, z.ZodTypeDef, unknown> = z
   .object({
     pointer: z.string().optional(),
+    parameter: z.string().optional(),
   });
 /** @internal */
 export type Source$Outbound = {
   pointer?: string | undefined;
+  parameter?: string | undefined;
 };
 
 /** @internal */
@@ -39,6 +42,7 @@ export const Source$outboundSchema: z.ZodType<
   Source
 > = z.object({
   pointer: z.string().optional(),
+  parameter: z.string().optional(),
 });
 
 export function sourceToJSON(source: Source): string {

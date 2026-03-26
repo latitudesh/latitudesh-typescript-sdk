@@ -94,7 +94,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/projects/{project_id}/ssh_keys")(pathParams);
 
   const query = encodeFormQuery({

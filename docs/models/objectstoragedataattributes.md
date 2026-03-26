@@ -1,0 +1,23 @@
+# ObjectStorageDataAttributes
+
+## Example Usage
+
+```typescript
+import { ObjectStorageDataAttributes } from "latitudesh-typescript-sdk/models";
+
+let value: ObjectStorageDataAttributes = {};
+```
+
+## Fields
+
+| Field                                                                                         | Type                                                                                          | Required                                                                                      | Description                                                                                   |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `name`                                                                                        | *string*                                                                                      | :heavy_minus_sign:                                                                            | Display name of the object storage                                                            |
+| `sizeInGb`                                                                                    | *number*                                                                                      | :heavy_minus_sign:                                                                            | Storage capacity in gigabytes                                                                 |
+| `createdAt`                                                                                   | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | Timestamp when the object storage was created                                                 |
+| `bucketName`                                                                                  | *string*                                                                                      | :heavy_minus_sign:                                                                            | S3-compatible bucket name                                                                     |
+| `endpoint`                                                                                    | *string*                                                                                      | :heavy_minus_sign:                                                                            | S3-compatible endpoint URL for accessing the bucket                                           |
+| `accessKey`                                                                                   | *string*[]                                                                                    | :heavy_minus_sign:                                                                            | S3 access key(s) for authentication                                                           |
+| `region`                                                                                      | [models.ObjectStorageDataRegion](../models/objectstoragedataregion.md)                        | :heavy_minus_sign:                                                                            | Region information where the object storage is located                                        |
+| `project`                                                                                     | [models.ProjectInclude](../models/projectinclude.md)                                          | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `team`                                                                                        | [models.TeamInclude](../models/teaminclude.md)                                                | :heavy_minus_sign:                                                                            | N/A                                                                                           |

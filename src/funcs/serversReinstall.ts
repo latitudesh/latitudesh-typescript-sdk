@@ -90,7 +90,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/servers/{server_id}/reinstall")(pathParams);
 
   const headers = new Headers(compactMap({

@@ -95,7 +95,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/servers/{server_id}/remote_access")(pathParams);
 
   const headers = new Headers(compactMap({
