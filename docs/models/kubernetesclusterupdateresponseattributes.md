@@ -1,0 +1,18 @@
+# KubernetesClusterUpdateResponseAttributes
+
+## Example Usage
+
+```typescript
+import { KubernetesClusterUpdateResponseAttributes } from "latitudesh-typescript-sdk/models";
+
+let value: KubernetesClusterUpdateResponseAttributes = {};
+```
+
+## Fields
+
+| Field                                                                                                                                         | Type                                                                                                                                          | Required                                                                                                                                      | Description                                                                                                                                   |
+| --------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| `name`                                                                                                                                        | *string*                                                                                                                                      | :heavy_minus_sign:                                                                                                                            | The cluster name                                                                                                                              |
+| `status`                                                                                                                                      | [models.KubernetesClusterUpdateResponseStatus](../models/kubernetesclusterupdateresponsestatus.md)                                            | :heavy_minus_sign:                                                                                                                            | The update status. 'scaling' indicates nodes are being added or removed. 'unchanged' indicates the requested count matches the current count. |
+| `workerCount`                                                                                                                                 | *number*                                                                                                                                      | :heavy_minus_sign:                                                                                                                            | The requested number of worker nodes. Present when scaling workers.                                                                           |
+| `controlPlaneCount`                                                                                                                           | *number*                                                                                                                                      | :heavy_minus_sign:                                                                                                                            | The requested number of control plane nodes. Present when scaling control plane.                                                              |

@@ -114,6 +114,7 @@ export * from "./showvirtualmachine.js";
 export * from "./updateapikey.js";
 export * from "./updateelasticip.js";
 export * from "./updatefirewall.js";
+export * from "./updatekubernetescluster.js";
 export * from "./updateplansbandwidth.js";
 export * from "./updateproject.js";
 export * from "./updateserver.js";
