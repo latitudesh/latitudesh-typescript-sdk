@@ -41,6 +41,7 @@ import { tool$kubernetesClustersDeleteKubernetesCluster } from "./tools/kubernet
 import { tool$kubernetesClustersGetKubernetesCluster } from "./tools/kubernetesClustersGetKubernetesCluster.js";
 import { tool$kubernetesClustersGetKubernetesClusterKubeconfig } from "./tools/kubernetesClustersGetKubernetesClusterKubeconfig.js";
 import { tool$kubernetesClustersListKubernetesClusters } from "./tools/kubernetesClustersListKubernetesClusters.js";
+import { tool$kubernetesClustersUpdateKubernetesCluster } from "./tools/kubernetesClustersUpdateKubernetesCluster.js";
 import { tool$operatingSystemsListPlans } from "./tools/operatingSystemsListPlans.js";
 import { tool$plansGet } from "./tools/plansGet.js";
 import { tool$plansGetBandwidth } from "./tools/plansGetBandwidth.js";
@@ -152,7 +153,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Latitudesh",
-    version: "0.3.5",
+    version: "0.3.6",
   });
 
   const client = new LatitudeshCore({
@@ -215,6 +216,7 @@ export function createMCPServer(deps: {
   tool(tool$kubernetesClustersCreateKubernetesCluster);
   tool(tool$kubernetesClustersGetKubernetesCluster);
   tool(tool$kubernetesClustersDeleteKubernetesCluster);
+  tool(tool$kubernetesClustersUpdateKubernetesCluster);
   tool(tool$kubernetesClustersGetKubernetesClusterKubeconfig);
   tool(tool$plansList);
   tool(tool$plansGet);

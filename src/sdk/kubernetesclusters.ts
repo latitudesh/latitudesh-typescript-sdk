@@ -7,6 +7,7 @@ import { kubernetesClustersDeleteKubernetesCluster } from "../funcs/kubernetesCl
 import { kubernetesClustersGetKubernetesCluster } from "../funcs/kubernetesClustersGetKubernetesCluster.js";
 import { kubernetesClustersGetKubernetesClusterKubeconfig } from "../funcs/kubernetesClustersGetKubernetesClusterKubeconfig.js";
 import { kubernetesClustersListKubernetesClusters } from "../funcs/kubernetesClustersListKubernetesClusters.js";
+import { kubernetesClustersUpdateKubernetesCluster } from "../funcs/kubernetesClustersUpdateKubernetesCluster.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as models from "../models/index.js";
 import * as operations from "../models/operations/index.js";
@@ -77,6 +78,33 @@ export class KubernetesClusters extends ClientSDK {
     options?: RequestOptions,
   ): Promise<void> {
     return unwrapAsync(kubernetesClustersDeleteKubernetesCluster(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Scale Kubernetes Cluster
+   *
+   * @remarks
+   * Scales the worker nodes or control plane nodes of a Kubernetes cluster. The cluster must be in `Provisioned` phase to accept updates.
+   *
+   * Exactly one of `worker_count` or `control_plane_count` must be provided per request. You cannot scale workers and control plane nodes in the same request.
+   *
+   * When scaling up, the API validates that sufficient server stock is available for the requested delta (e.g., scaling from 2 to 5 workers checks for 3 available servers).
+   *
+   * When scaling from 0 workers, you must provide a `worker_plan` since there is no existing configuration to inherit the plan from.
+   *
+   * Control plane scaling has a minimum of 1 node. You cannot scale control plane nodes to zero.
+   *
+   * Returns 202 Accepted when a scaling operation is triggered. Poll the GET endpoint to monitor progress. Returns 200 OK if the requested count matches the current count (no-op).
+   */
+  async updateKubernetesCluster(
+    request: operations.UpdateKubernetesClusterRequest,
+    options?: RequestOptions,
+  ): Promise<models.KubernetesClusterUpdateResponse> {
+    return unwrapAsync(kubernetesClustersUpdateKubernetesCluster(
       this,
       request,
       options,

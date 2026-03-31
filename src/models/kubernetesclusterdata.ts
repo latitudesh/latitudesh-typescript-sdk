@@ -45,6 +45,33 @@ export type Workers = {
 };
 
 /**
+ * Current status of worker nodes. 'idle' when 0 workers, 'ready' when all workers are ready, 'scaling' when workers are being provisioned/removed, 'error' when a worker has failed.
+ */
+export const WorkerStatus = {
+  Idle: "idle",
+  Ready: "ready",
+  Scaling: "scaling",
+  Error: "error",
+} as const;
+/**
+ * Current status of worker nodes. 'idle' when 0 workers, 'ready' when all workers are ready, 'scaling' when workers are being provisioned/removed, 'error' when a worker has failed.
+ */
+export type WorkerStatus = ClosedEnum<typeof WorkerStatus>;
+
+/**
+ * Current status of control plane nodes. 'ready' when control plane is operational, 'scaling' when nodes are being provisioned/removed, 'error' when a control plane node has failed.
+ */
+export const ControlPlaneStatus = {
+  Ready: "ready",
+  Scaling: "scaling",
+  Error: "error",
+} as const;
+/**
+ * Current status of control plane nodes. 'ready' when control plane is operational, 'scaling' when nodes are being provisioned/removed, 'error' when a control plane node has failed.
+ */
+export type ControlPlaneStatus = ClosedEnum<typeof ControlPlaneStatus>;
+
+/**
  * Step identifier
  */
 export const KubernetesClusterDataName = {
@@ -232,6 +259,14 @@ export type KubernetesClusterDataAttributes = {
    */
   workers?: Workers | null | undefined;
   /**
+   * Current status of worker nodes. 'idle' when 0 workers, 'ready' when all workers are ready, 'scaling' when workers are being provisioned/removed, 'error' when a worker has failed.
+   */
+  workerStatus?: WorkerStatus | null | undefined;
+  /**
+   * Current status of control plane nodes. 'ready' when control plane is operational, 'scaling' when nodes are being provisioned/removed, 'error' when a control plane node has failed.
+   */
+  controlPlaneStatus?: ControlPlaneStatus | undefined;
+  /**
    * Whether the underlying infrastructure is ready
    */
   infrastructureReady?: boolean | undefined;
@@ -383,6 +418,22 @@ export function workersFromJSON(
     `Failed to parse 'Workers' from JSON`,
   );
 }
+
+/** @internal */
+export const WorkerStatus$inboundSchema: z.ZodNativeEnum<typeof WorkerStatus> =
+  z.nativeEnum(WorkerStatus);
+/** @internal */
+export const WorkerStatus$outboundSchema: z.ZodNativeEnum<typeof WorkerStatus> =
+  WorkerStatus$inboundSchema;
+
+/** @internal */
+export const ControlPlaneStatus$inboundSchema: z.ZodNativeEnum<
+  typeof ControlPlaneStatus
+> = z.nativeEnum(ControlPlaneStatus);
+/** @internal */
+export const ControlPlaneStatus$outboundSchema: z.ZodNativeEnum<
+  typeof ControlPlaneStatus
+> = ControlPlaneStatus$inboundSchema;
 
 /** @internal */
 export const KubernetesClusterDataName$inboundSchema: z.ZodNativeEnum<
@@ -595,6 +646,8 @@ export const KubernetesClusterDataAttributes$inboundSchema: z.ZodType<
   control_plane: z.nullable(z.lazy(() => ControlPlane$inboundSchema))
     .optional(),
   workers: z.nullable(z.lazy(() => Workers$inboundSchema)).optional(),
+  worker_status: z.nullable(WorkerStatus$inboundSchema).optional(),
+  control_plane_status: ControlPlaneStatus$inboundSchema.optional(),
   infrastructure_ready: z.boolean().optional(),
   control_plane_ready: z.boolean().optional(),
   message: z.string().optional(),
@@ -618,6 +671,8 @@ export const KubernetesClusterDataAttributes$inboundSchema: z.ZodType<
     "control_plane_count": "controlPlaneCount",
     "worker_count": "workerCount",
     "control_plane": "controlPlane",
+    "worker_status": "workerStatus",
+    "control_plane_status": "controlPlaneStatus",
     "infrastructure_ready": "infrastructureReady",
     "control_plane_ready": "controlPlaneReady",
     "last_status_change": "lastStatusChange",
@@ -642,6 +697,8 @@ export type KubernetesClusterDataAttributes$Outbound = {
   worker_count?: number | undefined;
   control_plane?: ControlPlane$Outbound | null | undefined;
   workers?: Workers$Outbound | null | undefined;
+  worker_status?: string | null | undefined;
+  control_plane_status?: string | undefined;
   infrastructure_ready?: boolean | undefined;
   control_plane_ready?: boolean | undefined;
   message?: string | undefined;
@@ -675,6 +732,8 @@ export const KubernetesClusterDataAttributes$outboundSchema: z.ZodType<
   controlPlane: z.nullable(z.lazy(() => ControlPlane$outboundSchema))
     .optional(),
   workers: z.nullable(z.lazy(() => Workers$outboundSchema)).optional(),
+  workerStatus: z.nullable(WorkerStatus$outboundSchema).optional(),
+  controlPlaneStatus: ControlPlaneStatus$outboundSchema.optional(),
   infrastructureReady: z.boolean().optional(),
   controlPlaneReady: z.boolean().optional(),
   message: z.string().optional(),
@@ -697,6 +756,8 @@ export const KubernetesClusterDataAttributes$outboundSchema: z.ZodType<
     controlPlaneCount: "control_plane_count",
     workerCount: "worker_count",
     controlPlane: "control_plane",
+    workerStatus: "worker_status",
+    controlPlaneStatus: "control_plane_status",
     infrastructureReady: "infrastructure_ready",
     controlPlaneReady: "control_plane_ready",
     lastStatusChange: "last_status_change",
