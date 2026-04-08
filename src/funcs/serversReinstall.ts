@@ -18,6 +18,7 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import * as errors from "../models/errors/index.js";
 import { LatitudeshError } from "../models/errors/latitudesherror.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
@@ -35,6 +36,7 @@ export function serversReinstall(
 ): APIPromise<
   Result<
     void,
+    | errors.ErrorObject
     | LatitudeshError
     | ResponseValidationError
     | ConnectionError
@@ -60,6 +62,7 @@ async function $do(
   [
     Result<
       void,
+      | errors.ErrorObject
       | LatitudeshError
       | ResponseValidationError
       | ConnectionError
@@ -94,7 +97,7 @@ async function $do(
 
   const headers = new Headers(compactMap({
     "Content-Type": "application/json",
-    Accept: "*/*",
+    Accept: "application/vnd.api+json",
   }));
 
   const secConfig = await extractSecurity(client._options.bearer);
@@ -133,7 +136,7 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["4XX", "5XX"],
+    errorCodes: ["404", "422", "4XX", "5XX"],
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -142,8 +145,13 @@ async function $do(
   }
   const response = doResult.value;
 
+  const responseFields = {
+    HttpMeta: { Response: response, Request: req },
+  };
+
   const [result] = await M.match<
     void,
+    | errors.ErrorObject
     | LatitudeshError
     | ResponseValidationError
     | ConnectionError
@@ -154,9 +162,12 @@ async function $do(
     | SDKValidationError
   >(
     M.nil(201, z.void()),
+    M.jsonErr([404, 422], errors.ErrorObject$inboundSchema, {
+      ctype: "application/vnd.api+json",
+    }),
     M.fail("4XX"),
     M.fail("5XX"),
-  )(response, req);
+  )(response, req, { extraFields: responseFields });
   if (!result.ok) {
     return [result, { status: "complete", request: req, response }];
   }

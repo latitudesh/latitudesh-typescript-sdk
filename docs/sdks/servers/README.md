@@ -1454,7 +1454,7 @@ run();
 
 Run Server Reinstall
 
-### Example Usage
+### Example Usage: Created
 
 <!-- UsageSnippet language="typescript" operationID="create-server-reinstall" method="post" path="/servers/{server_id}/reinstall" example="Created" -->
 ```typescript
@@ -1523,6 +1523,65 @@ async function run() {
 
 run();
 ```
+### Example Usage: ServerNotFound
+
+<!-- UsageSnippet language="typescript" operationID="create-server-reinstall" method="post" path="/servers/{server_id}/reinstall" example="ServerNotFound" -->
+```typescript
+import { Latitudesh } from "latitudesh-typescript-sdk";
+
+const latitudesh = new Latitudesh({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  await latitudesh.servers.reinstall({
+    serverId: "<id>",
+    requestBody: {
+      data: {
+        type: "reinstalls",
+      },
+    },
+  });
+
+
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
+import { serversReinstall } from "latitudesh-typescript-sdk/funcs/serversReinstall.js";
+
+// Use `LatitudeshCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const latitudesh = new LatitudeshCore({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const res = await serversReinstall(latitudesh, {
+    serverId: "<id>",
+    requestBody: {
+      data: {
+        type: "reinstalls",
+      },
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("serversReinstall failed:", res.error);
+  }
+}
+
+run();
+```
 
 ### Parameters
 
@@ -1541,4 +1600,5 @@ run();
 
 | Error Type                    | Status Code                   | Content Type                  |
 | ----------------------------- | ----------------------------- | ----------------------------- |
+| errors.ErrorObject            | 404, 422                      | application/vnd.api+json      |
 | errors.LatitudeshDefaultError | 4XX, 5XX                      | \*/\*                         |

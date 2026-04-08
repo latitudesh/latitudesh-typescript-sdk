@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c8245324-f3d7-42c7-8124-ce79579cbff5
 management:
-  docChecksum: 9f3904ccaf4d4fa34e5a9bab05dcdab9
+  docChecksum: 92a59317dd293d85ccfae5cec3a8be1f
   docVersion: "2023-06-01"
-  speakeasyVersion: 1.761.0
-  generationVersion: 2.879.1
-  releaseVersion: 0.3.6
-  configChecksum: c7c5af25d911f3ae01e94b71fe15d9fe
+  speakeasyVersion: 1.761.1
+  generationVersion: 2.879.6
+  releaseVersion: 0.3.7
+  configChecksum: 02afc93f3e18a8ff3e4b99e7b20a2e87
   repoURL: https://github.com/latitudesh/latitudesh-typescript-sdk.git
   installationURL: https://github.com/latitudesh/latitudesh-typescript-sdk
   published: true
 persistentEdits:
-  generation_id: 7633120f-4ce3-4bf5-914f-4f68b14c5343
-  pristine_commit_hash: bce4c61b380b2f209078e807e6ff3251ab516531
-  pristine_tree_hash: 02ddb73a28c620ebbc351ba3d78ef2bf581a9387
+  generation_id: 830ea090-0544-4f07-81fb-9b695f5deb48
+  pristine_commit_hash: f212882c4d0db17ad5b8646b1bd28f0a7fd3fad3
+  pristine_tree_hash: 97da7732f2924cfb638837746236af037092b8a6
 features:
   typescript:
     additionalDependencies: 0.1.0
@@ -2920,8 +2920,8 @@ trackedFiles:
     pristine_git_object: 6b77f0809cc7793ee857086058f32f8df4877ec4
   docs/sdks/servers/README.md:
     id: f4172022b7ef
-    last_write_checksum: sha1:ac14bc19f8c96b0dd943ffe609d7a6dd2ee1f151
-    pristine_git_object: 2792b989b2865d1d7eeaef71cd1e7f65c36b459e
+    last_write_checksum: sha1:ea69f579838dc8a7982e49468f5dc08b2bd3708a
+    pristine_git_object: b83358fc2a12e40cb1bc8b9157f489e1a5aba2df
   docs/sdks/sshkeys/README.md:
     id: 34435aa66d61
     last_write_checksum: sha1:270c9fdec75d9508c74a8652dd65d90ff151e0ef
@@ -2992,12 +2992,12 @@ trackedFiles:
     pristine_git_object: 249e5d9837dbad499fc14718cebf96fd4875a9e8
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:f6baeeb451300a4bf1a8be7da4693d25ed22efc3
-    pristine_git_object: 06b7a61c56d46b2ed992eb8ece1b8476ccbf727b
+    last_write_checksum: sha1:2bb7535a972e2a0750f72a4f393abb1331e712d2
+    pristine_git_object: 89c4be0e84cd72e89cbdc84c68db060e392fa017
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:02b4fc078d2a1b6f7891e3869858c11a1105ae26
-    pristine_git_object: 6948cb39c01a8207a79af5748e02d63ccb57bfe1
+    last_write_checksum: sha1:67245dcf783d066f54cbe9bba9550e83918ef9d4
+    pristine_git_object: c0d7bcd53f32bb74f913f9797d473f03cdcc04c3
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:9bb7b3807363b77f27dbdb87d6d10e9605f723d6
@@ -3248,8 +3248,8 @@ trackedFiles:
     pristine_git_object: 55c5b37999e17fe3fb461b77d0847b0a1d3cb8ee
   src/funcs/serversReinstall.ts:
     id: c8c6399b2ae1
-    last_write_checksum: sha1:d5033648b2fae4354de96d86ed7db93c9909a5f2
-    pristine_git_object: 63a58b86f65028c476f98dc80fac599a35cf5c85
+    last_write_checksum: sha1:852624078c2b2cdf20223336536a03ce9ead2a8c
+    pristine_git_object: 0f138cce21e470ffeacbe907d7d23f82dd5376c4
   src/funcs/serversRunAction.ts:
     id: c4753b3ac9aa
     last_write_checksum: sha1:5e796e481cc375a91748fd84099a9008733dec43
@@ -3536,8 +3536,8 @@ trackedFiles:
     pristine_git_object: 0aebd8b0a4867e35cb3348fc52921c3c0b4725b7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:eb6e3c85480a98d85f739a95de2ccb9be6da2f41
-    pristine_git_object: 92a448f892c90fcfedad217fc76b49c4d92def8f
+    last_write_checksum: sha1:2dd6e3a4166832ee1483b90a554af6a8a6dea95d
+    pristine_git_object: e11d63682fc746a372a1520a857590007a9b3266
   src/lib/dlv.ts:
     id: b1988214835a
     last_write_checksum: sha1:1dd3e3fbb4550c4bf31f5ef997faff355d6f3250
@@ -3620,8 +3620,8 @@ trackedFiles:
     pristine_git_object: 0955a573c2ce989d63c737410ab8cc28706d9f74
   src/mcp-server/mcp-server.ts:
     id: aabbc4ab07c1
-    last_write_checksum: sha1:069017bc889cbbff80834887abc0f40155bf2b68
-    pristine_git_object: 0a0a6df1e28b5d71a9146375b3facbbdbecd2b94
+    last_write_checksum: sha1:e26871aa96db634eb5ab7c2bef88a86aa82b305e
+    pristine_git_object: 4fbac5d533ed60d9751f89da531a86b333bcb78d
   src/mcp-server/prompts.ts:
     id: 26f3d73cbf31
     last_write_checksum: sha1:3e8d60ab7f8078d83fa9528f2e831050c1fd119c
@@ -3636,8 +3636,8 @@ trackedFiles:
     pristine_git_object: c25696d4c4f70e081fa5d87ad6891874c509a577
   src/mcp-server/server.ts:
     id: 2784dd48e82a
-    last_write_checksum: sha1:61e28abdd267c4e9494e99260b45a959e45c6999
-    pristine_git_object: 7e44270b8dfb21e5780fdb736e78b898417cf4df
+    last_write_checksum: sha1:f805b69648f70e9b97ea6b02e53f70e375fd705f
+    pristine_git_object: 58e38b50afa5bafa5aa95f46772d7a363ee7e661
   src/mcp-server/shared.ts:
     id: 074e80d4be1e
     last_write_checksum: sha1:d89576cea2bef3856b7fc3e65b868875528be042
@@ -5969,6 +5969,9 @@ examples:
       requestBody:
         application/json: {"data": {"type": "reinstalls", "attributes": {"operating_system": "ipxe", "hostname": "BRC1", "ipxe": "https://some-host.com/image.ipxe"}}}
         application/vnd.api+json: {"data": {"type": "reinstalls", "attributes": {"operating_system": "ipxe", "hostname": "BRC1", "ipxe": "https://some-host.com/image.ipxe"}}}
+      responses:
+        "404":
+          application/vnd.api+json: {}
     speakeasy-default-create-server-reinstall:
       parameters:
         path:
@@ -5976,6 +5979,19 @@ examples:
       requestBody:
         application/json: {"data": {"type": "reinstalls"}}
         application/vnd.api+json: {"data": {"type": "reinstalls"}}
+      responses:
+        "404":
+          application/vnd.api+json: {}
+    ServerNotFound:
+      parameters:
+        path:
+          server_id: "<id>"
+      requestBody:
+        application/json: {"data": {"type": "reinstalls"}}
+        application/vnd.api+json: {"data": {"type": "reinstalls"}}
+      responses:
+        "404":
+          application/vnd.api+json: {"errors": [{"code": "REINSTALL_SERVER_NOT_FOUND", "status": "404", "title": "Reinstall Server Not Found", "detail": "Sorry, we're unable to reinstall"}]}
   get-storage-filesystems:
     Success:
       parameters:
@@ -6769,8 +6785,7 @@ examplesVersion: 1.0.2
 generatedTests: {}
 releaseNotes: |
   ## Typescript SDK Changes:
-  * `latitudesh.kubernetesClusters.updateKubernetesCluster()`: **Added**
-  * `latitudesh.kubernetesClusters.getKubernetesCluster()`:  `response.data.attributes` **Changed**
+  * `latitudesh.servers.reinstall()`:  `error` **Changed**
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
