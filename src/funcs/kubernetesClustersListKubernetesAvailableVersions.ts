@@ -3,10 +3,8 @@
  */
 
 import { LatitudeshCore } from "../core.js";
-import { encodeJSON, encodeSimple } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
@@ -22,44 +20,27 @@ import { LatitudeshError } from "../models/errors/latitudesherror.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import * as models from "../models/index.js";
-import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Update Kubernetes Cluster
+ * List Available Kubernetes Versions
  *
  * @remarks
- * Updates a Kubernetes cluster by scaling nodes or upgrading the Kubernetes version. The cluster must be in `Provisioned` phase to accept updates.
+ * Returns the list of available Kubernetes versions for cluster creation and upgrades. Versions are sourced from the RKE2 release channels and cached for 24 hours.
  *
- * ## Scaling Operations
+ * Each version object includes:
+ * - `version`: The full version string (e.g., `v1.35.3+rke2r1`)
+ * - `minor`: The minor version number (e.g., `1.35`)
  *
- * Exactly one of `worker_count` or `control_plane_count` must be provided per request. You cannot scale workers and control plane nodes in the same request.
- *
- * When scaling up, the API validates that sufficient server stock is available for the requested delta (e.g., scaling from 2 to 5 workers checks for 3 available servers).
- *
- * When scaling from 0 workers, you must provide a `worker_plan` since there is no existing configuration to inherit the plan from.
- *
- * Control plane scaling has a minimum of 1 node. You cannot scale control plane nodes to zero.
- *
- * ## Version Upgrades
- *
- * Provide a `kubernetes_version` parameter to upgrade the cluster to a new Kubernetes version. Version upgrades follow these rules:
- *
- * - **No downgrades**: You cannot downgrade to a lower version than currently installed
- * - **One minor version at a time**: You can only upgrade one minor version at a time (e.g., from 1.34 to 1.35, not from 1.34 to 1.36)
- * - **Mutually exclusive**: Version upgrades cannot be combined with scaling operations in the same request
- * - **Available versions only**: The target version must be in the list returned by `GET /kubernetes_clusters/available_versions`
- *
- * Returns 202 Accepted when an update operation is triggered. Poll the GET endpoint to monitor progress. Returns 200 OK if no change is needed (no-op).
+ * The API returns the latest 5 supported minor versions. When upgrading clusters, you can only upgrade one minor version at a time (e.g., from 1.34 to 1.35).
  */
-export function kubernetesClustersUpdateKubernetesCluster(
+export function kubernetesClustersListKubernetesAvailableVersions(
   client: LatitudeshCore,
-  request: operations.UpdateKubernetesClusterRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    models.KubernetesClusterUpdateResponse,
+    models.KubernetesAvailableVersions,
     | errors.ErrorObject
     | LatitudeshError
     | ResponseValidationError
@@ -73,19 +54,17 @@ export function kubernetesClustersUpdateKubernetesCluster(
 > {
   return new APIPromise($do(
     client,
-    request,
     options,
   ));
 }
 
 async function $do(
   client: LatitudeshCore,
-  request: operations.UpdateKubernetesClusterRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      models.KubernetesClusterUpdateResponse,
+      models.KubernetesAvailableVersions,
       | errors.ErrorObject
       | LatitudeshError
       | ResponseValidationError
@@ -99,33 +78,9 @@ async function $do(
     APICall,
   ]
 > {
-  const parsed = safeParse(
-    request,
-    (value) =>
-      operations.UpdateKubernetesClusterRequest$outboundSchema.parse(value),
-    "Input validation failed",
-  );
-  if (!parsed.ok) {
-    return [parsed, { status: "invalid" }];
-  }
-  const payload = parsed.value;
-  const body = encodeJSON("body", payload.update_kubernetes_cluster, {
-    explode: true,
-  });
-
-  const pathParams = {
-    kubernetes_cluster_id: encodeSimple(
-      "kubernetes_cluster_id",
-      payload.kubernetes_cluster_id,
-      { explode: false, charEncoding: "percent" },
-    ),
-  };
-  const path = pathToFunc("/kubernetes_clusters/{kubernetes_cluster_id}")(
-    pathParams,
-  );
+  const path = pathToFunc("/kubernetes_clusters/available_versions")();
 
   const headers = new Headers(compactMap({
-    "Content-Type": "application/vnd.api+json",
     Accept: "application/vnd.api+json",
   }));
 
@@ -136,7 +91,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "update-kubernetes-cluster",
+    operationID: "list-kubernetes-available-versions",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -150,11 +105,10 @@ async function $do(
 
   const requestRes = client._createRequest(context, {
     security: requestSecurity,
-    method: "PATCH",
+    method: "GET",
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
-    body: body,
     userAgent: client._options.userAgent,
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
   }, options);
@@ -165,7 +119,7 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["400", "403", "404", "422", "4XX", "503", "5XX"],
+    errorCodes: ["401", "403", "4XX", "5XX"],
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -179,7 +133,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    models.KubernetesClusterUpdateResponse,
+    models.KubernetesAvailableVersions,
     | errors.ErrorObject
     | LatitudeshError
     | ResponseValidationError
@@ -190,13 +144,10 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json([200, 202], models.KubernetesClusterUpdateResponse$inboundSchema, {
+    M.json(200, models.KubernetesAvailableVersions$inboundSchema, {
       ctype: "application/vnd.api+json",
     }),
-    M.jsonErr([400, 403, 404, 422], errors.ErrorObject$inboundSchema, {
-      ctype: "application/vnd.api+json",
-    }),
-    M.jsonErr(503, errors.ErrorObject$inboundSchema, {
+    M.jsonErr([401, 403], errors.ErrorObject$inboundSchema, {
       ctype: "application/vnd.api+json",
     }),
     M.fail("4XX"),

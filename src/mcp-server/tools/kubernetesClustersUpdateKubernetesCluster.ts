@@ -14,9 +14,11 @@ export const tool$kubernetesClustersUpdateKubernetesCluster: ToolDefinition<
   typeof args
 > = {
   name: "kubernetes-clusters-update-kubernetes-cluster",
-  description: `Scale Kubernetes Cluster
+  description: `Update Kubernetes Cluster
 
-Scales the worker nodes or control plane nodes of a Kubernetes cluster. The cluster must be in \`Provisioned\` phase to accept updates.
+Updates a Kubernetes cluster by scaling nodes or upgrading the Kubernetes version. The cluster must be in \`Provisioned\` phase to accept updates.
+
+## Scaling Operations
 
 Exactly one of \`worker_count\` or \`control_plane_count\` must be provided per request. You cannot scale workers and control plane nodes in the same request.
 
@@ -26,7 +28,16 @@ When scaling from 0 workers, you must provide a \`worker_plan\` since there is n
 
 Control plane scaling has a minimum of 1 node. You cannot scale control plane nodes to zero.
 
-Returns 202 Accepted when a scaling operation is triggered. Poll the GET endpoint to monitor progress. Returns 200 OK if the requested count matches the current count (no-op).
+## Version Upgrades
+
+Provide a \`kubernetes_version\` parameter to upgrade the cluster to a new Kubernetes version. Version upgrades follow these rules:
+
+- **No downgrades**: You cannot downgrade to a lower version than currently installed
+- **One minor version at a time**: You can only upgrade one minor version at a time (e.g., from 1.34 to 1.35, not from 1.34 to 1.36)
+- **Mutually exclusive**: Version upgrades cannot be combined with scaling operations in the same request
+- **Available versions only**: The target version must be in the list returned by \`GET /kubernetes_clusters/available_versions\`
+
+Returns 202 Accepted when an update operation is triggered. Poll the GET endpoint to monitor progress. Returns 200 OK if no change is needed (no-op).
 `,
   args,
   tool: async (client, args, ctx) => {
