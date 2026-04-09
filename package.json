@@ -1,6 +1,6 @@
 {
   "name": "latitudesh-typescript-sdk",
-  "version": "0.3.7",
+  "version": "0.3.8",
   "author": "Speakeasy",
   "type": "module",
   "bin": {
@@ -31,8 +31,8 @@
     "build:mcp": "bun src/mcp-server/build.mts",
     "build": "npm run build:mcp && tshy",
     "prepublishOnly": "npm run build",
-    "test:coverage": "bun test --coverage tests/integration",
-    "test:integration": "bun test tests/integration"
+    "test:integration": "bun test tests/integration",
+    "test:coverage": "bun test --coverage tests/integration"
   },
   "peerDependencies": {},
   "devDependencies": {

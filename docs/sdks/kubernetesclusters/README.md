@@ -6,9 +6,10 @@
 
 * [listKubernetesClusters](#listkubernetesclusters) - List Kubernetes Clusters
 * [createKubernetesCluster](#createkubernetescluster) - Create a Kubernetes Cluster
+* [listKubernetesAvailableVersions](#listkubernetesavailableversions) - List Available Kubernetes Versions
 * [getKubernetesCluster](#getkubernetescluster) - Get a Kubernetes Cluster
 * [deleteKubernetesCluster](#deletekubernetescluster) - Delete a Kubernetes Cluster
-* [updateKubernetesCluster](#updatekubernetescluster) - Scale Kubernetes Cluster
+* [updateKubernetesCluster](#updatekubernetescluster) - Update Kubernetes Cluster
 * [getKubernetesClusterKubeconfig](#getkubernetesclusterkubeconfig) - Get Kubernetes Cluster Kubeconfig
 
 ## listKubernetesClusters
@@ -361,6 +362,82 @@ run();
 | errors.ErrorObject            | 503                           | application/vnd.api+json      |
 | errors.LatitudeshDefaultError | 4XX, 5XX                      | \*/\*                         |
 
+## listKubernetesAvailableVersions
+
+Returns the list of available Kubernetes versions for cluster creation and upgrades. Versions are sourced from the RKE2 release channels and cached for 24 hours.
+
+Each version object includes:
+- `version`: The full version string (e.g., `v1.35.3+rke2r1`)
+- `minor`: The minor version number (e.g., `1.35`)
+
+The API returns the latest 5 supported minor versions. When upgrading clusters, you can only upgrade one minor version at a time (e.g., from 1.34 to 1.35).
+
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="list-kubernetes-available-versions" method="get" path="/kubernetes_clusters/available_versions" example="Success" -->
+```typescript
+import { Latitudesh } from "latitudesh-typescript-sdk";
+
+const latitudesh = new Latitudesh({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const result = await latitudesh.kubernetesClusters.listKubernetesAvailableVersions();
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
+import { kubernetesClustersListKubernetesAvailableVersions } from "latitudesh-typescript-sdk/funcs/kubernetesClustersListKubernetesAvailableVersions.js";
+
+// Use `LatitudeshCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const latitudesh = new LatitudeshCore({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const res = await kubernetesClustersListKubernetesAvailableVersions(latitudesh);
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("kubernetesClustersListKubernetesAvailableVersions failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[models.KubernetesAvailableVersions](../../models/kubernetesavailableversions.md)\>**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| errors.ErrorObject            | 401, 403                      | application/vnd.api+json      |
+| errors.LatitudeshDefaultError | 4XX, 5XX                      | \*/\*                         |
+
 ## getKubernetesCluster
 
 Retrieves detailed information about a Kubernetes cluster including its status, control plane, worker node details, and individual node information.
@@ -562,7 +639,9 @@ run();
 
 ## updateKubernetesCluster
 
-Scales the worker nodes or control plane nodes of a Kubernetes cluster. The cluster must be in `Provisioned` phase to accept updates.
+Updates a Kubernetes cluster by scaling nodes or upgrading the Kubernetes version. The cluster must be in `Provisioned` phase to accept updates.
+
+## Scaling Operations
 
 Exactly one of `worker_count` or `control_plane_count` must be provided per request. You cannot scale workers and control plane nodes in the same request.
 
@@ -572,7 +651,16 @@ When scaling from 0 workers, you must provide a `worker_plan` since there is no 
 
 Control plane scaling has a minimum of 1 node. You cannot scale control plane nodes to zero.
 
-Returns 202 Accepted when a scaling operation is triggered. Poll the GET endpoint to monitor progress. Returns 200 OK if the requested count matches the current count (no-op).
+## Version Upgrades
+
+Provide a `kubernetes_version` parameter to upgrade the cluster to a new Kubernetes version. Version upgrades follow these rules:
+
+- **No downgrades**: You cannot downgrade to a lower version than currently installed
+- **One minor version at a time**: You can only upgrade one minor version at a time (e.g., from 1.34 to 1.35, not from 1.34 to 1.36)
+- **Mutually exclusive**: Version upgrades cannot be combined with scaling operations in the same request
+- **Available versions only**: The target version must be in the list returned by `GET /kubernetes_clusters/available_versions`
+
+Returns 202 Accepted when an update operation is triggered. Poll the GET endpoint to monitor progress. Returns 200 OK if no change is needed (no-op).
 
 
 ### Example Usage: ControlPlaneUnchanged
@@ -700,6 +788,67 @@ run();
 ### Example Usage: InvalidWorkerCountType
 
 <!-- UsageSnippet language="typescript" operationID="update-kubernetes-cluster" method="patch" path="/kubernetes_clusters/{kubernetes_cluster_id}" example="InvalidWorkerCountType" -->
+```typescript
+import { Latitudesh } from "latitudesh-typescript-sdk";
+
+const latitudesh = new Latitudesh({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const result = await latitudesh.kubernetesClusters.updateKubernetesCluster({
+    kubernetesClusterId: "<id>",
+    updateKubernetesCluster: {
+      data: {
+        type: "kubernetes_clusters",
+        attributes: {},
+      },
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
+import { kubernetesClustersUpdateKubernetesCluster } from "latitudesh-typescript-sdk/funcs/kubernetesClustersUpdateKubernetesCluster.js";
+
+// Use `LatitudeshCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const latitudesh = new LatitudeshCore({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const res = await kubernetesClustersUpdateKubernetesCluster(latitudesh, {
+    kubernetesClusterId: "<id>",
+    updateKubernetesCluster: {
+      data: {
+        type: "kubernetes_clusters",
+        attributes: {},
+      },
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("kubernetesClustersUpdateKubernetesCluster failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: MissingParameter
+
+<!-- UsageSnippet language="typescript" operationID="update-kubernetes-cluster" method="patch" path="/kubernetes_clusters/{kubernetes_cluster_id}" example="MissingParameter" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -1259,6 +1408,193 @@ async function run() {
         attributes: {
           workerCount: 5,
         },
+      },
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("kubernetesClustersUpdateKubernetesCluster failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: ScalingMutualExclusion
+
+<!-- UsageSnippet language="typescript" operationID="update-kubernetes-cluster" method="patch" path="/kubernetes_clusters/{kubernetes_cluster_id}" example="ScalingMutualExclusion" -->
+```typescript
+import { Latitudesh } from "latitudesh-typescript-sdk";
+
+const latitudesh = new Latitudesh({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const result = await latitudesh.kubernetesClusters.updateKubernetesCluster({
+    kubernetesClusterId: "<id>",
+    updateKubernetesCluster: {
+      data: {
+        type: "kubernetes_clusters",
+        attributes: {},
+      },
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
+import { kubernetesClustersUpdateKubernetesCluster } from "latitudesh-typescript-sdk/funcs/kubernetesClustersUpdateKubernetesCluster.js";
+
+// Use `LatitudeshCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const latitudesh = new LatitudeshCore({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const res = await kubernetesClustersUpdateKubernetesCluster(latitudesh, {
+    kubernetesClusterId: "<id>",
+    updateKubernetesCluster: {
+      data: {
+        type: "kubernetes_clusters",
+        attributes: {},
+      },
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("kubernetesClustersUpdateKubernetesCluster failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: UpgradeVersion
+
+<!-- UsageSnippet language="typescript" operationID="update-kubernetes-cluster" method="patch" path="/kubernetes_clusters/{kubernetes_cluster_id}" example="UpgradeVersion" -->
+```typescript
+import { Latitudesh } from "latitudesh-typescript-sdk";
+
+const latitudesh = new Latitudesh({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const result = await latitudesh.kubernetesClusters.updateKubernetesCluster({
+    kubernetesClusterId: "<id>",
+    updateKubernetesCluster: {
+      data: {
+        type: "kubernetes_clusters",
+        attributes: {
+          kubernetesVersion: "v1.35.0+rke2r1",
+        },
+      },
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
+import { kubernetesClustersUpdateKubernetesCluster } from "latitudesh-typescript-sdk/funcs/kubernetesClustersUpdateKubernetesCluster.js";
+
+// Use `LatitudeshCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const latitudesh = new LatitudeshCore({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const res = await kubernetesClustersUpdateKubernetesCluster(latitudesh, {
+    kubernetesClusterId: "<id>",
+    updateKubernetesCluster: {
+      data: {
+        type: "kubernetes_clusters",
+        attributes: {
+          kubernetesVersion: "v1.35.0+rke2r1",
+        },
+      },
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("kubernetesClustersUpdateKubernetesCluster failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: VersionWithScaling
+
+<!-- UsageSnippet language="typescript" operationID="update-kubernetes-cluster" method="patch" path="/kubernetes_clusters/{kubernetes_cluster_id}" example="VersionWithScaling" -->
+```typescript
+import { Latitudesh } from "latitudesh-typescript-sdk";
+
+const latitudesh = new Latitudesh({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const result = await latitudesh.kubernetesClusters.updateKubernetesCluster({
+    kubernetesClusterId: "<id>",
+    updateKubernetesCluster: {
+      data: {
+        type: "kubernetes_clusters",
+        attributes: {},
+      },
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
+import { kubernetesClustersUpdateKubernetesCluster } from "latitudesh-typescript-sdk/funcs/kubernetesClustersUpdateKubernetesCluster.js";
+
+// Use `LatitudeshCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const latitudesh = new LatitudeshCore({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const res = await kubernetesClustersUpdateKubernetesCluster(latitudesh, {
+    kubernetesClusterId: "<id>",
+    updateKubernetesCluster: {
+      data: {
+        type: "kubernetes_clusters",
+        attributes: {},
       },
     },
   });

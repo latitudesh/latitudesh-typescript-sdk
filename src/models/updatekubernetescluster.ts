@@ -17,27 +17,31 @@ export type UpdateKubernetesClusterType = ClosedEnum<
 >;
 
 /**
- * Exactly one of worker_count or control_plane_count must be provided. These parameters are mutually exclusive.
+ * Provide one of: worker_count, control_plane_count (for scaling), or kubernetes_version (for upgrades). These are mutually exclusive operations.
  */
 export type UpdateKubernetesClusterAttributes = {
   /**
-   * Desired number of worker nodes. Must be between 0 and 10. Mutually exclusive with control_plane_count.
+   * Desired number of worker nodes. Must be between 0 and 10. Mutually exclusive with control_plane_count and kubernetes_version.
    */
   workerCount?: number | undefined;
   /**
-   * Desired number of control plane nodes. Minimum 1. Mutually exclusive with worker_count.
+   * Desired number of control plane nodes. Minimum 1. Mutually exclusive with worker_count and kubernetes_version.
    */
   controlPlaneCount?: number | undefined;
   /**
    * Plan slug for worker nodes. Required when scaling from 0 workers. Ignored when scaling an existing deployment.
    */
   workerPlan?: string | null | undefined;
+  /**
+   * Target Kubernetes version for upgrade (e.g., v1.35.0+rke2r1). Mutually exclusive with scaling operations. Must be one minor version higher than current.
+   */
+  kubernetesVersion?: string | undefined;
 };
 
 export type UpdateKubernetesClusterData = {
   type: UpdateKubernetesClusterType;
   /**
-   * Exactly one of worker_count or control_plane_count must be provided. These parameters are mutually exclusive.
+   * Provide one of: worker_count, control_plane_count (for scaling), or kubernetes_version (for upgrades). These are mutually exclusive operations.
    */
   attributes: UpdateKubernetesClusterAttributes;
 };
@@ -64,11 +68,13 @@ export const UpdateKubernetesClusterAttributes$inboundSchema: z.ZodType<
   worker_count: z.number().int().optional(),
   control_plane_count: z.number().int().optional(),
   worker_plan: z.nullable(z.string()).optional(),
+  kubernetes_version: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "worker_count": "workerCount",
     "control_plane_count": "controlPlaneCount",
     "worker_plan": "workerPlan",
+    "kubernetes_version": "kubernetesVersion",
   });
 });
 /** @internal */
@@ -76,6 +82,7 @@ export type UpdateKubernetesClusterAttributes$Outbound = {
   worker_count?: number | undefined;
   control_plane_count?: number | undefined;
   worker_plan?: string | null | undefined;
+  kubernetes_version?: string | undefined;
 };
 
 /** @internal */
@@ -87,11 +94,13 @@ export const UpdateKubernetesClusterAttributes$outboundSchema: z.ZodType<
   workerCount: z.number().int().optional(),
   controlPlaneCount: z.number().int().optional(),
   workerPlan: z.nullable(z.string()).optional(),
+  kubernetesVersion: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     workerCount: "worker_count",
     controlPlaneCount: "control_plane_count",
     workerPlan: "worker_plan",
+    kubernetesVersion: "kubernetes_version",
   });
 });
 

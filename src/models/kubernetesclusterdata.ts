@@ -27,6 +27,20 @@ export type KubernetesClusterDataPhase = ClosedEnum<
 >;
 
 /**
+ * The cluster's version status relative to available upgrades
+ */
+export const VersionStatus = {
+  UpToDate: "up_to_date",
+  UpgradeAvailable: "upgrade_available",
+  Unsupported: "unsupported",
+  Unknown: "unknown",
+} as const;
+/**
+ * The cluster's version status relative to available upgrades
+ */
+export type VersionStatus = ClosedEnum<typeof VersionStatus>;
+
+/**
  * Control plane status information
  */
 export type ControlPlane = {
@@ -231,6 +245,14 @@ export type KubernetesClusterDataAttributes = {
    */
   kubernetesVersion?: string | undefined;
   /**
+   * The cluster's version status relative to available upgrades
+   */
+  versionStatus?: VersionStatus | undefined;
+  /**
+   * The next available Kubernetes version for upgrade. Null if the cluster is already on the latest version, or if version status is unknown or unsupported.
+   */
+  availableUpgrade?: string | null | undefined;
+  /**
    * When the cluster was created
    */
   createdAt?: Date | undefined;
@@ -321,6 +343,15 @@ export const KubernetesClusterDataPhase$inboundSchema: z.ZodNativeEnum<
 export const KubernetesClusterDataPhase$outboundSchema: z.ZodNativeEnum<
   typeof KubernetesClusterDataPhase
 > = KubernetesClusterDataPhase$inboundSchema;
+
+/** @internal */
+export const VersionStatus$inboundSchema: z.ZodNativeEnum<
+  typeof VersionStatus
+> = z.nativeEnum(VersionStatus);
+/** @internal */
+export const VersionStatus$outboundSchema: z.ZodNativeEnum<
+  typeof VersionStatus
+> = VersionStatus$inboundSchema;
 
 /** @internal */
 export const ControlPlane$inboundSchema: z.ZodType<
@@ -637,6 +668,8 @@ export const KubernetesClusterDataAttributes$inboundSchema: z.ZodType<
   location: z.string().optional(),
   load_balancer_ips: z.array(z.string()).optional(),
   kubernetes_version: z.string().optional(),
+  version_status: VersionStatus$inboundSchema.optional(),
+  available_upgrade: z.nullable(z.string()).optional(),
   created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   plan: z.string().optional(),
@@ -666,6 +699,8 @@ export const KubernetesClusterDataAttributes$inboundSchema: z.ZodType<
     "kubeconfig_url": "kubeconfigUrl",
     "load_balancer_ips": "loadBalancerIps",
     "kubernetes_version": "kubernetesVersion",
+    "version_status": "versionStatus",
+    "available_upgrade": "availableUpgrade",
     "created_at": "createdAt",
     "worker_plan": "workerPlan",
     "control_plane_count": "controlPlaneCount",
@@ -690,6 +725,8 @@ export type KubernetesClusterDataAttributes$Outbound = {
   location?: string | undefined;
   load_balancer_ips?: Array<string> | undefined;
   kubernetes_version?: string | undefined;
+  version_status?: string | undefined;
+  available_upgrade?: string | null | undefined;
   created_at?: string | undefined;
   plan?: string | undefined;
   worker_plan?: string | null | undefined;
@@ -724,6 +761,8 @@ export const KubernetesClusterDataAttributes$outboundSchema: z.ZodType<
   location: z.string().optional(),
   loadBalancerIps: z.array(z.string()).optional(),
   kubernetesVersion: z.string().optional(),
+  versionStatus: VersionStatus$outboundSchema.optional(),
+  availableUpgrade: z.nullable(z.string()).optional(),
   createdAt: z.date().transform(v => v.toISOString()).optional(),
   plan: z.string().optional(),
   workerPlan: z.nullable(z.string()).optional(),
@@ -751,6 +790,8 @@ export const KubernetesClusterDataAttributes$outboundSchema: z.ZodType<
     kubeconfigUrl: "kubeconfig_url",
     loadBalancerIps: "load_balancer_ips",
     kubernetesVersion: "kubernetes_version",
+    versionStatus: "version_status",
+    availableUpgrade: "available_upgrade",
     createdAt: "created_at",
     workerPlan: "worker_plan",
     controlPlaneCount: "control_plane_count",

@@ -17,14 +17,15 @@ export type KubernetesClusterUpdateResponseType = ClosedEnum<
 >;
 
 /**
- * The update status. 'scaling' indicates nodes are being added or removed. 'unchanged' indicates the requested count matches the current count.
+ * The update status. 'scaling' indicates nodes are being added or removed. 'upgrading' indicates a version upgrade is in progress. 'unchanged' indicates no change was needed.
  */
 export const KubernetesClusterUpdateResponseStatus = {
   Scaling: "scaling",
+  Upgrading: "upgrading",
   Unchanged: "unchanged",
 } as const;
 /**
- * The update status. 'scaling' indicates nodes are being added or removed. 'unchanged' indicates the requested count matches the current count.
+ * The update status. 'scaling' indicates nodes are being added or removed. 'upgrading' indicates a version upgrade is in progress. 'unchanged' indicates no change was needed.
  */
 export type KubernetesClusterUpdateResponseStatus = ClosedEnum<
   typeof KubernetesClusterUpdateResponseStatus
@@ -36,7 +37,7 @@ export type KubernetesClusterUpdateResponseAttributes = {
    */
   name?: string | undefined;
   /**
-   * The update status. 'scaling' indicates nodes are being added or removed. 'unchanged' indicates the requested count matches the current count.
+   * The update status. 'scaling' indicates nodes are being added or removed. 'upgrading' indicates a version upgrade is in progress. 'unchanged' indicates no change was needed.
    */
   status?: KubernetesClusterUpdateResponseStatus | undefined;
   /**
@@ -47,6 +48,10 @@ export type KubernetesClusterUpdateResponseAttributes = {
    * The requested number of control plane nodes. Present when scaling control plane.
    */
   controlPlaneCount?: number | null | undefined;
+  /**
+   * The target Kubernetes version. Present when upgrading version.
+   */
+  kubernetesVersion?: string | null | undefined;
 };
 
 export type KubernetesClusterUpdateResponseData = {
@@ -91,10 +96,12 @@ export const KubernetesClusterUpdateResponseAttributes$inboundSchema: z.ZodType<
   status: KubernetesClusterUpdateResponseStatus$inboundSchema.optional(),
   worker_count: z.nullable(z.number().int()).optional(),
   control_plane_count: z.nullable(z.number().int()).optional(),
+  kubernetes_version: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "worker_count": "workerCount",
     "control_plane_count": "controlPlaneCount",
+    "kubernetes_version": "kubernetesVersion",
   });
 });
 /** @internal */
@@ -103,6 +110,7 @@ export type KubernetesClusterUpdateResponseAttributes$Outbound = {
   status?: string | undefined;
   worker_count?: number | null | undefined;
   control_plane_count?: number | null | undefined;
+  kubernetes_version?: string | null | undefined;
 };
 
 /** @internal */
@@ -116,10 +124,12 @@ export const KubernetesClusterUpdateResponseAttributes$outboundSchema:
     status: KubernetesClusterUpdateResponseStatus$outboundSchema.optional(),
     workerCount: z.nullable(z.number().int()).optional(),
     controlPlaneCount: z.nullable(z.number().int()).optional(),
+    kubernetesVersion: z.nullable(z.string()).optional(),
   }).transform((v) => {
     return remap$(v, {
       workerCount: "worker_count",
       controlPlaneCount: "control_plane_count",
+      kubernetesVersion: "kubernetes_version",
     });
   });
 

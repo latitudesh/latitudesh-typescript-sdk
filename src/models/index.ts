@@ -31,6 +31,7 @@ export * from "./firewallserver.js";
 export * from "./ipaddress.js";
 export * from "./ipaddresses.js";
 export * from "./ipmisession.js";
+export * from "./kubernetesavailableversions.js";
 export * from "./kubernetescluster.js";
 export * from "./kubernetesclustercreateresponse.js";
 export * from "./kubernetesclusterdata.js";

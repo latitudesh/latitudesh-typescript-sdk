@@ -6,6 +6,7 @@ import { kubernetesClustersCreateKubernetesCluster } from "../funcs/kubernetesCl
 import { kubernetesClustersDeleteKubernetesCluster } from "../funcs/kubernetesClustersDeleteKubernetesCluster.js";
 import { kubernetesClustersGetKubernetesCluster } from "../funcs/kubernetesClustersGetKubernetesCluster.js";
 import { kubernetesClustersGetKubernetesClusterKubeconfig } from "../funcs/kubernetesClustersGetKubernetesClusterKubeconfig.js";
+import { kubernetesClustersListKubernetesAvailableVersions } from "../funcs/kubernetesClustersListKubernetesAvailableVersions.js";
 import { kubernetesClustersListKubernetesClusters } from "../funcs/kubernetesClustersListKubernetesClusters.js";
 import { kubernetesClustersUpdateKubernetesCluster } from "../funcs/kubernetesClustersUpdateKubernetesCluster.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
@@ -51,6 +52,27 @@ export class KubernetesClusters extends ClientSDK {
   }
 
   /**
+   * List Available Kubernetes Versions
+   *
+   * @remarks
+   * Returns the list of available Kubernetes versions for cluster creation and upgrades. Versions are sourced from the RKE2 release channels and cached for 24 hours.
+   *
+   * Each version object includes:
+   * - `version`: The full version string (e.g., `v1.35.3+rke2r1`)
+   * - `minor`: The minor version number (e.g., `1.35`)
+   *
+   * The API returns the latest 5 supported minor versions. When upgrading clusters, you can only upgrade one minor version at a time (e.g., from 1.34 to 1.35).
+   */
+  async listKubernetesAvailableVersions(
+    options?: RequestOptions,
+  ): Promise<models.KubernetesAvailableVersions> {
+    return unwrapAsync(kubernetesClustersListKubernetesAvailableVersions(
+      this,
+      options,
+    ));
+  }
+
+  /**
    * Get a Kubernetes Cluster
    *
    * @remarks
@@ -85,10 +107,12 @@ export class KubernetesClusters extends ClientSDK {
   }
 
   /**
-   * Scale Kubernetes Cluster
+   * Update Kubernetes Cluster
    *
    * @remarks
-   * Scales the worker nodes or control plane nodes of a Kubernetes cluster. The cluster must be in `Provisioned` phase to accept updates.
+   * Updates a Kubernetes cluster by scaling nodes or upgrading the Kubernetes version. The cluster must be in `Provisioned` phase to accept updates.
+   *
+   * ## Scaling Operations
    *
    * Exactly one of `worker_count` or `control_plane_count` must be provided per request. You cannot scale workers and control plane nodes in the same request.
    *
@@ -98,7 +122,16 @@ export class KubernetesClusters extends ClientSDK {
    *
    * Control plane scaling has a minimum of 1 node. You cannot scale control plane nodes to zero.
    *
-   * Returns 202 Accepted when a scaling operation is triggered. Poll the GET endpoint to monitor progress. Returns 200 OK if the requested count matches the current count (no-op).
+   * ## Version Upgrades
+   *
+   * Provide a `kubernetes_version` parameter to upgrade the cluster to a new Kubernetes version. Version upgrades follow these rules:
+   *
+   * - **No downgrades**: You cannot downgrade to a lower version than currently installed
+   * - **One minor version at a time**: You can only upgrade one minor version at a time (e.g., from 1.34 to 1.35, not from 1.34 to 1.36)
+   * - **Mutually exclusive**: Version upgrades cannot be combined with scaling operations in the same request
+   * - **Available versions only**: The target version must be in the list returned by `GET /kubernetes_clusters/available_versions`
+   *
+   * Returns 202 Accepted when an update operation is triggered. Poll the GET endpoint to monitor progress. Returns 200 OK if no change is needed (no-op).
    */
   async updateKubernetesCluster(
     request: operations.UpdateKubernetesClusterRequest,
