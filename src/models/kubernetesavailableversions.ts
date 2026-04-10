@@ -9,9 +9,9 @@ import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 
 export type KubernetesAvailableVersionsData = {
   /**
-   * The full Kubernetes version string (e.g., v1.35.3+rke2r1)
+   * The latest full Kubernetes version string for this minor version (e.g., v1.35.3+rke2r1)
    */
-  version?: string | undefined;
+  latest?: string | undefined;
   /**
    * The minor version number (e.g., 1.35)
    */
@@ -31,12 +31,12 @@ export const KubernetesAvailableVersionsData$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  version: z.string().optional(),
+  latest: z.string().optional(),
   minor: z.string().optional(),
 });
 /** @internal */
 export type KubernetesAvailableVersionsData$Outbound = {
-  version?: string | undefined;
+  latest?: string | undefined;
   minor?: string | undefined;
 };
 
@@ -46,7 +46,7 @@ export const KubernetesAvailableVersionsData$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   KubernetesAvailableVersionsData
 > = z.object({
-  version: z.string().optional(),
+  latest: z.string().optional(),
   minor: z.string().optional(),
 });
 
