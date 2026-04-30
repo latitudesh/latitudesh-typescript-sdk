@@ -4,6 +4,7 @@
 
 import { LatitudeshCore } from "../core.js";
 import { encodeJSON } from "../lib/encodings.js";
+import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -133,7 +134,8 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["400", "403", "422", "4XX", "503", "5XX"],
+    isErrorStatusCode: (statusCode: number) =>
+      matchStatusCode({ status: statusCode } as Response, ["4XX", "5XX"]),
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -161,7 +163,7 @@ async function $do(
     M.json(201, models.KubernetesClusterCreateResponse$inboundSchema, {
       ctype: "application/vnd.api+json",
     }),
-    M.jsonErr([400, 403, 422], errors.ErrorObject$inboundSchema, {
+    M.jsonErr([400, 422], errors.ErrorObject$inboundSchema, {
       ctype: "application/vnd.api+json",
     }),
     M.jsonErr(503, errors.ErrorObject$inboundSchema, {

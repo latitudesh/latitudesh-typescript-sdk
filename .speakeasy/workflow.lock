@@ -1,19 +1,19 @@
-speakeasyVersion: 1.761.2
+speakeasyVersion: 1.761.10
 sources:
     Latitudesh-OAS:
         sourceNamespace: latitudesh-oas
-        sourceRevisionDigest: sha256:c25f8200360ecbe247128495906861af77564fdcaa7a37530c87aaafd269c071
-        sourceBlobDigest: sha256:a2375b81ad87d9d3de03e8068141fab21e2b7c6cdb6ffcb9ca598e7c4ef10c9f
+        sourceRevisionDigest: sha256:fcae6c64b2a82ebaff67f663e9018513923be5b78a22279794136996e384a3b6
+        sourceBlobDigest: sha256:4fddca1e549264aad350b04b91347e54c4ac9afac6383004702d509d6e1adfcb
         tags:
             - latest
 targets:
     latitudesh:
         source: Latitudesh-OAS
         sourceNamespace: latitudesh-oas
-        sourceRevisionDigest: sha256:c25f8200360ecbe247128495906861af77564fdcaa7a37530c87aaafd269c071
-        sourceBlobDigest: sha256:a2375b81ad87d9d3de03e8068141fab21e2b7c6cdb6ffcb9ca598e7c4ef10c9f
+        sourceRevisionDigest: sha256:fcae6c64b2a82ebaff67f663e9018513923be5b78a22279794136996e384a3b6
+        sourceBlobDigest: sha256:4fddca1e549264aad350b04b91347e54c4ac9afac6383004702d509d6e1adfcb
         codeSamplesNamespace: latitudesh-oas-typescript-code-samples
-        codeSamplesRevisionDigest: sha256:0e144447c706e776660386a015d8caefcf98432c7391c48015b350f7bdb5d2c8
+        codeSamplesRevisionDigest: sha256:203b759dfa1d5d1e4603b9634930c0e59f39a2b4a04102892638b14fda4dc897
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
