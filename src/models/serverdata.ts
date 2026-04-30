@@ -158,7 +158,7 @@ export type ServerDataRole = ClosedEnum<typeof ServerDataRole>;
 export type Interface = {
   role?: ServerDataRole | undefined;
   name?: string | undefined;
-  macAddress?: string | undefined;
+  macAddress?: string | null | undefined;
   description?: string | undefined;
 };
 
@@ -484,7 +484,7 @@ export const Interface$inboundSchema: z.ZodType<
 > = z.object({
   role: ServerDataRole$inboundSchema.optional(),
   name: z.string().optional(),
-  mac_address: z.string().optional(),
+  mac_address: z.nullable(z.string()).optional(),
   description: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -495,7 +495,7 @@ export const Interface$inboundSchema: z.ZodType<
 export type Interface$Outbound = {
   role?: string | undefined;
   name?: string | undefined;
-  mac_address?: string | undefined;
+  mac_address?: string | null | undefined;
   description?: string | undefined;
 };
 
@@ -507,7 +507,7 @@ export const Interface$outboundSchema: z.ZodType<
 > = z.object({
   role: ServerDataRole$outboundSchema.optional(),
   name: z.string().optional(),
-  macAddress: z.string().optional(),
+  macAddress: z.nullable(z.string()).optional(),
   description: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
