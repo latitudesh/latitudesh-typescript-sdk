@@ -32,6 +32,8 @@ import { Result } from "../types/fp.js";
  *
  * @remarks
  * Retrieves the kubeconfig file for a Kubernetes cluster. The kubeconfig is only available once the cluster is fully provisioned.
+ *
+ * **Note:** Only users with the `owner`, `administrator`, or `collaborator` role can access cluster credentials. Users with the `billing` role cannot perform this action.
  */
 export function kubernetesClustersGetKubernetesClusterKubeconfig(
   client: LatitudeshCore,
@@ -173,7 +175,7 @@ async function $do(
     M.json(200, models.KubernetesClusterKubeconfig$inboundSchema, {
       ctype: "application/vnd.api+json",
     }),
-    M.jsonErr([401, 404], errors.ErrorObject$inboundSchema, {
+    M.jsonErr([401, 403, 404], errors.ErrorObject$inboundSchema, {
       ctype: "application/vnd.api+json",
     }),
     M.fail("4XX"),

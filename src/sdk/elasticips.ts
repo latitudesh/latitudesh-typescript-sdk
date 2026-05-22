@@ -19,8 +19,6 @@ export class ElasticIps extends ClientSDK {
    *
    * @remarks
    * List all Elastic IPs for the authenticated team. Elastic IPs are static public IP addresses that can be assigned to servers and moved between servers within the same project.
-   *
-   * **Note:** This feature requires the `elastic_ips` feature flag to be enabled for your team. When the flag is disabled, the endpoint returns an empty list.
    */
   async listElasticIps(
     request?: operations.ListElasticIpsRequest | undefined,
@@ -39,9 +37,7 @@ export class ElasticIps extends ClientSDK {
    * Create an Elastic IP
    *
    * @remarks
-   * Creates a new Elastic IP and assigns it to the specified server. The IP is provisioned asynchronously—the response will show status `configuring` and the `id` will be `null` until provisioning completes.
-   *
-   * **Note:** This feature requires the `elastic_ips` feature flag to be enabled for your team. Currently only IPv4 /32 addresses in routed mode are supported.
+   * Creates a new Elastic IP and assigns it to the specified server. The IP is provisioned asynchronously—the response will show status `configuring` and the `id` will be `null` until provisioning completes. Currently only IPv4 /32 addresses in routed mode are supported.
    */
   async createElasticIp(
     request: models.CreateElasticIp,
@@ -59,8 +55,6 @@ export class ElasticIps extends ClientSDK {
    *
    * @remarks
    * Returns a single Elastic IP by its ID.
-   *
-   * **Note:** This feature requires the `elastic_ips` feature flag to be enabled for your team.
    */
   async getElasticIp(
     request: operations.GetElasticIpRequest,
@@ -77,9 +71,7 @@ export class ElasticIps extends ClientSDK {
    * Release an Elastic IP
    *
    * @remarks
-   * Releases an Elastic IP, returning it to the available pool. The IP will transition to `releasing` status before being fully removed.
-   *
-   * **Note:** This feature requires the `elastic_ips` feature flag to be enabled for your team. Only Elastic IPs with status `active` or `error` can be released.
+   * Releases an Elastic IP, returning it to the available pool. The IP will transition to `releasing` status before being fully removed. Only Elastic IPs with status `active` or `error` can be released.
    */
   async deleteElasticIp(
     request: operations.DeleteElasticIpRequest,
@@ -96,9 +88,7 @@ export class ElasticIps extends ClientSDK {
    * Move an Elastic IP
    *
    * @remarks
-   * Moves an Elastic IP to a different server within the same project. The reassignment is performed asynchronously.
-   *
-   * **Note:** This feature requires the `elastic_ips` feature flag to be enabled for your team. The Elastic IP must be in `active` status and the target server must belong to the same project.
+   * Moves an Elastic IP to a different server within the same project and site. The reassignment is performed asynchronously. The Elastic IP must be in `active` status, the target server must belong to the same project, and the target server must be in the same site as the currently assigned server.
    */
   async updateElasticIp(
     request: operations.UpdateElasticIpRequest,

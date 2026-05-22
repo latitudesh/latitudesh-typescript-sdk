@@ -52,7 +52,7 @@ export const ElasticIpDataStatus = {
 export type ElasticIpDataStatus = ClosedEnum<typeof ElasticIpDataStatus>;
 
 /**
- * The server this Elastic IP is assigned to
+ * The server this Elastic IP is assigned to. Returns null when the Elastic IP is not assigned to a server or when the assigned server is not active (e.g., decommissioning or deleted).
  */
 export type ElasticIpDataServer = {
   id?: string | undefined;
@@ -132,7 +132,7 @@ export type ElasticIpDataAttributes = {
    */
   createdAt?: Date | undefined;
   /**
-   * The server this Elastic IP is assigned to
+   * The server this Elastic IP is assigned to. Returns null when the Elastic IP is not assigned to a server or when the assigned server is not active (e.g., decommissioning or deleted).
    */
   server?: ElasticIpDataServer | null | undefined;
   /**

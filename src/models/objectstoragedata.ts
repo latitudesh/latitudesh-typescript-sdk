@@ -66,9 +66,9 @@ export type ObjectStorageDataAttributes = {
    */
   endpoint?: string | undefined;
   /**
-   * S3 access key(s) for authentication
+   * S3 access key for authentication
    */
-  accessKey?: Array<string> | undefined;
+  accessKey?: string | undefined;
   /**
    * Region information where the object storage is located
    */
@@ -153,7 +153,7 @@ export const ObjectStorageDataAttributes$inboundSchema: z.ZodType<
   ).optional(),
   bucket_name: z.string().optional(),
   endpoint: z.string().optional(),
-  access_key: z.array(z.string()).optional(),
+  access_key: z.string().optional(),
   region: z.nullable(z.lazy(() => ObjectStorageDataRegion$inboundSchema))
     .optional(),
   project: ProjectInclude$inboundSchema.optional(),
@@ -173,7 +173,7 @@ export type ObjectStorageDataAttributes$Outbound = {
   created_at?: string | null | undefined;
   bucket_name?: string | undefined;
   endpoint?: string | undefined;
-  access_key?: Array<string> | undefined;
+  access_key?: string | undefined;
   region?: ObjectStorageDataRegion$Outbound | null | undefined;
   project?: ProjectInclude$Outbound | undefined;
   team?: TeamInclude$Outbound | undefined;
@@ -190,7 +190,7 @@ export const ObjectStorageDataAttributes$outboundSchema: z.ZodType<
   createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   bucketName: z.string().optional(),
   endpoint: z.string().optional(),
-  accessKey: z.array(z.string()).optional(),
+  accessKey: z.string().optional(),
   region: z.nullable(z.lazy(() => ObjectStorageDataRegion$outboundSchema))
     .optional(),
   project: ProjectInclude$outboundSchema.optional(),

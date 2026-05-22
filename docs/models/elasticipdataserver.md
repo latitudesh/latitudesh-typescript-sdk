@@ -1,6 +1,6 @@
 # ElasticIpDataServer
 
-The server this Elastic IP is assigned to
+The server this Elastic IP is assigned to. Returns null when the Elastic IP is not assigned to a server or when the assigned server is not active (e.g., decommissioning or deleted).
 
 ## Example Usage
 

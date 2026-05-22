@@ -18,6 +18,8 @@ export const tool$kubernetesClustersCreateKubernetesCluster: ToolDefinition<
 
 Creates a new managed Kubernetes cluster. Maximum of 1 cluster per project.
 
+**Note:** Only users with the \`owner\`, \`administrator\`, or \`collaborator\` role can create clusters. Users with the \`billing\` role cannot perform this action.
+
 Cluster names must follow Kubernetes naming rules: lowercase alphanumeric characters or hyphens, must start and end with an alphanumeric character, and be at most 63 characters long.
 `,
   args,

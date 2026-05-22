@@ -38,6 +38,9 @@ export type IpAddressRegion = {
   location?: IpAddressLocation | undefined;
 };
 
+/**
+ * Server assignment information. Returns an empty object when the IP is not assigned to an active server (e.g., when the server is decommissioning or deleted).
+ */
 export type Assignment = {
   serverId?: string | undefined;
   hostname?: string | undefined;
@@ -57,6 +60,9 @@ export type IpAddressAttributes = {
   project?: IpAddressProject | undefined;
   region?: IpAddressRegion | undefined;
   available?: boolean | undefined;
+  /**
+   * Server assignment information. Returns an empty object when the IP is not assigned to an active server (e.g., when the server is decommissioning or deleted).
+   */
   assignment?: Assignment | undefined;
 };
 

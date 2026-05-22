@@ -1,5 +1,7 @@
 # VirtualMachineAttributesCredentials
 
+SSH credentials for connecting to the virtual machine. Only available when the VM is running.
+
 ## Example Usage
 
 ```typescript
@@ -10,9 +12,9 @@ let value: VirtualMachineAttributesCredentials = {};
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `username`         | *string*           | :heavy_minus_sign: | N/A                |
-| `host`             | *string*           | :heavy_minus_sign: | N/A                |
-| `password`         | *string*           | :heavy_minus_sign: | N/A                |
-| `sshKeys`          | *string*[]         | :heavy_minus_sign: | N/A                |
+| Field                                                                                                                                            | Type                                                                                                                                             | Required                                                                                                                                         | Description                                                                                                                                      |
+| ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `username`                                                                                                                                       | *string*                                                                                                                                         | :heavy_minus_sign:                                                                                                                               | The SSH username for the VM, determined by the operating system (e.g., ubuntu, centos, ec2-user). Defaults to ubuntu if not specified by the OS. |
+| `host`                                                                                                                                           | *string*                                                                                                                                         | :heavy_minus_sign:                                                                                                                               | N/A                                                                                                                                              |
+| `password`                                                                                                                                       | *string*                                                                                                                                         | :heavy_minus_sign:                                                                                                                               | N/A                                                                                                                                              |
+| `sshKeys`                                                                                                                                        | *string*[]                                                                                                                                       | :heavy_minus_sign:                                                                                                                               | N/A                                                                                                                                              |

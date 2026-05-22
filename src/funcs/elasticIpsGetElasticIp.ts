@@ -32,8 +32,6 @@ import { Result } from "../types/fp.js";
  *
  * @remarks
  * Returns a single Elastic IP by its ID.
- *
- * **Note:** This feature requires the `elastic_ips` feature flag to be enabled for your team.
  */
 export function elasticIpsGetElasticIp(
   client: LatitudeshCore,
@@ -169,7 +167,7 @@ async function $do(
     M.json(200, models.ElasticIp$inboundSchema, {
       ctype: "application/vnd.api+json",
     }),
-    M.jsonErr([403, 404], errors.ErrorObject$inboundSchema, {
+    M.jsonErr(404, errors.ErrorObject$inboundSchema, {
       ctype: "application/vnd.api+json",
     }),
     M.fail("4XX"),
