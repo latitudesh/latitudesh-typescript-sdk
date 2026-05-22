@@ -218,6 +218,14 @@ run();
 
 * [listUsage](docs/sdks/billing/README.md#listusage) - Retrieve billing usage
 
+### [BlockStorage](docs/sdks/blockstorage/README.md)
+
+* [getStorageVolumes](docs/sdks/blockstorage/README.md#getstoragevolumes) - List volumes
+* [postStorageVolumes](docs/sdks/blockstorage/README.md#poststoragevolumes) - Create volume
+* [getStorageVolume](docs/sdks/blockstorage/README.md#getstoragevolume) - Retrieve volume
+* [deleteStorageVolumes](docs/sdks/blockstorage/README.md#deletestoragevolumes) - Delete volume
+* [postStorageVolumesMount](docs/sdks/blockstorage/README.md#poststoragevolumesmount) - Mount volume
+
 ### [ElasticIps](docs/sdks/elasticips/README.md)
 
 * [listElasticIps](docs/sdks/elasticips/README.md#listelasticips) - List Elastic IPs
@@ -229,6 +237,13 @@ run();
 ### [Events](docs/sdks/events/README.md)
 
 * [list](docs/sdks/events/README.md#list) - List events
+
+### [FilesystemStorage](docs/sdks/filesystemstorage/README.md)
+
+* [createFilesystem](docs/sdks/filesystemstorage/README.md#createfilesystem) - Create filesystem
+* [listFilesystems](docs/sdks/filesystemstorage/README.md#listfilesystems) - List filesystems
+* [deleteFilesystem](docs/sdks/filesystemstorage/README.md#deletefilesystem) - Delete filesystem
+* [updateFilesystem](docs/sdks/filesystemstorage/README.md#updatefilesystem) - Update filesystem
 
 ### [Firewalls](docs/sdks/firewalls/README.md)
 
@@ -259,6 +274,13 @@ run();
 * [deleteKubernetesCluster](docs/sdks/kubernetesclusters/README.md#deletekubernetescluster) - Delete a Kubernetes Cluster
 * [updateKubernetesCluster](docs/sdks/kubernetesclusters/README.md#updatekubernetescluster) - Update Kubernetes Cluster
 * [getKubernetesClusterKubeconfig](docs/sdks/kubernetesclusters/README.md#getkubernetesclusterkubeconfig) - Get Kubernetes Cluster Kubeconfig
+
+### [ObjectStorage](docs/sdks/objectstorage/README.md)
+
+* [getStorageObjects](docs/sdks/objectstorage/README.md#getstorageobjects) - List object storages
+* [postStorageObjects](docs/sdks/objectstorage/README.md#poststorageobjects) - Create object storage
+* [getStorageObject](docs/sdks/objectstorage/README.md#getstorageobject) - Retrieve object storage
+* [deleteStorageObjects](docs/sdks/objectstorage/README.md#deletestorageobjects) - Delete object storage
 
 ### [OperatingSystems](docs/sdks/operatingsystems/README.md)
 
@@ -339,22 +361,6 @@ run();
 * [retrieve](docs/sdks/sshkeys/README.md#retrieve) - Retrieve SSH Key
 * [update](docs/sdks/sshkeys/README.md#update) - Update SSH Key
 * [delete](docs/sdks/sshkeys/README.md#delete) - Delete SSH Key
-
-### [Storage](docs/sdks/storage/README.md)
-
-* [createFilesystem](docs/sdks/storage/README.md#createfilesystem) - Create filesystem
-* [listFilesystems](docs/sdks/storage/README.md#listfilesystems) - List filesystems
-* [deleteFilesystem](docs/sdks/storage/README.md#deletefilesystem) - Delete filesystem
-* [updateFilesystem](docs/sdks/storage/README.md#updatefilesystem) - Update filesystem
-* [getStorageVolumes](docs/sdks/storage/README.md#getstoragevolumes) - List volumes
-* [postStorageVolumes](docs/sdks/storage/README.md#poststoragevolumes) - Create volume
-* [getStorageVolume](docs/sdks/storage/README.md#getstoragevolume) - Retrieve volume
-* [deleteStorageVolumes](docs/sdks/storage/README.md#deletestoragevolumes) - Delete volume
-* [postStorageVolumesMount](docs/sdks/storage/README.md#poststoragevolumesmount) - Mount volume
-* [getStorageObjects](docs/sdks/storage/README.md#getstorageobjects) - List object storages
-* [postStorageObjects](docs/sdks/storage/README.md#poststorageobjects) - Create object storage
-* [getStorageObject](docs/sdks/storage/README.md#getstorageobject) - Retrieve object storage
-* [deleteStorageObjects](docs/sdks/storage/README.md#deletestorageobjects) - Delete object storage
 
 ### [Tags](docs/sdks/tags/README.md)
 
@@ -446,12 +452,21 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`apiKeysUpdate`](docs/sdks/apikeys/README.md#update) - Rotate API key
 - [`apiKeysUpdateApiKey`](docs/sdks/apikeys/README.md#updateapikey) - Update API key settings
 - [`billingListUsage`](docs/sdks/billing/README.md#listusage) - Retrieve billing usage
+- [`blockStorageDeleteStorageVolumes`](docs/sdks/blockstorage/README.md#deletestoragevolumes) - Delete volume
+- [`blockStorageGetStorageVolume`](docs/sdks/blockstorage/README.md#getstoragevolume) - Retrieve volume
+- [`blockStorageGetStorageVolumes`](docs/sdks/blockstorage/README.md#getstoragevolumes) - List volumes
+- [`blockStoragePostStorageVolumes`](docs/sdks/blockstorage/README.md#poststoragevolumes) - Create volume
+- [`blockStoragePostStorageVolumesMount`](docs/sdks/blockstorage/README.md#poststoragevolumesmount) - Mount volume
 - [`elasticIpsCreateElasticIp`](docs/sdks/elasticips/README.md#createelasticip) - Create an Elastic IP
 - [`elasticIpsDeleteElasticIp`](docs/sdks/elasticips/README.md#deleteelasticip) - Release an Elastic IP
 - [`elasticIpsGetElasticIp`](docs/sdks/elasticips/README.md#getelasticip) - Retrieve an Elastic IP
 - [`elasticIpsListElasticIps`](docs/sdks/elasticips/README.md#listelasticips) - List Elastic IPs
 - [`elasticIpsUpdateElasticIp`](docs/sdks/elasticips/README.md#updateelasticip) - Move an Elastic IP
 - [`eventsList`](docs/sdks/events/README.md#list) - List events
+- [`filesystemStorageCreateFilesystem`](docs/sdks/filesystemstorage/README.md#createfilesystem) - Create filesystem
+- [`filesystemStorageDeleteFilesystem`](docs/sdks/filesystemstorage/README.md#deletefilesystem) - Delete filesystem
+- [`filesystemStorageListFilesystems`](docs/sdks/filesystemstorage/README.md#listfilesystems) - List filesystems
+- [`filesystemStorageUpdateFilesystem`](docs/sdks/filesystemstorage/README.md#updatefilesystem) - Update filesystem
 - [`firewallsAssignmentsCreate`](docs/sdks/assignments/README.md#create) - Assign server to firewall
 - [`firewallsCreate`](docs/sdks/firewalls/README.md#create) - Create firewall
 - [`firewallsDelete`](docs/sdks/firewalls/README.md#delete) - Delete firewall
@@ -470,6 +485,10 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`kubernetesClustersListKubernetesAvailableVersions`](docs/sdks/kubernetesclusters/README.md#listkubernetesavailableversions) - List Available Kubernetes Versions
 - [`kubernetesClustersListKubernetesClusters`](docs/sdks/kubernetesclusters/README.md#listkubernetesclusters) - List Kubernetes Clusters
 - [`kubernetesClustersUpdateKubernetesCluster`](docs/sdks/kubernetesclusters/README.md#updatekubernetescluster) - Update Kubernetes Cluster
+- [`objectStorageDeleteStorageObjects`](docs/sdks/objectstorage/README.md#deletestorageobjects) - Delete object storage
+- [`objectStorageGetStorageObject`](docs/sdks/objectstorage/README.md#getstorageobject) - Retrieve object storage
+- [`objectStorageGetStorageObjects`](docs/sdks/objectstorage/README.md#getstorageobjects) - List object storages
+- [`objectStoragePostStorageObjects`](docs/sdks/objectstorage/README.md#poststorageobjects) - Create object storage
 - [`operatingSystemsListPlans`](docs/sdks/operatingsystems/README.md#listplans) - List operating systems
 - [`plansGet`](docs/sdks/plans/README.md#get) - Retrieve plan
 - [`plansGetBandwidth`](docs/sdks/plans/README.md#getbandwidth) - List bandwidth plans
@@ -515,19 +534,6 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`sshKeysListAll`](docs/sdks/sshkeys/README.md#listall) - List SSH Keys
 - [`sshKeysRetrieve`](docs/sdks/sshkeys/README.md#retrieve) - Retrieve SSH Key
 - [`sshKeysUpdate`](docs/sdks/sshkeys/README.md#update) - Update SSH Key
-- [`storageCreateFilesystem`](docs/sdks/storage/README.md#createfilesystem) - Create filesystem
-- [`storageDeleteFilesystem`](docs/sdks/storage/README.md#deletefilesystem) - Delete filesystem
-- [`storageDeleteStorageObjects`](docs/sdks/storage/README.md#deletestorageobjects) - Delete object storage
-- [`storageDeleteStorageVolumes`](docs/sdks/storage/README.md#deletestoragevolumes) - Delete volume
-- [`storageGetStorageObject`](docs/sdks/storage/README.md#getstorageobject) - Retrieve object storage
-- [`storageGetStorageObjects`](docs/sdks/storage/README.md#getstorageobjects) - List object storages
-- [`storageGetStorageVolume`](docs/sdks/storage/README.md#getstoragevolume) - Retrieve volume
-- [`storageGetStorageVolumes`](docs/sdks/storage/README.md#getstoragevolumes) - List volumes
-- [`storageListFilesystems`](docs/sdks/storage/README.md#listfilesystems) - List filesystems
-- [`storagePostStorageObjects`](docs/sdks/storage/README.md#poststorageobjects) - Create object storage
-- [`storagePostStorageVolumes`](docs/sdks/storage/README.md#poststoragevolumes) - Create volume
-- [`storagePostStorageVolumesMount`](docs/sdks/storage/README.md#poststoragevolumesmount) - Mount volume
-- [`storageUpdateFilesystem`](docs/sdks/storage/README.md#updatefilesystem) - Update filesystem
 - [`tagsCreate`](docs/sdks/tags/README.md#create) - Create tag
 - [`tagsDelete`](docs/sdks/tags/README.md#delete) - Delete tag
 - [`tagsList`](docs/sdks/tags/README.md#list) - List tags

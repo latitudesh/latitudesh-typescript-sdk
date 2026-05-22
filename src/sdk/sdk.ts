@@ -5,11 +5,14 @@
 import { ClientSDK } from "../lib/sdks.js";
 import { ApiKeys } from "./apikeys.js";
 import { Billing } from "./billing.js";
+import { BlockStorage } from "./blockstorage.js";
 import { ElasticIps } from "./elasticips.js";
 import { Events } from "./events.js";
+import { FilesystemStorage } from "./filesystemstorage.js";
 import { Firewalls } from "./firewalls.js";
 import { IpAddresses } from "./ipaddresses.js";
 import { KubernetesClusters } from "./kubernetesclusters.js";
+import { ObjectStorage } from "./objectstorage.js";
 import { OperatingSystems } from "./operatingsystems.js";
 import { Plans } from "./plans.js";
 import { PrivateNetworks } from "./privatenetworks.js";
@@ -18,7 +21,6 @@ import { Regions } from "./regions.js";
 import { Roles } from "./roles.js";
 import { Servers } from "./servers.js";
 import { SSHKeys } from "./sshkeys.js";
-import { Storage } from "./storage.js";
 import { Tags } from "./tags.js";
 import { TeamMembers } from "./teammembers.js";
 import { Teams } from "./teams.js";
@@ -115,9 +117,19 @@ export class Latitudesh extends ClientSDK {
     return (this._servers ??= new Servers(this._options));
   }
 
-  private _storage?: Storage;
-  get storage(): Storage {
-    return (this._storage ??= new Storage(this._options));
+  private _filesystemStorage?: FilesystemStorage;
+  get filesystemStorage(): FilesystemStorage {
+    return (this._filesystemStorage ??= new FilesystemStorage(this._options));
+  }
+
+  private _blockStorage?: BlockStorage;
+  get blockStorage(): BlockStorage {
+    return (this._blockStorage ??= new BlockStorage(this._options));
+  }
+
+  private _objectStorage?: ObjectStorage;
+  get objectStorage(): ObjectStorage {
+    return (this._objectStorage ??= new ObjectStorage(this._options));
   }
 
   private _tags?: Tags;

@@ -110,6 +110,35 @@ export const CreateServerRaid2 = {
  */
 export type CreateServerRaid2 = ClosedEnum<typeof CreateServerRaid2>;
 
+export const CreateServerRole2 = {
+  Os: "os",
+  Storage: "storage",
+  Raw: "raw",
+} as const;
+export type CreateServerRole2 = ClosedEnum<typeof CreateServerRole2>;
+
+export const CreateServerRaidLevel2 = {
+  Raid0: "raid-0",
+  Raid1: "raid-1",
+} as const;
+export type CreateServerRaidLevel2 = ClosedEnum<typeof CreateServerRaidLevel2>;
+
+export const CreateServerFilesystem2 = {
+  Ext4: "ext4",
+  Xfs: "xfs",
+} as const;
+export type CreateServerFilesystem2 = ClosedEnum<
+  typeof CreateServerFilesystem2
+>;
+
+export type CreateServerDiskLayout2 = {
+  count: number;
+  role: CreateServerRole2;
+  raidLevel?: CreateServerRaidLevel2 | null | undefined;
+  filesystem?: CreateServerFilesystem2 | null | undefined;
+  mountPoint?: string | null | undefined;
+};
+
 /**
  * The server billing type. Accepts `hourly` and `monthly` for on demand projects and `yearly` for reserved projects.
  */
@@ -156,6 +185,7 @@ export type CreateServerAttributes2 = {
    * RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, or omit/null for no RAID configuration
    */
   raid?: CreateServerRaid2 | null | undefined;
+  diskLayout?: Array<CreateServerDiskLayout2> | null | undefined;
   /**
    * URL where iPXE script is stored on, OR the iPXE script encoded in base64. This attribute is required when iPXE is selected as operating system.
    */
@@ -220,6 +250,94 @@ export const CreateServerRaid2$outboundSchema: z.ZodNativeEnum<
 > = CreateServerRaid2$inboundSchema;
 
 /** @internal */
+export const CreateServerRole2$inboundSchema: z.ZodNativeEnum<
+  typeof CreateServerRole2
+> = z.nativeEnum(CreateServerRole2);
+/** @internal */
+export const CreateServerRole2$outboundSchema: z.ZodNativeEnum<
+  typeof CreateServerRole2
+> = CreateServerRole2$inboundSchema;
+
+/** @internal */
+export const CreateServerRaidLevel2$inboundSchema: z.ZodNativeEnum<
+  typeof CreateServerRaidLevel2
+> = z.nativeEnum(CreateServerRaidLevel2);
+/** @internal */
+export const CreateServerRaidLevel2$outboundSchema: z.ZodNativeEnum<
+  typeof CreateServerRaidLevel2
+> = CreateServerRaidLevel2$inboundSchema;
+
+/** @internal */
+export const CreateServerFilesystem2$inboundSchema: z.ZodNativeEnum<
+  typeof CreateServerFilesystem2
+> = z.nativeEnum(CreateServerFilesystem2);
+/** @internal */
+export const CreateServerFilesystem2$outboundSchema: z.ZodNativeEnum<
+  typeof CreateServerFilesystem2
+> = CreateServerFilesystem2$inboundSchema;
+
+/** @internal */
+export const CreateServerDiskLayout2$inboundSchema: z.ZodType<
+  CreateServerDiskLayout2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  count: z.number().int(),
+  role: CreateServerRole2$inboundSchema,
+  raid_level: z.nullable(CreateServerRaidLevel2$inboundSchema).optional(),
+  filesystem: z.nullable(CreateServerFilesystem2$inboundSchema).optional(),
+  mount_point: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "raid_level": "raidLevel",
+    "mount_point": "mountPoint",
+  });
+});
+/** @internal */
+export type CreateServerDiskLayout2$Outbound = {
+  count: number;
+  role: string;
+  raid_level?: string | null | undefined;
+  filesystem?: string | null | undefined;
+  mount_point?: string | null | undefined;
+};
+
+/** @internal */
+export const CreateServerDiskLayout2$outboundSchema: z.ZodType<
+  CreateServerDiskLayout2$Outbound,
+  z.ZodTypeDef,
+  CreateServerDiskLayout2
+> = z.object({
+  count: z.number().int(),
+  role: CreateServerRole2$outboundSchema,
+  raidLevel: z.nullable(CreateServerRaidLevel2$outboundSchema).optional(),
+  filesystem: z.nullable(CreateServerFilesystem2$outboundSchema).optional(),
+  mountPoint: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    raidLevel: "raid_level",
+    mountPoint: "mount_point",
+  });
+});
+
+export function createServerDiskLayout2ToJSON(
+  createServerDiskLayout2: CreateServerDiskLayout2,
+): string {
+  return JSON.stringify(
+    CreateServerDiskLayout2$outboundSchema.parse(createServerDiskLayout2),
+  );
+}
+export function createServerDiskLayout2FromJSON(
+  jsonString: string,
+): SafeParseResult<CreateServerDiskLayout2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateServerDiskLayout2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateServerDiskLayout2' from JSON`,
+  );
+}
+
+/** @internal */
 export const CreateServerBilling2$inboundSchema: z.ZodNativeEnum<
   typeof CreateServerBilling2
 > = z.nativeEnum(CreateServerBilling2);
@@ -242,6 +360,9 @@ export const CreateServerAttributes2$inboundSchema: z.ZodType<
   ssh_keys: z.nullable(z.array(z.string())).optional(),
   user_data: z.nullable(z.string()).optional(),
   raid: z.nullable(CreateServerRaid2$inboundSchema).optional(),
+  disk_layout: z.nullable(
+    z.array(z.lazy(() => CreateServerDiskLayout2$inboundSchema)),
+  ).optional(),
   ipxe: z.nullable(z.string()).optional(),
   billing: z.nullable(CreateServerBilling2$inboundSchema).optional(),
 }).transform((v) => {
@@ -249,6 +370,7 @@ export const CreateServerAttributes2$inboundSchema: z.ZodType<
     "operating_system": "operatingSystem",
     "ssh_keys": "sshKeys",
     "user_data": "userData",
+    "disk_layout": "diskLayout",
   });
 });
 /** @internal */
@@ -261,6 +383,7 @@ export type CreateServerAttributes2$Outbound = {
   ssh_keys?: Array<string> | null | undefined;
   user_data?: string | null | undefined;
   raid?: string | null | undefined;
+  disk_layout?: Array<CreateServerDiskLayout2$Outbound> | null | undefined;
   ipxe?: string | null | undefined;
   billing?: string | null | undefined;
 };
@@ -279,6 +402,9 @@ export const CreateServerAttributes2$outboundSchema: z.ZodType<
   sshKeys: z.nullable(z.array(z.string())).optional(),
   userData: z.nullable(z.string()).optional(),
   raid: z.nullable(CreateServerRaid2$outboundSchema).optional(),
+  diskLayout: z.nullable(
+    z.array(z.lazy(() => CreateServerDiskLayout2$outboundSchema)),
+  ).optional(),
   ipxe: z.nullable(z.string()).optional(),
   billing: z.nullable(CreateServerBilling2$outboundSchema).optional(),
 }).transform((v) => {
@@ -286,6 +412,7 @@ export const CreateServerAttributes2$outboundSchema: z.ZodType<
     operatingSystem: "operating_system",
     sshKeys: "ssh_keys",
     userData: "user_data",
+    diskLayout: "disk_layout",
   });
 });
 

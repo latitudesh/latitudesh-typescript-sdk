@@ -63,6 +63,39 @@ export type CreateServerReinstallRaid2 = ClosedEnum<
   typeof CreateServerReinstallRaid2
 >;
 
+export const CreateServerReinstallRole2 = {
+  Os: "os",
+  Storage: "storage",
+  Raw: "raw",
+} as const;
+export type CreateServerReinstallRole2 = ClosedEnum<
+  typeof CreateServerReinstallRole2
+>;
+
+export const CreateServerReinstallRaidLevel2 = {
+  Raid0: "raid-0",
+  Raid1: "raid-1",
+} as const;
+export type CreateServerReinstallRaidLevel2 = ClosedEnum<
+  typeof CreateServerReinstallRaidLevel2
+>;
+
+export const CreateServerReinstallFilesystem2 = {
+  Ext4: "ext4",
+  Xfs: "xfs",
+} as const;
+export type CreateServerReinstallFilesystem2 = ClosedEnum<
+  typeof CreateServerReinstallFilesystem2
+>;
+
+export type CreateServerReinstallDiskLayout2 = {
+  count: number;
+  role: CreateServerReinstallRole2;
+  raidLevel?: CreateServerReinstallRaidLevel2 | null | undefined;
+  filesystem?: CreateServerReinstallFilesystem2 | null | undefined;
+  mountPoint?: string | null | undefined;
+};
+
 export type CreateServerReinstallAttributes2 = {
   /**
    * The OS selected for the reinstall process
@@ -85,6 +118,7 @@ export type CreateServerReinstallAttributes2 = {
    * RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, or omit/null for no RAID configuration
    */
   raid?: CreateServerReinstallRaid2 | null | undefined;
+  diskLayout?: Array<CreateServerReinstallDiskLayout2> | null | undefined;
   /**
    * URL where iPXE script is stored on, OR the iPXE script encoded in base64. This attribute is required when operating system iPXE is selected.
    */
@@ -191,6 +225,100 @@ export const CreateServerReinstallRaid2$outboundSchema: z.ZodNativeEnum<
 > = CreateServerReinstallRaid2$inboundSchema;
 
 /** @internal */
+export const CreateServerReinstallRole2$inboundSchema: z.ZodNativeEnum<
+  typeof CreateServerReinstallRole2
+> = z.nativeEnum(CreateServerReinstallRole2);
+/** @internal */
+export const CreateServerReinstallRole2$outboundSchema: z.ZodNativeEnum<
+  typeof CreateServerReinstallRole2
+> = CreateServerReinstallRole2$inboundSchema;
+
+/** @internal */
+export const CreateServerReinstallRaidLevel2$inboundSchema: z.ZodNativeEnum<
+  typeof CreateServerReinstallRaidLevel2
+> = z.nativeEnum(CreateServerReinstallRaidLevel2);
+/** @internal */
+export const CreateServerReinstallRaidLevel2$outboundSchema: z.ZodNativeEnum<
+  typeof CreateServerReinstallRaidLevel2
+> = CreateServerReinstallRaidLevel2$inboundSchema;
+
+/** @internal */
+export const CreateServerReinstallFilesystem2$inboundSchema: z.ZodNativeEnum<
+  typeof CreateServerReinstallFilesystem2
+> = z.nativeEnum(CreateServerReinstallFilesystem2);
+/** @internal */
+export const CreateServerReinstallFilesystem2$outboundSchema: z.ZodNativeEnum<
+  typeof CreateServerReinstallFilesystem2
+> = CreateServerReinstallFilesystem2$inboundSchema;
+
+/** @internal */
+export const CreateServerReinstallDiskLayout2$inboundSchema: z.ZodType<
+  CreateServerReinstallDiskLayout2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  count: z.number().int(),
+  role: CreateServerReinstallRole2$inboundSchema,
+  raid_level: z.nullable(CreateServerReinstallRaidLevel2$inboundSchema)
+    .optional(),
+  filesystem: z.nullable(CreateServerReinstallFilesystem2$inboundSchema)
+    .optional(),
+  mount_point: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "raid_level": "raidLevel",
+    "mount_point": "mountPoint",
+  });
+});
+/** @internal */
+export type CreateServerReinstallDiskLayout2$Outbound = {
+  count: number;
+  role: string;
+  raid_level?: string | null | undefined;
+  filesystem?: string | null | undefined;
+  mount_point?: string | null | undefined;
+};
+
+/** @internal */
+export const CreateServerReinstallDiskLayout2$outboundSchema: z.ZodType<
+  CreateServerReinstallDiskLayout2$Outbound,
+  z.ZodTypeDef,
+  CreateServerReinstallDiskLayout2
+> = z.object({
+  count: z.number().int(),
+  role: CreateServerReinstallRole2$outboundSchema,
+  raidLevel: z.nullable(CreateServerReinstallRaidLevel2$outboundSchema)
+    .optional(),
+  filesystem: z.nullable(CreateServerReinstallFilesystem2$outboundSchema)
+    .optional(),
+  mountPoint: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    raidLevel: "raid_level",
+    mountPoint: "mount_point",
+  });
+});
+
+export function createServerReinstallDiskLayout2ToJSON(
+  createServerReinstallDiskLayout2: CreateServerReinstallDiskLayout2,
+): string {
+  return JSON.stringify(
+    CreateServerReinstallDiskLayout2$outboundSchema.parse(
+      createServerReinstallDiskLayout2,
+    ),
+  );
+}
+export function createServerReinstallDiskLayout2FromJSON(
+  jsonString: string,
+): SafeParseResult<CreateServerReinstallDiskLayout2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateServerReinstallDiskLayout2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateServerReinstallDiskLayout2' from JSON`,
+  );
+}
+
+/** @internal */
 export const CreateServerReinstallAttributes2$inboundSchema: z.ZodType<
   CreateServerReinstallAttributes2,
   z.ZodTypeDef,
@@ -205,12 +333,16 @@ export const CreateServerReinstallAttributes2$inboundSchema: z.ZodType<
   ssh_keys: z.nullable(z.array(z.string())).optional(),
   user_data: z.nullable(z.string()).optional(),
   raid: z.nullable(CreateServerReinstallRaid2$inboundSchema).optional(),
+  disk_layout: z.nullable(
+    z.array(z.lazy(() => CreateServerReinstallDiskLayout2$inboundSchema)),
+  ).optional(),
   ipxe: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "operating_system": "operatingSystem",
     "ssh_keys": "sshKeys",
     "user_data": "userData",
+    "disk_layout": "diskLayout",
   });
 });
 /** @internal */
@@ -224,6 +356,10 @@ export type CreateServerReinstallAttributes2$Outbound = {
   ssh_keys?: Array<string> | null | undefined;
   user_data?: string | null | undefined;
   raid?: string | null | undefined;
+  disk_layout?:
+    | Array<CreateServerReinstallDiskLayout2$Outbound>
+    | null
+    | undefined;
   ipxe?: string | null | undefined;
 };
 
@@ -242,12 +378,16 @@ export const CreateServerReinstallAttributes2$outboundSchema: z.ZodType<
   sshKeys: z.nullable(z.array(z.string())).optional(),
   userData: z.nullable(z.string()).optional(),
   raid: z.nullable(CreateServerReinstallRaid2$outboundSchema).optional(),
+  diskLayout: z.nullable(
+    z.array(z.lazy(() => CreateServerReinstallDiskLayout2$outboundSchema)),
+  ).optional(),
   ipxe: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     operatingSystem: "operating_system",
     sshKeys: "ssh_keys",
     userData: "user_data",
+    diskLayout: "disk_layout",
   });
 });
 

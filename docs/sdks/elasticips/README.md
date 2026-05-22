@@ -14,8 +14,6 @@
 
 List all Elastic IPs for the authenticated team. Elastic IPs are static public IP addresses that can be assigned to servers and moved between servers within the same project.
 
-**Note:** This feature requires the `elastic_ips` feature flag to be enabled for your team. When the flag is disabled, the endpoint returns an empty list.
-
 
 ### Example Usage
 
@@ -88,9 +86,7 @@ run();
 
 ## createElasticIp
 
-Creates a new Elastic IP and assigns it to the specified server. The IP is provisioned asynchronously—the response will show status `configuring` and the `id` will be `null` until provisioning completes.
-
-**Note:** This feature requires the `elastic_ips` feature flag to be enabled for your team. Currently only IPv4 /32 addresses in routed mode are supported.
+Creates a new Elastic IP and assigns it to the specified server. The IP is provisioned asynchronously—the response will show status `configuring` and the `id` will be `null` until provisioning completes. Currently only IPv4 /32 addresses in routed mode are supported.
 
 
 ### Example Usage: Accepted
@@ -276,6 +272,250 @@ async function run() {
 
 run();
 ```
+### Example Usage: IpAllocationFailed
+
+<!-- UsageSnippet language="typescript" operationID="create-elastic-ip" method="post" path="/elastic_ips" example="IpAllocationFailed" -->
+```typescript
+import { Latitudesh } from "latitudesh-typescript-sdk";
+
+const latitudesh = new Latitudesh({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const result = await latitudesh.elasticIps.createElasticIp({
+    data: {
+      type: "elastic_ips",
+      attributes: {
+        projectId: "<id>",
+        serverId: "<id>",
+      },
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
+import { elasticIpsCreateElasticIp } from "latitudesh-typescript-sdk/funcs/elasticIpsCreateElasticIp.js";
+
+// Use `LatitudeshCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const latitudesh = new LatitudeshCore({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const res = await elasticIpsCreateElasticIp(latitudesh, {
+    data: {
+      type: "elastic_ips",
+      attributes: {
+        projectId: "<id>",
+        serverId: "<id>",
+      },
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("elasticIpsCreateElasticIp failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: ServerNetworkIncompatible
+
+<!-- UsageSnippet language="typescript" operationID="create-elastic-ip" method="post" path="/elastic_ips" example="ServerNetworkIncompatible" -->
+```typescript
+import { Latitudesh } from "latitudesh-typescript-sdk";
+
+const latitudesh = new Latitudesh({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const result = await latitudesh.elasticIps.createElasticIp({
+    data: {
+      type: "elastic_ips",
+      attributes: {
+        projectId: "<id>",
+        serverId: "<id>",
+      },
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
+import { elasticIpsCreateElasticIp } from "latitudesh-typescript-sdk/funcs/elasticIpsCreateElasticIp.js";
+
+// Use `LatitudeshCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const latitudesh = new LatitudeshCore({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const res = await elasticIpsCreateElasticIp(latitudesh, {
+    data: {
+      type: "elastic_ips",
+      attributes: {
+        projectId: "<id>",
+        serverId: "<id>",
+      },
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("elasticIpsCreateElasticIp failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: ServerNotInProject
+
+<!-- UsageSnippet language="typescript" operationID="create-elastic-ip" method="post" path="/elastic_ips" example="ServerNotInProject" -->
+```typescript
+import { Latitudesh } from "latitudesh-typescript-sdk";
+
+const latitudesh = new Latitudesh({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const result = await latitudesh.elasticIps.createElasticIp({
+    data: {
+      type: "elastic_ips",
+      attributes: {
+        projectId: "<id>",
+        serverId: "<id>",
+      },
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
+import { elasticIpsCreateElasticIp } from "latitudesh-typescript-sdk/funcs/elasticIpsCreateElasticIp.js";
+
+// Use `LatitudeshCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const latitudesh = new LatitudeshCore({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const res = await elasticIpsCreateElasticIp(latitudesh, {
+    data: {
+      type: "elastic_ips",
+      attributes: {
+        projectId: "<id>",
+        serverId: "<id>",
+      },
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("elasticIpsCreateElasticIp failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: SiteNotSupported
+
+<!-- UsageSnippet language="typescript" operationID="create-elastic-ip" method="post" path="/elastic_ips" example="SiteNotSupported" -->
+```typescript
+import { Latitudesh } from "latitudesh-typescript-sdk";
+
+const latitudesh = new Latitudesh({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const result = await latitudesh.elasticIps.createElasticIp({
+    data: {
+      type: "elastic_ips",
+      attributes: {
+        projectId: "<id>",
+        serverId: "<id>",
+      },
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
+import { elasticIpsCreateElasticIp } from "latitudesh-typescript-sdk/funcs/elasticIpsCreateElasticIp.js";
+
+// Use `LatitudeshCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const latitudesh = new LatitudeshCore({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const res = await elasticIpsCreateElasticIp(latitudesh, {
+    data: {
+      type: "elastic_ips",
+      attributes: {
+        projectId: "<id>",
+        serverId: "<id>",
+      },
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("elasticIpsCreateElasticIp failed:", res.error);
+  }
+}
+
+run();
+```
 
 ### Parameters
 
@@ -294,14 +534,12 @@ run();
 
 | Error Type                    | Status Code                   | Content Type                  |
 | ----------------------------- | ----------------------------- | ----------------------------- |
-| errors.ErrorObject            | 403, 422                      | application/vnd.api+json      |
+| errors.ErrorObject            | 422                           | application/vnd.api+json      |
 | errors.LatitudeshDefaultError | 4XX, 5XX                      | \*/\*                         |
 
 ## getElasticIp
 
 Returns a single Elastic IP by its ID.
-
-**Note:** This feature requires the `elastic_ips` feature flag to be enabled for your team.
 
 
 ### Example Usage
@@ -371,14 +609,12 @@ run();
 
 | Error Type                    | Status Code                   | Content Type                  |
 | ----------------------------- | ----------------------------- | ----------------------------- |
-| errors.ErrorObject            | 403, 404                      | application/vnd.api+json      |
+| errors.ErrorObject            | 404                           | application/vnd.api+json      |
 | errors.LatitudeshDefaultError | 4XX, 5XX                      | \*/\*                         |
 
 ## deleteElasticIp
 
-Releases an Elastic IP, returning it to the available pool. The IP will transition to `releasing` status before being fully removed.
-
-**Note:** This feature requires the `elastic_ips` feature flag to be enabled for your team. Only Elastic IPs with status `active` or `error` can be released.
+Releases an Elastic IP, returning it to the available pool. The IP will transition to `releasing` status before being fully removed. Only Elastic IPs with status `active` or `error` can be released.
 
 
 ### Example Usage
@@ -448,14 +684,12 @@ run();
 
 | Error Type                    | Status Code                   | Content Type                  |
 | ----------------------------- | ----------------------------- | ----------------------------- |
-| errors.ErrorObject            | 403, 404, 422                 | application/vnd.api+json      |
+| errors.ErrorObject            | 404, 422                      | application/vnd.api+json      |
 | errors.LatitudeshDefaultError | 4XX, 5XX                      | \*/\*                         |
 
 ## updateElasticIp
 
-Moves an Elastic IP to a different server within the same project. The reassignment is performed asynchronously.
-
-**Note:** This feature requires the `elastic_ips` feature flag to be enabled for your team. The Elastic IP must be in `active` status and the target server must belong to the same project.
+Moves an Elastic IP to a different server within the same project and site. The reassignment is performed asynchronously. The Elastic IP must be in `active` status, the target server must belong to the same project, and the target server must be in the same site as the currently assigned server.
 
 
 ### Example Usage: FeatureNotEnabled
@@ -671,5 +905,5 @@ run();
 
 | Error Type                    | Status Code                   | Content Type                  |
 | ----------------------------- | ----------------------------- | ----------------------------- |
-| errors.ErrorObject            | 403, 404, 422                 | application/vnd.api+json      |
+| errors.ErrorObject            | 404, 422                      | application/vnd.api+json      |
 | errors.LatitudeshDefaultError | 4XX, 5XX                      | \*/\*                         |

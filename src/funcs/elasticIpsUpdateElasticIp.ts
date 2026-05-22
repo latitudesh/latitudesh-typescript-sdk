@@ -31,9 +31,7 @@ import { Result } from "../types/fp.js";
  * Move an Elastic IP
  *
  * @remarks
- * Moves an Elastic IP to a different server within the same project. The reassignment is performed asynchronously.
- *
- * **Note:** This feature requires the `elastic_ips` feature flag to be enabled for your team. The Elastic IP must be in `active` status and the target server must belong to the same project.
+ * Moves an Elastic IP to a different server within the same project and site. The reassignment is performed asynchronously. The Elastic IP must be in `active` status, the target server must belong to the same project, and the target server must be in the same site as the currently assigned server.
  */
 export function elasticIpsUpdateElasticIp(
   client: LatitudeshCore,
@@ -170,7 +168,7 @@ async function $do(
     M.json(202, models.ElasticIp$inboundSchema, {
       ctype: "application/vnd.api+json",
     }),
-    M.jsonErr([403, 404, 422], errors.ErrorObject$inboundSchema, {
+    M.jsonErr([404, 422], errors.ErrorObject$inboundSchema, {
       ctype: "application/vnd.api+json",
     }),
     M.fail("4XX"),

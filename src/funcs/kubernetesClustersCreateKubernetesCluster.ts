@@ -32,6 +32,8 @@ import { Result } from "../types/fp.js";
  * @remarks
  * Creates a new managed Kubernetes cluster. Maximum of 1 cluster per project.
  *
+ * **Note:** Only users with the `owner`, `administrator`, or `collaborator` role can create clusters. Users with the `billing` role cannot perform this action.
+ *
  * Cluster names must follow Kubernetes naming rules: lowercase alphanumeric characters or hyphens, must start and end with an alphanumeric character, and be at most 63 characters long.
  */
 export function kubernetesClustersCreateKubernetesCluster(
@@ -163,7 +165,7 @@ async function $do(
     M.json(201, models.KubernetesClusterCreateResponse$inboundSchema, {
       ctype: "application/vnd.api+json",
     }),
-    M.jsonErr([400, 422], errors.ErrorObject$inboundSchema, {
+    M.jsonErr([400, 403, 422], errors.ErrorObject$inboundSchema, {
       ctype: "application/vnd.api+json",
     }),
     M.jsonErr(503, errors.ErrorObject$inboundSchema, {

@@ -51,6 +51,39 @@ export type UpdateServerDeployConfigRaid2 = ClosedEnum<
   typeof UpdateServerDeployConfigRaid2
 >;
 
+export const UpdateServerDeployConfigRole2 = {
+  Os: "os",
+  Storage: "storage",
+  Raw: "raw",
+} as const;
+export type UpdateServerDeployConfigRole2 = ClosedEnum<
+  typeof UpdateServerDeployConfigRole2
+>;
+
+export const UpdateServerDeployConfigRaidLevel2 = {
+  Raid0: "raid-0",
+  Raid1: "raid-1",
+} as const;
+export type UpdateServerDeployConfigRaidLevel2 = ClosedEnum<
+  typeof UpdateServerDeployConfigRaidLevel2
+>;
+
+export const UpdateServerDeployConfigFilesystem2 = {
+  Ext4: "ext4",
+  Xfs: "xfs",
+} as const;
+export type UpdateServerDeployConfigFilesystem2 = ClosedEnum<
+  typeof UpdateServerDeployConfigFilesystem2
+>;
+
+export type UpdateServerDeployConfigDiskLayout2 = {
+  count: number;
+  role: UpdateServerDeployConfigRole2;
+  raidLevel?: UpdateServerDeployConfigRaidLevel2 | null | undefined;
+  filesystem?: UpdateServerDeployConfigFilesystem2 | null | undefined;
+  mountPoint?: string | null | undefined;
+};
+
 export type UpdateServerDeployConfigPartition2 = {
   sizeInGb?: number | undefined;
   path?: string | undefined;
@@ -64,6 +97,7 @@ export type UpdateServerDeployConfigAttributes2 = {
    * RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, or omit/null for no RAID configuration
    */
   raid?: UpdateServerDeployConfigRaid2 | null | undefined;
+  diskLayout?: Array<UpdateServerDeployConfigDiskLayout2> | null | undefined;
   /**
    * User data to configure the server
    */
@@ -115,6 +149,101 @@ export const UpdateServerDeployConfigRaid2$inboundSchema: z.ZodNativeEnum<
 export const UpdateServerDeployConfigRaid2$outboundSchema: z.ZodNativeEnum<
   typeof UpdateServerDeployConfigRaid2
 > = UpdateServerDeployConfigRaid2$inboundSchema;
+
+/** @internal */
+export const UpdateServerDeployConfigRole2$inboundSchema: z.ZodNativeEnum<
+  typeof UpdateServerDeployConfigRole2
+> = z.nativeEnum(UpdateServerDeployConfigRole2);
+/** @internal */
+export const UpdateServerDeployConfigRole2$outboundSchema: z.ZodNativeEnum<
+  typeof UpdateServerDeployConfigRole2
+> = UpdateServerDeployConfigRole2$inboundSchema;
+
+/** @internal */
+export const UpdateServerDeployConfigRaidLevel2$inboundSchema: z.ZodNativeEnum<
+  typeof UpdateServerDeployConfigRaidLevel2
+> = z.nativeEnum(UpdateServerDeployConfigRaidLevel2);
+/** @internal */
+export const UpdateServerDeployConfigRaidLevel2$outboundSchema: z.ZodNativeEnum<
+  typeof UpdateServerDeployConfigRaidLevel2
+> = UpdateServerDeployConfigRaidLevel2$inboundSchema;
+
+/** @internal */
+export const UpdateServerDeployConfigFilesystem2$inboundSchema: z.ZodNativeEnum<
+  typeof UpdateServerDeployConfigFilesystem2
+> = z.nativeEnum(UpdateServerDeployConfigFilesystem2);
+/** @internal */
+export const UpdateServerDeployConfigFilesystem2$outboundSchema:
+  z.ZodNativeEnum<typeof UpdateServerDeployConfigFilesystem2> =
+    UpdateServerDeployConfigFilesystem2$inboundSchema;
+
+/** @internal */
+export const UpdateServerDeployConfigDiskLayout2$inboundSchema: z.ZodType<
+  UpdateServerDeployConfigDiskLayout2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  count: z.number().int(),
+  role: UpdateServerDeployConfigRole2$inboundSchema,
+  raid_level: z.nullable(UpdateServerDeployConfigRaidLevel2$inboundSchema)
+    .optional(),
+  filesystem: z.nullable(UpdateServerDeployConfigFilesystem2$inboundSchema)
+    .optional(),
+  mount_point: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "raid_level": "raidLevel",
+    "mount_point": "mountPoint",
+  });
+});
+/** @internal */
+export type UpdateServerDeployConfigDiskLayout2$Outbound = {
+  count: number;
+  role: string;
+  raid_level?: string | null | undefined;
+  filesystem?: string | null | undefined;
+  mount_point?: string | null | undefined;
+};
+
+/** @internal */
+export const UpdateServerDeployConfigDiskLayout2$outboundSchema: z.ZodType<
+  UpdateServerDeployConfigDiskLayout2$Outbound,
+  z.ZodTypeDef,
+  UpdateServerDeployConfigDiskLayout2
+> = z.object({
+  count: z.number().int(),
+  role: UpdateServerDeployConfigRole2$outboundSchema,
+  raidLevel: z.nullable(UpdateServerDeployConfigRaidLevel2$outboundSchema)
+    .optional(),
+  filesystem: z.nullable(UpdateServerDeployConfigFilesystem2$outboundSchema)
+    .optional(),
+  mountPoint: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    raidLevel: "raid_level",
+    mountPoint: "mount_point",
+  });
+});
+
+export function updateServerDeployConfigDiskLayout2ToJSON(
+  updateServerDeployConfigDiskLayout2: UpdateServerDeployConfigDiskLayout2,
+): string {
+  return JSON.stringify(
+    UpdateServerDeployConfigDiskLayout2$outboundSchema.parse(
+      updateServerDeployConfigDiskLayout2,
+    ),
+  );
+}
+export function updateServerDeployConfigDiskLayout2FromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateServerDeployConfigDiskLayout2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateServerDeployConfigDiskLayout2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateServerDeployConfigDiskLayout2' from JSON`,
+  );
+}
 
 /** @internal */
 export const UpdateServerDeployConfigPartition2$inboundSchema: z.ZodType<
@@ -185,6 +314,9 @@ export const UpdateServerDeployConfigAttributes2$inboundSchema: z.ZodType<
     UpdateServerDeployConfigOperatingSystem2$inboundSchema,
   ).optional(),
   raid: z.nullable(UpdateServerDeployConfigRaid2$inboundSchema).optional(),
+  disk_layout: z.nullable(
+    z.array(z.lazy(() => UpdateServerDeployConfigDiskLayout2$inboundSchema)),
+  ).optional(),
   user_data: z.nullable(z.string()).optional(),
   ssh_keys: z.nullable(z.array(z.string())).optional(),
   partitions: z.nullable(
@@ -194,6 +326,7 @@ export const UpdateServerDeployConfigAttributes2$inboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     "operating_system": "operatingSystem",
+    "disk_layout": "diskLayout",
     "user_data": "userData",
     "ssh_keys": "sshKeys",
     "ipxe_url": "ipxeUrl",
@@ -204,6 +337,10 @@ export type UpdateServerDeployConfigAttributes2$Outbound = {
   hostname?: string | null | undefined;
   operating_system?: string | null | undefined;
   raid?: string | null | undefined;
+  disk_layout?:
+    | Array<UpdateServerDeployConfigDiskLayout2$Outbound>
+    | null
+    | undefined;
   user_data?: string | null | undefined;
   ssh_keys?: Array<string> | null | undefined;
   partitions?:
@@ -224,6 +361,9 @@ export const UpdateServerDeployConfigAttributes2$outboundSchema: z.ZodType<
     UpdateServerDeployConfigOperatingSystem2$outboundSchema,
   ).optional(),
   raid: z.nullable(UpdateServerDeployConfigRaid2$outboundSchema).optional(),
+  diskLayout: z.nullable(
+    z.array(z.lazy(() => UpdateServerDeployConfigDiskLayout2$outboundSchema)),
+  ).optional(),
   userData: z.nullable(z.string()).optional(),
   sshKeys: z.nullable(z.array(z.string())).optional(),
   partitions: z.nullable(
@@ -233,6 +373,7 @@ export const UpdateServerDeployConfigAttributes2$outboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     operatingSystem: "operating_system",
+    diskLayout: "disk_layout",
     userData: "user_data",
     sshKeys: "ssh_keys",
     ipxeUrl: "ipxe_url",

@@ -19,12 +19,21 @@ import { tool$apiKeysList } from "./tools/apiKeysList.js";
 import { tool$apiKeysUpdate } from "./tools/apiKeysUpdate.js";
 import { tool$apiKeysUpdateApiKey } from "./tools/apiKeysUpdateApiKey.js";
 import { tool$billingListUsage } from "./tools/billingListUsage.js";
+import { tool$blockStorageDeleteStorageVolumes } from "./tools/blockStorageDeleteStorageVolumes.js";
+import { tool$blockStorageGetStorageVolume } from "./tools/blockStorageGetStorageVolume.js";
+import { tool$blockStorageGetStorageVolumes } from "./tools/blockStorageGetStorageVolumes.js";
+import { tool$blockStoragePostStorageVolumes } from "./tools/blockStoragePostStorageVolumes.js";
+import { tool$blockStoragePostStorageVolumesMount } from "./tools/blockStoragePostStorageVolumesMount.js";
 import { tool$elasticIpsCreateElasticIp } from "./tools/elasticIpsCreateElasticIp.js";
 import { tool$elasticIpsDeleteElasticIp } from "./tools/elasticIpsDeleteElasticIp.js";
 import { tool$elasticIpsGetElasticIp } from "./tools/elasticIpsGetElasticIp.js";
 import { tool$elasticIpsListElasticIps } from "./tools/elasticIpsListElasticIps.js";
 import { tool$elasticIpsUpdateElasticIp } from "./tools/elasticIpsUpdateElasticIp.js";
 import { tool$eventsList } from "./tools/eventsList.js";
+import { tool$filesystemStorageCreateFilesystem } from "./tools/filesystemStorageCreateFilesystem.js";
+import { tool$filesystemStorageDeleteFilesystem } from "./tools/filesystemStorageDeleteFilesystem.js";
+import { tool$filesystemStorageListFilesystems } from "./tools/filesystemStorageListFilesystems.js";
+import { tool$filesystemStorageUpdateFilesystem } from "./tools/filesystemStorageUpdateFilesystem.js";
 import { tool$firewallsAssignmentsCreate } from "./tools/firewallsAssignmentsCreate.js";
 import { tool$firewallsCreate } from "./tools/firewallsCreate.js";
 import { tool$firewallsDelete } from "./tools/firewallsDelete.js";
@@ -43,6 +52,10 @@ import { tool$kubernetesClustersGetKubernetesClusterKubeconfig } from "./tools/k
 import { tool$kubernetesClustersListKubernetesAvailableVersions } from "./tools/kubernetesClustersListKubernetesAvailableVersions.js";
 import { tool$kubernetesClustersListKubernetesClusters } from "./tools/kubernetesClustersListKubernetesClusters.js";
 import { tool$kubernetesClustersUpdateKubernetesCluster } from "./tools/kubernetesClustersUpdateKubernetesCluster.js";
+import { tool$objectStorageDeleteStorageObjects } from "./tools/objectStorageDeleteStorageObjects.js";
+import { tool$objectStorageGetStorageObject } from "./tools/objectStorageGetStorageObject.js";
+import { tool$objectStorageGetStorageObjects } from "./tools/objectStorageGetStorageObjects.js";
+import { tool$objectStoragePostStorageObjects } from "./tools/objectStoragePostStorageObjects.js";
 import { tool$operatingSystemsListPlans } from "./tools/operatingSystemsListPlans.js";
 import { tool$plansGet } from "./tools/plansGet.js";
 import { tool$plansGetBandwidth } from "./tools/plansGetBandwidth.js";
@@ -93,19 +106,6 @@ import { tool$sshKeysModifyProjectKey } from "./tools/sshKeysModifyProjectKey.js
 import { tool$sshKeysRemoveFromProject } from "./tools/sshKeysRemoveFromProject.js";
 import { tool$sshKeysRetrieve } from "./tools/sshKeysRetrieve.js";
 import { tool$sshKeysUpdate } from "./tools/sshKeysUpdate.js";
-import { tool$storageCreateFilesystem } from "./tools/storageCreateFilesystem.js";
-import { tool$storageDeleteFilesystem } from "./tools/storageDeleteFilesystem.js";
-import { tool$storageDeleteStorageObjects } from "./tools/storageDeleteStorageObjects.js";
-import { tool$storageDeleteStorageVolumes } from "./tools/storageDeleteStorageVolumes.js";
-import { tool$storageGetStorageObject } from "./tools/storageGetStorageObject.js";
-import { tool$storageGetStorageObjects } from "./tools/storageGetStorageObjects.js";
-import { tool$storageGetStorageVolume } from "./tools/storageGetStorageVolume.js";
-import { tool$storageGetStorageVolumes } from "./tools/storageGetStorageVolumes.js";
-import { tool$storageListFilesystems } from "./tools/storageListFilesystems.js";
-import { tool$storagePostStorageObjects } from "./tools/storagePostStorageObjects.js";
-import { tool$storagePostStorageVolumes } from "./tools/storagePostStorageVolumes.js";
-import { tool$storagePostStorageVolumesMount } from "./tools/storagePostStorageVolumesMount.js";
-import { tool$storageUpdateFilesystem } from "./tools/storageUpdateFilesystem.js";
 import { tool$tagsCreate } from "./tools/tagsCreate.js";
 import { tool$tagsDelete } from "./tools/tagsDelete.js";
 import { tool$tagsList } from "./tools/tagsList.js";
@@ -154,7 +154,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Latitudesh",
-    version: "0.3.10",
+    version: "0.4.0",
   });
 
   const client = new LatitudeshCore({
@@ -270,19 +270,19 @@ export function createMCPServer(deps: {
   tool(tool$serversScheduleDeletion);
   tool(tool$serversUnscheduleDeletion);
   tool(tool$serversReinstall);
-  tool(tool$storageCreateFilesystem);
-  tool(tool$storageListFilesystems);
-  tool(tool$storageDeleteFilesystem);
-  tool(tool$storageUpdateFilesystem);
-  tool(tool$storageGetStorageVolumes);
-  tool(tool$storagePostStorageVolumes);
-  tool(tool$storageGetStorageVolume);
-  tool(tool$storageDeleteStorageVolumes);
-  tool(tool$storagePostStorageVolumesMount);
-  tool(tool$storageGetStorageObjects);
-  tool(tool$storagePostStorageObjects);
-  tool(tool$storageGetStorageObject);
-  tool(tool$storageDeleteStorageObjects);
+  tool(tool$filesystemStorageCreateFilesystem);
+  tool(tool$filesystemStorageListFilesystems);
+  tool(tool$filesystemStorageDeleteFilesystem);
+  tool(tool$filesystemStorageUpdateFilesystem);
+  tool(tool$blockStorageGetStorageVolumes);
+  tool(tool$blockStoragePostStorageVolumes);
+  tool(tool$blockStorageGetStorageVolume);
+  tool(tool$blockStorageDeleteStorageVolumes);
+  tool(tool$blockStoragePostStorageVolumesMount);
+  tool(tool$objectStorageGetStorageObjects);
+  tool(tool$objectStoragePostStorageObjects);
+  tool(tool$objectStorageGetStorageObject);
+  tool(tool$objectStorageDeleteStorageObjects);
   tool(tool$tagsList);
   tool(tool$tagsCreate);
   tool(tool$tagsUpdate);

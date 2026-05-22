@@ -102,7 +102,13 @@ export type VirtualMachineAttributesOperatingSystem = {
   distro?: VirtualMachineAttributesDistro | undefined;
 };
 
+/**
+ * SSH credentials for connecting to the virtual machine. Only available when the VM is running.
+ */
 export type VirtualMachineAttributesCredentials = {
+  /**
+   * The SSH username for the VM, determined by the operating system (e.g., ubuntu, centos, ec2-user). Defaults to ubuntu if not specified by the OS.
+   */
   username?: string | undefined;
   host?: string | undefined;
   password?: string | undefined;
@@ -131,6 +137,9 @@ export type VirtualMachineAttributesAttributes = {
    * The operating system installed on the virtual machine
    */
   operatingSystem?: VirtualMachineAttributesOperatingSystem | null | undefined;
+  /**
+   * SSH credentials for connecting to the virtual machine. Only available when the VM is running.
+   */
   credentials?: VirtualMachineAttributesCredentials | null | undefined;
   plan?: VirtualMachineAttributesPlan | undefined;
   specs?: VirtualMachineAttributesSpecs | undefined;
