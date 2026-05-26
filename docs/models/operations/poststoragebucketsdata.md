@@ -1,11 +1,11 @@
-# PostStorageObjectsData
+# PostStorageBucketsData
 
 ## Example Usage
 
 ```typescript
-import { PostStorageObjectsData } from "latitudesh-typescript-sdk/models/operations";
+import { PostStorageBucketsData } from "latitudesh-typescript-sdk/models/operations";
 
-let value: PostStorageObjectsData = {
+let value: PostStorageBucketsData = {
   type: "objects",
   attributes: {
     project: "<value>",
@@ -19,5 +19,5 @@ let value: PostStorageObjectsData = {
 
 | Field                                                                                              | Type                                                                                               | Required                                                                                           | Description                                                                                        |
 | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| `type`                                                                                             | [operations.PostStorageObjectsType](../../models/operations/poststorageobjectstype.md)             | :heavy_check_mark:                                                                                 | N/A                                                                                                |
-| `attributes`                                                                                       | [operations.PostStorageObjectsAttributes](../../models/operations/poststorageobjectsattributes.md) | :heavy_check_mark:                                                                                 | N/A                                                                                                |
+| `type`                                                                                             | [operations.PostStorageBucketsType](../../models/operations/poststoragebucketstype.md)             | :heavy_check_mark:                                                                                 | N/A                                                                                                |
+| `attributes`                                                                                       | [operations.PostStorageBucketsAttributes](../../models/operations/poststoragebucketsattributes.md) | :heavy_check_mark:                                                                                 | N/A                                                                                                |

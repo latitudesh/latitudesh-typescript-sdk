@@ -1,13 +1,13 @@
-# PostStorageObjectsResponse
+# PostStorageBucketsResponse
 
 Created
 
 ## Example Usage
 
 ```typescript
-import { PostStorageObjectsResponse } from "latitudesh-typescript-sdk/models/operations";
+import { PostStorageBucketsResponse } from "latitudesh-typescript-sdk/models/operations";
 
-let value: PostStorageObjectsResponse = {};
+let value: PostStorageBucketsResponse = {};
 ```
 
 ## Fields

@@ -1,11 +1,11 @@
-# GetStorageObjectRequest
+# DeleteStorageBucketsRequest
 
 ## Example Usage
 
 ```typescript
-import { GetStorageObjectRequest } from "latitudesh-typescript-sdk/models/operations";
+import { DeleteStorageBucketsRequest } from "latitudesh-typescript-sdk/models/operations";
 
-let value: GetStorageObjectRequest = {
+let value: DeleteStorageBucketsRequest = {
   id: "<id>",
 };
 ```

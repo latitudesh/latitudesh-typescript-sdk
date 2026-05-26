@@ -27,6 +27,31 @@ export const ObjectStorageDataType = {
 export type ObjectStorageDataType = ClosedEnum<typeof ObjectStorageDataType>;
 
 /**
+ * Storage class tier
+ */
+export const StorageClass = {
+  Standard: "standard",
+  HighPerformance: "high_performance",
+} as const;
+/**
+ * Storage class tier
+ */
+export type StorageClass = ClosedEnum<typeof StorageClass>;
+
+/**
+ * Object lock retention mode
+ */
+export const RetentionMode = {
+  None: "NONE",
+  Compliance: "COMPLIANCE",
+  Governance: "GOVERNANCE",
+} as const;
+/**
+ * Object lock retention mode
+ */
+export type RetentionMode = ClosedEnum<typeof RetentionMode>;
+
+/**
  * Region information where the object storage is located
  */
 export type ObjectStorageDataRegion = {
@@ -50,9 +75,13 @@ export type ObjectStorageDataAttributes = {
    */
   name?: string | undefined;
   /**
-   * Storage capacity in gigabytes
+   * Type of storage (e.g., `object`)
    */
-  sizeInGb?: number | undefined;
+  storageType?: string | undefined;
+  /**
+   * Storage class tier
+   */
+  storageClass?: StorageClass | undefined;
   /**
    * Timestamp when the object storage was created
    */
@@ -68,7 +97,27 @@ export type ObjectStorageDataAttributes = {
   /**
    * S3 access key for authentication
    */
-  accessKey?: string | undefined;
+  accessKey?: string | null | undefined;
+  /**
+   * S3 secret key for authentication
+   */
+  secretKey?: string | null | undefined;
+  /**
+   * Whether bucket versioning is enabled
+   */
+  versioning?: boolean | null | undefined;
+  /**
+   * Whether object lock is enabled on the bucket
+   */
+  locking?: boolean | null | undefined;
+  /**
+   * Object lock retention mode
+   */
+  retentionMode?: RetentionMode | null | undefined;
+  /**
+   * Default retention period in days when object lock is enabled
+   */
+  retentionPeriod?: number | null | undefined;
   /**
    * Region information where the object storage is located
    */
@@ -94,6 +143,22 @@ export const ObjectStorageDataType$inboundSchema: z.ZodNativeEnum<
 export const ObjectStorageDataType$outboundSchema: z.ZodNativeEnum<
   typeof ObjectStorageDataType
 > = ObjectStorageDataType$inboundSchema;
+
+/** @internal */
+export const StorageClass$inboundSchema: z.ZodNativeEnum<typeof StorageClass> =
+  z.nativeEnum(StorageClass);
+/** @internal */
+export const StorageClass$outboundSchema: z.ZodNativeEnum<typeof StorageClass> =
+  StorageClass$inboundSchema;
+
+/** @internal */
+export const RetentionMode$inboundSchema: z.ZodNativeEnum<
+  typeof RetentionMode
+> = z.nativeEnum(RetentionMode);
+/** @internal */
+export const RetentionMode$outboundSchema: z.ZodNativeEnum<
+  typeof RetentionMode
+> = RetentionMode$inboundSchema;
 
 /** @internal */
 export const ObjectStorageDataRegion$inboundSchema: z.ZodType<
@@ -147,33 +212,49 @@ export const ObjectStorageDataAttributes$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   name: z.string().optional(),
-  size_in_gb: z.number().int().optional(),
+  storage_type: z.string().optional(),
+  storage_class: StorageClass$inboundSchema.optional(),
   created_at: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
   bucket_name: z.string().optional(),
   endpoint: z.string().optional(),
-  access_key: z.string().optional(),
+  access_key: z.nullable(z.string()).optional(),
+  secret_key: z.nullable(z.string()).optional(),
+  versioning: z.nullable(z.boolean()).optional(),
+  locking: z.nullable(z.boolean()).optional(),
+  retention_mode: z.nullable(RetentionMode$inboundSchema).optional(),
+  retention_period: z.nullable(z.number().int()).optional(),
   region: z.nullable(z.lazy(() => ObjectStorageDataRegion$inboundSchema))
     .optional(),
   project: ProjectInclude$inboundSchema.optional(),
   team: TeamInclude$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
-    "size_in_gb": "sizeInGb",
+    "storage_type": "storageType",
+    "storage_class": "storageClass",
     "created_at": "createdAt",
     "bucket_name": "bucketName",
     "access_key": "accessKey",
+    "secret_key": "secretKey",
+    "retention_mode": "retentionMode",
+    "retention_period": "retentionPeriod",
   });
 });
 /** @internal */
 export type ObjectStorageDataAttributes$Outbound = {
   name?: string | undefined;
-  size_in_gb?: number | undefined;
+  storage_type?: string | undefined;
+  storage_class?: string | undefined;
   created_at?: string | null | undefined;
   bucket_name?: string | undefined;
   endpoint?: string | undefined;
-  access_key?: string | undefined;
+  access_key?: string | null | undefined;
+  secret_key?: string | null | undefined;
+  versioning?: boolean | null | undefined;
+  locking?: boolean | null | undefined;
+  retention_mode?: string | null | undefined;
+  retention_period?: number | null | undefined;
   region?: ObjectStorageDataRegion$Outbound | null | undefined;
   project?: ProjectInclude$Outbound | undefined;
   team?: TeamInclude$Outbound | undefined;
@@ -186,21 +267,31 @@ export const ObjectStorageDataAttributes$outboundSchema: z.ZodType<
   ObjectStorageDataAttributes
 > = z.object({
   name: z.string().optional(),
-  sizeInGb: z.number().int().optional(),
+  storageType: z.string().optional(),
+  storageClass: StorageClass$outboundSchema.optional(),
   createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   bucketName: z.string().optional(),
   endpoint: z.string().optional(),
-  accessKey: z.string().optional(),
+  accessKey: z.nullable(z.string()).optional(),
+  secretKey: z.nullable(z.string()).optional(),
+  versioning: z.nullable(z.boolean()).optional(),
+  locking: z.nullable(z.boolean()).optional(),
+  retentionMode: z.nullable(RetentionMode$outboundSchema).optional(),
+  retentionPeriod: z.nullable(z.number().int()).optional(),
   region: z.nullable(z.lazy(() => ObjectStorageDataRegion$outboundSchema))
     .optional(),
   project: ProjectInclude$outboundSchema.optional(),
   team: TeamInclude$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
-    sizeInGb: "size_in_gb",
+    storageType: "storage_type",
+    storageClass: "storage_class",
     createdAt: "created_at",
     bucketName: "bucket_name",
     accessKey: "access_key",
+    secretKey: "secret_key",
+    retentionMode: "retention_mode",
+    retentionPeriod: "retention_period",
   });
 });
 

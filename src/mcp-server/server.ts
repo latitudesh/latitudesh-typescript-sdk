@@ -52,10 +52,10 @@ import { tool$kubernetesClustersGetKubernetesClusterKubeconfig } from "./tools/k
 import { tool$kubernetesClustersListKubernetesAvailableVersions } from "./tools/kubernetesClustersListKubernetesAvailableVersions.js";
 import { tool$kubernetesClustersListKubernetesClusters } from "./tools/kubernetesClustersListKubernetesClusters.js";
 import { tool$kubernetesClustersUpdateKubernetesCluster } from "./tools/kubernetesClustersUpdateKubernetesCluster.js";
-import { tool$objectStorageDeleteStorageObjects } from "./tools/objectStorageDeleteStorageObjects.js";
-import { tool$objectStorageGetStorageObject } from "./tools/objectStorageGetStorageObject.js";
-import { tool$objectStorageGetStorageObjects } from "./tools/objectStorageGetStorageObjects.js";
-import { tool$objectStoragePostStorageObjects } from "./tools/objectStoragePostStorageObjects.js";
+import { tool$objectStorageDeleteStorageBuckets } from "./tools/objectStorageDeleteStorageBuckets.js";
+import { tool$objectStorageGetStorageBucket } from "./tools/objectStorageGetStorageBucket.js";
+import { tool$objectStorageGetStorageBuckets } from "./tools/objectStorageGetStorageBuckets.js";
+import { tool$objectStoragePostStorageBuckets } from "./tools/objectStoragePostStorageBuckets.js";
 import { tool$operatingSystemsListPlans } from "./tools/operatingSystemsListPlans.js";
 import { tool$plansGet } from "./tools/plansGet.js";
 import { tool$plansGetBandwidth } from "./tools/plansGetBandwidth.js";
@@ -154,7 +154,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Latitudesh",
-    version: "0.4.0",
+    version: "0.4.1",
   });
 
   const client = new LatitudeshCore({
@@ -279,10 +279,10 @@ export function createMCPServer(deps: {
   tool(tool$blockStorageGetStorageVolume);
   tool(tool$blockStorageDeleteStorageVolumes);
   tool(tool$blockStoragePostStorageVolumesMount);
-  tool(tool$objectStorageGetStorageObjects);
-  tool(tool$objectStoragePostStorageObjects);
-  tool(tool$objectStorageGetStorageObject);
-  tool(tool$objectStorageDeleteStorageObjects);
+  tool(tool$objectStorageGetStorageBuckets);
+  tool(tool$objectStoragePostStorageBuckets);
+  tool(tool$objectStorageGetStorageBucket);
+  tool(tool$objectStorageDeleteStorageBuckets);
   tool(tool$tagsList);
   tool(tool$tagsCreate);
   tool(tool$tagsUpdate);

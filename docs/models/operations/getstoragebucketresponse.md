@@ -1,13 +1,13 @@
-# GetStorageObjectResponse
+# GetStorageBucketResponse
 
 Success
 
 ## Example Usage
 
 ```typescript
-import { GetStorageObjectResponse } from "latitudesh-typescript-sdk/models/operations";
+import { GetStorageBucketResponse } from "latitudesh-typescript-sdk/models/operations";
 
-let value: GetStorageObjectResponse = {};
+let value: GetStorageBucketResponse = {};
 ```
 
 ## Fields

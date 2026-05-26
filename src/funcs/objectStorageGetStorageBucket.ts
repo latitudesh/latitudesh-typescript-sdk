@@ -3,7 +3,7 @@
  */
 
 import { LatitudeshCore } from "../core.js";
-import { encodeFormQuery } from "../lib/encodings.js";
+import { encodeSimple } from "../lib/encodings.js";
 import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
@@ -22,24 +22,23 @@ import * as errors from "../models/errors/index.js";
 import { LatitudeshError } from "../models/errors/latitudesherror.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as models from "../models/index.js";
 import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * List object storages
+ * Retrieve object storage
  *
  * @remarks
- * Lists all object storages from a team.
+ * Shows details of a specific object storage.
  */
-export function objectStorageGetStorageObjects(
+export function objectStorageGetStorageBucket(
   client: LatitudeshCore,
-  request?: operations.GetStorageObjectsRequest | undefined,
+  request: operations.GetStorageBucketRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    models.ObjectStorages,
+    operations.GetStorageBucketResponse,
     | errors.ErrorObject
     | LatitudeshError
     | ResponseValidationError
@@ -60,12 +59,12 @@ export function objectStorageGetStorageObjects(
 
 async function $do(
   client: LatitudeshCore,
-  request?: operations.GetStorageObjectsRequest | undefined,
+  request: operations.GetStorageBucketRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      models.ObjectStorages,
+      operations.GetStorageBucketResponse,
       | errors.ErrorObject
       | LatitudeshError
       | ResponseValidationError
@@ -81,10 +80,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) =>
-      operations.GetStorageObjectsRequest$outboundSchema.optional().parse(
-        value,
-      ),
+    (value) => operations.GetStorageBucketRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -93,11 +89,13 @@ async function $do(
   const payload = parsed.value;
   const body = null;
 
-  const path = pathToFunc("/storage/objects")();
-
-  const query = encodeFormQuery({
-    "filter[project]": payload?.["filter[project]"],
-  });
+  const pathParams = {
+    id: encodeSimple("id", payload.id, {
+      explode: false,
+      charEncoding: "percent",
+    }),
+  };
+  const path = pathToFunc("/storage/buckets/{id}")(pathParams);
 
   const headers = new Headers(compactMap({
     Accept: "application/vnd.api+json",
@@ -110,7 +108,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "get-storage-objects",
+    operationID: "get-storage-bucket",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -128,7 +126,6 @@ async function $do(
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
-    query: query,
     body: body,
     userAgent: client._options.userAgent,
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
@@ -155,7 +152,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    models.ObjectStorages,
+    operations.GetStorageBucketResponse,
     | errors.ErrorObject
     | LatitudeshError
     | ResponseValidationError
@@ -166,10 +163,10 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, models.ObjectStorages$inboundSchema, {
+    M.json(200, operations.GetStorageBucketResponse$inboundSchema, {
       ctype: "application/vnd.api+json",
     }),
-    M.jsonErr(403, errors.ErrorObject$inboundSchema, {
+    M.jsonErr([403, 404], errors.ErrorObject$inboundSchema, {
       ctype: "application/vnd.api+json",
     }),
     M.fail("4XX"),

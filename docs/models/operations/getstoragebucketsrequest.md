@@ -1,11 +1,11 @@
-# GetStorageObjectsRequest
+# GetStorageBucketsRequest
 
 ## Example Usage
 
 ```typescript
-import { GetStorageObjectsRequest } from "latitudesh-typescript-sdk/models/operations";
+import { GetStorageBucketsRequest } from "latitudesh-typescript-sdk/models/operations";
 
-let value: GetStorageObjectsRequest = {};
+let value: GetStorageBucketsRequest = {};
 ```
 
 ## Fields
