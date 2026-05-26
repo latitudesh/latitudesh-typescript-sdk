@@ -4,18 +4,18 @@
 
 ### Available Operations
 
-* [getStorageObjects](#getstorageobjects) - List object storages
-* [postStorageObjects](#poststorageobjects) - Create object storage
-* [getStorageObject](#getstorageobject) - Retrieve object storage
-* [deleteStorageObjects](#deletestorageobjects) - Delete object storage
+* [getStorageBuckets](#getstoragebuckets) - List object storages
+* [postStorageBuckets](#poststoragebuckets) - Create object storage
+* [getStorageBucket](#getstoragebucket) - Retrieve object storage
+* [deleteStorageBuckets](#deletestoragebuckets) - Delete object storage
 
-## getStorageObjects
+## getStorageBuckets
 
 Lists all object storages from a team.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-storage-objects" method="get" path="/storage/objects" example="Success" -->
+<!-- UsageSnippet language="typescript" operationID="get-storage-buckets" method="get" path="/storage/buckets" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -24,7 +24,7 @@ const latitudesh = new Latitudesh({
 });
 
 async function run() {
-  const result = await latitudesh.objectStorage.getStorageObjects();
+  const result = await latitudesh.objectStorage.getStorageBuckets();
 
   console.log(result);
 }
@@ -38,7 +38,7 @@ The standalone function version of this method:
 
 ```typescript
 import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
-import { objectStorageGetStorageObjects } from "latitudesh-typescript-sdk/funcs/objectStorageGetStorageObjects.js";
+import { objectStorageGetStorageBuckets } from "latitudesh-typescript-sdk/funcs/objectStorageGetStorageBuckets.js";
 
 // Use `LatitudeshCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -47,12 +47,12 @@ const latitudesh = new LatitudeshCore({
 });
 
 async function run() {
-  const res = await objectStorageGetStorageObjects(latitudesh);
+  const res = await objectStorageGetStorageBuckets(latitudesh);
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("objectStorageGetStorageObjects failed:", res.error);
+    console.log("objectStorageGetStorageBuckets failed:", res.error);
   }
 }
 
@@ -63,7 +63,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.GetStorageObjectsRequest](../../models/operations/getstorageobjectsrequest.md)                                                                                     | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.GetStorageBucketsRequest](../../models/operations/getstoragebucketsrequest.md)                                                                                     | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
@@ -79,13 +79,13 @@ run();
 | errors.ErrorObject            | 403                           | application/vnd.api+json      |
 | errors.LatitudeshDefaultError | 4XX, 5XX                      | \*/\*                         |
 
-## postStorageObjects
+## postStorageBuckets
 
 Creates a new object storage bucket for a project.
 
 ### Example Usage: Create
 
-<!-- UsageSnippet language="typescript" operationID="post-storage-objects" method="post" path="/storage/objects" example="Create" -->
+<!-- UsageSnippet language="typescript" operationID="post-storage-buckets" method="post" path="/storage/buckets" example="Create" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -94,7 +94,7 @@ const latitudesh = new Latitudesh({
 });
 
 async function run() {
-  const result = await latitudesh.objectStorage.postStorageObjects({
+  const result = await latitudesh.objectStorage.postStorageBuckets({
     data: {
       type: "objects",
       attributes: {
@@ -117,7 +117,7 @@ The standalone function version of this method:
 
 ```typescript
 import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
-import { objectStoragePostStorageObjects } from "latitudesh-typescript-sdk/funcs/objectStoragePostStorageObjects.js";
+import { objectStoragePostStorageBuckets } from "latitudesh-typescript-sdk/funcs/objectStoragePostStorageBuckets.js";
 
 // Use `LatitudeshCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -126,7 +126,7 @@ const latitudesh = new LatitudeshCore({
 });
 
 async function run() {
-  const res = await objectStoragePostStorageObjects(latitudesh, {
+  const res = await objectStoragePostStorageBuckets(latitudesh, {
     data: {
       type: "objects",
       attributes: {
@@ -140,7 +140,7 @@ async function run() {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("objectStoragePostStorageObjects failed:", res.error);
+    console.log("objectStoragePostStorageBuckets failed:", res.error);
   }
 }
 
@@ -148,7 +148,7 @@ run();
 ```
 ### Example Usage: CreateScoped
 
-<!-- UsageSnippet language="typescript" operationID="post-storage-objects" method="post" path="/storage/objects" example="CreateScoped" -->
+<!-- UsageSnippet language="typescript" operationID="post-storage-buckets" method="post" path="/storage/buckets" example="CreateScoped" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -157,7 +157,7 @@ const latitudesh = new Latitudesh({
 });
 
 async function run() {
-  const result = await latitudesh.objectStorage.postStorageObjects({
+  const result = await latitudesh.objectStorage.postStorageBuckets({
     data: {
       type: "objects",
       attributes: {
@@ -182,7 +182,7 @@ The standalone function version of this method:
 
 ```typescript
 import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
-import { objectStoragePostStorageObjects } from "latitudesh-typescript-sdk/funcs/objectStoragePostStorageObjects.js";
+import { objectStoragePostStorageBuckets } from "latitudesh-typescript-sdk/funcs/objectStoragePostStorageBuckets.js";
 
 // Use `LatitudeshCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -191,7 +191,7 @@ const latitudesh = new LatitudeshCore({
 });
 
 async function run() {
-  const res = await objectStoragePostStorageObjects(latitudesh, {
+  const res = await objectStoragePostStorageBuckets(latitudesh, {
     data: {
       type: "objects",
       attributes: {
@@ -207,7 +207,7 @@ async function run() {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("objectStoragePostStorageObjects failed:", res.error);
+    console.log("objectStoragePostStorageBuckets failed:", res.error);
   }
 }
 
@@ -215,7 +215,7 @@ run();
 ```
 ### Example Usage: Created
 
-<!-- UsageSnippet language="typescript" operationID="post-storage-objects" method="post" path="/storage/objects" example="Created" -->
+<!-- UsageSnippet language="typescript" operationID="post-storage-buckets" method="post" path="/storage/buckets" example="Created" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -224,7 +224,7 @@ const latitudesh = new Latitudesh({
 });
 
 async function run() {
-  const result = await latitudesh.objectStorage.postStorageObjects({
+  const result = await latitudesh.objectStorage.postStorageBuckets({
     data: {
       type: "objects",
       attributes: {
@@ -247,7 +247,7 @@ The standalone function version of this method:
 
 ```typescript
 import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
-import { objectStoragePostStorageObjects } from "latitudesh-typescript-sdk/funcs/objectStoragePostStorageObjects.js";
+import { objectStoragePostStorageBuckets } from "latitudesh-typescript-sdk/funcs/objectStoragePostStorageBuckets.js";
 
 // Use `LatitudeshCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -256,7 +256,7 @@ const latitudesh = new LatitudeshCore({
 });
 
 async function run() {
-  const res = await objectStoragePostStorageObjects(latitudesh, {
+  const res = await objectStoragePostStorageBuckets(latitudesh, {
     data: {
       type: "objects",
       attributes: {
@@ -270,7 +270,7 @@ async function run() {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("objectStoragePostStorageObjects failed:", res.error);
+    console.log("objectStoragePostStorageBuckets failed:", res.error);
   }
 }
 
@@ -278,7 +278,7 @@ run();
 ```
 ### Example Usage: FeatureNotEnabled
 
-<!-- UsageSnippet language="typescript" operationID="post-storage-objects" method="post" path="/storage/objects" example="FeatureNotEnabled" -->
+<!-- UsageSnippet language="typescript" operationID="post-storage-buckets" method="post" path="/storage/buckets" example="FeatureNotEnabled" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -287,7 +287,7 @@ const latitudesh = new Latitudesh({
 });
 
 async function run() {
-  const result = await latitudesh.objectStorage.postStorageObjects({
+  const result = await latitudesh.objectStorage.postStorageBuckets({
     data: {
       type: "objects",
       attributes: {
@@ -310,7 +310,7 @@ The standalone function version of this method:
 
 ```typescript
 import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
-import { objectStoragePostStorageObjects } from "latitudesh-typescript-sdk/funcs/objectStoragePostStorageObjects.js";
+import { objectStoragePostStorageBuckets } from "latitudesh-typescript-sdk/funcs/objectStoragePostStorageBuckets.js";
 
 // Use `LatitudeshCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -319,7 +319,7 @@ const latitudesh = new LatitudeshCore({
 });
 
 async function run() {
-  const res = await objectStoragePostStorageObjects(latitudesh, {
+  const res = await objectStoragePostStorageBuckets(latitudesh, {
     data: {
       type: "objects",
       attributes: {
@@ -333,7 +333,7 @@ async function run() {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("objectStoragePostStorageObjects failed:", res.error);
+    console.log("objectStoragePostStorageBuckets failed:", res.error);
   }
 }
 
@@ -341,7 +341,7 @@ run();
 ```
 ### Example Usage: InsufficientPermissions
 
-<!-- UsageSnippet language="typescript" operationID="post-storage-objects" method="post" path="/storage/objects" example="InsufficientPermissions" -->
+<!-- UsageSnippet language="typescript" operationID="post-storage-buckets" method="post" path="/storage/buckets" example="InsufficientPermissions" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -350,7 +350,7 @@ const latitudesh = new Latitudesh({
 });
 
 async function run() {
-  const result = await latitudesh.objectStorage.postStorageObjects({
+  const result = await latitudesh.objectStorage.postStorageBuckets({
     data: {
       type: "objects",
       attributes: {
@@ -373,7 +373,7 @@ The standalone function version of this method:
 
 ```typescript
 import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
-import { objectStoragePostStorageObjects } from "latitudesh-typescript-sdk/funcs/objectStoragePostStorageObjects.js";
+import { objectStoragePostStorageBuckets } from "latitudesh-typescript-sdk/funcs/objectStoragePostStorageBuckets.js";
 
 // Use `LatitudeshCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -382,7 +382,7 @@ const latitudesh = new LatitudeshCore({
 });
 
 async function run() {
-  const res = await objectStoragePostStorageObjects(latitudesh, {
+  const res = await objectStoragePostStorageBuckets(latitudesh, {
     data: {
       type: "objects",
       attributes: {
@@ -396,7 +396,7 @@ async function run() {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("objectStoragePostStorageObjects failed:", res.error);
+    console.log("objectStoragePostStorageBuckets failed:", res.error);
   }
 }
 
@@ -407,14 +407,14 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.PostStorageObjectsRequest](../../models/operations/poststorageobjectsrequest.md)                                                                                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.PostStorageBucketsRequest](../../models/operations/poststoragebucketsrequest.md)                                                                                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[operations.PostStorageObjectsResponse](../../models/operations/poststorageobjectsresponse.md)\>**
+**Promise\<[operations.PostStorageBucketsResponse](../../models/operations/poststoragebucketsresponse.md)\>**
 
 ### Errors
 
@@ -424,13 +424,13 @@ run();
 | errors.ErrorObject            | 500                           | application/vnd.api+json      |
 | errors.LatitudeshDefaultError | 4XX, 5XX                      | \*/\*                         |
 
-## getStorageObject
+## getStorageBucket
 
 Shows details of a specific object storage.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-storage-object" method="get" path="/storage/objects/{id}" example="Success" -->
+<!-- UsageSnippet language="typescript" operationID="get-storage-bucket" method="get" path="/storage/buckets/{id}" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -439,7 +439,7 @@ const latitudesh = new Latitudesh({
 });
 
 async function run() {
-  const result = await latitudesh.objectStorage.getStorageObject({
+  const result = await latitudesh.objectStorage.getStorageBucket({
     id: "<id>",
   });
 
@@ -455,7 +455,7 @@ The standalone function version of this method:
 
 ```typescript
 import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
-import { objectStorageGetStorageObject } from "latitudesh-typescript-sdk/funcs/objectStorageGetStorageObject.js";
+import { objectStorageGetStorageBucket } from "latitudesh-typescript-sdk/funcs/objectStorageGetStorageBucket.js";
 
 // Use `LatitudeshCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -464,14 +464,14 @@ const latitudesh = new LatitudeshCore({
 });
 
 async function run() {
-  const res = await objectStorageGetStorageObject(latitudesh, {
+  const res = await objectStorageGetStorageBucket(latitudesh, {
     id: "<id>",
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("objectStorageGetStorageObject failed:", res.error);
+    console.log("objectStorageGetStorageBucket failed:", res.error);
   }
 }
 
@@ -482,14 +482,14 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.GetStorageObjectRequest](../../models/operations/getstorageobjectrequest.md)                                                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.GetStorageBucketRequest](../../models/operations/getstoragebucketrequest.md)                                                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[operations.GetStorageObjectResponse](../../models/operations/getstorageobjectresponse.md)\>**
+**Promise\<[operations.GetStorageBucketResponse](../../models/operations/getstoragebucketresponse.md)\>**
 
 ### Errors
 
@@ -498,13 +498,13 @@ run();
 | errors.ErrorObject            | 403, 404                      | application/vnd.api+json      |
 | errors.LatitudeshDefaultError | 4XX, 5XX                      | \*/\*                         |
 
-## deleteStorageObjects
+## deleteStorageBuckets
 
 Allows you to remove an object storage from a project.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="delete-storage-objects" method="delete" path="/storage/objects/{id}" -->
+<!-- UsageSnippet language="typescript" operationID="delete-storage-buckets" method="delete" path="/storage/buckets/{id}" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -513,7 +513,7 @@ const latitudesh = new Latitudesh({
 });
 
 async function run() {
-  await latitudesh.objectStorage.deleteStorageObjects({
+  await latitudesh.objectStorage.deleteStorageBuckets({
     id: "<id>",
   });
 
@@ -529,7 +529,7 @@ The standalone function version of this method:
 
 ```typescript
 import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
-import { objectStorageDeleteStorageObjects } from "latitudesh-typescript-sdk/funcs/objectStorageDeleteStorageObjects.js";
+import { objectStorageDeleteStorageBuckets } from "latitudesh-typescript-sdk/funcs/objectStorageDeleteStorageBuckets.js";
 
 // Use `LatitudeshCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -538,14 +538,14 @@ const latitudesh = new LatitudeshCore({
 });
 
 async function run() {
-  const res = await objectStorageDeleteStorageObjects(latitudesh, {
+  const res = await objectStorageDeleteStorageBuckets(latitudesh, {
     id: "<id>",
   });
   if (res.ok) {
     const { value: result } = res;
     
   } else {
-    console.log("objectStorageDeleteStorageObjects failed:", res.error);
+    console.log("objectStorageDeleteStorageBuckets failed:", res.error);
   }
 }
 
@@ -556,7 +556,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.DeleteStorageObjectsRequest](../../models/operations/deletestorageobjectsrequest.md)                                                                               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.DeleteStorageBucketsRequest](../../models/operations/deletestoragebucketsrequest.md)                                                                               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
@@ -569,6 +569,6 @@ run();
 
 | Error Type                    | Status Code                   | Content Type                  |
 | ----------------------------- | ----------------------------- | ----------------------------- |
-| errors.ErrorObject            | 403, 404                      | application/vnd.api+json      |
+| errors.ErrorObject            | 403, 404, 409                 | application/vnd.api+json      |
 | errors.ErrorObject            | 500                           | application/vnd.api+json      |
 | errors.LatitudeshDefaultError | 4XX, 5XX                      | \*/\*                         |

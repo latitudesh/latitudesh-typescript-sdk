@@ -1,11 +1,11 @@
-# PostStorageObjectsRequest
+# PostStorageBucketsRequest
 
 ## Example Usage
 
 ```typescript
-import { PostStorageObjectsRequest } from "latitudesh-typescript-sdk/models/operations";
+import { PostStorageBucketsRequest } from "latitudesh-typescript-sdk/models/operations";
 
-let value: PostStorageObjectsRequest = {
+let value: PostStorageBucketsRequest = {
   data: {
     type: "objects",
     attributes: {
@@ -21,4 +21,4 @@ let value: PostStorageObjectsRequest = {
 
 | Field                                                                                  | Type                                                                                   | Required                                                                               | Description                                                                            |
 | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| `data`                                                                                 | [operations.PostStorageObjectsData](../../models/operations/poststorageobjectsdata.md) | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| `data`                                                                                 | [operations.PostStorageBucketsData](../../models/operations/poststoragebucketsdata.md) | :heavy_check_mark:                                                                     | N/A                                                                                    |

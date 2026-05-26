@@ -8,7 +8,7 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type GetStorageObjectsRequest = {
+export type GetStorageBucketsRequest = {
   /**
    * The project ID or Slug to filter by
    */
@@ -16,8 +16,8 @@ export type GetStorageObjectsRequest = {
 };
 
 /** @internal */
-export const GetStorageObjectsRequest$inboundSchema: z.ZodType<
-  GetStorageObjectsRequest,
+export const GetStorageBucketsRequest$inboundSchema: z.ZodType<
+  GetStorageBucketsRequest,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -28,15 +28,15 @@ export const GetStorageObjectsRequest$inboundSchema: z.ZodType<
   });
 });
 /** @internal */
-export type GetStorageObjectsRequest$Outbound = {
+export type GetStorageBucketsRequest$Outbound = {
   "filter[project]"?: string | undefined;
 };
 
 /** @internal */
-export const GetStorageObjectsRequest$outboundSchema: z.ZodType<
-  GetStorageObjectsRequest$Outbound,
+export const GetStorageBucketsRequest$outboundSchema: z.ZodType<
+  GetStorageBucketsRequest$Outbound,
   z.ZodTypeDef,
-  GetStorageObjectsRequest
+  GetStorageBucketsRequest
 > = z.object({
   filterProject: z.string().optional(),
 }).transform((v) => {
@@ -45,19 +45,19 @@ export const GetStorageObjectsRequest$outboundSchema: z.ZodType<
   });
 });
 
-export function getStorageObjectsRequestToJSON(
-  getStorageObjectsRequest: GetStorageObjectsRequest,
+export function getStorageBucketsRequestToJSON(
+  getStorageBucketsRequest: GetStorageBucketsRequest,
 ): string {
   return JSON.stringify(
-    GetStorageObjectsRequest$outboundSchema.parse(getStorageObjectsRequest),
+    GetStorageBucketsRequest$outboundSchema.parse(getStorageBucketsRequest),
   );
 }
-export function getStorageObjectsRequestFromJSON(
+export function getStorageBucketsRequestFromJSON(
   jsonString: string,
-): SafeParseResult<GetStorageObjectsRequest, SDKValidationError> {
+): SafeParseResult<GetStorageBucketsRequest, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => GetStorageObjectsRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetStorageObjectsRequest' from JSON`,
+    (x) => GetStorageBucketsRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetStorageBucketsRequest' from JSON`,
   );
 }

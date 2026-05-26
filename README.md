@@ -277,10 +277,10 @@ run();
 
 ### [ObjectStorage](docs/sdks/objectstorage/README.md)
 
-* [getStorageObjects](docs/sdks/objectstorage/README.md#getstorageobjects) - List object storages
-* [postStorageObjects](docs/sdks/objectstorage/README.md#poststorageobjects) - Create object storage
-* [getStorageObject](docs/sdks/objectstorage/README.md#getstorageobject) - Retrieve object storage
-* [deleteStorageObjects](docs/sdks/objectstorage/README.md#deletestorageobjects) - Delete object storage
+* [getStorageBuckets](docs/sdks/objectstorage/README.md#getstoragebuckets) - List object storages
+* [postStorageBuckets](docs/sdks/objectstorage/README.md#poststoragebuckets) - Create object storage
+* [getStorageBucket](docs/sdks/objectstorage/README.md#getstoragebucket) - Retrieve object storage
+* [deleteStorageBuckets](docs/sdks/objectstorage/README.md#deletestoragebuckets) - Delete object storage
 
 ### [OperatingSystems](docs/sdks/operatingsystems/README.md)
 
@@ -485,10 +485,10 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`kubernetesClustersListKubernetesAvailableVersions`](docs/sdks/kubernetesclusters/README.md#listkubernetesavailableversions) - List Available Kubernetes Versions
 - [`kubernetesClustersListKubernetesClusters`](docs/sdks/kubernetesclusters/README.md#listkubernetesclusters) - List Kubernetes Clusters
 - [`kubernetesClustersUpdateKubernetesCluster`](docs/sdks/kubernetesclusters/README.md#updatekubernetescluster) - Update Kubernetes Cluster
-- [`objectStorageDeleteStorageObjects`](docs/sdks/objectstorage/README.md#deletestorageobjects) - Delete object storage
-- [`objectStorageGetStorageObject`](docs/sdks/objectstorage/README.md#getstorageobject) - Retrieve object storage
-- [`objectStorageGetStorageObjects`](docs/sdks/objectstorage/README.md#getstorageobjects) - List object storages
-- [`objectStoragePostStorageObjects`](docs/sdks/objectstorage/README.md#poststorageobjects) - Create object storage
+- [`objectStorageDeleteStorageBuckets`](docs/sdks/objectstorage/README.md#deletestoragebuckets) - Delete object storage
+- [`objectStorageGetStorageBucket`](docs/sdks/objectstorage/README.md#getstoragebucket) - Retrieve object storage
+- [`objectStorageGetStorageBuckets`](docs/sdks/objectstorage/README.md#getstoragebuckets) - List object storages
+- [`objectStoragePostStorageBuckets`](docs/sdks/objectstorage/README.md#poststoragebuckets) - Create object storage
 - [`operatingSystemsListPlans`](docs/sdks/operatingsystems/README.md#listplans) - List operating systems
 - [`plansGet`](docs/sdks/plans/README.md#get) - Retrieve plan
 - [`plansGetBandwidth`](docs/sdks/plans/README.md#getbandwidth) - List bandwidth plans

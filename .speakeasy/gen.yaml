@@ -33,7 +33,7 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 typescript:
-  version: 0.4.0
+  version: 0.4.1
   acceptHeaderEnum: true
   additionalDependencies:
     dependencies: {}
@@ -85,6 +85,7 @@ typescript:
   packageName: latitudesh-typescript-sdk
   preApplyUnionDiscriminators: true
   preserveModelFieldNames: false
+  privateIdentifierPrefix: '#'
   responseFormat: flat
   sseFlatResponse: false
   templateVersion: v2

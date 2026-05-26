@@ -3,7 +3,7 @@
  */
 
 import { LatitudeshCore } from "../core.js";
-import { encodeSimple } from "../lib/encodings.js";
+import { encodeJSON } from "../lib/encodings.js";
 import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
@@ -27,18 +27,18 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Retrieve object storage
+ * Create object storage
  *
  * @remarks
- * Shows details of a specific object storage.
+ * Creates a new object storage bucket for a project.
  */
-export function objectStorageGetStorageObject(
+export function objectStoragePostStorageBuckets(
   client: LatitudeshCore,
-  request: operations.GetStorageObjectRequest,
+  request: operations.PostStorageBucketsRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetStorageObjectResponse,
+    operations.PostStorageBucketsResponse,
     | errors.ErrorObject
     | LatitudeshError
     | ResponseValidationError
@@ -59,12 +59,12 @@ export function objectStorageGetStorageObject(
 
 async function $do(
   client: LatitudeshCore,
-  request: operations.GetStorageObjectRequest,
+  request: operations.PostStorageBucketsRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.GetStorageObjectResponse,
+      operations.PostStorageBucketsResponse,
       | errors.ErrorObject
       | LatitudeshError
       | ResponseValidationError
@@ -80,24 +80,19 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) => operations.GetStorageObjectRequest$outboundSchema.parse(value),
+    (value) => operations.PostStorageBucketsRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = null;
+  const body = encodeJSON("body", payload, { explode: true });
 
-  const pathParams = {
-    id: encodeSimple("id", payload.id, {
-      explode: false,
-      charEncoding: "percent",
-    }),
-  };
-  const path = pathToFunc("/storage/objects/{id}")(pathParams);
+  const path = pathToFunc("/storage/buckets")();
 
   const headers = new Headers(compactMap({
+    "Content-Type": "application/vnd.api+json",
     Accept: "application/vnd.api+json",
   }));
 
@@ -108,7 +103,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "get-storage-object",
+    operationID: "post-storage-buckets",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -122,7 +117,7 @@ async function $do(
 
   const requestRes = client._createRequest(context, {
     security: requestSecurity,
-    method: "GET",
+    method: "POST",
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
@@ -152,7 +147,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.GetStorageObjectResponse,
+    operations.PostStorageBucketsResponse,
     | errors.ErrorObject
     | LatitudeshError
     | ResponseValidationError
@@ -163,10 +158,13 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.GetStorageObjectResponse$inboundSchema, {
+    M.json(201, operations.PostStorageBucketsResponse$inboundSchema, {
       ctype: "application/vnd.api+json",
     }),
-    M.jsonErr([403, 404], errors.ErrorObject$inboundSchema, {
+    M.jsonErr([403, 404, 409, 422], errors.ErrorObject$inboundSchema, {
+      ctype: "application/vnd.api+json",
+    }),
+    M.jsonErr(500, errors.ErrorObject$inboundSchema, {
       ctype: "application/vnd.api+json",
     }),
     M.fail("4XX"),
