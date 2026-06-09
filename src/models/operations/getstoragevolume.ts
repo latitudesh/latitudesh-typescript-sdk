@@ -10,7 +10,7 @@ import * as models from "../index.js";
 
 export type GetStorageVolumeRequest = {
   /**
-   * The volume storage ID
+   * The volume ID
    */
   id: string;
 };

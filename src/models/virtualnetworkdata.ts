@@ -33,7 +33,7 @@ export type VirtualNetworkDataRegion = {
   site?: VirtualNetworkDataSite | undefined;
 };
 
-export type Tag = {
+export type VirtualNetworkDataTag = {
   id?: string | undefined;
   name?: string | undefined;
   description?: string | undefined;
@@ -63,7 +63,7 @@ export type VirtualNetworkDataAttributes = {
   /**
    * Tags associated with the virtual network
    */
-  tags?: Array<Tag> | undefined;
+  tags?: Array<VirtualNetworkDataTag> | undefined;
 };
 
 export type VirtualNetworkData = {
@@ -175,15 +175,18 @@ export function virtualNetworkDataRegionFromJSON(
 }
 
 /** @internal */
-export const Tag$inboundSchema: z.ZodType<Tag, z.ZodTypeDef, unknown> = z
-  .object({
-    id: z.string().optional(),
-    name: z.string().optional(),
-    description: z.string().optional(),
-    color: z.string().optional(),
-  });
+export const VirtualNetworkDataTag$inboundSchema: z.ZodType<
+  VirtualNetworkDataTag,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string().optional(),
+  name: z.string().optional(),
+  description: z.string().optional(),
+  color: z.string().optional(),
+});
 /** @internal */
-export type Tag$Outbound = {
+export type VirtualNetworkDataTag$Outbound = {
   id?: string | undefined;
   name?: string | undefined;
   description?: string | undefined;
@@ -191,24 +194,31 @@ export type Tag$Outbound = {
 };
 
 /** @internal */
-export const Tag$outboundSchema: z.ZodType<Tag$Outbound, z.ZodTypeDef, Tag> = z
-  .object({
-    id: z.string().optional(),
-    name: z.string().optional(),
-    description: z.string().optional(),
-    color: z.string().optional(),
-  });
+export const VirtualNetworkDataTag$outboundSchema: z.ZodType<
+  VirtualNetworkDataTag$Outbound,
+  z.ZodTypeDef,
+  VirtualNetworkDataTag
+> = z.object({
+  id: z.string().optional(),
+  name: z.string().optional(),
+  description: z.string().optional(),
+  color: z.string().optional(),
+});
 
-export function tagToJSON(tag: Tag): string {
-  return JSON.stringify(Tag$outboundSchema.parse(tag));
+export function virtualNetworkDataTagToJSON(
+  virtualNetworkDataTag: VirtualNetworkDataTag,
+): string {
+  return JSON.stringify(
+    VirtualNetworkDataTag$outboundSchema.parse(virtualNetworkDataTag),
+  );
 }
-export function tagFromJSON(
+export function virtualNetworkDataTagFromJSON(
   jsonString: string,
-): SafeParseResult<Tag, SDKValidationError> {
+): SafeParseResult<VirtualNetworkDataTag, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Tag$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Tag' from JSON`,
+    (x) => VirtualNetworkDataTag$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'VirtualNetworkDataTag' from JSON`,
   );
 }
 
@@ -227,7 +237,7 @@ export const VirtualNetworkDataAttributes$inboundSchema: z.ZodType<
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
   assignments_count: z.number().int().optional(),
-  tags: z.array(z.lazy(() => Tag$inboundSchema)).optional(),
+  tags: z.array(z.lazy(() => VirtualNetworkDataTag$inboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     "created_at": "createdAt",
@@ -243,7 +253,7 @@ export type VirtualNetworkDataAttributes$Outbound = {
   region?: VirtualNetworkDataRegion$Outbound | undefined;
   created_at?: string | null | undefined;
   assignments_count?: number | undefined;
-  tags?: Array<Tag$Outbound> | undefined;
+  tags?: Array<VirtualNetworkDataTag$Outbound> | undefined;
 };
 
 /** @internal */
@@ -259,7 +269,7 @@ export const VirtualNetworkDataAttributes$outboundSchema: z.ZodType<
   region: z.lazy(() => VirtualNetworkDataRegion$outboundSchema).optional(),
   createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   assignmentsCount: z.number().int().optional(),
-  tags: z.array(z.lazy(() => Tag$outboundSchema)).optional(),
+  tags: z.array(z.lazy(() => VirtualNetworkDataTag$outboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     createdAt: "created_at",

@@ -128,6 +128,13 @@ export type VirtualMachineAttributesSpecs = {
   gpu?: string | null | undefined;
 };
 
+export type VirtualMachineAttributesTag = {
+  id?: string | undefined;
+  name?: string | undefined;
+  description?: string | null | undefined;
+  color?: string | null | undefined;
+};
+
 export type VirtualMachineAttributesAttributes = {
   name?: string | undefined;
   createdAt?: string | undefined;
@@ -141,10 +148,21 @@ export type VirtualMachineAttributesAttributes = {
    * SSH credentials for connecting to the virtual machine. Only available when the VM is running.
    */
   credentials?: VirtualMachineAttributesCredentials | null | undefined;
+  site?: string | null | undefined;
+  billing?: string | null | undefined;
+  /**
+   * Encoded ID of the user data record applied to this VM, if any
+   */
+  userData?: string | null | undefined;
   plan?: VirtualMachineAttributesPlan | undefined;
   specs?: VirtualMachineAttributesSpecs | undefined;
+  tags?: Array<VirtualMachineAttributesTag> | undefined;
   team?: TeamInclude | undefined;
   project?: ProjectInclude | undefined;
+  /**
+   * Opt-in extra field. Request via `extra_fields[virtual_machines]=pending_restart`.
+   */
+  pendingRestart?: boolean | undefined;
 };
 
 export type VirtualMachineAttributes = {
@@ -495,6 +513,56 @@ export function virtualMachineAttributesSpecsFromJSON(
 }
 
 /** @internal */
+export const VirtualMachineAttributesTag$inboundSchema: z.ZodType<
+  VirtualMachineAttributesTag,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string().optional(),
+  name: z.string().optional(),
+  description: z.nullable(z.string()).optional(),
+  color: z.nullable(z.string()).optional(),
+});
+/** @internal */
+export type VirtualMachineAttributesTag$Outbound = {
+  id?: string | undefined;
+  name?: string | undefined;
+  description?: string | null | undefined;
+  color?: string | null | undefined;
+};
+
+/** @internal */
+export const VirtualMachineAttributesTag$outboundSchema: z.ZodType<
+  VirtualMachineAttributesTag$Outbound,
+  z.ZodTypeDef,
+  VirtualMachineAttributesTag
+> = z.object({
+  id: z.string().optional(),
+  name: z.string().optional(),
+  description: z.nullable(z.string()).optional(),
+  color: z.nullable(z.string()).optional(),
+});
+
+export function virtualMachineAttributesTagToJSON(
+  virtualMachineAttributesTag: VirtualMachineAttributesTag,
+): string {
+  return JSON.stringify(
+    VirtualMachineAttributesTag$outboundSchema.parse(
+      virtualMachineAttributesTag,
+    ),
+  );
+}
+export function virtualMachineAttributesTagFromJSON(
+  jsonString: string,
+): SafeParseResult<VirtualMachineAttributesTag, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => VirtualMachineAttributesTag$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'VirtualMachineAttributesTag' from JSON`,
+  );
+}
+
+/** @internal */
 export const VirtualMachineAttributesAttributes$inboundSchema: z.ZodType<
   VirtualMachineAttributesAttributes,
   z.ZodTypeDef,
@@ -510,15 +578,23 @@ export const VirtualMachineAttributesAttributes$inboundSchema: z.ZodType<
   credentials: z.nullable(
     z.lazy(() => VirtualMachineAttributesCredentials$inboundSchema),
   ).optional(),
+  site: z.nullable(z.string()).optional(),
+  billing: z.nullable(z.string()).optional(),
+  user_data: z.nullable(z.string()).optional(),
   plan: z.lazy(() => VirtualMachineAttributesPlan$inboundSchema).optional(),
   specs: z.lazy(() => VirtualMachineAttributesSpecs$inboundSchema).optional(),
+  tags: z.array(z.lazy(() => VirtualMachineAttributesTag$inboundSchema))
+    .optional(),
   team: TeamInclude$inboundSchema.optional(),
   project: ProjectInclude$inboundSchema.optional(),
+  pending_restart: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     "created_at": "createdAt",
     "primary_ipv4": "primaryIpv4",
     "operating_system": "operatingSystem",
+    "user_data": "userData",
+    "pending_restart": "pendingRestart",
   });
 });
 /** @internal */
@@ -532,10 +608,15 @@ export type VirtualMachineAttributesAttributes$Outbound = {
     | null
     | undefined;
   credentials?: VirtualMachineAttributesCredentials$Outbound | null | undefined;
+  site?: string | null | undefined;
+  billing?: string | null | undefined;
+  user_data?: string | null | undefined;
   plan?: VirtualMachineAttributesPlan$Outbound | undefined;
   specs?: VirtualMachineAttributesSpecs$Outbound | undefined;
+  tags?: Array<VirtualMachineAttributesTag$Outbound> | undefined;
   team?: TeamInclude$Outbound | undefined;
   project?: ProjectInclude$Outbound | undefined;
+  pending_restart?: boolean | undefined;
 };
 
 /** @internal */
@@ -554,15 +635,23 @@ export const VirtualMachineAttributesAttributes$outboundSchema: z.ZodType<
   credentials: z.nullable(
     z.lazy(() => VirtualMachineAttributesCredentials$outboundSchema),
   ).optional(),
+  site: z.nullable(z.string()).optional(),
+  billing: z.nullable(z.string()).optional(),
+  userData: z.nullable(z.string()).optional(),
   plan: z.lazy(() => VirtualMachineAttributesPlan$outboundSchema).optional(),
   specs: z.lazy(() => VirtualMachineAttributesSpecs$outboundSchema).optional(),
+  tags: z.array(z.lazy(() => VirtualMachineAttributesTag$outboundSchema))
+    .optional(),
   team: TeamInclude$outboundSchema.optional(),
   project: ProjectInclude$outboundSchema.optional(),
+  pendingRestart: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     createdAt: "created_at",
     primaryIpv4: "primary_ipv4",
     operatingSystem: "operating_system",
+    userData: "user_data",
+    pendingRestart: "pending_restart",
   });
 });
 

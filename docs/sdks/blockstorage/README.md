@@ -232,7 +232,7 @@ run();
 
 ## getStorageVolume
 
-Shows details of a specific volume storage.
+Shows details of a specific volume.
 
 ### Example Usage
 
@@ -305,7 +305,7 @@ run();
 
 ## deleteStorageVolumes
 
-Allows you to remove persistent storage from a project.
+Allows you to remove a volume from a project.
 
 ### Example Usage
 
@@ -378,7 +378,7 @@ run();
 
 ## postStorageVolumesMount
 
-Mounts volume storage by adding the client to an allowed list
+Mounts a volume by adding the client to an allowed list
 
 ### Example Usage
 

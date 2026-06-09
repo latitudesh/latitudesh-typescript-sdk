@@ -179,3 +179,13 @@ Based on:
 - [typescript v0.4.1] .
 ### Releases
 - [NPM v0.4.1] https://www.npmjs.com/package/latitudesh-typescript-sdk/v/0.4.1 - .
+
+## 2026-06-09 15:22:15
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.773.1 (2.897.1) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [typescript v0.5.0] .
+### Releases
+- [NPM v0.5.0] https://www.npmjs.com/package/latitudesh-typescript-sdk/v/0.5.0 - .

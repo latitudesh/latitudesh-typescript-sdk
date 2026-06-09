@@ -8,9 +8,7 @@ import { VirtualMachineUpdatePayload } from "latitudesh-typescript-sdk/models";
 let value: VirtualMachineUpdatePayload = {
   data: {
     type: "virtual_machines",
-    attributes: {
-      name: "<value>",
-    },
+    attributes: {},
   },
 };
 ```

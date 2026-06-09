@@ -96,6 +96,7 @@ async function $do(
     "extra_fields[virtual_machines]": payload
       ?.["extra_fields[virtual_machines]"],
     "filter[project]": payload?.["filter[project]"],
+    "filter[tags]": payload?.["filter[tags]"],
   });
 
   const headers = new Headers(compactMap({

@@ -23,7 +23,7 @@ export type PostStorageVolumesAttributes2 = {
    */
   project: string;
   /**
-   * Storage name
+   * Volume name
    */
   name: string;
   /**

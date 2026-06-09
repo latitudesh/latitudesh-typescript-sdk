@@ -13,7 +13,7 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class ObjectStorage extends ClientSDK {
   /**
-   * List object storages
+   * List buckets
    *
    * @remarks
    * Lists all object storages from a team.
@@ -30,7 +30,7 @@ export class ObjectStorage extends ClientSDK {
   }
 
   /**
-   * Create object storage
+   * Create bucket
    *
    * @remarks
    * Creates a new object storage bucket for a project.
@@ -47,7 +47,7 @@ export class ObjectStorage extends ClientSDK {
   }
 
   /**
-   * Retrieve object storage
+   * Retrieve bucket
    *
    * @remarks
    * Shows details of a specific object storage.
@@ -64,7 +64,7 @@ export class ObjectStorage extends ClientSDK {
   }
 
   /**
-   * Delete object storage
+   * Delete bucket
    *
    * @remarks
    * Allows you to remove an object storage from a project.

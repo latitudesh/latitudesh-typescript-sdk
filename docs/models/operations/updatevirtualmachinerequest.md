@@ -10,9 +10,7 @@ let value: UpdateVirtualMachineRequest = {
   virtualMachineUpdatePayload: {
     data: {
       type: "virtual_machines",
-      attributes: {
-        name: "<value>",
-      },
+      attributes: {},
     },
   },
 };

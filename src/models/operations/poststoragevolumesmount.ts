@@ -18,7 +18,7 @@ export type PostStorageVolumesMountType = ClosedEnum<
 
 export type PostStorageVolumesMountAttributes = {
   /**
-   * NVMe Qualified Name (NQN) of the client/server that will access the volume storage. Format: nqn.YYYY-MM.domain:identifier (e.g., "nqn.2024-01.com.example:server01"). This uniquely identifies the NVMe client and must be configured on the client server.
+   * NVMe Qualified Name (NQN) of the client/server that will access the volume. Format: nqn.YYYY-MM.domain:identifier (e.g., "nqn.2024-01.com.example:server01"). This uniquely identifies the NVMe client and must be configured on the client server.
    */
   nqn: string;
 };
@@ -34,7 +34,7 @@ export type PostStorageVolumesMountRequestBody = {
 
 export type PostStorageVolumesMountRequest = {
   /**
-   * Volume storage ID
+   * Volume ID
    */
   id: string;
   requestBody: PostStorageVolumesMountRequestBody;

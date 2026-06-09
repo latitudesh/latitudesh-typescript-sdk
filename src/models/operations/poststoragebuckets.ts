@@ -16,19 +16,19 @@ export const PostStorageBucketsType = {
 export type PostStorageBucketsType = ClosedEnum<typeof PostStorageBucketsType>;
 
 /**
- * Storage class tier for the bucket.
+ * Backend storage tier. `standard` is the default S3-compatible tier. `high_performance` is a lower-latency, higher-throughput tier available in select regions only.
  */
 export const StorageClass = {
   Standard: "standard",
   HighPerformance: "high_performance",
 } as const;
 /**
- * Storage class tier for the bucket.
+ * Backend storage tier. `standard` is the default S3-compatible tier. `high_performance` is a lower-latency, higher-throughput tier available in select regions only.
  */
 export type StorageClass = ClosedEnum<typeof StorageClass>;
 
 /**
- * Object lock retention mode. Requires `locking` to be true when not `NONE`.
+ * Object Lock retention mode applied to new objects. `GOVERNANCE` allows privileged users to override the retention; `COMPLIANCE` cannot be overridden by anyone. Only applies when `locking` is `true`.
  */
 export const RetentionMode = {
   None: "NONE",
@@ -36,7 +36,7 @@ export const RetentionMode = {
   Governance: "GOVERNANCE",
 } as const;
 /**
- * Object lock retention mode. Requires `locking` to be true when not `NONE`.
+ * Object Lock retention mode applied to new objects. `GOVERNANCE` allows privileged users to override the retention; `COMPLIANCE` cannot be overridden by anyone. Only applies when `locking` is `true`.
  */
 export type RetentionMode = ClosedEnum<typeof RetentionMode>;
 
@@ -62,23 +62,23 @@ export type PostStorageBucketsAttributes = {
    */
   customer?: string | undefined;
   /**
-   * Storage class tier for the bucket.
+   * Backend storage tier. `standard` is the default S3-compatible tier. `high_performance` is a lower-latency, higher-throughput tier available in select regions only.
    */
   storageClass?: StorageClass | undefined;
   /**
-   * Enable bucket versioning.
+   * Enable S3 object versioning. Once enabled, versioning cannot be disabled.
    */
   versioning?: boolean | undefined;
   /**
-   * Enable object lock on the bucket.
+   * Enable S3 Object Lock (WORM). Must be enabled at bucket creation; cannot be added to an existing bucket. When `locking` is `true`, `versioning` is automatically enabled.
    */
   locking?: boolean | undefined;
   /**
-   * Object lock retention mode. Requires `locking` to be true when not `NONE`.
+   * Object Lock retention mode applied to new objects. `GOVERNANCE` allows privileged users to override the retention; `COMPLIANCE` cannot be overridden by anyone. Only applies when `locking` is `true`.
    */
   retentionMode?: RetentionMode | undefined;
   /**
-   * Default retention period in days when object lock is enabled.
+   * Default retention period, in days, applied to new objects when Object Lock is enabled. Only applies when `locking` is `true`.
    */
   retentionPeriod?: number | null | undefined;
 };

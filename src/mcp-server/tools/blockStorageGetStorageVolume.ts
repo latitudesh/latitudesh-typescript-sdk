@@ -14,7 +14,7 @@ export const tool$blockStorageGetStorageVolume: ToolDefinition<typeof args> = {
   name: "block-storage-get-storage-volume",
   description: `Retrieve volume
 
-Shows details of a specific volume storage.`,
+Shows details of a specific volume.`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await blockStorageGetStorageVolume(

@@ -20,15 +20,8 @@ export type GetPlansOperatingSystemRequest = {
   pageNumber?: number | undefined;
 };
 
-/**
- * Success
- */
-export type GetPlansOperatingSystemResponseBody = {
-  data?: Array<models.OperatingSystems> | undefined;
-};
-
 export type GetPlansOperatingSystemResponse = {
-  result: GetPlansOperatingSystemResponseBody;
+  result: models.OperatingSystems;
 };
 
 /** @internal */
@@ -86,54 +79,12 @@ export function getPlansOperatingSystemRequestFromJSON(
 }
 
 /** @internal */
-export const GetPlansOperatingSystemResponseBody$inboundSchema: z.ZodType<
-  GetPlansOperatingSystemResponseBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  data: z.array(models.OperatingSystems$inboundSchema).optional(),
-});
-/** @internal */
-export type GetPlansOperatingSystemResponseBody$Outbound = {
-  data?: Array<models.OperatingSystems$Outbound> | undefined;
-};
-
-/** @internal */
-export const GetPlansOperatingSystemResponseBody$outboundSchema: z.ZodType<
-  GetPlansOperatingSystemResponseBody$Outbound,
-  z.ZodTypeDef,
-  GetPlansOperatingSystemResponseBody
-> = z.object({
-  data: z.array(models.OperatingSystems$outboundSchema).optional(),
-});
-
-export function getPlansOperatingSystemResponseBodyToJSON(
-  getPlansOperatingSystemResponseBody: GetPlansOperatingSystemResponseBody,
-): string {
-  return JSON.stringify(
-    GetPlansOperatingSystemResponseBody$outboundSchema.parse(
-      getPlansOperatingSystemResponseBody,
-    ),
-  );
-}
-export function getPlansOperatingSystemResponseBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<GetPlansOperatingSystemResponseBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetPlansOperatingSystemResponseBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetPlansOperatingSystemResponseBody' from JSON`,
-  );
-}
-
-/** @internal */
 export const GetPlansOperatingSystemResponse$inboundSchema: z.ZodType<
   GetPlansOperatingSystemResponse,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  Result: z.lazy(() => GetPlansOperatingSystemResponseBody$inboundSchema),
+  Result: models.OperatingSystems$inboundSchema,
 }).transform((v) => {
   return remap$(v, {
     "Result": "result",
@@ -141,7 +92,7 @@ export const GetPlansOperatingSystemResponse$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type GetPlansOperatingSystemResponse$Outbound = {
-  Result: GetPlansOperatingSystemResponseBody$Outbound;
+  Result: models.OperatingSystems$Outbound;
 };
 
 /** @internal */
@@ -150,7 +101,7 @@ export const GetPlansOperatingSystemResponse$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetPlansOperatingSystemResponse
 > = z.object({
-  result: z.lazy(() => GetPlansOperatingSystemResponseBody$outboundSchema),
+  result: models.OperatingSystems$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
     result: "Result",

@@ -28,7 +28,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * List object storages
+ * List buckets
  *
  * @remarks
  * Lists all object storages from a team.

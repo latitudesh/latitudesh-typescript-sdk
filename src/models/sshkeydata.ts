@@ -26,7 +26,15 @@ export const SshKeyDataType = {
 } as const;
 export type SshKeyDataType = ClosedEnum<typeof SshKeyDataType>;
 
+export type SshKeyDataTag = {
+  id?: string | undefined;
+  name?: string | undefined;
+  description?: string | null | undefined;
+  color?: string | null | undefined;
+};
+
 export type SshKeyDataAttributes = {
+  tags?: Array<SshKeyDataTag> | undefined;
   /**
    * Name of the SSH Key
    */
@@ -61,11 +69,56 @@ export const SshKeyDataType$outboundSchema: z.ZodNativeEnum<
 > = SshKeyDataType$inboundSchema;
 
 /** @internal */
+export const SshKeyDataTag$inboundSchema: z.ZodType<
+  SshKeyDataTag,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string().optional(),
+  name: z.string().optional(),
+  description: z.nullable(z.string()).optional(),
+  color: z.nullable(z.string()).optional(),
+});
+/** @internal */
+export type SshKeyDataTag$Outbound = {
+  id?: string | undefined;
+  name?: string | undefined;
+  description?: string | null | undefined;
+  color?: string | null | undefined;
+};
+
+/** @internal */
+export const SshKeyDataTag$outboundSchema: z.ZodType<
+  SshKeyDataTag$Outbound,
+  z.ZodTypeDef,
+  SshKeyDataTag
+> = z.object({
+  id: z.string().optional(),
+  name: z.string().optional(),
+  description: z.nullable(z.string()).optional(),
+  color: z.nullable(z.string()).optional(),
+});
+
+export function sshKeyDataTagToJSON(sshKeyDataTag: SshKeyDataTag): string {
+  return JSON.stringify(SshKeyDataTag$outboundSchema.parse(sshKeyDataTag));
+}
+export function sshKeyDataTagFromJSON(
+  jsonString: string,
+): SafeParseResult<SshKeyDataTag, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SshKeyDataTag$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SshKeyDataTag' from JSON`,
+  );
+}
+
+/** @internal */
 export const SshKeyDataAttributes$inboundSchema: z.ZodType<
   SshKeyDataAttributes,
   z.ZodTypeDef,
   unknown
 > = z.object({
+  tags: z.array(z.lazy(() => SshKeyDataTag$inboundSchema)).optional(),
   name: z.string().optional(),
   public_key: z.string().optional(),
   fingerprint: z.string().optional(),
@@ -82,6 +135,7 @@ export const SshKeyDataAttributes$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type SshKeyDataAttributes$Outbound = {
+  tags?: Array<SshKeyDataTag$Outbound> | undefined;
   name?: string | undefined;
   public_key?: string | undefined;
   fingerprint?: string | undefined;
@@ -97,6 +151,7 @@ export const SshKeyDataAttributes$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SshKeyDataAttributes
 > = z.object({
+  tags: z.array(z.lazy(() => SshKeyDataTag$outboundSchema)).optional(),
   name: z.string().optional(),
   publicKey: z.string().optional(),
   fingerprint: z.string().optional(),

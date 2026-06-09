@@ -277,10 +277,10 @@ run();
 
 ### [ObjectStorage](docs/sdks/objectstorage/README.md)
 
-* [getStorageBuckets](docs/sdks/objectstorage/README.md#getstoragebuckets) - List object storages
-* [postStorageBuckets](docs/sdks/objectstorage/README.md#poststoragebuckets) - Create object storage
-* [getStorageBucket](docs/sdks/objectstorage/README.md#getstoragebucket) - Retrieve object storage
-* [deleteStorageBuckets](docs/sdks/objectstorage/README.md#deletestoragebuckets) - Delete object storage
+* [getStorageBuckets](docs/sdks/objectstorage/README.md#getstoragebuckets) - List buckets
+* [postStorageBuckets](docs/sdks/objectstorage/README.md#poststoragebuckets) - Create bucket
+* [getStorageBucket](docs/sdks/objectstorage/README.md#getstoragebucket) - Retrieve bucket
+* [deleteStorageBuckets](docs/sdks/objectstorage/README.md#deletestoragebuckets) - Delete bucket
 
 ### [OperatingSystems](docs/sdks/operatingsystems/README.md)
 
@@ -416,6 +416,10 @@ run();
 * [delete](docs/sdks/virtualmachines/README.md#delete) - Destroy VM
 * [updateVirtualMachine](docs/sdks/virtualmachines/README.md#updatevirtualmachine) - Update VM
 * [createVirtualMachineAction](docs/sdks/virtualmachines/README.md#createvirtualmachineaction) - Run VM power action
+* [showVirtualMachineMetrics](docs/sdks/virtualmachines/README.md#showvirtualmachinemetrics) - Retrieve VM metrics
+* [listVirtualMachineNetworkAttachments](docs/sdks/virtualmachines/README.md#listvirtualmachinenetworkattachments) - List VM network attachments
+* [createVirtualMachineNetworkAttachment](docs/sdks/virtualmachines/README.md#createvirtualmachinenetworkattachment) - Attach a network to a VM
+* [destroyVirtualMachineNetworkAttachment](docs/sdks/virtualmachines/README.md#destroyvirtualmachinenetworkattachment) - Detach a network from a VM
 
 ### [VirtualNetworks](docs/sdks/virtualnetworks/README.md)
 
@@ -485,10 +489,10 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`kubernetesClustersListKubernetesAvailableVersions`](docs/sdks/kubernetesclusters/README.md#listkubernetesavailableversions) - List Available Kubernetes Versions
 - [`kubernetesClustersListKubernetesClusters`](docs/sdks/kubernetesclusters/README.md#listkubernetesclusters) - List Kubernetes Clusters
 - [`kubernetesClustersUpdateKubernetesCluster`](docs/sdks/kubernetesclusters/README.md#updatekubernetescluster) - Update Kubernetes Cluster
-- [`objectStorageDeleteStorageBuckets`](docs/sdks/objectstorage/README.md#deletestoragebuckets) - Delete object storage
-- [`objectStorageGetStorageBucket`](docs/sdks/objectstorage/README.md#getstoragebucket) - Retrieve object storage
-- [`objectStorageGetStorageBuckets`](docs/sdks/objectstorage/README.md#getstoragebuckets) - List object storages
-- [`objectStoragePostStorageBuckets`](docs/sdks/objectstorage/README.md#poststoragebuckets) - Create object storage
+- [`objectStorageDeleteStorageBuckets`](docs/sdks/objectstorage/README.md#deletestoragebuckets) - Delete bucket
+- [`objectStorageGetStorageBucket`](docs/sdks/objectstorage/README.md#getstoragebucket) - Retrieve bucket
+- [`objectStorageGetStorageBuckets`](docs/sdks/objectstorage/README.md#getstoragebuckets) - List buckets
+- [`objectStoragePostStorageBuckets`](docs/sdks/objectstorage/README.md#poststoragebuckets) - Create bucket
 - [`operatingSystemsListPlans`](docs/sdks/operatingsystems/README.md#listplans) - List operating systems
 - [`plansGet`](docs/sdks/plans/README.md#get) - Retrieve plan
 - [`plansGetBandwidth`](docs/sdks/plans/README.md#getbandwidth) - List bandwidth plans
@@ -556,9 +560,13 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`userProfileUpdate`](docs/sdks/userprofile/README.md#update) - Update profile
 - [`virtualMachinesCreate`](docs/sdks/virtualmachines/README.md#create) - Create VM
 - [`virtualMachinesCreateVirtualMachineAction`](docs/sdks/virtualmachines/README.md#createvirtualmachineaction) - Run VM power action
+- [`virtualMachinesCreateVirtualMachineNetworkAttachment`](docs/sdks/virtualmachines/README.md#createvirtualmachinenetworkattachment) - Attach a network to a VM
 - [`virtualMachinesDelete`](docs/sdks/virtualmachines/README.md#delete) - Destroy VM
+- [`virtualMachinesDestroyVirtualMachineNetworkAttachment`](docs/sdks/virtualmachines/README.md#destroyvirtualmachinenetworkattachment) - Detach a network from a VM
 - [`virtualMachinesGet`](docs/sdks/virtualmachines/README.md#get) - Retrieve VM
 - [`virtualMachinesList`](docs/sdks/virtualmachines/README.md#list) - List VMs
+- [`virtualMachinesListVirtualMachineNetworkAttachments`](docs/sdks/virtualmachines/README.md#listvirtualmachinenetworkattachments) - List VM network attachments
+- [`virtualMachinesShowVirtualMachineMetrics`](docs/sdks/virtualmachines/README.md#showvirtualmachinemetrics) - Retrieve VM metrics
 - [`virtualMachinesUpdateVirtualMachine`](docs/sdks/virtualmachines/README.md#updatevirtualmachine) - Update VM
 - [`virtualNetworksDelete`](docs/sdks/virtualnetworks/README.md#delete) - Delete VLAN
 - [`vpnSessionsCreate`](docs/sdks/vpnsessions/README.md#create) - Create VPN session
@@ -747,7 +755,7 @@ run();
 
 
 **Inherit from [`LatitudeshError`](./src/models/errors/latitudesherror.ts)**:
-* [`ErrorObject`](./src/models/errors/errorobject.ts): Applicable to 20 of 129 methods.*
+* [`ErrorObject`](./src/models/errors/errorobject.ts): Applicable to 20 of 133 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>

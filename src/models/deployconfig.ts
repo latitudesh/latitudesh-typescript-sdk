@@ -5,8 +5,36 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
+import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
+
+export const DeployConfigRole = {
+  Os: "os",
+  Storage: "storage",
+  Raw: "raw",
+} as const;
+export type DeployConfigRole = ClosedEnum<typeof DeployConfigRole>;
+
+export const RaidLevel = {
+  Raid0: "raid-0",
+  Raid1: "raid-1",
+} as const;
+export type RaidLevel = ClosedEnum<typeof RaidLevel>;
+
+export const Filesystem = {
+  Ext4: "ext4",
+  Xfs: "xfs",
+} as const;
+export type Filesystem = ClosedEnum<typeof Filesystem>;
+
+export type DiskLayout = {
+  count: number;
+  role: DeployConfigRole;
+  raidLevel?: RaidLevel | null | undefined;
+  filesystem?: Filesystem | null | undefined;
+  mountPoint?: string | null | undefined;
+};
 
 export type Partition = {
   path?: string | undefined;
@@ -18,6 +46,7 @@ export type DeployConfigAttributes = {
   operatingSystem?: string | undefined;
   hostname?: string | undefined;
   raid?: string | undefined;
+  diskLayout?: Array<DiskLayout> | null | undefined;
   userData?: string | undefined;
   sshKeys?: Array<string> | undefined;
   partitions?: Array<Partition> | null | undefined;
@@ -31,6 +60,86 @@ export type DeployConfigData = {
 export type DeployConfig = {
   data?: DeployConfigData | undefined;
 };
+
+/** @internal */
+export const DeployConfigRole$inboundSchema: z.ZodNativeEnum<
+  typeof DeployConfigRole
+> = z.nativeEnum(DeployConfigRole);
+/** @internal */
+export const DeployConfigRole$outboundSchema: z.ZodNativeEnum<
+  typeof DeployConfigRole
+> = DeployConfigRole$inboundSchema;
+
+/** @internal */
+export const RaidLevel$inboundSchema: z.ZodNativeEnum<typeof RaidLevel> = z
+  .nativeEnum(RaidLevel);
+/** @internal */
+export const RaidLevel$outboundSchema: z.ZodNativeEnum<typeof RaidLevel> =
+  RaidLevel$inboundSchema;
+
+/** @internal */
+export const Filesystem$inboundSchema: z.ZodNativeEnum<typeof Filesystem> = z
+  .nativeEnum(Filesystem);
+/** @internal */
+export const Filesystem$outboundSchema: z.ZodNativeEnum<typeof Filesystem> =
+  Filesystem$inboundSchema;
+
+/** @internal */
+export const DiskLayout$inboundSchema: z.ZodType<
+  DiskLayout,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  count: z.number().int(),
+  role: DeployConfigRole$inboundSchema,
+  raid_level: z.nullable(RaidLevel$inboundSchema).optional(),
+  filesystem: z.nullable(Filesystem$inboundSchema).optional(),
+  mount_point: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "raid_level": "raidLevel",
+    "mount_point": "mountPoint",
+  });
+});
+/** @internal */
+export type DiskLayout$Outbound = {
+  count: number;
+  role: string;
+  raid_level?: string | null | undefined;
+  filesystem?: string | null | undefined;
+  mount_point?: string | null | undefined;
+};
+
+/** @internal */
+export const DiskLayout$outboundSchema: z.ZodType<
+  DiskLayout$Outbound,
+  z.ZodTypeDef,
+  DiskLayout
+> = z.object({
+  count: z.number().int(),
+  role: DeployConfigRole$outboundSchema,
+  raidLevel: z.nullable(RaidLevel$outboundSchema).optional(),
+  filesystem: z.nullable(Filesystem$outboundSchema).optional(),
+  mountPoint: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    raidLevel: "raid_level",
+    mountPoint: "mount_point",
+  });
+});
+
+export function diskLayoutToJSON(diskLayout: DiskLayout): string {
+  return JSON.stringify(DiskLayout$outboundSchema.parse(diskLayout));
+}
+export function diskLayoutFromJSON(
+  jsonString: string,
+): SafeParseResult<DiskLayout, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DiskLayout$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DiskLayout' from JSON`,
+  );
+}
 
 /** @internal */
 export const Partition$inboundSchema: z.ZodType<
@@ -92,6 +201,8 @@ export const DeployConfigAttributes$inboundSchema: z.ZodType<
   operating_system: z.string().optional(),
   hostname: z.string().optional(),
   raid: z.string().optional(),
+  disk_layout: z.nullable(z.array(z.lazy(() => DiskLayout$inboundSchema)))
+    .optional(),
   user_data: z.string().optional(),
   ssh_keys: z.array(z.string()).optional(),
   partitions: z.nullable(z.array(z.lazy(() => Partition$inboundSchema)))
@@ -99,6 +210,7 @@ export const DeployConfigAttributes$inboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     "operating_system": "operatingSystem",
+    "disk_layout": "diskLayout",
     "user_data": "userData",
     "ssh_keys": "sshKeys",
   });
@@ -108,6 +220,7 @@ export type DeployConfigAttributes$Outbound = {
   operating_system?: string | undefined;
   hostname?: string | undefined;
   raid?: string | undefined;
+  disk_layout?: Array<DiskLayout$Outbound> | null | undefined;
   user_data?: string | undefined;
   ssh_keys?: Array<string> | undefined;
   partitions?: Array<Partition$Outbound> | null | undefined;
@@ -122,6 +235,8 @@ export const DeployConfigAttributes$outboundSchema: z.ZodType<
   operatingSystem: z.string().optional(),
   hostname: z.string().optional(),
   raid: z.string().optional(),
+  diskLayout: z.nullable(z.array(z.lazy(() => DiskLayout$outboundSchema)))
+    .optional(),
   userData: z.string().optional(),
   sshKeys: z.array(z.string()).optional(),
   partitions: z.nullable(z.array(z.lazy(() => Partition$outboundSchema)))
@@ -129,6 +244,7 @@ export const DeployConfigAttributes$outboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     operatingSystem: "operating_system",
+    diskLayout: "disk_layout",
     userData: "user_data",
     sshKeys: "ssh_keys",
   });

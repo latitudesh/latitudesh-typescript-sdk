@@ -4,9 +4,13 @@
 
 import { virtualMachinesCreate } from "../funcs/virtualMachinesCreate.js";
 import { virtualMachinesCreateVirtualMachineAction } from "../funcs/virtualMachinesCreateVirtualMachineAction.js";
+import { virtualMachinesCreateVirtualMachineNetworkAttachment } from "../funcs/virtualMachinesCreateVirtualMachineNetworkAttachment.js";
 import { virtualMachinesDelete } from "../funcs/virtualMachinesDelete.js";
+import { virtualMachinesDestroyVirtualMachineNetworkAttachment } from "../funcs/virtualMachinesDestroyVirtualMachineNetworkAttachment.js";
 import { virtualMachinesGet } from "../funcs/virtualMachinesGet.js";
 import { virtualMachinesList } from "../funcs/virtualMachinesList.js";
+import { virtualMachinesListVirtualMachineNetworkAttachments } from "../funcs/virtualMachinesListVirtualMachineNetworkAttachments.js";
+import { virtualMachinesShowVirtualMachineMetrics } from "../funcs/virtualMachinesShowVirtualMachineMetrics.js";
 import { virtualMachinesUpdateVirtualMachine } from "../funcs/virtualMachinesUpdateVirtualMachine.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as models from "../models/index.js";
@@ -113,6 +117,74 @@ export class VirtualMachines extends ClientSDK {
     options?: RequestOptions,
   ): Promise<void> {
     return unwrapAsync(virtualMachinesCreateVirtualMachineAction(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Retrieve VM metrics
+   *
+   * @remarks
+   * Retrieve a time series for a single metric of a Virtual Machine.
+   */
+  async showVirtualMachineMetrics(
+    request: operations.ShowVirtualMachineMetricsRequest,
+    options?: RequestOptions,
+  ): Promise<models.VirtualMachineMetrics> {
+    return unwrapAsync(virtualMachinesShowVirtualMachineMetrics(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List VM network attachments
+   *
+   * @remarks
+   * Lists the secondary network attachments currently configured for a Virtual Machine.
+   */
+  async listVirtualMachineNetworkAttachments(
+    request: operations.ListVirtualMachineNetworkAttachmentsRequest,
+    options?: RequestOptions,
+  ): Promise<models.VirtualMachineNetworkAttachments> {
+    return unwrapAsync(virtualMachinesListVirtualMachineNetworkAttachments(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Attach a network to a VM
+   *
+   * @remarks
+   * Attaches a virtual network (VLAN) to a Virtual Machine. Work runs asynchronously and returns 202 Accepted.
+   */
+  async createVirtualMachineNetworkAttachment(
+    request: operations.CreateVirtualMachineNetworkAttachmentRequest,
+    options?: RequestOptions,
+  ): Promise<operations.CreateVirtualMachineNetworkAttachmentResponse> {
+    return unwrapAsync(virtualMachinesCreateVirtualMachineNetworkAttachment(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Detach a network from a VM
+   *
+   * @remarks
+   * Detaches a virtual network (VLAN) from a Virtual Machine. Work runs asynchronously and returns 202 Accepted.
+   */
+  async destroyVirtualMachineNetworkAttachment(
+    request: operations.DestroyVirtualMachineNetworkAttachmentRequest,
+    options?: RequestOptions,
+  ): Promise<operations.DestroyVirtualMachineNetworkAttachmentResponse> {
+    return unwrapAsync(virtualMachinesDestroyVirtualMachineNetworkAttachment(
       this,
       request,
       options,

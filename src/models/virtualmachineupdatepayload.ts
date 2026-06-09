@@ -19,7 +19,11 @@ export type VirtualMachineUpdatePayloadAttributes = {
   /**
    * The new display name (hostname) for the Virtual Machine
    */
-  name: string;
+  name?: string | undefined;
+  /**
+   * Array of tag IDs to assign to the VM. Replaces all existing tags.
+   */
+  tags?: Array<string> | null | undefined;
 };
 
 export type VirtualMachineUpdatePayloadData = {
@@ -47,11 +51,13 @@ export const VirtualMachineUpdatePayloadAttributes$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  name: z.string(),
+  name: z.string().optional(),
+  tags: z.nullable(z.array(z.string())).optional(),
 });
 /** @internal */
 export type VirtualMachineUpdatePayloadAttributes$Outbound = {
-  name: string;
+  name?: string | undefined;
+  tags?: Array<string> | null | undefined;
 };
 
 /** @internal */
@@ -60,7 +66,8 @@ export const VirtualMachineUpdatePayloadAttributes$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   VirtualMachineUpdatePayloadAttributes
 > = z.object({
-  name: z.string(),
+  name: z.string().optional(),
+  tags: z.nullable(z.array(z.string())).optional(),
 });
 
 export function virtualMachineUpdatePayloadAttributesToJSON(
