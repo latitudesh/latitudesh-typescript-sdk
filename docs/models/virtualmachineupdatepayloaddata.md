@@ -7,9 +7,7 @@ import { VirtualMachineUpdatePayloadData } from "latitudesh-typescript-sdk/model
 
 let value: VirtualMachineUpdatePayloadData = {
   type: "virtual_machines",
-  attributes: {
-    name: "<value>",
-  },
+  attributes: {},
 };
 ```
 

@@ -16,7 +16,7 @@ export const tool$blockStorageDeleteStorageVolumes: ToolDefinition<
   name: "block-storage-delete-storage-volumes",
   description: `Delete volume
 
-Allows you to remove persistent storage from a project.`,
+Allows you to remove a volume from a project.`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await blockStorageDeleteStorageVolumes(

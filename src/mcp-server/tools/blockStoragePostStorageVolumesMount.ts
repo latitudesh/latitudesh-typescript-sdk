@@ -16,7 +16,7 @@ export const tool$blockStoragePostStorageVolumesMount: ToolDefinition<
   name: "block-storage-post-storage-volumes-mount",
   description: `Mount volume
 
-Mounts volume storage by adding the client to an allowed list`,
+Mounts a volume by adding the client to an allowed list`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await blockStoragePostStorageVolumesMount(

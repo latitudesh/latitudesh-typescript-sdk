@@ -12,6 +12,7 @@ let value: SshKeyDataAttributes = {};
 
 | Field                                                | Type                                                 | Required                                             | Description                                          |
 | ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- |
+| `tags`                                               | [models.SshKeyDataTag](../models/sshkeydatatag.md)[] | :heavy_minus_sign:                                   | N/A                                                  |
 | `name`                                               | *string*                                             | :heavy_minus_sign:                                   | Name of the SSH Key                                  |
 | `publicKey`                                          | *string*                                             | :heavy_minus_sign:                                   | SSH Public Key                                       |
 | `fingerprint`                                        | *string*                                             | :heavy_minus_sign:                                   | SSH Key fingerprint                                  |

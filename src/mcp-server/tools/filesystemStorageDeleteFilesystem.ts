@@ -16,7 +16,7 @@ export const tool$filesystemStorageDeleteFilesystem: ToolDefinition<
   name: "filesystem-storage-delete-filesystem",
   description: `Delete filesystem
 
-Allows you to remove persistent storage from a project.`,
+Allows you to remove a filesystem from a project.`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await filesystemStorageDeleteFilesystem(

@@ -13,7 +13,7 @@ const args = {
 export const tool$objectStoragePostStorageBuckets: ToolDefinition<typeof args> =
   {
     name: "object-storage-post-storage-buckets",
-    description: `Create object storage
+    description: `Create bucket
 
 Creates a new object storage bucket for a project.`,
     args,

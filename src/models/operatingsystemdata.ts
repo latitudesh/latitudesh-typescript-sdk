@@ -10,7 +10,7 @@ import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 
 export const OperatingSystemDataType = {
-  OperatingSystems: "operating_systems",
+  OperatingSystem: "operating_system",
 } as const;
 export type OperatingSystemDataType = ClosedEnum<
   typeof OperatingSystemDataType

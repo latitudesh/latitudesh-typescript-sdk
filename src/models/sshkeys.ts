@@ -7,58 +7,33 @@ import { safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 import {
+  PaginationMeta,
+  PaginationMeta$inboundSchema,
+  PaginationMeta$Outbound,
+  PaginationMeta$outboundSchema,
+} from "./paginationmeta.js";
+import {
   SshKeyData,
   SshKeyData$inboundSchema,
   SshKeyData$Outbound,
   SshKeyData$outboundSchema,
 } from "./sshkeydata.js";
 
-export type SshKeysMeta = {};
-
 export type SshKeys = {
   data?: Array<SshKeyData> | undefined;
-  meta?: SshKeysMeta | undefined;
+  meta?: PaginationMeta | undefined;
 };
-
-/** @internal */
-export const SshKeysMeta$inboundSchema: z.ZodType<
-  SshKeysMeta,
-  z.ZodTypeDef,
-  unknown
-> = z.object({});
-/** @internal */
-export type SshKeysMeta$Outbound = {};
-
-/** @internal */
-export const SshKeysMeta$outboundSchema: z.ZodType<
-  SshKeysMeta$Outbound,
-  z.ZodTypeDef,
-  SshKeysMeta
-> = z.object({});
-
-export function sshKeysMetaToJSON(sshKeysMeta: SshKeysMeta): string {
-  return JSON.stringify(SshKeysMeta$outboundSchema.parse(sshKeysMeta));
-}
-export function sshKeysMetaFromJSON(
-  jsonString: string,
-): SafeParseResult<SshKeysMeta, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SshKeysMeta$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SshKeysMeta' from JSON`,
-  );
-}
 
 /** @internal */
 export const SshKeys$inboundSchema: z.ZodType<SshKeys, z.ZodTypeDef, unknown> =
   z.object({
     data: z.array(SshKeyData$inboundSchema).optional(),
-    meta: z.lazy(() => SshKeysMeta$inboundSchema).optional(),
+    meta: PaginationMeta$inboundSchema.optional(),
   });
 /** @internal */
 export type SshKeys$Outbound = {
   data?: Array<SshKeyData$Outbound> | undefined;
-  meta?: SshKeysMeta$Outbound | undefined;
+  meta?: PaginationMeta$Outbound | undefined;
 };
 
 /** @internal */
@@ -68,7 +43,7 @@ export const SshKeys$outboundSchema: z.ZodType<
   SshKeys
 > = z.object({
   data: z.array(SshKeyData$outboundSchema).optional(),
-  meta: z.lazy(() => SshKeysMeta$outboundSchema).optional(),
+  meta: PaginationMeta$outboundSchema.optional(),
 });
 
 export function sshKeysToJSON(sshKeys: SshKeys): string {

@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  * Mount volume
  *
  * @remarks
- * Mounts volume storage by adding the client to an allowed list
+ * Mounts a volume by adding the client to an allowed list
  */
 export function blockStoragePostStorageVolumesMount(
   client: LatitudeshCore,

@@ -36,14 +36,14 @@ export type GetVpnSessionsRequest = {
   filterLocation?: FilterLocation | undefined;
 };
 
-export type Meta = {};
+export type GetVpnSessionsMeta = {};
 
 /**
  * Success
  */
 export type GetVpnSessionsResponse = {
   data?: Array<models.VpnSessionDataWithPassword> | undefined;
-  meta?: Meta | undefined;
+  meta?: GetVpnSessionsMeta | undefined;
 };
 
 /** @internal */
@@ -103,25 +103,35 @@ export function getVpnSessionsRequestFromJSON(
 }
 
 /** @internal */
-export const Meta$inboundSchema: z.ZodType<Meta, z.ZodTypeDef, unknown> = z
-  .object({});
+export const GetVpnSessionsMeta$inboundSchema: z.ZodType<
+  GetVpnSessionsMeta,
+  z.ZodTypeDef,
+  unknown
+> = z.object({});
 /** @internal */
-export type Meta$Outbound = {};
+export type GetVpnSessionsMeta$Outbound = {};
 
 /** @internal */
-export const Meta$outboundSchema: z.ZodType<Meta$Outbound, z.ZodTypeDef, Meta> =
-  z.object({});
+export const GetVpnSessionsMeta$outboundSchema: z.ZodType<
+  GetVpnSessionsMeta$Outbound,
+  z.ZodTypeDef,
+  GetVpnSessionsMeta
+> = z.object({});
 
-export function metaToJSON(meta: Meta): string {
-  return JSON.stringify(Meta$outboundSchema.parse(meta));
+export function getVpnSessionsMetaToJSON(
+  getVpnSessionsMeta: GetVpnSessionsMeta,
+): string {
+  return JSON.stringify(
+    GetVpnSessionsMeta$outboundSchema.parse(getVpnSessionsMeta),
+  );
 }
-export function metaFromJSON(
+export function getVpnSessionsMetaFromJSON(
   jsonString: string,
-): SafeParseResult<Meta, SDKValidationError> {
+): SafeParseResult<GetVpnSessionsMeta, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Meta$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Meta' from JSON`,
+    (x) => GetVpnSessionsMeta$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetVpnSessionsMeta' from JSON`,
   );
 }
 
@@ -132,12 +142,12 @@ export const GetVpnSessionsResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   data: z.array(models.VpnSessionDataWithPassword$inboundSchema).optional(),
-  meta: z.lazy(() => Meta$inboundSchema).optional(),
+  meta: z.lazy(() => GetVpnSessionsMeta$inboundSchema).optional(),
 });
 /** @internal */
 export type GetVpnSessionsResponse$Outbound = {
   data?: Array<models.VpnSessionDataWithPassword$Outbound> | undefined;
-  meta?: Meta$Outbound | undefined;
+  meta?: GetVpnSessionsMeta$Outbound | undefined;
 };
 
 /** @internal */
@@ -147,7 +157,7 @@ export const GetVpnSessionsResponse$outboundSchema: z.ZodType<
   GetVpnSessionsResponse
 > = z.object({
   data: z.array(models.VpnSessionDataWithPassword$outboundSchema).optional(),
-  meta: z.lazy(() => Meta$outboundSchema).optional(),
+  meta: z.lazy(() => GetVpnSessionsMeta$outboundSchema).optional(),
 });
 
 export function getVpnSessionsResponseToJSON(

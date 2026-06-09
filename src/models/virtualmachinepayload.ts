@@ -16,6 +16,11 @@ export type VirtualMachinePayloadType = ClosedEnum<
   typeof VirtualMachinePayloadType
 >;
 
+/**
+ * A user data record reference (encoded id_hash, e.g. 'ud_xxx', or raw integer id) to apply as cloud-init configuration
+ */
+export type UserDataUnion = number | string;
+
 export type VirtualMachinePayloadAttributes = {
   name?: string | undefined;
   /**
@@ -28,6 +33,14 @@ export type VirtualMachinePayloadAttributes = {
    * The operating system slug for the Virtual Machine. If not specified, defaults to ubuntu-24-04 for CPU plans or ubuntu24_ml_in_a_box for GPU plans.
    */
   operatingSystem?: string | null | undefined;
+  /**
+   * A user data record reference (encoded id_hash, e.g. 'ud_xxx', or raw integer id) to apply as cloud-init configuration
+   */
+  userData?: number | string | null | undefined;
+  /**
+   * Array of tag IDs to assign to the VM.
+   */
+  tags?: Array<string> | null | undefined;
 };
 
 export type VirtualMachinePayloadData = {
@@ -49,6 +62,35 @@ export const VirtualMachinePayloadType$outboundSchema: z.ZodNativeEnum<
 > = VirtualMachinePayloadType$inboundSchema;
 
 /** @internal */
+export const UserDataUnion$inboundSchema: z.ZodType<
+  UserDataUnion,
+  z.ZodTypeDef,
+  unknown
+> = z.union([z.number().int(), z.string()]);
+/** @internal */
+export type UserDataUnion$Outbound = number | string;
+
+/** @internal */
+export const UserDataUnion$outboundSchema: z.ZodType<
+  UserDataUnion$Outbound,
+  z.ZodTypeDef,
+  UserDataUnion
+> = z.union([z.number().int(), z.string()]);
+
+export function userDataUnionToJSON(userDataUnion: UserDataUnion): string {
+  return JSON.stringify(UserDataUnion$outboundSchema.parse(userDataUnion));
+}
+export function userDataUnionFromJSON(
+  jsonString: string,
+): SafeParseResult<UserDataUnion, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UserDataUnion$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UserDataUnion' from JSON`,
+  );
+}
+
+/** @internal */
 export const VirtualMachinePayloadAttributes$inboundSchema: z.ZodType<
   VirtualMachinePayloadAttributes,
   z.ZodTypeDef,
@@ -59,10 +101,13 @@ export const VirtualMachinePayloadAttributes$inboundSchema: z.ZodType<
   ssh_keys: z.nullable(z.array(z.string())).optional(),
   project: z.string().default("my-project"),
   operating_system: z.nullable(z.string()).optional(),
+  user_data: z.nullable(z.union([z.number().int(), z.string()])).optional(),
+  tags: z.nullable(z.array(z.string())).optional(),
 }).transform((v) => {
   return remap$(v, {
     "ssh_keys": "sshKeys",
     "operating_system": "operatingSystem",
+    "user_data": "userData",
   });
 });
 /** @internal */
@@ -72,6 +117,8 @@ export type VirtualMachinePayloadAttributes$Outbound = {
   ssh_keys?: Array<string> | null | undefined;
   project: string;
   operating_system?: string | null | undefined;
+  user_data?: number | string | null | undefined;
+  tags?: Array<string> | null | undefined;
 };
 
 /** @internal */
@@ -85,10 +132,13 @@ export const VirtualMachinePayloadAttributes$outboundSchema: z.ZodType<
   sshKeys: z.nullable(z.array(z.string())).optional(),
   project: z.string().default("my-project"),
   operatingSystem: z.nullable(z.string()).optional(),
+  userData: z.nullable(z.union([z.number().int(), z.string()])).optional(),
+  tags: z.nullable(z.array(z.string())).optional(),
 }).transform((v) => {
   return remap$(v, {
     sshKeys: "ssh_keys",
     operatingSystem: "operating_system",
+    userData: "user_data",
   });
 });
 

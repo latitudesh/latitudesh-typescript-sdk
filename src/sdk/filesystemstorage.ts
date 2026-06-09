@@ -49,7 +49,7 @@ export class FilesystemStorage extends ClientSDK {
    * Delete filesystem
    *
    * @remarks
-   * Allows you to remove persistent storage from a project.
+   * Allows you to remove a filesystem from a project.
    */
   async deleteFilesystem(
     request: operations.DeleteStorageFilesystemsRequest,

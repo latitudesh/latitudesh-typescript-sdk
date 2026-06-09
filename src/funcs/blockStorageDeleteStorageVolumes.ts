@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  * Delete volume
  *
  * @remarks
- * Allows you to remove persistent storage from a project.
+ * Allows you to remove a volume from a project.
  */
 export function blockStorageDeleteStorageVolumes(
   client: LatitudeshCore,

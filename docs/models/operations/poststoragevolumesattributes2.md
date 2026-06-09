@@ -16,5 +16,5 @@ let value: PostStorageVolumesAttributes2 = {
 | Field                                      | Type                                       | Required                                   | Description                                |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
 | `project`                                  | *string*                                   | :heavy_check_mark:                         | Project ID or slug                         |
-| `name`                                     | *string*                                   | :heavy_check_mark:                         | Storage name                               |
+| `name`                                     | *string*                                   | :heavy_check_mark:                         | Volume name                                |
 | `sizeInGb`                                 | *number*                                   | :heavy_minus_sign:                         | Size in GB (not required, default is 1500) |

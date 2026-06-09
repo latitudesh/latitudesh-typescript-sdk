@@ -1,11 +1,11 @@
-# Tag
+# SshKeyDataTag
 
 ## Example Usage
 
 ```typescript
-import { Tag } from "latitudesh-typescript-sdk/models";
+import { SshKeyDataTag } from "latitudesh-typescript-sdk/models";
 
-let value: Tag = {};
+let value: SshKeyDataTag = {};
 ```
 
 ## Fields

@@ -27,7 +27,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Retrieve object storage
+ * Retrieve bucket
  *
  * @remarks
  * Shows details of a specific object storage.

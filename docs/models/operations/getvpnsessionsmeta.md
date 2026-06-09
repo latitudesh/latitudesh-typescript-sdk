@@ -1,11 +1,11 @@
-# Meta
+# GetVpnSessionsMeta
 
 ## Example Usage
 
 ```typescript
-import { Meta } from "latitudesh-typescript-sdk/models/operations";
+import { GetVpnSessionsMeta } from "latitudesh-typescript-sdk/models/operations";
 
-let value: Meta = {};
+let value: GetVpnSessionsMeta = {};
 ```
 
 ## Fields

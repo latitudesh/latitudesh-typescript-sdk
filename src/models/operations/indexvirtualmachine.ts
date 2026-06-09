@@ -14,7 +14,11 @@ export type IndexVirtualMachineRequest = {
    */
   filterProject?: string | undefined;
   /**
-   * The `credentials` are provided as extra attributes that are lazy loaded. To request it, just set `extra_fields[virtual_machines]=credentials` in the query string.
+   * The tag IDs to filter by, separated by comma, e.g. `filter[tags]=tag_1,tag_2` will return VMs with `tag_1` AND `tag_2`.
+   */
+  filterTags?: string | undefined;
+  /**
+   * Comma-separated extra attributes that are lazy-loaded. Supported values: `credentials`, `pending_restart`. Example: `extra_fields[virtual_machines]=credentials,pending_restart`.
    */
   extraFieldsVirtualMachines?: string | undefined;
 };
@@ -26,16 +30,19 @@ export const IndexVirtualMachineRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   "filter[project]": z.string().optional(),
+  "filter[tags]": z.string().optional(),
   "extra_fields[virtual_machines]": z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "filter[project]": "filterProject",
+    "filter[tags]": "filterTags",
     "extra_fields[virtual_machines]": "extraFieldsVirtualMachines",
   });
 });
 /** @internal */
 export type IndexVirtualMachineRequest$Outbound = {
   "filter[project]"?: string | undefined;
+  "filter[tags]"?: string | undefined;
   "extra_fields[virtual_machines]"?: string | undefined;
 };
 
@@ -46,10 +53,12 @@ export const IndexVirtualMachineRequest$outboundSchema: z.ZodType<
   IndexVirtualMachineRequest
 > = z.object({
   filterProject: z.string().optional(),
+  filterTags: z.string().optional(),
   extraFieldsVirtualMachines: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     filterProject: "filter[project]",
+    filterTags: "filter[tags]",
     extraFieldsVirtualMachines: "extra_fields[virtual_machines]",
   });
 });

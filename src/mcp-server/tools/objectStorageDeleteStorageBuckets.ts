@@ -14,7 +14,7 @@ export const tool$objectStorageDeleteStorageBuckets: ToolDefinition<
   typeof args
 > = {
   name: "object-storage-delete-storage-buckets",
-  description: `Delete object storage
+  description: `Delete bucket
 
 Allows you to remove an object storage from a project.`,
   args,

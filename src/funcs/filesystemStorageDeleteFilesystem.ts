@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  * Delete filesystem
  *
  * @remarks
- * Allows you to remove persistent storage from a project.
+ * Allows you to remove a filesystem from a project.
  */
 export function filesystemStorageDeleteFilesystem(
   client: LatitudeshCore,

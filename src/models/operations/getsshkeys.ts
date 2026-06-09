@@ -21,6 +21,18 @@ export type GetSshKeysRequest = {
    * The tags ids to filter by, separated by comma, e.g. `filter[tags]=tag_1,tag_2`will return ssh keys with `tag_1` AND `tag_2`
    */
   filterTags?: string | undefined;
+  /**
+   * Request aggregate stats in the response `meta`. Use `count` to get the total number of records, returned as `meta.stats.total.count`.
+   */
+  statsTotal?: string | undefined;
+  /**
+   * Page number for pagination
+   */
+  pageNumber?: number | undefined;
+  /**
+   * Number of items per page
+   */
+  pageSize?: number | undefined;
 };
 
 /** @internal */
@@ -32,11 +44,17 @@ export const GetSshKeysRequest$inboundSchema: z.ZodType<
   "filter[project]": z.string().optional(),
   "filter[scope]": z.string().optional(),
   "filter[tags]": z.string().optional(),
+  "stats[total]": z.string().optional(),
+  "page[number]": z.number().int().optional(),
+  "page[size]": z.number().int().optional(),
 }).transform((v) => {
   return remap$(v, {
     "filter[project]": "filterProject",
     "filter[scope]": "filterScope",
     "filter[tags]": "filterTags",
+    "stats[total]": "statsTotal",
+    "page[number]": "pageNumber",
+    "page[size]": "pageSize",
   });
 });
 /** @internal */
@@ -44,6 +62,9 @@ export type GetSshKeysRequest$Outbound = {
   "filter[project]"?: string | undefined;
   "filter[scope]"?: string | undefined;
   "filter[tags]"?: string | undefined;
+  "stats[total]"?: string | undefined;
+  "page[number]"?: number | undefined;
+  "page[size]"?: number | undefined;
 };
 
 /** @internal */
@@ -55,11 +76,17 @@ export const GetSshKeysRequest$outboundSchema: z.ZodType<
   filterProject: z.string().optional(),
   filterScope: z.string().optional(),
   filterTags: z.string().optional(),
+  statsTotal: z.string().optional(),
+  pageNumber: z.number().int().optional(),
+  pageSize: z.number().int().optional(),
 }).transform((v) => {
   return remap$(v, {
     filterProject: "filter[project]",
     filterScope: "filter[scope]",
     filterTags: "filter[tags]",
+    statsTotal: "stats[total]",
+    pageNumber: "page[number]",
+    pageSize: "page[size]",
   });
 });
 

@@ -12,7 +12,7 @@ const args = {
 
 export const tool$objectStorageGetStorageBucket: ToolDefinition<typeof args> = {
   name: "object-storage-get-storage-bucket",
-  description: `Retrieve object storage
+  description: `Retrieve bucket
 
 Shows details of a specific object storage.`,
   args,

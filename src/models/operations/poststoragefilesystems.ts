@@ -23,7 +23,7 @@ export type PostStorageFilesystemsAttributes2 = {
    */
   project: string;
   /**
-   * Storage name
+   * Filesystem name
    */
   name: string;
   /**

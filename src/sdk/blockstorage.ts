@@ -50,7 +50,7 @@ export class BlockStorage extends ClientSDK {
    * Retrieve volume
    *
    * @remarks
-   * Shows details of a specific volume storage.
+   * Shows details of a specific volume.
    */
   async getStorageVolume(
     request: operations.GetStorageVolumeRequest,
@@ -67,7 +67,7 @@ export class BlockStorage extends ClientSDK {
    * Delete volume
    *
    * @remarks
-   * Allows you to remove persistent storage from a project.
+   * Allows you to remove a volume from a project.
    */
   async deleteStorageVolumes(
     request: operations.DeleteStorageVolumesRequest,
@@ -84,7 +84,7 @@ export class BlockStorage extends ClientSDK {
    * Mount volume
    *
    * @remarks
-   * Mounts volume storage by adding the client to an allowed list
+   * Mounts a volume by adding the client to an allowed list
    */
   async postStorageVolumesMount(
     request: operations.PostStorageVolumesMountRequest,

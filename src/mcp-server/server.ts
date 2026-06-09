@@ -133,9 +133,13 @@ import { tool$userProfileListTeams } from "./tools/userProfileListTeams.js";
 import { tool$userProfileUpdate } from "./tools/userProfileUpdate.js";
 import { tool$virtualMachinesCreate } from "./tools/virtualMachinesCreate.js";
 import { tool$virtualMachinesCreateVirtualMachineAction } from "./tools/virtualMachinesCreateVirtualMachineAction.js";
+import { tool$virtualMachinesCreateVirtualMachineNetworkAttachment } from "./tools/virtualMachinesCreateVirtualMachineNetworkAttachment.js";
 import { tool$virtualMachinesDelete } from "./tools/virtualMachinesDelete.js";
+import { tool$virtualMachinesDestroyVirtualMachineNetworkAttachment } from "./tools/virtualMachinesDestroyVirtualMachineNetworkAttachment.js";
 import { tool$virtualMachinesGet } from "./tools/virtualMachinesGet.js";
 import { tool$virtualMachinesList } from "./tools/virtualMachinesList.js";
+import { tool$virtualMachinesListVirtualMachineNetworkAttachments } from "./tools/virtualMachinesListVirtualMachineNetworkAttachments.js";
+import { tool$virtualMachinesShowVirtualMachineMetrics } from "./tools/virtualMachinesShowVirtualMachineMetrics.js";
 import { tool$virtualMachinesUpdateVirtualMachine } from "./tools/virtualMachinesUpdateVirtualMachine.js";
 import { tool$virtualNetworksDelete } from "./tools/virtualNetworksDelete.js";
 import { tool$vpnSessionsCreate } from "./tools/vpnSessionsCreate.js";
@@ -154,7 +158,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Latitudesh",
-    version: "0.4.1",
+    version: "0.5.0",
   });
 
   const client = new LatitudeshCore({
@@ -298,6 +302,10 @@ export function createMCPServer(deps: {
   tool(tool$virtualMachinesDelete);
   tool(tool$virtualMachinesUpdateVirtualMachine);
   tool(tool$virtualMachinesCreateVirtualMachineAction);
+  tool(tool$virtualMachinesShowVirtualMachineMetrics);
+  tool(tool$virtualMachinesListVirtualMachineNetworkAttachments);
+  tool(tool$virtualMachinesCreateVirtualMachineNetworkAttachment);
+  tool(tool$virtualMachinesDestroyVirtualMachineNetworkAttachment);
   tool(tool$privateNetworksList);
   tool(tool$privateNetworksCreate);
   tool(tool$privateNetworksUpdate);

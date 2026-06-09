@@ -29,7 +29,7 @@ import { Result } from "../types/fp.js";
  * Retrieve volume
  *
  * @remarks
- * Shows details of a specific volume storage.
+ * Shows details of a specific volume.
  */
 export function blockStorageGetStorageVolume(
   client: LatitudeshCore,

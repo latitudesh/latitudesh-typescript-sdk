@@ -27,7 +27,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Create object storage
+ * Create bucket
  *
  * @remarks
  * Creates a new object storage bucket for a project.

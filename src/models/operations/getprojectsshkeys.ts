@@ -17,6 +17,18 @@ export type GetProjectSshKeysRequest = {
    * The tags ids to filter by, separated by comma, e.g. `filter[tags]=tag_1,tag_2`will return ssh keys with `tag_1` AND `tag_2`
    */
   filterTags?: string | undefined;
+  /**
+   * Request aggregate stats in the response `meta`. Use `count` to get the total number of records, returned as `meta.stats.total.count`.
+   */
+  statsTotal?: string | undefined;
+  /**
+   * Page number for pagination
+   */
+  pageNumber?: number | undefined;
+  /**
+   * Number of items per page
+   */
+  pageSize?: number | undefined;
 };
 
 /** @internal */
@@ -27,16 +39,25 @@ export const GetProjectSshKeysRequest$inboundSchema: z.ZodType<
 > = z.object({
   project_id: z.string(),
   "filter[tags]": z.string().optional(),
+  "stats[total]": z.string().optional(),
+  "page[number]": z.number().int().optional(),
+  "page[size]": z.number().int().optional(),
 }).transform((v) => {
   return remap$(v, {
     "project_id": "projectId",
     "filter[tags]": "filterTags",
+    "stats[total]": "statsTotal",
+    "page[number]": "pageNumber",
+    "page[size]": "pageSize",
   });
 });
 /** @internal */
 export type GetProjectSshKeysRequest$Outbound = {
   project_id: string;
   "filter[tags]"?: string | undefined;
+  "stats[total]"?: string | undefined;
+  "page[number]"?: number | undefined;
+  "page[size]"?: number | undefined;
 };
 
 /** @internal */
@@ -47,10 +68,16 @@ export const GetProjectSshKeysRequest$outboundSchema: z.ZodType<
 > = z.object({
   projectId: z.string(),
   filterTags: z.string().optional(),
+  statsTotal: z.string().optional(),
+  pageNumber: z.number().int().optional(),
+  pageSize: z.number().int().optional(),
 }).transform((v) => {
   return remap$(v, {
     projectId: "project_id",
     filterTags: "filter[tags]",
+    statsTotal: "stats[total]",
+    pageNumber: "page[number]",
+    pageSize: "page[size]",
   });
 });
 
