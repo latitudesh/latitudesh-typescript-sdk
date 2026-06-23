@@ -59,14 +59,17 @@ export type GetServersRequest = {
    */
   filterRamLte?: number | undefined;
   /**
-   * The disk size in Gigabytes to filter by, should be used with the following options:
-   *
-   * @remarks
-   *                               [eql] to filter for values equal to the provided value.
-   *                               [gte] to filter for values greater than or equal to the provided value.
-   *                               [lte] to filter by values lower than or equal to the provided value.
+   * Filter servers with disk size (in GB) equal to the provided value.
    */
-  filterDisk?: number | undefined;
+  filterDiskEql?: number | undefined;
+  /**
+   * Filter servers with disk size (in GB) greater than or equal to the provided value.
+   */
+  filterDiskGte?: number | undefined;
+  /**
+   * Filter servers with disk size (in GB) less than or equal to the provided value.
+   */
+  filterDiskLte?: number | undefined;
   /**
    * The tags IDs to filter by, separated by comma, e.g. `filter[tags]=tag_1,tag_2`will return servers with `tag_1` AND `tag_2`
    */
@@ -107,7 +110,9 @@ export const GetServersRequest$inboundSchema: z.ZodType<
   "filter[ram][eql]": z.number().int().optional(),
   "filter[ram][gte]": z.number().int().optional(),
   "filter[ram][lte]": z.number().int().optional(),
-  "filter[disk]": z.number().int().optional(),
+  "filter[disk][eql]": z.number().int().optional(),
+  "filter[disk][gte]": z.number().int().optional(),
+  "filter[disk][lte]": z.number().int().optional(),
   "filter[tags]": z.string().optional(),
   "extra_fields[servers]": z.string().optional(),
   "page[size]": z.number().int().default(20),
@@ -126,7 +131,9 @@ export const GetServersRequest$inboundSchema: z.ZodType<
     "filter[ram][eql]": "filterRamEql",
     "filter[ram][gte]": "filterRamGte",
     "filter[ram][lte]": "filterRamLte",
-    "filter[disk]": "filterDisk",
+    "filter[disk][eql]": "filterDiskEql",
+    "filter[disk][gte]": "filterDiskGte",
+    "filter[disk][lte]": "filterDiskLte",
     "filter[tags]": "filterTags",
     "extra_fields[servers]": "extraFieldsServers",
     "page[size]": "pageSize",
@@ -147,7 +154,9 @@ export type GetServersRequest$Outbound = {
   "filter[ram][eql]"?: number | undefined;
   "filter[ram][gte]"?: number | undefined;
   "filter[ram][lte]"?: number | undefined;
-  "filter[disk]"?: number | undefined;
+  "filter[disk][eql]"?: number | undefined;
+  "filter[disk][gte]"?: number | undefined;
+  "filter[disk][lte]"?: number | undefined;
   "filter[tags]"?: string | undefined;
   "extra_fields[servers]"?: string | undefined;
   "page[size]": number;
@@ -172,7 +181,9 @@ export const GetServersRequest$outboundSchema: z.ZodType<
   filterRamEql: z.number().int().optional(),
   filterRamGte: z.number().int().optional(),
   filterRamLte: z.number().int().optional(),
-  filterDisk: z.number().int().optional(),
+  filterDiskEql: z.number().int().optional(),
+  filterDiskGte: z.number().int().optional(),
+  filterDiskLte: z.number().int().optional(),
   filterTags: z.string().optional(),
   extraFieldsServers: z.string().optional(),
   pageSize: z.number().int().default(20),
@@ -191,7 +202,9 @@ export const GetServersRequest$outboundSchema: z.ZodType<
     filterRamEql: "filter[ram][eql]",
     filterRamGte: "filter[ram][gte]",
     filterRamLte: "filter[ram][lte]",
-    filterDisk: "filter[disk]",
+    filterDiskEql: "filter[disk][eql]",
+    filterDiskGte: "filter[disk][gte]",
+    filterDiskLte: "filter[disk][lte]",
     filterTags: "filter[tags]",
     extraFieldsServers: "extra_fields[servers]",
     pageSize: "page[size]",

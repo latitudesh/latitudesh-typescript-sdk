@@ -10,7 +10,7 @@ let value: IpAddress = {};
 
 ## Fields
 
-| Field                                                          | Type                                                           | Required                                                       | Description                                                    |
-| -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- |
-| `id`                                                           | *string*                                                       | :heavy_minus_sign:                                             | N/A                                                            |
-| `attributes`                                                   | [models.IpAddressAttributes](../models/ipaddressattributes.md) | :heavy_minus_sign:                                             | N/A                                                            |
+| Field                                              | Type                                               | Required                                           | Description                                        |
+| -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- |
+| `data`                                             | [models.IpAddressData](../models/ipaddressdata.md) | :heavy_minus_sign:                                 | N/A                                                |
+| `meta`                                             | [models.IpAddressMeta](../models/ipaddressmeta.md) | :heavy_minus_sign:                                 | N/A                                                |

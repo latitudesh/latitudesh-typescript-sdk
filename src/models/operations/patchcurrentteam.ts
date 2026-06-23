@@ -15,19 +15,10 @@ export const PatchCurrentTeamType2 = {
 } as const;
 export type PatchCurrentTeamType2 = ClosedEnum<typeof PatchCurrentTeamType2>;
 
-export const PatchCurrentTeamCurrency2 = {
-  Usd: "USD",
-  Brl: "BRL",
-} as const;
-export type PatchCurrentTeamCurrency2 = ClosedEnum<
-  typeof PatchCurrentTeamCurrency2
->;
-
 export type PatchCurrentTeamAttributes2 = {
   address?: string | undefined;
   name?: string | undefined;
-  currency?: PatchCurrentTeamCurrency2 | undefined;
-  referredCode?: string | undefined;
+  enforceMfa?: boolean | undefined;
 };
 
 export type PatchCurrentTeamData2 = {
@@ -62,15 +53,6 @@ export const PatchCurrentTeamType2$outboundSchema: z.ZodNativeEnum<
 > = PatchCurrentTeamType2$inboundSchema;
 
 /** @internal */
-export const PatchCurrentTeamCurrency2$inboundSchema: z.ZodNativeEnum<
-  typeof PatchCurrentTeamCurrency2
-> = z.nativeEnum(PatchCurrentTeamCurrency2);
-/** @internal */
-export const PatchCurrentTeamCurrency2$outboundSchema: z.ZodNativeEnum<
-  typeof PatchCurrentTeamCurrency2
-> = PatchCurrentTeamCurrency2$inboundSchema;
-
-/** @internal */
 export const PatchCurrentTeamAttributes2$inboundSchema: z.ZodType<
   PatchCurrentTeamAttributes2,
   z.ZodTypeDef,
@@ -78,19 +60,17 @@ export const PatchCurrentTeamAttributes2$inboundSchema: z.ZodType<
 > = z.object({
   address: z.string().optional(),
   name: z.string().optional(),
-  currency: PatchCurrentTeamCurrency2$inboundSchema.default("USD"),
-  referred_code: z.string().optional(),
+  enforce_mfa: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
-    "referred_code": "referredCode",
+    "enforce_mfa": "enforceMfa",
   });
 });
 /** @internal */
 export type PatchCurrentTeamAttributes2$Outbound = {
   address?: string | undefined;
   name?: string | undefined;
-  currency: string;
-  referred_code?: string | undefined;
+  enforce_mfa?: boolean | undefined;
 };
 
 /** @internal */
@@ -101,11 +81,10 @@ export const PatchCurrentTeamAttributes2$outboundSchema: z.ZodType<
 > = z.object({
   address: z.string().optional(),
   name: z.string().optional(),
-  currency: PatchCurrentTeamCurrency2$outboundSchema.default("USD"),
-  referredCode: z.string().optional(),
+  enforceMfa: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
-    referredCode: "referred_code",
+    enforceMfa: "enforce_mfa",
   });
 });
 

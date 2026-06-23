@@ -1,11 +1,11 @@
-# UserDataMeta
+# IpAddressesMeta
 
 ## Example Usage
 
 ```typescript
-import { UserDataMeta } from "latitudesh-typescript-sdk/models";
+import { IpAddressesMeta } from "latitudesh-typescript-sdk/models";
 
-let value: UserDataMeta = {};
+let value: IpAddressesMeta = {};
 ```
 
 ## Fields

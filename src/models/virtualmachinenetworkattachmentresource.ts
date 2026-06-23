@@ -26,10 +26,6 @@ export type VirtualMachineNetworkAttachmentResourceAttributes = {
    */
   vid?: number | undefined;
   /**
-   * The underlying NetworkAttachmentDefinition name
-   */
-  nadName?: string | undefined;
-  /**
    * True if the attachment requires a VM restart to take effect
    */
   pendingRestart?: boolean | undefined;
@@ -62,12 +58,10 @@ export const VirtualMachineNetworkAttachmentResourceAttributes$inboundSchema:
   > = z.object({
     virtual_network_id: z.string().optional(),
     vid: z.number().int().optional(),
-    nad_name: z.string().optional(),
     pending_restart: z.boolean().optional(),
   }).transform((v) => {
     return remap$(v, {
       "virtual_network_id": "virtualNetworkId",
-      "nad_name": "nadName",
       "pending_restart": "pendingRestart",
     });
   });
@@ -75,7 +69,6 @@ export const VirtualMachineNetworkAttachmentResourceAttributes$inboundSchema:
 export type VirtualMachineNetworkAttachmentResourceAttributes$Outbound = {
   virtual_network_id?: string | undefined;
   vid?: number | undefined;
-  nad_name?: string | undefined;
   pending_restart?: boolean | undefined;
 };
 
@@ -88,12 +81,10 @@ export const VirtualMachineNetworkAttachmentResourceAttributes$outboundSchema:
   > = z.object({
     virtualNetworkId: z.string().optional(),
     vid: z.number().int().optional(),
-    nadName: z.string().optional(),
     pendingRestart: z.boolean().optional(),
   }).transform((v) => {
     return remap$(v, {
       virtualNetworkId: "virtual_network_id",
-      nadName: "nad_name",
       pendingRestart: "pending_restart",
     });
   });

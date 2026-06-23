@@ -31,7 +31,7 @@ List all Users Data in the project. These scripts can be used to configure serve
       };
     }
 
-    const value = result.value;
+    const value = result.value.result;
 
     return formatResult(value, apiCall);
   },

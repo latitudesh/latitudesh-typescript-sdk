@@ -437,7 +437,9 @@ const latitudesh = new Latitudesh({
 async function run() {
   const result = await latitudesh.userData.list({});
 
-  console.log(result);
+  for await (const page of result) {
+    console.log(page);
+  }
 }
 
 run();
@@ -461,7 +463,9 @@ async function run() {
   const res = await userDataList(latitudesh, {});
   if (res.ok) {
     const { value: result } = res;
-    console.log(result);
+    for await (const page of result) {
+    console.log(page);
+  }
   } else {
     console.log("userDataList failed:", res.error);
   }
@@ -481,7 +485,7 @@ run();
 
 ### Response
 
-**Promise\<[models.UserData](../../models/userdata.md)\>**
+**Promise\<[operations.GetUsersDataResponse](../../models/operations/getusersdataresponse.md)\>**
 
 ### Errors
 

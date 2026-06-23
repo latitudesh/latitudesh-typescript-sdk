@@ -7,15 +7,49 @@ import { safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 import {
-  IpAddress,
-  IpAddress$inboundSchema,
-  IpAddress$Outbound,
-  IpAddress$outboundSchema,
-} from "./ipaddress.js";
+  IpAddressData,
+  IpAddressData$inboundSchema,
+  IpAddressData$Outbound,
+  IpAddressData$outboundSchema,
+} from "./ipaddressdata.js";
+
+export type IpAddressesMeta = {};
 
 export type IpAddresses = {
-  data?: Array<IpAddress> | undefined;
+  data?: Array<IpAddressData> | undefined;
+  meta?: IpAddressesMeta | undefined;
 };
+
+/** @internal */
+export const IpAddressesMeta$inboundSchema: z.ZodType<
+  IpAddressesMeta,
+  z.ZodTypeDef,
+  unknown
+> = z.object({});
+/** @internal */
+export type IpAddressesMeta$Outbound = {};
+
+/** @internal */
+export const IpAddressesMeta$outboundSchema: z.ZodType<
+  IpAddressesMeta$Outbound,
+  z.ZodTypeDef,
+  IpAddressesMeta
+> = z.object({});
+
+export function ipAddressesMetaToJSON(
+  ipAddressesMeta: IpAddressesMeta,
+): string {
+  return JSON.stringify(IpAddressesMeta$outboundSchema.parse(ipAddressesMeta));
+}
+export function ipAddressesMetaFromJSON(
+  jsonString: string,
+): SafeParseResult<IpAddressesMeta, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => IpAddressesMeta$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'IpAddressesMeta' from JSON`,
+  );
+}
 
 /** @internal */
 export const IpAddresses$inboundSchema: z.ZodType<
@@ -23,11 +57,13 @@ export const IpAddresses$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  data: z.array(IpAddress$inboundSchema).optional(),
+  data: z.array(IpAddressData$inboundSchema).optional(),
+  meta: z.lazy(() => IpAddressesMeta$inboundSchema).optional(),
 });
 /** @internal */
 export type IpAddresses$Outbound = {
-  data?: Array<IpAddress$Outbound> | undefined;
+  data?: Array<IpAddressData$Outbound> | undefined;
+  meta?: IpAddressesMeta$Outbound | undefined;
 };
 
 /** @internal */
@@ -36,7 +72,8 @@ export const IpAddresses$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   IpAddresses
 > = z.object({
-  data: z.array(IpAddress$outboundSchema).optional(),
+  data: z.array(IpAddressData$outboundSchema).optional(),
+  meta: z.lazy(() => IpAddressesMeta$outboundSchema).optional(),
 });
 
 export function ipAddressesToJSON(ipAddresses: IpAddresses): string {

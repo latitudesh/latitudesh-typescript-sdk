@@ -3,7 +3,6 @@
  */
 
 import { LatitudeshCore } from "../core.js";
-import { dlv } from "../lib/dlv.js";
 import { encodeFormQuery } from "../lib/encodings.js";
 import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
@@ -106,7 +105,9 @@ async function $do(
     "extra_fields[servers]": payload?.["extra_fields[servers]"],
     "filter[created_at_gte]": payload?.["filter[created_at_gte]"],
     "filter[created_at_lte]": payload?.["filter[created_at_lte]"],
-    "filter[disk]": payload?.["filter[disk]"],
+    "filter[disk][eql]": payload?.["filter[disk][eql]"],
+    "filter[disk][gte]": payload?.["filter[disk][gte]"],
+    "filter[disk][lte]": payload?.["filter[disk][lte]"],
     "filter[gpu]": payload?.["filter[gpu]"],
     "filter[hostname]": payload?.["filter[hostname]"],
     "filter[label]": payload?.["filter[label]"],
@@ -227,7 +228,7 @@ async function $do(
     if (!responseData) {
       return { next: () => null };
     }
-    const results = dlv(responseData, "data");
+    const results = (responseData as { data?: unknown }).data;
     if (!Array.isArray(results) || !results.length) {
       return { next: () => null };
     }

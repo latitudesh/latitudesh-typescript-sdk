@@ -7,47 +7,22 @@ import { safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 import {
+  PaginationMeta,
+  PaginationMeta$inboundSchema,
+  PaginationMeta$Outbound,
+  PaginationMeta$outboundSchema,
+} from "./paginationmeta.js";
+import {
   UserDataObject,
   UserDataObject$inboundSchema,
   UserDataObject$Outbound,
   UserDataObject$outboundSchema,
 } from "./userdataobject.js";
 
-export type UserDataMeta = {};
-
 export type UserData = {
   data?: Array<UserDataObject> | undefined;
-  meta?: UserDataMeta | undefined;
+  meta?: PaginationMeta | undefined;
 };
-
-/** @internal */
-export const UserDataMeta$inboundSchema: z.ZodType<
-  UserDataMeta,
-  z.ZodTypeDef,
-  unknown
-> = z.object({});
-/** @internal */
-export type UserDataMeta$Outbound = {};
-
-/** @internal */
-export const UserDataMeta$outboundSchema: z.ZodType<
-  UserDataMeta$Outbound,
-  z.ZodTypeDef,
-  UserDataMeta
-> = z.object({});
-
-export function userDataMetaToJSON(userDataMeta: UserDataMeta): string {
-  return JSON.stringify(UserDataMeta$outboundSchema.parse(userDataMeta));
-}
-export function userDataMetaFromJSON(
-  jsonString: string,
-): SafeParseResult<UserDataMeta, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UserDataMeta$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UserDataMeta' from JSON`,
-  );
-}
 
 /** @internal */
 export const UserData$inboundSchema: z.ZodType<
@@ -56,12 +31,12 @@ export const UserData$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   data: z.array(UserDataObject$inboundSchema).optional(),
-  meta: z.lazy(() => UserDataMeta$inboundSchema).optional(),
+  meta: PaginationMeta$inboundSchema.optional(),
 });
 /** @internal */
 export type UserData$Outbound = {
   data?: Array<UserDataObject$Outbound> | undefined;
-  meta?: UserDataMeta$Outbound | undefined;
+  meta?: PaginationMeta$Outbound | undefined;
 };
 
 /** @internal */
@@ -71,7 +46,7 @@ export const UserData$outboundSchema: z.ZodType<
   UserData
 > = z.object({
   data: z.array(UserDataObject$outboundSchema).optional(),
-  meta: z.lazy(() => UserDataMeta$outboundSchema).optional(),
+  meta: PaginationMeta$outboundSchema.optional(),
 });
 
 export function userDataToJSON(userData: UserData): string {

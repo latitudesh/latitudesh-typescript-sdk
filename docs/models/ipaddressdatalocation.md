@@ -1,11 +1,11 @@
-# IpAddressLocation
+# IpAddressDataLocation
 
 ## Example Usage
 
 ```typescript
-import { IpAddressLocation } from "latitudesh-typescript-sdk/models";
+import { IpAddressDataLocation } from "latitudesh-typescript-sdk/models";
 
-let value: IpAddressLocation = {};
+let value: IpAddressDataLocation = {};
 ```
 
 ## Fields

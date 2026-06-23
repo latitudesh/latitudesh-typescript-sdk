@@ -16,6 +16,7 @@ import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as models from "../models/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
+import { PageIterator, unwrapResultIterator } from "../types/operations.js";
 
 export class UserData extends ClientSDK {
   /**
@@ -122,8 +123,8 @@ export class UserData extends ClientSDK {
   async list(
     request?: operations.GetUsersDataRequest | undefined,
     options?: RequestOptions,
-  ): Promise<models.UserData> {
-    return unwrapAsync(userDataList(
+  ): Promise<PageIterator<operations.GetUsersDataResponse, { page: number }>> {
+    return unwrapResultIterator(userDataList(
       this,
       request,
       options,

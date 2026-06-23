@@ -52,15 +52,8 @@ export type GetEventsRequest = {
   pageNumber?: number | undefined;
 };
 
-/**
- * Success
- */
-export type GetEventsResponseBody = {
-  data?: Array<models.Events> | undefined;
-};
-
 export type GetEventsResponse = {
-  result: GetEventsResponseBody;
+  result: models.Events;
 };
 
 /** @internal */
@@ -156,51 +149,12 @@ export function getEventsRequestFromJSON(
 }
 
 /** @internal */
-export const GetEventsResponseBody$inboundSchema: z.ZodType<
-  GetEventsResponseBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  data: z.array(models.Events$inboundSchema).optional(),
-});
-/** @internal */
-export type GetEventsResponseBody$Outbound = {
-  data?: Array<models.Events$Outbound> | undefined;
-};
-
-/** @internal */
-export const GetEventsResponseBody$outboundSchema: z.ZodType<
-  GetEventsResponseBody$Outbound,
-  z.ZodTypeDef,
-  GetEventsResponseBody
-> = z.object({
-  data: z.array(models.Events$outboundSchema).optional(),
-});
-
-export function getEventsResponseBodyToJSON(
-  getEventsResponseBody: GetEventsResponseBody,
-): string {
-  return JSON.stringify(
-    GetEventsResponseBody$outboundSchema.parse(getEventsResponseBody),
-  );
-}
-export function getEventsResponseBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<GetEventsResponseBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetEventsResponseBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetEventsResponseBody' from JSON`,
-  );
-}
-
-/** @internal */
 export const GetEventsResponse$inboundSchema: z.ZodType<
   GetEventsResponse,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  Result: z.lazy(() => GetEventsResponseBody$inboundSchema),
+  Result: models.Events$inboundSchema,
 }).transform((v) => {
   return remap$(v, {
     "Result": "result",
@@ -208,7 +162,7 @@ export const GetEventsResponse$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type GetEventsResponse$Outbound = {
-  Result: GetEventsResponseBody$Outbound;
+  Result: models.Events$Outbound;
 };
 
 /** @internal */
@@ -217,7 +171,7 @@ export const GetEventsResponse$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetEventsResponse
 > = z.object({
-  result: z.lazy(() => GetEventsResponseBody$outboundSchema),
+  result: models.Events$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
     result: "Result",

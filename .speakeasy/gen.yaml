@@ -33,7 +33,7 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 typescript:
-  version: 0.5.0
+  version: 0.6.0
   acceptHeaderEnum: true
   additionalDependencies:
     dependencies: {}
@@ -44,6 +44,7 @@ typescript:
     test:coverage: bun test --coverage tests/integration
     test:integration: bun test tests/integration
   alwaysIncludeInboundAndOutbound: false
+  apiPromiseHelpers: false
   author: Speakeasy
   baseErrorName: LatitudeshError
   clientServerStatusCodesAsErrors: true
@@ -54,6 +55,7 @@ typescript:
   enableReactQuery: false
   enumFormat: union
   envVarPrefix: LATITUDESH
+  eventStreamClassName: EventStream
   exportZodModelNamespace: false
   fixEnumNameSanitization: false
   flatAdditionalProperties: false
@@ -86,6 +88,7 @@ typescript:
   preApplyUnionDiscriminators: true
   preserveModelFieldNames: false
   privateIdentifierPrefix: '#'
+  requestExtras: false
   responseFormat: flat
   sseFlatResponse: false
   templateVersion: v2

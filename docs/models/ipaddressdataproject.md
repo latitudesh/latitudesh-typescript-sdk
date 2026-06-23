@@ -1,11 +1,11 @@
-# IpAddressProject
+# IpAddressDataProject
 
 ## Example Usage
 
 ```typescript
-import { IpAddressProject } from "latitudesh-typescript-sdk/models";
+import { IpAddressDataProject } from "latitudesh-typescript-sdk/models";
 
-let value: IpAddressProject = {};
+let value: IpAddressDataProject = {};
 ```
 
 ## Fields

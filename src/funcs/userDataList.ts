@@ -21,10 +21,15 @@ import {
 import { LatitudeshError } from "../models/errors/latitudesherror.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as models from "../models/index.js";
 import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
+import {
+  createPageIterator,
+  haltIterator,
+  PageIterator,
+  Paginator,
+} from "../types/operations.js";
 
 /**
  * List user data
@@ -37,16 +42,19 @@ export function userDataList(
   request?: operations.GetUsersDataRequest | undefined,
   options?: RequestOptions,
 ): APIPromise<
-  Result<
-    models.UserData,
-    | LatitudeshError
-    | ResponseValidationError
-    | ConnectionError
-    | RequestAbortedError
-    | RequestTimeoutError
-    | InvalidRequestError
-    | UnexpectedClientError
-    | SDKValidationError
+  PageIterator<
+    Result<
+      operations.GetUsersDataResponse,
+      | LatitudeshError
+      | ResponseValidationError
+      | ConnectionError
+      | RequestAbortedError
+      | RequestTimeoutError
+      | InvalidRequestError
+      | UnexpectedClientError
+      | SDKValidationError
+    >,
+    { page: number }
   >
 > {
   return new APIPromise($do(
@@ -62,16 +70,19 @@ async function $do(
   options?: RequestOptions,
 ): Promise<
   [
-    Result<
-      models.UserData,
-      | LatitudeshError
-      | ResponseValidationError
-      | ConnectionError
-      | RequestAbortedError
-      | RequestTimeoutError
-      | InvalidRequestError
-      | UnexpectedClientError
-      | SDKValidationError
+    PageIterator<
+      Result<
+        operations.GetUsersDataResponse,
+        | LatitudeshError
+        | ResponseValidationError
+        | ConnectionError
+        | RequestAbortedError
+        | RequestTimeoutError
+        | InvalidRequestError
+        | UnexpectedClientError
+        | SDKValidationError
+      >,
+      { page: number }
     >,
     APICall,
   ]
@@ -83,7 +94,7 @@ async function $do(
     "Input validation failed",
   );
   if (!parsed.ok) {
-    return [parsed, { status: "invalid" }];
+    return [haltIterator(parsed), { status: "invalid" }];
   }
   const payload = parsed.value;
   const body = null;
@@ -94,6 +105,9 @@ async function $do(
     "extra_fields[user_data]": payload?.["extra_fields[user_data]"],
     "filter[project]": payload?.["filter[project]"],
     "filter[scope]": payload?.["filter[scope]"],
+    "page[number]": payload?.["page[number]"],
+    "page[size]": payload?.["page[size]"],
+    "stats[total]": payload?.["stats[total]"],
   });
 
   const headers = new Headers(compactMap({
@@ -131,7 +145,7 @@ async function $do(
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
   }, options);
   if (!requestRes.ok) {
-    return [requestRes, { status: "invalid" }];
+    return [haltIterator(requestRes), { status: "invalid" }];
   }
   const req = requestRes.value;
 
@@ -143,12 +157,16 @@ async function $do(
     retryCodes: context.retryCodes,
   });
   if (!doResult.ok) {
-    return [doResult, { status: "request-error", request: req }];
+    return [haltIterator(doResult), { status: "request-error", request: req }];
   }
   const response = doResult.value;
 
-  const [result] = await M.match<
-    models.UserData,
+  const responseFields = {
+    HttpMeta: { Response: response, Request: req },
+  };
+
+  const [result, raw] = await M.match<
+    operations.GetUsersDataResponse,
     | LatitudeshError
     | ResponseValidationError
     | ConnectionError
@@ -158,15 +176,71 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, models.UserData$inboundSchema, {
+    M.json(200, operations.GetUsersDataResponse$inboundSchema, {
       ctype: "application/vnd.api+json",
+      key: "Result",
     }),
     M.fail("4XX"),
     M.fail("5XX"),
-  )(response, req);
+  )(response, req, { extraFields: responseFields });
   if (!result.ok) {
-    return [result, { status: "complete", request: req, response }];
+    return [haltIterator(result), {
+      status: "complete",
+      request: req,
+      response,
+    }];
   }
 
-  return [result, { status: "complete", request: req, response }];
+  const nextFunc = (
+    responseData: unknown,
+  ): {
+    next: Paginator<
+      Result<
+        operations.GetUsersDataResponse,
+        | LatitudeshError
+        | ResponseValidationError
+        | ConnectionError
+        | RequestAbortedError
+        | RequestTimeoutError
+        | InvalidRequestError
+        | UnexpectedClientError
+        | SDKValidationError
+      >
+    >;
+    "~next"?: { page: number };
+  } => {
+    const page = request?.pageNumber ?? 1;
+    const nextPage = page + 1;
+
+    if (!responseData) {
+      return { next: () => null };
+    }
+    const results = (responseData as { data?: unknown }).data;
+    if (!Array.isArray(results) || !results.length) {
+      return { next: () => null };
+    }
+    const limit = request?.pageSize ?? 20;
+    if (results.length < limit) {
+      return { next: () => null };
+    }
+
+    const nextVal = () =>
+      userDataList(
+        client,
+        {
+          ...request!,
+          pageNumber: nextPage,
+        },
+        options,
+      );
+
+    return { next: nextVal, "~next": { page: nextPage } };
+  };
+
+  const page = { ...result, ...nextFunc(raw) };
+  return [{ ...page, ...createPageIterator(page, (v) => !v.ok) }, {
+    status: "complete",
+    request: req,
+    response,
+  }];
 }
