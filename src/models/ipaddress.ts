@@ -3,345 +3,49 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
-import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
+import {
+  IpAddressData,
+  IpAddressData$inboundSchema,
+  IpAddressData$Outbound,
+  IpAddressData$outboundSchema,
+} from "./ipaddressdata.js";
 
-export const IpAddressFamily = {
-  IPv4: "IPv4",
-  IPv6: "IPv6",
-} as const;
-export type IpAddressFamily = ClosedEnum<typeof IpAddressFamily>;
-
-export const IpAddressType = {
-  Public: "Public",
-  Private: "Private",
-} as const;
-export type IpAddressType = ClosedEnum<typeof IpAddressType>;
-
-export type IpAddressProject = {
-  id?: string | undefined;
-  name?: string | undefined;
-};
-
-export type IpAddressLocation = {
-  id?: string | undefined;
-  name?: string | undefined;
-  slug?: string | undefined;
-};
-
-export type IpAddressRegion = {
-  id?: string | undefined;
-  name?: string | undefined;
-  location?: IpAddressLocation | undefined;
-};
-
-/**
- * Server assignment information. Returns an empty object when the IP is not assigned to an active server (e.g., when the server is decommissioning or deleted).
- */
-export type Assignment = {
-  serverId?: string | undefined;
-  hostname?: string | undefined;
-  assignedAt?: string | undefined;
-};
-
-export type IpAddressAttributes = {
-  address?: string | undefined;
-  cidr?: string | null | undefined;
-  family?: IpAddressFamily | undefined;
-  gateway?: string | null | undefined;
-  netmask?: string | undefined;
-  type?: IpAddressType | undefined;
-  public?: boolean | undefined;
-  management?: boolean | undefined;
-  additional?: boolean | undefined;
-  project?: IpAddressProject | undefined;
-  region?: IpAddressRegion | undefined;
-  available?: boolean | undefined;
-  /**
-   * Server assignment information. Returns an empty object when the IP is not assigned to an active server (e.g., when the server is decommissioning or deleted).
-   */
-  assignment?: Assignment | undefined;
-};
+export type IpAddressMeta = {};
 
 export type IpAddress = {
-  id?: string | undefined;
-  attributes?: IpAddressAttributes | undefined;
+  data?: IpAddressData | undefined;
+  meta?: IpAddressMeta | undefined;
 };
 
 /** @internal */
-export const IpAddressFamily$inboundSchema: z.ZodNativeEnum<
-  typeof IpAddressFamily
-> = z.nativeEnum(IpAddressFamily);
-/** @internal */
-export const IpAddressFamily$outboundSchema: z.ZodNativeEnum<
-  typeof IpAddressFamily
-> = IpAddressFamily$inboundSchema;
-
-/** @internal */
-export const IpAddressType$inboundSchema: z.ZodNativeEnum<
-  typeof IpAddressType
-> = z.nativeEnum(IpAddressType);
-/** @internal */
-export const IpAddressType$outboundSchema: z.ZodNativeEnum<
-  typeof IpAddressType
-> = IpAddressType$inboundSchema;
-
-/** @internal */
-export const IpAddressProject$inboundSchema: z.ZodType<
-  IpAddressProject,
+export const IpAddressMeta$inboundSchema: z.ZodType<
+  IpAddressMeta,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-});
+> = z.object({});
 /** @internal */
-export type IpAddressProject$Outbound = {
-  id?: string | undefined;
-  name?: string | undefined;
-};
+export type IpAddressMeta$Outbound = {};
 
 /** @internal */
-export const IpAddressProject$outboundSchema: z.ZodType<
-  IpAddressProject$Outbound,
+export const IpAddressMeta$outboundSchema: z.ZodType<
+  IpAddressMeta$Outbound,
   z.ZodTypeDef,
-  IpAddressProject
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-});
+  IpAddressMeta
+> = z.object({});
 
-export function ipAddressProjectToJSON(
-  ipAddressProject: IpAddressProject,
-): string {
-  return JSON.stringify(
-    IpAddressProject$outboundSchema.parse(ipAddressProject),
-  );
+export function ipAddressMetaToJSON(ipAddressMeta: IpAddressMeta): string {
+  return JSON.stringify(IpAddressMeta$outboundSchema.parse(ipAddressMeta));
 }
-export function ipAddressProjectFromJSON(
+export function ipAddressMetaFromJSON(
   jsonString: string,
-): SafeParseResult<IpAddressProject, SDKValidationError> {
+): SafeParseResult<IpAddressMeta, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => IpAddressProject$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'IpAddressProject' from JSON`,
-  );
-}
-
-/** @internal */
-export const IpAddressLocation$inboundSchema: z.ZodType<
-  IpAddressLocation,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  slug: z.string().optional(),
-});
-/** @internal */
-export type IpAddressLocation$Outbound = {
-  id?: string | undefined;
-  name?: string | undefined;
-  slug?: string | undefined;
-};
-
-/** @internal */
-export const IpAddressLocation$outboundSchema: z.ZodType<
-  IpAddressLocation$Outbound,
-  z.ZodTypeDef,
-  IpAddressLocation
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  slug: z.string().optional(),
-});
-
-export function ipAddressLocationToJSON(
-  ipAddressLocation: IpAddressLocation,
-): string {
-  return JSON.stringify(
-    IpAddressLocation$outboundSchema.parse(ipAddressLocation),
-  );
-}
-export function ipAddressLocationFromJSON(
-  jsonString: string,
-): SafeParseResult<IpAddressLocation, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => IpAddressLocation$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'IpAddressLocation' from JSON`,
-  );
-}
-
-/** @internal */
-export const IpAddressRegion$inboundSchema: z.ZodType<
-  IpAddressRegion,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  location: z.lazy(() => IpAddressLocation$inboundSchema).optional(),
-});
-/** @internal */
-export type IpAddressRegion$Outbound = {
-  id?: string | undefined;
-  name?: string | undefined;
-  location?: IpAddressLocation$Outbound | undefined;
-};
-
-/** @internal */
-export const IpAddressRegion$outboundSchema: z.ZodType<
-  IpAddressRegion$Outbound,
-  z.ZodTypeDef,
-  IpAddressRegion
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  location: z.lazy(() => IpAddressLocation$outboundSchema).optional(),
-});
-
-export function ipAddressRegionToJSON(
-  ipAddressRegion: IpAddressRegion,
-): string {
-  return JSON.stringify(IpAddressRegion$outboundSchema.parse(ipAddressRegion));
-}
-export function ipAddressRegionFromJSON(
-  jsonString: string,
-): SafeParseResult<IpAddressRegion, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => IpAddressRegion$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'IpAddressRegion' from JSON`,
-  );
-}
-
-/** @internal */
-export const Assignment$inboundSchema: z.ZodType<
-  Assignment,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  server_id: z.string().optional(),
-  hostname: z.string().optional(),
-  assigned_at: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "server_id": "serverId",
-    "assigned_at": "assignedAt",
-  });
-});
-/** @internal */
-export type Assignment$Outbound = {
-  server_id?: string | undefined;
-  hostname?: string | undefined;
-  assigned_at?: string | undefined;
-};
-
-/** @internal */
-export const Assignment$outboundSchema: z.ZodType<
-  Assignment$Outbound,
-  z.ZodTypeDef,
-  Assignment
-> = z.object({
-  serverId: z.string().optional(),
-  hostname: z.string().optional(),
-  assignedAt: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    serverId: "server_id",
-    assignedAt: "assigned_at",
-  });
-});
-
-export function assignmentToJSON(assignment: Assignment): string {
-  return JSON.stringify(Assignment$outboundSchema.parse(assignment));
-}
-export function assignmentFromJSON(
-  jsonString: string,
-): SafeParseResult<Assignment, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Assignment$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Assignment' from JSON`,
-  );
-}
-
-/** @internal */
-export const IpAddressAttributes$inboundSchema: z.ZodType<
-  IpAddressAttributes,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  address: z.string().optional(),
-  cidr: z.nullable(z.string()).optional(),
-  family: IpAddressFamily$inboundSchema.optional(),
-  gateway: z.nullable(z.string()).optional(),
-  netmask: z.string().optional(),
-  type: IpAddressType$inboundSchema.optional(),
-  public: z.boolean().optional(),
-  management: z.boolean().optional(),
-  additional: z.boolean().optional(),
-  project: z.lazy(() => IpAddressProject$inboundSchema).optional(),
-  region: z.lazy(() => IpAddressRegion$inboundSchema).optional(),
-  available: z.boolean().optional(),
-  assignment: z.lazy(() => Assignment$inboundSchema).optional(),
-});
-/** @internal */
-export type IpAddressAttributes$Outbound = {
-  address?: string | undefined;
-  cidr?: string | null | undefined;
-  family?: string | undefined;
-  gateway?: string | null | undefined;
-  netmask?: string | undefined;
-  type?: string | undefined;
-  public?: boolean | undefined;
-  management?: boolean | undefined;
-  additional?: boolean | undefined;
-  project?: IpAddressProject$Outbound | undefined;
-  region?: IpAddressRegion$Outbound | undefined;
-  available?: boolean | undefined;
-  assignment?: Assignment$Outbound | undefined;
-};
-
-/** @internal */
-export const IpAddressAttributes$outboundSchema: z.ZodType<
-  IpAddressAttributes$Outbound,
-  z.ZodTypeDef,
-  IpAddressAttributes
-> = z.object({
-  address: z.string().optional(),
-  cidr: z.nullable(z.string()).optional(),
-  family: IpAddressFamily$outboundSchema.optional(),
-  gateway: z.nullable(z.string()).optional(),
-  netmask: z.string().optional(),
-  type: IpAddressType$outboundSchema.optional(),
-  public: z.boolean().optional(),
-  management: z.boolean().optional(),
-  additional: z.boolean().optional(),
-  project: z.lazy(() => IpAddressProject$outboundSchema).optional(),
-  region: z.lazy(() => IpAddressRegion$outboundSchema).optional(),
-  available: z.boolean().optional(),
-  assignment: z.lazy(() => Assignment$outboundSchema).optional(),
-});
-
-export function ipAddressAttributesToJSON(
-  ipAddressAttributes: IpAddressAttributes,
-): string {
-  return JSON.stringify(
-    IpAddressAttributes$outboundSchema.parse(ipAddressAttributes),
-  );
-}
-export function ipAddressAttributesFromJSON(
-  jsonString: string,
-): SafeParseResult<IpAddressAttributes, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => IpAddressAttributes$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'IpAddressAttributes' from JSON`,
+    (x) => IpAddressMeta$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'IpAddressMeta' from JSON`,
   );
 }
 
@@ -351,13 +55,13 @@ export const IpAddress$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().optional(),
-  attributes: z.lazy(() => IpAddressAttributes$inboundSchema).optional(),
+  data: IpAddressData$inboundSchema.optional(),
+  meta: z.lazy(() => IpAddressMeta$inboundSchema).optional(),
 });
 /** @internal */
 export type IpAddress$Outbound = {
-  id?: string | undefined;
-  attributes?: IpAddressAttributes$Outbound | undefined;
+  data?: IpAddressData$Outbound | undefined;
+  meta?: IpAddressMeta$Outbound | undefined;
 };
 
 /** @internal */
@@ -366,8 +70,8 @@ export const IpAddress$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   IpAddress
 > = z.object({
-  id: z.string().optional(),
-  attributes: z.lazy(() => IpAddressAttributes$outboundSchema).optional(),
+  data: IpAddressData$outboundSchema.optional(),
+  meta: z.lazy(() => IpAddressMeta$outboundSchema).optional(),
 });
 
 export function ipAddressToJSON(ipAddress: IpAddress): string {

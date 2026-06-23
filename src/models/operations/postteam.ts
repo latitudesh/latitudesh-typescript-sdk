@@ -15,16 +15,17 @@ export const PostTeamType2 = {
 } as const;
 export type PostTeamType2 = ClosedEnum<typeof PostTeamType2>;
 
-export const PostTeamCurrency2 = {
+export const Currency2 = {
   Usd: "USD",
   Brl: "BRL",
 } as const;
-export type PostTeamCurrency2 = ClosedEnum<typeof PostTeamCurrency2>;
+export type Currency2 = ClosedEnum<typeof Currency2>;
 
 export type PostTeamAttributes2 = {
   name: string;
-  currency: PostTeamCurrency2;
+  currency: Currency2;
   address?: string | undefined;
+  enforceMfa?: boolean | undefined;
   /**
    * Supported only for first team creation
    */
@@ -57,13 +58,11 @@ export const PostTeamType2$outboundSchema: z.ZodNativeEnum<
 > = PostTeamType2$inboundSchema;
 
 /** @internal */
-export const PostTeamCurrency2$inboundSchema: z.ZodNativeEnum<
-  typeof PostTeamCurrency2
-> = z.nativeEnum(PostTeamCurrency2);
+export const Currency2$inboundSchema: z.ZodNativeEnum<typeof Currency2> = z
+  .nativeEnum(Currency2);
 /** @internal */
-export const PostTeamCurrency2$outboundSchema: z.ZodNativeEnum<
-  typeof PostTeamCurrency2
-> = PostTeamCurrency2$inboundSchema;
+export const Currency2$outboundSchema: z.ZodNativeEnum<typeof Currency2> =
+  Currency2$inboundSchema;
 
 /** @internal */
 export const PostTeamAttributes2$inboundSchema: z.ZodType<
@@ -72,11 +71,13 @@ export const PostTeamAttributes2$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   name: z.string(),
-  currency: PostTeamCurrency2$inboundSchema,
+  currency: Currency2$inboundSchema,
   address: z.string().optional(),
+  enforce_mfa: z.boolean().optional(),
   referred_code: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
+    "enforce_mfa": "enforceMfa",
     "referred_code": "referredCode",
   });
 });
@@ -85,6 +86,7 @@ export type PostTeamAttributes2$Outbound = {
   name: string;
   currency: string;
   address?: string | undefined;
+  enforce_mfa?: boolean | undefined;
   referred_code?: string | undefined;
 };
 
@@ -95,11 +97,13 @@ export const PostTeamAttributes2$outboundSchema: z.ZodType<
   PostTeamAttributes2
 > = z.object({
   name: z.string(),
-  currency: PostTeamCurrency2$outboundSchema,
+  currency: Currency2$outboundSchema,
   address: z.string().optional(),
+  enforceMfa: z.boolean().optional(),
   referredCode: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
+    enforceMfa: "enforce_mfa",
     referredCode: "referred_code",
   });
 });

@@ -7,6 +7,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as models from "../index.js";
 
 export type GetUsersDataRequest = {
   /**
@@ -18,9 +19,25 @@ export type GetUsersDataRequest = {
    */
   filterScope?: string | undefined;
   /**
+   * Request aggregate stats in the response `meta`. Use `count` to get the total number of records, returned as `meta.stats.total.count`.
+   */
+  statsTotal?: string | undefined;
+  /**
    * The `decoded_content` is provided as an extra attribute that shows content in decoded form.
    */
   extraFieldsUserData?: string | undefined;
+  /**
+   * Number of items to return per page
+   */
+  pageSize?: number | undefined;
+  /**
+   * Page number to return (starts at 1)
+   */
+  pageNumber?: number | undefined;
+};
+
+export type GetUsersDataResponse = {
+  result: models.UserData;
 };
 
 /** @internal */
@@ -31,19 +48,28 @@ export const GetUsersDataRequest$inboundSchema: z.ZodType<
 > = z.object({
   "filter[project]": z.string().optional(),
   "filter[scope]": z.string().optional(),
+  "stats[total]": z.string().optional(),
   "extra_fields[user_data]": z.string().default("decoded_content"),
+  "page[size]": z.number().int().default(20),
+  "page[number]": z.number().int().default(1),
 }).transform((v) => {
   return remap$(v, {
     "filter[project]": "filterProject",
     "filter[scope]": "filterScope",
+    "stats[total]": "statsTotal",
     "extra_fields[user_data]": "extraFieldsUserData",
+    "page[size]": "pageSize",
+    "page[number]": "pageNumber",
   });
 });
 /** @internal */
 export type GetUsersDataRequest$Outbound = {
   "filter[project]"?: string | undefined;
   "filter[scope]"?: string | undefined;
+  "stats[total]"?: string | undefined;
   "extra_fields[user_data]": string;
+  "page[size]": number;
+  "page[number]": number;
 };
 
 /** @internal */
@@ -54,12 +80,18 @@ export const GetUsersDataRequest$outboundSchema: z.ZodType<
 > = z.object({
   filterProject: z.string().optional(),
   filterScope: z.string().optional(),
+  statsTotal: z.string().optional(),
   extraFieldsUserData: z.string().default("decoded_content"),
+  pageSize: z.number().int().default(20),
+  pageNumber: z.number().int().default(1),
 }).transform((v) => {
   return remap$(v, {
     filterProject: "filter[project]",
     filterScope: "filter[scope]",
+    statsTotal: "stats[total]",
     extraFieldsUserData: "extra_fields[user_data]",
+    pageSize: "page[size]",
+    pageNumber: "page[number]",
   });
 });
 
@@ -77,5 +109,52 @@ export function getUsersDataRequestFromJSON(
     jsonString,
     (x) => GetUsersDataRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetUsersDataRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetUsersDataResponse$inboundSchema: z.ZodType<
+  GetUsersDataResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Result: models.UserData$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Result": "result",
+  });
+});
+/** @internal */
+export type GetUsersDataResponse$Outbound = {
+  Result: models.UserData$Outbound;
+};
+
+/** @internal */
+export const GetUsersDataResponse$outboundSchema: z.ZodType<
+  GetUsersDataResponse$Outbound,
+  z.ZodTypeDef,
+  GetUsersDataResponse
+> = z.object({
+  result: models.UserData$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    result: "Result",
+  });
+});
+
+export function getUsersDataResponseToJSON(
+  getUsersDataResponse: GetUsersDataResponse,
+): string {
+  return JSON.stringify(
+    GetUsersDataResponse$outboundSchema.parse(getUsersDataResponse),
+  );
+}
+export function getUsersDataResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetUsersDataResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetUsersDataResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetUsersDataResponse' from JSON`,
   );
 }

@@ -13,4 +13,4 @@ let value: UserData = {};
 | Field                                                  | Type                                                   | Required                                               | Description                                            |
 | ------------------------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------ |
 | `data`                                                 | [models.UserDataObject](../models/userdataobject.md)[] | :heavy_minus_sign:                                     | N/A                                                    |
-| `meta`                                                 | [models.UserDataMeta](../models/userdatameta.md)       | :heavy_minus_sign:                                     | N/A                                                    |
+| `meta`                                                 | [models.PaginationMeta](../models/paginationmeta.md)   | :heavy_minus_sign:                                     | N/A                                                    |

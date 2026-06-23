@@ -11,8 +11,6 @@ import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 export type TeamMembersRole = {
   id?: string | undefined;
   name?: string | undefined;
-  createdAt?: string | undefined;
-  updatedAt?: string | undefined;
 };
 
 export type TeamMembersAttributes = {
@@ -32,8 +30,11 @@ export type TeamMembersData = {
   attributes?: TeamMembersAttributes | undefined;
 };
 
+export type TeamMembersMeta = {};
+
 export type TeamMembers = {
   data?: Array<TeamMembersData> | undefined;
+  meta?: TeamMembersMeta | undefined;
 };
 
 /** @internal */
@@ -44,20 +45,11 @@ export const TeamMembersRole$inboundSchema: z.ZodType<
 > = z.object({
   id: z.string().optional(),
   name: z.string().optional(),
-  created_at: z.string().optional(),
-  updated_at: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "created_at": "createdAt",
-    "updated_at": "updatedAt",
-  });
 });
 /** @internal */
 export type TeamMembersRole$Outbound = {
   id?: string | undefined;
   name?: string | undefined;
-  created_at?: string | undefined;
-  updated_at?: string | undefined;
 };
 
 /** @internal */
@@ -68,13 +60,6 @@ export const TeamMembersRole$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string().optional(),
   name: z.string().optional(),
-  createdAt: z.string().optional(),
-  updatedAt: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    createdAt: "created_at",
-    updatedAt: "updated_at",
-  });
 });
 
 export function teamMembersRoleToJSON(
@@ -218,16 +203,49 @@ export function teamMembersDataFromJSON(
 }
 
 /** @internal */
+export const TeamMembersMeta$inboundSchema: z.ZodType<
+  TeamMembersMeta,
+  z.ZodTypeDef,
+  unknown
+> = z.object({});
+/** @internal */
+export type TeamMembersMeta$Outbound = {};
+
+/** @internal */
+export const TeamMembersMeta$outboundSchema: z.ZodType<
+  TeamMembersMeta$Outbound,
+  z.ZodTypeDef,
+  TeamMembersMeta
+> = z.object({});
+
+export function teamMembersMetaToJSON(
+  teamMembersMeta: TeamMembersMeta,
+): string {
+  return JSON.stringify(TeamMembersMeta$outboundSchema.parse(teamMembersMeta));
+}
+export function teamMembersMetaFromJSON(
+  jsonString: string,
+): SafeParseResult<TeamMembersMeta, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => TeamMembersMeta$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'TeamMembersMeta' from JSON`,
+  );
+}
+
+/** @internal */
 export const TeamMembers$inboundSchema: z.ZodType<
   TeamMembers,
   z.ZodTypeDef,
   unknown
 > = z.object({
   data: z.array(z.lazy(() => TeamMembersData$inboundSchema)).optional(),
+  meta: z.lazy(() => TeamMembersMeta$inboundSchema).optional(),
 });
 /** @internal */
 export type TeamMembers$Outbound = {
   data?: Array<TeamMembersData$Outbound> | undefined;
+  meta?: TeamMembersMeta$Outbound | undefined;
 };
 
 /** @internal */
@@ -237,6 +255,7 @@ export const TeamMembers$outboundSchema: z.ZodType<
   TeamMembers
 > = z.object({
   data: z.array(z.lazy(() => TeamMembersData$outboundSchema)).optional(),
+  meta: z.lazy(() => TeamMembersMeta$outboundSchema).optional(),
 });
 
 export function teamMembersToJSON(teamMembers: TeamMembers): string {

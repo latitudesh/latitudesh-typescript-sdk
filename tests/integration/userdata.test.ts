@@ -28,7 +28,7 @@ describe('User Data - Core Operations', () => {
       });
 
       // Act
-      const result = await sdk.userData.list();
+      const { result } = await sdk.userData.list();
 
       // Assert
       expect(result.data).toBeDefined();
@@ -49,7 +49,7 @@ describe('User Data - Core Operations', () => {
       });
 
       // Act
-      const result = await sdk.userData.list();
+      const { result } = await sdk.userData.list();
 
       // Assert
       expect(result.data).toBeDefined();
@@ -64,7 +64,7 @@ describe('User Data - Core Operations', () => {
       });
 
       // Act
-      const result = await sdk.userData.list();
+      const { result } = await sdk.userData.list();
 
       // Assert
       const userData = result.data[0];
@@ -81,7 +81,7 @@ describe('User Data - Core Operations', () => {
       });
 
       // Act
-      const result = await sdk.userData.list();
+      const { result } = await sdk.userData.list();
 
       // Assert
       const userData = result.data[0];
@@ -99,7 +99,7 @@ describe('User Data - Core Operations', () => {
       });
 
       // Act
-      const result = await sdk.userData.list();
+      const { result } = await sdk.userData.list();
 
       // Assert
       const userData = result.data[0];
@@ -535,7 +535,7 @@ describe('User Data - Core Operations', () => {
       });
 
       // Act
-      const result = await sdk.userData.list();
+      const { result } = await sdk.userData.list();
 
       // Assert
       const bashScript = result.data[0];
@@ -550,7 +550,7 @@ describe('User Data - Core Operations', () => {
       });
 
       // Act
-      const result = await sdk.userData.list();
+      const { result } = await sdk.userData.list();
 
       // Assert
       const script = result.data[0];
@@ -601,7 +601,7 @@ describe('User Data - Core Operations', () => {
       });
 
       // Act
-      const result = await sdk.userData.list();
+      const { result } = await sdk.userData.list();
 
       // Assert
       expect(result.data[0].data?.attributes?.project?.id).toBe('proj_test123');
@@ -616,7 +616,7 @@ describe('User Data - Core Operations', () => {
       });
 
       // Act
-      const result = await sdk.userData.list();
+      const { result } = await sdk.userData.list();
 
       // Assert
       const userData = result.data[0];
