@@ -29,6 +29,10 @@ export type UserDataPropertiesAttributes = {
    * content of the User Data
    */
   content?: string | undefined;
+  /**
+   * decoded content of the User Data
+   */
+  decodedContent?: string | null | undefined;
   project?: ProjectInclude | undefined;
   createdAt?: string | undefined;
   updatedAt?: string | undefined;
@@ -57,11 +61,13 @@ export const UserDataPropertiesAttributes$inboundSchema: z.ZodType<
 > = z.object({
   description: z.string().optional(),
   content: z.string().optional(),
+  decoded_content: z.nullable(z.string()).optional(),
   project: ProjectInclude$inboundSchema.optional(),
   created_at: z.string().optional(),
   updated_at: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
+    "decoded_content": "decodedContent",
     "created_at": "createdAt",
     "updated_at": "updatedAt",
   });
@@ -70,6 +76,7 @@ export const UserDataPropertiesAttributes$inboundSchema: z.ZodType<
 export type UserDataPropertiesAttributes$Outbound = {
   description?: string | undefined;
   content?: string | undefined;
+  decoded_content?: string | null | undefined;
   project?: ProjectInclude$Outbound | undefined;
   created_at?: string | undefined;
   updated_at?: string | undefined;
@@ -83,11 +90,13 @@ export const UserDataPropertiesAttributes$outboundSchema: z.ZodType<
 > = z.object({
   description: z.string().optional(),
   content: z.string().optional(),
+  decodedContent: z.nullable(z.string()).optional(),
   project: ProjectInclude$outboundSchema.optional(),
   createdAt: z.string().optional(),
   updatedAt: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
+    decodedContent: "decoded_content",
     createdAt: "created_at",
     updatedAt: "updated_at",
   });
