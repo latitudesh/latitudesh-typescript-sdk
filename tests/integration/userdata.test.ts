@@ -33,9 +33,9 @@ describe('User Data - Core Operations', () => {
       // Assert
       expect(result.data).toBeDefined();
       expect(result.data.length).toBe(2);
-      expect(result.data[0].data?.id).toBe('userdata_test123');
-      expect(result.data[0].data?.type).toBe('user_data');
-      expect(result.data[0].data?.attributes?.description).toBe('Test User Data Script');
+      expect(result.data[0].id).toBe('userdata_test123');
+      expect(result.data[0].type).toBe('user_data');
+      expect(result.data[0].attributes?.description).toBe('Test User Data Script');
     });
 
     test('should handle empty user data list', async () => {
@@ -68,9 +68,9 @@ describe('User Data - Core Operations', () => {
 
       // Assert
       const userData = result.data[0];
-      expect(userData.data?.attributes?.content).toBeDefined();
-      expect(userData.data?.attributes?.content).toContain('#!/bin/bash');
-      expect(userData.data?.attributes?.content).toContain('apt-get update');
+      expect(userData.attributes?.content).toBeDefined();
+      expect(userData.attributes?.content).toContain('#!/bin/bash');
+      expect(userData.attributes?.content).toContain('apt-get update');
     });
 
     test('should include associated project', async () => {
@@ -85,10 +85,10 @@ describe('User Data - Core Operations', () => {
 
       // Assert
       const userData = result.data[0];
-      expect(userData.data?.attributes?.project).toBeDefined();
-      expect(userData.data?.attributes?.project?.id).toBe('proj_test123');
-      expect(userData.data?.attributes?.project?.name).toBe('Test Project');
-      expect(userData.data?.attributes?.project?.slug).toBe('test-project');
+      expect(userData.attributes?.project).toBeDefined();
+      expect(userData.attributes?.project?.id).toBe('proj_test123');
+      expect(userData.attributes?.project?.name).toBe('Test Project');
+      expect(userData.attributes?.project?.slug).toBe('test-project');
     });
 
     test('should include timestamps', async () => {
@@ -103,9 +103,9 @@ describe('User Data - Core Operations', () => {
 
       // Assert
       const userData = result.data[0];
-      expect(userData.data?.attributes?.createdAt).toBeDefined();
-      expect(userData.data?.attributes?.updatedAt).toBeDefined();
-      expect(userData.data?.attributes?.createdAt).toBe('2024-01-01T00:00:00Z');
+      expect(userData.attributes?.createdAt).toBeDefined();
+      expect(userData.attributes?.updatedAt).toBeDefined();
+      expect(userData.attributes?.createdAt).toBe('2024-01-01T00:00:00Z');
     });
   });
 
@@ -539,7 +539,7 @@ describe('User Data - Core Operations', () => {
 
       // Assert
       const bashScript = result.data[0];
-      expect(bashScript.data?.attributes?.content).toContain('#!/bin/bash');
+      expect(bashScript.attributes?.content).toContain('#!/bin/bash');
     });
 
     test('should handle multi-line scripts', async () => {
@@ -554,7 +554,7 @@ describe('User Data - Core Operations', () => {
 
       // Assert
       const script = result.data[0];
-      const content = script.data?.attributes?.content || '';
+      const content = script.attributes?.content || '';
       const lines = content.split('\n');
       expect(lines.length).toBeGreaterThan(1);
       expect(lines[0]).toBe('#!/bin/bash');
@@ -604,8 +604,8 @@ describe('User Data - Core Operations', () => {
       const { result } = await sdk.userData.list();
 
       // Assert
-      expect(result.data[0].data?.attributes?.project?.id).toBe('proj_test123');
-      expect(result.data[1].data?.attributes?.project?.id).toBe('proj_test456');
+      expect(result.data[0].attributes?.project?.id).toBe('proj_test123');
+      expect(result.data[1].attributes?.project?.id).toBe('proj_test456');
     });
 
     test('should include project slug', async () => {
@@ -620,7 +620,7 @@ describe('User Data - Core Operations', () => {
 
       // Assert
       const userData = result.data[0];
-      expect(userData.data?.attributes?.project?.slug).toBe('test-project');
+      expect(userData.attributes?.project?.slug).toBe('test-project');
     });
   });
 });

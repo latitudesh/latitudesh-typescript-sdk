@@ -13,14 +13,14 @@ import {
   PaginationMeta$outboundSchema,
 } from "./paginationmeta.js";
 import {
-  UserDataObject,
-  UserDataObject$inboundSchema,
-  UserDataObject$Outbound,
-  UserDataObject$outboundSchema,
-} from "./userdataobject.js";
+  UserDataProperties,
+  UserDataProperties$inboundSchema,
+  UserDataProperties$Outbound,
+  UserDataProperties$outboundSchema,
+} from "./userdataproperties.js";
 
 export type UserData = {
-  data?: Array<UserDataObject> | undefined;
+  data?: Array<UserDataProperties> | undefined;
   meta?: PaginationMeta | undefined;
 };
 
@@ -30,12 +30,12 @@ export const UserData$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  data: z.array(UserDataObject$inboundSchema).optional(),
+  data: z.array(UserDataProperties$inboundSchema).optional(),
   meta: PaginationMeta$inboundSchema.optional(),
 });
 /** @internal */
 export type UserData$Outbound = {
-  data?: Array<UserDataObject$Outbound> | undefined;
+  data?: Array<UserDataProperties$Outbound> | undefined;
   meta?: PaginationMeta$Outbound | undefined;
 };
 
@@ -45,7 +45,7 @@ export const UserData$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UserData
 > = z.object({
-  data: z.array(UserDataObject$outboundSchema).optional(),
+  data: z.array(UserDataProperties$outboundSchema).optional(),
   meta: PaginationMeta$outboundSchema.optional(),
 });
 

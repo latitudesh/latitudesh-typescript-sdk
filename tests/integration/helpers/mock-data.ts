@@ -471,40 +471,34 @@ export const mockUserData = {
 export const mockUserDataList = {
   data: [
     {
-      data: {
-        id: 'userdata_test123',
-        type: 'user_data',
-        attributes: {
-          description: 'Test User Data Script',
-          content: '#!/bin/bash\necho "Hello World"\napt-get update\napt-get install -y nginx',
-          project: {
-            id: 'proj_test123',
-            name: 'Test Project',
-            slug: 'test-project',
-          },
-          created_at: '2024-01-01T00:00:00Z',
-          updated_at: '2024-01-01T00:00:00Z',
+      id: 'userdata_test123',
+      type: 'user_data',
+      attributes: {
+        description: 'Test User Data Script',
+        content: '#!/bin/bash\necho "Hello World"\napt-get update\napt-get install -y nginx',
+        project: {
+          id: 'proj_test123',
+          name: 'Test Project',
+          slug: 'test-project',
         },
+        created_at: '2024-01-01T00:00:00Z',
+        updated_at: '2024-01-01T00:00:00Z',
       },
-      meta: {},
     },
     {
-      data: {
-        id: 'userdata_test456',
-        type: 'user_data',
-        attributes: {
-          description: 'Docker Setup Script',
-          content: '#!/bin/bash\ncurl -fsSL https://get.docker.com -o get-docker.sh\nsh get-docker.sh',
-          project: {
-            id: 'proj_test456',
-            name: 'Production Project',
-            slug: 'production-project',
-          },
-          created_at: '2024-01-02T00:00:00Z',
-          updated_at: '2024-01-02T00:00:00Z',
+      id: 'userdata_test456',
+      type: 'user_data',
+      attributes: {
+        description: 'Docker Setup Script',
+        content: '#!/bin/bash\ncurl -fsSL https://get.docker.com -o get-docker.sh\nsh get-docker.sh',
+        project: {
+          id: 'proj_test456',
+          name: 'Production Project',
+          slug: 'production-project',
         },
+        created_at: '2024-01-02T00:00:00Z',
+        updated_at: '2024-01-02T00:00:00Z',
       },
-      meta: {},
     },
   ],
   meta: {},

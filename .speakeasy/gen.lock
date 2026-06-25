@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c8245324-f3d7-42c7-8124-ce79579cbff5
 management:
-  docChecksum: 34bc0c1858c4ca7de0d381d4793d4893
+  docChecksum: d47ed53ead44c8acb632fad70810f979
   docVersion: "2023-06-01"
-  speakeasyVersion: 1.784.1
-  generationVersion: 2.911.3
-  releaseVersion: 0.6.0
-  configChecksum: 6b8508511551a8775fbee8266474c079
+  speakeasyVersion: 1.785.0
+  generationVersion: 2.912.1
+  releaseVersion: 0.6.1
+  configChecksum: 464ebfd66b28bbc17f3dc9a0f0f84bd9
   repoURL: https://github.com/latitudesh/latitudesh-typescript-sdk.git
   installationURL: https://github.com/latitudesh/latitudesh-typescript-sdk
   published: true
 persistentEdits:
-  generation_id: 3a7a0c61-09d0-4067-a77a-8725e80b07e3
-  pristine_commit_hash: c31857b4fc1a43781a103d3ad22b156dd480620b
-  pristine_tree_hash: 6550b51b5f707057238e01aa603538f4c6676ed5
+  generation_id: d8533e22-a03b-4b81-802e-92caafb2d239
+  pristine_commit_hash: 068fcfad216046b846671f750cad94fa0a45cda9
+  pristine_tree_hash: 06e9cf5f133002ac9e449b787fcfaf39e53cb71d
 features:
   typescript:
     additionalDependencies: 0.1.0
@@ -2697,8 +2697,8 @@ trackedFiles:
     pristine_git_object: 736ff6315b2b23d4af334c389ce1dbb7f498d2fb
   docs/models/userdata.md:
     id: 9ee78d14b93d
-    last_write_checksum: sha1:d3246f62705fc7db45dbf82556fc1ccae1b3da94
-    pristine_git_object: 21f734fa1c6f2e9b63310cb6104084e4085dbd3c
+    last_write_checksum: sha1:cd32c583874ec882c2d3c730bb38c893039cd83c
+    pristine_git_object: 86aaba2e5ef997fcb0691e35f202dc75d949ebcc
   docs/models/userdataobject.md:
     id: 35aec7ee75d0
     last_write_checksum: sha1:2e20ddef49a6b7f78aa56e719c06b4a56326e699
@@ -2713,8 +2713,8 @@ trackedFiles:
     pristine_git_object: 331eaa83724363010017f77a80dc761c08d8e366
   docs/models/userdatapropertiesattributes.md:
     id: 9bf58e62bc2f
-    last_write_checksum: sha1:2b5391ff21d5c1e2ba6e7ee8104576a1308c0e60
-    pristine_git_object: 703e7e4b612285d12cbab1728de51350c652893e
+    last_write_checksum: sha1:ac98f00b809e7b45c2e06679ba9934d1d1eea292
+    pristine_git_object: d3e322a5aeaf70ccba2466428c5073c025cc023f
   docs/models/userdatapropertiestype.md:
     id: 660f338583eb
     last_write_checksum: sha1:a4bdd82e51d861221dc4fdd9ce67af665e4aceeb
@@ -3217,12 +3217,12 @@ trackedFiles:
     pristine_git_object: 249e5d9837dbad499fc14718cebf96fd4875a9e8
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:3aa00e146b2b8feace8782eac740d76de241c7ca
-    pristine_git_object: 69f07983421a3e30bc2d56a02554c4178aba9528
+    last_write_checksum: sha1:505340b869636f91bdb885ac0a61a9670ac2fe74
+    pristine_git_object: 0dbb188dfa4f0cfc5695dafafdb4478828227f93
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:486ccb56604d699c56249e5f8991f2db22851192
-    pristine_git_object: 556568f7603f11e740660958d9d398bc4dce8d15
+    last_write_checksum: sha1:17d39eb6a8110002928064e9a0581264e2fc42e5
+    pristine_git_object: ec947f36b78cc9f52ad0aae1c898632d85e27251
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:9bb7b3807363b77f27dbdb87d6d10e9605f723d6
@@ -3781,8 +3781,8 @@ trackedFiles:
     pristine_git_object: 0aebd8b0a4867e35cb3348fc52921c3c0b4725b7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:d33b8f84edb6746bdd4fd06a61177e25bbae0d0c
-    pristine_git_object: 286ae4ba46408281d6a77a890ce02e63dc4ea385
+    last_write_checksum: sha1:d16040450f36d1680150179ea18a8dee04d1963f
+    pristine_git_object: ff1f5651d10c5f2821d311c6974cc840d9317618
   src/lib/encodings.ts:
     id: 3bd8ead98afd
     last_write_checksum: sha1:50d9b187dcfc3cca8d3bbd9fe074f865d715d2b0
@@ -3857,8 +3857,8 @@ trackedFiles:
     pristine_git_object: 0955a573c2ce989d63c737410ab8cc28706d9f74
   src/mcp-server/mcp-server.ts:
     id: aabbc4ab07c1
-    last_write_checksum: sha1:14abc2979c582424ede0f99e2472bdf108dda818
-    pristine_git_object: 9b19ebc6ff00562e476a3ff8026ce96010803368
+    last_write_checksum: sha1:3d3374e7a9af9bdf8d737a7eb7726e03d20ea575
+    pristine_git_object: 78af261e961c59a4b6807fe8d5f7a1e3527c39ba
   src/mcp-server/prompts.ts:
     id: 26f3d73cbf31
     last_write_checksum: sha1:3e8d60ab7f8078d83fa9528f2e831050c1fd119c
@@ -3873,8 +3873,8 @@ trackedFiles:
     pristine_git_object: c25696d4c4f70e081fa5d87ad6891874c509a577
   src/mcp-server/server.ts:
     id: 2784dd48e82a
-    last_write_checksum: sha1:1e6a1ed80822cdb0959a226b4d7da970341cb2a8
-    pristine_git_object: da51ad7e10c96c0a4f5eb2bc21b5ff334dd30e07
+    last_write_checksum: sha1:415a0fdffdde5934dfada55dc9539151dde6e246
+    pristine_git_object: 1e376b525be5dfa84e37dd6bbbc42d4f59391dab
   src/mcp-server/shared.ts:
     id: 074e80d4be1e
     last_write_checksum: sha1:d89576cea2bef3856b7fc3e65b868875528be042
@@ -5257,16 +5257,16 @@ trackedFiles:
     pristine_git_object: a77ae9fbd098c039f2487a8bbc8a5f871a4374c4
   src/models/userdata.ts:
     id: 27689c97e724
-    last_write_checksum: sha1:f80d902876789b1933fe56275291f7aad6d1edeb
-    pristine_git_object: 8af267f094b428831d02bb9763ca9d9003453909
+    last_write_checksum: sha1:46ba00bbfced55499610a70e4054694a1cd498a7
+    pristine_git_object: e68289f1d7e9e6b71828fb38b193858fed0c42bb
   src/models/userdataobject.ts:
     id: 346e4c8eccc2
     last_write_checksum: sha1:fef268be00f7e23bdb86866a9bcdce46970d62bb
     pristine_git_object: e5718b64d5f5d0ff51444bfe00fca79529a1b4aa
   src/models/userdataproperties.ts:
     id: a35944f4fa00
-    last_write_checksum: sha1:b7cca311763e2424932e125df9bcc57365df7d7f
-    pristine_git_object: 4b8a4fa63bf9e143aea0da12e31f18cdf7802cc7
+    last_write_checksum: sha1:c1273dc3185571880ec6e2a514e164dcd92efbab
+    pristine_git_object: 0b75dc6e9739d64bf0ee9644b691ad3d278566b4
   src/models/userinclude.ts:
     id: b227c99e251d
     last_write_checksum: sha1:f3d272a67e17b4023d6ceac0bb36098f9f4659c4
@@ -6008,7 +6008,7 @@ examples:
           extra_fields[user_data]: "decoded_content"
       responses:
         "200":
-          application/vnd.api+json: {"data": [{}], "meta": {}}
+          application/vnd.api+json: {"data": [{"id": "ud_AW6Q2D9lqKLpr", "type": "user_data", "attributes": {"description": "Three eggs with cilantro, tomatoes, onions, avocados and melted Emmental cheese. With a side of roasted potatoes, and your choice of toast or croissant.", "content": "QnJlYWRlZCBmcmllZCBjaGlja2VuIHdpdGggd2FmZmxlcywgYW5kIGEgc2lkZSBvZiBtYXBsZSBzeXJ1cC4=", "decoded_content": "Breaded fried chicken with waffles, and a side of maple syrup.", "project": {"id": "proj_LYV8DZYQq5QoE", "name": "Sleek Cotton Bottle", "slug": "sleek-cotton-bottle", "description": "Intelligent Aluminum Watch", "billing_type": "Normal", "provisioning_type": "on_demand", "billing_method": "Normal", "bandwidth_alert": false, "environment": null, "billing": {}, "stats": {"ip_addresses": 0, "prefixes": 0, "servers": 0, "vlans": 0}}, "created_at": "2026-01-14T15:56:43+00:00", "updated_at": "2026-01-14T15:56:43+00:00"}}], "meta": {}}
   get-project-user-data:
     Success:
       parameters:
@@ -6019,7 +6019,7 @@ examples:
           extra_fields[user_data]: "decoded_content"
       responses:
         "200":
-          application/vnd.api+json: {"data": {"id": "ud_VLMmAD8EOwop2", "type": "user_data", "attributes": {"description": "Three egg omelet with Roquefort cheese, chives, and ham. With a side of roasted potatoes, and your choice of toast or croissant.", "content": "Q3JlYW15IG1hc2NhcnBvbmUgY2hlZXNlIGFuZCBjdXN0YXJkIGxheWVyZWQgYmV0d2VlbiBlc3ByZXNzbyBhbmQgcnVtIHNvYWtlZCBob3VzZS1tYWRlIGxhZHlmaW5nZXJzLCB0b3BwZWQgd2l0aCBWYWxyaG9uYSBjb2NvYSBwb3dkZXIu", "project": {"id": "proj_e8pKq0GYdWAob", "name": "Enormous Silk Car", "slug": "enormous-silk-car", "description": "Aerodynamic Granite Bag", "billing_type": "Normal", "provisioning_type": "on_demand", "billing_method": "Normal", "bandwidth_alert": false, "environment": null, "billing": {}, "stats": {"ip_addresses": 0, "prefixes": 0, "servers": 0, "vlans": 0}}, "created_at": "2026-01-14T15:56:43+00:00", "updated_at": "2026-01-14T15:56:43+00:00"}}, "meta": {}}
+          application/vnd.api+json: {"data": {"id": "ud_VLMmAD8EOwop2", "type": "user_data", "attributes": {"description": "Three egg omelet with Roquefort cheese, chives, and ham. With a side of roasted potatoes, and your choice of toast or croissant.", "content": "Q3JlYW15IG1hc2NhcnBvbmUgY2hlZXNlIGFuZCBjdXN0YXJkIGxheWVyZWQgYmV0d2VlbiBlc3ByZXNzbyBhbmQgcnVtIHNvYWtlZCBob3VzZS1tYWRlIGxhZHlmaW5nZXJzLCB0b3BwZWQgd2l0aCBWYWxyaG9uYSBjb2NvYSBwb3dkZXIu", "decoded_content": "Creamy mascarpone cheese and custard layered between espresso and rum soaked house-made ladyfingers, topped with Valrhona cocoa powder.", "project": {"id": "proj_e8pKq0GYdWAob", "name": "Enormous Silk Car", "slug": "enormous-silk-car", "description": "Aerodynamic Granite Bag", "billing_type": "Normal", "provisioning_type": "on_demand", "billing_method": "Normal", "bandwidth_alert": false, "environment": null, "billing": {}, "stats": {"ip_addresses": 0, "prefixes": 0, "servers": 0, "vlans": 0}}, "created_at": "2026-01-14T15:56:43+00:00", "updated_at": "2026-01-14T15:56:43+00:00"}}, "meta": {}}
   delete-project-user-data:
     speakeasy-default-delete-project-user-data:
       parameters:
@@ -6036,7 +6036,7 @@ examples:
         application/vnd.api+json: {"data": {"type": "user_data", "attributes": {"description": "User Data description", "content": "I2Nsb3VkLWNvbmZpZwpydW5jbWQ6CiAtIFsgdG91Y2gsICAvaG9tZS91YnVudHUvdGVzdCBd"}}}
       responses:
         "201":
-          application/vnd.api+json: {"data": {"id": "ud_pRMLydp0dQKr1", "type": "user_data", "attributes": {"description": "User Data description", "content": "I2Nsb3VkLWNvbmZpZwpydW5jbWQ6CiAtIFsgdG91Y2gsICAvaG9tZS91YnVudHUvdGVzdCBd", "project": {"id": "proj_8NkvdyMKdeLpx", "name": "Intelligent Bronze Car", "slug": "intelligent-bronze-car", "description": "Small Iron Shoes", "billing_type": "Normal", "provisioning_type": "on_demand", "billing_method": "Normal", "bandwidth_alert": false, "environment": null, "billing": {}, "stats": {"ip_addresses": 0, "prefixes": 0, "servers": 0, "vlans": 0}}, "created_at": "2026-01-14T15:56:43+00:00", "updated_at": "2026-01-14T15:56:43+00:00"}}, "meta": {}}
+          application/vnd.api+json: {"data": {"id": "ud_pRMLydp0dQKr1", "type": "user_data", "attributes": {"description": "User Data description", "content": "I2Nsb3VkLWNvbmZpZwpydW5jbWQ6CiAtIFsgdG91Y2gsICAvaG9tZS91YnVudHUvdGVzdCBd", "decoded_content": "#cloud-config\nruncmd:\n - [ touch,  /home/ubuntu/test ]", "project": {"id": "proj_8NkvdyMKdeLpx", "name": "Intelligent Bronze Car", "slug": "intelligent-bronze-car", "description": "Small Iron Shoes", "billing_type": "Normal", "provisioning_type": "on_demand", "billing_method": "Normal", "bandwidth_alert": false, "environment": null, "billing": {}, "stats": {"ip_addresses": 0, "prefixes": 0, "servers": 0, "vlans": 0}}, "created_at": "2026-01-14T15:56:43+00:00", "updated_at": "2026-01-14T15:56:43+00:00"}}, "meta": {}}
   put-project-user-data:
     speakeasy-default-put-project-user-data:
       parameters:
@@ -6055,7 +6055,7 @@ examples:
           page[number]: 1
       responses:
         "200":
-          application/vnd.api+json: {"data": [{}], "meta": {}}
+          application/vnd.api+json: {"data": [{"id": "ud_1Qkm7dXzD8nZV", "type": "user_data", "attributes": {"description": "Thick slices of French toast bread, brown sugar, half-and-half and vanilla, topped with powdered sugar. With two eggs served any style, and your choice of smoked bacon or smoked ham.", "content": "VHdvIGJ1dHRlcm1pbGsgd2FmZmxlcywgdG9wcGVkIHdpdGggd2hpcHBlZCBjcmVhbSBhbmQgbWFwbGUgc3lydXAsIGEgc2lkZSBvZiB0d28gZWdncyBzZXJ2ZWQgYW55IHN0eWxlLCBhbmQgeW91ciBjaG9pY2Ugb2Ygc21va2VkIGJhY29uIG9yIHNtb2tlZCBoYW0u", "decoded_content": "Two buttermilk waffles, topped with whipped cream and maple syrup, a side of two eggs served any style, and your choice of smoked bacon or smoked ham.", "project": {"id": "proj_1ZJrdxoyOg4LV", "name": "Heavy Duty Aluminum Coat", "slug": "heavy-duty-aluminum-coat", "description": "Enormous Bronze Bag", "billing_type": "Normal", "provisioning_type": "on_demand", "billing_method": "Normal", "bandwidth_alert": false, "environment": null, "billing": {}, "stats": {"ip_addresses": 0, "prefixes": 0, "servers": 0, "vlans": 0}}, "created_at": "2026-01-14T15:57:11+00:00", "updated_at": "2026-01-14T15:57:11+00:00"}}], "meta": {}}
   post-user-data:
     Created:
       requestBody:
@@ -6063,7 +6063,7 @@ examples:
         application/vnd.api+json: {"data": {"type": "user_data", "attributes": {"description": "User Data description", "project": "proj_QraYDPW3qpjwW", "content": "I2Nsb3VkLWNvbmZpZwpydW5jbWQ6CiAtIFsgdG91Y2gsICAvaG9tZS91YnVudHUvdGVzdCBd"}}}
       responses:
         "201":
-          application/vnd.api+json: {"data": {"id": "ud_w49QDB55qagKb", "type": "user_data", "attributes": {"description": "User Data description", "content": "I2Nsb3VkLWNvbmZpZwpydW5jbWQ6CiAtIFsgdG91Y2gsICAvaG9tZS91YnVudHUvdGVzdCBd", "project": {"id": "proj_QraYDPW3qpjwW", "name": "Rustic Granite Gloves", "slug": "rustic-granite-gloves", "description": "Heavy Duty Leather Wallet", "billing_type": "Normal", "provisioning_type": "on_demand", "billing_method": "Normal", "bandwidth_alert": false, "environment": null, "billing": {}, "stats": {"ip_addresses": 0, "prefixes": 0, "servers": 0, "vlans": 0}}, "created_at": "2026-01-14T15:57:11+00:00", "updated_at": "2026-01-14T15:57:11+00:00"}}, "meta": {}}
+          application/vnd.api+json: {"data": {"id": "ud_w49QDB55qagKb", "type": "user_data", "attributes": {"description": "User Data description", "content": "I2Nsb3VkLWNvbmZpZwpydW5jbWQ6CiAtIFsgdG91Y2gsICAvaG9tZS91YnVudHUvdGVzdCBd", "decoded_content": "#cloud-config\nruncmd:\n - [ touch,  /home/ubuntu/test ]", "project": {"id": "proj_QraYDPW3qpjwW", "name": "Rustic Granite Gloves", "slug": "rustic-granite-gloves", "description": "Heavy Duty Leather Wallet", "billing_type": "Normal", "provisioning_type": "on_demand", "billing_method": "Normal", "bandwidth_alert": false, "environment": null, "billing": {}, "stats": {"ip_addresses": 0, "prefixes": 0, "servers": 0, "vlans": 0}}, "created_at": "2026-01-14T15:57:11+00:00", "updated_at": "2026-01-14T15:57:11+00:00"}}, "meta": {}}
   get-user-data:
     Success:
       parameters:
@@ -6073,7 +6073,7 @@ examples:
           extra_fields[user_data]: "decoded_content"
       responses:
         "200":
-          application/vnd.api+json: {"data": {"id": "ud_MLGXPdWgdnNWk", "type": "user_data", "attributes": {"description": "Three egg whites with spinach, mushrooms, caramelized onions, tomatoes and low-fat feta cheese. With herbed quinoa, and your choice of rye or whole-grain toast.", "content": "VHdvIGJ1dHRlcm1pbGsgd2FmZmxlcywgdG9wcGVkIHdpdGggd2hpcHBlZCBjcmVhbSBhbmQgbWFwbGUgc3lydXAsIGEgc2lkZSBvZiB0d28gZWdncyBzZXJ2ZWQgYW55IHN0eWxlLCBhbmQgeW91ciBjaG9pY2Ugb2Ygc21va2VkIGJhY29uIG9yIHNtb2tlZCBoYW0u", "project": {"id": "proj_pbV0DgkzD4AWz", "name": "Sleek Iron Wallet", "slug": "sleek-iron-wallet", "description": "Small Silk Shoes", "billing_type": "Normal", "provisioning_type": "on_demand", "billing_method": "Normal", "bandwidth_alert": false, "environment": null, "billing": {}, "stats": {"ip_addresses": 0, "prefixes": 0, "servers": 0, "vlans": 0}}, "created_at": "2026-01-14T15:57:11+00:00", "updated_at": "2026-01-14T15:57:11+00:00"}}, "meta": {}}
+          application/vnd.api+json: {"data": {"id": "ud_MLGXPdWgdnNWk", "type": "user_data", "attributes": {"description": "Three egg whites with spinach, mushrooms, caramelized onions, tomatoes and low-fat feta cheese. With herbed quinoa, and your choice of rye or whole-grain toast.", "content": "VHdvIGJ1dHRlcm1pbGsgd2FmZmxlcywgdG9wcGVkIHdpdGggd2hpcHBlZCBjcmVhbSBhbmQgbWFwbGUgc3lydXAsIGEgc2lkZSBvZiB0d28gZWdncyBzZXJ2ZWQgYW55IHN0eWxlLCBhbmQgeW91ciBjaG9pY2Ugb2Ygc21va2VkIGJhY29uIG9yIHNtb2tlZCBoYW0u", "decoded_content": "Two buttermilk waffles, topped with whipped cream and maple syrup, a side of two eggs served any style, and your choice of smoked bacon or smoked ham.", "project": {"id": "proj_pbV0DgkzD4AWz", "name": "Sleek Iron Wallet", "slug": "sleek-iron-wallet", "description": "Small Silk Shoes", "billing_type": "Normal", "provisioning_type": "on_demand", "billing_method": "Normal", "bandwidth_alert": false, "environment": null, "billing": {}, "stats": {"ip_addresses": 0, "prefixes": 0, "servers": 0, "vlans": 0}}, "created_at": "2026-01-14T15:57:11+00:00", "updated_at": "2026-01-14T15:57:11+00:00"}}, "meta": {}}
   delete-user-data:
     speakeasy-default-delete-user-data:
       parameters:
@@ -7339,7 +7339,16 @@ examples:
           application/vnd.api+json: {"meta": {"status": "accepted"}}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Typescript SDK Changes:\n* `latitudesh.events.list()`:  `response` **Changed** (Breaking ⚠️)\n* `latitudesh.ipAddresses.list()`:  `response` **Changed** (Breaking ⚠️)\n* `latitudesh.ipAddresses.get()`:  `response` **Changed** (Breaking ⚠️)\n* `latitudesh.teams.update()`: \n  *  `request.requestBody.data.attributes` **Changed** (Breaking ⚠️)\n* `latitudesh.teams.members.getTeamMembers()`:  `response` **Changed** (Breaking ⚠️)\n* `latitudesh.servers.list()`:  `request` **Changed** (Breaking ⚠️)\n* `latitudesh.virtualMachines.listVirtualMachineNetworkAttachments()`:  `response.data[].attributes.nadName` **Removed** (Breaking ⚠️)\n* `latitudesh.teams.create()`: \n  *  `request.data.attributes.enforceMfa` **Added**\n* `latitudesh.userData.getProjectUsersData()`:  `response.meta.stats` **Added**\n* `latitudesh.userData.list()`: \n  *  `request` **Changed**\n  *  `response.meta.stats` **Added**\n"
+releaseNotes: |
+  ## Typescript SDK Changes:
+  * `latitudesh.userData.getProjectUsersData()`:  `response.data[]` **Changed** (Breaking ⚠️)
+  * `latitudesh.userData.list()`:  `response.data[]` **Changed** (Breaking ⚠️)
+  * `latitudesh.userData.getProjectUserData()`:  `response.data.attributes.decodedContent` **Added**
+  * `latitudesh.userData.create()`:  `response.data.attributes.decodedContent` **Added**
+  * `latitudesh.userData.updateForProject()`:  `response.data.attributes.decodedContent` **Added**
+  * `latitudesh.userData.createNew()`:  `response.data.attributes.decodedContent` **Added**
+  * `latitudesh.userData.retrieve()`:  `response.data.attributes.decodedContent` **Added**
+  * `latitudesh.userData.update()`:  `response.data.attributes.decodedContent` **Added**
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
