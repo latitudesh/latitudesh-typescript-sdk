@@ -25,3 +25,4 @@ let value: TeamAttributes = {};
 | `owner`                                                | [models.UserInclude](../models/userinclude.md)         | :heavy_minus_sign:                                     | N/A                                                    |
 | `billing`                                              | [models.TeamBilling](../models/teambilling.md)         | :heavy_minus_sign:                                     | N/A                                                    |
 | `featureFlags`                                         | *string*[]                                             | :heavy_minus_sign:                                     | N/A                                                    |
+| `limits`                                               | [models.TeamLimits](../models/teamlimits.md)           | :heavy_minus_sign:                                     | N/A                                                    |

@@ -25,6 +25,18 @@ export type TeamBilling = {
   customerBillingId?: string | undefined;
 };
 
+export type TeamLimits = {
+  bareMetal?: number | null | undefined;
+  bareMetalGpu?: number | null | undefined;
+  virtualMachine?: number | null | undefined;
+  virtualMachineGpu?: number | null | undefined;
+  elasticIp?: number | null | undefined;
+  virtualNetwork?: number | null | undefined;
+  database?: number | null | undefined;
+  filesystem?: number | null | undefined;
+  blockStorage?: number | null | undefined;
+};
+
 export type TeamAttributes = {
   name?: string | undefined;
   slug?: string | undefined;
@@ -39,6 +51,7 @@ export type TeamAttributes = {
   owner?: UserInclude | undefined;
   billing?: TeamBilling | undefined;
   featureFlags?: Array<string> | undefined;
+  limits?: TeamLimits | undefined;
 };
 
 export type Team = {
@@ -93,6 +106,85 @@ export function teamBillingFromJSON(
 }
 
 /** @internal */
+export const TeamLimits$inboundSchema: z.ZodType<
+  TeamLimits,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  bare_metal: z.nullable(z.number().int()).optional(),
+  bare_metal_gpu: z.nullable(z.number().int()).optional(),
+  virtual_machine: z.nullable(z.number().int()).optional(),
+  virtual_machine_gpu: z.nullable(z.number().int()).optional(),
+  elastic_ip: z.nullable(z.number().int()).optional(),
+  virtual_network: z.nullable(z.number().int()).optional(),
+  database: z.nullable(z.number().int()).optional(),
+  filesystem: z.nullable(z.number().int()).optional(),
+  block_storage: z.nullable(z.number().int()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "bare_metal": "bareMetal",
+    "bare_metal_gpu": "bareMetalGpu",
+    "virtual_machine": "virtualMachine",
+    "virtual_machine_gpu": "virtualMachineGpu",
+    "elastic_ip": "elasticIp",
+    "virtual_network": "virtualNetwork",
+    "block_storage": "blockStorage",
+  });
+});
+/** @internal */
+export type TeamLimits$Outbound = {
+  bare_metal?: number | null | undefined;
+  bare_metal_gpu?: number | null | undefined;
+  virtual_machine?: number | null | undefined;
+  virtual_machine_gpu?: number | null | undefined;
+  elastic_ip?: number | null | undefined;
+  virtual_network?: number | null | undefined;
+  database?: number | null | undefined;
+  filesystem?: number | null | undefined;
+  block_storage?: number | null | undefined;
+};
+
+/** @internal */
+export const TeamLimits$outboundSchema: z.ZodType<
+  TeamLimits$Outbound,
+  z.ZodTypeDef,
+  TeamLimits
+> = z.object({
+  bareMetal: z.nullable(z.number().int()).optional(),
+  bareMetalGpu: z.nullable(z.number().int()).optional(),
+  virtualMachine: z.nullable(z.number().int()).optional(),
+  virtualMachineGpu: z.nullable(z.number().int()).optional(),
+  elasticIp: z.nullable(z.number().int()).optional(),
+  virtualNetwork: z.nullable(z.number().int()).optional(),
+  database: z.nullable(z.number().int()).optional(),
+  filesystem: z.nullable(z.number().int()).optional(),
+  blockStorage: z.nullable(z.number().int()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    bareMetal: "bare_metal",
+    bareMetalGpu: "bare_metal_gpu",
+    virtualMachine: "virtual_machine",
+    virtualMachineGpu: "virtual_machine_gpu",
+    elasticIp: "elastic_ip",
+    virtualNetwork: "virtual_network",
+    blockStorage: "block_storage",
+  });
+});
+
+export function teamLimitsToJSON(teamLimits: TeamLimits): string {
+  return JSON.stringify(TeamLimits$outboundSchema.parse(teamLimits));
+}
+export function teamLimitsFromJSON(
+  jsonString: string,
+): SafeParseResult<TeamLimits, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => TeamLimits$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'TeamLimits' from JSON`,
+  );
+}
+
+/** @internal */
 export const TeamAttributes$inboundSchema: z.ZodType<
   TeamAttributes,
   z.ZodTypeDef,
@@ -111,6 +203,7 @@ export const TeamAttributes$inboundSchema: z.ZodType<
   owner: UserInclude$inboundSchema.optional(),
   billing: z.lazy(() => TeamBilling$inboundSchema).optional(),
   feature_flags: z.array(z.string()).optional(),
+  limits: z.lazy(() => TeamLimits$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "created_at": "createdAt",
@@ -134,6 +227,7 @@ export type TeamAttributes$Outbound = {
   owner?: UserInclude$Outbound | undefined;
   billing?: TeamBilling$Outbound | undefined;
   feature_flags?: Array<string> | undefined;
+  limits?: TeamLimits$Outbound | undefined;
 };
 
 /** @internal */
@@ -155,6 +249,7 @@ export const TeamAttributes$outboundSchema: z.ZodType<
   owner: UserInclude$outboundSchema.optional(),
   billing: z.lazy(() => TeamBilling$outboundSchema).optional(),
   featureFlags: z.array(z.string()).optional(),
+  limits: z.lazy(() => TeamLimits$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     createdAt: "created_at",
