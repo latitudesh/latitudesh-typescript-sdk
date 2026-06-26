@@ -10,6 +10,18 @@ import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 
 export type Currency = {};
 
+export type TeamIncludeLimits = {
+  bareMetal?: number | null | undefined;
+  bareMetalGpu?: number | null | undefined;
+  virtualMachine?: number | null | undefined;
+  virtualMachineGpu?: number | null | undefined;
+  elasticIp?: number | null | undefined;
+  virtualNetwork?: number | null | undefined;
+  database?: number | null | undefined;
+  filesystem?: number | null | undefined;
+  blockStorage?: number | null | undefined;
+};
+
 export type TeamInclude = {
   id?: string | undefined;
   name?: string | undefined;
@@ -19,6 +31,7 @@ export type TeamInclude = {
   currency?: Currency | undefined;
   status?: string | undefined;
   featureFlags?: Array<string> | undefined;
+  limits?: TeamIncludeLimits | undefined;
 };
 
 /** @internal */
@@ -51,6 +64,89 @@ export function currencyFromJSON(
 }
 
 /** @internal */
+export const TeamIncludeLimits$inboundSchema: z.ZodType<
+  TeamIncludeLimits,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  bare_metal: z.nullable(z.number().int()).optional(),
+  bare_metal_gpu: z.nullable(z.number().int()).optional(),
+  virtual_machine: z.nullable(z.number().int()).optional(),
+  virtual_machine_gpu: z.nullable(z.number().int()).optional(),
+  elastic_ip: z.nullable(z.number().int()).optional(),
+  virtual_network: z.nullable(z.number().int()).optional(),
+  database: z.nullable(z.number().int()).optional(),
+  filesystem: z.nullable(z.number().int()).optional(),
+  block_storage: z.nullable(z.number().int()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "bare_metal": "bareMetal",
+    "bare_metal_gpu": "bareMetalGpu",
+    "virtual_machine": "virtualMachine",
+    "virtual_machine_gpu": "virtualMachineGpu",
+    "elastic_ip": "elasticIp",
+    "virtual_network": "virtualNetwork",
+    "block_storage": "blockStorage",
+  });
+});
+/** @internal */
+export type TeamIncludeLimits$Outbound = {
+  bare_metal?: number | null | undefined;
+  bare_metal_gpu?: number | null | undefined;
+  virtual_machine?: number | null | undefined;
+  virtual_machine_gpu?: number | null | undefined;
+  elastic_ip?: number | null | undefined;
+  virtual_network?: number | null | undefined;
+  database?: number | null | undefined;
+  filesystem?: number | null | undefined;
+  block_storage?: number | null | undefined;
+};
+
+/** @internal */
+export const TeamIncludeLimits$outboundSchema: z.ZodType<
+  TeamIncludeLimits$Outbound,
+  z.ZodTypeDef,
+  TeamIncludeLimits
+> = z.object({
+  bareMetal: z.nullable(z.number().int()).optional(),
+  bareMetalGpu: z.nullable(z.number().int()).optional(),
+  virtualMachine: z.nullable(z.number().int()).optional(),
+  virtualMachineGpu: z.nullable(z.number().int()).optional(),
+  elasticIp: z.nullable(z.number().int()).optional(),
+  virtualNetwork: z.nullable(z.number().int()).optional(),
+  database: z.nullable(z.number().int()).optional(),
+  filesystem: z.nullable(z.number().int()).optional(),
+  blockStorage: z.nullable(z.number().int()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    bareMetal: "bare_metal",
+    bareMetalGpu: "bare_metal_gpu",
+    virtualMachine: "virtual_machine",
+    virtualMachineGpu: "virtual_machine_gpu",
+    elasticIp: "elastic_ip",
+    virtualNetwork: "virtual_network",
+    blockStorage: "block_storage",
+  });
+});
+
+export function teamIncludeLimitsToJSON(
+  teamIncludeLimits: TeamIncludeLimits,
+): string {
+  return JSON.stringify(
+    TeamIncludeLimits$outboundSchema.parse(teamIncludeLimits),
+  );
+}
+export function teamIncludeLimitsFromJSON(
+  jsonString: string,
+): SafeParseResult<TeamIncludeLimits, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => TeamIncludeLimits$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'TeamIncludeLimits' from JSON`,
+  );
+}
+
+/** @internal */
 export const TeamInclude$inboundSchema: z.ZodType<
   TeamInclude,
   z.ZodTypeDef,
@@ -64,6 +160,7 @@ export const TeamInclude$inboundSchema: z.ZodType<
   currency: z.lazy(() => Currency$inboundSchema).optional(),
   status: z.string().optional(),
   feature_flags: z.array(z.string()).optional(),
+  limits: z.lazy(() => TeamIncludeLimits$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "feature_flags": "featureFlags",
@@ -79,6 +176,7 @@ export type TeamInclude$Outbound = {
   currency?: Currency$Outbound | undefined;
   status?: string | undefined;
   feature_flags?: Array<string> | undefined;
+  limits?: TeamIncludeLimits$Outbound | undefined;
 };
 
 /** @internal */
@@ -95,6 +193,7 @@ export const TeamInclude$outboundSchema: z.ZodType<
   currency: z.lazy(() => Currency$outboundSchema).optional(),
   status: z.string().optional(),
   featureFlags: z.array(z.string()).optional(),
+  limits: z.lazy(() => TeamIncludeLimits$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     featureFlags: "feature_flags",
