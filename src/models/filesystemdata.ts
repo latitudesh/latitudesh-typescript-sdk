@@ -8,23 +8,37 @@ import { safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
+import {
+  ProjectInclude,
+  ProjectInclude$inboundSchema,
+  ProjectInclude$Outbound,
+  ProjectInclude$outboundSchema,
+} from "./projectinclude.js";
+import {
+  TeamInclude,
+  TeamInclude$inboundSchema,
+  TeamInclude$Outbound,
+  TeamInclude$outboundSchema,
+} from "./teaminclude.js";
 
 export const FilesystemDataType = {
   Filesystems: "filesystems",
 } as const;
 export type FilesystemDataType = ClosedEnum<typeof FilesystemDataType>;
 
-export type FilesystemDataProject = {
-  id?: string | undefined;
-  name?: string | undefined;
-  slug?: string | undefined;
-};
+export const FilesystemStorageClass = {
+  Standard: "standard",
+  HighPerformance: "high_performance",
+} as const;
+export type FilesystemStorageClass = ClosedEnum<typeof FilesystemStorageClass>;
 
 export type FilesystemDataAttributes = {
   name?: string | undefined;
   sizeInGb?: number | undefined;
+  filesystemStorageClass?: FilesystemStorageClass | null | undefined;
   createdAt?: Date | null | undefined;
-  project?: FilesystemDataProject | undefined;
+  project?: ProjectInclude | undefined;
+  team?: TeamInclude | undefined;
 };
 
 export type FilesystemData = {
@@ -43,49 +57,13 @@ export const FilesystemDataType$outboundSchema: z.ZodNativeEnum<
 > = FilesystemDataType$inboundSchema;
 
 /** @internal */
-export const FilesystemDataProject$inboundSchema: z.ZodType<
-  FilesystemDataProject,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  slug: z.string().optional(),
-});
+export const FilesystemStorageClass$inboundSchema: z.ZodNativeEnum<
+  typeof FilesystemStorageClass
+> = z.nativeEnum(FilesystemStorageClass);
 /** @internal */
-export type FilesystemDataProject$Outbound = {
-  id?: string | undefined;
-  name?: string | undefined;
-  slug?: string | undefined;
-};
-
-/** @internal */
-export const FilesystemDataProject$outboundSchema: z.ZodType<
-  FilesystemDataProject$Outbound,
-  z.ZodTypeDef,
-  FilesystemDataProject
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  slug: z.string().optional(),
-});
-
-export function filesystemDataProjectToJSON(
-  filesystemDataProject: FilesystemDataProject,
-): string {
-  return JSON.stringify(
-    FilesystemDataProject$outboundSchema.parse(filesystemDataProject),
-  );
-}
-export function filesystemDataProjectFromJSON(
-  jsonString: string,
-): SafeParseResult<FilesystemDataProject, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => FilesystemDataProject$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FilesystemDataProject' from JSON`,
-  );
-}
+export const FilesystemStorageClass$outboundSchema: z.ZodNativeEnum<
+  typeof FilesystemStorageClass
+> = FilesystemStorageClass$inboundSchema;
 
 /** @internal */
 export const FilesystemDataAttributes$inboundSchema: z.ZodType<
@@ -95,13 +73,16 @@ export const FilesystemDataAttributes$inboundSchema: z.ZodType<
 > = z.object({
   name: z.string().optional(),
   size_in_gb: z.number().int().optional(),
+  storage_class: z.nullable(FilesystemStorageClass$inboundSchema).optional(),
   created_at: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  project: z.lazy(() => FilesystemDataProject$inboundSchema).optional(),
+  project: ProjectInclude$inboundSchema.optional(),
+  team: TeamInclude$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "size_in_gb": "sizeInGb",
+    "storage_class": "filesystemStorageClass",
     "created_at": "createdAt",
   });
 });
@@ -109,8 +90,10 @@ export const FilesystemDataAttributes$inboundSchema: z.ZodType<
 export type FilesystemDataAttributes$Outbound = {
   name?: string | undefined;
   size_in_gb?: number | undefined;
+  storage_class?: string | null | undefined;
   created_at?: string | null | undefined;
-  project?: FilesystemDataProject$Outbound | undefined;
+  project?: ProjectInclude$Outbound | undefined;
+  team?: TeamInclude$Outbound | undefined;
 };
 
 /** @internal */
@@ -121,11 +104,15 @@ export const FilesystemDataAttributes$outboundSchema: z.ZodType<
 > = z.object({
   name: z.string().optional(),
   sizeInGb: z.number().int().optional(),
+  filesystemStorageClass: z.nullable(FilesystemStorageClass$outboundSchema)
+    .optional(),
   createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  project: z.lazy(() => FilesystemDataProject$outboundSchema).optional(),
+  project: ProjectInclude$outboundSchema.optional(),
+  team: TeamInclude$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     sizeInGb: "size_in_gb",
+    filesystemStorageClass: "storage_class",
     createdAt: "created_at",
   });
 });

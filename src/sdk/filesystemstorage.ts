@@ -7,6 +7,7 @@ import { filesystemStorageDeleteFilesystem } from "../funcs/filesystemStorageDel
 import { filesystemStorageListFilesystems } from "../funcs/filesystemStorageListFilesystems.js";
 import { filesystemStorageUpdateFilesystem } from "../funcs/filesystemStorageUpdateFilesystem.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
+import * as models from "../models/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -37,7 +38,7 @@ export class FilesystemStorage extends ClientSDK {
   async listFilesystems(
     request?: operations.GetStorageFilesystemsRequest | undefined,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<models.Filesystems> {
     return unwrapAsync(filesystemStorageListFilesystems(
       this,
       request,

@@ -25,6 +25,10 @@ export type Rule = {
   port?: string | undefined;
   protocol?: string | undefined;
   /**
+   * True when this rule was seeded by Latitude when the firewall was created (cannot be deleted); false for user-added rules.
+   */
+  default?: boolean | undefined;
+  /**
    * Optional description explaining the purpose of this rule
    */
   description?: string | null | undefined;
@@ -64,6 +68,7 @@ export const Rule$inboundSchema: z.ZodType<Rule, z.ZodTypeDef, unknown> = z
     to: z.string().optional(),
     port: z.string().optional(),
     protocol: z.string().optional(),
+    default: z.boolean().optional(),
     description: z.nullable(z.string()).optional(),
   });
 /** @internal */
@@ -72,6 +77,7 @@ export type Rule$Outbound = {
   to?: string | undefined;
   port?: string | undefined;
   protocol?: string | undefined;
+  default?: boolean | undefined;
   description?: string | null | undefined;
 };
 
@@ -82,6 +88,7 @@ export const Rule$outboundSchema: z.ZodType<Rule$Outbound, z.ZodTypeDef, Rule> =
     to: z.string().optional(),
     port: z.string().optional(),
     protocol: z.string().optional(),
+    default: z.boolean().optional(),
     description: z.nullable(z.string()).optional(),
   });
 
