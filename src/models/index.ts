@@ -22,6 +22,7 @@ export * from "./errorobject.js";
 export * from "./eventdata.js";
 export * from "./events.js";
 export * from "./filesystemdata.js";
+export * from "./filesystems.js";
 export * from "./firewall.js";
 export * from "./firewallassignmentdata.js";
 export * from "./firewallassignments.js";

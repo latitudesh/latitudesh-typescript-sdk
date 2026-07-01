@@ -162,7 +162,7 @@ Lists all the filesystems from a team.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-storage-filesystems" method="get" path="/storage/filesystems" -->
+<!-- UsageSnippet language="typescript" operationID="get-storage-filesystems" method="get" path="/storage/filesystems" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -171,11 +171,11 @@ const latitudesh = new Latitudesh({
 });
 
 async function run() {
-  await latitudesh.filesystemStorage.listFilesystems({
+  const result = await latitudesh.filesystemStorage.listFilesystems({
     filterProject: "small-rubber-shirt",
   });
 
-
+  console.log(result);
 }
 
 run();
@@ -201,7 +201,7 @@ async function run() {
   });
   if (res.ok) {
     const { value: result } = res;
-    
+    console.log(result);
   } else {
     console.log("filesystemStorageListFilesystems failed:", res.error);
   }
@@ -221,7 +221,7 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[models.Filesystems](../../models/filesystems.md)\>**
 
 ### Errors
 

@@ -1,11 +1,11 @@
-# FilesystemDataProject
+# FirewallAssignmentDataFirewall
 
 ## Example Usage
 
 ```typescript
-import { FilesystemDataProject } from "latitudesh-typescript-sdk/models";
+import { FirewallAssignmentDataFirewall } from "latitudesh-typescript-sdk/models";
 
-let value: FilesystemDataProject = {};
+let value: FirewallAssignmentDataFirewall = {};
 ```
 
 ## Fields
@@ -14,4 +14,3 @@ let value: FilesystemDataProject = {};
 | ------------------ | ------------------ | ------------------ | ------------------ |
 | `id`               | *string*           | :heavy_minus_sign: | N/A                |
 | `name`             | *string*           | :heavy_minus_sign: | N/A                |
-| `slug`             | *string*           | :heavy_minus_sign: | N/A                |

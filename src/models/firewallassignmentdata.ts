@@ -22,8 +22,14 @@ export type FirewallAssignmentDataServer = {
   hostname?: string | undefined;
 };
 
+export type FirewallAssignmentDataFirewall = {
+  id?: string | undefined;
+  name?: string | undefined;
+};
+
 export type FirewallAssignmentDataAttributes = {
   server?: FirewallAssignmentDataServer | undefined;
+  firewall?: FirewallAssignmentDataFirewall | undefined;
   firewallId?: string | undefined;
 };
 
@@ -98,12 +104,58 @@ export function firewallAssignmentDataServerFromJSON(
 }
 
 /** @internal */
+export const FirewallAssignmentDataFirewall$inboundSchema: z.ZodType<
+  FirewallAssignmentDataFirewall,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string().optional(),
+  name: z.string().optional(),
+});
+/** @internal */
+export type FirewallAssignmentDataFirewall$Outbound = {
+  id?: string | undefined;
+  name?: string | undefined;
+};
+
+/** @internal */
+export const FirewallAssignmentDataFirewall$outboundSchema: z.ZodType<
+  FirewallAssignmentDataFirewall$Outbound,
+  z.ZodTypeDef,
+  FirewallAssignmentDataFirewall
+> = z.object({
+  id: z.string().optional(),
+  name: z.string().optional(),
+});
+
+export function firewallAssignmentDataFirewallToJSON(
+  firewallAssignmentDataFirewall: FirewallAssignmentDataFirewall,
+): string {
+  return JSON.stringify(
+    FirewallAssignmentDataFirewall$outboundSchema.parse(
+      firewallAssignmentDataFirewall,
+    ),
+  );
+}
+export function firewallAssignmentDataFirewallFromJSON(
+  jsonString: string,
+): SafeParseResult<FirewallAssignmentDataFirewall, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => FirewallAssignmentDataFirewall$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FirewallAssignmentDataFirewall' from JSON`,
+  );
+}
+
+/** @internal */
 export const FirewallAssignmentDataAttributes$inboundSchema: z.ZodType<
   FirewallAssignmentDataAttributes,
   z.ZodTypeDef,
   unknown
 > = z.object({
   server: z.lazy(() => FirewallAssignmentDataServer$inboundSchema).optional(),
+  firewall: z.lazy(() => FirewallAssignmentDataFirewall$inboundSchema)
+    .optional(),
   firewall_id: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -113,6 +165,7 @@ export const FirewallAssignmentDataAttributes$inboundSchema: z.ZodType<
 /** @internal */
 export type FirewallAssignmentDataAttributes$Outbound = {
   server?: FirewallAssignmentDataServer$Outbound | undefined;
+  firewall?: FirewallAssignmentDataFirewall$Outbound | undefined;
   firewall_id?: string | undefined;
 };
 
@@ -123,6 +176,8 @@ export const FirewallAssignmentDataAttributes$outboundSchema: z.ZodType<
   FirewallAssignmentDataAttributes
 > = z.object({
   server: z.lazy(() => FirewallAssignmentDataServer$outboundSchema).optional(),
+  firewall: z.lazy(() => FirewallAssignmentDataFirewall$outboundSchema)
+    .optional(),
   firewallId: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {

@@ -41,6 +41,10 @@ export type VirtualMachinePayloadAttributes = {
    * Array of tag IDs to assign to the VM.
    */
   tags?: Array<string> | null | undefined;
+  /**
+   * Site/region slug where the VM is provisioned (e.g. DAL, SAO). Defaults to DAL when omitted.
+   */
+  site?: string | null | undefined;
 };
 
 export type VirtualMachinePayloadData = {
@@ -103,6 +107,7 @@ export const VirtualMachinePayloadAttributes$inboundSchema: z.ZodType<
   operating_system: z.nullable(z.string()).optional(),
   user_data: z.nullable(z.union([z.number().int(), z.string()])).optional(),
   tags: z.nullable(z.array(z.string())).optional(),
+  site: z.nullable(z.string().default("DAL")),
 }).transform((v) => {
   return remap$(v, {
     "ssh_keys": "sshKeys",
@@ -119,6 +124,7 @@ export type VirtualMachinePayloadAttributes$Outbound = {
   operating_system?: string | null | undefined;
   user_data?: number | string | null | undefined;
   tags?: Array<string> | null | undefined;
+  site: string | null;
 };
 
 /** @internal */
@@ -134,6 +140,7 @@ export const VirtualMachinePayloadAttributes$outboundSchema: z.ZodType<
   operatingSystem: z.nullable(z.string()).optional(),
   userData: z.nullable(z.union([z.number().int(), z.string()])).optional(),
   tags: z.nullable(z.array(z.string())).optional(),
+  site: z.nullable(z.string().default("DAL")),
 }).transform((v) => {
   return remap$(v, {
     sshKeys: "ssh_keys",
