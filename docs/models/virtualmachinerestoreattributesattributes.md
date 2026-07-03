@@ -1,0 +1,20 @@
+# VirtualMachineRestoreAttributesAttributes
+
+## Example Usage
+
+```typescript
+import { VirtualMachineRestoreAttributesAttributes } from "latitudesh-typescript-sdk/models";
+
+let value: VirtualMachineRestoreAttributesAttributes = {};
+```
+
+## Fields
+
+| Field                                                                                                              | Type                                                                                                               | Required                                                                                                           | Description                                                                                                        |
+| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
+| `status`                                                                                                           | [models.VirtualMachineRestoreAttributesStatus](../models/virtualmachinerestoreattributesstatus.md)                 | :heavy_minus_sign:                                                                                                 | N/A                                                                                                                |
+| `createdAt`                                                                                                        | *string*                                                                                                           | :heavy_minus_sign:                                                                                                 | N/A                                                                                                                |
+| `backup`                                                                                                           | [models.Backup](../models/backup.md)                                                                               | :heavy_minus_sign:                                                                                                 | N/A                                                                                                                |
+| `virtualMachine`                                                                                                   | [models.VirtualMachineRestoreAttributesVirtualMachine](../models/virtualmachinerestoreattributesvirtualmachine.md) | :heavy_minus_sign:                                                                                                 | The restored VM. Null until the restore is ready.                                                                  |
+| `team`                                                                                                             | [models.TeamInclude](../models/teaminclude.md)                                                                     | :heavy_minus_sign:                                                                                                 | N/A                                                                                                                |
+| `project`                                                                                                          | [models.ProjectInclude](../models/projectinclude.md)                                                               | :heavy_minus_sign:                                                                                                 | N/A                                                                                                                |

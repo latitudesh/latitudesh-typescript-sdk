@@ -103,7 +103,7 @@ export type VirtualMachineAttributesOperatingSystem = {
 };
 
 /**
- * SSH credentials for connecting to the virtual machine. Only available when the VM is running.
+ * SSH credentials for connecting to the virtual machine. Only available when the VM is running. Opt-in extra field: request via `extra_fields[virtual_machines]=credentials`.
  */
 export type VirtualMachineAttributesCredentials = {
   /**
@@ -145,7 +145,7 @@ export type VirtualMachineAttributesAttributes = {
    */
   operatingSystem?: VirtualMachineAttributesOperatingSystem | null | undefined;
   /**
-   * SSH credentials for connecting to the virtual machine. Only available when the VM is running.
+   * SSH credentials for connecting to the virtual machine. Only available when the VM is running. Opt-in extra field: request via `extra_fields[virtual_machines]=credentials`.
    */
   credentials?: VirtualMachineAttributesCredentials | null | undefined;
   site?: string | null | undefined;

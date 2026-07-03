@@ -161,10 +161,10 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, models.VirtualMachine$inboundSchema, {
+    M.json([200, 202], models.VirtualMachine$inboundSchema, {
       ctype: "application/vnd.api+json",
     }),
-    M.fail([404, 422, "4XX"]),
+    M.fail([404, 409, 422, "4XX"]),
     M.fail("5XX"),
   )(response, req);
   if (!result.ok) {

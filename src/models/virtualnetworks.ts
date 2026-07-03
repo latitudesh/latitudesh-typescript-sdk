@@ -7,51 +7,22 @@ import { safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 import {
+  PaginationMeta,
+  PaginationMeta$inboundSchema,
+  PaginationMeta$Outbound,
+  PaginationMeta$outboundSchema,
+} from "./paginationmeta.js";
+import {
   VirtualNetworkData,
   VirtualNetworkData$inboundSchema,
   VirtualNetworkData$Outbound,
   VirtualNetworkData$outboundSchema,
 } from "./virtualnetworkdata.js";
 
-export type VirtualNetworksMeta = {};
-
 export type VirtualNetworks = {
   data?: Array<VirtualNetworkData> | undefined;
-  meta?: VirtualNetworksMeta | undefined;
+  meta?: PaginationMeta | undefined;
 };
-
-/** @internal */
-export const VirtualNetworksMeta$inboundSchema: z.ZodType<
-  VirtualNetworksMeta,
-  z.ZodTypeDef,
-  unknown
-> = z.object({});
-/** @internal */
-export type VirtualNetworksMeta$Outbound = {};
-
-/** @internal */
-export const VirtualNetworksMeta$outboundSchema: z.ZodType<
-  VirtualNetworksMeta$Outbound,
-  z.ZodTypeDef,
-  VirtualNetworksMeta
-> = z.object({});
-
-export function virtualNetworksMetaToJSON(
-  virtualNetworksMeta: VirtualNetworksMeta,
-): string {
-  return JSON.stringify(
-    VirtualNetworksMeta$outboundSchema.parse(virtualNetworksMeta),
-  );
-}
-export function virtualNetworksMetaFromJSON(
-  jsonString: string,
-): SafeParseResult<VirtualNetworksMeta, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => VirtualNetworksMeta$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'VirtualNetworksMeta' from JSON`,
-  );
-}
 
 /** @internal */
 export const VirtualNetworks$inboundSchema: z.ZodType<
@@ -60,12 +31,12 @@ export const VirtualNetworks$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   data: z.array(VirtualNetworkData$inboundSchema).optional(),
-  meta: z.lazy(() => VirtualNetworksMeta$inboundSchema).optional(),
+  meta: PaginationMeta$inboundSchema.optional(),
 });
 /** @internal */
 export type VirtualNetworks$Outbound = {
   data?: Array<VirtualNetworkData$Outbound> | undefined;
-  meta?: VirtualNetworksMeta$Outbound | undefined;
+  meta?: PaginationMeta$Outbound | undefined;
 };
 
 /** @internal */
@@ -75,7 +46,7 @@ export const VirtualNetworks$outboundSchema: z.ZodType<
   VirtualNetworks
 > = z.object({
   data: z.array(VirtualNetworkData$outboundSchema).optional(),
-  meta: z.lazy(() => VirtualNetworksMeta$outboundSchema).optional(),
+  meta: PaginationMeta$outboundSchema.optional(),
 });
 
 export function virtualNetworksToJSON(

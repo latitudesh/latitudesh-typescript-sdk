@@ -10,6 +10,10 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ShowVirtualMachineRequest = {
   virtualMachineId: string;
+  /**
+   * Comma-separated extra attributes that are lazy-loaded. Supported values: `credentials`, `pending_restart`. Example: `extra_fields[virtual_machines]=credentials,pending_restart`.
+   */
+  extraFieldsVirtualMachines?: string | undefined;
 };
 
 /** @internal */
@@ -19,14 +23,17 @@ export const ShowVirtualMachineRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   virtual_machine_id: z.string(),
+  "extra_fields[virtual_machines]": z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "virtual_machine_id": "virtualMachineId",
+    "extra_fields[virtual_machines]": "extraFieldsVirtualMachines",
   });
 });
 /** @internal */
 export type ShowVirtualMachineRequest$Outbound = {
   virtual_machine_id: string;
+  "extra_fields[virtual_machines]"?: string | undefined;
 };
 
 /** @internal */
@@ -36,9 +43,11 @@ export const ShowVirtualMachineRequest$outboundSchema: z.ZodType<
   ShowVirtualMachineRequest
 > = z.object({
   virtualMachineId: z.string(),
+  extraFieldsVirtualMachines: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     virtualMachineId: "virtual_machine_id",
+    extraFieldsVirtualMachines: "extra_fields[virtual_machines]",
   });
 });
 

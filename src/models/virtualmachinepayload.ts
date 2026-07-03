@@ -30,7 +30,7 @@ export type VirtualMachinePayloadAttributes = {
   sshKeys?: Array<string> | null | undefined;
   project?: string | undefined;
   /**
-   * The operating system slug for the Virtual Machine. If not specified, defaults to ubuntu-24-04 for CPU plans or ubuntu24_ml_in_a_box for GPU plans.
+   * The operating system slug for the Virtual Machine. If not specified, defaults to ubuntu_24_04_x64_lts for CPU plans or ubuntu24_ml_in_a_box for GPU plans.
    */
   operatingSystem?: string | null | undefined;
   /**

@@ -108,6 +108,7 @@ async function $do(
     "filter[virtual_network_id]": payload?.["filter[virtual_network_id]"],
     "page[number]": payload?.["page[number]"],
     "page[size]": payload?.["page[size]"],
+    "stats[total]": payload?.["stats[total]"],
   });
 
   const headers = new Headers(compactMap({

@@ -27,6 +27,8 @@ import { Teams } from "./teams.js";
 import { Traffic } from "./traffic.js";
 import { UserData } from "./userdata.js";
 import { UserProfile } from "./userprofile.js";
+import { VirtualMachineBackups } from "./virtualmachinebackups.js";
+import { VirtualMachineRestores } from "./virtualmachinerestores.js";
 import { VirtualMachines } from "./virtualmachines.js";
 import { VirtualNetworks } from "./virtualnetworks.js";
 import { VpnSessions } from "./vpnsessions.js";
@@ -150,6 +152,20 @@ export class Latitudesh extends ClientSDK {
   private _virtualMachines?: VirtualMachines;
   get virtualMachines(): VirtualMachines {
     return (this._virtualMachines ??= new VirtualMachines(this._options));
+  }
+
+  private _virtualMachineBackups?: VirtualMachineBackups;
+  get virtualMachineBackups(): VirtualMachineBackups {
+    return (this._virtualMachineBackups ??= new VirtualMachineBackups(
+      this._options,
+    ));
+  }
+
+  private _virtualMachineRestores?: VirtualMachineRestores;
+  get virtualMachineRestores(): VirtualMachineRestores {
+    return (this._virtualMachineRestores ??= new VirtualMachineRestores(
+      this._options,
+    ));
   }
 
   private _privateNetworks?: PrivateNetworks;

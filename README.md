@@ -293,6 +293,7 @@ run();
 * [getBandwidth](docs/sdks/plans/README.md#getbandwidth) - List bandwidth plans
 * [updateBandwidth](docs/sdks/plans/README.md#updatebandwidth) - Update bandwidth packages
 * [listStorage](docs/sdks/plans/README.md#liststorage) - List storage plans
+* [getManagedDatabasePlans](docs/sdks/plans/README.md#getmanageddatabaseplans) - List managed database plans
 
 ### [Plans.Vm](docs/sdks/vm/README.md)
 
@@ -408,6 +409,24 @@ run();
 * [update](docs/sdks/userprofile/README.md#update) - Update profile
 * [listTeams](docs/sdks/userprofile/README.md#listteams) - List user teams
 
+### [VirtualMachineBackups](docs/sdks/virtualmachinebackups/README.md)
+
+* [listForVirtualMachine](docs/sdks/virtualmachinebackups/README.md#listforvirtualmachine) - List a VM's backups
+* [createForVirtualMachine](docs/sdks/virtualmachinebackups/README.md#createforvirtualmachine) - Create VM backup
+* [list](docs/sdks/virtualmachinebackups/README.md#list) - List all VM backups
+* [create](docs/sdks/virtualmachinebackups/README.md#create) - Create VM backup (top-level)
+* [get](docs/sdks/virtualmachinebackups/README.md#get) - Get VM backup
+* [delete](docs/sdks/virtualmachinebackups/README.md#delete) - Delete VM backup
+
+### [VirtualMachineRestores](docs/sdks/virtualmachinerestores/README.md)
+
+* [listForVirtualMachineBackup](docs/sdks/virtualmachinerestores/README.md#listforvirtualmachinebackup) - List a backup's restores
+* [createForVirtualMachineBackup](docs/sdks/virtualmachinerestores/README.md#createforvirtualmachinebackup) - Create VM restore
+* [listForBackup](docs/sdks/virtualmachinerestores/README.md#listforbackup) - List a backup's restores (top-level backup path)
+* [list](docs/sdks/virtualmachinerestores/README.md#list) - List all VM restores
+* [create](docs/sdks/virtualmachinerestores/README.md#create) - Create VM restore (flat)
+* [get](docs/sdks/virtualmachinerestores/README.md#get) - Get VM restore
+
 ### [VirtualMachines](docs/sdks/virtualmachines/README.md)
 
 * [create](docs/sdks/virtualmachines/README.md#create) - Create VM
@@ -496,6 +515,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`operatingSystemsListPlans`](docs/sdks/operatingsystems/README.md#listplans) - List operating systems
 - [`plansGet`](docs/sdks/plans/README.md#get) - Retrieve plan
 - [`plansGetBandwidth`](docs/sdks/plans/README.md#getbandwidth) - List bandwidth plans
+- [`plansGetManagedDatabasePlans`](docs/sdks/plans/README.md#getmanageddatabaseplans) - List managed database plans
 - [`plansList`](docs/sdks/plans/README.md#list) - List plans
 - [`plansListStorage`](docs/sdks/plans/README.md#liststorage) - List storage plans
 - [`plansUpdateBandwidth`](docs/sdks/plans/README.md#updatebandwidth) - Update bandwidth packages
@@ -558,6 +578,18 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`userProfileGet`](docs/sdks/userprofile/README.md#get) - Retrieve profile
 - [`userProfileListTeams`](docs/sdks/userprofile/README.md#listteams) - List user teams
 - [`userProfileUpdate`](docs/sdks/userprofile/README.md#update) - Update profile
+- [`virtualMachineBackupsCreate`](docs/sdks/virtualmachinebackups/README.md#create) - Create VM backup (top-level)
+- [`virtualMachineBackupsCreateForVirtualMachine`](docs/sdks/virtualmachinebackups/README.md#createforvirtualmachine) - Create VM backup
+- [`virtualMachineBackupsDelete`](docs/sdks/virtualmachinebackups/README.md#delete) - Delete VM backup
+- [`virtualMachineBackupsGet`](docs/sdks/virtualmachinebackups/README.md#get) - Get VM backup
+- [`virtualMachineBackupsList`](docs/sdks/virtualmachinebackups/README.md#list) - List all VM backups
+- [`virtualMachineBackupsListForVirtualMachine`](docs/sdks/virtualmachinebackups/README.md#listforvirtualmachine) - List a VM's backups
+- [`virtualMachineRestoresCreate`](docs/sdks/virtualmachinerestores/README.md#create) - Create VM restore (flat)
+- [`virtualMachineRestoresCreateForVirtualMachineBackup`](docs/sdks/virtualmachinerestores/README.md#createforvirtualmachinebackup) - Create VM restore
+- [`virtualMachineRestoresGet`](docs/sdks/virtualmachinerestores/README.md#get) - Get VM restore
+- [`virtualMachineRestoresList`](docs/sdks/virtualmachinerestores/README.md#list) - List all VM restores
+- [`virtualMachineRestoresListForBackup`](docs/sdks/virtualmachinerestores/README.md#listforbackup) - List a backup's restores (top-level backup path)
+- [`virtualMachineRestoresListForVirtualMachineBackup`](docs/sdks/virtualmachinerestores/README.md#listforvirtualmachinebackup) - List a backup's restores
 - [`virtualMachinesCreate`](docs/sdks/virtualmachines/README.md#create) - Create VM
 - [`virtualMachinesCreateVirtualMachineAction`](docs/sdks/virtualmachines/README.md#createvirtualmachineaction) - Run VM power action
 - [`virtualMachinesCreateVirtualMachineNetworkAttachment`](docs/sdks/virtualmachines/README.md#createvirtualmachinenetworkattachment) - Attach a network to a VM
@@ -755,7 +787,7 @@ run();
 
 
 **Inherit from [`LatitudeshError`](./src/models/errors/latitudesherror.ts)**:
-* [`ErrorObject`](./src/models/errors/errorobject.ts): Applicable to 20 of 133 methods.*
+* [`ErrorObject`](./src/models/errors/errorobject.ts): Applicable to 32 of 146 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>
