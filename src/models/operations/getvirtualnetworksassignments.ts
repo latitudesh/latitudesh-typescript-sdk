@@ -23,6 +23,10 @@ export type GetVirtualNetworksAssignmentsRequest = {
    */
   filterVirtualNetworkId?: string | undefined;
   /**
+   * Request aggregate stats in the response `meta`. Use `count` to get the total number of records, returned as `meta.stats.total.count`.
+   */
+  statsTotal?: string | undefined;
+  /**
    * Number of items to return per page
    */
   pageSize?: number | undefined;
@@ -45,6 +49,7 @@ export const GetVirtualNetworksAssignmentsRequest$inboundSchema: z.ZodType<
   "filter[server]": z.string().optional(),
   "filter[vid]": z.string().optional(),
   "filter[virtual_network_id]": z.string().optional(),
+  "stats[total]": z.string().optional(),
   "page[size]": z.number().int().default(20),
   "page[number]": z.number().int().default(1),
 }).transform((v) => {
@@ -52,6 +57,7 @@ export const GetVirtualNetworksAssignmentsRequest$inboundSchema: z.ZodType<
     "filter[server]": "filterServer",
     "filter[vid]": "filterVid",
     "filter[virtual_network_id]": "filterVirtualNetworkId",
+    "stats[total]": "statsTotal",
     "page[size]": "pageSize",
     "page[number]": "pageNumber",
   });
@@ -61,6 +67,7 @@ export type GetVirtualNetworksAssignmentsRequest$Outbound = {
   "filter[server]"?: string | undefined;
   "filter[vid]"?: string | undefined;
   "filter[virtual_network_id]"?: string | undefined;
+  "stats[total]"?: string | undefined;
   "page[size]": number;
   "page[number]": number;
 };
@@ -74,6 +81,7 @@ export const GetVirtualNetworksAssignmentsRequest$outboundSchema: z.ZodType<
   filterServer: z.string().optional(),
   filterVid: z.string().optional(),
   filterVirtualNetworkId: z.string().optional(),
+  statsTotal: z.string().optional(),
   pageSize: z.number().int().default(20),
   pageNumber: z.number().int().default(1),
 }).transform((v) => {
@@ -81,6 +89,7 @@ export const GetVirtualNetworksAssignmentsRequest$outboundSchema: z.ZodType<
     filterServer: "filter[server]",
     filterVid: "filter[vid]",
     filterVirtualNetworkId: "filter[virtual_network_id]",
+    statsTotal: "stats[total]",
     pageSize: "page[size]",
     pageNumber: "page[number]",
   });

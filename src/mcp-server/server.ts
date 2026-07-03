@@ -59,6 +59,7 @@ import { tool$objectStoragePostStorageBuckets } from "./tools/objectStoragePostS
 import { tool$operatingSystemsListPlans } from "./tools/operatingSystemsListPlans.js";
 import { tool$plansGet } from "./tools/plansGet.js";
 import { tool$plansGetBandwidth } from "./tools/plansGetBandwidth.js";
+import { tool$plansGetManagedDatabasePlans } from "./tools/plansGetManagedDatabasePlans.js";
 import { tool$plansList } from "./tools/plansList.js";
 import { tool$plansListStorage } from "./tools/plansListStorage.js";
 import { tool$plansUpdateBandwidth } from "./tools/plansUpdateBandwidth.js";
@@ -131,6 +132,18 @@ import { tool$userDataUpdateForProject } from "./tools/userDataUpdateForProject.
 import { tool$userProfileGet } from "./tools/userProfileGet.js";
 import { tool$userProfileListTeams } from "./tools/userProfileListTeams.js";
 import { tool$userProfileUpdate } from "./tools/userProfileUpdate.js";
+import { tool$virtualMachineBackupsCreate } from "./tools/virtualMachineBackupsCreate.js";
+import { tool$virtualMachineBackupsCreateForVirtualMachine } from "./tools/virtualMachineBackupsCreateForVirtualMachine.js";
+import { tool$virtualMachineBackupsDelete } from "./tools/virtualMachineBackupsDelete.js";
+import { tool$virtualMachineBackupsGet } from "./tools/virtualMachineBackupsGet.js";
+import { tool$virtualMachineBackupsList } from "./tools/virtualMachineBackupsList.js";
+import { tool$virtualMachineBackupsListForVirtualMachine } from "./tools/virtualMachineBackupsListForVirtualMachine.js";
+import { tool$virtualMachineRestoresCreate } from "./tools/virtualMachineRestoresCreate.js";
+import { tool$virtualMachineRestoresCreateForVirtualMachineBackup } from "./tools/virtualMachineRestoresCreateForVirtualMachineBackup.js";
+import { tool$virtualMachineRestoresGet } from "./tools/virtualMachineRestoresGet.js";
+import { tool$virtualMachineRestoresList } from "./tools/virtualMachineRestoresList.js";
+import { tool$virtualMachineRestoresListForBackup } from "./tools/virtualMachineRestoresListForBackup.js";
+import { tool$virtualMachineRestoresListForVirtualMachineBackup } from "./tools/virtualMachineRestoresListForVirtualMachineBackup.js";
 import { tool$virtualMachinesCreate } from "./tools/virtualMachinesCreate.js";
 import { tool$virtualMachinesCreateVirtualMachineAction } from "./tools/virtualMachinesCreateVirtualMachineAction.js";
 import { tool$virtualMachinesCreateVirtualMachineNetworkAttachment } from "./tools/virtualMachinesCreateVirtualMachineNetworkAttachment.js";
@@ -158,7 +171,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Latitudesh",
-    version: "0.6.3",
+    version: "0.6.4",
   });
 
   const client = new LatitudeshCore({
@@ -229,6 +242,7 @@ export function createMCPServer(deps: {
   tool(tool$plansGetBandwidth);
   tool(tool$plansUpdateBandwidth);
   tool(tool$plansListStorage);
+  tool(tool$plansGetManagedDatabasePlans);
   tool(tool$projectsList);
   tool(tool$projectsCreate);
   tool(tool$projectsUpdate);
@@ -306,6 +320,18 @@ export function createMCPServer(deps: {
   tool(tool$virtualMachinesListVirtualMachineNetworkAttachments);
   tool(tool$virtualMachinesCreateVirtualMachineNetworkAttachment);
   tool(tool$virtualMachinesDestroyVirtualMachineNetworkAttachment);
+  tool(tool$virtualMachineBackupsListForVirtualMachine);
+  tool(tool$virtualMachineBackupsCreateForVirtualMachine);
+  tool(tool$virtualMachineBackupsList);
+  tool(tool$virtualMachineBackupsCreate);
+  tool(tool$virtualMachineBackupsGet);
+  tool(tool$virtualMachineBackupsDelete);
+  tool(tool$virtualMachineRestoresListForVirtualMachineBackup);
+  tool(tool$virtualMachineRestoresCreateForVirtualMachineBackup);
+  tool(tool$virtualMachineRestoresListForBackup);
+  tool(tool$virtualMachineRestoresList);
+  tool(tool$virtualMachineRestoresCreate);
+  tool(tool$virtualMachineRestoresGet);
   tool(tool$privateNetworksList);
   tool(tool$privateNetworksCreate);
   tool(tool$privateNetworksUpdate);

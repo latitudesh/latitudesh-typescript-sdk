@@ -23,6 +23,10 @@ export type GetVirtualNetworksRequest = {
    */
   filterTags?: string | undefined;
   /**
+   * Request aggregate stats in the response `meta`. Use `count` to get the total number of records, returned as `meta.stats.total.count`.
+   */
+  statsTotal?: string | undefined;
+  /**
    * Number of items to return per page
    */
   pageSize?: number | undefined;
@@ -45,6 +49,7 @@ export const GetVirtualNetworksRequest$inboundSchema: z.ZodType<
   "filter[location]": z.string().optional(),
   "filter[project]": z.string().optional(),
   "filter[tags]": z.string().optional(),
+  "stats[total]": z.string().optional(),
   "page[size]": z.number().int().default(20),
   "page[number]": z.number().int().default(1),
 }).transform((v) => {
@@ -52,6 +57,7 @@ export const GetVirtualNetworksRequest$inboundSchema: z.ZodType<
     "filter[location]": "filterLocation",
     "filter[project]": "filterProject",
     "filter[tags]": "filterTags",
+    "stats[total]": "statsTotal",
     "page[size]": "pageSize",
     "page[number]": "pageNumber",
   });
@@ -61,6 +67,7 @@ export type GetVirtualNetworksRequest$Outbound = {
   "filter[location]"?: string | undefined;
   "filter[project]"?: string | undefined;
   "filter[tags]"?: string | undefined;
+  "stats[total]"?: string | undefined;
   "page[size]": number;
   "page[number]": number;
 };
@@ -74,6 +81,7 @@ export const GetVirtualNetworksRequest$outboundSchema: z.ZodType<
   filterLocation: z.string().optional(),
   filterProject: z.string().optional(),
   filterTags: z.string().optional(),
+  statsTotal: z.string().optional(),
   pageSize: z.number().int().default(20),
   pageNumber: z.number().int().default(1),
 }).transform((v) => {
@@ -81,6 +89,7 @@ export const GetVirtualNetworksRequest$outboundSchema: z.ZodType<
     filterLocation: "filter[location]",
     filterProject: "filter[project]",
     filterTags: "filter[tags]",
+    statsTotal: "stats[total]",
     pageSize: "page[size]",
     pageNumber: "page[number]",
   });

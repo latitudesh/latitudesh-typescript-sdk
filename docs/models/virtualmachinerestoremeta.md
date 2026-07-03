@@ -1,11 +1,11 @@
-# ServersMeta
+# VirtualMachineRestoreMeta
 
 ## Example Usage
 
 ```typescript
-import { ServersMeta } from "latitudesh-typescript-sdk/models";
+import { VirtualMachineRestoreMeta } from "latitudesh-typescript-sdk/models";
 
-let value: ServersMeta = {};
+let value: VirtualMachineRestoreMeta = {};
 ```
 
 ## Fields

@@ -31,7 +31,7 @@ export type CustomTagDataAttributes = {
   /**
    * Description of the Tag
    */
-  description?: string | undefined;
+  description?: string | null | undefined;
   /**
    * Color of the Tag
    */
@@ -62,7 +62,7 @@ export const CustomTagDataAttributes$inboundSchema: z.ZodType<
 > = z.object({
   name: z.string().optional(),
   slug: z.string().optional(),
-  description: z.string().optional(),
+  description: z.nullable(z.string()).optional(),
   color: z.string().optional(),
   team: TeamInclude$inboundSchema.optional(),
 });
@@ -70,7 +70,7 @@ export const CustomTagDataAttributes$inboundSchema: z.ZodType<
 export type CustomTagDataAttributes$Outbound = {
   name?: string | undefined;
   slug?: string | undefined;
-  description?: string | undefined;
+  description?: string | null | undefined;
   color?: string | undefined;
   team?: TeamInclude$Outbound | undefined;
 };
@@ -83,7 +83,7 @@ export const CustomTagDataAttributes$outboundSchema: z.ZodType<
 > = z.object({
   name: z.string().optional(),
   slug: z.string().optional(),
-  description: z.string().optional(),
+  description: z.nullable(z.string()).optional(),
   color: z.string().optional(),
   team: TeamInclude$outboundSchema.optional(),
 });

@@ -319,6 +319,7 @@ const latitudesh = new Latitudesh({
 async function run() {
   const result = await latitudesh.virtualMachines.get({
     virtualMachineId: "vm_7vYAZqGBdMQ94",
+    extraFieldsVirtualMachines: "credentials",
   });
 
   console.log(result);
@@ -344,6 +345,7 @@ const latitudesh = new LatitudeshCore({
 async function run() {
   const res = await virtualMachinesGet(latitudesh, {
     virtualMachineId: "vm_7vYAZqGBdMQ94",
+    extraFieldsVirtualMachines: "credentials",
   });
   if (res.ok) {
     const { value: result } = res;

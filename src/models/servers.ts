@@ -7,58 +7,33 @@ import { safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 import {
+  PaginationMeta,
+  PaginationMeta$inboundSchema,
+  PaginationMeta$Outbound,
+  PaginationMeta$outboundSchema,
+} from "./paginationmeta.js";
+import {
   ServerData,
   ServerData$inboundSchema,
   ServerData$Outbound,
   ServerData$outboundSchema,
 } from "./serverdata.js";
 
-export type ServersMeta = {};
-
 export type Servers = {
   data?: Array<ServerData> | undefined;
-  meta?: ServersMeta | undefined;
+  meta?: PaginationMeta | undefined;
 };
-
-/** @internal */
-export const ServersMeta$inboundSchema: z.ZodType<
-  ServersMeta,
-  z.ZodTypeDef,
-  unknown
-> = z.object({});
-/** @internal */
-export type ServersMeta$Outbound = {};
-
-/** @internal */
-export const ServersMeta$outboundSchema: z.ZodType<
-  ServersMeta$Outbound,
-  z.ZodTypeDef,
-  ServersMeta
-> = z.object({});
-
-export function serversMetaToJSON(serversMeta: ServersMeta): string {
-  return JSON.stringify(ServersMeta$outboundSchema.parse(serversMeta));
-}
-export function serversMetaFromJSON(
-  jsonString: string,
-): SafeParseResult<ServersMeta, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ServersMeta$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ServersMeta' from JSON`,
-  );
-}
 
 /** @internal */
 export const Servers$inboundSchema: z.ZodType<Servers, z.ZodTypeDef, unknown> =
   z.object({
     data: z.array(ServerData$inboundSchema).optional(),
-    meta: z.lazy(() => ServersMeta$inboundSchema).optional(),
+    meta: PaginationMeta$inboundSchema.optional(),
   });
 /** @internal */
 export type Servers$Outbound = {
   data?: Array<ServerData$Outbound> | undefined;
-  meta?: ServersMeta$Outbound | undefined;
+  meta?: PaginationMeta$Outbound | undefined;
 };
 
 /** @internal */
@@ -68,7 +43,7 @@ export const Servers$outboundSchema: z.ZodType<
   Servers
 > = z.object({
   data: z.array(ServerData$outboundSchema).optional(),
-  meta: z.lazy(() => ServersMeta$outboundSchema).optional(),
+  meta: PaginationMeta$outboundSchema.optional(),
 });
 
 export function serversToJSON(servers: Servers): string {

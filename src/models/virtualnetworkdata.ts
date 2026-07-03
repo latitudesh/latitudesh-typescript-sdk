@@ -36,8 +36,8 @@ export type VirtualNetworkDataRegion = {
 export type VirtualNetworkDataTag = {
   id?: string | undefined;
   name?: string | undefined;
-  description?: string | undefined;
-  color?: string | undefined;
+  description?: string | null | undefined;
+  color?: string | null | undefined;
 };
 
 export type VirtualNetworkDataAttributes = {
@@ -182,15 +182,15 @@ export const VirtualNetworkDataTag$inboundSchema: z.ZodType<
 > = z.object({
   id: z.string().optional(),
   name: z.string().optional(),
-  description: z.string().optional(),
-  color: z.string().optional(),
+  description: z.nullable(z.string()).optional(),
+  color: z.nullable(z.string()).optional(),
 });
 /** @internal */
 export type VirtualNetworkDataTag$Outbound = {
   id?: string | undefined;
   name?: string | undefined;
-  description?: string | undefined;
-  color?: string | undefined;
+  description?: string | null | undefined;
+  color?: string | null | undefined;
 };
 
 /** @internal */
@@ -201,8 +201,8 @@ export const VirtualNetworkDataTag$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string().optional(),
   name: z.string().optional(),
-  description: z.string().optional(),
-  color: z.string().optional(),
+  description: z.nullable(z.string()).optional(),
+  color: z.nullable(z.string()).optional(),
 });
 
 export function virtualNetworkDataTagToJSON(

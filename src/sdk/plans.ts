@@ -4,6 +4,7 @@
 
 import { plansGet } from "../funcs/plansGet.js";
 import { plansGetBandwidth } from "../funcs/plansGetBandwidth.js";
+import { plansGetManagedDatabasePlans } from "../funcs/plansGetManagedDatabasePlans.js";
 import { plansList } from "../funcs/plansList.js";
 import { plansListStorage } from "../funcs/plansListStorage.js";
 import { plansUpdateBandwidth } from "../funcs/plansUpdateBandwidth.js";
@@ -94,6 +95,18 @@ export class Plans extends ClientSDK {
     options?: RequestOptions,
   ): Promise<models.StoragePlans> {
     return unwrapAsync(plansListStorage(
+      this,
+      options,
+    ));
+  }
+
+  /**
+   * List managed database plans
+   */
+  async getManagedDatabasePlans(
+    options?: RequestOptions,
+  ): Promise<models.ManagedDatabasePlans> {
+    return unwrapAsync(plansGetManagedDatabasePlans(
       this,
       options,
     ));

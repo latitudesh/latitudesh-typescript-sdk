@@ -7,53 +7,22 @@ import { safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 import {
+  PaginationMeta,
+  PaginationMeta$inboundSchema,
+  PaginationMeta$Outbound,
+  PaginationMeta$outboundSchema,
+} from "./paginationmeta.js";
+import {
   VirtualNetworkAssignmentData,
   VirtualNetworkAssignmentData$inboundSchema,
   VirtualNetworkAssignmentData$Outbound,
   VirtualNetworkAssignmentData$outboundSchema,
 } from "./virtualnetworkassignmentdata.js";
 
-export type VirtualNetworkAssignmentsMeta = {};
-
 export type VirtualNetworkAssignments = {
   data?: Array<VirtualNetworkAssignmentData> | undefined;
-  meta?: VirtualNetworkAssignmentsMeta | undefined;
+  meta?: PaginationMeta | undefined;
 };
-
-/** @internal */
-export const VirtualNetworkAssignmentsMeta$inboundSchema: z.ZodType<
-  VirtualNetworkAssignmentsMeta,
-  z.ZodTypeDef,
-  unknown
-> = z.object({});
-/** @internal */
-export type VirtualNetworkAssignmentsMeta$Outbound = {};
-
-/** @internal */
-export const VirtualNetworkAssignmentsMeta$outboundSchema: z.ZodType<
-  VirtualNetworkAssignmentsMeta$Outbound,
-  z.ZodTypeDef,
-  VirtualNetworkAssignmentsMeta
-> = z.object({});
-
-export function virtualNetworkAssignmentsMetaToJSON(
-  virtualNetworkAssignmentsMeta: VirtualNetworkAssignmentsMeta,
-): string {
-  return JSON.stringify(
-    VirtualNetworkAssignmentsMeta$outboundSchema.parse(
-      virtualNetworkAssignmentsMeta,
-    ),
-  );
-}
-export function virtualNetworkAssignmentsMetaFromJSON(
-  jsonString: string,
-): SafeParseResult<VirtualNetworkAssignmentsMeta, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => VirtualNetworkAssignmentsMeta$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'VirtualNetworkAssignmentsMeta' from JSON`,
-  );
-}
 
 /** @internal */
 export const VirtualNetworkAssignments$inboundSchema: z.ZodType<
@@ -62,12 +31,12 @@ export const VirtualNetworkAssignments$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   data: z.array(VirtualNetworkAssignmentData$inboundSchema).optional(),
-  meta: z.lazy(() => VirtualNetworkAssignmentsMeta$inboundSchema).optional(),
+  meta: PaginationMeta$inboundSchema.optional(),
 });
 /** @internal */
 export type VirtualNetworkAssignments$Outbound = {
   data?: Array<VirtualNetworkAssignmentData$Outbound> | undefined;
-  meta?: VirtualNetworkAssignmentsMeta$Outbound | undefined;
+  meta?: PaginationMeta$Outbound | undefined;
 };
 
 /** @internal */
@@ -77,7 +46,7 @@ export const VirtualNetworkAssignments$outboundSchema: z.ZodType<
   VirtualNetworkAssignments
 > = z.object({
   data: z.array(VirtualNetworkAssignmentData$outboundSchema).optional(),
-  meta: z.lazy(() => VirtualNetworkAssignmentsMeta$outboundSchema).optional(),
+  meta: PaginationMeta$outboundSchema.optional(),
 });
 
 export function virtualNetworkAssignmentsToJSON(
