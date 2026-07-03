@@ -236,6 +236,6 @@ Based on:
 - OpenAPI Doc  
 - Speakeasy CLI 1.788.0 (2.915.0) https://github.com/speakeasy-api/speakeasy
 ### Generated
-- [typescript v0.6.4] .
+- [typescript v0.7.0] .
 ### Releases
-- [NPM v0.6.4] https://www.npmjs.com/package/latitudesh-typescript-sdk/v/0.6.4 - .
+- [NPM v0.7.0] https://www.npmjs.com/package/latitudesh-typescript-sdk/v/0.7.0 - .

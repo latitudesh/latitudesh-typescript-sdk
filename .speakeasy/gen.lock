@@ -5,7 +5,7 @@ management:
   docVersion: "2023-06-01"
   speakeasyVersion: 1.788.0
   generationVersion: 2.915.0
-  releaseVersion: 0.6.4
+  releaseVersion: 0.7.0
   configChecksum: a5480dd8f4d16aa3365a67aa5d7b62b6
   repoURL: https://github.com/latitudesh/latitudesh-typescript-sdk.git
   installationURL: https://github.com/latitudesh/latitudesh-typescript-sdk
