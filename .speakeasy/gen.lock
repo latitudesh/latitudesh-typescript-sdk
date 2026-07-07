@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c8245324-f3d7-42c7-8124-ce79579cbff5
 management:
-  docChecksum: 8ce990e6f7a4ff596636dd7099689562
+  docChecksum: 2dee815ebcb037d9aabbe908aa865c90
   docVersion: "2023-06-01"
-  speakeasyVersion: 1.788.0
-  generationVersion: 2.915.0
-  releaseVersion: 0.7.0
-  configChecksum: a5480dd8f4d16aa3365a67aa5d7b62b6
+  speakeasyVersion: 1.789.0
+  generationVersion: 2.916.2
+  releaseVersion: 0.7.1
+  configChecksum: 0ba1d23d42efbd8fa9c3ce25bcccdfa8
   repoURL: https://github.com/latitudesh/latitudesh-typescript-sdk.git
   installationURL: https://github.com/latitudesh/latitudesh-typescript-sdk
   published: true
 persistentEdits:
-  generation_id: 05c3ba09-92f2-434d-a470-1411d24f586d
-  pristine_commit_hash: 409843652c762c61cf8c3eab9d508f2b9b191c80
-  pristine_tree_hash: 25cfe3332c857bec8c289667b27e57aa1b9d4496
+  generation_id: 21a48b48-910e-42b1-b412-36fef4dd13e2
+  pristine_commit_hash: ed6b5ad26017c1e012a59621edff17d6fda65d41
+  pristine_tree_hash: c5c833570373713b28567cd5023789e80fc45899
 features:
   typescript:
     additionalDependencies: 0.1.0
@@ -1545,8 +1545,8 @@ trackedFiles:
     pristine_git_object: 3d2f829fbcee1e5cc6e18224bff8a0343906f4f1
   docs/models/operations/indexvirtualmachinerequest.md:
     id: 2bc7285a85dc
-    last_write_checksum: sha1:d960e172898439658cc8f111b7b96a1e5395a0eb
-    pristine_git_object: 38ce5e47ff1d76ad8acfa231e8d3fdb85e7826c5
+    last_write_checksum: sha1:5629be87e5fb1f6c6d6dee5c9cabca1645dcd169
+    pristine_git_object: b4788806e25185ad79e684b32152347fc8bb3ab7
   docs/models/operations/listbackuprestoresrequest.md:
     id: ca1b17bf898e
     last_write_checksum: sha1:bc9d341dacef3bc75e609d41d1350aa6b5a2b59e
@@ -3373,8 +3373,8 @@ trackedFiles:
     pristine_git_object: b4142a033cac497da610f0d3c89a8b3ff11365e4
   docs/sdks/virtualmachines/README.md:
     id: 9a444616366b
-    last_write_checksum: sha1:c026fc31d71a82aecc9765d6dcc7f918127b6574
-    pristine_git_object: 654ed38959d9a4e1f1dac20f7df08bb96540021d
+    last_write_checksum: sha1:d016aa34e630f526c28ad64d2bed461c4659a512
+    pristine_git_object: fb3d5d96a035b1bedd956bf1870866566dc22315
   docs/sdks/virtualnetworks/README.md:
     id: 523cffefb080
     last_write_checksum: sha1:c4a5d5f09383430ddbd1975702b1d05b8afdb20e
@@ -3409,12 +3409,12 @@ trackedFiles:
     pristine_git_object: 249e5d9837dbad499fc14718cebf96fd4875a9e8
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:51e1732932cfc8b44be5a875ff447cb810e9736a
-    pristine_git_object: 8b3f61292949f0c9d66518960f80a9b25ed09de3
+    last_write_checksum: sha1:ff6b7d354d7ee9a76f8893ce46afcbb071788252
+    pristine_git_object: d932590e8245f3c762c1d5da67926c4a4f41d859
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:b87eedb0d749bc54571520605f07b86ce3987529
-    pristine_git_object: d016f8dd273c5b45c0fa222d4c09e9e45146943e
+    last_write_checksum: sha1:d2bdb09123f0cd69e876587a19f655ab6581f0af
+    pristine_git_object: 3e88a5819fd9fe0a2a3131242766f35da0be76ac
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:9bb7b3807363b77f27dbdb87d6d10e9605f723d6
@@ -3969,8 +3969,8 @@ trackedFiles:
     pristine_git_object: 8b543ded304392424dca063d499be83189aabb5b
   src/funcs/virtualMachinesList.ts:
     id: 9af0473895a0
-    last_write_checksum: sha1:394d15c2c305231943e86593ef8024789a1a9573
-    pristine_git_object: 74b4eaaf85b7c5f4ba1538856a96c9d730861ab9
+    last_write_checksum: sha1:2b816eb1059ddd5f3698c6eb1fc1c75fcab863d7
+    pristine_git_object: c226903ba7fb8cb6b43a39a331ea41a1fd16d9ec
   src/funcs/virtualMachinesListVirtualMachineNetworkAttachments.ts:
     id: 3f1c17f402b5
     last_write_checksum: sha1:d826eb1521b9387f166bd0bce3f97c64674f59e7
@@ -4025,8 +4025,8 @@ trackedFiles:
     pristine_git_object: 0aebd8b0a4867e35cb3348fc52921c3c0b4725b7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:1ec237921409687e34d421b686824ab2c84f8002
-    pristine_git_object: 3f4e7ed9788a4b81654d6951b3b96bc2d8e75c8f
+    last_write_checksum: sha1:872107864ffbd79d6d9f5d1025ad7990ea504cb6
+    pristine_git_object: ae1059986321c32aaebfc4f316a6f24068014374
   src/lib/encodings.ts:
     id: 3bd8ead98afd
     last_write_checksum: sha1:50d9b187dcfc3cca8d3bbd9fe074f865d715d2b0
@@ -4101,8 +4101,8 @@ trackedFiles:
     pristine_git_object: 0955a573c2ce989d63c737410ab8cc28706d9f74
   src/mcp-server/mcp-server.ts:
     id: aabbc4ab07c1
-    last_write_checksum: sha1:b6e10426a2f33cb4d739f2a2902a0f2fc1a479b3
-    pristine_git_object: eeee00e344e64ae49dec9cf695b0eb96124c5bf8
+    last_write_checksum: sha1:5e91cc2edd0239235e01569bdb1abe946f12d5f0
+    pristine_git_object: 2c78f748c06abfcf4fc053659b9a2368163205d6
   src/mcp-server/prompts.ts:
     id: 26f3d73cbf31
     last_write_checksum: sha1:3e8d60ab7f8078d83fa9528f2e831050c1fd119c
@@ -4117,8 +4117,8 @@ trackedFiles:
     pristine_git_object: c25696d4c4f70e081fa5d87ad6891874c509a577
   src/mcp-server/server.ts:
     id: 2784dd48e82a
-    last_write_checksum: sha1:7a2422ff5976241b3dcd3bb39269a6b347d79c30
-    pristine_git_object: 0acdcc92e8db7dd3dd77279e79cd5a2d0854289f
+    last_write_checksum: sha1:e3b4c47b3c34e169f64f5d5db9674086604127e4
+    pristine_git_object: 07c18bbd0a88cf54e59c4ed6ebf1af42a9532cd5
   src/mcp-server/shared.ts:
     id: 074e80d4be1e
     last_write_checksum: sha1:d89576cea2bef3856b7fc3e65b868875528be042
@@ -5269,8 +5269,8 @@ trackedFiles:
     pristine_git_object: 6f931b079d59d54a852a2b9d35b6a71d6553d531
   src/models/operations/indexvirtualmachine.ts:
     id: d34148c8ec5f
-    last_write_checksum: sha1:454b01b711e50637ad8deb28d0d0e499c0d1263c
-    pristine_git_object: ce05bfb0065dcb7226d6b5e900c8624758f81cc8
+    last_write_checksum: sha1:17d7fd13014cc438ee815d7534c5ddbe50da6324
+    pristine_git_object: 805b617da5a6c8607a2a434f9c2af6d96a94e822
   src/models/operations/listbackuprestores.ts:
     id: 3f48404a9dfe
     last_write_checksum: sha1:3766478957b50c7d9301557a400dbfaff4ed5b11
@@ -5457,8 +5457,8 @@ trackedFiles:
     pristine_git_object: 699ba9525c7124ba2cfddf8b0d8ae0d97d0f72e6
   src/models/operations/updatevirtualnetwork.ts:
     id: 5acee7023ec5
-    last_write_checksum: sha1:dc7803c3c908acf7f6c45f63ee226494424880bc
-    pristine_git_object: 3c08ad1af1402e0b4a8ce8a6d8a695af3b04bb8a
+    last_write_checksum: sha1:72bfdeeceb521e48417882b3f6da04b2ca853219
+    pristine_git_object: 059a4ce7979c570973a9fd375a3540c1bfe11267
   src/models/outofbandconnection.ts:
     id: e6f97f1c3204
     last_write_checksum: sha1:ea72b2c553989dae12aec7b08cc60e21634118d1
@@ -6896,6 +6896,10 @@ examples:
       responses:
         "200":
           application/vnd.api+json: {"data": [{"id": "vm_zlkg1DegdvZE5", "type": "virtual_machines", "attributes": {"name": "my-new-vm", "created_at": "2026-01-14T15:57:14+00:00", "status": "Running", "primary_ipv4": "192.168.1.100", "operating_system": null, "credentials": {"username": "ubuntu", "host": "192.168.1.100", "password": "secure_password", "ssh_keys": []}, "site": "MEX192", "billing": "hourly", "plan": {"id": "plan_059EqYVjDQj8p", "name": "g3.l40s.medium-142"}, "specs": {"vcpu": null, "ram": null, "storage": null, "nic": "1 x 1 Gbps", "gpu": "1 x NVIDIA H100 Tensor Core GPU"}, "team": {"id": "team_1ejNe2b5gQiKpxYNxz0bFm2yY38", "name": "701 Team", "slug": "701-team", "description": "701 Team", "address": "29825 Klocko Trafficway, Wunschhaven, KS 74888", "currency": {}, "status": "verified"}, "project": {"id": "proj_w49QDB2WDagKb", "name": "Intelligent Granite Pants", "slug": "intelligent-granite-pants", "description": "Aerodynamic Copper Bottle", "billing_type": "Normal", "billing_method": "Normal", "bandwidth_alert": false, "environment": null, "billing": {"subscription_id": null, "type": "Normal", "method": "Normal"}, "stats": {"ip_addresses": 0, "prefixes": 0, "servers": 0, "vlans": 0}}}}]}
+    UnsupportedSortField:
+      responses:
+        "400":
+          application/vnd.api+json: {"errors": [{"code": "VALIDATION_ERROR", "status": "400", "title": "Validation Error", "detail": "contains unsupported field: region", "source": {"parameter": "sort"}, "meta": {}}]}
   create-virtual-machine:
     Created:
       requestBody:
@@ -6984,8 +6988,8 @@ examples:
         path:
           vlan_id: "vlan_VaNmodjeObE8W"
       requestBody:
-        application/json: {"data": {"id": "vlan_VaNmodjeObE8W", "type": "virtual_networks", "attributes": {"tags": ["tag_RjLvG6oe84IAw7BxxEGaFAXK4l4", "tag_lpPQ21kXEYfb9az3jRoVIVw4RBk"], "description": "Test virtual network update"}}}
-        application/vnd.api+json: {"data": {"id": "vlan_VaNmodjeObE8W", "type": "virtual_networks", "attributes": {"tags": ["tag_RjLvG6oe84IAw7BxxEGaFAXK4l4", "tag_lpPQ21kXEYfb9az3jRoVIVw4RBk"], "description": "Test virtual network update"}}}
+        application/json: {"data": {"id": "vlan_VaNmodjeObE8W", "type": "virtual_networks", "attributes": {"tags": ["tag_RjLvG6oe84IAw7BxxEGaFAXK4l4", "tag_lpPQ21kXEYfb9az3jRoVIVw4RBk"]}}}
+        application/vnd.api+json: {"data": {"id": "vlan_VaNmodjeObE8W", "type": "virtual_networks", "attributes": {"tags": ["tag_RjLvG6oe84IAw7BxxEGaFAXK4l4", "tag_lpPQ21kXEYfb9az3jRoVIVw4RBk"]}}}
       responses:
         "200":
           application/vnd.api+json: {"data": {"id": "vlan_VaNmodjeObE8W", "type": "virtual_networks", "attributes": {"vid": 2040, "name": "cupiditate", "description": "Perspiciatis molestiae laborum quae.", "created_at": null, "tags": [{"id": "tag_RjLvG6oe84IAw7BxxEGaFAXK4l4", "name": "Tal-Elmar", "description": "Placeat non sit velit.", "color": "#e5e53e"}, {"id": "tag_lpPQ21kXEYfb9az3jRoVIVw4RBk", "name": "Great Eagle", "description": "Voluptatem aut in corrupti.", "color": "#502f50"}]}}, "meta": {}}
@@ -7925,7 +7929,7 @@ examples:
           application/vnd.api+json: {}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Typescript SDK Changes:\n* `latitudesh.tags.list()`:  `response.data[].attributes.description` **Changed** (Breaking ⚠️)\n* `latitudesh.privateNetworks.get()`:  `response.data.attributes.tags[]` **Changed** (Breaking ⚠️)\n* `latitudesh.privateNetworks.update()`:  `response.data.attributes.tags[]` **Changed** (Breaking ⚠️)\n* `latitudesh.privateNetworks.create()`:  `response.data.attributes.tags[]` **Changed** (Breaking ⚠️)\n* `latitudesh.privateNetworks.list()`: \n  *  `request.stats[total]` **Added**\n  *  `response` **Changed** (Breaking ⚠️)\n* `latitudesh.virtualMachines.updateVirtualMachine()`: \n  *  `request.virtualMachineUpdatePayload.data.attributes` **Changed**\n  *  `response.status[202]` **Added** (Breaking ⚠️)\n  *  `error.status[409]` **Added**\n* `latitudesh.tags.update()`:  `response.data.attributes.description` **Changed** (Breaking ⚠️)\n* `latitudesh.tags.create()`:  `response.data.attributes.description` **Changed** (Breaking ⚠️)\n* `latitudesh.virtualMachineBackups.delete()`: **Added**\n* `latitudesh.virtualMachineRestores.listForVirtualMachineBackup()`: **Added**\n* `latitudesh.virtualMachineRestores.list()`: **Added**\n* `latitudesh.virtualMachineRestores.create()`: **Added**\n* `latitudesh.virtualMachineRestores.get()`: **Added**\n* `latitudesh.servers.list()`: \n  *  `request.stats[total]` **Added**\n  *  `response.meta.stats` **Added**\n* `latitudesh.virtualMachineRestores.createForVirtualMachineBackup()`: **Added**\n* `latitudesh.virtualMachineRestores.listForBackup()`: **Added**\n* `latitudesh.plans.getManagedDatabasePlans()`: **Added**\n* `latitudesh.virtualMachines.get()`: \n  *  `request.extraFields[virtualMachines]` **Added**\n* `latitudesh.virtualMachineBackups.get()`: **Added**\n* `latitudesh.virtualMachineBackups.create()`: **Added**\n* `latitudesh.virtualMachineBackups.list()`: **Added**\n* `latitudesh.virtualMachineBackups.createForVirtualMachine()`: **Added**\n* `latitudesh.virtualMachineBackups.listForVirtualMachine()`: **Added**\n* `latitudesh.privateNetworks.listAssignments()`: \n  *  `request.stats[total]` **Added**\n  *  `response.meta.stats` **Added**\n"
+releaseNotes: "## Typescript SDK Changes:\n* `latitudesh.virtualMachines.list()`: \n  *  `request.sort` **Added**\n  *  `error.status[400]` **Added**\n* `latitudesh.privateNetworks.update()`: \n  *  `request.requestBody.data.attributes.description` **Changed**\n"
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json

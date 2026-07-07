@@ -55,12 +55,12 @@ export const UpdateVirtualNetworkAttributes2$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   tags: z.array(z.string()).optional(),
-  description: z.string().default("Test virtual network update"),
+  description: z.string().optional(),
 });
 /** @internal */
 export type UpdateVirtualNetworkAttributes2$Outbound = {
   tags?: Array<string> | undefined;
-  description: string;
+  description?: string | undefined;
 };
 
 /** @internal */
@@ -70,7 +70,7 @@ export const UpdateVirtualNetworkAttributes2$outboundSchema: z.ZodType<
   UpdateVirtualNetworkAttributes2
 > = z.object({
   tags: z.array(z.string()).optional(),
-  description: z.string().default("Test virtual network update"),
+  description: z.string().optional(),
 });
 
 export function updateVirtualNetworkAttributes2ToJSON(
