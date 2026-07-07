@@ -21,6 +21,10 @@ export type IndexVirtualMachineRequest = {
    * Comma-separated extra attributes that are lazy-loaded. Supported values: `credentials`, `pending_restart`. Example: `extra_fields[virtual_machines]=credentials,pending_restart`.
    */
   extraFieldsVirtualMachines?: string | undefined;
+  /**
+   * Comma-separated sort fields. Prefix a field with `-` for descending order. Supported fields: created_at, name, hostname, status. Example: `sort=status,-created_at` sorts by status ascending, then by creation date descending.
+   */
+  sort?: string | undefined;
 };
 
 /** @internal */
@@ -32,6 +36,7 @@ export const IndexVirtualMachineRequest$inboundSchema: z.ZodType<
   "filter[project]": z.string().optional(),
   "filter[tags]": z.string().optional(),
   "extra_fields[virtual_machines]": z.string().optional(),
+  sort: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "filter[project]": "filterProject",
@@ -44,6 +49,7 @@ export type IndexVirtualMachineRequest$Outbound = {
   "filter[project]"?: string | undefined;
   "filter[tags]"?: string | undefined;
   "extra_fields[virtual_machines]"?: string | undefined;
+  sort?: string | undefined;
 };
 
 /** @internal */
@@ -55,6 +61,7 @@ export const IndexVirtualMachineRequest$outboundSchema: z.ZodType<
   filterProject: z.string().optional(),
   filterTags: z.string().optional(),
   extraFieldsVirtualMachines: z.string().optional(),
+  sort: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     filterProject: "filter[project]",
