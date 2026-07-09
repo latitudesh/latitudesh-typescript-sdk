@@ -8,7 +8,12 @@ import { safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 
-export type Currency = {};
+export type Currency = {
+  id?: string | undefined;
+  code?: string | undefined;
+  name?: string | undefined;
+  currencyId?: number | null | undefined;
+};
 
 export type TeamIncludeLimits = {
   bareMetal?: number | null | undefined;
@@ -27,9 +32,9 @@ export type TeamInclude = {
   name?: string | undefined;
   slug?: string | undefined;
   description?: string | null | undefined;
-  address?: string | undefined;
+  address?: string | null | undefined;
   currency?: Currency | undefined;
-  status?: string | undefined;
+  status?: string | null | undefined;
   featureFlags?: Array<string> | undefined;
   limits?: TeamIncludeLimits | undefined;
 };
@@ -39,16 +44,39 @@ export const Currency$inboundSchema: z.ZodType<
   Currency,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = z.object({
+  id: z.string().optional(),
+  code: z.string().optional(),
+  name: z.string().optional(),
+  currency_id: z.nullable(z.number().int()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "currency_id": "currencyId",
+  });
+});
 /** @internal */
-export type Currency$Outbound = {};
+export type Currency$Outbound = {
+  id?: string | undefined;
+  code?: string | undefined;
+  name?: string | undefined;
+  currency_id?: number | null | undefined;
+};
 
 /** @internal */
 export const Currency$outboundSchema: z.ZodType<
   Currency$Outbound,
   z.ZodTypeDef,
   Currency
-> = z.object({});
+> = z.object({
+  id: z.string().optional(),
+  code: z.string().optional(),
+  name: z.string().optional(),
+  currencyId: z.nullable(z.number().int()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    currencyId: "currency_id",
+  });
+});
 
 export function currencyToJSON(currency: Currency): string {
   return JSON.stringify(Currency$outboundSchema.parse(currency));
@@ -156,9 +184,9 @@ export const TeamInclude$inboundSchema: z.ZodType<
   name: z.string().optional(),
   slug: z.string().optional(),
   description: z.nullable(z.string()).optional(),
-  address: z.string().optional(),
+  address: z.nullable(z.string()).optional(),
   currency: z.lazy(() => Currency$inboundSchema).optional(),
-  status: z.string().optional(),
+  status: z.nullable(z.string()).optional(),
   feature_flags: z.array(z.string()).optional(),
   limits: z.lazy(() => TeamIncludeLimits$inboundSchema).optional(),
 }).transform((v) => {
@@ -172,9 +200,9 @@ export type TeamInclude$Outbound = {
   name?: string | undefined;
   slug?: string | undefined;
   description?: string | null | undefined;
-  address?: string | undefined;
+  address?: string | null | undefined;
   currency?: Currency$Outbound | undefined;
-  status?: string | undefined;
+  status?: string | null | undefined;
   feature_flags?: Array<string> | undefined;
   limits?: TeamIncludeLimits$Outbound | undefined;
 };
@@ -189,9 +217,9 @@ export const TeamInclude$outboundSchema: z.ZodType<
   name: z.string().optional(),
   slug: z.string().optional(),
   description: z.nullable(z.string()).optional(),
-  address: z.string().optional(),
+  address: z.nullable(z.string()).optional(),
   currency: z.lazy(() => Currency$outboundSchema).optional(),
-  status: z.string().optional(),
+  status: z.nullable(z.string()).optional(),
   featureFlags: z.array(z.string()).optional(),
   limits: z.lazy(() => TeamIncludeLimits$outboundSchema).optional(),
 }).transform((v) => {
