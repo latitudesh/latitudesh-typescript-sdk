@@ -6,6 +6,12 @@ import * as z from "zod/v3";
 import { safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
+import {
+  PaginationMeta,
+  PaginationMeta$inboundSchema,
+  PaginationMeta$Outbound,
+  PaginationMeta$outboundSchema,
+} from "./paginationmeta.js";
 
 export type RegionsCountry = {
   slug?: string | undefined;
@@ -25,6 +31,7 @@ export type RegionsData = {
 
 export type Regions = {
   data?: Array<RegionsData> | undefined;
+  meta?: PaginationMeta | undefined;
 };
 
 /** @internal */
@@ -152,10 +159,12 @@ export function regionsDataFromJSON(
 export const Regions$inboundSchema: z.ZodType<Regions, z.ZodTypeDef, unknown> =
   z.object({
     data: z.array(z.lazy(() => RegionsData$inboundSchema)).optional(),
+    meta: PaginationMeta$inboundSchema.optional(),
   });
 /** @internal */
 export type Regions$Outbound = {
   data?: Array<RegionsData$Outbound> | undefined;
+  meta?: PaginationMeta$Outbound | undefined;
 };
 
 /** @internal */
@@ -165,6 +174,7 @@ export const Regions$outboundSchema: z.ZodType<
   Regions
 > = z.object({
   data: z.array(z.lazy(() => RegionsData$outboundSchema)).optional(),
+  meta: PaginationMeta$outboundSchema.optional(),
 });
 
 export function regionsToJSON(regions: Regions): string {

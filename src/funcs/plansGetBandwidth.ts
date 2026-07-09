@@ -107,6 +107,7 @@ async function $do(
     "filter[id]": payload?.["filter[id]"],
     "page[number]": payload?.["page[number]"],
     "page[size]": payload?.["page[size]"],
+    "stats[total]": payload?.["stats[total]"],
   });
 
   const headers = new Headers(compactMap({

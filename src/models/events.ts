@@ -12,53 +12,28 @@ import {
   EventData$Outbound,
   EventData$outboundSchema,
 } from "./eventdata.js";
-
-export type EventsMeta = {};
+import {
+  PaginationMeta,
+  PaginationMeta$inboundSchema,
+  PaginationMeta$Outbound,
+  PaginationMeta$outboundSchema,
+} from "./paginationmeta.js";
 
 export type Events = {
   data?: Array<EventData> | undefined;
-  meta?: EventsMeta | undefined;
+  meta?: PaginationMeta | undefined;
 };
-
-/** @internal */
-export const EventsMeta$inboundSchema: z.ZodType<
-  EventsMeta,
-  z.ZodTypeDef,
-  unknown
-> = z.object({});
-/** @internal */
-export type EventsMeta$Outbound = {};
-
-/** @internal */
-export const EventsMeta$outboundSchema: z.ZodType<
-  EventsMeta$Outbound,
-  z.ZodTypeDef,
-  EventsMeta
-> = z.object({});
-
-export function eventsMetaToJSON(eventsMeta: EventsMeta): string {
-  return JSON.stringify(EventsMeta$outboundSchema.parse(eventsMeta));
-}
-export function eventsMetaFromJSON(
-  jsonString: string,
-): SafeParseResult<EventsMeta, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => EventsMeta$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'EventsMeta' from JSON`,
-  );
-}
 
 /** @internal */
 export const Events$inboundSchema: z.ZodType<Events, z.ZodTypeDef, unknown> = z
   .object({
     data: z.array(EventData$inboundSchema).optional(),
-    meta: z.lazy(() => EventsMeta$inboundSchema).optional(),
+    meta: PaginationMeta$inboundSchema.optional(),
   });
 /** @internal */
 export type Events$Outbound = {
   data?: Array<EventData$Outbound> | undefined;
-  meta?: EventsMeta$Outbound | undefined;
+  meta?: PaginationMeta$Outbound | undefined;
 };
 
 /** @internal */
@@ -68,7 +43,7 @@ export const Events$outboundSchema: z.ZodType<
   Events
 > = z.object({
   data: z.array(EventData$outboundSchema).optional(),
-  meta: z.lazy(() => EventsMeta$outboundSchema).optional(),
+  meta: PaginationMeta$outboundSchema.optional(),
 });
 
 export function eventsToJSON(events: Events): string {

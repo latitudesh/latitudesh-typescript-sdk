@@ -7,6 +7,12 @@ import { safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 import {
+  PaginationMeta,
+  PaginationMeta$inboundSchema,
+  PaginationMeta$Outbound,
+  PaginationMeta$outboundSchema,
+} from "./paginationmeta.js";
+import {
   Project,
   Project$inboundSchema,
   Project$Outbound,
@@ -15,6 +21,7 @@ import {
 
 export type Projects = {
   data?: Array<Project> | undefined;
+  meta?: PaginationMeta | undefined;
 };
 
 /** @internal */
@@ -24,10 +31,12 @@ export const Projects$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   data: z.array(Project$inboundSchema).optional(),
+  meta: PaginationMeta$inboundSchema.optional(),
 });
 /** @internal */
 export type Projects$Outbound = {
   data?: Array<Project$Outbound> | undefined;
+  meta?: PaginationMeta$Outbound | undefined;
 };
 
 /** @internal */
@@ -37,6 +46,7 @@ export const Projects$outboundSchema: z.ZodType<
   Projects
 > = z.object({
   data: z.array(Project$outboundSchema).optional(),
+  meta: PaginationMeta$outboundSchema.optional(),
 });
 
 export function projectsToJSON(projects: Projects): string {

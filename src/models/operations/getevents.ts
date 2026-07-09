@@ -50,6 +50,10 @@ export type GetEventsRequest = {
    * Page number to return (starts at 1)
    */
   pageNumber?: number | undefined;
+  /**
+   * Request aggregate stats in the response `meta`. Use `count` to get the total number of records, returned as `meta.stats.total.count`.
+   */
+  statsTotal?: string | undefined;
 };
 
 export type GetEventsResponse = {
@@ -72,6 +76,7 @@ export const GetEventsRequest$inboundSchema: z.ZodType<
   "filter[created_at]": z.array(z.string()).optional(),
   "page[size]": z.number().int().default(20),
   "page[number]": z.number().int().default(1),
+  "stats[total]": z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "filter[author]": "filterAuthor",
@@ -84,6 +89,7 @@ export const GetEventsRequest$inboundSchema: z.ZodType<
     "filter[created_at]": "filterCreatedAt",
     "page[size]": "pageSize",
     "page[number]": "pageNumber",
+    "stats[total]": "statsTotal",
   });
 });
 /** @internal */
@@ -98,6 +104,7 @@ export type GetEventsRequest$Outbound = {
   "filter[created_at]"?: Array<string> | undefined;
   "page[size]": number;
   "page[number]": number;
+  "stats[total]"?: string | undefined;
 };
 
 /** @internal */
@@ -116,6 +123,7 @@ export const GetEventsRequest$outboundSchema: z.ZodType<
   filterCreatedAt: z.array(z.string()).optional(),
   pageSize: z.number().int().default(20),
   pageNumber: z.number().int().default(1),
+  statsTotal: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     filterAuthor: "filter[author]",
@@ -128,6 +136,7 @@ export const GetEventsRequest$outboundSchema: z.ZodType<
     filterCreatedAt: "filter[created_at]",
     pageSize: "page[size]",
     pageNumber: "page[number]",
+    statsTotal: "stats[total]",
   });
 });
 

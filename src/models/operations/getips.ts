@@ -75,6 +75,14 @@ export type GetIpsRequest = {
    * Page number to return (starts at 1)
    */
   pageNumber?: number | undefined;
+  /**
+   * Request aggregate stats in the response `meta`. Use `count` to get the total number of records, returned as `meta.stats.total.count`.
+   */
+  statsTotal?: string | undefined;
+  /**
+   * Comma-separated sort fields. Prefix a field with `-` for descending order. Supported fields: address, family, type, created_at. Example: `sort=type,-created_at` sorts by type ascending, then by creation date descending.
+   */
+  sort?: string | undefined;
 };
 
 export type GetIpsResponse = {
@@ -111,6 +119,8 @@ export const GetIpsRequest$inboundSchema: z.ZodType<
   "extra_fields[ip_addresses]": z.string().optional(),
   "page[size]": z.number().int().default(20),
   "page[number]": z.number().int().default(1),
+  "stats[total]": z.string().optional(),
+  sort: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "filter[server]": "filterServer",
@@ -123,6 +133,7 @@ export const GetIpsRequest$inboundSchema: z.ZodType<
     "extra_fields[ip_addresses]": "extraFieldsIpAddresses",
     "page[size]": "pageSize",
     "page[number]": "pageNumber",
+    "stats[total]": "statsTotal",
   });
 });
 /** @internal */
@@ -137,6 +148,8 @@ export type GetIpsRequest$Outbound = {
   "extra_fields[ip_addresses]"?: string | undefined;
   "page[size]": number;
   "page[number]": number;
+  "stats[total]"?: string | undefined;
+  sort?: string | undefined;
 };
 
 /** @internal */
@@ -155,6 +168,8 @@ export const GetIpsRequest$outboundSchema: z.ZodType<
   extraFieldsIpAddresses: z.string().optional(),
   pageSize: z.number().int().default(20),
   pageNumber: z.number().int().default(1),
+  statsTotal: z.string().optional(),
+  sort: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     filterServer: "filter[server]",
@@ -167,6 +182,7 @@ export const GetIpsRequest$outboundSchema: z.ZodType<
     extraFieldsIpAddresses: "extra_fields[ip_addresses]",
     pageSize: "page[size]",
     pageNumber: "page[number]",
+    statsTotal: "stats[total]",
   });
 });
 

@@ -18,6 +18,10 @@ export type GetRolesRequest = {
    * Page number to return (starts at 1)
    */
   pageNumber?: number | undefined;
+  /**
+   * Request aggregate stats in the response `meta`. Use `count` to get the total number of records, returned as `meta.stats.total.count`.
+   */
+  statsTotal?: string | undefined;
 };
 
 /**
@@ -25,6 +29,7 @@ export type GetRolesRequest = {
  */
 export type GetRolesResponseBody = {
   data?: Array<models.RoleData> | undefined;
+  meta?: models.PaginationMeta | undefined;
 };
 
 export type GetRolesResponse = {
@@ -39,16 +44,19 @@ export const GetRolesRequest$inboundSchema: z.ZodType<
 > = z.object({
   "page[size]": z.number().int().default(20),
   "page[number]": z.number().int().default(1),
+  "stats[total]": z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "page[size]": "pageSize",
     "page[number]": "pageNumber",
+    "stats[total]": "statsTotal",
   });
 });
 /** @internal */
 export type GetRolesRequest$Outbound = {
   "page[size]": number;
   "page[number]": number;
+  "stats[total]"?: string | undefined;
 };
 
 /** @internal */
@@ -59,10 +67,12 @@ export const GetRolesRequest$outboundSchema: z.ZodType<
 > = z.object({
   pageSize: z.number().int().default(20),
   pageNumber: z.number().int().default(1),
+  statsTotal: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     pageSize: "page[size]",
     pageNumber: "page[number]",
+    statsTotal: "stats[total]",
   });
 });
 
@@ -88,10 +98,12 @@ export const GetRolesResponseBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   data: z.array(models.RoleData$inboundSchema).optional(),
+  meta: models.PaginationMeta$inboundSchema.optional(),
 });
 /** @internal */
 export type GetRolesResponseBody$Outbound = {
   data?: Array<models.RoleData$Outbound> | undefined;
+  meta?: models.PaginationMeta$Outbound | undefined;
 };
 
 /** @internal */
@@ -101,6 +113,7 @@ export const GetRolesResponseBody$outboundSchema: z.ZodType<
   GetRolesResponseBody
 > = z.object({
   data: z.array(models.RoleData$outboundSchema).optional(),
+  meta: models.PaginationMeta$outboundSchema.optional(),
 });
 
 export function getRolesResponseBodyToJSON(
