@@ -12,46 +12,17 @@ import {
   BandwidthPlanData$outboundSchema,
 } from "./bandwidthplandata.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
-
-export type BandwidthPlansMeta = {};
+import {
+  PaginationMeta,
+  PaginationMeta$inboundSchema,
+  PaginationMeta$Outbound,
+  PaginationMeta$outboundSchema,
+} from "./paginationmeta.js";
 
 export type BandwidthPlans = {
   data?: Array<BandwidthPlanData> | undefined;
-  meta?: BandwidthPlansMeta | undefined;
+  meta?: PaginationMeta | undefined;
 };
-
-/** @internal */
-export const BandwidthPlansMeta$inboundSchema: z.ZodType<
-  BandwidthPlansMeta,
-  z.ZodTypeDef,
-  unknown
-> = z.object({});
-/** @internal */
-export type BandwidthPlansMeta$Outbound = {};
-
-/** @internal */
-export const BandwidthPlansMeta$outboundSchema: z.ZodType<
-  BandwidthPlansMeta$Outbound,
-  z.ZodTypeDef,
-  BandwidthPlansMeta
-> = z.object({});
-
-export function bandwidthPlansMetaToJSON(
-  bandwidthPlansMeta: BandwidthPlansMeta,
-): string {
-  return JSON.stringify(
-    BandwidthPlansMeta$outboundSchema.parse(bandwidthPlansMeta),
-  );
-}
-export function bandwidthPlansMetaFromJSON(
-  jsonString: string,
-): SafeParseResult<BandwidthPlansMeta, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => BandwidthPlansMeta$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'BandwidthPlansMeta' from JSON`,
-  );
-}
 
 /** @internal */
 export const BandwidthPlans$inboundSchema: z.ZodType<
@@ -60,12 +31,12 @@ export const BandwidthPlans$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   data: z.array(BandwidthPlanData$inboundSchema).optional(),
-  meta: z.lazy(() => BandwidthPlansMeta$inboundSchema).optional(),
+  meta: PaginationMeta$inboundSchema.optional(),
 });
 /** @internal */
 export type BandwidthPlans$Outbound = {
   data?: Array<BandwidthPlanData$Outbound> | undefined;
-  meta?: BandwidthPlansMeta$Outbound | undefined;
+  meta?: PaginationMeta$Outbound | undefined;
 };
 
 /** @internal */
@@ -75,7 +46,7 @@ export const BandwidthPlans$outboundSchema: z.ZodType<
   BandwidthPlans
 > = z.object({
   data: z.array(BandwidthPlanData$outboundSchema).optional(),
-  meta: z.lazy(() => BandwidthPlansMeta$outboundSchema).optional(),
+  meta: PaginationMeta$outboundSchema.optional(),
 });
 
 export function bandwidthPlansToJSON(bandwidthPlans: BandwidthPlans): string {

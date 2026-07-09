@@ -46,6 +46,10 @@ export type GetProjectsRequest = {
    * Page number to return (starts at 1)
    */
   pageNumber?: number | undefined;
+  /**
+   * Request aggregate stats in the response `meta`. Use `count` to get the total number of records, returned as `meta.stats.total.count`.
+   */
+  statsTotal?: string | undefined;
 };
 
 export type GetProjectsResponse = {
@@ -67,6 +71,7 @@ export const GetProjectsRequest$inboundSchema: z.ZodType<
   "extra_fields[projects]": z.string().optional(),
   "page[size]": z.number().int().default(20),
   "page[number]": z.number().int().default(1),
+  "stats[total]": z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "filter[name]": "filterName",
@@ -78,6 +83,7 @@ export const GetProjectsRequest$inboundSchema: z.ZodType<
     "extra_fields[projects]": "extraFieldsProjects",
     "page[size]": "pageSize",
     "page[number]": "pageNumber",
+    "stats[total]": "statsTotal",
   });
 });
 /** @internal */
@@ -91,6 +97,7 @@ export type GetProjectsRequest$Outbound = {
   "extra_fields[projects]"?: string | undefined;
   "page[size]": number;
   "page[number]": number;
+  "stats[total]"?: string | undefined;
 };
 
 /** @internal */
@@ -108,6 +115,7 @@ export const GetProjectsRequest$outboundSchema: z.ZodType<
   extraFieldsProjects: z.string().optional(),
   pageSize: z.number().int().default(20),
   pageNumber: z.number().int().default(1),
+  statsTotal: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     filterName: "filter[name]",
@@ -119,6 +127,7 @@ export const GetProjectsRequest$outboundSchema: z.ZodType<
     extraFieldsProjects: "extra_fields[projects]",
     pageSize: "page[size]",
     pageNumber: "page[number]",
+    statsTotal: "stats[total]",
   });
 });
 

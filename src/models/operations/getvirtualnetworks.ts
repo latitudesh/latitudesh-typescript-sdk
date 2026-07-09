@@ -23,10 +23,6 @@ export type GetVirtualNetworksRequest = {
    */
   filterTags?: string | undefined;
   /**
-   * Request aggregate stats in the response `meta`. Use `count` to get the total number of records, returned as `meta.stats.total.count`.
-   */
-  statsTotal?: string | undefined;
-  /**
    * Number of items to return per page
    */
   pageSize?: number | undefined;
@@ -34,6 +30,10 @@ export type GetVirtualNetworksRequest = {
    * Page number to return (starts at 1)
    */
   pageNumber?: number | undefined;
+  /**
+   * Request aggregate stats in the response `meta`. Use `count` to get the total number of records, returned as `meta.stats.total.count`.
+   */
+  statsTotal?: string | undefined;
 };
 
 export type GetVirtualNetworksResponse = {
@@ -49,17 +49,17 @@ export const GetVirtualNetworksRequest$inboundSchema: z.ZodType<
   "filter[location]": z.string().optional(),
   "filter[project]": z.string().optional(),
   "filter[tags]": z.string().optional(),
-  "stats[total]": z.string().optional(),
   "page[size]": z.number().int().default(20),
   "page[number]": z.number().int().default(1),
+  "stats[total]": z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "filter[location]": "filterLocation",
     "filter[project]": "filterProject",
     "filter[tags]": "filterTags",
-    "stats[total]": "statsTotal",
     "page[size]": "pageSize",
     "page[number]": "pageNumber",
+    "stats[total]": "statsTotal",
   });
 });
 /** @internal */
@@ -67,9 +67,9 @@ export type GetVirtualNetworksRequest$Outbound = {
   "filter[location]"?: string | undefined;
   "filter[project]"?: string | undefined;
   "filter[tags]"?: string | undefined;
-  "stats[total]"?: string | undefined;
   "page[size]": number;
   "page[number]": number;
+  "stats[total]"?: string | undefined;
 };
 
 /** @internal */
@@ -81,17 +81,17 @@ export const GetVirtualNetworksRequest$outboundSchema: z.ZodType<
   filterLocation: z.string().optional(),
   filterProject: z.string().optional(),
   filterTags: z.string().optional(),
-  statsTotal: z.string().optional(),
   pageSize: z.number().int().default(20),
   pageNumber: z.number().int().default(1),
+  statsTotal: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     filterLocation: "filter[location]",
     filterProject: "filter[project]",
     filterTags: "filter[tags]",
-    statsTotal: "stats[total]",
     pageSize: "page[size]",
     pageNumber: "page[number]",
+    statsTotal: "stats[total]",
   });
 });
 

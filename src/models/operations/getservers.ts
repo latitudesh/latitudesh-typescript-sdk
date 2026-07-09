@@ -79,10 +79,6 @@ export type GetServersRequest = {
    */
   extraFieldsServers?: string | undefined;
   /**
-   * Request aggregate stats in the response `meta`. Use `count` to get the total number of records, returned as `meta.stats.total.count`.
-   */
-  statsTotal?: string | undefined;
-  /**
    * Number of items to return per page
    */
   pageSize?: number | undefined;
@@ -90,6 +86,10 @@ export type GetServersRequest = {
    * Page number to return (starts at 1)
    */
   pageNumber?: number | undefined;
+  /**
+   * Request aggregate stats in the response `meta`. Use `count` to get the total number of records, returned as `meta.stats.total.count`.
+   */
+  statsTotal?: string | undefined;
 };
 
 export type GetServersResponse = {
@@ -119,9 +119,9 @@ export const GetServersRequest$inboundSchema: z.ZodType<
   "filter[disk][lte]": z.number().int().optional(),
   "filter[tags]": z.string().optional(),
   "extra_fields[servers]": z.string().optional(),
-  "stats[total]": z.string().optional(),
   "page[size]": z.number().int().default(20),
   "page[number]": z.number().int().default(1),
+  "stats[total]": z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "filter[project]": "filterProject",
@@ -141,9 +141,9 @@ export const GetServersRequest$inboundSchema: z.ZodType<
     "filter[disk][lte]": "filterDiskLte",
     "filter[tags]": "filterTags",
     "extra_fields[servers]": "extraFieldsServers",
-    "stats[total]": "statsTotal",
     "page[size]": "pageSize",
     "page[number]": "pageNumber",
+    "stats[total]": "statsTotal",
   });
 });
 /** @internal */
@@ -165,9 +165,9 @@ export type GetServersRequest$Outbound = {
   "filter[disk][lte]"?: number | undefined;
   "filter[tags]"?: string | undefined;
   "extra_fields[servers]"?: string | undefined;
-  "stats[total]"?: string | undefined;
   "page[size]": number;
   "page[number]": number;
+  "stats[total]"?: string | undefined;
 };
 
 /** @internal */
@@ -193,9 +193,9 @@ export const GetServersRequest$outboundSchema: z.ZodType<
   filterDiskLte: z.number().int().optional(),
   filterTags: z.string().optional(),
   extraFieldsServers: z.string().optional(),
-  statsTotal: z.string().optional(),
   pageSize: z.number().int().default(20),
   pageNumber: z.number().int().default(1),
+  statsTotal: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     filterProject: "filter[project]",
@@ -215,9 +215,9 @@ export const GetServersRequest$outboundSchema: z.ZodType<
     filterDiskLte: "filter[disk][lte]",
     filterTags: "filter[tags]",
     extraFieldsServers: "extra_fields[servers]",
-    statsTotal: "stats[total]",
     pageSize: "page[size]",
     pageNumber: "page[number]",
+    statsTotal: "stats[total]",
   });
 });
 

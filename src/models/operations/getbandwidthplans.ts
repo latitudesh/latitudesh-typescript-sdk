@@ -23,6 +23,10 @@ export type GetBandwidthPlansRequest = {
    * Page number to return (starts at 1)
    */
   pageNumber?: number | undefined;
+  /**
+   * Request aggregate stats in the response `meta`. Use `count` to get the total number of records, returned as `meta.stats.total.count`.
+   */
+  statsTotal?: string | undefined;
 };
 
 export type GetBandwidthPlansResponse = {
@@ -39,12 +43,14 @@ export const GetBandwidthPlansRequest$inboundSchema: z.ZodType<
   "filter[id]": z.string().optional(),
   "page[size]": z.number().int().default(20),
   "page[number]": z.number().int().default(1),
+  "stats[total]": z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "API-Version": "apiVersion",
     "filter[id]": "filterId",
     "page[size]": "pageSize",
     "page[number]": "pageNumber",
+    "stats[total]": "statsTotal",
   });
 });
 /** @internal */
@@ -53,6 +59,7 @@ export type GetBandwidthPlansRequest$Outbound = {
   "filter[id]"?: string | undefined;
   "page[size]": number;
   "page[number]": number;
+  "stats[total]"?: string | undefined;
 };
 
 /** @internal */
@@ -65,12 +72,14 @@ export const GetBandwidthPlansRequest$outboundSchema: z.ZodType<
   filterId: z.string().optional(),
   pageSize: z.number().int().default(20),
   pageNumber: z.number().int().default(1),
+  statsTotal: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     apiVersion: "API-Version",
     filterId: "filter[id]",
     pageSize: "page[size]",
     pageNumber: "page[number]",
+    statsTotal: "stats[total]",
   });
 });
 

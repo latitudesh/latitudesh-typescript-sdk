@@ -7,6 +7,12 @@ import { remap as remap$ } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
+import {
+  PaginationMeta,
+  PaginationMeta$inboundSchema,
+  PaginationMeta$Outbound,
+  PaginationMeta$outboundSchema,
+} from "./paginationmeta.js";
 
 export type TeamMembersRole = {
   id?: string | undefined;
@@ -30,11 +36,9 @@ export type TeamMembersData = {
   attributes?: TeamMembersAttributes | undefined;
 };
 
-export type TeamMembersMeta = {};
-
 export type TeamMembers = {
   data?: Array<TeamMembersData> | undefined;
-  meta?: TeamMembersMeta | undefined;
+  meta?: PaginationMeta | undefined;
 };
 
 /** @internal */
@@ -203,49 +207,18 @@ export function teamMembersDataFromJSON(
 }
 
 /** @internal */
-export const TeamMembersMeta$inboundSchema: z.ZodType<
-  TeamMembersMeta,
-  z.ZodTypeDef,
-  unknown
-> = z.object({});
-/** @internal */
-export type TeamMembersMeta$Outbound = {};
-
-/** @internal */
-export const TeamMembersMeta$outboundSchema: z.ZodType<
-  TeamMembersMeta$Outbound,
-  z.ZodTypeDef,
-  TeamMembersMeta
-> = z.object({});
-
-export function teamMembersMetaToJSON(
-  teamMembersMeta: TeamMembersMeta,
-): string {
-  return JSON.stringify(TeamMembersMeta$outboundSchema.parse(teamMembersMeta));
-}
-export function teamMembersMetaFromJSON(
-  jsonString: string,
-): SafeParseResult<TeamMembersMeta, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => TeamMembersMeta$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'TeamMembersMeta' from JSON`,
-  );
-}
-
-/** @internal */
 export const TeamMembers$inboundSchema: z.ZodType<
   TeamMembers,
   z.ZodTypeDef,
   unknown
 > = z.object({
   data: z.array(z.lazy(() => TeamMembersData$inboundSchema)).optional(),
-  meta: z.lazy(() => TeamMembersMeta$inboundSchema).optional(),
+  meta: PaginationMeta$inboundSchema.optional(),
 });
 /** @internal */
 export type TeamMembers$Outbound = {
   data?: Array<TeamMembersData$Outbound> | undefined;
-  meta?: TeamMembersMeta$Outbound | undefined;
+  meta?: PaginationMeta$Outbound | undefined;
 };
 
 /** @internal */
@@ -255,7 +228,7 @@ export const TeamMembers$outboundSchema: z.ZodType<
   TeamMembers
 > = z.object({
   data: z.array(z.lazy(() => TeamMembersData$outboundSchema)).optional(),
-  meta: z.lazy(() => TeamMembersMeta$outboundSchema).optional(),
+  meta: PaginationMeta$outboundSchema.optional(),
 });
 
 export function teamMembersToJSON(teamMembers: TeamMembers): string {

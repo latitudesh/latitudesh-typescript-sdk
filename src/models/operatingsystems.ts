@@ -12,46 +12,17 @@ import {
   OperatingSystemData$Outbound,
   OperatingSystemData$outboundSchema,
 } from "./operatingsystemdata.js";
-
-export type OperatingSystemsMeta = {};
+import {
+  PaginationMeta,
+  PaginationMeta$inboundSchema,
+  PaginationMeta$Outbound,
+  PaginationMeta$outboundSchema,
+} from "./paginationmeta.js";
 
 export type OperatingSystems = {
   data?: Array<OperatingSystemData> | undefined;
-  meta?: OperatingSystemsMeta | undefined;
+  meta?: PaginationMeta | undefined;
 };
-
-/** @internal */
-export const OperatingSystemsMeta$inboundSchema: z.ZodType<
-  OperatingSystemsMeta,
-  z.ZodTypeDef,
-  unknown
-> = z.object({});
-/** @internal */
-export type OperatingSystemsMeta$Outbound = {};
-
-/** @internal */
-export const OperatingSystemsMeta$outboundSchema: z.ZodType<
-  OperatingSystemsMeta$Outbound,
-  z.ZodTypeDef,
-  OperatingSystemsMeta
-> = z.object({});
-
-export function operatingSystemsMetaToJSON(
-  operatingSystemsMeta: OperatingSystemsMeta,
-): string {
-  return JSON.stringify(
-    OperatingSystemsMeta$outboundSchema.parse(operatingSystemsMeta),
-  );
-}
-export function operatingSystemsMetaFromJSON(
-  jsonString: string,
-): SafeParseResult<OperatingSystemsMeta, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => OperatingSystemsMeta$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'OperatingSystemsMeta' from JSON`,
-  );
-}
 
 /** @internal */
 export const OperatingSystems$inboundSchema: z.ZodType<
@@ -60,12 +31,12 @@ export const OperatingSystems$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   data: z.array(OperatingSystemData$inboundSchema).optional(),
-  meta: z.lazy(() => OperatingSystemsMeta$inboundSchema).optional(),
+  meta: PaginationMeta$inboundSchema.optional(),
 });
 /** @internal */
 export type OperatingSystems$Outbound = {
   data?: Array<OperatingSystemData$Outbound> | undefined;
-  meta?: OperatingSystemsMeta$Outbound | undefined;
+  meta?: PaginationMeta$Outbound | undefined;
 };
 
 /** @internal */
@@ -75,7 +46,7 @@ export const OperatingSystems$outboundSchema: z.ZodType<
   OperatingSystems
 > = z.object({
   data: z.array(OperatingSystemData$outboundSchema).optional(),
-  meta: z.lazy(() => OperatingSystemsMeta$outboundSchema).optional(),
+  meta: PaginationMeta$outboundSchema.optional(),
 });
 
 export function operatingSystemsToJSON(
