@@ -7,11 +7,11 @@ The protocol type to filter by
 ```typescript
 import { FilterType } from "latitudesh-typescript-sdk/models/operations";
 
-let value: FilterType = "public";
+let value: FilterType = "elastic";
 ```
 
 ## Values
 
 ```typescript
-"private" | "public"
+"private" | "public" | "elastic"
 ```

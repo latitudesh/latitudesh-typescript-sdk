@@ -28,6 +28,7 @@ export type FilterFamily = ClosedEnum<typeof FilterFamily>;
 export const FilterType = {
   Private: "private",
   Public: "public",
+  Elastic: "elastic",
 } as const;
 /**
  * The protocol type to filter by
@@ -63,6 +64,14 @@ export type GetIpsRequest = {
    * Filter by additional IPs (true) or management IPs (false)
    */
   filterAdditional?: boolean | undefined;
+  /**
+   * Filter by unassigned IPs (true) or assigned IPs (false)
+   */
+  filterAvailable?: boolean | undefined;
+  /**
+   * Filter by management IPs (true) or additional/elastic IPs (false)
+   */
+  filterManagement?: boolean | undefined;
   /**
    * The `region` and `server` are provided as extra attributes that are lazy loaded. To request it, just set `extra_fields[ip_addresses]=region,server` in the query string.
    */
@@ -116,6 +125,8 @@ export const GetIpsRequest$inboundSchema: z.ZodType<
   "filter[location]": z.string().optional(),
   "filter[address]": z.string().optional(),
   "filter[additional]": z.boolean().optional(),
+  "filter[available]": z.boolean().optional(),
+  "filter[management]": z.boolean().optional(),
   "extra_fields[ip_addresses]": z.string().optional(),
   "page[size]": z.number().int().default(20),
   "page[number]": z.number().int().default(1),
@@ -130,6 +141,8 @@ export const GetIpsRequest$inboundSchema: z.ZodType<
     "filter[location]": "filterLocation",
     "filter[address]": "filterAddress",
     "filter[additional]": "filterAdditional",
+    "filter[available]": "filterAvailable",
+    "filter[management]": "filterManagement",
     "extra_fields[ip_addresses]": "extraFieldsIpAddresses",
     "page[size]": "pageSize",
     "page[number]": "pageNumber",
@@ -145,6 +158,8 @@ export type GetIpsRequest$Outbound = {
   "filter[location]"?: string | undefined;
   "filter[address]"?: string | undefined;
   "filter[additional]"?: boolean | undefined;
+  "filter[available]"?: boolean | undefined;
+  "filter[management]"?: boolean | undefined;
   "extra_fields[ip_addresses]"?: string | undefined;
   "page[size]": number;
   "page[number]": number;
@@ -165,6 +180,8 @@ export const GetIpsRequest$outboundSchema: z.ZodType<
   filterLocation: z.string().optional(),
   filterAddress: z.string().optional(),
   filterAdditional: z.boolean().optional(),
+  filterAvailable: z.boolean().optional(),
+  filterManagement: z.boolean().optional(),
   extraFieldsIpAddresses: z.string().optional(),
   pageSize: z.number().int().default(20),
   pageNumber: z.number().int().default(1),
@@ -179,6 +196,8 @@ export const GetIpsRequest$outboundSchema: z.ZodType<
     filterLocation: "filter[location]",
     filterAddress: "filter[address]",
     filterAdditional: "filter[additional]",
+    filterAvailable: "filter[available]",
+    filterManagement: "filter[management]",
     extraFieldsIpAddresses: "extra_fields[ip_addresses]",
     pageSize: "page[size]",
     pageNumber: "page[number]",
