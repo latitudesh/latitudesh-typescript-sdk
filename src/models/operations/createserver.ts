@@ -5,7 +5,8 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { ClosedEnum, OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -41,7 +42,7 @@ export const Plan2 = {
 /**
  * The plan slug to choose server from, defining the specs the server will have
  */
-export type Plan2 = ClosedEnum<typeof Plan2>;
+export type Plan2 = OpenEnum<typeof Plan2>;
 
 /**
  * The site slug to deploy the server
@@ -69,7 +70,7 @@ export const CreateServerSite2 = {
 /**
  * The site slug to deploy the server
  */
-export type CreateServerSite2 = ClosedEnum<typeof CreateServerSite2>;
+export type CreateServerSite2 = OpenEnum<typeof CreateServerSite2>;
 
 /**
  * The operating system slug for the new server
@@ -215,21 +216,24 @@ export const CreateServerType2$outboundSchema: z.ZodNativeEnum<
 > = CreateServerType2$inboundSchema;
 
 /** @internal */
-export const Plan2$inboundSchema: z.ZodNativeEnum<typeof Plan2> = z.nativeEnum(
-  Plan2,
-);
+export const Plan2$inboundSchema: z.ZodType<Plan2, z.ZodTypeDef, unknown> =
+  openEnums.inboundSchema(Plan2);
 /** @internal */
-export const Plan2$outboundSchema: z.ZodNativeEnum<typeof Plan2> =
-  Plan2$inboundSchema;
+export const Plan2$outboundSchema: z.ZodType<string, z.ZodTypeDef, Plan2> =
+  openEnums.outboundSchema(Plan2);
 
 /** @internal */
-export const CreateServerSite2$inboundSchema: z.ZodNativeEnum<
-  typeof CreateServerSite2
-> = z.nativeEnum(CreateServerSite2);
+export const CreateServerSite2$inboundSchema: z.ZodType<
+  CreateServerSite2,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(CreateServerSite2);
 /** @internal */
-export const CreateServerSite2$outboundSchema: z.ZodNativeEnum<
-  typeof CreateServerSite2
-> = CreateServerSite2$inboundSchema;
+export const CreateServerSite2$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  CreateServerSite2
+> = openEnums.outboundSchema(CreateServerSite2);
 
 /** @internal */
 export const CreateServerOperatingSystem2$inboundSchema: z.ZodNativeEnum<

@@ -5,7 +5,8 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { ClosedEnum, OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -34,7 +35,7 @@ export const PostVpnSessionSite2 = {
   Tyo: "TYO",
   Tyo2: "TYO2",
 } as const;
-export type PostVpnSessionSite2 = ClosedEnum<typeof PostVpnSessionSite2>;
+export type PostVpnSessionSite2 = OpenEnum<typeof PostVpnSessionSite2>;
 
 export type PostVpnSessionAttributes2 = {
   site?: PostVpnSessionSite2 | undefined;
@@ -60,13 +61,17 @@ export const PostVpnSessionType2$outboundSchema: z.ZodNativeEnum<
 > = PostVpnSessionType2$inboundSchema;
 
 /** @internal */
-export const PostVpnSessionSite2$inboundSchema: z.ZodNativeEnum<
-  typeof PostVpnSessionSite2
-> = z.nativeEnum(PostVpnSessionSite2);
+export const PostVpnSessionSite2$inboundSchema: z.ZodType<
+  PostVpnSessionSite2,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(PostVpnSessionSite2);
 /** @internal */
-export const PostVpnSessionSite2$outboundSchema: z.ZodNativeEnum<
-  typeof PostVpnSessionSite2
-> = PostVpnSessionSite2$inboundSchema;
+export const PostVpnSessionSite2$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  PostVpnSessionSite2
+> = openEnums.outboundSchema(PostVpnSessionSite2);
 
 /** @internal */
 export const PostVpnSessionAttributes2$inboundSchema: z.ZodType<
