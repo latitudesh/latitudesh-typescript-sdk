@@ -4,7 +4,8 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { ClosedEnum, OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -16,7 +17,7 @@ export type CreateVirtualNetworkType2 = ClosedEnum<
 >;
 
 /**
- * Site ID or slug
+ * Site slug
  */
 export const CreateVirtualNetworkSite2 = {
   Ash: "ASH",
@@ -39,16 +40,16 @@ export const CreateVirtualNetworkSite2 = {
   Tyo2: "TYO2",
 } as const;
 /**
- * Site ID or slug
+ * Site slug
  */
-export type CreateVirtualNetworkSite2 = ClosedEnum<
+export type CreateVirtualNetworkSite2 = OpenEnum<
   typeof CreateVirtualNetworkSite2
 >;
 
 export type CreateVirtualNetworkAttributes2 = {
   description: string;
   /**
-   * Site ID or slug
+   * Site slug
    */
   site?: CreateVirtualNetworkSite2 | undefined;
   /**
@@ -76,13 +77,17 @@ export const CreateVirtualNetworkType2$outboundSchema: z.ZodNativeEnum<
 > = CreateVirtualNetworkType2$inboundSchema;
 
 /** @internal */
-export const CreateVirtualNetworkSite2$inboundSchema: z.ZodNativeEnum<
-  typeof CreateVirtualNetworkSite2
-> = z.nativeEnum(CreateVirtualNetworkSite2);
+export const CreateVirtualNetworkSite2$inboundSchema: z.ZodType<
+  CreateVirtualNetworkSite2,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(CreateVirtualNetworkSite2);
 /** @internal */
-export const CreateVirtualNetworkSite2$outboundSchema: z.ZodNativeEnum<
-  typeof CreateVirtualNetworkSite2
-> = CreateVirtualNetworkSite2$inboundSchema;
+export const CreateVirtualNetworkSite2$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  CreateVirtualNetworkSite2
+> = openEnums.outboundSchema(CreateVirtualNetworkSite2);
 
 /** @internal */
 export const CreateVirtualNetworkAttributes2$inboundSchema: z.ZodType<

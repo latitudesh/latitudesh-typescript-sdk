@@ -5,7 +5,8 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as models from "../index.js";
@@ -30,7 +31,7 @@ export const FilterLocation = {
   Tyo: "TYO",
   Tyo2: "TYO2",
 } as const;
-export type FilterLocation = ClosedEnum<typeof FilterLocation>;
+export type FilterLocation = OpenEnum<typeof FilterLocation>;
 
 export type GetVpnSessionsRequest = {
   filterLocation?: FilterLocation | undefined;
@@ -47,13 +48,17 @@ export type GetVpnSessionsResponse = {
 };
 
 /** @internal */
-export const FilterLocation$inboundSchema: z.ZodNativeEnum<
-  typeof FilterLocation
-> = z.nativeEnum(FilterLocation);
+export const FilterLocation$inboundSchema: z.ZodType<
+  FilterLocation,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(FilterLocation);
 /** @internal */
-export const FilterLocation$outboundSchema: z.ZodNativeEnum<
-  typeof FilterLocation
-> = FilterLocation$inboundSchema;
+export const FilterLocation$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  FilterLocation
+> = openEnums.outboundSchema(FilterLocation);
 
 /** @internal */
 export const GetVpnSessionsRequest$inboundSchema: z.ZodType<
