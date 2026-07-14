@@ -28,4 +28,5 @@ let value: BillingUsage = {
 
 | Field                                                    | Type                                                     | Required                                                 | Description                                              |
 | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `meta`                                                   | [models.BillingUsageMeta](../models/billingusagemeta.md) | :heavy_minus_sign:                                       | N/A                                                      |
 | `data`                                                   | [models.BillingUsageData](../models/billingusagedata.md) | :heavy_minus_sign:                                       | N/A                                                      |

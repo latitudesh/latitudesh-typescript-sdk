@@ -7,6 +7,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as models from "../index.js";
 
 export type IndexVirtualMachineRequest = {
   /**
@@ -25,6 +26,22 @@ export type IndexVirtualMachineRequest = {
    * Comma-separated sort fields. Prefix a field with `-` for descending order. Supported fields: created_at, name, hostname, status. Example: `sort=status,-created_at` sorts by status ascending, then by creation date descending.
    */
   sort?: string | undefined;
+  /**
+   * Number of items to return per page
+   */
+  pageSize?: number | undefined;
+  /**
+   * Page number to return (starts at 1)
+   */
+  pageNumber?: number | undefined;
+  /**
+   * Request aggregate stats in the response `meta`. Use `count` to get the total number of records, returned as `meta.stats.total.count`.
+   */
+  statsTotal?: string | undefined;
+};
+
+export type IndexVirtualMachineResponse = {
+  result: models.VirtualMachines;
 };
 
 /** @internal */
@@ -37,11 +54,17 @@ export const IndexVirtualMachineRequest$inboundSchema: z.ZodType<
   "filter[tags]": z.string().optional(),
   "extra_fields[virtual_machines]": z.string().optional(),
   sort: z.string().optional(),
+  "page[size]": z.number().int().default(20),
+  "page[number]": z.number().int().default(1),
+  "stats[total]": z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "filter[project]": "filterProject",
     "filter[tags]": "filterTags",
     "extra_fields[virtual_machines]": "extraFieldsVirtualMachines",
+    "page[size]": "pageSize",
+    "page[number]": "pageNumber",
+    "stats[total]": "statsTotal",
   });
 });
 /** @internal */
@@ -50,6 +73,9 @@ export type IndexVirtualMachineRequest$Outbound = {
   "filter[tags]"?: string | undefined;
   "extra_fields[virtual_machines]"?: string | undefined;
   sort?: string | undefined;
+  "page[size]": number;
+  "page[number]": number;
+  "stats[total]"?: string | undefined;
 };
 
 /** @internal */
@@ -62,11 +88,17 @@ export const IndexVirtualMachineRequest$outboundSchema: z.ZodType<
   filterTags: z.string().optional(),
   extraFieldsVirtualMachines: z.string().optional(),
   sort: z.string().optional(),
+  pageSize: z.number().int().default(20),
+  pageNumber: z.number().int().default(1),
+  statsTotal: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     filterProject: "filter[project]",
     filterTags: "filter[tags]",
     extraFieldsVirtualMachines: "extra_fields[virtual_machines]",
+    pageSize: "page[size]",
+    pageNumber: "page[number]",
+    statsTotal: "stats[total]",
   });
 });
 
@@ -84,5 +116,54 @@ export function indexVirtualMachineRequestFromJSON(
     jsonString,
     (x) => IndexVirtualMachineRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'IndexVirtualMachineRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const IndexVirtualMachineResponse$inboundSchema: z.ZodType<
+  IndexVirtualMachineResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  Result: models.VirtualMachines$inboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    "Result": "result",
+  });
+});
+/** @internal */
+export type IndexVirtualMachineResponse$Outbound = {
+  Result: models.VirtualMachines$Outbound;
+};
+
+/** @internal */
+export const IndexVirtualMachineResponse$outboundSchema: z.ZodType<
+  IndexVirtualMachineResponse$Outbound,
+  z.ZodTypeDef,
+  IndexVirtualMachineResponse
+> = z.object({
+  result: models.VirtualMachines$outboundSchema,
+}).transform((v) => {
+  return remap$(v, {
+    result: "Result",
+  });
+});
+
+export function indexVirtualMachineResponseToJSON(
+  indexVirtualMachineResponse: IndexVirtualMachineResponse,
+): string {
+  return JSON.stringify(
+    IndexVirtualMachineResponse$outboundSchema.parse(
+      indexVirtualMachineResponse,
+    ),
+  );
+}
+export function indexVirtualMachineResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<IndexVirtualMachineResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => IndexVirtualMachineResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'IndexVirtualMachineResponse' from JSON`,
   );
 }

@@ -7,51 +7,22 @@ import { safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 import {
+  PaginationMeta,
+  PaginationMeta$inboundSchema,
+  PaginationMeta$Outbound,
+  PaginationMeta$outboundSchema,
+} from "./paginationmeta.js";
+import {
   VirtualMachineAttributes,
   VirtualMachineAttributes$inboundSchema,
   VirtualMachineAttributes$Outbound,
   VirtualMachineAttributes$outboundSchema,
 } from "./virtualmachineattributes.js";
 
-export type VirtualMachinesMeta = {};
-
 export type VirtualMachines = {
   data?: Array<VirtualMachineAttributes> | undefined;
-  meta?: VirtualMachinesMeta | undefined;
+  meta?: PaginationMeta | undefined;
 };
-
-/** @internal */
-export const VirtualMachinesMeta$inboundSchema: z.ZodType<
-  VirtualMachinesMeta,
-  z.ZodTypeDef,
-  unknown
-> = z.object({});
-/** @internal */
-export type VirtualMachinesMeta$Outbound = {};
-
-/** @internal */
-export const VirtualMachinesMeta$outboundSchema: z.ZodType<
-  VirtualMachinesMeta$Outbound,
-  z.ZodTypeDef,
-  VirtualMachinesMeta
-> = z.object({});
-
-export function virtualMachinesMetaToJSON(
-  virtualMachinesMeta: VirtualMachinesMeta,
-): string {
-  return JSON.stringify(
-    VirtualMachinesMeta$outboundSchema.parse(virtualMachinesMeta),
-  );
-}
-export function virtualMachinesMetaFromJSON(
-  jsonString: string,
-): SafeParseResult<VirtualMachinesMeta, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => VirtualMachinesMeta$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'VirtualMachinesMeta' from JSON`,
-  );
-}
 
 /** @internal */
 export const VirtualMachines$inboundSchema: z.ZodType<
@@ -60,12 +31,12 @@ export const VirtualMachines$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   data: z.array(VirtualMachineAttributes$inboundSchema).optional(),
-  meta: z.lazy(() => VirtualMachinesMeta$inboundSchema).optional(),
+  meta: PaginationMeta$inboundSchema.optional(),
 });
 /** @internal */
 export type VirtualMachines$Outbound = {
   data?: Array<VirtualMachineAttributes$Outbound> | undefined;
-  meta?: VirtualMachinesMeta$Outbound | undefined;
+  meta?: PaginationMeta$Outbound | undefined;
 };
 
 /** @internal */
@@ -75,7 +46,7 @@ export const VirtualMachines$outboundSchema: z.ZodType<
   VirtualMachines
 > = z.object({
   data: z.array(VirtualMachineAttributes$outboundSchema).optional(),
-  meta: z.lazy(() => VirtualMachinesMeta$outboundSchema).optional(),
+  meta: PaginationMeta$outboundSchema.optional(),
 });
 
 export function virtualMachinesToJSON(

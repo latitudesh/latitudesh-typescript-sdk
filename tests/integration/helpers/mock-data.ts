@@ -137,10 +137,12 @@ export const mockProject = {
     cost: '0.00',
     environment: 'Development',
     stats: {
+      databases: 0,
       ip_addresses: 2,
       prefixes: 0,
       servers: 1,
-      containers: 0,
+      storages: 0,
+      virtual_machines: 0,
       vlans: 1,
     },
     billing: {
@@ -168,10 +170,12 @@ export const mockProjectList = {
         cost: '150.00',
         environment: 'Production',
         stats: {
+          databases: 0,
           ip_addresses: 10,
           prefixes: 1,
           servers: 5,
-          containers: 2,
+          storages: 2,
+          virtual_machines: 1,
           vlans: 3,
         },
         billing: {

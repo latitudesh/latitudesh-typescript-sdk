@@ -16,6 +16,7 @@ import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as models from "../models/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
+import { PageIterator, unwrapResultIterator } from "../types/operations.js";
 
 export class VirtualMachines extends ClientSDK {
   /**
@@ -44,8 +45,10 @@ export class VirtualMachines extends ClientSDK {
   async list(
     request?: operations.IndexVirtualMachineRequest | undefined,
     options?: RequestOptions,
-  ): Promise<models.VirtualMachines> {
-    return unwrapAsync(virtualMachinesList(
+  ): Promise<
+    PageIterator<operations.IndexVirtualMachineResponse, { page: number }>
+  > {
+    return unwrapResultIterator(virtualMachinesList(
       this,
       request,
       options,

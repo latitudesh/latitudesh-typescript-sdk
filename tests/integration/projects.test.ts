@@ -471,7 +471,9 @@ describe('Projects - Core CRUD Operations', () => {
       expect(project.attributes.stats.ipAddresses).toBe(2);
       expect(project.attributes.stats.servers).toBe(1);
       expect(project.attributes.stats.vlans).toBe(1);
-      expect(project.attributes.stats.containers).toBe(0);
+      expect(project.attributes.stats.storages).toBe(0);
+      expect(project.attributes.stats.virtualMachines).toBe(0);
+      expect(project.attributes.stats.databases).toBe(0);
       expect(project.attributes.stats.prefixes).toBe(0);
     });
   });
