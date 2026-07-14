@@ -11,5 +11,5 @@ let value: BillingUsageUnit = "quantity";
 ## Values
 
 ```typescript
-"quantity" | "hour" | "minute"
+"quantity" | "hour" | "minute" | "GB"
 ```

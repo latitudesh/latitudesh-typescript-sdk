@@ -15,9 +15,12 @@ export type ProjectIncludeBilling = {
 };
 
 export type ProjectIncludeStats = {
+  databases?: number | undefined;
   ipAddresses?: number | undefined;
   prefixes?: number | undefined;
   servers?: number | undefined;
+  storages?: number | undefined;
+  virtualMachines?: number | undefined;
   vlans?: number | undefined;
 };
 
@@ -94,20 +97,27 @@ export const ProjectIncludeStats$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  databases: z.number().int().optional(),
   ip_addresses: z.number().int().optional(),
   prefixes: z.number().int().optional(),
   servers: z.number().int().optional(),
+  storages: z.number().int().optional(),
+  virtual_machines: z.number().int().optional(),
   vlans: z.number().int().optional(),
 }).transform((v) => {
   return remap$(v, {
     "ip_addresses": "ipAddresses",
+    "virtual_machines": "virtualMachines",
   });
 });
 /** @internal */
 export type ProjectIncludeStats$Outbound = {
+  databases?: number | undefined;
   ip_addresses?: number | undefined;
   prefixes?: number | undefined;
   servers?: number | undefined;
+  storages?: number | undefined;
+  virtual_machines?: number | undefined;
   vlans?: number | undefined;
 };
 
@@ -117,13 +127,17 @@ export const ProjectIncludeStats$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ProjectIncludeStats
 > = z.object({
+  databases: z.number().int().optional(),
   ipAddresses: z.number().int().optional(),
   prefixes: z.number().int().optional(),
   servers: z.number().int().optional(),
+  storages: z.number().int().optional(),
+  virtualMachines: z.number().int().optional(),
   vlans: z.number().int().optional(),
 }).transform((v) => {
   return remap$(v, {
     ipAddresses: "ip_addresses",
+    virtualMachines: "virtual_machines",
   });
 });
 

@@ -5,7 +5,8 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
-import { ClosedEnum } from "../types/enums.js";
+import * as openEnums from "../types/enums.js";
+import { ClosedEnum, OpenEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 import {
@@ -15,6 +16,13 @@ import {
   TeamInclude$outboundSchema,
 } from "./teaminclude.js";
 
+export const ProjectType = {
+  Projects: "projects",
+} as const;
+export type ProjectType = ClosedEnum<typeof ProjectType>;
+
+export type ProjectTag = {};
+
 export const BillingType = {
   Yearly: "Yearly",
   Monthly: "Monthly",
@@ -22,22 +30,26 @@ export const BillingType = {
   Normal: "Normal",
   Custom: "Custom",
 } as const;
-export type BillingType = ClosedEnum<typeof BillingType>;
+export type BillingType = OpenEnum<typeof BillingType>;
 
 export const BillingMethod = {
   Normal: "Normal",
   NinetyFivethPercentile: "95th percentile",
 } as const;
-export type BillingMethod = ClosedEnum<typeof BillingMethod>;
+export type BillingMethod = OpenEnum<typeof BillingMethod>;
 
 export const Environment = {
   Development: "Development",
   Staging: "Staging",
   Production: "Production",
 } as const;
-export type Environment = ClosedEnum<typeof Environment>;
+export type Environment = OpenEnum<typeof Environment>;
 
 export type ProjectStats = {
+  /**
+   * The number of database servers assigned to the project
+   */
+  databases?: number | undefined;
   /**
    * The number of IP addresses assigned to the project
    */
@@ -51,9 +63,13 @@ export type ProjectStats = {
    */
   servers?: number | undefined;
   /**
-   * The number of containers assigned to the project
+   * The number of storages assigned to the project
    */
-  containers?: number | undefined;
+  storages?: number | undefined;
+  /**
+   * The number of active virtual machines assigned to the project
+   */
+  virtualMachines?: number | undefined;
   /**
    * The number of VLANs assigned to the project
    */
@@ -67,6 +83,10 @@ export type ProjectBilling = {
 };
 
 export type ProjectAttributes = {
+  /**
+   * The tags assigned to the project
+   */
+  tags?: Array<ProjectTag> | undefined;
   /**
    * The project name
    */
@@ -82,7 +102,15 @@ export type ProjectAttributes = {
   billingType?: BillingType | null | undefined;
   billingMethod?: BillingMethod | null | undefined;
   cost?: string | null | undefined;
+  /**
+   * Whether bandwidth quota alerts are enabled for the project
+   */
+  bandwidthAlert?: boolean | null | undefined;
   environment?: Environment | null | undefined;
+  /**
+   * The project provisioning model, either on_demand (pay-as-you-go, hourly or monthly billing) or reserved (annual contract with yearly billing). Defaults to on_demand.
+   */
+  provisioningType?: string | null | undefined;
   stats?: ProjectStats | undefined;
   billing?: ProjectBilling | undefined;
   team?: TeamInclude | undefined;
@@ -95,31 +123,84 @@ export type Project = {
    * The project ID
    */
   id?: string | undefined;
+  type?: ProjectType | undefined;
   attributes?: ProjectAttributes | undefined;
 };
 
 /** @internal */
-export const BillingType$inboundSchema: z.ZodNativeEnum<typeof BillingType> = z
-  .nativeEnum(BillingType);
+export const ProjectType$inboundSchema: z.ZodNativeEnum<typeof ProjectType> = z
+  .nativeEnum(ProjectType);
 /** @internal */
-export const BillingType$outboundSchema: z.ZodNativeEnum<typeof BillingType> =
-  BillingType$inboundSchema;
+export const ProjectType$outboundSchema: z.ZodNativeEnum<typeof ProjectType> =
+  ProjectType$inboundSchema;
 
 /** @internal */
-export const BillingMethod$inboundSchema: z.ZodNativeEnum<
-  typeof BillingMethod
-> = z.nativeEnum(BillingMethod);
+export const ProjectTag$inboundSchema: z.ZodType<
+  ProjectTag,
+  z.ZodTypeDef,
+  unknown
+> = z.object({});
 /** @internal */
-export const BillingMethod$outboundSchema: z.ZodNativeEnum<
-  typeof BillingMethod
-> = BillingMethod$inboundSchema;
+export type ProjectTag$Outbound = {};
 
 /** @internal */
-export const Environment$inboundSchema: z.ZodNativeEnum<typeof Environment> = z
-  .nativeEnum(Environment);
+export const ProjectTag$outboundSchema: z.ZodType<
+  ProjectTag$Outbound,
+  z.ZodTypeDef,
+  ProjectTag
+> = z.object({});
+
+export function projectTagToJSON(projectTag: ProjectTag): string {
+  return JSON.stringify(ProjectTag$outboundSchema.parse(projectTag));
+}
+export function projectTagFromJSON(
+  jsonString: string,
+): SafeParseResult<ProjectTag, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ProjectTag$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ProjectTag' from JSON`,
+  );
+}
+
 /** @internal */
-export const Environment$outboundSchema: z.ZodNativeEnum<typeof Environment> =
-  Environment$inboundSchema;
+export const BillingType$inboundSchema: z.ZodType<
+  BillingType,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(BillingType);
+/** @internal */
+export const BillingType$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  BillingType
+> = openEnums.outboundSchema(BillingType);
+
+/** @internal */
+export const BillingMethod$inboundSchema: z.ZodType<
+  BillingMethod,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(BillingMethod);
+/** @internal */
+export const BillingMethod$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  BillingMethod
+> = openEnums.outboundSchema(BillingMethod);
+
+/** @internal */
+export const Environment$inboundSchema: z.ZodType<
+  Environment,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(Environment);
+/** @internal */
+export const Environment$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  Environment
+> = openEnums.outboundSchema(Environment);
 
 /** @internal */
 export const ProjectStats$inboundSchema: z.ZodType<
@@ -127,22 +208,27 @@ export const ProjectStats$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  databases: z.number().optional(),
   ip_addresses: z.number().optional(),
   prefixes: z.number().optional(),
   servers: z.number().optional(),
-  containers: z.number().optional(),
+  storages: z.number().optional(),
+  virtual_machines: z.number().optional(),
   vlans: z.number().optional(),
 }).transform((v) => {
   return remap$(v, {
     "ip_addresses": "ipAddresses",
+    "virtual_machines": "virtualMachines",
   });
 });
 /** @internal */
 export type ProjectStats$Outbound = {
+  databases?: number | undefined;
   ip_addresses?: number | undefined;
   prefixes?: number | undefined;
   servers?: number | undefined;
-  containers?: number | undefined;
+  storages?: number | undefined;
+  virtual_machines?: number | undefined;
   vlans?: number | undefined;
 };
 
@@ -152,14 +238,17 @@ export const ProjectStats$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ProjectStats
 > = z.object({
+  databases: z.number().optional(),
   ipAddresses: z.number().optional(),
   prefixes: z.number().optional(),
   servers: z.number().optional(),
-  containers: z.number().optional(),
+  storages: z.number().optional(),
+  virtualMachines: z.number().optional(),
   vlans: z.number().optional(),
 }).transform((v) => {
   return remap$(v, {
     ipAddresses: "ip_addresses",
+    virtualMachines: "virtual_machines",
   });
 });
 
@@ -231,13 +320,16 @@ export const ProjectAttributes$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  tags: z.array(z.lazy(() => ProjectTag$inboundSchema)).optional(),
   name: z.string().optional(),
   slug: z.string().optional(),
   description: z.nullable(z.string()).optional(),
   billing_type: z.nullable(BillingType$inboundSchema).optional(),
   billing_method: z.nullable(BillingMethod$inboundSchema).optional(),
   cost: z.nullable(z.string()).optional(),
+  bandwidth_alert: z.nullable(z.boolean()).optional(),
   environment: z.nullable(Environment$inboundSchema).optional(),
+  provisioning_type: z.nullable(z.string()).optional(),
   stats: z.lazy(() => ProjectStats$inboundSchema).optional(),
   billing: z.lazy(() => ProjectBilling$inboundSchema).optional(),
   team: TeamInclude$inboundSchema.optional(),
@@ -247,19 +339,24 @@ export const ProjectAttributes$inboundSchema: z.ZodType<
   return remap$(v, {
     "billing_type": "billingType",
     "billing_method": "billingMethod",
+    "bandwidth_alert": "bandwidthAlert",
+    "provisioning_type": "provisioningType",
     "created_at": "createdAt",
     "updated_at": "updatedAt",
   });
 });
 /** @internal */
 export type ProjectAttributes$Outbound = {
+  tags?: Array<ProjectTag$Outbound> | undefined;
   name?: string | undefined;
   slug?: string | undefined;
   description?: string | null | undefined;
   billing_type?: string | null | undefined;
   billing_method?: string | null | undefined;
   cost?: string | null | undefined;
+  bandwidth_alert?: boolean | null | undefined;
   environment?: string | null | undefined;
+  provisioning_type?: string | null | undefined;
   stats?: ProjectStats$Outbound | undefined;
   billing?: ProjectBilling$Outbound | undefined;
   team?: TeamInclude$Outbound | undefined;
@@ -273,13 +370,16 @@ export const ProjectAttributes$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ProjectAttributes
 > = z.object({
+  tags: z.array(z.lazy(() => ProjectTag$outboundSchema)).optional(),
   name: z.string().optional(),
   slug: z.string().optional(),
   description: z.nullable(z.string()).optional(),
   billingType: z.nullable(BillingType$outboundSchema).optional(),
   billingMethod: z.nullable(BillingMethod$outboundSchema).optional(),
   cost: z.nullable(z.string()).optional(),
+  bandwidthAlert: z.nullable(z.boolean()).optional(),
   environment: z.nullable(Environment$outboundSchema).optional(),
+  provisioningType: z.nullable(z.string()).optional(),
   stats: z.lazy(() => ProjectStats$outboundSchema).optional(),
   billing: z.lazy(() => ProjectBilling$outboundSchema).optional(),
   team: TeamInclude$outboundSchema.optional(),
@@ -289,6 +389,8 @@ export const ProjectAttributes$outboundSchema: z.ZodType<
   return remap$(v, {
     billingType: "billing_type",
     billingMethod: "billing_method",
+    bandwidthAlert: "bandwidth_alert",
+    provisioningType: "provisioning_type",
     createdAt: "created_at",
     updatedAt: "updated_at",
   });
@@ -315,11 +417,13 @@ export function projectAttributesFromJSON(
 export const Project$inboundSchema: z.ZodType<Project, z.ZodTypeDef, unknown> =
   z.object({
     id: z.string().optional(),
+    type: ProjectType$inboundSchema.optional(),
     attributes: z.lazy(() => ProjectAttributes$inboundSchema).optional(),
   });
 /** @internal */
 export type Project$Outbound = {
   id?: string | undefined;
+  type?: string | undefined;
   attributes?: ProjectAttributes$Outbound | undefined;
 };
 
@@ -330,6 +434,7 @@ export const Project$outboundSchema: z.ZodType<
   Project
 > = z.object({
   id: z.string().optional(),
+  type: ProjectType$outboundSchema.optional(),
   attributes: z.lazy(() => ProjectAttributes$outboundSchema).optional(),
 });
 

@@ -28,18 +28,6 @@ export type VirtualMachineAttributesType = ClosedEnum<
   typeof VirtualMachineAttributesType
 >;
 
-export const VirtualMachineAttributesStatus = {
-  Running: "Running",
-  ConfiguringNetwork: "Configuring network",
-  Starting: "Starting",
-  Scheduling: "Scheduling",
-  Scheduled: "Scheduled",
-  Destroying: "Destroying",
-} as const;
-export type VirtualMachineAttributesStatus = ClosedEnum<
-  typeof VirtualMachineAttributesStatus
->;
-
 /**
  * Features supported by this operating system
  */
@@ -56,6 +44,14 @@ export type VirtualMachineAttributesFeatures = {
    * Whether user data is supported
    */
   userData?: boolean | undefined;
+  /**
+   * Whether rescue mode is supported
+   */
+  rescue?: boolean | undefined;
+  /**
+   * Whether workflow is supported
+   */
+  workflow?: boolean | undefined;
 };
 
 /**
@@ -138,7 +134,10 @@ export type VirtualMachineAttributesTag = {
 export type VirtualMachineAttributesAttributes = {
   name?: string | undefined;
   createdAt?: string | undefined;
-  status?: VirtualMachineAttributesStatus | undefined;
+  /**
+   * Current lifecycle status of the VM, derived from the underlying KubeVirt phase/printable status and capitalized. This is an open set that may grow over time — do not treat it as a closed enum. Known values include: Running, Starting, Stopped, Stopping, Failed, Off, Error, Rebooting, Deleting, Destroying, Configuring network, Scheduling, Scheduled, Provisioning.
+   */
+  status?: string | undefined;
   primaryIpv4?: string | null | undefined;
   /**
    * The operating system installed on the virtual machine
@@ -181,15 +180,6 @@ export const VirtualMachineAttributesType$outboundSchema: z.ZodNativeEnum<
 > = VirtualMachineAttributesType$inboundSchema;
 
 /** @internal */
-export const VirtualMachineAttributesStatus$inboundSchema: z.ZodNativeEnum<
-  typeof VirtualMachineAttributesStatus
-> = z.nativeEnum(VirtualMachineAttributesStatus);
-/** @internal */
-export const VirtualMachineAttributesStatus$outboundSchema: z.ZodNativeEnum<
-  typeof VirtualMachineAttributesStatus
-> = VirtualMachineAttributesStatus$inboundSchema;
-
-/** @internal */
 export const VirtualMachineAttributesFeatures$inboundSchema: z.ZodType<
   VirtualMachineAttributesFeatures,
   z.ZodTypeDef,
@@ -198,6 +188,8 @@ export const VirtualMachineAttributesFeatures$inboundSchema: z.ZodType<
   raid: z.boolean().optional(),
   ssh_keys: z.boolean().optional(),
   user_data: z.boolean().optional(),
+  rescue: z.boolean().optional(),
+  workflow: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     "ssh_keys": "sshKeys",
@@ -209,6 +201,8 @@ export type VirtualMachineAttributesFeatures$Outbound = {
   raid?: boolean | undefined;
   ssh_keys?: boolean | undefined;
   user_data?: boolean | undefined;
+  rescue?: boolean | undefined;
+  workflow?: boolean | undefined;
 };
 
 /** @internal */
@@ -220,6 +214,8 @@ export const VirtualMachineAttributesFeatures$outboundSchema: z.ZodType<
   raid: z.boolean().optional(),
   sshKeys: z.boolean().optional(),
   userData: z.boolean().optional(),
+  rescue: z.boolean().optional(),
+  workflow: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     sshKeys: "ssh_keys",
@@ -570,7 +566,7 @@ export const VirtualMachineAttributesAttributes$inboundSchema: z.ZodType<
 > = z.object({
   name: z.string().optional(),
   created_at: z.string().optional(),
-  status: VirtualMachineAttributesStatus$inboundSchema.optional(),
+  status: z.string().optional(),
   primary_ipv4: z.nullable(z.string()).optional(),
   operating_system: z.nullable(
     z.lazy(() => VirtualMachineAttributesOperatingSystem$inboundSchema),
@@ -627,7 +623,7 @@ export const VirtualMachineAttributesAttributes$outboundSchema: z.ZodType<
 > = z.object({
   name: z.string().optional(),
   createdAt: z.string().optional(),
-  status: VirtualMachineAttributesStatus$outboundSchema.optional(),
+  status: z.string().optional(),
   primaryIpv4: z.nullable(z.string()).optional(),
   operatingSystem: z.nullable(
     z.lazy(() => VirtualMachineAttributesOperatingSystem$outboundSchema),

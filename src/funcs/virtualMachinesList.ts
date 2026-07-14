@@ -22,10 +22,15 @@ import * as errors from "../models/errors/index.js";
 import { LatitudeshError } from "../models/errors/latitudesherror.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as models from "../models/index.js";
 import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
+import {
+  createPageIterator,
+  haltIterator,
+  PageIterator,
+  Paginator,
+} from "../types/operations.js";
 
 /**
  * List VMs
@@ -38,17 +43,20 @@ export function virtualMachinesList(
   request?: operations.IndexVirtualMachineRequest | undefined,
   options?: RequestOptions,
 ): APIPromise<
-  Result<
-    models.VirtualMachines,
-    | errors.ErrorObject
-    | LatitudeshError
-    | ResponseValidationError
-    | ConnectionError
-    | RequestAbortedError
-    | RequestTimeoutError
-    | InvalidRequestError
-    | UnexpectedClientError
-    | SDKValidationError
+  PageIterator<
+    Result<
+      operations.IndexVirtualMachineResponse,
+      | errors.ErrorObject
+      | LatitudeshError
+      | ResponseValidationError
+      | ConnectionError
+      | RequestAbortedError
+      | RequestTimeoutError
+      | InvalidRequestError
+      | UnexpectedClientError
+      | SDKValidationError
+    >,
+    { page: number }
   >
 > {
   return new APIPromise($do(
@@ -64,17 +72,20 @@ async function $do(
   options?: RequestOptions,
 ): Promise<
   [
-    Result<
-      models.VirtualMachines,
-      | errors.ErrorObject
-      | LatitudeshError
-      | ResponseValidationError
-      | ConnectionError
-      | RequestAbortedError
-      | RequestTimeoutError
-      | InvalidRequestError
-      | UnexpectedClientError
-      | SDKValidationError
+    PageIterator<
+      Result<
+        operations.IndexVirtualMachineResponse,
+        | errors.ErrorObject
+        | LatitudeshError
+        | ResponseValidationError
+        | ConnectionError
+        | RequestAbortedError
+        | RequestTimeoutError
+        | InvalidRequestError
+        | UnexpectedClientError
+        | SDKValidationError
+      >,
+      { page: number }
     >,
     APICall,
   ]
@@ -88,7 +99,7 @@ async function $do(
     "Input validation failed",
   );
   if (!parsed.ok) {
-    return [parsed, { status: "invalid" }];
+    return [haltIterator(parsed), { status: "invalid" }];
   }
   const payload = parsed.value;
   const body = null;
@@ -100,7 +111,10 @@ async function $do(
       ?.["extra_fields[virtual_machines]"],
     "filter[project]": payload?.["filter[project]"],
     "filter[tags]": payload?.["filter[tags]"],
+    "page[number]": payload?.["page[number]"],
+    "page[size]": payload?.["page[size]"],
     "sort": payload?.sort,
+    "stats[total]": payload?.["stats[total]"],
   });
 
   const headers = new Headers(compactMap({
@@ -138,7 +152,7 @@ async function $do(
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
   }, options);
   if (!requestRes.ok) {
-    return [requestRes, { status: "invalid" }];
+    return [haltIterator(requestRes), { status: "invalid" }];
   }
   const req = requestRes.value;
 
@@ -150,7 +164,7 @@ async function $do(
     retryCodes: context.retryCodes,
   });
   if (!doResult.ok) {
-    return [doResult, { status: "request-error", request: req }];
+    return [haltIterator(doResult), { status: "request-error", request: req }];
   }
   const response = doResult.value;
 
@@ -158,8 +172,8 @@ async function $do(
     HttpMeta: { Response: response, Request: req },
   };
 
-  const [result] = await M.match<
-    models.VirtualMachines,
+  const [result, raw] = await M.match<
+    operations.IndexVirtualMachineResponse,
     | errors.ErrorObject
     | LatitudeshError
     | ResponseValidationError
@@ -170,8 +184,9 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, models.VirtualMachines$inboundSchema, {
+    M.json(200, operations.IndexVirtualMachineResponse$inboundSchema, {
       ctype: "application/vnd.api+json",
+      key: "Result",
     }),
     M.jsonErr(400, errors.ErrorObject$inboundSchema, {
       ctype: "application/vnd.api+json",
@@ -180,8 +195,64 @@ async function $do(
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {
-    return [result, { status: "complete", request: req, response }];
+    return [haltIterator(result), {
+      status: "complete",
+      request: req,
+      response,
+    }];
   }
 
-  return [result, { status: "complete", request: req, response }];
+  const nextFunc = (
+    responseData: unknown,
+  ): {
+    next: Paginator<
+      Result<
+        operations.IndexVirtualMachineResponse,
+        | errors.ErrorObject
+        | LatitudeshError
+        | ResponseValidationError
+        | ConnectionError
+        | RequestAbortedError
+        | RequestTimeoutError
+        | InvalidRequestError
+        | UnexpectedClientError
+        | SDKValidationError
+      >
+    >;
+    "~next"?: { page: number };
+  } => {
+    const page = request?.pageNumber ?? 1;
+    const nextPage = page + 1;
+
+    if (!responseData) {
+      return { next: () => null };
+    }
+    const results = (responseData as { data?: unknown }).data;
+    if (!Array.isArray(results) || !results.length) {
+      return { next: () => null };
+    }
+    const limit = request?.pageSize ?? 20;
+    if (results.length < limit) {
+      return { next: () => null };
+    }
+
+    const nextVal = () =>
+      virtualMachinesList(
+        client,
+        {
+          ...request!,
+          pageNumber: nextPage,
+        },
+        options,
+      );
+
+    return { next: nextVal, "~next": { page: nextPage } };
+  };
+
+  const page = { ...result, ...nextFunc(raw) };
+  return [{ ...page, ...createPageIterator(page, (v) => !v.ok) }, {
+    status: "complete",
+    request: req,
+    response,
+  }];
 }

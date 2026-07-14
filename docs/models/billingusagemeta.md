@@ -1,11 +1,11 @@
-# VirtualMachinesMeta
+# BillingUsageMeta
 
 ## Example Usage
 
 ```typescript
-import { VirtualMachinesMeta } from "latitudesh-typescript-sdk/models";
+import { BillingUsageMeta } from "latitudesh-typescript-sdk/models";
 
-let value: VirtualMachinesMeta = {};
+let value: BillingUsageMeta = {};
 ```
 
 ## Fields

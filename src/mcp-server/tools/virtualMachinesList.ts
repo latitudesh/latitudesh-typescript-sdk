@@ -31,7 +31,7 @@ Show all Team's Virtual Machines.
       };
     }
 
-    const value = result.value;
+    const value = result.value.result;
 
     return formatResult(value, apiCall);
   },

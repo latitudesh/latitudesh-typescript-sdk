@@ -9,6 +9,8 @@ import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 
+export type BillingUsageMeta = {};
+
 /**
  * The project in which the returned usage belongs to
  */
@@ -57,6 +59,7 @@ export const BillingUsageUnit = {
   Quantity: "quantity",
   Hour: "hour",
   Minute: "minute",
+  Gb: "GB",
 } as const;
 export type BillingUsageUnit = ClosedEnum<typeof BillingUsageUnit>;
 
@@ -66,11 +69,26 @@ export const UsageType = {
 } as const;
 export type UsageType = ClosedEnum<typeof UsageType>;
 
-export type Metadata = {
-  id?: string | null | undefined;
-  hostname?: string | null | undefined;
-  plan?: string | null | undefined;
+export type BillingUsageServer = {
+  id?: string | undefined;
+  hostname?: string | undefined;
+  plan?: string | undefined;
   tags?: Array<string> | undefined;
+};
+
+export type Bucket = {
+  id?: string | undefined;
+  name?: string | undefined;
+  location?: string | null | undefined;
+};
+
+export type Metadata = {
+  servers?: Array<BillingUsageServer> | undefined;
+  bucket?: Bucket | undefined;
+  /**
+   * For products priced per divided unit (e.g. $0.01 per 1000 API calls), the divisor applied to the quantity before pricing. Omitted for products that are not priced by divided units.
+   */
+  billingUnitDivisor?: number | null | undefined;
 };
 
 export type Product = {
@@ -86,11 +104,19 @@ export type Product = {
   end?: Date | null | undefined;
   unit?: BillingUsageUnit | undefined;
   /**
+   * The unit amount of the product in cents
+   */
+  unitAmount?: number | undefined;
+  /**
    * The unit price of the product in cents
    */
   unitPrice?: number | undefined;
   usageType?: UsageType | undefined;
   quantity?: number | undefined;
+  /**
+   * The total usage amount of the product in cents
+   */
+  amount?: number | undefined;
   /**
    * The total usage price of the product in cents
    */
@@ -112,6 +138,10 @@ export type BillingUsageAttributes = {
    */
   availableCreditBalance?: number | undefined;
   /**
+   * The total usage amount in cents
+   */
+  amount?: number | undefined;
+  /**
    * The total usage price in cents
    */
   price?: number | undefined;
@@ -124,12 +154,47 @@ export type BillingUsageAttributes = {
 
 export type BillingUsageData = {
   id?: string | undefined;
+  type?: string | undefined;
   attributes?: BillingUsageAttributes | undefined;
 };
 
 export type BillingUsage = {
+  meta?: BillingUsageMeta | undefined;
   data?: BillingUsageData | undefined;
 };
+
+/** @internal */
+export const BillingUsageMeta$inboundSchema: z.ZodType<
+  BillingUsageMeta,
+  z.ZodTypeDef,
+  unknown
+> = z.object({});
+/** @internal */
+export type BillingUsageMeta$Outbound = {};
+
+/** @internal */
+export const BillingUsageMeta$outboundSchema: z.ZodType<
+  BillingUsageMeta$Outbound,
+  z.ZodTypeDef,
+  BillingUsageMeta
+> = z.object({});
+
+export function billingUsageMetaToJSON(
+  billingUsageMeta: BillingUsageMeta,
+): string {
+  return JSON.stringify(
+    BillingUsageMeta$outboundSchema.parse(billingUsageMeta),
+  );
+}
+export function billingUsageMetaFromJSON(
+  jsonString: string,
+): SafeParseResult<BillingUsageMeta, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => BillingUsageMeta$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'BillingUsageMeta' from JSON`,
+  );
+}
 
 /** @internal */
 export const BillingUsageProject$inboundSchema: z.ZodType<
@@ -280,22 +345,110 @@ export const UsageType$outboundSchema: z.ZodNativeEnum<typeof UsageType> =
   UsageType$inboundSchema;
 
 /** @internal */
+export const BillingUsageServer$inboundSchema: z.ZodType<
+  BillingUsageServer,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string().optional(),
+  hostname: z.string().optional(),
+  plan: z.string().optional(),
+  tags: z.array(z.string()).optional(),
+});
+/** @internal */
+export type BillingUsageServer$Outbound = {
+  id?: string | undefined;
+  hostname?: string | undefined;
+  plan?: string | undefined;
+  tags?: Array<string> | undefined;
+};
+
+/** @internal */
+export const BillingUsageServer$outboundSchema: z.ZodType<
+  BillingUsageServer$Outbound,
+  z.ZodTypeDef,
+  BillingUsageServer
+> = z.object({
+  id: z.string().optional(),
+  hostname: z.string().optional(),
+  plan: z.string().optional(),
+  tags: z.array(z.string()).optional(),
+});
+
+export function billingUsageServerToJSON(
+  billingUsageServer: BillingUsageServer,
+): string {
+  return JSON.stringify(
+    BillingUsageServer$outboundSchema.parse(billingUsageServer),
+  );
+}
+export function billingUsageServerFromJSON(
+  jsonString: string,
+): SafeParseResult<BillingUsageServer, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => BillingUsageServer$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'BillingUsageServer' from JSON`,
+  );
+}
+
+/** @internal */
+export const Bucket$inboundSchema: z.ZodType<Bucket, z.ZodTypeDef, unknown> = z
+  .object({
+    id: z.string().optional(),
+    name: z.string().optional(),
+    location: z.nullable(z.string()).optional(),
+  });
+/** @internal */
+export type Bucket$Outbound = {
+  id?: string | undefined;
+  name?: string | undefined;
+  location?: string | null | undefined;
+};
+
+/** @internal */
+export const Bucket$outboundSchema: z.ZodType<
+  Bucket$Outbound,
+  z.ZodTypeDef,
+  Bucket
+> = z.object({
+  id: z.string().optional(),
+  name: z.string().optional(),
+  location: z.nullable(z.string()).optional(),
+});
+
+export function bucketToJSON(bucket: Bucket): string {
+  return JSON.stringify(Bucket$outboundSchema.parse(bucket));
+}
+export function bucketFromJSON(
+  jsonString: string,
+): SafeParseResult<Bucket, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Bucket$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Bucket' from JSON`,
+  );
+}
+
+/** @internal */
 export const Metadata$inboundSchema: z.ZodType<
   Metadata,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.nullable(z.string()).optional(),
-  hostname: z.nullable(z.string()).optional(),
-  plan: z.nullable(z.string()).optional(),
-  tags: z.array(z.string()).optional(),
+  servers: z.array(z.lazy(() => BillingUsageServer$inboundSchema)).optional(),
+  bucket: z.lazy(() => Bucket$inboundSchema).optional(),
+  billing_unit_divisor: z.nullable(z.number().int()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "billing_unit_divisor": "billingUnitDivisor",
+  });
 });
 /** @internal */
 export type Metadata$Outbound = {
-  id?: string | null | undefined;
-  hostname?: string | null | undefined;
-  plan?: string | null | undefined;
-  tags?: Array<string> | undefined;
+  servers?: Array<BillingUsageServer$Outbound> | undefined;
+  bucket?: Bucket$Outbound | undefined;
+  billing_unit_divisor?: number | null | undefined;
 };
 
 /** @internal */
@@ -304,10 +457,13 @@ export const Metadata$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Metadata
 > = z.object({
-  id: z.nullable(z.string()).optional(),
-  hostname: z.nullable(z.string()).optional(),
-  plan: z.nullable(z.string()).optional(),
-  tags: z.array(z.string()).optional(),
+  servers: z.array(z.lazy(() => BillingUsageServer$outboundSchema)).optional(),
+  bucket: z.lazy(() => Bucket$outboundSchema).optional(),
+  billingUnitDivisor: z.nullable(z.number().int()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    billingUnitDivisor: "billing_unit_divisor",
+  });
 });
 
 export function metadataToJSON(metadata: Metadata): string {
@@ -340,14 +496,17 @@ export const Product$inboundSchema: z.ZodType<Product, z.ZodTypeDef, unknown> =
       z.string().datetime({ offset: true }).transform(v => new Date(v)),
     ).optional(),
     unit: BillingUsageUnit$inboundSchema.optional(),
+    unit_amount: z.number().optional(),
     unit_price: z.number().optional(),
     usage_type: UsageType$inboundSchema.optional(),
     quantity: z.number().optional(),
+    amount: z.number().optional(),
     price: z.number().optional(),
     metadata: z.lazy(() => Metadata$inboundSchema).optional(),
   }).transform((v) => {
     return remap$(v, {
       "amount_without_discount": "amountWithoutDiscount",
+      "unit_amount": "unitAmount",
       "unit_price": "unitPrice",
       "usage_type": "usageType",
     });
@@ -365,9 +524,11 @@ export type Product$Outbound = {
   start?: string | undefined;
   end?: string | null | undefined;
   unit?: string | undefined;
+  unit_amount?: number | undefined;
   unit_price?: number | undefined;
   usage_type?: string | undefined;
   quantity?: number | undefined;
+  amount?: number | undefined;
   price?: number | undefined;
   metadata?: Metadata$Outbound | undefined;
 };
@@ -389,14 +550,17 @@ export const Product$outboundSchema: z.ZodType<
   start: z.date().transform(v => v.toISOString()).optional(),
   end: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   unit: BillingUsageUnit$outboundSchema.optional(),
+  unitAmount: z.number().optional(),
   unitPrice: z.number().optional(),
   usageType: UsageType$outboundSchema.optional(),
   quantity: z.number().optional(),
+  amount: z.number().optional(),
   price: z.number().optional(),
   metadata: z.lazy(() => Metadata$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     amountWithoutDiscount: "amount_without_discount",
+    unitAmount: "unit_amount",
     unitPrice: "unit_price",
     usageType: "usage_type",
   });
@@ -424,6 +588,7 @@ export const BillingUsageAttributes$inboundSchema: z.ZodType<
   project: z.lazy(() => BillingUsageProject$inboundSchema).optional(),
   period: z.lazy(() => Period$inboundSchema).optional(),
   available_credit_balance: z.number().int().optional(),
+  amount: z.number().optional(),
   price: z.number().optional(),
   threshold: z.nullable(z.number()).optional(),
   products: z.array(z.lazy(() => Product$inboundSchema)).optional(),
@@ -437,6 +602,7 @@ export type BillingUsageAttributes$Outbound = {
   project?: BillingUsageProject$Outbound | undefined;
   period?: Period$Outbound | undefined;
   available_credit_balance?: number | undefined;
+  amount?: number | undefined;
   price?: number | undefined;
   threshold?: number | null | undefined;
   products?: Array<Product$Outbound> | undefined;
@@ -451,6 +617,7 @@ export const BillingUsageAttributes$outboundSchema: z.ZodType<
   project: z.lazy(() => BillingUsageProject$outboundSchema).optional(),
   period: z.lazy(() => Period$outboundSchema).optional(),
   availableCreditBalance: z.number().int().optional(),
+  amount: z.number().optional(),
   price: z.number().optional(),
   threshold: z.nullable(z.number()).optional(),
   products: z.array(z.lazy(() => Product$outboundSchema)).optional(),
@@ -484,11 +651,13 @@ export const BillingUsageData$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   id: z.string().optional(),
+  type: z.string().optional(),
   attributes: z.lazy(() => BillingUsageAttributes$inboundSchema).optional(),
 });
 /** @internal */
 export type BillingUsageData$Outbound = {
   id?: string | undefined;
+  type?: string | undefined;
   attributes?: BillingUsageAttributes$Outbound | undefined;
 };
 
@@ -499,6 +668,7 @@ export const BillingUsageData$outboundSchema: z.ZodType<
   BillingUsageData
 > = z.object({
   id: z.string().optional(),
+  type: z.string().optional(),
   attributes: z.lazy(() => BillingUsageAttributes$outboundSchema).optional(),
 });
 
@@ -525,10 +695,12 @@ export const BillingUsage$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  meta: z.lazy(() => BillingUsageMeta$inboundSchema).optional(),
   data: z.lazy(() => BillingUsageData$inboundSchema).optional(),
 });
 /** @internal */
 export type BillingUsage$Outbound = {
+  meta?: BillingUsageMeta$Outbound | undefined;
   data?: BillingUsageData$Outbound | undefined;
 };
 
@@ -538,6 +710,7 @@ export const BillingUsage$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   BillingUsage
 > = z.object({
+  meta: z.lazy(() => BillingUsageMeta$outboundSchema).optional(),
   data: z.lazy(() => BillingUsageData$outboundSchema).optional(),
 });
 

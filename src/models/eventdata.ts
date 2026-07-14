@@ -15,20 +15,20 @@ export const EventDataType = {
 export type EventDataType = ClosedEnum<typeof EventDataType>;
 
 export type Author = {
-  id?: string | undefined;
-  name?: string | undefined;
-  email?: string | undefined;
+  id?: string | null | undefined;
+  name?: string | null | undefined;
+  email?: string | null | undefined;
 };
 
 export type EventDataProject = {
-  id?: string | undefined;
-  name?: string | undefined;
-  slug?: string | undefined;
+  id?: string | null | undefined;
+  name?: string | null | undefined;
+  slug?: string | null | undefined;
 };
 
 export type EventDataTeam = {
-  id?: string | undefined;
-  name?: string | undefined;
+  id?: string | null | undefined;
+  name?: string | null | undefined;
 };
 
 export type Target = {
@@ -72,15 +72,15 @@ export const EventDataType$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const Author$inboundSchema: z.ZodType<Author, z.ZodTypeDef, unknown> = z
   .object({
-    id: z.string().optional(),
-    name: z.string().optional(),
-    email: z.string().optional(),
+    id: z.nullable(z.string()).optional(),
+    name: z.nullable(z.string()).optional(),
+    email: z.nullable(z.string()).optional(),
   });
 /** @internal */
 export type Author$Outbound = {
-  id?: string | undefined;
-  name?: string | undefined;
-  email?: string | undefined;
+  id?: string | null | undefined;
+  name?: string | null | undefined;
+  email?: string | null | undefined;
 };
 
 /** @internal */
@@ -89,9 +89,9 @@ export const Author$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Author
 > = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  email: z.string().optional(),
+  id: z.nullable(z.string()).optional(),
+  name: z.nullable(z.string()).optional(),
+  email: z.nullable(z.string()).optional(),
 });
 
 export function authorToJSON(author: Author): string {
@@ -113,15 +113,15 @@ export const EventDataProject$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  slug: z.string().optional(),
+  id: z.nullable(z.string()).optional(),
+  name: z.nullable(z.string()).optional(),
+  slug: z.nullable(z.string()).optional(),
 });
 /** @internal */
 export type EventDataProject$Outbound = {
-  id?: string | undefined;
-  name?: string | undefined;
-  slug?: string | undefined;
+  id?: string | null | undefined;
+  name?: string | null | undefined;
+  slug?: string | null | undefined;
 };
 
 /** @internal */
@@ -130,9 +130,9 @@ export const EventDataProject$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   EventDataProject
 > = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  slug: z.string().optional(),
+  id: z.nullable(z.string()).optional(),
+  name: z.nullable(z.string()).optional(),
+  slug: z.nullable(z.string()).optional(),
 });
 
 export function eventDataProjectToJSON(
@@ -158,13 +158,13 @@ export const EventDataTeam$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
+  id: z.nullable(z.string()).optional(),
+  name: z.nullable(z.string()).optional(),
 });
 /** @internal */
 export type EventDataTeam$Outbound = {
-  id?: string | undefined;
-  name?: string | undefined;
+  id?: string | null | undefined;
+  name?: string | null | undefined;
 };
 
 /** @internal */
@@ -173,8 +173,8 @@ export const EventDataTeam$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   EventDataTeam
 > = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
+  id: z.nullable(z.string()).optional(),
+  name: z.nullable(z.string()).optional(),
 });
 
 export function eventDataTeamToJSON(eventDataTeam: EventDataTeam): string {
