@@ -36,6 +36,7 @@ async function run() {
       type: "virtual_machines",
       attributes: {
         name: "my-new-vm",
+        billing: "monthly",
         project: "lightweight-leather-lamp",
       },
     },
@@ -67,6 +68,7 @@ async function run() {
       type: "virtual_machines",
       attributes: {
         name: "my-new-vm",
+        billing: "monthly",
         project: "lightweight-leather-lamp",
       },
     },
@@ -97,6 +99,7 @@ async function run() {
       type: "virtual_machines",
       attributes: {
         name: "my-new-vm",
+        billing: "monthly",
         project: "lightweight-leather-lamp",
         operatingSystem: "ubuntu_24_04_x64_lts",
       },
@@ -129,6 +132,7 @@ async function run() {
       type: "virtual_machines",
       attributes: {
         name: "my-new-vm",
+        billing: "monthly",
         project: "lightweight-leather-lamp",
         operatingSystem: "ubuntu_24_04_x64_lts",
       },
@@ -160,6 +164,7 @@ async function run() {
       type: "virtual_machines",
       attributes: {
         name: "my-new-vm",
+        billing: "monthly",
         project: "lightweight-leather-lamp",
         userData: "ud_abc123",
       },
@@ -192,6 +197,7 @@ async function run() {
       type: "virtual_machines",
       attributes: {
         name: "my-new-vm",
+        billing: "monthly",
         project: "lightweight-leather-lamp",
         userData: "ud_abc123",
       },

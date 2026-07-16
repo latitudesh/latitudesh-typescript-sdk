@@ -32,7 +32,7 @@ export type EventDataTeam = {
 };
 
 export type Target = {
-  id?: string | undefined;
+  id?: string | null | undefined;
   name?: string | undefined;
 };
 
@@ -193,12 +193,12 @@ export function eventDataTeamFromJSON(
 /** @internal */
 export const Target$inboundSchema: z.ZodType<Target, z.ZodTypeDef, unknown> = z
   .object({
-    id: z.string().optional(),
+    id: z.nullable(z.string()).optional(),
     name: z.string().optional(),
   });
 /** @internal */
 export type Target$Outbound = {
-  id?: string | undefined;
+  id?: string | null | undefined;
   name?: string | undefined;
 };
 
@@ -208,7 +208,7 @@ export const Target$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Target
 > = z.object({
-  id: z.string().optional(),
+  id: z.nullable(z.string()).optional(),
   name: z.string().optional(),
 });
 

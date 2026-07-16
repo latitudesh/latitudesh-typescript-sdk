@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c8245324-f3d7-42c7-8124-ce79579cbff5
 management:
-  docChecksum: ae2165bf803280bc9fc9b31b4d59aa83
+  docChecksum: 9737f4615af8fb7a28c5055bce18bd13
   docVersion: "2023-06-01"
-  speakeasyVersion: 1.790.1
-  generationVersion: 2.918.1
-  releaseVersion: 0.8.1
-  configChecksum: 7ebbfc9c8cf5f9e8b58e5c23ef6ae27d
+  speakeasyVersion: 1.790.2
+  generationVersion: 2.918.3
+  releaseVersion: 0.8.2
+  configChecksum: cd42e444a7366fa206fb5118b38ae013
   repoURL: https://github.com/latitudesh/latitudesh-typescript-sdk.git
   installationURL: https://github.com/latitudesh/latitudesh-typescript-sdk
   published: true
 persistentEdits:
-  generation_id: 4dda3432-ea91-43b4-a687-f6a03822a0a5
-  pristine_commit_hash: c8b59110074097e98eeafa6f5dd6fd1f7b4b5342
-  pristine_tree_hash: dcc65604362138c3ab613a6127060f5f6a871aa1
+  generation_id: 7fcfa43a-c5a0-47ff-b55f-0d422bcf6ab2
+  pristine_commit_hash: 2c5116e98466271af524d8049a1a84734e8843d8
+  pristine_tree_hash: 9fa6ab92f2f858af501c1f2a303e010a46f47c96
 features:
   typescript:
     additionalDependencies: 0.1.0
@@ -160,10 +160,6 @@ trackedFiles:
     id: 7ad8fe5b86b2
     last_write_checksum: sha1:6d3c6a34df241738c12e8c6f932849c09d2889c6
     pristine_git_object: 1214c841326b07bb034ce914c58c7331e754b6d7
-  docs/models/billingenum.md:
-    id: 624f0d80e902
-    last_write_checksum: sha1:80b3e73cc4ab52766767a971d3d7e173f8dd9583
-    pristine_git_object: bef2de71abf93117ab1c53ddb16eafb2371124b2
   docs/models/billingmethod.md:
     id: 80a9643d9f96
     last_write_checksum: sha1:2ba82c1c59a40211e47ae1e1a6c11b772ae1ddfd
@@ -3010,8 +3006,12 @@ trackedFiles:
     pristine_git_object: cd875dc8248e9d89ee2f1462427d3865cd5d04a3
   docs/models/virtualmachinepayloadattributes.md:
     id: 13701ce4e0e3
-    last_write_checksum: sha1:c8ac337ab8009ce6d72f6fc25619b6325719679e
-    pristine_git_object: 78cc06300ffbad6243d902cb9709206a194fd990
+    last_write_checksum: sha1:70fffb6b568ae24b120eb2772f846099982e7bf9
+    pristine_git_object: b3bb31d7c31f25ae913c3b77ab8fe06165711217
+  docs/models/virtualmachinepayloadbilling.md:
+    id: c4dab557e4f9
+    last_write_checksum: sha1:ef0a5e6dd7cec6fb909625b8d68122355796377d
+    pristine_git_object: 8b8e9a7338393a023186155d07619011f51d687c
   docs/models/virtualmachinepayloaddata.md:
     id: a48271b14057
     last_write_checksum: sha1:b990963b7c98d78beb509ca280bb08887a90dc29
@@ -3138,8 +3138,12 @@ trackedFiles:
     pristine_git_object: 03ecc5e0e7af3c7428eb852c118ce9cb02217108
   docs/models/virtualmachineupdatepayloadattributes.md:
     id: db0430848194
-    last_write_checksum: sha1:3d0f8d85924c724a427819c2af0127473628047a
-    pristine_git_object: 04dea5a1484ca463d9197c3294a60d30d40c91da
+    last_write_checksum: sha1:6265b1beec2325c7371aea12eb05fccece0ccfbe
+    pristine_git_object: 0c9510411a04dfe648cb07f7d9a2735a7346682f
+  docs/models/virtualmachineupdatepayloadbilling.md:
+    id: 0e6c4ff49ef8
+    last_write_checksum: sha1:ecd19d27f1f492db6cdf83e889555060460a97f8
+    pristine_git_object: 21ce79bc5ab15dbdd780a1f02b6aa4dcc5a4b609
   docs/models/virtualmachineupdatepayloaddata.md:
     id: 9f37f2bb3de1
     last_write_checksum: sha1:7d1e763ce4f7904c3550ee855e75d8099083a0f3
@@ -3370,8 +3374,8 @@ trackedFiles:
     pristine_git_object: b4142a033cac497da610f0d3c89a8b3ff11365e4
   docs/sdks/virtualmachines/README.md:
     id: 9a444616366b
-    last_write_checksum: sha1:5459f26aac7260b9dd042a5bcb0061d7c6a71234
-    pristine_git_object: 2b019daf322021e1cc626de942e388cb8699fde6
+    last_write_checksum: sha1:062aa570b20f7934b5bf8fbad1e2af4f387e3495
+    pristine_git_object: c102aa0d6b380e37612d2825456c79f9b8a91f60
   docs/sdks/virtualnetworks/README.md:
     id: 523cffefb080
     last_write_checksum: sha1:c4a5d5f09383430ddbd1975702b1d05b8afdb20e
@@ -3406,12 +3410,12 @@ trackedFiles:
     pristine_git_object: 249e5d9837dbad499fc14718cebf96fd4875a9e8
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:9d5682dec7d01986d002b6d80e468d5b25f91c76
-    pristine_git_object: 37096e76a7f259282fd0d54c3312ea2bc6beb464
+    last_write_checksum: sha1:b98b74dc102eebaeaee6bb13d8896936d8583e4a
+    pristine_git_object: 1d5bbba86a7b78b8b87d7e0cf46d029760e1a9ff
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:252253e9d299328e5186e20b6fc469c2af3a0729
-    pristine_git_object: a52c50ba23e66b570a97f64fc458ad73f419b16c
+    last_write_checksum: sha1:60e826171f952ea6dbac6a7482dbf4f05aff9595
+    pristine_git_object: 42c76c8c219b20eee20ac77de7b9dce755b32d7f
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:9bb7b3807363b77f27dbdb87d6d10e9605f723d6
@@ -4022,8 +4026,8 @@ trackedFiles:
     pristine_git_object: 0aebd8b0a4867e35cb3348fc52921c3c0b4725b7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:0447e585d4437e95ee52683c760b8fdbaae0ff33
-    pristine_git_object: f09feaead67826634a637d2d27a021a69fd71544
+    last_write_checksum: sha1:7ab1dadbb5a016ef3997645e79b8d6797ccfe4d6
+    pristine_git_object: 76e4bb481a0faac2ebe4b0767c3912d797c620c7
   src/lib/encodings.ts:
     id: 3bd8ead98afd
     last_write_checksum: sha1:50d9b187dcfc3cca8d3bbd9fe074f865d715d2b0
@@ -4098,8 +4102,8 @@ trackedFiles:
     pristine_git_object: 0955a573c2ce989d63c737410ab8cc28706d9f74
   src/mcp-server/mcp-server.ts:
     id: aabbc4ab07c1
-    last_write_checksum: sha1:3f64df81a1ccc2d62b19dae6ac2190387020ba02
-    pristine_git_object: 43e63ade2ce94e7a12c7578917ee0c98f252ca53
+    last_write_checksum: sha1:d07e0617e61265d21c1a2e4b6874abd8c932a54e
+    pristine_git_object: 4ce21297ef87ea98afe17cec1b26390a56c55590
   src/mcp-server/prompts.ts:
     id: 26f3d73cbf31
     last_write_checksum: sha1:3e8d60ab7f8078d83fa9528f2e831050c1fd119c
@@ -4114,8 +4118,8 @@ trackedFiles:
     pristine_git_object: c25696d4c4f70e081fa5d87ad6891874c509a577
   src/mcp-server/server.ts:
     id: 2784dd48e82a
-    last_write_checksum: sha1:1d5454ec3723f08405a310290633d81dbcd2c2e9
-    pristine_git_object: 2904879a99555ffe7e6a5aecada858876dbd080c
+    last_write_checksum: sha1:0a3d96b88f920b5a75158d6bbaf41fde8264a16d
+    pristine_git_object: 6848d497a50f6a6bf4e3923192d5a4a44f63b184
   src/mcp-server/shared.ts:
     id: 074e80d4be1e
     last_write_checksum: sha1:d89576cea2bef3856b7fc3e65b868875528be042
@@ -4806,8 +4810,8 @@ trackedFiles:
     pristine_git_object: 6826e1208a5d7b7d310535d18909646522bf0fbd
   src/models/eventdata.ts:
     id: 686dfd30c1f5
-    last_write_checksum: sha1:d11acfffc8fd5074189193c45246cefa0576fe87
-    pristine_git_object: c4e2fe473c949e69ee0b2d3a9be7b87a2b0e2fc8
+    last_write_checksum: sha1:69b07323939619e9875064d3d49b2f0c8fcbb3d4
+    pristine_git_object: 36e0be123271ba1a8ba4e85aa583bd2b5992a74e
   src/models/events.ts:
     id: 8af8573dae85
     last_write_checksum: sha1:516a8b5794af138e3def6f8c3438f43d913e7952
@@ -5662,8 +5666,8 @@ trackedFiles:
     pristine_git_object: 0c93c52af7db83ddeefd5023f8298fb66fbba033
   src/models/virtualmachinepayload.ts:
     id: 64a447fc4c60
-    last_write_checksum: sha1:31a0bd9587b70aa863ed7d297e89e7a0bf925b2b
-    pristine_git_object: 9d3e2a072e4a7f6960565f3f8305f826babf03d5
+    last_write_checksum: sha1:fec393855fd27147cf40e6ff34afed9601f6a60d
+    pristine_git_object: 4f93e1b3713a645ed2a7dcffe41a006a8cda59da
   src/models/virtualmachineplans.ts:
     id: e97f2cade30a
     last_write_checksum: sha1:408de85d47c455a7cf795feec388bc81f8b4e7c8
@@ -5690,8 +5694,8 @@ trackedFiles:
     pristine_git_object: aa01d641b6d84b2c7ba9cf0dfcb687d241b9fb51
   src/models/virtualmachineupdatepayload.ts:
     id: 780fcdd6f99f
-    last_write_checksum: sha1:ca254bff5866e6ef5d41f8c2f32f4530c699d725
-    pristine_git_object: 8d179c9d37eafe839d9b19fe39efd35efdd1c4cc
+    last_write_checksum: sha1:4cacb8716df3bf839e52227c1db942cc8e43635a
+    pristine_git_object: 1dd7621d2ae5e0022a6dfc6f8d4af655cb0d11c6
   src/models/virtualnetwork.ts:
     id: 031d6ceaf0bd
     last_write_checksum: sha1:d7ea31c851ddd8f9af6083578b3e137b0d89f73c
@@ -6906,22 +6910,22 @@ examples:
   create-virtual-machine:
     Created:
       requestBody:
-        application/json: {"data": {"type": "virtual_machines", "attributes": {"name": "my-new-vm", "project": "lightweight-leather-lamp", "site": "DAL"}}}
-        application/vnd.api+json: {"data": {"type": "virtual_machines", "attributes": {"name": "my-new-vm", "project": "lightweight-leather-lamp", "site": "DAL"}}}
+        application/json: {"data": {"type": "virtual_machines", "attributes": {"name": "my-new-vm", "billing": "monthly", "project": "lightweight-leather-lamp", "site": "DAL"}}}
+        application/vnd.api+json: {"data": {"type": "virtual_machines", "attributes": {"name": "my-new-vm", "billing": "monthly", "project": "lightweight-leather-lamp", "site": "DAL"}}}
       responses:
         "201":
           application/vnd.api+json: {"data": {"id": "vm_mw49QDB5qagKb", "type": "virtual_machines", "attributes": {"name": "my-new-vm", "created_at": "2026-01-14T15:57:13+00:00", "status": "Starting", "primary_ipv4": "192.168.1.50", "operating_system": {"name": "Ubuntu 24.04 LTS", "slug": "ubuntu_24_04_x64_lts", "version": "24.04 x64 LTS", "features": {"raid": true, "ssh_keys": true, "user_data": true}, "distro": {"name": "Ubuntu", "slug": "ubuntu", "series": "noble"}}, "site": "FRA181", "billing": "monthly", "plan": {"id": "plan_VE1Wd3VXOXnZJ", "name": "g3.h100.large-131"}, "specs": {"vcpu": 16, "ram": "128 GB", "storage": "100 GB", "nic": "1 x 1 Gbps", "gpu": "1 x NVIDIA H100 Tensor Core GPU"}, "team": {"id": "team_zAbb72Zm3VS3N0o89Y48sGXv3mZ", "name": "690 Team", "slug": "690-team", "description": "690 Team", "address": "Apt. 922 405 Ondricka Lights, Lake Jennineview, SC 58925-4625", "currency": {"id": "cur_AW6Q2D9lqKLpr", "code": "BRL", "name": "Brazilian Real", "currency_id": null}, "status": "verified"}, "project": {"id": "proj_GMy1Dbk1ON50m", "name": "Lightweight Leather Lamp", "slug": "lightweight-leather-lamp", "description": "Sleek Wool Plate", "billing_type": "Normal", "billing_method": "Normal", "bandwidth_alert": false, "environment": null, "billing": {"subscription_id": null, "type": "Normal", "method": "Normal"}, "stats": {"databases": 0, "ip_addresses": 0, "prefixes": 0, "servers": 0, "storages": 0, "virtual_machines": 1, "vlans": 0}}}}}
     CreatedWithOS:
       requestBody:
-        application/json: {"data": {"type": "virtual_machines", "attributes": {"name": "my-new-vm", "project": "lightweight-leather-lamp", "operating_system": "ubuntu_24_04_x64_lts", "site": "DAL"}}}
-        application/vnd.api+json: {"data": {"type": "virtual_machines", "attributes": {"name": "my-new-vm", "project": "lightweight-leather-lamp", "operating_system": "ubuntu_24_04_x64_lts", "site": "DAL"}}}
+        application/json: {"data": {"type": "virtual_machines", "attributes": {"name": "my-new-vm", "billing": "monthly", "project": "lightweight-leather-lamp", "operating_system": "ubuntu_24_04_x64_lts", "site": "DAL"}}}
+        application/vnd.api+json: {"data": {"type": "virtual_machines", "attributes": {"name": "my-new-vm", "billing": "monthly", "project": "lightweight-leather-lamp", "operating_system": "ubuntu_24_04_x64_lts", "site": "DAL"}}}
       responses:
         "201":
           application/vnd.api+json: {}
     CreatedWithUserData:
       requestBody:
-        application/json: {"data": {"type": "virtual_machines", "attributes": {"name": "my-new-vm", "project": "lightweight-leather-lamp", "user_data": "ud_abc123", "site": "DAL"}}}
-        application/vnd.api+json: {"data": {"type": "virtual_machines", "attributes": {"name": "my-new-vm", "project": "lightweight-leather-lamp", "user_data": "ud_abc123", "site": "DAL"}}}
+        application/json: {"data": {"type": "virtual_machines", "attributes": {"name": "my-new-vm", "billing": "monthly", "project": "lightweight-leather-lamp", "user_data": "ud_abc123", "site": "DAL"}}}
+        application/vnd.api+json: {"data": {"type": "virtual_machines", "attributes": {"name": "my-new-vm", "billing": "monthly", "project": "lightweight-leather-lamp", "user_data": "ud_abc123", "site": "DAL"}}}
       responses:
         "201":
           application/vnd.api+json: {}
@@ -7932,7 +7936,7 @@ examples:
           application/vnd.api+json: {}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Typescript SDK Changes:\n* `latitudesh.billing.listUsage()`:  `response` **Changed** (Breaking ⚠️)\n* `latitudesh.events.list()`:  `response.data[].attributes` **Changed** (Breaking ⚠️)\n* `latitudesh.virtualMachines.updateVirtualMachine()`:  `response.data.attributes` **Changed** (Breaking ⚠️)\n* `latitudesh.virtualMachines.get()`:  `response.data.attributes` **Changed** (Breaking ⚠️)\n* `latitudesh.virtualMachines.list()`: \n  *  `request` **Changed**\n  *  `response` **Changed** (Breaking ⚠️)\n* `latitudesh.projects.list()`:  `response.data[]` **Changed** (Breaking ⚠️)\n* `latitudesh.projects.create()`:  `response.data` **Changed** (Breaking ⚠️)\n* `latitudesh.projects.update()`:  `response.data` **Changed** (Breaking ⚠️)\n* `latitudesh.virtualMachines.create()`:  `response.data.attributes` **Changed** (Breaking ⚠️)\n* `latitudesh.sshKeys.retrieve()`:  `response.data.attributes.project.stats` **Changed**\n* `latitudesh.blockStorage.postStorageVolumes()`:  `response.data.attributes.project.stats` **Changed**\n* `latitudesh.sshKeys.modifyProjectKey()`:  `response.data.attributes.project.stats` **Changed**\n* `latitudesh.sshKeys.listAll()`:  `response.data[].attributes.project.stats` **Changed**\n* `latitudesh.sshKeys.create()`:  `response.data.attributes.project.stats` **Changed**\n* `latitudesh.sshKeys.list()`:  `response.data[].attributes.project.stats` **Changed**\n* `latitudesh.sshKeys.update()`:  `response.data.attributes.project.stats` **Changed**\n* `latitudesh.userData.getProjectUsersData()`:  `response.data[].attributes.project.stats` **Changed**\n* `latitudesh.userData.getProjectUserData()`:  `response.data.attributes.project.stats` **Changed**\n* `latitudesh.userData.create()`:  `response.data.attributes.project.stats` **Changed**\n* `latitudesh.userData.updateForProject()`:  `response.data.attributes.project.stats` **Changed**\n* `latitudesh.userData.list()`:  `response.data[].attributes.project.stats` **Changed**\n* `latitudesh.userData.createNew()`:  `response.data.attributes.project.stats` **Changed**\n* `latitudesh.userData.retrieve()`:  `response.data.attributes.project.stats` **Changed**\n* `latitudesh.userData.update()`:  `response.data.attributes.project.stats` **Changed**\n* `latitudesh.servers.list()`:  `response.data[].attributes.project.stats` **Changed**\n* `latitudesh.servers.create()`:  `response.data.attributes.project.stats` **Changed**\n* `latitudesh.servers.get()`:  `response.data.attributes.project.stats` **Changed**\n* `latitudesh.servers.update()`:  `response.data.attributes.project.stats` **Changed**\n* `latitudesh.servers.lock()`:  `response.data.attributes.project.stats` **Changed**\n* `latitudesh.servers.unlock()`:  `response.data.attributes.project.stats` **Changed**\n* `latitudesh.filesystemStorage.createFilesystem()`:  `response.data.attributes.project.stats` **Changed**\n* `latitudesh.filesystemStorage.listFilesystems()`:  `response.data[].attributes.project.stats` **Changed**\n* `latitudesh.filesystemStorage.updateFilesystem()`:  `response.data.attributes.project.stats` **Changed**\n* `latitudesh.blockStorage.getStorageVolumes()`:  `response.data[].attributes.project.stats` **Changed**\n* `latitudesh.sshKeys.get()`:  `response.data.attributes.project.stats` **Changed**\n* `latitudesh.blockStorage.getStorageVolume()`:  `response.data.attributes.project.stats` **Changed**\n* `latitudesh.objectStorage.getStorageBuckets()`:  `response.data[].attributes.project.stats` **Changed**\n* `latitudesh.objectStorage.postStorageBuckets()`:  `response.data.attributes.project.stats` **Changed**\n* `latitudesh.objectStorage.getStorageBucket()`:  `response.data.attributes.project.stats` **Changed**\n* `latitudesh.projects.sshKeys.postProjectSshKey()`:  `response.data.attributes.project.stats` **Changed**\n* `latitudesh.teams.update()`:  `response.data.attributes.projects[].stats` **Changed**\n* `latitudesh.teams.create()`:  `response.data.attributes.projects[].stats` **Changed**\n* `latitudesh.teams.get()`:  `response.data[].attributes.projects[].stats` **Changed**\n* `latitudesh.virtualMachineBackups.listForVirtualMachine()`:  `response.data[].attributes.project.stats` **Changed**\n* `latitudesh.virtualMachineBackups.createForVirtualMachine()`:  `response.data.attributes.project.stats` **Changed**\n* `latitudesh.virtualMachineBackups.list()`:  `response.data[].attributes.project.stats` **Changed**\n* `latitudesh.virtualMachineBackups.create()`:  `response.data.attributes.project.stats` **Changed**\n* `latitudesh.virtualMachineBackups.get()`:  `response.data.attributes.project.stats` **Changed**\n* `latitudesh.virtualMachineBackups.delete()`:  `response.data.attributes.project.stats` **Changed**\n* `latitudesh.virtualMachineRestores.listForVirtualMachineBackup()`:  `response.data[].attributes.project.stats` **Changed**\n* `latitudesh.virtualMachineRestores.createForVirtualMachineBackup()`:  `response.data.attributes.project.stats` **Changed**\n* `latitudesh.virtualMachineRestores.listForBackup()`:  `response.data[].attributes.project.stats` **Changed**\n* `latitudesh.virtualMachineRestores.list()`:  `response.data[].attributes.project.stats` **Changed**\n* `latitudesh.virtualMachineRestores.create()`:  `response.data.attributes.project.stats` **Changed**\n* `latitudesh.virtualMachineRestores.get()`:  `response.data.attributes.project.stats` **Changed**\n* `latitudesh.privateNetworks.list()`:  `response.data[].attributes.project.stats` **Changed**\n* `latitudesh.privateNetworks.create()`:  `response.data.attributes.project.stats` **Changed**\n* `latitudesh.privateNetworks.update()`:  `response.data.attributes.project.stats` **Changed**\n* `latitudesh.privateNetworks.get()`:  `response.data.attributes.project.stats` **Changed**\n"
+releaseNotes: "## Typescript SDK Changes:\n* `latitudesh.events.list()`:  `response.data[].attributes.target.id` **Changed** (Breaking ⚠️)\n* `latitudesh.virtualMachines.create()`: \n  *  `request.data.attributes.billing` **Added**\n"
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
