@@ -17,12 +17,31 @@ export type VirtualMachinePayloadType = ClosedEnum<
 >;
 
 /**
+ * Billing cycle for the VM. The supported set is validated per-project (on_demand vs reserved). Defaults to the project's default billing when omitted.
+ */
+export const VirtualMachinePayloadBilling = {
+  Hourly: "hourly",
+  Monthly: "monthly",
+  Yearly: "yearly",
+} as const;
+/**
+ * Billing cycle for the VM. The supported set is validated per-project (on_demand vs reserved). Defaults to the project's default billing when omitted.
+ */
+export type VirtualMachinePayloadBilling = ClosedEnum<
+  typeof VirtualMachinePayloadBilling
+>;
+
+/**
  * A user data record reference (encoded id_hash, e.g. 'ud_xxx', or raw integer id) to apply as cloud-init configuration
  */
 export type UserDataUnion = number | string;
 
 export type VirtualMachinePayloadAttributes = {
   name?: string | undefined;
+  /**
+   * Billing cycle for the VM. The supported set is validated per-project (on_demand vs reserved). Defaults to the project's default billing when omitted.
+   */
+  billing?: VirtualMachinePayloadBilling | undefined;
   /**
    * The plan ID or Slug for the Virtual Machine
    */
@@ -66,6 +85,15 @@ export const VirtualMachinePayloadType$outboundSchema: z.ZodNativeEnum<
 > = VirtualMachinePayloadType$inboundSchema;
 
 /** @internal */
+export const VirtualMachinePayloadBilling$inboundSchema: z.ZodNativeEnum<
+  typeof VirtualMachinePayloadBilling
+> = z.nativeEnum(VirtualMachinePayloadBilling);
+/** @internal */
+export const VirtualMachinePayloadBilling$outboundSchema: z.ZodNativeEnum<
+  typeof VirtualMachinePayloadBilling
+> = VirtualMachinePayloadBilling$inboundSchema;
+
+/** @internal */
 export const UserDataUnion$inboundSchema: z.ZodType<
   UserDataUnion,
   z.ZodTypeDef,
@@ -101,6 +129,7 @@ export const VirtualMachinePayloadAttributes$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   name: z.string().default("my-vm"),
+  billing: VirtualMachinePayloadBilling$inboundSchema.optional(),
   plan: z.nullable(z.string()).optional(),
   ssh_keys: z.nullable(z.array(z.string())).optional(),
   project: z.string().default("my-project"),
@@ -118,6 +147,7 @@ export const VirtualMachinePayloadAttributes$inboundSchema: z.ZodType<
 /** @internal */
 export type VirtualMachinePayloadAttributes$Outbound = {
   name: string;
+  billing?: string | undefined;
   plan?: string | null | undefined;
   ssh_keys?: Array<string> | null | undefined;
   project: string;
@@ -134,6 +164,7 @@ export const VirtualMachinePayloadAttributes$outboundSchema: z.ZodType<
   VirtualMachinePayloadAttributes
 > = z.object({
   name: z.string().default("my-vm"),
+  billing: VirtualMachinePayloadBilling$outboundSchema.optional(),
   plan: z.nullable(z.string()).optional(),
   sshKeys: z.nullable(z.array(z.string())).optional(),
   project: z.string().default("my-project"),

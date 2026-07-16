@@ -18,7 +18,7 @@ export type VirtualMachineUpdatePayloadType = ClosedEnum<
 /**
  * Target billing cycle. Upgrades only (hourly → monthly → yearly); downgrades and reserved-project changes return 422.
  */
-export const BillingEnum = {
+export const VirtualMachineUpdatePayloadBilling = {
   Hourly: "hourly",
   Monthly: "monthly",
   Yearly: "yearly",
@@ -26,7 +26,9 @@ export const BillingEnum = {
 /**
  * Target billing cycle. Upgrades only (hourly → monthly → yearly); downgrades and reserved-project changes return 422.
  */
-export type BillingEnum = ClosedEnum<typeof BillingEnum>;
+export type VirtualMachineUpdatePayloadBilling = ClosedEnum<
+  typeof VirtualMachineUpdatePayloadBilling
+>;
 
 export type VirtualMachineUpdatePayloadAttributes = {
   /**
@@ -40,7 +42,7 @@ export type VirtualMachineUpdatePayloadAttributes = {
   /**
    * Target billing cycle. Upgrades only (hourly → monthly → yearly); downgrades and reserved-project changes return 422.
    */
-  billing?: BillingEnum | undefined;
+  billing?: VirtualMachineUpdatePayloadBilling | undefined;
   /**
    * Target plan slug for a vertical upgrade. Upgrades only (cpu, memory, and/or storage must scale up; nothing may shrink). The VM is powered off to apply the new resources and powered back on. Must be sent on its own (cannot be combined with name, tags, or billing). Returns 202 Accepted.
    */
@@ -67,11 +69,13 @@ export const VirtualMachineUpdatePayloadType$outboundSchema: z.ZodNativeEnum<
 > = VirtualMachineUpdatePayloadType$inboundSchema;
 
 /** @internal */
-export const BillingEnum$inboundSchema: z.ZodNativeEnum<typeof BillingEnum> = z
-  .nativeEnum(BillingEnum);
+export const VirtualMachineUpdatePayloadBilling$inboundSchema: z.ZodNativeEnum<
+  typeof VirtualMachineUpdatePayloadBilling
+> = z.nativeEnum(VirtualMachineUpdatePayloadBilling);
 /** @internal */
-export const BillingEnum$outboundSchema: z.ZodNativeEnum<typeof BillingEnum> =
-  BillingEnum$inboundSchema;
+export const VirtualMachineUpdatePayloadBilling$outboundSchema: z.ZodNativeEnum<
+  typeof VirtualMachineUpdatePayloadBilling
+> = VirtualMachineUpdatePayloadBilling$inboundSchema;
 
 /** @internal */
 export const VirtualMachineUpdatePayloadAttributes$inboundSchema: z.ZodType<
@@ -81,7 +85,7 @@ export const VirtualMachineUpdatePayloadAttributes$inboundSchema: z.ZodType<
 > = z.object({
   name: z.string().optional(),
   tags: z.nullable(z.array(z.string())).optional(),
-  billing: BillingEnum$inboundSchema.optional(),
+  billing: VirtualMachineUpdatePayloadBilling$inboundSchema.optional(),
   plan: z.string().optional(),
 });
 /** @internal */
@@ -100,7 +104,7 @@ export const VirtualMachineUpdatePayloadAttributes$outboundSchema: z.ZodType<
 > = z.object({
   name: z.string().optional(),
   tags: z.nullable(z.array(z.string())).optional(),
-  billing: BillingEnum$outboundSchema.optional(),
+  billing: VirtualMachineUpdatePayloadBilling$outboundSchema.optional(),
   plan: z.string().optional(),
 });
 
