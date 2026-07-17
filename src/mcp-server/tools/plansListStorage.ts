@@ -3,14 +3,21 @@
  */
 
 import { plansListStorage } from "../../funcs/plansListStorage.js";
+import * as operations from "../../models/operations/index.js";
 import { formatResult, ToolDefinition } from "../tools.js";
 
-export const tool$plansListStorage: ToolDefinition = {
+const args = {
+  request: operations.GetStoragePlansRequest$inboundSchema.optional(),
+};
+
+export const tool$plansListStorage: ToolDefinition<typeof args> = {
   name: "plans-list-storage",
   description: `List storage plans`,
-  tool: async (client, ctx) => {
+  args,
+  tool: async (client, args, ctx) => {
     const [result, apiCall] = await plansListStorage(
       client,
+      args.request,
       { fetchOptions: { signal: ctx.signal } },
     ).$inspect();
 

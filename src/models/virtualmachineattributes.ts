@@ -98,17 +98,26 @@ export type VirtualMachineAttributesOperatingSystem = {
   distro?: VirtualMachineAttributesDistro | undefined;
 };
 
+export type VirtualMachineAttributesSshKey = {
+  id?: string | undefined;
+  name?: string | undefined;
+  fingerprint?: string | undefined;
+  publicKey?: string | undefined;
+  createdAt?: string | undefined;
+  updatedAt?: string | undefined;
+};
+
 /**
  * SSH credentials for connecting to the virtual machine. Only available when the VM is running. Opt-in extra field: request via `extra_fields[virtual_machines]=credentials`.
  */
 export type VirtualMachineAttributesCredentials = {
   /**
-   * The SSH username for the VM, determined by the operating system (e.g., ubuntu, centos, ec2-user). Defaults to ubuntu if not specified by the OS.
+   * The SSH username for the VM, determined by the operating system (e.g., ubuntu, centos, ec2-user). Defaults to ubuntu if not specified by the OS. Returns null when the VM is not running.
    */
-  username?: string | undefined;
-  host?: string | undefined;
-  password?: string | undefined;
-  sshKeys?: Array<string> | undefined;
+  username?: string | null | undefined;
+  host?: string | null | undefined;
+  password?: string | null | undefined;
+  sshKeys?: Array<VirtualMachineAttributesSshKey> | null | undefined;
 };
 
 export type VirtualMachineAttributesPlan = {
@@ -353,15 +362,85 @@ export function virtualMachineAttributesOperatingSystemFromJSON(
 }
 
 /** @internal */
+export const VirtualMachineAttributesSshKey$inboundSchema: z.ZodType<
+  VirtualMachineAttributesSshKey,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string().optional(),
+  name: z.string().optional(),
+  fingerprint: z.string().optional(),
+  public_key: z.string().optional(),
+  created_at: z.string().optional(),
+  updated_at: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "public_key": "publicKey",
+    "created_at": "createdAt",
+    "updated_at": "updatedAt",
+  });
+});
+/** @internal */
+export type VirtualMachineAttributesSshKey$Outbound = {
+  id?: string | undefined;
+  name?: string | undefined;
+  fingerprint?: string | undefined;
+  public_key?: string | undefined;
+  created_at?: string | undefined;
+  updated_at?: string | undefined;
+};
+
+/** @internal */
+export const VirtualMachineAttributesSshKey$outboundSchema: z.ZodType<
+  VirtualMachineAttributesSshKey$Outbound,
+  z.ZodTypeDef,
+  VirtualMachineAttributesSshKey
+> = z.object({
+  id: z.string().optional(),
+  name: z.string().optional(),
+  fingerprint: z.string().optional(),
+  publicKey: z.string().optional(),
+  createdAt: z.string().optional(),
+  updatedAt: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    publicKey: "public_key",
+    createdAt: "created_at",
+    updatedAt: "updated_at",
+  });
+});
+
+export function virtualMachineAttributesSshKeyToJSON(
+  virtualMachineAttributesSshKey: VirtualMachineAttributesSshKey,
+): string {
+  return JSON.stringify(
+    VirtualMachineAttributesSshKey$outboundSchema.parse(
+      virtualMachineAttributesSshKey,
+    ),
+  );
+}
+export function virtualMachineAttributesSshKeyFromJSON(
+  jsonString: string,
+): SafeParseResult<VirtualMachineAttributesSshKey, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => VirtualMachineAttributesSshKey$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'VirtualMachineAttributesSshKey' from JSON`,
+  );
+}
+
+/** @internal */
 export const VirtualMachineAttributesCredentials$inboundSchema: z.ZodType<
   VirtualMachineAttributesCredentials,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  username: z.string().optional(),
-  host: z.string().optional(),
-  password: z.string().optional(),
-  ssh_keys: z.array(z.string()).optional(),
+  username: z.nullable(z.string()).optional(),
+  host: z.nullable(z.string()).optional(),
+  password: z.nullable(z.string()).optional(),
+  ssh_keys: z.nullable(
+    z.array(z.lazy(() => VirtualMachineAttributesSshKey$inboundSchema)),
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     "ssh_keys": "sshKeys",
@@ -369,10 +448,10 @@ export const VirtualMachineAttributesCredentials$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type VirtualMachineAttributesCredentials$Outbound = {
-  username?: string | undefined;
-  host?: string | undefined;
-  password?: string | undefined;
-  ssh_keys?: Array<string> | undefined;
+  username?: string | null | undefined;
+  host?: string | null | undefined;
+  password?: string | null | undefined;
+  ssh_keys?: Array<VirtualMachineAttributesSshKey$Outbound> | null | undefined;
 };
 
 /** @internal */
@@ -381,10 +460,12 @@ export const VirtualMachineAttributesCredentials$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   VirtualMachineAttributesCredentials
 > = z.object({
-  username: z.string().optional(),
-  host: z.string().optional(),
-  password: z.string().optional(),
-  sshKeys: z.array(z.string()).optional(),
+  username: z.nullable(z.string()).optional(),
+  host: z.nullable(z.string()).optional(),
+  password: z.nullable(z.string()).optional(),
+  sshKeys: z.nullable(
+    z.array(z.lazy(() => VirtualMachineAttributesSshKey$outboundSchema)),
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     sshKeys: "ssh_keys",

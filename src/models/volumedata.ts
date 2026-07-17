@@ -37,6 +37,18 @@ export type VolumeDataAttributes = {
   namespaceId?: string | null | undefined;
   connectorId?: string | null | undefined;
   initiators?: Array<Initiator> | null | undefined;
+  /**
+   * Cephx keyring secret used to connect to the volume. Returned only for dashboard-origin requests; null until the volume is provisioned.
+   */
+  keyring?: string | null | undefined;
+  /**
+   * Ceph cluster user used to connect to the volume. Returned only for dashboard-origin requests; null until the volume is provisioned.
+   */
+  clusterUser?: string | null | undefined;
+  /**
+   * Path of the volume inside the cluster. Returned only for dashboard-origin requests; null until the volume is provisioned.
+   */
+  volumePath?: string | null | undefined;
   project?: ProjectInclude | undefined;
   team?: TeamInclude | undefined;
 };
@@ -106,6 +118,9 @@ export const VolumeDataAttributes$inboundSchema: z.ZodType<
   connector_id: z.nullable(z.string()).optional(),
   initiators: z.nullable(z.array(z.lazy(() => Initiator$inboundSchema)))
     .optional(),
+  keyring: z.nullable(z.string()).optional(),
+  cluster_user: z.nullable(z.string()).optional(),
+  volume_path: z.nullable(z.string()).optional(),
   project: ProjectInclude$inboundSchema.optional(),
   team: TeamInclude$inboundSchema.optional(),
 }).transform((v) => {
@@ -114,6 +129,8 @@ export const VolumeDataAttributes$inboundSchema: z.ZodType<
     "created_at": "createdAt",
     "namespace_id": "namespaceId",
     "connector_id": "connectorId",
+    "cluster_user": "clusterUser",
+    "volume_path": "volumePath",
   });
 });
 /** @internal */
@@ -124,6 +141,9 @@ export type VolumeDataAttributes$Outbound = {
   namespace_id?: string | null | undefined;
   connector_id?: string | null | undefined;
   initiators?: Array<Initiator$Outbound> | null | undefined;
+  keyring?: string | null | undefined;
+  cluster_user?: string | null | undefined;
+  volume_path?: string | null | undefined;
   project?: ProjectInclude$Outbound | undefined;
   team?: TeamInclude$Outbound | undefined;
 };
@@ -141,6 +161,9 @@ export const VolumeDataAttributes$outboundSchema: z.ZodType<
   connectorId: z.nullable(z.string()).optional(),
   initiators: z.nullable(z.array(z.lazy(() => Initiator$outboundSchema)))
     .optional(),
+  keyring: z.nullable(z.string()).optional(),
+  clusterUser: z.nullable(z.string()).optional(),
+  volumePath: z.nullable(z.string()).optional(),
   project: ProjectInclude$outboundSchema.optional(),
   team: TeamInclude$outboundSchema.optional(),
 }).transform((v) => {
@@ -149,6 +172,8 @@ export const VolumeDataAttributes$outboundSchema: z.ZodType<
     createdAt: "created_at",
     namespaceId: "namespace_id",
     connectorId: "connector_id",
+    clusterUser: "cluster_user",
+    volumePath: "volume_path",
   });
 });
 

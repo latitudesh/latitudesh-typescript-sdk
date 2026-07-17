@@ -8,7 +8,7 @@ import { safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 
-export type SshKey = {
+export type OutOfBandConnectionSshKey = {
   id?: string | undefined;
   description?: string | undefined;
   fingerprint?: string | undefined;
@@ -23,7 +23,7 @@ export type OutOfBandConnectionCredentials = {
 };
 
 export type OutOfBandConnectionAttributes = {
-  sshKey?: SshKey | undefined;
+  sshKey?: OutOfBandConnectionSshKey | undefined;
   createdAt?: string | undefined;
   username?: string | undefined;
   /**
@@ -47,40 +47,47 @@ export type OutOfBandConnection = {
 };
 
 /** @internal */
-export const SshKey$inboundSchema: z.ZodType<SshKey, z.ZodTypeDef, unknown> = z
-  .object({
-    id: z.string().optional(),
-    description: z.string().optional(),
-    fingerprint: z.string().optional(),
-  });
+export const OutOfBandConnectionSshKey$inboundSchema: z.ZodType<
+  OutOfBandConnectionSshKey,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string().optional(),
+  description: z.string().optional(),
+  fingerprint: z.string().optional(),
+});
 /** @internal */
-export type SshKey$Outbound = {
+export type OutOfBandConnectionSshKey$Outbound = {
   id?: string | undefined;
   description?: string | undefined;
   fingerprint?: string | undefined;
 };
 
 /** @internal */
-export const SshKey$outboundSchema: z.ZodType<
-  SshKey$Outbound,
+export const OutOfBandConnectionSshKey$outboundSchema: z.ZodType<
+  OutOfBandConnectionSshKey$Outbound,
   z.ZodTypeDef,
-  SshKey
+  OutOfBandConnectionSshKey
 > = z.object({
   id: z.string().optional(),
   description: z.string().optional(),
   fingerprint: z.string().optional(),
 });
 
-export function sshKeyToJSON(sshKey: SshKey): string {
-  return JSON.stringify(SshKey$outboundSchema.parse(sshKey));
+export function outOfBandConnectionSshKeyToJSON(
+  outOfBandConnectionSshKey: OutOfBandConnectionSshKey,
+): string {
+  return JSON.stringify(
+    OutOfBandConnectionSshKey$outboundSchema.parse(outOfBandConnectionSshKey),
+  );
 }
-export function sshKeyFromJSON(
+export function outOfBandConnectionSshKeyFromJSON(
   jsonString: string,
-): SafeParseResult<SshKey, SDKValidationError> {
+): SafeParseResult<OutOfBandConnectionSshKey, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => SshKey$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SshKey' from JSON`,
+    (x) => OutOfBandConnectionSshKey$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'OutOfBandConnectionSshKey' from JSON`,
   );
 }
 
@@ -134,7 +141,7 @@ export const OutOfBandConnectionAttributes$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  ssh_key: z.lazy(() => SshKey$inboundSchema).optional(),
+  ssh_key: z.lazy(() => OutOfBandConnectionSshKey$inboundSchema).optional(),
   created_at: z.string().optional(),
   username: z.string().optional(),
   credentials: z.lazy(() => OutOfBandConnectionCredentials$inboundSchema)
@@ -153,7 +160,7 @@ export const OutOfBandConnectionAttributes$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type OutOfBandConnectionAttributes$Outbound = {
-  ssh_key?: SshKey$Outbound | undefined;
+  ssh_key?: OutOfBandConnectionSshKey$Outbound | undefined;
   created_at?: string | undefined;
   username?: string | undefined;
   credentials?: OutOfBandConnectionCredentials$Outbound | undefined;
@@ -169,7 +176,7 @@ export const OutOfBandConnectionAttributes$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   OutOfBandConnectionAttributes
 > = z.object({
-  sshKey: z.lazy(() => SshKey$outboundSchema).optional(),
+  sshKey: z.lazy(() => OutOfBandConnectionSshKey$outboundSchema).optional(),
   createdAt: z.string().optional(),
   username: z.string().optional(),
   credentials: z.lazy(() => OutOfBandConnectionCredentials$outboundSchema)

@@ -3,9 +3,11 @@
  */
 
 import { LatitudeshCore } from "../core.js";
+import { encodeFormQuery } from "../lib/encodings.js";
 import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
+import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
@@ -20,6 +22,7 @@ import { LatitudeshError } from "../models/errors/latitudesherror.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import * as models from "../models/index.js";
+import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -28,6 +31,7 @@ import { Result } from "../types/fp.js";
  */
 export function plansListStorage(
   client: LatitudeshCore,
+  request?: operations.GetStoragePlansRequest | undefined,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -44,12 +48,14 @@ export function plansListStorage(
 > {
   return new APIPromise($do(
     client,
+    request,
     options,
   ));
 }
 
 async function $do(
   client: LatitudeshCore,
+  request?: operations.GetStoragePlansRequest | undefined,
   options?: RequestOptions,
 ): Promise<
   [
@@ -67,7 +73,24 @@ async function $do(
     APICall,
   ]
 > {
+  const parsed = safeParse(
+    request,
+    (value) =>
+      operations.GetStoragePlansRequest$outboundSchema.optional().parse(value),
+    "Input validation failed",
+  );
+  if (!parsed.ok) {
+    return [parsed, { status: "invalid" }];
+  }
+  const payload = parsed.value;
+  const body = null;
+
   const path = pathToFunc("/plans/storage")();
+
+  const query = encodeFormQuery({
+    "filter[storage_class]": payload?.["filter[storage_class]"],
+    "filter[storage_type]": payload?.["filter[storage_type]"],
+  });
 
   const headers = new Headers(compactMap({
     Accept: "application/vnd.api+json",
@@ -98,6 +121,8 @@ async function $do(
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
+    query: query,
+    body: body,
     userAgent: client._options.userAgent,
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
   }, options);

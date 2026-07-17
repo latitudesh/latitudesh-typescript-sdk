@@ -1,11 +1,11 @@
-# SshKey
+# OutOfBandConnectionSshKey
 
 ## Example Usage
 
 ```typescript
-import { SshKey } from "latitudesh-typescript-sdk/models";
+import { OutOfBandConnectionSshKey } from "latitudesh-typescript-sdk/models";
 
-let value: SshKey = {};
+let value: OutOfBandConnectionSshKey = {};
 ```
 
 ## Fields
