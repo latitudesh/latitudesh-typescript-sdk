@@ -293,6 +293,7 @@ describe('Projects - Core CRUD Operations', () => {
         projectId: 'proj_test123',
         requestBody: {
           data: {
+            id: 'proj_test123',
             type: 'projects',
             attributes: {
               name: 'Updated Project Name',
@@ -331,6 +332,7 @@ describe('Projects - Core CRUD Operations', () => {
         projectId: 'proj_test123',
         requestBody: {
           data: {
+            id: 'proj_test123',
             type: 'projects',
             attributes: {
               environment: 'Production',
@@ -364,6 +366,7 @@ describe('Projects - Core CRUD Operations', () => {
           projectId: 'proj_nonexistent',
           requestBody: {
             data: {
+              id: 'proj_nonexistent',
               type: 'projects',
               attributes: {
                 name: 'Updated Name',
