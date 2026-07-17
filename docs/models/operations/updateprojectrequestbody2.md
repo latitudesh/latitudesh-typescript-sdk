@@ -7,6 +7,7 @@ import { UpdateProjectRequestBody2 } from "latitudesh-typescript-sdk/models/oper
 
 let value: UpdateProjectRequestBody2 = {
   data: {
+    id: "<id>",
     type: "projects",
   },
 };

@@ -71,6 +71,7 @@ export * from "./getsshkeys.js";
 export * from "./getstoragebucket.js";
 export * from "./getstoragebuckets.js";
 export * from "./getstoragefilesystems.js";
+export * from "./getstorageplans.js";
 export * from "./getstoragevolume.js";
 export * from "./getstoragevolumes.js";
 export * from "./getteammembers.js";

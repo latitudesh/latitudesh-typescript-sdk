@@ -33,7 +33,7 @@ export type UpdateProjectAttributes2 = {
 };
 
 export type UpdateProjectData2 = {
-  id?: string | undefined;
+  id: string;
   type: UpdateProjectType2;
   attributes?: UpdateProjectAttributes2 | undefined;
 };
@@ -81,12 +81,10 @@ export const UpdateProjectAttributes2$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  name: z.string().default("A brand new name for the virtual network"),
-  description: z.string().default(
-    "A brand new description for the virtual network",
-  ),
+  name: z.string().optional(),
+  description: z.string().optional(),
   environment: UpdateProjectEnvironment2$inboundSchema.optional(),
-  bandwidth_alert: z.boolean().default(false),
+  bandwidth_alert: z.boolean().optional(),
   tags: z.array(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -95,10 +93,10 @@ export const UpdateProjectAttributes2$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type UpdateProjectAttributes2$Outbound = {
-  name: string;
-  description: string;
+  name?: string | undefined;
+  description?: string | undefined;
   environment?: string | undefined;
-  bandwidth_alert: boolean;
+  bandwidth_alert?: boolean | undefined;
   tags?: Array<string> | undefined;
 };
 
@@ -108,12 +106,10 @@ export const UpdateProjectAttributes2$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateProjectAttributes2
 > = z.object({
-  name: z.string().default("A brand new name for the virtual network"),
-  description: z.string().default(
-    "A brand new description for the virtual network",
-  ),
+  name: z.string().optional(),
+  description: z.string().optional(),
   environment: UpdateProjectEnvironment2$outboundSchema.optional(),
-  bandwidthAlert: z.boolean().default(false),
+  bandwidthAlert: z.boolean().optional(),
   tags: z.array(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -144,7 +140,7 @@ export const UpdateProjectData2$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().default("proj_81EVOtR1N4J2Z"),
+  id: z.string(),
   type: UpdateProjectType2$inboundSchema,
   attributes: z.lazy(() => UpdateProjectAttributes2$inboundSchema).optional(),
 });
@@ -161,7 +157,7 @@ export const UpdateProjectData2$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateProjectData2
 > = z.object({
-  id: z.string().default("proj_81EVOtR1N4J2Z"),
+  id: z.string(),
   type: UpdateProjectType2$outboundSchema,
   attributes: z.lazy(() => UpdateProjectAttributes2$outboundSchema).optional(),
 });

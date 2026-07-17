@@ -5,8 +5,15 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
+import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
+import {
+  ProjectInclude,
+  ProjectInclude$inboundSchema,
+  ProjectInclude$Outbound,
+  ProjectInclude$outboundSchema,
+} from "./projectinclude.js";
 import {
   UserInclude,
   UserInclude$inboundSchema,
@@ -14,9 +21,26 @@ import {
   UserInclude$outboundSchema,
 } from "./userinclude.js";
 
+export const UserTeamType = {
+  Teams: "teams",
+} as const;
+export type UserTeamType = ClosedEnum<typeof UserTeamType>;
+
 export type UserTeamBilling = {
   id?: string | undefined;
   customerBillingId?: string | undefined;
+};
+
+export type UserTeamLimits = {
+  bareMetal?: number | null | undefined;
+  bareMetalGpu?: number | null | undefined;
+  virtualMachine?: number | null | undefined;
+  virtualMachineGpu?: number | null | undefined;
+  elasticIp?: number | null | undefined;
+  virtualNetwork?: number | null | undefined;
+  database?: number | null | undefined;
+  filesystem?: number | null | undefined;
+  blockStorage?: number | null | undefined;
 };
 
 export type UserTeamAttributes = {
@@ -27,14 +51,28 @@ export type UserTeamAttributes = {
   currency?: string | undefined;
   createdAt?: string | undefined;
   updatedAt?: string | undefined;
+  status?: string | null | undefined;
+  enforceMfa?: boolean | undefined;
+  users?: Array<UserInclude> | undefined;
+  projects?: Array<ProjectInclude> | undefined;
   owner?: UserInclude | undefined;
   billing?: UserTeamBilling | undefined;
+  featureFlags?: Array<string> | undefined;
+  limits?: UserTeamLimits | undefined;
 };
 
 export type UserTeam = {
   id?: string | undefined;
+  type?: UserTeamType | undefined;
   attributes?: UserTeamAttributes | undefined;
 };
+
+/** @internal */
+export const UserTeamType$inboundSchema: z.ZodNativeEnum<typeof UserTeamType> =
+  z.nativeEnum(UserTeamType);
+/** @internal */
+export const UserTeamType$outboundSchema: z.ZodNativeEnum<typeof UserTeamType> =
+  UserTeamType$inboundSchema;
 
 /** @internal */
 export const UserTeamBilling$inboundSchema: z.ZodType<
@@ -85,6 +123,85 @@ export function userTeamBillingFromJSON(
 }
 
 /** @internal */
+export const UserTeamLimits$inboundSchema: z.ZodType<
+  UserTeamLimits,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  bare_metal: z.nullable(z.number().int()).optional(),
+  bare_metal_gpu: z.nullable(z.number().int()).optional(),
+  virtual_machine: z.nullable(z.number().int()).optional(),
+  virtual_machine_gpu: z.nullable(z.number().int()).optional(),
+  elastic_ip: z.nullable(z.number().int()).optional(),
+  virtual_network: z.nullable(z.number().int()).optional(),
+  database: z.nullable(z.number().int()).optional(),
+  filesystem: z.nullable(z.number().int()).optional(),
+  block_storage: z.nullable(z.number().int()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "bare_metal": "bareMetal",
+    "bare_metal_gpu": "bareMetalGpu",
+    "virtual_machine": "virtualMachine",
+    "virtual_machine_gpu": "virtualMachineGpu",
+    "elastic_ip": "elasticIp",
+    "virtual_network": "virtualNetwork",
+    "block_storage": "blockStorage",
+  });
+});
+/** @internal */
+export type UserTeamLimits$Outbound = {
+  bare_metal?: number | null | undefined;
+  bare_metal_gpu?: number | null | undefined;
+  virtual_machine?: number | null | undefined;
+  virtual_machine_gpu?: number | null | undefined;
+  elastic_ip?: number | null | undefined;
+  virtual_network?: number | null | undefined;
+  database?: number | null | undefined;
+  filesystem?: number | null | undefined;
+  block_storage?: number | null | undefined;
+};
+
+/** @internal */
+export const UserTeamLimits$outboundSchema: z.ZodType<
+  UserTeamLimits$Outbound,
+  z.ZodTypeDef,
+  UserTeamLimits
+> = z.object({
+  bareMetal: z.nullable(z.number().int()).optional(),
+  bareMetalGpu: z.nullable(z.number().int()).optional(),
+  virtualMachine: z.nullable(z.number().int()).optional(),
+  virtualMachineGpu: z.nullable(z.number().int()).optional(),
+  elasticIp: z.nullable(z.number().int()).optional(),
+  virtualNetwork: z.nullable(z.number().int()).optional(),
+  database: z.nullable(z.number().int()).optional(),
+  filesystem: z.nullable(z.number().int()).optional(),
+  blockStorage: z.nullable(z.number().int()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    bareMetal: "bare_metal",
+    bareMetalGpu: "bare_metal_gpu",
+    virtualMachine: "virtual_machine",
+    virtualMachineGpu: "virtual_machine_gpu",
+    elasticIp: "elastic_ip",
+    virtualNetwork: "virtual_network",
+    blockStorage: "block_storage",
+  });
+});
+
+export function userTeamLimitsToJSON(userTeamLimits: UserTeamLimits): string {
+  return JSON.stringify(UserTeamLimits$outboundSchema.parse(userTeamLimits));
+}
+export function userTeamLimitsFromJSON(
+  jsonString: string,
+): SafeParseResult<UserTeamLimits, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UserTeamLimits$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UserTeamLimits' from JSON`,
+  );
+}
+
+/** @internal */
 export const UserTeamAttributes$inboundSchema: z.ZodType<
   UserTeamAttributes,
   z.ZodTypeDef,
@@ -97,12 +214,20 @@ export const UserTeamAttributes$inboundSchema: z.ZodType<
   currency: z.string().optional(),
   created_at: z.string().optional(),
   updated_at: z.string().optional(),
+  status: z.nullable(z.string()).optional(),
+  enforce_mfa: z.boolean().optional(),
+  users: z.array(UserInclude$inboundSchema).optional(),
+  projects: z.array(ProjectInclude$inboundSchema).optional(),
   owner: UserInclude$inboundSchema.optional(),
   billing: z.lazy(() => UserTeamBilling$inboundSchema).optional(),
+  feature_flags: z.array(z.string()).optional(),
+  limits: z.lazy(() => UserTeamLimits$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "created_at": "createdAt",
     "updated_at": "updatedAt",
+    "enforce_mfa": "enforceMfa",
+    "feature_flags": "featureFlags",
   });
 });
 /** @internal */
@@ -114,8 +239,14 @@ export type UserTeamAttributes$Outbound = {
   currency?: string | undefined;
   created_at?: string | undefined;
   updated_at?: string | undefined;
+  status?: string | null | undefined;
+  enforce_mfa?: boolean | undefined;
+  users?: Array<UserInclude$Outbound> | undefined;
+  projects?: Array<ProjectInclude$Outbound> | undefined;
   owner?: UserInclude$Outbound | undefined;
   billing?: UserTeamBilling$Outbound | undefined;
+  feature_flags?: Array<string> | undefined;
+  limits?: UserTeamLimits$Outbound | undefined;
 };
 
 /** @internal */
@@ -131,12 +262,20 @@ export const UserTeamAttributes$outboundSchema: z.ZodType<
   currency: z.string().optional(),
   createdAt: z.string().optional(),
   updatedAt: z.string().optional(),
+  status: z.nullable(z.string()).optional(),
+  enforceMfa: z.boolean().optional(),
+  users: z.array(UserInclude$outboundSchema).optional(),
+  projects: z.array(ProjectInclude$outboundSchema).optional(),
   owner: UserInclude$outboundSchema.optional(),
   billing: z.lazy(() => UserTeamBilling$outboundSchema).optional(),
+  featureFlags: z.array(z.string()).optional(),
+  limits: z.lazy(() => UserTeamLimits$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     createdAt: "created_at",
     updatedAt: "updated_at",
+    enforceMfa: "enforce_mfa",
+    featureFlags: "feature_flags",
   });
 });
 
@@ -164,11 +303,13 @@ export const UserTeam$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   id: z.string().optional(),
+  type: UserTeamType$inboundSchema.optional(),
   attributes: z.lazy(() => UserTeamAttributes$inboundSchema).optional(),
 });
 /** @internal */
 export type UserTeam$Outbound = {
   id?: string | undefined;
+  type?: string | undefined;
   attributes?: UserTeamAttributes$Outbound | undefined;
 };
 
@@ -179,6 +320,7 @@ export const UserTeam$outboundSchema: z.ZodType<
   UserTeam
 > = z.object({
   id: z.string().optional(),
+  type: UserTeamType$outboundSchema.optional(),
   attributes: z.lazy(() => UserTeamAttributes$outboundSchema).optional(),
 });
 

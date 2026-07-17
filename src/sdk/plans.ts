@@ -92,10 +92,12 @@ export class Plans extends ClientSDK {
    * List storage plans
    */
   async listStorage(
+    request?: operations.GetStoragePlansRequest | undefined,
     options?: RequestOptions,
   ): Promise<models.StoragePlans> {
     return unwrapAsync(plansListStorage(
       this,
+      request,
       options,
     ));
   }
