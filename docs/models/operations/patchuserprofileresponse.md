@@ -12,6 +12,7 @@ let value: PatchUserProfileResponse = {};
 
 ## Fields
 
-| Field                                           | Type                                            | Required                                        | Description                                     |
-| ----------------------------------------------- | ----------------------------------------------- | ----------------------------------------------- | ----------------------------------------------- |
-| `data`                                          | [models.UserUpdate](../../models/userupdate.md) | :heavy_minus_sign:                              | N/A                                             |
+| Field                                                                              | Type                                                                               | Required                                                                           | Description                                                                        |
+| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `data`                                                                             | [models.UserUpdate](../../models/userupdate.md)                                    | :heavy_minus_sign:                                                                 | N/A                                                                                |
+| `meta`                                                                             | [operations.PatchUserProfileMeta](../../models/operations/patchuserprofilemeta.md) | :heavy_minus_sign:                                                                 | N/A                                                                                |

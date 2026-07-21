@@ -5,21 +5,39 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
+import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
+
+export const UserUpdateType = {
+  Users: "users",
+} as const;
+export type UserUpdateType = ClosedEnum<typeof UserUpdateType>;
 
 export type UserUpdateAttributes = {
   firstName?: string | undefined;
   lastName?: string | undefined;
   email?: string | undefined;
   authenticationFactorId?: string | null | undefined;
-  role?: string | undefined;
+  role?: string | null | undefined;
+  createdAt?: string | undefined;
+  updatedAt?: string | undefined;
 };
 
 export type UserUpdate = {
   id?: string | undefined;
+  type?: UserUpdateType | undefined;
   attributes?: UserUpdateAttributes | undefined;
 };
+
+/** @internal */
+export const UserUpdateType$inboundSchema: z.ZodNativeEnum<
+  typeof UserUpdateType
+> = z.nativeEnum(UserUpdateType);
+/** @internal */
+export const UserUpdateType$outboundSchema: z.ZodNativeEnum<
+  typeof UserUpdateType
+> = UserUpdateType$inboundSchema;
 
 /** @internal */
 export const UserUpdateAttributes$inboundSchema: z.ZodType<
@@ -31,12 +49,16 @@ export const UserUpdateAttributes$inboundSchema: z.ZodType<
   last_name: z.string().optional(),
   email: z.string().optional(),
   authentication_factor_id: z.nullable(z.string()).optional(),
-  role: z.string().optional(),
+  role: z.nullable(z.string()).optional(),
+  created_at: z.string().optional(),
+  updated_at: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "first_name": "firstName",
     "last_name": "lastName",
     "authentication_factor_id": "authenticationFactorId",
+    "created_at": "createdAt",
+    "updated_at": "updatedAt",
   });
 });
 /** @internal */
@@ -45,7 +67,9 @@ export type UserUpdateAttributes$Outbound = {
   last_name?: string | undefined;
   email?: string | undefined;
   authentication_factor_id?: string | null | undefined;
-  role?: string | undefined;
+  role?: string | null | undefined;
+  created_at?: string | undefined;
+  updated_at?: string | undefined;
 };
 
 /** @internal */
@@ -58,12 +82,16 @@ export const UserUpdateAttributes$outboundSchema: z.ZodType<
   lastName: z.string().optional(),
   email: z.string().optional(),
   authenticationFactorId: z.nullable(z.string()).optional(),
-  role: z.string().optional(),
+  role: z.nullable(z.string()).optional(),
+  createdAt: z.string().optional(),
+  updatedAt: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     firstName: "first_name",
     lastName: "last_name",
     authenticationFactorId: "authentication_factor_id",
+    createdAt: "created_at",
+    updatedAt: "updated_at",
   });
 });
 
@@ -91,11 +119,13 @@ export const UserUpdate$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   id: z.string().optional(),
+  type: UserUpdateType$inboundSchema.optional(),
   attributes: z.lazy(() => UserUpdateAttributes$inboundSchema).optional(),
 });
 /** @internal */
 export type UserUpdate$Outbound = {
   id?: string | undefined;
+  type?: string | undefined;
   attributes?: UserUpdateAttributes$Outbound | undefined;
 };
 
@@ -106,6 +136,7 @@ export const UserUpdate$outboundSchema: z.ZodType<
   UserUpdate
 > = z.object({
   id: z.string().optional(),
+  type: UserUpdateType$outboundSchema.optional(),
   attributes: z.lazy(() => UserUpdateAttributes$outboundSchema).optional(),
 });
 

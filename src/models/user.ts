@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
+import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 import {
@@ -13,6 +14,11 @@ import {
   TeamInclude$Outbound,
   TeamInclude$outboundSchema,
 } from "./teaminclude.js";
+
+export const UserType = {
+  Users: "users",
+} as const;
+export type UserType = ClosedEnum<typeof UserType>;
 
 export type UserRole = {
   id?: string | undefined;
@@ -26,14 +32,24 @@ export type UserAttributes = {
   lastName?: string | undefined;
   email?: string | undefined;
   authenticationFactorId?: string | undefined;
+  createdAt?: string | undefined;
+  updatedAt?: string | undefined;
   role?: UserRole | undefined;
   teams?: Array<TeamInclude> | undefined;
 };
 
 export type User = {
   id?: string | undefined;
+  type?: UserType | undefined;
   attributes?: UserAttributes | undefined;
 };
+
+/** @internal */
+export const UserType$inboundSchema: z.ZodNativeEnum<typeof UserType> = z
+  .nativeEnum(UserType);
+/** @internal */
+export const UserType$outboundSchema: z.ZodNativeEnum<typeof UserType> =
+  UserType$inboundSchema;
 
 /** @internal */
 export const UserRole$inboundSchema: z.ZodType<
@@ -101,6 +117,8 @@ export const UserAttributes$inboundSchema: z.ZodType<
   last_name: z.string().optional(),
   email: z.string().optional(),
   authentication_factor_id: z.string().optional(),
+  created_at: z.string().optional(),
+  updated_at: z.string().optional(),
   role: z.lazy(() => UserRole$inboundSchema).optional(),
   teams: z.array(TeamInclude$inboundSchema).optional(),
 }).transform((v) => {
@@ -108,6 +126,8 @@ export const UserAttributes$inboundSchema: z.ZodType<
     "first_name": "firstName",
     "last_name": "lastName",
     "authentication_factor_id": "authenticationFactorId",
+    "created_at": "createdAt",
+    "updated_at": "updatedAt",
   });
 });
 /** @internal */
@@ -116,6 +136,8 @@ export type UserAttributes$Outbound = {
   last_name?: string | undefined;
   email?: string | undefined;
   authentication_factor_id?: string | undefined;
+  created_at?: string | undefined;
+  updated_at?: string | undefined;
   role?: UserRole$Outbound | undefined;
   teams?: Array<TeamInclude$Outbound> | undefined;
 };
@@ -130,6 +152,8 @@ export const UserAttributes$outboundSchema: z.ZodType<
   lastName: z.string().optional(),
   email: z.string().optional(),
   authenticationFactorId: z.string().optional(),
+  createdAt: z.string().optional(),
+  updatedAt: z.string().optional(),
   role: z.lazy(() => UserRole$outboundSchema).optional(),
   teams: z.array(TeamInclude$outboundSchema).optional(),
 }).transform((v) => {
@@ -137,6 +161,8 @@ export const UserAttributes$outboundSchema: z.ZodType<
     firstName: "first_name",
     lastName: "last_name",
     authenticationFactorId: "authentication_factor_id",
+    createdAt: "created_at",
+    updatedAt: "updated_at",
   });
 });
 
@@ -157,11 +183,13 @@ export function userAttributesFromJSON(
 export const User$inboundSchema: z.ZodType<User, z.ZodTypeDef, unknown> = z
   .object({
     id: z.string().optional(),
+    type: UserType$inboundSchema.optional(),
     attributes: z.lazy(() => UserAttributes$inboundSchema).optional(),
   });
 /** @internal */
 export type User$Outbound = {
   id?: string | undefined;
+  type?: string | undefined;
   attributes?: UserAttributes$Outbound | undefined;
 };
 
@@ -169,6 +197,7 @@ export type User$Outbound = {
 export const User$outboundSchema: z.ZodType<User$Outbound, z.ZodTypeDef, User> =
   z.object({
     id: z.string().optional(),
+    type: UserType$outboundSchema.optional(),
     attributes: z.lazy(() => UserAttributes$outboundSchema).optional(),
   });
 
