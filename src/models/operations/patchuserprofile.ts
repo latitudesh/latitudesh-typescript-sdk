@@ -44,11 +44,14 @@ export type PatchUserProfileRequest = {
   requestBody: PatchUserProfileRequestBody2;
 };
 
+export type PatchUserProfileMeta = {};
+
 /**
  * Success
  */
 export type PatchUserProfileResponse = {
   data?: models.UserUpdate | undefined;
+  meta?: PatchUserProfileMeta | undefined;
 };
 
 /** @internal */
@@ -265,16 +268,51 @@ export function patchUserProfileRequestFromJSON(
 }
 
 /** @internal */
+export const PatchUserProfileMeta$inboundSchema: z.ZodType<
+  PatchUserProfileMeta,
+  z.ZodTypeDef,
+  unknown
+> = z.object({});
+/** @internal */
+export type PatchUserProfileMeta$Outbound = {};
+
+/** @internal */
+export const PatchUserProfileMeta$outboundSchema: z.ZodType<
+  PatchUserProfileMeta$Outbound,
+  z.ZodTypeDef,
+  PatchUserProfileMeta
+> = z.object({});
+
+export function patchUserProfileMetaToJSON(
+  patchUserProfileMeta: PatchUserProfileMeta,
+): string {
+  return JSON.stringify(
+    PatchUserProfileMeta$outboundSchema.parse(patchUserProfileMeta),
+  );
+}
+export function patchUserProfileMetaFromJSON(
+  jsonString: string,
+): SafeParseResult<PatchUserProfileMeta, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PatchUserProfileMeta$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PatchUserProfileMeta' from JSON`,
+  );
+}
+
+/** @internal */
 export const PatchUserProfileResponse$inboundSchema: z.ZodType<
   PatchUserProfileResponse,
   z.ZodTypeDef,
   unknown
 > = z.object({
   data: models.UserUpdate$inboundSchema.optional(),
+  meta: z.lazy(() => PatchUserProfileMeta$inboundSchema).optional(),
 });
 /** @internal */
 export type PatchUserProfileResponse$Outbound = {
   data?: models.UserUpdate$Outbound | undefined;
+  meta?: PatchUserProfileMeta$Outbound | undefined;
 };
 
 /** @internal */
@@ -284,6 +322,7 @@ export const PatchUserProfileResponse$outboundSchema: z.ZodType<
   PatchUserProfileResponse
 > = z.object({
   data: models.UserUpdate$outboundSchema.optional(),
+  meta: z.lazy(() => PatchUserProfileMeta$outboundSchema).optional(),
 });
 
 export function patchUserProfileResponseToJSON(

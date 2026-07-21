@@ -17,3 +17,5 @@ let value: UserUpdateAttributes = {};
 | `email`                  | *string*                 | :heavy_minus_sign:       | N/A                      |
 | `authenticationFactorId` | *string*                 | :heavy_minus_sign:       | N/A                      |
 | `role`                   | *string*                 | :heavy_minus_sign:       | N/A                      |
+| `createdAt`              | *string*                 | :heavy_minus_sign:       | N/A                      |
+| `updatedAt`              | *string*                 | :heavy_minus_sign:       | N/A                      |

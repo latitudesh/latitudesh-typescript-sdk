@@ -20,6 +20,9 @@ export type OperatingSystemDataFeatures = {
   raid?: boolean | undefined;
   sshKeys?: boolean | undefined;
   userData?: boolean | undefined;
+  accelerate?: boolean | undefined;
+  rescue?: boolean | undefined;
+  workflow?: boolean | undefined;
 };
 
 export type OperatingSystemDataAttributes = {
@@ -56,6 +59,9 @@ export const OperatingSystemDataFeatures$inboundSchema: z.ZodType<
   raid: z.boolean().optional(),
   ssh_keys: z.boolean().optional(),
   user_data: z.boolean().optional(),
+  accelerate: z.boolean().optional(),
+  rescue: z.boolean().optional(),
+  workflow: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     "ssh_keys": "sshKeys",
@@ -67,6 +73,9 @@ export type OperatingSystemDataFeatures$Outbound = {
   raid?: boolean | undefined;
   ssh_keys?: boolean | undefined;
   user_data?: boolean | undefined;
+  accelerate?: boolean | undefined;
+  rescue?: boolean | undefined;
+  workflow?: boolean | undefined;
 };
 
 /** @internal */
@@ -78,6 +87,9 @@ export const OperatingSystemDataFeatures$outboundSchema: z.ZodType<
   raid: z.boolean().optional(),
   sshKeys: z.boolean().optional(),
   userData: z.boolean().optional(),
+  accelerate: z.boolean().optional(),
+  rescue: z.boolean().optional(),
+  workflow: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     sshKeys: "ssh_keys",

@@ -27,6 +27,13 @@ import {
   TeamInclude$outboundSchema,
 } from "./teaminclude.js";
 
+export type ServerDataTag = {
+  id?: string | undefined;
+  name?: string | undefined;
+  description?: string | null | undefined;
+  color?: string | null | undefined;
+};
+
 /**
  * `on` - The server is powered ON
  *
@@ -163,11 +170,13 @@ export type Interface = {
 };
 
 export type ServerDataAttributes = {
+  tags?: Array<ServerDataTag> | undefined;
   hostname?: string | undefined;
   /**
    * The server label
    */
   label?: string | undefined;
+  price?: number | null | undefined;
   /**
    * `on` - The server is powered ON
    *
@@ -180,7 +189,7 @@ export type ServerDataAttributes = {
    * `rescue_mode` - The server is in rescue mode
    */
   status?: ServerDataStatus | undefined;
-  ipmiStatus?: IpmiStatus | undefined;
+  ipmiStatus?: IpmiStatus | null | undefined;
   /**
    * The server role (e.g. Bare Metal)
    */
@@ -206,6 +215,50 @@ export type ServerData = {
   type?: string | undefined;
   attributes?: ServerDataAttributes | undefined;
 };
+
+/** @internal */
+export const ServerDataTag$inboundSchema: z.ZodType<
+  ServerDataTag,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string().optional(),
+  name: z.string().optional(),
+  description: z.nullable(z.string()).optional(),
+  color: z.nullable(z.string()).optional(),
+});
+/** @internal */
+export type ServerDataTag$Outbound = {
+  id?: string | undefined;
+  name?: string | undefined;
+  description?: string | null | undefined;
+  color?: string | null | undefined;
+};
+
+/** @internal */
+export const ServerDataTag$outboundSchema: z.ZodType<
+  ServerDataTag$Outbound,
+  z.ZodTypeDef,
+  ServerDataTag
+> = z.object({
+  id: z.string().optional(),
+  name: z.string().optional(),
+  description: z.nullable(z.string()).optional(),
+  color: z.nullable(z.string()).optional(),
+});
+
+export function serverDataTagToJSON(serverDataTag: ServerDataTag): string {
+  return JSON.stringify(ServerDataTag$outboundSchema.parse(serverDataTag));
+}
+export function serverDataTagFromJSON(
+  jsonString: string,
+): SafeParseResult<ServerDataTag, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ServerDataTag$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ServerDataTag' from JSON`,
+  );
+}
 
 /** @internal */
 export const ServerDataStatus$inboundSchema: z.ZodNativeEnum<
@@ -534,10 +587,12 @@ export const ServerDataAttributes$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  tags: z.array(z.lazy(() => ServerDataTag$inboundSchema)).optional(),
   hostname: z.string().optional(),
   label: z.string().optional(),
+  price: z.nullable(z.number()).optional(),
   status: ServerDataStatus$inboundSchema.optional(),
-  ipmi_status: IpmiStatus$inboundSchema.optional(),
+  ipmi_status: z.nullable(IpmiStatus$inboundSchema).optional(),
   role: z.string().optional(),
   site: z.string().optional(),
   locked: z.boolean().optional(),
@@ -567,10 +622,12 @@ export const ServerDataAttributes$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type ServerDataAttributes$Outbound = {
+  tags?: Array<ServerDataTag$Outbound> | undefined;
   hostname?: string | undefined;
   label?: string | undefined;
+  price?: number | null | undefined;
   status?: string | undefined;
-  ipmi_status?: string | undefined;
+  ipmi_status?: string | null | undefined;
   role?: string | undefined;
   site?: string | undefined;
   locked?: boolean | undefined;
@@ -594,10 +651,12 @@ export const ServerDataAttributes$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ServerDataAttributes
 > = z.object({
+  tags: z.array(z.lazy(() => ServerDataTag$outboundSchema)).optional(),
   hostname: z.string().optional(),
   label: z.string().optional(),
+  price: z.nullable(z.number()).optional(),
   status: ServerDataStatus$outboundSchema.optional(),
-  ipmiStatus: IpmiStatus$outboundSchema.optional(),
+  ipmiStatus: z.nullable(IpmiStatus$outboundSchema).optional(),
   role: z.string().optional(),
   site: z.string().optional(),
   locked: z.boolean().optional(),

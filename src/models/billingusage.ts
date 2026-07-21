@@ -72,7 +72,7 @@ export type UsageType = ClosedEnum<typeof UsageType>;
 export type BillingUsageServer = {
   id?: string | undefined;
   hostname?: string | undefined;
-  plan?: string | undefined;
+  plan?: string | null | undefined;
   tags?: Array<string> | undefined;
 };
 
@@ -352,14 +352,14 @@ export const BillingUsageServer$inboundSchema: z.ZodType<
 > = z.object({
   id: z.string().optional(),
   hostname: z.string().optional(),
-  plan: z.string().optional(),
+  plan: z.nullable(z.string()).optional(),
   tags: z.array(z.string()).optional(),
 });
 /** @internal */
 export type BillingUsageServer$Outbound = {
   id?: string | undefined;
   hostname?: string | undefined;
-  plan?: string | undefined;
+  plan?: string | null | undefined;
   tags?: Array<string> | undefined;
 };
 
@@ -371,7 +371,7 @@ export const BillingUsageServer$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string().optional(),
   hostname: z.string().optional(),
-  plan: z.string().optional(),
+  plan: z.nullable(z.string()).optional(),
   tags: z.array(z.string()).optional(),
 });
 

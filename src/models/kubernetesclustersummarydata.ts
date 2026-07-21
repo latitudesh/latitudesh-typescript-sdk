@@ -5,24 +5,27 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
-import { ClosedEnum } from "../types/enums.js";
+import * as openEnums from "../types/enums.js";
+import { ClosedEnum, OpenEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 
 /**
- * The current phase of the cluster lifecycle
+ * The current phase of the cluster lifecycle.
  */
 export const KubernetesClusterSummaryDataPhase = {
   Pending: "Pending",
   Provisioning: "Provisioning",
   Provisioned: "Provisioned",
+  Upgrading: "Upgrading",
   Deleting: "Deleting",
   Failed: "Failed",
+  Unknown: "Unknown",
 } as const;
 /**
- * The current phase of the cluster lifecycle
+ * The current phase of the cluster lifecycle.
  */
-export type KubernetesClusterSummaryDataPhase = ClosedEnum<
+export type KubernetesClusterSummaryDataPhase = OpenEnum<
   typeof KubernetesClusterSummaryDataPhase
 >;
 
@@ -73,7 +76,7 @@ export type KubernetesClusterSummaryDataAttributes = {
    */
   name?: string | undefined;
   /**
-   * The current phase of the cluster lifecycle
+   * The current phase of the cluster lifecycle.
    */
   phase?: KubernetesClusterSummaryDataPhase | undefined;
   /**
@@ -119,13 +122,17 @@ export type KubernetesClusterSummaryData = {
 };
 
 /** @internal */
-export const KubernetesClusterSummaryDataPhase$inboundSchema: z.ZodNativeEnum<
-  typeof KubernetesClusterSummaryDataPhase
-> = z.nativeEnum(KubernetesClusterSummaryDataPhase);
+export const KubernetesClusterSummaryDataPhase$inboundSchema: z.ZodType<
+  KubernetesClusterSummaryDataPhase,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(KubernetesClusterSummaryDataPhase);
 /** @internal */
-export const KubernetesClusterSummaryDataPhase$outboundSchema: z.ZodNativeEnum<
-  typeof KubernetesClusterSummaryDataPhase
-> = KubernetesClusterSummaryDataPhase$inboundSchema;
+export const KubernetesClusterSummaryDataPhase$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  KubernetesClusterSummaryDataPhase
+> = openEnums.outboundSchema(KubernetesClusterSummaryDataPhase);
 
 /** @internal */
 export const KubernetesClusterSummaryDataName$inboundSchema: z.ZodNativeEnum<

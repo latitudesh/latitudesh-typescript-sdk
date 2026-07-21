@@ -20,6 +20,10 @@ export type IpmiSessionAttributes = {
    */
   ipmiAddress?: string | undefined;
   /**
+   * The IPMI URL for direct access
+   */
+  ipmiUrl?: string | null | undefined;
+  /**
    * The IPMI username
    */
   ipmiUsername?: string | undefined;
@@ -55,11 +59,13 @@ export const IpmiSessionAttributes$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   ipmi_address: z.string().optional(),
+  ipmi_url: z.nullable(z.string()).optional(),
   ipmi_username: z.string().optional(),
   ipmi_password: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "ipmi_address": "ipmiAddress",
+    "ipmi_url": "ipmiUrl",
     "ipmi_username": "ipmiUsername",
     "ipmi_password": "ipmiPassword",
   });
@@ -67,6 +73,7 @@ export const IpmiSessionAttributes$inboundSchema: z.ZodType<
 /** @internal */
 export type IpmiSessionAttributes$Outbound = {
   ipmi_address?: string | undefined;
+  ipmi_url?: string | null | undefined;
   ipmi_username?: string | undefined;
   ipmi_password?: string | undefined;
 };
@@ -78,11 +85,13 @@ export const IpmiSessionAttributes$outboundSchema: z.ZodType<
   IpmiSessionAttributes
 > = z.object({
   ipmiAddress: z.string().optional(),
+  ipmiUrl: z.nullable(z.string()).optional(),
   ipmiUsername: z.string().optional(),
   ipmiPassword: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     ipmiAddress: "ipmi_address",
+    ipmiUrl: "ipmi_url",
     ipmiUsername: "ipmi_username",
     ipmiPassword: "ipmi_password",
   });

@@ -119,6 +119,10 @@ export type ObjectStorageDataAttributes = {
    */
   retentionPeriod?: number | null | undefined;
   /**
+   * How the bucket originated: `default` for buckets created through the API, or `synchronized` for buckets imported from the storage provider.
+   */
+  source?: string | undefined;
+  /**
    * Region information where the object storage is located
    */
   region?: ObjectStorageDataRegion | null | undefined;
@@ -225,6 +229,7 @@ export const ObjectStorageDataAttributes$inboundSchema: z.ZodType<
   locking: z.nullable(z.boolean()).optional(),
   retention_mode: z.nullable(RetentionMode$inboundSchema).optional(),
   retention_period: z.nullable(z.number().int()).optional(),
+  source: z.string().optional(),
   region: z.nullable(z.lazy(() => ObjectStorageDataRegion$inboundSchema))
     .optional(),
   project: ProjectInclude$inboundSchema.optional(),
@@ -255,6 +260,7 @@ export type ObjectStorageDataAttributes$Outbound = {
   locking?: boolean | null | undefined;
   retention_mode?: string | null | undefined;
   retention_period?: number | null | undefined;
+  source?: string | undefined;
   region?: ObjectStorageDataRegion$Outbound | null | undefined;
   project?: ProjectInclude$Outbound | undefined;
   team?: TeamInclude$Outbound | undefined;
@@ -278,6 +284,7 @@ export const ObjectStorageDataAttributes$outboundSchema: z.ZodType<
   locking: z.nullable(z.boolean()).optional(),
   retentionMode: z.nullable(RetentionMode$outboundSchema).optional(),
   retentionPeriod: z.nullable(z.number().int()).optional(),
+  source: z.string().optional(),
   region: z.nullable(z.lazy(() => ObjectStorageDataRegion$outboundSchema))
     .optional(),
   project: ProjectInclude$outboundSchema.optional(),

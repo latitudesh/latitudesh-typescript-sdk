@@ -5,24 +5,27 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
-import { ClosedEnum } from "../types/enums.js";
+import * as openEnums from "../types/enums.js";
+import { ClosedEnum, OpenEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 
 /**
- * The current phase of the cluster lifecycle
+ * The current phase of the cluster lifecycle. 'Upgrading' is reported while a Kubernetes version upgrade is rolling through the cluster.
  */
 export const KubernetesClusterDataPhase = {
   Pending: "Pending",
   Provisioning: "Provisioning",
   Provisioned: "Provisioned",
+  Upgrading: "Upgrading",
   Deleting: "Deleting",
   Failed: "Failed",
+  Unknown: "Unknown",
 } as const;
 /**
- * The current phase of the cluster lifecycle
+ * The current phase of the cluster lifecycle. 'Upgrading' is reported while a Kubernetes version upgrade is rolling through the cluster.
  */
-export type KubernetesClusterDataPhase = ClosedEnum<
+export type KubernetesClusterDataPhase = OpenEnum<
   typeof KubernetesClusterDataPhase
 >;
 
@@ -59,31 +62,33 @@ export type Workers = {
 };
 
 /**
- * Current status of worker nodes. 'idle' when 0 workers, 'ready' when all workers are ready, 'scaling' when workers are being provisioned/removed, 'error' when a worker has failed.
+ * Current status of worker nodes. 'idle' when 0 workers, 'ready' when all workers are ready, 'scaling' when workers are being provisioned/removed, 'upgrading' while a Kubernetes version upgrade is rolling through the workers, 'error' when a worker has failed.
  */
 export const WorkerStatus = {
   Idle: "idle",
   Ready: "ready",
   Scaling: "scaling",
+  Upgrading: "upgrading",
   Error: "error",
 } as const;
 /**
- * Current status of worker nodes. 'idle' when 0 workers, 'ready' when all workers are ready, 'scaling' when workers are being provisioned/removed, 'error' when a worker has failed.
+ * Current status of worker nodes. 'idle' when 0 workers, 'ready' when all workers are ready, 'scaling' when workers are being provisioned/removed, 'upgrading' while a Kubernetes version upgrade is rolling through the workers, 'error' when a worker has failed.
  */
-export type WorkerStatus = ClosedEnum<typeof WorkerStatus>;
+export type WorkerStatus = OpenEnum<typeof WorkerStatus>;
 
 /**
- * Current status of control plane nodes. 'ready' when control plane is operational, 'scaling' when nodes are being provisioned/removed, 'error' when a control plane node has failed.
+ * Current status of control plane nodes. 'ready' when control plane is operational, 'scaling' when nodes are being provisioned/removed, 'upgrading' while a Kubernetes version upgrade is rolling through the control plane, 'error' when a control plane node has failed.
  */
 export const ControlPlaneStatus = {
   Ready: "ready",
   Scaling: "scaling",
+  Upgrading: "upgrading",
   Error: "error",
 } as const;
 /**
- * Current status of control plane nodes. 'ready' when control plane is operational, 'scaling' when nodes are being provisioned/removed, 'error' when a control plane node has failed.
+ * Current status of control plane nodes. 'ready' when control plane is operational, 'scaling' when nodes are being provisioned/removed, 'upgrading' while a Kubernetes version upgrade is rolling through the control plane, 'error' when a control plane node has failed.
  */
-export type ControlPlaneStatus = ClosedEnum<typeof ControlPlaneStatus>;
+export type ControlPlaneStatus = OpenEnum<typeof ControlPlaneStatus>;
 
 /**
  * Step identifier
@@ -217,7 +222,7 @@ export type KubernetesClusterDataAttributes = {
    */
   name?: string | undefined;
   /**
-   * The current phase of the cluster lifecycle
+   * The current phase of the cluster lifecycle. 'Upgrading' is reported while a Kubernetes version upgrade is rolling through the cluster.
    */
   phase?: KubernetesClusterDataPhase | undefined;
   /**
@@ -233,17 +238,17 @@ export type KubernetesClusterDataAttributes = {
    */
   kubeconfigUrl?: string | null | undefined;
   /**
-   * The site/region where the cluster is deployed
+   * The site/region where the cluster is deployed. May be null when the cluster's resources are not fully available (e.g., incomplete provisioning or deletion in progress).
    */
-  location?: string | undefined;
+  location?: string | null | undefined;
   /**
    * IP addresses assigned to the cluster's load balancer
    */
   loadBalancerIps?: Array<string> | undefined;
   /**
-   * The Kubernetes version running on the cluster
+   * The Kubernetes version running on the cluster. May be null when the control plane resource is not fully available (e.g., incomplete provisioning or deletion in progress).
    */
-  kubernetesVersion?: string | undefined;
+  kubernetesVersion?: string | null | undefined;
   /**
    * The cluster's version status relative to available upgrades
    */
@@ -257,9 +262,9 @@ export type KubernetesClusterDataAttributes = {
    */
   createdAt?: Date | undefined;
   /**
-   * The machine plan slug for control plane nodes
+   * The machine plan slug for control plane nodes. May be null when the control plane machine template is not available (e.g., incomplete provisioning or deletion in progress).
    */
-  plan?: string | undefined;
+  plan?: string | null | undefined;
   /**
    * The machine plan slug for worker nodes. Null if no workers exist.
    */
@@ -281,11 +286,11 @@ export type KubernetesClusterDataAttributes = {
    */
   workers?: Workers | null | undefined;
   /**
-   * Current status of worker nodes. 'idle' when 0 workers, 'ready' when all workers are ready, 'scaling' when workers are being provisioned/removed, 'error' when a worker has failed.
+   * Current status of worker nodes. 'idle' when 0 workers, 'ready' when all workers are ready, 'scaling' when workers are being provisioned/removed, 'upgrading' while a Kubernetes version upgrade is rolling through the workers, 'error' when a worker has failed.
    */
   workerStatus?: WorkerStatus | null | undefined;
   /**
-   * Current status of control plane nodes. 'ready' when control plane is operational, 'scaling' when nodes are being provisioned/removed, 'error' when a control plane node has failed.
+   * Current status of control plane nodes. 'ready' when control plane is operational, 'scaling' when nodes are being provisioned/removed, 'upgrading' while a Kubernetes version upgrade is rolling through the control plane, 'error' when a control plane node has failed.
    */
   controlPlaneStatus?: ControlPlaneStatus | undefined;
   /**
@@ -336,13 +341,17 @@ export type KubernetesClusterData = {
 };
 
 /** @internal */
-export const KubernetesClusterDataPhase$inboundSchema: z.ZodNativeEnum<
-  typeof KubernetesClusterDataPhase
-> = z.nativeEnum(KubernetesClusterDataPhase);
+export const KubernetesClusterDataPhase$inboundSchema: z.ZodType<
+  KubernetesClusterDataPhase,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(KubernetesClusterDataPhase);
 /** @internal */
-export const KubernetesClusterDataPhase$outboundSchema: z.ZodNativeEnum<
-  typeof KubernetesClusterDataPhase
-> = KubernetesClusterDataPhase$inboundSchema;
+export const KubernetesClusterDataPhase$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  KubernetesClusterDataPhase
+> = openEnums.outboundSchema(KubernetesClusterDataPhase);
 
 /** @internal */
 export const VersionStatus$inboundSchema: z.ZodNativeEnum<
@@ -451,20 +460,30 @@ export function workersFromJSON(
 }
 
 /** @internal */
-export const WorkerStatus$inboundSchema: z.ZodNativeEnum<typeof WorkerStatus> =
-  z.nativeEnum(WorkerStatus);
+export const WorkerStatus$inboundSchema: z.ZodType<
+  WorkerStatus,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(WorkerStatus);
 /** @internal */
-export const WorkerStatus$outboundSchema: z.ZodNativeEnum<typeof WorkerStatus> =
-  WorkerStatus$inboundSchema;
+export const WorkerStatus$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  WorkerStatus
+> = openEnums.outboundSchema(WorkerStatus);
 
 /** @internal */
-export const ControlPlaneStatus$inboundSchema: z.ZodNativeEnum<
-  typeof ControlPlaneStatus
-> = z.nativeEnum(ControlPlaneStatus);
+export const ControlPlaneStatus$inboundSchema: z.ZodType<
+  ControlPlaneStatus,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(ControlPlaneStatus);
 /** @internal */
-export const ControlPlaneStatus$outboundSchema: z.ZodNativeEnum<
-  typeof ControlPlaneStatus
-> = ControlPlaneStatus$inboundSchema;
+export const ControlPlaneStatus$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  ControlPlaneStatus
+> = openEnums.outboundSchema(ControlPlaneStatus);
 
 /** @internal */
 export const KubernetesClusterDataName$inboundSchema: z.ZodNativeEnum<
@@ -665,14 +684,14 @@ export const KubernetesClusterDataAttributes$inboundSchema: z.ZodType<
   ready: z.boolean().optional(),
   control_plane_endpoint: z.nullable(z.string()).optional(),
   kubeconfig_url: z.nullable(z.string()).optional(),
-  location: z.string().optional(),
+  location: z.nullable(z.string()).optional(),
   load_balancer_ips: z.array(z.string()).optional(),
-  kubernetes_version: z.string().optional(),
+  kubernetes_version: z.nullable(z.string()).optional(),
   version_status: VersionStatus$inboundSchema.optional(),
   available_upgrade: z.nullable(z.string()).optional(),
   created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
-  plan: z.string().optional(),
+  plan: z.nullable(z.string()).optional(),
   worker_plan: z.nullable(z.string()).optional(),
   control_plane_count: z.number().int().optional(),
   worker_count: z.number().int().optional(),
@@ -722,13 +741,13 @@ export type KubernetesClusterDataAttributes$Outbound = {
   ready?: boolean | undefined;
   control_plane_endpoint?: string | null | undefined;
   kubeconfig_url?: string | null | undefined;
-  location?: string | undefined;
+  location?: string | null | undefined;
   load_balancer_ips?: Array<string> | undefined;
-  kubernetes_version?: string | undefined;
+  kubernetes_version?: string | null | undefined;
   version_status?: string | undefined;
   available_upgrade?: string | null | undefined;
   created_at?: string | undefined;
-  plan?: string | undefined;
+  plan?: string | null | undefined;
   worker_plan?: string | null | undefined;
   control_plane_count?: number | undefined;
   worker_count?: number | undefined;
@@ -758,13 +777,13 @@ export const KubernetesClusterDataAttributes$outboundSchema: z.ZodType<
   ready: z.boolean().optional(),
   controlPlaneEndpoint: z.nullable(z.string()).optional(),
   kubeconfigUrl: z.nullable(z.string()).optional(),
-  location: z.string().optional(),
+  location: z.nullable(z.string()).optional(),
   loadBalancerIps: z.array(z.string()).optional(),
-  kubernetesVersion: z.string().optional(),
+  kubernetesVersion: z.nullable(z.string()).optional(),
   versionStatus: VersionStatus$outboundSchema.optional(),
   availableUpgrade: z.nullable(z.string()).optional(),
   createdAt: z.date().transform(v => v.toISOString()).optional(),
-  plan: z.string().optional(),
+  plan: z.nullable(z.string()).optional(),
   workerPlan: z.nullable(z.string()).optional(),
   controlPlaneCount: z.number().int().optional(),
   workerCount: z.number().int().optional(),

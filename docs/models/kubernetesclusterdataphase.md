@@ -1,6 +1,6 @@
 # KubernetesClusterDataPhase
 
-The current phase of the cluster lifecycle
+The current phase of the cluster lifecycle. 'Upgrading' is reported while a Kubernetes version upgrade is rolling through the cluster.
 
 ## Example Usage
 
@@ -8,10 +8,12 @@ The current phase of the cluster lifecycle
 import { KubernetesClusterDataPhase } from "latitudesh-typescript-sdk/models";
 
 let value: KubernetesClusterDataPhase = "Provisioned";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
 
 ```typescript
-"Pending" | "Provisioning" | "Provisioned" | "Deleting" | "Failed"
+"Pending" | "Provisioning" | "Provisioned" | "Upgrading" | "Deleting" | "Failed" | "Unknown" | Unrecognized<string>
 ```
