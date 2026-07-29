@@ -18,8 +18,8 @@ export type OutOfBandConnectionSshKey = {
  * credentials are valid only when the server is deployed with ssh keys
  */
 export type OutOfBandConnectionCredentials = {
-  user?: string | undefined;
-  password?: string | undefined;
+  user?: string | null | undefined;
+  password?: string | null | undefined;
 };
 
 export type OutOfBandConnectionAttributes = {
@@ -42,8 +42,11 @@ export type OutOfBandConnectionData = {
   attributes?: OutOfBandConnectionAttributes | undefined;
 };
 
+export type OutOfBandConnectionMeta = {};
+
 export type OutOfBandConnection = {
   data?: OutOfBandConnectionData | undefined;
+  meta?: OutOfBandConnectionMeta | undefined;
 };
 
 /** @internal */
@@ -97,13 +100,13 @@ export const OutOfBandConnectionCredentials$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  user: z.string().optional(),
-  password: z.string().optional(),
+  user: z.nullable(z.string()).optional(),
+  password: z.nullable(z.string()).optional(),
 });
 /** @internal */
 export type OutOfBandConnectionCredentials$Outbound = {
-  user?: string | undefined;
-  password?: string | undefined;
+  user?: string | null | undefined;
+  password?: string | null | undefined;
 };
 
 /** @internal */
@@ -112,8 +115,8 @@ export const OutOfBandConnectionCredentials$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   OutOfBandConnectionCredentials
 > = z.object({
-  user: z.string().optional(),
-  password: z.string().optional(),
+  user: z.nullable(z.string()).optional(),
+  password: z.nullable(z.string()).optional(),
 });
 
 export function outOfBandConnectionCredentialsToJSON(
@@ -261,16 +264,51 @@ export function outOfBandConnectionDataFromJSON(
 }
 
 /** @internal */
+export const OutOfBandConnectionMeta$inboundSchema: z.ZodType<
+  OutOfBandConnectionMeta,
+  z.ZodTypeDef,
+  unknown
+> = z.object({});
+/** @internal */
+export type OutOfBandConnectionMeta$Outbound = {};
+
+/** @internal */
+export const OutOfBandConnectionMeta$outboundSchema: z.ZodType<
+  OutOfBandConnectionMeta$Outbound,
+  z.ZodTypeDef,
+  OutOfBandConnectionMeta
+> = z.object({});
+
+export function outOfBandConnectionMetaToJSON(
+  outOfBandConnectionMeta: OutOfBandConnectionMeta,
+): string {
+  return JSON.stringify(
+    OutOfBandConnectionMeta$outboundSchema.parse(outOfBandConnectionMeta),
+  );
+}
+export function outOfBandConnectionMetaFromJSON(
+  jsonString: string,
+): SafeParseResult<OutOfBandConnectionMeta, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => OutOfBandConnectionMeta$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'OutOfBandConnectionMeta' from JSON`,
+  );
+}
+
+/** @internal */
 export const OutOfBandConnection$inboundSchema: z.ZodType<
   OutOfBandConnection,
   z.ZodTypeDef,
   unknown
 > = z.object({
   data: z.lazy(() => OutOfBandConnectionData$inboundSchema).optional(),
+  meta: z.lazy(() => OutOfBandConnectionMeta$inboundSchema).optional(),
 });
 /** @internal */
 export type OutOfBandConnection$Outbound = {
   data?: OutOfBandConnectionData$Outbound | undefined;
+  meta?: OutOfBandConnectionMeta$Outbound | undefined;
 };
 
 /** @internal */
@@ -280,6 +318,7 @@ export const OutOfBandConnection$outboundSchema: z.ZodType<
   OutOfBandConnection
 > = z.object({
   data: z.lazy(() => OutOfBandConnectionData$outboundSchema).optional(),
+  meta: z.lazy(() => OutOfBandConnectionMeta$outboundSchema).optional(),
 });
 
 export function outOfBandConnectionToJSON(

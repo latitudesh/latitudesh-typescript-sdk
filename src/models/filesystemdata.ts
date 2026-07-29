@@ -37,6 +37,18 @@ export type FilesystemDataAttributes = {
   sizeInGb?: number | undefined;
   filesystemStorageClass?: FilesystemStorageClass | null | undefined;
   createdAt?: Date | null | undefined;
+  /**
+   * Cephx keyring secret used to mount the filesystem. Returned only for dashboard-origin requests; null until the filesystem is provisioned.
+   */
+  keyring?: string | null | undefined;
+  /**
+   * Ceph cluster user used to mount the filesystem. Returned only for dashboard-origin requests; null until the filesystem is provisioned.
+   */
+  clusterUser?: string | null | undefined;
+  /**
+   * Path of the filesystem volume inside the cluster. Returned only for dashboard-origin requests; null until the filesystem is provisioned.
+   */
+  volumePath?: string | null | undefined;
   project?: ProjectInclude | undefined;
   team?: TeamInclude | undefined;
 };
@@ -77,6 +89,9 @@ export const FilesystemDataAttributes$inboundSchema: z.ZodType<
   created_at: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
+  keyring: z.nullable(z.string()).optional(),
+  cluster_user: z.nullable(z.string()).optional(),
+  volume_path: z.nullable(z.string()).optional(),
   project: ProjectInclude$inboundSchema.optional(),
   team: TeamInclude$inboundSchema.optional(),
 }).transform((v) => {
@@ -84,6 +99,8 @@ export const FilesystemDataAttributes$inboundSchema: z.ZodType<
     "size_in_gb": "sizeInGb",
     "storage_class": "filesystemStorageClass",
     "created_at": "createdAt",
+    "cluster_user": "clusterUser",
+    "volume_path": "volumePath",
   });
 });
 /** @internal */
@@ -92,6 +109,9 @@ export type FilesystemDataAttributes$Outbound = {
   size_in_gb?: number | undefined;
   storage_class?: string | null | undefined;
   created_at?: string | null | undefined;
+  keyring?: string | null | undefined;
+  cluster_user?: string | null | undefined;
+  volume_path?: string | null | undefined;
   project?: ProjectInclude$Outbound | undefined;
   team?: TeamInclude$Outbound | undefined;
 };
@@ -107,6 +127,9 @@ export const FilesystemDataAttributes$outboundSchema: z.ZodType<
   filesystemStorageClass: z.nullable(FilesystemStorageClass$outboundSchema)
     .optional(),
   createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+  keyring: z.nullable(z.string()).optional(),
+  clusterUser: z.nullable(z.string()).optional(),
+  volumePath: z.nullable(z.string()).optional(),
   project: ProjectInclude$outboundSchema.optional(),
   team: TeamInclude$outboundSchema.optional(),
 }).transform((v) => {
@@ -114,6 +137,8 @@ export const FilesystemDataAttributes$outboundSchema: z.ZodType<
     sizeInGb: "size_in_gb",
     filesystemStorageClass: "storage_class",
     createdAt: "created_at",
+    clusterUser: "cluster_user",
+    volumePath: "volume_path",
   });
 });
 

@@ -123,6 +123,10 @@ export type CreateServerReinstallAttributes2 = {
    * URL where iPXE script is stored on, OR the iPXE script encoded in base64. This attribute is required when operating system iPXE is selected.
    */
   ipxe?: string | null | undefined;
+  /**
+   * Keep network boot enabled so the server iPXE-boots on every reboot instead of booting from disk. Only supported with the 'ipxe' operating system.
+   */
+  persistentNetboot?: boolean | undefined;
 };
 
 export type CreateServerReinstallData2 = {
@@ -337,12 +341,14 @@ export const CreateServerReinstallAttributes2$inboundSchema: z.ZodType<
     z.array(z.lazy(() => CreateServerReinstallDiskLayout2$inboundSchema)),
   ).optional(),
   ipxe: z.nullable(z.string()).optional(),
+  persistent_netboot: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     "operating_system": "operatingSystem",
     "ssh_keys": "sshKeys",
     "user_data": "userData",
     "disk_layout": "diskLayout",
+    "persistent_netboot": "persistentNetboot",
   });
 });
 /** @internal */
@@ -361,6 +367,7 @@ export type CreateServerReinstallAttributes2$Outbound = {
     | null
     | undefined;
   ipxe?: string | null | undefined;
+  persistent_netboot?: boolean | undefined;
 };
 
 /** @internal */
@@ -382,12 +389,14 @@ export const CreateServerReinstallAttributes2$outboundSchema: z.ZodType<
     z.array(z.lazy(() => CreateServerReinstallDiskLayout2$outboundSchema)),
   ).optional(),
   ipxe: z.nullable(z.string()).optional(),
+  persistentNetboot: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     operatingSystem: "operating_system",
     sshKeys: "ssh_keys",
     userData: "user_data",
     diskLayout: "disk_layout",
+    persistentNetboot: "persistent_netboot",
   });
 });
 

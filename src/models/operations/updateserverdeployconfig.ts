@@ -108,6 +108,10 @@ export type UpdateServerDeployConfigAttributes2 = {
    * URL where iPXE script is stored on, necessary for custom image deployments. This attribute is required when operating system iPXE is selected.
    */
   ipxeUrl?: string | null | undefined;
+  /**
+   * Keep network boot enabled so the server iPXE-boots on every reboot instead of booting from disk. Only supported with the 'ipxe' operating system.
+   */
+  persistentNetboot?: boolean | undefined;
 };
 
 export type UpdateServerDeployConfigRequestBody2 = {
@@ -323,6 +327,7 @@ export const UpdateServerDeployConfigAttributes2$inboundSchema: z.ZodType<
     z.array(z.lazy(() => UpdateServerDeployConfigPartition2$inboundSchema)),
   ).optional(),
   ipxe_url: z.nullable(z.string()).optional(),
+  persistent_netboot: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     "operating_system": "operatingSystem",
@@ -330,6 +335,7 @@ export const UpdateServerDeployConfigAttributes2$inboundSchema: z.ZodType<
     "user_data": "userData",
     "ssh_keys": "sshKeys",
     "ipxe_url": "ipxeUrl",
+    "persistent_netboot": "persistentNetboot",
   });
 });
 /** @internal */
@@ -348,6 +354,7 @@ export type UpdateServerDeployConfigAttributes2$Outbound = {
     | null
     | undefined;
   ipxe_url?: string | null | undefined;
+  persistent_netboot?: boolean | undefined;
 };
 
 /** @internal */
@@ -370,6 +377,7 @@ export const UpdateServerDeployConfigAttributes2$outboundSchema: z.ZodType<
     z.array(z.lazy(() => UpdateServerDeployConfigPartition2$outboundSchema)),
   ).optional(),
   ipxeUrl: z.nullable(z.string()).optional(),
+  persistentNetboot: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     operatingSystem: "operating_system",
@@ -377,6 +385,7 @@ export const UpdateServerDeployConfigAttributes2$outboundSchema: z.ZodType<
     userData: "user_data",
     sshKeys: "ssh_keys",
     ipxeUrl: "ipxe_url",
+    persistentNetboot: "persistent_netboot",
   });
 });
 

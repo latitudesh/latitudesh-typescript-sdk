@@ -52,9 +52,13 @@ import { tool$kubernetesClustersGetKubernetesClusterKubeconfig } from "./tools/k
 import { tool$kubernetesClustersListKubernetesAvailableVersions } from "./tools/kubernetesClustersListKubernetesAvailableVersions.js";
 import { tool$kubernetesClustersListKubernetesClusters } from "./tools/kubernetesClustersListKubernetesClusters.js";
 import { tool$kubernetesClustersUpdateKubernetesCluster } from "./tools/kubernetesClustersUpdateKubernetesCluster.js";
+import { tool$objectStorageDeleteStorageAccessKeysUsername } from "./tools/objectStorageDeleteStorageAccessKeysUsername.js";
 import { tool$objectStorageDeleteStorageBuckets } from "./tools/objectStorageDeleteStorageBuckets.js";
+import { tool$objectStorageGetStorageAccessKeys } from "./tools/objectStorageGetStorageAccessKeys.js";
 import { tool$objectStorageGetStorageBucket } from "./tools/objectStorageGetStorageBucket.js";
+import { tool$objectStorageGetStorageBucketAccessKeys } from "./tools/objectStorageGetStorageBucketAccessKeys.js";
 import { tool$objectStorageGetStorageBuckets } from "./tools/objectStorageGetStorageBuckets.js";
+import { tool$objectStoragePostStorageAccessKeys } from "./tools/objectStoragePostStorageAccessKeys.js";
 import { tool$objectStoragePostStorageBuckets } from "./tools/objectStoragePostStorageBuckets.js";
 import { tool$operatingSystemsListPlans } from "./tools/operatingSystemsListPlans.js";
 import { tool$plansGet } from "./tools/plansGet.js";
@@ -171,7 +175,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Latitudesh",
-    version: "0.8.4",
+    version: "0.8.5",
   });
 
   const client = new LatitudeshCore({
@@ -297,6 +301,10 @@ export function createMCPServer(deps: {
   tool(tool$blockStorageGetStorageVolume);
   tool(tool$blockStorageDeleteStorageVolumes);
   tool(tool$blockStoragePostStorageVolumesMount);
+  tool(tool$objectStoragePostStorageAccessKeys);
+  tool(tool$objectStorageGetStorageAccessKeys);
+  tool(tool$objectStorageDeleteStorageAccessKeysUsername);
+  tool(tool$objectStorageGetStorageBucketAccessKeys);
   tool(tool$objectStorageGetStorageBuckets);
   tool(tool$objectStoragePostStorageBuckets);
   tool(tool$objectStorageGetStorageBucket);

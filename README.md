@@ -277,6 +277,10 @@ run();
 
 ### [ObjectStorage](docs/sdks/objectstorage/README.md)
 
+* [postStorageAccessKeys](docs/sdks/objectstorage/README.md#poststorageaccesskeys) - Create access key
+* [getStorageAccessKeys](docs/sdks/objectstorage/README.md#getstorageaccesskeys) - List access keys
+* [deleteStorageAccessKeysUsername](docs/sdks/objectstorage/README.md#deletestorageaccesskeysusername) - Delete access key
+* [getStorageBucketAccessKeys](docs/sdks/objectstorage/README.md#getstoragebucketaccesskeys) - List bucket access keys
 * [getStorageBuckets](docs/sdks/objectstorage/README.md#getstoragebuckets) - List buckets
 * [postStorageBuckets](docs/sdks/objectstorage/README.md#poststoragebuckets) - Create bucket
 * [getStorageBucket](docs/sdks/objectstorage/README.md#getstoragebucket) - Retrieve bucket
@@ -508,9 +512,13 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`kubernetesClustersListKubernetesAvailableVersions`](docs/sdks/kubernetesclusters/README.md#listkubernetesavailableversions) - List Available Kubernetes Versions
 - [`kubernetesClustersListKubernetesClusters`](docs/sdks/kubernetesclusters/README.md#listkubernetesclusters) - List Kubernetes Clusters
 - [`kubernetesClustersUpdateKubernetesCluster`](docs/sdks/kubernetesclusters/README.md#updatekubernetescluster) - Update Kubernetes Cluster
+- [`objectStorageDeleteStorageAccessKeysUsername`](docs/sdks/objectstorage/README.md#deletestorageaccesskeysusername) - Delete access key
 - [`objectStorageDeleteStorageBuckets`](docs/sdks/objectstorage/README.md#deletestoragebuckets) - Delete bucket
+- [`objectStorageGetStorageAccessKeys`](docs/sdks/objectstorage/README.md#getstorageaccesskeys) - List access keys
 - [`objectStorageGetStorageBucket`](docs/sdks/objectstorage/README.md#getstoragebucket) - Retrieve bucket
+- [`objectStorageGetStorageBucketAccessKeys`](docs/sdks/objectstorage/README.md#getstoragebucketaccesskeys) - List bucket access keys
 - [`objectStorageGetStorageBuckets`](docs/sdks/objectstorage/README.md#getstoragebuckets) - List buckets
+- [`objectStoragePostStorageAccessKeys`](docs/sdks/objectstorage/README.md#poststorageaccesskeys) - Create access key
 - [`objectStoragePostStorageBuckets`](docs/sdks/objectstorage/README.md#poststoragebuckets) - Create bucket
 - [`operatingSystemsListPlans`](docs/sdks/operatingsystems/README.md#listplans) - List operating systems
 - [`plansGet`](docs/sdks/plans/README.md#get) - Retrieve plan
@@ -787,7 +795,7 @@ run();
 
 
 **Inherit from [`LatitudeshError`](./src/models/errors/latitudesherror.ts)**:
-* [`ErrorObject`](./src/models/errors/errorobject.ts): Applicable to 33 of 146 methods.*
+* [`ErrorObject`](./src/models/errors/errorobject.ts): Applicable to 37 of 150 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>
