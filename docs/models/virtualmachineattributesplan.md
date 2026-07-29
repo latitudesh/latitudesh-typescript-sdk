@@ -14,3 +14,4 @@ let value: VirtualMachineAttributesPlan = {};
 | ------------------ | ------------------ | ------------------ | ------------------ |
 | `id`               | *string*           | :heavy_minus_sign: | N/A                |
 | `name`             | *string*           | :heavy_minus_sign: | N/A                |
+| `slug`             | *string*           | :heavy_minus_sign: | N/A                |

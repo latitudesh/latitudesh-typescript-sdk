@@ -123,6 +123,7 @@ export type VirtualMachineAttributesCredentials = {
 export type VirtualMachineAttributesPlan = {
   id?: string | undefined;
   name?: string | undefined;
+  slug?: string | undefined;
 };
 
 export type VirtualMachineAttributesSpecs = {
@@ -500,11 +501,13 @@ export const VirtualMachineAttributesPlan$inboundSchema: z.ZodType<
 > = z.object({
   id: z.string().optional(),
   name: z.string().optional(),
+  slug: z.string().optional(),
 });
 /** @internal */
 export type VirtualMachineAttributesPlan$Outbound = {
   id?: string | undefined;
   name?: string | undefined;
+  slug?: string | undefined;
 };
 
 /** @internal */
@@ -515,6 +518,7 @@ export const VirtualMachineAttributesPlan$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string().optional(),
   name: z.string().optional(),
+  slug: z.string().optional(),
 });
 
 export function virtualMachineAttributesPlanToJSON(

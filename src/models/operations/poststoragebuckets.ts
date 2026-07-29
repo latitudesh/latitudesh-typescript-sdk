@@ -18,14 +18,16 @@ export type PostStorageBucketsType = ClosedEnum<typeof PostStorageBucketsType>;
 /**
  * Backend storage tier. `standard` is the default S3-compatible tier. `high_performance` is a lower-latency, higher-throughput tier available in select regions only.
  */
-export const StorageClass = {
+export const PostStorageBucketsStorageClass = {
   Standard: "standard",
   HighPerformance: "high_performance",
 } as const;
 /**
  * Backend storage tier. `standard` is the default S3-compatible tier. `high_performance` is a lower-latency, higher-throughput tier available in select regions only.
  */
-export type StorageClass = ClosedEnum<typeof StorageClass>;
+export type PostStorageBucketsStorageClass = ClosedEnum<
+  typeof PostStorageBucketsStorageClass
+>;
 
 /**
  * Object Lock retention mode applied to new objects. `GOVERNANCE` allows privileged users to override the retention; `COMPLIANCE` cannot be overridden by anyone. Only applies when `locking` is `true`.
@@ -64,7 +66,7 @@ export type PostStorageBucketsAttributes = {
   /**
    * Backend storage tier. `standard` is the default S3-compatible tier. `high_performance` is a lower-latency, higher-throughput tier available in select regions only.
    */
-  storageClass?: StorageClass | undefined;
+  storageClass?: PostStorageBucketsStorageClass | undefined;
   /**
    * Enable S3 object versioning. Once enabled, versioning cannot be disabled.
    */
@@ -109,11 +111,13 @@ export const PostStorageBucketsType$outboundSchema: z.ZodNativeEnum<
 > = PostStorageBucketsType$inboundSchema;
 
 /** @internal */
-export const StorageClass$inboundSchema: z.ZodNativeEnum<typeof StorageClass> =
-  z.nativeEnum(StorageClass);
+export const PostStorageBucketsStorageClass$inboundSchema: z.ZodNativeEnum<
+  typeof PostStorageBucketsStorageClass
+> = z.nativeEnum(PostStorageBucketsStorageClass);
 /** @internal */
-export const StorageClass$outboundSchema: z.ZodNativeEnum<typeof StorageClass> =
-  StorageClass$inboundSchema;
+export const PostStorageBucketsStorageClass$outboundSchema: z.ZodNativeEnum<
+  typeof PostStorageBucketsStorageClass
+> = PostStorageBucketsStorageClass$inboundSchema;
 
 /** @internal */
 export const RetentionMode$inboundSchema: z.ZodNativeEnum<
@@ -135,7 +139,9 @@ export const PostStorageBucketsAttributes$inboundSchema: z.ZodType<
   region: z.string(),
   scoped: z.boolean().default(false),
   customer: z.string().optional(),
-  storage_class: StorageClass$inboundSchema.default("standard"),
+  storage_class: PostStorageBucketsStorageClass$inboundSchema.default(
+    "standard",
+  ),
   versioning: z.boolean().default(false),
   locking: z.boolean().default(false),
   retention_mode: RetentionMode$inboundSchema.default("NONE"),
@@ -172,7 +178,9 @@ export const PostStorageBucketsAttributes$outboundSchema: z.ZodType<
   region: z.string(),
   scoped: z.boolean().default(false),
   customer: z.string().optional(),
-  storageClass: StorageClass$outboundSchema.default("standard"),
+  storageClass: PostStorageBucketsStorageClass$outboundSchema.default(
+    "standard",
+  ),
   versioning: z.boolean().default(false),
   locking: z.boolean().default(false),
   retentionMode: RetentionMode$outboundSchema.default("NONE"),

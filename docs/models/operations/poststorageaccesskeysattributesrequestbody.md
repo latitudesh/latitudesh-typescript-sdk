@@ -1,0 +1,26 @@
+# PostStorageAccessKeysAttributesRequestBody
+
+## Example Usage
+
+```typescript
+import { PostStorageAccessKeysAttributesRequestBody } from "latitudesh-typescript-sdk/models/operations";
+
+let value: PostStorageAccessKeysAttributesRequestBody = {
+  project: "<value>",
+  accessKeyStorageClass: "standard",
+  name: "<value>",
+  accessScope: "limited_access",
+  region: "<value>",
+};
+```
+
+## Fields
+
+| Field                                                                                                                                         | Type                                                                                                                                          | Required                                                                                                                                      | Description                                                                                                                                   |
+| --------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| `project`                                                                                                                                     | *string*                                                                                                                                      | :heavy_check_mark:                                                                                                                            | Project ID or slug the access key belongs to.                                                                                                 |
+| `accessKeyStorageClass`                                                                                                                       | [operations.AccessKeyStorageClass](../../models/operations/accesskeystorageclass.md)                                                          | :heavy_check_mark:                                                                                                                            | Backend storage tier. `standard` provisions the key on Wasabi; `high_performance` provisions it on VAST.                                      |
+| `name`                                                                                                                                        | *string*                                                                                                                                      | :heavy_check_mark:                                                                                                                            | Name for the access key. Normalized server-side (lowercased, with special characters replaced by hyphens).                                    |
+| `accessScope`                                                                                                                                 | [operations.AccessScope](../../models/operations/accessscope.md)                                                                              | :heavy_check_mark:                                                                                                                            | `fullaccess` grants access to all of the project's buckets. `limited_access` restricts the key to the buckets listed in `bucket_permissions`. |
+| `region`                                                                                                                                      | *string*                                                                                                                                      | :heavy_check_mark:                                                                                                                            | Region slug (e.g., `DAL`, `SAO2`). Selects the VAST cluster for `high_performance` storage. Required for all requests.                        |
+| `bucketPermissions`                                                                                                                           | [operations.BucketPermission](../../models/operations/bucketpermission.md)[]                                                                  | :heavy_minus_sign:                                                                                                                            | Per-bucket permissions. Required when `access_scope` is `limited_access`; ignored for `fullaccess`.                                           |

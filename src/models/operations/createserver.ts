@@ -192,6 +192,10 @@ export type CreateServerAttributes2 = {
    */
   ipxe?: string | null | undefined;
   /**
+   * Keep network boot enabled so the server iPXE-boots on every reboot instead of booting from disk. Only supported with the 'ipxe' operating system.
+   */
+  persistentNetboot?: boolean | undefined;
+  /**
    * The server billing type. Accepts `hourly` and `monthly` for on demand projects and `yearly` for reserved projects.
    */
   billing?: CreateServerBilling2 | null | undefined;
@@ -368,6 +372,7 @@ export const CreateServerAttributes2$inboundSchema: z.ZodType<
     z.array(z.lazy(() => CreateServerDiskLayout2$inboundSchema)),
   ).optional(),
   ipxe: z.nullable(z.string()).optional(),
+  persistent_netboot: z.boolean().optional(),
   billing: z.nullable(CreateServerBilling2$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -375,6 +380,7 @@ export const CreateServerAttributes2$inboundSchema: z.ZodType<
     "ssh_keys": "sshKeys",
     "user_data": "userData",
     "disk_layout": "diskLayout",
+    "persistent_netboot": "persistentNetboot",
   });
 });
 /** @internal */
@@ -389,6 +395,7 @@ export type CreateServerAttributes2$Outbound = {
   raid?: string | null | undefined;
   disk_layout?: Array<CreateServerDiskLayout2$Outbound> | null | undefined;
   ipxe?: string | null | undefined;
+  persistent_netboot?: boolean | undefined;
   billing?: string | null | undefined;
 };
 
@@ -410,6 +417,7 @@ export const CreateServerAttributes2$outboundSchema: z.ZodType<
     z.array(z.lazy(() => CreateServerDiskLayout2$outboundSchema)),
   ).optional(),
   ipxe: z.nullable(z.string()).optional(),
+  persistentNetboot: z.boolean().optional(),
   billing: z.nullable(CreateServerBilling2$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -417,6 +425,7 @@ export const CreateServerAttributes2$outboundSchema: z.ZodType<
     sshKeys: "ssh_keys",
     userData: "user_data",
     diskLayout: "disk_layout",
+    persistentNetboot: "persistent_netboot",
   });
 });
 

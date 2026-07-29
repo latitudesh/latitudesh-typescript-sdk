@@ -50,6 +50,10 @@ export type DeployConfigAttributes = {
   userData?: string | undefined;
   sshKeys?: Array<string> | undefined;
   partitions?: Array<Partition> | null | undefined;
+  /**
+   * Keep network boot enabled so the server iPXE-boots on every reboot instead of booting from disk. Only supported with the 'ipxe' operating system.
+   */
+  persistentNetboot?: boolean | null | undefined;
 };
 
 export type DeployConfigData = {
@@ -207,12 +211,14 @@ export const DeployConfigAttributes$inboundSchema: z.ZodType<
   ssh_keys: z.array(z.string()).optional(),
   partitions: z.nullable(z.array(z.lazy(() => Partition$inboundSchema)))
     .optional(),
+  persistent_netboot: z.nullable(z.boolean()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "operating_system": "operatingSystem",
     "disk_layout": "diskLayout",
     "user_data": "userData",
     "ssh_keys": "sshKeys",
+    "persistent_netboot": "persistentNetboot",
   });
 });
 /** @internal */
@@ -224,6 +230,7 @@ export type DeployConfigAttributes$Outbound = {
   user_data?: string | undefined;
   ssh_keys?: Array<string> | undefined;
   partitions?: Array<Partition$Outbound> | null | undefined;
+  persistent_netboot?: boolean | null | undefined;
 };
 
 /** @internal */
@@ -241,12 +248,14 @@ export const DeployConfigAttributes$outboundSchema: z.ZodType<
   sshKeys: z.array(z.string()).optional(),
   partitions: z.nullable(z.array(z.lazy(() => Partition$outboundSchema)))
     .optional(),
+  persistentNetboot: z.nullable(z.boolean()).optional(),
 }).transform((v) => {
   return remap$(v, {
     operatingSystem: "operating_system",
     diskLayout: "disk_layout",
     userData: "user_data",
     sshKeys: "ssh_keys",
+    persistentNetboot: "persistent_netboot",
   });
 });
 

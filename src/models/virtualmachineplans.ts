@@ -48,7 +48,7 @@ export type VirtualMachinePlansNic = {
   /**
    * Number of NICs
    */
-  count?: string | undefined;
+  count?: number | undefined;
 };
 
 /**
@@ -91,7 +91,7 @@ export type VirtualMachinePlansSpecs = {
   /**
    * The GPU type
    */
-  gpu?: string | undefined;
+  gpu?: string | null | undefined;
   /**
    * VRAM per GPU in GB
    */
@@ -187,6 +187,10 @@ export type VirtualMachinePlansAttributes = {
    * The name of the plan
    */
   name?: string | undefined;
+  /**
+   * The slug of the plan, used to create virtual machines
+   */
+  slug?: string | undefined;
   specs?: VirtualMachinePlansSpecs | undefined;
   regions?: Array<VirtualMachinePlansRegion> | undefined;
   /**
@@ -266,12 +270,12 @@ export const VirtualMachinePlansNic$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   type: z.string().optional(),
-  count: z.string().optional(),
+  count: z.number().int().optional(),
 });
 /** @internal */
 export type VirtualMachinePlansNic$Outbound = {
   type?: string | undefined;
-  count?: string | undefined;
+  count?: number | undefined;
 };
 
 /** @internal */
@@ -281,7 +285,7 @@ export const VirtualMachinePlansNic$outboundSchema: z.ZodType<
   VirtualMachinePlansNic
 > = z.object({
   type: z.string().optional(),
-  count: z.string().optional(),
+  count: z.number().int().optional(),
 });
 
 export function virtualMachinePlansNicToJSON(
@@ -381,7 +385,7 @@ export const VirtualMachinePlansSpecs$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   memory: z.number().int().optional(),
-  gpu: z.string().optional(),
+  gpu: z.nullable(z.string()).optional(),
   vram_per_gpu: z.nullable(z.number().int()).optional(),
   vcpus: z.number().int().optional(),
   vcpu: z.lazy(() => Vcpu$inboundSchema).optional(),
@@ -396,7 +400,7 @@ export const VirtualMachinePlansSpecs$inboundSchema: z.ZodType<
 /** @internal */
 export type VirtualMachinePlansSpecs$Outbound = {
   memory?: number | undefined;
-  gpu?: string | undefined;
+  gpu?: string | null | undefined;
   vram_per_gpu?: number | null | undefined;
   vcpus?: number | undefined;
   vcpu?: Vcpu$Outbound | undefined;
@@ -411,7 +415,7 @@ export const VirtualMachinePlansSpecs$outboundSchema: z.ZodType<
   VirtualMachinePlansSpecs
 > = z.object({
   memory: z.number().int().optional(),
-  gpu: z.string().optional(),
+  gpu: z.nullable(z.string()).optional(),
   vramPerGpu: z.nullable(z.number().int()).optional(),
   vcpus: z.number().int().optional(),
   vcpu: z.lazy(() => Vcpu$outboundSchema).optional(),
@@ -721,6 +725,7 @@ export const VirtualMachinePlansAttributes$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   name: z.string().optional(),
+  slug: z.string().optional(),
   specs: z.lazy(() => VirtualMachinePlansSpecs$inboundSchema).optional(),
   regions: z.array(z.lazy(() => VirtualMachinePlansRegion$inboundSchema))
     .optional(),
@@ -735,6 +740,7 @@ export const VirtualMachinePlansAttributes$inboundSchema: z.ZodType<
 /** @internal */
 export type VirtualMachinePlansAttributes$Outbound = {
   name?: string | undefined;
+  slug?: string | undefined;
   specs?: VirtualMachinePlansSpecs$Outbound | undefined;
   regions?: Array<VirtualMachinePlansRegion$Outbound> | undefined;
   stock_level?: string | undefined;
@@ -748,6 +754,7 @@ export const VirtualMachinePlansAttributes$outboundSchema: z.ZodType<
   VirtualMachinePlansAttributes
 > = z.object({
   name: z.string().optional(),
+  slug: z.string().optional(),
   specs: z.lazy(() => VirtualMachinePlansSpecs$outboundSchema).optional(),
   regions: z.array(z.lazy(() => VirtualMachinePlansRegion$outboundSchema))
     .optional(),
