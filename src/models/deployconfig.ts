@@ -16,30 +16,24 @@ export const DeployConfigRole = {
 } as const;
 export type DeployConfigRole = ClosedEnum<typeof DeployConfigRole>;
 
-export const RaidLevel = {
+export const DeployConfigRaidLevel = {
   Raid0: "raid-0",
   Raid1: "raid-1",
 } as const;
-export type RaidLevel = ClosedEnum<typeof RaidLevel>;
+export type DeployConfigRaidLevel = ClosedEnum<typeof DeployConfigRaidLevel>;
 
-export const Filesystem = {
+export const DeployConfigFilesystem = {
   Ext4: "ext4",
   Xfs: "xfs",
 } as const;
-export type Filesystem = ClosedEnum<typeof Filesystem>;
+export type DeployConfigFilesystem = ClosedEnum<typeof DeployConfigFilesystem>;
 
 export type DiskLayout = {
   count: number;
   role: DeployConfigRole;
-  raidLevel?: RaidLevel | null | undefined;
-  filesystem?: Filesystem | null | undefined;
+  raidLevel?: DeployConfigRaidLevel | null | undefined;
+  filesystem?: DeployConfigFilesystem | null | undefined;
   mountPoint?: string | null | undefined;
-};
-
-export type Partition = {
-  path?: string | undefined;
-  sizeInGb?: number | undefined;
-  filesystemType?: string | undefined;
 };
 
 export type DeployConfigAttributes = {
@@ -49,7 +43,6 @@ export type DeployConfigAttributes = {
   diskLayout?: Array<DiskLayout> | null | undefined;
   userData?: string | undefined;
   sshKeys?: Array<string> | undefined;
-  partitions?: Array<Partition> | null | undefined;
   /**
    * Keep network boot enabled so the server iPXE-boots on every reboot instead of booting from disk. Only supported with the 'ipxe' operating system.
    */
@@ -75,18 +68,22 @@ export const DeployConfigRole$outboundSchema: z.ZodNativeEnum<
 > = DeployConfigRole$inboundSchema;
 
 /** @internal */
-export const RaidLevel$inboundSchema: z.ZodNativeEnum<typeof RaidLevel> = z
-  .nativeEnum(RaidLevel);
+export const DeployConfigRaidLevel$inboundSchema: z.ZodNativeEnum<
+  typeof DeployConfigRaidLevel
+> = z.nativeEnum(DeployConfigRaidLevel);
 /** @internal */
-export const RaidLevel$outboundSchema: z.ZodNativeEnum<typeof RaidLevel> =
-  RaidLevel$inboundSchema;
+export const DeployConfigRaidLevel$outboundSchema: z.ZodNativeEnum<
+  typeof DeployConfigRaidLevel
+> = DeployConfigRaidLevel$inboundSchema;
 
 /** @internal */
-export const Filesystem$inboundSchema: z.ZodNativeEnum<typeof Filesystem> = z
-  .nativeEnum(Filesystem);
+export const DeployConfigFilesystem$inboundSchema: z.ZodNativeEnum<
+  typeof DeployConfigFilesystem
+> = z.nativeEnum(DeployConfigFilesystem);
 /** @internal */
-export const Filesystem$outboundSchema: z.ZodNativeEnum<typeof Filesystem> =
-  Filesystem$inboundSchema;
+export const DeployConfigFilesystem$outboundSchema: z.ZodNativeEnum<
+  typeof DeployConfigFilesystem
+> = DeployConfigFilesystem$inboundSchema;
 
 /** @internal */
 export const DiskLayout$inboundSchema: z.ZodType<
@@ -96,8 +93,8 @@ export const DiskLayout$inboundSchema: z.ZodType<
 > = z.object({
   count: z.number().int(),
   role: DeployConfigRole$inboundSchema,
-  raid_level: z.nullable(RaidLevel$inboundSchema).optional(),
-  filesystem: z.nullable(Filesystem$inboundSchema).optional(),
+  raid_level: z.nullable(DeployConfigRaidLevel$inboundSchema).optional(),
+  filesystem: z.nullable(DeployConfigFilesystem$inboundSchema).optional(),
   mount_point: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -122,8 +119,8 @@ export const DiskLayout$outboundSchema: z.ZodType<
 > = z.object({
   count: z.number().int(),
   role: DeployConfigRole$outboundSchema,
-  raidLevel: z.nullable(RaidLevel$outboundSchema).optional(),
-  filesystem: z.nullable(Filesystem$outboundSchema).optional(),
+  raidLevel: z.nullable(DeployConfigRaidLevel$outboundSchema).optional(),
+  filesystem: z.nullable(DeployConfigFilesystem$outboundSchema).optional(),
   mountPoint: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -146,57 +143,6 @@ export function diskLayoutFromJSON(
 }
 
 /** @internal */
-export const Partition$inboundSchema: z.ZodType<
-  Partition,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  path: z.string().optional(),
-  size_in_gb: z.number().int().optional(),
-  filesystem_type: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "size_in_gb": "sizeInGb",
-    "filesystem_type": "filesystemType",
-  });
-});
-/** @internal */
-export type Partition$Outbound = {
-  path?: string | undefined;
-  size_in_gb?: number | undefined;
-  filesystem_type?: string | undefined;
-};
-
-/** @internal */
-export const Partition$outboundSchema: z.ZodType<
-  Partition$Outbound,
-  z.ZodTypeDef,
-  Partition
-> = z.object({
-  path: z.string().optional(),
-  sizeInGb: z.number().int().optional(),
-  filesystemType: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    sizeInGb: "size_in_gb",
-    filesystemType: "filesystem_type",
-  });
-});
-
-export function partitionToJSON(partition: Partition): string {
-  return JSON.stringify(Partition$outboundSchema.parse(partition));
-}
-export function partitionFromJSON(
-  jsonString: string,
-): SafeParseResult<Partition, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Partition$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Partition' from JSON`,
-  );
-}
-
-/** @internal */
 export const DeployConfigAttributes$inboundSchema: z.ZodType<
   DeployConfigAttributes,
   z.ZodTypeDef,
@@ -209,8 +155,6 @@ export const DeployConfigAttributes$inboundSchema: z.ZodType<
     .optional(),
   user_data: z.string().optional(),
   ssh_keys: z.array(z.string()).optional(),
-  partitions: z.nullable(z.array(z.lazy(() => Partition$inboundSchema)))
-    .optional(),
   persistent_netboot: z.nullable(z.boolean()).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -229,7 +173,6 @@ export type DeployConfigAttributes$Outbound = {
   disk_layout?: Array<DiskLayout$Outbound> | null | undefined;
   user_data?: string | undefined;
   ssh_keys?: Array<string> | undefined;
-  partitions?: Array<Partition$Outbound> | null | undefined;
   persistent_netboot?: boolean | null | undefined;
 };
 
@@ -246,8 +189,6 @@ export const DeployConfigAttributes$outboundSchema: z.ZodType<
     .optional(),
   userData: z.string().optional(),
   sshKeys: z.array(z.string()).optional(),
-  partitions: z.nullable(z.array(z.lazy(() => Partition$outboundSchema)))
-    .optional(),
   persistentNetboot: z.nullable(z.boolean()).optional(),
 }).transform((v) => {
   return remap$(v, {

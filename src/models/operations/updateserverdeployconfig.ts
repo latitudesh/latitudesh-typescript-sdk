@@ -84,12 +84,6 @@ export type UpdateServerDeployConfigDiskLayout2 = {
   mountPoint?: string | null | undefined;
 };
 
-export type UpdateServerDeployConfigPartition2 = {
-  sizeInGb?: number | undefined;
-  path?: string | undefined;
-  filesystemType?: string | undefined;
-};
-
 export type UpdateServerDeployConfigAttributes2 = {
   hostname?: string | null | undefined;
   operatingSystem?: UpdateServerDeployConfigOperatingSystem2 | null | undefined;
@@ -103,7 +97,6 @@ export type UpdateServerDeployConfigAttributes2 = {
    */
   userData?: string | null | undefined;
   sshKeys?: Array<string> | null | undefined;
-  partitions?: Array<UpdateServerDeployConfigPartition2> | null | undefined;
   /**
    * URL where iPXE script is stored on, necessary for custom image deployments. This attribute is required when operating system iPXE is selected.
    */
@@ -250,64 +243,6 @@ export function updateServerDeployConfigDiskLayout2FromJSON(
 }
 
 /** @internal */
-export const UpdateServerDeployConfigPartition2$inboundSchema: z.ZodType<
-  UpdateServerDeployConfigPartition2,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  size_in_gb: z.number().int().optional(),
-  path: z.string().optional(),
-  filesystem_type: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "size_in_gb": "sizeInGb",
-    "filesystem_type": "filesystemType",
-  });
-});
-/** @internal */
-export type UpdateServerDeployConfigPartition2$Outbound = {
-  size_in_gb?: number | undefined;
-  path?: string | undefined;
-  filesystem_type?: string | undefined;
-};
-
-/** @internal */
-export const UpdateServerDeployConfigPartition2$outboundSchema: z.ZodType<
-  UpdateServerDeployConfigPartition2$Outbound,
-  z.ZodTypeDef,
-  UpdateServerDeployConfigPartition2
-> = z.object({
-  sizeInGb: z.number().int().optional(),
-  path: z.string().optional(),
-  filesystemType: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    sizeInGb: "size_in_gb",
-    filesystemType: "filesystem_type",
-  });
-});
-
-export function updateServerDeployConfigPartition2ToJSON(
-  updateServerDeployConfigPartition2: UpdateServerDeployConfigPartition2,
-): string {
-  return JSON.stringify(
-    UpdateServerDeployConfigPartition2$outboundSchema.parse(
-      updateServerDeployConfigPartition2,
-    ),
-  );
-}
-export function updateServerDeployConfigPartition2FromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateServerDeployConfigPartition2, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      UpdateServerDeployConfigPartition2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateServerDeployConfigPartition2' from JSON`,
-  );
-}
-
-/** @internal */
 export const UpdateServerDeployConfigAttributes2$inboundSchema: z.ZodType<
   UpdateServerDeployConfigAttributes2,
   z.ZodTypeDef,
@@ -323,9 +258,6 @@ export const UpdateServerDeployConfigAttributes2$inboundSchema: z.ZodType<
   ).optional(),
   user_data: z.nullable(z.string()).optional(),
   ssh_keys: z.nullable(z.array(z.string())).optional(),
-  partitions: z.nullable(
-    z.array(z.lazy(() => UpdateServerDeployConfigPartition2$inboundSchema)),
-  ).optional(),
   ipxe_url: z.nullable(z.string()).optional(),
   persistent_netboot: z.boolean().optional(),
 }).transform((v) => {
@@ -349,10 +281,6 @@ export type UpdateServerDeployConfigAttributes2$Outbound = {
     | undefined;
   user_data?: string | null | undefined;
   ssh_keys?: Array<string> | null | undefined;
-  partitions?:
-    | Array<UpdateServerDeployConfigPartition2$Outbound>
-    | null
-    | undefined;
   ipxe_url?: string | null | undefined;
   persistent_netboot?: boolean | undefined;
 };
@@ -373,9 +301,6 @@ export const UpdateServerDeployConfigAttributes2$outboundSchema: z.ZodType<
   ).optional(),
   userData: z.nullable(z.string()).optional(),
   sshKeys: z.nullable(z.array(z.string())).optional(),
-  partitions: z.nullable(
-    z.array(z.lazy(() => UpdateServerDeployConfigPartition2$outboundSchema)),
-  ).optional(),
   ipxeUrl: z.nullable(z.string()).optional(),
   persistentNetboot: z.boolean().optional(),
 }).transform((v) => {

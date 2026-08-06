@@ -20,7 +20,7 @@ export type CreateServerOutOfBandAttributes2 = {
   /**
    * SSH Key ID to set for out of band
    */
-  sshKeyId?: string | undefined;
+  sshKeyId: string;
 };
 
 export type CreateServerOutOfBandData2 = {
@@ -52,7 +52,7 @@ export const CreateServerOutOfBandAttributes2$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  ssh_key_id: z.string().optional(),
+  ssh_key_id: z.string(),
 }).transform((v) => {
   return remap$(v, {
     "ssh_key_id": "sshKeyId",
@@ -60,7 +60,7 @@ export const CreateServerOutOfBandAttributes2$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type CreateServerOutOfBandAttributes2$Outbound = {
-  ssh_key_id?: string | undefined;
+  ssh_key_id: string;
 };
 
 /** @internal */
@@ -69,7 +69,7 @@ export const CreateServerOutOfBandAttributes2$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateServerOutOfBandAttributes2
 > = z.object({
-  sshKeyId: z.string().optional(),
+  sshKeyId: z.string(),
 }).transform((v) => {
   return remap$(v, {
     sshKeyId: "ssh_key_id",

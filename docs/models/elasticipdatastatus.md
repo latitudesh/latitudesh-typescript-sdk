@@ -7,11 +7,11 @@ The current status of the Elastic IP
 ```typescript
 import { ElasticIpDataStatus } from "latitudesh-typescript-sdk/models";
 
-let value: ElasticIpDataStatus = "active";
+let value: ElasticIpDataStatus = "configuring";
 ```
 
 ## Values
 
 ```typescript
-"configuring" | "active" | "moving" | "releasing" | "error"
+"pending" | "configuring" | "active" | "moving" | "releasing" | "error"
 ```

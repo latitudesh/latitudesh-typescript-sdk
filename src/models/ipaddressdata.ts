@@ -47,11 +47,11 @@ export type IpAddressDataRegion = {
 };
 
 /**
- * Server assignment information. Returns an empty object when the IP is not assigned to an active server (e.g., when the server is decommissioning or deleted).
+ * Server assignment information. Returns an empty object when the IP is not assigned to an active server (e.g., when the server is decommissioning or deleted). The hostname is null when the assigned server has no hostname set.
  */
 export type Assignment = {
   serverId?: string | undefined;
-  hostname?: string | undefined;
+  hostname?: string | null | undefined;
   assignedAt?: string | undefined;
 };
 
@@ -78,7 +78,7 @@ export type IpAddressDataAttributes = {
   region?: IpAddressDataRegion | undefined;
   available?: boolean | undefined;
   /**
-   * Server assignment information. Returns an empty object when the IP is not assigned to an active server (e.g., when the server is decommissioning or deleted).
+   * Server assignment information. Returns an empty object when the IP is not assigned to an active server (e.g., when the server is decommissioning or deleted). The hostname is null when the assigned server has no hostname set.
    */
   assignment?: Assignment | undefined;
   /**
@@ -260,7 +260,7 @@ export const Assignment$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   server_id: z.string().optional(),
-  hostname: z.string().optional(),
+  hostname: z.nullable(z.string()).optional(),
   assigned_at: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -271,7 +271,7 @@ export const Assignment$inboundSchema: z.ZodType<
 /** @internal */
 export type Assignment$Outbound = {
   server_id?: string | undefined;
-  hostname?: string | undefined;
+  hostname?: string | null | undefined;
   assigned_at?: string | undefined;
 };
 
@@ -282,7 +282,7 @@ export const Assignment$outboundSchema: z.ZodType<
   Assignment
 > = z.object({
   serverId: z.string().optional(),
-  hostname: z.string().optional(),
+  hostname: z.nullable(z.string()).optional(),
   assignedAt: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {

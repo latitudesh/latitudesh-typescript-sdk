@@ -157,23 +157,23 @@ export type CreateServerAttributes2 = {
   /**
    * The project (ID or Slug) to deploy the server
    */
-  project?: string | undefined;
+  project: string;
   /**
    * The plan slug to choose server from, defining the specs the server will have
    */
-  plan?: Plan2 | undefined;
+  plan: Plan2;
   /**
    * The site slug to deploy the server
    */
-  site?: CreateServerSite2 | undefined;
+  site: CreateServerSite2;
   /**
    * The operating system slug for the new server
    */
-  operatingSystem?: CreateServerOperatingSystem2 | undefined;
+  operatingSystem: CreateServerOperatingSystem2;
   /**
    * The server hostname
    */
-  hostname?: string | undefined;
+  hostname: string;
   /**
    * SSH Keys to set on the server
    */
@@ -360,11 +360,11 @@ export const CreateServerAttributes2$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  project: z.string().optional(),
-  plan: Plan2$inboundSchema.optional(),
-  site: CreateServerSite2$inboundSchema.optional(),
-  operating_system: CreateServerOperatingSystem2$inboundSchema.optional(),
-  hostname: z.string().optional(),
+  project: z.string(),
+  plan: Plan2$inboundSchema,
+  site: CreateServerSite2$inboundSchema,
+  operating_system: CreateServerOperatingSystem2$inboundSchema,
+  hostname: z.string(),
   ssh_keys: z.nullable(z.array(z.string())).optional(),
   user_data: z.nullable(z.string()).optional(),
   raid: z.nullable(CreateServerRaid2$inboundSchema).optional(),
@@ -385,11 +385,11 @@ export const CreateServerAttributes2$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type CreateServerAttributes2$Outbound = {
-  project?: string | undefined;
-  plan?: string | undefined;
-  site?: string | undefined;
-  operating_system?: string | undefined;
-  hostname?: string | undefined;
+  project: string;
+  plan: string;
+  site: string;
+  operating_system: string;
+  hostname: string;
   ssh_keys?: Array<string> | null | undefined;
   user_data?: string | null | undefined;
   raid?: string | null | undefined;
@@ -405,11 +405,11 @@ export const CreateServerAttributes2$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateServerAttributes2
 > = z.object({
-  project: z.string().optional(),
-  plan: Plan2$outboundSchema.optional(),
-  site: CreateServerSite2$outboundSchema.optional(),
-  operatingSystem: CreateServerOperatingSystem2$outboundSchema.optional(),
-  hostname: z.string().optional(),
+  project: z.string(),
+  plan: Plan2$outboundSchema,
+  site: CreateServerSite2$outboundSchema,
+  operatingSystem: CreateServerOperatingSystem2$outboundSchema,
+  hostname: z.string(),
   sshKeys: z.nullable(z.array(z.string())).optional(),
   userData: z.nullable(z.string()).optional(),
   raid: z.nullable(CreateServerRaid2$outboundSchema).optional(),

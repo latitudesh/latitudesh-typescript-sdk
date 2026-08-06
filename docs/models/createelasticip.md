@@ -8,10 +8,6 @@ import { CreateElasticIp } from "latitudesh-typescript-sdk/models";
 let value: CreateElasticIp = {
   data: {
     type: "elastic_ips",
-    attributes: {
-      projectId: "<id>",
-      serverId: "<id>",
-    },
   },
 };
 ```

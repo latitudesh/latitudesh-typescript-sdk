@@ -214,6 +214,13 @@ run();
 * [delete](docs/sdks/apikeys/README.md#delete) - Delete API key
 * [updateApiKey](docs/sdks/apikeys/README.md#updateapikey) - Update API key settings
 
+### [BaselinesPreview](docs/sdks/baselinespreview/README.md)
+
+* [getBaselines](docs/sdks/baselinespreview/README.md#getbaselines) - List baselines
+* [createBaseline](docs/sdks/baselinespreview/README.md#createbaseline) - Create baseline
+* [getBaseline](docs/sdks/baselinespreview/README.md#getbaseline) - Retrieve baseline
+* [destroyBaseline](docs/sdks/baselinespreview/README.md#destroybaseline) - Delete baseline
+
 ### [Billing](docs/sdks/billing/README.md)
 
 * [listUsage](docs/sdks/billing/README.md#listusage) - Retrieve billing usage
@@ -233,6 +240,10 @@ run();
 * [getElasticIp](docs/sdks/elasticips/README.md#getelasticip) - Retrieve an Elastic IP
 * [deleteElasticIp](docs/sdks/elasticips/README.md#deleteelasticip) - Release an Elastic IP
 * [updateElasticIp](docs/sdks/elasticips/README.md#updateelasticip) - Move an Elastic IP
+* [listElasticIpBgpSessions](docs/sdks/elasticips/README.md#listelasticipbgpsessions) - List BGP sessions
+* [createElasticIpBgpSession](docs/sdks/elasticips/README.md#createelasticipbgpsession) - Create a BGP session
+* [getElasticIpBgpSession](docs/sdks/elasticips/README.md#getelasticipbgpsession) - Retrieve a BGP session
+* [deleteElasticIpBgpSession](docs/sdks/elasticips/README.md#deleteelasticipbgpsession) - Delete a BGP session
 
 ### [Events](docs/sdks/events/README.md)
 
@@ -478,6 +489,10 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`apiKeysList`](docs/sdks/apikeys/README.md#list) - List API keys
 - [`apiKeysUpdate`](docs/sdks/apikeys/README.md#update) - Rotate API key
 - [`apiKeysUpdateApiKey`](docs/sdks/apikeys/README.md#updateapikey) - Update API key settings
+- [`baselinesPreviewCreateBaseline`](docs/sdks/baselinespreview/README.md#createbaseline) - Create baseline
+- [`baselinesPreviewDestroyBaseline`](docs/sdks/baselinespreview/README.md#destroybaseline) - Delete baseline
+- [`baselinesPreviewGetBaseline`](docs/sdks/baselinespreview/README.md#getbaseline) - Retrieve baseline
+- [`baselinesPreviewGetBaselines`](docs/sdks/baselinespreview/README.md#getbaselines) - List baselines
 - [`billingListUsage`](docs/sdks/billing/README.md#listusage) - Retrieve billing usage
 - [`blockStorageDeleteStorageVolumes`](docs/sdks/blockstorage/README.md#deletestoragevolumes) - Delete volume
 - [`blockStorageGetStorageVolume`](docs/sdks/blockstorage/README.md#getstoragevolume) - Retrieve volume
@@ -485,8 +500,12 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`blockStoragePostStorageVolumes`](docs/sdks/blockstorage/README.md#poststoragevolumes) - Create volume
 - [`blockStoragePostStorageVolumesMount`](docs/sdks/blockstorage/README.md#poststoragevolumesmount) - Mount volume
 - [`elasticIpsCreateElasticIp`](docs/sdks/elasticips/README.md#createelasticip) - Create an Elastic IP
+- [`elasticIpsCreateElasticIpBgpSession`](docs/sdks/elasticips/README.md#createelasticipbgpsession) - Create a BGP session
 - [`elasticIpsDeleteElasticIp`](docs/sdks/elasticips/README.md#deleteelasticip) - Release an Elastic IP
+- [`elasticIpsDeleteElasticIpBgpSession`](docs/sdks/elasticips/README.md#deleteelasticipbgpsession) - Delete a BGP session
 - [`elasticIpsGetElasticIp`](docs/sdks/elasticips/README.md#getelasticip) - Retrieve an Elastic IP
+- [`elasticIpsGetElasticIpBgpSession`](docs/sdks/elasticips/README.md#getelasticipbgpsession) - Retrieve a BGP session
+- [`elasticIpsListElasticIpBgpSessions`](docs/sdks/elasticips/README.md#listelasticipbgpsessions) - List BGP sessions
 - [`elasticIpsListElasticIps`](docs/sdks/elasticips/README.md#listelasticips) - List Elastic IPs
 - [`elasticIpsUpdateElasticIp`](docs/sdks/elasticips/README.md#updateelasticip) - Move an Elastic IP
 - [`eventsList`](docs/sdks/events/README.md#list) - List events
@@ -751,8 +770,8 @@ async function run() {
       data: {
         type: "elastic_ips",
         attributes: {
-          projectId: "proj_AoW6vRnwkvLn0",
           serverId: "sv_2GmAlJ6BXlK1a",
+          projectId: "proj_AoW6vRnwkvLn0",
         },
       },
     });
@@ -795,7 +814,7 @@ run();
 
 
 **Inherit from [`LatitudeshError`](./src/models/errors/latitudesherror.ts)**:
-* [`ErrorObject`](./src/models/errors/errorobject.ts): Applicable to 37 of 150 methods.*
+* [`ErrorObject`](./src/models/errors/errorobject.ts): Applicable to 37 of 158 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>
