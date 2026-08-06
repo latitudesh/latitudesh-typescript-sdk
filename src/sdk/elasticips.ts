@@ -3,8 +3,12 @@
  */
 
 import { elasticIpsCreateElasticIp } from "../funcs/elasticIpsCreateElasticIp.js";
+import { elasticIpsCreateElasticIpBgpSession } from "../funcs/elasticIpsCreateElasticIpBgpSession.js";
 import { elasticIpsDeleteElasticIp } from "../funcs/elasticIpsDeleteElasticIp.js";
+import { elasticIpsDeleteElasticIpBgpSession } from "../funcs/elasticIpsDeleteElasticIpBgpSession.js";
 import { elasticIpsGetElasticIp } from "../funcs/elasticIpsGetElasticIp.js";
+import { elasticIpsGetElasticIpBgpSession } from "../funcs/elasticIpsGetElasticIpBgpSession.js";
+import { elasticIpsListElasticIpBgpSessions } from "../funcs/elasticIpsListElasticIpBgpSessions.js";
 import { elasticIpsListElasticIps } from "../funcs/elasticIpsListElasticIps.js";
 import { elasticIpsUpdateElasticIp } from "../funcs/elasticIpsUpdateElasticIp.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
@@ -95,6 +99,74 @@ export class ElasticIps extends ClientSDK {
     options?: RequestOptions,
   ): Promise<models.ElasticIp> {
     return unwrapAsync(elasticIpsUpdateElasticIp(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List BGP sessions
+   *
+   * @remarks
+   * List the BGP sessions announcing an elastic IP
+   */
+  async listElasticIpBgpSessions(
+    request: operations.ListElasticIpBgpSessionsRequest,
+    options?: RequestOptions,
+  ): Promise<models.BgpSessions> {
+    return unwrapAsync(elasticIpsListElasticIpBgpSessions(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Create a BGP session
+   *
+   * @remarks
+   * Announce an elastic IP from a server over BGP
+   */
+  async createElasticIpBgpSession(
+    request: operations.CreateElasticIpBgpSessionRequest,
+    options?: RequestOptions,
+  ): Promise<models.BgpSession> {
+    return unwrapAsync(elasticIpsCreateElasticIpBgpSession(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Retrieve a BGP session
+   *
+   * @remarks
+   * Retrieve a BGP session announcing an elastic IP
+   */
+  async getElasticIpBgpSession(
+    request: operations.GetElasticIpBgpSessionRequest,
+    options?: RequestOptions,
+  ): Promise<models.BgpSession> {
+    return unwrapAsync(elasticIpsGetElasticIpBgpSession(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Delete a BGP session
+   *
+   * @remarks
+   * Stop announcing an elastic IP from a server
+   */
+  async deleteElasticIpBgpSession(
+    request: operations.DeleteElasticIpBgpSessionRequest,
+    options?: RequestOptions,
+  ): Promise<void> {
+    return unwrapAsync(elasticIpsDeleteElasticIpBgpSession(
       this,
       request,
       options,

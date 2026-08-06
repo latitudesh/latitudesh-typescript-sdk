@@ -20,7 +20,7 @@ export type VirtualMachineBackupPayloadAttributes = {
   /**
    * Virtual machine id to back up. Required on the top-level `POST /virtual_machine_backups`; taken from the path when nested under a VM.
    */
-  virtualMachine?: string | undefined;
+  virtualMachine: string;
 };
 
 export type VirtualMachineBackupPayloadData = {
@@ -47,7 +47,7 @@ export const VirtualMachineBackupPayloadAttributes$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  virtual_machine: z.string().optional(),
+  virtual_machine: z.string(),
 }).transform((v) => {
   return remap$(v, {
     "virtual_machine": "virtualMachine",
@@ -55,7 +55,7 @@ export const VirtualMachineBackupPayloadAttributes$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type VirtualMachineBackupPayloadAttributes$Outbound = {
-  virtual_machine?: string | undefined;
+  virtual_machine: string;
 };
 
 /** @internal */
@@ -64,7 +64,7 @@ export const VirtualMachineBackupPayloadAttributes$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   VirtualMachineBackupPayloadAttributes
 > = z.object({
-  virtualMachine: z.string().optional(),
+  virtualMachine: z.string(),
 }).transform((v) => {
   return remap$(v, {
     virtualMachine: "virtual_machine",

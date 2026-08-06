@@ -4,6 +4,7 @@
 
 import { ClientSDK } from "../lib/sdks.js";
 import { ApiKeys } from "./apikeys.js";
+import { BaselinesPreview } from "./baselinespreview.js";
 import { Billing } from "./billing.js";
 import { BlockStorage } from "./blockstorage.js";
 import { ElasticIps } from "./elasticips.js";
@@ -37,6 +38,11 @@ export class Latitudesh extends ClientSDK {
   private _apiKeys?: ApiKeys;
   get apiKeys(): ApiKeys {
     return (this._apiKeys ??= new ApiKeys(this._options));
+  }
+
+  private _baselinesPreview?: BaselinesPreview;
+  get baselinesPreview(): BaselinesPreview {
+    return (this._baselinesPreview ??= new BaselinesPreview(this._options));
   }
 
   private _billing?: Billing;

@@ -31,7 +31,7 @@ export type OutOfBandConnectionAttributes = {
    */
   credentials?: OutOfBandConnectionCredentials | undefined;
   port?: string | undefined;
-  accessIp?: string | undefined;
+  accessIp?: string | null | undefined;
   serverId?: string | undefined;
   status?: string | undefined;
 };
@@ -150,7 +150,7 @@ export const OutOfBandConnectionAttributes$inboundSchema: z.ZodType<
   credentials: z.lazy(() => OutOfBandConnectionCredentials$inboundSchema)
     .optional(),
   port: z.string().optional(),
-  access_ip: z.string().optional(),
+  access_ip: z.nullable(z.string()).optional(),
   server_id: z.string().optional(),
   status: z.string().optional(),
 }).transform((v) => {
@@ -168,7 +168,7 @@ export type OutOfBandConnectionAttributes$Outbound = {
   username?: string | undefined;
   credentials?: OutOfBandConnectionCredentials$Outbound | undefined;
   port?: string | undefined;
-  access_ip?: string | undefined;
+  access_ip?: string | null | undefined;
   server_id?: string | undefined;
   status?: string | undefined;
 };
@@ -185,7 +185,7 @@ export const OutOfBandConnectionAttributes$outboundSchema: z.ZodType<
   credentials: z.lazy(() => OutOfBandConnectionCredentials$outboundSchema)
     .optional(),
   port: z.string().optional(),
-  accessIp: z.string().optional(),
+  accessIp: z.nullable(z.string()).optional(),
   serverId: z.string().optional(),
   status: z.string().optional(),
 }).transform((v) => {

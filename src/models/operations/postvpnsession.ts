@@ -38,8 +38,8 @@ export const PostVpnSessionSite2 = {
 export type PostVpnSessionSite2 = OpenEnum<typeof PostVpnSessionSite2>;
 
 export type PostVpnSessionAttributes2 = {
-  site?: PostVpnSessionSite2 | undefined;
-  serverId?: string | undefined;
+  site: PostVpnSessionSite2;
+  serverId: string;
 };
 
 export type PostVpnSessionData2 = {
@@ -79,8 +79,8 @@ export const PostVpnSessionAttributes2$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  site: PostVpnSessionSite2$inboundSchema.optional(),
-  server_id: z.string().optional(),
+  site: PostVpnSessionSite2$inboundSchema,
+  server_id: z.string(),
 }).transform((v) => {
   return remap$(v, {
     "server_id": "serverId",
@@ -88,8 +88,8 @@ export const PostVpnSessionAttributes2$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type PostVpnSessionAttributes2$Outbound = {
-  site?: string | undefined;
-  server_id?: string | undefined;
+  site: string;
+  server_id: string;
 };
 
 /** @internal */
@@ -98,8 +98,8 @@ export const PostVpnSessionAttributes2$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PostVpnSessionAttributes2
 > = z.object({
-  site: PostVpnSessionSite2$outboundSchema.optional(),
-  serverId: z.string().optional(),
+  site: PostVpnSessionSite2$outboundSchema,
+  serverId: z.string(),
 }).transform((v) => {
   return remap$(v, {
     serverId: "server_id",

@@ -43,12 +43,6 @@ export type CreateServerReinstallOperatingSystem2 = ClosedEnum<
   typeof CreateServerReinstallOperatingSystem2
 >;
 
-export type CreateServerReinstallPartition2 = {
-  sizeInGb?: number | undefined;
-  path?: string | undefined;
-  filesystemType?: string | undefined;
-};
-
 /**
  * RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, or omit/null for no RAID configuration
  */
@@ -105,7 +99,6 @@ export type CreateServerReinstallAttributes2 = {
    * The server hostname to set upon reinstall
    */
   hostname?: string | undefined;
-  partitions?: Array<CreateServerReinstallPartition2> | null | undefined;
   /**
    * SSH Key IDs to set upon reinstall
    */
@@ -161,63 +154,6 @@ export const CreateServerReinstallOperatingSystem2$inboundSchema:
 export const CreateServerReinstallOperatingSystem2$outboundSchema:
   z.ZodNativeEnum<typeof CreateServerReinstallOperatingSystem2> =
     CreateServerReinstallOperatingSystem2$inboundSchema;
-
-/** @internal */
-export const CreateServerReinstallPartition2$inboundSchema: z.ZodType<
-  CreateServerReinstallPartition2,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  size_in_gb: z.number().int().optional(),
-  path: z.string().optional(),
-  filesystem_type: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "size_in_gb": "sizeInGb",
-    "filesystem_type": "filesystemType",
-  });
-});
-/** @internal */
-export type CreateServerReinstallPartition2$Outbound = {
-  size_in_gb?: number | undefined;
-  path?: string | undefined;
-  filesystem_type?: string | undefined;
-};
-
-/** @internal */
-export const CreateServerReinstallPartition2$outboundSchema: z.ZodType<
-  CreateServerReinstallPartition2$Outbound,
-  z.ZodTypeDef,
-  CreateServerReinstallPartition2
-> = z.object({
-  sizeInGb: z.number().int().optional(),
-  path: z.string().optional(),
-  filesystemType: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    sizeInGb: "size_in_gb",
-    filesystemType: "filesystem_type",
-  });
-});
-
-export function createServerReinstallPartition2ToJSON(
-  createServerReinstallPartition2: CreateServerReinstallPartition2,
-): string {
-  return JSON.stringify(
-    CreateServerReinstallPartition2$outboundSchema.parse(
-      createServerReinstallPartition2,
-    ),
-  );
-}
-export function createServerReinstallPartition2FromJSON(
-  jsonString: string,
-): SafeParseResult<CreateServerReinstallPartition2, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateServerReinstallPartition2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateServerReinstallPartition2' from JSON`,
-  );
-}
 
 /** @internal */
 export const CreateServerReinstallRaid2$inboundSchema: z.ZodNativeEnum<
@@ -331,9 +267,6 @@ export const CreateServerReinstallAttributes2$inboundSchema: z.ZodType<
   operating_system: CreateServerReinstallOperatingSystem2$inboundSchema
     .optional(),
   hostname: z.string().optional(),
-  partitions: z.nullable(
-    z.array(z.lazy(() => CreateServerReinstallPartition2$inboundSchema)),
-  ).optional(),
   ssh_keys: z.nullable(z.array(z.string())).optional(),
   user_data: z.nullable(z.string()).optional(),
   raid: z.nullable(CreateServerReinstallRaid2$inboundSchema).optional(),
@@ -355,10 +288,6 @@ export const CreateServerReinstallAttributes2$inboundSchema: z.ZodType<
 export type CreateServerReinstallAttributes2$Outbound = {
   operating_system?: string | undefined;
   hostname?: string | undefined;
-  partitions?:
-    | Array<CreateServerReinstallPartition2$Outbound>
-    | null
-    | undefined;
   ssh_keys?: Array<string> | null | undefined;
   user_data?: string | null | undefined;
   raid?: string | null | undefined;
@@ -379,9 +308,6 @@ export const CreateServerReinstallAttributes2$outboundSchema: z.ZodType<
   operatingSystem: CreateServerReinstallOperatingSystem2$outboundSchema
     .optional(),
   hostname: z.string().optional(),
-  partitions: z.nullable(
-    z.array(z.lazy(() => CreateServerReinstallPartition2$outboundSchema)),
-  ).optional(),
   sshKeys: z.nullable(z.array(z.string())).optional(),
   userData: z.nullable(z.string()).optional(),
   raid: z.nullable(CreateServerReinstallRaid2$outboundSchema).optional(),

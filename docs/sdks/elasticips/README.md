@@ -9,6 +9,10 @@
 * [getElasticIp](#getelasticip) - Retrieve an Elastic IP
 * [deleteElasticIp](#deleteelasticip) - Release an Elastic IP
 * [updateElasticIp](#updateelasticip) - Move an Elastic IP
+* [listElasticIpBgpSessions](#listelasticipbgpsessions) - List BGP sessions
+* [createElasticIpBgpSession](#createelasticipbgpsession) - Create a BGP session
+* [getElasticIpBgpSession](#getelasticipbgpsession) - Retrieve a BGP session
+* [deleteElasticIpBgpSession](#deleteelasticipbgpsession) - Delete a BGP session
 
 ## listElasticIps
 
@@ -103,10 +107,6 @@ async function run() {
   const result = await latitudesh.elasticIps.createElasticIp({
     data: {
       type: "elastic_ips",
-      attributes: {
-        projectId: "<id>",
-        serverId: "<id>",
-      },
     },
   });
 
@@ -134,10 +134,6 @@ async function run() {
   const res = await elasticIpsCreateElasticIp(latitudesh, {
     data: {
       type: "elastic_ips",
-      attributes: {
-        projectId: "<id>",
-        serverId: "<id>",
-      },
     },
   });
   if (res.ok) {
@@ -165,8 +161,8 @@ async function run() {
     data: {
       type: "elastic_ips",
       attributes: {
-        projectId: "proj_AoW6vRnwkvLn0",
         serverId: "sv_2GmAlJ6BXlK1a",
+        projectId: "proj_AoW6vRnwkvLn0",
       },
     },
   });
@@ -196,8 +192,8 @@ async function run() {
     data: {
       type: "elastic_ips",
       attributes: {
-        projectId: "proj_AoW6vRnwkvLn0",
         serverId: "sv_2GmAlJ6BXlK1a",
+        projectId: "proj_AoW6vRnwkvLn0",
       },
     },
   });
@@ -226,8 +222,8 @@ async function run() {
     data: {
       type: "elastic_ips",
       attributes: {
-        projectId: "<id>",
         serverId: "<id>",
+        projectId: "<id>",
       },
     },
   });
@@ -257,8 +253,8 @@ async function run() {
     data: {
       type: "elastic_ips",
       attributes: {
-        projectId: "<id>",
         serverId: "<id>",
+        projectId: "<id>",
       },
     },
   });
@@ -286,10 +282,6 @@ async function run() {
   const result = await latitudesh.elasticIps.createElasticIp({
     data: {
       type: "elastic_ips",
-      attributes: {
-        projectId: "<id>",
-        serverId: "<id>",
-      },
     },
   });
 
@@ -317,10 +309,6 @@ async function run() {
   const res = await elasticIpsCreateElasticIp(latitudesh, {
     data: {
       type: "elastic_ips",
-      attributes: {
-        projectId: "<id>",
-        serverId: "<id>",
-      },
     },
   });
   if (res.ok) {
@@ -347,10 +335,6 @@ async function run() {
   const result = await latitudesh.elasticIps.createElasticIp({
     data: {
       type: "elastic_ips",
-      attributes: {
-        projectId: "<id>",
-        serverId: "<id>",
-      },
     },
   });
 
@@ -378,10 +362,6 @@ async function run() {
   const res = await elasticIpsCreateElasticIp(latitudesh, {
     data: {
       type: "elastic_ips",
-      attributes: {
-        projectId: "<id>",
-        serverId: "<id>",
-      },
     },
   });
   if (res.ok) {
@@ -408,10 +388,6 @@ async function run() {
   const result = await latitudesh.elasticIps.createElasticIp({
     data: {
       type: "elastic_ips",
-      attributes: {
-        projectId: "<id>",
-        serverId: "<id>",
-      },
     },
   });
 
@@ -439,10 +415,6 @@ async function run() {
   const res = await elasticIpsCreateElasticIp(latitudesh, {
     data: {
       type: "elastic_ips",
-      attributes: {
-        projectId: "<id>",
-        serverId: "<id>",
-      },
     },
   });
   if (res.ok) {
@@ -469,10 +441,6 @@ async function run() {
   const result = await latitudesh.elasticIps.createElasticIp({
     data: {
       type: "elastic_ips",
-      attributes: {
-        projectId: "<id>",
-        serverId: "<id>",
-      },
     },
   });
 
@@ -500,10 +468,6 @@ async function run() {
   const res = await elasticIpsCreateElasticIp(latitudesh, {
     data: {
       type: "elastic_ips",
-      attributes: {
-        projectId: "<id>",
-        serverId: "<id>",
-      },
     },
   });
   if (res.ok) {
@@ -906,4 +870,316 @@ run();
 | Error Type                    | Status Code                   | Content Type                  |
 | ----------------------------- | ----------------------------- | ----------------------------- |
 | errors.ErrorObject            | 404, 422                      | application/vnd.api+json      |
+| errors.LatitudeshDefaultError | 4XX, 5XX                      | \*/\*                         |
+
+## listElasticIpBgpSessions
+
+List the BGP sessions announcing an elastic IP
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="list-elastic-ip-bgp-sessions" method="get" path="/elastic_ips/{elastic_ip_id}/bgp_sessions" example="Success" -->
+```typescript
+import { Latitudesh } from "latitudesh-typescript-sdk";
+
+const latitudesh = new Latitudesh({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const result = await latitudesh.elasticIps.listElasticIpBgpSessions({
+    elasticIpId: "ueip_v9BVDaGvdRm1W",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
+import { elasticIpsListElasticIpBgpSessions } from "latitudesh-typescript-sdk/funcs/elasticIpsListElasticIpBgpSessions.js";
+
+// Use `LatitudeshCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const latitudesh = new LatitudeshCore({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const res = await elasticIpsListElasticIpBgpSessions(latitudesh, {
+    elasticIpId: "ueip_v9BVDaGvdRm1W",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("elasticIpsListElasticIpBgpSessions failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.ListElasticIpBgpSessionsRequest](../../models/operations/listelasticipbgpsessionsrequest.md)                                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[models.BgpSessions](../../models/bgpsessions.md)\>**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| errors.LatitudeshDefaultError | 4XX, 5XX                      | \*/\*                         |
+
+## createElasticIpBgpSession
+
+Announce an elastic IP from a server over BGP
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="create-elastic-ip-bgp-session" method="post" path="/elastic_ips/{elastic_ip_id}/bgp_sessions" example="Accepted" -->
+```typescript
+import { Latitudesh } from "latitudesh-typescript-sdk";
+
+const latitudesh = new Latitudesh({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const result = await latitudesh.elasticIps.createElasticIpBgpSession({
+    elasticIpId: "ueip_059EqY7kOQj8p",
+    createBgpSession: {
+      data: {
+        type: "bgp_sessions",
+        attributes: {
+          serverId: "sv_A05EdQp4OvKYQ",
+        },
+      },
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
+import { elasticIpsCreateElasticIpBgpSession } from "latitudesh-typescript-sdk/funcs/elasticIpsCreateElasticIpBgpSession.js";
+
+// Use `LatitudeshCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const latitudesh = new LatitudeshCore({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const res = await elasticIpsCreateElasticIpBgpSession(latitudesh, {
+    elasticIpId: "ueip_059EqY7kOQj8p",
+    createBgpSession: {
+      data: {
+        type: "bgp_sessions",
+        attributes: {
+          serverId: "sv_A05EdQp4OvKYQ",
+        },
+      },
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("elasticIpsCreateElasticIpBgpSession failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.CreateElasticIpBgpSessionRequest](../../models/operations/createelasticipbgpsessionrequest.md)                                                                     | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[models.BgpSession](../../models/bgpsession.md)\>**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| errors.LatitudeshDefaultError | 4XX, 5XX                      | \*/\*                         |
+
+## getElasticIpBgpSession
+
+Retrieve a BGP session announcing an elastic IP
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="get-elastic-ip-bgp-session" method="get" path="/elastic_ips/{elastic_ip_id}/bgp_sessions/{id}" example="Success" -->
+```typescript
+import { Latitudesh } from "latitudesh-typescript-sdk";
+
+const latitudesh = new Latitudesh({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const result = await latitudesh.elasticIps.getElasticIpBgpSession({
+    elasticIpId: "ueip_e8pKq015DWAob",
+    id: "bgps_w49QDB9PqagKb",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
+import { elasticIpsGetElasticIpBgpSession } from "latitudesh-typescript-sdk/funcs/elasticIpsGetElasticIpBgpSession.js";
+
+// Use `LatitudeshCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const latitudesh = new LatitudeshCore({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const res = await elasticIpsGetElasticIpBgpSession(latitudesh, {
+    elasticIpId: "ueip_e8pKq015DWAob",
+    id: "bgps_w49QDB9PqagKb",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("elasticIpsGetElasticIpBgpSession failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.GetElasticIpBgpSessionRequest](../../models/operations/getelasticipbgpsessionrequest.md)                                                                           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[models.BgpSession](../../models/bgpsession.md)\>**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| errors.LatitudeshDefaultError | 4XX, 5XX                      | \*/\*                         |
+
+## deleteElasticIpBgpSession
+
+Stop announcing an elastic IP from a server
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="delete-elastic-ip-bgp-session" method="delete" path="/elastic_ips/{elastic_ip_id}/bgp_sessions/{id}" -->
+```typescript
+import { Latitudesh } from "latitudesh-typescript-sdk";
+
+const latitudesh = new Latitudesh({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  await latitudesh.elasticIps.deleteElasticIpBgpSession({
+    elasticIpId: "<id>",
+    id: "<id>",
+  });
+
+
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
+import { elasticIpsDeleteElasticIpBgpSession } from "latitudesh-typescript-sdk/funcs/elasticIpsDeleteElasticIpBgpSession.js";
+
+// Use `LatitudeshCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const latitudesh = new LatitudeshCore({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const res = await elasticIpsDeleteElasticIpBgpSession(latitudesh, {
+    elasticIpId: "<id>",
+    id: "<id>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("elasticIpsDeleteElasticIpBgpSession failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.DeleteElasticIpBgpSessionRequest](../../models/operations/deleteelasticipbgpsessionrequest.md)                                                                     | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<void\>**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
 | errors.LatitudeshDefaultError | 4XX, 5XX                      | \*/\*                         |

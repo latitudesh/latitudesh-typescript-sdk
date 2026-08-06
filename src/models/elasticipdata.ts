@@ -28,18 +28,20 @@ export type ElasticIpDataFamily = ClosedEnum<typeof ElasticIpDataFamily>;
 /**
  * The routing mode for this Elastic IP
  */
-export const Mode = {
+export const ElasticIpDataMode = {
   Routed: "routed",
+  Bgp: "bgp",
 } as const;
 /**
  * The routing mode for this Elastic IP
  */
-export type Mode = ClosedEnum<typeof Mode>;
+export type ElasticIpDataMode = ClosedEnum<typeof ElasticIpDataMode>;
 
 /**
  * The current status of the Elastic IP
  */
 export const ElasticIpDataStatus = {
+  Pending: "pending",
   Configuring: "configuring",
   Active: "active",
   Moving: "moving",
@@ -122,7 +124,7 @@ export type ElasticIpDataAttributes = {
   /**
    * The routing mode for this Elastic IP
    */
-  mode?: Mode | undefined;
+  mode?: ElasticIpDataMode | undefined;
   /**
    * The current status of the Elastic IP
    */
@@ -173,12 +175,13 @@ export const ElasticIpDataFamily$outboundSchema: z.ZodNativeEnum<
 > = ElasticIpDataFamily$inboundSchema;
 
 /** @internal */
-export const Mode$inboundSchema: z.ZodNativeEnum<typeof Mode> = z.nativeEnum(
-  Mode,
-);
+export const ElasticIpDataMode$inboundSchema: z.ZodNativeEnum<
+  typeof ElasticIpDataMode
+> = z.nativeEnum(ElasticIpDataMode);
 /** @internal */
-export const Mode$outboundSchema: z.ZodNativeEnum<typeof Mode> =
-  Mode$inboundSchema;
+export const ElasticIpDataMode$outboundSchema: z.ZodNativeEnum<
+  typeof ElasticIpDataMode
+> = ElasticIpDataMode$inboundSchema;
 
 /** @internal */
 export const ElasticIpDataStatus$inboundSchema: z.ZodNativeEnum<
@@ -391,7 +394,7 @@ export const ElasticIpDataAttributes$inboundSchema: z.ZodType<
   address: z.string().optional(),
   family: ElasticIpDataFamily$inboundSchema.optional(),
   prefix_length: z.number().int().optional(),
-  mode: Mode$inboundSchema.optional(),
+  mode: ElasticIpDataMode$inboundSchema.optional(),
   status: ElasticIpDataStatus$inboundSchema.optional(),
   created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
@@ -428,7 +431,7 @@ export const ElasticIpDataAttributes$outboundSchema: z.ZodType<
   address: z.string().optional(),
   family: ElasticIpDataFamily$outboundSchema.optional(),
   prefixLength: z.number().int().optional(),
-  mode: Mode$outboundSchema.optional(),
+  mode: ElasticIpDataMode$outboundSchema.optional(),
   status: ElasticIpDataStatus$outboundSchema.optional(),
   createdAt: z.date().transform(v => v.toISOString()).optional(),
   server: z.nullable(z.lazy(() => ElasticIpDataServer$outboundSchema))

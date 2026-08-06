@@ -19,7 +19,7 @@ export type PostSshKeyAttributes2 = {
   /**
    * Name of the SSH Key
    */
-  name?: string | undefined;
+  name: string;
   /**
    * Project ID or slug
    */
@@ -27,7 +27,7 @@ export type PostSshKeyAttributes2 = {
   /**
    * SSH Public Key
    */
-  publicKey?: string | undefined;
+  publicKey: string;
 };
 
 export type PostSshKeyData2 = {
@@ -61,9 +61,9 @@ export const PostSshKeyAttributes2$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  name: z.string().optional(),
+  name: z.string(),
   project: z.string().optional(),
-  public_key: z.string().optional(),
+  public_key: z.string(),
 }).transform((v) => {
   return remap$(v, {
     "public_key": "publicKey",
@@ -71,9 +71,9 @@ export const PostSshKeyAttributes2$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type PostSshKeyAttributes2$Outbound = {
-  name?: string | undefined;
+  name: string;
   project?: string | undefined;
-  public_key?: string | undefined;
+  public_key: string;
 };
 
 /** @internal */
@@ -82,9 +82,9 @@ export const PostSshKeyAttributes2$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PostSshKeyAttributes2
 > = z.object({
-  name: z.string().optional(),
+  name: z.string(),
   project: z.string().optional(),
-  publicKey: z.string().optional(),
+  publicKey: z.string(),
 }).transform((v) => {
   return remap$(v, {
     publicKey: "public_key",

@@ -18,6 +18,10 @@ import { tool$apiKeysDelete } from "./tools/apiKeysDelete.js";
 import { tool$apiKeysList } from "./tools/apiKeysList.js";
 import { tool$apiKeysUpdate } from "./tools/apiKeysUpdate.js";
 import { tool$apiKeysUpdateApiKey } from "./tools/apiKeysUpdateApiKey.js";
+import { tool$baselinesPreviewCreateBaseline } from "./tools/baselinesPreviewCreateBaseline.js";
+import { tool$baselinesPreviewDestroyBaseline } from "./tools/baselinesPreviewDestroyBaseline.js";
+import { tool$baselinesPreviewGetBaseline } from "./tools/baselinesPreviewGetBaseline.js";
+import { tool$baselinesPreviewGetBaselines } from "./tools/baselinesPreviewGetBaselines.js";
 import { tool$billingListUsage } from "./tools/billingListUsage.js";
 import { tool$blockStorageDeleteStorageVolumes } from "./tools/blockStorageDeleteStorageVolumes.js";
 import { tool$blockStorageGetStorageVolume } from "./tools/blockStorageGetStorageVolume.js";
@@ -25,8 +29,12 @@ import { tool$blockStorageGetStorageVolumes } from "./tools/blockStorageGetStora
 import { tool$blockStoragePostStorageVolumes } from "./tools/blockStoragePostStorageVolumes.js";
 import { tool$blockStoragePostStorageVolumesMount } from "./tools/blockStoragePostStorageVolumesMount.js";
 import { tool$elasticIpsCreateElasticIp } from "./tools/elasticIpsCreateElasticIp.js";
+import { tool$elasticIpsCreateElasticIpBgpSession } from "./tools/elasticIpsCreateElasticIpBgpSession.js";
 import { tool$elasticIpsDeleteElasticIp } from "./tools/elasticIpsDeleteElasticIp.js";
+import { tool$elasticIpsDeleteElasticIpBgpSession } from "./tools/elasticIpsDeleteElasticIpBgpSession.js";
 import { tool$elasticIpsGetElasticIp } from "./tools/elasticIpsGetElasticIp.js";
+import { tool$elasticIpsGetElasticIpBgpSession } from "./tools/elasticIpsGetElasticIpBgpSession.js";
+import { tool$elasticIpsListElasticIpBgpSessions } from "./tools/elasticIpsListElasticIpBgpSessions.js";
 import { tool$elasticIpsListElasticIps } from "./tools/elasticIpsListElasticIps.js";
 import { tool$elasticIpsUpdateElasticIp } from "./tools/elasticIpsUpdateElasticIp.js";
 import { tool$eventsList } from "./tools/eventsList.js";
@@ -175,7 +183,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Latitudesh",
-    version: "0.8.5",
+    version: "0.8.6",
   });
 
   const client = new LatitudeshCore({
@@ -211,6 +219,10 @@ export function createMCPServer(deps: {
   tool(tool$apiKeysUpdate);
   tool(tool$apiKeysDelete);
   tool(tool$apiKeysUpdateApiKey);
+  tool(tool$baselinesPreviewGetBaselines);
+  tool(tool$baselinesPreviewCreateBaseline);
+  tool(tool$baselinesPreviewGetBaseline);
+  tool(tool$baselinesPreviewDestroyBaseline);
   tool(tool$billingListUsage);
   tool(tool$eventsList);
   tool(tool$firewallsGetAllFirewallAssignments);
@@ -226,6 +238,10 @@ export function createMCPServer(deps: {
   tool(tool$elasticIpsGetElasticIp);
   tool(tool$elasticIpsDeleteElasticIp);
   tool(tool$elasticIpsUpdateElasticIp);
+  tool(tool$elasticIpsListElasticIpBgpSessions);
+  tool(tool$elasticIpsCreateElasticIpBgpSession);
+  tool(tool$elasticIpsGetElasticIpBgpSession);
+  tool(tool$elasticIpsDeleteElasticIpBgpSession);
   tool(tool$ipAddressesList);
   tool(tool$ipAddressesGet);
   tool(tool$teamsGet);
