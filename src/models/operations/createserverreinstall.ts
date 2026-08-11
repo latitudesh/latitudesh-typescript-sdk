@@ -120,6 +120,10 @@ export type CreateServerReinstallAttributes2 = {
    * Keep network boot enabled so the server iPXE-boots on every reboot instead of booting from disk. Only supported with the 'ipxe' operating system.
    */
   persistentNetboot?: boolean | undefined;
+  /**
+   * ID of a customer prefix to bond this server to during the reinstall. The prefix must belong to the same project and be in the same location as the server, and must have at least one free IP address. Applies to this reinstall only; omit it to leave any existing bond unchanged.
+   */
+  prefixId?: string | null | undefined;
 };
 
 export type CreateServerReinstallData2 = {
@@ -275,6 +279,7 @@ export const CreateServerReinstallAttributes2$inboundSchema: z.ZodType<
   ).optional(),
   ipxe: z.nullable(z.string()).optional(),
   persistent_netboot: z.boolean().optional(),
+  prefix_id: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "operating_system": "operatingSystem",
@@ -282,6 +287,7 @@ export const CreateServerReinstallAttributes2$inboundSchema: z.ZodType<
     "user_data": "userData",
     "disk_layout": "diskLayout",
     "persistent_netboot": "persistentNetboot",
+    "prefix_id": "prefixId",
   });
 });
 /** @internal */
@@ -297,6 +303,7 @@ export type CreateServerReinstallAttributes2$Outbound = {
     | undefined;
   ipxe?: string | null | undefined;
   persistent_netboot?: boolean | undefined;
+  prefix_id?: string | null | undefined;
 };
 
 /** @internal */
@@ -316,6 +323,7 @@ export const CreateServerReinstallAttributes2$outboundSchema: z.ZodType<
   ).optional(),
   ipxe: z.nullable(z.string()).optional(),
   persistentNetboot: z.boolean().optional(),
+  prefixId: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     operatingSystem: "operating_system",
@@ -323,6 +331,7 @@ export const CreateServerReinstallAttributes2$outboundSchema: z.ZodType<
     userData: "user_data",
     diskLayout: "disk_layout",
     persistentNetboot: "persistent_netboot",
+    prefixId: "prefix_id",
   });
 });
 

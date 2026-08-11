@@ -31,6 +31,7 @@ export type TeamLimits = {
   virtualMachine?: number | null | undefined;
   virtualMachineGpu?: number | null | undefined;
   elasticIp?: number | null | undefined;
+  prefix?: number | null | undefined;
   virtualNetwork?: number | null | undefined;
   database?: number | null | undefined;
   filesystem?: number | null | undefined;
@@ -116,6 +117,7 @@ export const TeamLimits$inboundSchema: z.ZodType<
   virtual_machine: z.nullable(z.number().int()).optional(),
   virtual_machine_gpu: z.nullable(z.number().int()).optional(),
   elastic_ip: z.nullable(z.number().int()).optional(),
+  prefix: z.nullable(z.number().int()).optional(),
   virtual_network: z.nullable(z.number().int()).optional(),
   database: z.nullable(z.number().int()).optional(),
   filesystem: z.nullable(z.number().int()).optional(),
@@ -138,6 +140,7 @@ export type TeamLimits$Outbound = {
   virtual_machine?: number | null | undefined;
   virtual_machine_gpu?: number | null | undefined;
   elastic_ip?: number | null | undefined;
+  prefix?: number | null | undefined;
   virtual_network?: number | null | undefined;
   database?: number | null | undefined;
   filesystem?: number | null | undefined;
@@ -155,6 +158,7 @@ export const TeamLimits$outboundSchema: z.ZodType<
   virtualMachine: z.nullable(z.number().int()).optional(),
   virtualMachineGpu: z.nullable(z.number().int()).optional(),
   elasticIp: z.nullable(z.number().int()).optional(),
+  prefix: z.nullable(z.number().int()).optional(),
   virtualNetwork: z.nullable(z.number().int()).optional(),
   database: z.nullable(z.number().int()).optional(),
   filesystem: z.nullable(z.number().int()).optional(),

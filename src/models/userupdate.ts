@@ -20,8 +20,8 @@ export type UserUpdateAttributes = {
   email?: string | undefined;
   authenticationFactorId?: string | null | undefined;
   role?: string | null | undefined;
-  createdAt?: string | undefined;
-  updatedAt?: string | undefined;
+  createdAt?: string | null | undefined;
+  updatedAt?: string | null | undefined;
 };
 
 export type UserUpdate = {
@@ -50,8 +50,8 @@ export const UserUpdateAttributes$inboundSchema: z.ZodType<
   email: z.string().optional(),
   authentication_factor_id: z.nullable(z.string()).optional(),
   role: z.nullable(z.string()).optional(),
-  created_at: z.string().optional(),
-  updated_at: z.string().optional(),
+  created_at: z.nullable(z.string()).optional(),
+  updated_at: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "first_name": "firstName",
@@ -68,8 +68,8 @@ export type UserUpdateAttributes$Outbound = {
   email?: string | undefined;
   authentication_factor_id?: string | null | undefined;
   role?: string | null | undefined;
-  created_at?: string | undefined;
-  updated_at?: string | undefined;
+  created_at?: string | null | undefined;
+  updated_at?: string | null | undefined;
 };
 
 /** @internal */
@@ -83,8 +83,8 @@ export const UserUpdateAttributes$outboundSchema: z.ZodType<
   email: z.string().optional(),
   authenticationFactorId: z.nullable(z.string()).optional(),
   role: z.nullable(z.string()).optional(),
-  createdAt: z.string().optional(),
-  updatedAt: z.string().optional(),
+  createdAt: z.nullable(z.string()).optional(),
+  updatedAt: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     firstName: "first_name",

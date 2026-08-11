@@ -69,6 +69,16 @@ export type ObjectStorageDataRegion = {
   country?: string | null | undefined;
 };
 
+/**
+ * S3 access credentials. Only included when `extra_fields[object_storages]=credentials` is requested and the requesting user is the bucket's creator.
+ */
+export type ObjectStorageDataCredentials = {
+  /**
+   * S3 access key for authentication
+   */
+  accessKey?: string | undefined;
+};
+
 export type ObjectStorageDataAttributes = {
   /**
    * Display name of the object storage
@@ -95,14 +105,6 @@ export type ObjectStorageDataAttributes = {
    */
   endpoint?: string | undefined;
   /**
-   * S3 access key for authentication
-   */
-  accessKey?: string | null | undefined;
-  /**
-   * S3 secret key for authentication
-   */
-  secretKey?: string | null | undefined;
-  /**
    * Whether bucket versioning is enabled
    */
   versioning?: boolean | null | undefined;
@@ -126,6 +128,10 @@ export type ObjectStorageDataAttributes = {
    * Region information where the object storage is located
    */
   region?: ObjectStorageDataRegion | null | undefined;
+  /**
+   * S3 access credentials. Only included when `extra_fields[object_storages]=credentials` is requested and the requesting user is the bucket's creator.
+   */
+  credentials?: ObjectStorageDataCredentials | null | undefined;
   project?: ProjectInclude | undefined;
   team?: TeamInclude | undefined;
 };
@@ -210,6 +216,55 @@ export function objectStorageDataRegionFromJSON(
 }
 
 /** @internal */
+export const ObjectStorageDataCredentials$inboundSchema: z.ZodType<
+  ObjectStorageDataCredentials,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  access_key: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "access_key": "accessKey",
+  });
+});
+/** @internal */
+export type ObjectStorageDataCredentials$Outbound = {
+  access_key?: string | undefined;
+};
+
+/** @internal */
+export const ObjectStorageDataCredentials$outboundSchema: z.ZodType<
+  ObjectStorageDataCredentials$Outbound,
+  z.ZodTypeDef,
+  ObjectStorageDataCredentials
+> = z.object({
+  accessKey: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    accessKey: "access_key",
+  });
+});
+
+export function objectStorageDataCredentialsToJSON(
+  objectStorageDataCredentials: ObjectStorageDataCredentials,
+): string {
+  return JSON.stringify(
+    ObjectStorageDataCredentials$outboundSchema.parse(
+      objectStorageDataCredentials,
+    ),
+  );
+}
+export function objectStorageDataCredentialsFromJSON(
+  jsonString: string,
+): SafeParseResult<ObjectStorageDataCredentials, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ObjectStorageDataCredentials$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ObjectStorageDataCredentials' from JSON`,
+  );
+}
+
+/** @internal */
 export const ObjectStorageDataAttributes$inboundSchema: z.ZodType<
   ObjectStorageDataAttributes,
   z.ZodTypeDef,
@@ -223,8 +278,6 @@ export const ObjectStorageDataAttributes$inboundSchema: z.ZodType<
   ).optional(),
   bucket_name: z.string().optional(),
   endpoint: z.string().optional(),
-  access_key: z.nullable(z.string()).optional(),
-  secret_key: z.nullable(z.string()).optional(),
   versioning: z.nullable(z.boolean()).optional(),
   locking: z.nullable(z.boolean()).optional(),
   retention_mode: z.nullable(RetentionMode$inboundSchema).optional(),
@@ -232,6 +285,9 @@ export const ObjectStorageDataAttributes$inboundSchema: z.ZodType<
   source: z.string().optional(),
   region: z.nullable(z.lazy(() => ObjectStorageDataRegion$inboundSchema))
     .optional(),
+  credentials: z.nullable(
+    z.lazy(() => ObjectStorageDataCredentials$inboundSchema),
+  ).optional(),
   project: ProjectInclude$inboundSchema.optional(),
   team: TeamInclude$inboundSchema.optional(),
 }).transform((v) => {
@@ -240,8 +296,6 @@ export const ObjectStorageDataAttributes$inboundSchema: z.ZodType<
     "storage_class": "storageClass",
     "created_at": "createdAt",
     "bucket_name": "bucketName",
-    "access_key": "accessKey",
-    "secret_key": "secretKey",
     "retention_mode": "retentionMode",
     "retention_period": "retentionPeriod",
   });
@@ -254,14 +308,13 @@ export type ObjectStorageDataAttributes$Outbound = {
   created_at?: string | null | undefined;
   bucket_name?: string | undefined;
   endpoint?: string | undefined;
-  access_key?: string | null | undefined;
-  secret_key?: string | null | undefined;
   versioning?: boolean | null | undefined;
   locking?: boolean | null | undefined;
   retention_mode?: string | null | undefined;
   retention_period?: number | null | undefined;
   source?: string | undefined;
   region?: ObjectStorageDataRegion$Outbound | null | undefined;
+  credentials?: ObjectStorageDataCredentials$Outbound | null | undefined;
   project?: ProjectInclude$Outbound | undefined;
   team?: TeamInclude$Outbound | undefined;
 };
@@ -278,8 +331,6 @@ export const ObjectStorageDataAttributes$outboundSchema: z.ZodType<
   createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   bucketName: z.string().optional(),
   endpoint: z.string().optional(),
-  accessKey: z.nullable(z.string()).optional(),
-  secretKey: z.nullable(z.string()).optional(),
   versioning: z.nullable(z.boolean()).optional(),
   locking: z.nullable(z.boolean()).optional(),
   retentionMode: z.nullable(RetentionMode$outboundSchema).optional(),
@@ -287,6 +338,9 @@ export const ObjectStorageDataAttributes$outboundSchema: z.ZodType<
   source: z.string().optional(),
   region: z.nullable(z.lazy(() => ObjectStorageDataRegion$outboundSchema))
     .optional(),
+  credentials: z.nullable(
+    z.lazy(() => ObjectStorageDataCredentials$outboundSchema),
+  ).optional(),
   project: ProjectInclude$outboundSchema.optional(),
   team: TeamInclude$outboundSchema.optional(),
 }).transform((v) => {
@@ -295,8 +349,6 @@ export const ObjectStorageDataAttributes$outboundSchema: z.ZodType<
     storageClass: "storage_class",
     createdAt: "created_at",
     bucketName: "bucket_name",
-    accessKey: "access_key",
-    secretKey: "secret_key",
     retentionMode: "retention_mode",
     retentionPeriod: "retention_period",
   });

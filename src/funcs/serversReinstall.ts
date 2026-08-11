@@ -164,7 +164,7 @@ async function $do(
     | SDKValidationError
   >(
     M.nil(201, z.void()),
-    M.jsonErr([404, 422], errors.ErrorObject$inboundSchema, {
+    M.jsonErr([403, 404, 422], errors.ErrorObject$inboundSchema, {
       ctype: "application/vnd.api+json",
     }),
     M.fail("4XX"),

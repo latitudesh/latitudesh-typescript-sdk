@@ -314,6 +314,13 @@ run();
 
 * [list](docs/sdks/vm/README.md#list) - List VM plans
 
+### [Prefixes](docs/sdks/prefixes/README.md)
+
+* [getPrefixes](docs/sdks/prefixes/README.md#getprefixes) - List networks
+* [createPrefix](docs/sdks/prefixes/README.md#createprefix) - Create a network
+* [getPrefix](docs/sdks/prefixes/README.md#getprefix) - Retrieve a network
+* [destroyPrefix](docs/sdks/prefixes/README.md#destroyprefix) - Delete a network
+
 ### [PrivateNetworks](docs/sdks/privatenetworks/README.md)
 
 * [list](docs/sdks/privatenetworks/README.md#list) - List VLANs
@@ -547,6 +554,10 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`plansListStorage`](docs/sdks/plans/README.md#liststorage) - List storage plans
 - [`plansUpdateBandwidth`](docs/sdks/plans/README.md#updatebandwidth) - Update bandwidth packages
 - [`plansVmList`](docs/sdks/vm/README.md#list) - List VM plans
+- [`prefixesCreatePrefix`](docs/sdks/prefixes/README.md#createprefix) - Create a network
+- [`prefixesDestroyPrefix`](docs/sdks/prefixes/README.md#destroyprefix) - Delete a network
+- [`prefixesGetPrefix`](docs/sdks/prefixes/README.md#getprefix) - Retrieve a network
+- [`prefixesGetPrefixes`](docs/sdks/prefixes/README.md#getprefixes) - List networks
 - [`privateNetworksAssign`](docs/sdks/privatenetworks/README.md#assign) - Assign VLAN
 - [`privateNetworksCreate`](docs/sdks/privatenetworks/README.md#create) - Create VLAN
 - [`privateNetworksDeleteAssignment`](docs/sdks/privatenetworks/README.md#deleteassignment) - Delete VLAN assignment
@@ -814,7 +825,7 @@ run();
 
 
 **Inherit from [`LatitudeshError`](./src/models/errors/latitudesherror.ts)**:
-* [`ErrorObject`](./src/models/errors/errorobject.ts): Applicable to 37 of 158 methods.*
+* [`ErrorObject`](./src/models/errors/errorobject.ts): Applicable to 41 of 162 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>
