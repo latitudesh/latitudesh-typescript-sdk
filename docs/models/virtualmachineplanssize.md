@@ -1,11 +1,11 @@
-# Size
+# VirtualMachinePlansSize
 
 ## Example Usage
 
 ```typescript
-import { Size } from "latitudesh-typescript-sdk/models";
+import { VirtualMachinePlansSize } from "latitudesh-typescript-sdk/models";
 
-let value: Size = {};
+let value: VirtualMachinePlansSize = {};
 ```
 
 ## Fields

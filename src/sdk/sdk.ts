@@ -16,6 +16,7 @@ import { KubernetesClusters } from "./kubernetesclusters.js";
 import { ObjectStorage } from "./objectstorage.js";
 import { OperatingSystems } from "./operatingsystems.js";
 import { Plans } from "./plans.js";
+import { Prefixes } from "./prefixes.js";
 import { PrivateNetworks } from "./privatenetworks.js";
 import { Projects } from "./projects.js";
 import { Regions } from "./regions.js";
@@ -93,6 +94,11 @@ export class Latitudesh extends ClientSDK {
   private _plans?: Plans;
   get plans(): Plans {
     return (this._plans ??= new Plans(this._options));
+  }
+
+  private _prefixes?: Prefixes;
+  get prefixes(): Prefixes {
+    return (this._prefixes ??= new Prefixes(this._options));
   }
 
   private _projects?: Projects;

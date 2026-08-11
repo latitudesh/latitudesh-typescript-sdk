@@ -64,7 +64,7 @@ export type VirtualMachinePlansUnit = ClosedEnum<
   typeof VirtualMachinePlansUnit
 >;
 
-export type Size = {
+export type VirtualMachinePlansSize = {
   /**
    * The total size of the disk
    */
@@ -80,7 +80,7 @@ export type Disk = {
    * The type of the disk (e.g., local SSD, local NVMe)
    */
   type?: string | undefined;
-  size?: Size | undefined;
+  size?: VirtualMachinePlansSize | undefined;
 };
 
 export type VirtualMachinePlansSpecs = {
@@ -315,34 +315,44 @@ export const VirtualMachinePlansUnit$outboundSchema: z.ZodNativeEnum<
 > = VirtualMachinePlansUnit$inboundSchema;
 
 /** @internal */
-export const Size$inboundSchema: z.ZodType<Size, z.ZodTypeDef, unknown> = z
-  .object({
-    amount: z.number().int().optional(),
-    unit: VirtualMachinePlansUnit$inboundSchema.optional(),
-  });
+export const VirtualMachinePlansSize$inboundSchema: z.ZodType<
+  VirtualMachinePlansSize,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  amount: z.number().int().optional(),
+  unit: VirtualMachinePlansUnit$inboundSchema.optional(),
+});
 /** @internal */
-export type Size$Outbound = {
+export type VirtualMachinePlansSize$Outbound = {
   amount?: number | undefined;
   unit?: string | undefined;
 };
 
 /** @internal */
-export const Size$outboundSchema: z.ZodType<Size$Outbound, z.ZodTypeDef, Size> =
-  z.object({
-    amount: z.number().int().optional(),
-    unit: VirtualMachinePlansUnit$outboundSchema.optional(),
-  });
+export const VirtualMachinePlansSize$outboundSchema: z.ZodType<
+  VirtualMachinePlansSize$Outbound,
+  z.ZodTypeDef,
+  VirtualMachinePlansSize
+> = z.object({
+  amount: z.number().int().optional(),
+  unit: VirtualMachinePlansUnit$outboundSchema.optional(),
+});
 
-export function sizeToJSON(size: Size): string {
-  return JSON.stringify(Size$outboundSchema.parse(size));
+export function virtualMachinePlansSizeToJSON(
+  virtualMachinePlansSize: VirtualMachinePlansSize,
+): string {
+  return JSON.stringify(
+    VirtualMachinePlansSize$outboundSchema.parse(virtualMachinePlansSize),
+  );
 }
-export function sizeFromJSON(
+export function virtualMachinePlansSizeFromJSON(
   jsonString: string,
-): SafeParseResult<Size, SDKValidationError> {
+): SafeParseResult<VirtualMachinePlansSize, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Size$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Size' from JSON`,
+    (x) => VirtualMachinePlansSize$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'VirtualMachinePlansSize' from JSON`,
   );
 }
 
@@ -350,19 +360,19 @@ export function sizeFromJSON(
 export const Disk$inboundSchema: z.ZodType<Disk, z.ZodTypeDef, unknown> = z
   .object({
     type: z.string().optional(),
-    size: z.lazy(() => Size$inboundSchema).optional(),
+    size: z.lazy(() => VirtualMachinePlansSize$inboundSchema).optional(),
   });
 /** @internal */
 export type Disk$Outbound = {
   type?: string | undefined;
-  size?: Size$Outbound | undefined;
+  size?: VirtualMachinePlansSize$Outbound | undefined;
 };
 
 /** @internal */
 export const Disk$outboundSchema: z.ZodType<Disk$Outbound, z.ZodTypeDef, Disk> =
   z.object({
     type: z.string().optional(),
-    size: z.lazy(() => Size$outboundSchema).optional(),
+    size: z.lazy(() => VirtualMachinePlansSize$outboundSchema).optional(),
   });
 
 export function diskToJSON(disk: Disk): string {

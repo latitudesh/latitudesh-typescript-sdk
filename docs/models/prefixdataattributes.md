@@ -1,0 +1,24 @@
+# PrefixDataAttributes
+
+## Example Usage
+
+```typescript
+import { PrefixDataAttributes } from "latitudesh-typescript-sdk/models";
+
+let value: PrefixDataAttributes = {};
+```
+
+## Fields
+
+| Field                                                                                         | Type                                                                                          | Required                                                                                      | Description                                                                                   |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `ipv4`                                                                                        | *string*                                                                                      | :heavy_minus_sign:                                                                            | The IPv4 network in CIDR notation (e.g., "203.0.113.0/27")                                    |
+| `ipv6`                                                                                        | *string*                                                                                      | :heavy_minus_sign:                                                                            | The paired IPv6 /64 in CIDR notation (e.g., "2001:db8:1234::/64")                             |
+| `size`                                                                                        | [models.PrefixDataSize](../models/prefixdatasize.md)                                          | :heavy_minus_sign:                                                                            | IPv4 prefix length. Determines how many servers the network can host.                         |
+| `activated`                                                                                   | *boolean*                                                                                     | :heavy_minus_sign:                                                                            | True once a server has been added to the network and the network is ready to use.             |
+| `capacity`                                                                                    | *number*                                                                                      | :heavy_minus_sign:                                                                            | Servers this network can host                                                                 |
+| `ipsUsed`                                                                                     | *number*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `ipsFree`                                                                                     | *number*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `createdAt`                                                                                   | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `project`                                                                                     | [models.PrefixDataProject](../models/prefixdataproject.md)                                    | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `region`                                                                                      | [models.PrefixDataRegion](../models/prefixdataregion.md)                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |

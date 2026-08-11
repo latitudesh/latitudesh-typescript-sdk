@@ -76,6 +76,10 @@ import { tool$plansList } from "./tools/plansList.js";
 import { tool$plansListStorage } from "./tools/plansListStorage.js";
 import { tool$plansUpdateBandwidth } from "./tools/plansUpdateBandwidth.js";
 import { tool$plansVmList } from "./tools/plansVmList.js";
+import { tool$prefixesCreatePrefix } from "./tools/prefixesCreatePrefix.js";
+import { tool$prefixesDestroyPrefix } from "./tools/prefixesDestroyPrefix.js";
+import { tool$prefixesGetPrefix } from "./tools/prefixesGetPrefix.js";
+import { tool$prefixesGetPrefixes } from "./tools/prefixesGetPrefixes.js";
 import { tool$privateNetworksAssign } from "./tools/privateNetworksAssign.js";
 import { tool$privateNetworksCreate } from "./tools/privateNetworksCreate.js";
 import { tool$privateNetworksDeleteAssignment } from "./tools/privateNetworksDeleteAssignment.js";
@@ -183,7 +187,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Latitudesh",
-    version: "0.8.6",
+    version: "0.8.7",
   });
 
   const client = new LatitudeshCore({
@@ -263,6 +267,10 @@ export function createMCPServer(deps: {
   tool(tool$plansUpdateBandwidth);
   tool(tool$plansListStorage);
   tool(tool$plansGetManagedDatabasePlans);
+  tool(tool$prefixesGetPrefixes);
+  tool(tool$prefixesCreatePrefix);
+  tool(tool$prefixesGetPrefix);
+  tool(tool$prefixesDestroyPrefix);
   tool(tool$projectsList);
   tool(tool$projectsCreate);
   tool(tool$projectsUpdate);

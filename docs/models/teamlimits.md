@@ -17,6 +17,7 @@ let value: TeamLimits = {};
 | `virtualMachine`    | *number*            | :heavy_minus_sign:  | N/A                 |
 | `virtualMachineGpu` | *number*            | :heavy_minus_sign:  | N/A                 |
 | `elasticIp`         | *number*            | :heavy_minus_sign:  | N/A                 |
+| `prefix`            | *number*            | :heavy_minus_sign:  | N/A                 |
 | `virtualNetwork`    | *number*            | :heavy_minus_sign:  | N/A                 |
 | `database`          | *number*            | :heavy_minus_sign:  | N/A                 |
 | `filesystem`        | *number*            | :heavy_minus_sign:  | N/A                 |
