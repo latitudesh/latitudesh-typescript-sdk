@@ -9,7 +9,9 @@ let value: PatchStorageFilesystemsRequestBody2 = {
   data: {
     id: "<id>",
     type: "filesystems",
-    attributes: {},
+    attributes: {
+      sizeInGb: 696864,
+    },
   },
 };
 ```

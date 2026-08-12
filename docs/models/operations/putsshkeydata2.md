@@ -6,6 +6,7 @@
 import { PutSshKeyData2 } from "latitudesh-typescript-sdk/models/operations";
 
 let value: PutSshKeyData2 = {
+  id: "<id>",
   type: "ssh_keys",
 };
 ```
@@ -14,6 +15,6 @@ let value: PutSshKeyData2 = {
 
 | Field                                                                              | Type                                                                               | Required                                                                           | Description                                                                        |
 | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| `id`                                                                               | *string*                                                                           | :heavy_minus_sign:                                                                 | N/A                                                                                |
+| `id`                                                                               | *string*                                                                           | :heavy_check_mark:                                                                 | N/A                                                                                |
 | `type`                                                                             | [operations.PutSshKeyType2](../../models/operations/putsshkeytype2.md)             | :heavy_check_mark:                                                                 | N/A                                                                                |
 | `attributes`                                                                       | [operations.PutSshKeyAttributes2](../../models/operations/putsshkeyattributes2.md) | :heavy_minus_sign:                                                                 | N/A                                                                                |

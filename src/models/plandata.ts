@@ -119,6 +119,7 @@ export type PlanDataAttributes = {
   features?: Array<Feature> | undefined;
   specs?: PlanDataSpecs | undefined;
   regions?: Array<PlanDataRegion> | undefined;
+  availableOperatingSystems?: Array<string> | undefined;
 };
 
 export type PlanData = {
@@ -646,6 +647,11 @@ export const PlanDataAttributes$inboundSchema: z.ZodType<
   features: z.array(Feature$inboundSchema).optional(),
   specs: z.lazy(() => PlanDataSpecs$inboundSchema).optional(),
   regions: z.array(z.lazy(() => PlanDataRegion$inboundSchema)).optional(),
+  available_operating_systems: z.array(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "available_operating_systems": "availableOperatingSystems",
+  });
 });
 /** @internal */
 export type PlanDataAttributes$Outbound = {
@@ -654,6 +660,7 @@ export type PlanDataAttributes$Outbound = {
   features?: Array<string> | undefined;
   specs?: PlanDataSpecs$Outbound | undefined;
   regions?: Array<PlanDataRegion$Outbound> | undefined;
+  available_operating_systems?: Array<string> | undefined;
 };
 
 /** @internal */
@@ -667,6 +674,11 @@ export const PlanDataAttributes$outboundSchema: z.ZodType<
   features: z.array(Feature$outboundSchema).optional(),
   specs: z.lazy(() => PlanDataSpecs$outboundSchema).optional(),
   regions: z.array(z.lazy(() => PlanDataRegion$outboundSchema)).optional(),
+  availableOperatingSystems: z.array(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    availableOperatingSystems: "available_operating_systems",
+  });
 });
 
 export function planDataAttributesToJSON(

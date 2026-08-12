@@ -25,7 +25,7 @@ export type CreateTagAttributes2 = {
   /**
    * Color of the Tag
    */
-  color?: string | undefined;
+  color: string;
 };
 
 export type CreateTagData2 = {
@@ -54,7 +54,7 @@ export const CreateTagAttributes2$inboundSchema: z.ZodType<
 > = z.object({
   name: z.string(),
   description: z.nullable(z.string()).optional(),
-  color: z.string().default("#ffffff"),
+  color: z.string(),
 });
 /** @internal */
 export type CreateTagAttributes2$Outbound = {
@@ -71,7 +71,7 @@ export const CreateTagAttributes2$outboundSchema: z.ZodType<
 > = z.object({
   name: z.string(),
   description: z.nullable(z.string()).optional(),
-  color: z.string().default("#ffffff"),
+  color: z.string(),
 });
 
 export function createTagAttributes2ToJSON(

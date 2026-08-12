@@ -13,3 +13,4 @@ let value: Traffic = {};
 | Field                                          | Type                                           | Required                                       | Description                                    |
 | ---------------------------------------------- | ---------------------------------------------- | ---------------------------------------------- | ---------------------------------------------- |
 | `data`                                         | [models.TrafficData](../models/trafficdata.md) | :heavy_minus_sign:                             | N/A                                            |
+| `meta`                                         | [models.TrafficMeta](../models/trafficmeta.md) | :heavy_minus_sign:                             | N/A                                            |
