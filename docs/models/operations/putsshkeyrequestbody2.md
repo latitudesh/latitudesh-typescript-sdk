@@ -7,6 +7,7 @@ import { PutSshKeyRequestBody2 } from "latitudesh-typescript-sdk/models/operatio
 
 let value: PutSshKeyRequestBody2 = {
   data: {
+    id: "<id>",
     type: "ssh_keys",
   },
 };

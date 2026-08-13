@@ -82,14 +82,14 @@ export const UpdateServerAttributes2$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  hostname: z.string().default("new-hostname"),
+  hostname: z.string().optional(),
   billing: z.nullable(UpdateServerBilling2$inboundSchema).optional(),
   tags: z.nullable(z.array(z.string())).optional(),
   project: z.string().optional(),
 });
 /** @internal */
 export type UpdateServerAttributes2$Outbound = {
-  hostname: string;
+  hostname?: string | undefined;
   billing?: string | null | undefined;
   tags?: Array<string> | null | undefined;
   project?: string | undefined;
@@ -101,7 +101,7 @@ export const UpdateServerAttributes2$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateServerAttributes2
 > = z.object({
-  hostname: z.string().default("new-hostname"),
+  hostname: z.string().optional(),
   billing: z.nullable(UpdateServerBilling2$outboundSchema).optional(),
   tags: z.nullable(z.array(z.string())).optional(),
   project: z.string().optional(),
@@ -130,13 +130,13 @@ export const UpdateServerData2$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().default("sv_81EVOtR1N4J2Z"),
+  id: z.string().optional(),
   type: UpdateServerType2$inboundSchema.optional(),
   attributes: z.lazy(() => UpdateServerAttributes2$inboundSchema).optional(),
 });
 /** @internal */
 export type UpdateServerData2$Outbound = {
-  id: string;
+  id?: string | undefined;
   type?: string | undefined;
   attributes?: UpdateServerAttributes2$Outbound | undefined;
 };
@@ -147,7 +147,7 @@ export const UpdateServerData2$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateServerData2
 > = z.object({
-  id: z.string().default("sv_81EVOtR1N4J2Z"),
+  id: z.string().optional(),
   type: UpdateServerType2$outboundSchema.optional(),
   attributes: z.lazy(() => UpdateServerAttributes2$outboundSchema).optional(),
 });

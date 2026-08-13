@@ -21,7 +21,7 @@ export type PatchStorageFilesystemsAttributes2 = {
   /**
    * Size in GB (not required, default is 1500)
    */
-  sizeInGb?: number | undefined;
+  sizeInGb: number;
 };
 
 export type PatchStorageFilesystemsData2 = {
@@ -64,7 +64,7 @@ export const PatchStorageFilesystemsAttributes2$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  size_in_gb: z.number().int().default(1500),
+  size_in_gb: z.number().int(),
 }).transform((v) => {
   return remap$(v, {
     "size_in_gb": "sizeInGb",
@@ -81,7 +81,7 @@ export const PatchStorageFilesystemsAttributes2$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PatchStorageFilesystemsAttributes2
 > = z.object({
-  sizeInGb: z.number().int().default(1500),
+  sizeInGb: z.number().int(),
 }).transform((v) => {
   return remap$(v, {
     sizeInGb: "size_in_gb",

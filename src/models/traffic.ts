@@ -35,6 +35,14 @@ export type AttributesData = {
    * Value in Mbps
    */
   avgInboundSpeedMbps?: number | undefined;
+  /**
+   * Value in Mbps
+   */
+  outboundSpeedMbps?: number | undefined;
+  /**
+   * Value in Mbps
+   */
+  inboundSpeedMbps?: number | undefined;
 };
 
 export type TrafficRegion = {
@@ -92,8 +100,11 @@ export type TrafficData = {
   attributes?: TrafficAttributes | undefined;
 };
 
+export type TrafficMeta = {};
+
 export type Traffic = {
   data?: TrafficData | undefined;
+  meta?: TrafficMeta | undefined;
 };
 
 /** @internal */
@@ -114,12 +125,16 @@ export const AttributesData$inboundSchema: z.ZodType<
   outbound_gb: z.number().int().optional(),
   avg_outbound_speed_mbps: z.number().optional(),
   avg_inbound_speed_mbps: z.number().optional(),
+  outbound_speed_mbps: z.number().optional(),
+  inbound_speed_mbps: z.number().optional(),
 }).transform((v) => {
   return remap$(v, {
     "inbound_gb": "inboundGb",
     "outbound_gb": "outboundGb",
     "avg_outbound_speed_mbps": "avgOutboundSpeedMbps",
     "avg_inbound_speed_mbps": "avgInboundSpeedMbps",
+    "outbound_speed_mbps": "outboundSpeedMbps",
+    "inbound_speed_mbps": "inboundSpeedMbps",
   });
 });
 /** @internal */
@@ -129,6 +144,8 @@ export type AttributesData$Outbound = {
   outbound_gb?: number | undefined;
   avg_outbound_speed_mbps?: number | undefined;
   avg_inbound_speed_mbps?: number | undefined;
+  outbound_speed_mbps?: number | undefined;
+  inbound_speed_mbps?: number | undefined;
 };
 
 /** @internal */
@@ -142,12 +159,16 @@ export const AttributesData$outboundSchema: z.ZodType<
   outboundGb: z.number().int().optional(),
   avgOutboundSpeedMbps: z.number().optional(),
   avgInboundSpeedMbps: z.number().optional(),
+  outboundSpeedMbps: z.number().optional(),
+  inboundSpeedMbps: z.number().optional(),
 }).transform((v) => {
   return remap$(v, {
     inboundGb: "inbound_gb",
     outboundGb: "outbound_gb",
     avgOutboundSpeedMbps: "avg_outbound_speed_mbps",
     avgInboundSpeedMbps: "avg_inbound_speed_mbps",
+    outboundSpeedMbps: "outbound_speed_mbps",
+    inboundSpeedMbps: "inbound_speed_mbps",
   });
 });
 
@@ -347,13 +368,44 @@ export function trafficDataFromJSON(
 }
 
 /** @internal */
+export const TrafficMeta$inboundSchema: z.ZodType<
+  TrafficMeta,
+  z.ZodTypeDef,
+  unknown
+> = z.object({});
+/** @internal */
+export type TrafficMeta$Outbound = {};
+
+/** @internal */
+export const TrafficMeta$outboundSchema: z.ZodType<
+  TrafficMeta$Outbound,
+  z.ZodTypeDef,
+  TrafficMeta
+> = z.object({});
+
+export function trafficMetaToJSON(trafficMeta: TrafficMeta): string {
+  return JSON.stringify(TrafficMeta$outboundSchema.parse(trafficMeta));
+}
+export function trafficMetaFromJSON(
+  jsonString: string,
+): SafeParseResult<TrafficMeta, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => TrafficMeta$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'TrafficMeta' from JSON`,
+  );
+}
+
+/** @internal */
 export const Traffic$inboundSchema: z.ZodType<Traffic, z.ZodTypeDef, unknown> =
   z.object({
     data: z.lazy(() => TrafficData$inboundSchema).optional(),
+    meta: z.lazy(() => TrafficMeta$inboundSchema).optional(),
   });
 /** @internal */
 export type Traffic$Outbound = {
   data?: TrafficData$Outbound | undefined;
+  meta?: TrafficMeta$Outbound | undefined;
 };
 
 /** @internal */
@@ -363,6 +415,7 @@ export const Traffic$outboundSchema: z.ZodType<
   Traffic
 > = z.object({
   data: z.lazy(() => TrafficData$outboundSchema).optional(),
+  meta: z.lazy(() => TrafficMeta$outboundSchema).optional(),
 });
 
 export function trafficToJSON(traffic: Traffic): string {

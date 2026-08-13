@@ -17,3 +17,5 @@ let value: AttributesData = {};
 | `outboundGb`            | *number*                | :heavy_minus_sign:      | Value in GB             |
 | `avgOutboundSpeedMbps`  | *number*                | :heavy_minus_sign:      | Value in Mbps           |
 | `avgInboundSpeedMbps`   | *number*                | :heavy_minus_sign:      | Value in Mbps           |
+| `outboundSpeedMbps`     | *number*                | :heavy_minus_sign:      | Value in Mbps           |
+| `inboundSpeedMbps`      | *number*                | :heavy_minus_sign:      | Value in Mbps           |

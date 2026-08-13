@@ -8,7 +8,9 @@ import { PatchStorageFilesystemsData2 } from "latitudesh-typescript-sdk/models/o
 let value: PatchStorageFilesystemsData2 = {
   id: "<id>",
   type: "filesystems",
-  attributes: {},
+  attributes: {
+    sizeInGb: 696864,
+  },
 };
 ```
 

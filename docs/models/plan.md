@@ -13,3 +13,4 @@ let value: Plan = {};
 | Field                                    | Type                                     | Required                                 | Description                              |
 | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
 | `data`                                   | [models.PlanData](../models/plandata.md) | :heavy_minus_sign:                       | N/A                                      |
+| `meta`                                   | [models.PlanMeta](../models/planmeta.md) | :heavy_minus_sign:                       | N/A                                      |

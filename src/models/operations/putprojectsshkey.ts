@@ -24,7 +24,7 @@ export type PutProjectSshKeyAttributes2 = {
 };
 
 export type PutProjectSshKeyData2 = {
-  id?: string | undefined;
+  id: string;
   type: PutProjectSshKeyType2;
   attributes?: PutProjectSshKeyAttributes2 | undefined;
 };
@@ -65,12 +65,12 @@ export const PutProjectSshKeyAttributes2$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   tags: z.array(z.string()).optional(),
-  name: z.string().default("New SSH Key Name"),
+  name: z.string().optional(),
 });
 /** @internal */
 export type PutProjectSshKeyAttributes2$Outbound = {
   tags?: Array<string> | undefined;
-  name: string;
+  name?: string | undefined;
 };
 
 /** @internal */
@@ -80,7 +80,7 @@ export const PutProjectSshKeyAttributes2$outboundSchema: z.ZodType<
   PutProjectSshKeyAttributes2
 > = z.object({
   tags: z.array(z.string()).optional(),
-  name: z.string().default("New SSH Key Name"),
+  name: z.string().optional(),
 });
 
 export function putProjectSshKeyAttributes2ToJSON(
@@ -108,7 +108,7 @@ export const PutProjectSshKeyData2$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().default("ssh_81EVOtR1N4J2Z"),
+  id: z.string(),
   type: PutProjectSshKeyType2$inboundSchema,
   attributes: z.lazy(() => PutProjectSshKeyAttributes2$inboundSchema)
     .optional(),
@@ -126,7 +126,7 @@ export const PutProjectSshKeyData2$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PutProjectSshKeyData2
 > = z.object({
-  id: z.string().default("ssh_81EVOtR1N4J2Z"),
+  id: z.string(),
   type: PutProjectSshKeyType2$outboundSchema,
   attributes: z.lazy(() => PutProjectSshKeyAttributes2$outboundSchema)
     .optional(),

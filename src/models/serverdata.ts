@@ -194,6 +194,10 @@ export type ServerDataAttributes = {
    * The server role (e.g. Bare Metal)
    */
   role?: string | undefined;
+  /**
+   * Whether the server is eligible to be bonded (carries the bond-vpc-enabled tag).
+   */
+  bondEligible?: boolean | undefined;
   site?: string | undefined;
   locked?: boolean | undefined;
   rescueAllowed?: boolean | undefined;
@@ -594,6 +598,7 @@ export const ServerDataAttributes$inboundSchema: z.ZodType<
   status: ServerDataStatus$inboundSchema.optional(),
   ipmi_status: z.nullable(IpmiStatus$inboundSchema).optional(),
   role: z.string().optional(),
+  bond_eligible: z.boolean().optional(),
   site: z.string().optional(),
   locked: z.boolean().optional(),
   rescue_allowed: z.boolean().optional(),
@@ -612,6 +617,7 @@ export const ServerDataAttributes$inboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     "ipmi_status": "ipmiStatus",
+    "bond_eligible": "bondEligible",
     "rescue_allowed": "rescueAllowed",
     "primary_ipv4": "primaryIpv4",
     "primary_ipv6": "primaryIpv6",
@@ -629,6 +635,7 @@ export type ServerDataAttributes$Outbound = {
   status?: string | undefined;
   ipmi_status?: string | null | undefined;
   role?: string | undefined;
+  bond_eligible?: boolean | undefined;
   site?: string | undefined;
   locked?: boolean | undefined;
   rescue_allowed?: boolean | undefined;
@@ -658,6 +665,7 @@ export const ServerDataAttributes$outboundSchema: z.ZodType<
   status: ServerDataStatus$outboundSchema.optional(),
   ipmiStatus: z.nullable(IpmiStatus$outboundSchema).optional(),
   role: z.string().optional(),
+  bondEligible: z.boolean().optional(),
   site: z.string().optional(),
   locked: z.boolean().optional(),
   rescueAllowed: z.boolean().optional(),
@@ -676,6 +684,7 @@ export const ServerDataAttributes$outboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     ipmiStatus: "ipmi_status",
+    bondEligible: "bond_eligible",
     rescueAllowed: "rescue_allowed",
     primaryIpv4: "primary_ipv4",
     primaryIpv6: "primary_ipv6",

@@ -7,6 +7,7 @@ import { CreateTagAttributes2 } from "latitudesh-typescript-sdk/models/operation
 
 let value: CreateTagAttributes2 = {
   name: "<value>",
+  color: "olive",
 };
 ```
 
@@ -16,4 +17,4 @@ let value: CreateTagAttributes2 = {
 | ---------------------- | ---------------------- | ---------------------- | ---------------------- |
 | `name`                 | *string*               | :heavy_check_mark:     | Name of the Tag        |
 | `description`          | *string*               | :heavy_minus_sign:     | Description of the Tag |
-| `color`                | *string*               | :heavy_minus_sign:     | Color of the Tag       |
+| `color`                | *string*               | :heavy_check_mark:     | Color of the Tag       |

@@ -10,6 +10,7 @@ let value: PutProjectSshKeyRequest = {
   sshKeyId: "<id>",
   requestBody: {
     data: {
+      id: "<id>",
       type: "ssh_keys",
     },
   },

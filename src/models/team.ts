@@ -46,7 +46,11 @@ export type TeamAttributes = {
   currency?: string | undefined;
   createdAt?: string | undefined;
   updatedAt?: string | undefined;
+  status?: string | null | undefined;
   enforceMfa?: boolean | undefined;
+  token?: string | null | undefined;
+  customerBillingId?: string | null | undefined;
+  referredCode?: string | null | undefined;
   users?: Array<UserInclude> | undefined;
   projects?: Array<ProjectInclude> | undefined;
   owner?: UserInclude | undefined;
@@ -201,7 +205,11 @@ export const TeamAttributes$inboundSchema: z.ZodType<
   currency: z.string().optional(),
   created_at: z.string().optional(),
   updated_at: z.string().optional(),
+  status: z.nullable(z.string()).optional(),
   enforce_mfa: z.boolean().optional(),
+  token: z.nullable(z.string()).optional(),
+  customer_billing_id: z.nullable(z.string()).optional(),
+  referred_code: z.nullable(z.string()).optional(),
   users: z.array(UserInclude$inboundSchema).optional(),
   projects: z.array(ProjectInclude$inboundSchema).optional(),
   owner: UserInclude$inboundSchema.optional(),
@@ -213,6 +221,8 @@ export const TeamAttributes$inboundSchema: z.ZodType<
     "created_at": "createdAt",
     "updated_at": "updatedAt",
     "enforce_mfa": "enforceMfa",
+    "customer_billing_id": "customerBillingId",
+    "referred_code": "referredCode",
     "feature_flags": "featureFlags",
   });
 });
@@ -225,7 +235,11 @@ export type TeamAttributes$Outbound = {
   currency?: string | undefined;
   created_at?: string | undefined;
   updated_at?: string | undefined;
+  status?: string | null | undefined;
   enforce_mfa?: boolean | undefined;
+  token?: string | null | undefined;
+  customer_billing_id?: string | null | undefined;
+  referred_code?: string | null | undefined;
   users?: Array<UserInclude$Outbound> | undefined;
   projects?: Array<ProjectInclude$Outbound> | undefined;
   owner?: UserInclude$Outbound | undefined;
@@ -247,7 +261,11 @@ export const TeamAttributes$outboundSchema: z.ZodType<
   currency: z.string().optional(),
   createdAt: z.string().optional(),
   updatedAt: z.string().optional(),
+  status: z.nullable(z.string()).optional(),
   enforceMfa: z.boolean().optional(),
+  token: z.nullable(z.string()).optional(),
+  customerBillingId: z.nullable(z.string()).optional(),
+  referredCode: z.nullable(z.string()).optional(),
   users: z.array(UserInclude$outboundSchema).optional(),
   projects: z.array(ProjectInclude$outboundSchema).optional(),
   owner: UserInclude$outboundSchema.optional(),
@@ -259,6 +277,8 @@ export const TeamAttributes$outboundSchema: z.ZodType<
     createdAt: "created_at",
     updatedAt: "updated_at",
     enforceMfa: "enforce_mfa",
+    customerBillingId: "customer_billing_id",
+    referredCode: "referred_code",
     featureFlags: "feature_flags",
   });
 });
