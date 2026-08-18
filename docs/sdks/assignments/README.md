@@ -8,7 +8,7 @@
 
 ## create
 
-Assigns a server to a firewall by its ID.
+Assigns a server or a virtual machine to a firewall by its ID.
 
 ### Example Usage
 

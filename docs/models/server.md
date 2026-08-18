@@ -5,7 +5,17 @@
 ```typescript
 import { Server } from "latitudesh-typescript-sdk/models";
 
-let value: Server = {};
+let value: Server = {
+  data: {
+    attributes: {
+      prefix: {
+        id: "pfx_2aBcDeFgH",
+        ipv4: "10.90.0.0/26",
+        ipv6: "2001:db8::/64",
+      },
+    },
+  },
+};
 ```
 
 ## Fields

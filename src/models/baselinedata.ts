@@ -21,9 +21,19 @@ export const BaselineDataType = {
 export type BaselineDataType = ClosedEnum<typeof BaselineDataType>;
 
 /**
- * The plan this baseline applies to
+ * Target of the baseline: all servers, a custom set (plan unknown), or specific platforms
  */
-export type BaselineDataPlan = {
+export const TargetType = {
+  AllServers: "all_servers",
+  Custom: "custom",
+  Platforms: "platforms",
+} as const;
+/**
+ * Target of the baseline: all servers, a custom set (plan unknown), or specific platforms
+ */
+export type TargetType = ClosedEnum<typeof TargetType>;
+
+export type Platform = {
   id?: string | undefined;
   slug?: string | undefined;
   name?: string | undefined;
@@ -58,9 +68,17 @@ export type BaselineDataAttributes = {
    */
   description?: string | null | undefined;
   /**
-   * The plan this baseline applies to
+   * Target of the baseline: all servers, a custom set (plan unknown), or specific platforms
    */
-  plan?: BaselineDataPlan | null | undefined;
+  targetType?: TargetType | undefined;
+  /**
+   * Slug of the operating system the baseline expects the server to run
+   */
+  operatingSystem?: string | null | undefined;
+  /**
+   * The plans this baseline applies to (only populated when target_type is "platforms")
+   */
+  platforms?: Array<Platform> | undefined;
   /**
    * SSH keys the baseline expects on the server
    */
@@ -99,8 +117,15 @@ export const BaselineDataType$outboundSchema: z.ZodNativeEnum<
 > = BaselineDataType$inboundSchema;
 
 /** @internal */
-export const BaselineDataPlan$inboundSchema: z.ZodType<
-  BaselineDataPlan,
+export const TargetType$inboundSchema: z.ZodNativeEnum<typeof TargetType> = z
+  .nativeEnum(TargetType);
+/** @internal */
+export const TargetType$outboundSchema: z.ZodNativeEnum<typeof TargetType> =
+  TargetType$inboundSchema;
+
+/** @internal */
+export const Platform$inboundSchema: z.ZodType<
+  Platform,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -109,37 +134,33 @@ export const BaselineDataPlan$inboundSchema: z.ZodType<
   name: z.string().optional(),
 });
 /** @internal */
-export type BaselineDataPlan$Outbound = {
+export type Platform$Outbound = {
   id?: string | undefined;
   slug?: string | undefined;
   name?: string | undefined;
 };
 
 /** @internal */
-export const BaselineDataPlan$outboundSchema: z.ZodType<
-  BaselineDataPlan$Outbound,
+export const Platform$outboundSchema: z.ZodType<
+  Platform$Outbound,
   z.ZodTypeDef,
-  BaselineDataPlan
+  Platform
 > = z.object({
   id: z.string().optional(),
   slug: z.string().optional(),
   name: z.string().optional(),
 });
 
-export function baselineDataPlanToJSON(
-  baselineDataPlan: BaselineDataPlan,
-): string {
-  return JSON.stringify(
-    BaselineDataPlan$outboundSchema.parse(baselineDataPlan),
-  );
+export function platformToJSON(platform: Platform): string {
+  return JSON.stringify(Platform$outboundSchema.parse(platform));
 }
-export function baselineDataPlanFromJSON(
+export function platformFromJSON(
   jsonString: string,
-): SafeParseResult<BaselineDataPlan, SDKValidationError> {
+): SafeParseResult<Platform, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => BaselineDataPlan$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'BaselineDataPlan' from JSON`,
+    (x) => Platform$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Platform' from JSON`,
   );
 }
 
@@ -261,7 +282,9 @@ export const BaselineDataAttributes$inboundSchema: z.ZodType<
 > = z.object({
   name: z.string().optional(),
   description: z.nullable(z.string()).optional(),
-  plan: z.nullable(z.lazy(() => BaselineDataPlan$inboundSchema)).optional(),
+  target_type: TargetType$inboundSchema.optional(),
+  operating_system: z.nullable(z.string()).optional(),
+  platforms: z.array(z.lazy(() => Platform$inboundSchema)).optional(),
   ssh_keys: z.array(z.lazy(() => BaselineDataSshKey$inboundSchema)).optional(),
   user_data: z.nullable(z.lazy(() => BaselineDataUserData$inboundSchema))
     .optional(),
@@ -270,6 +293,8 @@ export const BaselineDataAttributes$inboundSchema: z.ZodType<
   created_at: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
+    "target_type": "targetType",
+    "operating_system": "operatingSystem",
     "ssh_keys": "sshKeys",
     "user_data": "userData",
     "disk_layout": "diskLayout",
@@ -280,7 +305,9 @@ export const BaselineDataAttributes$inboundSchema: z.ZodType<
 export type BaselineDataAttributes$Outbound = {
   name?: string | undefined;
   description?: string | null | undefined;
-  plan?: BaselineDataPlan$Outbound | null | undefined;
+  target_type?: string | undefined;
+  operating_system?: string | null | undefined;
+  platforms?: Array<Platform$Outbound> | undefined;
   ssh_keys?: Array<BaselineDataSshKey$Outbound> | undefined;
   user_data?: BaselineDataUserData$Outbound | null | undefined;
   disk_layout?: Array<BaselineDiskLayoutGroup$Outbound> | undefined;
@@ -296,7 +323,9 @@ export const BaselineDataAttributes$outboundSchema: z.ZodType<
 > = z.object({
   name: z.string().optional(),
   description: z.nullable(z.string()).optional(),
-  plan: z.nullable(z.lazy(() => BaselineDataPlan$outboundSchema)).optional(),
+  targetType: TargetType$outboundSchema.optional(),
+  operatingSystem: z.nullable(z.string()).optional(),
+  platforms: z.array(z.lazy(() => Platform$outboundSchema)).optional(),
   sshKeys: z.array(z.lazy(() => BaselineDataSshKey$outboundSchema)).optional(),
   userData: z.nullable(z.lazy(() => BaselineDataUserData$outboundSchema))
     .optional(),
@@ -305,6 +334,8 @@ export const BaselineDataAttributes$outboundSchema: z.ZodType<
   createdAt: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
+    targetType: "target_type",
+    operatingSystem: "operating_system",
     sshKeys: "ssh_keys",
     userData: "user_data",
     diskLayout: "disk_layout",

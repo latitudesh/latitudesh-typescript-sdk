@@ -105,6 +105,14 @@ export type UpdateServerDeployConfigAttributes2 = {
    * Keep network boot enabled so the server iPXE-boots on every reboot instead of booting from disk. Only supported with the 'ipxe' operating system.
    */
   persistentNetboot?: boolean | undefined;
+  /**
+   * Set to 'true' to bond the server onto a prefix. Requires 'prefix_id'. Available only when the prefixes feature is enabled for your team.
+   */
+  bond?: boolean | null | undefined;
+  /**
+   * ID of a customer prefix to bond the server onto. Requires 'bond' to be 'true'. The prefix must belong to the same project and be in the same location as the server, and must have at least one free IP address. This bond configuration is saved to the deploy config and inherited by future reinstalls until changed. Available only when the prefixes feature is enabled for your team.
+   */
+  prefixId?: string | null | undefined;
 };
 
 export type UpdateServerDeployConfigRequestBody2 = {
@@ -260,6 +268,8 @@ export const UpdateServerDeployConfigAttributes2$inboundSchema: z.ZodType<
   ssh_keys: z.nullable(z.array(z.string())).optional(),
   ipxe_url: z.nullable(z.string()).optional(),
   persistent_netboot: z.boolean().optional(),
+  bond: z.nullable(z.boolean()).optional(),
+  prefix_id: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "operating_system": "operatingSystem",
@@ -268,6 +278,7 @@ export const UpdateServerDeployConfigAttributes2$inboundSchema: z.ZodType<
     "ssh_keys": "sshKeys",
     "ipxe_url": "ipxeUrl",
     "persistent_netboot": "persistentNetboot",
+    "prefix_id": "prefixId",
   });
 });
 /** @internal */
@@ -283,6 +294,8 @@ export type UpdateServerDeployConfigAttributes2$Outbound = {
   ssh_keys?: Array<string> | null | undefined;
   ipxe_url?: string | null | undefined;
   persistent_netboot?: boolean | undefined;
+  bond?: boolean | null | undefined;
+  prefix_id?: string | null | undefined;
 };
 
 /** @internal */
@@ -303,6 +316,8 @@ export const UpdateServerDeployConfigAttributes2$outboundSchema: z.ZodType<
   sshKeys: z.nullable(z.array(z.string())).optional(),
   ipxeUrl: z.nullable(z.string()).optional(),
   persistentNetboot: z.boolean().optional(),
+  bond: z.nullable(z.boolean()).optional(),
+  prefixId: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     operatingSystem: "operating_system",
@@ -311,6 +326,7 @@ export const UpdateServerDeployConfigAttributes2$outboundSchema: z.ZodType<
     sshKeys: "ssh_keys",
     ipxeUrl: "ipxe_url",
     persistentNetboot: "persistent_netboot",
+    prefixId: "prefix_id",
   });
 });
 

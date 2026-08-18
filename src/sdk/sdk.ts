@@ -111,6 +111,11 @@ export class Latitudesh extends ClientSDK {
     return (this._sshKeys ??= new SSHKeys(this._options));
   }
 
+  private _objectStorage?: ObjectStorage;
+  get objectStorage(): ObjectStorage {
+    return (this._objectStorage ??= new ObjectStorage(this._options));
+  }
+
   private _userData?: UserData;
   get userData(): UserData {
     return (this._userData ??= new UserData(this._options));
@@ -139,11 +144,6 @@ export class Latitudesh extends ClientSDK {
   private _blockStorage?: BlockStorage;
   get blockStorage(): BlockStorage {
     return (this._blockStorage ??= new BlockStorage(this._options));
-  }
-
-  private _objectStorage?: ObjectStorage;
-  get objectStorage(): ObjectStorage {
-    return (this._objectStorage ??= new ObjectStorage(this._options));
   }
 
   private _tags?: Tags;

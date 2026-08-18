@@ -21,6 +21,7 @@ export const PrefixDataSize = {
   TwentySix: 26,
   TwentySeven: 27,
   TwentyEight: 28,
+  TwentyNine: 29,
 } as const;
 /**
  * IPv4 prefix length. Determines how many servers the network can host.

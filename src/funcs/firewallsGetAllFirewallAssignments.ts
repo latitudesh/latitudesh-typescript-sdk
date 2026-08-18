@@ -35,7 +35,7 @@ import {
  * List firewall assignments
  *
  * @remarks
- * Returns a list of all servers assigned to one or more firewalls.
+ * Returns a list of all servers and virtual machines assigned to one or more firewalls.
  */
 export function firewallsGetAllFirewallAssignments(
   client: LatitudeshCore,
@@ -104,6 +104,7 @@ async function $do(
 
   const query = encodeFormQuery({
     "filter[server]": payload?.["filter[server]"],
+    "filter[virtual_machine]": payload?.["filter[virtual_machine]"],
     "page[number]": payload?.["page[number]"],
     "page[size]": payload?.["page[size]"],
   });

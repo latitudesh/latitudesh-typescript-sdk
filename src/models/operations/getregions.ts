@@ -22,6 +22,14 @@ export type GetRegionsRequest = {
    * Request aggregate stats in the response `meta`. Use `count` to get the total number of records, returned as `meta.stats.total.count`.
    */
   statsTotal?: string | undefined;
+  /**
+   * When set to `true`, the response also includes custom regions (such as storage-only regions) alongside the default core regions. When omitted or `false`, only core regions are returned.
+   */
+  includeCustom?: boolean | undefined;
+  /**
+   * Return only locations that support the given capability, e.g. `filter[features]=prefixes`.
+   */
+  filterFeatures?: string | undefined;
 };
 
 export type GetRegionsResponse = {
@@ -37,11 +45,15 @@ export const GetRegionsRequest$inboundSchema: z.ZodType<
   "page[size]": z.number().int().default(20),
   "page[number]": z.number().int().default(1),
   "stats[total]": z.string().optional(),
+  include_custom: z.boolean().optional(),
+  "filter[features]": z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "page[size]": "pageSize",
     "page[number]": "pageNumber",
     "stats[total]": "statsTotal",
+    "include_custom": "includeCustom",
+    "filter[features]": "filterFeatures",
   });
 });
 /** @internal */
@@ -49,6 +61,8 @@ export type GetRegionsRequest$Outbound = {
   "page[size]": number;
   "page[number]": number;
   "stats[total]"?: string | undefined;
+  include_custom?: boolean | undefined;
+  "filter[features]"?: string | undefined;
 };
 
 /** @internal */
@@ -60,11 +74,15 @@ export const GetRegionsRequest$outboundSchema: z.ZodType<
   pageSize: z.number().int().default(20),
   pageNumber: z.number().int().default(1),
   statsTotal: z.string().optional(),
+  includeCustom: z.boolean().optional(),
+  filterFeatures: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     pageSize: "page[size]",
     pageNumber: "page[number]",
     statsTotal: "stats[total]",
+    includeCustom: "include_custom",
+    filterFeatures: "filter[features]",
   });
 });
 

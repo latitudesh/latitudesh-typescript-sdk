@@ -6,7 +6,17 @@
 import { GetRegionsResponse } from "latitudesh-typescript-sdk/models/operations";
 
 let value: GetRegionsResponse = {
-  result: {},
+  result: {
+    data: [
+      {
+        attributes: {
+          features: [
+            "prefixes",
+          ],
+        },
+      },
+    ],
+  },
 };
 ```
 

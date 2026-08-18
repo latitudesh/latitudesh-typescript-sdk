@@ -288,6 +288,7 @@ run();
 
 ### [ObjectStorage](docs/sdks/objectstorage/README.md)
 
+* [indexProjectStorageUsage](docs/sdks/objectstorage/README.md#indexprojectstorageusage) - List storage usage
 * [postStorageAccessKeys](docs/sdks/objectstorage/README.md#poststorageaccesskeys) - Create access key
 * [getStorageAccessKeys](docs/sdks/objectstorage/README.md#getstorageaccesskeys) - List access keys
 * [deleteStorageAccessKeysUsername](docs/sdks/objectstorage/README.md#deletestorageaccesskeysusername) - Delete access key
@@ -296,6 +297,7 @@ run();
 * [postStorageBuckets](docs/sdks/objectstorage/README.md#poststoragebuckets) - Create bucket
 * [getStorageBucket](docs/sdks/objectstorage/README.md#getstoragebucket) - Retrieve bucket
 * [deleteStorageBuckets](docs/sdks/objectstorage/README.md#deletestoragebuckets) - Delete bucket
+* [getStorageBucketMetrics](docs/sdks/objectstorage/README.md#getstoragebucketmetrics) - Retrieve bucket metrics
 
 ### [OperatingSystems](docs/sdks/operatingsystems/README.md)
 
@@ -543,7 +545,9 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`objectStorageGetStorageAccessKeys`](docs/sdks/objectstorage/README.md#getstorageaccesskeys) - List access keys
 - [`objectStorageGetStorageBucket`](docs/sdks/objectstorage/README.md#getstoragebucket) - Retrieve bucket
 - [`objectStorageGetStorageBucketAccessKeys`](docs/sdks/objectstorage/README.md#getstoragebucketaccesskeys) - List bucket access keys
+- [`objectStorageGetStorageBucketMetrics`](docs/sdks/objectstorage/README.md#getstoragebucketmetrics) - Retrieve bucket metrics
 - [`objectStorageGetStorageBuckets`](docs/sdks/objectstorage/README.md#getstoragebuckets) - List buckets
+- [`objectStorageIndexProjectStorageUsage`](docs/sdks/objectstorage/README.md#indexprojectstorageusage) - List storage usage
 - [`objectStoragePostStorageAccessKeys`](docs/sdks/objectstorage/README.md#poststorageaccesskeys) - Create access key
 - [`objectStoragePostStorageBuckets`](docs/sdks/objectstorage/README.md#poststoragebuckets) - Create bucket
 - [`operatingSystemsListPlans`](docs/sdks/operatingsystems/README.md#listplans) - List operating systems
@@ -825,7 +829,7 @@ run();
 
 
 **Inherit from [`LatitudeshError`](./src/models/errors/latitudesherror.ts)**:
-* [`ErrorObject`](./src/models/errors/errorobject.ts): Applicable to 41 of 162 methods.*
+* [`ErrorObject`](./src/models/errors/errorobject.ts): Applicable to 44 of 164 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>

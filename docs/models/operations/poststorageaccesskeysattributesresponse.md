@@ -1,11 +1,11 @@
-# AttributesResponse
+# PostStorageAccessKeysAttributesResponse
 
 ## Example Usage
 
 ```typescript
-import { AttributesResponse } from "latitudesh-typescript-sdk/models/operations";
+import { PostStorageAccessKeysAttributesResponse } from "latitudesh-typescript-sdk/models/operations";
 
-let value: AttributesResponse = {};
+let value: PostStorageAccessKeysAttributesResponse = {};
 ```
 
 ## Fields

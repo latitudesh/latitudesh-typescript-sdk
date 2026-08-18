@@ -35,7 +35,7 @@ import {
  * Firewall assignments
  *
  * @remarks
- * Returns a list of all servers assigned to a particular firewall.
+ * Returns a list of all servers and virtual machines assigned to a particular firewall.
  */
 export function firewallsListAssignments(
   client: LatitudeshCore,

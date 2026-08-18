@@ -13,5 +13,5 @@ let value: CreatePrefixSize = 28;
 ## Values
 
 ```typescript
-26 | 27 | 28
+26 | 27 | 28 | 29
 ```

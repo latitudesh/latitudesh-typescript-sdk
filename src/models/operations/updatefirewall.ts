@@ -38,6 +38,10 @@ export type UpdateFirewallRule2 = {
 
 export type UpdateFirewallAttributes2 = {
   name?: string | undefined;
+  /**
+   * IDs of the tags to attach to the firewall. Replaces the current tags; send an empty array to remove all tags.
+   */
+  tags?: Array<string> | undefined;
   rules?: Array<UpdateFirewallRule2> | undefined;
 };
 
@@ -134,11 +138,13 @@ export const UpdateFirewallAttributes2$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   name: z.string().optional(),
+  tags: z.array(z.string()).optional(),
   rules: z.array(z.lazy(() => UpdateFirewallRule2$inboundSchema)).optional(),
 });
 /** @internal */
 export type UpdateFirewallAttributes2$Outbound = {
   name?: string | undefined;
+  tags?: Array<string> | undefined;
   rules?: Array<UpdateFirewallRule2$Outbound> | undefined;
 };
 
@@ -149,6 +155,7 @@ export const UpdateFirewallAttributes2$outboundSchema: z.ZodType<
   UpdateFirewallAttributes2
 > = z.object({
   name: z.string().optional(),
+  tags: z.array(z.string()).optional(),
   rules: z.array(z.lazy(() => UpdateFirewallRule2$outboundSchema)).optional(),
 });
 

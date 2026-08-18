@@ -16,6 +16,19 @@ export const CreateBaselineType2 = {
 export type CreateBaselineType2 = ClosedEnum<typeof CreateBaselineType2>;
 
 /**
+ * Baseline target: all servers, a custom set (plan unknown), or specific platforms
+ */
+export const TargetType2 = {
+  AllServers: "all_servers",
+  Custom: "custom",
+  Platforms: "platforms",
+} as const;
+/**
+ * Baseline target: all servers, a custom set (plan unknown), or specific platforms
+ */
+export type TargetType2 = ClosedEnum<typeof TargetType2>;
+
+/**
  * Expected BIOS settings, keyed by setting id
  */
 export type Bios2 = {};
@@ -24,15 +37,23 @@ export type CreateBaselineAttributes2 = {
   /**
    * Name of the baseline
    */
-  name?: string | undefined;
+  name: string;
   /**
    * Description of the baseline
    */
   description?: string | null | undefined;
   /**
-   * Slug of the plan this baseline applies to
+   * Baseline target: all servers, a custom set (plan unknown), or specific platforms
    */
-  plan?: string | undefined;
+  targetType: TargetType2;
+  /**
+   * Slug of the operating system the baseline expects the server to run (required)
+   */
+  operatingSystem: string;
+  /**
+   * Slugs of the plans this baseline applies to. Required when target_type is "platforms"
+   */
+  platforms?: Array<string> | undefined;
   /**
    * SSH keys the baseline expects on the server
    */
@@ -70,6 +91,13 @@ export const CreateBaselineType2$outboundSchema: z.ZodNativeEnum<
 > = CreateBaselineType2$inboundSchema;
 
 /** @internal */
+export const TargetType2$inboundSchema: z.ZodNativeEnum<typeof TargetType2> = z
+  .nativeEnum(TargetType2);
+/** @internal */
+export const TargetType2$outboundSchema: z.ZodNativeEnum<typeof TargetType2> =
+  TargetType2$inboundSchema;
+
+/** @internal */
 export const Bios2$inboundSchema: z.ZodType<Bios2, z.ZodTypeDef, unknown> = z
   .object({});
 /** @internal */
@@ -101,15 +129,19 @@ export const CreateBaselineAttributes2$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  name: z.string().optional(),
+  name: z.string(),
   description: z.nullable(z.string()).optional(),
-  plan: z.string().optional(),
+  target_type: TargetType2$inboundSchema,
+  operating_system: z.string(),
+  platforms: z.array(z.string()).optional(),
   ssh_key_ids: z.array(z.string()).optional(),
   user_data_id: z.nullable(z.string()).optional(),
   disk_layout: z.array(models.BaselineDiskLayoutGroup$inboundSchema).optional(),
   bios: z.lazy(() => Bios2$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
+    "target_type": "targetType",
+    "operating_system": "operatingSystem",
     "ssh_key_ids": "sshKeyIds",
     "user_data_id": "userDataId",
     "disk_layout": "diskLayout",
@@ -117,9 +149,11 @@ export const CreateBaselineAttributes2$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type CreateBaselineAttributes2$Outbound = {
-  name?: string | undefined;
+  name: string;
   description?: string | null | undefined;
-  plan?: string | undefined;
+  target_type: string;
+  operating_system: string;
+  platforms?: Array<string> | undefined;
   ssh_key_ids?: Array<string> | undefined;
   user_data_id?: string | null | undefined;
   disk_layout?: Array<models.BaselineDiskLayoutGroup$Outbound> | undefined;
@@ -132,15 +166,19 @@ export const CreateBaselineAttributes2$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateBaselineAttributes2
 > = z.object({
-  name: z.string().optional(),
+  name: z.string(),
   description: z.nullable(z.string()).optional(),
-  plan: z.string().optional(),
+  targetType: TargetType2$outboundSchema,
+  operatingSystem: z.string(),
+  platforms: z.array(z.string()).optional(),
   sshKeyIds: z.array(z.string()).optional(),
   userDataId: z.nullable(z.string()).optional(),
   diskLayout: z.array(models.BaselineDiskLayoutGroup$outboundSchema).optional(),
   bios: z.lazy(() => Bios2$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
+    targetType: "target_type",
+    operatingSystem: "operating_system",
     sshKeyIds: "ssh_key_ids",
     userDataId: "user_data_id",
     diskLayout: "disk_layout",

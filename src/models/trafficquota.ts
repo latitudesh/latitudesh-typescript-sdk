@@ -29,6 +29,7 @@ export type QuotaInMbps = {
 export type QuotaPerRegion = {
   regionId?: string | undefined;
   regionSlug?: string | undefined;
+  price?: number | null | undefined;
   quotaInTb?: QuotaInTb | undefined;
   quotaInMbps?: QuotaInMbps | undefined;
 };
@@ -51,8 +52,11 @@ export type TrafficQuotaData = {
   attributes?: TrafficQuotaAttributes | undefined;
 };
 
+export type TrafficQuotaMeta = {};
+
 export type TrafficQuota = {
   data?: TrafficQuotaData | undefined;
+  meta?: TrafficQuotaMeta | undefined;
 };
 
 /** @internal */
@@ -154,6 +158,7 @@ export const QuotaPerRegion$inboundSchema: z.ZodType<
 > = z.object({
   region_id: z.string().optional(),
   region_slug: z.string().optional(),
+  price: z.nullable(z.number().int()).optional(),
   quota_in_tb: z.lazy(() => QuotaInTb$inboundSchema).optional(),
   quota_in_mbps: z.lazy(() => QuotaInMbps$inboundSchema).optional(),
 }).transform((v) => {
@@ -168,6 +173,7 @@ export const QuotaPerRegion$inboundSchema: z.ZodType<
 export type QuotaPerRegion$Outbound = {
   region_id?: string | undefined;
   region_slug?: string | undefined;
+  price?: number | null | undefined;
   quota_in_tb?: QuotaInTb$Outbound | undefined;
   quota_in_mbps?: QuotaInMbps$Outbound | undefined;
 };
@@ -180,6 +186,7 @@ export const QuotaPerRegion$outboundSchema: z.ZodType<
 > = z.object({
   regionId: z.string().optional(),
   regionSlug: z.string().optional(),
+  price: z.nullable(z.number().int()).optional(),
   quotaInTb: z.lazy(() => QuotaInTb$outboundSchema).optional(),
   quotaInMbps: z.lazy(() => QuotaInMbps$outboundSchema).optional(),
 }).transform((v) => {
@@ -364,16 +371,51 @@ export function trafficQuotaDataFromJSON(
 }
 
 /** @internal */
+export const TrafficQuotaMeta$inboundSchema: z.ZodType<
+  TrafficQuotaMeta,
+  z.ZodTypeDef,
+  unknown
+> = z.object({});
+/** @internal */
+export type TrafficQuotaMeta$Outbound = {};
+
+/** @internal */
+export const TrafficQuotaMeta$outboundSchema: z.ZodType<
+  TrafficQuotaMeta$Outbound,
+  z.ZodTypeDef,
+  TrafficQuotaMeta
+> = z.object({});
+
+export function trafficQuotaMetaToJSON(
+  trafficQuotaMeta: TrafficQuotaMeta,
+): string {
+  return JSON.stringify(
+    TrafficQuotaMeta$outboundSchema.parse(trafficQuotaMeta),
+  );
+}
+export function trafficQuotaMetaFromJSON(
+  jsonString: string,
+): SafeParseResult<TrafficQuotaMeta, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => TrafficQuotaMeta$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'TrafficQuotaMeta' from JSON`,
+  );
+}
+
+/** @internal */
 export const TrafficQuota$inboundSchema: z.ZodType<
   TrafficQuota,
   z.ZodTypeDef,
   unknown
 > = z.object({
   data: z.lazy(() => TrafficQuotaData$inboundSchema).optional(),
+  meta: z.lazy(() => TrafficQuotaMeta$inboundSchema).optional(),
 });
 /** @internal */
 export type TrafficQuota$Outbound = {
   data?: TrafficQuotaData$Outbound | undefined;
+  meta?: TrafficQuotaMeta$Outbound | undefined;
 };
 
 /** @internal */
@@ -383,6 +425,7 @@ export const TrafficQuota$outboundSchema: z.ZodType<
   TrafficQuota
 > = z.object({
   data: z.lazy(() => TrafficQuotaData$outboundSchema).optional(),
+  meta: z.lazy(() => TrafficQuotaMeta$outboundSchema).optional(),
 });
 
 export function trafficQuotaToJSON(trafficQuota: TrafficQuota): string {

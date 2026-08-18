@@ -25,7 +25,7 @@ export type Rule = {
   port?: string | undefined;
   protocol?: string | undefined;
   /**
-   * True when this rule was seeded by Latitude when the firewall was created (cannot be deleted); false for user-added rules.
+   * True when this rule was seeded by Latitude when the firewall was created; false for user-added rules. Read-only: this flag cannot be set through the API.
    */
   default?: boolean | undefined;
   /**
@@ -40,10 +40,18 @@ export type FirewallDataProject = {
   name?: string | undefined;
 };
 
+export type FirewallDataTag = {
+  id?: string | undefined;
+  name?: string | undefined;
+  description?: string | null | undefined;
+  color?: string | null | undefined;
+};
+
 export type FirewallDataAttributes = {
   name?: string | undefined;
   rules?: Array<Rule> | undefined;
   project?: FirewallDataProject | undefined;
+  tags?: Array<FirewallDataTag> | undefined;
 };
 
 export type FirewallData = {
@@ -151,6 +159,52 @@ export function firewallDataProjectFromJSON(
 }
 
 /** @internal */
+export const FirewallDataTag$inboundSchema: z.ZodType<
+  FirewallDataTag,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string().optional(),
+  name: z.string().optional(),
+  description: z.nullable(z.string()).optional(),
+  color: z.nullable(z.string()).optional(),
+});
+/** @internal */
+export type FirewallDataTag$Outbound = {
+  id?: string | undefined;
+  name?: string | undefined;
+  description?: string | null | undefined;
+  color?: string | null | undefined;
+};
+
+/** @internal */
+export const FirewallDataTag$outboundSchema: z.ZodType<
+  FirewallDataTag$Outbound,
+  z.ZodTypeDef,
+  FirewallDataTag
+> = z.object({
+  id: z.string().optional(),
+  name: z.string().optional(),
+  description: z.nullable(z.string()).optional(),
+  color: z.nullable(z.string()).optional(),
+});
+
+export function firewallDataTagToJSON(
+  firewallDataTag: FirewallDataTag,
+): string {
+  return JSON.stringify(FirewallDataTag$outboundSchema.parse(firewallDataTag));
+}
+export function firewallDataTagFromJSON(
+  jsonString: string,
+): SafeParseResult<FirewallDataTag, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => FirewallDataTag$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FirewallDataTag' from JSON`,
+  );
+}
+
+/** @internal */
 export const FirewallDataAttributes$inboundSchema: z.ZodType<
   FirewallDataAttributes,
   z.ZodTypeDef,
@@ -159,12 +213,14 @@ export const FirewallDataAttributes$inboundSchema: z.ZodType<
   name: z.string().optional(),
   rules: z.array(z.lazy(() => Rule$inboundSchema)).optional(),
   project: z.lazy(() => FirewallDataProject$inboundSchema).optional(),
+  tags: z.array(z.lazy(() => FirewallDataTag$inboundSchema)).optional(),
 });
 /** @internal */
 export type FirewallDataAttributes$Outbound = {
   name?: string | undefined;
   rules?: Array<Rule$Outbound> | undefined;
   project?: FirewallDataProject$Outbound | undefined;
+  tags?: Array<FirewallDataTag$Outbound> | undefined;
 };
 
 /** @internal */
@@ -176,6 +232,7 @@ export const FirewallDataAttributes$outboundSchema: z.ZodType<
   name: z.string().optional(),
   rules: z.array(z.lazy(() => Rule$outboundSchema)).optional(),
   project: z.lazy(() => FirewallDataProject$outboundSchema).optional(),
+  tags: z.array(z.lazy(() => FirewallDataTag$outboundSchema)).optional(),
 });
 
 export function firewallDataAttributesToJSON(

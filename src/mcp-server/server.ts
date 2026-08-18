@@ -65,7 +65,9 @@ import { tool$objectStorageDeleteStorageBuckets } from "./tools/objectStorageDel
 import { tool$objectStorageGetStorageAccessKeys } from "./tools/objectStorageGetStorageAccessKeys.js";
 import { tool$objectStorageGetStorageBucket } from "./tools/objectStorageGetStorageBucket.js";
 import { tool$objectStorageGetStorageBucketAccessKeys } from "./tools/objectStorageGetStorageBucketAccessKeys.js";
+import { tool$objectStorageGetStorageBucketMetrics } from "./tools/objectStorageGetStorageBucketMetrics.js";
 import { tool$objectStorageGetStorageBuckets } from "./tools/objectStorageGetStorageBuckets.js";
+import { tool$objectStorageIndexProjectStorageUsage } from "./tools/objectStorageIndexProjectStorageUsage.js";
 import { tool$objectStoragePostStorageAccessKeys } from "./tools/objectStoragePostStorageAccessKeys.js";
 import { tool$objectStoragePostStorageBuckets } from "./tools/objectStoragePostStorageBuckets.js";
 import { tool$operatingSystemsListPlans } from "./tools/operatingSystemsListPlans.js";
@@ -187,7 +189,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Latitudesh",
-    version: "0.8.9",
+    version: "0.8.10",
   });
 
   const client = new LatitudeshCore({
@@ -284,6 +286,16 @@ export function createMCPServer(deps: {
   tool(tool$sshKeysRetrieve);
   tool(tool$sshKeysUpdate);
   tool(tool$sshKeysDelete);
+  tool(tool$objectStorageIndexProjectStorageUsage);
+  tool(tool$objectStoragePostStorageAccessKeys);
+  tool(tool$objectStorageGetStorageAccessKeys);
+  tool(tool$objectStorageDeleteStorageAccessKeysUsername);
+  tool(tool$objectStorageGetStorageBucketAccessKeys);
+  tool(tool$objectStorageGetStorageBuckets);
+  tool(tool$objectStoragePostStorageBuckets);
+  tool(tool$objectStorageGetStorageBucket);
+  tool(tool$objectStorageDeleteStorageBuckets);
+  tool(tool$objectStorageGetStorageBucketMetrics);
   tool(tool$userDataGetProjectUsersData);
   tool(tool$userDataGetProjectUserData);
   tool(tool$userDataDeleteProjectUserData);
@@ -325,14 +337,6 @@ export function createMCPServer(deps: {
   tool(tool$blockStorageGetStorageVolume);
   tool(tool$blockStorageDeleteStorageVolumes);
   tool(tool$blockStoragePostStorageVolumesMount);
-  tool(tool$objectStoragePostStorageAccessKeys);
-  tool(tool$objectStorageGetStorageAccessKeys);
-  tool(tool$objectStorageDeleteStorageAccessKeysUsername);
-  tool(tool$objectStorageGetStorageBucketAccessKeys);
-  tool(tool$objectStorageGetStorageBuckets);
-  tool(tool$objectStoragePostStorageBuckets);
-  tool(tool$objectStorageGetStorageBucket);
-  tool(tool$objectStorageDeleteStorageBuckets);
   tool(tool$tagsList);
   tool(tool$tagsCreate);
   tool(tool$tagsUpdate);

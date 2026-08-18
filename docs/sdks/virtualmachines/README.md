@@ -561,8 +561,73 @@ Performs a power action on a given virtual machine:
 - `power_off` - Stops the virtual machine
 - `reboot` - Restarts the virtual machine
 
+`power_on` is never blocked. A `power_off` or `reboot` returns `409 Conflict` when a backup is in progress for the virtual machine.
 
-### Example Usage
+
+### Example Usage: BackupInProgress
+
+<!-- UsageSnippet language="typescript" operationID="create-virtual-machine-action" method="post" path="/virtual_machines/{virtual_machine_id}/actions" example="BackupInProgress" -->
+```typescript
+import { Latitudesh } from "latitudesh-typescript-sdk";
+
+const latitudesh = new Latitudesh({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  await latitudesh.virtualMachines.createVirtualMachineAction({
+    virtualMachineId: "<id>",
+    requestBody: {
+      id: "<id>",
+      type: "virtual_machines",
+      attributes: {
+        action: "reboot",
+      },
+    },
+  });
+
+
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
+import { virtualMachinesCreateVirtualMachineAction } from "latitudesh-typescript-sdk/funcs/virtualMachinesCreateVirtualMachineAction.js";
+
+// Use `LatitudeshCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const latitudesh = new LatitudeshCore({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const res = await virtualMachinesCreateVirtualMachineAction(latitudesh, {
+    virtualMachineId: "<id>",
+    requestBody: {
+      id: "<id>",
+      type: "virtual_machines",
+      attributes: {
+        action: "reboot",
+      },
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("virtualMachinesCreateVirtualMachineAction failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: Created
 
 <!-- UsageSnippet language="typescript" operationID="create-virtual-machine-action" method="post" path="/virtual_machines/{virtual_machine_id}/actions" example="Created" -->
 ```typescript
@@ -643,6 +708,7 @@ run();
 
 | Error Type                    | Status Code                   | Content Type                  |
 | ----------------------------- | ----------------------------- | ----------------------------- |
+| errors.ErrorObject            | 409, 422                      | application/vnd.api+json      |
 | errors.LatitudeshDefaultError | 4XX, 5XX                      | \*/\*                         |
 
 ## showVirtualMachineMetrics

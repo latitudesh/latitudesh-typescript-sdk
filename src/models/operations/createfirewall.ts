@@ -44,6 +44,13 @@ export type CreateFirewallRule2 = {
 export type CreateFirewallAttributes2 = {
   name: string;
   project: string;
+  /**
+   * IDs of the tags to attach to the firewall
+   */
+  tags?: Array<string> | undefined;
+  /**
+   * Firewall rules. When empty, Latitude seeds a default rule allowing SSH (TCP port 22) from any source.
+   */
   rules?: Array<CreateFirewallRule2> | undefined;
 };
 
@@ -133,12 +140,14 @@ export const CreateFirewallAttributes2$inboundSchema: z.ZodType<
 > = z.object({
   name: z.string(),
   project: z.string(),
+  tags: z.array(z.string()).optional(),
   rules: z.array(z.lazy(() => CreateFirewallRule2$inboundSchema)).optional(),
 });
 /** @internal */
 export type CreateFirewallAttributes2$Outbound = {
   name: string;
   project: string;
+  tags?: Array<string> | undefined;
   rules?: Array<CreateFirewallRule2$Outbound> | undefined;
 };
 
@@ -150,6 +159,7 @@ export const CreateFirewallAttributes2$outboundSchema: z.ZodType<
 > = z.object({
   name: z.string(),
   project: z.string(),
+  tags: z.array(z.string()).optional(),
   rules: z.array(z.lazy(() => CreateFirewallRule2$outboundSchema)).optional(),
 });
 

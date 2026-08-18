@@ -13,7 +13,7 @@ export class Assignments extends ClientSDK {
    * Assign server to firewall
    *
    * @remarks
-   * Assigns a server to a firewall by its ID.
+   * Assigns a server or a virtual machine to a firewall by its ID.
    */
   async create(
     request: operations.CreateFirewallAssignmentRequest,
