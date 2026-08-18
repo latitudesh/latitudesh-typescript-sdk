@@ -3,22 +3,22 @@ id: c8245324-f3d7-42c7-8124-ce79579cbff5
 management:
   docChecksum: 55d0dd315a93f4f63ab0ffb25232cf20
   docVersion: "2023-06-01"
-  speakeasyVersion: 1.793.1
-  generationVersion: 2.928.0
-  releaseVersion: 0.8.8
-  configChecksum: 0c7630e87b3300d40816e14af48bfcff
+  speakeasyVersion: 1.794.1
+  generationVersion: 2.931.0
+  releaseVersion: 0.8.9
+  configChecksum: ecbbc2e16aa3cdf8e72ac66f9697ba66
   repoURL: https://github.com/latitudesh/latitudesh-typescript-sdk.git
   installationURL: https://github.com/latitudesh/latitudesh-typescript-sdk
   published: true
 persistentEdits:
-  generation_id: 603efaa6-b1c1-4df3-84e3-f6b8d34a168d
-  pristine_commit_hash: 07fc2558d54ece8f7feed5d792375e0fc39f99e1
-  pristine_tree_hash: f62153b9478caa8bf6643f8a4239c50d7c2bde68
+  generation_id: 3d74e2e2-f1dc-4dad-bad8-7952b5e4a932
+  pristine_commit_hash: defb24d0d24ae4cd42eeeb6b81bf10b565451b09
+  pristine_tree_hash: f9cdb8074db12db8155910cb8a891f4122198f17
 features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.14
-    core: 3.31.4
+    core: 3.31.5
     defaultEnabledRetries: 0.1.0
     deprecations: 2.81.1
     devContainers: 2.90.1
@@ -38,7 +38,7 @@ features:
     responseFormat: 0.3.0
     retries: 2.83.1
     sdkHooks: 0.4.0
-    unions: 2.86.4
+    unions: 2.86.5
 trackedFiles:
   .devcontainer/README.md:
     id: b170c0f184ac
@@ -3798,12 +3798,12 @@ trackedFiles:
     pristine_git_object: 249e5d9837dbad499fc14718cebf96fd4875a9e8
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:f3641fd7bbe6a9a274c3ec4217a2b1bbaf4dcf26
-    pristine_git_object: 7f03dee8b3c160adf81b02b814f2038768b14fda
+    last_write_checksum: sha1:82272f533bcad053527fe891ae88f2707c163b6b
+    pristine_git_object: 7e71bd48e658c208f79a451f31f89561a04f5504
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:0401314e0f55dbd086d1bb0244a8e2924d2ea2d4
-    pristine_git_object: 7bd6ae2e9907389b542c85c64be382799ccddda6
+    last_write_checksum: sha1:fffae4af423f9603a0ebda1ece93f87310e7928b
+    pristine_git_object: 137f82757be1699b9872964e4d4505898af1daa0
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:9bb7b3807363b77f27dbdb87d6d10e9605f723d6
@@ -4478,8 +4478,8 @@ trackedFiles:
     pristine_git_object: 0aebd8b0a4867e35cb3348fc52921c3c0b4725b7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:e774148fd9f64ab5c736d6eae124605eb3914975
-    pristine_git_object: 96a68b5218f95b8dea555554d1070abf1385bf06
+    last_write_checksum: sha1:7b962c0b7313979564e4c07c0e0c84f34c2a224b
+    pristine_git_object: 75b16639886f00ca801efd4129f08d45e572fe5f
   src/lib/encodings.ts:
     id: 3bd8ead98afd
     last_write_checksum: sha1:50d9b187dcfc3cca8d3bbd9fe074f865d715d2b0
@@ -4554,8 +4554,8 @@ trackedFiles:
     pristine_git_object: 0955a573c2ce989d63c737410ab8cc28706d9f74
   src/mcp-server/mcp-server.ts:
     id: aabbc4ab07c1
-    last_write_checksum: sha1:390f8de6a7730e76f159db30925a8abf09c8befd
-    pristine_git_object: 057a4c389653131c47ce9ede87ae5d23e3632ee7
+    last_write_checksum: sha1:8663d464b000ef85ebd6aade9d342a24b89d5b49
+    pristine_git_object: 233a7975f43e2b8696dfa852cac7d305471644fe
   src/mcp-server/prompts.ts:
     id: 26f3d73cbf31
     last_write_checksum: sha1:3e8d60ab7f8078d83fa9528f2e831050c1fd119c
@@ -4570,8 +4570,8 @@ trackedFiles:
     pristine_git_object: c25696d4c4f70e081fa5d87ad6891874c509a577
   src/mcp-server/server.ts:
     id: 2784dd48e82a
-    last_write_checksum: sha1:52f6d68e3acfdfb859c546bb3903daeb6cd0688a
-    pristine_git_object: 411802a27022794dd90a06ac15131c7c91003ad9
+    last_write_checksum: sha1:6c7bcb0dbe7d6ea742d06c15e093e5632976c70e
+    pristine_git_object: 67fdcaf6cb3c207e1b22df7da3d77f2cb28575c4
   src/mcp-server/shared.ts:
     id: 074e80d4be1e
     last_write_checksum: sha1:d89576cea2bef3856b7fc3e65b868875528be042
@@ -8757,7 +8757,6 @@ examples:
           application/vnd.api+json: {}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Typescript SDK Changes:\n* `latitudesh.sshKeys.modifyProjectKey()`: \n  *  `request.requestBody.data` **Changed** (Breaking ⚠️)\n* `latitudesh.tags.create()`: \n  *  `request.data.attributes.color` **Changed** (Breaking ⚠️)\n* `latitudesh.filesystemStorage.updateFilesystem()`: \n  *  `request.requestBody.data.attributes.sizeInGb` **Changed** (Breaking ⚠️)\n* `latitudesh.sshKeys.update()`: \n  *  `request.requestBody.data` **Changed** (Breaking ⚠️)\n* `latitudesh.servers.create()`:  `response.data.attributes.bondEligible` **Added**\n* `latitudesh.plans.get()`:  `response` **Changed**\n* `latitudesh.plans.list()`:  `response.data[].attributes.availableOperatingSystems` **Added**\n* `latitudesh.servers.list()`:  `response.data[].attributes.bondEligible` **Added**\n* `latitudesh.teams.get()`:  `response.data[].attributes` **Changed**\n* `latitudesh.servers.get()`:  `response.data.attributes.bondEligible` **Added**\n* `latitudesh.servers.update()`: \n  *  `request.requestBody.data` **Changed**\n  *  `response.data.attributes.bondEligible` **Added**\n* `latitudesh.servers.lock()`:  `response.data.attributes.bondEligible` **Added**\n* `latitudesh.servers.unlock()`:  `response.data.attributes.bondEligible` **Added**\n* `latitudesh.teams.update()`:  `response.data.attributes` **Changed**\n* `latitudesh.teams.create()`:  `response.data.attributes` **Changed**\n* `latitudesh.tags.update()`: \n  *  `request.requestBody.data.attributes.color` **Changed**\n* `latitudesh.traffic.get()`:  `response` **Changed**\n"
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
