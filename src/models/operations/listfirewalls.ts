@@ -12,6 +12,10 @@ import * as models from "../index.js";
 export type ListFirewallsRequest = {
   filterProject?: string | undefined;
   /**
+   * Comma-separated tag IDs. Returns firewalls that have all the given tags.
+   */
+  filterTags?: string | undefined;
+  /**
    * Number of items to return per page
    */
   pageSize?: number | undefined;
@@ -32,11 +36,13 @@ export const ListFirewallsRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   "filter[project]": z.string().optional(),
+  "filter[tags]": z.string().optional(),
   "page[size]": z.number().int().default(20),
   "page[number]": z.number().int().default(1),
 }).transform((v) => {
   return remap$(v, {
     "filter[project]": "filterProject",
+    "filter[tags]": "filterTags",
     "page[size]": "pageSize",
     "page[number]": "pageNumber",
   });
@@ -44,6 +50,7 @@ export const ListFirewallsRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type ListFirewallsRequest$Outbound = {
   "filter[project]"?: string | undefined;
+  "filter[tags]"?: string | undefined;
   "page[size]": number;
   "page[number]": number;
 };
@@ -55,11 +62,13 @@ export const ListFirewallsRequest$outboundSchema: z.ZodType<
   ListFirewallsRequest
 > = z.object({
   filterProject: z.string().optional(),
+  filterTags: z.string().optional(),
   pageSize: z.number().int().default(20),
   pageNumber: z.number().int().default(1),
 }).transform((v) => {
   return remap$(v, {
     filterProject: "filter[project]",
+    filterTags: "filter[tags]",
     pageSize: "page[size]",
     pageNumber: "page[number]",
   });

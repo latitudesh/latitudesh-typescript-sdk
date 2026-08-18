@@ -74,6 +74,15 @@ export const IpmiStatus = {
 } as const;
 export type IpmiStatus = ClosedEnum<typeof IpmiStatus>;
 
+/**
+ * **Preview** (`prefixes_api` feature flag). The customer prefix this server is bonded onto, or null. Fetch full details from GET /prefixes/{id}.
+ */
+export type ServerDataPrefix = {
+  id?: string | undefined;
+  ipv4?: string | undefined;
+  ipv6?: string | null | undefined;
+};
+
 export type ServerDataPlan = {
   /**
    * The plan ID
@@ -198,6 +207,10 @@ export type ServerDataAttributes = {
    * Whether the server is eligible to be bonded (carries the bond-vpc-enabled tag).
    */
   bondEligible?: boolean | undefined;
+  /**
+   * **Preview** (`prefixes_api` feature flag). The customer prefix this server is bonded onto, or null. Fetch full details from GET /prefixes/{id}.
+   */
+  prefix?: ServerDataPrefix | null | undefined;
   site?: string | undefined;
   locked?: boolean | undefined;
   rescueAllowed?: boolean | undefined;
@@ -279,6 +292,51 @@ export const IpmiStatus$inboundSchema: z.ZodNativeEnum<typeof IpmiStatus> = z
 /** @internal */
 export const IpmiStatus$outboundSchema: z.ZodNativeEnum<typeof IpmiStatus> =
   IpmiStatus$inboundSchema;
+
+/** @internal */
+export const ServerDataPrefix$inboundSchema: z.ZodType<
+  ServerDataPrefix,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string().optional(),
+  ipv4: z.string().optional(),
+  ipv6: z.nullable(z.string()).optional(),
+});
+/** @internal */
+export type ServerDataPrefix$Outbound = {
+  id?: string | undefined;
+  ipv4?: string | undefined;
+  ipv6?: string | null | undefined;
+};
+
+/** @internal */
+export const ServerDataPrefix$outboundSchema: z.ZodType<
+  ServerDataPrefix$Outbound,
+  z.ZodTypeDef,
+  ServerDataPrefix
+> = z.object({
+  id: z.string().optional(),
+  ipv4: z.string().optional(),
+  ipv6: z.nullable(z.string()).optional(),
+});
+
+export function serverDataPrefixToJSON(
+  serverDataPrefix: ServerDataPrefix,
+): string {
+  return JSON.stringify(
+    ServerDataPrefix$outboundSchema.parse(serverDataPrefix),
+  );
+}
+export function serverDataPrefixFromJSON(
+  jsonString: string,
+): SafeParseResult<ServerDataPrefix, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ServerDataPrefix$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ServerDataPrefix' from JSON`,
+  );
+}
 
 /** @internal */
 export const ServerDataPlan$inboundSchema: z.ZodType<
@@ -599,6 +657,7 @@ export const ServerDataAttributes$inboundSchema: z.ZodType<
   ipmi_status: z.nullable(IpmiStatus$inboundSchema).optional(),
   role: z.string().optional(),
   bond_eligible: z.boolean().optional(),
+  prefix: z.nullable(z.lazy(() => ServerDataPrefix$inboundSchema)).optional(),
   site: z.string().optional(),
   locked: z.boolean().optional(),
   rescue_allowed: z.boolean().optional(),
@@ -636,6 +695,7 @@ export type ServerDataAttributes$Outbound = {
   ipmi_status?: string | null | undefined;
   role?: string | undefined;
   bond_eligible?: boolean | undefined;
+  prefix?: ServerDataPrefix$Outbound | null | undefined;
   site?: string | undefined;
   locked?: boolean | undefined;
   rescue_allowed?: boolean | undefined;
@@ -666,6 +726,7 @@ export const ServerDataAttributes$outboundSchema: z.ZodType<
   ipmiStatus: z.nullable(IpmiStatus$outboundSchema).optional(),
   role: z.string().optional(),
   bondEligible: z.boolean().optional(),
+  prefix: z.nullable(z.lazy(() => ServerDataPrefix$outboundSchema)).optional(),
   site: z.string().optional(),
   locked: z.boolean().optional(),
   rescueAllowed: z.boolean().optional(),

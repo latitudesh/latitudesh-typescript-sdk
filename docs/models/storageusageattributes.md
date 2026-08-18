@@ -1,0 +1,23 @@
+# StorageUsageAttributes
+
+## Example Usage
+
+```typescript
+import { StorageUsageAttributes } from "latitudesh-typescript-sdk/models";
+
+let value: StorageUsageAttributes = {};
+```
+
+## Fields
+
+| Field                                                                                         | Type                                                                                          | Required                                                                                      | Description                                                                                   |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `date`                                                                                        | [RFCDate](../types/rfcdate.md)                                                                | :heavy_minus_sign:                                                                            | The day this usage row refers to                                                              |
+| `storageId`                                                                                   | *number*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `projectId`                                                                                   | *number*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `provider`                                                                                    | *string*                                                                                      | :heavy_minus_sign:                                                                            | Storage provider that reported this usage (e.g. vast, wasabi)                                 |
+| `region`                                                                                      | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `bytes`                                                                                       | *number*                                                                                      | :heavy_minus_sign:                                                                            | Canonical storage usage for the day, in bytes                                                 |
+| `rawValue`                                                                                    | *number*                                                                                      | :heavy_minus_sign:                                                                            | The provider-reported usage value, in raw_unit                                                |
+| `rawUnit`                                                                                     | *string*                                                                                      | :heavy_minus_sign:                                                                            | The unit raw_value is expressed in                                                            |
+| `ingestedAt`                                                                                  | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |

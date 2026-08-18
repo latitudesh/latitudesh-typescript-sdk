@@ -13,5 +13,6 @@ let value: GetAllFirewallAssignmentsRequest = {};
 | Field                               | Type                                | Required                            | Description                         |
 | ----------------------------------- | ----------------------------------- | ----------------------------------- | ----------------------------------- |
 | `filterServer`                      | *string*                            | :heavy_minus_sign:                  | The server ID to filter by          |
+| `filterVirtualMachine`              | *string*                            | :heavy_minus_sign:                  | The virtual machine ID to filter by |
 | `pageSize`                          | *number*                            | :heavy_minus_sign:                  | Number of items to return per page  |
 | `pageNumber`                        | *number*                            | :heavy_minus_sign:                  | Page number to return (starts at 1) |

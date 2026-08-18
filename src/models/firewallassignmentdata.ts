@@ -16,9 +16,21 @@ export type FirewallAssignmentDataType = ClosedEnum<
   typeof FirewallAssignmentDataType
 >;
 
+/**
+ * Present only when the assignment targets a server.
+ */
 export type FirewallAssignmentDataServer = {
   id?: string | undefined;
-  primaryIpv4?: string | undefined;
+  primaryIpv4?: string | null | undefined;
+  hostname?: string | undefined;
+};
+
+/**
+ * Present only when the assignment targets a virtual machine.
+ */
+export type FirewallAssignmentDataVirtualMachine = {
+  id?: string | undefined;
+  primaryIpv4?: string | null | undefined;
   hostname?: string | undefined;
 };
 
@@ -28,7 +40,14 @@ export type FirewallAssignmentDataFirewall = {
 };
 
 export type FirewallAssignmentDataAttributes = {
+  /**
+   * Present only when the assignment targets a server.
+   */
   server?: FirewallAssignmentDataServer | undefined;
+  /**
+   * Present only when the assignment targets a virtual machine.
+   */
+  virtualMachine?: FirewallAssignmentDataVirtualMachine | undefined;
   firewall?: FirewallAssignmentDataFirewall | undefined;
   firewallId?: string | undefined;
 };
@@ -55,7 +74,7 @@ export const FirewallAssignmentDataServer$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   id: z.string().optional(),
-  primary_ipv4: z.string().optional(),
+  primary_ipv4: z.nullable(z.string()).optional(),
   hostname: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -65,7 +84,7 @@ export const FirewallAssignmentDataServer$inboundSchema: z.ZodType<
 /** @internal */
 export type FirewallAssignmentDataServer$Outbound = {
   id?: string | undefined;
-  primary_ipv4?: string | undefined;
+  primary_ipv4?: string | null | undefined;
   hostname?: string | undefined;
 };
 
@@ -76,7 +95,7 @@ export const FirewallAssignmentDataServer$outboundSchema: z.ZodType<
   FirewallAssignmentDataServer
 > = z.object({
   id: z.string().optional(),
-  primaryIpv4: z.string().optional(),
+  primaryIpv4: z.nullable(z.string()).optional(),
   hostname: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -100,6 +119,62 @@ export function firewallAssignmentDataServerFromJSON(
     jsonString,
     (x) => FirewallAssignmentDataServer$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'FirewallAssignmentDataServer' from JSON`,
+  );
+}
+
+/** @internal */
+export const FirewallAssignmentDataVirtualMachine$inboundSchema: z.ZodType<
+  FirewallAssignmentDataVirtualMachine,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string().optional(),
+  primary_ipv4: z.nullable(z.string()).optional(),
+  hostname: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "primary_ipv4": "primaryIpv4",
+  });
+});
+/** @internal */
+export type FirewallAssignmentDataVirtualMachine$Outbound = {
+  id?: string | undefined;
+  primary_ipv4?: string | null | undefined;
+  hostname?: string | undefined;
+};
+
+/** @internal */
+export const FirewallAssignmentDataVirtualMachine$outboundSchema: z.ZodType<
+  FirewallAssignmentDataVirtualMachine$Outbound,
+  z.ZodTypeDef,
+  FirewallAssignmentDataVirtualMachine
+> = z.object({
+  id: z.string().optional(),
+  primaryIpv4: z.nullable(z.string()).optional(),
+  hostname: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    primaryIpv4: "primary_ipv4",
+  });
+});
+
+export function firewallAssignmentDataVirtualMachineToJSON(
+  firewallAssignmentDataVirtualMachine: FirewallAssignmentDataVirtualMachine,
+): string {
+  return JSON.stringify(
+    FirewallAssignmentDataVirtualMachine$outboundSchema.parse(
+      firewallAssignmentDataVirtualMachine,
+    ),
+  );
+}
+export function firewallAssignmentDataVirtualMachineFromJSON(
+  jsonString: string,
+): SafeParseResult<FirewallAssignmentDataVirtualMachine, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      FirewallAssignmentDataVirtualMachine$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FirewallAssignmentDataVirtualMachine' from JSON`,
   );
 }
 
@@ -154,17 +229,22 @@ export const FirewallAssignmentDataAttributes$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   server: z.lazy(() => FirewallAssignmentDataServer$inboundSchema).optional(),
+  virtual_machine: z.lazy(() =>
+    FirewallAssignmentDataVirtualMachine$inboundSchema
+  ).optional(),
   firewall: z.lazy(() => FirewallAssignmentDataFirewall$inboundSchema)
     .optional(),
   firewall_id: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
+    "virtual_machine": "virtualMachine",
     "firewall_id": "firewallId",
   });
 });
 /** @internal */
 export type FirewallAssignmentDataAttributes$Outbound = {
   server?: FirewallAssignmentDataServer$Outbound | undefined;
+  virtual_machine?: FirewallAssignmentDataVirtualMachine$Outbound | undefined;
   firewall?: FirewallAssignmentDataFirewall$Outbound | undefined;
   firewall_id?: string | undefined;
 };
@@ -176,11 +256,15 @@ export const FirewallAssignmentDataAttributes$outboundSchema: z.ZodType<
   FirewallAssignmentDataAttributes
 > = z.object({
   server: z.lazy(() => FirewallAssignmentDataServer$outboundSchema).optional(),
+  virtualMachine: z.lazy(() =>
+    FirewallAssignmentDataVirtualMachine$outboundSchema
+  ).optional(),
   firewall: z.lazy(() => FirewallAssignmentDataFirewall$outboundSchema)
     .optional(),
   firewallId: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
+    virtualMachine: "virtual_machine",
     firewallId: "firewall_id",
   });
 });

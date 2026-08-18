@@ -15,7 +15,7 @@
 
 ## getAllFirewallAssignments
 
-Returns a list of all servers assigned to one or more firewalls.
+Returns a list of all servers and virtual machines assigned to one or more firewalls.
 
 ### Example Usage
 
@@ -551,7 +551,7 @@ run();
 
 ## listAssignments
 
-Returns a list of all servers assigned to a particular firewall.
+Returns a list of all servers and virtual machines assigned to a particular firewall.
 
 ### Example Usage
 
@@ -628,7 +628,7 @@ run();
 
 ## deleteAssignment
 
-Removes a server from a firewall by its ID.
+Removes a server or a virtual machine from a firewall by its assignment ID.
 
 ### Example Usage
 

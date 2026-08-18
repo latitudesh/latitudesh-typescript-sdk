@@ -56,11 +56,11 @@ export type TrafficRegion = {
    */
   totalOutboundGb?: number | undefined;
   /**
-   * The 95th percentile of inbound bandwidth for this region, calculated from 30-minute intervals. Value in Mbps
+   * The 95th percentile of inbound bandwidth for this region. Value in Mbps
    */
   totalInbound95thPercentileMbps?: number | undefined;
   /**
-   * The 95th percentile of outbound bandwidth for this region, calculated from 30-minute intervals. Value in Mbps
+   * The 95th percentile of outbound bandwidth for this region. Value in Mbps
    */
   totalOutbound95thPercentileMbps?: number | undefined;
   data?: Array<AttributesData> | undefined;
@@ -85,11 +85,11 @@ export type TrafficAttributes = {
    */
   totalOutboundGb?: number | undefined;
   /**
-   * The 95th percentile of inbound bandwidth across all regions, calculated from all 30-minute intervals combined. This is a global percentile, not a sum of regional percentiles. Value in Mbps
+   * The 95th percentile of inbound bandwidth across all regions. This is a global percentile, not a sum of regional percentiles. Value in Mbps
    */
   totalInbound95thPercentileMbps?: number | undefined;
   /**
-   * The 95th percentile of outbound bandwidth across all regions, calculated from all 30-minute intervals combined. This is a global percentile, not a sum of regional percentiles. Value in Mbps
+   * The 95th percentile of outbound bandwidth across all regions. This is a global percentile, not a sum of regional percentiles. Value in Mbps
    */
   totalOutbound95thPercentileMbps?: number | undefined;
 };

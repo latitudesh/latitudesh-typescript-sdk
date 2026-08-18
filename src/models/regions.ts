@@ -22,6 +22,10 @@ export type RegionsAttributes = {
   slug?: string | undefined;
   name?: string | undefined;
   country?: RegionsCountry | undefined;
+  /**
+   * Location capabilities available at this location (e.g. `prefixes`).
+   */
+  features?: Array<string> | undefined;
 };
 
 export type RegionsData = {
@@ -81,12 +85,14 @@ export const RegionsAttributes$inboundSchema: z.ZodType<
   slug: z.string().optional(),
   name: z.string().optional(),
   country: z.lazy(() => RegionsCountry$inboundSchema).optional(),
+  features: z.array(z.string()).optional(),
 });
 /** @internal */
 export type RegionsAttributes$Outbound = {
   slug?: string | undefined;
   name?: string | undefined;
   country?: RegionsCountry$Outbound | undefined;
+  features?: Array<string> | undefined;
 };
 
 /** @internal */
@@ -98,6 +104,7 @@ export const RegionsAttributes$outboundSchema: z.ZodType<
   slug: z.string().optional(),
   name: z.string().optional(),
   country: z.lazy(() => RegionsCountry$outboundSchema).optional(),
+  features: z.array(z.string()).optional(),
 });
 
 export function regionsAttributesToJSON(

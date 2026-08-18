@@ -27,7 +27,7 @@ export class Firewalls extends ClientSDK {
    * List firewall assignments
    *
    * @remarks
-   * Returns a list of all servers assigned to one or more firewalls.
+   * Returns a list of all servers and virtual machines assigned to one or more firewalls.
    */
   async getAllFirewallAssignments(
     request?: operations.GetAllFirewallAssignmentsRequest | undefined,
@@ -128,7 +128,7 @@ export class Firewalls extends ClientSDK {
    * Firewall assignments
    *
    * @remarks
-   * Returns a list of all servers assigned to a particular firewall.
+   * Returns a list of all servers and virtual machines assigned to a particular firewall.
    */
   async listAssignments(
     request: operations.GetFirewallAssignmentsRequest,
@@ -147,7 +147,7 @@ export class Firewalls extends ClientSDK {
    * Delete assignment
    *
    * @remarks
-   * Removes a server from a firewall by its ID.
+   * Removes a server or a virtual machine from a firewall by its assignment ID.
    */
   async deleteAssignment(
     request: operations.DeleteFirewallAssignmentRequest,

@@ -4,6 +4,7 @@
 
 ### Available Operations
 
+* [indexProjectStorageUsage](#indexprojectstorageusage) - List storage usage
 * [postStorageAccessKeys](#poststorageaccesskeys) - Create access key
 * [getStorageAccessKeys](#getstorageaccesskeys) - List access keys
 * [deleteStorageAccessKeysUsername](#deletestorageaccesskeysusername) - Delete access key
@@ -12,6 +13,83 @@
 * [postStorageBuckets](#poststoragebuckets) - Create bucket
 * [getStorageBucket](#getstoragebucket) - Retrieve bucket
 * [deleteStorageBuckets](#deletestoragebuckets) - Delete bucket
+* [getStorageBucketMetrics](#getstoragebucketmetrics) - Retrieve bucket metrics
+
+## indexProjectStorageUsage
+
+Returns daily object storage usage for the project. Each row reports the canonical usage in bytes for a single storage on a given day, plus the provider-reported raw value.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="index-project-storage-usage" method="get" path="/projects/{project_id}/storage_usage" example="Success" -->
+```typescript
+import { Latitudesh } from "latitudesh-typescript-sdk";
+
+const latitudesh = new Latitudesh({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const result = await latitudesh.objectStorage.indexProjectStorageUsage({
+    projectId: "proj_5AEmq7wMqBkWX",
+    storageId: "bkt_6VE1Wd37dXnZJ",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
+import { objectStorageIndexProjectStorageUsage } from "latitudesh-typescript-sdk/funcs/objectStorageIndexProjectStorageUsage.js";
+
+// Use `LatitudeshCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const latitudesh = new LatitudeshCore({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const res = await objectStorageIndexProjectStorageUsage(latitudesh, {
+    projectId: "proj_5AEmq7wMqBkWX",
+    storageId: "bkt_6VE1Wd37dXnZJ",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("objectStorageIndexProjectStorageUsage failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.IndexProjectStorageUsageRequest](../../models/operations/indexprojectstorageusagerequest.md)                                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[models.StorageUsage](../../models/storageusage.md)\>**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| errors.LatitudeshDefaultError | 4XX, 5XX                      | \*/\*                         |
 
 ## postStorageAccessKeys
 
@@ -1114,4 +1192,78 @@ run();
 | ----------------------------- | ----------------------------- | ----------------------------- |
 | errors.ErrorObject            | 403, 404, 409                 | application/vnd.api+json      |
 | errors.ErrorObject            | 500                           | application/vnd.api+json      |
+| errors.LatitudeshDefaultError | 4XX, 5XX                      | \*/\*                         |
+
+## getStorageBucketMetrics
+
+Retrieves usage metrics for a specific object storage bucket, including storage consumption and estimated cost for the current billing period.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="get-storage-bucket-metrics" method="get" path="/storage/buckets/{bucket_id}/metrics" example="Success" -->
+```typescript
+import { Latitudesh } from "latitudesh-typescript-sdk";
+
+const latitudesh = new Latitudesh({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const result = await latitudesh.objectStorage.getStorageBucketMetrics({
+    bucketId: "<id>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
+import { objectStorageGetStorageBucketMetrics } from "latitudesh-typescript-sdk/funcs/objectStorageGetStorageBucketMetrics.js";
+
+// Use `LatitudeshCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const latitudesh = new LatitudeshCore({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const res = await objectStorageGetStorageBucketMetrics(latitudesh, {
+    bucketId: "<id>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("objectStorageGetStorageBucketMetrics failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.GetStorageBucketMetricsRequest](../../models/operations/getstoragebucketmetricsrequest.md)                                                                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.GetStorageBucketMetricsResponse](../../models/operations/getstoragebucketmetricsresponse.md)\>**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| errors.ErrorObject            | 403, 404                      | application/vnd.api+json      |
 | errors.LatitudeshDefaultError | 4XX, 5XX                      | \*/\*                         |

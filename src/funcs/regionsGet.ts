@@ -102,6 +102,8 @@ async function $do(
   const path = pathToFunc("/regions")();
 
   const query = encodeFormQuery({
+    "filter[features]": payload?.["filter[features]"],
+    "include_custom": payload?.include_custom,
     "page[number]": payload?.["page[number]"],
     "page[size]": payload?.["page[size]"],
     "stats[total]": payload?.["stats[total]"],

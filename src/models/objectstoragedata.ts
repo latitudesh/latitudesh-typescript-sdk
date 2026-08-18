@@ -101,7 +101,7 @@ export type ObjectStorageDataAttributes = {
    */
   bucketName?: string | undefined;
   /**
-   * S3-compatible endpoint URL for accessing the bucket
+   * Region-specific S3-compatible endpoint URL for accessing the bucket. The endpoint varies based on the bucket's location.
    */
   endpoint?: string | undefined;
   /**

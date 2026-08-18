@@ -114,6 +114,8 @@ export class VirtualMachines extends ClientSDK {
    * - `power_on` - Starts the virtual machine
    * - `power_off` - Stops the virtual machine
    * - `reboot` - Restarts the virtual machine
+   *
+   * `power_on` is never blocked. A `power_off` or `reboot` returns `409 Conflict` when a backup is in progress for the virtual machine.
    */
   async createVirtualMachineAction(
     request: operations.CreateVirtualMachineActionRequest,

@@ -52,7 +52,7 @@ export type IpAddressDataRegion = {
 export type Assignment = {
   serverId?: string | undefined;
   hostname?: string | null | undefined;
-  assignedAt?: string | undefined;
+  assignedAt?: string | null | undefined;
 };
 
 /**
@@ -261,7 +261,7 @@ export const Assignment$inboundSchema: z.ZodType<
 > = z.object({
   server_id: z.string().optional(),
   hostname: z.nullable(z.string()).optional(),
-  assigned_at: z.string().optional(),
+  assigned_at: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "server_id": "serverId",
@@ -272,7 +272,7 @@ export const Assignment$inboundSchema: z.ZodType<
 export type Assignment$Outbound = {
   server_id?: string | undefined;
   hostname?: string | null | undefined;
-  assigned_at?: string | undefined;
+  assigned_at?: string | null | undefined;
 };
 
 /** @internal */
@@ -283,7 +283,7 @@ export const Assignment$outboundSchema: z.ZodType<
 > = z.object({
   serverId: z.string().optional(),
   hostname: z.nullable(z.string()).optional(),
-  assignedAt: z.string().optional(),
+  assignedAt: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     serverId: "server_id",

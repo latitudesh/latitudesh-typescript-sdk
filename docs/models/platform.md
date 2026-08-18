@@ -1,13 +1,11 @@
-# BaselineDataPlan
-
-The plan this baseline applies to
+# Platform
 
 ## Example Usage
 
 ```typescript
-import { BaselineDataPlan } from "latitudesh-typescript-sdk/models";
+import { Platform } from "latitudesh-typescript-sdk/models";
 
-let value: BaselineDataPlan = {};
+let value: Platform = {};
 ```
 
 ## Fields

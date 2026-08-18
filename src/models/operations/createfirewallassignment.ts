@@ -17,7 +17,14 @@ export type CreateFirewallAssignmentType2 = ClosedEnum<
 >;
 
 export type CreateFirewallAssignmentAttributes2 = {
-  serverId: string;
+  /**
+   * The server ID to assign. Provide exactly one of server_id or virtual_machine_id.
+   */
+  serverId?: string | undefined;
+  /**
+   * The virtual machine ID to assign. Provide exactly one of server_id or virtual_machine_id. A virtual machine can be assigned to at most one firewall.
+   */
+  virtualMachineId?: string | undefined;
 };
 
 export type CreateFirewallAssignmentData2 = {
@@ -52,15 +59,18 @@ export const CreateFirewallAssignmentAttributes2$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  server_id: z.string(),
+  server_id: z.string().optional(),
+  virtual_machine_id: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "server_id": "serverId",
+    "virtual_machine_id": "virtualMachineId",
   });
 });
 /** @internal */
 export type CreateFirewallAssignmentAttributes2$Outbound = {
-  server_id: string;
+  server_id?: string | undefined;
+  virtual_machine_id?: string | undefined;
 };
 
 /** @internal */
@@ -69,10 +79,12 @@ export const CreateFirewallAssignmentAttributes2$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateFirewallAssignmentAttributes2
 > = z.object({
-  serverId: z.string(),
+  serverId: z.string().optional(),
+  virtualMachineId: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     serverId: "server_id",
+    virtualMachineId: "virtual_machine_id",
   });
 });
 

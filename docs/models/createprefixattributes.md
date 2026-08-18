@@ -8,7 +8,7 @@ import { CreatePrefixAttributes } from "latitudesh-typescript-sdk/models";
 let value: CreatePrefixAttributes = {
   projectId: "<id>",
   site: "<value>",
-  size: 27,
+  size: 28,
 };
 ```
 

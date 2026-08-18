@@ -15,6 +15,10 @@ export type GetAllFirewallAssignmentsRequest = {
    */
   filterServer?: string | undefined;
   /**
+   * The virtual machine ID to filter by
+   */
+  filterVirtualMachine?: string | undefined;
+  /**
    * Number of items to return per page
    */
   pageSize?: number | undefined;
@@ -35,11 +39,13 @@ export const GetAllFirewallAssignmentsRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   "filter[server]": z.string().optional(),
+  "filter[virtual_machine]": z.string().optional(),
   "page[size]": z.number().int().default(20),
   "page[number]": z.number().int().default(1),
 }).transform((v) => {
   return remap$(v, {
     "filter[server]": "filterServer",
+    "filter[virtual_machine]": "filterVirtualMachine",
     "page[size]": "pageSize",
     "page[number]": "pageNumber",
   });
@@ -47,6 +53,7 @@ export const GetAllFirewallAssignmentsRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type GetAllFirewallAssignmentsRequest$Outbound = {
   "filter[server]"?: string | undefined;
+  "filter[virtual_machine]"?: string | undefined;
   "page[size]": number;
   "page[number]": number;
 };
@@ -58,11 +65,13 @@ export const GetAllFirewallAssignmentsRequest$outboundSchema: z.ZodType<
   GetAllFirewallAssignmentsRequest
 > = z.object({
   filterServer: z.string().optional(),
+  filterVirtualMachine: z.string().optional(),
   pageSize: z.number().int().default(20),
   pageNumber: z.number().int().default(1),
 }).transform((v) => {
   return remap$(v, {
     filterServer: "filter[server]",
+    filterVirtualMachine: "filter[virtual_machine]",
     pageSize: "page[size]",
     pageNumber: "page[number]",
   });

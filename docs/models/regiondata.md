@@ -5,7 +5,13 @@
 ```typescript
 import { RegionData } from "latitudesh-typescript-sdk/models";
 
-let value: RegionData = {};
+let value: RegionData = {
+  attributes: {
+    features: [
+      "prefixes",
+    ],
+  },
+};
 ```
 
 ## Fields

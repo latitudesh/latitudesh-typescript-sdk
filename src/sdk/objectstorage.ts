@@ -7,7 +7,9 @@ import { objectStorageDeleteStorageBuckets } from "../funcs/objectStorageDeleteS
 import { objectStorageGetStorageAccessKeys } from "../funcs/objectStorageGetStorageAccessKeys.js";
 import { objectStorageGetStorageBucket } from "../funcs/objectStorageGetStorageBucket.js";
 import { objectStorageGetStorageBucketAccessKeys } from "../funcs/objectStorageGetStorageBucketAccessKeys.js";
+import { objectStorageGetStorageBucketMetrics } from "../funcs/objectStorageGetStorageBucketMetrics.js";
 import { objectStorageGetStorageBuckets } from "../funcs/objectStorageGetStorageBuckets.js";
+import { objectStorageIndexProjectStorageUsage } from "../funcs/objectStorageIndexProjectStorageUsage.js";
 import { objectStoragePostStorageAccessKeys } from "../funcs/objectStoragePostStorageAccessKeys.js";
 import { objectStoragePostStorageBuckets } from "../funcs/objectStoragePostStorageBuckets.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
@@ -16,6 +18,23 @@ import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class ObjectStorage extends ClientSDK {
+  /**
+   * List storage usage
+   *
+   * @remarks
+   * Returns daily object storage usage for the project. Each row reports the canonical usage in bytes for a single storage on a given day, plus the provider-reported raw value.
+   */
+  async indexProjectStorageUsage(
+    request: operations.IndexProjectStorageUsageRequest,
+    options?: RequestOptions,
+  ): Promise<models.StorageUsage> {
+    return unwrapAsync(objectStorageIndexProjectStorageUsage(
+      this,
+      request,
+      options,
+    ));
+  }
+
   /**
    * Create access key
    *
@@ -146,6 +165,23 @@ export class ObjectStorage extends ClientSDK {
     options?: RequestOptions,
   ): Promise<void> {
     return unwrapAsync(objectStorageDeleteStorageBuckets(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Retrieve bucket metrics
+   *
+   * @remarks
+   * Retrieves usage metrics for a specific object storage bucket, including storage consumption and estimated cost for the current billing period.
+   */
+  async getStorageBucketMetrics(
+    request: operations.GetStorageBucketMetricsRequest,
+    options?: RequestOptions,
+  ): Promise<operations.GetStorageBucketMetricsResponse> {
+    return unwrapAsync(objectStorageGetStorageBucketMetrics(
       this,
       request,
       options,

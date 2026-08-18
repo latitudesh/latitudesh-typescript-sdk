@@ -99,10 +99,12 @@ export type PostStorageAccessKeysRequest = {
   data: PostStorageAccessKeysDataRequest;
 };
 
-export const TypeResponse = {
+export const PostStorageAccessKeysTypeResponse = {
   AccessKeys: "access_keys",
 } as const;
-export type TypeResponse = ClosedEnum<typeof TypeResponse>;
+export type PostStorageAccessKeysTypeResponse = ClosedEnum<
+  typeof PostStorageAccessKeysTypeResponse
+>;
 
 /**
  * The newly created access key. The secret is included only in this create response and cannot be retrieved again. Field names depend on the provider: `standard` (Wasabi) returns `access_key_id` and `secret_access_key`; `high_performance` (VAST) returns `access_key` and `secret_key`.
@@ -138,7 +140,7 @@ export type AccessKey = {
   username?: string | undefined;
 };
 
-export type AttributesResponse = {
+export type PostStorageAccessKeysAttributesResponse = {
   /**
    * The newly created access key. The secret is included only in this create response and cannot be retrieved again. Field names depend on the provider: `standard` (Wasabi) returns `access_key_id` and `secret_access_key`; `high_performance` (VAST) returns `access_key` and `secret_key`.
    */
@@ -146,8 +148,8 @@ export type AttributesResponse = {
 };
 
 export type PostStorageAccessKeysDataResponse = {
-  type?: TypeResponse | undefined;
-  attributes?: AttributesResponse | undefined;
+  type?: PostStorageAccessKeysTypeResponse | undefined;
+  attributes?: PostStorageAccessKeysAttributesResponse | undefined;
 };
 
 /**
@@ -406,11 +408,13 @@ export function postStorageAccessKeysRequestFromJSON(
 }
 
 /** @internal */
-export const TypeResponse$inboundSchema: z.ZodNativeEnum<typeof TypeResponse> =
-  z.nativeEnum(TypeResponse);
+export const PostStorageAccessKeysTypeResponse$inboundSchema: z.ZodNativeEnum<
+  typeof PostStorageAccessKeysTypeResponse
+> = z.nativeEnum(PostStorageAccessKeysTypeResponse);
 /** @internal */
-export const TypeResponse$outboundSchema: z.ZodNativeEnum<typeof TypeResponse> =
-  TypeResponse$inboundSchema;
+export const PostStorageAccessKeysTypeResponse$outboundSchema: z.ZodNativeEnum<
+  typeof PostStorageAccessKeysTypeResponse
+> = PostStorageAccessKeysTypeResponse$inboundSchema;
 
 /** @internal */
 export const AccessKey$inboundSchema: z.ZodType<
@@ -480,8 +484,8 @@ export function accessKeyFromJSON(
 }
 
 /** @internal */
-export const AttributesResponse$inboundSchema: z.ZodType<
-  AttributesResponse,
+export const PostStorageAccessKeysAttributesResponse$inboundSchema: z.ZodType<
+  PostStorageAccessKeysAttributesResponse,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -492,15 +496,15 @@ export const AttributesResponse$inboundSchema: z.ZodType<
   });
 });
 /** @internal */
-export type AttributesResponse$Outbound = {
+export type PostStorageAccessKeysAttributesResponse$Outbound = {
   access_key?: AccessKey$Outbound | undefined;
 };
 
 /** @internal */
-export const AttributesResponse$outboundSchema: z.ZodType<
-  AttributesResponse$Outbound,
+export const PostStorageAccessKeysAttributesResponse$outboundSchema: z.ZodType<
+  PostStorageAccessKeysAttributesResponse$Outbound,
   z.ZodTypeDef,
-  AttributesResponse
+  PostStorageAccessKeysAttributesResponse
 > = z.object({
   accessKey: z.lazy(() => AccessKey$outboundSchema).optional(),
 }).transform((v) => {
@@ -509,20 +513,29 @@ export const AttributesResponse$outboundSchema: z.ZodType<
   });
 });
 
-export function attributesResponseToJSON(
-  attributesResponse: AttributesResponse,
+export function postStorageAccessKeysAttributesResponseToJSON(
+  postStorageAccessKeysAttributesResponse:
+    PostStorageAccessKeysAttributesResponse,
 ): string {
   return JSON.stringify(
-    AttributesResponse$outboundSchema.parse(attributesResponse),
+    PostStorageAccessKeysAttributesResponse$outboundSchema.parse(
+      postStorageAccessKeysAttributesResponse,
+    ),
   );
 }
-export function attributesResponseFromJSON(
+export function postStorageAccessKeysAttributesResponseFromJSON(
   jsonString: string,
-): SafeParseResult<AttributesResponse, SDKValidationError> {
+): SafeParseResult<
+  PostStorageAccessKeysAttributesResponse,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
-    (x) => AttributesResponse$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'AttributesResponse' from JSON`,
+    (x) =>
+      PostStorageAccessKeysAttributesResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'PostStorageAccessKeysAttributesResponse' from JSON`,
   );
 }
 
@@ -532,13 +545,15 @@ export const PostStorageAccessKeysDataResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: TypeResponse$inboundSchema.optional(),
-  attributes: z.lazy(() => AttributesResponse$inboundSchema).optional(),
+  type: PostStorageAccessKeysTypeResponse$inboundSchema.optional(),
+  attributes: z.lazy(() =>
+    PostStorageAccessKeysAttributesResponse$inboundSchema
+  ).optional(),
 });
 /** @internal */
 export type PostStorageAccessKeysDataResponse$Outbound = {
   type?: string | undefined;
-  attributes?: AttributesResponse$Outbound | undefined;
+  attributes?: PostStorageAccessKeysAttributesResponse$Outbound | undefined;
 };
 
 /** @internal */
@@ -547,8 +562,10 @@ export const PostStorageAccessKeysDataResponse$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PostStorageAccessKeysDataResponse
 > = z.object({
-  type: TypeResponse$outboundSchema.optional(),
-  attributes: z.lazy(() => AttributesResponse$outboundSchema).optional(),
+  type: PostStorageAccessKeysTypeResponse$outboundSchema.optional(),
+  attributes: z.lazy(() =>
+    PostStorageAccessKeysAttributesResponse$outboundSchema
+  ).optional(),
 });
 
 export function postStorageAccessKeysDataResponseToJSON(
