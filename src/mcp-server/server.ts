@@ -187,7 +187,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Latitudesh",
-    version: "0.8.8",
+    version: "0.8.9",
   });
 
   const client = new LatitudeshCore({
