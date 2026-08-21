@@ -67,7 +67,7 @@ import { tool$objectStorageGetStorageBucket } from "./tools/objectStorageGetStor
 import { tool$objectStorageGetStorageBucketAccessKeys } from "./tools/objectStorageGetStorageBucketAccessKeys.js";
 import { tool$objectStorageGetStorageBucketMetrics } from "./tools/objectStorageGetStorageBucketMetrics.js";
 import { tool$objectStorageGetStorageBuckets } from "./tools/objectStorageGetStorageBuckets.js";
-import { tool$objectStorageIndexProjectStorageUsage } from "./tools/objectStorageIndexProjectStorageUsage.js";
+import { tool$objectStorageGetStorageUsage } from "./tools/objectStorageGetStorageUsage.js";
 import { tool$objectStoragePostStorageAccessKeys } from "./tools/objectStoragePostStorageAccessKeys.js";
 import { tool$objectStoragePostStorageBuckets } from "./tools/objectStoragePostStorageBuckets.js";
 import { tool$operatingSystemsListPlans } from "./tools/operatingSystemsListPlans.js";
@@ -189,7 +189,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Latitudesh",
-    version: "0.8.10",
+    version: "0.8.11",
   });
 
   const client = new LatitudeshCore({
@@ -286,7 +286,7 @@ export function createMCPServer(deps: {
   tool(tool$sshKeysRetrieve);
   tool(tool$sshKeysUpdate);
   tool(tool$sshKeysDelete);
-  tool(tool$objectStorageIndexProjectStorageUsage);
+  tool(tool$objectStorageGetStorageUsage);
   tool(tool$objectStoragePostStorageAccessKeys);
   tool(tool$objectStorageGetStorageAccessKeys);
   tool(tool$objectStorageDeleteStorageAccessKeysUsername);

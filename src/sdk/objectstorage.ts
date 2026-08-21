@@ -9,7 +9,7 @@ import { objectStorageGetStorageBucket } from "../funcs/objectStorageGetStorageB
 import { objectStorageGetStorageBucketAccessKeys } from "../funcs/objectStorageGetStorageBucketAccessKeys.js";
 import { objectStorageGetStorageBucketMetrics } from "../funcs/objectStorageGetStorageBucketMetrics.js";
 import { objectStorageGetStorageBuckets } from "../funcs/objectStorageGetStorageBuckets.js";
-import { objectStorageIndexProjectStorageUsage } from "../funcs/objectStorageIndexProjectStorageUsage.js";
+import { objectStorageGetStorageUsage } from "../funcs/objectStorageGetStorageUsage.js";
 import { objectStoragePostStorageAccessKeys } from "../funcs/objectStoragePostStorageAccessKeys.js";
 import { objectStoragePostStorageBuckets } from "../funcs/objectStoragePostStorageBuckets.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
@@ -22,13 +22,13 @@ export class ObjectStorage extends ClientSDK {
    * List storage usage
    *
    * @remarks
-   * Returns daily object storage usage for the project. Each row reports the canonical usage in bytes for a single storage on a given day, plus the provider-reported raw value.
+   * Returns daily object storage usage for a project. Each row reports the canonical usage in bytes for a single storage on a given day, plus the provider-reported raw value.
    */
-  async indexProjectStorageUsage(
-    request: operations.IndexProjectStorageUsageRequest,
+  async getStorageUsage(
+    request: operations.GetStorageUsageRequest,
     options?: RequestOptions,
   ): Promise<models.StorageUsage> {
-    return unwrapAsync(objectStorageIndexProjectStorageUsage(
+    return unwrapAsync(objectStorageGetStorageUsage(
       this,
       request,
       options,

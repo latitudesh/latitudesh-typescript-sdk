@@ -288,7 +288,7 @@ run();
 
 ### [ObjectStorage](docs/sdks/objectstorage/README.md)
 
-* [indexProjectStorageUsage](docs/sdks/objectstorage/README.md#indexprojectstorageusage) - List storage usage
+* [getStorageUsage](docs/sdks/objectstorage/README.md#getstorageusage) - List storage usage
 * [postStorageAccessKeys](docs/sdks/objectstorage/README.md#poststorageaccesskeys) - Create access key
 * [getStorageAccessKeys](docs/sdks/objectstorage/README.md#getstorageaccesskeys) - List access keys
 * [deleteStorageAccessKeysUsername](docs/sdks/objectstorage/README.md#deletestorageaccesskeysusername) - Delete access key
@@ -547,7 +547,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`objectStorageGetStorageBucketAccessKeys`](docs/sdks/objectstorage/README.md#getstoragebucketaccesskeys) - List bucket access keys
 - [`objectStorageGetStorageBucketMetrics`](docs/sdks/objectstorage/README.md#getstoragebucketmetrics) - Retrieve bucket metrics
 - [`objectStorageGetStorageBuckets`](docs/sdks/objectstorage/README.md#getstoragebuckets) - List buckets
-- [`objectStorageIndexProjectStorageUsage`](docs/sdks/objectstorage/README.md#indexprojectstorageusage) - List storage usage
+- [`objectStorageGetStorageUsage`](docs/sdks/objectstorage/README.md#getstorageusage) - List storage usage
 - [`objectStoragePostStorageAccessKeys`](docs/sdks/objectstorage/README.md#poststorageaccesskeys) - Create access key
 - [`objectStoragePostStorageBuckets`](docs/sdks/objectstorage/README.md#poststoragebuckets) - Create bucket
 - [`operatingSystemsListPlans`](docs/sdks/operatingsystems/README.md#listplans) - List operating systems

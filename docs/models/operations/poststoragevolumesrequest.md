@@ -11,6 +11,7 @@ let value: PostStorageVolumesRequest = {
     attributes: {
       project: "<value>",
       name: "<value>",
+      region: "<value>",
     },
   },
 };

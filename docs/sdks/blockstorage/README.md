@@ -104,6 +104,7 @@ async function run() {
       attributes: {
         project: "proj_enPbqoZ6dA2MQ",
         name: "my-data",
+        region: "DAL",
       },
     },
   });
@@ -135,6 +136,7 @@ async function run() {
       attributes: {
         project: "proj_enPbqoZ6dA2MQ",
         name: "my-data",
+        region: "DAL",
       },
     },
   });
@@ -165,6 +167,7 @@ async function run() {
       attributes: {
         project: "<value>",
         name: "<value>",
+        region: "<value>",
       },
     },
   });
@@ -196,6 +199,7 @@ async function run() {
       attributes: {
         project: "<value>",
         name: "<value>",
+        region: "<value>",
       },
     },
   });

@@ -10,6 +10,7 @@ let value: PostStorageVolumesData2 = {
   attributes: {
     project: "<value>",
     name: "<value>",
+    region: "<value>",
   },
 };
 ```

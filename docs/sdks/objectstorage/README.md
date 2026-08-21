@@ -4,7 +4,7 @@
 
 ### Available Operations
 
-* [indexProjectStorageUsage](#indexprojectstorageusage) - List storage usage
+* [getStorageUsage](#getstorageusage) - List storage usage
 * [postStorageAccessKeys](#poststorageaccesskeys) - Create access key
 * [getStorageAccessKeys](#getstorageaccesskeys) - List access keys
 * [deleteStorageAccessKeysUsername](#deletestorageaccesskeysusername) - Delete access key
@@ -15,14 +15,14 @@
 * [deleteStorageBuckets](#deletestoragebuckets) - Delete bucket
 * [getStorageBucketMetrics](#getstoragebucketmetrics) - Retrieve bucket metrics
 
-## indexProjectStorageUsage
+## getStorageUsage
 
-Returns daily object storage usage for the project. Each row reports the canonical usage in bytes for a single storage on a given day, plus the provider-reported raw value.
+Returns daily object storage usage for a project. Each row reports the canonical usage in bytes for a single storage on a given day, plus the provider-reported raw value.
 
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="index-project-storage-usage" method="get" path="/projects/{project_id}/storage_usage" example="Success" -->
+<!-- UsageSnippet language="typescript" operationID="get-storage-usage" method="get" path="/storage/usage" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -31,9 +31,9 @@ const latitudesh = new Latitudesh({
 });
 
 async function run() {
-  const result = await latitudesh.objectStorage.indexProjectStorageUsage({
-    projectId: "proj_5AEmq7wMqBkWX",
-    storageId: "bkt_6VE1Wd37dXnZJ",
+  const result = await latitudesh.objectStorage.getStorageUsage({
+    filterProject: "proj_5AEmq7wMqBkWX",
+    filterStorageId: "bkt_6VE1Wd37dXnZJ",
   });
 
   console.log(result);
@@ -48,7 +48,7 @@ The standalone function version of this method:
 
 ```typescript
 import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
-import { objectStorageIndexProjectStorageUsage } from "latitudesh-typescript-sdk/funcs/objectStorageIndexProjectStorageUsage.js";
+import { objectStorageGetStorageUsage } from "latitudesh-typescript-sdk/funcs/objectStorageGetStorageUsage.js";
 
 // Use `LatitudeshCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -57,15 +57,15 @@ const latitudesh = new LatitudeshCore({
 });
 
 async function run() {
-  const res = await objectStorageIndexProjectStorageUsage(latitudesh, {
-    projectId: "proj_5AEmq7wMqBkWX",
-    storageId: "bkt_6VE1Wd37dXnZJ",
+  const res = await objectStorageGetStorageUsage(latitudesh, {
+    filterProject: "proj_5AEmq7wMqBkWX",
+    filterStorageId: "bkt_6VE1Wd37dXnZJ",
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("objectStorageIndexProjectStorageUsage failed:", res.error);
+    console.log("objectStorageGetStorageUsage failed:", res.error);
   }
 }
 
@@ -76,7 +76,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.IndexProjectStorageUsageRequest](../../models/operations/indexprojectstorageusagerequest.md)                                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.GetStorageUsageRequest](../../models/operations/getstorageusagerequest.md)                                                                                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
