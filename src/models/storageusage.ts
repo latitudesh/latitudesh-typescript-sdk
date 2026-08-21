@@ -17,9 +17,13 @@ export type StorageUsageAttributes = {
   storageId?: number | undefined;
   projectId?: number | undefined;
   /**
-   * Storage provider that reported this usage (e.g. vast, wasabi)
+   * Storage kind. One of: object, file, block.
    */
-  provider?: string | undefined;
+  storageType?: string | null | undefined;
+  /**
+   * Performance tier. One of: high, standard.
+   */
+  tier?: string | null | undefined;
   region?: string | undefined;
   /**
    * Canonical storage usage for the day, in bytes
@@ -55,7 +59,8 @@ export const StorageUsageAttributes$inboundSchema: z.ZodType<
   date: z.string().transform(v => new RFCDate(v)).optional(),
   storage_id: z.number().int().optional(),
   project_id: z.number().int().optional(),
-  provider: z.string().optional(),
+  storage_type: z.nullable(z.string()).optional(),
+  tier: z.nullable(z.string()).optional(),
   region: z.string().optional(),
   bytes: z.number().int().optional(),
   raw_value: z.number().optional(),
@@ -66,6 +71,7 @@ export const StorageUsageAttributes$inboundSchema: z.ZodType<
   return remap$(v, {
     "storage_id": "storageId",
     "project_id": "projectId",
+    "storage_type": "storageType",
     "raw_value": "rawValue",
     "raw_unit": "rawUnit",
     "ingested_at": "ingestedAt",
@@ -76,7 +82,8 @@ export type StorageUsageAttributes$Outbound = {
   date?: string | undefined;
   storage_id?: number | undefined;
   project_id?: number | undefined;
-  provider?: string | undefined;
+  storage_type?: string | null | undefined;
+  tier?: string | null | undefined;
   region?: string | undefined;
   bytes?: number | undefined;
   raw_value?: number | undefined;
@@ -93,7 +100,8 @@ export const StorageUsageAttributes$outboundSchema: z.ZodType<
   date: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
   storageId: z.number().int().optional(),
   projectId: z.number().int().optional(),
-  provider: z.string().optional(),
+  storageType: z.nullable(z.string()).optional(),
+  tier: z.nullable(z.string()).optional(),
   region: z.string().optional(),
   bytes: z.number().int().optional(),
   rawValue: z.number().optional(),
@@ -103,6 +111,7 @@ export const StorageUsageAttributes$outboundSchema: z.ZodType<
   return remap$(v, {
     storageId: "storage_id",
     projectId: "project_id",
+    storageType: "storage_type",
     rawValue: "raw_value",
     rawUnit: "raw_unit",
     ingestedAt: "ingested_at",

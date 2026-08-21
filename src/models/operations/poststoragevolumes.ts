@@ -27,6 +27,10 @@ export type PostStorageVolumesAttributes2 = {
    */
   name: string;
   /**
+   * Region (site) slug where the volume is provisioned
+   */
+  region: string;
+  /**
    * Size in GB (not required, default is 1500)
    */
   sizeInGb?: number | undefined;
@@ -65,6 +69,7 @@ export const PostStorageVolumesAttributes2$inboundSchema: z.ZodType<
 > = z.object({
   project: z.string(),
   name: z.string(),
+  region: z.string(),
   size_in_gb: z.number().int().default(1500),
 }).transform((v) => {
   return remap$(v, {
@@ -75,6 +80,7 @@ export const PostStorageVolumesAttributes2$inboundSchema: z.ZodType<
 export type PostStorageVolumesAttributes2$Outbound = {
   project: string;
   name: string;
+  region: string;
   size_in_gb: number;
 };
 
@@ -86,6 +92,7 @@ export const PostStorageVolumesAttributes2$outboundSchema: z.ZodType<
 > = z.object({
   project: z.string(),
   name: z.string(),
+  region: z.string(),
   sizeInGb: z.number().int().default(1500),
 }).transform((v) => {
   return remap$(v, {

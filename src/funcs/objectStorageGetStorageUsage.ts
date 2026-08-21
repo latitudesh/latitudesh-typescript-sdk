@@ -3,7 +3,7 @@
  */
 
 import { LatitudeshCore } from "../core.js";
-import { encodeFormQuery, encodeSimple } from "../lib/encodings.js";
+import { encodeFormQuery } from "../lib/encodings.js";
 import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
@@ -30,11 +30,11 @@ import { Result } from "../types/fp.js";
  * List storage usage
  *
  * @remarks
- * Returns daily object storage usage for the project. Each row reports the canonical usage in bytes for a single storage on a given day, plus the provider-reported raw value.
+ * Returns daily object storage usage for a project. Each row reports the canonical usage in bytes for a single storage on a given day, plus the provider-reported raw value.
  */
-export function objectStorageIndexProjectStorageUsage(
+export function objectStorageGetStorageUsage(
   client: LatitudeshCore,
-  request: operations.IndexProjectStorageUsageRequest,
+  request: operations.GetStorageUsageRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -58,7 +58,7 @@ export function objectStorageIndexProjectStorageUsage(
 
 async function $do(
   client: LatitudeshCore,
-  request: operations.IndexProjectStorageUsageRequest,
+  request: operations.GetStorageUsageRequest,
   options?: RequestOptions,
 ): Promise<
   [
@@ -78,8 +78,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) =>
-      operations.IndexProjectStorageUsageRequest$outboundSchema.parse(value),
+    (value) => operations.GetStorageUsageRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -88,18 +87,13 @@ async function $do(
   const payload = parsed.value;
   const body = null;
 
-  const pathParams = {
-    project_id: encodeSimple("project_id", payload.project_id, {
-      explode: false,
-      charEncoding: "percent",
-    }),
-  };
-  const path = pathToFunc("/projects/{project_id}/storage_usage")(pathParams);
+  const path = pathToFunc("/storage/usage")();
 
   const query = encodeFormQuery({
-    "end_date": payload.end_date,
-    "start_date": payload.start_date,
-    "storage_id": payload.storage_id,
+    "filter[end_date]": payload["filter[end_date]"],
+    "filter[project]": payload["filter[project]"],
+    "filter[start_date]": payload["filter[start_date]"],
+    "filter[storage_id]": payload["filter[storage_id]"],
   });
 
   const headers = new Headers(compactMap({
@@ -113,7 +107,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "index-project-storage-usage",
+    operationID: "get-storage-usage",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,

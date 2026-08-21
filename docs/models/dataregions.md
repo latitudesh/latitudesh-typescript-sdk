@@ -1,11 +1,11 @@
-# RegionData
+# DataRegions
 
 ## Example Usage
 
 ```typescript
-import { RegionData } from "latitudesh-typescript-sdk/models";
+import { DataRegions } from "latitudesh-typescript-sdk/models";
 
-let value: RegionData = {
+let value: DataRegions = {
   attributes: {
     features: [
       "prefixes",
@@ -19,4 +19,5 @@ let value: RegionData = {
 | Field                                                    | Type                                                     | Required                                                 | Description                                              |
 | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
 | `id`                                                     | *string*                                                 | :heavy_minus_sign:                                       | N/A                                                      |
+| `type`                                                   | [models.RegionType](../models/regiontype.md)             | :heavy_minus_sign:                                       | N/A                                                      |
 | `attributes`                                             | [models.RegionAttributes](../models/regionattributes.md) | :heavy_minus_sign:                                       | N/A                                                      |
