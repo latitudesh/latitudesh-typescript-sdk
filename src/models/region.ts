@@ -26,7 +26,7 @@ export type RegionAttributes = {
   country?: RegionCountry | undefined;
   type?: string | null | undefined;
   /**
-   * Location capabilities available at this location (e.g. `prefixes`).
+   * Location capabilities available at this location (e.g. `public_network`).
    */
   features?: Array<string> | undefined;
   /**

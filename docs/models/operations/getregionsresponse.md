@@ -11,7 +11,7 @@ let value: GetRegionsResponse = {
       {
         attributes: {
           features: [
-            "prefixes",
+            "public_network",
           ],
         },
       },

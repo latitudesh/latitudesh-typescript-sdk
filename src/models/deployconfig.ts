@@ -47,8 +47,8 @@ export type DeployConfigAttributes = {
    * Keep network boot enabled so the server iPXE-boots on every reboot instead of booting from disk. Only supported with the 'ipxe' operating system.
    */
   persistentNetboot?: boolean | null | undefined;
-  bond?: boolean | null | undefined;
-  prefixId?: string | null | undefined;
+  publicNetwork?: boolean | null | undefined;
+  publicNetworkId?: string | null | undefined;
 };
 
 export type DeployConfigData = {
@@ -158,8 +158,8 @@ export const DeployConfigAttributes$inboundSchema: z.ZodType<
   user_data: z.string().optional(),
   ssh_keys: z.array(z.string()).optional(),
   persistent_netboot: z.nullable(z.boolean()).optional(),
-  bond: z.nullable(z.boolean()).optional(),
-  prefix_id: z.nullable(z.string()).optional(),
+  public_network: z.nullable(z.boolean()).optional(),
+  public_network_id: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "operating_system": "operatingSystem",
@@ -167,7 +167,8 @@ export const DeployConfigAttributes$inboundSchema: z.ZodType<
     "user_data": "userData",
     "ssh_keys": "sshKeys",
     "persistent_netboot": "persistentNetboot",
-    "prefix_id": "prefixId",
+    "public_network": "publicNetwork",
+    "public_network_id": "publicNetworkId",
   });
 });
 /** @internal */
@@ -179,8 +180,8 @@ export type DeployConfigAttributes$Outbound = {
   user_data?: string | undefined;
   ssh_keys?: Array<string> | undefined;
   persistent_netboot?: boolean | null | undefined;
-  bond?: boolean | null | undefined;
-  prefix_id?: string | null | undefined;
+  public_network?: boolean | null | undefined;
+  public_network_id?: string | null | undefined;
 };
 
 /** @internal */
@@ -197,8 +198,8 @@ export const DeployConfigAttributes$outboundSchema: z.ZodType<
   userData: z.string().optional(),
   sshKeys: z.array(z.string()).optional(),
   persistentNetboot: z.nullable(z.boolean()).optional(),
-  bond: z.nullable(z.boolean()).optional(),
-  prefixId: z.nullable(z.string()).optional(),
+  publicNetwork: z.nullable(z.boolean()).optional(),
+  publicNetworkId: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     operatingSystem: "operating_system",
@@ -206,7 +207,8 @@ export const DeployConfigAttributes$outboundSchema: z.ZodType<
     userData: "user_data",
     sshKeys: "ssh_keys",
     persistentNetboot: "persistent_netboot",
-    prefixId: "prefix_id",
+    publicNetwork: "public_network",
+    publicNetworkId: "public_network_id",
   });
 });
 

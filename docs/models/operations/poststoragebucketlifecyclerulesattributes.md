@@ -1,0 +1,23 @@
+# PostStorageBucketLifecycleRulesAttributes
+
+## Example Usage
+
+```typescript
+import { PostStorageBucketLifecycleRulesAttributes } from "latitudesh-typescript-sdk/models/operations";
+
+let value: PostStorageBucketLifecycleRulesAttributes = {
+  name: "<value>",
+  expirationDays: 628387,
+};
+```
+
+## Fields
+
+| Field                                                                                                                           | Type                                                                                                                            | Required                                                                                                                        | Description                                                                                                                     |
+| ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `name`                                                                                                                          | *string*                                                                                                                        | :heavy_check_mark:                                                                                                              | Name of the lifecycle rule                                                                                                      |
+| `enabled`                                                                                                                       | *boolean*                                                                                                                       | :heavy_minus_sign:                                                                                                              | Whether the rule is active. Defaults to true if not specified.                                                                  |
+| `prefix`                                                                                                                        | *string*                                                                                                                        | :heavy_minus_sign:                                                                                                              | Object key prefix to filter which objects the rule applies to. If not specified, the rule applies to all objects in the bucket. |
+| `expirationDays`                                                                                                                | *number*                                                                                                                        | :heavy_check_mark:                                                                                                              | Number of days after object creation when the object expires and is automatically deleted                                       |
+| `noncurrentDays`                                                                                                                | *number*                                                                                                                        | :heavy_minus_sign:                                                                                                              | Number of days after which noncurrent object versions expire (for versioned buckets)                                            |
+| `abortMpuDaysAfterInitiation`                                                                                                   | *number*                                                                                                                        | :heavy_minus_sign:                                                                                                              | Number of days after initiation to abort incomplete multipart uploads                                                           |

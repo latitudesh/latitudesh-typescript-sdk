@@ -10,7 +10,7 @@ let value: Regions = {
     {
       attributes: {
         features: [
-          "prefixes",
+          "public_network",
         ],
       },
     },

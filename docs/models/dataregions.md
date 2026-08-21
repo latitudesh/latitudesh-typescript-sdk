@@ -8,7 +8,7 @@ import { DataRegions } from "latitudesh-typescript-sdk/models";
 let value: DataRegions = {
   attributes: {
     features: [
-      "prefixes",
+      "public_network",
     ],
   },
 };

@@ -1,0 +1,24 @@
+# PublicNetworkDataAttributes
+
+## Example Usage
+
+```typescript
+import { PublicNetworkDataAttributes } from "latitudesh-typescript-sdk/models";
+
+let value: PublicNetworkDataAttributes = {};
+```
+
+## Fields
+
+| Field                                                                                           | Type                                                                                            | Required                                                                                        | Description                                                                                     |
+| ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `ipv4`                                                                                          | *string*                                                                                        | :heavy_minus_sign:                                                                              | The IPv4 network in CIDR notation (e.g., "203.0.113.0/27")                                      |
+| `ipv6`                                                                                          | *string*                                                                                        | :heavy_minus_sign:                                                                              | The paired IPv6 /64 in CIDR notation (e.g., "2001:db8:1234::/64")                               |
+| `size`                                                                                          | [models.PublicNetworkDataSize](../models/publicnetworkdatasize.md)                              | :heavy_minus_sign:                                                                              | IPv4 prefix length. Determines how many servers the public network can host.                    |
+| `activated`                                                                                     | *boolean*                                                                                       | :heavy_minus_sign:                                                                              | True once a server has been added to the public network and the public network is ready to use. |
+| `capacity`                                                                                      | *number*                                                                                        | :heavy_minus_sign:                                                                              | Servers this public network can host                                                            |
+| `ipsUsed`                                                                                       | *number*                                                                                        | :heavy_minus_sign:                                                                              | N/A                                                                                             |
+| `ipsFree`                                                                                       | *number*                                                                                        | :heavy_minus_sign:                                                                              | N/A                                                                                             |
+| `createdAt`                                                                                     | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)   | :heavy_minus_sign:                                                                              | N/A                                                                                             |
+| `project`                                                                                       | [models.PublicNetworkDataProject](../models/publicnetworkdataproject.md)                        | :heavy_minus_sign:                                                                              | N/A                                                                                             |
+| `region`                                                                                        | [models.PublicNetworkDataRegion](../models/publicnetworkdataregion.md)                          | :heavy_minus_sign:                                                                              | N/A                                                                                             |

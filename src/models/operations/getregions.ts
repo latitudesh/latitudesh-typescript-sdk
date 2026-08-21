@@ -27,7 +27,7 @@ export type GetRegionsRequest = {
    */
   includeCustom?: boolean | undefined;
   /**
-   * Return only locations that support the given capability, e.g. `filter[features]=prefixes`.
+   * Return only locations that support the given capability, e.g. `filter[features]=public_network`.
    */
   filterFeatures?: string | undefined;
 };

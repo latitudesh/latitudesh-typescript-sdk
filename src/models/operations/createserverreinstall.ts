@@ -121,9 +121,13 @@ export type CreateServerReinstallAttributes2 = {
    */
   persistentNetboot?: boolean | undefined;
   /**
-   * ID of a customer prefix to bond this server to during the reinstall. The prefix must belong to the same project and be in the same location as the server, and must have at least one free IP address. Applies to this reinstall only; omit it to leave any existing bond unchanged.
+   * **Preview** (`public_network` feature flag). Set to 'true' to attach the server onto the given 'public_network_id', or 'false' to detach an existing public network, during the reinstall. Requires 'public_network_id' when attaching.
    */
-  prefixId?: string | null | undefined;
+  publicNetwork?: boolean | null | undefined;
+  /**
+   * ID of a customer public network to attach this server to during the reinstall. The public network must belong to the same project and be in the same location as the server, and must have at least one free IP address. Applies to this reinstall only; omit it to leave any existing public network unchanged.
+   */
+  publicNetworkId?: string | null | undefined;
 };
 
 export type CreateServerReinstallData2 = {
@@ -279,7 +283,8 @@ export const CreateServerReinstallAttributes2$inboundSchema: z.ZodType<
   ).optional(),
   ipxe: z.nullable(z.string()).optional(),
   persistent_netboot: z.boolean().optional(),
-  prefix_id: z.nullable(z.string()).optional(),
+  public_network: z.nullable(z.boolean()).optional(),
+  public_network_id: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "operating_system": "operatingSystem",
@@ -287,7 +292,8 @@ export const CreateServerReinstallAttributes2$inboundSchema: z.ZodType<
     "user_data": "userData",
     "disk_layout": "diskLayout",
     "persistent_netboot": "persistentNetboot",
-    "prefix_id": "prefixId",
+    "public_network": "publicNetwork",
+    "public_network_id": "publicNetworkId",
   });
 });
 /** @internal */
@@ -303,7 +309,8 @@ export type CreateServerReinstallAttributes2$Outbound = {
     | undefined;
   ipxe?: string | null | undefined;
   persistent_netboot?: boolean | undefined;
-  prefix_id?: string | null | undefined;
+  public_network?: boolean | null | undefined;
+  public_network_id?: string | null | undefined;
 };
 
 /** @internal */
@@ -323,7 +330,8 @@ export const CreateServerReinstallAttributes2$outboundSchema: z.ZodType<
   ).optional(),
   ipxe: z.nullable(z.string()).optional(),
   persistentNetboot: z.boolean().optional(),
-  prefixId: z.nullable(z.string()).optional(),
+  publicNetwork: z.nullable(z.boolean()).optional(),
+  publicNetworkId: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     operatingSystem: "operating_system",
@@ -331,7 +339,8 @@ export const CreateServerReinstallAttributes2$outboundSchema: z.ZodType<
     userData: "user_data",
     diskLayout: "disk_layout",
     persistentNetboot: "persistent_netboot",
-    prefixId: "prefix_id",
+    publicNetwork: "public_network",
+    publicNetworkId: "public_network_id",
   });
 });
 

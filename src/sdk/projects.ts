@@ -4,6 +4,7 @@
 
 import { projectsCreate } from "../funcs/projectsCreate.js";
 import { projectsDelete } from "../funcs/projectsDelete.js";
+import { projectsGetProject } from "../funcs/projectsGetProject.js";
 import { projectsList } from "../funcs/projectsList.js";
 import { projectsUpdate } from "../funcs/projectsUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
@@ -74,6 +75,23 @@ export class Projects extends ClientSDK {
     options?: RequestOptions,
   ): Promise<void> {
     return unwrapAsync(projectsDelete(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Retrieve project
+   *
+   * @remarks
+   * Returns a single project belonging to the current team
+   */
+  async getProject(
+    request: operations.GetProjectRequest,
+    options?: RequestOptions,
+  ): Promise<operations.GetProjectResponse> {
+    return unwrapAsync(projectsGetProject(
       this,
       request,
       options,
