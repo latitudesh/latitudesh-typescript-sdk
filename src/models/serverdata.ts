@@ -75,11 +75,11 @@ export const IpmiStatus = {
 export type IpmiStatus = ClosedEnum<typeof IpmiStatus>;
 
 /**
- * **Preview** (`prefixes_api` feature flag). The customer prefix this server is bonded onto, or null. Fetch full details from GET /prefixes/{id}.
+ * **Preview** (`public_network` feature flag). The public network this server is attached onto, or null. Fetch full details from GET /public_networks/{id}.
  */
-export type ServerDataPrefix = {
+export type ServerDataPublicNetwork = {
   id?: string | undefined;
-  ipv4?: string | undefined;
+  ipv4?: string | null | undefined;
   ipv6?: string | null | undefined;
 };
 
@@ -204,13 +204,13 @@ export type ServerDataAttributes = {
    */
   role?: string | undefined;
   /**
-   * Whether the server is eligible to be bonded (carries the bond-vpc-enabled tag).
+   * Whether the server is eligible to attach a public network (carries the bond-vpc-enabled tag).
    */
-  bondEligible?: boolean | undefined;
+  publicNetworkEligible?: boolean | undefined;
   /**
-   * **Preview** (`prefixes_api` feature flag). The customer prefix this server is bonded onto, or null. Fetch full details from GET /prefixes/{id}.
+   * **Preview** (`public_network` feature flag). The public network this server is attached onto, or null. Fetch full details from GET /public_networks/{id}.
    */
-  prefix?: ServerDataPrefix | null | undefined;
+  publicNetwork?: ServerDataPublicNetwork | null | undefined;
   site?: string | undefined;
   locked?: boolean | undefined;
   rescueAllowed?: boolean | undefined;
@@ -294,47 +294,47 @@ export const IpmiStatus$outboundSchema: z.ZodNativeEnum<typeof IpmiStatus> =
   IpmiStatus$inboundSchema;
 
 /** @internal */
-export const ServerDataPrefix$inboundSchema: z.ZodType<
-  ServerDataPrefix,
+export const ServerDataPublicNetwork$inboundSchema: z.ZodType<
+  ServerDataPublicNetwork,
   z.ZodTypeDef,
   unknown
 > = z.object({
   id: z.string().optional(),
-  ipv4: z.string().optional(),
+  ipv4: z.nullable(z.string()).optional(),
   ipv6: z.nullable(z.string()).optional(),
 });
 /** @internal */
-export type ServerDataPrefix$Outbound = {
+export type ServerDataPublicNetwork$Outbound = {
   id?: string | undefined;
-  ipv4?: string | undefined;
+  ipv4?: string | null | undefined;
   ipv6?: string | null | undefined;
 };
 
 /** @internal */
-export const ServerDataPrefix$outboundSchema: z.ZodType<
-  ServerDataPrefix$Outbound,
+export const ServerDataPublicNetwork$outboundSchema: z.ZodType<
+  ServerDataPublicNetwork$Outbound,
   z.ZodTypeDef,
-  ServerDataPrefix
+  ServerDataPublicNetwork
 > = z.object({
   id: z.string().optional(),
-  ipv4: z.string().optional(),
+  ipv4: z.nullable(z.string()).optional(),
   ipv6: z.nullable(z.string()).optional(),
 });
 
-export function serverDataPrefixToJSON(
-  serverDataPrefix: ServerDataPrefix,
+export function serverDataPublicNetworkToJSON(
+  serverDataPublicNetwork: ServerDataPublicNetwork,
 ): string {
   return JSON.stringify(
-    ServerDataPrefix$outboundSchema.parse(serverDataPrefix),
+    ServerDataPublicNetwork$outboundSchema.parse(serverDataPublicNetwork),
   );
 }
-export function serverDataPrefixFromJSON(
+export function serverDataPublicNetworkFromJSON(
   jsonString: string,
-): SafeParseResult<ServerDataPrefix, SDKValidationError> {
+): SafeParseResult<ServerDataPublicNetwork, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ServerDataPrefix$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ServerDataPrefix' from JSON`,
+    (x) => ServerDataPublicNetwork$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ServerDataPublicNetwork' from JSON`,
   );
 }
 
@@ -656,8 +656,10 @@ export const ServerDataAttributes$inboundSchema: z.ZodType<
   status: ServerDataStatus$inboundSchema.optional(),
   ipmi_status: z.nullable(IpmiStatus$inboundSchema).optional(),
   role: z.string().optional(),
-  bond_eligible: z.boolean().optional(),
-  prefix: z.nullable(z.lazy(() => ServerDataPrefix$inboundSchema)).optional(),
+  public_network_eligible: z.boolean().optional(),
+  public_network: z.nullable(
+    z.lazy(() => ServerDataPublicNetwork$inboundSchema),
+  ).optional(),
   site: z.string().optional(),
   locked: z.boolean().optional(),
   rescue_allowed: z.boolean().optional(),
@@ -676,7 +678,8 @@ export const ServerDataAttributes$inboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     "ipmi_status": "ipmiStatus",
-    "bond_eligible": "bondEligible",
+    "public_network_eligible": "publicNetworkEligible",
+    "public_network": "publicNetwork",
     "rescue_allowed": "rescueAllowed",
     "primary_ipv4": "primaryIpv4",
     "primary_ipv6": "primaryIpv6",
@@ -694,8 +697,8 @@ export type ServerDataAttributes$Outbound = {
   status?: string | undefined;
   ipmi_status?: string | null | undefined;
   role?: string | undefined;
-  bond_eligible?: boolean | undefined;
-  prefix?: ServerDataPrefix$Outbound | null | undefined;
+  public_network_eligible?: boolean | undefined;
+  public_network?: ServerDataPublicNetwork$Outbound | null | undefined;
   site?: string | undefined;
   locked?: boolean | undefined;
   rescue_allowed?: boolean | undefined;
@@ -725,8 +728,10 @@ export const ServerDataAttributes$outboundSchema: z.ZodType<
   status: ServerDataStatus$outboundSchema.optional(),
   ipmiStatus: z.nullable(IpmiStatus$outboundSchema).optional(),
   role: z.string().optional(),
-  bondEligible: z.boolean().optional(),
-  prefix: z.nullable(z.lazy(() => ServerDataPrefix$outboundSchema)).optional(),
+  publicNetworkEligible: z.boolean().optional(),
+  publicNetwork: z.nullable(
+    z.lazy(() => ServerDataPublicNetwork$outboundSchema),
+  ).optional(),
   site: z.string().optional(),
   locked: z.boolean().optional(),
   rescueAllowed: z.boolean().optional(),
@@ -745,7 +750,8 @@ export const ServerDataAttributes$outboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     ipmiStatus: "ipmi_status",
-    bondEligible: "bond_eligible",
+    publicNetworkEligible: "public_network_eligible",
+    publicNetwork: "public_network",
     rescueAllowed: "rescue_allowed",
     primaryIpv4: "primary_ipv4",
     primaryIpv6: "primary_ipv6",

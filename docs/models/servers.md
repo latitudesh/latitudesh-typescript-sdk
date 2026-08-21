@@ -9,8 +9,8 @@ let value: Servers = {
   data: [
     {
       attributes: {
-        prefix: {
-          id: "pfx_2aBcDeFgH",
+        publicNetwork: {
+          id: "pn_2aBcDeFgH",
           ipv4: "10.90.0.0/26",
           ipv6: "2001:db8::/64",
         },

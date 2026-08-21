@@ -3,15 +3,20 @@
  */
 
 import { objectStorageDeleteStorageAccessKeysUsername } from "../funcs/objectStorageDeleteStorageAccessKeysUsername.js";
+import { objectStorageDeleteStorageBucketLifecycleRule } from "../funcs/objectStorageDeleteStorageBucketLifecycleRule.js";
 import { objectStorageDeleteStorageBuckets } from "../funcs/objectStorageDeleteStorageBuckets.js";
 import { objectStorageGetStorageAccessKeys } from "../funcs/objectStorageGetStorageAccessKeys.js";
 import { objectStorageGetStorageBucket } from "../funcs/objectStorageGetStorageBucket.js";
 import { objectStorageGetStorageBucketAccessKeys } from "../funcs/objectStorageGetStorageBucketAccessKeys.js";
+import { objectStorageGetStorageBucketLifecycleRule } from "../funcs/objectStorageGetStorageBucketLifecycleRule.js";
+import { objectStorageGetStorageBucketLifecycleRules } from "../funcs/objectStorageGetStorageBucketLifecycleRules.js";
 import { objectStorageGetStorageBucketMetrics } from "../funcs/objectStorageGetStorageBucketMetrics.js";
 import { objectStorageGetStorageBuckets } from "../funcs/objectStorageGetStorageBuckets.js";
 import { objectStorageGetStorageUsage } from "../funcs/objectStorageGetStorageUsage.js";
 import { objectStoragePostStorageAccessKeys } from "../funcs/objectStoragePostStorageAccessKeys.js";
+import { objectStoragePostStorageBucketLifecycleRules } from "../funcs/objectStoragePostStorageBucketLifecycleRules.js";
 import { objectStoragePostStorageBuckets } from "../funcs/objectStoragePostStorageBuckets.js";
+import { objectStoragePutStorageBucketLifecycleRule } from "../funcs/objectStoragePutStorageBucketLifecycleRule.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as models from "../models/index.js";
 import * as operations from "../models/operations/index.js";
@@ -165,6 +170,91 @@ export class ObjectStorage extends ClientSDK {
     options?: RequestOptions,
   ): Promise<void> {
     return unwrapAsync(objectStorageDeleteStorageBuckets(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List lifecycle rules
+   *
+   * @remarks
+   * Lists all lifecycle rules for a specific object storage bucket.
+   */
+  async getStorageBucketLifecycleRules(
+    request: operations.GetStorageBucketLifecycleRulesRequest,
+    options?: RequestOptions,
+  ): Promise<models.LifecycleRules> {
+    return unwrapAsync(objectStorageGetStorageBucketLifecycleRules(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Create lifecycle rule
+   *
+   * @remarks
+   * Creates a new lifecycle rule for an object storage bucket. Lifecycle rules automate object expiration based on age.
+   */
+  async postStorageBucketLifecycleRules(
+    request: operations.PostStorageBucketLifecycleRulesRequest,
+    options?: RequestOptions,
+  ): Promise<operations.PostStorageBucketLifecycleRulesResponse> {
+    return unwrapAsync(objectStoragePostStorageBucketLifecycleRules(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Retrieve lifecycle rule
+   *
+   * @remarks
+   * Retrieves details of a specific lifecycle rule.
+   */
+  async getStorageBucketLifecycleRule(
+    request: operations.GetStorageBucketLifecycleRuleRequest,
+    options?: RequestOptions,
+  ): Promise<operations.GetStorageBucketLifecycleRuleResponse> {
+    return unwrapAsync(objectStorageGetStorageBucketLifecycleRule(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Update lifecycle rule
+   *
+   * @remarks
+   * Updates an existing lifecycle rule for an object storage bucket.
+   */
+  async putStorageBucketLifecycleRule(
+    request: operations.PutStorageBucketLifecycleRuleRequest,
+    options?: RequestOptions,
+  ): Promise<operations.PutStorageBucketLifecycleRuleResponse> {
+    return unwrapAsync(objectStoragePutStorageBucketLifecycleRule(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Delete lifecycle rule
+   *
+   * @remarks
+   * Deletes a lifecycle rule from an object storage bucket.
+   */
+  async deleteStorageBucketLifecycleRule(
+    request: operations.DeleteStorageBucketLifecycleRuleRequest,
+    options?: RequestOptions,
+  ): Promise<void> {
+    return unwrapAsync(objectStorageDeleteStorageBucketLifecycleRule(
       this,
       request,
       options,

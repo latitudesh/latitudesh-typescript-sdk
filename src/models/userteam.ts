@@ -37,7 +37,8 @@ export type UserTeamLimits = {
   virtualMachine?: number | null | undefined;
   virtualMachineGpu?: number | null | undefined;
   elasticIp?: number | null | undefined;
-  prefix?: number | null | undefined;
+  bgpSessionPerIp?: number | null | undefined;
+  publicNetwork?: number | null | undefined;
   virtualNetwork?: number | null | undefined;
   database?: number | null | undefined;
   filesystem?: number | null | undefined;
@@ -134,7 +135,8 @@ export const UserTeamLimits$inboundSchema: z.ZodType<
   virtual_machine: z.nullable(z.number().int()).optional(),
   virtual_machine_gpu: z.nullable(z.number().int()).optional(),
   elastic_ip: z.nullable(z.number().int()).optional(),
-  prefix: z.nullable(z.number().int()).optional(),
+  bgp_session_per_ip: z.nullable(z.number().int()).optional(),
+  public_network: z.nullable(z.number().int()).optional(),
   virtual_network: z.nullable(z.number().int()).optional(),
   database: z.nullable(z.number().int()).optional(),
   filesystem: z.nullable(z.number().int()).optional(),
@@ -146,6 +148,8 @@ export const UserTeamLimits$inboundSchema: z.ZodType<
     "virtual_machine": "virtualMachine",
     "virtual_machine_gpu": "virtualMachineGpu",
     "elastic_ip": "elasticIp",
+    "bgp_session_per_ip": "bgpSessionPerIp",
+    "public_network": "publicNetwork",
     "virtual_network": "virtualNetwork",
     "block_storage": "blockStorage",
   });
@@ -157,7 +161,8 @@ export type UserTeamLimits$Outbound = {
   virtual_machine?: number | null | undefined;
   virtual_machine_gpu?: number | null | undefined;
   elastic_ip?: number | null | undefined;
-  prefix?: number | null | undefined;
+  bgp_session_per_ip?: number | null | undefined;
+  public_network?: number | null | undefined;
   virtual_network?: number | null | undefined;
   database?: number | null | undefined;
   filesystem?: number | null | undefined;
@@ -175,7 +180,8 @@ export const UserTeamLimits$outboundSchema: z.ZodType<
   virtualMachine: z.nullable(z.number().int()).optional(),
   virtualMachineGpu: z.nullable(z.number().int()).optional(),
   elasticIp: z.nullable(z.number().int()).optional(),
-  prefix: z.nullable(z.number().int()).optional(),
+  bgpSessionPerIp: z.nullable(z.number().int()).optional(),
+  publicNetwork: z.nullable(z.number().int()).optional(),
   virtualNetwork: z.nullable(z.number().int()).optional(),
   database: z.nullable(z.number().int()).optional(),
   filesystem: z.nullable(z.number().int()).optional(),
@@ -187,6 +193,8 @@ export const UserTeamLimits$outboundSchema: z.ZodType<
     virtualMachine: "virtual_machine",
     virtualMachineGpu: "virtual_machine_gpu",
     elasticIp: "elastic_ip",
+    bgpSessionPerIp: "bgp_session_per_ip",
+    publicNetwork: "public_network",
     virtualNetwork: "virtual_network",
     blockStorage: "block_storage",
   });

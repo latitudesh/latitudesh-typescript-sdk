@@ -13,6 +13,11 @@
 * [postStorageBuckets](#poststoragebuckets) - Create bucket
 * [getStorageBucket](#getstoragebucket) - Retrieve bucket
 * [deleteStorageBuckets](#deletestoragebuckets) - Delete bucket
+* [getStorageBucketLifecycleRules](#getstoragebucketlifecyclerules) - List lifecycle rules
+* [postStorageBucketLifecycleRules](#poststoragebucketlifecyclerules) - Create lifecycle rule
+* [getStorageBucketLifecycleRule](#getstoragebucketlifecyclerule) - Retrieve lifecycle rule
+* [putStorageBucketLifecycleRule](#putstoragebucketlifecyclerule) - Update lifecycle rule
+* [deleteStorageBucketLifecycleRule](#deletestoragebucketlifecyclerule) - Delete lifecycle rule
 * [getStorageBucketMetrics](#getstoragebucketmetrics) - Retrieve bucket metrics
 
 ## getStorageUsage
@@ -1191,6 +1196,900 @@ run();
 | Error Type                    | Status Code                   | Content Type                  |
 | ----------------------------- | ----------------------------- | ----------------------------- |
 | errors.ErrorObject            | 403, 404, 409                 | application/vnd.api+json      |
+| errors.ErrorObject            | 500                           | application/vnd.api+json      |
+| errors.LatitudeshDefaultError | 4XX, 5XX                      | \*/\*                         |
+
+## getStorageBucketLifecycleRules
+
+Lists all lifecycle rules for a specific object storage bucket.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="get-storage-bucket-lifecycle-rules" method="get" path="/storage/buckets/{bucket_id}/lifecycle_rules" example="Success" -->
+```typescript
+import { Latitudesh } from "latitudesh-typescript-sdk";
+
+const latitudesh = new Latitudesh({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const result = await latitudesh.objectStorage.getStorageBucketLifecycleRules({
+    bucketId: "<id>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
+import { objectStorageGetStorageBucketLifecycleRules } from "latitudesh-typescript-sdk/funcs/objectStorageGetStorageBucketLifecycleRules.js";
+
+// Use `LatitudeshCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const latitudesh = new LatitudeshCore({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const res = await objectStorageGetStorageBucketLifecycleRules(latitudesh, {
+    bucketId: "<id>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("objectStorageGetStorageBucketLifecycleRules failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.GetStorageBucketLifecycleRulesRequest](../../models/operations/getstoragebucketlifecyclerulesrequest.md)                                                           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[models.LifecycleRules](../../models/lifecyclerules.md)\>**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| errors.ErrorObject            | 403, 404                      | application/vnd.api+json      |
+| errors.LatitudeshDefaultError | 4XX, 5XX                      | \*/\*                         |
+
+## postStorageBucketLifecycleRules
+
+Creates a new lifecycle rule for an object storage bucket. Lifecycle rules automate object expiration based on age.
+
+### Example Usage: Create
+
+<!-- UsageSnippet language="typescript" operationID="post-storage-bucket-lifecycle-rules" method="post" path="/storage/buckets/{bucket_id}/lifecycle_rules" example="Create" -->
+```typescript
+import { Latitudesh } from "latitudesh-typescript-sdk";
+
+const latitudesh = new Latitudesh({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const result = await latitudesh.objectStorage.postStorageBucketLifecycleRules({
+    bucketId: "<id>",
+    requestBody: {
+      data: {
+        type: "lifecycle_rules",
+        attributes: {
+          name: "delete-old-logs",
+          prefix: "logs/",
+          expirationDays: 30,
+        },
+      },
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
+import { objectStoragePostStorageBucketLifecycleRules } from "latitudesh-typescript-sdk/funcs/objectStoragePostStorageBucketLifecycleRules.js";
+
+// Use `LatitudeshCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const latitudesh = new LatitudeshCore({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const res = await objectStoragePostStorageBucketLifecycleRules(latitudesh, {
+    bucketId: "<id>",
+    requestBody: {
+      data: {
+        type: "lifecycle_rules",
+        attributes: {
+          name: "delete-old-logs",
+          prefix: "logs/",
+          expirationDays: 30,
+        },
+      },
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("objectStoragePostStorageBucketLifecycleRules failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: CreateWithAllOptions
+
+<!-- UsageSnippet language="typescript" operationID="post-storage-bucket-lifecycle-rules" method="post" path="/storage/buckets/{bucket_id}/lifecycle_rules" example="CreateWithAllOptions" -->
+```typescript
+import { Latitudesh } from "latitudesh-typescript-sdk";
+
+const latitudesh = new Latitudesh({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const result = await latitudesh.objectStorage.postStorageBucketLifecycleRules({
+    bucketId: "<id>",
+    requestBody: {
+      data: {
+        type: "lifecycle_rules",
+        attributes: {
+          name: "full-cleanup-rule",
+          prefix: "temp/",
+          expirationDays: 30,
+          noncurrentDays: 14,
+          abortMpuDaysAfterInitiation: 7,
+        },
+      },
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
+import { objectStoragePostStorageBucketLifecycleRules } from "latitudesh-typescript-sdk/funcs/objectStoragePostStorageBucketLifecycleRules.js";
+
+// Use `LatitudeshCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const latitudesh = new LatitudeshCore({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const res = await objectStoragePostStorageBucketLifecycleRules(latitudesh, {
+    bucketId: "<id>",
+    requestBody: {
+      data: {
+        type: "lifecycle_rules",
+        attributes: {
+          name: "full-cleanup-rule",
+          prefix: "temp/",
+          expirationDays: 30,
+          noncurrentDays: 14,
+          abortMpuDaysAfterInitiation: 7,
+        },
+      },
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("objectStoragePostStorageBucketLifecycleRules failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: Created
+
+<!-- UsageSnippet language="typescript" operationID="post-storage-bucket-lifecycle-rules" method="post" path="/storage/buckets/{bucket_id}/lifecycle_rules" example="Created" -->
+```typescript
+import { Latitudesh } from "latitudesh-typescript-sdk";
+
+const latitudesh = new Latitudesh({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const result = await latitudesh.objectStorage.postStorageBucketLifecycleRules({
+    bucketId: "<id>",
+    requestBody: {
+      data: {
+        type: "lifecycle_rules",
+        attributes: {
+          name: "<value>",
+          expirationDays: 69486,
+        },
+      },
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
+import { objectStoragePostStorageBucketLifecycleRules } from "latitudesh-typescript-sdk/funcs/objectStoragePostStorageBucketLifecycleRules.js";
+
+// Use `LatitudeshCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const latitudesh = new LatitudeshCore({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const res = await objectStoragePostStorageBucketLifecycleRules(latitudesh, {
+    bucketId: "<id>",
+    requestBody: {
+      data: {
+        type: "lifecycle_rules",
+        attributes: {
+          name: "<value>",
+          expirationDays: 69486,
+        },
+      },
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("objectStoragePostStorageBucketLifecycleRules failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: FeatureNotEnabled
+
+<!-- UsageSnippet language="typescript" operationID="post-storage-bucket-lifecycle-rules" method="post" path="/storage/buckets/{bucket_id}/lifecycle_rules" example="FeatureNotEnabled" -->
+```typescript
+import { Latitudesh } from "latitudesh-typescript-sdk";
+
+const latitudesh = new Latitudesh({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const result = await latitudesh.objectStorage.postStorageBucketLifecycleRules({
+    bucketId: "<id>",
+    requestBody: {
+      data: {
+        type: "lifecycle_rules",
+        attributes: {
+          name: "<value>",
+          expirationDays: 69486,
+        },
+      },
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
+import { objectStoragePostStorageBucketLifecycleRules } from "latitudesh-typescript-sdk/funcs/objectStoragePostStorageBucketLifecycleRules.js";
+
+// Use `LatitudeshCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const latitudesh = new LatitudeshCore({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const res = await objectStoragePostStorageBucketLifecycleRules(latitudesh, {
+    bucketId: "<id>",
+    requestBody: {
+      data: {
+        type: "lifecycle_rules",
+        attributes: {
+          name: "<value>",
+          expirationDays: 69486,
+        },
+      },
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("objectStoragePostStorageBucketLifecycleRules failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: InsufficientPermissions
+
+<!-- UsageSnippet language="typescript" operationID="post-storage-bucket-lifecycle-rules" method="post" path="/storage/buckets/{bucket_id}/lifecycle_rules" example="InsufficientPermissions" -->
+```typescript
+import { Latitudesh } from "latitudesh-typescript-sdk";
+
+const latitudesh = new Latitudesh({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const result = await latitudesh.objectStorage.postStorageBucketLifecycleRules({
+    bucketId: "<id>",
+    requestBody: {
+      data: {
+        type: "lifecycle_rules",
+        attributes: {
+          name: "<value>",
+          expirationDays: 69486,
+        },
+      },
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
+import { objectStoragePostStorageBucketLifecycleRules } from "latitudesh-typescript-sdk/funcs/objectStoragePostStorageBucketLifecycleRules.js";
+
+// Use `LatitudeshCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const latitudesh = new LatitudeshCore({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const res = await objectStoragePostStorageBucketLifecycleRules(latitudesh, {
+    bucketId: "<id>",
+    requestBody: {
+      data: {
+        type: "lifecycle_rules",
+        attributes: {
+          name: "<value>",
+          expirationDays: 69486,
+        },
+      },
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("objectStoragePostStorageBucketLifecycleRules failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.PostStorageBucketLifecycleRulesRequest](../../models/operations/poststoragebucketlifecyclerulesrequest.md)                                                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.PostStorageBucketLifecycleRulesResponse](../../models/operations/poststoragebucketlifecyclerulesresponse.md)\>**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| errors.ErrorObject            | 403, 404, 422                 | application/vnd.api+json      |
+| errors.ErrorObject            | 500                           | application/vnd.api+json      |
+| errors.LatitudeshDefaultError | 4XX, 5XX                      | \*/\*                         |
+
+## getStorageBucketLifecycleRule
+
+Retrieves details of a specific lifecycle rule.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="get-storage-bucket-lifecycle-rule" method="get" path="/storage/buckets/{bucket_id}/lifecycle_rules/{id}" example="Success" -->
+```typescript
+import { Latitudesh } from "latitudesh-typescript-sdk";
+
+const latitudesh = new Latitudesh({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const result = await latitudesh.objectStorage.getStorageBucketLifecycleRule({
+    bucketId: "<id>",
+    id: "<id>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
+import { objectStorageGetStorageBucketLifecycleRule } from "latitudesh-typescript-sdk/funcs/objectStorageGetStorageBucketLifecycleRule.js";
+
+// Use `LatitudeshCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const latitudesh = new LatitudeshCore({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const res = await objectStorageGetStorageBucketLifecycleRule(latitudesh, {
+    bucketId: "<id>",
+    id: "<id>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("objectStorageGetStorageBucketLifecycleRule failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.GetStorageBucketLifecycleRuleRequest](../../models/operations/getstoragebucketlifecyclerulerequest.md)                                                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.GetStorageBucketLifecycleRuleResponse](../../models/operations/getstoragebucketlifecycleruleresponse.md)\>**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| errors.ErrorObject            | 403, 404                      | application/vnd.api+json      |
+| errors.LatitudeshDefaultError | 4XX, 5XX                      | \*/\*                         |
+
+## putStorageBucketLifecycleRule
+
+Updates an existing lifecycle rule for an object storage bucket.
+
+### Example Usage: FeatureNotEnabled
+
+<!-- UsageSnippet language="typescript" operationID="put-storage-bucket-lifecycle-rule" method="put" path="/storage/buckets/{bucket_id}/lifecycle_rules/{id}" example="FeatureNotEnabled" -->
+```typescript
+import { Latitudesh } from "latitudesh-typescript-sdk";
+
+const latitudesh = new Latitudesh({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const result = await latitudesh.objectStorage.putStorageBucketLifecycleRule({
+    bucketId: "<id>",
+    id: "<id>",
+    requestBody: {
+      data: {
+        type: "lifecycle_rules",
+        attributes: {
+          name: "<value>",
+        },
+      },
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
+import { objectStoragePutStorageBucketLifecycleRule } from "latitudesh-typescript-sdk/funcs/objectStoragePutStorageBucketLifecycleRule.js";
+
+// Use `LatitudeshCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const latitudesh = new LatitudeshCore({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const res = await objectStoragePutStorageBucketLifecycleRule(latitudesh, {
+    bucketId: "<id>",
+    id: "<id>",
+    requestBody: {
+      data: {
+        type: "lifecycle_rules",
+        attributes: {
+          name: "<value>",
+        },
+      },
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("objectStoragePutStorageBucketLifecycleRule failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: InsufficientPermissions
+
+<!-- UsageSnippet language="typescript" operationID="put-storage-bucket-lifecycle-rule" method="put" path="/storage/buckets/{bucket_id}/lifecycle_rules/{id}" example="InsufficientPermissions" -->
+```typescript
+import { Latitudesh } from "latitudesh-typescript-sdk";
+
+const latitudesh = new Latitudesh({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const result = await latitudesh.objectStorage.putStorageBucketLifecycleRule({
+    bucketId: "<id>",
+    id: "<id>",
+    requestBody: {
+      data: {
+        type: "lifecycle_rules",
+        attributes: {
+          name: "<value>",
+        },
+      },
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
+import { objectStoragePutStorageBucketLifecycleRule } from "latitudesh-typescript-sdk/funcs/objectStoragePutStorageBucketLifecycleRule.js";
+
+// Use `LatitudeshCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const latitudesh = new LatitudeshCore({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const res = await objectStoragePutStorageBucketLifecycleRule(latitudesh, {
+    bucketId: "<id>",
+    id: "<id>",
+    requestBody: {
+      data: {
+        type: "lifecycle_rules",
+        attributes: {
+          name: "<value>",
+        },
+      },
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("objectStoragePutStorageBucketLifecycleRule failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: Success
+
+<!-- UsageSnippet language="typescript" operationID="put-storage-bucket-lifecycle-rule" method="put" path="/storage/buckets/{bucket_id}/lifecycle_rules/{id}" example="Success" -->
+```typescript
+import { Latitudesh } from "latitudesh-typescript-sdk";
+
+const latitudesh = new Latitudesh({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const result = await latitudesh.objectStorage.putStorageBucketLifecycleRule({
+    bucketId: "<id>",
+    id: "<id>",
+    requestBody: {
+      data: {
+        type: "lifecycle_rules",
+        attributes: {
+          name: "<value>",
+        },
+      },
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
+import { objectStoragePutStorageBucketLifecycleRule } from "latitudesh-typescript-sdk/funcs/objectStoragePutStorageBucketLifecycleRule.js";
+
+// Use `LatitudeshCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const latitudesh = new LatitudeshCore({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const res = await objectStoragePutStorageBucketLifecycleRule(latitudesh, {
+    bucketId: "<id>",
+    id: "<id>",
+    requestBody: {
+      data: {
+        type: "lifecycle_rules",
+        attributes: {
+          name: "<value>",
+        },
+      },
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("objectStoragePutStorageBucketLifecycleRule failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: Update
+
+<!-- UsageSnippet language="typescript" operationID="put-storage-bucket-lifecycle-rule" method="put" path="/storage/buckets/{bucket_id}/lifecycle_rules/{id}" example="Update" -->
+```typescript
+import { Latitudesh } from "latitudesh-typescript-sdk";
+
+const latitudesh = new Latitudesh({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const result = await latitudesh.objectStorage.putStorageBucketLifecycleRule({
+    bucketId: "<id>",
+    id: "<id>",
+    requestBody: {
+      data: {
+        type: "lifecycle_rules",
+        attributes: {
+          name: "delete-old-logs",
+          enabled: false,
+          expirationDays: 60,
+        },
+      },
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
+import { objectStoragePutStorageBucketLifecycleRule } from "latitudesh-typescript-sdk/funcs/objectStoragePutStorageBucketLifecycleRule.js";
+
+// Use `LatitudeshCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const latitudesh = new LatitudeshCore({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const res = await objectStoragePutStorageBucketLifecycleRule(latitudesh, {
+    bucketId: "<id>",
+    id: "<id>",
+    requestBody: {
+      data: {
+        type: "lifecycle_rules",
+        attributes: {
+          name: "delete-old-logs",
+          enabled: false,
+          expirationDays: 60,
+        },
+      },
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("objectStoragePutStorageBucketLifecycleRule failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.PutStorageBucketLifecycleRuleRequest](../../models/operations/putstoragebucketlifecyclerulerequest.md)                                                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.PutStorageBucketLifecycleRuleResponse](../../models/operations/putstoragebucketlifecycleruleresponse.md)\>**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| errors.ErrorObject            | 403, 404, 422                 | application/vnd.api+json      |
+| errors.ErrorObject            | 500                           | application/vnd.api+json      |
+| errors.LatitudeshDefaultError | 4XX, 5XX                      | \*/\*                         |
+
+## deleteStorageBucketLifecycleRule
+
+Deletes a lifecycle rule from an object storage bucket.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="delete-storage-bucket-lifecycle-rule" method="delete" path="/storage/buckets/{bucket_id}/lifecycle_rules/{id}" -->
+```typescript
+import { Latitudesh } from "latitudesh-typescript-sdk";
+
+const latitudesh = new Latitudesh({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  await latitudesh.objectStorage.deleteStorageBucketLifecycleRule({
+    bucketId: "<id>",
+    id: "<id>",
+  });
+
+
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
+import { objectStorageDeleteStorageBucketLifecycleRule } from "latitudesh-typescript-sdk/funcs/objectStorageDeleteStorageBucketLifecycleRule.js";
+
+// Use `LatitudeshCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const latitudesh = new LatitudeshCore({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const res = await objectStorageDeleteStorageBucketLifecycleRule(latitudesh, {
+    bucketId: "<id>",
+    id: "<id>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("objectStorageDeleteStorageBucketLifecycleRule failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.DeleteStorageBucketLifecycleRuleRequest](../../models/operations/deletestoragebucketlifecyclerulerequest.md)                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<void\>**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| errors.ErrorObject            | 403, 404                      | application/vnd.api+json      |
 | errors.ErrorObject            | 500                           | application/vnd.api+json      |
 | errors.LatitudeshDefaultError | 4XX, 5XX                      | \*/\*                         |
 

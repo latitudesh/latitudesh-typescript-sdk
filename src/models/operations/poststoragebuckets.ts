@@ -68,7 +68,7 @@ export type PostStorageBucketsAttributes = {
    */
   storageClass?: PostStorageBucketsStorageClass | undefined;
   /**
-   * Enable S3 object versioning. Once enabled, versioning cannot be disabled.
+   * Enable S3 object versioning. Versioning can be suspended later unless Object Lock is enabled; enabling Object Lock requires versioning and prevents versioning from being suspended.
    */
   versioning?: boolean | undefined;
   /**

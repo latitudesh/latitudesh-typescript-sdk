@@ -12,6 +12,7 @@ let value: PostTeamResponse = {};
 
 ## Fields
 
-| Field                               | Type                                | Required                            | Description                         |
-| ----------------------------------- | ----------------------------------- | ----------------------------------- | ----------------------------------- |
-| `data`                              | [models.Team](../../models/team.md) | :heavy_minus_sign:                  | N/A                                 |
+| Field                                                              | Type                                                               | Required                                                           | Description                                                        |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ |
+| `data`                                                             | [models.Team](../../models/team.md)                                | :heavy_minus_sign:                                                 | N/A                                                                |
+| `meta`                                                             | [operations.PostTeamMeta](../../models/operations/postteammeta.md) | :heavy_minus_sign:                                                 | N/A                                                                |

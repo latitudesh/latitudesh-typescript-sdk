@@ -297,6 +297,11 @@ run();
 * [postStorageBuckets](docs/sdks/objectstorage/README.md#poststoragebuckets) - Create bucket
 * [getStorageBucket](docs/sdks/objectstorage/README.md#getstoragebucket) - Retrieve bucket
 * [deleteStorageBuckets](docs/sdks/objectstorage/README.md#deletestoragebuckets) - Delete bucket
+* [getStorageBucketLifecycleRules](docs/sdks/objectstorage/README.md#getstoragebucketlifecyclerules) - List lifecycle rules
+* [postStorageBucketLifecycleRules](docs/sdks/objectstorage/README.md#poststoragebucketlifecyclerules) - Create lifecycle rule
+* [getStorageBucketLifecycleRule](docs/sdks/objectstorage/README.md#getstoragebucketlifecyclerule) - Retrieve lifecycle rule
+* [putStorageBucketLifecycleRule](docs/sdks/objectstorage/README.md#putstoragebucketlifecyclerule) - Update lifecycle rule
+* [deleteStorageBucketLifecycleRule](docs/sdks/objectstorage/README.md#deletestoragebucketlifecyclerule) - Delete lifecycle rule
 * [getStorageBucketMetrics](docs/sdks/objectstorage/README.md#getstoragebucketmetrics) - Retrieve bucket metrics
 
 ### [OperatingSystems](docs/sdks/operatingsystems/README.md)
@@ -316,13 +321,6 @@ run();
 
 * [list](docs/sdks/vm/README.md#list) - List VM plans
 
-### [Prefixes](docs/sdks/prefixes/README.md)
-
-* [getPrefixes](docs/sdks/prefixes/README.md#getprefixes) - List networks
-* [createPrefix](docs/sdks/prefixes/README.md#createprefix) - Create a network
-* [getPrefix](docs/sdks/prefixes/README.md#getprefix) - Retrieve a network
-* [destroyPrefix](docs/sdks/prefixes/README.md#destroyprefix) - Delete a network
-
 ### [PrivateNetworks](docs/sdks/privatenetworks/README.md)
 
 * [list](docs/sdks/privatenetworks/README.md#list) - List VLANs
@@ -339,10 +337,18 @@ run();
 * [create](docs/sdks/projects/README.md#create) - Create project
 * [update](docs/sdks/projects/README.md#update) - Update project
 * [delete](docs/sdks/projects/README.md#delete) - Delete project
+* [getProject](docs/sdks/projects/README.md#getproject) - Retrieve project
 
 ### [~~Projects.SshKeys~~](docs/sdks/projectssshkeys/README.md)
 
 * [~~postProjectSshKey~~](docs/sdks/projectssshkeys/README.md#postprojectsshkey) - Create SSH Key :warning: **Deprecated**
+
+### [PublicNetworks](docs/sdks/publicnetworks/README.md)
+
+* [getPublicNetworks](docs/sdks/publicnetworks/README.md#getpublicnetworks) - List networks
+* [createPublicNetwork](docs/sdks/publicnetworks/README.md#createpublicnetwork) - Create a network
+* [getPublicNetwork](docs/sdks/publicnetworks/README.md#getpublicnetwork) - Retrieve a network
+* [destroyPublicNetwork](docs/sdks/publicnetworks/README.md#destroypublicnetwork) - Delete a network
 
 ### [Regions](docs/sdks/regions/README.md)
 
@@ -541,15 +547,20 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`kubernetesClustersListKubernetesClusters`](docs/sdks/kubernetesclusters/README.md#listkubernetesclusters) - List Kubernetes Clusters
 - [`kubernetesClustersUpdateKubernetesCluster`](docs/sdks/kubernetesclusters/README.md#updatekubernetescluster) - Update Kubernetes Cluster
 - [`objectStorageDeleteStorageAccessKeysUsername`](docs/sdks/objectstorage/README.md#deletestorageaccesskeysusername) - Delete access key
+- [`objectStorageDeleteStorageBucketLifecycleRule`](docs/sdks/objectstorage/README.md#deletestoragebucketlifecyclerule) - Delete lifecycle rule
 - [`objectStorageDeleteStorageBuckets`](docs/sdks/objectstorage/README.md#deletestoragebuckets) - Delete bucket
 - [`objectStorageGetStorageAccessKeys`](docs/sdks/objectstorage/README.md#getstorageaccesskeys) - List access keys
 - [`objectStorageGetStorageBucket`](docs/sdks/objectstorage/README.md#getstoragebucket) - Retrieve bucket
 - [`objectStorageGetStorageBucketAccessKeys`](docs/sdks/objectstorage/README.md#getstoragebucketaccesskeys) - List bucket access keys
+- [`objectStorageGetStorageBucketLifecycleRule`](docs/sdks/objectstorage/README.md#getstoragebucketlifecyclerule) - Retrieve lifecycle rule
+- [`objectStorageGetStorageBucketLifecycleRules`](docs/sdks/objectstorage/README.md#getstoragebucketlifecyclerules) - List lifecycle rules
 - [`objectStorageGetStorageBucketMetrics`](docs/sdks/objectstorage/README.md#getstoragebucketmetrics) - Retrieve bucket metrics
 - [`objectStorageGetStorageBuckets`](docs/sdks/objectstorage/README.md#getstoragebuckets) - List buckets
 - [`objectStorageGetStorageUsage`](docs/sdks/objectstorage/README.md#getstorageusage) - List storage usage
 - [`objectStoragePostStorageAccessKeys`](docs/sdks/objectstorage/README.md#poststorageaccesskeys) - Create access key
+- [`objectStoragePostStorageBucketLifecycleRules`](docs/sdks/objectstorage/README.md#poststoragebucketlifecyclerules) - Create lifecycle rule
 - [`objectStoragePostStorageBuckets`](docs/sdks/objectstorage/README.md#poststoragebuckets) - Create bucket
+- [`objectStoragePutStorageBucketLifecycleRule`](docs/sdks/objectstorage/README.md#putstoragebucketlifecyclerule) - Update lifecycle rule
 - [`operatingSystemsListPlans`](docs/sdks/operatingsystems/README.md#listplans) - List operating systems
 - [`plansGet`](docs/sdks/plans/README.md#get) - Retrieve plan
 - [`plansGetBandwidth`](docs/sdks/plans/README.md#getbandwidth) - List bandwidth plans
@@ -558,10 +569,6 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`plansListStorage`](docs/sdks/plans/README.md#liststorage) - List storage plans
 - [`plansUpdateBandwidth`](docs/sdks/plans/README.md#updatebandwidth) - Update bandwidth packages
 - [`plansVmList`](docs/sdks/vm/README.md#list) - List VM plans
-- [`prefixesCreatePrefix`](docs/sdks/prefixes/README.md#createprefix) - Create a network
-- [`prefixesDestroyPrefix`](docs/sdks/prefixes/README.md#destroyprefix) - Delete a network
-- [`prefixesGetPrefix`](docs/sdks/prefixes/README.md#getprefix) - Retrieve a network
-- [`prefixesGetPrefixes`](docs/sdks/prefixes/README.md#getprefixes) - List networks
 - [`privateNetworksAssign`](docs/sdks/privatenetworks/README.md#assign) - Assign VLAN
 - [`privateNetworksCreate`](docs/sdks/privatenetworks/README.md#create) - Create VLAN
 - [`privateNetworksDeleteAssignment`](docs/sdks/privatenetworks/README.md#deleteassignment) - Delete VLAN assignment
@@ -571,8 +578,13 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`privateNetworksUpdate`](docs/sdks/privatenetworks/README.md#update) - Update VLAN
 - [`projectsCreate`](docs/sdks/projects/README.md#create) - Create project
 - [`projectsDelete`](docs/sdks/projects/README.md#delete) - Delete project
+- [`projectsGetProject`](docs/sdks/projects/README.md#getproject) - Retrieve project
 - [`projectsList`](docs/sdks/projects/README.md#list) - List projects
 - [`projectsUpdate`](docs/sdks/projects/README.md#update) - Update project
+- [`publicNetworksCreatePublicNetwork`](docs/sdks/publicnetworks/README.md#createpublicnetwork) - Create a network
+- [`publicNetworksDestroyPublicNetwork`](docs/sdks/publicnetworks/README.md#destroypublicnetwork) - Delete a network
+- [`publicNetworksGetPublicNetwork`](docs/sdks/publicnetworks/README.md#getpublicnetwork) - Retrieve a network
+- [`publicNetworksGetPublicNetworks`](docs/sdks/publicnetworks/README.md#getpublicnetworks) - List networks
 - [`regionsFetch`](docs/sdks/regions/README.md#fetch) - Retrieve region
 - [`regionsGet`](docs/sdks/regions/README.md#get) - List regions
 - [`rolesGet`](docs/sdks/roles/README.md#get) - Retrieve role
@@ -829,7 +841,7 @@ run();
 
 
 **Inherit from [`LatitudeshError`](./src/models/errors/latitudesherror.ts)**:
-* [`ErrorObject`](./src/models/errors/errorobject.ts): Applicable to 44 of 164 methods.*
+* [`ErrorObject`](./src/models/errors/errorobject.ts): Applicable to 49 of 170 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>

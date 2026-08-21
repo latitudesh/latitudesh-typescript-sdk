@@ -7,8 +7,8 @@ import { ServerData } from "latitudesh-typescript-sdk/models";
 
 let value: ServerData = {
   attributes: {
-    prefix: {
-      id: "pfx_2aBcDeFgH",
+    publicNetwork: {
+      id: "pn_2aBcDeFgH",
       ipv4: "10.90.0.0/26",
       ipv6: "2001:db8::/64",
     },

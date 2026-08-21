@@ -61,15 +61,20 @@ import { tool$kubernetesClustersListKubernetesAvailableVersions } from "./tools/
 import { tool$kubernetesClustersListKubernetesClusters } from "./tools/kubernetesClustersListKubernetesClusters.js";
 import { tool$kubernetesClustersUpdateKubernetesCluster } from "./tools/kubernetesClustersUpdateKubernetesCluster.js";
 import { tool$objectStorageDeleteStorageAccessKeysUsername } from "./tools/objectStorageDeleteStorageAccessKeysUsername.js";
+import { tool$objectStorageDeleteStorageBucketLifecycleRule } from "./tools/objectStorageDeleteStorageBucketLifecycleRule.js";
 import { tool$objectStorageDeleteStorageBuckets } from "./tools/objectStorageDeleteStorageBuckets.js";
 import { tool$objectStorageGetStorageAccessKeys } from "./tools/objectStorageGetStorageAccessKeys.js";
 import { tool$objectStorageGetStorageBucket } from "./tools/objectStorageGetStorageBucket.js";
 import { tool$objectStorageGetStorageBucketAccessKeys } from "./tools/objectStorageGetStorageBucketAccessKeys.js";
+import { tool$objectStorageGetStorageBucketLifecycleRule } from "./tools/objectStorageGetStorageBucketLifecycleRule.js";
+import { tool$objectStorageGetStorageBucketLifecycleRules } from "./tools/objectStorageGetStorageBucketLifecycleRules.js";
 import { tool$objectStorageGetStorageBucketMetrics } from "./tools/objectStorageGetStorageBucketMetrics.js";
 import { tool$objectStorageGetStorageBuckets } from "./tools/objectStorageGetStorageBuckets.js";
 import { tool$objectStorageGetStorageUsage } from "./tools/objectStorageGetStorageUsage.js";
 import { tool$objectStoragePostStorageAccessKeys } from "./tools/objectStoragePostStorageAccessKeys.js";
+import { tool$objectStoragePostStorageBucketLifecycleRules } from "./tools/objectStoragePostStorageBucketLifecycleRules.js";
 import { tool$objectStoragePostStorageBuckets } from "./tools/objectStoragePostStorageBuckets.js";
+import { tool$objectStoragePutStorageBucketLifecycleRule } from "./tools/objectStoragePutStorageBucketLifecycleRule.js";
 import { tool$operatingSystemsListPlans } from "./tools/operatingSystemsListPlans.js";
 import { tool$plansGet } from "./tools/plansGet.js";
 import { tool$plansGetBandwidth } from "./tools/plansGetBandwidth.js";
@@ -78,10 +83,6 @@ import { tool$plansList } from "./tools/plansList.js";
 import { tool$plansListStorage } from "./tools/plansListStorage.js";
 import { tool$plansUpdateBandwidth } from "./tools/plansUpdateBandwidth.js";
 import { tool$plansVmList } from "./tools/plansVmList.js";
-import { tool$prefixesCreatePrefix } from "./tools/prefixesCreatePrefix.js";
-import { tool$prefixesDestroyPrefix } from "./tools/prefixesDestroyPrefix.js";
-import { tool$prefixesGetPrefix } from "./tools/prefixesGetPrefix.js";
-import { tool$prefixesGetPrefixes } from "./tools/prefixesGetPrefixes.js";
 import { tool$privateNetworksAssign } from "./tools/privateNetworksAssign.js";
 import { tool$privateNetworksCreate } from "./tools/privateNetworksCreate.js";
 import { tool$privateNetworksDeleteAssignment } from "./tools/privateNetworksDeleteAssignment.js";
@@ -91,9 +92,14 @@ import { tool$privateNetworksListAssignments } from "./tools/privateNetworksList
 import { tool$privateNetworksUpdate } from "./tools/privateNetworksUpdate.js";
 import { tool$projectsCreate } from "./tools/projectsCreate.js";
 import { tool$projectsDelete } from "./tools/projectsDelete.js";
+import { tool$projectsGetProject } from "./tools/projectsGetProject.js";
 import { tool$projectsList } from "./tools/projectsList.js";
 import { tool$projectsSshKeysPostProjectSshKey } from "./tools/projectsSshKeysPostProjectSshKey.js";
 import { tool$projectsUpdate } from "./tools/projectsUpdate.js";
+import { tool$publicNetworksCreatePublicNetwork } from "./tools/publicNetworksCreatePublicNetwork.js";
+import { tool$publicNetworksDestroyPublicNetwork } from "./tools/publicNetworksDestroyPublicNetwork.js";
+import { tool$publicNetworksGetPublicNetwork } from "./tools/publicNetworksGetPublicNetwork.js";
+import { tool$publicNetworksGetPublicNetworks } from "./tools/publicNetworksGetPublicNetworks.js";
 import { tool$regionsFetch } from "./tools/regionsFetch.js";
 import { tool$regionsGet } from "./tools/regionsGet.js";
 import { tool$rolesGet } from "./tools/rolesGet.js";
@@ -189,7 +195,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Latitudesh",
-    version: "0.8.11",
+    version: "0.8.12",
   });
 
   const client = new LatitudeshCore({
@@ -269,14 +275,15 @@ export function createMCPServer(deps: {
   tool(tool$plansUpdateBandwidth);
   tool(tool$plansListStorage);
   tool(tool$plansGetManagedDatabasePlans);
-  tool(tool$prefixesGetPrefixes);
-  tool(tool$prefixesCreatePrefix);
-  tool(tool$prefixesGetPrefix);
-  tool(tool$prefixesDestroyPrefix);
+  tool(tool$publicNetworksGetPublicNetworks);
+  tool(tool$publicNetworksCreatePublicNetwork);
+  tool(tool$publicNetworksGetPublicNetwork);
+  tool(tool$publicNetworksDestroyPublicNetwork);
   tool(tool$projectsList);
   tool(tool$projectsCreate);
   tool(tool$projectsUpdate);
   tool(tool$projectsDelete);
+  tool(tool$projectsGetProject);
   tool(tool$sshKeysList);
   tool(tool$sshKeysGet);
   tool(tool$sshKeysModifyProjectKey);
@@ -295,6 +302,11 @@ export function createMCPServer(deps: {
   tool(tool$objectStoragePostStorageBuckets);
   tool(tool$objectStorageGetStorageBucket);
   tool(tool$objectStorageDeleteStorageBuckets);
+  tool(tool$objectStorageGetStorageBucketLifecycleRules);
+  tool(tool$objectStoragePostStorageBucketLifecycleRules);
+  tool(tool$objectStorageGetStorageBucketLifecycleRule);
+  tool(tool$objectStoragePutStorageBucketLifecycleRule);
+  tool(tool$objectStorageDeleteStorageBucketLifecycleRule);
   tool(tool$objectStorageGetStorageBucketMetrics);
   tool(tool$userDataGetProjectUsersData);
   tool(tool$userDataGetProjectUserData);

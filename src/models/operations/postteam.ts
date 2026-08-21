@@ -41,11 +41,19 @@ export type PostTeamRequest = {
   data: PostTeamData2;
 };
 
+export type PostTeamMeta = {
+  /**
+   * Create-only session token to authenticate follow-up requests against the new team
+   */
+  sessionToken?: string | undefined;
+};
+
 /**
  * Created
  */
 export type PostTeamResponse = {
   data?: models.Team | undefined;
+  meta?: PostTeamMeta | undefined;
 };
 
 /** @internal */
@@ -201,16 +209,61 @@ export function postTeamRequestFromJSON(
 }
 
 /** @internal */
+export const PostTeamMeta$inboundSchema: z.ZodType<
+  PostTeamMeta,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  session_token: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "session_token": "sessionToken",
+  });
+});
+/** @internal */
+export type PostTeamMeta$Outbound = {
+  session_token?: string | undefined;
+};
+
+/** @internal */
+export const PostTeamMeta$outboundSchema: z.ZodType<
+  PostTeamMeta$Outbound,
+  z.ZodTypeDef,
+  PostTeamMeta
+> = z.object({
+  sessionToken: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    sessionToken: "session_token",
+  });
+});
+
+export function postTeamMetaToJSON(postTeamMeta: PostTeamMeta): string {
+  return JSON.stringify(PostTeamMeta$outboundSchema.parse(postTeamMeta));
+}
+export function postTeamMetaFromJSON(
+  jsonString: string,
+): SafeParseResult<PostTeamMeta, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostTeamMeta$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostTeamMeta' from JSON`,
+  );
+}
+
+/** @internal */
 export const PostTeamResponse$inboundSchema: z.ZodType<
   PostTeamResponse,
   z.ZodTypeDef,
   unknown
 > = z.object({
   data: models.Team$inboundSchema.optional(),
+  meta: z.lazy(() => PostTeamMeta$inboundSchema).optional(),
 });
 /** @internal */
 export type PostTeamResponse$Outbound = {
   data?: models.Team$Outbound | undefined;
+  meta?: PostTeamMeta$Outbound | undefined;
 };
 
 /** @internal */
@@ -220,6 +273,7 @@ export const PostTeamResponse$outboundSchema: z.ZodType<
   PostTeamResponse
 > = z.object({
   data: models.Team$outboundSchema.optional(),
+  meta: z.lazy(() => PostTeamMeta$outboundSchema).optional(),
 });
 
 export function postTeamResponseToJSON(
