@@ -196,6 +196,10 @@ export type CreateServerAttributes2 = {
    */
   persistentNetboot?: boolean | undefined;
   /**
+   * Deploy the server onto hardware that can announce an Elastic IP over BGP.
+   */
+  bgpReady?: boolean | null | undefined;
+  /**
    * The server billing type. Accepts `hourly` and `monthly` for on demand projects and `yearly` for reserved projects.
    */
   billing?: CreateServerBilling2 | null | undefined;
@@ -373,6 +377,7 @@ export const CreateServerAttributes2$inboundSchema: z.ZodType<
   ).optional(),
   ipxe: z.nullable(z.string()).optional(),
   persistent_netboot: z.boolean().optional(),
+  bgp_ready: z.nullable(z.boolean()).optional(),
   billing: z.nullable(CreateServerBilling2$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -381,6 +386,7 @@ export const CreateServerAttributes2$inboundSchema: z.ZodType<
     "user_data": "userData",
     "disk_layout": "diskLayout",
     "persistent_netboot": "persistentNetboot",
+    "bgp_ready": "bgpReady",
   });
 });
 /** @internal */
@@ -396,6 +402,7 @@ export type CreateServerAttributes2$Outbound = {
   disk_layout?: Array<CreateServerDiskLayout2$Outbound> | null | undefined;
   ipxe?: string | null | undefined;
   persistent_netboot?: boolean | undefined;
+  bgp_ready?: boolean | null | undefined;
   billing?: string | null | undefined;
 };
 
@@ -418,6 +425,7 @@ export const CreateServerAttributes2$outboundSchema: z.ZodType<
   ).optional(),
   ipxe: z.nullable(z.string()).optional(),
   persistentNetboot: z.boolean().optional(),
+  bgpReady: z.nullable(z.boolean()).optional(),
   billing: z.nullable(CreateServerBilling2$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -426,6 +434,7 @@ export const CreateServerAttributes2$outboundSchema: z.ZodType<
     userData: "user_data",
     diskLayout: "disk_layout",
     persistentNetboot: "persistent_netboot",
+    bgpReady: "bgp_ready",
   });
 });
 

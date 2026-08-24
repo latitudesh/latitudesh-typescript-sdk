@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c8245324-f3d7-42c7-8124-ce79579cbff5
 management:
-  docChecksum: 3fce78f6140d140ca17518a8b270b367
+  docChecksum: b5d18be03922932583eae14fa4b2e634
   docVersion: "2023-06-01"
-  speakeasyVersion: 1.795.2
+  speakeasyVersion: 1.795.3
   generationVersion: 2.932.9
-  releaseVersion: 0.8.13
-  configChecksum: 7aed20f35b420f7fb13a1c094c2a3981
+  releaseVersion: 0.8.14
+  configChecksum: d88ad61eb558232fe3d35786b319caa9
   repoURL: https://github.com/latitudesh/latitudesh-typescript-sdk.git
   installationURL: https://github.com/latitudesh/latitudesh-typescript-sdk
   published: true
 persistentEdits:
-  generation_id: 03146d62-1449-467e-89e6-97c67b14f8f3
-  pristine_commit_hash: 6d10e32cb83f4d6a5f01f4c5bf27bba3f6f4474c
-  pristine_tree_hash: e8eca248fcf9839a58c0554f91e22d908c5f9e08
+  generation_id: e6c3ef16-7a53-4f3c-9a28-7154d7fd7a09
+  pristine_commit_hash: dce4ba92eaa24f6f5de09d95f1fadd8c935b625a
+  pristine_tree_hash: 7fc5467ab8f3ba80964124daa80cd94e7449925e
 features:
   typescript:
     additionalDependencies: 0.1.0
@@ -1162,8 +1162,8 @@ trackedFiles:
     pristine_git_object: f16f8570a19cf4e4ba68b8d4a7c470329a4277bd
   docs/models/operations/createserverattributes2.md:
     id: 093b74bef518
-    last_write_checksum: sha1:4ba45c5495ddd332304a5fd35b2b6199823236b8
-    pristine_git_object: 7f64f3b9bddf95eee6b916d29657af772c08404e
+    last_write_checksum: sha1:232d44700dbe55f7623e6fe597c123ee0fc7ac99
+    pristine_git_object: e69b60cede5b2e58d5ffda7360dc9f7c30e7ab5c
   docs/models/operations/createserverbilling2.md:
     id: 5e3843929c4b
     last_write_checksum: sha1:523c28fc0ffc87e07637ae7a644e78a638370a5b
@@ -3990,12 +3990,12 @@ trackedFiles:
     pristine_git_object: 249e5d9837dbad499fc14718cebf96fd4875a9e8
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:49dd09816719836f7487d605be1689b31e88a690
-    pristine_git_object: 9ee325c282934aea6733008186d86e0a73895223
+    last_write_checksum: sha1:6291aebb8c6e24090deffd92596e432a4f140687
+    pristine_git_object: efb8728c62e97578c360719441714be021527932
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:5a034454bcbf9c2c3ba00b6b39aa4010c06a9cb1
-    pristine_git_object: 410e10dd135e5c8da22b3c5ee2363ca3805d7eaf
+    last_write_checksum: sha1:949516705239fe057e50aeaf28c2464b080533d0
+    pristine_git_object: 362e5248cbb77422b1d0561dabf9e1a0e222e56e
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:9bb7b3807363b77f27dbdb87d6d10e9605f723d6
@@ -4702,8 +4702,8 @@ trackedFiles:
     pristine_git_object: 0aebd8b0a4867e35cb3348fc52921c3c0b4725b7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:808244fd76d2858409c1ea3b39654c1ede11d208
-    pristine_git_object: ecdc2b0676c58767ef58c6c813ed724f091a3a94
+    last_write_checksum: sha1:96e7bcb524adbe4186b7cb1a7ac29efdd330314a
+    pristine_git_object: 8f3d01b1b5500d1cc550d94d39ce7e2daa3901c1
   src/lib/encodings.ts:
     id: 3bd8ead98afd
     last_write_checksum: sha1:50d9b187dcfc3cca8d3bbd9fe074f865d715d2b0
@@ -4778,8 +4778,8 @@ trackedFiles:
     pristine_git_object: 0955a573c2ce989d63c737410ab8cc28706d9f74
   src/mcp-server/mcp-server.ts:
     id: aabbc4ab07c1
-    last_write_checksum: sha1:19f5af66ffd50ff9e0eb9bf1826986c727a32a63
-    pristine_git_object: 8c16dd7e01fdb7ed3ce2b46796a63d54fd20ba17
+    last_write_checksum: sha1:5ebd7504189063bc89b694d17a09770a922130fd
+    pristine_git_object: d56b4a4da346304e5d6811319a9db83d73209fcc
   src/mcp-server/prompts.ts:
     id: 26f3d73cbf31
     last_write_checksum: sha1:3e8d60ab7f8078d83fa9528f2e831050c1fd119c
@@ -4794,8 +4794,8 @@ trackedFiles:
     pristine_git_object: c25696d4c4f70e081fa5d87ad6891874c509a577
   src/mcp-server/server.ts:
     id: 2784dd48e82a
-    last_write_checksum: sha1:feb601758205befbba95e0f18d2c909886ba401c
-    pristine_git_object: 7c497b679050e1debc7b0b35e22773a1c0f337ac
+    last_write_checksum: sha1:7079e3c9e50b15d1796018cb73e2952dac318b37
+    pristine_git_object: 8cba17705fc56f43ff798d992fc521b29a76067b
   src/mcp-server/shared.ts:
     id: 074e80d4be1e
     last_write_checksum: sha1:d89576cea2bef3856b7fc3e65b868875528be042
@@ -5774,8 +5774,8 @@ trackedFiles:
     pristine_git_object: 421667124fe7e204815d9f16cd287eefc3cc6398
   src/models/operations/createserver.ts:
     id: 37fdb28f00ed
-    last_write_checksum: sha1:092a2df8dd1da04502ec07f7f748ecc9ea3bfec6
-    pristine_git_object: 517ef02923292ce369ddbd5fefb5d7d90350dcc8
+    last_write_checksum: sha1:da571d037a60a85d56bc6fde2e1e12955fdbc3d5
+    pristine_git_object: d0ff53a15f6446faab1284ef4d5212a99ba7b57a
   src/models/operations/createserveraction.ts:
     id: 1c7fdbc5efcf
     last_write_checksum: sha1:8816535ae36cf11e762a1eb4c8e0c6a19b0a61dd
@@ -9330,10 +9330,7 @@ examples:
           application/vnd.api+json: {}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: |
-  ## Typescript SDK Changes:
-  * `latitudesh.plans.updateBandwidth()`:  `response` **Changed** (Breaking ⚠️)
-  * `latitudesh.plans.getBandwidth()`:  `response.data[].attributes.pricing` **Changed**
+releaseNotes: "## Typescript SDK Changes:\n* `latitudesh.servers.create()`: \n  *  `request.data.attributes.bgpReady` **Added**\n"
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
