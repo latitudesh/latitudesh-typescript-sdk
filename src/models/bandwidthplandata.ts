@@ -16,11 +16,13 @@ export type BandwidthPlanDataType = ClosedEnum<typeof BandwidthPlanDataType>;
 export type BandwidthPlanDataUsd = {
   monthly?: number | undefined;
   hourly?: number | undefined;
+  yearly?: number | null | undefined;
 };
 
 export type BandwidthPlanDataBrl = {
   monthly?: number | undefined;
   hourly?: number | undefined;
+  yearly?: number | null | undefined;
 };
 
 export type BandwidthPlanDataPricing = {
@@ -57,11 +59,13 @@ export const BandwidthPlanDataUsd$inboundSchema: z.ZodType<
 > = z.object({
   monthly: z.number().int().optional(),
   hourly: z.number().int().optional(),
+  yearly: z.nullable(z.number().int()).optional(),
 });
 /** @internal */
 export type BandwidthPlanDataUsd$Outbound = {
   monthly?: number | undefined;
   hourly?: number | undefined;
+  yearly?: number | null | undefined;
 };
 
 /** @internal */
@@ -72,6 +76,7 @@ export const BandwidthPlanDataUsd$outboundSchema: z.ZodType<
 > = z.object({
   monthly: z.number().int().optional(),
   hourly: z.number().int().optional(),
+  yearly: z.nullable(z.number().int()).optional(),
 });
 
 export function bandwidthPlanDataUsdToJSON(
@@ -99,11 +104,13 @@ export const BandwidthPlanDataBrl$inboundSchema: z.ZodType<
 > = z.object({
   monthly: z.number().int().optional(),
   hourly: z.number().int().optional(),
+  yearly: z.nullable(z.number().int()).optional(),
 });
 /** @internal */
 export type BandwidthPlanDataBrl$Outbound = {
   monthly?: number | undefined;
   hourly?: number | undefined;
+  yearly?: number | null | undefined;
 };
 
 /** @internal */
@@ -114,6 +121,7 @@ export const BandwidthPlanDataBrl$outboundSchema: z.ZodType<
 > = z.object({
   monthly: z.number().int().optional(),
   hourly: z.number().int().optional(),
+  yearly: z.nullable(z.number().int()).optional(),
 });
 
 export function bandwidthPlanDataBrlToJSON(

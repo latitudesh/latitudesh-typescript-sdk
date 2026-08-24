@@ -14,3 +14,4 @@ let value: BandwidthPlanDataBrl = {};
 | ------------------ | ------------------ | ------------------ | ------------------ |
 | `monthly`          | *number*           | :heavy_minus_sign: | N/A                |
 | `hourly`           | *number*           | :heavy_minus_sign: | N/A                |
+| `yearly`           | *number*           | :heavy_minus_sign: | N/A                |

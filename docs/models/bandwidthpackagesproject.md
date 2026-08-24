@@ -12,6 +12,6 @@ let value: BandwidthPackagesProject = {};
 
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
-| `id`               | *number*           | :heavy_minus_sign: | N/A                |
+| `id`               | *string*           | :heavy_minus_sign: | N/A                |
 | `name`             | *string*           | :heavy_minus_sign: | N/A                |
 | `slug`             | *string*           | :heavy_minus_sign: | N/A                |
