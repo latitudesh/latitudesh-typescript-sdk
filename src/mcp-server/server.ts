@@ -60,6 +60,8 @@ import { tool$kubernetesClustersGetKubernetesClusterKubeconfig } from "./tools/k
 import { tool$kubernetesClustersListKubernetesAvailableVersions } from "./tools/kubernetesClustersListKubernetesAvailableVersions.js";
 import { tool$kubernetesClustersListKubernetesClusters } from "./tools/kubernetesClustersListKubernetesClusters.js";
 import { tool$kubernetesClustersUpdateKubernetesCluster } from "./tools/kubernetesClustersUpdateKubernetesCluster.js";
+import { tool$marketplaceAppsGetMarketplaceApp } from "./tools/marketplaceAppsGetMarketplaceApp.js";
+import { tool$marketplaceAppsListMarketplaceApps } from "./tools/marketplaceAppsListMarketplaceApps.js";
 import { tool$objectStorageDeleteStorageAccessKeysUsername } from "./tools/objectStorageDeleteStorageAccessKeysUsername.js";
 import { tool$objectStorageDeleteStorageBucketLifecycleRule } from "./tools/objectStorageDeleteStorageBucketLifecycleRule.js";
 import { tool$objectStorageDeleteStorageBuckets } from "./tools/objectStorageDeleteStorageBuckets.js";
@@ -195,7 +197,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Latitudesh",
-    version: "0.8.16",
+    version: "0.8.17",
   });
 
   const client = new LatitudeshCore({
@@ -358,6 +360,8 @@ export function createMCPServer(deps: {
   tool(tool$userProfileGet);
   tool(tool$userProfileUpdate);
   tool(tool$userProfileListTeams);
+  tool(tool$marketplaceAppsListMarketplaceApps);
+  tool(tool$marketplaceAppsGetMarketplaceApp);
   tool(tool$virtualMachinesCreate);
   tool(tool$virtualMachinesList);
   tool(tool$virtualMachinesGet);
