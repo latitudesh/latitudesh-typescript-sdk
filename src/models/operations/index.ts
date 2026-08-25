@@ -59,6 +59,7 @@ export * from "./getip.js";
 export * from "./getips.js";
 export * from "./getkubernetescluster.js";
 export * from "./getkubernetesclusterkubeconfig.js";
+export * from "./getmarketplaceapp.js";
 export * from "./getplan.js";
 export * from "./getplans.js";
 export * from "./getplansoperatingsystem.js";

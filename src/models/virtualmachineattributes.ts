@@ -120,6 +120,15 @@ export type VirtualMachineAttributesCredentials = {
   sshKeys?: Array<VirtualMachineAttributesSshKey> | null | undefined;
 };
 
+/**
+ * Deploy-time snapshot of the marketplace app this VM was created with. Null when the VM was deployed from a plain operating system.
+ */
+export type VirtualMachineAttributesMarketplaceApp = {
+  slug?: string | undefined;
+  name?: string | null | undefined;
+  version?: string | null | undefined;
+};
+
 export type VirtualMachineAttributesPlan = {
   id?: string | undefined;
   name?: string | undefined;
@@ -163,6 +172,10 @@ export type VirtualMachineAttributesAttributes = {
    * Encoded ID of the user data record applied to this VM, if any
    */
   userData?: string | null | undefined;
+  /**
+   * Deploy-time snapshot of the marketplace app this VM was created with. Null when the VM was deployed from a plain operating system.
+   */
+  marketplaceApp?: VirtualMachineAttributesMarketplaceApp | null | undefined;
   plan?: VirtualMachineAttributesPlan | undefined;
   specs?: VirtualMachineAttributesSpecs | undefined;
   tags?: Array<VirtualMachineAttributesTag> | undefined;
@@ -494,6 +507,55 @@ export function virtualMachineAttributesCredentialsFromJSON(
 }
 
 /** @internal */
+export const VirtualMachineAttributesMarketplaceApp$inboundSchema: z.ZodType<
+  VirtualMachineAttributesMarketplaceApp,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  slug: z.string().optional(),
+  name: z.nullable(z.string()).optional(),
+  version: z.nullable(z.string()).optional(),
+});
+/** @internal */
+export type VirtualMachineAttributesMarketplaceApp$Outbound = {
+  slug?: string | undefined;
+  name?: string | null | undefined;
+  version?: string | null | undefined;
+};
+
+/** @internal */
+export const VirtualMachineAttributesMarketplaceApp$outboundSchema: z.ZodType<
+  VirtualMachineAttributesMarketplaceApp$Outbound,
+  z.ZodTypeDef,
+  VirtualMachineAttributesMarketplaceApp
+> = z.object({
+  slug: z.string().optional(),
+  name: z.nullable(z.string()).optional(),
+  version: z.nullable(z.string()).optional(),
+});
+
+export function virtualMachineAttributesMarketplaceAppToJSON(
+  virtualMachineAttributesMarketplaceApp:
+    VirtualMachineAttributesMarketplaceApp,
+): string {
+  return JSON.stringify(
+    VirtualMachineAttributesMarketplaceApp$outboundSchema.parse(
+      virtualMachineAttributesMarketplaceApp,
+    ),
+  );
+}
+export function virtualMachineAttributesMarketplaceAppFromJSON(
+  jsonString: string,
+): SafeParseResult<VirtualMachineAttributesMarketplaceApp, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      VirtualMachineAttributesMarketplaceApp$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'VirtualMachineAttributesMarketplaceApp' from JSON`,
+  );
+}
+
+/** @internal */
 export const VirtualMachineAttributesPlan$inboundSchema: z.ZodType<
   VirtualMachineAttributesPlan,
   z.ZodTypeDef,
@@ -662,6 +724,9 @@ export const VirtualMachineAttributesAttributes$inboundSchema: z.ZodType<
   site: z.nullable(z.string()).optional(),
   billing: z.nullable(z.string()).optional(),
   user_data: z.nullable(z.string()).optional(),
+  marketplace_app: z.nullable(
+    z.lazy(() => VirtualMachineAttributesMarketplaceApp$inboundSchema),
+  ).optional(),
   plan: z.lazy(() => VirtualMachineAttributesPlan$inboundSchema).optional(),
   specs: z.lazy(() => VirtualMachineAttributesSpecs$inboundSchema).optional(),
   tags: z.array(z.lazy(() => VirtualMachineAttributesTag$inboundSchema))
@@ -675,6 +740,7 @@ export const VirtualMachineAttributesAttributes$inboundSchema: z.ZodType<
     "primary_ipv4": "primaryIpv4",
     "operating_system": "operatingSystem",
     "user_data": "userData",
+    "marketplace_app": "marketplaceApp",
     "pending_restart": "pendingRestart",
   });
 });
@@ -692,6 +758,10 @@ export type VirtualMachineAttributesAttributes$Outbound = {
   site?: string | null | undefined;
   billing?: string | null | undefined;
   user_data?: string | null | undefined;
+  marketplace_app?:
+    | VirtualMachineAttributesMarketplaceApp$Outbound
+    | null
+    | undefined;
   plan?: VirtualMachineAttributesPlan$Outbound | undefined;
   specs?: VirtualMachineAttributesSpecs$Outbound | undefined;
   tags?: Array<VirtualMachineAttributesTag$Outbound> | undefined;
@@ -719,6 +789,9 @@ export const VirtualMachineAttributesAttributes$outboundSchema: z.ZodType<
   site: z.nullable(z.string()).optional(),
   billing: z.nullable(z.string()).optional(),
   userData: z.nullable(z.string()).optional(),
+  marketplaceApp: z.nullable(
+    z.lazy(() => VirtualMachineAttributesMarketplaceApp$outboundSchema),
+  ).optional(),
   plan: z.lazy(() => VirtualMachineAttributesPlan$outboundSchema).optional(),
   specs: z.lazy(() => VirtualMachineAttributesSpecs$outboundSchema).optional(),
   tags: z.array(z.lazy(() => VirtualMachineAttributesTag$outboundSchema))
@@ -732,6 +805,7 @@ export const VirtualMachineAttributesAttributes$outboundSchema: z.ZodType<
     primaryIpv4: "primary_ipv4",
     operatingSystem: "operating_system",
     userData: "user_data",
+    marketplaceApp: "marketplace_app",
     pendingRestart: "pending_restart",
   });
 });
