@@ -1,11 +1,11 @@
-# PutStorageBucketLifecycleRuleAttributes
+# PatchStorageBucketLifecycleRuleAttributes
 
 ## Example Usage
 
 ```typescript
-import { PutStorageBucketLifecycleRuleAttributes } from "latitudesh-typescript-sdk/models/operations";
+import { PatchStorageBucketLifecycleRuleAttributes } from "latitudesh-typescript-sdk/models/operations";
 
-let value: PutStorageBucketLifecycleRuleAttributes = {
+let value: PatchStorageBucketLifecycleRuleAttributes = {
   name: "<value>",
 };
 ```

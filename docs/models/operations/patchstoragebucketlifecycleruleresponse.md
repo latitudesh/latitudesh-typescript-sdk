@@ -1,13 +1,13 @@
-# PutStorageBucketLifecycleRuleResponse
+# PatchStorageBucketLifecycleRuleResponse
 
 Success
 
 ## Example Usage
 
 ```typescript
-import { PutStorageBucketLifecycleRuleResponse } from "latitudesh-typescript-sdk/models/operations";
+import { PatchStorageBucketLifecycleRuleResponse } from "latitudesh-typescript-sdk/models/operations";
 
-let value: PutStorageBucketLifecycleRuleResponse = {};
+let value: PatchStorageBucketLifecycleRuleResponse = {};
 ```
 
 ## Fields

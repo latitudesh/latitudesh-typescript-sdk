@@ -13,10 +13,10 @@ import { objectStorageGetStorageBucketLifecycleRules } from "../funcs/objectStor
 import { objectStorageGetStorageBucketMetrics } from "../funcs/objectStorageGetStorageBucketMetrics.js";
 import { objectStorageGetStorageBuckets } from "../funcs/objectStorageGetStorageBuckets.js";
 import { objectStorageGetStorageUsage } from "../funcs/objectStorageGetStorageUsage.js";
+import { objectStoragePatchStorageBucketLifecycleRule } from "../funcs/objectStoragePatchStorageBucketLifecycleRule.js";
 import { objectStoragePostStorageAccessKeys } from "../funcs/objectStoragePostStorageAccessKeys.js";
 import { objectStoragePostStorageBucketLifecycleRules } from "../funcs/objectStoragePostStorageBucketLifecycleRules.js";
 import { objectStoragePostStorageBuckets } from "../funcs/objectStoragePostStorageBuckets.js";
-import { objectStoragePutStorageBucketLifecycleRule } from "../funcs/objectStoragePutStorageBucketLifecycleRule.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as models from "../models/index.js";
 import * as operations from "../models/operations/index.js";
@@ -228,23 +228,6 @@ export class ObjectStorage extends ClientSDK {
   }
 
   /**
-   * Update lifecycle rule
-   *
-   * @remarks
-   * Updates an existing lifecycle rule for an object storage bucket.
-   */
-  async putStorageBucketLifecycleRule(
-    request: operations.PutStorageBucketLifecycleRuleRequest,
-    options?: RequestOptions,
-  ): Promise<operations.PutStorageBucketLifecycleRuleResponse> {
-    return unwrapAsync(objectStoragePutStorageBucketLifecycleRule(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
    * Delete lifecycle rule
    *
    * @remarks
@@ -255,6 +238,23 @@ export class ObjectStorage extends ClientSDK {
     options?: RequestOptions,
   ): Promise<void> {
     return unwrapAsync(objectStorageDeleteStorageBucketLifecycleRule(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Update lifecycle rule
+   *
+   * @remarks
+   * Updates an existing lifecycle rule for an object storage bucket.
+   */
+  async patchStorageBucketLifecycleRule(
+    request: operations.PatchStorageBucketLifecycleRuleRequest,
+    options?: RequestOptions,
+  ): Promise<operations.PatchStorageBucketLifecycleRuleResponse> {
+    return unwrapAsync(objectStoragePatchStorageBucketLifecycleRule(
       this,
       request,
       options,
