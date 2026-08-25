@@ -5,15 +5,15 @@ management:
   docVersion: "2023-06-01"
   speakeasyVersion: 1.795.3
   generationVersion: 2.932.9
-  releaseVersion: 0.8.15
-  configChecksum: efd57408451e63b442cc576161761398
+  releaseVersion: 0.8.16
+  configChecksum: e07488b91234b15106e19fa2087ac4bb
   repoURL: https://github.com/latitudesh/latitudesh-typescript-sdk.git
   installationURL: https://github.com/latitudesh/latitudesh-typescript-sdk
   published: true
 persistentEdits:
-  generation_id: 0e25eec1-5936-4479-ae7f-769de543604c
-  pristine_commit_hash: 5edbade8cc90ed41f2391b013c6d3c1c22c6e9dd
-  pristine_tree_hash: d33bfb85d770eb4ac033135dd7c3bb3990351f53
+  generation_id: aeafd192-4931-4dd8-a589-a17dd07b5c70
+  pristine_commit_hash: 97f49bce76650bfb6d52d3f29f4333f9c897e9b8
+  pristine_tree_hash: ffc93e250d44fb5c7fcd2a64eaf8d58c3308414e
 features:
   typescript:
     additionalDependencies: 0.1.0
@@ -3990,12 +3990,12 @@ trackedFiles:
     pristine_git_object: 249e5d9837dbad499fc14718cebf96fd4875a9e8
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:550931ab2263398ebbeeaa006bcbf3b4340fc3af
-    pristine_git_object: 45a8c75b66e250b80170e7fb409bae515f2f14af
+    last_write_checksum: sha1:eaf9dcdb776783b1eaa70857a0472ad052841137
+    pristine_git_object: d65921e3cfbb312e7fabc9fa36e3e14638a46000
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:9a9021e99692d24e4e8c3f3a9f14bd01675097ef
-    pristine_git_object: db4f9a9a981a08da0f022ca20e12a60a58049af8
+    last_write_checksum: sha1:b3747e894b7f96909ce9d947dde2dd2b73c707f3
+    pristine_git_object: 5700ca26e686c88eac70222e7b83ee4ec4fff398
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:9bb7b3807363b77f27dbdb87d6d10e9605f723d6
@@ -4702,8 +4702,8 @@ trackedFiles:
     pristine_git_object: 0aebd8b0a4867e35cb3348fc52921c3c0b4725b7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:fd27e00623567439797a23a076f0423522b74b09
-    pristine_git_object: 7817fc47a27cc8ce57e77c00b70925fba9b0271f
+    last_write_checksum: sha1:9e1b34c22a69f1c2038ceaacae2c63b647d0fb17
+    pristine_git_object: 3d05f0d7806f3c783dbacd170ebae94dfcf9bd4b
   src/lib/encodings.ts:
     id: 3bd8ead98afd
     last_write_checksum: sha1:50d9b187dcfc3cca8d3bbd9fe074f865d715d2b0
@@ -4778,8 +4778,8 @@ trackedFiles:
     pristine_git_object: 0955a573c2ce989d63c737410ab8cc28706d9f74
   src/mcp-server/mcp-server.ts:
     id: aabbc4ab07c1
-    last_write_checksum: sha1:1a34ac58ef670708a996b34093b9648429775c1f
-    pristine_git_object: 058e0daa378de02d83ec9c59150f0b1e1ed72156
+    last_write_checksum: sha1:b69984af4b8e9f84aacf499efb4aa7d48ff05411
+    pristine_git_object: 39d99049cd88d7222e38aaeda4fe463ae4a1fef4
   src/mcp-server/prompts.ts:
     id: 26f3d73cbf31
     last_write_checksum: sha1:3e8d60ab7f8078d83fa9528f2e831050c1fd119c
@@ -4794,8 +4794,8 @@ trackedFiles:
     pristine_git_object: c25696d4c4f70e081fa5d87ad6891874c509a577
   src/mcp-server/server.ts:
     id: 2784dd48e82a
-    last_write_checksum: sha1:fdb6f63d3171df345fd18d5bfc64dfe090c74f67
-    pristine_git_object: 7bc3b9fbdb4eca6be8c85a62c6d24ceb0ac1a0f0
+    last_write_checksum: sha1:2bfdd934a614497add55e1a34b2e8df3c4259aae
+    pristine_git_object: ac3de4e1416c053e2a6bbdf1284b86b2970ef4e7
   src/mcp-server/shared.ts:
     id: 074e80d4be1e
     last_write_checksum: sha1:d89576cea2bef3856b7fc3e65b868875528be042
@@ -9379,10 +9379,6 @@ examples:
           application/vnd.api+json: {"errors": [{"code": "USER_AUTHORIZATION_ERROR", "status": "forbidden", "title": "User Authorization Error", "detail": "You are not authorized to perform this action.", "meta": {}}]}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: |
-  ## Typescript SDK Changes:
-  * `latitudesh.objectStorage.patchStorageBucketLifecycleRule()`: **Added**
-  * `latitudesh.objectStorage.putStorageBucketLifecycleRule()`: **Removed** (Breaking ⚠️)
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json

@@ -13,7 +13,7 @@ targets:
         sourceRevisionDigest: sha256:ee9398e0f3d6f6d331e57db36f238299669085e8bfeec99e68f6c54cf9250423
         sourceBlobDigest: sha256:ee29e03d8757c14b47c0ce0de7fa5a945fbace9b0c6a0e231a6c33aefebe9d7d
         codeSamplesNamespace: latitudesh-oas-typescript-code-samples
-        codeSamplesRevisionDigest: sha256:634e259bad98aa4ec92c60af5030ad96cacba4a6956bc529518f3bacb29114e1
+        codeSamplesRevisionDigest: sha256:d62fed6873a83189a1cd370ce11ef6f8851a0fd6069c8018820b605d73c91e08
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
