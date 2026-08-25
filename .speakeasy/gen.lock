@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c8245324-f3d7-42c7-8124-ce79579cbff5
 management:
-  docChecksum: 67302a446c0a941446a5588f79ef1513
+  docChecksum: 2d5d3e8aa475088a6a738b361af276b4
   docVersion: "2023-06-01"
   speakeasyVersion: 1.795.3
   generationVersion: 2.932.9
-  releaseVersion: 0.8.16
-  configChecksum: e07488b91234b15106e19fa2087ac4bb
+  releaseVersion: 0.8.17
+  configChecksum: 8f6a857fa28b2ab208eba821ebe8759d
   repoURL: https://github.com/latitudesh/latitudesh-typescript-sdk.git
   installationURL: https://github.com/latitudesh/latitudesh-typescript-sdk
   published: true
 persistentEdits:
-  generation_id: aeafd192-4931-4dd8-a589-a17dd07b5c70
-  pristine_commit_hash: 97f49bce76650bfb6d52d3f29f4333f9c897e9b8
-  pristine_tree_hash: ffc93e250d44fb5c7fcd2a64eaf8d58c3308414e
+  generation_id: 1b3abb52-0227-4fa6-8273-ff10b3d61786
+  pristine_commit_hash: 87cdf89255787acd5a5e56b098a53600345460b6
+  pristine_tree_hash: edc404e03174a7a6d1ea19487d57957f42fe2f62
 features:
   typescript:
     additionalDependencies: 0.1.0
@@ -464,6 +464,10 @@ trackedFiles:
     id: 5bf90e4bd5ea
     last_write_checksum: sha1:e953e63d89c13f69ce2523a0530ab0c74d7c77c1
     pristine_git_object: 134a6080811fa61dbd95384142a7c43077720206
+  docs/models/deploymentstrategy.md:
+    id: 636087b7bf18
+    last_write_checksum: sha1:bd2fd6577cda9d41e93b3ba34e8c57567c905363
+    pristine_git_object: 768e7d48759c618dfa6a369d60aabe8249ee2819
   docs/models/discount.md:
     id: 003b28f6c8a6
     last_write_checksum: sha1:b6faec8891f2c197d715154f409ff7906e68f609
@@ -928,6 +932,26 @@ trackedFiles:
     id: ceac505bd3de
     last_write_checksum: sha1:850218c141fe53e30f0bb42d4eeca3d2819360bc
     pristine_git_object: e642e6609e17827676dbca4ec013d866749566e1
+  docs/models/marketplaceapp.md:
+    id: 30e0743f85bb
+    last_write_checksum: sha1:2ee99defec3fc4f25b6bb76a72a6ba16fd076fbb
+    pristine_git_object: 13ebc3f6bbcfedc931b9fb1aa393ee9a7e967226
+  docs/models/marketplaceappdata.md:
+    id: 075ec7c02fc3
+    last_write_checksum: sha1:536cb3520b42a2df449260e49e823e251805f025
+    pristine_git_object: 18046cfc5b491147536154eddb9b3b1a78898914
+  docs/models/marketplaceappdataattributes.md:
+    id: d782cba3e14a
+    last_write_checksum: sha1:387176d44322cfed5feffc4a3486721befdca7b5
+    pristine_git_object: fa6d37022431f96eb35d0fb817a118272810b14b
+  docs/models/marketplaceappdatatype.md:
+    id: eaaa9be8a3c7
+    last_write_checksum: sha1:c566c671f9bb66044e6327aebdc2fc8a8289051a
+    pristine_git_object: 5d46dc8d8e302922bcf4aa4ad2955b2476c4a517
+  docs/models/marketplaceapps.md:
+    id: 9a845344224e
+    last_write_checksum: sha1:f76ac18a855bb04ef5982572fa08f72248bc71c0
+    pristine_git_object: ace4b5e1a504ec0aaf6b7d641c5cea7d8fa27f86
   docs/models/membership.md:
     id: cc319e98ebbd
     last_write_checksum: sha1:206893e9c1de7a30fc8a8248d04684576048fc96
@@ -1568,6 +1592,10 @@ trackedFiles:
     id: d4c55f7cd9cc
     last_write_checksum: sha1:6e5462e232367ea9e4652ba74289daed5f02019e
     pristine_git_object: 634080767877430c79c15e7f88402f0c97d4ca0d
+  docs/models/operations/getmarketplaceapprequest.md:
+    id: b872e18a8328
+    last_write_checksum: sha1:1b8c04d478c0b5f52a03da144129ce1677acf200
+    pristine_git_object: 1dee588afc95959c2e84d54f40c2a4e634e80323
   docs/models/operations/getplanrequest.md:
     id: c490a78dced0
     last_write_checksum: sha1:304fc6e5ac6646976c020f321775c6f33ad00adb
@@ -3156,6 +3184,10 @@ trackedFiles:
     id: 5102a8b3d663
     last_write_checksum: sha1:d37c59dfa26edee35d3a944d9e2d602fdf5858bc
     pristine_git_object: 10ccfe98f14cc22054e7ea1e6b5947ed5dc56db5
+  docs/models/systemrequirements.md:
+    id: 29fd863ab183
+    last_write_checksum: sha1:4ee1d9ca7146d32d472ff0826abbde14f2dc7839
+    pristine_git_object: fd47629c3fa956c06ce3f195de56f75221868fcb
   docs/models/target.md:
     id: 5c0836d4405b
     last_write_checksum: sha1:54daa8be1ed427fda0de6a0b571379d29486979d
@@ -3430,8 +3462,8 @@ trackedFiles:
     pristine_git_object: 0c5e64823bf1b717c6842aa248cc60d5bbf7d490
   docs/models/virtualmachineattributesattributes.md:
     id: ba8971a2fd16
-    last_write_checksum: sha1:87db98b39879bab81938a84e315654f2cea52c66
-    pristine_git_object: 7c15aacd0672cdf6b6fd27f3dc6e427a46f783c3
+    last_write_checksum: sha1:be61072603ba2c78efa1435a7a88e8c32cb7abf6
+    pristine_git_object: 49d7054f76c826c1f693784689e9984fb0cc113a
   docs/models/virtualmachineattributescredentials.md:
     id: d6c913d66765
     last_write_checksum: sha1:96c7cf0253ff685c22f4f88730fc9c02845837c2
@@ -3444,6 +3476,10 @@ trackedFiles:
     id: 850e9c73cc82
     last_write_checksum: sha1:aed5a0f9e0e0ce7a14c44dbba27b0306ce0d69fe
     pristine_git_object: f00ded53e665c92c18159652fff0517e4e131c67
+  docs/models/virtualmachineattributesmarketplaceapp.md:
+    id: e09bfd2e1de7
+    last_write_checksum: sha1:ed3b15092893ed20d5959f4f49bf20649a42c495
+    pristine_git_object: caa5557f0f2f8d0baf4d27dbcc50cb71d816bc2f
   docs/models/virtualmachineattributesoperatingsystem.md:
     id: 2ee1e2ed9777
     last_write_checksum: sha1:733e85302452f873d4103d24ca813bc8bc350c2c
@@ -3570,8 +3606,8 @@ trackedFiles:
     pristine_git_object: cd875dc8248e9d89ee2f1462427d3865cd5d04a3
   docs/models/virtualmachinepayloadattributes.md:
     id: 13701ce4e0e3
-    last_write_checksum: sha1:70fffb6b568ae24b120eb2772f846099982e7bf9
-    pristine_git_object: b3bb31d7c31f25ae913c3b77ab8fe06165711217
+    last_write_checksum: sha1:38cb678e9f4220892bea8e221b037b156e4d9f40
+    pristine_git_object: 424b87a09f59b70e74f7ac27c51630c34a7ad1e5
   docs/models/virtualmachinepayloadbilling.md:
     id: c4dab557e4f9
     last_write_checksum: sha1:ef0a5e6dd7cec6fb909625b8d68122355796377d
@@ -3868,6 +3904,10 @@ trackedFiles:
     id: 93994c21c7b4
     last_write_checksum: sha1:0400fabb6d96e9cf5a65b9a5920312a379c40287
     pristine_git_object: f968eb26adceb052a94b45ce9dd51a35102944b7
+  docs/sdks/marketplaceapps/README.md:
+    id: e1c4794ffc4b
+    last_write_checksum: sha1:40d9c040d67800de1fb0b54cb197d16aedf60314
+    pristine_git_object: 348706a8a6bbad99adb896673220e5e4bea0e388
   docs/sdks/members/README.md:
     id: efb92d440525
     last_write_checksum: sha1:995e151541f1244f26568941418d0993fbbb67a3
@@ -3990,12 +4030,12 @@ trackedFiles:
     pristine_git_object: 249e5d9837dbad499fc14718cebf96fd4875a9e8
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:eaf9dcdb776783b1eaa70857a0472ad052841137
-    pristine_git_object: d65921e3cfbb312e7fabc9fa36e3e14638a46000
+    last_write_checksum: sha1:33b4fc9fab48ff19b2fb6354dcd1b8efc2fb369d
+    pristine_git_object: 7997f2359725f6b1c1d48fa6295db7475b783d6f
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:b3747e894b7f96909ce9d947dde2dd2b73c707f3
-    pristine_git_object: 5700ca26e686c88eac70222e7b83ee4ec4fff398
+    last_write_checksum: sha1:de685fbc945e80b8fec9c324304facda640d522f
+    pristine_git_object: b3a8723fad8ce486108f0016b4b2b0e4d2c00073
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:9bb7b3807363b77f27dbdb87d6d10e9605f723d6
@@ -4188,6 +4228,14 @@ trackedFiles:
     id: 0ce3c4f23c74
     last_write_checksum: sha1:b65ca1928ed98bf3594b3d8c66f07d1bc6237883
     pristine_git_object: 02ddb2d953000906d4ee8a60685d87180c8268ba
+  src/funcs/marketplaceAppsGetMarketplaceApp.ts:
+    id: 59c047c25ed8
+    last_write_checksum: sha1:a3521113f3379d5aa021d872272d93d858feaac2
+    pristine_git_object: 0ed39f7bd3b9e3bce480fffdd5506af98b50ed8e
+  src/funcs/marketplaceAppsListMarketplaceApps.ts:
+    id: 69225e8e2d25
+    last_write_checksum: sha1:085ebcc7ea8f5e102792f41c55b6e074e2adcf1a
+    pristine_git_object: 801f24e4f853ac7bc06a3384af598322a6a995f3
   src/funcs/objectStorageDeleteStorageAccessKeysUsername.ts:
     id: 33fe2cf34a6e
     last_write_checksum: sha1:ccc4d15a37385e74dde634a4812bfe94f353d55c
@@ -4702,8 +4750,8 @@ trackedFiles:
     pristine_git_object: 0aebd8b0a4867e35cb3348fc52921c3c0b4725b7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:9e1b34c22a69f1c2038ceaacae2c63b647d0fb17
-    pristine_git_object: 3d05f0d7806f3c783dbacd170ebae94dfcf9bd4b
+    last_write_checksum: sha1:dc5f4a7921a9773bb3df4cee95b699d2fe1b450b
+    pristine_git_object: c1a4947fc5c95506bf0f2f606e2aa56f873101f1
   src/lib/encodings.ts:
     id: 3bd8ead98afd
     last_write_checksum: sha1:50d9b187dcfc3cca8d3bbd9fe074f865d715d2b0
@@ -4778,8 +4826,8 @@ trackedFiles:
     pristine_git_object: 0955a573c2ce989d63c737410ab8cc28706d9f74
   src/mcp-server/mcp-server.ts:
     id: aabbc4ab07c1
-    last_write_checksum: sha1:b69984af4b8e9f84aacf499efb4aa7d48ff05411
-    pristine_git_object: 39d99049cd88d7222e38aaeda4fe463ae4a1fef4
+    last_write_checksum: sha1:c9db643e6c3a4812d4b27547383a655eaad57319
+    pristine_git_object: b2b270db5e508bf8a098ef764926bbc56b9b0007
   src/mcp-server/prompts.ts:
     id: 26f3d73cbf31
     last_write_checksum: sha1:3e8d60ab7f8078d83fa9528f2e831050c1fd119c
@@ -4794,8 +4842,8 @@ trackedFiles:
     pristine_git_object: c25696d4c4f70e081fa5d87ad6891874c509a577
   src/mcp-server/server.ts:
     id: 2784dd48e82a
-    last_write_checksum: sha1:2bfdd934a614497add55e1a34b2e8df3c4259aae
-    pristine_git_object: ac3de4e1416c053e2a6bbdf1284b86b2970ef4e7
+    last_write_checksum: sha1:0534271a309d253a37d31aa66012789db2a7398f
+    pristine_git_object: aedca82838a151f4710501bee4aa1e8d1b657804
   src/mcp-server/shared.ts:
     id: 074e80d4be1e
     last_write_checksum: sha1:d89576cea2bef3856b7fc3e65b868875528be042
@@ -4992,6 +5040,14 @@ trackedFiles:
     id: fd65738cec56
     last_write_checksum: sha1:69e20ccd89a9657b74f50307be925ade83f9984e
     pristine_git_object: 233460e38a636f9cb98f8b3dc06cc90f981bbf91
+  src/mcp-server/tools/marketplaceAppsGetMarketplaceApp.ts:
+    id: eae43272973b
+    last_write_checksum: sha1:00dcfde570b38521b23c0acc934f4411fb644a48
+    pristine_git_object: fdec71cba0d4cc773a55d686b14542e31a8f99e9
+  src/mcp-server/tools/marketplaceAppsListMarketplaceApps.ts:
+    id: a8c8f84df2fb
+    last_write_checksum: sha1:9ffec66df4b74dcbeb1ff6db3e9ac1867d98e489
+    pristine_git_object: b7074ba618c927a30643929cee65d427aea4e61b
   src/mcp-server/tools/objectStorageDeleteStorageAccessKeysUsername.ts:
     id: 6e376def22ad
     last_write_checksum: sha1:e2b6ab02668a21ffc25aaa25dca9d6dfd2d379b4
@@ -5658,8 +5714,8 @@ trackedFiles:
     pristine_git_object: 7b5e948dec27119474be26eab2ac84829f816fc3
   src/models/index.ts:
     id: f93644b0f37e
-    last_write_checksum: sha1:4111cb36ac813d8474c7cbdcd88ce3311688bb84
-    pristine_git_object: e19950c9089d85a3d12da685b024014863d79d52
+    last_write_checksum: sha1:8dfeca12a39704cab5b9a0b771b769d405fa21e4
+    pristine_git_object: 2b7d49612050767b57d737a8a891ae93ebbb6b16
   src/models/ipaddress.ts:
     id: b0e9d5e076cc
     last_write_checksum: sha1:e154a4a1550ae03ff0526f88d8662653edacfb95
@@ -5724,6 +5780,18 @@ trackedFiles:
     id: c2d03b89b4fd
     last_write_checksum: sha1:958eda4fbcc851e1ef71ce7521acb6efb207ee5c
     pristine_git_object: f487f25c8fd7df7f92262c0451808097596cfac9
+  src/models/marketplaceapp.ts:
+    id: df92889e625e
+    last_write_checksum: sha1:b101ea9782aa401aa9d0f12bcde2451cdf98d639
+    pristine_git_object: 315f0e7581762bbb48df525ed3f646b5cc79fe0b
+  src/models/marketplaceappdata.ts:
+    id: a3cfa37543e6
+    last_write_checksum: sha1:533ac96583fda6b76d1ad310bb981359b73f676c
+    pristine_git_object: 39be0b3973017c3bacd12d7706256bfb4917bafa
+  src/models/marketplaceapps.ts:
+    id: 87565e54b011
+    last_write_checksum: sha1:6c4345db1e52ae48a93325b6728d7f1eee7b730e
+    pristine_git_object: c284f62b77c9f88e284691df977d5477b82ae1d0
   src/models/membership.ts:
     id: c8003e947a48
     last_write_checksum: sha1:6c8bde5e8f58d3d1307bf6072409be6ede5dc925
@@ -5972,6 +6040,10 @@ trackedFiles:
     id: 3ddd73e8cc4c
     last_write_checksum: sha1:775138fe4bab2ffb783c806a45a1323e62a3dd91
     pristine_git_object: 2b0138a4bd30cf8d61199da65519a62fb1c19f13
+  src/models/operations/getmarketplaceapp.ts:
+    id: 3d5a9a933c18
+    last_write_checksum: sha1:d381fa18677e4ac16a55f32cea5ced11d52c74a5
+    pristine_git_object: 8644657e8254e66bde9ada6f26e722104edeab91
   src/models/operations/getplan.ts:
     id: 7006c58f6aae
     last_write_checksum: sha1:daaae6e9f940d55f4f575a1606a3d3aec62b2ce9
@@ -6158,8 +6230,8 @@ trackedFiles:
     pristine_git_object: 474be6e9f8901ba59c4c60032f79a832b51c7f06
   src/models/operations/index.ts:
     id: 0d9ffaf774d2
-    last_write_checksum: sha1:d0899eaebbb382ac41b54367e49d964e8116a427
-    pristine_git_object: 79096e2e7b2fb23105d5769f63e7792e56bef9d7
+    last_write_checksum: sha1:7a48b40b5d620ca194cadf83460fb95c8cd4c5f1
+    pristine_git_object: 508d87ecd88d8dfca553657deabf6c2d1c40d9a5
   src/models/operations/indexvirtualmachine.ts:
     id: d34148c8ec5f
     last_write_checksum: sha1:04295835b41e3e9aea22cb7e8e6be15b993418f4
@@ -6554,8 +6626,8 @@ trackedFiles:
     pristine_git_object: e4fa2885c86a878849dce7078ff3829e0dbffb7d
   src/models/virtualmachineattributes.ts:
     id: 50994fcdfd7c
-    last_write_checksum: sha1:e886a9d83f9c5fe4aac600189e56cbfbaa8681d3
-    pristine_git_object: 096bf069d1f5b103260741442156e3be02f67b93
+    last_write_checksum: sha1:7db5ff59081cd51ad6bf9ef0375e8105fd9a9180
+    pristine_git_object: ad76a81714b9049018de5e0eb93be130d1be63e8
   src/models/virtualmachinebackup.ts:
     id: 8e5dbed657a0
     last_write_checksum: sha1:eab6641cfd2a6e1642c21dbdd1ab5c8e85f91d37
@@ -6590,8 +6662,8 @@ trackedFiles:
     pristine_git_object: 0c93c52af7db83ddeefd5023f8298fb66fbba033
   src/models/virtualmachinepayload.ts:
     id: 64a447fc4c60
-    last_write_checksum: sha1:fec393855fd27147cf40e6ff34afed9601f6a60d
-    pristine_git_object: 4f93e1b3713a645ed2a7dcffe41a006a8cda59da
+    last_write_checksum: sha1:a24ee6611c10220bca09502af5c54ee1c0034eb9
+    pristine_git_object: 76928eebe9f5c20f72c43281f629cc16be3e42a1
   src/models/virtualmachineplans.ts:
     id: e97f2cade30a
     last_write_checksum: sha1:ff940867de0ceef0bf1877f3ec6265347a95470d
@@ -6704,6 +6776,10 @@ trackedFiles:
     id: 6bddb41f1a10
     last_write_checksum: sha1:6ff259d54d2630b025204f19b277ed47329f0b4a
     pristine_git_object: 409d2450a7d7ee1b3585b3c44f38e59dc427910d
+  src/sdk/marketplaceapps.ts:
+    id: 93ac7288f599
+    last_write_checksum: sha1:fbd6541642903f787c0a1b83cf1c89fdb116dd76
+    pristine_git_object: 4d56b89b9323ad4bc2fec82b086ec84efee8916f
   src/sdk/members.ts:
     id: d13d6204fca3
     last_write_checksum: sha1:873d775247c9875f3ddbd5183bb1066eaf7f81ae
@@ -6746,8 +6822,8 @@ trackedFiles:
     pristine_git_object: d273e59a718d2186c44dcbbcff7e74e342b81a8c
   src/sdk/sdk.ts:
     id: 784571af2f69
-    last_write_checksum: sha1:64ad8934f1db0c5bcb3e8f5971eba2b63d3e90fa
-    pristine_git_object: e06029f821f6b8b5bc3de9f8454f5645131c67ec
+    last_write_checksum: sha1:220aea758565a7a1877cd5d4079379d91214301a
+    pristine_git_object: 037ba39f1259e3f1ae3b1bfedb1e490883fe957f
   src/sdk/servers.ts:
     id: 6b55195105a0
     last_write_checksum: sha1:949fc5302e4685fdf908e7666d4238fa5af59f02
@@ -9377,8 +9453,22 @@ examples:
           application/vnd.api+json: {"errors": [{"code": "USER_AUTHORIZATION_ERROR", "status": "forbidden", "title": "User Authorization Error", "detail": "You are not authorized to perform this action.", "meta": {}}]}
         "500":
           application/vnd.api+json: {"errors": [{"code": "USER_AUTHORIZATION_ERROR", "status": "forbidden", "title": "User Authorization Error", "detail": "You are not authorized to perform this action.", "meta": {}}]}
+  list-marketplace-apps:
+    Success:
+      responses:
+        "200":
+          application/vnd.api+json: {"data": [{"id": "mkapp_x1kg1DegdvZE5", "type": "marketplace_apps", "attributes": {"name": "OpenClaw", "slug": "openclaw", "description": "Personal AI agent gateway with messaging integrations", "short_description": "Personal AI agent gateway", "category": "ai_agents", "version": "2026.7.20", "system_requirements": {"vcpus": 1, "memory_in_gb": 2, "storage_in_gb": 10, "gpu": false}, "deployment_strategy": "user_data", "default_operating_system": "ubuntu_24_04_x64_lts", "compatible_plans": ["vm.small", "vm.medium"], "access_instructions": "Connect with: ssh -L 18789:localhost:18789 ubuntu@{{PUBLIC_IPV4}}", "upstream_url": "https://github.com/openclaw/openclaw", "documentation_url": null, "logo_url": null, "created_at": "2026-07-20T12:00:00+00:00"}}]}
+  get-marketplace-app:
+    Success:
+      parameters:
+        path:
+          id: "openclaw"
+      responses:
+        "200":
+          application/vnd.api+json: {"data": {"id": "mkapp_x1kg1DegdvZE5", "type": "marketplace_apps", "attributes": {"name": "OpenClaw", "slug": "openclaw", "description": "Personal AI agent gateway with messaging integrations", "short_description": "Personal AI agent gateway", "category": "ai_agents", "version": "2026.7.20", "system_requirements": {"vcpus": 1, "memory_in_gb": 2, "storage_in_gb": 10, "gpu": false}, "deployment_strategy": "user_data", "default_operating_system": "ubuntu_24_04_x64_lts", "compatible_plans": ["vm.small", "vm.medium"], "access_instructions": "Connect with: ssh -L 18789:localhost:18789 ubuntu@{{PUBLIC_IPV4}}", "upstream_url": "https://github.com/openclaw/openclaw", "documentation_url": null, "logo_url": null, "created_at": "2026-07-20T12:00:00+00:00"}}}
 examplesVersion: 1.0.2
 generatedTests: {}
+releaseNotes: "## Typescript SDK Changes:\n* `latitudesh.marketplaceApps.listMarketplaceApps()`: **Added**\n* `latitudesh.marketplaceApps.getMarketplaceApp()`: **Added**\n* `latitudesh.virtualMachines.create()`: \n  *  `request.data.attributes.marketplaceApp` **Added**\n  *  `response.data.attributes.marketplaceApp` **Added**\n* `latitudesh.virtualMachines.list()`:  `response.data[].attributes.marketplaceApp` **Added**\n* `latitudesh.virtualMachines.get()`:  `response.data.attributes.marketplaceApp` **Added**\n* `latitudesh.virtualMachines.updateVirtualMachine()`:  `response.data.attributes.marketplaceApp` **Added**\n"
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json

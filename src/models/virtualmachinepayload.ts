@@ -57,6 +57,10 @@ export type VirtualMachinePayloadAttributes = {
    */
   userData?: number | string | null | undefined;
   /**
+   * A marketplace app reference (slug, e.g. "openclaw", or encoded id_hash "mkapp_xxx") to preinstall on the VM via cloud-init. Cannot be combined with operating_system; the app defines its own.
+   */
+  marketplaceApp?: string | null | undefined;
+  /**
    * Array of tag IDs to assign to the VM.
    */
   tags?: Array<string> | null | undefined;
@@ -135,6 +139,7 @@ export const VirtualMachinePayloadAttributes$inboundSchema: z.ZodType<
   project: z.string().default("my-project"),
   operating_system: z.nullable(z.string()).optional(),
   user_data: z.nullable(z.union([z.number().int(), z.string()])).optional(),
+  marketplace_app: z.nullable(z.string()).optional(),
   tags: z.nullable(z.array(z.string())).optional(),
   site: z.nullable(z.string().default("DAL")),
 }).transform((v) => {
@@ -142,6 +147,7 @@ export const VirtualMachinePayloadAttributes$inboundSchema: z.ZodType<
     "ssh_keys": "sshKeys",
     "operating_system": "operatingSystem",
     "user_data": "userData",
+    "marketplace_app": "marketplaceApp",
   });
 });
 /** @internal */
@@ -153,6 +159,7 @@ export type VirtualMachinePayloadAttributes$Outbound = {
   project: string;
   operating_system?: string | null | undefined;
   user_data?: number | string | null | undefined;
+  marketplace_app?: string | null | undefined;
   tags?: Array<string> | null | undefined;
   site: string | null;
 };
@@ -170,6 +177,7 @@ export const VirtualMachinePayloadAttributes$outboundSchema: z.ZodType<
   project: z.string().default("my-project"),
   operatingSystem: z.nullable(z.string()).optional(),
   userData: z.nullable(z.union([z.number().int(), z.string()])).optional(),
+  marketplaceApp: z.nullable(z.string()).optional(),
   tags: z.nullable(z.array(z.string())).optional(),
   site: z.nullable(z.string().default("DAL")),
 }).transform((v) => {
@@ -177,6 +185,7 @@ export const VirtualMachinePayloadAttributes$outboundSchema: z.ZodType<
     sshKeys: "ssh_keys",
     operatingSystem: "operating_system",
     userData: "user_data",
+    marketplaceApp: "marketplace_app",
   });
 });
 

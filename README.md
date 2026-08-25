@@ -286,6 +286,11 @@ run();
 * [updateKubernetesCluster](docs/sdks/kubernetesclusters/README.md#updatekubernetescluster) - Update Kubernetes Cluster
 * [getKubernetesClusterKubeconfig](docs/sdks/kubernetesclusters/README.md#getkubernetesclusterkubeconfig) - Get Kubernetes Cluster Kubeconfig
 
+### [MarketplaceApps](docs/sdks/marketplaceapps/README.md)
+
+* [listMarketplaceApps](docs/sdks/marketplaceapps/README.md#listmarketplaceapps) - List marketplace apps
+* [getMarketplaceApp](docs/sdks/marketplaceapps/README.md#getmarketplaceapp) - Retrieve a marketplace app
+
 ### [ObjectStorage](docs/sdks/objectstorage/README.md)
 
 * [getStorageUsage](docs/sdks/objectstorage/README.md#getstorageusage) - List storage usage
@@ -546,6 +551,8 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`kubernetesClustersListKubernetesAvailableVersions`](docs/sdks/kubernetesclusters/README.md#listkubernetesavailableversions) - List Available Kubernetes Versions
 - [`kubernetesClustersListKubernetesClusters`](docs/sdks/kubernetesclusters/README.md#listkubernetesclusters) - List Kubernetes Clusters
 - [`kubernetesClustersUpdateKubernetesCluster`](docs/sdks/kubernetesclusters/README.md#updatekubernetescluster) - Update Kubernetes Cluster
+- [`marketplaceAppsGetMarketplaceApp`](docs/sdks/marketplaceapps/README.md#getmarketplaceapp) - Retrieve a marketplace app
+- [`marketplaceAppsListMarketplaceApps`](docs/sdks/marketplaceapps/README.md#listmarketplaceapps) - List marketplace apps
 - [`objectStorageDeleteStorageAccessKeysUsername`](docs/sdks/objectstorage/README.md#deletestorageaccesskeysusername) - Delete access key
 - [`objectStorageDeleteStorageBucketLifecycleRule`](docs/sdks/objectstorage/README.md#deletestoragebucketlifecyclerule) - Delete lifecycle rule
 - [`objectStorageDeleteStorageBuckets`](docs/sdks/objectstorage/README.md#deletestoragebuckets) - Delete bucket
@@ -841,7 +848,7 @@ run();
 
 
 **Inherit from [`LatitudeshError`](./src/models/errors/latitudesherror.ts)**:
-* [`ErrorObject`](./src/models/errors/errorobject.ts): Applicable to 49 of 170 methods.*
+* [`ErrorObject`](./src/models/errors/errorobject.ts): Applicable to 50 of 172 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>
