@@ -32,13 +32,13 @@ import { Result } from "../types/fp.js";
  * @remarks
  * Updates an existing lifecycle rule for an object storage bucket.
  */
-export function objectStoragePutStorageBucketLifecycleRule(
+export function objectStoragePatchStorageBucketLifecycleRule(
   client: LatitudeshCore,
-  request: operations.PutStorageBucketLifecycleRuleRequest,
+  request: operations.PatchStorageBucketLifecycleRuleRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.PutStorageBucketLifecycleRuleResponse,
+    operations.PatchStorageBucketLifecycleRuleResponse,
     | errors.ErrorObject
     | LatitudeshError
     | ResponseValidationError
@@ -59,12 +59,12 @@ export function objectStoragePutStorageBucketLifecycleRule(
 
 async function $do(
   client: LatitudeshCore,
-  request: operations.PutStorageBucketLifecycleRuleRequest,
+  request: operations.PatchStorageBucketLifecycleRuleRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.PutStorageBucketLifecycleRuleResponse,
+      operations.PatchStorageBucketLifecycleRuleResponse,
       | errors.ErrorObject
       | LatitudeshError
       | ResponseValidationError
@@ -81,7 +81,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations.PutStorageBucketLifecycleRuleRequest$outboundSchema.parse(
+      operations.PatchStorageBucketLifecycleRuleRequest$outboundSchema.parse(
         value,
       ),
     "Input validation failed",
@@ -118,7 +118,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "put-storage-bucket-lifecycle-rule",
+    operationID: "patch-storage-bucket-lifecycle-rule",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -132,7 +132,7 @@ async function $do(
 
   const requestRes = client._createRequest(context, {
     security: requestSecurity,
-    method: "PUT",
+    method: "PATCH",
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
@@ -162,7 +162,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.PutStorageBucketLifecycleRuleResponse,
+    operations.PatchStorageBucketLifecycleRuleResponse,
     | errors.ErrorObject
     | LatitudeshError
     | ResponseValidationError
@@ -175,7 +175,7 @@ async function $do(
   >(
     M.json(
       200,
-      operations.PutStorageBucketLifecycleRuleResponse$inboundSchema,
+      operations.PatchStorageBucketLifecycleRuleResponse$inboundSchema,
       { ctype: "application/vnd.api+json" },
     ),
     M.jsonErr([403, 404, 422], errors.ErrorObject$inboundSchema, {

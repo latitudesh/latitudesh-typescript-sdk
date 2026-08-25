@@ -300,8 +300,8 @@ run();
 * [getStorageBucketLifecycleRules](docs/sdks/objectstorage/README.md#getstoragebucketlifecyclerules) - List lifecycle rules
 * [postStorageBucketLifecycleRules](docs/sdks/objectstorage/README.md#poststoragebucketlifecyclerules) - Create lifecycle rule
 * [getStorageBucketLifecycleRule](docs/sdks/objectstorage/README.md#getstoragebucketlifecyclerule) - Retrieve lifecycle rule
-* [putStorageBucketLifecycleRule](docs/sdks/objectstorage/README.md#putstoragebucketlifecyclerule) - Update lifecycle rule
 * [deleteStorageBucketLifecycleRule](docs/sdks/objectstorage/README.md#deletestoragebucketlifecyclerule) - Delete lifecycle rule
+* [patchStorageBucketLifecycleRule](docs/sdks/objectstorage/README.md#patchstoragebucketlifecyclerule) - Update lifecycle rule
 * [getStorageBucketMetrics](docs/sdks/objectstorage/README.md#getstoragebucketmetrics) - Retrieve bucket metrics
 
 ### [OperatingSystems](docs/sdks/operatingsystems/README.md)
@@ -557,10 +557,10 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`objectStorageGetStorageBucketMetrics`](docs/sdks/objectstorage/README.md#getstoragebucketmetrics) - Retrieve bucket metrics
 - [`objectStorageGetStorageBuckets`](docs/sdks/objectstorage/README.md#getstoragebuckets) - List buckets
 - [`objectStorageGetStorageUsage`](docs/sdks/objectstorage/README.md#getstorageusage) - List storage usage
+- [`objectStoragePatchStorageBucketLifecycleRule`](docs/sdks/objectstorage/README.md#patchstoragebucketlifecyclerule) - Update lifecycle rule
 - [`objectStoragePostStorageAccessKeys`](docs/sdks/objectstorage/README.md#poststorageaccesskeys) - Create access key
 - [`objectStoragePostStorageBucketLifecycleRules`](docs/sdks/objectstorage/README.md#poststoragebucketlifecyclerules) - Create lifecycle rule
 - [`objectStoragePostStorageBuckets`](docs/sdks/objectstorage/README.md#poststoragebuckets) - Create bucket
-- [`objectStoragePutStorageBucketLifecycleRule`](docs/sdks/objectstorage/README.md#putstoragebucketlifecyclerule) - Update lifecycle rule
 - [`operatingSystemsListPlans`](docs/sdks/operatingsystems/README.md#listplans) - List operating systems
 - [`plansGet`](docs/sdks/plans/README.md#get) - Retrieve plan
 - [`plansGetBandwidth`](docs/sdks/plans/README.md#getbandwidth) - List bandwidth plans

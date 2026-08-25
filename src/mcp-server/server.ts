@@ -71,10 +71,10 @@ import { tool$objectStorageGetStorageBucketLifecycleRules } from "./tools/object
 import { tool$objectStorageGetStorageBucketMetrics } from "./tools/objectStorageGetStorageBucketMetrics.js";
 import { tool$objectStorageGetStorageBuckets } from "./tools/objectStorageGetStorageBuckets.js";
 import { tool$objectStorageGetStorageUsage } from "./tools/objectStorageGetStorageUsage.js";
+import { tool$objectStoragePatchStorageBucketLifecycleRule } from "./tools/objectStoragePatchStorageBucketLifecycleRule.js";
 import { tool$objectStoragePostStorageAccessKeys } from "./tools/objectStoragePostStorageAccessKeys.js";
 import { tool$objectStoragePostStorageBucketLifecycleRules } from "./tools/objectStoragePostStorageBucketLifecycleRules.js";
 import { tool$objectStoragePostStorageBuckets } from "./tools/objectStoragePostStorageBuckets.js";
-import { tool$objectStoragePutStorageBucketLifecycleRule } from "./tools/objectStoragePutStorageBucketLifecycleRule.js";
 import { tool$operatingSystemsListPlans } from "./tools/operatingSystemsListPlans.js";
 import { tool$plansGet } from "./tools/plansGet.js";
 import { tool$plansGetBandwidth } from "./tools/plansGetBandwidth.js";
@@ -195,7 +195,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Latitudesh",
-    version: "0.8.14",
+    version: "0.8.15",
   });
 
   const client = new LatitudeshCore({
@@ -305,8 +305,8 @@ export function createMCPServer(deps: {
   tool(tool$objectStorageGetStorageBucketLifecycleRules);
   tool(tool$objectStoragePostStorageBucketLifecycleRules);
   tool(tool$objectStorageGetStorageBucketLifecycleRule);
-  tool(tool$objectStoragePutStorageBucketLifecycleRule);
   tool(tool$objectStorageDeleteStorageBucketLifecycleRule);
+  tool(tool$objectStoragePatchStorageBucketLifecycleRule);
   tool(tool$objectStorageGetStorageBucketMetrics);
   tool(tool$userDataGetProjectUsersData);
   tool(tool$userDataGetProjectUserData);
