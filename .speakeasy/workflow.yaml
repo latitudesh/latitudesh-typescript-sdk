@@ -3,7 +3,7 @@ speakeasyVersion: latest
 sources:
     Latitudesh-OAS:
         inputs:
-            - location: registry.speakeasyapi.dev/latitude/latitude/latitudesh-oas:main
+            - location: registry.speakeasyapi.dev/latitude/latitude/latitudesh-oas@sha256:fcf9998c0ad491e3876f04f5b2480c95f5a4f8e98bac2906a98f94ebe59d0d8a
         registry:
             location: registry.speakeasyapi.dev/latitude/latitude/latitudesh-oas
 targets:
