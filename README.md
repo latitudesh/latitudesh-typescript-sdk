@@ -232,6 +232,7 @@ run();
 * [getStorageVolume](docs/sdks/blockstorage/README.md#getstoragevolume) - Retrieve volume
 * [deleteStorageVolumes](docs/sdks/blockstorage/README.md#deletestoragevolumes) - Delete volume
 * [postStorageVolumesMount](docs/sdks/blockstorage/README.md#poststoragevolumesmount) - Mount volume
+* [postStorageVolumesMap](docs/sdks/blockstorage/README.md#poststoragevolumesmap) - Map volume to server
 
 ### [ElasticIps](docs/sdks/elasticips/README.md)
 
@@ -518,6 +519,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`blockStorageGetStorageVolume`](docs/sdks/blockstorage/README.md#getstoragevolume) - Retrieve volume
 - [`blockStorageGetStorageVolumes`](docs/sdks/blockstorage/README.md#getstoragevolumes) - List volumes
 - [`blockStoragePostStorageVolumes`](docs/sdks/blockstorage/README.md#poststoragevolumes) - Create volume
+- [`blockStoragePostStorageVolumesMap`](docs/sdks/blockstorage/README.md#poststoragevolumesmap) - Map volume to server
 - [`blockStoragePostStorageVolumesMount`](docs/sdks/blockstorage/README.md#poststoragevolumesmount) - Mount volume
 - [`elasticIpsCreateElasticIp`](docs/sdks/elasticips/README.md#createelasticip) - Create an Elastic IP
 - [`elasticIpsCreateElasticIpBgpSession`](docs/sdks/elasticips/README.md#createelasticipbgpsession) - Create a BGP session
@@ -848,7 +850,7 @@ run();
 
 
 **Inherit from [`LatitudeshError`](./src/models/errors/latitudesherror.ts)**:
-* [`ErrorObject`](./src/models/errors/errorobject.ts): Applicable to 50 of 172 methods.*
+* [`ErrorObject`](./src/models/errors/errorobject.ts): Applicable to 50 of 173 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>

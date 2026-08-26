@@ -9,6 +9,7 @@ let value: PostStorageVolumesAttributes2 = {
   project: "<value>",
   name: "<value>",
   region: "<value>",
+  sizeInGb: 923022,
 };
 ```
 
@@ -19,4 +20,4 @@ let value: PostStorageVolumesAttributes2 = {
 | `project`                                          | *string*                                           | :heavy_check_mark:                                 | Project ID or slug                                 |
 | `name`                                             | *string*                                           | :heavy_check_mark:                                 | Volume name                                        |
 | `region`                                           | *string*                                           | :heavy_check_mark:                                 | Region (site) slug where the volume is provisioned |
-| `sizeInGb`                                         | *number*                                           | :heavy_minus_sign:                                 | Size in GB (not required, default is 1500)         |
+| `sizeInGb`                                         | *number*                                           | :heavy_check_mark:                                 | Size in GB                                         |

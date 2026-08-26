@@ -6,6 +6,7 @@ import { blockStorageDeleteStorageVolumes } from "../funcs/blockStorageDeleteSto
 import { blockStorageGetStorageVolume } from "../funcs/blockStorageGetStorageVolume.js";
 import { blockStorageGetStorageVolumes } from "../funcs/blockStorageGetStorageVolumes.js";
 import { blockStoragePostStorageVolumes } from "../funcs/blockStoragePostStorageVolumes.js";
+import { blockStoragePostStorageVolumesMap } from "../funcs/blockStoragePostStorageVolumesMap.js";
 import { blockStoragePostStorageVolumesMount } from "../funcs/blockStoragePostStorageVolumesMount.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as operations from "../models/operations/index.js";
@@ -91,6 +92,23 @@ export class BlockStorage extends ClientSDK {
     options?: RequestOptions,
   ): Promise<void> {
     return unwrapAsync(blockStoragePostStorageVolumesMount(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Map volume to server
+   *
+   * @remarks
+   * Maps a high performance volume to a server over NVMe-TCP.
+   */
+  async postStorageVolumesMap(
+    request: operations.PostStorageVolumesMapRequest,
+    options?: RequestOptions,
+  ): Promise<operations.PostStorageVolumesMapResponse> {
+    return unwrapAsync(blockStoragePostStorageVolumesMap(
       this,
       request,
       options,

@@ -106,11 +106,11 @@ export type UpdateServerDeployConfigAttributes2 = {
    */
   persistentNetboot?: boolean | undefined;
   /**
-   * Set to 'true' to attach the server onto a public network. Requires 'public_network_id'. Available only when the public network feature is enabled for your team.
+   * Set to 'true' to attach the server onto a public network. Requires 'public_network_id'. Available only when the public network feature is enabled for the server's location.
    */
   publicNetwork?: boolean | null | undefined;
   /**
-   * ID of a customer public network to attach the server onto. Requires 'public_network' to be 'true'. The public network must belong to the same project and be in the same location as the server, and must have at least one free IP address. This public network configuration is saved to the deploy config and inherited by future reinstalls until changed. Available only when the public network feature is enabled for your team.
+   * ID of a customer public network to attach the server onto. Requires 'public_network' to be 'true'. The public network must belong to the same project and be in the same location as the server, and must have at least one free IP address. This public network configuration is saved to the deploy config and inherited by future reinstalls until changed. Available only when the public network feature is enabled for the server's location.
    */
   publicNetworkId?: string | null | undefined;
 };

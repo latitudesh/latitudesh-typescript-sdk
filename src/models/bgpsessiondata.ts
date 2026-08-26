@@ -76,6 +76,10 @@ export type BgpSessionDataAttributes = {
    */
   statusMessage?: string | null | undefined;
   serverIp?: string | null | undefined;
+  /**
+   * IP address on the other end of the announcing server's /31 — the address you configure as the BGP neighbor when peering. Use it as the neighbor in BIRD or as peerAddress in MetalLB. Null while the session is still pending, or when the address cannot be resolved.
+   */
+  peerAddress?: string | null | undefined;
   asn?: number | null | undefined;
   createdAt?: Date | null | undefined;
   /**
@@ -269,6 +273,7 @@ export const BgpSessionDataAttributes$inboundSchema: z.ZodType<
   status: z.nullable(BgpSessionDataStatus$inboundSchema).optional(),
   status_message: z.nullable(z.string()).optional(),
   server_ip: z.nullable(z.string()).optional(),
+  peer_address: z.nullable(z.string()).optional(),
   asn: z.nullable(z.number().int()).optional(),
   created_at: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
@@ -281,6 +286,7 @@ export const BgpSessionDataAttributes$inboundSchema: z.ZodType<
   return remap$(v, {
     "status_message": "statusMessage",
     "server_ip": "serverIp",
+    "peer_address": "peerAddress",
     "created_at": "createdAt",
   });
 });
@@ -289,6 +295,7 @@ export type BgpSessionDataAttributes$Outbound = {
   status?: string | null | undefined;
   status_message?: string | null | undefined;
   server_ip?: string | null | undefined;
+  peer_address?: string | null | undefined;
   asn?: number | null | undefined;
   created_at?: string | null | undefined;
   server?: BgpSessionDataServer$Outbound | null | undefined;
@@ -304,6 +311,7 @@ export const BgpSessionDataAttributes$outboundSchema: z.ZodType<
   status: z.nullable(BgpSessionDataStatus$outboundSchema).optional(),
   statusMessage: z.nullable(z.string()).optional(),
   serverIp: z.nullable(z.string()).optional(),
+  peerAddress: z.nullable(z.string()).optional(),
   asn: z.nullable(z.number().int()).optional(),
   createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   server: z.nullable(z.lazy(() => BgpSessionDataServer$outboundSchema))
@@ -314,6 +322,7 @@ export const BgpSessionDataAttributes$outboundSchema: z.ZodType<
   return remap$(v, {
     statusMessage: "status_message",
     serverIp: "server_ip",
+    peerAddress: "peer_address",
     createdAt: "created_at",
   });
 });

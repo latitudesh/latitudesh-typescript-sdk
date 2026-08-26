@@ -5,11 +5,11 @@
 ```typescript
 import { FirewallServerType } from "latitudesh-typescript-sdk/models";
 
-let value: FirewallServerType = "firewall_servers";
+let value: FirewallServerType = "firewall_assignments";
 ```
 
 ## Values
 
 ```typescript
-"firewall_servers"
+"firewall_assignments"
 ```

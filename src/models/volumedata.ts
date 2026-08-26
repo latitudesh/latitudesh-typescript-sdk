@@ -30,6 +30,37 @@ export type Initiator = {
   nqn?: string | undefined;
 };
 
+/**
+ * NVMe-TCP block mapping of a high performance volume. Null for volumes that are not mapped to a server.
+ */
+export type Block = {
+  /**
+   * NVMe Qualified Name of the mapped server.
+   */
+  nqn?: string | null | undefined;
+  /**
+   * NVMe namespace ID of the mapping.
+   */
+  nsid?: number | null | undefined;
+  /**
+   * ID of the server the volume is mapped to.
+   */
+  serverId?: string | null | undefined;
+};
+
+export type VolumeDataSite = {
+  id?: string | undefined;
+  name?: string | undefined;
+  slug?: string | undefined;
+  facility?: string | undefined;
+};
+
+export type VolumeDataRegion = {
+  city?: string | null | undefined;
+  country?: string | null | undefined;
+  site?: VolumeDataSite | null | undefined;
+};
+
 export type VolumeDataAttributes = {
   name?: string | undefined;
   sizeInGb?: number | undefined;
@@ -38,17 +69,22 @@ export type VolumeDataAttributes = {
   connectorId?: string | null | undefined;
   initiators?: Array<Initiator> | null | undefined;
   /**
-   * Cephx keyring secret used to connect to the volume. Returned only for dashboard-origin requests; null until the volume is provisioned.
+   * NVMe-TCP block mapping of a high performance volume. Null for volumes that are not mapped to a server.
+   */
+  block?: Block | null | undefined;
+  /**
+   * Keyring secret used to connect to the volume. Returned only for dashboard-origin requests; null until the volume is provisioned.
    */
   keyring?: string | null | undefined;
   /**
-   * Ceph cluster user used to connect to the volume. Returned only for dashboard-origin requests; null until the volume is provisioned.
+   * Cluster user used to connect to the volume. Returned only for dashboard-origin requests; null until the volume is provisioned.
    */
   clusterUser?: string | null | undefined;
   /**
    * Path of the volume inside the cluster. Returned only for dashboard-origin requests; null until the volume is provisioned.
    */
   volumePath?: string | null | undefined;
+  region?: VolumeDataRegion | null | undefined;
   project?: ProjectInclude | undefined;
   team?: TeamInclude | undefined;
 };
@@ -104,6 +140,141 @@ export function initiatorFromJSON(
 }
 
 /** @internal */
+export const Block$inboundSchema: z.ZodType<Block, z.ZodTypeDef, unknown> = z
+  .object({
+    nqn: z.nullable(z.string()).optional(),
+    nsid: z.nullable(z.number().int()).optional(),
+    server_id: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "server_id": "serverId",
+    });
+  });
+/** @internal */
+export type Block$Outbound = {
+  nqn?: string | null | undefined;
+  nsid?: number | null | undefined;
+  server_id?: string | null | undefined;
+};
+
+/** @internal */
+export const Block$outboundSchema: z.ZodType<
+  Block$Outbound,
+  z.ZodTypeDef,
+  Block
+> = z.object({
+  nqn: z.nullable(z.string()).optional(),
+  nsid: z.nullable(z.number().int()).optional(),
+  serverId: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    serverId: "server_id",
+  });
+});
+
+export function blockToJSON(block: Block): string {
+  return JSON.stringify(Block$outboundSchema.parse(block));
+}
+export function blockFromJSON(
+  jsonString: string,
+): SafeParseResult<Block, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Block$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Block' from JSON`,
+  );
+}
+
+/** @internal */
+export const VolumeDataSite$inboundSchema: z.ZodType<
+  VolumeDataSite,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string().optional(),
+  name: z.string().optional(),
+  slug: z.string().optional(),
+  facility: z.string().optional(),
+});
+/** @internal */
+export type VolumeDataSite$Outbound = {
+  id?: string | undefined;
+  name?: string | undefined;
+  slug?: string | undefined;
+  facility?: string | undefined;
+};
+
+/** @internal */
+export const VolumeDataSite$outboundSchema: z.ZodType<
+  VolumeDataSite$Outbound,
+  z.ZodTypeDef,
+  VolumeDataSite
+> = z.object({
+  id: z.string().optional(),
+  name: z.string().optional(),
+  slug: z.string().optional(),
+  facility: z.string().optional(),
+});
+
+export function volumeDataSiteToJSON(volumeDataSite: VolumeDataSite): string {
+  return JSON.stringify(VolumeDataSite$outboundSchema.parse(volumeDataSite));
+}
+export function volumeDataSiteFromJSON(
+  jsonString: string,
+): SafeParseResult<VolumeDataSite, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => VolumeDataSite$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'VolumeDataSite' from JSON`,
+  );
+}
+
+/** @internal */
+export const VolumeDataRegion$inboundSchema: z.ZodType<
+  VolumeDataRegion,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  city: z.nullable(z.string()).optional(),
+  country: z.nullable(z.string()).optional(),
+  site: z.nullable(z.lazy(() => VolumeDataSite$inboundSchema)).optional(),
+});
+/** @internal */
+export type VolumeDataRegion$Outbound = {
+  city?: string | null | undefined;
+  country?: string | null | undefined;
+  site?: VolumeDataSite$Outbound | null | undefined;
+};
+
+/** @internal */
+export const VolumeDataRegion$outboundSchema: z.ZodType<
+  VolumeDataRegion$Outbound,
+  z.ZodTypeDef,
+  VolumeDataRegion
+> = z.object({
+  city: z.nullable(z.string()).optional(),
+  country: z.nullable(z.string()).optional(),
+  site: z.nullable(z.lazy(() => VolumeDataSite$outboundSchema)).optional(),
+});
+
+export function volumeDataRegionToJSON(
+  volumeDataRegion: VolumeDataRegion,
+): string {
+  return JSON.stringify(
+    VolumeDataRegion$outboundSchema.parse(volumeDataRegion),
+  );
+}
+export function volumeDataRegionFromJSON(
+  jsonString: string,
+): SafeParseResult<VolumeDataRegion, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => VolumeDataRegion$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'VolumeDataRegion' from JSON`,
+  );
+}
+
+/** @internal */
 export const VolumeDataAttributes$inboundSchema: z.ZodType<
   VolumeDataAttributes,
   z.ZodTypeDef,
@@ -118,9 +289,11 @@ export const VolumeDataAttributes$inboundSchema: z.ZodType<
   connector_id: z.nullable(z.string()).optional(),
   initiators: z.nullable(z.array(z.lazy(() => Initiator$inboundSchema)))
     .optional(),
+  block: z.nullable(z.lazy(() => Block$inboundSchema)).optional(),
   keyring: z.nullable(z.string()).optional(),
   cluster_user: z.nullable(z.string()).optional(),
   volume_path: z.nullable(z.string()).optional(),
+  region: z.nullable(z.lazy(() => VolumeDataRegion$inboundSchema)).optional(),
   project: ProjectInclude$inboundSchema.optional(),
   team: TeamInclude$inboundSchema.optional(),
 }).transform((v) => {
@@ -141,9 +314,11 @@ export type VolumeDataAttributes$Outbound = {
   namespace_id?: string | null | undefined;
   connector_id?: string | null | undefined;
   initiators?: Array<Initiator$Outbound> | null | undefined;
+  block?: Block$Outbound | null | undefined;
   keyring?: string | null | undefined;
   cluster_user?: string | null | undefined;
   volume_path?: string | null | undefined;
+  region?: VolumeDataRegion$Outbound | null | undefined;
   project?: ProjectInclude$Outbound | undefined;
   team?: TeamInclude$Outbound | undefined;
 };
@@ -161,9 +336,11 @@ export const VolumeDataAttributes$outboundSchema: z.ZodType<
   connectorId: z.nullable(z.string()).optional(),
   initiators: z.nullable(z.array(z.lazy(() => Initiator$outboundSchema)))
     .optional(),
+  block: z.nullable(z.lazy(() => Block$outboundSchema)).optional(),
   keyring: z.nullable(z.string()).optional(),
   clusterUser: z.nullable(z.string()).optional(),
   volumePath: z.nullable(z.string()).optional(),
+  region: z.nullable(z.lazy(() => VolumeDataRegion$outboundSchema)).optional(),
   project: ProjectInclude$outboundSchema.optional(),
   team: TeamInclude$outboundSchema.optional(),
 }).transform((v) => {
