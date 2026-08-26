@@ -31,9 +31,9 @@ export type PostStorageVolumesAttributes2 = {
    */
   region: string;
   /**
-   * Size in GB (not required, default is 1500)
+   * Size in GB
    */
-  sizeInGb?: number | undefined;
+  sizeInGb: number;
 };
 
 export type PostStorageVolumesData2 = {
@@ -70,7 +70,7 @@ export const PostStorageVolumesAttributes2$inboundSchema: z.ZodType<
   project: z.string(),
   name: z.string(),
   region: z.string(),
-  size_in_gb: z.number().int().default(1500),
+  size_in_gb: z.number().int(),
 }).transform((v) => {
   return remap$(v, {
     "size_in_gb": "sizeInGb",
@@ -93,7 +93,7 @@ export const PostStorageVolumesAttributes2$outboundSchema: z.ZodType<
   project: z.string(),
   name: z.string(),
   region: z.string(),
-  sizeInGb: z.number().int().default(1500),
+  sizeInGb: z.number().int(),
 }).transform((v) => {
   return remap$(v, {
     sizeInGb: "size_in_gb",

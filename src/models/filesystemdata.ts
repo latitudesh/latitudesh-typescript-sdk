@@ -38,11 +38,11 @@ export type FilesystemDataAttributes = {
   filesystemStorageClass?: FilesystemStorageClass | null | undefined;
   createdAt?: Date | null | undefined;
   /**
-   * Cephx keyring secret used to mount the filesystem. Returned only for dashboard-origin requests; null until the filesystem is provisioned.
+   * Keyring secret used to mount the filesystem. Returned only for dashboard-origin requests; null until the filesystem is provisioned.
    */
   keyring?: string | null | undefined;
   /**
-   * Ceph cluster user used to mount the filesystem. Returned only for dashboard-origin requests; null until the filesystem is provisioned.
+   * Cluster user used to mount the filesystem. Returned only for dashboard-origin requests; null until the filesystem is provisioned.
    */
   clusterUser?: string | null | undefined;
   /**

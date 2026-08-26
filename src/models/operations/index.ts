@@ -129,6 +129,7 @@ export * from "./poststoragebucketlifecyclerules.js";
 export * from "./poststoragebuckets.js";
 export * from "./poststoragefilesystems.js";
 export * from "./poststoragevolumes.js";
+export * from "./poststoragevolumesmap.js";
 export * from "./poststoragevolumesmount.js";
 export * from "./postteam.js";
 export * from "./postteammembers.js";

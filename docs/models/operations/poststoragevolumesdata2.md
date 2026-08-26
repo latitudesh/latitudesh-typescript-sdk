@@ -11,6 +11,7 @@ let value: PostStorageVolumesData2 = {
     project: "<value>",
     name: "<value>",
     region: "<value>",
+    sizeInGb: 281954,
   },
 };
 ```

@@ -21,6 +21,10 @@ export type VirtualMachineNetworkAttachmentCreatePayloadAttributes = {
    * VLAN id_hash to attach (e.g. vlan_abc123).
    */
   virtualNetworkId: string;
+  /**
+   * Optional static IPv4 address with prefix (e.g. 10.0.0.5/24) for the NIC inside the guest. When omitted the NIC is configured for DHCP without a default route. Applying the regenerated network configuration requires running `sudo cloud-init clean --logs --reboot` inside the guest. Warning: that command makes cloud-init treat the next boot as a first boot — it re-runs the instance user-data (e.g. runcmd scripts) and regenerates the SSH host keys, so SSH clients will see a host-key changed warning.
+   */
+  address?: string | undefined;
 };
 
 export type VirtualMachineNetworkAttachmentCreatePayloadData = {
@@ -49,6 +53,7 @@ export const VirtualMachineNetworkAttachmentCreatePayloadAttributes$inboundSchem
     unknown
   > = z.object({
     virtual_network_id: z.string(),
+    address: z.string().optional(),
   }).transform((v) => {
     return remap$(v, {
       "virtual_network_id": "virtualNetworkId",
@@ -57,6 +62,7 @@ export const VirtualMachineNetworkAttachmentCreatePayloadAttributes$inboundSchem
 /** @internal */
 export type VirtualMachineNetworkAttachmentCreatePayloadAttributes$Outbound = {
   virtual_network_id: string;
+  address?: string | undefined;
 };
 
 /** @internal */
@@ -67,6 +73,7 @@ export const VirtualMachineNetworkAttachmentCreatePayloadAttributes$outboundSche
     VirtualMachineNetworkAttachmentCreatePayloadAttributes
   > = z.object({
     virtualNetworkId: z.string(),
+    address: z.string().optional(),
   }).transform((v) => {
     return remap$(v, {
       virtualNetworkId: "virtual_network_id",

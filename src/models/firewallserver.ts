@@ -10,19 +10,48 @@ import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 
 export const FirewallServerType = {
-  FirewallServers: "firewall_servers",
+  FirewallAssignments: "firewall_assignments",
 } as const;
 export type FirewallServerType = ClosedEnum<typeof FirewallServerType>;
 
+/**
+ * Present only when the assignment targets a server.
+ */
+export type FirewallServerServer = {
+  id?: string | undefined;
+  hostname?: string | undefined;
+  primaryIpv4?: string | null | undefined;
+};
+
+/**
+ * Present only when the assignment targets a virtual machine.
+ */
+export type FirewallServerVirtualMachine = {
+  id?: string | undefined;
+  hostname?: string | undefined;
+  primaryIpv4?: string | null | undefined;
+};
+
 export type FirewallServerAttributes = {
-  serverId?: string | undefined;
+  /**
+   * Present only when the assignment targets a server.
+   */
+  server?: FirewallServerServer | undefined;
+  /**
+   * Present only when the assignment targets a virtual machine.
+   */
+  virtualMachine?: FirewallServerVirtualMachine | undefined;
   firewallId?: string | undefined;
 };
 
-export type FirewallServer = {
+export type FirewallServerData = {
   id?: string | undefined;
   type?: FirewallServerType | undefined;
   attributes?: FirewallServerAttributes | undefined;
+};
+
+export type FirewallServer = {
+  data?: FirewallServerData | undefined;
 };
 
 /** @internal */
@@ -35,22 +64,133 @@ export const FirewallServerType$outboundSchema: z.ZodNativeEnum<
 > = FirewallServerType$inboundSchema;
 
 /** @internal */
+export const FirewallServerServer$inboundSchema: z.ZodType<
+  FirewallServerServer,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string().optional(),
+  hostname: z.string().optional(),
+  primary_ipv4: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "primary_ipv4": "primaryIpv4",
+  });
+});
+/** @internal */
+export type FirewallServerServer$Outbound = {
+  id?: string | undefined;
+  hostname?: string | undefined;
+  primary_ipv4?: string | null | undefined;
+};
+
+/** @internal */
+export const FirewallServerServer$outboundSchema: z.ZodType<
+  FirewallServerServer$Outbound,
+  z.ZodTypeDef,
+  FirewallServerServer
+> = z.object({
+  id: z.string().optional(),
+  hostname: z.string().optional(),
+  primaryIpv4: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    primaryIpv4: "primary_ipv4",
+  });
+});
+
+export function firewallServerServerToJSON(
+  firewallServerServer: FirewallServerServer,
+): string {
+  return JSON.stringify(
+    FirewallServerServer$outboundSchema.parse(firewallServerServer),
+  );
+}
+export function firewallServerServerFromJSON(
+  jsonString: string,
+): SafeParseResult<FirewallServerServer, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => FirewallServerServer$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FirewallServerServer' from JSON`,
+  );
+}
+
+/** @internal */
+export const FirewallServerVirtualMachine$inboundSchema: z.ZodType<
+  FirewallServerVirtualMachine,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string().optional(),
+  hostname: z.string().optional(),
+  primary_ipv4: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "primary_ipv4": "primaryIpv4",
+  });
+});
+/** @internal */
+export type FirewallServerVirtualMachine$Outbound = {
+  id?: string | undefined;
+  hostname?: string | undefined;
+  primary_ipv4?: string | null | undefined;
+};
+
+/** @internal */
+export const FirewallServerVirtualMachine$outboundSchema: z.ZodType<
+  FirewallServerVirtualMachine$Outbound,
+  z.ZodTypeDef,
+  FirewallServerVirtualMachine
+> = z.object({
+  id: z.string().optional(),
+  hostname: z.string().optional(),
+  primaryIpv4: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    primaryIpv4: "primary_ipv4",
+  });
+});
+
+export function firewallServerVirtualMachineToJSON(
+  firewallServerVirtualMachine: FirewallServerVirtualMachine,
+): string {
+  return JSON.stringify(
+    FirewallServerVirtualMachine$outboundSchema.parse(
+      firewallServerVirtualMachine,
+    ),
+  );
+}
+export function firewallServerVirtualMachineFromJSON(
+  jsonString: string,
+): SafeParseResult<FirewallServerVirtualMachine, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => FirewallServerVirtualMachine$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FirewallServerVirtualMachine' from JSON`,
+  );
+}
+
+/** @internal */
 export const FirewallServerAttributes$inboundSchema: z.ZodType<
   FirewallServerAttributes,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  server_id: z.string().optional(),
+  server: z.lazy(() => FirewallServerServer$inboundSchema).optional(),
+  virtual_machine: z.lazy(() => FirewallServerVirtualMachine$inboundSchema)
+    .optional(),
   firewall_id: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
-    "server_id": "serverId",
+    "virtual_machine": "virtualMachine",
     "firewall_id": "firewallId",
   });
 });
 /** @internal */
 export type FirewallServerAttributes$Outbound = {
-  server_id?: string | undefined;
+  server?: FirewallServerServer$Outbound | undefined;
+  virtual_machine?: FirewallServerVirtualMachine$Outbound | undefined;
   firewall_id?: string | undefined;
 };
 
@@ -60,11 +200,13 @@ export const FirewallServerAttributes$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   FirewallServerAttributes
 > = z.object({
-  serverId: z.string().optional(),
+  server: z.lazy(() => FirewallServerServer$outboundSchema).optional(),
+  virtualMachine: z.lazy(() => FirewallServerVirtualMachine$outboundSchema)
+    .optional(),
   firewallId: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
-    serverId: "server_id",
+    virtualMachine: "virtual_machine",
     firewallId: "firewall_id",
   });
 });
@@ -87,8 +229,8 @@ export function firewallServerAttributesFromJSON(
 }
 
 /** @internal */
-export const FirewallServer$inboundSchema: z.ZodType<
-  FirewallServer,
+export const FirewallServerData$inboundSchema: z.ZodType<
+  FirewallServerData,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -97,10 +239,51 @@ export const FirewallServer$inboundSchema: z.ZodType<
   attributes: z.lazy(() => FirewallServerAttributes$inboundSchema).optional(),
 });
 /** @internal */
-export type FirewallServer$Outbound = {
+export type FirewallServerData$Outbound = {
   id?: string | undefined;
   type?: string | undefined;
   attributes?: FirewallServerAttributes$Outbound | undefined;
+};
+
+/** @internal */
+export const FirewallServerData$outboundSchema: z.ZodType<
+  FirewallServerData$Outbound,
+  z.ZodTypeDef,
+  FirewallServerData
+> = z.object({
+  id: z.string().optional(),
+  type: FirewallServerType$outboundSchema.optional(),
+  attributes: z.lazy(() => FirewallServerAttributes$outboundSchema).optional(),
+});
+
+export function firewallServerDataToJSON(
+  firewallServerData: FirewallServerData,
+): string {
+  return JSON.stringify(
+    FirewallServerData$outboundSchema.parse(firewallServerData),
+  );
+}
+export function firewallServerDataFromJSON(
+  jsonString: string,
+): SafeParseResult<FirewallServerData, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => FirewallServerData$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FirewallServerData' from JSON`,
+  );
+}
+
+/** @internal */
+export const FirewallServer$inboundSchema: z.ZodType<
+  FirewallServer,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  data: z.lazy(() => FirewallServerData$inboundSchema).optional(),
+});
+/** @internal */
+export type FirewallServer$Outbound = {
+  data?: FirewallServerData$Outbound | undefined;
 };
 
 /** @internal */
@@ -109,9 +292,7 @@ export const FirewallServer$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   FirewallServer
 > = z.object({
-  id: z.string().optional(),
-  type: FirewallServerType$outboundSchema.optional(),
-  attributes: z.lazy(() => FirewallServerAttributes$outboundSchema).optional(),
+  data: z.lazy(() => FirewallServerData$outboundSchema).optional(),
 });
 
 export function firewallServerToJSON(firewallServer: FirewallServer): string {

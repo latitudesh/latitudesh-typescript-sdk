@@ -12,6 +12,7 @@ let value: PostStorageVolumesRequest = {
       project: "<value>",
       name: "<value>",
       region: "<value>",
+      sizeInGb: 281954,
     },
   },
 };
