@@ -79,6 +79,10 @@ export type GetServersRequest = {
    */
   extraFieldsServers?: string | undefined;
   /**
+   * Comma-separated sort fields. Prefix a field with `-` for descending order. Supported: hostname, created_at, location, operating_system.
+   */
+  sort?: string | undefined;
+  /**
    * Number of items to return per page
    */
   pageSize?: number | undefined;
@@ -119,6 +123,7 @@ export const GetServersRequest$inboundSchema: z.ZodType<
   "filter[disk][lte]": z.number().int().optional(),
   "filter[tags]": z.string().optional(),
   "extra_fields[servers]": z.string().optional(),
+  sort: z.string().optional(),
   "page[size]": z.number().int().default(20),
   "page[number]": z.number().int().default(1),
   "stats[total]": z.string().optional(),
@@ -165,6 +170,7 @@ export type GetServersRequest$Outbound = {
   "filter[disk][lte]"?: number | undefined;
   "filter[tags]"?: string | undefined;
   "extra_fields[servers]"?: string | undefined;
+  sort?: string | undefined;
   "page[size]": number;
   "page[number]": number;
   "stats[total]"?: string | undefined;
@@ -193,6 +199,7 @@ export const GetServersRequest$outboundSchema: z.ZodType<
   filterDiskLte: z.number().int().optional(),
   filterTags: z.string().optional(),
   extraFieldsServers: z.string().optional(),
+  sort: z.string().optional(),
   pageSize: z.number().int().default(20),
   pageNumber: z.number().int().default(1),
   statsTotal: z.string().optional(),

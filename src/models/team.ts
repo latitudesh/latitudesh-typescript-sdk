@@ -44,11 +44,11 @@ export type TeamAttributes = {
   slug?: string | undefined;
   description?: string | null | undefined;
   address?: string | null | undefined;
-  currency?: string | undefined;
+  currency?: string | null | undefined;
   createdAt?: string | undefined;
   updatedAt?: string | undefined;
   status?: string | null | undefined;
-  enforceMfa?: boolean | undefined;
+  enforceMfa?: boolean | null | undefined;
   customerBillingId?: string | null | undefined;
   referredCode?: string | null | undefined;
   users?: Array<UserInclude> | undefined;
@@ -209,11 +209,11 @@ export const TeamAttributes$inboundSchema: z.ZodType<
   slug: z.string().optional(),
   description: z.nullable(z.string()).optional(),
   address: z.nullable(z.string()).optional(),
-  currency: z.string().optional(),
+  currency: z.nullable(z.string()).optional(),
   created_at: z.string().optional(),
   updated_at: z.string().optional(),
   status: z.nullable(z.string()).optional(),
-  enforce_mfa: z.boolean().optional(),
+  enforce_mfa: z.nullable(z.boolean()).optional(),
   customer_billing_id: z.nullable(z.string()).optional(),
   referred_code: z.nullable(z.string()).optional(),
   users: z.array(UserInclude$inboundSchema).optional(),
@@ -238,11 +238,11 @@ export type TeamAttributes$Outbound = {
   slug?: string | undefined;
   description?: string | null | undefined;
   address?: string | null | undefined;
-  currency?: string | undefined;
+  currency?: string | null | undefined;
   created_at?: string | undefined;
   updated_at?: string | undefined;
   status?: string | null | undefined;
-  enforce_mfa?: boolean | undefined;
+  enforce_mfa?: boolean | null | undefined;
   customer_billing_id?: string | null | undefined;
   referred_code?: string | null | undefined;
   users?: Array<UserInclude$Outbound> | undefined;
@@ -263,11 +263,11 @@ export const TeamAttributes$outboundSchema: z.ZodType<
   slug: z.string().optional(),
   description: z.nullable(z.string()).optional(),
   address: z.nullable(z.string()).optional(),
-  currency: z.string().optional(),
+  currency: z.nullable(z.string()).optional(),
   createdAt: z.string().optional(),
   updatedAt: z.string().optional(),
   status: z.nullable(z.string()).optional(),
-  enforceMfa: z.boolean().optional(),
+  enforceMfa: z.nullable(z.boolean()).optional(),
   customerBillingId: z.nullable(z.string()).optional(),
   referredCode: z.nullable(z.string()).optional(),
   users: z.array(UserInclude$outboundSchema).optional(),

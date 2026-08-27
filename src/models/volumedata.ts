@@ -35,6 +35,10 @@ export type Initiator = {
  */
 export type Block = {
   /**
+   * Mapping lifecycle state: "mapping" while the mapping is being applied, "mapped" once the server can access the volume, or "failed". Mapping is asynchronous, so poll the volume until this reaches a terminal state.
+   */
+  status?: string | null | undefined;
+  /**
    * NVMe Qualified Name of the mapped server.
    */
   nqn?: string | null | undefined;
@@ -142,6 +146,7 @@ export function initiatorFromJSON(
 /** @internal */
 export const Block$inboundSchema: z.ZodType<Block, z.ZodTypeDef, unknown> = z
   .object({
+    status: z.nullable(z.string()).optional(),
     nqn: z.nullable(z.string()).optional(),
     nsid: z.nullable(z.number().int()).optional(),
     server_id: z.nullable(z.string()).optional(),
@@ -152,6 +157,7 @@ export const Block$inboundSchema: z.ZodType<Block, z.ZodTypeDef, unknown> = z
   });
 /** @internal */
 export type Block$Outbound = {
+  status?: string | null | undefined;
   nqn?: string | null | undefined;
   nsid?: number | null | undefined;
   server_id?: string | null | undefined;
@@ -163,6 +169,7 @@ export const Block$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Block
 > = z.object({
+  status: z.nullable(z.string()).optional(),
   nqn: z.nullable(z.string()).optional(),
   nsid: z.nullable(z.number().int()).optional(),
   serverId: z.nullable(z.string()).optional(),

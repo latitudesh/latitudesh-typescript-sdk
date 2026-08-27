@@ -53,9 +53,13 @@ export type Unit = ClosedEnum<typeof Unit>;
  */
 export type Storage = {
   /**
-   * Amount of storage consumed
+   * Billed storage usage for the current period
    */
   consumed?: number | undefined;
+  /**
+   * Latest recorded storage usage (last datapoint)
+   */
+  current?: number | undefined;
   /**
    * Unit of measurement for storage
    */
@@ -216,11 +220,13 @@ export const Unit$outboundSchema: z.ZodNativeEnum<typeof Unit> =
 export const Storage$inboundSchema: z.ZodType<Storage, z.ZodTypeDef, unknown> =
   z.object({
     consumed: z.number().int().optional(),
+    current: z.number().int().optional(),
     unit: Unit$inboundSchema.optional(),
   });
 /** @internal */
 export type Storage$Outbound = {
   consumed?: number | undefined;
+  current?: number | undefined;
   unit?: string | undefined;
 };
 
@@ -231,6 +237,7 @@ export const Storage$outboundSchema: z.ZodType<
   Storage
 > = z.object({
   consumed: z.number().int().optional(),
+  current: z.number().int().optional(),
   unit: Unit$outboundSchema.optional(),
 });
 

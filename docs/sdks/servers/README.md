@@ -619,7 +619,9 @@ async function run() {
   const result = await latitudesh.servers.updateDeployConfig({
     serverId: "<id>",
     requestBody: {
-      type: "deploy_config",
+      data: {
+        type: "deploy_config",
+      },
     },
   });
 
@@ -647,7 +649,9 @@ async function run() {
   const res = await serversUpdateDeployConfig(latitudesh, {
     serverId: "<id>",
     requestBody: {
-      type: "deploy_config",
+      data: {
+        type: "deploy_config",
+      },
     },
   });
   if (res.ok) {
@@ -674,7 +678,18 @@ async function run() {
   const result = await latitudesh.servers.updateDeployConfig({
     serverId: "sv_lkg1DeYLDvZE5",
     requestBody: {
-      type: "deploy_config",
+      data: {
+        type: "deploy_config",
+        attributes: {
+          hostname: "my-hostname",
+          operatingSystem: "ubuntu_20_04_x64_lts",
+          raid: "raid-1",
+          userData: "ud_5LA73qkjdaJ2o",
+          sshKeys: [
+            "ssh_m5xyZOnNOWM0l",
+          ],
+        },
+      },
     },
   });
 
@@ -702,7 +717,18 @@ async function run() {
   const res = await serversUpdateDeployConfig(latitudesh, {
     serverId: "sv_lkg1DeYLDvZE5",
     requestBody: {
-      type: "deploy_config",
+      data: {
+        type: "deploy_config",
+        attributes: {
+          hostname: "my-hostname",
+          operatingSystem: "ubuntu_20_04_x64_lts",
+          raid: "raid-1",
+          userData: "ud_5LA73qkjdaJ2o",
+          sshKeys: [
+            "ssh_m5xyZOnNOWM0l",
+          ],
+        },
+      },
     },
   });
   if (res.ok) {

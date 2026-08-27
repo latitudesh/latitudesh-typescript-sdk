@@ -70,7 +70,6 @@ export type UpdateServerDeployConfigRaidLevel2 = ClosedEnum<
 
 export const UpdateServerDeployConfigFilesystem2 = {
   Ext4: "ext4",
-  Xfs: "xfs",
 } as const;
 export type UpdateServerDeployConfigFilesystem2 = ClosedEnum<
   typeof UpdateServerDeployConfigFilesystem2
@@ -102,6 +101,10 @@ export type UpdateServerDeployConfigAttributes2 = {
    */
   ipxeUrl?: string | null | undefined;
   /**
+   * URL where the iPXE script is stored, or the iPXE script encoded in base64. This attribute is required when the iPXE operating system is selected. Replaces the deprecated 'ipxe_url'.
+   */
+  ipxe?: string | null | undefined;
+  /**
    * Keep network boot enabled so the server iPXE-boots on every reboot instead of booting from disk. Only supported with the 'ipxe' operating system.
    */
   persistentNetboot?: boolean | undefined;
@@ -115,9 +118,14 @@ export type UpdateServerDeployConfigAttributes2 = {
   publicNetworkId?: string | null | undefined;
 };
 
-export type UpdateServerDeployConfigRequestBody2 = {
+export type UpdateServerDeployConfigData2 = {
+  id?: string | undefined;
   type: UpdateServerDeployConfigType2;
   attributes?: UpdateServerDeployConfigAttributes2 | undefined;
+};
+
+export type UpdateServerDeployConfigRequestBody2 = {
+  data: UpdateServerDeployConfigData2;
 };
 
 export type UpdateServerDeployConfigRequest = {
@@ -267,6 +275,7 @@ export const UpdateServerDeployConfigAttributes2$inboundSchema: z.ZodType<
   user_data: z.nullable(z.string()).optional(),
   ssh_keys: z.nullable(z.array(z.string())).optional(),
   ipxe_url: z.nullable(z.string()).optional(),
+  ipxe: z.nullable(z.string()).optional(),
   persistent_netboot: z.boolean().optional(),
   public_network: z.nullable(z.boolean()).optional(),
   public_network_id: z.nullable(z.string()).optional(),
@@ -294,6 +303,7 @@ export type UpdateServerDeployConfigAttributes2$Outbound = {
   user_data?: string | null | undefined;
   ssh_keys?: Array<string> | null | undefined;
   ipxe_url?: string | null | undefined;
+  ipxe?: string | null | undefined;
   persistent_netboot?: boolean | undefined;
   public_network?: boolean | null | undefined;
   public_network_id?: string | null | undefined;
@@ -316,6 +326,7 @@ export const UpdateServerDeployConfigAttributes2$outboundSchema: z.ZodType<
   userData: z.nullable(z.string()).optional(),
   sshKeys: z.nullable(z.array(z.string())).optional(),
   ipxeUrl: z.nullable(z.string()).optional(),
+  ipxe: z.nullable(z.string()).optional(),
   persistentNetboot: z.boolean().optional(),
   publicNetwork: z.nullable(z.boolean()).optional(),
   publicNetworkId: z.nullable(z.string()).optional(),
@@ -353,19 +364,65 @@ export function updateServerDeployConfigAttributes2FromJSON(
 }
 
 /** @internal */
-export const UpdateServerDeployConfigRequestBody2$inboundSchema: z.ZodType<
-  UpdateServerDeployConfigRequestBody2,
+export const UpdateServerDeployConfigData2$inboundSchema: z.ZodType<
+  UpdateServerDeployConfigData2,
   z.ZodTypeDef,
   unknown
 > = z.object({
+  id: z.string().optional(),
   type: UpdateServerDeployConfigType2$inboundSchema,
   attributes: z.lazy(() => UpdateServerDeployConfigAttributes2$inboundSchema)
     .optional(),
 });
 /** @internal */
-export type UpdateServerDeployConfigRequestBody2$Outbound = {
+export type UpdateServerDeployConfigData2$Outbound = {
+  id?: string | undefined;
   type: string;
   attributes?: UpdateServerDeployConfigAttributes2$Outbound | undefined;
+};
+
+/** @internal */
+export const UpdateServerDeployConfigData2$outboundSchema: z.ZodType<
+  UpdateServerDeployConfigData2$Outbound,
+  z.ZodTypeDef,
+  UpdateServerDeployConfigData2
+> = z.object({
+  id: z.string().optional(),
+  type: UpdateServerDeployConfigType2$outboundSchema,
+  attributes: z.lazy(() => UpdateServerDeployConfigAttributes2$outboundSchema)
+    .optional(),
+});
+
+export function updateServerDeployConfigData2ToJSON(
+  updateServerDeployConfigData2: UpdateServerDeployConfigData2,
+): string {
+  return JSON.stringify(
+    UpdateServerDeployConfigData2$outboundSchema.parse(
+      updateServerDeployConfigData2,
+    ),
+  );
+}
+export function updateServerDeployConfigData2FromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateServerDeployConfigData2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateServerDeployConfigData2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateServerDeployConfigData2' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateServerDeployConfigRequestBody2$inboundSchema: z.ZodType<
+  UpdateServerDeployConfigRequestBody2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  data: z.lazy(() => UpdateServerDeployConfigData2$inboundSchema),
+});
+/** @internal */
+export type UpdateServerDeployConfigRequestBody2$Outbound = {
+  data: UpdateServerDeployConfigData2$Outbound;
 };
 
 /** @internal */
@@ -374,9 +431,7 @@ export const UpdateServerDeployConfigRequestBody2$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateServerDeployConfigRequestBody2
 > = z.object({
-  type: UpdateServerDeployConfigType2$outboundSchema,
-  attributes: z.lazy(() => UpdateServerDeployConfigAttributes2$outboundSchema)
-    .optional(),
+  data: z.lazy(() => UpdateServerDeployConfigData2$outboundSchema),
 });
 
 export function updateServerDeployConfigRequestBody2ToJSON(

@@ -14,5 +14,6 @@ let value: Storage = {};
 
 | Field                                              | Type                                               | Required                                           | Description                                        |
 | -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- |
-| `consumed`                                         | *number*                                           | :heavy_minus_sign:                                 | Amount of storage consumed                         |
+| `consumed`                                         | *number*                                           | :heavy_minus_sign:                                 | Billed storage usage for the current period        |
+| `current`                                          | *number*                                           | :heavy_minus_sign:                                 | Latest recorded storage usage (last datapoint)     |
 | `unit`                                             | [operations.Unit](../../models/operations/unit.md) | :heavy_minus_sign:                                 | Unit of measurement for storage                    |

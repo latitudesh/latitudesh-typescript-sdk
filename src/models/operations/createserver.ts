@@ -95,7 +95,7 @@ export const CreateServerOperatingSystem2 = {
 /**
  * The operating system slug for the new server
  */
-export type CreateServerOperatingSystem2 = ClosedEnum<
+export type CreateServerOperatingSystem2 = OpenEnum<
   typeof CreateServerOperatingSystem2
 >;
 
@@ -192,6 +192,14 @@ export type CreateServerAttributes2 = {
    */
   ipxe?: string | null | undefined;
   /**
+   * **Preview.** Available to teams with public networks enabled. Set to true to deploy the server attached to the given public_network_id. Requires public_network_id; only public-network-capable stock is selected.
+   */
+  publicNetwork?: boolean | null | undefined;
+  /**
+   * **Preview.** Available to teams with public networks enabled. ID of a customer public network to attach the server onto. Requires public_network: true. The public network must belong to the same project and location as the deployment and have a free address.
+   */
+  publicNetworkId?: string | null | undefined;
+  /**
    * Keep network boot enabled so the server iPXE-boots on every reboot instead of booting from disk. Only supported with the 'ipxe' operating system.
    */
   persistentNetboot?: boolean | undefined;
@@ -244,13 +252,17 @@ export const CreateServerSite2$outboundSchema: z.ZodType<
 > = openEnums.outboundSchema(CreateServerSite2);
 
 /** @internal */
-export const CreateServerOperatingSystem2$inboundSchema: z.ZodNativeEnum<
-  typeof CreateServerOperatingSystem2
-> = z.nativeEnum(CreateServerOperatingSystem2);
+export const CreateServerOperatingSystem2$inboundSchema: z.ZodType<
+  CreateServerOperatingSystem2,
+  z.ZodTypeDef,
+  unknown
+> = openEnums.inboundSchema(CreateServerOperatingSystem2);
 /** @internal */
-export const CreateServerOperatingSystem2$outboundSchema: z.ZodNativeEnum<
-  typeof CreateServerOperatingSystem2
-> = CreateServerOperatingSystem2$inboundSchema;
+export const CreateServerOperatingSystem2$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  CreateServerOperatingSystem2
+> = openEnums.outboundSchema(CreateServerOperatingSystem2);
 
 /** @internal */
 export const CreateServerRaid2$inboundSchema: z.ZodNativeEnum<
@@ -376,6 +388,8 @@ export const CreateServerAttributes2$inboundSchema: z.ZodType<
     z.array(z.lazy(() => CreateServerDiskLayout2$inboundSchema)),
   ).optional(),
   ipxe: z.nullable(z.string()).optional(),
+  public_network: z.nullable(z.boolean()).optional(),
+  public_network_id: z.nullable(z.string()).optional(),
   persistent_netboot: z.boolean().optional(),
   bgp_ready: z.nullable(z.boolean()).optional(),
   billing: z.nullable(CreateServerBilling2$inboundSchema).optional(),
@@ -385,6 +399,8 @@ export const CreateServerAttributes2$inboundSchema: z.ZodType<
     "ssh_keys": "sshKeys",
     "user_data": "userData",
     "disk_layout": "diskLayout",
+    "public_network": "publicNetwork",
+    "public_network_id": "publicNetworkId",
     "persistent_netboot": "persistentNetboot",
     "bgp_ready": "bgpReady",
   });
@@ -401,6 +417,8 @@ export type CreateServerAttributes2$Outbound = {
   raid?: string | null | undefined;
   disk_layout?: Array<CreateServerDiskLayout2$Outbound> | null | undefined;
   ipxe?: string | null | undefined;
+  public_network?: boolean | null | undefined;
+  public_network_id?: string | null | undefined;
   persistent_netboot?: boolean | undefined;
   bgp_ready?: boolean | null | undefined;
   billing?: string | null | undefined;
@@ -424,6 +442,8 @@ export const CreateServerAttributes2$outboundSchema: z.ZodType<
     z.array(z.lazy(() => CreateServerDiskLayout2$outboundSchema)),
   ).optional(),
   ipxe: z.nullable(z.string()).optional(),
+  publicNetwork: z.nullable(z.boolean()).optional(),
+  publicNetworkId: z.nullable(z.string()).optional(),
   persistentNetboot: z.boolean().optional(),
   bgpReady: z.nullable(z.boolean()).optional(),
   billing: z.nullable(CreateServerBilling2$outboundSchema).optional(),
@@ -433,6 +453,8 @@ export const CreateServerAttributes2$outboundSchema: z.ZodType<
     sshKeys: "ssh_keys",
     userData: "user_data",
     diskLayout: "disk_layout",
+    publicNetwork: "public_network",
+    publicNetworkId: "public_network_id",
     persistentNetboot: "persistent_netboot",
     bgpReady: "bgp_ready",
   });

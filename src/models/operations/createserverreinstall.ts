@@ -121,7 +121,7 @@ export type CreateServerReinstallAttributes2 = {
    */
   persistentNetboot?: boolean | undefined;
   /**
-   * **Preview** (`public_network` feature flag). Set to 'true' to attach the server onto the given 'public_network_id', or 'false' to detach an existing public network, during the reinstall. Requires 'public_network_id' when attaching.
+   * **Preview.** Available to teams with public networks enabled. Set to 'true' to attach the server onto the given 'public_network_id', or 'false' to detach an existing public network, during the reinstall. Requires 'public_network_id' when attaching.
    */
   publicNetwork?: boolean | null | undefined;
   /**

@@ -9,6 +9,11 @@ import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 
+export const DeployConfigType = {
+  DeployConfig: "deploy_config",
+} as const;
+export type DeployConfigType = ClosedEnum<typeof DeployConfigType>;
+
 export const DeployConfigRole = {
   Os: "os",
   Storage: "storage",
@@ -24,7 +29,6 @@ export type DeployConfigRaidLevel = ClosedEnum<typeof DeployConfigRaidLevel>;
 
 export const DeployConfigFilesystem = {
   Ext4: "ext4",
-  Xfs: "xfs",
 } as const;
 export type DeployConfigFilesystem = ClosedEnum<typeof DeployConfigFilesystem>;
 
@@ -39,10 +43,12 @@ export type DiskLayout = {
 export type DeployConfigAttributes = {
   operatingSystem?: string | undefined;
   hostname?: string | undefined;
-  raid?: string | undefined;
+  raid?: string | null | undefined;
   diskLayout?: Array<DiskLayout> | null | undefined;
   userData?: string | undefined;
   sshKeys?: Array<string> | undefined;
+  ipxeUrl?: string | null | undefined;
+  ipxe?: string | null | undefined;
   /**
    * Keep network boot enabled so the server iPXE-boots on every reboot instead of booting from disk. Only supported with the 'ipxe' operating system.
    */
@@ -53,12 +59,25 @@ export type DeployConfigAttributes = {
 
 export type DeployConfigData = {
   id?: string | undefined;
+  type?: DeployConfigType | undefined;
   attributes?: DeployConfigAttributes | undefined;
 };
 
+export type DeployConfigMeta = {};
+
 export type DeployConfig = {
   data?: DeployConfigData | undefined;
+  meta?: DeployConfigMeta | undefined;
 };
+
+/** @internal */
+export const DeployConfigType$inboundSchema: z.ZodNativeEnum<
+  typeof DeployConfigType
+> = z.nativeEnum(DeployConfigType);
+/** @internal */
+export const DeployConfigType$outboundSchema: z.ZodNativeEnum<
+  typeof DeployConfigType
+> = DeployConfigType$inboundSchema;
 
 /** @internal */
 export const DeployConfigRole$inboundSchema: z.ZodNativeEnum<
@@ -152,11 +171,13 @@ export const DeployConfigAttributes$inboundSchema: z.ZodType<
 > = z.object({
   operating_system: z.string().optional(),
   hostname: z.string().optional(),
-  raid: z.string().optional(),
+  raid: z.nullable(z.string()).optional(),
   disk_layout: z.nullable(z.array(z.lazy(() => DiskLayout$inboundSchema)))
     .optional(),
   user_data: z.string().optional(),
   ssh_keys: z.array(z.string()).optional(),
+  ipxe_url: z.nullable(z.string()).optional(),
+  ipxe: z.nullable(z.string()).optional(),
   persistent_netboot: z.nullable(z.boolean()).optional(),
   public_network: z.nullable(z.boolean()).optional(),
   public_network_id: z.nullable(z.string()).optional(),
@@ -166,6 +187,7 @@ export const DeployConfigAttributes$inboundSchema: z.ZodType<
     "disk_layout": "diskLayout",
     "user_data": "userData",
     "ssh_keys": "sshKeys",
+    "ipxe_url": "ipxeUrl",
     "persistent_netboot": "persistentNetboot",
     "public_network": "publicNetwork",
     "public_network_id": "publicNetworkId",
@@ -175,10 +197,12 @@ export const DeployConfigAttributes$inboundSchema: z.ZodType<
 export type DeployConfigAttributes$Outbound = {
   operating_system?: string | undefined;
   hostname?: string | undefined;
-  raid?: string | undefined;
+  raid?: string | null | undefined;
   disk_layout?: Array<DiskLayout$Outbound> | null | undefined;
   user_data?: string | undefined;
   ssh_keys?: Array<string> | undefined;
+  ipxe_url?: string | null | undefined;
+  ipxe?: string | null | undefined;
   persistent_netboot?: boolean | null | undefined;
   public_network?: boolean | null | undefined;
   public_network_id?: string | null | undefined;
@@ -192,11 +216,13 @@ export const DeployConfigAttributes$outboundSchema: z.ZodType<
 > = z.object({
   operatingSystem: z.string().optional(),
   hostname: z.string().optional(),
-  raid: z.string().optional(),
+  raid: z.nullable(z.string()).optional(),
   diskLayout: z.nullable(z.array(z.lazy(() => DiskLayout$outboundSchema)))
     .optional(),
   userData: z.string().optional(),
   sshKeys: z.array(z.string()).optional(),
+  ipxeUrl: z.nullable(z.string()).optional(),
+  ipxe: z.nullable(z.string()).optional(),
   persistentNetboot: z.nullable(z.boolean()).optional(),
   publicNetwork: z.nullable(z.boolean()).optional(),
   publicNetworkId: z.nullable(z.string()).optional(),
@@ -206,6 +232,7 @@ export const DeployConfigAttributes$outboundSchema: z.ZodType<
     diskLayout: "disk_layout",
     userData: "user_data",
     sshKeys: "ssh_keys",
+    ipxeUrl: "ipxe_url",
     persistentNetboot: "persistent_netboot",
     publicNetwork: "public_network",
     publicNetworkId: "public_network_id",
@@ -236,11 +263,13 @@ export const DeployConfigData$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   id: z.string().optional(),
+  type: DeployConfigType$inboundSchema.optional(),
   attributes: z.lazy(() => DeployConfigAttributes$inboundSchema).optional(),
 });
 /** @internal */
 export type DeployConfigData$Outbound = {
   id?: string | undefined;
+  type?: string | undefined;
   attributes?: DeployConfigAttributes$Outbound | undefined;
 };
 
@@ -251,6 +280,7 @@ export const DeployConfigData$outboundSchema: z.ZodType<
   DeployConfigData
 > = z.object({
   id: z.string().optional(),
+  type: DeployConfigType$outboundSchema.optional(),
   attributes: z.lazy(() => DeployConfigAttributes$outboundSchema).optional(),
 });
 
@@ -272,16 +302,51 @@ export function deployConfigDataFromJSON(
 }
 
 /** @internal */
+export const DeployConfigMeta$inboundSchema: z.ZodType<
+  DeployConfigMeta,
+  z.ZodTypeDef,
+  unknown
+> = z.object({});
+/** @internal */
+export type DeployConfigMeta$Outbound = {};
+
+/** @internal */
+export const DeployConfigMeta$outboundSchema: z.ZodType<
+  DeployConfigMeta$Outbound,
+  z.ZodTypeDef,
+  DeployConfigMeta
+> = z.object({});
+
+export function deployConfigMetaToJSON(
+  deployConfigMeta: DeployConfigMeta,
+): string {
+  return JSON.stringify(
+    DeployConfigMeta$outboundSchema.parse(deployConfigMeta),
+  );
+}
+export function deployConfigMetaFromJSON(
+  jsonString: string,
+): SafeParseResult<DeployConfigMeta, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeployConfigMeta$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeployConfigMeta' from JSON`,
+  );
+}
+
+/** @internal */
 export const DeployConfig$inboundSchema: z.ZodType<
   DeployConfig,
   z.ZodTypeDef,
   unknown
 > = z.object({
   data: z.lazy(() => DeployConfigData$inboundSchema).optional(),
+  meta: z.lazy(() => DeployConfigMeta$inboundSchema).optional(),
 });
 /** @internal */
 export type DeployConfig$Outbound = {
   data?: DeployConfigData$Outbound | undefined;
+  meta?: DeployConfigMeta$Outbound | undefined;
 };
 
 /** @internal */
@@ -291,6 +356,7 @@ export const DeployConfig$outboundSchema: z.ZodType<
   DeployConfig
 > = z.object({
   data: z.lazy(() => DeployConfigData$outboundSchema).optional(),
+  meta: z.lazy(() => DeployConfigMeta$outboundSchema).optional(),
 });
 
 export function deployConfigToJSON(deployConfig: DeployConfig): string {

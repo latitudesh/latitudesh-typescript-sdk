@@ -5,11 +5,11 @@
 ```typescript
 import { DeployConfigFilesystem } from "latitudesh-typescript-sdk/models";
 
-let value: DeployConfigFilesystem = "xfs";
+let value: DeployConfigFilesystem = "ext4";
 ```
 
 ## Values
 
 ```typescript
-"ext4" | "xfs"
+"ext4"
 ```
