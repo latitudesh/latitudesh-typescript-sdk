@@ -133,10 +133,12 @@ describe('Servers Advanced Integration Tests', () => {
       const result = await sdk.servers.updateDeployConfig({
         serverId: 'srv_test123',
         requestBody: {
-          type: 'deploy_config',
-          attributes: {
-            raid: 'raid-1',
-            userData: '#!/bin/bash\necho "Updated"',
+          data: {
+            type: 'deploy_config',
+            attributes: {
+              raid: 'raid-1',
+              userData: '#!/bin/bash\necho "Updated"',
+            },
           },
         },
       });
