@@ -11,5 +11,5 @@ let value: UpdateServerDeployConfigFilesystem2 = "ext4";
 ## Values
 
 ```typescript
-"ext4" | "xfs"
+"ext4"
 ```

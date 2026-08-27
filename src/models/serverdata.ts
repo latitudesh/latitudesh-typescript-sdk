@@ -34,39 +34,6 @@ export type ServerDataTag = {
   color?: string | null | undefined;
 };
 
-/**
- * `on` - The server is powered ON
- *
- * @remarks
- * `off` - The server is powered OFF
- * `unknown` - The server power status is unknown
- * `disk_erasing` - The server is in reinstalling state `disk_erasing`
- * `deploying` - The server is deploying or reinstalling
- * `failed_deployment` - The server has failed deployment or reinstall
- * `rescue_mode` - The server is in rescue mode
- */
-export const ServerDataStatus = {
-  On: "on",
-  Off: "off",
-  Unknown: "unknown",
-  DiskErasing: "disk_erasing",
-  Deploying: "deploying",
-  FailedDeployment: "failed_deployment",
-  RescueMode: "rescue_mode",
-} as const;
-/**
- * `on` - The server is powered ON
- *
- * @remarks
- * `off` - The server is powered OFF
- * `unknown` - The server power status is unknown
- * `disk_erasing` - The server is in reinstalling state `disk_erasing`
- * `deploying` - The server is deploying or reinstalling
- * `failed_deployment` - The server has failed deployment or reinstall
- * `rescue_mode` - The server is in rescue mode
- */
-export type ServerDataStatus = ClosedEnum<typeof ServerDataStatus>;
-
 export const IpmiStatus = {
   Unavailable: "Unavailable",
   Intermittent: "Intermittent",
@@ -75,7 +42,7 @@ export const IpmiStatus = {
 export type IpmiStatus = ClosedEnum<typeof IpmiStatus>;
 
 /**
- * **Preview** (`public_network` feature flag). The public network this server is attached onto, or null. Fetch full details from GET /public_networks/{id}.
+ * **Preview.** Available to teams with public networks enabled. The public network this server is attached onto, or null. Fetch full details from GET /public_networks/{id}.
  */
 export type ServerDataPublicNetwork = {
   id?: string | undefined;
@@ -106,6 +73,9 @@ export type ServerDataFeatures = {
   raid?: boolean | undefined;
   sshKeys?: boolean | undefined;
   userData?: boolean | undefined;
+  accelerate?: boolean | undefined;
+  rescue?: boolean | undefined;
+  workflow?: boolean | undefined;
 };
 
 export type ServerDataDistro = {
@@ -178,6 +148,27 @@ export type Interface = {
   description?: string | undefined;
 };
 
+export type ServerDataSshKey = {
+  id?: number | undefined;
+  name?: string | undefined;
+  fingerprint?: string | undefined;
+  publicKey?: string | undefined;
+  createdAt?: Date | undefined;
+  updatedAt?: Date | undefined;
+  userId?: string | undefined;
+  groupId?: number | null | undefined;
+};
+
+/**
+ * Latest provisioning credentials, lazy loaded. Request it with `extra_fields[servers]=credentials`. Empty when the latest provisioning has no valid credentials.
+ */
+export type ServerDataCredentials = {
+  username?: string | null | undefined;
+  password?: string | null | undefined;
+  sshKeys?: Array<ServerDataSshKey> | null | undefined;
+  expiresAt?: Date | null | undefined;
+};
+
 export type ServerDataAttributes = {
   tags?: Array<ServerDataTag> | undefined;
   hostname?: string | undefined;
@@ -196,8 +187,14 @@ export type ServerDataAttributes = {
    * `deploying` - The server is deploying or reinstalling
    * `failed_deployment` - The server has failed deployment or reinstall
    * `rescue_mode` - The server is in rescue mode
+   * `entering_rescue_mode` - The server is entering rescue mode
+   * `exiting_rescue_mode` - The server is exiting rescue mode
+   *
+   * While a server is provisioning, the provisioning state slug is returned verbatim,
+   * so values outside this list (e.g. `queued`, `starting_deploy`, `commissioning`)
+   * are possible. Treat this field as an open set, not a closed enum.
    */
-  status?: ServerDataStatus | undefined;
+  status?: string | undefined;
   ipmiStatus?: IpmiStatus | null | undefined;
   /**
    * The server role (e.g. Bare Metal)
@@ -208,11 +205,19 @@ export type ServerDataAttributes = {
    */
   publicNetworkEligible?: boolean | undefined;
   /**
-   * **Preview** (`public_network` feature flag). The public network this server is attached onto, or null. Fetch full details from GET /public_networks/{id}.
+   * **Preview.** Available to teams with public networks enabled. The public network this server is attached onto, or null. Fetch full details from GET /public_networks/{id}.
    */
   publicNetwork?: ServerDataPublicNetwork | null | undefined;
   site?: string | undefined;
   locked?: boolean | undefined;
+  /**
+   * Whether the server is attached to a legacy network.
+   */
+  legacyNetwork?: boolean | null | undefined;
+  /**
+   * Feature slugs supported by the server hardware (e.g. `direct_remote_access`).
+   */
+  features?: Array<string> | null | undefined;
   rescueAllowed?: boolean | undefined;
   primaryIpv4?: string | null | undefined;
   primaryIpv6?: string | null | undefined;
@@ -223,6 +228,10 @@ export type ServerDataAttributes = {
   region?: ServerRegionResourceData | undefined;
   specs?: ServerDataSpecs | undefined;
   interfaces?: Array<Interface> | undefined;
+  /**
+   * Latest provisioning credentials, lazy loaded. Request it with `extra_fields[servers]=credentials`. Empty when the latest provisioning has no valid credentials.
+   */
+  credentials?: ServerDataCredentials | null | undefined;
   project?: ProjectInclude | undefined;
   team?: TeamInclude | undefined;
 };
@@ -276,15 +285,6 @@ export function serverDataTagFromJSON(
     `Failed to parse 'ServerDataTag' from JSON`,
   );
 }
-
-/** @internal */
-export const ServerDataStatus$inboundSchema: z.ZodNativeEnum<
-  typeof ServerDataStatus
-> = z.nativeEnum(ServerDataStatus);
-/** @internal */
-export const ServerDataStatus$outboundSchema: z.ZodNativeEnum<
-  typeof ServerDataStatus
-> = ServerDataStatus$inboundSchema;
 
 /** @internal */
 export const IpmiStatus$inboundSchema: z.ZodNativeEnum<typeof IpmiStatus> = z
@@ -391,6 +391,9 @@ export const ServerDataFeatures$inboundSchema: z.ZodType<
   raid: z.boolean().optional(),
   ssh_keys: z.boolean().optional(),
   user_data: z.boolean().optional(),
+  accelerate: z.boolean().optional(),
+  rescue: z.boolean().optional(),
+  workflow: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     "ssh_keys": "sshKeys",
@@ -402,6 +405,9 @@ export type ServerDataFeatures$Outbound = {
   raid?: boolean | undefined;
   ssh_keys?: boolean | undefined;
   user_data?: boolean | undefined;
+  accelerate?: boolean | undefined;
+  rescue?: boolean | undefined;
+  workflow?: boolean | undefined;
 };
 
 /** @internal */
@@ -413,6 +419,9 @@ export const ServerDataFeatures$outboundSchema: z.ZodType<
   raid: z.boolean().optional(),
   sshKeys: z.boolean().optional(),
   userData: z.boolean().optional(),
+  accelerate: z.boolean().optional(),
+  rescue: z.boolean().optional(),
+  workflow: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     sshKeys: "ssh_keys",
@@ -644,6 +653,146 @@ export function interfaceFromJSON(
 }
 
 /** @internal */
+export const ServerDataSshKey$inboundSchema: z.ZodType<
+  ServerDataSshKey,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.number().int().optional(),
+  name: z.string().optional(),
+  fingerprint: z.string().optional(),
+  public_key: z.string().optional(),
+  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
+    .optional(),
+  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
+    .optional(),
+  user_id: z.string().optional(),
+  group_id: z.nullable(z.number().int()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "public_key": "publicKey",
+    "created_at": "createdAt",
+    "updated_at": "updatedAt",
+    "user_id": "userId",
+    "group_id": "groupId",
+  });
+});
+/** @internal */
+export type ServerDataSshKey$Outbound = {
+  id?: number | undefined;
+  name?: string | undefined;
+  fingerprint?: string | undefined;
+  public_key?: string | undefined;
+  created_at?: string | undefined;
+  updated_at?: string | undefined;
+  user_id?: string | undefined;
+  group_id?: number | null | undefined;
+};
+
+/** @internal */
+export const ServerDataSshKey$outboundSchema: z.ZodType<
+  ServerDataSshKey$Outbound,
+  z.ZodTypeDef,
+  ServerDataSshKey
+> = z.object({
+  id: z.number().int().optional(),
+  name: z.string().optional(),
+  fingerprint: z.string().optional(),
+  publicKey: z.string().optional(),
+  createdAt: z.date().transform(v => v.toISOString()).optional(),
+  updatedAt: z.date().transform(v => v.toISOString()).optional(),
+  userId: z.string().optional(),
+  groupId: z.nullable(z.number().int()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    publicKey: "public_key",
+    createdAt: "created_at",
+    updatedAt: "updated_at",
+    userId: "user_id",
+    groupId: "group_id",
+  });
+});
+
+export function serverDataSshKeyToJSON(
+  serverDataSshKey: ServerDataSshKey,
+): string {
+  return JSON.stringify(
+    ServerDataSshKey$outboundSchema.parse(serverDataSshKey),
+  );
+}
+export function serverDataSshKeyFromJSON(
+  jsonString: string,
+): SafeParseResult<ServerDataSshKey, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ServerDataSshKey$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ServerDataSshKey' from JSON`,
+  );
+}
+
+/** @internal */
+export const ServerDataCredentials$inboundSchema: z.ZodType<
+  ServerDataCredentials,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  username: z.nullable(z.string()).optional(),
+  password: z.nullable(z.string()).optional(),
+  ssh_keys: z.nullable(z.array(z.lazy(() => ServerDataSshKey$inboundSchema)))
+    .optional(),
+  expires_at: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "ssh_keys": "sshKeys",
+    "expires_at": "expiresAt",
+  });
+});
+/** @internal */
+export type ServerDataCredentials$Outbound = {
+  username?: string | null | undefined;
+  password?: string | null | undefined;
+  ssh_keys?: Array<ServerDataSshKey$Outbound> | null | undefined;
+  expires_at?: string | null | undefined;
+};
+
+/** @internal */
+export const ServerDataCredentials$outboundSchema: z.ZodType<
+  ServerDataCredentials$Outbound,
+  z.ZodTypeDef,
+  ServerDataCredentials
+> = z.object({
+  username: z.nullable(z.string()).optional(),
+  password: z.nullable(z.string()).optional(),
+  sshKeys: z.nullable(z.array(z.lazy(() => ServerDataSshKey$outboundSchema)))
+    .optional(),
+  expiresAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    sshKeys: "ssh_keys",
+    expiresAt: "expires_at",
+  });
+});
+
+export function serverDataCredentialsToJSON(
+  serverDataCredentials: ServerDataCredentials,
+): string {
+  return JSON.stringify(
+    ServerDataCredentials$outboundSchema.parse(serverDataCredentials),
+  );
+}
+export function serverDataCredentialsFromJSON(
+  jsonString: string,
+): SafeParseResult<ServerDataCredentials, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ServerDataCredentials$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ServerDataCredentials' from JSON`,
+  );
+}
+
+/** @internal */
 export const ServerDataAttributes$inboundSchema: z.ZodType<
   ServerDataAttributes,
   z.ZodTypeDef,
@@ -653,7 +802,7 @@ export const ServerDataAttributes$inboundSchema: z.ZodType<
   hostname: z.string().optional(),
   label: z.string().optional(),
   price: z.nullable(z.number()).optional(),
-  status: ServerDataStatus$inboundSchema.optional(),
+  status: z.string().optional(),
   ipmi_status: z.nullable(IpmiStatus$inboundSchema).optional(),
   role: z.string().optional(),
   public_network_eligible: z.boolean().optional(),
@@ -662,6 +811,8 @@ export const ServerDataAttributes$inboundSchema: z.ZodType<
   ).optional(),
   site: z.string().optional(),
   locked: z.boolean().optional(),
+  legacy_network: z.nullable(z.boolean()).optional(),
+  features: z.nullable(z.array(z.string())).optional(),
   rescue_allowed: z.boolean().optional(),
   primary_ipv4: z.nullable(z.string()).optional(),
   primary_ipv6: z.nullable(z.string()).optional(),
@@ -673,6 +824,8 @@ export const ServerDataAttributes$inboundSchema: z.ZodType<
   region: ServerRegionResourceData$inboundSchema.optional(),
   specs: z.lazy(() => ServerDataSpecs$inboundSchema).optional(),
   interfaces: z.array(z.lazy(() => Interface$inboundSchema)).optional(),
+  credentials: z.nullable(z.lazy(() => ServerDataCredentials$inboundSchema))
+    .optional(),
   project: ProjectInclude$inboundSchema.optional(),
   team: TeamInclude$inboundSchema.optional(),
 }).transform((v) => {
@@ -680,6 +833,7 @@ export const ServerDataAttributes$inboundSchema: z.ZodType<
     "ipmi_status": "ipmiStatus",
     "public_network_eligible": "publicNetworkEligible",
     "public_network": "publicNetwork",
+    "legacy_network": "legacyNetwork",
     "rescue_allowed": "rescueAllowed",
     "primary_ipv4": "primaryIpv4",
     "primary_ipv6": "primaryIpv6",
@@ -701,6 +855,8 @@ export type ServerDataAttributes$Outbound = {
   public_network?: ServerDataPublicNetwork$Outbound | null | undefined;
   site?: string | undefined;
   locked?: boolean | undefined;
+  legacy_network?: boolean | null | undefined;
+  features?: Array<string> | null | undefined;
   rescue_allowed?: boolean | undefined;
   primary_ipv4?: string | null | undefined;
   primary_ipv6?: string | null | undefined;
@@ -711,6 +867,7 @@ export type ServerDataAttributes$Outbound = {
   region?: ServerRegionResourceData$Outbound | undefined;
   specs?: ServerDataSpecs$Outbound | undefined;
   interfaces?: Array<Interface$Outbound> | undefined;
+  credentials?: ServerDataCredentials$Outbound | null | undefined;
   project?: ProjectInclude$Outbound | undefined;
   team?: TeamInclude$Outbound | undefined;
 };
@@ -725,7 +882,7 @@ export const ServerDataAttributes$outboundSchema: z.ZodType<
   hostname: z.string().optional(),
   label: z.string().optional(),
   price: z.nullable(z.number()).optional(),
-  status: ServerDataStatus$outboundSchema.optional(),
+  status: z.string().optional(),
   ipmiStatus: z.nullable(IpmiStatus$outboundSchema).optional(),
   role: z.string().optional(),
   publicNetworkEligible: z.boolean().optional(),
@@ -734,6 +891,8 @@ export const ServerDataAttributes$outboundSchema: z.ZodType<
   ).optional(),
   site: z.string().optional(),
   locked: z.boolean().optional(),
+  legacyNetwork: z.nullable(z.boolean()).optional(),
+  features: z.nullable(z.array(z.string())).optional(),
   rescueAllowed: z.boolean().optional(),
   primaryIpv4: z.nullable(z.string()).optional(),
   primaryIpv6: z.nullable(z.string()).optional(),
@@ -745,6 +904,8 @@ export const ServerDataAttributes$outboundSchema: z.ZodType<
   region: ServerRegionResourceData$outboundSchema.optional(),
   specs: z.lazy(() => ServerDataSpecs$outboundSchema).optional(),
   interfaces: z.array(z.lazy(() => Interface$outboundSchema)).optional(),
+  credentials: z.nullable(z.lazy(() => ServerDataCredentials$outboundSchema))
+    .optional(),
   project: ProjectInclude$outboundSchema.optional(),
   team: TeamInclude$outboundSchema.optional(),
 }).transform((v) => {
@@ -752,6 +913,7 @@ export const ServerDataAttributes$outboundSchema: z.ZodType<
     ipmiStatus: "ipmi_status",
     publicNetworkEligible: "public_network_eligible",
     publicNetwork: "public_network",
+    legacyNetwork: "legacy_network",
     rescueAllowed: "rescue_allowed",
     primaryIpv4: "primary_ipv4",
     primaryIpv6: "primary_ipv6",

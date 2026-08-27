@@ -8,7 +8,9 @@ import { UpdateServerDeployConfigRequest } from "latitudesh-typescript-sdk/model
 let value: UpdateServerDeployConfigRequest = {
   serverId: "<id>",
   requestBody: {
-    type: "deploy_config",
+    data: {
+      type: "deploy_config",
+    },
   },
 };
 ```

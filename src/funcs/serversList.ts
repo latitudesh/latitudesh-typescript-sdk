@@ -121,6 +121,7 @@ async function $do(
     "filter[tags]": payload?.["filter[tags]"],
     "page[number]": payload?.["page[number]"],
     "page[size]": payload?.["page[size]"],
+    "sort": payload?.sort,
     "stats[total]": payload?.["stats[total]"],
   });
 
