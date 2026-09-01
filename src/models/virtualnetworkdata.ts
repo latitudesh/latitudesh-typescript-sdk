@@ -64,6 +64,10 @@ export type VirtualNetworkDataAttributes = {
    * Tags associated with the virtual network
    */
   tags?: Array<VirtualNetworkDataTag> | undefined;
+  /**
+   * Whether this is an auto-provisioned storage service VLAN
+   */
+  storage?: boolean | undefined;
 };
 
 export type VirtualNetworkData = {
@@ -238,6 +242,7 @@ export const VirtualNetworkDataAttributes$inboundSchema: z.ZodType<
   ).optional(),
   assignments_count: z.number().int().optional(),
   tags: z.array(z.lazy(() => VirtualNetworkDataTag$inboundSchema)).optional(),
+  storage: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     "created_at": "createdAt",
@@ -254,6 +259,7 @@ export type VirtualNetworkDataAttributes$Outbound = {
   created_at?: string | null | undefined;
   assignments_count?: number | undefined;
   tags?: Array<VirtualNetworkDataTag$Outbound> | undefined;
+  storage?: boolean | undefined;
 };
 
 /** @internal */
@@ -270,6 +276,7 @@ export const VirtualNetworkDataAttributes$outboundSchema: z.ZodType<
   createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   assignmentsCount: z.number().int().optional(),
   tags: z.array(z.lazy(() => VirtualNetworkDataTag$outboundSchema)).optional(),
+  storage: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     createdAt: "created_at",

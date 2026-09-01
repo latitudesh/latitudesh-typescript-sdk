@@ -13,6 +13,7 @@ import { FilesystemStorage } from "./filesystemstorage.js";
 import { Firewalls } from "./firewalls.js";
 import { IpAddresses } from "./ipaddresses.js";
 import { KubernetesClusters } from "./kubernetesclusters.js";
+import { ManagedDatabases } from "./manageddatabases.js";
 import { MarketplaceApps } from "./marketplaceapps.js";
 import { ObjectStorage } from "./objectstorage.js";
 import { OperatingSystems } from "./operatingsystems.js";
@@ -199,5 +200,10 @@ export class Latitudesh extends ClientSDK {
   private _vpnSessions?: VpnSessions;
   get vpnSessions(): VpnSessions {
     return (this._vpnSessions ??= new VpnSessions(this._options));
+  }
+
+  private _managedDatabases?: ManagedDatabases;
+  get managedDatabases(): ManagedDatabases {
+    return (this._managedDatabases ??= new ManagedDatabases(this._options));
   }
 }

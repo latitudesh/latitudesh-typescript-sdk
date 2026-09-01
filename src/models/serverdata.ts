@@ -205,6 +205,14 @@ export type ServerDataAttributes = {
    */
   publicNetworkEligible?: boolean | undefined;
   /**
+   * Whether the server can announce a BGP Elastic IP. Lazy loaded; request it with `extra_fields[servers]=bgp_eligible`.
+   */
+  bgpEligible?: boolean | undefined;
+  /**
+   * Whether the server was deployed with the BGP option.
+   */
+  bgpDeployed?: boolean | undefined;
+  /**
    * **Preview.** Available to teams with public networks enabled. The public network this server is attached onto, or null. Fetch full details from GET /public_networks/{id}.
    */
   publicNetwork?: ServerDataPublicNetwork | null | undefined;
@@ -806,6 +814,8 @@ export const ServerDataAttributes$inboundSchema: z.ZodType<
   ipmi_status: z.nullable(IpmiStatus$inboundSchema).optional(),
   role: z.string().optional(),
   public_network_eligible: z.boolean().optional(),
+  bgp_eligible: z.boolean().optional(),
+  bgp_deployed: z.boolean().optional(),
   public_network: z.nullable(
     z.lazy(() => ServerDataPublicNetwork$inboundSchema),
   ).optional(),
@@ -832,6 +842,8 @@ export const ServerDataAttributes$inboundSchema: z.ZodType<
   return remap$(v, {
     "ipmi_status": "ipmiStatus",
     "public_network_eligible": "publicNetworkEligible",
+    "bgp_eligible": "bgpEligible",
+    "bgp_deployed": "bgpDeployed",
     "public_network": "publicNetwork",
     "legacy_network": "legacyNetwork",
     "rescue_allowed": "rescueAllowed",
@@ -852,6 +864,8 @@ export type ServerDataAttributes$Outbound = {
   ipmi_status?: string | null | undefined;
   role?: string | undefined;
   public_network_eligible?: boolean | undefined;
+  bgp_eligible?: boolean | undefined;
+  bgp_deployed?: boolean | undefined;
   public_network?: ServerDataPublicNetwork$Outbound | null | undefined;
   site?: string | undefined;
   locked?: boolean | undefined;
@@ -886,6 +900,8 @@ export const ServerDataAttributes$outboundSchema: z.ZodType<
   ipmiStatus: z.nullable(IpmiStatus$outboundSchema).optional(),
   role: z.string().optional(),
   publicNetworkEligible: z.boolean().optional(),
+  bgpEligible: z.boolean().optional(),
+  bgpDeployed: z.boolean().optional(),
   publicNetwork: z.nullable(
     z.lazy(() => ServerDataPublicNetwork$outboundSchema),
   ).optional(),
@@ -912,6 +928,8 @@ export const ServerDataAttributes$outboundSchema: z.ZodType<
   return remap$(v, {
     ipmiStatus: "ipmi_status",
     publicNetworkEligible: "public_network_eligible",
+    bgpEligible: "bgp_eligible",
+    bgpDeployed: "bgp_deployed",
     publicNetwork: "public_network",
     legacyNetwork: "legacy_network",
     rescueAllowed: "rescue_allowed",

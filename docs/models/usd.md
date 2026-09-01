@@ -1,11 +1,11 @@
-# BandwidthPlanDataUsd
+# Usd
 
 ## Example Usage
 
 ```typescript
-import { BandwidthPlanDataUsd } from "latitudesh-typescript-sdk/models";
+import { Usd } from "latitudesh-typescript-sdk/models";
 
-let value: BandwidthPlanDataUsd = {};
+let value: Usd = {};
 ```
 
 ## Fields

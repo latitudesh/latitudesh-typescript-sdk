@@ -5,7 +5,24 @@
 ```typescript
 import { VirtualMachinePlansAttributes } from "latitudesh-typescript-sdk/models";
 
-let value: VirtualMachinePlansAttributes = {};
+let value: VirtualMachinePlansAttributes = {
+  regions: [
+    {
+      pricing: {
+        "USD": {
+          hour: 2.18,
+          month: 796,
+          year: 6686,
+        },
+        "BRL": {
+          hour: 11.99,
+          month: 4376,
+          year: 36758,
+        },
+      },
+    },
+  ],
+};
 ```
 
 ## Fields

@@ -14,8 +14,14 @@ export type StorageUsageAttributes = {
    * The day this usage row refers to
    */
   date?: RFCDate | undefined;
-  storageId?: number | undefined;
-  projectId?: number | undefined;
+  /**
+   * The storage/bucket ID. A numeric value serialized as a string, e.g. "42".
+   */
+  storageId?: string | undefined;
+  /**
+   * The project ID. A numeric value serialized as a string, e.g. "1234".
+   */
+  projectId?: string | undefined;
   /**
    * Storage kind. One of: object, file, block.
    */
@@ -57,8 +63,8 @@ export const StorageUsageAttributes$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   date: z.string().transform(v => new RFCDate(v)).optional(),
-  storage_id: z.number().int().optional(),
-  project_id: z.number().int().optional(),
+  storage_id: z.string().optional(),
+  project_id: z.string().optional(),
   storage_type: z.nullable(z.string()).optional(),
   tier: z.nullable(z.string()).optional(),
   region: z.string().optional(),
@@ -80,8 +86,8 @@ export const StorageUsageAttributes$inboundSchema: z.ZodType<
 /** @internal */
 export type StorageUsageAttributes$Outbound = {
   date?: string | undefined;
-  storage_id?: number | undefined;
-  project_id?: number | undefined;
+  storage_id?: string | undefined;
+  project_id?: string | undefined;
   storage_type?: string | null | undefined;
   tier?: string | null | undefined;
   region?: string | undefined;
@@ -98,8 +104,8 @@ export const StorageUsageAttributes$outboundSchema: z.ZodType<
   StorageUsageAttributes
 > = z.object({
   date: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
-  storageId: z.number().int().optional(),
-  projectId: z.number().int().optional(),
+  storageId: z.string().optional(),
+  projectId: z.string().optional(),
   storageType: z.nullable(z.string()).optional(),
   tier: z.nullable(z.string()).optional(),
   region: z.string().optional(),

@@ -13,21 +13,21 @@ export const BandwidthPlanDataType = {
 } as const;
 export type BandwidthPlanDataType = ClosedEnum<typeof BandwidthPlanDataType>;
 
-export type BandwidthPlanDataUsd = {
+export type Usd = {
   monthly?: number | undefined;
   hourly?: number | undefined;
   yearly?: number | null | undefined;
 };
 
-export type BandwidthPlanDataBrl = {
+export type Brl = {
   monthly?: number | undefined;
   hourly?: number | undefined;
   yearly?: number | null | undefined;
 };
 
 export type BandwidthPlanDataPricing = {
-  usd?: BandwidthPlanDataUsd | undefined;
-  brl?: BandwidthPlanDataBrl | undefined;
+  usd?: Usd | undefined;
+  brl?: Brl | undefined;
 };
 
 export type BandwidthPlanDataAttributes = {
@@ -52,92 +52,72 @@ export const BandwidthPlanDataType$outboundSchema: z.ZodNativeEnum<
 > = BandwidthPlanDataType$inboundSchema;
 
 /** @internal */
-export const BandwidthPlanDataUsd$inboundSchema: z.ZodType<
-  BandwidthPlanDataUsd,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  monthly: z.number().int().optional(),
-  hourly: z.number().int().optional(),
-  yearly: z.nullable(z.number().int()).optional(),
-});
+export const Usd$inboundSchema: z.ZodType<Usd, z.ZodTypeDef, unknown> = z
+  .object({
+    monthly: z.number().int().optional(),
+    hourly: z.number().int().optional(),
+    yearly: z.nullable(z.number().int()).optional(),
+  });
 /** @internal */
-export type BandwidthPlanDataUsd$Outbound = {
+export type Usd$Outbound = {
   monthly?: number | undefined;
   hourly?: number | undefined;
   yearly?: number | null | undefined;
 };
 
 /** @internal */
-export const BandwidthPlanDataUsd$outboundSchema: z.ZodType<
-  BandwidthPlanDataUsd$Outbound,
-  z.ZodTypeDef,
-  BandwidthPlanDataUsd
-> = z.object({
-  monthly: z.number().int().optional(),
-  hourly: z.number().int().optional(),
-  yearly: z.nullable(z.number().int()).optional(),
-});
+export const Usd$outboundSchema: z.ZodType<Usd$Outbound, z.ZodTypeDef, Usd> = z
+  .object({
+    monthly: z.number().int().optional(),
+    hourly: z.number().int().optional(),
+    yearly: z.nullable(z.number().int()).optional(),
+  });
 
-export function bandwidthPlanDataUsdToJSON(
-  bandwidthPlanDataUsd: BandwidthPlanDataUsd,
-): string {
-  return JSON.stringify(
-    BandwidthPlanDataUsd$outboundSchema.parse(bandwidthPlanDataUsd),
-  );
+export function usdToJSON(usd: Usd): string {
+  return JSON.stringify(Usd$outboundSchema.parse(usd));
 }
-export function bandwidthPlanDataUsdFromJSON(
+export function usdFromJSON(
   jsonString: string,
-): SafeParseResult<BandwidthPlanDataUsd, SDKValidationError> {
+): SafeParseResult<Usd, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => BandwidthPlanDataUsd$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'BandwidthPlanDataUsd' from JSON`,
+    (x) => Usd$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Usd' from JSON`,
   );
 }
 
 /** @internal */
-export const BandwidthPlanDataBrl$inboundSchema: z.ZodType<
-  BandwidthPlanDataBrl,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  monthly: z.number().int().optional(),
-  hourly: z.number().int().optional(),
-  yearly: z.nullable(z.number().int()).optional(),
-});
+export const Brl$inboundSchema: z.ZodType<Brl, z.ZodTypeDef, unknown> = z
+  .object({
+    monthly: z.number().int().optional(),
+    hourly: z.number().int().optional(),
+    yearly: z.nullable(z.number().int()).optional(),
+  });
 /** @internal */
-export type BandwidthPlanDataBrl$Outbound = {
+export type Brl$Outbound = {
   monthly?: number | undefined;
   hourly?: number | undefined;
   yearly?: number | null | undefined;
 };
 
 /** @internal */
-export const BandwidthPlanDataBrl$outboundSchema: z.ZodType<
-  BandwidthPlanDataBrl$Outbound,
-  z.ZodTypeDef,
-  BandwidthPlanDataBrl
-> = z.object({
-  monthly: z.number().int().optional(),
-  hourly: z.number().int().optional(),
-  yearly: z.nullable(z.number().int()).optional(),
-});
+export const Brl$outboundSchema: z.ZodType<Brl$Outbound, z.ZodTypeDef, Brl> = z
+  .object({
+    monthly: z.number().int().optional(),
+    hourly: z.number().int().optional(),
+    yearly: z.nullable(z.number().int()).optional(),
+  });
 
-export function bandwidthPlanDataBrlToJSON(
-  bandwidthPlanDataBrl: BandwidthPlanDataBrl,
-): string {
-  return JSON.stringify(
-    BandwidthPlanDataBrl$outboundSchema.parse(bandwidthPlanDataBrl),
-  );
+export function brlToJSON(brl: Brl): string {
+  return JSON.stringify(Brl$outboundSchema.parse(brl));
 }
-export function bandwidthPlanDataBrlFromJSON(
+export function brlFromJSON(
   jsonString: string,
-): SafeParseResult<BandwidthPlanDataBrl, SDKValidationError> {
+): SafeParseResult<Brl, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => BandwidthPlanDataBrl$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'BandwidthPlanDataBrl' from JSON`,
+    (x) => Brl$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Brl' from JSON`,
   );
 }
 
@@ -147,13 +127,13 @@ export const BandwidthPlanDataPricing$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  usd: z.lazy(() => BandwidthPlanDataUsd$inboundSchema).optional(),
-  brl: z.lazy(() => BandwidthPlanDataBrl$inboundSchema).optional(),
+  usd: z.lazy(() => Usd$inboundSchema).optional(),
+  brl: z.lazy(() => Brl$inboundSchema).optional(),
 });
 /** @internal */
 export type BandwidthPlanDataPricing$Outbound = {
-  usd?: BandwidthPlanDataUsd$Outbound | undefined;
-  brl?: BandwidthPlanDataBrl$Outbound | undefined;
+  usd?: Usd$Outbound | undefined;
+  brl?: Brl$Outbound | undefined;
 };
 
 /** @internal */
@@ -162,8 +142,8 @@ export const BandwidthPlanDataPricing$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   BandwidthPlanDataPricing
 > = z.object({
-  usd: z.lazy(() => BandwidthPlanDataUsd$outboundSchema).optional(),
-  brl: z.lazy(() => BandwidthPlanDataBrl$outboundSchema).optional(),
+  usd: z.lazy(() => Usd$outboundSchema).optional(),
+  brl: z.lazy(() => Brl$outboundSchema).optional(),
 });
 
 export function bandwidthPlanDataPricingToJSON(

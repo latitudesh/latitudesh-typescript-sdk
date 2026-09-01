@@ -146,6 +146,7 @@ export * from "./serverscheduledeletion.js";
 export * from "./serverstartrescuemode.js";
 export * from "./serverunlock.js";
 export * from "./serverunscheduledeletion.js";
+export * from "./showmanageddatabasemetrics.js";
 export * from "./showvirtualmachine.js";
 export * from "./showvirtualmachinemetrics.js";
 export * from "./updateapikey.js";

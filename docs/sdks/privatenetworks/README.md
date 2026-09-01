@@ -428,7 +428,7 @@ run();
 
 Assign VLAN
 
-### Example Usage
+### Example Usage: Created
 
 <!-- UsageSnippet language="typescript" operationID="assign-server-virtual-network" method="post" path="/virtual_networks/assignments" example="Created" -->
 ```typescript
@@ -489,6 +489,51 @@ async function run() {
 
 run();
 ```
+### Example Usage: StorageVlanNotAssignable
+
+<!-- UsageSnippet language="typescript" operationID="assign-server-virtual-network" method="post" path="/virtual_networks/assignments" example="StorageVlanNotAssignable" -->
+```typescript
+import { Latitudesh } from "latitudesh-typescript-sdk";
+
+const latitudesh = new Latitudesh({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const result = await latitudesh.privateNetworks.assign({});
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
+import { privateNetworksAssign } from "latitudesh-typescript-sdk/funcs/privateNetworksAssign.js";
+
+// Use `LatitudeshCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const latitudesh = new LatitudeshCore({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const res = await privateNetworksAssign(latitudesh, {});
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("privateNetworksAssign failed:", res.error);
+  }
+}
+
+run();
+```
 
 ### Parameters
 
@@ -507,6 +552,7 @@ run();
 
 | Error Type                    | Status Code                   | Content Type                  |
 | ----------------------------- | ----------------------------- | ----------------------------- |
+| errors.ErrorObject            | 422                           | application/vnd.api+json      |
 | errors.LatitudeshDefaultError | 4XX, 5XX                      | \*/\*                         |
 
 ## deleteAssignment
@@ -581,4 +627,5 @@ run();
 
 | Error Type                    | Status Code                   | Content Type                  |
 | ----------------------------- | ----------------------------- | ----------------------------- |
+| errors.ErrorObject            | 422                           | application/vnd.api+json      |
 | errors.LatitudeshDefaultError | 4XX, 5XX                      | \*/\*                         |

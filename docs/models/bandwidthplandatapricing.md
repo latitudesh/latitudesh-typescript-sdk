@@ -10,7 +10,7 @@ let value: BandwidthPlanDataPricing = {};
 
 ## Fields
 
-| Field                                                            | Type                                                             | Required                                                         | Description                                                      |
-| ---------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- |
-| `usd`                                                            | [models.BandwidthPlanDataUsd](../models/bandwidthplandatausd.md) | :heavy_minus_sign:                                               | N/A                                                              |
-| `brl`                                                            | [models.BandwidthPlanDataBrl](../models/bandwidthplandatabrl.md) | :heavy_minus_sign:                                               | N/A                                                              |
+| Field                          | Type                           | Required                       | Description                    |
+| ------------------------------ | ------------------------------ | ------------------------------ | ------------------------------ |
+| `usd`                          | [models.Usd](../models/usd.md) | :heavy_minus_sign:             | N/A                            |
+| `brl`                          | [models.Brl](../models/brl.md) | :heavy_minus_sign:             | N/A                            |

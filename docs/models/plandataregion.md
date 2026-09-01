@@ -5,15 +5,28 @@
 ```typescript
 import { PlanDataRegion } from "latitudesh-typescript-sdk/models";
 
-let value: PlanDataRegion = {};
+let value: PlanDataRegion = {
+  pricing: {
+    "USD": {
+      hour: 2.18,
+      month: 796,
+      year: 6686,
+    },
+    "BRL": {
+      hour: 11.99,
+      month: 4376,
+      year: 36758,
+    },
+  },
+};
 ```
 
 ## Fields
 
-| Field                                                        | Type                                                         | Required                                                     | Description                                                  |
-| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| `name`                                                       | *string*                                                     | :heavy_minus_sign:                                           | N/A                                                          |
-| `deploysInstantly`                                           | *string*[]                                                   | :heavy_minus_sign:                                           | N/A                                                          |
-| `locations`                                                  | [models.PlanDataLocations](../models/plandatalocations.md)   | :heavy_minus_sign:                                           | N/A                                                          |
-| `stockLevel`                                                 | [models.PlanDataStockLevel](../models/plandatastocklevel.md) | :heavy_minus_sign:                                           | N/A                                                          |
-| `pricing`                                                    | [models.PlanDataPricing](../models/plandatapricing.md)       | :heavy_minus_sign:                                           | N/A                                                          |
+| Field                                                                                                           | Type                                                                                                            | Required                                                                                                        | Description                                                                                                     | Example                                                                                                         |
+| --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `name`                                                                                                          | *string*                                                                                                        | :heavy_minus_sign:                                                                                              | N/A                                                                                                             |                                                                                                                 |
+| `deploysInstantly`                                                                                              | *string*[]                                                                                                      | :heavy_minus_sign:                                                                                              | N/A                                                                                                             |                                                                                                                 |
+| `locations`                                                                                                     | [models.PlanDataLocations](../models/plandatalocations.md)                                                      | :heavy_minus_sign:                                                                                              | N/A                                                                                                             |                                                                                                                 |
+| `stockLevel`                                                                                                    | [models.PlanDataStockLevel](../models/plandatastocklevel.md)                                                    | :heavy_minus_sign:                                                                                              | N/A                                                                                                             |                                                                                                                 |
+| `pricing`                                                                                                       | Record<string, [models.PlanDataPricing](../models/plandatapricing.md)>                                          | :heavy_minus_sign:                                                                                              | Prices keyed by ISO 4217 currency code (e.g. USD, BRL).                                                         | {<br/>"USD": {<br/>"hour": 2.18,<br/>"month": 796,<br/>"year": 6686<br/>},<br/>"BRL": {<br/>"hour": 11.99,<br/>"month": 4376,<br/>"year": 36758<br/>}<br/>} |
