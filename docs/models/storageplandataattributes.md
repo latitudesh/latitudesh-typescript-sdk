@@ -5,7 +5,20 @@
 ```typescript
 import { StoragePlanDataAttributes } from "latitudesh-typescript-sdk/models";
 
-let value: StoragePlanDataAttributes = {};
+let value: StoragePlanDataAttributes = {
+  regions: [
+    {
+      pricing: {
+        "USD": {
+          month: 30,
+        },
+        "BRL": {
+          month: 165,
+        },
+      },
+    },
+  ],
+};
 ```
 
 ## Fields

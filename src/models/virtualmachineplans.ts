@@ -111,21 +111,10 @@ export type VirtualMachinePlansSpecs = {
   disk?: Disk | undefined;
 };
 
-export type VirtualMachinePlansUSD = {
-  hour?: number | undefined;
-  month?: number | undefined;
-  year?: number | undefined;
-};
-
-export type VirtualMachinePlansBRL = {
-  hour?: number | undefined;
-  month?: number | undefined;
-  year?: number | undefined;
-};
-
 export type VirtualMachinePlansPricing = {
-  usd?: VirtualMachinePlansUSD | undefined;
-  brl?: VirtualMachinePlansBRL | undefined;
+  hour?: number | undefined;
+  month?: number | undefined;
+  year?: number | undefined;
 };
 
 export type VirtualMachinePlansLocations = {
@@ -158,7 +147,10 @@ export type VirtualMachinePlansRegionStockLevel = ClosedEnum<
 export type VirtualMachinePlansRegion = {
   name?: string | undefined;
   available?: Array<string> | undefined;
-  pricing?: VirtualMachinePlansPricing | undefined;
+  /**
+   * Prices keyed by ISO 4217 currency code (e.g. USD, BRL).
+   */
+  pricing?: { [k: string]: VirtualMachinePlansPricing } | undefined;
   locations?: VirtualMachinePlansLocations | undefined;
   /**
    * The stock level in this region
@@ -456,113 +448,20 @@ export function virtualMachinePlansSpecsFromJSON(
 }
 
 /** @internal */
-export const VirtualMachinePlansUSD$inboundSchema: z.ZodType<
-  VirtualMachinePlansUSD,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  hour: z.number().optional(),
-  month: z.number().optional(),
-  year: z.number().optional(),
-});
-/** @internal */
-export type VirtualMachinePlansUSD$Outbound = {
-  hour?: number | undefined;
-  month?: number | undefined;
-  year?: number | undefined;
-};
-
-/** @internal */
-export const VirtualMachinePlansUSD$outboundSchema: z.ZodType<
-  VirtualMachinePlansUSD$Outbound,
-  z.ZodTypeDef,
-  VirtualMachinePlansUSD
-> = z.object({
-  hour: z.number().optional(),
-  month: z.number().optional(),
-  year: z.number().optional(),
-});
-
-export function virtualMachinePlansUSDToJSON(
-  virtualMachinePlansUSD: VirtualMachinePlansUSD,
-): string {
-  return JSON.stringify(
-    VirtualMachinePlansUSD$outboundSchema.parse(virtualMachinePlansUSD),
-  );
-}
-export function virtualMachinePlansUSDFromJSON(
-  jsonString: string,
-): SafeParseResult<VirtualMachinePlansUSD, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => VirtualMachinePlansUSD$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'VirtualMachinePlansUSD' from JSON`,
-  );
-}
-
-/** @internal */
-export const VirtualMachinePlansBRL$inboundSchema: z.ZodType<
-  VirtualMachinePlansBRL,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  hour: z.number().optional(),
-  month: z.number().optional(),
-  year: z.number().optional(),
-});
-/** @internal */
-export type VirtualMachinePlansBRL$Outbound = {
-  hour?: number | undefined;
-  month?: number | undefined;
-  year?: number | undefined;
-};
-
-/** @internal */
-export const VirtualMachinePlansBRL$outboundSchema: z.ZodType<
-  VirtualMachinePlansBRL$Outbound,
-  z.ZodTypeDef,
-  VirtualMachinePlansBRL
-> = z.object({
-  hour: z.number().optional(),
-  month: z.number().optional(),
-  year: z.number().optional(),
-});
-
-export function virtualMachinePlansBRLToJSON(
-  virtualMachinePlansBRL: VirtualMachinePlansBRL,
-): string {
-  return JSON.stringify(
-    VirtualMachinePlansBRL$outboundSchema.parse(virtualMachinePlansBRL),
-  );
-}
-export function virtualMachinePlansBRLFromJSON(
-  jsonString: string,
-): SafeParseResult<VirtualMachinePlansBRL, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => VirtualMachinePlansBRL$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'VirtualMachinePlansBRL' from JSON`,
-  );
-}
-
-/** @internal */
 export const VirtualMachinePlansPricing$inboundSchema: z.ZodType<
   VirtualMachinePlansPricing,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  USD: z.lazy(() => VirtualMachinePlansUSD$inboundSchema).optional(),
-  BRL: z.lazy(() => VirtualMachinePlansBRL$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "USD": "usd",
-    "BRL": "brl",
-  });
+  hour: z.number().optional(),
+  month: z.number().optional(),
+  year: z.number().optional(),
 });
 /** @internal */
 export type VirtualMachinePlansPricing$Outbound = {
-  USD?: VirtualMachinePlansUSD$Outbound | undefined;
-  BRL?: VirtualMachinePlansBRL$Outbound | undefined;
+  hour?: number | undefined;
+  month?: number | undefined;
+  year?: number | undefined;
 };
 
 /** @internal */
@@ -571,13 +470,9 @@ export const VirtualMachinePlansPricing$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   VirtualMachinePlansPricing
 > = z.object({
-  usd: z.lazy(() => VirtualMachinePlansUSD$outboundSchema).optional(),
-  brl: z.lazy(() => VirtualMachinePlansBRL$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    usd: "USD",
-    brl: "BRL",
-  });
+  hour: z.number().optional(),
+  month: z.number().optional(),
+  year: z.number().optional(),
 });
 
 export function virtualMachinePlansPricingToJSON(
@@ -666,7 +561,8 @@ export const VirtualMachinePlansRegion$inboundSchema: z.ZodType<
 > = z.object({
   name: z.string().optional(),
   available: z.array(z.string()).optional(),
-  pricing: z.lazy(() => VirtualMachinePlansPricing$inboundSchema).optional(),
+  pricing: z.record(z.lazy(() => VirtualMachinePlansPricing$inboundSchema))
+    .optional(),
   locations: z.lazy(() => VirtualMachinePlansLocations$inboundSchema)
     .optional(),
   stock_level: VirtualMachinePlansRegionStockLevel$inboundSchema.optional(),
@@ -679,7 +575,7 @@ export const VirtualMachinePlansRegion$inboundSchema: z.ZodType<
 export type VirtualMachinePlansRegion$Outbound = {
   name?: string | undefined;
   available?: Array<string> | undefined;
-  pricing?: VirtualMachinePlansPricing$Outbound | undefined;
+  pricing?: { [k: string]: VirtualMachinePlansPricing$Outbound } | undefined;
   locations?: VirtualMachinePlansLocations$Outbound | undefined;
   stock_level?: string | undefined;
 };
@@ -692,7 +588,8 @@ export const VirtualMachinePlansRegion$outboundSchema: z.ZodType<
 > = z.object({
   name: z.string().optional(),
   available: z.array(z.string()).optional(),
-  pricing: z.lazy(() => VirtualMachinePlansPricing$outboundSchema).optional(),
+  pricing: z.record(z.lazy(() => VirtualMachinePlansPricing$outboundSchema))
+    .optional(),
   locations: z.lazy(() => VirtualMachinePlansLocations$outboundSchema)
     .optional(),
   stockLevel: VirtualMachinePlansRegionStockLevel$outboundSchema.optional(),

@@ -103,6 +103,7 @@ async function $do(
 
   const query = encodeFormQuery({
     "extra_fields[servers]": payload?.["extra_fields[servers]"],
+    "filter[bgp_eligible]": payload?.["filter[bgp_eligible]"],
     "filter[created_at_gte]": payload?.["filter[created_at_gte]"],
     "filter[created_at_lte]": payload?.["filter[created_at_lte]"],
     "filter[disk][eql]": payload?.["filter[disk][eql]"],

@@ -1,11 +1,11 @@
-# BandwidthPlanDataBrl
+# Brl
 
 ## Example Usage
 
 ```typescript
-import { BandwidthPlanDataBrl } from "latitudesh-typescript-sdk/models";
+import { Brl } from "latitudesh-typescript-sdk/models";
 
-let value: BandwidthPlanDataBrl = {};
+let value: Brl = {};
 ```
 
 ## Fields

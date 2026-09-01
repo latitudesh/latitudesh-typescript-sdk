@@ -44,7 +44,7 @@ export type PostStorageVolumesMapRequest = {
 export type PostStorageVolumesMapMeta = {};
 
 /**
- * Success
+ * Accepted
  */
 export type PostStorageVolumesMapResponse = {
   data?: models.VolumeData | undefined;

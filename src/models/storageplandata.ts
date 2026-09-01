@@ -28,23 +28,17 @@ export type StoragePlanStorageClass = ClosedEnum<
   typeof StoragePlanStorageClass
 >;
 
-export type StoragePlanDataUSD = {
-  month?: number | undefined;
-};
-
-export type StoragePlanDataBRL = {
-  month?: number | undefined;
-};
-
 export type StoragePlanDataPricing = {
-  usd?: StoragePlanDataUSD | undefined;
-  brl?: StoragePlanDataBRL | undefined;
+  month?: number | undefined;
 };
 
 export type StoragePlanDataRegion = {
   name?: string | undefined;
   locations?: Array<string> | undefined;
-  pricing?: StoragePlanDataPricing | undefined;
+  /**
+   * Prices keyed by ISO 4217 currency code (e.g. USD, BRL).
+   */
+  pricing?: { [k: string]: StoragePlanDataPricing } | undefined;
 };
 
 export type StoragePlanDataAttributes = {
@@ -88,101 +82,16 @@ export const StoragePlanStorageClass$outboundSchema: z.ZodNativeEnum<
 > = StoragePlanStorageClass$inboundSchema;
 
 /** @internal */
-export const StoragePlanDataUSD$inboundSchema: z.ZodType<
-  StoragePlanDataUSD,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  month: z.number().optional(),
-});
-/** @internal */
-export type StoragePlanDataUSD$Outbound = {
-  month?: number | undefined;
-};
-
-/** @internal */
-export const StoragePlanDataUSD$outboundSchema: z.ZodType<
-  StoragePlanDataUSD$Outbound,
-  z.ZodTypeDef,
-  StoragePlanDataUSD
-> = z.object({
-  month: z.number().optional(),
-});
-
-export function storagePlanDataUSDToJSON(
-  storagePlanDataUSD: StoragePlanDataUSD,
-): string {
-  return JSON.stringify(
-    StoragePlanDataUSD$outboundSchema.parse(storagePlanDataUSD),
-  );
-}
-export function storagePlanDataUSDFromJSON(
-  jsonString: string,
-): SafeParseResult<StoragePlanDataUSD, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => StoragePlanDataUSD$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'StoragePlanDataUSD' from JSON`,
-  );
-}
-
-/** @internal */
-export const StoragePlanDataBRL$inboundSchema: z.ZodType<
-  StoragePlanDataBRL,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  month: z.number().optional(),
-});
-/** @internal */
-export type StoragePlanDataBRL$Outbound = {
-  month?: number | undefined;
-};
-
-/** @internal */
-export const StoragePlanDataBRL$outboundSchema: z.ZodType<
-  StoragePlanDataBRL$Outbound,
-  z.ZodTypeDef,
-  StoragePlanDataBRL
-> = z.object({
-  month: z.number().optional(),
-});
-
-export function storagePlanDataBRLToJSON(
-  storagePlanDataBRL: StoragePlanDataBRL,
-): string {
-  return JSON.stringify(
-    StoragePlanDataBRL$outboundSchema.parse(storagePlanDataBRL),
-  );
-}
-export function storagePlanDataBRLFromJSON(
-  jsonString: string,
-): SafeParseResult<StoragePlanDataBRL, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => StoragePlanDataBRL$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'StoragePlanDataBRL' from JSON`,
-  );
-}
-
-/** @internal */
 export const StoragePlanDataPricing$inboundSchema: z.ZodType<
   StoragePlanDataPricing,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  USD: z.lazy(() => StoragePlanDataUSD$inboundSchema).optional(),
-  BRL: z.lazy(() => StoragePlanDataBRL$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "USD": "usd",
-    "BRL": "brl",
-  });
+  month: z.number().optional(),
 });
 /** @internal */
 export type StoragePlanDataPricing$Outbound = {
-  USD?: StoragePlanDataUSD$Outbound | undefined;
-  BRL?: StoragePlanDataBRL$Outbound | undefined;
+  month?: number | undefined;
 };
 
 /** @internal */
@@ -191,13 +100,7 @@ export const StoragePlanDataPricing$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   StoragePlanDataPricing
 > = z.object({
-  usd: z.lazy(() => StoragePlanDataUSD$outboundSchema).optional(),
-  brl: z.lazy(() => StoragePlanDataBRL$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    usd: "USD",
-    brl: "BRL",
-  });
+  month: z.number().optional(),
 });
 
 export function storagePlanDataPricingToJSON(
@@ -225,13 +128,14 @@ export const StoragePlanDataRegion$inboundSchema: z.ZodType<
 > = z.object({
   name: z.string().optional(),
   locations: z.array(z.string()).optional(),
-  pricing: z.lazy(() => StoragePlanDataPricing$inboundSchema).optional(),
+  pricing: z.record(z.lazy(() => StoragePlanDataPricing$inboundSchema))
+    .optional(),
 });
 /** @internal */
 export type StoragePlanDataRegion$Outbound = {
   name?: string | undefined;
   locations?: Array<string> | undefined;
-  pricing?: StoragePlanDataPricing$Outbound | undefined;
+  pricing?: { [k: string]: StoragePlanDataPricing$Outbound } | undefined;
 };
 
 /** @internal */
@@ -242,7 +146,8 @@ export const StoragePlanDataRegion$outboundSchema: z.ZodType<
 > = z.object({
   name: z.string().optional(),
   locations: z.array(z.string()).optional(),
-  pricing: z.lazy(() => StoragePlanDataPricing$outboundSchema).optional(),
+  pricing: z.record(z.lazy(() => StoragePlanDataPricing$outboundSchema))
+    .optional(),
 });
 
 export function storagePlanDataRegionToJSON(

@@ -10,7 +10,8 @@ let value: PlanDataPricing = {};
 
 ## Fields
 
-| Field                                          | Type                                           | Required                                       | Description                                    |
-| ---------------------------------------------- | ---------------------------------------------- | ---------------------------------------------- | ---------------------------------------------- |
-| `usd`                                          | [models.PlanDataUSD](../models/plandatausd.md) | :heavy_minus_sign:                             | N/A                                            |
-| `brl`                                          | [models.PlanDataBRL](../models/plandatabrl.md) | :heavy_minus_sign:                             | N/A                                            |
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `hour`             | *number*           | :heavy_minus_sign: | N/A                |
+| `month`            | *number*           | :heavy_minus_sign: | N/A                |
+| `year`             | *number*           | :heavy_minus_sign: | N/A                |

@@ -157,7 +157,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.PostStorageVolumesMapResponse$inboundSchema),
+    M.json(202, operations.PostStorageVolumesMapResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req);

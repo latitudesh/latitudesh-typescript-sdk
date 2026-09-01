@@ -1,6 +1,6 @@
 # PostStorageVolumesMapResponse
 
-Success
+Accepted
 
 ## Example Usage
 

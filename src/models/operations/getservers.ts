@@ -75,6 +75,10 @@ export type GetServersRequest = {
    */
   filterTags?: string | undefined;
   /**
+   * Filter by whether the server can announce a BGP Elastic IP.
+   */
+  filterBgpEligible?: boolean | undefined;
+  /**
    * The `credentials` are provided as extra attributes that are lazy loaded. To request it, just set `extra_fields[servers]=credentials` in the query string.
    */
   extraFieldsServers?: string | undefined;
@@ -122,6 +126,7 @@ export const GetServersRequest$inboundSchema: z.ZodType<
   "filter[disk][gte]": z.number().int().optional(),
   "filter[disk][lte]": z.number().int().optional(),
   "filter[tags]": z.string().optional(),
+  "filter[bgp_eligible]": z.boolean().optional(),
   "extra_fields[servers]": z.string().optional(),
   sort: z.string().optional(),
   "page[size]": z.number().int().default(20),
@@ -145,6 +150,7 @@ export const GetServersRequest$inboundSchema: z.ZodType<
     "filter[disk][gte]": "filterDiskGte",
     "filter[disk][lte]": "filterDiskLte",
     "filter[tags]": "filterTags",
+    "filter[bgp_eligible]": "filterBgpEligible",
     "extra_fields[servers]": "extraFieldsServers",
     "page[size]": "pageSize",
     "page[number]": "pageNumber",
@@ -169,6 +175,7 @@ export type GetServersRequest$Outbound = {
   "filter[disk][gte]"?: number | undefined;
   "filter[disk][lte]"?: number | undefined;
   "filter[tags]"?: string | undefined;
+  "filter[bgp_eligible]"?: boolean | undefined;
   "extra_fields[servers]"?: string | undefined;
   sort?: string | undefined;
   "page[size]": number;
@@ -198,6 +205,7 @@ export const GetServersRequest$outboundSchema: z.ZodType<
   filterDiskGte: z.number().int().optional(),
   filterDiskLte: z.number().int().optional(),
   filterTags: z.string().optional(),
+  filterBgpEligible: z.boolean().optional(),
   extraFieldsServers: z.string().optional(),
   sort: z.string().optional(),
   pageSize: z.number().int().default(20),
@@ -221,6 +229,7 @@ export const GetServersRequest$outboundSchema: z.ZodType<
     filterDiskGte: "filter[disk][gte]",
     filterDiskLte: "filter[disk][lte]",
     filterTags: "filter[tags]",
+    filterBgpEligible: "filter[bgp_eligible]",
     extraFieldsServers: "extra_fields[servers]",
     pageSize: "page[size]",
     pageNumber: "page[number]",

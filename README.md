@@ -287,6 +287,10 @@ run();
 * [updateKubernetesCluster](docs/sdks/kubernetesclusters/README.md#updatekubernetescluster) - Update Kubernetes Cluster
 * [getKubernetesClusterKubeconfig](docs/sdks/kubernetesclusters/README.md#getkubernetesclusterkubeconfig) - Get Kubernetes Cluster Kubeconfig
 
+### [ManagedDatabases](docs/sdks/manageddatabases/README.md)
+
+* [showManagedDatabaseMetrics](docs/sdks/manageddatabases/README.md#showmanageddatabasemetrics) - Show managed database metrics
+
 ### [MarketplaceApps](docs/sdks/marketplaceapps/README.md)
 
 * [listMarketplaceApps](docs/sdks/marketplaceapps/README.md#listmarketplaceapps) - List marketplace apps
@@ -553,6 +557,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`kubernetesClustersListKubernetesAvailableVersions`](docs/sdks/kubernetesclusters/README.md#listkubernetesavailableversions) - List Available Kubernetes Versions
 - [`kubernetesClustersListKubernetesClusters`](docs/sdks/kubernetesclusters/README.md#listkubernetesclusters) - List Kubernetes Clusters
 - [`kubernetesClustersUpdateKubernetesCluster`](docs/sdks/kubernetesclusters/README.md#updatekubernetescluster) - Update Kubernetes Cluster
+- [`managedDatabasesShowManagedDatabaseMetrics`](docs/sdks/manageddatabases/README.md#showmanageddatabasemetrics) - Show managed database metrics
 - [`marketplaceAppsGetMarketplaceApp`](docs/sdks/marketplaceapps/README.md#getmarketplaceapp) - Retrieve a marketplace app
 - [`marketplaceAppsListMarketplaceApps`](docs/sdks/marketplaceapps/README.md#listmarketplaceapps) - List marketplace apps
 - [`objectStorageDeleteStorageAccessKeysUsername`](docs/sdks/objectstorage/README.md#deletestorageaccesskeysusername) - Delete access key
@@ -850,7 +855,7 @@ run();
 
 
 **Inherit from [`LatitudeshError`](./src/models/errors/latitudesherror.ts)**:
-* [`ErrorObject`](./src/models/errors/errorobject.ts): Applicable to 50 of 173 methods.*
+* [`ErrorObject`](./src/models/errors/errorobject.ts): Applicable to 52 of 174 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>

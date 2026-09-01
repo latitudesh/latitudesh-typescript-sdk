@@ -85,21 +85,10 @@ export const PlanDataStockLevel = {
 } as const;
 export type PlanDataStockLevel = ClosedEnum<typeof PlanDataStockLevel>;
 
-export type PlanDataUSD = {
-  hour?: number | null | undefined;
-  month?: number | null | undefined;
-  year?: number | null | undefined;
-};
-
-export type PlanDataBRL = {
-  hour?: number | null | undefined;
-  month?: number | null | undefined;
-  year?: number | null | undefined;
-};
-
 export type PlanDataPricing = {
-  usd?: PlanDataUSD | undefined;
-  brl?: PlanDataBRL | undefined;
+  hour?: number | null | undefined;
+  month?: number | null | undefined;
+  year?: number | null | undefined;
 };
 
 export type PlanDataRegion = {
@@ -107,7 +96,10 @@ export type PlanDataRegion = {
   deploysInstantly?: Array<string> | undefined;
   locations?: PlanDataLocations | undefined;
   stockLevel?: PlanDataStockLevel | undefined;
-  pricing?: PlanDataPricing | undefined;
+  /**
+   * Prices keyed by ISO 4217 currency code (e.g. USD, BRL).
+   */
+  pricing?: { [k: string]: PlanDataPricing } | undefined;
 };
 
 export type PlanDataAttributes = {
@@ -448,105 +440,20 @@ export const PlanDataStockLevel$outboundSchema: z.ZodNativeEnum<
 > = PlanDataStockLevel$inboundSchema;
 
 /** @internal */
-export const PlanDataUSD$inboundSchema: z.ZodType<
-  PlanDataUSD,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  hour: z.nullable(z.number()).optional(),
-  month: z.nullable(z.number()).optional(),
-  year: z.nullable(z.number()).optional(),
-});
-/** @internal */
-export type PlanDataUSD$Outbound = {
-  hour?: number | null | undefined;
-  month?: number | null | undefined;
-  year?: number | null | undefined;
-};
-
-/** @internal */
-export const PlanDataUSD$outboundSchema: z.ZodType<
-  PlanDataUSD$Outbound,
-  z.ZodTypeDef,
-  PlanDataUSD
-> = z.object({
-  hour: z.nullable(z.number()).optional(),
-  month: z.nullable(z.number()).optional(),
-  year: z.nullable(z.number()).optional(),
-});
-
-export function planDataUSDToJSON(planDataUSD: PlanDataUSD): string {
-  return JSON.stringify(PlanDataUSD$outboundSchema.parse(planDataUSD));
-}
-export function planDataUSDFromJSON(
-  jsonString: string,
-): SafeParseResult<PlanDataUSD, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PlanDataUSD$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PlanDataUSD' from JSON`,
-  );
-}
-
-/** @internal */
-export const PlanDataBRL$inboundSchema: z.ZodType<
-  PlanDataBRL,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  hour: z.nullable(z.number()).optional(),
-  month: z.nullable(z.number()).optional(),
-  year: z.nullable(z.number()).optional(),
-});
-/** @internal */
-export type PlanDataBRL$Outbound = {
-  hour?: number | null | undefined;
-  month?: number | null | undefined;
-  year?: number | null | undefined;
-};
-
-/** @internal */
-export const PlanDataBRL$outboundSchema: z.ZodType<
-  PlanDataBRL$Outbound,
-  z.ZodTypeDef,
-  PlanDataBRL
-> = z.object({
-  hour: z.nullable(z.number()).optional(),
-  month: z.nullable(z.number()).optional(),
-  year: z.nullable(z.number()).optional(),
-});
-
-export function planDataBRLToJSON(planDataBRL: PlanDataBRL): string {
-  return JSON.stringify(PlanDataBRL$outboundSchema.parse(planDataBRL));
-}
-export function planDataBRLFromJSON(
-  jsonString: string,
-): SafeParseResult<PlanDataBRL, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PlanDataBRL$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PlanDataBRL' from JSON`,
-  );
-}
-
-/** @internal */
 export const PlanDataPricing$inboundSchema: z.ZodType<
   PlanDataPricing,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  USD: z.lazy(() => PlanDataUSD$inboundSchema).optional(),
-  BRL: z.lazy(() => PlanDataBRL$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "USD": "usd",
-    "BRL": "brl",
-  });
+  hour: z.nullable(z.number()).optional(),
+  month: z.nullable(z.number()).optional(),
+  year: z.nullable(z.number()).optional(),
 });
 /** @internal */
 export type PlanDataPricing$Outbound = {
-  USD?: PlanDataUSD$Outbound | undefined;
-  BRL?: PlanDataBRL$Outbound | undefined;
+  hour?: number | null | undefined;
+  month?: number | null | undefined;
+  year?: number | null | undefined;
 };
 
 /** @internal */
@@ -555,13 +462,9 @@ export const PlanDataPricing$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PlanDataPricing
 > = z.object({
-  usd: z.lazy(() => PlanDataUSD$outboundSchema).optional(),
-  brl: z.lazy(() => PlanDataBRL$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    usd: "USD",
-    brl: "BRL",
-  });
+  hour: z.nullable(z.number()).optional(),
+  month: z.nullable(z.number()).optional(),
+  year: z.nullable(z.number()).optional(),
 });
 
 export function planDataPricingToJSON(
@@ -589,7 +492,7 @@ export const PlanDataRegion$inboundSchema: z.ZodType<
   deploys_instantly: z.array(z.string()).optional(),
   locations: z.lazy(() => PlanDataLocations$inboundSchema).optional(),
   stock_level: PlanDataStockLevel$inboundSchema.optional(),
-  pricing: z.lazy(() => PlanDataPricing$inboundSchema).optional(),
+  pricing: z.record(z.lazy(() => PlanDataPricing$inboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     "deploys_instantly": "deploysInstantly",
@@ -602,7 +505,7 @@ export type PlanDataRegion$Outbound = {
   deploys_instantly?: Array<string> | undefined;
   locations?: PlanDataLocations$Outbound | undefined;
   stock_level?: string | undefined;
-  pricing?: PlanDataPricing$Outbound | undefined;
+  pricing?: { [k: string]: PlanDataPricing$Outbound } | undefined;
 };
 
 /** @internal */
@@ -615,7 +518,7 @@ export const PlanDataRegion$outboundSchema: z.ZodType<
   deploysInstantly: z.array(z.string()).optional(),
   locations: z.lazy(() => PlanDataLocations$outboundSchema).optional(),
   stockLevel: PlanDataStockLevel$outboundSchema.optional(),
-  pricing: z.lazy(() => PlanDataPricing$outboundSchema).optional(),
+  pricing: z.record(z.lazy(() => PlanDataPricing$outboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     deploysInstantly: "deploys_instantly",

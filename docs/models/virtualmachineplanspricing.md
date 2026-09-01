@@ -10,7 +10,8 @@ let value: VirtualMachinePlansPricing = {};
 
 ## Fields
 
-| Field                                                                | Type                                                                 | Required                                                             | Description                                                          |
-| -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
-| `usd`                                                                | [models.VirtualMachinePlansUSD](../models/virtualmachineplansusd.md) | :heavy_minus_sign:                                                   | N/A                                                                  |
-| `brl`                                                                | [models.VirtualMachinePlansBRL](../models/virtualmachineplansbrl.md) | :heavy_minus_sign:                                                   | N/A                                                                  |
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `hour`             | *number*           | :heavy_minus_sign: | N/A                |
+| `month`            | *number*           | :heavy_minus_sign: | N/A                |
+| `year`             | *number*           | :heavy_minus_sign: | N/A                |
