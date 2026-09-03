@@ -138,7 +138,7 @@ export type ObjectStorageDataAttributes = {
 
 export type ObjectStorageData = {
   /**
-   * Object storage ID with bucket_ prefix
+   * Object storage ID with bkt_ prefix
    */
   id?: string | undefined;
   type?: ObjectStorageDataType | undefined;

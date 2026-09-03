@@ -256,11 +256,11 @@ async function run() {
         region: "DAL",
         bucketPermissions: [
           {
-            bucketId: "bucket_6VE1Wd37dXnZJ",
+            bucketId: "bkt_6VE1Wd37dXnZJ",
             permission: "readonly",
           },
           {
-            bucketId: "bucket_7WF2Xe48eYoAK",
+            bucketId: "bkt_7WF2Xe48eYoAK",
             permission: "rw",
           },
         ],
@@ -300,11 +300,11 @@ async function run() {
         region: "DAL",
         bucketPermissions: [
           {
-            bucketId: "bucket_6VE1Wd37dXnZJ",
+            bucketId: "bkt_6VE1Wd37dXnZJ",
             permission: "readonly",
           },
           {
-            bucketId: "bucket_7WF2Xe48eYoAK",
+            bucketId: "bkt_7WF2Xe48eYoAK",
             permission: "rw",
           },
         ],
