@@ -11,6 +11,10 @@ import * as models from "../index.js";
 
 export type GetServersRequest = {
   /**
+   * The server ID to filter by (exact match)
+   */
+  filterId?: string | undefined;
+  /**
    * The project ID or Slug to filter by
    */
   filterProject?: string | undefined;
@@ -23,17 +27,53 @@ export type GetServersRequest = {
    */
   filterHostname?: string | undefined;
   /**
-   * The created at greater than equal date to filter by
+   * The exact (case-sensitive) hostname of server to filter by
+   */
+  filterHostnameEql?: string | undefined;
+  /**
+   * Filter servers whose hostname starts with the provided value
+   */
+  filterHostnamePrefix?: string | undefined;
+  /**
+   * Filter servers whose hostname ends with the provided value
+   */
+  filterHostnameSuffix?: string | undefined;
+  /**
+   * Filter servers whose hostname contains the provided value
+   */
+  filterHostnameMatch?: string | undefined;
+  /**
+   * The created at greater than equal date to filter by. `created_at` is the date the server was added to the project
    */
   filterCreatedAtGte?: string | undefined;
   /**
-   * The created at less than equal date to filter by
+   * The created at less than equal date to filter by. `created_at` is the date the server was added to the project
    */
   filterCreatedAtLte?: string | undefined;
+  /**
+   * The created at date range to filter by, as two comma-separated ISO 8601 datetimes (both bounds required), e.g. `filter[created_at]=2026-01-01T00:00:00Z,2026-01-31T23:59:59Z`. `created_at` is the date the server was added to the project
+   */
+  filterCreatedAt?: string | undefined;
   /**
    * The label of server to filter by
    */
   filterLabel?: string | undefined;
+  /**
+   * The exact (case-sensitive) label of server to filter by
+   */
+  filterLabelEql?: string | undefined;
+  /**
+   * Filter servers whose label starts with the provided value
+   */
+  filterLabelPrefix?: string | undefined;
+  /**
+   * Filter servers whose label ends with the provided value
+   */
+  filterLabelSuffix?: string | undefined;
+  /**
+   * Filter servers whose label contains the provided value
+   */
+  filterLabelMatch?: string | undefined;
   /**
    * The status of server to filter by
    */
@@ -42,6 +82,22 @@ export type GetServersRequest = {
    * The platform/plan name of the server to filter by
    */
   filterPlan?: string | undefined;
+  /**
+   * The exact platform/plan name of the server to filter by (case-insensitive)
+   */
+  filterPlanEql?: string | undefined;
+  /**
+   * Filter servers whose platform/plan name starts with the provided value
+   */
+  filterPlanPrefix?: string | undefined;
+  /**
+   * Filter servers whose platform/plan name ends with the provided value
+   */
+  filterPlanSuffix?: string | undefined;
+  /**
+   * Filter servers whose platform/plan name contains the provided value
+   */
+  filterPlanMatch?: string | undefined;
   /**
    * Filter by the existence of an associated GPU
    */
@@ -110,14 +166,28 @@ export const GetServersRequest$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  "filter[id]": z.string().optional(),
   "filter[project]": z.string().optional(),
   "filter[region]": z.string().optional(),
   "filter[hostname]": z.string().optional(),
+  "filter[hostname][eql]": z.string().optional(),
+  "filter[hostname][prefix]": z.string().optional(),
+  "filter[hostname][suffix]": z.string().optional(),
+  "filter[hostname][match]": z.string().optional(),
   "filter[created_at_gte]": z.string().optional(),
   "filter[created_at_lte]": z.string().optional(),
+  "filter[created_at]": z.string().optional(),
   "filter[label]": z.string().optional(),
+  "filter[label][eql]": z.string().optional(),
+  "filter[label][prefix]": z.string().optional(),
+  "filter[label][suffix]": z.string().optional(),
+  "filter[label][match]": z.string().optional(),
   "filter[status]": z.string().optional(),
   "filter[plan]": z.string().optional(),
+  "filter[plan][eql]": z.string().optional(),
+  "filter[plan][prefix]": z.string().optional(),
+  "filter[plan][suffix]": z.string().optional(),
+  "filter[plan][match]": z.string().optional(),
   "filter[gpu]": z.boolean().optional(),
   "filter[ram][eql]": z.number().int().optional(),
   "filter[ram][gte]": z.number().int().optional(),
@@ -134,14 +204,28 @@ export const GetServersRequest$inboundSchema: z.ZodType<
   "stats[total]": z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
+    "filter[id]": "filterId",
     "filter[project]": "filterProject",
     "filter[region]": "filterRegion",
     "filter[hostname]": "filterHostname",
+    "filter[hostname][eql]": "filterHostnameEql",
+    "filter[hostname][prefix]": "filterHostnamePrefix",
+    "filter[hostname][suffix]": "filterHostnameSuffix",
+    "filter[hostname][match]": "filterHostnameMatch",
     "filter[created_at_gte]": "filterCreatedAtGte",
     "filter[created_at_lte]": "filterCreatedAtLte",
+    "filter[created_at]": "filterCreatedAt",
     "filter[label]": "filterLabel",
+    "filter[label][eql]": "filterLabelEql",
+    "filter[label][prefix]": "filterLabelPrefix",
+    "filter[label][suffix]": "filterLabelSuffix",
+    "filter[label][match]": "filterLabelMatch",
     "filter[status]": "filterStatus",
     "filter[plan]": "filterPlan",
+    "filter[plan][eql]": "filterPlanEql",
+    "filter[plan][prefix]": "filterPlanPrefix",
+    "filter[plan][suffix]": "filterPlanSuffix",
+    "filter[plan][match]": "filterPlanMatch",
     "filter[gpu]": "filterGpu",
     "filter[ram][eql]": "filterRamEql",
     "filter[ram][gte]": "filterRamGte",
@@ -159,14 +243,28 @@ export const GetServersRequest$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type GetServersRequest$Outbound = {
+  "filter[id]"?: string | undefined;
   "filter[project]"?: string | undefined;
   "filter[region]"?: string | undefined;
   "filter[hostname]"?: string | undefined;
+  "filter[hostname][eql]"?: string | undefined;
+  "filter[hostname][prefix]"?: string | undefined;
+  "filter[hostname][suffix]"?: string | undefined;
+  "filter[hostname][match]"?: string | undefined;
   "filter[created_at_gte]"?: string | undefined;
   "filter[created_at_lte]"?: string | undefined;
+  "filter[created_at]"?: string | undefined;
   "filter[label]"?: string | undefined;
+  "filter[label][eql]"?: string | undefined;
+  "filter[label][prefix]"?: string | undefined;
+  "filter[label][suffix]"?: string | undefined;
+  "filter[label][match]"?: string | undefined;
   "filter[status]"?: string | undefined;
   "filter[plan]"?: string | undefined;
+  "filter[plan][eql]"?: string | undefined;
+  "filter[plan][prefix]"?: string | undefined;
+  "filter[plan][suffix]"?: string | undefined;
+  "filter[plan][match]"?: string | undefined;
   "filter[gpu]"?: boolean | undefined;
   "filter[ram][eql]"?: number | undefined;
   "filter[ram][gte]"?: number | undefined;
@@ -189,14 +287,28 @@ export const GetServersRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetServersRequest
 > = z.object({
+  filterId: z.string().optional(),
   filterProject: z.string().optional(),
   filterRegion: z.string().optional(),
   filterHostname: z.string().optional(),
+  filterHostnameEql: z.string().optional(),
+  filterHostnamePrefix: z.string().optional(),
+  filterHostnameSuffix: z.string().optional(),
+  filterHostnameMatch: z.string().optional(),
   filterCreatedAtGte: z.string().optional(),
   filterCreatedAtLte: z.string().optional(),
+  filterCreatedAt: z.string().optional(),
   filterLabel: z.string().optional(),
+  filterLabelEql: z.string().optional(),
+  filterLabelPrefix: z.string().optional(),
+  filterLabelSuffix: z.string().optional(),
+  filterLabelMatch: z.string().optional(),
   filterStatus: z.string().optional(),
   filterPlan: z.string().optional(),
+  filterPlanEql: z.string().optional(),
+  filterPlanPrefix: z.string().optional(),
+  filterPlanSuffix: z.string().optional(),
+  filterPlanMatch: z.string().optional(),
   filterGpu: z.boolean().optional(),
   filterRamEql: z.number().int().optional(),
   filterRamGte: z.number().int().optional(),
@@ -213,14 +325,28 @@ export const GetServersRequest$outboundSchema: z.ZodType<
   statsTotal: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
+    filterId: "filter[id]",
     filterProject: "filter[project]",
     filterRegion: "filter[region]",
     filterHostname: "filter[hostname]",
+    filterHostnameEql: "filter[hostname][eql]",
+    filterHostnamePrefix: "filter[hostname][prefix]",
+    filterHostnameSuffix: "filter[hostname][suffix]",
+    filterHostnameMatch: "filter[hostname][match]",
     filterCreatedAtGte: "filter[created_at_gte]",
     filterCreatedAtLte: "filter[created_at_lte]",
+    filterCreatedAt: "filter[created_at]",
     filterLabel: "filter[label]",
+    filterLabelEql: "filter[label][eql]",
+    filterLabelPrefix: "filter[label][prefix]",
+    filterLabelSuffix: "filter[label][suffix]",
+    filterLabelMatch: "filter[label][match]",
     filterStatus: "filter[status]",
     filterPlan: "filter[plan]",
+    filterPlanEql: "filter[plan][eql]",
+    filterPlanPrefix: "filter[plan][prefix]",
+    filterPlanSuffix: "filter[plan][suffix]",
+    filterPlanMatch: "filter[plan][match]",
     filterGpu: "filter[gpu]",
     filterRamEql: "filter[ram][eql]",
     filterRamGte: "filter[ram][gte]",
