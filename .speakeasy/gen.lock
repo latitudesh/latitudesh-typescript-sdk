@@ -6,7 +6,7 @@ management:
   speakeasyVersion: 1.796.4
   generationVersion: 2.935.1
   releaseVersion: 0.8.22
-  configChecksum: b3fb26d96634c88d8b95c7578eec3f99
+  configChecksum: e614016668115f41ed35995e3bc52143
   repoURL: https://github.com/latitudesh/latitudesh-typescript-sdk.git
   installationURL: https://github.com/latitudesh/latitudesh-typescript-sdk
   published: true
