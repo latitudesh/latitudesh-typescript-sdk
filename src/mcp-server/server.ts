@@ -62,7 +62,13 @@ import { tool$kubernetesClustersGetKubernetesClusterKubeconfig } from "./tools/k
 import { tool$kubernetesClustersListKubernetesAvailableVersions } from "./tools/kubernetesClustersListKubernetesAvailableVersions.js";
 import { tool$kubernetesClustersListKubernetesClusters } from "./tools/kubernetesClustersListKubernetesClusters.js";
 import { tool$kubernetesClustersUpdateKubernetesCluster } from "./tools/kubernetesClustersUpdateKubernetesCluster.js";
+import { tool$managedDatabasesCreateManagedDatabase } from "./tools/managedDatabasesCreateManagedDatabase.js";
+import { tool$managedDatabasesDestroyManagedDatabase } from "./tools/managedDatabasesDestroyManagedDatabase.js";
+import { tool$managedDatabasesListManagedDatabaseBackups } from "./tools/managedDatabasesListManagedDatabaseBackups.js";
+import { tool$managedDatabasesListManagedDatabases } from "./tools/managedDatabasesListManagedDatabases.js";
+import { tool$managedDatabasesShowManagedDatabase } from "./tools/managedDatabasesShowManagedDatabase.js";
 import { tool$managedDatabasesShowManagedDatabaseMetrics } from "./tools/managedDatabasesShowManagedDatabaseMetrics.js";
+import { tool$managedDatabasesUpdateManagedDatabase } from "./tools/managedDatabasesUpdateManagedDatabase.js";
 import { tool$marketplaceAppsGetMarketplaceApp } from "./tools/marketplaceAppsGetMarketplaceApp.js";
 import { tool$marketplaceAppsListMarketplaceApps } from "./tools/marketplaceAppsListMarketplaceApps.js";
 import { tool$objectStorageDeleteStorageAccessKeysUsername } from "./tools/objectStorageDeleteStorageAccessKeysUsername.js";
@@ -200,7 +206,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Latitudesh",
-    version: "0.8.24",
+    version: "0.8.25",
   });
 
   const client = new LatitudeshCore({
@@ -402,6 +408,12 @@ export function createMCPServer(deps: {
   tool(tool$vpnSessionsRefreshPassword);
   tool(tool$vpnSessionsDelete);
   tool(tool$managedDatabasesShowManagedDatabaseMetrics);
+  tool(tool$managedDatabasesListManagedDatabases);
+  tool(tool$managedDatabasesCreateManagedDatabase);
+  tool(tool$managedDatabasesShowManagedDatabase);
+  tool(tool$managedDatabasesDestroyManagedDatabase);
+  tool(tool$managedDatabasesUpdateManagedDatabase);
+  tool(tool$managedDatabasesListManagedDatabaseBackups);
   tool(tool$firewallsAssignmentsCreate);
   tool(tool$teamsMembersGetTeamMembers);
   tool(tool$plansVmList);
