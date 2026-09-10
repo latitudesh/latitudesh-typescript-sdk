@@ -35,7 +35,7 @@ export type Initiator = {
  */
 export type Block = {
   /**
-   * Mapping lifecycle state: "mapping" while the mapping is being applied, "mapped" once the server can access the volume, or "failed". Mapping is asynchronous, so poll the volume until this reaches a terminal state.
+   * Mapping lifecycle state: "mapping" while the mapping is being applied, "mapped" once the server can access the volume, "unmapping" while the mapping is being removed, or "failed". Mapping and unmapping are asynchronous, so poll the volume until this reaches a terminal state. The block object becomes null once the volume is fully unmapped.
    */
   status?: string | null | undefined;
   /**

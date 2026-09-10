@@ -1,11 +1,11 @@
-# PostStorageVolumesMapAttributes
+# PostStorageVolumesMapAttributes2
 
 ## Example Usage
 
 ```typescript
-import { PostStorageVolumesMapAttributes } from "latitudesh-typescript-sdk/models/operations";
+import { PostStorageVolumesMapAttributes2 } from "latitudesh-typescript-sdk/models/operations";
 
-let value: PostStorageVolumesMapAttributes = {
+let value: PostStorageVolumesMapAttributes2 = {
   serverId: "sv_abcd1234",
 };
 ```

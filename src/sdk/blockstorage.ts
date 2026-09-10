@@ -8,6 +8,7 @@ import { blockStorageGetStorageVolumes } from "../funcs/blockStorageGetStorageVo
 import { blockStoragePostStorageVolumes } from "../funcs/blockStoragePostStorageVolumes.js";
 import { blockStoragePostStorageVolumesMap } from "../funcs/blockStoragePostStorageVolumesMap.js";
 import { blockStoragePostStorageVolumesMount } from "../funcs/blockStoragePostStorageVolumesMount.js";
+import { blockStoragePostStorageVolumesUnmap } from "../funcs/blockStoragePostStorageVolumesUnmap.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
@@ -109,6 +110,23 @@ export class BlockStorage extends ClientSDK {
     options?: RequestOptions,
   ): Promise<operations.PostStorageVolumesMapResponse> {
     return unwrapAsync(blockStoragePostStorageVolumesMap(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Unmap volume from server
+   *
+   * @remarks
+   * Unmaps a high performance volume from the server it is currently mapped to.
+   */
+  async postStorageVolumesUnmap(
+    request: operations.PostStorageVolumesUnmapRequest,
+    options?: RequestOptions,
+  ): Promise<operations.PostStorageVolumesUnmapResponse> {
+    return unwrapAsync(blockStoragePostStorageVolumesUnmap(
       this,
       request,
       options,

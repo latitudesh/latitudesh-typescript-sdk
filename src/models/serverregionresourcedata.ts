@@ -14,6 +14,7 @@ export type ServerRegionResourceDataSite = {
   slug?: string | undefined;
   facility?: string | undefined;
   rackId?: string | undefined;
+  rackName?: string | null | undefined;
 };
 
 export type ServerRegionResourceData = {
@@ -33,9 +34,11 @@ export const ServerRegionResourceDataSite$inboundSchema: z.ZodType<
   slug: z.string().optional(),
   facility: z.string().optional(),
   rack_id: z.string().optional(),
+  rack_name: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "rack_id": "rackId",
+    "rack_name": "rackName",
   });
 });
 /** @internal */
@@ -45,6 +48,7 @@ export type ServerRegionResourceDataSite$Outbound = {
   slug?: string | undefined;
   facility?: string | undefined;
   rack_id?: string | undefined;
+  rack_name?: string | null | undefined;
 };
 
 /** @internal */
@@ -58,9 +62,11 @@ export const ServerRegionResourceDataSite$outboundSchema: z.ZodType<
   slug: z.string().optional(),
   facility: z.string().optional(),
   rackId: z.string().optional(),
+  rackName: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     rackId: "rack_id",
+    rackName: "rack_name",
   });
 });
 

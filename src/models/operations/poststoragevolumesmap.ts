@@ -10,27 +10,27 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as models from "../index.js";
 
-export const PostStorageVolumesMapType = {
+export const PostStorageVolumesMapType2 = {
   Volumes: "volumes",
 } as const;
-export type PostStorageVolumesMapType = ClosedEnum<
-  typeof PostStorageVolumesMapType
+export type PostStorageVolumesMapType2 = ClosedEnum<
+  typeof PostStorageVolumesMapType2
 >;
 
-export type PostStorageVolumesMapAttributes = {
+export type PostStorageVolumesMapAttributes2 = {
   /**
    * ID of the server that will access the volume. The server must belong to the same project and location as the volume, and must be eligible for bonding.
    */
   serverId: string;
 };
 
-export type PostStorageVolumesMapData = {
-  type: PostStorageVolumesMapType;
-  attributes: PostStorageVolumesMapAttributes;
+export type PostStorageVolumesMapData2 = {
+  type: PostStorageVolumesMapType2;
+  attributes: PostStorageVolumesMapAttributes2;
 };
 
-export type PostStorageVolumesMapRequestBody = {
-  data: PostStorageVolumesMapData;
+export type PostStorageVolumesMapRequestBody2 = {
+  data: PostStorageVolumesMapData2;
 };
 
 export type PostStorageVolumesMapRequest = {
@@ -38,7 +38,7 @@ export type PostStorageVolumesMapRequest = {
    * Volume ID
    */
   id: string;
-  requestBody: PostStorageVolumesMapRequestBody;
+  requestBody: PostStorageVolumesMapRequestBody2;
 };
 
 export type PostStorageVolumesMapMeta = {};
@@ -52,17 +52,17 @@ export type PostStorageVolumesMapResponse = {
 };
 
 /** @internal */
-export const PostStorageVolumesMapType$inboundSchema: z.ZodNativeEnum<
-  typeof PostStorageVolumesMapType
-> = z.nativeEnum(PostStorageVolumesMapType);
+export const PostStorageVolumesMapType2$inboundSchema: z.ZodNativeEnum<
+  typeof PostStorageVolumesMapType2
+> = z.nativeEnum(PostStorageVolumesMapType2);
 /** @internal */
-export const PostStorageVolumesMapType$outboundSchema: z.ZodNativeEnum<
-  typeof PostStorageVolumesMapType
-> = PostStorageVolumesMapType$inboundSchema;
+export const PostStorageVolumesMapType2$outboundSchema: z.ZodNativeEnum<
+  typeof PostStorageVolumesMapType2
+> = PostStorageVolumesMapType2$inboundSchema;
 
 /** @internal */
-export const PostStorageVolumesMapAttributes$inboundSchema: z.ZodType<
-  PostStorageVolumesMapAttributes,
+export const PostStorageVolumesMapAttributes2$inboundSchema: z.ZodType<
+  PostStorageVolumesMapAttributes2,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -73,15 +73,15 @@ export const PostStorageVolumesMapAttributes$inboundSchema: z.ZodType<
   });
 });
 /** @internal */
-export type PostStorageVolumesMapAttributes$Outbound = {
+export type PostStorageVolumesMapAttributes2$Outbound = {
   server_id: string;
 };
 
 /** @internal */
-export const PostStorageVolumesMapAttributes$outboundSchema: z.ZodType<
-  PostStorageVolumesMapAttributes$Outbound,
+export const PostStorageVolumesMapAttributes2$outboundSchema: z.ZodType<
+  PostStorageVolumesMapAttributes2$Outbound,
   z.ZodTypeDef,
-  PostStorageVolumesMapAttributes
+  PostStorageVolumesMapAttributes2
 > = z.object({
   serverId: z.string(),
 }).transform((v) => {
@@ -90,105 +90,105 @@ export const PostStorageVolumesMapAttributes$outboundSchema: z.ZodType<
   });
 });
 
-export function postStorageVolumesMapAttributesToJSON(
-  postStorageVolumesMapAttributes: PostStorageVolumesMapAttributes,
+export function postStorageVolumesMapAttributes2ToJSON(
+  postStorageVolumesMapAttributes2: PostStorageVolumesMapAttributes2,
 ): string {
   return JSON.stringify(
-    PostStorageVolumesMapAttributes$outboundSchema.parse(
-      postStorageVolumesMapAttributes,
+    PostStorageVolumesMapAttributes2$outboundSchema.parse(
+      postStorageVolumesMapAttributes2,
     ),
   );
 }
-export function postStorageVolumesMapAttributesFromJSON(
+export function postStorageVolumesMapAttributes2FromJSON(
   jsonString: string,
-): SafeParseResult<PostStorageVolumesMapAttributes, SDKValidationError> {
+): SafeParseResult<PostStorageVolumesMapAttributes2, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => PostStorageVolumesMapAttributes$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PostStorageVolumesMapAttributes' from JSON`,
+    (x) => PostStorageVolumesMapAttributes2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostStorageVolumesMapAttributes2' from JSON`,
   );
 }
 
 /** @internal */
-export const PostStorageVolumesMapData$inboundSchema: z.ZodType<
-  PostStorageVolumesMapData,
+export const PostStorageVolumesMapData2$inboundSchema: z.ZodType<
+  PostStorageVolumesMapData2,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: PostStorageVolumesMapType$inboundSchema,
-  attributes: z.lazy(() => PostStorageVolumesMapAttributes$inboundSchema),
+  type: PostStorageVolumesMapType2$inboundSchema,
+  attributes: z.lazy(() => PostStorageVolumesMapAttributes2$inboundSchema),
 });
 /** @internal */
-export type PostStorageVolumesMapData$Outbound = {
+export type PostStorageVolumesMapData2$Outbound = {
   type: string;
-  attributes: PostStorageVolumesMapAttributes$Outbound;
+  attributes: PostStorageVolumesMapAttributes2$Outbound;
 };
 
 /** @internal */
-export const PostStorageVolumesMapData$outboundSchema: z.ZodType<
-  PostStorageVolumesMapData$Outbound,
+export const PostStorageVolumesMapData2$outboundSchema: z.ZodType<
+  PostStorageVolumesMapData2$Outbound,
   z.ZodTypeDef,
-  PostStorageVolumesMapData
+  PostStorageVolumesMapData2
 > = z.object({
-  type: PostStorageVolumesMapType$outboundSchema,
-  attributes: z.lazy(() => PostStorageVolumesMapAttributes$outboundSchema),
+  type: PostStorageVolumesMapType2$outboundSchema,
+  attributes: z.lazy(() => PostStorageVolumesMapAttributes2$outboundSchema),
 });
 
-export function postStorageVolumesMapDataToJSON(
-  postStorageVolumesMapData: PostStorageVolumesMapData,
+export function postStorageVolumesMapData2ToJSON(
+  postStorageVolumesMapData2: PostStorageVolumesMapData2,
 ): string {
   return JSON.stringify(
-    PostStorageVolumesMapData$outboundSchema.parse(postStorageVolumesMapData),
+    PostStorageVolumesMapData2$outboundSchema.parse(postStorageVolumesMapData2),
   );
 }
-export function postStorageVolumesMapDataFromJSON(
+export function postStorageVolumesMapData2FromJSON(
   jsonString: string,
-): SafeParseResult<PostStorageVolumesMapData, SDKValidationError> {
+): SafeParseResult<PostStorageVolumesMapData2, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => PostStorageVolumesMapData$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PostStorageVolumesMapData' from JSON`,
+    (x) => PostStorageVolumesMapData2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostStorageVolumesMapData2' from JSON`,
   );
 }
 
 /** @internal */
-export const PostStorageVolumesMapRequestBody$inboundSchema: z.ZodType<
-  PostStorageVolumesMapRequestBody,
+export const PostStorageVolumesMapRequestBody2$inboundSchema: z.ZodType<
+  PostStorageVolumesMapRequestBody2,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  data: z.lazy(() => PostStorageVolumesMapData$inboundSchema),
+  data: z.lazy(() => PostStorageVolumesMapData2$inboundSchema),
 });
 /** @internal */
-export type PostStorageVolumesMapRequestBody$Outbound = {
-  data: PostStorageVolumesMapData$Outbound;
+export type PostStorageVolumesMapRequestBody2$Outbound = {
+  data: PostStorageVolumesMapData2$Outbound;
 };
 
 /** @internal */
-export const PostStorageVolumesMapRequestBody$outboundSchema: z.ZodType<
-  PostStorageVolumesMapRequestBody$Outbound,
+export const PostStorageVolumesMapRequestBody2$outboundSchema: z.ZodType<
+  PostStorageVolumesMapRequestBody2$Outbound,
   z.ZodTypeDef,
-  PostStorageVolumesMapRequestBody
+  PostStorageVolumesMapRequestBody2
 > = z.object({
-  data: z.lazy(() => PostStorageVolumesMapData$outboundSchema),
+  data: z.lazy(() => PostStorageVolumesMapData2$outboundSchema),
 });
 
-export function postStorageVolumesMapRequestBodyToJSON(
-  postStorageVolumesMapRequestBody: PostStorageVolumesMapRequestBody,
+export function postStorageVolumesMapRequestBody2ToJSON(
+  postStorageVolumesMapRequestBody2: PostStorageVolumesMapRequestBody2,
 ): string {
   return JSON.stringify(
-    PostStorageVolumesMapRequestBody$outboundSchema.parse(
-      postStorageVolumesMapRequestBody,
+    PostStorageVolumesMapRequestBody2$outboundSchema.parse(
+      postStorageVolumesMapRequestBody2,
     ),
   );
 }
-export function postStorageVolumesMapRequestBodyFromJSON(
+export function postStorageVolumesMapRequestBody2FromJSON(
   jsonString: string,
-): SafeParseResult<PostStorageVolumesMapRequestBody, SDKValidationError> {
+): SafeParseResult<PostStorageVolumesMapRequestBody2, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => PostStorageVolumesMapRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PostStorageVolumesMapRequestBody' from JSON`,
+    (x) => PostStorageVolumesMapRequestBody2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostStorageVolumesMapRequestBody2' from JSON`,
   );
 }
 
@@ -199,7 +199,7 @@ export const PostStorageVolumesMapRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   id: z.string(),
-  RequestBody: z.lazy(() => PostStorageVolumesMapRequestBody$inboundSchema),
+  RequestBody: z.lazy(() => PostStorageVolumesMapRequestBody2$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
     "RequestBody": "requestBody",
@@ -208,7 +208,7 @@ export const PostStorageVolumesMapRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type PostStorageVolumesMapRequest$Outbound = {
   id: string;
-  RequestBody: PostStorageVolumesMapRequestBody$Outbound;
+  RequestBody: PostStorageVolumesMapRequestBody2$Outbound;
 };
 
 /** @internal */
@@ -218,7 +218,7 @@ export const PostStorageVolumesMapRequest$outboundSchema: z.ZodType<
   PostStorageVolumesMapRequest
 > = z.object({
   id: z.string(),
-  requestBody: z.lazy(() => PostStorageVolumesMapRequestBody$outboundSchema),
+  requestBody: z.lazy(() => PostStorageVolumesMapRequestBody2$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
     requestBody: "RequestBody",

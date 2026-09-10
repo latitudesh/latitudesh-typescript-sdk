@@ -33,13 +33,13 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 typescript:
-  version: 0.8.22
+  version: 0.8.23
   acceptHeaderEnum: true
   additionalDependencies:
     dependencies:
-      "@modelcontextprotocol/sdk": ^1.30.0
+      '@modelcontextprotocol/sdk': ^1.30.0
     devDependencies:
-      "@types/express": ^5.0.6
+      '@types/express': ^5.0.6
       express: ^5.2.1
     peerDependencies: {}
   additionalPackageJSON: {}
