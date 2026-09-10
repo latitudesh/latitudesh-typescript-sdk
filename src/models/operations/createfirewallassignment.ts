@@ -18,7 +18,7 @@ export type CreateFirewallAssignmentType2 = ClosedEnum<
 
 export type CreateFirewallAssignmentAttributes2 = {
   /**
-   * The server ID to assign. Provide exactly one of server_id or virtual_machine_id.
+   * The server ID to assign. Provide exactly one of server_id or virtual_machine_id. A server can be assigned to at most one firewall.
    */
   serverId?: string | undefined;
   /**

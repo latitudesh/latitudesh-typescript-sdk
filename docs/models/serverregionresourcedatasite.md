@@ -17,3 +17,4 @@ let value: ServerRegionResourceDataSite = {};
 | `slug`             | *string*           | :heavy_minus_sign: | N/A                |
 | `facility`         | *string*           | :heavy_minus_sign: | N/A                |
 | `rackId`           | *string*           | :heavy_minus_sign: | N/A                |
+| `rackName`         | *string*           | :heavy_minus_sign: | N/A                |

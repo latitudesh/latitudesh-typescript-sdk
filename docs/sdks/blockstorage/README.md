@@ -10,6 +10,7 @@
 * [deleteStorageVolumes](#deletestoragevolumes) - Delete volume
 * [postStorageVolumesMount](#poststoragevolumesmount) - Mount volume
 * [postStorageVolumesMap](#poststoragevolumesmap) - Map volume to server
+* [postStorageVolumesUnmap](#poststoragevolumesunmap) - Unmap volume from server
 
 ## getStorageVolumes
 
@@ -556,6 +557,79 @@ run();
 ### Response
 
 **Promise\<[operations.PostStorageVolumesMapResponse](../../models/operations/poststoragevolumesmapresponse.md)\>**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| errors.LatitudeshDefaultError | 4XX, 5XX                      | \*/\*                         |
+
+## postStorageVolumesUnmap
+
+Unmaps a high performance volume from the server it is currently mapped to.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="post-storage-volumes-unmap" method="post" path="/storage/volumes/{id}/unmap" -->
+```typescript
+import { Latitudesh } from "latitudesh-typescript-sdk";
+
+const latitudesh = new Latitudesh({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const result = await latitudesh.blockStorage.postStorageVolumesUnmap({
+    id: "<id>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
+import { blockStoragePostStorageVolumesUnmap } from "latitudesh-typescript-sdk/funcs/blockStoragePostStorageVolumesUnmap.js";
+
+// Use `LatitudeshCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const latitudesh = new LatitudeshCore({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const res = await blockStoragePostStorageVolumesUnmap(latitudesh, {
+    id: "<id>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("blockStoragePostStorageVolumesUnmap failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.PostStorageVolumesUnmapRequest](../../models/operations/poststoragevolumesunmaprequest.md)                                                                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.PostStorageVolumesUnmapResponse](../../models/operations/poststoragevolumesunmapresponse.md)\>**
 
 ### Errors
 

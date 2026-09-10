@@ -3,7 +3,7 @@
  */
 
 import { LatitudeshCore } from "../core.js";
-import { encodeJSON, encodeSimple } from "../lib/encodings.js";
+import { encodeSimple } from "../lib/encodings.js";
 import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
@@ -26,18 +26,18 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Map volume to server
+ * Unmap volume from server
  *
  * @remarks
- * Maps a high performance volume to a server over NVMe-TCP.
+ * Unmaps a high performance volume from the server it is currently mapped to.
  */
-export function blockStoragePostStorageVolumesMap(
+export function blockStoragePostStorageVolumesUnmap(
   client: LatitudeshCore,
-  request: operations.PostStorageVolumesMapRequest,
+  request: operations.PostStorageVolumesUnmapRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.PostStorageVolumesMapResponse,
+    operations.PostStorageVolumesUnmapResponse,
     | LatitudeshError
     | ResponseValidationError
     | ConnectionError
@@ -57,12 +57,12 @@ export function blockStoragePostStorageVolumesMap(
 
 async function $do(
   client: LatitudeshCore,
-  request: operations.PostStorageVolumesMapRequest,
+  request: operations.PostStorageVolumesUnmapRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.PostStorageVolumesMapResponse,
+      operations.PostStorageVolumesUnmapResponse,
       | LatitudeshError
       | ResponseValidationError
       | ConnectionError
@@ -78,14 +78,14 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations.PostStorageVolumesMapRequest$outboundSchema.parse(value),
+      operations.PostStorageVolumesUnmapRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.RequestBody, { explode: true });
+  const body = null;
 
   const pathParams = {
     id: encodeSimple("id", payload.id, {
@@ -93,10 +93,9 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-  const path = pathToFunc("/storage/volumes/{id}/map")(pathParams);
+  const path = pathToFunc("/storage/volumes/{id}/unmap")(pathParams);
 
   const headers = new Headers(compactMap({
-    "Content-Type": "application/json",
     Accept: "application/vnd.api+json",
   }));
 
@@ -107,7 +106,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "post-storage-volumes-map",
+    operationID: "post-storage-volumes-unmap",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -147,7 +146,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    operations.PostStorageVolumesMapResponse,
+    operations.PostStorageVolumesUnmapResponse,
     | LatitudeshError
     | ResponseValidationError
     | ConnectionError
@@ -157,7 +156,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(202, operations.PostStorageVolumesMapResponse$inboundSchema, {
+    M.json(202, operations.PostStorageVolumesUnmapResponse$inboundSchema, {
       ctype: "application/vnd.api+json",
     }),
     M.fail("4XX"),
