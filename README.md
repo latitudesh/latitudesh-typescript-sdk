@@ -291,6 +291,12 @@ run();
 ### [ManagedDatabases](docs/sdks/manageddatabases/README.md)
 
 * [showManagedDatabaseMetrics](docs/sdks/manageddatabases/README.md#showmanageddatabasemetrics) - Show managed database metrics
+* [listManagedDatabases](docs/sdks/manageddatabases/README.md#listmanageddatabases) - List managed databases
+* [createManagedDatabase](docs/sdks/manageddatabases/README.md#createmanageddatabase) - Create a managed database
+* [showManagedDatabase](docs/sdks/manageddatabases/README.md#showmanageddatabase) - Show a managed database
+* [destroyManagedDatabase](docs/sdks/manageddatabases/README.md#destroymanageddatabase) - Destroy a managed database
+* [updateManagedDatabase](docs/sdks/manageddatabases/README.md#updatemanageddatabase) - Update a managed database
+* [listManagedDatabaseBackups](docs/sdks/manageddatabases/README.md#listmanageddatabasebackups) - List managed database backups
 
 ### [MarketplaceApps](docs/sdks/marketplaceapps/README.md)
 
@@ -559,7 +565,13 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`kubernetesClustersListKubernetesAvailableVersions`](docs/sdks/kubernetesclusters/README.md#listkubernetesavailableversions) - List Available Kubernetes Versions
 - [`kubernetesClustersListKubernetesClusters`](docs/sdks/kubernetesclusters/README.md#listkubernetesclusters) - List Kubernetes Clusters
 - [`kubernetesClustersUpdateKubernetesCluster`](docs/sdks/kubernetesclusters/README.md#updatekubernetescluster) - Update Kubernetes Cluster
+- [`managedDatabasesCreateManagedDatabase`](docs/sdks/manageddatabases/README.md#createmanageddatabase) - Create a managed database
+- [`managedDatabasesDestroyManagedDatabase`](docs/sdks/manageddatabases/README.md#destroymanageddatabase) - Destroy a managed database
+- [`managedDatabasesListManagedDatabaseBackups`](docs/sdks/manageddatabases/README.md#listmanageddatabasebackups) - List managed database backups
+- [`managedDatabasesListManagedDatabases`](docs/sdks/manageddatabases/README.md#listmanageddatabases) - List managed databases
+- [`managedDatabasesShowManagedDatabase`](docs/sdks/manageddatabases/README.md#showmanageddatabase) - Show a managed database
 - [`managedDatabasesShowManagedDatabaseMetrics`](docs/sdks/manageddatabases/README.md#showmanageddatabasemetrics) - Show managed database metrics
+- [`managedDatabasesUpdateManagedDatabase`](docs/sdks/manageddatabases/README.md#updatemanageddatabase) - Update a managed database
 - [`marketplaceAppsGetMarketplaceApp`](docs/sdks/marketplaceapps/README.md#getmarketplaceapp) - Retrieve a marketplace app
 - [`marketplaceAppsListMarketplaceApps`](docs/sdks/marketplaceapps/README.md#listmarketplaceapps) - List marketplace apps
 - [`objectStorageDeleteStorageAccessKeysUsername`](docs/sdks/objectstorage/README.md#deletestorageaccesskeysusername) - Delete access key
@@ -857,7 +869,7 @@ run();
 
 
 **Inherit from [`LatitudeshError`](./src/models/errors/latitudesherror.ts)**:
-* [`ErrorObject`](./src/models/errors/errorobject.ts): Applicable to 52 of 175 methods.*
+* [`ErrorObject`](./src/models/errors/errorobject.ts): Applicable to 52 of 181 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>
