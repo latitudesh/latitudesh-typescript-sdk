@@ -101,7 +101,7 @@ async function $do(
   });
 
   const headers = new Headers(compactMap({
-    Accept: "application/json",
+    Accept: "application/vnd.api+json",
   }));
 
   const secConfig = await extractSecurity(client._options.bearer);
@@ -162,7 +162,9 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.ShowManagedDatabaseMetricsResponse$inboundSchema),
+    M.json(200, operations.ShowManagedDatabaseMetricsResponse$inboundSchema, {
+      ctype: "application/vnd.api+json",
+    }),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req);
