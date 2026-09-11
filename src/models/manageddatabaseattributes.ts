@@ -29,11 +29,11 @@ export type ManagedDatabaseAttributesType = ClosedEnum<
 >;
 
 export type ManagedDatabaseAttributesSpecs = {
-  cpu?: number | undefined;
-  memory?: number | undefined;
-  storage?: number | undefined;
-  shards?: number | undefined;
-  replicas?: number | undefined;
+  cpu?: number | null | undefined;
+  memory?: number | null | undefined;
+  storage?: number | null | undefined;
+  shards?: number | null | undefined;
+  replicas?: number | null | undefined;
   iops?: string | null | undefined;
 };
 
@@ -52,8 +52,8 @@ export type ManagedDatabaseAttributesRegion = {
 
 export type ManagedDatabaseAttributesPlan = {
   id?: string | undefined;
-  name?: string | undefined;
-  slug?: string | undefined;
+  name?: string | null | undefined;
+  slug?: string | null | undefined;
   billing?: string | undefined;
 };
 
@@ -86,7 +86,7 @@ export type ManagedDatabaseAttributesAttributes = {
   name?: string | undefined;
   engine?: string | undefined;
   status?: string | undefined;
-  namespace?: string | undefined;
+  namespace?: string | null | undefined;
   createdAt?: string | null | undefined;
   specs?: ManagedDatabaseAttributesSpecs | null | undefined;
   region?: ManagedDatabaseAttributesRegion | undefined;
@@ -98,7 +98,7 @@ export type ManagedDatabaseAttributesAttributes = {
    */
   trustedSources?: Array<string> | undefined;
   playUrl?: string | null | undefined;
-  credentials?: ManagedDatabaseAttributesCredentials | undefined;
+  credentials?: ManagedDatabaseAttributesCredentials | null | undefined;
   /**
    * Custom PostgreSQL parameters
    */
@@ -136,20 +136,20 @@ export const ManagedDatabaseAttributesSpecs$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  cpu: z.number().int().optional(),
-  memory: z.number().int().optional(),
-  storage: z.number().int().optional(),
-  shards: z.number().int().optional(),
-  replicas: z.number().int().optional(),
+  cpu: z.nullable(z.number().int()).optional(),
+  memory: z.nullable(z.number().int()).optional(),
+  storage: z.nullable(z.number().int()).optional(),
+  shards: z.nullable(z.number().int()).optional(),
+  replicas: z.nullable(z.number().int()).optional(),
   iops: z.nullable(z.string()).optional(),
 });
 /** @internal */
 export type ManagedDatabaseAttributesSpecs$Outbound = {
-  cpu?: number | undefined;
-  memory?: number | undefined;
-  storage?: number | undefined;
-  shards?: number | undefined;
-  replicas?: number | undefined;
+  cpu?: number | null | undefined;
+  memory?: number | null | undefined;
+  storage?: number | null | undefined;
+  shards?: number | null | undefined;
+  replicas?: number | null | undefined;
   iops?: string | null | undefined;
 };
 
@@ -159,11 +159,11 @@ export const ManagedDatabaseAttributesSpecs$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ManagedDatabaseAttributesSpecs
 > = z.object({
-  cpu: z.number().int().optional(),
-  memory: z.number().int().optional(),
-  storage: z.number().int().optional(),
-  shards: z.number().int().optional(),
-  replicas: z.number().int().optional(),
+  cpu: z.nullable(z.number().int()).optional(),
+  memory: z.nullable(z.number().int()).optional(),
+  storage: z.nullable(z.number().int()).optional(),
+  shards: z.nullable(z.number().int()).optional(),
+  replicas: z.nullable(z.number().int()).optional(),
   iops: z.nullable(z.string()).optional(),
 });
 
@@ -292,15 +292,15 @@ export const ManagedDatabaseAttributesPlan$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   id: z.string().optional(),
-  name: z.string().optional(),
-  slug: z.string().optional(),
+  name: z.nullable(z.string()).optional(),
+  slug: z.nullable(z.string()).optional(),
   billing: z.string().optional(),
 });
 /** @internal */
 export type ManagedDatabaseAttributesPlan$Outbound = {
   id?: string | undefined;
-  name?: string | undefined;
-  slug?: string | undefined;
+  name?: string | null | undefined;
+  slug?: string | null | undefined;
   billing?: string | undefined;
 };
 
@@ -311,8 +311,8 @@ export const ManagedDatabaseAttributesPlan$outboundSchema: z.ZodType<
   ManagedDatabaseAttributesPlan
 > = z.object({
   id: z.string().optional(),
-  name: z.string().optional(),
-  slug: z.string().optional(),
+  name: z.nullable(z.string()).optional(),
+  slug: z.nullable(z.string()).optional(),
   billing: z.string().optional(),
 });
 
@@ -493,7 +493,7 @@ export const ManagedDatabaseAttributesAttributes$inboundSchema: z.ZodType<
   name: z.string().optional(),
   engine: z.string().optional(),
   status: z.string().optional(),
-  namespace: z.string().optional(),
+  namespace: z.nullable(z.string()).optional(),
   created_at: z.nullable(z.string()).optional(),
   specs: z.nullable(z.lazy(() => ManagedDatabaseAttributesSpecs$inboundSchema))
     .optional(),
@@ -504,8 +504,9 @@ export const ManagedDatabaseAttributesAttributes$inboundSchema: z.ZodType<
   project: ProjectInclude$inboundSchema.optional(),
   trusted_sources: z.array(z.string()).optional(),
   play_url: z.nullable(z.string()).optional(),
-  credentials: z.lazy(() => ManagedDatabaseAttributesCredentials$inboundSchema)
-    .optional(),
+  credentials: z.nullable(
+    z.lazy(() => ManagedDatabaseAttributesCredentials$inboundSchema),
+  ).optional(),
   parameters: z.record(z.string()).optional(),
   pooler: z.record(z.any()).optional(),
   backup: z.record(z.any()).optional(),
@@ -524,7 +525,7 @@ export type ManagedDatabaseAttributesAttributes$Outbound = {
   name?: string | undefined;
   engine?: string | undefined;
   status?: string | undefined;
-  namespace?: string | undefined;
+  namespace?: string | null | undefined;
   created_at?: string | null | undefined;
   specs?: ManagedDatabaseAttributesSpecs$Outbound | null | undefined;
   region?: ManagedDatabaseAttributesRegion$Outbound | undefined;
@@ -533,7 +534,10 @@ export type ManagedDatabaseAttributesAttributes$Outbound = {
   project?: ProjectInclude$Outbound | undefined;
   trusted_sources?: Array<string> | undefined;
   play_url?: string | null | undefined;
-  credentials?: ManagedDatabaseAttributesCredentials$Outbound | undefined;
+  credentials?:
+    | ManagedDatabaseAttributesCredentials$Outbound
+    | null
+    | undefined;
   parameters?: { [k: string]: string } | undefined;
   pooler?: { [k: string]: any } | undefined;
   backup?: { [k: string]: any } | undefined;
@@ -550,7 +554,7 @@ export const ManagedDatabaseAttributesAttributes$outboundSchema: z.ZodType<
   name: z.string().optional(),
   engine: z.string().optional(),
   status: z.string().optional(),
-  namespace: z.string().optional(),
+  namespace: z.nullable(z.string()).optional(),
   createdAt: z.nullable(z.string()).optional(),
   specs: z.nullable(z.lazy(() => ManagedDatabaseAttributesSpecs$outboundSchema))
     .optional(),
@@ -561,8 +565,9 @@ export const ManagedDatabaseAttributesAttributes$outboundSchema: z.ZodType<
   project: ProjectInclude$outboundSchema.optional(),
   trustedSources: z.array(z.string()).optional(),
   playUrl: z.nullable(z.string()).optional(),
-  credentials: z.lazy(() => ManagedDatabaseAttributesCredentials$outboundSchema)
-    .optional(),
+  credentials: z.nullable(
+    z.lazy(() => ManagedDatabaseAttributesCredentials$outboundSchema),
+  ).optional(),
   parameters: z.record(z.string()).optional(),
   pooler: z.record(z.any()).optional(),
   backup: z.record(z.any()).optional(),

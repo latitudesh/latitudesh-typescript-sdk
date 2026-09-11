@@ -2,6 +2,8 @@
 
 ## Overview
 
+Managed database instances (PostgreSQL, ClickHouse)
+
 ### Available Operations
 
 * [showManagedDatabaseMetrics](#showmanageddatabasemetrics) - Show managed database metrics
@@ -102,6 +104,7 @@ const latitudesh = new Latitudesh({
 async function run() {
   const result = await latitudesh.managedDatabases.listManagedDatabases({
     projectId: "<id>",
+    engine: "postgres",
   });
 
   console.log(result);
@@ -127,6 +130,7 @@ const latitudesh = new LatitudeshCore({
 async function run() {
   const res = await managedDatabasesListManagedDatabases(latitudesh, {
     projectId: "<id>",
+    engine: "postgres",
   });
   if (res.ok) {
     const { value: result } = res;
@@ -177,11 +181,11 @@ async function run() {
     data: {
       type: "managed_databases",
       attributes: {
-        name: "my-analytics-db",
+        name: "my-postgres-db",
         projectId: "proj_ABC123",
         region: "ASH",
-        plan: "db.clickhouse.dev",
-        engine: "clickhouse",
+        plan: "db.psql.small",
+        engine: "postgres",
       },
     },
   });
@@ -211,11 +215,11 @@ async function run() {
     data: {
       type: "managed_databases",
       attributes: {
-        name: "my-analytics-db",
+        name: "my-postgres-db",
         projectId: "proj_ABC123",
         region: "ASH",
-        plan: "db.clickhouse.dev",
-        engine: "clickhouse",
+        plan: "db.psql.small",
+        engine: "postgres",
       },
     },
   });

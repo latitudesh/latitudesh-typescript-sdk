@@ -17,18 +17,6 @@ export type ManagedDatabasePayloadType = ClosedEnum<
 >;
 
 /**
- * Database engine
- */
-export const Engine = {
-  Clickhouse: "clickhouse",
-  Postgres: "postgres",
-} as const;
-/**
- * Database engine
- */
-export type Engine = ClosedEnum<typeof Engine>;
-
-/**
  * Billing cycle (postgres/clickhouse). Defaults to monthly when omitted.
  */
 export const ManagedDatabasePayloadBilling = {
@@ -64,13 +52,13 @@ export type ManagedDatabasePayloadAttributes = {
    */
   region: string;
   /**
-   * Plan slug (e.g. db.clickhouse.dev)
+   * Plan slug (e.g. db.psql.small)
    */
   plan: string;
   /**
    * Database engine
    */
-  engine: Engine;
+  engine: string;
   /**
    * Billing cycle (postgres/clickhouse). Defaults to monthly when omitted.
    */
@@ -110,13 +98,6 @@ export const ManagedDatabasePayloadType$inboundSchema: z.ZodNativeEnum<
 export const ManagedDatabasePayloadType$outboundSchema: z.ZodNativeEnum<
   typeof ManagedDatabasePayloadType
 > = ManagedDatabasePayloadType$inboundSchema;
-
-/** @internal */
-export const Engine$inboundSchema: z.ZodNativeEnum<typeof Engine> = z
-  .nativeEnum(Engine);
-/** @internal */
-export const Engine$outboundSchema: z.ZodNativeEnum<typeof Engine> =
-  Engine$inboundSchema;
 
 /** @internal */
 export const ManagedDatabasePayloadBilling$inboundSchema: z.ZodNativeEnum<
@@ -181,7 +162,7 @@ export const ManagedDatabasePayloadAttributes$inboundSchema: z.ZodType<
   project_id: z.string(),
   region: z.string(),
   plan: z.string(),
-  engine: Engine$inboundSchema,
+  engine: z.string(),
   billing: ManagedDatabasePayloadBilling$inboundSchema.optional(),
   parameters: z.record(z.any()).optional(),
   pooler: z.record(z.any()).optional(),
@@ -217,7 +198,7 @@ export const ManagedDatabasePayloadAttributes$outboundSchema: z.ZodType<
   projectId: z.string(),
   region: z.string(),
   plan: z.string(),
-  engine: Engine$outboundSchema,
+  engine: z.string(),
   billing: ManagedDatabasePayloadBilling$outboundSchema.optional(),
   parameters: z.record(z.any()).optional(),
   pooler: z.record(z.any()).optional(),

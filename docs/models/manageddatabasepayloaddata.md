@@ -5,7 +5,14 @@
 ```typescript
 import { ManagedDatabasePayloadData } from "latitudesh-typescript-sdk/models";
 
-let value: ManagedDatabasePayloadData = {};
+let value: ManagedDatabasePayloadData = {
+  attributes: {
+    projectId: "<id>",
+    region: "ASH",
+    plan: "db.psql.small",
+    engine: "postgres",
+  },
+};
 ```
 
 ## Fields
