@@ -9,11 +9,11 @@ let value: ManagedDatabasePayload = {
   data: {
     type: "managed_databases",
     attributes: {
-      name: "my-analytics-db",
+      name: "my-postgres-db",
       projectId: "proj_ABC123",
       region: "ASH",
-      plan: "db.clickhouse.dev",
-      engine: "clickhouse",
+      plan: "db.psql.small",
+      engine: "postgres",
     },
   },
 };
