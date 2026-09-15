@@ -10,7 +10,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetStoragePlansRequest = {
   /**
-   * Filter by storage type (filesystem or object)
+   * Filter by storage type (filesystem, object, or volume)
    */
   filterStorageType?: string | undefined;
   /**

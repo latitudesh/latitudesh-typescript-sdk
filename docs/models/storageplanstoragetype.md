@@ -5,11 +5,11 @@
 ```typescript
 import { StoragePlanStorageType } from "latitudesh-typescript-sdk/models";
 
-let value: StoragePlanStorageType = "object";
+let value: StoragePlanStorageType = "volume";
 ```
 
 ## Values
 
 ```typescript
-"filesystem" | "object"
+"filesystem" | "object" | "volume"
 ```
