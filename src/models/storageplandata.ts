@@ -8,25 +8,21 @@ import { safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
+import {
+  StoragePlanStorageClass,
+  StoragePlanStorageClass$inboundSchema,
+  StoragePlanStorageClass$outboundSchema,
+} from "./storageplanstorageclass.js";
+import {
+  StoragePlanStorageType,
+  StoragePlanStorageType$inboundSchema,
+  StoragePlanStorageType$outboundSchema,
+} from "./storageplanstoragetype.js";
 
 export const StoragePlanDataType = {
   StoragePlans: "storage_plans",
 } as const;
 export type StoragePlanDataType = ClosedEnum<typeof StoragePlanDataType>;
-
-export const StoragePlanStorageType = {
-  Filesystem: "filesystem",
-  Object: "object",
-} as const;
-export type StoragePlanStorageType = ClosedEnum<typeof StoragePlanStorageType>;
-
-export const StoragePlanStorageClass = {
-  Standard: "standard",
-  HighPerformance: "high_performance",
-} as const;
-export type StoragePlanStorageClass = ClosedEnum<
-  typeof StoragePlanStorageClass
->;
 
 export type StoragePlanDataPricing = {
   month?: number | undefined;
@@ -62,24 +58,6 @@ export const StoragePlanDataType$inboundSchema: z.ZodNativeEnum<
 export const StoragePlanDataType$outboundSchema: z.ZodNativeEnum<
   typeof StoragePlanDataType
 > = StoragePlanDataType$inboundSchema;
-
-/** @internal */
-export const StoragePlanStorageType$inboundSchema: z.ZodNativeEnum<
-  typeof StoragePlanStorageType
-> = z.nativeEnum(StoragePlanStorageType);
-/** @internal */
-export const StoragePlanStorageType$outboundSchema: z.ZodNativeEnum<
-  typeof StoragePlanStorageType
-> = StoragePlanStorageType$inboundSchema;
-
-/** @internal */
-export const StoragePlanStorageClass$inboundSchema: z.ZodNativeEnum<
-  typeof StoragePlanStorageClass
-> = z.nativeEnum(StoragePlanStorageClass);
-/** @internal */
-export const StoragePlanStorageClass$outboundSchema: z.ZodNativeEnum<
-  typeof StoragePlanStorageClass
-> = StoragePlanStorageClass$inboundSchema;
 
 /** @internal */
 export const StoragePlanDataPricing$inboundSchema: z.ZodType<

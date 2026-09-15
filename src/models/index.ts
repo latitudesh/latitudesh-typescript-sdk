@@ -94,6 +94,8 @@ export * from "./sshkeydata.js";
 export * from "./sshkeys.js";
 export * from "./storageplandata.js";
 export * from "./storageplans.js";
+export * from "./storageplanstorageclass.js";
+export * from "./storageplanstoragetype.js";
 export * from "./storageusage.js";
 export * from "./team.js";
 export * from "./teaminclude.js";
