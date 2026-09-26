@@ -4,6 +4,7 @@
 
 import { plansGet } from "../funcs/plansGet.js";
 import { plansGetBandwidth } from "../funcs/plansGetBandwidth.js";
+import { plansGetLksPlans } from "../funcs/plansGetLksPlans.js";
 import { plansGetManagedDatabasePlans } from "../funcs/plansGetManagedDatabasePlans.js";
 import { plansList } from "../funcs/plansList.js";
 import { plansListStorage } from "../funcs/plansListStorage.js";
@@ -98,6 +99,22 @@ export class Plans extends ClientSDK {
     return unwrapAsync(plansListStorage(
       this,
       request,
+      options,
+    ));
+  }
+
+  /**
+   * List LKS plans
+   *
+   * @remarks
+   * Lists bare metal plans available to LKS with per-site capacity for a node pool.
+   * `attributes.regions.locations.in_stock_count` gives the number of servers a node pool can get, keyed by site slug.
+   */
+  async getLksPlans(
+    options?: RequestOptions,
+  ): Promise<models.LksPlans> {
+    return unwrapAsync(plansGetLksPlans(
+      this,
       options,
     ));
   }

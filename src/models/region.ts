@@ -8,16 +8,17 @@ import { safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
+import {
+  RegionCountry,
+  RegionCountry$inboundSchema,
+  RegionCountry$Outbound,
+  RegionCountry$outboundSchema,
+} from "./regioncountry.js";
 
 export const RegionType = {
   Regions: "regions",
 } as const;
 export type RegionType = ClosedEnum<typeof RegionType>;
-
-export type RegionCountry = {
-  slug?: string | undefined;
-  name?: string | undefined;
-};
 
 export type RegionAttributes = {
   slug?: string | undefined;
@@ -53,44 +54,6 @@ export const RegionType$outboundSchema: z.ZodNativeEnum<typeof RegionType> =
   RegionType$inboundSchema;
 
 /** @internal */
-export const RegionCountry$inboundSchema: z.ZodType<
-  RegionCountry,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  slug: z.string().optional(),
-  name: z.string().optional(),
-});
-/** @internal */
-export type RegionCountry$Outbound = {
-  slug?: string | undefined;
-  name?: string | undefined;
-};
-
-/** @internal */
-export const RegionCountry$outboundSchema: z.ZodType<
-  RegionCountry$Outbound,
-  z.ZodTypeDef,
-  RegionCountry
-> = z.object({
-  slug: z.string().optional(),
-  name: z.string().optional(),
-});
-
-export function regionCountryToJSON(regionCountry: RegionCountry): string {
-  return JSON.stringify(RegionCountry$outboundSchema.parse(regionCountry));
-}
-export function regionCountryFromJSON(
-  jsonString: string,
-): SafeParseResult<RegionCountry, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => RegionCountry$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RegionCountry' from JSON`,
-  );
-}
-
-/** @internal */
 export const RegionAttributes$inboundSchema: z.ZodType<
   RegionAttributes,
   z.ZodTypeDef,
@@ -99,7 +62,7 @@ export const RegionAttributes$inboundSchema: z.ZodType<
   slug: z.string().optional(),
   name: z.string().optional(),
   facility: z.nullable(z.string()).optional(),
-  country: z.lazy(() => RegionCountry$inboundSchema).optional(),
+  country: RegionCountry$inboundSchema.optional(),
   type: z.nullable(z.string()).optional(),
   features: z.array(z.string()).optional(),
   network_group: z.nullable(z.string()).optional(),
@@ -128,7 +91,7 @@ export const RegionAttributes$outboundSchema: z.ZodType<
   slug: z.string().optional(),
   name: z.string().optional(),
   facility: z.nullable(z.string()).optional(),
-  country: z.lazy(() => RegionCountry$outboundSchema).optional(),
+  country: RegionCountry$outboundSchema.optional(),
   type: z.nullable(z.string()).optional(),
   features: z.array(z.string()).optional(),
   networkGroup: z.nullable(z.string()).optional(),

@@ -23,13 +23,13 @@ import { tool$baselinesPreviewDestroyBaseline } from "./tools/baselinesPreviewDe
 import { tool$baselinesPreviewGetBaseline } from "./tools/baselinesPreviewGetBaseline.js";
 import { tool$baselinesPreviewGetBaselines } from "./tools/baselinesPreviewGetBaselines.js";
 import { tool$billingListUsage } from "./tools/billingListUsage.js";
-import { tool$blockStorageDeleteStorageVolumes } from "./tools/blockStorageDeleteStorageVolumes.js";
-import { tool$blockStorageGetStorageVolume } from "./tools/blockStorageGetStorageVolume.js";
-import { tool$blockStorageGetStorageVolumes } from "./tools/blockStorageGetStorageVolumes.js";
-import { tool$blockStoragePostStorageVolumes } from "./tools/blockStoragePostStorageVolumes.js";
-import { tool$blockStoragePostStorageVolumesMap } from "./tools/blockStoragePostStorageVolumesMap.js";
-import { tool$blockStoragePostStorageVolumesMount } from "./tools/blockStoragePostStorageVolumesMount.js";
-import { tool$blockStoragePostStorageVolumesUnmap } from "./tools/blockStoragePostStorageVolumesUnmap.js";
+import { tool$blockStorageCreateVolume } from "./tools/blockStorageCreateVolume.js";
+import { tool$blockStorageDeleteVolume } from "./tools/blockStorageDeleteVolume.js";
+import { tool$blockStorageListVolumes } from "./tools/blockStorageListVolumes.js";
+import { tool$blockStorageMapVolume } from "./tools/blockStorageMapVolume.js";
+import { tool$blockStorageMountVolume } from "./tools/blockStorageMountVolume.js";
+import { tool$blockStorageRetrieveVolume } from "./tools/blockStorageRetrieveVolume.js";
+import { tool$blockStorageUnmapVolume } from "./tools/blockStorageUnmapVolume.js";
 import { tool$elasticIpsCreateElasticIp } from "./tools/elasticIpsCreateElasticIp.js";
 import { tool$elasticIpsCreateElasticIpBgpSession } from "./tools/elasticIpsCreateElasticIpBgpSession.js";
 import { tool$elasticIpsDeleteElasticIp } from "./tools/elasticIpsDeleteElasticIp.js";
@@ -62,6 +62,19 @@ import { tool$kubernetesClustersGetKubernetesClusterKubeconfig } from "./tools/k
 import { tool$kubernetesClustersListKubernetesAvailableVersions } from "./tools/kubernetesClustersListKubernetesAvailableVersions.js";
 import { tool$kubernetesClustersListKubernetesClusters } from "./tools/kubernetesClustersListKubernetesClusters.js";
 import { tool$kubernetesClustersUpdateKubernetesCluster } from "./tools/kubernetesClustersUpdateKubernetesCluster.js";
+import { tool$lksCreateLKSCluster } from "./tools/lksCreateLKSCluster.js";
+import { tool$lksCreateLKSNodePool } from "./tools/lksCreateLKSNodePool.js";
+import { tool$lksDeleteLKSCluster } from "./tools/lksDeleteLKSCluster.js";
+import { tool$lksDeleteLKSNodePool } from "./tools/lksDeleteLKSNodePool.js";
+import { tool$lksGetLKSCluster } from "./tools/lksGetLKSCluster.js";
+import { tool$lksGetLKSClusterKubeconfig } from "./tools/lksGetLKSClusterKubeconfig.js";
+import { tool$lksGetLKSNodePool } from "./tools/lksGetLKSNodePool.js";
+import { tool$lksListLKSAvailableVersions } from "./tools/lksListLKSAvailableVersions.js";
+import { tool$lksListLKSClusters } from "./tools/lksListLKSClusters.js";
+import { tool$lksListLKSNodePools } from "./tools/lksListLKSNodePools.js";
+import { tool$lksListLKSSites } from "./tools/lksListLKSSites.js";
+import { tool$lksUpdateLKSCluster } from "./tools/lksUpdateLKSCluster.js";
+import { tool$lksUpdateLKSNodePool } from "./tools/lksUpdateLKSNodePool.js";
 import { tool$managedDatabasesCreateManagedDatabase } from "./tools/managedDatabasesCreateManagedDatabase.js";
 import { tool$managedDatabasesDestroyManagedDatabase } from "./tools/managedDatabasesDestroyManagedDatabase.js";
 import { tool$managedDatabasesListManagedDatabaseBackups } from "./tools/managedDatabasesListManagedDatabaseBackups.js";
@@ -89,6 +102,7 @@ import { tool$objectStoragePostStorageBuckets } from "./tools/objectStoragePostS
 import { tool$operatingSystemsListPlans } from "./tools/operatingSystemsListPlans.js";
 import { tool$plansGet } from "./tools/plansGet.js";
 import { tool$plansGetBandwidth } from "./tools/plansGetBandwidth.js";
+import { tool$plansGetLksPlans } from "./tools/plansGetLksPlans.js";
 import { tool$plansGetManagedDatabasePlans } from "./tools/plansGetManagedDatabasePlans.js";
 import { tool$plansList } from "./tools/plansList.js";
 import { tool$plansListStorage } from "./tools/plansListStorage.js";
@@ -206,7 +220,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Latitudesh",
-    version: "0.8.27",
+    version: "0.8.28",
   });
 
   const client = new LatitudeshCore({
@@ -280,11 +294,25 @@ export function createMCPServer(deps: {
   tool(tool$kubernetesClustersDeleteKubernetesCluster);
   tool(tool$kubernetesClustersUpdateKubernetesCluster);
   tool(tool$kubernetesClustersGetKubernetesClusterKubeconfig);
+  tool(tool$lksListLKSClusters);
+  tool(tool$lksCreateLKSCluster);
+  tool(tool$lksGetLKSCluster);
+  tool(tool$lksDeleteLKSCluster);
+  tool(tool$lksUpdateLKSCluster);
+  tool(tool$lksGetLKSClusterKubeconfig);
+  tool(tool$lksListLKSNodePools);
+  tool(tool$lksCreateLKSNodePool);
+  tool(tool$lksGetLKSNodePool);
+  tool(tool$lksDeleteLKSNodePool);
+  tool(tool$lksUpdateLKSNodePool);
+  tool(tool$lksListLKSAvailableVersions);
+  tool(tool$lksListLKSSites);
   tool(tool$plansList);
   tool(tool$plansGet);
   tool(tool$plansGetBandwidth);
   tool(tool$plansUpdateBandwidth);
   tool(tool$plansListStorage);
+  tool(tool$plansGetLksPlans);
   tool(tool$plansGetManagedDatabasePlans);
   tool(tool$publicNetworksGetPublicNetworks);
   tool(tool$publicNetworksCreatePublicNetwork);
@@ -355,13 +383,13 @@ export function createMCPServer(deps: {
   tool(tool$filesystemStorageListFilesystems);
   tool(tool$filesystemStorageDeleteFilesystem);
   tool(tool$filesystemStorageUpdateFilesystem);
-  tool(tool$blockStorageGetStorageVolumes);
-  tool(tool$blockStoragePostStorageVolumes);
-  tool(tool$blockStorageGetStorageVolume);
-  tool(tool$blockStorageDeleteStorageVolumes);
-  tool(tool$blockStoragePostStorageVolumesMount);
-  tool(tool$blockStoragePostStorageVolumesMap);
-  tool(tool$blockStoragePostStorageVolumesUnmap);
+  tool(tool$blockStorageListVolumes);
+  tool(tool$blockStorageCreateVolume);
+  tool(tool$blockStorageRetrieveVolume);
+  tool(tool$blockStorageDeleteVolume);
+  tool(tool$blockStorageMountVolume);
+  tool(tool$blockStorageMapVolume);
+  tool(tool$blockStorageUnmapVolume);
   tool(tool$tagsList);
   tool(tool$tagsCreate);
   tool(tool$tagsUpdate);

@@ -79,6 +79,10 @@ export type ManagedDatabasePayloadAttributes = {
    * Restore from a source database backup at create (postgres only)
    */
   recovery?: ManagedDatabasePayloadRecovery | undefined;
+  /**
+   * Optional. Reserved for cross-region read replicas (postgres only): accepted and validated, but replica provisioning is not yet active.
+   */
+  replicaRegions?: Array<string> | undefined;
 };
 
 export type ManagedDatabasePayloadData = {
@@ -169,9 +173,11 @@ export const ManagedDatabasePayloadAttributes$inboundSchema: z.ZodType<
   backup: z.record(z.any()).optional(),
   recovery: z.lazy(() => ManagedDatabasePayloadRecovery$inboundSchema)
     .optional(),
+  replica_regions: z.array(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "project_id": "projectId",
+    "replica_regions": "replicaRegions",
   });
 });
 /** @internal */
@@ -186,6 +192,7 @@ export type ManagedDatabasePayloadAttributes$Outbound = {
   pooler?: { [k: string]: any } | undefined;
   backup?: { [k: string]: any } | undefined;
   recovery?: ManagedDatabasePayloadRecovery$Outbound | undefined;
+  replica_regions?: Array<string> | undefined;
 };
 
 /** @internal */
@@ -205,9 +212,11 @@ export const ManagedDatabasePayloadAttributes$outboundSchema: z.ZodType<
   backup: z.record(z.any()).optional(),
   recovery: z.lazy(() => ManagedDatabasePayloadRecovery$outboundSchema)
     .optional(),
+  replicaRegions: z.array(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     projectId: "project_id",
+    replicaRegions: "replica_regions",
   });
 });
 

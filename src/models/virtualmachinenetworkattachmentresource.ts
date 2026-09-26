@@ -26,7 +26,7 @@ export type VirtualMachineNetworkAttachmentResourceAttributes = {
    */
   vid?: number | undefined;
   /**
-   * True if the attachment requires a VM restart to take effect
+   * Deprecated, always false. Attaching and detaching restart the VM automatically, so an attachment never waits on a manual restart.
    */
   pendingRestart?: boolean | undefined;
 };

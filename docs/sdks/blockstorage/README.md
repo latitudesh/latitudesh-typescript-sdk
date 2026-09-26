@@ -4,21 +4,21 @@
 
 ### Available Operations
 
-* [getStorageVolumes](#getstoragevolumes) - List volumes
-* [postStorageVolumes](#poststoragevolumes) - Create volume
-* [getStorageVolume](#getstoragevolume) - Retrieve volume
-* [deleteStorageVolumes](#deletestoragevolumes) - Delete volume
-* [postStorageVolumesMount](#poststoragevolumesmount) - Mount volume
-* [postStorageVolumesMap](#poststoragevolumesmap) - Map volume to server
-* [postStorageVolumesUnmap](#poststoragevolumesunmap) - Unmap volume from server
+* [listVolumes](#listvolumes) - List volumes
+* [createVolume](#createvolume) - Create volume
+* [retrieveVolume](#retrievevolume) - Retrieve volume
+* [deleteVolume](#deletevolume) - Delete volume
+* [~~mountVolume~~](#mountvolume) - Mount volume (deprecated) :warning: **Deprecated**
+* [mapVolume](#mapvolume) - Map volume
+* [unmapVolume](#unmapvolume) - Unmap volume
 
-## getStorageVolumes
+## listVolumes
 
 Lists all the volumes from a team.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-storage-volumes" method="get" path="/storage/volumes" example="Success" -->
+<!-- UsageSnippet language="typescript" operationID="list-volumes" method="get" path="/storage/volumes" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -27,7 +27,7 @@ const latitudesh = new Latitudesh({
 });
 
 async function run() {
-  const result = await latitudesh.blockStorage.getStorageVolumes({
+  const result = await latitudesh.blockStorage.listVolumes({
     filterProject: "proj_WeGoqA5AqP7nz",
   });
 
@@ -43,7 +43,7 @@ The standalone function version of this method:
 
 ```typescript
 import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
-import { blockStorageGetStorageVolumes } from "latitudesh-typescript-sdk/funcs/blockStorageGetStorageVolumes.js";
+import { blockStorageListVolumes } from "latitudesh-typescript-sdk/funcs/blockStorageListVolumes.js";
 
 // Use `LatitudeshCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -52,14 +52,14 @@ const latitudesh = new LatitudeshCore({
 });
 
 async function run() {
-  const res = await blockStorageGetStorageVolumes(latitudesh, {
+  const res = await blockStorageListVolumes(latitudesh, {
     filterProject: "proj_WeGoqA5AqP7nz",
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("blockStorageGetStorageVolumes failed:", res.error);
+    console.log("blockStorageListVolumes failed:", res.error);
   }
 }
 
@@ -70,14 +70,14 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.GetStorageVolumesRequest](../../models/operations/getstoragevolumesrequest.md)                                                                                     | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.ListVolumesRequest](../../models/operations/listvolumesrequest.md)                                                                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[operations.GetStorageVolumesResponse](../../models/operations/getstoragevolumesresponse.md)\>**
+**Promise\<[operations.ListVolumesResponse](../../models/operations/listvolumesresponse.md)\>**
 
 ### Errors
 
@@ -85,13 +85,13 @@ run();
 | ----------------------------- | ----------------------------- | ----------------------------- |
 | errors.LatitudeshDefaultError | 4XX, 5XX                      | \*/\*                         |
 
-## postStorageVolumes
+## createVolume
 
 Allows you to add persistent storage to a project. These volumes can be used to store data across your servers.
 
-### Example Usage: Created
+### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="post-storage-volumes" method="post" path="/storage/volumes" example="Created" -->
+<!-- UsageSnippet language="typescript" operationID="create-volume" method="post" path="/storage/volumes" example="Created" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -100,7 +100,7 @@ const latitudesh = new Latitudesh({
 });
 
 async function run() {
-  const result = await latitudesh.blockStorage.postStorageVolumes({
+  const result = await latitudesh.blockStorage.createVolume({
     data: {
       type: "volumes",
       attributes: {
@@ -124,7 +124,7 @@ The standalone function version of this method:
 
 ```typescript
 import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
-import { blockStoragePostStorageVolumes } from "latitudesh-typescript-sdk/funcs/blockStoragePostStorageVolumes.js";
+import { blockStorageCreateVolume } from "latitudesh-typescript-sdk/funcs/blockStorageCreateVolume.js";
 
 // Use `LatitudeshCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -133,7 +133,7 @@ const latitudesh = new LatitudeshCore({
 });
 
 async function run() {
-  const res = await blockStoragePostStorageVolumes(latitudesh, {
+  const res = await blockStorageCreateVolume(latitudesh, {
     data: {
       type: "volumes",
       attributes: {
@@ -148,72 +148,7 @@ async function run() {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("blockStoragePostStorageVolumes failed:", res.error);
-  }
-}
-
-run();
-```
-### Example Usage: Storage creation frozen
-
-<!-- UsageSnippet language="typescript" operationID="post-storage-volumes" method="post" path="/storage/volumes" example="Storage creation frozen" -->
-```typescript
-import { Latitudesh } from "latitudesh-typescript-sdk";
-
-const latitudesh = new Latitudesh({
-  bearer: process.env["LATITUDESH_BEARER"] ?? "",
-});
-
-async function run() {
-  const result = await latitudesh.blockStorage.postStorageVolumes({
-    data: {
-      type: "volumes",
-      attributes: {
-        project: "<value>",
-        name: "<value>",
-        region: "<value>",
-        sizeInGb: 1500,
-      },
-    },
-  });
-
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
-import { blockStoragePostStorageVolumes } from "latitudesh-typescript-sdk/funcs/blockStoragePostStorageVolumes.js";
-
-// Use `LatitudeshCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const latitudesh = new LatitudeshCore({
-  bearer: process.env["LATITUDESH_BEARER"] ?? "",
-});
-
-async function run() {
-  const res = await blockStoragePostStorageVolumes(latitudesh, {
-    data: {
-      type: "volumes",
-      attributes: {
-        project: "<value>",
-        name: "<value>",
-        region: "<value>",
-        sizeInGb: 1500,
-      },
-    },
-  });
-  if (res.ok) {
-    const { value: result } = res;
-    console.log(result);
-  } else {
-    console.log("blockStoragePostStorageVolumes failed:", res.error);
+    console.log("blockStorageCreateVolume failed:", res.error);
   }
 }
 
@@ -224,29 +159,28 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.PostStorageVolumesRequest](../../models/operations/poststoragevolumesrequest.md)                                                                                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.CreateVolumeRequest](../../models/operations/createvolumerequest.md)                                                                                               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[operations.PostStorageVolumesResponse](../../models/operations/poststoragevolumesresponse.md)\>**
+**Promise\<[operations.CreateVolumeResponse](../../models/operations/createvolumeresponse.md)\>**
 
 ### Errors
 
 | Error Type                    | Status Code                   | Content Type                  |
 | ----------------------------- | ----------------------------- | ----------------------------- |
-| errors.ErrorObject            | 503                           | application/vnd.api+json      |
 | errors.LatitudeshDefaultError | 4XX, 5XX                      | \*/\*                         |
 
-## getStorageVolume
+## retrieveVolume
 
 Shows details of a specific volume.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-storage-volume" method="get" path="/storage/volumes/{id}" example="Success" -->
+<!-- UsageSnippet language="typescript" operationID="retrieve-volume" method="get" path="/storage/volumes/{id}" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -255,7 +189,7 @@ const latitudesh = new Latitudesh({
 });
 
 async function run() {
-  const result = await latitudesh.blockStorage.getStorageVolume({
+  const result = await latitudesh.blockStorage.retrieveVolume({
     id: "vol_aKXgRdR3qv9k5",
   });
 
@@ -271,7 +205,7 @@ The standalone function version of this method:
 
 ```typescript
 import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
-import { blockStorageGetStorageVolume } from "latitudesh-typescript-sdk/funcs/blockStorageGetStorageVolume.js";
+import { blockStorageRetrieveVolume } from "latitudesh-typescript-sdk/funcs/blockStorageRetrieveVolume.js";
 
 // Use `LatitudeshCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -280,14 +214,14 @@ const latitudesh = new LatitudeshCore({
 });
 
 async function run() {
-  const res = await blockStorageGetStorageVolume(latitudesh, {
+  const res = await blockStorageRetrieveVolume(latitudesh, {
     id: "vol_aKXgRdR3qv9k5",
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("blockStorageGetStorageVolume failed:", res.error);
+    console.log("blockStorageRetrieveVolume failed:", res.error);
   }
 }
 
@@ -298,14 +232,14 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.GetStorageVolumeRequest](../../models/operations/getstoragevolumerequest.md)                                                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.RetrieveVolumeRequest](../../models/operations/retrievevolumerequest.md)                                                                                           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[operations.GetStorageVolumeResponse](../../models/operations/getstoragevolumeresponse.md)\>**
+**Promise\<[operations.RetrieveVolumeResponse](../../models/operations/retrievevolumeresponse.md)\>**
 
 ### Errors
 
@@ -313,13 +247,13 @@ run();
 | ----------------------------- | ----------------------------- | ----------------------------- |
 | errors.LatitudeshDefaultError | 4XX, 5XX                      | \*/\*                         |
 
-## deleteStorageVolumes
+## deleteVolume
 
 Allows you to remove a volume from a project.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="delete-storage-volumes" method="delete" path="/storage/volumes/{id}" -->
+<!-- UsageSnippet language="typescript" operationID="delete-volume" method="delete" path="/storage/volumes/{id}" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -328,7 +262,7 @@ const latitudesh = new Latitudesh({
 });
 
 async function run() {
-  await latitudesh.blockStorage.deleteStorageVolumes({
+  await latitudesh.blockStorage.deleteVolume({
     id: "<id>",
   });
 
@@ -344,7 +278,7 @@ The standalone function version of this method:
 
 ```typescript
 import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
-import { blockStorageDeleteStorageVolumes } from "latitudesh-typescript-sdk/funcs/blockStorageDeleteStorageVolumes.js";
+import { blockStorageDeleteVolume } from "latitudesh-typescript-sdk/funcs/blockStorageDeleteVolume.js";
 
 // Use `LatitudeshCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -353,14 +287,14 @@ const latitudesh = new LatitudeshCore({
 });
 
 async function run() {
-  const res = await blockStorageDeleteStorageVolumes(latitudesh, {
+  const res = await blockStorageDeleteVolume(latitudesh, {
     id: "<id>",
   });
   if (res.ok) {
     const { value: result } = res;
     
   } else {
-    console.log("blockStorageDeleteStorageVolumes failed:", res.error);
+    console.log("blockStorageDeleteVolume failed:", res.error);
   }
 }
 
@@ -371,7 +305,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.DeleteStorageVolumesRequest](../../models/operations/deletestoragevolumesrequest.md)                                                                               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.DeleteVolumeRequest](../../models/operations/deletevolumerequest.md)                                                                                               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
@@ -386,13 +320,15 @@ run();
 | ----------------------------- | ----------------------------- | ----------------------------- |
 | errors.LatitudeshDefaultError | 4XX, 5XX                      | \*/\*                         |
 
-## postStorageVolumesMount
+## ~~mountVolume~~
 
 Mounts a volume by adding the client to an allowed list
 
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
+
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="post-storage-volumes-mount" method="post" path="/storage/volumes/{id}/mount" -->
+<!-- UsageSnippet language="typescript" operationID="mount-volume" method="post" path="/storage/volumes/{id}/mount" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -401,7 +337,7 @@ const latitudesh = new Latitudesh({
 });
 
 async function run() {
-  await latitudesh.blockStorage.postStorageVolumesMount({
+  await latitudesh.blockStorage.mountVolume({
     id: "<id>",
     requestBody: {
       data: {
@@ -425,7 +361,7 @@ The standalone function version of this method:
 
 ```typescript
 import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
-import { blockStoragePostStorageVolumesMount } from "latitudesh-typescript-sdk/funcs/blockStoragePostStorageVolumesMount.js";
+import { blockStorageMountVolume } from "latitudesh-typescript-sdk/funcs/blockStorageMountVolume.js";
 
 // Use `LatitudeshCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -434,7 +370,7 @@ const latitudesh = new LatitudeshCore({
 });
 
 async function run() {
-  const res = await blockStoragePostStorageVolumesMount(latitudesh, {
+  const res = await blockStorageMountVolume(latitudesh, {
     id: "<id>",
     requestBody: {
       data: {
@@ -449,7 +385,7 @@ async function run() {
     const { value: result } = res;
     
   } else {
-    console.log("blockStoragePostStorageVolumesMount failed:", res.error);
+    console.log("blockStorageMountVolume failed:", res.error);
   }
 }
 
@@ -460,7 +396,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.PostStorageVolumesMountRequest](../../models/operations/poststoragevolumesmountrequest.md)                                                                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.MountVolumeRequest](../../models/operations/mountvolumerequest.md)                                                                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
@@ -475,13 +411,13 @@ run();
 | ----------------------------- | ----------------------------- | ----------------------------- |
 | errors.LatitudeshDefaultError | 4XX, 5XX                      | \*/\*                         |
 
-## postStorageVolumesMap
+## mapVolume
 
 Maps a high performance volume to a server over NVMe-TCP.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="post-storage-volumes-map" method="post" path="/storage/volumes/{id}/map" -->
+<!-- UsageSnippet language="typescript" operationID="map-volume" method="post" path="/storage/volumes/{id}/map" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -490,7 +426,7 @@ const latitudesh = new Latitudesh({
 });
 
 async function run() {
-  const result = await latitudesh.blockStorage.postStorageVolumesMap({
+  const result = await latitudesh.blockStorage.mapVolume({
     id: "<id>",
     requestBody: {
       data: {
@@ -514,7 +450,7 @@ The standalone function version of this method:
 
 ```typescript
 import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
-import { blockStoragePostStorageVolumesMap } from "latitudesh-typescript-sdk/funcs/blockStoragePostStorageVolumesMap.js";
+import { blockStorageMapVolume } from "latitudesh-typescript-sdk/funcs/blockStorageMapVolume.js";
 
 // Use `LatitudeshCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -523,7 +459,7 @@ const latitudesh = new LatitudeshCore({
 });
 
 async function run() {
-  const res = await blockStoragePostStorageVolumesMap(latitudesh, {
+  const res = await blockStorageMapVolume(latitudesh, {
     id: "<id>",
     requestBody: {
       data: {
@@ -538,7 +474,7 @@ async function run() {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("blockStoragePostStorageVolumesMap failed:", res.error);
+    console.log("blockStorageMapVolume failed:", res.error);
   }
 }
 
@@ -549,14 +485,14 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.PostStorageVolumesMapRequest](../../models/operations/poststoragevolumesmaprequest.md)                                                                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.MapVolumeRequest](../../models/operations/mapvolumerequest.md)                                                                                                     | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[operations.PostStorageVolumesMapResponse](../../models/operations/poststoragevolumesmapresponse.md)\>**
+**Promise\<[operations.MapVolumeResponse](../../models/operations/mapvolumeresponse.md)\>**
 
 ### Errors
 
@@ -564,13 +500,13 @@ run();
 | ----------------------------- | ----------------------------- | ----------------------------- |
 | errors.LatitudeshDefaultError | 4XX, 5XX                      | \*/\*                         |
 
-## postStorageVolumesUnmap
+## unmapVolume
 
 Unmaps a high performance volume from the server it is currently mapped to.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="post-storage-volumes-unmap" method="post" path="/storage/volumes/{id}/unmap" -->
+<!-- UsageSnippet language="typescript" operationID="unmap-volume" method="post" path="/storage/volumes/{id}/unmap" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -579,7 +515,7 @@ const latitudesh = new Latitudesh({
 });
 
 async function run() {
-  const result = await latitudesh.blockStorage.postStorageVolumesUnmap({
+  const result = await latitudesh.blockStorage.unmapVolume({
     id: "<id>",
   });
 
@@ -595,7 +531,7 @@ The standalone function version of this method:
 
 ```typescript
 import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
-import { blockStoragePostStorageVolumesUnmap } from "latitudesh-typescript-sdk/funcs/blockStoragePostStorageVolumesUnmap.js";
+import { blockStorageUnmapVolume } from "latitudesh-typescript-sdk/funcs/blockStorageUnmapVolume.js";
 
 // Use `LatitudeshCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -604,14 +540,14 @@ const latitudesh = new LatitudeshCore({
 });
 
 async function run() {
-  const res = await blockStoragePostStorageVolumesUnmap(latitudesh, {
+  const res = await blockStorageUnmapVolume(latitudesh, {
     id: "<id>",
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("blockStoragePostStorageVolumesUnmap failed:", res.error);
+    console.log("blockStorageUnmapVolume failed:", res.error);
   }
 }
 
@@ -622,14 +558,14 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.PostStorageVolumesUnmapRequest](../../models/operations/poststoragevolumesunmaprequest.md)                                                                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.UnmapVolumeRequest](../../models/operations/unmapvolumerequest.md)                                                                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[operations.PostStorageVolumesUnmapResponse](../../models/operations/poststoragevolumesunmapresponse.md)\>**
+**Promise\<[operations.UnmapVolumeResponse](../../models/operations/unmapvolumeresponse.md)\>**
 
 ### Errors
 
