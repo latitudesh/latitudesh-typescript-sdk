@@ -1,15 +1,17 @@
 # Total
 
-## Example Usage
+
+## Supported Types
+
+### `number`
 
 ```typescript
-import { Total } from "latitudesh-typescript-sdk/models";
-
-let value: Total = {};
+const value: number = 128403;
 ```
 
-## Fields
+### `string`
 
-| Field                                                                    | Type                                                                     | Required                                                                 | Description                                                              |
-| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
-| `count`                                                                  | *number*                                                                 | :heavy_minus_sign:                                                       | Total number of records, returned when `stats[total]=count` is requested |
+```typescript
+const value: string = "<value>";
+```
+

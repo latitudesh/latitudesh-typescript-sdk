@@ -10,6 +10,6 @@ let value: PaginationMetaStats = {};
 
 ## Fields
 
-| Field                              | Type                               | Required                           | Description                        |
-| ---------------------------------- | ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| `total`                            | [models.Total](../models/total.md) | :heavy_minus_sign:                 | N/A                                |
+| Field                                                          | Type                                                           | Required                                                       | Description                                                    |
+| -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- |
+| `total`                                                        | [models.PaginationMetaTotal](../models/paginationmetatotal.md) | :heavy_minus_sign:                                             | N/A                                                            |

@@ -170,9 +170,9 @@ async function run() {
       type: "servers",
       attributes: {
         project: "proj_lxWpD699qm6rk",
-        plan: "c2-small-x86",
+        plan: "m4-metal-xlarge",
         site: "ASH",
-        operatingSystem: "ubuntu_22_04_x64_lts",
+        operatingSystem: "almalinux-10",
         hostname: "BRC1",
       },
     },
@@ -204,9 +204,9 @@ async function run() {
       type: "servers",
       attributes: {
         project: "proj_lxWpD699qm6rk",
-        plan: "c2-small-x86",
+        plan: "m4-metal-xlarge",
         site: "ASH",
-        operatingSystem: "ubuntu_22_04_x64_lts",
+        operatingSystem: "almalinux-10",
         hostname: "BRC1",
       },
     },
@@ -682,7 +682,7 @@ async function run() {
         type: "deploy_config",
         attributes: {
           hostname: "my-hostname",
-          operatingSystem: "ubuntu_20_04_x64_lts",
+          operatingSystem: "centos-9-stream",
           raid: "raid-1",
           userData: "ud_5LA73qkjdaJ2o",
           sshKeys: [
@@ -721,7 +721,7 @@ async function run() {
         type: "deploy_config",
         attributes: {
           hostname: "my-hostname",
-          operatingSystem: "ubuntu_20_04_x64_lts",
+          operatingSystem: "centos-9-stream",
           raid: "raid-1",
           userData: "ud_5LA73qkjdaJ2o",
           sshKeys: [

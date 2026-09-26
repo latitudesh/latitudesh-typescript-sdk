@@ -11,6 +11,10 @@ let value: ManagedDatabasePayloadData = {
     region: "ASH",
     plan: "db.psql.small",
     engine: "postgres",
+    replicaRegions: [
+      "MIA",
+      "DAL",
+    ],
   },
 };
 ```

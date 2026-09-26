@@ -6,7 +6,7 @@
 import { PostVpnSessionAttributes2 } from "latitudesh-typescript-sdk/models/operations";
 
 let value: PostVpnSessionAttributes2 = {
-  site: "DAL",
+  site: "CHI",
   serverId: "<id>",
 };
 ```

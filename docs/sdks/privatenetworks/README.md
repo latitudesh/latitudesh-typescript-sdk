@@ -111,7 +111,7 @@ async function run() {
       type: "virtual_network",
       attributes: {
         description: "São Paulo VLAN",
-        site: "MIA",
+        site: "LAX2",
         project: "ergonomic-steel-bag",
       },
     },
@@ -143,7 +143,7 @@ async function run() {
       type: "virtual_network",
       attributes: {
         description: "São Paulo VLAN",
-        site: "MIA",
+        site: "LAX2",
         project: "ergonomic-steel-bag",
       },
     },

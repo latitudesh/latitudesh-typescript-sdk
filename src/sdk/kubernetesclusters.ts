@@ -20,6 +20,8 @@ export class KubernetesClusters extends ClientSDK {
    *
    * @remarks
    * Lists all Kubernetes clusters for a project.
+   *
+   * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   async listKubernetesClusters(
     request: operations.ListKubernetesClustersRequest,
@@ -41,6 +43,8 @@ export class KubernetesClusters extends ClientSDK {
    * **Note:** Only users with the `owner`, `administrator`, or `collaborator` role can create clusters. Users with the `billing` role cannot perform this action.
    *
    * Cluster names must follow Kubernetes naming rules: lowercase alphanumeric characters or hyphens, must start and end with an alphanumeric character, and be at most 63 characters long.
+   *
+   * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   async createKubernetesCluster(
     request: models.CreateKubernetesCluster,
@@ -64,6 +68,8 @@ export class KubernetesClusters extends ClientSDK {
    * - `minor`: The minor version number (e.g., `1.35`)
    *
    * The API returns the latest 5 supported minor versions. When upgrading clusters, you can only upgrade one minor version at a time (e.g., from 1.34 to 1.35).
+   *
+   * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   async listKubernetesAvailableVersions(
     options?: RequestOptions,
@@ -79,6 +85,8 @@ export class KubernetesClusters extends ClientSDK {
    *
    * @remarks
    * Retrieves detailed information about a Kubernetes cluster including its status, control plane, worker node details, and individual node information.
+   *
+   * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   async getKubernetesCluster(
     request: operations.GetKubernetesClusterRequest,
@@ -98,6 +106,8 @@ export class KubernetesClusters extends ClientSDK {
    * Deletes a Kubernetes cluster. This action is irreversible and will destroy all cluster resources.
    *
    * **Note:** Only users with the `owner`, `administrator`, or `collaborator` role can delete clusters. Users with the `billing` role cannot perform this action.
+   *
+   * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   async deleteKubernetesCluster(
     request: operations.DeleteKubernetesClusterRequest,
@@ -136,6 +146,8 @@ export class KubernetesClusters extends ClientSDK {
    * - **Available versions only**: The target version must be in the list returned by `GET /kubernetes_clusters/available_versions`
    *
    * Returns 202 Accepted when an update operation is triggered. Poll the GET endpoint to monitor progress. Returns 200 OK if no change is needed (no-op).
+   *
+   * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   async updateKubernetesCluster(
     request: operations.UpdateKubernetesClusterRequest,
@@ -155,6 +167,8 @@ export class KubernetesClusters extends ClientSDK {
    * Retrieves the kubeconfig file for a Kubernetes cluster. The kubeconfig is only available once the cluster is fully provisioned.
    *
    * **Note:** Only users with the `owner`, `administrator`, or `collaborator` role can access cluster credentials. Users with the `billing` role cannot perform this action.
+   *
+   * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   async getKubernetesClusterKubeconfig(
     request: operations.GetKubernetesClusterKubeconfigRequest,

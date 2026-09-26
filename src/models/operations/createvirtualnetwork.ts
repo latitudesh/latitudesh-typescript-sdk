@@ -20,24 +20,32 @@ export type CreateVirtualNetworkType2 = ClosedEnum<
  * Site slug
  */
 export const CreateVirtualNetworkSite2 = {
+  Ams: "AMS",
   Ash: "ASH",
+  Ash2: "ASH2",
+  Bgt: "BGT",
   Bue: "BUE",
   Chi: "CHI",
   Dal: "DAL",
   Fra: "FRA",
+  Fra2: "FRA2",
   Lax: "LAX",
+  Lax2: "LAX2",
   Lon: "LON",
-  Mex: "MEX",
+  Lon2: "LON2",
   Mex2: "MEX2",
-  Mia: "MIA",
   Mia2: "MIA2",
   Nyc: "NYC",
+  San3: "SAN3",
   Sao: "SAO",
   Sao2: "SAO2",
   Sgp: "SGP",
+  Sjc2: "SJC2",
   Syd: "SYD",
-  Tyo: "TYO",
-  Tyo2: "TYO2",
+  Syd2: "SYD2",
+  Tor: "TOR",
+  Tyo3: "TYO3",
+  Tyo4: "TYO4",
 } as const;
 /**
  * Site slug
