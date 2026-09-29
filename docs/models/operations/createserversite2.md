@@ -7,7 +7,7 @@ The site slug to deploy the server
 ```typescript
 import { CreateServerSite2 } from "latitudesh-typescript-sdk/models/operations";
 
-let value: CreateServerSite2 = "MEX2";
+let value: CreateServerSite2 = "LON2";
 
 // Open enum: unrecognized values are captured as Unrecognized<string>
 ```
@@ -15,5 +15,5 @@ let value: CreateServerSite2 = "MEX2";
 ## Values
 
 ```typescript
-"ASH" | "BUE" | "CHI" | "DAL" | "FRA" | "LAX" | "LON" | "MEX" | "MEX2" | "MIA" | "MIA2" | "NYC" | "SAO" | "SAO2" | "SGP" | "SYD" | "TYO" | "TYO2" | Unrecognized<string>
+"AMS" | "ASH" | "ASH2" | "BGT" | "BUE" | "CHI" | "DAL" | "FRA" | "FRA2" | "LAX" | "LAX2" | "LON" | "LON2" | "MEX2" | "MIA2" | "NYC" | "SAN3" | "SAO" | "SAO2" | "SGP" | "SJC2" | "SYD" | "SYD2" | "TOR" | "TYO3" | "TYO4" | Unrecognized<string>
 ```

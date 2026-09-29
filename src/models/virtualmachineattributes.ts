@@ -182,7 +182,7 @@ export type VirtualMachineAttributesAttributes = {
   team?: TeamInclude | undefined;
   project?: ProjectInclude | undefined;
   /**
-   * Opt-in extra field. Request via `extra_fields[virtual_machines]=pending_restart`.
+   * Deprecated, always false. Opt-in extra field, requested via `extra_fields[virtual_machines]=pending_restart`. Attaching and detaching restart the VM automatically.
    */
   pendingRestart?: boolean | undefined;
 };

@@ -1,0 +1,30 @@
+# UpdateLksNodePoolAttributes
+
+At least one attribute must be provided. max_pods_per_node is set once, at creation, and is not updatable: a PATCH that carries it is rejected with 422.
+
+## Example Usage
+
+```typescript
+import { UpdateLksNodePoolAttributes } from "latitudesh-typescript-sdk/models";
+
+let value: UpdateLksNodePoolAttributes = {
+  taints: [
+    {
+      key: "dedicated",
+      value: "gpu",
+      effect: "NoSchedule",
+    },
+  ],
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                         | Type                                                                                                                                                                          | Required                                                                                                                                                                      | Description                                                                                                                                                                   |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `name`                                                                                                                                                                        | *string*                                                                                                                                                                      | :heavy_minus_sign:                                                                                                                                                            | N/A                                                                                                                                                                           |
+| `count`                                                                                                                                                                       | *number*                                                                                                                                                                      | :heavy_minus_sign:                                                                                                                                                            | must be >= 1                                                                                                                                                                  |
+| `kubernetesVersion`                                                                                                                                                           | *string*                                                                                                                                                                      | :heavy_minus_sign:                                                                                                                                                            | A newer patch rolls a node-recreating upgrade. Must not be lower than the current patch (422 DOWNGRADE_NOT_ALLOWED) nor newer than the control-plane patch (422 VERSION_SKEW) |
+| `labels`                                                                                                                                                                      | Record<string, *string*>                                                                                                                                                      | :heavy_minus_sign:                                                                                                                                                            | Declarative replace. Omit to leave labels unchanged; send the whole map to replace it (not a merge); send {} to clear all. Same validation as on create.                      |
+| `taints`                                                                                                                                                                      | [models.LksNodePoolTaint](../models/lksnodepooltaint.md)[]                                                                                                                    | :heavy_minus_sign:                                                                                                                                                            | Declarative replace. Omit to leave taints unchanged; send the whole list to replace it; send [] to clear all. Same validation as on create.                                   |
+| `description`                                                                                                                                                                 | *string*                                                                                                                                                                      | :heavy_minus_sign:                                                                                                                                                            | N/A                                                                                                                                                                           |

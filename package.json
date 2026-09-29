@@ -1,6 +1,6 @@
 {
   "name": "latitudesh-typescript-sdk",
-  "version": "0.8.27",
+  "version": "0.8.28",
   "author": "Speakeasy",
   "type": "module",
   "bin": {

@@ -7,9 +7,9 @@ import { CreateServerAttributes2 } from "latitudesh-typescript-sdk/models/operat
 
 let value: CreateServerAttributes2 = {
   project: "<value>",
-  plan: "g3-medium-x86",
-  site: "FRA",
-  operatingSystem: "ubuntu_24_04_x64_lts",
+  plan: "g4-rtx6kpro-large",
+  site: "DAL",
+  operatingSystem: "ubuntu24_ml_in_a_box_sxm",
   hostname: "flawless-utilization.name",
 };
 ```

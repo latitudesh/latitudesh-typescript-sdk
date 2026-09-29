@@ -7,6 +7,10 @@ import { DataRegions } from "latitudesh-typescript-sdk/models";
 
 let value: DataRegions = {
   attributes: {
+    country: {
+      slug: "US",
+      name: "United States",
+    },
     features: [
       "public_network",
     ],

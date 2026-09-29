@@ -13,23 +13,6 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class FilesystemStorage extends ClientSDK {
   /**
-   * Create filesystem
-   *
-   * @remarks
-   * Allows you to add persistent storage to a project. These filesystems can be used to store data across your servers.
-   */
-  async createFilesystem(
-    request: operations.PostStorageFilesystemsRequest,
-    options?: RequestOptions,
-  ): Promise<operations.PostStorageFilesystemsResponse> {
-    return unwrapAsync(filesystemStorageCreateFilesystem(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
    * List filesystems
    *
    * @remarks
@@ -40,6 +23,23 @@ export class FilesystemStorage extends ClientSDK {
     options?: RequestOptions,
   ): Promise<models.Filesystems> {
     return unwrapAsync(filesystemStorageListFilesystems(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Create filesystem
+   *
+   * @remarks
+   * Allows you to add persistent storage to a project. These filesystems can be used to store data across your servers.
+   */
+  async createFilesystem(
+    request: operations.PostStorageFilesystemsRequest,
+    options?: RequestOptions,
+  ): Promise<operations.PostStorageFilesystemsResponse> {
+    return unwrapAsync(filesystemStorageCreateFilesystem(
       this,
       request,
       options,

@@ -13,7 +13,7 @@ const args = {
 
 export const tool$virtualMachinesDestroyVirtualMachineNetworkAttachment:
   ToolDefinition<typeof args> = {
-    name: "virtual-machines-destroy-virtual-machine-network-attachment",
+    name: "virtual-machines-destroy-network-attachment",
     description: `Detach a network from a VM
 
 Detaches a virtual network (VLAN) from a Virtual Machine. Work runs asynchronously and returns 202 Accepted.

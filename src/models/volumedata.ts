@@ -31,6 +31,36 @@ export type Initiator = {
 };
 
 /**
+ * Storage network the mapped server joins to reach the volume over NVMe-TCP. Null until the network has been provisioned for the volume.
+ */
+export type StorageNetwork = {
+  /**
+   * VLAN ID of the storage VLAN to tag on the server bond.
+   */
+  vid?: number | null | undefined;
+  /**
+   * Storage IP of the mapped server, in CIDR notation. Null until the mapping status is "mapped".
+   */
+  hostCidr?: string | null | undefined;
+  /**
+   * Gateway of the storage network, used for the routes below.
+   */
+  gateway?: string | null | undefined;
+  /**
+   * Storage infrastructure prefixes to route via the gateway.
+   */
+  routes?: Array<string> | null | undefined;
+  /**
+   * NVMe-oF/TCP discovery portal address.
+   */
+  blockGateway?: string | null | undefined;
+  /**
+   * NVMe-oF/TCP discovery portal port.
+   */
+  blockPort?: number | null | undefined;
+};
+
+/**
  * NVMe-TCP block mapping of a high performance volume. Null for volumes that are not mapped to a server.
  */
 export type Block = {
@@ -50,6 +80,10 @@ export type Block = {
    * ID of the server the volume is mapped to.
    */
   serverId?: string | null | undefined;
+  /**
+   * Storage network the mapped server joins to reach the volume over NVMe-TCP. Null until the network has been provisioned for the volume.
+   */
+  storageNetwork?: StorageNetwork | null | undefined;
 };
 
 export type VolumeDataSite = {
@@ -69,7 +103,7 @@ export type VolumeDataAttributes = {
   name?: string | undefined;
   sizeInGb?: number | undefined;
   createdAt?: Date | null | undefined;
-  namespaceId?: string | null | undefined;
+  namespaceId?: number | null | undefined;
   connectorId?: string | null | undefined;
   initiators?: Array<Initiator> | null | undefined;
   /**
@@ -144,15 +178,80 @@ export function initiatorFromJSON(
 }
 
 /** @internal */
+export const StorageNetwork$inboundSchema: z.ZodType<
+  StorageNetwork,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  vid: z.nullable(z.number().int()).optional(),
+  host_cidr: z.nullable(z.string()).optional(),
+  gateway: z.nullable(z.string()).optional(),
+  routes: z.nullable(z.array(z.string())).optional(),
+  block_gateway: z.nullable(z.string()).optional(),
+  block_port: z.nullable(z.number().int()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "host_cidr": "hostCidr",
+    "block_gateway": "blockGateway",
+    "block_port": "blockPort",
+  });
+});
+/** @internal */
+export type StorageNetwork$Outbound = {
+  vid?: number | null | undefined;
+  host_cidr?: string | null | undefined;
+  gateway?: string | null | undefined;
+  routes?: Array<string> | null | undefined;
+  block_gateway?: string | null | undefined;
+  block_port?: number | null | undefined;
+};
+
+/** @internal */
+export const StorageNetwork$outboundSchema: z.ZodType<
+  StorageNetwork$Outbound,
+  z.ZodTypeDef,
+  StorageNetwork
+> = z.object({
+  vid: z.nullable(z.number().int()).optional(),
+  hostCidr: z.nullable(z.string()).optional(),
+  gateway: z.nullable(z.string()).optional(),
+  routes: z.nullable(z.array(z.string())).optional(),
+  blockGateway: z.nullable(z.string()).optional(),
+  blockPort: z.nullable(z.number().int()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    hostCidr: "host_cidr",
+    blockGateway: "block_gateway",
+    blockPort: "block_port",
+  });
+});
+
+export function storageNetworkToJSON(storageNetwork: StorageNetwork): string {
+  return JSON.stringify(StorageNetwork$outboundSchema.parse(storageNetwork));
+}
+export function storageNetworkFromJSON(
+  jsonString: string,
+): SafeParseResult<StorageNetwork, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StorageNetwork$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StorageNetwork' from JSON`,
+  );
+}
+
+/** @internal */
 export const Block$inboundSchema: z.ZodType<Block, z.ZodTypeDef, unknown> = z
   .object({
     status: z.nullable(z.string()).optional(),
     nqn: z.nullable(z.string()).optional(),
     nsid: z.nullable(z.number().int()).optional(),
     server_id: z.nullable(z.string()).optional(),
+    storage_network: z.nullable(z.lazy(() => StorageNetwork$inboundSchema))
+      .optional(),
   }).transform((v) => {
     return remap$(v, {
       "server_id": "serverId",
+      "storage_network": "storageNetwork",
     });
   });
 /** @internal */
@@ -161,6 +260,7 @@ export type Block$Outbound = {
   nqn?: string | null | undefined;
   nsid?: number | null | undefined;
   server_id?: string | null | undefined;
+  storage_network?: StorageNetwork$Outbound | null | undefined;
 };
 
 /** @internal */
@@ -173,9 +273,12 @@ export const Block$outboundSchema: z.ZodType<
   nqn: z.nullable(z.string()).optional(),
   nsid: z.nullable(z.number().int()).optional(),
   serverId: z.nullable(z.string()).optional(),
+  storageNetwork: z.nullable(z.lazy(() => StorageNetwork$outboundSchema))
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     serverId: "server_id",
+    storageNetwork: "storage_network",
   });
 });
 
@@ -292,7 +395,7 @@ export const VolumeDataAttributes$inboundSchema: z.ZodType<
   created_at: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
-  namespace_id: z.nullable(z.string()).optional(),
+  namespace_id: z.nullable(z.number().int()).optional(),
   connector_id: z.nullable(z.string()).optional(),
   initiators: z.nullable(z.array(z.lazy(() => Initiator$inboundSchema)))
     .optional(),
@@ -318,7 +421,7 @@ export type VolumeDataAttributes$Outbound = {
   name?: string | undefined;
   size_in_gb?: number | undefined;
   created_at?: string | null | undefined;
-  namespace_id?: string | null | undefined;
+  namespace_id?: number | null | undefined;
   connector_id?: string | null | undefined;
   initiators?: Array<Initiator$Outbound> | null | undefined;
   block?: Block$Outbound | null | undefined;
@@ -339,7 +442,7 @@ export const VolumeDataAttributes$outboundSchema: z.ZodType<
   name: z.string().optional(),
   sizeInGb: z.number().int().optional(),
   createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  namespaceId: z.nullable(z.string()).optional(),
+  namespaceId: z.nullable(z.number().int()).optional(),
   connectorId: z.nullable(z.string()).optional(),
   initiators: z.nullable(z.array(z.lazy(() => Initiator$outboundSchema)))
     .optional(),

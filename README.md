@@ -227,13 +227,13 @@ run();
 
 ### [BlockStorage](docs/sdks/blockstorage/README.md)
 
-* [getStorageVolumes](docs/sdks/blockstorage/README.md#getstoragevolumes) - List volumes
-* [postStorageVolumes](docs/sdks/blockstorage/README.md#poststoragevolumes) - Create volume
-* [getStorageVolume](docs/sdks/blockstorage/README.md#getstoragevolume) - Retrieve volume
-* [deleteStorageVolumes](docs/sdks/blockstorage/README.md#deletestoragevolumes) - Delete volume
-* [postStorageVolumesMount](docs/sdks/blockstorage/README.md#poststoragevolumesmount) - Mount volume
-* [postStorageVolumesMap](docs/sdks/blockstorage/README.md#poststoragevolumesmap) - Map volume to server
-* [postStorageVolumesUnmap](docs/sdks/blockstorage/README.md#poststoragevolumesunmap) - Unmap volume from server
+* [listVolumes](docs/sdks/blockstorage/README.md#listvolumes) - List volumes
+* [createVolume](docs/sdks/blockstorage/README.md#createvolume) - Create volume
+* [retrieveVolume](docs/sdks/blockstorage/README.md#retrievevolume) - Retrieve volume
+* [deleteVolume](docs/sdks/blockstorage/README.md#deletevolume) - Delete volume
+* [~~mountVolume~~](docs/sdks/blockstorage/README.md#mountvolume) - Mount volume (deprecated) :warning: **Deprecated**
+* [mapVolume](docs/sdks/blockstorage/README.md#mapvolume) - Map volume
+* [unmapVolume](docs/sdks/blockstorage/README.md#unmapvolume) - Unmap volume
 
 ### [ElasticIps](docs/sdks/elasticips/README.md)
 
@@ -253,19 +253,19 @@ run();
 
 ### [FilesystemStorage](docs/sdks/filesystemstorage/README.md)
 
-* [createFilesystem](docs/sdks/filesystemstorage/README.md#createfilesystem) - Create filesystem
 * [listFilesystems](docs/sdks/filesystemstorage/README.md#listfilesystems) - List filesystems
+* [createFilesystem](docs/sdks/filesystemstorage/README.md#createfilesystem) - Create filesystem
 * [deleteFilesystem](docs/sdks/filesystemstorage/README.md#deletefilesystem) - Delete filesystem
 * [updateFilesystem](docs/sdks/filesystemstorage/README.md#updatefilesystem) - Update filesystem
 
 ### [Firewalls](docs/sdks/firewalls/README.md)
 
 * [getAllFirewallAssignments](docs/sdks/firewalls/README.md#getallfirewallassignments) - List firewall assignments
-* [create](docs/sdks/firewalls/README.md#create) - Create firewall
 * [list](docs/sdks/firewalls/README.md#list) - List firewalls
+* [create](docs/sdks/firewalls/README.md#create) - Create firewall
 * [get](docs/sdks/firewalls/README.md#get) - Retrieve firewall
-* [update](docs/sdks/firewalls/README.md#update) - Update firewall
 * [delete](docs/sdks/firewalls/README.md#delete) - Delete firewall
+* [update](docs/sdks/firewalls/README.md#update) - Update firewall
 * [listAssignments](docs/sdks/firewalls/README.md#listassignments) - Firewall assignments
 * [deleteAssignment](docs/sdks/firewalls/README.md#deleteassignment) - Delete assignment
 
@@ -278,15 +278,31 @@ run();
 * [list](docs/sdks/ipaddresses/README.md#list) - List IPs
 * [get](docs/sdks/ipaddresses/README.md#get) - Retrieve an IP
 
-### [KubernetesClusters](docs/sdks/kubernetesclusters/README.md)
+### [~~KubernetesClusters~~](docs/sdks/kubernetesclusters/README.md)
 
-* [listKubernetesClusters](docs/sdks/kubernetesclusters/README.md#listkubernetesclusters) - List Kubernetes Clusters
-* [createKubernetesCluster](docs/sdks/kubernetesclusters/README.md#createkubernetescluster) - Create a Kubernetes Cluster
-* [listKubernetesAvailableVersions](docs/sdks/kubernetesclusters/README.md#listkubernetesavailableversions) - List Available Kubernetes Versions
-* [getKubernetesCluster](docs/sdks/kubernetesclusters/README.md#getkubernetescluster) - Get a Kubernetes Cluster
-* [deleteKubernetesCluster](docs/sdks/kubernetesclusters/README.md#deletekubernetescluster) - Delete a Kubernetes Cluster
-* [updateKubernetesCluster](docs/sdks/kubernetesclusters/README.md#updatekubernetescluster) - Update Kubernetes Cluster
-* [getKubernetesClusterKubeconfig](docs/sdks/kubernetesclusters/README.md#getkubernetesclusterkubeconfig) - Get Kubernetes Cluster Kubeconfig
+* [~~listKubernetesClusters~~](docs/sdks/kubernetesclusters/README.md#listkubernetesclusters) - List Kubernetes Clusters :warning: **Deprecated**
+* [~~createKubernetesCluster~~](docs/sdks/kubernetesclusters/README.md#createkubernetescluster) - Create a Kubernetes Cluster :warning: **Deprecated**
+* [~~listAvailableVersions~~](docs/sdks/kubernetesclusters/README.md#listavailableversions) - List Available Kubernetes Versions :warning: **Deprecated**
+* [~~getKubernetesCluster~~](docs/sdks/kubernetesclusters/README.md#getkubernetescluster) - Get a Kubernetes Cluster :warning: **Deprecated**
+* [~~deleteKubernetesCluster~~](docs/sdks/kubernetesclusters/README.md#deletekubernetescluster) - Delete a Kubernetes Cluster :warning: **Deprecated**
+* [~~updateKubernetesCluster~~](docs/sdks/kubernetesclusters/README.md#updatekubernetescluster) - Update Kubernetes Cluster :warning: **Deprecated**
+* [~~getKubernetesClusterKubeconfig~~](docs/sdks/kubernetesclusters/README.md#getkubernetesclusterkubeconfig) - Get Kubernetes Cluster Kubeconfig :warning: **Deprecated**
+
+### [Lks](docs/sdks/lks/README.md)
+
+* [listLksClusters](docs/sdks/lks/README.md#listlksclusters) - List LKS clusters
+* [createLksCluster](docs/sdks/lks/README.md#createlkscluster) - Create an LKS cluster
+* [getLksCluster](docs/sdks/lks/README.md#getlkscluster) - Get an LKS cluster
+* [deleteLksCluster](docs/sdks/lks/README.md#deletelkscluster) - Delete an LKS cluster
+* [updateLksCluster](docs/sdks/lks/README.md#updatelkscluster) - Update an LKS cluster
+* [getLksClusterKubeconfig](docs/sdks/lks/README.md#getlksclusterkubeconfig) - Get the cluster kubeconfig
+* [listLksNodePools](docs/sdks/lks/README.md#listlksnodepools) - List node pools
+* [createLksNodePool](docs/sdks/lks/README.md#createlksnodepool) - Create a node pool
+* [getLksNodePool](docs/sdks/lks/README.md#getlksnodepool) - Get a node pool
+* [deleteLksNodePool](docs/sdks/lks/README.md#deletelksnodepool) - Delete a node pool
+* [updateLksNodePool](docs/sdks/lks/README.md#updatelksnodepool) - Update a node pool
+* [listLksAvailableVersions](docs/sdks/lks/README.md#listlksavailableversions) - List available Kubernetes versions
+* [listLksSites](docs/sdks/lks/README.md#listlkssites) - List sites available for LKS
 
 ### [ManagedDatabases](docs/sdks/manageddatabases/README.md)
 
@@ -306,8 +322,8 @@ run();
 ### [ObjectStorage](docs/sdks/objectstorage/README.md)
 
 * [getStorageUsage](docs/sdks/objectstorage/README.md#getstorageusage) - List storage usage
-* [postStorageAccessKeys](docs/sdks/objectstorage/README.md#poststorageaccesskeys) - Create access key
 * [getStorageAccessKeys](docs/sdks/objectstorage/README.md#getstorageaccesskeys) - List access keys
+* [postStorageAccessKeys](docs/sdks/objectstorage/README.md#poststorageaccesskeys) - Create access key
 * [deleteStorageAccessKeysUsername](docs/sdks/objectstorage/README.md#deletestorageaccesskeysusername) - Delete access key
 * [getStorageBucketAccessKeys](docs/sdks/objectstorage/README.md#getstoragebucketaccesskeys) - List bucket access keys
 * [getStorageBuckets](docs/sdks/objectstorage/README.md#getstoragebuckets) - List buckets
@@ -332,6 +348,7 @@ run();
 * [getBandwidth](docs/sdks/plans/README.md#getbandwidth) - List bandwidth plans
 * [updateBandwidth](docs/sdks/plans/README.md#updatebandwidth) - Update bandwidth packages
 * [listStorage](docs/sdks/plans/README.md#liststorage) - List storage plans
+* [getLksPlans](docs/sdks/plans/README.md#getlksplans) - List LKS plans
 * [getManagedDatabasePlans](docs/sdks/plans/README.md#getmanageddatabaseplans) - List managed database plans
 
 ### [Plans.Vm](docs/sdks/vm/README.md)
@@ -342,8 +359,8 @@ run();
 
 * [list](docs/sdks/privatenetworks/README.md#list) - List VLANs
 * [create](docs/sdks/privatenetworks/README.md#create) - Create VLAN
-* [update](docs/sdks/privatenetworks/README.md#update) - Update VLAN
 * [get](docs/sdks/privatenetworks/README.md#get) - Retrieve VLAN
+* [update](docs/sdks/privatenetworks/README.md#update) - Update VLAN
 * [listAssignments](docs/sdks/privatenetworks/README.md#listassignments) - List VLAN assignments
 * [assign](docs/sdks/privatenetworks/README.md#assign) - Assign VLAN
 * [deleteAssignment](docs/sdks/privatenetworks/README.md#deleteassignment) - Delete VLAN assignment
@@ -352,9 +369,9 @@ run();
 
 * [list](docs/sdks/projects/README.md#list) - List projects
 * [create](docs/sdks/projects/README.md#create) - Create project
-* [update](docs/sdks/projects/README.md#update) - Update project
-* [delete](docs/sdks/projects/README.md#delete) - Delete project
 * [getProject](docs/sdks/projects/README.md#getproject) - Retrieve project
+* [delete](docs/sdks/projects/README.md#delete) - Delete project
+* [update](docs/sdks/projects/README.md#update) - Update project
 
 ### [~~Projects.SshKeys~~](docs/sdks/projectssshkeys/README.md)
 
@@ -382,14 +399,14 @@ run();
 * [list](docs/sdks/servers/README.md#list) - List servers
 * [create](docs/sdks/servers/README.md#create) - Create server
 * [get](docs/sdks/servers/README.md#get) - Retrieve server
-* [update](docs/sdks/servers/README.md#update) - Update server
 * [delete](docs/sdks/servers/README.md#delete) - Remove server
+* [update](docs/sdks/servers/README.md#update) - Update server
 * [getDeployConfig](docs/sdks/servers/README.md#getdeployconfig) - Retrieve deploy config
 * [updateDeployConfig](docs/sdks/servers/README.md#updatedeployconfig) - Update deploy config
 * [lock](docs/sdks/servers/README.md#lock) - Lock server
 * [unlock](docs/sdks/servers/README.md#unlock) - Unlock server
-* [startOutOfBandConnection](docs/sdks/servers/README.md#startoutofbandconnection) - Create out-of-band connection
 * [getOutOfBand](docs/sdks/servers/README.md#getoutofband) - List out-of-band connections
+* [startOutOfBandConnection](docs/sdks/servers/README.md#startoutofbandconnection) - Create out-of-band connection
 * [runAction](docs/sdks/servers/README.md#runaction) - Run power action
 * [createIpmiSession](docs/sdks/servers/README.md#createipmisession) - Create IPMI credentials
 * [startRescueMode](docs/sdks/servers/README.md#startrescuemode) - Put server in rescue mode
@@ -402,20 +419,20 @@ run();
 
 * [~~list~~](docs/sdks/sshkeys/README.md#list) - List SSH Keys :warning: **Deprecated**
 * [~~get~~](docs/sdks/sshkeys/README.md#get) - Retrieve Project SSH Key :warning: **Deprecated**
-* [~~modifyProjectKey~~](docs/sdks/sshkeys/README.md#modifyprojectkey) - Update Project SSH Key :warning: **Deprecated**
 * [~~removeFromProject~~](docs/sdks/sshkeys/README.md#removefromproject) - Delete Project SSH Key :warning: **Deprecated**
+* [~~modifyProjectKey~~](docs/sdks/sshkeys/README.md#modifyprojectkey) - Update Project SSH Key :warning: **Deprecated**
 * [listAll](docs/sdks/sshkeys/README.md#listall) - List SSH Keys
 * [create](docs/sdks/sshkeys/README.md#create) - Create SSH Key
 * [retrieve](docs/sdks/sshkeys/README.md#retrieve) - Retrieve SSH Key
-* [update](docs/sdks/sshkeys/README.md#update) - Update SSH Key
 * [delete](docs/sdks/sshkeys/README.md#delete) - Delete SSH Key
+* [update](docs/sdks/sshkeys/README.md#update) - Update SSH Key
 
 ### [Tags](docs/sdks/tags/README.md)
 
 * [list](docs/sdks/tags/README.md#list) - List tags
 * [create](docs/sdks/tags/README.md#create) - Create tag
-* [update](docs/sdks/tags/README.md#update) - Update tag
 * [delete](docs/sdks/tags/README.md#delete) - Delete tag
+* [update](docs/sdks/tags/README.md#update) - Update tag
 
 ### [TeamMembers](docs/sdks/teammembers/README.md)
 
@@ -447,8 +464,8 @@ run();
 * [list](docs/sdks/userdata/README.md#list) - List user data
 * [createNew](docs/sdks/userdata/README.md#createnew) - Create user data
 * [retrieve](docs/sdks/userdata/README.md#retrieve) - Retrieve user data
-* [update](docs/sdks/userdata/README.md#update) - Update user data
 * [delete](docs/sdks/userdata/README.md#delete) - Delete user data
+* [update](docs/sdks/userdata/README.md#update) - Update user data
 
 ### [UserProfile](docs/sdks/userprofile/README.md)
 
@@ -476,8 +493,8 @@ run();
 
 ### [VirtualMachines](docs/sdks/virtualmachines/README.md)
 
-* [create](docs/sdks/virtualmachines/README.md#create) - Create VM
 * [list](docs/sdks/virtualmachines/README.md#list) - List VMs
+* [create](docs/sdks/virtualmachines/README.md#create) - Create VM
 * [get](docs/sdks/virtualmachines/README.md#get) - Retrieve VM
 * [delete](docs/sdks/virtualmachines/README.md#delete) - Destroy VM
 * [updateVirtualMachine](docs/sdks/virtualmachines/README.md#updatevirtualmachine) - Update VM
@@ -526,13 +543,12 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`baselinesPreviewGetBaseline`](docs/sdks/baselinespreview/README.md#getbaseline) - Retrieve baseline
 - [`baselinesPreviewGetBaselines`](docs/sdks/baselinespreview/README.md#getbaselines) - List baselines
 - [`billingListUsage`](docs/sdks/billing/README.md#listusage) - Retrieve billing usage
-- [`blockStorageDeleteStorageVolumes`](docs/sdks/blockstorage/README.md#deletestoragevolumes) - Delete volume
-- [`blockStorageGetStorageVolume`](docs/sdks/blockstorage/README.md#getstoragevolume) - Retrieve volume
-- [`blockStorageGetStorageVolumes`](docs/sdks/blockstorage/README.md#getstoragevolumes) - List volumes
-- [`blockStoragePostStorageVolumes`](docs/sdks/blockstorage/README.md#poststoragevolumes) - Create volume
-- [`blockStoragePostStorageVolumesMap`](docs/sdks/blockstorage/README.md#poststoragevolumesmap) - Map volume to server
-- [`blockStoragePostStorageVolumesMount`](docs/sdks/blockstorage/README.md#poststoragevolumesmount) - Mount volume
-- [`blockStoragePostStorageVolumesUnmap`](docs/sdks/blockstorage/README.md#poststoragevolumesunmap) - Unmap volume from server
+- [`blockStorageCreateVolume`](docs/sdks/blockstorage/README.md#createvolume) - Create volume
+- [`blockStorageDeleteVolume`](docs/sdks/blockstorage/README.md#deletevolume) - Delete volume
+- [`blockStorageListVolumes`](docs/sdks/blockstorage/README.md#listvolumes) - List volumes
+- [`blockStorageMapVolume`](docs/sdks/blockstorage/README.md#mapvolume) - Map volume
+- [`blockStorageRetrieveVolume`](docs/sdks/blockstorage/README.md#retrievevolume) - Retrieve volume
+- [`blockStorageUnmapVolume`](docs/sdks/blockstorage/README.md#unmapvolume) - Unmap volume
 - [`elasticIpsCreateElasticIp`](docs/sdks/elasticips/README.md#createelasticip) - Create an Elastic IP
 - [`elasticIpsCreateElasticIpBgpSession`](docs/sdks/elasticips/README.md#createelasticipbgpsession) - Create a BGP session
 - [`elasticIpsDeleteElasticIp`](docs/sdks/elasticips/README.md#deleteelasticip) - Release an Elastic IP
@@ -558,13 +574,19 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`firewallsUpdate`](docs/sdks/firewalls/README.md#update) - Update firewall
 - [`ipAddressesGet`](docs/sdks/ipaddresses/README.md#get) - Retrieve an IP
 - [`ipAddressesList`](docs/sdks/ipaddresses/README.md#list) - List IPs
-- [`kubernetesClustersCreateKubernetesCluster`](docs/sdks/kubernetesclusters/README.md#createkubernetescluster) - Create a Kubernetes Cluster
-- [`kubernetesClustersDeleteKubernetesCluster`](docs/sdks/kubernetesclusters/README.md#deletekubernetescluster) - Delete a Kubernetes Cluster
-- [`kubernetesClustersGetKubernetesCluster`](docs/sdks/kubernetesclusters/README.md#getkubernetescluster) - Get a Kubernetes Cluster
-- [`kubernetesClustersGetKubernetesClusterKubeconfig`](docs/sdks/kubernetesclusters/README.md#getkubernetesclusterkubeconfig) - Get Kubernetes Cluster Kubeconfig
-- [`kubernetesClustersListKubernetesAvailableVersions`](docs/sdks/kubernetesclusters/README.md#listkubernetesavailableversions) - List Available Kubernetes Versions
-- [`kubernetesClustersListKubernetesClusters`](docs/sdks/kubernetesclusters/README.md#listkubernetesclusters) - List Kubernetes Clusters
-- [`kubernetesClustersUpdateKubernetesCluster`](docs/sdks/kubernetesclusters/README.md#updatekubernetescluster) - Update Kubernetes Cluster
+- [`lksCreateLKSCluster`](docs/sdks/lks/README.md#createlkscluster) - Create an LKS cluster
+- [`lksCreateLKSNodePool`](docs/sdks/lks/README.md#createlksnodepool) - Create a node pool
+- [`lksDeleteLKSCluster`](docs/sdks/lks/README.md#deletelkscluster) - Delete an LKS cluster
+- [`lksDeleteLKSNodePool`](docs/sdks/lks/README.md#deletelksnodepool) - Delete a node pool
+- [`lksGetLKSCluster`](docs/sdks/lks/README.md#getlkscluster) - Get an LKS cluster
+- [`lksGetLKSClusterKubeconfig`](docs/sdks/lks/README.md#getlksclusterkubeconfig) - Get the cluster kubeconfig
+- [`lksGetLKSNodePool`](docs/sdks/lks/README.md#getlksnodepool) - Get a node pool
+- [`lksListLKSAvailableVersions`](docs/sdks/lks/README.md#listlksavailableversions) - List available Kubernetes versions
+- [`lksListLKSClusters`](docs/sdks/lks/README.md#listlksclusters) - List LKS clusters
+- [`lksListLKSNodePools`](docs/sdks/lks/README.md#listlksnodepools) - List node pools
+- [`lksListLKSSites`](docs/sdks/lks/README.md#listlkssites) - List sites available for LKS
+- [`lksUpdateLKSCluster`](docs/sdks/lks/README.md#updatelkscluster) - Update an LKS cluster
+- [`lksUpdateLKSNodePool`](docs/sdks/lks/README.md#updatelksnodepool) - Update a node pool
 - [`managedDatabasesCreateManagedDatabase`](docs/sdks/manageddatabases/README.md#createmanageddatabase) - Create a managed database
 - [`managedDatabasesDestroyManagedDatabase`](docs/sdks/manageddatabases/README.md#destroymanageddatabase) - Destroy a managed database
 - [`managedDatabasesListManagedDatabaseBackups`](docs/sdks/manageddatabases/README.md#listmanageddatabasebackups) - List managed database backups
@@ -592,6 +614,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`operatingSystemsListPlans`](docs/sdks/operatingsystems/README.md#listplans) - List operating systems
 - [`plansGet`](docs/sdks/plans/README.md#get) - Retrieve plan
 - [`plansGetBandwidth`](docs/sdks/plans/README.md#getbandwidth) - List bandwidth plans
+- [`plansGetLksPlans`](docs/sdks/plans/README.md#getlksplans) - List LKS plans
 - [`plansGetManagedDatabasePlans`](docs/sdks/plans/README.md#getmanageddatabaseplans) - List managed database plans
 - [`plansList`](docs/sdks/plans/README.md#list) - List plans
 - [`plansListStorage`](docs/sdks/plans/README.md#liststorage) - List storage plans
@@ -687,6 +710,14 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`vpnSessionsDelete`](docs/sdks/vpnsessions/README.md#delete) - Delete VPN session
 - [`vpnSessionsList`](docs/sdks/vpnsessions/README.md#list) - List VPN sessions
 - [`vpnSessionsRefreshPassword`](docs/sdks/vpnsessions/README.md#refreshpassword) - Refresh VPN session
+- ~~[`blockStorageMountVolume`](docs/sdks/blockstorage/README.md#mountvolume)~~ - Mount volume (deprecated) :warning: **Deprecated**
+- ~~[`kubernetesClustersCreateKubernetesCluster`](docs/sdks/kubernetesclusters/README.md#createkubernetescluster)~~ - Create a Kubernetes Cluster :warning: **Deprecated**
+- ~~[`kubernetesClustersDeleteKubernetesCluster`](docs/sdks/kubernetesclusters/README.md#deletekubernetescluster)~~ - Delete a Kubernetes Cluster :warning: **Deprecated**
+- ~~[`kubernetesClustersGetKubernetesCluster`](docs/sdks/kubernetesclusters/README.md#getkubernetescluster)~~ - Get a Kubernetes Cluster :warning: **Deprecated**
+- ~~[`kubernetesClustersGetKubernetesClusterKubeconfig`](docs/sdks/kubernetesclusters/README.md#getkubernetesclusterkubeconfig)~~ - Get Kubernetes Cluster Kubeconfig :warning: **Deprecated**
+- ~~[`kubernetesClustersListAvailableVersions`](docs/sdks/kubernetesclusters/README.md#listavailableversions)~~ - List Available Kubernetes Versions :warning: **Deprecated**
+- ~~[`kubernetesClustersListKubernetesClusters`](docs/sdks/kubernetesclusters/README.md#listkubernetesclusters)~~ - List Kubernetes Clusters :warning: **Deprecated**
+- ~~[`kubernetesClustersUpdateKubernetesCluster`](docs/sdks/kubernetesclusters/README.md#updatekubernetescluster)~~ - Update Kubernetes Cluster :warning: **Deprecated**
 - ~~[`projectsSshKeysPostProjectSshKey`](docs/sdks/projectssshkeys/README.md#postprojectsshkey)~~ - Create SSH Key :warning: **Deprecated**
 - ~~[`sshKeysGet`](docs/sdks/sshkeys/README.md#get)~~ - Retrieve Project SSH Key :warning: **Deprecated**
 - ~~[`sshKeysList`](docs/sdks/sshkeys/README.md#list)~~ - List SSH Keys :warning: **Deprecated**
@@ -869,7 +900,7 @@ run();
 
 
 **Inherit from [`LatitudeshError`](./src/models/errors/latitudesherror.ts)**:
-* [`ErrorObject`](./src/models/errors/errorobject.ts): Applicable to 52 of 181 methods.*
+* [`ErrorObject`](./src/models/errors/errorobject.ts): Applicable to 64 of 195 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>
