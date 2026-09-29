@@ -7,6 +7,12 @@ import { remap as remap$ } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
+import {
+  Country,
+  Country$inboundSchema,
+  Country$Outbound,
+  Country$outboundSchema,
+} from "./country.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 import {
   PaginationMeta,
@@ -20,16 +26,11 @@ export const RegionsType = {
 } as const;
 export type RegionsType = ClosedEnum<typeof RegionsType>;
 
-export type RegionsCountry = {
-  slug?: string | undefined;
-  name?: string | undefined;
-};
-
 export type RegionsAttributes = {
   slug?: string | undefined;
   name?: string | undefined;
   facility?: string | null | undefined;
-  country?: RegionsCountry | undefined;
+  country?: Country | undefined;
   type?: string | null | undefined;
   /**
    * Location capabilities available at this location (e.g. `public_network`, `elastic_ip_bgp`).
@@ -60,44 +61,6 @@ export const RegionsType$outboundSchema: z.ZodNativeEnum<typeof RegionsType> =
   RegionsType$inboundSchema;
 
 /** @internal */
-export const RegionsCountry$inboundSchema: z.ZodType<
-  RegionsCountry,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  slug: z.string().optional(),
-  name: z.string().optional(),
-});
-/** @internal */
-export type RegionsCountry$Outbound = {
-  slug?: string | undefined;
-  name?: string | undefined;
-};
-
-/** @internal */
-export const RegionsCountry$outboundSchema: z.ZodType<
-  RegionsCountry$Outbound,
-  z.ZodTypeDef,
-  RegionsCountry
-> = z.object({
-  slug: z.string().optional(),
-  name: z.string().optional(),
-});
-
-export function regionsCountryToJSON(regionsCountry: RegionsCountry): string {
-  return JSON.stringify(RegionsCountry$outboundSchema.parse(regionsCountry));
-}
-export function regionsCountryFromJSON(
-  jsonString: string,
-): SafeParseResult<RegionsCountry, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => RegionsCountry$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RegionsCountry' from JSON`,
-  );
-}
-
-/** @internal */
 export const RegionsAttributes$inboundSchema: z.ZodType<
   RegionsAttributes,
   z.ZodTypeDef,
@@ -106,7 +69,7 @@ export const RegionsAttributes$inboundSchema: z.ZodType<
   slug: z.string().optional(),
   name: z.string().optional(),
   facility: z.nullable(z.string()).optional(),
-  country: z.lazy(() => RegionsCountry$inboundSchema).optional(),
+  country: Country$inboundSchema.optional(),
   type: z.nullable(z.string()).optional(),
   features: z.array(z.string()).optional(),
   network_group: z.nullable(z.string()).optional(),
@@ -120,7 +83,7 @@ export type RegionsAttributes$Outbound = {
   slug?: string | undefined;
   name?: string | undefined;
   facility?: string | null | undefined;
-  country?: RegionsCountry$Outbound | undefined;
+  country?: Country$Outbound | undefined;
   type?: string | null | undefined;
   features?: Array<string> | undefined;
   network_group?: string | null | undefined;
@@ -135,7 +98,7 @@ export const RegionsAttributes$outboundSchema: z.ZodType<
   slug: z.string().optional(),
   name: z.string().optional(),
   facility: z.nullable(z.string()).optional(),
-  country: z.lazy(() => RegionsCountry$outboundSchema).optional(),
+  country: Country$outboundSchema.optional(),
   type: z.nullable(z.string()).optional(),
   features: z.array(z.string()).optional(),
   networkGroup: z.nullable(z.string()).optional(),

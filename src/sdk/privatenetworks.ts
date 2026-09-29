@@ -53,23 +53,6 @@ export class PrivateNetworks extends ClientSDK {
   }
 
   /**
-   * Update VLAN
-   *
-   * @remarks
-   * Update a Virtual Network.
-   */
-  async update(
-    request: operations.UpdateVirtualNetworkRequest,
-    options?: RequestOptions,
-  ): Promise<models.VirtualNetwork> {
-    return unwrapAsync(privateNetworksUpdate(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
    * Retrieve VLAN
    *
    * @remarks
@@ -80,6 +63,23 @@ export class PrivateNetworks extends ClientSDK {
     options?: RequestOptions,
   ): Promise<models.VirtualNetwork> {
     return unwrapAsync(privateNetworksGet(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Update VLAN
+   *
+   * @remarks
+   * Update a Virtual Network.
+   */
+  async update(
+    request: operations.UpdateVirtualNetworkRequest,
+    options?: RequestOptions,
+  ): Promise<models.VirtualNetwork> {
+    return unwrapAsync(privateNetworksUpdate(
       this,
       request,
       options,

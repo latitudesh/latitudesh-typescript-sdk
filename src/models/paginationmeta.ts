@@ -7,7 +7,7 @@ import { safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 
-export type Total = {
+export type PaginationMetaTotal = {
   /**
    * Total number of records, returned when `stats[total]=count` is requested
    */
@@ -15,7 +15,7 @@ export type Total = {
 };
 
 export type PaginationMetaStats = {
-  total?: Total | undefined;
+  total?: PaginationMetaTotal | undefined;
 };
 
 export type PaginationMeta = {
@@ -23,34 +23,41 @@ export type PaginationMeta = {
 };
 
 /** @internal */
-export const Total$inboundSchema: z.ZodType<Total, z.ZodTypeDef, unknown> = z
-  .object({
-    count: z.number().int().optional(),
-  });
+export const PaginationMetaTotal$inboundSchema: z.ZodType<
+  PaginationMetaTotal,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  count: z.number().int().optional(),
+});
 /** @internal */
-export type Total$Outbound = {
+export type PaginationMetaTotal$Outbound = {
   count?: number | undefined;
 };
 
 /** @internal */
-export const Total$outboundSchema: z.ZodType<
-  Total$Outbound,
+export const PaginationMetaTotal$outboundSchema: z.ZodType<
+  PaginationMetaTotal$Outbound,
   z.ZodTypeDef,
-  Total
+  PaginationMetaTotal
 > = z.object({
   count: z.number().int().optional(),
 });
 
-export function totalToJSON(total: Total): string {
-  return JSON.stringify(Total$outboundSchema.parse(total));
+export function paginationMetaTotalToJSON(
+  paginationMetaTotal: PaginationMetaTotal,
+): string {
+  return JSON.stringify(
+    PaginationMetaTotal$outboundSchema.parse(paginationMetaTotal),
+  );
 }
-export function totalFromJSON(
+export function paginationMetaTotalFromJSON(
   jsonString: string,
-): SafeParseResult<Total, SDKValidationError> {
+): SafeParseResult<PaginationMetaTotal, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Total$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Total' from JSON`,
+    (x) => PaginationMetaTotal$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PaginationMetaTotal' from JSON`,
   );
 }
 
@@ -60,11 +67,11 @@ export const PaginationMetaStats$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  total: z.lazy(() => Total$inboundSchema).optional(),
+  total: z.lazy(() => PaginationMetaTotal$inboundSchema).optional(),
 });
 /** @internal */
 export type PaginationMetaStats$Outbound = {
-  total?: Total$Outbound | undefined;
+  total?: PaginationMetaTotal$Outbound | undefined;
 };
 
 /** @internal */
@@ -73,7 +80,7 @@ export const PaginationMetaStats$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PaginationMetaStats
 > = z.object({
-  total: z.lazy(() => Total$outboundSchema).optional(),
+  total: z.lazy(() => PaginationMetaTotal$outboundSchema).optional(),
 });
 
 export function paginationMetaStatsToJSON(

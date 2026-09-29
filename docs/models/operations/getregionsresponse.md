@@ -10,6 +10,10 @@ let value: GetRegionsResponse = {
     data: [
       {
         attributes: {
+          country: {
+            slug: "US",
+            name: "United States",
+          },
           features: [
             "public_network",
           ],

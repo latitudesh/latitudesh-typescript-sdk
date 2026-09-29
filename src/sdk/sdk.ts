@@ -13,6 +13,7 @@ import { FilesystemStorage } from "./filesystemstorage.js";
 import { Firewalls } from "./firewalls.js";
 import { IpAddresses } from "./ipaddresses.js";
 import { KubernetesClusters } from "./kubernetesclusters.js";
+import { Lks } from "./lks.js";
 import { ManagedDatabases } from "./manageddatabases.js";
 import { MarketplaceApps } from "./marketplaceapps.js";
 import { ObjectStorage } from "./objectstorage.js";
@@ -91,6 +92,11 @@ export class Latitudesh extends ClientSDK {
   private _kubernetesClusters?: KubernetesClusters;
   get kubernetesClusters(): KubernetesClusters {
     return (this._kubernetesClusters ??= new KubernetesClusters(this._options));
+  }
+
+  private _lks?: Lks;
+  get lks(): Lks {
+    return (this._lks ??= new Lks(this._options));
   }
 
   private _plans?: Plans;
