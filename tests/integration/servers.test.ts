@@ -500,7 +500,7 @@ describe('Servers Integration Tests', () => {
           data: {
             type: 'reinstalls',
             attributes: {
-              operatingSystem: 'ubuntu_22_04_x64_lts',
+              operatingSystem: 'ubuntu_24_04_x64_lts',
             },
           },
         },
