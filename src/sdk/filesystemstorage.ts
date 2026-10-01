@@ -13,23 +13,6 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class FilesystemStorage extends ClientSDK {
   /**
-   * List filesystems
-   *
-   * @remarks
-   * Lists all the filesystems from a team.
-   */
-  async listFilesystems(
-    request?: operations.GetStorageFilesystemsRequest | undefined,
-    options?: RequestOptions,
-  ): Promise<models.Filesystems> {
-    return unwrapAsync(filesystemStorageListFilesystems(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
    * Create filesystem
    *
    * @remarks
@@ -40,6 +23,23 @@ export class FilesystemStorage extends ClientSDK {
     options?: RequestOptions,
   ): Promise<operations.PostStorageFilesystemsResponse> {
     return unwrapAsync(filesystemStorageCreateFilesystem(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List filesystems
+   *
+   * @remarks
+   * Lists all the filesystems from a team.
+   */
+  async listFilesystems(
+    request?: operations.GetStorageFilesystemsRequest | undefined,
+    options?: RequestOptions,
+  ): Promise<models.Filesystems> {
+    return unwrapAsync(filesystemStorageListFilesystems(
       this,
       request,
       options,

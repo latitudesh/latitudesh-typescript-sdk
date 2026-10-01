@@ -12,7 +12,7 @@ const args = {
 
 export const tool$kubernetesClustersGetKubernetesClusterKubeconfig:
   ToolDefinition<typeof args> = {
-    name: "kubernetes-clusters-get-kubeconfig",
+    name: "kubernetes-clusters-get-kubernetes-cluster-kubeconfig",
     description: `Get Kubernetes Cluster Kubeconfig
 
 Retrieves the kubeconfig file for a Kubernetes cluster. The kubeconfig is only available once the cluster is fully provisioned.

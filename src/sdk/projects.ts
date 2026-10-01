@@ -51,16 +51,13 @@ export class Projects extends ClientSDK {
   }
 
   /**
-   * Retrieve project
-   *
-   * @remarks
-   * Returns a single project belonging to the current team
+   * Update project
    */
-  async getProject(
-    request: operations.GetProjectRequest,
+  async update(
+    request: operations.UpdateProjectRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetProjectResponse> {
-    return unwrapAsync(projectsGetProject(
+  ): Promise<operations.UpdateProjectResponse> {
+    return unwrapAsync(projectsUpdate(
       this,
       request,
       options,
@@ -85,13 +82,16 @@ export class Projects extends ClientSDK {
   }
 
   /**
-   * Update project
+   * Retrieve project
+   *
+   * @remarks
+   * Returns a single project belonging to the current team
    */
-  async update(
-    request: operations.UpdateProjectRequest,
+  async getProject(
+    request: operations.GetProjectRequest,
     options?: RequestOptions,
-  ): Promise<operations.UpdateProjectResponse> {
-    return unwrapAsync(projectsUpdate(
+  ): Promise<operations.GetProjectResponse> {
+    return unwrapAsync(projectsGetProject(
       this,
       request,
       options,

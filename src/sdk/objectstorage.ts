@@ -41,23 +41,6 @@ export class ObjectStorage extends ClientSDK {
   }
 
   /**
-   * List access keys
-   *
-   * @remarks
-   * Lists object storage access keys for a project, grouped by storage class. Secrets are never returned by this endpoint.
-   */
-  async getStorageAccessKeys(
-    request: operations.GetStorageAccessKeysRequest,
-    options?: RequestOptions,
-  ): Promise<operations.GetStorageAccessKeysResponse> {
-    return unwrapAsync(objectStorageGetStorageAccessKeys(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
    * Create access key
    *
    * @remarks
@@ -68,6 +51,23 @@ export class ObjectStorage extends ClientSDK {
     options?: RequestOptions,
   ): Promise<operations.PostStorageAccessKeysResponse> {
     return unwrapAsync(objectStoragePostStorageAccessKeys(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List access keys
+   *
+   * @remarks
+   * Lists object storage access keys for a project, grouped by storage class. Secrets are never returned by this endpoint.
+   */
+  async getStorageAccessKeys(
+    request: operations.GetStorageAccessKeysRequest,
+    options?: RequestOptions,
+  ): Promise<operations.GetStorageAccessKeysResponse> {
+    return unwrapAsync(objectStorageGetStorageAccessKeys(
       this,
       request,
       options,

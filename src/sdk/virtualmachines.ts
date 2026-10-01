@@ -20,6 +20,23 @@ import { PageIterator, unwrapResultIterator } from "../types/operations.js";
 
 export class VirtualMachines extends ClientSDK {
   /**
+   * Create VM
+   *
+   * @remarks
+   * Creates a new Virtual Machine.
+   */
+  async create(
+    request: models.VirtualMachinePayload,
+    options?: RequestOptions,
+  ): Promise<models.VirtualMachine> {
+    return unwrapAsync(virtualMachinesCreate(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
    * List VMs
    *
    * @remarks
@@ -32,23 +49,6 @@ export class VirtualMachines extends ClientSDK {
     PageIterator<operations.IndexVirtualMachineResponse, { page: number }>
   > {
     return unwrapResultIterator(virtualMachinesList(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Create VM
-   *
-   * @remarks
-   * Creates a new Virtual Machine.
-   */
-  async create(
-    request: models.VirtualMachinePayload,
-    options?: RequestOptions,
-  ): Promise<models.VirtualMachine> {
-    return unwrapAsync(virtualMachinesCreate(
       this,
       request,
       options,

@@ -56,25 +56,6 @@ export class SSHKeys extends ClientSDK {
   }
 
   /**
-   * Delete Project SSH Key
-   *
-   * @remarks
-   * Allow you remove SSH Keys in a project. Remove a SSH Key from the project won't revoke the SSH Keys access for previously deploy and reinstall actions.
-   *
-   * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
-   */
-  async removeFromProject(
-    request: operations.DeleteProjectSshKeyRequest,
-    options?: RequestOptions,
-  ): Promise<void> {
-    return unwrapAsync(sshKeysRemoveFromProject(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
    * Update Project SSH Key
    *
    * @remarks
@@ -87,6 +68,25 @@ export class SSHKeys extends ClientSDK {
     options?: RequestOptions,
   ): Promise<operations.PutProjectSshKeyResponse> {
     return unwrapAsync(sshKeysModifyProjectKey(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Delete Project SSH Key
+   *
+   * @remarks
+   * Allow you remove SSH Keys in a project. Remove a SSH Key from the project won't revoke the SSH Keys access for previously deploy and reinstall actions.
+   *
+   * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
+   */
+  async removeFromProject(
+    request: operations.DeleteProjectSshKeyRequest,
+    options?: RequestOptions,
+  ): Promise<void> {
+    return unwrapAsync(sshKeysRemoveFromProject(
       this,
       request,
       options,
@@ -145,23 +145,6 @@ export class SSHKeys extends ClientSDK {
   }
 
   /**
-   * Delete SSH Key
-   *
-   * @remarks
-   * Allows you remove SSH Keys in a project. Remove a SSH Key from the project won't revoke the SSH Keys access for previously deploy and reinstall actions.
-   */
-  async delete(
-    request: operations.DeleteSshKeyRequest,
-    options?: RequestOptions,
-  ): Promise<void> {
-    return unwrapAsync(sshKeysDelete(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
    * Update SSH Key
    *
    * @remarks
@@ -172,6 +155,23 @@ export class SSHKeys extends ClientSDK {
     options?: RequestOptions,
   ): Promise<operations.PutSshKeyResponse> {
     return unwrapAsync(sshKeysUpdate(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Delete SSH Key
+   *
+   * @remarks
+   * Allows you remove SSH Keys in a project. Remove a SSH Key from the project won't revoke the SSH Keys access for previously deploy and reinstall actions.
+   */
+  async delete(
+    request: operations.DeleteSshKeyRequest,
+    options?: RequestOptions,
+  ): Promise<void> {
+    return unwrapAsync(sshKeysDelete(
       this,
       request,
       options,
