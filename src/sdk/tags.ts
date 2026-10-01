@@ -45,23 +45,6 @@ export class Tags extends ClientSDK {
   }
 
   /**
-   * Delete tag
-   *
-   * @remarks
-   * Update a Tag in the team.
-   */
-  async delete(
-    request: operations.DestroyTagRequest,
-    options?: RequestOptions,
-  ): Promise<void> {
-    return unwrapAsync(tagsDelete(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
    * Update tag
    *
    * @remarks
@@ -72,6 +55,23 @@ export class Tags extends ClientSDK {
     options?: RequestOptions,
   ): Promise<models.CustomTag> {
     return unwrapAsync(tagsUpdate(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Delete tag
+   *
+   * @remarks
+   * Update a Tag in the team.
+   */
+  async delete(
+    request: operations.DestroyTagRequest,
+    options?: RequestOptions,
+  ): Promise<void> {
+    return unwrapAsync(tagsDelete(
       this,
       request,
       options,

@@ -253,19 +253,19 @@ run();
 
 ### [FilesystemStorage](docs/sdks/filesystemstorage/README.md)
 
-* [listFilesystems](docs/sdks/filesystemstorage/README.md#listfilesystems) - List filesystems
 * [createFilesystem](docs/sdks/filesystemstorage/README.md#createfilesystem) - Create filesystem
+* [listFilesystems](docs/sdks/filesystemstorage/README.md#listfilesystems) - List filesystems
 * [deleteFilesystem](docs/sdks/filesystemstorage/README.md#deletefilesystem) - Delete filesystem
 * [updateFilesystem](docs/sdks/filesystemstorage/README.md#updatefilesystem) - Update filesystem
 
 ### [Firewalls](docs/sdks/firewalls/README.md)
 
 * [getAllFirewallAssignments](docs/sdks/firewalls/README.md#getallfirewallassignments) - List firewall assignments
-* [list](docs/sdks/firewalls/README.md#list) - List firewalls
 * [create](docs/sdks/firewalls/README.md#create) - Create firewall
+* [list](docs/sdks/firewalls/README.md#list) - List firewalls
 * [get](docs/sdks/firewalls/README.md#get) - Retrieve firewall
-* [delete](docs/sdks/firewalls/README.md#delete) - Delete firewall
 * [update](docs/sdks/firewalls/README.md#update) - Update firewall
+* [delete](docs/sdks/firewalls/README.md#delete) - Delete firewall
 * [listAssignments](docs/sdks/firewalls/README.md#listassignments) - Firewall assignments
 * [deleteAssignment](docs/sdks/firewalls/README.md#deleteassignment) - Delete assignment
 
@@ -282,7 +282,7 @@ run();
 
 * [~~listKubernetesClusters~~](docs/sdks/kubernetesclusters/README.md#listkubernetesclusters) - List Kubernetes Clusters :warning: **Deprecated**
 * [~~createKubernetesCluster~~](docs/sdks/kubernetesclusters/README.md#createkubernetescluster) - Create a Kubernetes Cluster :warning: **Deprecated**
-* [~~listAvailableVersions~~](docs/sdks/kubernetesclusters/README.md#listavailableversions) - List Available Kubernetes Versions :warning: **Deprecated**
+* [~~listKubernetesAvailableVersions~~](docs/sdks/kubernetesclusters/README.md#listkubernetesavailableversions) - List Available Kubernetes Versions :warning: **Deprecated**
 * [~~getKubernetesCluster~~](docs/sdks/kubernetesclusters/README.md#getkubernetescluster) - Get a Kubernetes Cluster :warning: **Deprecated**
 * [~~deleteKubernetesCluster~~](docs/sdks/kubernetesclusters/README.md#deletekubernetescluster) - Delete a Kubernetes Cluster :warning: **Deprecated**
 * [~~updateKubernetesCluster~~](docs/sdks/kubernetesclusters/README.md#updatekubernetescluster) - Update Kubernetes Cluster :warning: **Deprecated**
@@ -322,8 +322,8 @@ run();
 ### [ObjectStorage](docs/sdks/objectstorage/README.md)
 
 * [getStorageUsage](docs/sdks/objectstorage/README.md#getstorageusage) - List storage usage
-* [getStorageAccessKeys](docs/sdks/objectstorage/README.md#getstorageaccesskeys) - List access keys
 * [postStorageAccessKeys](docs/sdks/objectstorage/README.md#poststorageaccesskeys) - Create access key
+* [getStorageAccessKeys](docs/sdks/objectstorage/README.md#getstorageaccesskeys) - List access keys
 * [deleteStorageAccessKeysUsername](docs/sdks/objectstorage/README.md#deletestorageaccesskeysusername) - Delete access key
 * [getStorageBucketAccessKeys](docs/sdks/objectstorage/README.md#getstoragebucketaccesskeys) - List bucket access keys
 * [getStorageBuckets](docs/sdks/objectstorage/README.md#getstoragebuckets) - List buckets
@@ -359,8 +359,8 @@ run();
 
 * [list](docs/sdks/privatenetworks/README.md#list) - List VLANs
 * [create](docs/sdks/privatenetworks/README.md#create) - Create VLAN
-* [get](docs/sdks/privatenetworks/README.md#get) - Retrieve VLAN
 * [update](docs/sdks/privatenetworks/README.md#update) - Update VLAN
+* [get](docs/sdks/privatenetworks/README.md#get) - Retrieve VLAN
 * [listAssignments](docs/sdks/privatenetworks/README.md#listassignments) - List VLAN assignments
 * [assign](docs/sdks/privatenetworks/README.md#assign) - Assign VLAN
 * [deleteAssignment](docs/sdks/privatenetworks/README.md#deleteassignment) - Delete VLAN assignment
@@ -369,9 +369,9 @@ run();
 
 * [list](docs/sdks/projects/README.md#list) - List projects
 * [create](docs/sdks/projects/README.md#create) - Create project
-* [getProject](docs/sdks/projects/README.md#getproject) - Retrieve project
-* [delete](docs/sdks/projects/README.md#delete) - Delete project
 * [update](docs/sdks/projects/README.md#update) - Update project
+* [delete](docs/sdks/projects/README.md#delete) - Delete project
+* [getProject](docs/sdks/projects/README.md#getproject) - Retrieve project
 
 ### [~~Projects.SshKeys~~](docs/sdks/projectssshkeys/README.md)
 
@@ -399,14 +399,14 @@ run();
 * [list](docs/sdks/servers/README.md#list) - List servers
 * [create](docs/sdks/servers/README.md#create) - Create server
 * [get](docs/sdks/servers/README.md#get) - Retrieve server
-* [delete](docs/sdks/servers/README.md#delete) - Remove server
 * [update](docs/sdks/servers/README.md#update) - Update server
+* [delete](docs/sdks/servers/README.md#delete) - Remove server
 * [getDeployConfig](docs/sdks/servers/README.md#getdeployconfig) - Retrieve deploy config
 * [updateDeployConfig](docs/sdks/servers/README.md#updatedeployconfig) - Update deploy config
 * [lock](docs/sdks/servers/README.md#lock) - Lock server
 * [unlock](docs/sdks/servers/README.md#unlock) - Unlock server
-* [getOutOfBand](docs/sdks/servers/README.md#getoutofband) - List out-of-band connections
 * [startOutOfBandConnection](docs/sdks/servers/README.md#startoutofbandconnection) - Create out-of-band connection
+* [getOutOfBand](docs/sdks/servers/README.md#getoutofband) - List out-of-band connections
 * [runAction](docs/sdks/servers/README.md#runaction) - Run power action
 * [createIpmiSession](docs/sdks/servers/README.md#createipmisession) - Create IPMI credentials
 * [startRescueMode](docs/sdks/servers/README.md#startrescuemode) - Put server in rescue mode
@@ -419,20 +419,20 @@ run();
 
 * [~~list~~](docs/sdks/sshkeys/README.md#list) - List SSH Keys :warning: **Deprecated**
 * [~~get~~](docs/sdks/sshkeys/README.md#get) - Retrieve Project SSH Key :warning: **Deprecated**
-* [~~removeFromProject~~](docs/sdks/sshkeys/README.md#removefromproject) - Delete Project SSH Key :warning: **Deprecated**
 * [~~modifyProjectKey~~](docs/sdks/sshkeys/README.md#modifyprojectkey) - Update Project SSH Key :warning: **Deprecated**
+* [~~removeFromProject~~](docs/sdks/sshkeys/README.md#removefromproject) - Delete Project SSH Key :warning: **Deprecated**
 * [listAll](docs/sdks/sshkeys/README.md#listall) - List SSH Keys
 * [create](docs/sdks/sshkeys/README.md#create) - Create SSH Key
 * [retrieve](docs/sdks/sshkeys/README.md#retrieve) - Retrieve SSH Key
-* [delete](docs/sdks/sshkeys/README.md#delete) - Delete SSH Key
 * [update](docs/sdks/sshkeys/README.md#update) - Update SSH Key
+* [delete](docs/sdks/sshkeys/README.md#delete) - Delete SSH Key
 
 ### [Tags](docs/sdks/tags/README.md)
 
 * [list](docs/sdks/tags/README.md#list) - List tags
 * [create](docs/sdks/tags/README.md#create) - Create tag
-* [delete](docs/sdks/tags/README.md#delete) - Delete tag
 * [update](docs/sdks/tags/README.md#update) - Update tag
+* [delete](docs/sdks/tags/README.md#delete) - Delete tag
 
 ### [TeamMembers](docs/sdks/teammembers/README.md)
 
@@ -464,8 +464,8 @@ run();
 * [list](docs/sdks/userdata/README.md#list) - List user data
 * [createNew](docs/sdks/userdata/README.md#createnew) - Create user data
 * [retrieve](docs/sdks/userdata/README.md#retrieve) - Retrieve user data
-* [delete](docs/sdks/userdata/README.md#delete) - Delete user data
 * [update](docs/sdks/userdata/README.md#update) - Update user data
+* [delete](docs/sdks/userdata/README.md#delete) - Delete user data
 
 ### [UserProfile](docs/sdks/userprofile/README.md)
 
@@ -493,8 +493,8 @@ run();
 
 ### [VirtualMachines](docs/sdks/virtualmachines/README.md)
 
-* [list](docs/sdks/virtualmachines/README.md#list) - List VMs
 * [create](docs/sdks/virtualmachines/README.md#create) - Create VM
+* [list](docs/sdks/virtualmachines/README.md#list) - List VMs
 * [get](docs/sdks/virtualmachines/README.md#get) - Retrieve VM
 * [delete](docs/sdks/virtualmachines/README.md#delete) - Destroy VM
 * [updateVirtualMachine](docs/sdks/virtualmachines/README.md#updatevirtualmachine) - Update VM
@@ -715,7 +715,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - ~~[`kubernetesClustersDeleteKubernetesCluster`](docs/sdks/kubernetesclusters/README.md#deletekubernetescluster)~~ - Delete a Kubernetes Cluster :warning: **Deprecated**
 - ~~[`kubernetesClustersGetKubernetesCluster`](docs/sdks/kubernetesclusters/README.md#getkubernetescluster)~~ - Get a Kubernetes Cluster :warning: **Deprecated**
 - ~~[`kubernetesClustersGetKubernetesClusterKubeconfig`](docs/sdks/kubernetesclusters/README.md#getkubernetesclusterkubeconfig)~~ - Get Kubernetes Cluster Kubeconfig :warning: **Deprecated**
-- ~~[`kubernetesClustersListAvailableVersions`](docs/sdks/kubernetesclusters/README.md#listavailableversions)~~ - List Available Kubernetes Versions :warning: **Deprecated**
+- ~~[`kubernetesClustersListKubernetesAvailableVersions`](docs/sdks/kubernetesclusters/README.md#listkubernetesavailableversions)~~ - List Available Kubernetes Versions :warning: **Deprecated**
 - ~~[`kubernetesClustersListKubernetesClusters`](docs/sdks/kubernetesclusters/README.md#listkubernetesclusters)~~ - List Kubernetes Clusters :warning: **Deprecated**
 - ~~[`kubernetesClustersUpdateKubernetesCluster`](docs/sdks/kubernetesclusters/README.md#updatekubernetescluster)~~ - Update Kubernetes Cluster :warning: **Deprecated**
 - ~~[`projectsSshKeysPostProjectSshKey`](docs/sdks/projectssshkeys/README.md#postprojectsshkey)~~ - Create SSH Key :warning: **Deprecated**

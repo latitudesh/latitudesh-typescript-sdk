@@ -107,6 +107,10 @@ export type VolumeDataAttributes = {
   connectorId?: string | null | undefined;
   initiators?: Array<Initiator> | null | undefined;
   /**
+   * NVMe namespace globally unique identifier (NGUID) of the volume, exactly as reported by the storage cluster, in UUID form (e.g. "b338cb51-7593-413d-8c87-2657af7ecae9"). Without the dashes it matches the NGUID the mapped server reports for the NVMe device of the volume. Null when it has not been recorded for the volume.
+   */
+  nguid?: string | null | undefined;
+  /**
    * NVMe-TCP block mapping of a high performance volume. Null for volumes that are not mapped to a server.
    */
   block?: Block | null | undefined;
@@ -399,6 +403,7 @@ export const VolumeDataAttributes$inboundSchema: z.ZodType<
   connector_id: z.nullable(z.string()).optional(),
   initiators: z.nullable(z.array(z.lazy(() => Initiator$inboundSchema)))
     .optional(),
+  nguid: z.nullable(z.string()).optional(),
   block: z.nullable(z.lazy(() => Block$inboundSchema)).optional(),
   keyring: z.nullable(z.string()).optional(),
   cluster_user: z.nullable(z.string()).optional(),
@@ -424,6 +429,7 @@ export type VolumeDataAttributes$Outbound = {
   namespace_id?: number | null | undefined;
   connector_id?: string | null | undefined;
   initiators?: Array<Initiator$Outbound> | null | undefined;
+  nguid?: string | null | undefined;
   block?: Block$Outbound | null | undefined;
   keyring?: string | null | undefined;
   cluster_user?: string | null | undefined;
@@ -446,6 +452,7 @@ export const VolumeDataAttributes$outboundSchema: z.ZodType<
   connectorId: z.nullable(z.string()).optional(),
   initiators: z.nullable(z.array(z.lazy(() => Initiator$outboundSchema)))
     .optional(),
+  nguid: z.nullable(z.string()).optional(),
   block: z.nullable(z.lazy(() => Block$outboundSchema)).optional(),
   keyring: z.nullable(z.string()).optional(),
   clusterUser: z.nullable(z.string()).optional(),

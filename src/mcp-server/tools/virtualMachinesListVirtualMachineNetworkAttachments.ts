@@ -12,7 +12,7 @@ const args = {
 
 export const tool$virtualMachinesListVirtualMachineNetworkAttachments:
   ToolDefinition<typeof args> = {
-    name: "virtual-machines-list-network-attachments",
+    name: "virtual-machines-list-virtual-machine-network-attachments",
     description: `List VM network attachments
 
 Lists the secondary network attachments currently configured for a Virtual Machine.
