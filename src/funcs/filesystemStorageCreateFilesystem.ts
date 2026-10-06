@@ -34,11 +34,11 @@ import { Result } from "../types/fp.js";
  */
 export function filesystemStorageCreateFilesystem(
   client: LatitudeshCore,
-  request: operations.PostStorageFilesystemsRequest,
+  request: operations.CreateFilesystemRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.PostStorageFilesystemsResponse,
+    operations.CreateFilesystemResponse,
     | errors.ErrorObject
     | LatitudeshError
     | ResponseValidationError
@@ -59,12 +59,12 @@ export function filesystemStorageCreateFilesystem(
 
 async function $do(
   client: LatitudeshCore,
-  request: operations.PostStorageFilesystemsRequest,
+  request: operations.CreateFilesystemRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.PostStorageFilesystemsResponse,
+      operations.CreateFilesystemResponse,
       | errors.ErrorObject
       | LatitudeshError
       | ResponseValidationError
@@ -80,8 +80,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) =>
-      operations.PostStorageFilesystemsRequest$outboundSchema.parse(value),
+    (value) => operations.CreateFilesystemRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -104,7 +103,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "post-storage-filesystems",
+    operationID: "create-filesystem",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -148,7 +147,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.PostStorageFilesystemsResponse,
+    operations.CreateFilesystemResponse,
     | errors.ErrorObject
     | LatitudeshError
     | ResponseValidationError
@@ -159,7 +158,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(201, operations.PostStorageFilesystemsResponse$inboundSchema, {
+    M.json(201, operations.CreateFilesystemResponse$inboundSchema, {
       ctype: "application/vnd.api+json",
     }),
     M.jsonErr(503, errors.ErrorObject$inboundSchema, {

@@ -34,7 +34,7 @@ import { Result } from "../types/fp.js";
  */
 export function filesystemStorageListFilesystems(
   client: LatitudeshCore,
-  request?: operations.GetStorageFilesystemsRequest | undefined,
+  request?: operations.ListFilesystemsRequest | undefined,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -58,7 +58,7 @@ export function filesystemStorageListFilesystems(
 
 async function $do(
   client: LatitudeshCore,
-  request?: operations.GetStorageFilesystemsRequest | undefined,
+  request?: operations.ListFilesystemsRequest | undefined,
   options?: RequestOptions,
 ): Promise<
   [
@@ -79,9 +79,7 @@ async function $do(
   const parsed = safeParse(
     request,
     (value) =>
-      operations.GetStorageFilesystemsRequest$outboundSchema.optional().parse(
-        value,
-      ),
+      operations.ListFilesystemsRequest$outboundSchema.optional().parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -107,7 +105,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "get-storage-filesystems",
+    operationID: "list-filesystems",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,

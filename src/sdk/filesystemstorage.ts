@@ -19,9 +19,9 @@ export class FilesystemStorage extends ClientSDK {
    * Allows you to add persistent storage to a project. These filesystems can be used to store data across your servers.
    */
   async createFilesystem(
-    request: operations.PostStorageFilesystemsRequest,
+    request: operations.CreateFilesystemRequest,
     options?: RequestOptions,
-  ): Promise<operations.PostStorageFilesystemsResponse> {
+  ): Promise<operations.CreateFilesystemResponse> {
     return unwrapAsync(filesystemStorageCreateFilesystem(
       this,
       request,
@@ -36,7 +36,7 @@ export class FilesystemStorage extends ClientSDK {
    * Lists all the filesystems from a team.
    */
   async listFilesystems(
-    request?: operations.GetStorageFilesystemsRequest | undefined,
+    request?: operations.ListFilesystemsRequest | undefined,
     options?: RequestOptions,
   ): Promise<models.Filesystems> {
     return unwrapAsync(filesystemStorageListFilesystems(
@@ -53,7 +53,7 @@ export class FilesystemStorage extends ClientSDK {
    * Allows you to remove a filesystem from a project.
    */
   async deleteFilesystem(
-    request: operations.DeleteStorageFilesystemsRequest,
+    request: operations.DeleteFilesystemRequest,
     options?: RequestOptions,
   ): Promise<void> {
     return unwrapAsync(filesystemStorageDeleteFilesystem(
@@ -70,9 +70,9 @@ export class FilesystemStorage extends ClientSDK {
    * Allow you to upgrade the size of a filesystem.
    */
   async updateFilesystem(
-    request: operations.PatchStorageFilesystemsRequest,
+    request: operations.UpdateFilesystemRequest,
     options?: RequestOptions,
-  ): Promise<operations.PatchStorageFilesystemsResponse> {
+  ): Promise<operations.UpdateFilesystemResponse> {
     return unwrapAsync(filesystemStorageUpdateFilesystem(
       this,
       request,

@@ -173,7 +173,7 @@ async function $do(
     M.json(200, models.KubernetesCluster$inboundSchema, {
       ctype: "application/vnd.api+json",
     }),
-    M.jsonErr([401, 404], errors.ErrorObject$inboundSchema, {
+    M.jsonErr([401, 403, 404], errors.ErrorObject$inboundSchema, {
       ctype: "application/vnd.api+json",
     }),
     M.fail("4XX"),

@@ -40,9 +40,9 @@ export type ManagedDatabasePayloadRecovery = {
 
 export type ManagedDatabasePayloadAttributes = {
   /**
-   * Display name (optional)
+   * Display name; used to derive the helm release name
    */
-  name?: string | undefined;
+  name: string;
   /**
    * Project slug
    */
@@ -162,7 +162,7 @@ export const ManagedDatabasePayloadAttributes$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  name: z.string().optional(),
+  name: z.string(),
   project_id: z.string(),
   region: z.string(),
   plan: z.string(),
@@ -182,7 +182,7 @@ export const ManagedDatabasePayloadAttributes$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type ManagedDatabasePayloadAttributes$Outbound = {
-  name?: string | undefined;
+  name: string;
   project_id: string;
   region: string;
   plan: string;
@@ -201,7 +201,7 @@ export const ManagedDatabasePayloadAttributes$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ManagedDatabasePayloadAttributes
 > = z.object({
-  name: z.string().optional(),
+  name: z.string(),
   projectId: z.string(),
   region: z.string(),
   plan: z.string(),

@@ -1,13 +1,13 @@
-# PostStorageFilesystemsResponse
+# UpdateFilesystemResponse
 
-Created
+Success
 
 ## Example Usage
 
 ```typescript
-import { PostStorageFilesystemsResponse } from "latitudesh-typescript-sdk/models/operations";
+import { UpdateFilesystemResponse } from "latitudesh-typescript-sdk/models/operations";
 
-let value: PostStorageFilesystemsResponse = {};
+let value: UpdateFilesystemResponse = {};
 ```
 
 ## Fields

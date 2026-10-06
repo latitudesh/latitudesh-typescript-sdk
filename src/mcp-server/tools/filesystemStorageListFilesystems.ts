@@ -7,7 +7,7 @@ import * as operations from "../../models/operations/index.js";
 import { formatResult, ToolDefinition } from "../tools.js";
 
 const args = {
-  request: operations.GetStorageFilesystemsRequest$inboundSchema.optional(),
+  request: operations.ListFilesystemsRequest$inboundSchema.optional(),
 };
 
 export const tool$filesystemStorageListFilesystems: ToolDefinition<

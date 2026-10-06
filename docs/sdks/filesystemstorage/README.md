@@ -15,7 +15,7 @@ Allows you to add persistent storage to a project. These filesystems can be used
 
 ### Example Usage: Created
 
-<!-- UsageSnippet language="typescript" operationID="post-storage-filesystems" method="post" path="/storage/filesystems" example="Created" -->
+<!-- UsageSnippet language="typescript" operationID="create-filesystem" method="post" path="/storage/filesystems" example="Created" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -30,6 +30,10 @@ async function run() {
       attributes: {
         project: "proj_lkg1De6ROvZE5",
         name: "my-data",
+        region: "NYC",
+        protocols: [
+          "nfs3",
+        ],
       },
     },
   });
@@ -61,6 +65,10 @@ async function run() {
       attributes: {
         project: "proj_lkg1De6ROvZE5",
         name: "my-data",
+        region: "NYC",
+        protocols: [
+          "nfs3",
+        ],
       },
     },
   });
@@ -76,7 +84,7 @@ run();
 ```
 ### Example Usage: Storage creation frozen
 
-<!-- UsageSnippet language="typescript" operationID="post-storage-filesystems" method="post" path="/storage/filesystems" example="Storage creation frozen" -->
+<!-- UsageSnippet language="typescript" operationID="create-filesystem" method="post" path="/storage/filesystems" example="Storage creation frozen" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -91,6 +99,10 @@ async function run() {
       attributes: {
         project: "<value>",
         name: "<value>",
+        region: "<value>",
+        protocols: [
+          "nfs4",
+        ],
       },
     },
   });
@@ -122,6 +134,10 @@ async function run() {
       attributes: {
         project: "<value>",
         name: "<value>",
+        region: "<value>",
+        protocols: [
+          "nfs4",
+        ],
       },
     },
   });
@@ -140,14 +156,14 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.PostStorageFilesystemsRequest](../../models/operations/poststoragefilesystemsrequest.md)                                                                           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.CreateFilesystemRequest](../../models/operations/createfilesystemrequest.md)                                                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[operations.PostStorageFilesystemsResponse](../../models/operations/poststoragefilesystemsresponse.md)\>**
+**Promise\<[operations.CreateFilesystemResponse](../../models/operations/createfilesystemresponse.md)\>**
 
 ### Errors
 
@@ -162,7 +178,7 @@ Lists all the filesystems from a team.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="get-storage-filesystems" method="get" path="/storage/filesystems" example="Success" -->
+<!-- UsageSnippet language="typescript" operationID="list-filesystems" method="get" path="/storage/filesystems" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -214,7 +230,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.GetStorageFilesystemsRequest](../../models/operations/getstoragefilesystemsrequest.md)                                                                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.ListFilesystemsRequest](../../models/operations/listfilesystemsrequest.md)                                                                                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
@@ -235,7 +251,7 @@ Allows you to remove a filesystem from a project.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="delete-storage-filesystems" method="delete" path="/storage/filesystems/{filesystem_id}" -->
+<!-- UsageSnippet language="typescript" operationID="delete-filesystem" method="delete" path="/storage/filesystems/{filesystem_id}" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -287,7 +303,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.DeleteStorageFilesystemsRequest](../../models/operations/deletestoragefilesystemsrequest.md)                                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.DeleteFilesystemRequest](../../models/operations/deletefilesystemrequest.md)                                                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
@@ -308,7 +324,7 @@ Allow you to upgrade the size of a filesystem.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="patch-storage-filesystems" method="patch" path="/storage/filesystems/{filesystem_id}" example="Success" -->
+<!-- UsageSnippet language="typescript" operationID="update-filesystem" method="patch" path="/storage/filesystems/{filesystem_id}" example="Success" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -378,14 +394,14 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.PatchStorageFilesystemsRequest](../../models/operations/patchstoragefilesystemsrequest.md)                                                                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.UpdateFilesystemRequest](../../models/operations/updatefilesystemrequest.md)                                                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[operations.PatchStorageFilesystemsResponse](../../models/operations/patchstoragefilesystemsresponse.md)\>**
+**Promise\<[operations.UpdateFilesystemResponse](../../models/operations/updatefilesystemresponse.md)\>**
 
 ### Errors
 

@@ -8,7 +8,7 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type GetStorageFilesystemsRequest = {
+export type ListFilesystemsRequest = {
   /**
    * The project ID or Slug to filter by
    */
@@ -16,8 +16,8 @@ export type GetStorageFilesystemsRequest = {
 };
 
 /** @internal */
-export const GetStorageFilesystemsRequest$inboundSchema: z.ZodType<
-  GetStorageFilesystemsRequest,
+export const ListFilesystemsRequest$inboundSchema: z.ZodType<
+  ListFilesystemsRequest,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -28,15 +28,15 @@ export const GetStorageFilesystemsRequest$inboundSchema: z.ZodType<
   });
 });
 /** @internal */
-export type GetStorageFilesystemsRequest$Outbound = {
+export type ListFilesystemsRequest$Outbound = {
   "filter[project]"?: string | undefined;
 };
 
 /** @internal */
-export const GetStorageFilesystemsRequest$outboundSchema: z.ZodType<
-  GetStorageFilesystemsRequest$Outbound,
+export const ListFilesystemsRequest$outboundSchema: z.ZodType<
+  ListFilesystemsRequest$Outbound,
   z.ZodTypeDef,
-  GetStorageFilesystemsRequest
+  ListFilesystemsRequest
 > = z.object({
   filterProject: z.string().optional(),
 }).transform((v) => {
@@ -45,21 +45,19 @@ export const GetStorageFilesystemsRequest$outboundSchema: z.ZodType<
   });
 });
 
-export function getStorageFilesystemsRequestToJSON(
-  getStorageFilesystemsRequest: GetStorageFilesystemsRequest,
+export function listFilesystemsRequestToJSON(
+  listFilesystemsRequest: ListFilesystemsRequest,
 ): string {
   return JSON.stringify(
-    GetStorageFilesystemsRequest$outboundSchema.parse(
-      getStorageFilesystemsRequest,
-    ),
+    ListFilesystemsRequest$outboundSchema.parse(listFilesystemsRequest),
   );
 }
-export function getStorageFilesystemsRequestFromJSON(
+export function listFilesystemsRequestFromJSON(
   jsonString: string,
-): SafeParseResult<GetStorageFilesystemsRequest, SDKValidationError> {
+): SafeParseResult<ListFilesystemsRequest, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => GetStorageFilesystemsRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetStorageFilesystemsRequest' from JSON`,
+    (x) => ListFilesystemsRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListFilesystemsRequest' from JSON`,
   );
 }

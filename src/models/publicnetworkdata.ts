@@ -9,10 +9,12 @@ import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 
-export const PublicNetworkDataType = {
+export const PublicNetworkDataTypePublicNetworks = {
   PublicNetworks: "public_networks",
 } as const;
-export type PublicNetworkDataType = ClosedEnum<typeof PublicNetworkDataType>;
+export type PublicNetworkDataTypePublicNetworks = ClosedEnum<
+  typeof PublicNetworkDataTypePublicNetworks
+>;
 
 /**
  * IPv4 prefix length. Determines how many servers the public network can host.
@@ -27,6 +29,51 @@ export const PublicNetworkDataSize = {
  * IPv4 prefix length. Determines how many servers the public network can host.
  */
 export type PublicNetworkDataSize = ClosedEnum<typeof PublicNetworkDataSize>;
+
+/**
+ * gateway: reserved for the network gateway; server: a server on the network; elastic_ip: an elastic IP; reserved: held in IPAM but not by a server; available: free to use
+ */
+export const PublicNetworkDataRole = {
+  Gateway: "gateway",
+  Server: "server",
+  ElasticIp: "elastic_ip",
+  Reserved: "reserved",
+  Available: "available",
+} as const;
+/**
+ * gateway: reserved for the network gateway; server: a server on the network; elastic_ip: an elastic IP; reserved: held in IPAM but not by a server; available: free to use
+ */
+export type PublicNetworkDataRole = ClosedEnum<typeof PublicNetworkDataRole>;
+
+export const AssignmentType = {
+  Server: "server",
+  ElasticIp: "elastic_ip",
+} as const;
+export type AssignmentType = ClosedEnum<typeof AssignmentType>;
+
+/**
+ * The resource holding the address, when it is a server or an elastic IP
+ */
+export type PublicNetworkDataAssignment = {
+  type?: AssignmentType | undefined;
+  id?: string | undefined;
+  /**
+   * Servers only
+   */
+  hostname?: string | null | undefined;
+};
+
+export type Ip = {
+  address?: string | undefined;
+  /**
+   * gateway: reserved for the network gateway; server: a server on the network; elastic_ip: an elastic IP; reserved: held in IPAM but not by a server; available: free to use
+   */
+  role?: PublicNetworkDataRole | undefined;
+  /**
+   * The resource holding the address, when it is a server or an elastic IP
+   */
+  assignment?: PublicNetworkDataAssignment | null | undefined;
+};
 
 export type PublicNetworkDataProject = {
   id?: string | undefined;
@@ -69,6 +116,10 @@ export type PublicNetworkDataAttributes = {
   capacity?: number | undefined;
   ipsUsed?: number | undefined;
   ipsFree?: number | undefined;
+  /**
+   * Every host address of the IPv4 network and what holds it. Only returned when retrieving a single public network.
+   */
+  ips?: Array<Ip> | undefined;
   createdAt?: Date | undefined;
   project?: PublicNetworkDataProject | null | undefined;
   region?: PublicNetworkDataRegion | null | undefined;
@@ -76,18 +127,18 @@ export type PublicNetworkDataAttributes = {
 
 export type PublicNetworkData = {
   id?: string | undefined;
-  type?: PublicNetworkDataType | undefined;
+  type?: PublicNetworkDataTypePublicNetworks | undefined;
   attributes?: PublicNetworkDataAttributes | undefined;
 };
 
 /** @internal */
-export const PublicNetworkDataType$inboundSchema: z.ZodNativeEnum<
-  typeof PublicNetworkDataType
-> = z.nativeEnum(PublicNetworkDataType);
+export const PublicNetworkDataTypePublicNetworks$inboundSchema: z.ZodNativeEnum<
+  typeof PublicNetworkDataTypePublicNetworks
+> = z.nativeEnum(PublicNetworkDataTypePublicNetworks);
 /** @internal */
-export const PublicNetworkDataType$outboundSchema: z.ZodNativeEnum<
-  typeof PublicNetworkDataType
-> = PublicNetworkDataType$inboundSchema;
+export const PublicNetworkDataTypePublicNetworks$outboundSchema:
+  z.ZodNativeEnum<typeof PublicNetworkDataTypePublicNetworks> =
+    PublicNetworkDataTypePublicNetworks$inboundSchema;
 
 /** @internal */
 export const PublicNetworkDataSize$inboundSchema: z.ZodNativeEnum<
@@ -97,6 +148,109 @@ export const PublicNetworkDataSize$inboundSchema: z.ZodNativeEnum<
 export const PublicNetworkDataSize$outboundSchema: z.ZodNativeEnum<
   typeof PublicNetworkDataSize
 > = PublicNetworkDataSize$inboundSchema;
+
+/** @internal */
+export const PublicNetworkDataRole$inboundSchema: z.ZodNativeEnum<
+  typeof PublicNetworkDataRole
+> = z.nativeEnum(PublicNetworkDataRole);
+/** @internal */
+export const PublicNetworkDataRole$outboundSchema: z.ZodNativeEnum<
+  typeof PublicNetworkDataRole
+> = PublicNetworkDataRole$inboundSchema;
+
+/** @internal */
+export const AssignmentType$inboundSchema: z.ZodNativeEnum<
+  typeof AssignmentType
+> = z.nativeEnum(AssignmentType);
+/** @internal */
+export const AssignmentType$outboundSchema: z.ZodNativeEnum<
+  typeof AssignmentType
+> = AssignmentType$inboundSchema;
+
+/** @internal */
+export const PublicNetworkDataAssignment$inboundSchema: z.ZodType<
+  PublicNetworkDataAssignment,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: AssignmentType$inboundSchema.optional(),
+  id: z.string().optional(),
+  hostname: z.nullable(z.string()).optional(),
+});
+/** @internal */
+export type PublicNetworkDataAssignment$Outbound = {
+  type?: string | undefined;
+  id?: string | undefined;
+  hostname?: string | null | undefined;
+};
+
+/** @internal */
+export const PublicNetworkDataAssignment$outboundSchema: z.ZodType<
+  PublicNetworkDataAssignment$Outbound,
+  z.ZodTypeDef,
+  PublicNetworkDataAssignment
+> = z.object({
+  type: AssignmentType$outboundSchema.optional(),
+  id: z.string().optional(),
+  hostname: z.nullable(z.string()).optional(),
+});
+
+export function publicNetworkDataAssignmentToJSON(
+  publicNetworkDataAssignment: PublicNetworkDataAssignment,
+): string {
+  return JSON.stringify(
+    PublicNetworkDataAssignment$outboundSchema.parse(
+      publicNetworkDataAssignment,
+    ),
+  );
+}
+export function publicNetworkDataAssignmentFromJSON(
+  jsonString: string,
+): SafeParseResult<PublicNetworkDataAssignment, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PublicNetworkDataAssignment$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PublicNetworkDataAssignment' from JSON`,
+  );
+}
+
+/** @internal */
+export const Ip$inboundSchema: z.ZodType<Ip, z.ZodTypeDef, unknown> = z.object({
+  address: z.string().optional(),
+  role: PublicNetworkDataRole$inboundSchema.optional(),
+  assignment: z.nullable(
+    z.lazy(() => PublicNetworkDataAssignment$inboundSchema),
+  ).optional(),
+});
+/** @internal */
+export type Ip$Outbound = {
+  address?: string | undefined;
+  role?: string | undefined;
+  assignment?: PublicNetworkDataAssignment$Outbound | null | undefined;
+};
+
+/** @internal */
+export const Ip$outboundSchema: z.ZodType<Ip$Outbound, z.ZodTypeDef, Ip> = z
+  .object({
+    address: z.string().optional(),
+    role: PublicNetworkDataRole$outboundSchema.optional(),
+    assignment: z.nullable(
+      z.lazy(() => PublicNetworkDataAssignment$outboundSchema),
+    ).optional(),
+  });
+
+export function ipToJSON(ip: Ip): string {
+  return JSON.stringify(Ip$outboundSchema.parse(ip));
+}
+export function ipFromJSON(
+  jsonString: string,
+): SafeParseResult<Ip, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Ip$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Ip' from JSON`,
+  );
+}
 
 /** @internal */
 export const PublicNetworkDataProject$inboundSchema: z.ZodType<
@@ -246,6 +400,7 @@ export const PublicNetworkDataAttributes$inboundSchema: z.ZodType<
   capacity: z.number().int().optional(),
   ips_used: z.number().int().optional(),
   ips_free: z.number().int().optional(),
+  ips: z.array(z.lazy(() => Ip$inboundSchema)).optional(),
   created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   project: z.nullable(z.lazy(() => PublicNetworkDataProject$inboundSchema))
@@ -268,6 +423,7 @@ export type PublicNetworkDataAttributes$Outbound = {
   capacity?: number | undefined;
   ips_used?: number | undefined;
   ips_free?: number | undefined;
+  ips?: Array<Ip$Outbound> | undefined;
   created_at?: string | undefined;
   project?: PublicNetworkDataProject$Outbound | null | undefined;
   region?: PublicNetworkDataRegion$Outbound | null | undefined;
@@ -286,6 +442,7 @@ export const PublicNetworkDataAttributes$outboundSchema: z.ZodType<
   capacity: z.number().int().optional(),
   ipsUsed: z.number().int().optional(),
   ipsFree: z.number().int().optional(),
+  ips: z.array(z.lazy(() => Ip$outboundSchema)).optional(),
   createdAt: z.date().transform(v => v.toISOString()).optional(),
   project: z.nullable(z.lazy(() => PublicNetworkDataProject$outboundSchema))
     .optional(),
@@ -325,7 +482,7 @@ export const PublicNetworkData$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   id: z.string().optional(),
-  type: PublicNetworkDataType$inboundSchema.optional(),
+  type: PublicNetworkDataTypePublicNetworks$inboundSchema.optional(),
   attributes: z.lazy(() => PublicNetworkDataAttributes$inboundSchema)
     .optional(),
 });
@@ -343,7 +500,7 @@ export const PublicNetworkData$outboundSchema: z.ZodType<
   PublicNetworkData
 > = z.object({
   id: z.string().optional(),
-  type: PublicNetworkDataType$outboundSchema.optional(),
+  type: PublicNetworkDataTypePublicNetworks$outboundSchema.optional(),
   attributes: z.lazy(() => PublicNetworkDataAttributes$outboundSchema)
     .optional(),
 });
