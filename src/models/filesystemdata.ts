@@ -32,6 +32,25 @@ export const FilesystemStorageClass = {
 } as const;
 export type FilesystemStorageClass = ClosedEnum<typeof FilesystemStorageClass>;
 
+export const Protocol = {
+  Nfs3: "nfs3",
+  Nfs4: "nfs4",
+} as const;
+export type Protocol = ClosedEnum<typeof Protocol>;
+
+export type FilesystemDataSite = {
+  id?: string | undefined;
+  name?: string | undefined;
+  slug?: string | undefined;
+  facility?: string | undefined;
+};
+
+export type FilesystemDataRegion = {
+  city?: string | null | undefined;
+  country?: string | null | undefined;
+  site?: FilesystemDataSite | null | undefined;
+};
+
 export type FilesystemDataAttributes = {
   name?: string | undefined;
   sizeInGb?: number | undefined;
@@ -49,6 +68,19 @@ export type FilesystemDataAttributes = {
    * Path of the filesystem volume inside the cluster. Returned only for dashboard-origin requests; null until the filesystem is provisioned.
    */
   volumePath?: string | null | undefined;
+  /**
+   * Path of the NFS view (NFSv3 and NFSv4) backing the filesystem. Null for filesystems that are not backed by high performance file storage.
+   */
+  nfsMountPath?: string | null | undefined;
+  /**
+   * NFS protocol version(s) the filesystem was requested to be mounted with. Null for filesystems that are not backed by high performance file storage.
+   */
+  protocols?: Array<Protocol> | null | undefined;
+  /**
+   * Hostname of the NFS endpoint backing the filesystem. Null for filesystems that are not backed by high performance file storage.
+   */
+  fileEndpoint?: string | null | undefined;
+  region?: FilesystemDataRegion | null | undefined;
   project?: ProjectInclude | undefined;
   team?: TeamInclude | undefined;
 };
@@ -78,6 +110,106 @@ export const FilesystemStorageClass$outboundSchema: z.ZodNativeEnum<
 > = FilesystemStorageClass$inboundSchema;
 
 /** @internal */
+export const Protocol$inboundSchema: z.ZodNativeEnum<typeof Protocol> = z
+  .nativeEnum(Protocol);
+/** @internal */
+export const Protocol$outboundSchema: z.ZodNativeEnum<typeof Protocol> =
+  Protocol$inboundSchema;
+
+/** @internal */
+export const FilesystemDataSite$inboundSchema: z.ZodType<
+  FilesystemDataSite,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string().optional(),
+  name: z.string().optional(),
+  slug: z.string().optional(),
+  facility: z.string().optional(),
+});
+/** @internal */
+export type FilesystemDataSite$Outbound = {
+  id?: string | undefined;
+  name?: string | undefined;
+  slug?: string | undefined;
+  facility?: string | undefined;
+};
+
+/** @internal */
+export const FilesystemDataSite$outboundSchema: z.ZodType<
+  FilesystemDataSite$Outbound,
+  z.ZodTypeDef,
+  FilesystemDataSite
+> = z.object({
+  id: z.string().optional(),
+  name: z.string().optional(),
+  slug: z.string().optional(),
+  facility: z.string().optional(),
+});
+
+export function filesystemDataSiteToJSON(
+  filesystemDataSite: FilesystemDataSite,
+): string {
+  return JSON.stringify(
+    FilesystemDataSite$outboundSchema.parse(filesystemDataSite),
+  );
+}
+export function filesystemDataSiteFromJSON(
+  jsonString: string,
+): SafeParseResult<FilesystemDataSite, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => FilesystemDataSite$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FilesystemDataSite' from JSON`,
+  );
+}
+
+/** @internal */
+export const FilesystemDataRegion$inboundSchema: z.ZodType<
+  FilesystemDataRegion,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  city: z.nullable(z.string()).optional(),
+  country: z.nullable(z.string()).optional(),
+  site: z.nullable(z.lazy(() => FilesystemDataSite$inboundSchema)).optional(),
+});
+/** @internal */
+export type FilesystemDataRegion$Outbound = {
+  city?: string | null | undefined;
+  country?: string | null | undefined;
+  site?: FilesystemDataSite$Outbound | null | undefined;
+};
+
+/** @internal */
+export const FilesystemDataRegion$outboundSchema: z.ZodType<
+  FilesystemDataRegion$Outbound,
+  z.ZodTypeDef,
+  FilesystemDataRegion
+> = z.object({
+  city: z.nullable(z.string()).optional(),
+  country: z.nullable(z.string()).optional(),
+  site: z.nullable(z.lazy(() => FilesystemDataSite$outboundSchema)).optional(),
+});
+
+export function filesystemDataRegionToJSON(
+  filesystemDataRegion: FilesystemDataRegion,
+): string {
+  return JSON.stringify(
+    FilesystemDataRegion$outboundSchema.parse(filesystemDataRegion),
+  );
+}
+export function filesystemDataRegionFromJSON(
+  jsonString: string,
+): SafeParseResult<FilesystemDataRegion, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => FilesystemDataRegion$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FilesystemDataRegion' from JSON`,
+  );
+}
+
+/** @internal */
 export const FilesystemDataAttributes$inboundSchema: z.ZodType<
   FilesystemDataAttributes,
   z.ZodTypeDef,
@@ -92,6 +224,11 @@ export const FilesystemDataAttributes$inboundSchema: z.ZodType<
   keyring: z.nullable(z.string()).optional(),
   cluster_user: z.nullable(z.string()).optional(),
   volume_path: z.nullable(z.string()).optional(),
+  nfs_mount_path: z.nullable(z.string()).optional(),
+  protocols: z.nullable(z.array(Protocol$inboundSchema)).optional(),
+  file_endpoint: z.nullable(z.string()).optional(),
+  region: z.nullable(z.lazy(() => FilesystemDataRegion$inboundSchema))
+    .optional(),
   project: ProjectInclude$inboundSchema.optional(),
   team: TeamInclude$inboundSchema.optional(),
 }).transform((v) => {
@@ -101,6 +238,8 @@ export const FilesystemDataAttributes$inboundSchema: z.ZodType<
     "created_at": "createdAt",
     "cluster_user": "clusterUser",
     "volume_path": "volumePath",
+    "nfs_mount_path": "nfsMountPath",
+    "file_endpoint": "fileEndpoint",
   });
 });
 /** @internal */
@@ -112,6 +251,10 @@ export type FilesystemDataAttributes$Outbound = {
   keyring?: string | null | undefined;
   cluster_user?: string | null | undefined;
   volume_path?: string | null | undefined;
+  nfs_mount_path?: string | null | undefined;
+  protocols?: Array<string> | null | undefined;
+  file_endpoint?: string | null | undefined;
+  region?: FilesystemDataRegion$Outbound | null | undefined;
   project?: ProjectInclude$Outbound | undefined;
   team?: TeamInclude$Outbound | undefined;
 };
@@ -130,6 +273,11 @@ export const FilesystemDataAttributes$outboundSchema: z.ZodType<
   keyring: z.nullable(z.string()).optional(),
   clusterUser: z.nullable(z.string()).optional(),
   volumePath: z.nullable(z.string()).optional(),
+  nfsMountPath: z.nullable(z.string()).optional(),
+  protocols: z.nullable(z.array(Protocol$outboundSchema)).optional(),
+  fileEndpoint: z.nullable(z.string()).optional(),
+  region: z.nullable(z.lazy(() => FilesystemDataRegion$outboundSchema))
+    .optional(),
   project: ProjectInclude$outboundSchema.optional(),
   team: TeamInclude$outboundSchema.optional(),
 }).transform((v) => {
@@ -139,6 +287,8 @@ export const FilesystemDataAttributes$outboundSchema: z.ZodType<
     createdAt: "created_at",
     clusterUser: "cluster_user",
     volumePath: "volume_path",
+    nfsMountPath: "nfs_mount_path",
+    fileEndpoint: "file_endpoint",
   });
 });
 

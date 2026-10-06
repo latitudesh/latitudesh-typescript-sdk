@@ -27,7 +27,7 @@ export type RegionAttributes = {
   country?: RegionCountry | undefined;
   type?: string | null | undefined;
   /**
-   * Location capabilities available at this location (e.g. `public_network`, `elastic_ip_bgp`).
+   * Location capabilities available at this location (e.g. `public_network`, `elastic_ip_bgp`, `object_storage`, `object_storage_high_performance`, `file_storage`, `block_storage`, `lks`).
    */
   features?: Array<string> | undefined;
   /**

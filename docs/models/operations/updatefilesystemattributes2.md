@@ -1,12 +1,12 @@
-# PatchStorageFilesystemsAttributes2
+# UpdateFilesystemAttributes2
 
 ## Example Usage
 
 ```typescript
-import { PatchStorageFilesystemsAttributes2 } from "latitudesh-typescript-sdk/models/operations";
+import { UpdateFilesystemAttributes2 } from "latitudesh-typescript-sdk/models/operations";
 
-let value: PatchStorageFilesystemsAttributes2 = {
-  sizeInGb: 586203,
+let value: UpdateFilesystemAttributes2 = {
+  sizeInGb: 963661,
 };
 ```
 

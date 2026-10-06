@@ -7,7 +7,7 @@ import * as operations from "../../models/operations/index.js";
 import { formatResult, ToolDefinition } from "../tools.js";
 
 const args = {
-  request: operations.DeleteStorageFilesystemsRequest$inboundSchema,
+  request: operations.DeleteFilesystemRequest$inboundSchema,
 };
 
 export const tool$filesystemStorageDeleteFilesystem: ToolDefinition<

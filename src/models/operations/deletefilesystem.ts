@@ -8,13 +8,13 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type DeleteStorageFilesystemsRequest = {
+export type DeleteFilesystemRequest = {
   filesystemId: string;
 };
 
 /** @internal */
-export const DeleteStorageFilesystemsRequest$inboundSchema: z.ZodType<
-  DeleteStorageFilesystemsRequest,
+export const DeleteFilesystemRequest$inboundSchema: z.ZodType<
+  DeleteFilesystemRequest,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -25,15 +25,15 @@ export const DeleteStorageFilesystemsRequest$inboundSchema: z.ZodType<
   });
 });
 /** @internal */
-export type DeleteStorageFilesystemsRequest$Outbound = {
+export type DeleteFilesystemRequest$Outbound = {
   filesystem_id: string;
 };
 
 /** @internal */
-export const DeleteStorageFilesystemsRequest$outboundSchema: z.ZodType<
-  DeleteStorageFilesystemsRequest$Outbound,
+export const DeleteFilesystemRequest$outboundSchema: z.ZodType<
+  DeleteFilesystemRequest$Outbound,
   z.ZodTypeDef,
-  DeleteStorageFilesystemsRequest
+  DeleteFilesystemRequest
 > = z.object({
   filesystemId: z.string(),
 }).transform((v) => {
@@ -42,21 +42,19 @@ export const DeleteStorageFilesystemsRequest$outboundSchema: z.ZodType<
   });
 });
 
-export function deleteStorageFilesystemsRequestToJSON(
-  deleteStorageFilesystemsRequest: DeleteStorageFilesystemsRequest,
+export function deleteFilesystemRequestToJSON(
+  deleteFilesystemRequest: DeleteFilesystemRequest,
 ): string {
   return JSON.stringify(
-    DeleteStorageFilesystemsRequest$outboundSchema.parse(
-      deleteStorageFilesystemsRequest,
-    ),
+    DeleteFilesystemRequest$outboundSchema.parse(deleteFilesystemRequest),
   );
 }
-export function deleteStorageFilesystemsRequestFromJSON(
+export function deleteFilesystemRequestFromJSON(
   jsonString: string,
-): SafeParseResult<DeleteStorageFilesystemsRequest, SDKValidationError> {
+): SafeParseResult<DeleteFilesystemRequest, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => DeleteStorageFilesystemsRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeleteStorageFilesystemsRequest' from JSON`,
+    (x) => DeleteFilesystemRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeleteFilesystemRequest' from JSON`,
   );
 }

@@ -231,6 +231,7 @@ run();
 * [createVolume](docs/sdks/blockstorage/README.md#createvolume) - Create volume
 * [retrieveVolume](docs/sdks/blockstorage/README.md#retrievevolume) - Retrieve volume
 * [deleteVolume](docs/sdks/blockstorage/README.md#deletevolume) - Delete volume
+* [updateVolume](docs/sdks/blockstorage/README.md#updatevolume) - Update volume
 * [~~mountVolume~~](docs/sdks/blockstorage/README.md#mountvolume) - Mount volume (deprecated) :warning: **Deprecated**
 * [mapVolume](docs/sdks/blockstorage/README.md#mapvolume) - Map volume
 * [unmapVolume](docs/sdks/blockstorage/README.md#unmapvolume) - Unmap volume
@@ -549,6 +550,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`blockStorageMapVolume`](docs/sdks/blockstorage/README.md#mapvolume) - Map volume
 - [`blockStorageRetrieveVolume`](docs/sdks/blockstorage/README.md#retrievevolume) - Retrieve volume
 - [`blockStorageUnmapVolume`](docs/sdks/blockstorage/README.md#unmapvolume) - Unmap volume
+- [`blockStorageUpdateVolume`](docs/sdks/blockstorage/README.md#updatevolume) - Update volume
 - [`elasticIpsCreateElasticIp`](docs/sdks/elasticips/README.md#createelasticip) - Create an Elastic IP
 - [`elasticIpsCreateElasticIpBgpSession`](docs/sdks/elasticips/README.md#createelasticipbgpsession) - Create a BGP session
 - [`elasticIpsDeleteElasticIp`](docs/sdks/elasticips/README.md#deleteelasticip) - Release an Elastic IP
@@ -900,7 +902,7 @@ run();
 
 
 **Inherit from [`LatitudeshError`](./src/models/errors/latitudesherror.ts)**:
-* [`ErrorObject`](./src/models/errors/errorobject.ts): Applicable to 64 of 195 methods.*
+* [`ErrorObject`](./src/models/errors/errorobject.ts): Applicable to 64 of 196 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>

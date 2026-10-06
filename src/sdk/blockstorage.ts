@@ -9,6 +9,7 @@ import { blockStorageMapVolume } from "../funcs/blockStorageMapVolume.js";
 import { blockStorageMountVolume } from "../funcs/blockStorageMountVolume.js";
 import { blockStorageRetrieveVolume } from "../funcs/blockStorageRetrieveVolume.js";
 import { blockStorageUnmapVolume } from "../funcs/blockStorageUnmapVolume.js";
+import { blockStorageUpdateVolume } from "../funcs/blockStorageUpdateVolume.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
@@ -76,6 +77,23 @@ export class BlockStorage extends ClientSDK {
     options?: RequestOptions,
   ): Promise<void> {
     return unwrapAsync(blockStorageDeleteVolume(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Update volume
+   *
+   * @remarks
+   * Increases the size of a high performance volume. Shrinking is not supported. Billing is prorated to the new size.
+   */
+  async updateVolume(
+    request: operations.UpdateVolumeRequest,
+    options?: RequestOptions,
+  ): Promise<operations.UpdateVolumeResponse> {
+    return unwrapAsync(blockStorageUpdateVolume(
       this,
       request,
       options,

@@ -34,7 +34,7 @@ import { Result } from "../types/fp.js";
  */
 export function filesystemStorageDeleteFilesystem(
   client: LatitudeshCore,
-  request: operations.DeleteStorageFilesystemsRequest,
+  request: operations.DeleteFilesystemRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -58,7 +58,7 @@ export function filesystemStorageDeleteFilesystem(
 
 async function $do(
   client: LatitudeshCore,
-  request: operations.DeleteStorageFilesystemsRequest,
+  request: operations.DeleteFilesystemRequest,
   options?: RequestOptions,
 ): Promise<
   [
@@ -78,8 +78,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) =>
-      operations.DeleteStorageFilesystemsRequest$outboundSchema.parse(value),
+    (value) => operations.DeleteFilesystemRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -107,7 +106,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "delete-storage-filesystems",
+    operationID: "delete-filesystem",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,

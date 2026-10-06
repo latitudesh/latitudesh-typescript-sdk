@@ -1,11 +1,11 @@
-# DeleteStorageFilesystemsRequest
+# DeleteFilesystemRequest
 
 ## Example Usage
 
 ```typescript
-import { DeleteStorageFilesystemsRequest } from "latitudesh-typescript-sdk/models/operations";
+import { DeleteFilesystemRequest } from "latitudesh-typescript-sdk/models/operations";
 
-let value: DeleteStorageFilesystemsRequest = {
+let value: DeleteFilesystemRequest = {
   filesystemId: "<id>",
 };
 ```

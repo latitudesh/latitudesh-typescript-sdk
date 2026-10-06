@@ -33,11 +33,11 @@ import { Result } from "../types/fp.js";
  */
 export function filesystemStorageUpdateFilesystem(
   client: LatitudeshCore,
-  request: operations.PatchStorageFilesystemsRequest,
+  request: operations.UpdateFilesystemRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.PatchStorageFilesystemsResponse,
+    operations.UpdateFilesystemResponse,
     | LatitudeshError
     | ResponseValidationError
     | ConnectionError
@@ -57,12 +57,12 @@ export function filesystemStorageUpdateFilesystem(
 
 async function $do(
   client: LatitudeshCore,
-  request: operations.PatchStorageFilesystemsRequest,
+  request: operations.UpdateFilesystemRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.PatchStorageFilesystemsResponse,
+      operations.UpdateFilesystemResponse,
       | LatitudeshError
       | ResponseValidationError
       | ConnectionError
@@ -77,8 +77,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) =>
-      operations.PatchStorageFilesystemsRequest$outboundSchema.parse(value),
+    (value) => operations.UpdateFilesystemRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -107,7 +106,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "patch-storage-filesystems",
+    operationID: "update-filesystem",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -147,7 +146,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    operations.PatchStorageFilesystemsResponse,
+    operations.UpdateFilesystemResponse,
     | LatitudeshError
     | ResponseValidationError
     | ConnectionError
@@ -157,7 +156,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.PatchStorageFilesystemsResponse$inboundSchema, {
+    M.json(200, operations.UpdateFilesystemResponse$inboundSchema, {
       ctype: "application/vnd.api+json",
     }),
     M.fail("4XX"),

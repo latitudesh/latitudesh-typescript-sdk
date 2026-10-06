@@ -138,7 +138,7 @@ run();
 
 | Error Type                    | Status Code                   | Content Type                  |
 | ----------------------------- | ----------------------------- | ----------------------------- |
-| errors.ErrorObject            | 400, 401                      | application/vnd.api+json      |
+| errors.ErrorObject            | 400, 401, 403                 | application/vnd.api+json      |
 | errors.LatitudeshDefaultError | 4XX, 5XX                      | \*/\*                         |
 
 ## ~~createKubernetesCluster~~
@@ -446,7 +446,7 @@ run();
 
 | Error Type                    | Status Code                   | Content Type                  |
 | ----------------------------- | ----------------------------- | ----------------------------- |
-| errors.ErrorObject            | 401                           | application/vnd.api+json      |
+| errors.ErrorObject            | 401, 403                      | application/vnd.api+json      |
 | errors.LatitudeshDefaultError | 4XX, 5XX                      | \*/\*                         |
 
 ## ~~getKubernetesCluster~~
@@ -572,7 +572,7 @@ run();
 
 | Error Type                    | Status Code                   | Content Type                  |
 | ----------------------------- | ----------------------------- | ----------------------------- |
-| errors.ErrorObject            | 401, 404                      | application/vnd.api+json      |
+| errors.ErrorObject            | 401, 403, 404                 | application/vnd.api+json      |
 | errors.LatitudeshDefaultError | 4XX, 5XX                      | \*/\*                         |
 
 ## ~~deleteKubernetesCluster~~

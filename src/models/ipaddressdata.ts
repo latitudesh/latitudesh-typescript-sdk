@@ -49,7 +49,7 @@ export type IpAddressDataRegion = {
 /**
  * Server assignment information. Returns an empty object when the IP is not assigned to an active server (e.g., when the server is decommissioning or deleted). The hostname is null when the assigned server has no hostname set.
  */
-export type Assignment = {
+export type IpAddressDataAssignment = {
   serverId?: string | undefined;
   hostname?: string | null | undefined;
   assignedAt?: string | null | undefined;
@@ -80,7 +80,7 @@ export type IpAddressDataAttributes = {
   /**
    * Server assignment information. Returns an empty object when the IP is not assigned to an active server (e.g., when the server is decommissioning or deleted). The hostname is null when the assigned server has no hostname set.
    */
-  assignment?: Assignment | undefined;
+  assignment?: IpAddressDataAssignment | undefined;
   /**
    * Elastic IP details. Returns an empty object when the IP is not an Elastic IP.
    */
@@ -254,8 +254,8 @@ export function ipAddressDataRegionFromJSON(
 }
 
 /** @internal */
-export const Assignment$inboundSchema: z.ZodType<
-  Assignment,
+export const IpAddressDataAssignment$inboundSchema: z.ZodType<
+  IpAddressDataAssignment,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -269,17 +269,17 @@ export const Assignment$inboundSchema: z.ZodType<
   });
 });
 /** @internal */
-export type Assignment$Outbound = {
+export type IpAddressDataAssignment$Outbound = {
   server_id?: string | undefined;
   hostname?: string | null | undefined;
   assigned_at?: string | null | undefined;
 };
 
 /** @internal */
-export const Assignment$outboundSchema: z.ZodType<
-  Assignment$Outbound,
+export const IpAddressDataAssignment$outboundSchema: z.ZodType<
+  IpAddressDataAssignment$Outbound,
   z.ZodTypeDef,
-  Assignment
+  IpAddressDataAssignment
 > = z.object({
   serverId: z.string().optional(),
   hostname: z.nullable(z.string()).optional(),
@@ -291,16 +291,20 @@ export const Assignment$outboundSchema: z.ZodType<
   });
 });
 
-export function assignmentToJSON(assignment: Assignment): string {
-  return JSON.stringify(Assignment$outboundSchema.parse(assignment));
+export function ipAddressDataAssignmentToJSON(
+  ipAddressDataAssignment: IpAddressDataAssignment,
+): string {
+  return JSON.stringify(
+    IpAddressDataAssignment$outboundSchema.parse(ipAddressDataAssignment),
+  );
 }
-export function assignmentFromJSON(
+export function ipAddressDataAssignmentFromJSON(
   jsonString: string,
-): SafeParseResult<Assignment, SDKValidationError> {
+): SafeParseResult<IpAddressDataAssignment, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Assignment$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Assignment' from JSON`,
+    (x) => IpAddressDataAssignment$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'IpAddressDataAssignment' from JSON`,
   );
 }
 
@@ -360,7 +364,7 @@ export const IpAddressDataAttributes$inboundSchema: z.ZodType<
   project: z.lazy(() => IpAddressDataProject$inboundSchema).optional(),
   region: z.lazy(() => IpAddressDataRegion$inboundSchema).optional(),
   available: z.boolean().optional(),
-  assignment: z.lazy(() => Assignment$inboundSchema).optional(),
+  assignment: z.lazy(() => IpAddressDataAssignment$inboundSchema).optional(),
   elastic: z.lazy(() => Elastic$inboundSchema).optional(),
   created_at: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
@@ -384,7 +388,7 @@ export type IpAddressDataAttributes$Outbound = {
   project?: IpAddressDataProject$Outbound | undefined;
   region?: IpAddressDataRegion$Outbound | undefined;
   available?: boolean | undefined;
-  assignment?: Assignment$Outbound | undefined;
+  assignment?: IpAddressDataAssignment$Outbound | undefined;
   elastic?: Elastic$Outbound | undefined;
   created_at?: string | null | undefined;
 };
@@ -407,7 +411,7 @@ export const IpAddressDataAttributes$outboundSchema: z.ZodType<
   project: z.lazy(() => IpAddressDataProject$outboundSchema).optional(),
   region: z.lazy(() => IpAddressDataRegion$outboundSchema).optional(),
   available: z.boolean().optional(),
-  assignment: z.lazy(() => Assignment$outboundSchema).optional(),
+  assignment: z.lazy(() => IpAddressDataAssignment$outboundSchema).optional(),
   elastic: z.lazy(() => Elastic$outboundSchema).optional(),
   createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
 }).transform((v) => {

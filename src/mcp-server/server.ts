@@ -30,6 +30,7 @@ import { tool$blockStorageMapVolume } from "./tools/blockStorageMapVolume.js";
 import { tool$blockStorageMountVolume } from "./tools/blockStorageMountVolume.js";
 import { tool$blockStorageRetrieveVolume } from "./tools/blockStorageRetrieveVolume.js";
 import { tool$blockStorageUnmapVolume } from "./tools/blockStorageUnmapVolume.js";
+import { tool$blockStorageUpdateVolume } from "./tools/blockStorageUpdateVolume.js";
 import { tool$elasticIpsCreateElasticIp } from "./tools/elasticIpsCreateElasticIp.js";
 import { tool$elasticIpsCreateElasticIpBgpSession } from "./tools/elasticIpsCreateElasticIpBgpSession.js";
 import { tool$elasticIpsDeleteElasticIp } from "./tools/elasticIpsDeleteElasticIp.js";
@@ -220,7 +221,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Latitudesh",
-    version: "0.8.29",
+    version: "0.8.30",
   });
 
   const client = new LatitudeshCore({
@@ -387,6 +388,7 @@ export function createMCPServer(deps: {
   tool(tool$blockStorageCreateVolume);
   tool(tool$blockStorageRetrieveVolume);
   tool(tool$blockStorageDeleteVolume);
+  tool(tool$blockStorageUpdateVolume);
   tool(tool$blockStorageMountVolume);
   tool(tool$blockStorageMapVolume);
   tool(tool$blockStorageUnmapVolume);

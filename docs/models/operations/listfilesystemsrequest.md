@@ -1,11 +1,11 @@
-# GetStorageFilesystemsRequest
+# ListFilesystemsRequest
 
 ## Example Usage
 
 ```typescript
-import { GetStorageFilesystemsRequest } from "latitudesh-typescript-sdk/models/operations";
+import { ListFilesystemsRequest } from "latitudesh-typescript-sdk/models/operations";
 
-let value: GetStorageFilesystemsRequest = {};
+let value: ListFilesystemsRequest = {};
 ```
 
 ## Fields

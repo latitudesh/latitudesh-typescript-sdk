@@ -7,6 +7,7 @@ import { ManagedDatabasePayloadData } from "latitudesh-typescript-sdk/models";
 
 let value: ManagedDatabasePayloadData = {
   attributes: {
+    name: "<value>",
     projectId: "<id>",
     region: "ASH",
     plan: "db.psql.small",
