@@ -76,20 +76,6 @@ export class Servers extends ClientSDK {
   }
 
   /**
-   * Update server
-   */
-  async update(
-    request: operations.UpdateServerRequest,
-    options?: RequestOptions,
-  ): Promise<models.Server> {
-    return unwrapAsync(serversUpdate(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
    * Remove server
    */
   async delete(
@@ -97,6 +83,20 @@ export class Servers extends ClientSDK {
     options?: RequestOptions,
   ): Promise<void> {
     return unwrapAsync(serversDelete(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Update server
+   */
+  async update(
+    request: operations.UpdateServerRequest,
+    options?: RequestOptions,
+  ): Promise<models.Server> {
+    return unwrapAsync(serversUpdate(
       this,
       request,
       options,
@@ -166,20 +166,6 @@ export class Servers extends ClientSDK {
   }
 
   /**
-   * Create out-of-band connection
-   */
-  async startOutOfBandConnection(
-    request: operations.CreateServerOutOfBandRequest,
-    options?: RequestOptions,
-  ): Promise<models.OutOfBandConnection> {
-    return unwrapAsync(serversStartOutOfBandConnection(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
    * List out-of-band connections
    */
   async getOutOfBand(
@@ -187,6 +173,20 @@ export class Servers extends ClientSDK {
     options?: RequestOptions,
   ): Promise<models.OutOfBandConnection> {
     return unwrapAsync(serversGetOutOfBand(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Create out-of-band connection
+   */
+  async startOutOfBandConnection(
+    request: operations.CreateServerOutOfBandRequest,
+    options?: RequestOptions,
+  ): Promise<models.OutOfBandConnection> {
+    return unwrapAsync(serversStartOutOfBandConnection(
       this,
       request,
       options,

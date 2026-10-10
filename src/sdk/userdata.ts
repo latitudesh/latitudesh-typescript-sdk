@@ -166,6 +166,20 @@ export class UserData extends ClientSDK {
   }
 
   /**
+   * Delete user data
+   */
+  async delete(
+    request: operations.DeleteUserDataRequest,
+    options?: RequestOptions,
+  ): Promise<void> {
+    return unwrapAsync(userDataDelete(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
    * Update user data
    *
    * @remarks
@@ -176,20 +190,6 @@ export class UserData extends ClientSDK {
     options?: RequestOptions,
   ): Promise<models.UserDataObject> {
     return unwrapAsync(userDataUpdate(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Delete user data
-   */
-  async delete(
-    request: operations.DeleteUserDataRequest,
-    options?: RequestOptions,
-  ): Promise<void> {
-    return unwrapAsync(userDataDelete(
       this,
       request,
       options,

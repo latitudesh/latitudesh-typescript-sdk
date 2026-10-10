@@ -31,7 +31,7 @@ export const PublicNetworkDataSize = {
 export type PublicNetworkDataSize = ClosedEnum<typeof PublicNetworkDataSize>;
 
 /**
- * gateway: reserved for the network gateway; server: a server on the network; elastic_ip: an elastic IP; reserved: held in IPAM but not by a server; available: free to use
+ * gateway: reserved for the network gateway; server: a server on the network; elastic_ip: an elastic IP; reserved: held in IPAM but not by a server, including addresses you reserved; available: free to use
  */
 export const PublicNetworkDataRole = {
   Gateway: "gateway",
@@ -41,7 +41,7 @@ export const PublicNetworkDataRole = {
   Available: "available",
 } as const;
 /**
- * gateway: reserved for the network gateway; server: a server on the network; elastic_ip: an elastic IP; reserved: held in IPAM but not by a server; available: free to use
+ * gateway: reserved for the network gateway; server: a server on the network; elastic_ip: an elastic IP; reserved: held in IPAM but not by a server, including addresses you reserved; available: free to use
  */
 export type PublicNetworkDataRole = ClosedEnum<typeof PublicNetworkDataRole>;
 
@@ -66,7 +66,7 @@ export type PublicNetworkDataAssignment = {
 export type Ip = {
   address?: string | undefined;
   /**
-   * gateway: reserved for the network gateway; server: a server on the network; elastic_ip: an elastic IP; reserved: held in IPAM but not by a server; available: free to use
+   * gateway: reserved for the network gateway; server: a server on the network; elastic_ip: an elastic IP; reserved: held in IPAM but not by a server, including addresses you reserved; available: free to use
    */
   role?: PublicNetworkDataRole | undefined;
   /**

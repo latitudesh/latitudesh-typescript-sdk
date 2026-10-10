@@ -125,6 +125,7 @@ export * from "./updateelasticip.js";
 export * from "./updatekubernetescluster.js";
 export * from "./updatelkscluster.js";
 export * from "./updatelksnodepool.js";
+export * from "./updatepublicnetworkip.js";
 export * from "./user.js";
 export * from "./userdata.js";
 export * from "./userdataobject.js";
