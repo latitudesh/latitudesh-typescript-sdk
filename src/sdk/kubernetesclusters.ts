@@ -6,7 +6,7 @@ import { kubernetesClustersCreateKubernetesCluster } from "../funcs/kubernetesCl
 import { kubernetesClustersDeleteKubernetesCluster } from "../funcs/kubernetesClustersDeleteKubernetesCluster.js";
 import { kubernetesClustersGetKubernetesCluster } from "../funcs/kubernetesClustersGetKubernetesCluster.js";
 import { kubernetesClustersGetKubernetesClusterKubeconfig } from "../funcs/kubernetesClustersGetKubernetesClusterKubeconfig.js";
-import { kubernetesClustersListKubernetesAvailableVersions } from "../funcs/kubernetesClustersListKubernetesAvailableVersions.js";
+import { kubernetesClustersListAvailableVersions } from "../funcs/kubernetesClustersListAvailableVersions.js";
 import { kubernetesClustersListKubernetesClusters } from "../funcs/kubernetesClustersListKubernetesClusters.js";
 import { kubernetesClustersUpdateKubernetesCluster } from "../funcs/kubernetesClustersUpdateKubernetesCluster.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
@@ -71,10 +71,10 @@ export class KubernetesClusters extends ClientSDK {
    *
    * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
    */
-  async listKubernetesAvailableVersions(
+  async listAvailableVersions(
     options?: RequestOptions,
   ): Promise<models.KubernetesAvailableVersions> {
-    return unwrapAsync(kubernetesClustersListKubernetesAvailableVersions(
+    return unwrapAsync(kubernetesClustersListAvailableVersions(
       this,
       options,
     ));

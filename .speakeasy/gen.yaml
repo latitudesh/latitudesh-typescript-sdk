@@ -33,7 +33,7 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 typescript:
-  version: 0.8.30
+  version: 0.8.31
   acceptHeaderEnum: true
   additionalDependencies:
     dependencies:
@@ -86,6 +86,7 @@ typescript:
   modelPropertyCasing: camel
   moduleFormat: dual
   multipartArrayFormat: legacy
+  numericEnumMemberNames: legacy
   outputModelSuffix: output
   packageName: latitudesh-typescript-sdk
   preApplyUnionDiscriminators: true

@@ -171,6 +171,7 @@ export * from "./updatelksnodepool.js";
 export * from "./updatemanageddatabase.js";
 export * from "./updateplansbandwidth.js";
 export * from "./updateproject.js";
+export * from "./updatepublicnetworkip.js";
 export * from "./updateserver.js";
 export * from "./updateserverdeployconfig.js";
 export * from "./updatetag.js";
