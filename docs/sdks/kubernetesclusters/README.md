@@ -9,7 +9,7 @@
 
 * [~~listKubernetesClusters~~](#listkubernetesclusters) - List Kubernetes Clusters :warning: **Deprecated**
 * [~~createKubernetesCluster~~](#createkubernetescluster) - Create a Kubernetes Cluster :warning: **Deprecated**
-* [~~listKubernetesAvailableVersions~~](#listkubernetesavailableversions) - List Available Kubernetes Versions :warning: **Deprecated**
+* [~~listAvailableVersions~~](#listavailableversions) - List Available Kubernetes Versions :warning: **Deprecated**
 * [~~getKubernetesCluster~~](#getkubernetescluster) - Get a Kubernetes Cluster :warning: **Deprecated**
 * [~~deleteKubernetesCluster~~](#deletekubernetescluster) - Delete a Kubernetes Cluster :warning: **Deprecated**
 * [~~updateKubernetesCluster~~](#updatekubernetescluster) - Update Kubernetes Cluster :warning: **Deprecated**
@@ -371,7 +371,7 @@ run();
 | errors.ErrorObject            | 503                           | application/vnd.api+json      |
 | errors.LatitudeshDefaultError | 4XX, 5XX                      | \*/\*                         |
 
-## ~~listKubernetesAvailableVersions~~
+## ~~listAvailableVersions~~
 
 Returns the list of available Kubernetes versions for cluster creation and upgrades. Versions are sourced from the RKE2 release channels and cached for 24 hours.
 
@@ -395,7 +395,7 @@ const latitudesh = new Latitudesh({
 });
 
 async function run() {
-  const result = await latitudesh.kubernetesClusters.listKubernetesAvailableVersions();
+  const result = await latitudesh.kubernetesClusters.listAvailableVersions();
 
   console.log(result);
 }
@@ -409,7 +409,7 @@ The standalone function version of this method:
 
 ```typescript
 import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
-import { kubernetesClustersListKubernetesAvailableVersions } from "latitudesh-typescript-sdk/funcs/kubernetesClustersListKubernetesAvailableVersions.js";
+import { kubernetesClustersListAvailableVersions } from "latitudesh-typescript-sdk/funcs/kubernetesClustersListAvailableVersions.js";
 
 // Use `LatitudeshCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -418,12 +418,12 @@ const latitudesh = new LatitudeshCore({
 });
 
 async function run() {
-  const res = await kubernetesClustersListKubernetesAvailableVersions(latitudesh);
+  const res = await kubernetesClustersListAvailableVersions(latitudesh);
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("kubernetesClustersListKubernetesAvailableVersions failed:", res.error);
+    console.log("kubernetesClustersListAvailableVersions failed:", res.error);
   }
 }
 

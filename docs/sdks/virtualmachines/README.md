@@ -4,8 +4,8 @@
 
 ### Available Operations
 
-* [create](#create) - Create VM
 * [list](#list) - List VMs
+* [create](#create) - Create VM
 * [get](#get) - Retrieve VM
 * [delete](#delete) - Destroy VM
 * [updateVirtualMachine](#updatevirtualmachine) - Update VM
@@ -14,6 +14,85 @@
 * [listVirtualMachineNetworkAttachments](#listvirtualmachinenetworkattachments) - List VM network attachments
 * [createVirtualMachineNetworkAttachment](#createvirtualmachinenetworkattachment) - Attach a network to a VM
 * [destroyVirtualMachineNetworkAttachment](#destroyvirtualmachinenetworkattachment) - Detach a network from a VM
+
+## list
+
+Show all Team's Virtual Machines.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="index-virtual-machine" method="get" path="/virtual_machines" example="Success" -->
+```typescript
+import { Latitudesh } from "latitudesh-typescript-sdk";
+
+const latitudesh = new Latitudesh({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const result = await latitudesh.virtualMachines.list({
+    extraFieldsVirtualMachines: "credentials",
+  });
+
+  for await (const page of result) {
+    console.log(page);
+  }
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
+import { virtualMachinesList } from "latitudesh-typescript-sdk/funcs/virtualMachinesList.js";
+
+// Use `LatitudeshCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const latitudesh = new LatitudeshCore({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const res = await virtualMachinesList(latitudesh, {
+    extraFieldsVirtualMachines: "credentials",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    for await (const page of result) {
+    console.log(page);
+  }
+  } else {
+    console.log("virtualMachinesList failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.IndexVirtualMachineRequest](../../models/operations/indexvirtualmachinerequest.md)                                                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.IndexVirtualMachineResponse](../../models/operations/indexvirtualmachineresponse.md)\>**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| errors.ErrorObject            | 400                           | application/vnd.api+json      |
+| errors.LatitudeshDefaultError | 4XX, 5XX                      | \*/\*                         |
 
 ## create
 
@@ -231,85 +310,6 @@ run();
 
 | Error Type                    | Status Code                   | Content Type                  |
 | ----------------------------- | ----------------------------- | ----------------------------- |
-| errors.LatitudeshDefaultError | 4XX, 5XX                      | \*/\*                         |
-
-## list
-
-Show all Team's Virtual Machines.
-
-
-### Example Usage
-
-<!-- UsageSnippet language="typescript" operationID="index-virtual-machine" method="get" path="/virtual_machines" example="Success" -->
-```typescript
-import { Latitudesh } from "latitudesh-typescript-sdk";
-
-const latitudesh = new Latitudesh({
-  bearer: process.env["LATITUDESH_BEARER"] ?? "",
-});
-
-async function run() {
-  const result = await latitudesh.virtualMachines.list({
-    extraFieldsVirtualMachines: "credentials",
-  });
-
-  for await (const page of result) {
-    console.log(page);
-  }
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
-import { virtualMachinesList } from "latitudesh-typescript-sdk/funcs/virtualMachinesList.js";
-
-// Use `LatitudeshCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const latitudesh = new LatitudeshCore({
-  bearer: process.env["LATITUDESH_BEARER"] ?? "",
-});
-
-async function run() {
-  const res = await virtualMachinesList(latitudesh, {
-    extraFieldsVirtualMachines: "credentials",
-  });
-  if (res.ok) {
-    const { value: result } = res;
-    for await (const page of result) {
-    console.log(page);
-  }
-  } else {
-    console.log("virtualMachinesList failed:", res.error);
-  }
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.IndexVirtualMachineRequest](../../models/operations/indexvirtualmachinerequest.md)                                                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[operations.IndexVirtualMachineResponse](../../models/operations/indexvirtualmachineresponse.md)\>**
-
-### Errors
-
-| Error Type                    | Status Code                   | Content Type                  |
-| ----------------------------- | ----------------------------- | ----------------------------- |
-| errors.ErrorObject            | 400                           | application/vnd.api+json      |
 | errors.LatitudeshDefaultError | 4XX, 5XX                      | \*/\*                         |
 
 ## get

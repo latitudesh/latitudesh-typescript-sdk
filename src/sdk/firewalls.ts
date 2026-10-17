@@ -43,23 +43,6 @@ export class Firewalls extends ClientSDK {
   }
 
   /**
-   * Create firewall
-   *
-   * @remarks
-   * Create a firewall
-   */
-  async create(
-    request: operations.CreateFirewallRequest,
-    options?: RequestOptions,
-  ): Promise<models.Firewall> {
-    return unwrapAsync(firewallsCreate(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
    * List firewalls
    *
    * @remarks
@@ -70,6 +53,23 @@ export class Firewalls extends ClientSDK {
     options?: RequestOptions,
   ): Promise<PageIterator<operations.ListFirewallsResponse, { page: number }>> {
     return unwrapResultIterator(firewallsList(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Create firewall
+   *
+   * @remarks
+   * Create a firewall
+   */
+  async create(
+    request: operations.CreateFirewallRequest,
+    options?: RequestOptions,
+  ): Promise<models.Firewall> {
+    return unwrapAsync(firewallsCreate(
       this,
       request,
       options,
@@ -94,6 +94,20 @@ export class Firewalls extends ClientSDK {
   }
 
   /**
+   * Delete firewall
+   */
+  async delete(
+    request: operations.DeleteFirewallRequest,
+    options?: RequestOptions,
+  ): Promise<void> {
+    return unwrapAsync(firewallsDelete(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
    * Update firewall
    *
    * @remarks
@@ -104,20 +118,6 @@ export class Firewalls extends ClientSDK {
     options?: RequestOptions,
   ): Promise<models.Firewall> {
     return unwrapAsync(firewallsUpdate(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Delete firewall
-   */
-  async delete(
-    request: operations.DeleteFirewallRequest,
-    options?: RequestOptions,
-  ): Promise<void> {
-    return unwrapAsync(firewallsDelete(
       this,
       request,
       options,
