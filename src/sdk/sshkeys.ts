@@ -56,25 +56,6 @@ export class SSHKeys extends ClientSDK {
   }
 
   /**
-   * Update Project SSH Key
-   *
-   * @remarks
-   * Allow you update SSH Key in a project. These keys can be used to access servers after deploy and reinstall actions.
-   *
-   * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
-   */
-  async modifyProjectKey(
-    request: operations.PutProjectSshKeyRequest,
-    options?: RequestOptions,
-  ): Promise<operations.PutProjectSshKeyResponse> {
-    return unwrapAsync(sshKeysModifyProjectKey(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
    * Delete Project SSH Key
    *
    * @remarks
@@ -87,6 +68,25 @@ export class SSHKeys extends ClientSDK {
     options?: RequestOptions,
   ): Promise<void> {
     return unwrapAsync(sshKeysRemoveFromProject(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Update Project SSH Key
+   *
+   * @remarks
+   * Allow you update SSH Key in a project. These keys can be used to access servers after deploy and reinstall actions.
+   *
+   * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
+   */
+  async modifyProjectKey(
+    request: operations.PutProjectSshKeyRequest,
+    options?: RequestOptions,
+  ): Promise<operations.PutProjectSshKeyResponse> {
+    return unwrapAsync(sshKeysModifyProjectKey(
       this,
       request,
       options,
@@ -145,23 +145,6 @@ export class SSHKeys extends ClientSDK {
   }
 
   /**
-   * Update SSH Key
-   *
-   * @remarks
-   * Allows you update SSH Key in a project. These keys can be used to access servers after deploy and reinstall actions.
-   */
-  async update(
-    request: operations.PutSshKeyRequest,
-    options?: RequestOptions,
-  ): Promise<operations.PutSshKeyResponse> {
-    return unwrapAsync(sshKeysUpdate(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
    * Delete SSH Key
    *
    * @remarks
@@ -172,6 +155,23 @@ export class SSHKeys extends ClientSDK {
     options?: RequestOptions,
   ): Promise<void> {
     return unwrapAsync(sshKeysDelete(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Update SSH Key
+   *
+   * @remarks
+   * Allows you update SSH Key in a project. These keys can be used to access servers after deploy and reinstall actions.
+   */
+  async update(
+    request: operations.PutSshKeyRequest,
+    options?: RequestOptions,
+  ): Promise<operations.PutSshKeyResponse> {
+    return unwrapAsync(sshKeysUpdate(
       this,
       request,
       options,

@@ -41,23 +41,6 @@ export class ObjectStorage extends ClientSDK {
   }
 
   /**
-   * Create access key
-   *
-   * @remarks
-   * Creates an object storage IAM access key for a project. The secret is returned only once, in this response, and cannot be retrieved again. The provider is selected by `storage_class`: `standard` provisions the key on Wasabi and `high_performance` provisions it on VAST.
-   */
-  async postStorageAccessKeys(
-    request: operations.PostStorageAccessKeysRequest,
-    options?: RequestOptions,
-  ): Promise<operations.PostStorageAccessKeysResponse> {
-    return unwrapAsync(objectStoragePostStorageAccessKeys(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
    * List access keys
    *
    * @remarks
@@ -68,6 +51,23 @@ export class ObjectStorage extends ClientSDK {
     options?: RequestOptions,
   ): Promise<operations.GetStorageAccessKeysResponse> {
     return unwrapAsync(objectStorageGetStorageAccessKeys(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Create access key
+   *
+   * @remarks
+   * Creates an object storage IAM access key for a project. The secret is returned only once, in this response, and cannot be retrieved again. The provider is selected by `storage_class`: `standard` provisions the key on Wasabi and `high_performance` provisions it on VAST.
+   */
+  async postStorageAccessKeys(
+    request: operations.PostStorageAccessKeysRequest,
+    options?: RequestOptions,
+  ): Promise<operations.PostStorageAccessKeysResponse> {
+    return unwrapAsync(objectStoragePostStorageAccessKeys(
       this,
       request,
       options,

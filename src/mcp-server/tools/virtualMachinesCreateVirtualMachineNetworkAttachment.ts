@@ -13,7 +13,7 @@ const args = {
 
 export const tool$virtualMachinesCreateVirtualMachineNetworkAttachment:
   ToolDefinition<typeof args> = {
-    name: "virtual-machines-create-virtual-machine-network-attachment",
+    name: "virtual-machines-create-network-attachment",
     description: `Attach a network to a VM
 
 Attaches a virtual network (VLAN) to a Virtual Machine. Work runs asynchronously and returns 202 Accepted.

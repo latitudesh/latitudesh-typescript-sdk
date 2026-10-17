@@ -6,6 +6,7 @@ import { publicNetworksCreatePublicNetwork } from "../funcs/publicNetworksCreate
 import { publicNetworksDestroyPublicNetwork } from "../funcs/publicNetworksDestroyPublicNetwork.js";
 import { publicNetworksGetPublicNetwork } from "../funcs/publicNetworksGetPublicNetwork.js";
 import { publicNetworksGetPublicNetworks } from "../funcs/publicNetworksGetPublicNetworks.js";
+import { publicNetworksUpdatePublicNetworkIp } from "../funcs/publicNetworksUpdatePublicNetworkIp.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as models from "../models/index.js";
 import * as operations from "../models/operations/index.js";
@@ -80,6 +81,25 @@ export class PublicNetworks extends ClientSDK {
     options?: RequestOptions,
   ): Promise<void> {
     return unwrapAsync(publicNetworksDestroyPublicNetwork(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Update a network IP
+   *
+   * @remarks
+   * **Preview.** Available at locations where the `public_network` feature is enabled.
+   *
+   * Reserve an available address of a network for your own use, so servers are never attached to the network with it, or release an address you reserved.
+   */
+  async updatePublicNetworkIp(
+    request: operations.UpdatePublicNetworkIpRequest,
+    options?: RequestOptions,
+  ): Promise<models.PublicNetwork> {
+    return unwrapAsync(publicNetworksUpdatePublicNetworkIp(
       this,
       request,
       options,
