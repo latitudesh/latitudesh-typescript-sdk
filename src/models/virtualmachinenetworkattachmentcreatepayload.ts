@@ -22,7 +22,7 @@ export type VirtualMachineNetworkAttachmentCreatePayloadAttributes = {
    */
   virtualNetworkId: string;
   /**
-   * Optional static IPv4 address with prefix (e.g. 10.0.0.5/24) for the NIC inside the guest. When omitted the NIC is configured for DHCP without a default route. Applying the regenerated network configuration requires running `sudo cloud-init clean --logs --reboot` inside the guest. Warning: that command makes cloud-init treat the next boot as a first boot — it re-runs the instance user-data (e.g. runcmd scripts) and regenerates the SSH host keys, so SSH clients will see a host-key changed warning.
+   * Optional static IPv4 address with prefix (e.g. 10.0.0.5/24) for the NIC inside the guest. When omitted the NIC is configured for DHCP without a default route. VMs created with `apply_network_on_boot` enabled apply it on the restart the attach performs; on other VMs, configure it yourself on the interface whose MAC matches the attachment `mac_address`.
    */
   address?: string | undefined;
 };

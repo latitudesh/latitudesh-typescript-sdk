@@ -9,9 +9,11 @@ import { lksDeleteLKSNodePool } from "../funcs/lksDeleteLKSNodePool.js";
 import { lksGetLKSCluster } from "../funcs/lksGetLKSCluster.js";
 import { lksGetLKSClusterKubeconfig } from "../funcs/lksGetLKSClusterKubeconfig.js";
 import { lksGetLKSNodePool } from "../funcs/lksGetLKSNodePool.js";
+import { lksListLKSAllocatableServers } from "../funcs/lksListLKSAllocatableServers.js";
 import { lksListLKSAvailableVersions } from "../funcs/lksListLKSAvailableVersions.js";
 import { lksListLKSClusters } from "../funcs/lksListLKSClusters.js";
 import { lksListLKSNodePools } from "../funcs/lksListLKSNodePools.js";
+import { lksListLKSNodes } from "../funcs/lksListLKSNodes.js";
 import { lksListLKSSites } from "../funcs/lksListLKSSites.js";
 import { lksUpdateLKSCluster } from "../funcs/lksUpdateLKSCluster.js";
 import { lksUpdateLKSNodePool } from "../funcs/lksUpdateLKSNodePool.js";
@@ -154,9 +156,12 @@ export class Lks extends ClientSDK {
    * Create a node pool
    *
    * @remarks
-   * Adds a node pool to an LKS cluster. The platform provisions `count` servers of `plan` from stock, so both fields are required.
+   * Adds a node pool to an LKS cluster. `mode` decides where the pool's nodes come from:
    *
-   * `kubernetes_version` defaults to the control-plane patch and may never be newer than it. `max_pods_per_node` is set once, here — it cannot be changed later.
+   * - `on_demand` (default): the platform provisions `count` servers of `plan` from stock, so both fields are required.
+   * - `allocated`: the pool is built from `server_ids`, bare metal servers already in the cluster project. Each server is reinstalled with the LKS node image, which erases its disks. `plan` and `count` are rejected: the pool uses the plan the servers share, and `count` is the number of servers. Each server that fails an eligibility check is reported as its own 422 error, pointing at its index in `server_ids` and listing every reason in `meta.reasons`. `GET /lks/allocatable_servers` shows which servers can join. Allocated node pools are available only in on-demand projects: a reserved project is refused with 422 `RESERVED_PROJECT_NOT_SUPPORTED`.
+   *
+   * `kubernetes_version` defaults to the control-plane patch and may never be newer than it. `max_pods_per_node` and `mode` are set once, here — they cannot be changed later.
    */
   async createLksNodePool(
     request: operations.CreateLksNodePoolRequest,
@@ -207,11 +212,13 @@ export class Lks extends ClientSDK {
    * Update a node pool
    *
    * @remarks
-   * Scales, renames, upgrades or re-labels a node pool. At least one attribute must be provided.
+   * Scales, renames, upgrades, re-labels or changes the servers of a node pool. At least one attribute must be provided.
    *
    * `labels` and `taints` are declarative replacements, not merges: omit the field to leave it untouched, send the whole map/list to replace it, or send `{}` / `[]` to clear it.
    *
-   * A newer `kubernetes_version` rolls a node-recreating upgrade; it must not be lower than the pool's current patch nor newer than the control-plane patch. `max_pods_per_node` is immutable — a PATCH that carries it is rejected with 422 even if the value is unchanged.
+   * A newer `kubernetes_version` rolls a node-recreating upgrade; it must not be lower than the pool's current patch nor newer than the control-plane patch. `max_pods_per_node` and `mode` are immutable — a PATCH that carries either is rejected with 422 even if the value is unchanged.
+   *
+   * For an allocated node pool, `server_ids` replaces `count`: send the whole set of servers the pool should have. Added servers are checked as on create and reinstalled to join; removed servers are drained and reinstalled with a clean OS, with no data, keys or user data restored. A server set change cannot be combined with a `kubernetes_version` change.
    *
    * The node pool must be idle: one that is provisioning, updating, scaling, upgrading, paused or deleting rejects the request with 409.
    */
@@ -220,6 +227,23 @@ export class Lks extends ClientSDK {
     options?: RequestOptions,
   ): Promise<models.LksNodePool> {
     return unwrapAsync(lksUpdateLKSNodePool(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List nodes
+   *
+   * @remarks
+   * Lists the nodes of a node pool, with the status of each node and of the server it runs on. Each node's `id` is a stable node ID (format: `lksno_<hash>`); `name` is its Kubernetes node name, as shown by `kubectl get nodes`. The response is not paginated; `meta.total` is the number of nodes returned.
+   */
+  async listLksNodes(
+    request: operations.ListLksNodesRequest,
+    options?: RequestOptions,
+  ): Promise<models.LksNodes> {
+    return unwrapAsync(lksListLKSNodes(
       this,
       request,
       options,
@@ -252,6 +276,25 @@ export class Lks extends ClientSDK {
   ): Promise<models.LksSites> {
     return unwrapAsync(lksListLKSSites(
       this,
+      options,
+    ));
+  }
+
+  /**
+   * List servers that can join an allocated node pool
+   *
+   * @remarks
+   * Lists a project's servers at a site, with whether each one can join an allocated node pool right now. Pass the `id` of an allocatable server in `server_ids` when creating or updating an allocated node pool.
+   *
+   * When `allocatable` is false, `reasons` lists why, using the same codes that node pool create and update return per server. `node_pool_id` and `cluster_id` identify the pool a server already belongs to.
+   */
+  async listLksAllocatableServers(
+    request: operations.ListLksAllocatableServersRequest,
+    options?: RequestOptions,
+  ): Promise<models.LksAllocatableServers> {
+    return unwrapAsync(lksListLKSAllocatableServers(
+      this,
+      request,
       options,
     ));
   }

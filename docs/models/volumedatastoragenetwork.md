@@ -1,13 +1,13 @@
-# StorageNetwork
+# VolumeDataStorageNetwork
 
 Storage network the mapped server joins to reach the volume over NVMe-TCP. Null until the network has been provisioned for the volume.
 
 ## Example Usage
 
 ```typescript
-import { StorageNetwork } from "latitudesh-typescript-sdk/models";
+import { VolumeDataStorageNetwork } from "latitudesh-typescript-sdk/models";
 
-let value: StorageNetwork = {};
+let value: VolumeDataStorageNetwork = {};
 ```
 
 ## Fields

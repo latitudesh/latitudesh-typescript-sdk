@@ -41,8 +41,11 @@ import { tool$elasticIpsListElasticIpBgpSessions } from "./tools/elasticIpsListE
 import { tool$elasticIpsListElasticIps } from "./tools/elasticIpsListElasticIps.js";
 import { tool$elasticIpsUpdateElasticIp } from "./tools/elasticIpsUpdateElasticIp.js";
 import { tool$eventsList } from "./tools/eventsList.js";
+import { tool$filesystemStorageAttachFilesystem } from "./tools/filesystemStorageAttachFilesystem.js";
 import { tool$filesystemStorageCreateFilesystem } from "./tools/filesystemStorageCreateFilesystem.js";
 import { tool$filesystemStorageDeleteFilesystem } from "./tools/filesystemStorageDeleteFilesystem.js";
+import { tool$filesystemStorageDetachFilesystem } from "./tools/filesystemStorageDetachFilesystem.js";
+import { tool$filesystemStorageGetFilesystemAttachment } from "./tools/filesystemStorageGetFilesystemAttachment.js";
 import { tool$filesystemStorageListFilesystems } from "./tools/filesystemStorageListFilesystems.js";
 import { tool$filesystemStorageUpdateFilesystem } from "./tools/filesystemStorageUpdateFilesystem.js";
 import { tool$firewallsAssignmentsCreate } from "./tools/firewallsAssignmentsCreate.js";
@@ -70,9 +73,11 @@ import { tool$lksDeleteLKSNodePool } from "./tools/lksDeleteLKSNodePool.js";
 import { tool$lksGetLKSCluster } from "./tools/lksGetLKSCluster.js";
 import { tool$lksGetLKSClusterKubeconfig } from "./tools/lksGetLKSClusterKubeconfig.js";
 import { tool$lksGetLKSNodePool } from "./tools/lksGetLKSNodePool.js";
+import { tool$lksListLKSAllocatableServers } from "./tools/lksListLKSAllocatableServers.js";
 import { tool$lksListLKSAvailableVersions } from "./tools/lksListLKSAvailableVersions.js";
 import { tool$lksListLKSClusters } from "./tools/lksListLKSClusters.js";
 import { tool$lksListLKSNodePools } from "./tools/lksListLKSNodePools.js";
+import { tool$lksListLKSNodes } from "./tools/lksListLKSNodes.js";
 import { tool$lksListLKSSites } from "./tools/lksListLKSSites.js";
 import { tool$lksUpdateLKSCluster } from "./tools/lksUpdateLKSCluster.js";
 import { tool$lksUpdateLKSNodePool } from "./tools/lksUpdateLKSNodePool.js";
@@ -126,6 +131,7 @@ import { tool$publicNetworksCreatePublicNetwork } from "./tools/publicNetworksCr
 import { tool$publicNetworksDestroyPublicNetwork } from "./tools/publicNetworksDestroyPublicNetwork.js";
 import { tool$publicNetworksGetPublicNetwork } from "./tools/publicNetworksGetPublicNetwork.js";
 import { tool$publicNetworksGetPublicNetworks } from "./tools/publicNetworksGetPublicNetworks.js";
+import { tool$publicNetworksUpdatePublicNetworkIp } from "./tools/publicNetworksUpdatePublicNetworkIp.js";
 import { tool$regionsFetch } from "./tools/regionsFetch.js";
 import { tool$regionsGet } from "./tools/regionsGet.js";
 import { tool$rolesGet } from "./tools/rolesGet.js";
@@ -221,7 +227,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Latitudesh",
-    version: "0.8.30",
+    version: "0.8.31",
   });
 
   const client = new LatitudeshCore({
@@ -306,8 +312,10 @@ export function createMCPServer(deps: {
   tool(tool$lksGetLKSNodePool);
   tool(tool$lksDeleteLKSNodePool);
   tool(tool$lksUpdateLKSNodePool);
+  tool(tool$lksListLKSNodes);
   tool(tool$lksListLKSAvailableVersions);
   tool(tool$lksListLKSSites);
+  tool(tool$lksListLKSAllocatableServers);
   tool(tool$plansList);
   tool(tool$plansGet);
   tool(tool$plansGetBandwidth);
@@ -319,6 +327,7 @@ export function createMCPServer(deps: {
   tool(tool$publicNetworksCreatePublicNetwork);
   tool(tool$publicNetworksGetPublicNetwork);
   tool(tool$publicNetworksDestroyPublicNetwork);
+  tool(tool$publicNetworksUpdatePublicNetworkIp);
   tool(tool$projectsList);
   tool(tool$projectsCreate);
   tool(tool$projectsUpdate);
@@ -384,6 +393,9 @@ export function createMCPServer(deps: {
   tool(tool$filesystemStorageListFilesystems);
   tool(tool$filesystemStorageDeleteFilesystem);
   tool(tool$filesystemStorageUpdateFilesystem);
+  tool(tool$filesystemStorageGetFilesystemAttachment);
+  tool(tool$filesystemStorageAttachFilesystem);
+  tool(tool$filesystemStorageDetachFilesystem);
   tool(tool$blockStorageListVolumes);
   tool(tool$blockStorageCreateVolume);
   tool(tool$blockStorageRetrieveVolume);

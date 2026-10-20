@@ -13,10 +13,14 @@ let value: LksNodePools = {
         name: "pool-a",
         type: "bare_metal",
         mode: "on_demand",
+        serverIds: [
+          "sv_9dQKr1pRMLyd",
+        ],
         maxPodsPerNode: 110,
         kubernetesVersion: "1.36.3",
         platformVersion: "lks-v1.36.3-002",
         status: "provisioning",
+        reason: "AdoptingServers",
         taints: [
           {
             key: "dedicated",
