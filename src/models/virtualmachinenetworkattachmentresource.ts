@@ -26,6 +26,14 @@ export type VirtualMachineNetworkAttachmentResourceAttributes = {
    */
   vid?: number | undefined;
   /**
+   * The static IPv4 address with prefix given when the network was attached (e.g. 10.0.0.5/24). Null when the attachment has no static address.
+   */
+  address?: string | null | undefined;
+  /**
+   * MAC address of the NIC inside the guest. Interface names differ between images, so use the MAC to find the interface. Null until the VM has restarted with the network attached.
+   */
+  macAddress?: string | null | undefined;
+  /**
    * Deprecated, always false. Attaching and detaching restart the VM automatically, so an attachment never waits on a manual restart.
    */
   pendingRestart?: boolean | undefined;
@@ -58,10 +66,13 @@ export const VirtualMachineNetworkAttachmentResourceAttributes$inboundSchema:
   > = z.object({
     virtual_network_id: z.string().optional(),
     vid: z.number().int().optional(),
+    address: z.nullable(z.string()).optional(),
+    mac_address: z.nullable(z.string()).optional(),
     pending_restart: z.boolean().optional(),
   }).transform((v) => {
     return remap$(v, {
       "virtual_network_id": "virtualNetworkId",
+      "mac_address": "macAddress",
       "pending_restart": "pendingRestart",
     });
   });
@@ -69,6 +80,8 @@ export const VirtualMachineNetworkAttachmentResourceAttributes$inboundSchema:
 export type VirtualMachineNetworkAttachmentResourceAttributes$Outbound = {
   virtual_network_id?: string | undefined;
   vid?: number | undefined;
+  address?: string | null | undefined;
+  mac_address?: string | null | undefined;
   pending_restart?: boolean | undefined;
 };
 
@@ -81,10 +94,13 @@ export const VirtualMachineNetworkAttachmentResourceAttributes$outboundSchema:
   > = z.object({
     virtualNetworkId: z.string().optional(),
     vid: z.number().int().optional(),
+    address: z.nullable(z.string()).optional(),
+    macAddress: z.nullable(z.string()).optional(),
     pendingRestart: z.boolean().optional(),
   }).transform((v) => {
     return remap$(v, {
       virtualNetworkId: "virtual_network_id",
+      macAddress: "mac_address",
       pendingRestart: "pending_restart",
     });
   });

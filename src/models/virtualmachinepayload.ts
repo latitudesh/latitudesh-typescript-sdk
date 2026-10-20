@@ -65,6 +65,10 @@ export type VirtualMachinePayloadAttributes = {
    */
   tags?: Array<string> | null | undefined;
   /**
+   * Re-apply the platform network configuration on every boot, so a virtual network attached to or detached from the VM is configured in the guest by the restart the attach or detach performs. Every boot, including a restart started inside the guest, rewrites cloud-init's own network file (for example `/etc/netplan/50-cloud-init.yaml`): keep custom network configuration in a separate file. Set at creation only; it cannot be changed later through the API. To stop the re-apply from inside the guest, create `/etc/cloud/cloud.cfg.d/99-disable-network-config.cfg` containing `network: {config: disabled}`; networks attached afterwards must then be configured by hand. Defaults to true.
+   */
+  applyNetworkOnBoot?: boolean | undefined;
+  /**
    * Site/region slug where the VM is provisioned (e.g. DAL, SAO). Defaults to DAL when omitted.
    */
   site?: string | null | undefined;
@@ -141,6 +145,7 @@ export const VirtualMachinePayloadAttributes$inboundSchema: z.ZodType<
   user_data: z.nullable(z.union([z.number().int(), z.string()])).optional(),
   marketplace_app: z.nullable(z.string()).optional(),
   tags: z.nullable(z.array(z.string())).optional(),
+  apply_network_on_boot: z.boolean().default(true),
   site: z.nullable(z.string().default("DAL")),
 }).transform((v) => {
   return remap$(v, {
@@ -148,6 +153,7 @@ export const VirtualMachinePayloadAttributes$inboundSchema: z.ZodType<
     "operating_system": "operatingSystem",
     "user_data": "userData",
     "marketplace_app": "marketplaceApp",
+    "apply_network_on_boot": "applyNetworkOnBoot",
   });
 });
 /** @internal */
@@ -161,6 +167,7 @@ export type VirtualMachinePayloadAttributes$Outbound = {
   user_data?: number | string | null | undefined;
   marketplace_app?: string | null | undefined;
   tags?: Array<string> | null | undefined;
+  apply_network_on_boot: boolean;
   site: string | null;
 };
 
@@ -179,6 +186,7 @@ export const VirtualMachinePayloadAttributes$outboundSchema: z.ZodType<
   userData: z.nullable(z.union([z.number().int(), z.string()])).optional(),
   marketplaceApp: z.nullable(z.string()).optional(),
   tags: z.nullable(z.array(z.string())).optional(),
+  applyNetworkOnBoot: z.boolean().default(true),
   site: z.nullable(z.string().default("DAL")),
 }).transform((v) => {
   return remap$(v, {
@@ -186,6 +194,7 @@ export const VirtualMachinePayloadAttributes$outboundSchema: z.ZodType<
     operatingSystem: "operating_system",
     userData: "user_data",
     marketplaceApp: "marketplace_app",
+    applyNetworkOnBoot: "apply_network_on_boot",
   });
 });
 

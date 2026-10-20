@@ -33,7 +33,7 @@ export type Initiator = {
 /**
  * Storage network the mapped server joins to reach the volume over NVMe-TCP. Null until the network has been provisioned for the volume.
  */
-export type StorageNetwork = {
+export type VolumeDataStorageNetwork = {
   /**
    * VLAN ID of the storage VLAN to tag on the server bond.
    */
@@ -83,7 +83,7 @@ export type Block = {
   /**
    * Storage network the mapped server joins to reach the volume over NVMe-TCP. Null until the network has been provisioned for the volume.
    */
-  storageNetwork?: StorageNetwork | null | undefined;
+  storageNetwork?: VolumeDataStorageNetwork | null | undefined;
 };
 
 export type VolumeDataSite = {
@@ -182,8 +182,8 @@ export function initiatorFromJSON(
 }
 
 /** @internal */
-export const StorageNetwork$inboundSchema: z.ZodType<
-  StorageNetwork,
+export const VolumeDataStorageNetwork$inboundSchema: z.ZodType<
+  VolumeDataStorageNetwork,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -201,7 +201,7 @@ export const StorageNetwork$inboundSchema: z.ZodType<
   });
 });
 /** @internal */
-export type StorageNetwork$Outbound = {
+export type VolumeDataStorageNetwork$Outbound = {
   vid?: number | null | undefined;
   host_cidr?: string | null | undefined;
   gateway?: string | null | undefined;
@@ -211,10 +211,10 @@ export type StorageNetwork$Outbound = {
 };
 
 /** @internal */
-export const StorageNetwork$outboundSchema: z.ZodType<
-  StorageNetwork$Outbound,
+export const VolumeDataStorageNetwork$outboundSchema: z.ZodType<
+  VolumeDataStorageNetwork$Outbound,
   z.ZodTypeDef,
-  StorageNetwork
+  VolumeDataStorageNetwork
 > = z.object({
   vid: z.nullable(z.number().int()).optional(),
   hostCidr: z.nullable(z.string()).optional(),
@@ -230,16 +230,20 @@ export const StorageNetwork$outboundSchema: z.ZodType<
   });
 });
 
-export function storageNetworkToJSON(storageNetwork: StorageNetwork): string {
-  return JSON.stringify(StorageNetwork$outboundSchema.parse(storageNetwork));
+export function volumeDataStorageNetworkToJSON(
+  volumeDataStorageNetwork: VolumeDataStorageNetwork,
+): string {
+  return JSON.stringify(
+    VolumeDataStorageNetwork$outboundSchema.parse(volumeDataStorageNetwork),
+  );
 }
-export function storageNetworkFromJSON(
+export function volumeDataStorageNetworkFromJSON(
   jsonString: string,
-): SafeParseResult<StorageNetwork, SDKValidationError> {
+): SafeParseResult<VolumeDataStorageNetwork, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => StorageNetwork$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'StorageNetwork' from JSON`,
+    (x) => VolumeDataStorageNetwork$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'VolumeDataStorageNetwork' from JSON`,
   );
 }
 
@@ -250,8 +254,9 @@ export const Block$inboundSchema: z.ZodType<Block, z.ZodTypeDef, unknown> = z
     nqn: z.nullable(z.string()).optional(),
     nsid: z.nullable(z.number().int()).optional(),
     server_id: z.nullable(z.string()).optional(),
-    storage_network: z.nullable(z.lazy(() => StorageNetwork$inboundSchema))
-      .optional(),
+    storage_network: z.nullable(
+      z.lazy(() => VolumeDataStorageNetwork$inboundSchema),
+    ).optional(),
   }).transform((v) => {
     return remap$(v, {
       "server_id": "serverId",
@@ -264,7 +269,7 @@ export type Block$Outbound = {
   nqn?: string | null | undefined;
   nsid?: number | null | undefined;
   server_id?: string | null | undefined;
-  storage_network?: StorageNetwork$Outbound | null | undefined;
+  storage_network?: VolumeDataStorageNetwork$Outbound | null | undefined;
 };
 
 /** @internal */
@@ -277,8 +282,9 @@ export const Block$outboundSchema: z.ZodType<
   nqn: z.nullable(z.string()).optional(),
   nsid: z.nullable(z.number().int()).optional(),
   serverId: z.nullable(z.string()).optional(),
-  storageNetwork: z.nullable(z.lazy(() => StorageNetwork$outboundSchema))
-    .optional(),
+  storageNetwork: z.nullable(
+    z.lazy(() => VolumeDataStorageNetwork$outboundSchema),
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     serverId: "server_id",

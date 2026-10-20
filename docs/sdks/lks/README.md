@@ -15,8 +15,10 @@
 * [getLksNodePool](#getlksnodepool) - Get a node pool
 * [deleteLksNodePool](#deletelksnodepool) - Delete a node pool
 * [updateLksNodePool](#updatelksnodepool) - Update a node pool
+* [listLksNodes](#listlksnodes) - List nodes
 * [listLksAvailableVersions](#listlksavailableversions) - List available Kubernetes versions
 * [listLksSites](#listlkssites) - List sites available for LKS
+* [listLksAllocatableServers](#listlksallocatableservers) - List servers that can join an allocated node pool
 
 ## listLksClusters
 
@@ -1106,14 +1108,17 @@ run();
 
 ## createLksNodePool
 
-Adds a node pool to an LKS cluster. The platform provisions `count` servers of `plan` from stock, so both fields are required.
+Adds a node pool to an LKS cluster. `mode` decides where the pool's nodes come from:
 
-`kubernetes_version` defaults to the control-plane patch and may never be newer than it. `max_pods_per_node` is set once, here — it cannot be changed later.
+- `on_demand` (default): the platform provisions `count` servers of `plan` from stock, so both fields are required.
+- `allocated`: the pool is built from `server_ids`, bare metal servers already in the cluster project. Each server is reinstalled with the LKS node image, which erases its disks. `plan` and `count` are rejected: the pool uses the plan the servers share, and `count` is the number of servers. Each server that fails an eligibility check is reported as its own 422 error, pointing at its index in `server_ids` and listing every reason in `meta.reasons`. `GET /lks/allocatable_servers` shows which servers can join. Allocated node pools are available only in on-demand projects: a reserved project is refused with 422 `RESERVED_PROJECT_NOT_SUPPORTED`.
+
+`kubernetes_version` defaults to the control-plane patch and may never be newer than it. `max_pods_per_node` and `mode` are set once, here — they cannot be changed later.
 
 
-### Example Usage: InsufficientPermissions
+### Example Usage: Allocated
 
-<!-- UsageSnippet language="typescript" operationID="create-lks-node-pool" method="post" path="/lks/clusters/{cluster_id}/nodepools" example="InsufficientPermissions" -->
+<!-- UsageSnippet language="typescript" operationID="create-lks-node-pool" method="post" path="/lks/clusters/{cluster_id}/nodepools" example="Allocated" -->
 ```typescript
 import { Latitudesh } from "latitudesh-typescript-sdk";
 
@@ -1128,8 +1133,84 @@ async function run() {
       data: {
         type: "lks_node_pools",
         attributes: {
-          plan: "<value>",
-          count: 973849,
+          mode: "allocated",
+          serverIds: [
+            "sv_9dQKr1pRMLyd",
+            "sv_pRMLydp0dQKr1",
+          ],
+          name: "gpu-owned",
+        },
+      },
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
+import { lksCreateLKSNodePool } from "latitudesh-typescript-sdk/funcs/lksCreateLKSNodePool.js";
+
+// Use `LatitudeshCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const latitudesh = new LatitudeshCore({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const res = await lksCreateLKSNodePool(latitudesh, {
+    clusterId: "<id>",
+    createLksNodePool: {
+      data: {
+        type: "lks_node_pools",
+        attributes: {
+          mode: "allocated",
+          serverIds: [
+            "sv_9dQKr1pRMLyd",
+            "sv_pRMLydp0dQKr1",
+          ],
+          name: "gpu-owned",
+        },
+      },
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("lksCreateLKSNodePool failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: AllocatedProvisioning
+
+<!-- UsageSnippet language="typescript" operationID="create-lks-node-pool" method="post" path="/lks/clusters/{cluster_id}/nodepools" example="AllocatedProvisioning" -->
+```typescript
+import { Latitudesh } from "latitudesh-typescript-sdk";
+
+const latitudesh = new Latitudesh({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const result = await latitudesh.lks.createLksNodePool({
+    clusterId: "<id>",
+    createLksNodePool: {
+      data: {
+        type: "lks_node_pools",
+        attributes: {
+          serverIds: [
+            "sv_9dQKr1pRMLyd",
+          ],
           kubernetesVersion: "1.36.3",
           maxPodsPerNode: 110,
           taints: [
@@ -1171,8 +1252,96 @@ async function run() {
       data: {
         type: "lks_node_pools",
         attributes: {
-          plan: "<value>",
-          count: 973849,
+          serverIds: [
+            "sv_9dQKr1pRMLyd",
+          ],
+          kubernetesVersion: "1.36.3",
+          maxPodsPerNode: 110,
+          taints: [
+            {
+              key: "dedicated",
+              value: "gpu",
+              effect: "NoSchedule",
+            },
+          ],
+        },
+      },
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("lksCreateLKSNodePool failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: InsufficientPermissions
+
+<!-- UsageSnippet language="typescript" operationID="create-lks-node-pool" method="post" path="/lks/clusters/{cluster_id}/nodepools" example="InsufficientPermissions" -->
+```typescript
+import { Latitudesh } from "latitudesh-typescript-sdk";
+
+const latitudesh = new Latitudesh({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const result = await latitudesh.lks.createLksNodePool({
+    clusterId: "<id>",
+    createLksNodePool: {
+      data: {
+        type: "lks_node_pools",
+        attributes: {
+          serverIds: [
+            "sv_9dQKr1pRMLyd",
+          ],
+          kubernetesVersion: "1.36.3",
+          maxPodsPerNode: 110,
+          taints: [
+            {
+              key: "dedicated",
+              value: "gpu",
+              effect: "NoSchedule",
+            },
+          ],
+        },
+      },
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
+import { lksCreateLKSNodePool } from "latitudesh-typescript-sdk/funcs/lksCreateLKSNodePool.js";
+
+// Use `LatitudeshCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const latitudesh = new LatitudeshCore({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const res = await lksCreateLKSNodePool(latitudesh, {
+    clusterId: "<id>",
+    createLksNodePool: {
+      data: {
+        type: "lks_node_pools",
+        attributes: {
+          serverIds: [
+            "sv_9dQKr1pRMLyd",
+          ],
           kubernetesVersion: "1.36.3",
           maxPodsPerNode: 110,
           taints: [
@@ -1282,8 +1451,9 @@ async function run() {
       data: {
         type: "lks_node_pools",
         attributes: {
-          plan: "<value>",
-          count: 973849,
+          serverIds: [
+            "sv_9dQKr1pRMLyd",
+          ],
           kubernetesVersion: "1.36.3",
           maxPodsPerNode: 110,
           taints: [
@@ -1325,8 +1495,9 @@ async function run() {
       data: {
         type: "lks_node_pools",
         attributes: {
-          plan: "<value>",
-          count: 973849,
+          serverIds: [
+            "sv_9dQKr1pRMLyd",
+          ],
           kubernetesVersion: "1.36.3",
           maxPodsPerNode: 110,
           taints: [
@@ -1621,11 +1792,13 @@ run();
 
 ## updateLksNodePool
 
-Scales, renames, upgrades or re-labels a node pool. At least one attribute must be provided.
+Scales, renames, upgrades, re-labels or changes the servers of a node pool. At least one attribute must be provided.
 
 `labels` and `taints` are declarative replacements, not merges: omit the field to leave it untouched, send the whole map/list to replace it, or send `{}` / `[]` to clear it.
 
-A newer `kubernetes_version` rolls a node-recreating upgrade; it must not be lower than the pool's current patch nor newer than the control-plane patch. `max_pods_per_node` is immutable — a PATCH that carries it is rejected with 422 even if the value is unchanged.
+A newer `kubernetes_version` rolls a node-recreating upgrade; it must not be lower than the pool's current patch nor newer than the control-plane patch. `max_pods_per_node` and `mode` are immutable — a PATCH that carries either is rejected with 422 even if the value is unchanged.
+
+For an allocated node pool, `server_ids` replaces `count`: send the whole set of servers the pool should have. Added servers are checked as on create and reinstalled to join; removed servers are drained and reinstalled with a clean OS, with no data, keys or user data restored. A server set change cannot be combined with a `kubernetes_version` change.
 
 The node pool must be idle: one that is provisioning, updating, scaling, upgrading, paused or deleting rejects the request with 409.
 
@@ -1833,6 +2006,79 @@ async function run() {
           labels: {
             "env": "prod",
           },
+        },
+      },
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("lksUpdateLKSNodePool failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: ReplaceServers
+
+<!-- UsageSnippet language="typescript" operationID="update-lks-node-pool" method="patch" path="/lks/clusters/{cluster_id}/nodepools/{id}" example="ReplaceServers" -->
+```typescript
+import { Latitudesh } from "latitudesh-typescript-sdk";
+
+const latitudesh = new Latitudesh({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const result = await latitudesh.lks.updateLksNodePool({
+    clusterId: "<id>",
+    id: "<id>",
+    updateLksNodePool: {
+      data: {
+        type: "lks_node_pools",
+        attributes: {
+          serverIds: [
+            "sv_9dQKr1pRMLyd",
+            "sv_pRMLydp0dQKr1",
+          ],
+        },
+      },
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
+import { lksUpdateLKSNodePool } from "latitudesh-typescript-sdk/funcs/lksUpdateLKSNodePool.js";
+
+// Use `LatitudeshCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const latitudesh = new LatitudeshCore({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const res = await lksUpdateLKSNodePool(latitudesh, {
+    clusterId: "<id>",
+    id: "<id>",
+    updateLksNodePool: {
+      data: {
+        type: "lks_node_pools",
+        attributes: {
+          serverIds: [
+            "sv_9dQKr1pRMLyd",
+            "sv_pRMLydp0dQKr1",
+          ],
         },
       },
     },
@@ -2082,6 +2328,84 @@ run();
 | errors.ErrorObject            | 502                           | application/vnd.api+json      |
 | errors.LatitudeshDefaultError | 4XX, 5XX                      | \*/\*                         |
 
+## listLksNodes
+
+Lists the nodes of a node pool, with the status of each node and of the server it runs on. Each node's `id` is a stable node ID (format: `lksno_<hash>`); `name` is its Kubernetes node name, as shown by `kubectl get nodes`. The response is not paginated; `meta.total` is the number of nodes returned.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="list-lks-nodes" method="get" path="/lks/clusters/{cluster_id}/nodepools/{node_pool_id}/nodes" example="OneNode" -->
+```typescript
+import { Latitudesh } from "latitudesh-typescript-sdk";
+
+const latitudesh = new Latitudesh({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const result = await latitudesh.lks.listLksNodes({
+    clusterId: "<id>",
+    nodePoolId: "<id>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
+import { lksListLKSNodes } from "latitudesh-typescript-sdk/funcs/lksListLKSNodes.js";
+
+// Use `LatitudeshCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const latitudesh = new LatitudeshCore({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const res = await lksListLKSNodes(latitudesh, {
+    clusterId: "<id>",
+    nodePoolId: "<id>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("lksListLKSNodes failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.ListLksNodesRequest](../../models/operations/listlksnodesrequest.md)                                                                                               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[models.LksNodes](../../models/lksnodes.md)\>**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| errors.ErrorObject            | 403, 404                      | application/vnd.api+json      |
+| errors.ErrorObject            | 502                           | application/vnd.api+json      |
+| errors.LatitudeshDefaultError | 4XX, 5XX                      | \*/\*                         |
+
 ## listLksAvailableVersions
 
 Lists the Kubernetes patches the platform offers, with their lifecycle flags. Use a version with `available_for_creation: true` when creating a cluster or a node pool, and one with `available_for_upgrade: true` when upgrading. Exactly one entry has `default: true`.
@@ -2219,5 +2543,85 @@ run();
 
 | Error Type                    | Status Code                   | Content Type                  |
 | ----------------------------- | ----------------------------- | ----------------------------- |
+| errors.ErrorObject            | 502                           | application/vnd.api+json      |
+| errors.LatitudeshDefaultError | 4XX, 5XX                      | \*/\*                         |
+
+## listLksAllocatableServers
+
+Lists a project's servers at a site, with whether each one can join an allocated node pool right now. Pass the `id` of an allocatable server in `server_ids` when creating or updating an allocated node pool.
+
+When `allocatable` is false, `reasons` lists why, using the same codes that node pool create and update return per server. `node_pool_id` and `cluster_id` identify the pool a server already belongs to.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="list-lks-allocatable-servers" method="get" path="/lks/allocatable_servers" example="TwoServers" -->
+```typescript
+import { Latitudesh } from "latitudesh-typescript-sdk";
+
+const latitudesh = new Latitudesh({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const result = await latitudesh.lks.listLksAllocatableServers({
+    filterProject: "<value>",
+    filterSite: "<value>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
+import { lksListLKSAllocatableServers } from "latitudesh-typescript-sdk/funcs/lksListLKSAllocatableServers.js";
+
+// Use `LatitudeshCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const latitudesh = new LatitudeshCore({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const res = await lksListLKSAllocatableServers(latitudesh, {
+    filterProject: "<value>",
+    filterSite: "<value>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("lksListLKSAllocatableServers failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.ListLksAllocatableServersRequest](../../models/operations/listlksallocatableserversrequest.md)                                                                     | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[models.LksAllocatableServers](../../models/lksallocatableservers.md)\>**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| errors.ErrorObject            | 404, 422                      | application/vnd.api+json      |
 | errors.ErrorObject            | 502                           | application/vnd.api+json      |
 | errors.LatitudeshDefaultError | 4XX, 5XX                      | \*/\*                         |

@@ -25,16 +25,36 @@ export const TypeBareMetal = {
 } as const;
 export type TypeBareMetal = ClosedEnum<typeof TypeBareMetal>;
 
+/**
+ * on_demand provisions new servers of `plan` from stock. allocated builds the pool from `server_ids`, servers already in the cluster project: each one is reinstalled with the LKS node image (erasing its disks) and, when it leaves the pool, reinstalled with a clean OS (no data, keys or user data are restored).
+ */
+export const CreateLksNodePoolMode = {
+  OnDemand: "on_demand",
+  Allocated: "allocated",
+} as const;
+/**
+ * on_demand provisions new servers of `plan` from stock. allocated builds the pool from `server_ids`, servers already in the cluster project: each one is reinstalled with the LKS node image (erasing its disks) and, when it leaves the pool, reinstalled with a clean OS (no data, keys or user data are restored).
+ */
+export type CreateLksNodePoolMode = ClosedEnum<typeof CreateLksNodePoolMode>;
+
 export type CreateLksNodePoolAttributes = {
   type?: TypeBareMetal | undefined;
   /**
-   * Plan the pool nodes are provisioned from
+   * on_demand provisions new servers of `plan` from stock. allocated builds the pool from `server_ids`, servers already in the cluster project: each one is reinstalled with the LKS node image (erasing its disks) and, when it leaves the pool, reinstalled with a clean OS (no data, keys or user data are restored).
    */
-  plan: string;
+  mode?: CreateLksNodePoolMode | undefined;
   /**
-   * Number of nodes; must be >= 1
+   * Plan the pool nodes are provisioned from. Required in on_demand mode; rejected in allocated mode, where the plan is the one the servers already have
    */
-  count: number;
+  plan?: string | undefined;
+  /**
+   * Number of nodes; must be >= 1. Required in on_demand mode; rejected in allocated mode, where it is the number of server_ids
+   */
+  count?: number | undefined;
+  /**
+   * Required in allocated mode and rejected in on_demand mode. Servers must be bare metal, in the cluster project and location, share one plan, have been deployed with bgp_ready and not belong to another node pool. Each server that fails a check is reported as its own 422 error pointing at its index.
+   */
+  serverIds?: Array<string> | undefined;
   /**
    * Patch; defaults to the cluster control-plane patch. Must not be newer than the control-plane patch (422 VERSION_SKEW)
    */
@@ -86,14 +106,25 @@ export const TypeBareMetal$outboundSchema: z.ZodNativeEnum<
 > = TypeBareMetal$inboundSchema;
 
 /** @internal */
+export const CreateLksNodePoolMode$inboundSchema: z.ZodNativeEnum<
+  typeof CreateLksNodePoolMode
+> = z.nativeEnum(CreateLksNodePoolMode);
+/** @internal */
+export const CreateLksNodePoolMode$outboundSchema: z.ZodNativeEnum<
+  typeof CreateLksNodePoolMode
+> = CreateLksNodePoolMode$inboundSchema;
+
+/** @internal */
 export const CreateLksNodePoolAttributes$inboundSchema: z.ZodType<
   CreateLksNodePoolAttributes,
   z.ZodTypeDef,
   unknown
 > = z.object({
   type: TypeBareMetal$inboundSchema.optional(),
-  plan: z.string(),
-  count: z.number().int(),
+  mode: CreateLksNodePoolMode$inboundSchema.default("on_demand"),
+  plan: z.string().optional(),
+  count: z.number().int().optional(),
+  server_ids: z.array(z.string()).optional(),
   kubernetes_version: z.string().optional(),
   max_pods_per_node: z.number().int().optional(),
   name: z.string().optional(),
@@ -102,6 +133,7 @@ export const CreateLksNodePoolAttributes$inboundSchema: z.ZodType<
   taints: z.array(LksNodePoolTaint$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
+    "server_ids": "serverIds",
     "kubernetes_version": "kubernetesVersion",
     "max_pods_per_node": "maxPodsPerNode",
   });
@@ -109,8 +141,10 @@ export const CreateLksNodePoolAttributes$inboundSchema: z.ZodType<
 /** @internal */
 export type CreateLksNodePoolAttributes$Outbound = {
   type?: string | undefined;
-  plan: string;
-  count: number;
+  mode: string;
+  plan?: string | undefined;
+  count?: number | undefined;
+  server_ids?: Array<string> | undefined;
   kubernetes_version?: string | undefined;
   max_pods_per_node?: number | undefined;
   name?: string | undefined;
@@ -126,8 +160,10 @@ export const CreateLksNodePoolAttributes$outboundSchema: z.ZodType<
   CreateLksNodePoolAttributes
 > = z.object({
   type: TypeBareMetal$outboundSchema.optional(),
-  plan: z.string(),
-  count: z.number().int(),
+  mode: CreateLksNodePoolMode$outboundSchema.default("on_demand"),
+  plan: z.string().optional(),
+  count: z.number().int().optional(),
+  serverIds: z.array(z.string()).optional(),
   kubernetesVersion: z.string().optional(),
   maxPodsPerNode: z.number().int().optional(),
   name: z.string().optional(),
@@ -136,6 +172,7 @@ export const CreateLksNodePoolAttributes$outboundSchema: z.ZodType<
   taints: z.array(LksNodePoolTaint$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
+    serverIds: "server_ids",
     kubernetesVersion: "kubernetes_version",
     maxPodsPerNode: "max_pods_per_node",
   });

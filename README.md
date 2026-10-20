@@ -258,6 +258,9 @@ run();
 * [listFilesystems](docs/sdks/filesystemstorage/README.md#listfilesystems) - List filesystems
 * [deleteFilesystem](docs/sdks/filesystemstorage/README.md#deletefilesystem) - Delete filesystem
 * [updateFilesystem](docs/sdks/filesystemstorage/README.md#updatefilesystem) - Update filesystem
+* [getFilesystemAttachment](docs/sdks/filesystemstorage/README.md#getfilesystemattachment) - Get filesystem attachment
+* [attachFilesystem](docs/sdks/filesystemstorage/README.md#attachfilesystem) - Attach filesystem to server
+* [detachFilesystem](docs/sdks/filesystemstorage/README.md#detachfilesystem) - Detach filesystem from server
 
 ### [Firewalls](docs/sdks/firewalls/README.md)
 
@@ -302,8 +305,10 @@ run();
 * [getLksNodePool](docs/sdks/lks/README.md#getlksnodepool) - Get a node pool
 * [deleteLksNodePool](docs/sdks/lks/README.md#deletelksnodepool) - Delete a node pool
 * [updateLksNodePool](docs/sdks/lks/README.md#updatelksnodepool) - Update a node pool
+* [listLksNodes](docs/sdks/lks/README.md#listlksnodes) - List nodes
 * [listLksAvailableVersions](docs/sdks/lks/README.md#listlksavailableversions) - List available Kubernetes versions
 * [listLksSites](docs/sdks/lks/README.md#listlkssites) - List sites available for LKS
+* [listLksAllocatableServers](docs/sdks/lks/README.md#listlksallocatableservers) - List servers that can join an allocated node pool
 
 ### [ManagedDatabases](docs/sdks/manageddatabases/README.md)
 
@@ -384,6 +389,7 @@ run();
 * [createPublicNetwork](docs/sdks/publicnetworks/README.md#createpublicnetwork) - Create a network
 * [getPublicNetwork](docs/sdks/publicnetworks/README.md#getpublicnetwork) - Retrieve a network
 * [destroyPublicNetwork](docs/sdks/publicnetworks/README.md#destroypublicnetwork) - Delete a network
+* [updatePublicNetworkIp](docs/sdks/publicnetworks/README.md#updatepublicnetworkip) - Update a network IP
 
 ### [Regions](docs/sdks/regions/README.md)
 
@@ -561,8 +567,11 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`elasticIpsListElasticIps`](docs/sdks/elasticips/README.md#listelasticips) - List Elastic IPs
 - [`elasticIpsUpdateElasticIp`](docs/sdks/elasticips/README.md#updateelasticip) - Move an Elastic IP
 - [`eventsList`](docs/sdks/events/README.md#list) - List events
+- [`filesystemStorageAttachFilesystem`](docs/sdks/filesystemstorage/README.md#attachfilesystem) - Attach filesystem to server
 - [`filesystemStorageCreateFilesystem`](docs/sdks/filesystemstorage/README.md#createfilesystem) - Create filesystem
 - [`filesystemStorageDeleteFilesystem`](docs/sdks/filesystemstorage/README.md#deletefilesystem) - Delete filesystem
+- [`filesystemStorageDetachFilesystem`](docs/sdks/filesystemstorage/README.md#detachfilesystem) - Detach filesystem from server
+- [`filesystemStorageGetFilesystemAttachment`](docs/sdks/filesystemstorage/README.md#getfilesystemattachment) - Get filesystem attachment
 - [`filesystemStorageListFilesystems`](docs/sdks/filesystemstorage/README.md#listfilesystems) - List filesystems
 - [`filesystemStorageUpdateFilesystem`](docs/sdks/filesystemstorage/README.md#updatefilesystem) - Update filesystem
 - [`firewallsAssignmentsCreate`](docs/sdks/assignments/README.md#create) - Assign server to firewall
@@ -583,9 +592,11 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`lksGetLKSCluster`](docs/sdks/lks/README.md#getlkscluster) - Get an LKS cluster
 - [`lksGetLKSClusterKubeconfig`](docs/sdks/lks/README.md#getlksclusterkubeconfig) - Get the cluster kubeconfig
 - [`lksGetLKSNodePool`](docs/sdks/lks/README.md#getlksnodepool) - Get a node pool
+- [`lksListLKSAllocatableServers`](docs/sdks/lks/README.md#listlksallocatableservers) - List servers that can join an allocated node pool
 - [`lksListLKSAvailableVersions`](docs/sdks/lks/README.md#listlksavailableversions) - List available Kubernetes versions
 - [`lksListLKSClusters`](docs/sdks/lks/README.md#listlksclusters) - List LKS clusters
 - [`lksListLKSNodePools`](docs/sdks/lks/README.md#listlksnodepools) - List node pools
+- [`lksListLKSNodes`](docs/sdks/lks/README.md#listlksnodes) - List nodes
 - [`lksListLKSSites`](docs/sdks/lks/README.md#listlkssites) - List sites available for LKS
 - [`lksUpdateLKSCluster`](docs/sdks/lks/README.md#updatelkscluster) - Update an LKS cluster
 - [`lksUpdateLKSNodePool`](docs/sdks/lks/README.md#updatelksnodepool) - Update a node pool
@@ -638,6 +649,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`publicNetworksDestroyPublicNetwork`](docs/sdks/publicnetworks/README.md#destroypublicnetwork) - Delete a network
 - [`publicNetworksGetPublicNetwork`](docs/sdks/publicnetworks/README.md#getpublicnetwork) - Retrieve a network
 - [`publicNetworksGetPublicNetworks`](docs/sdks/publicnetworks/README.md#getpublicnetworks) - List networks
+- [`publicNetworksUpdatePublicNetworkIp`](docs/sdks/publicnetworks/README.md#updatepublicnetworkip) - Update a network IP
 - [`regionsFetch`](docs/sdks/regions/README.md#fetch) - Retrieve region
 - [`regionsGet`](docs/sdks/regions/README.md#get) - List regions
 - [`rolesGet`](docs/sdks/roles/README.md#get) - Retrieve role
@@ -902,7 +914,7 @@ run();
 
 
 **Inherit from [`LatitudeshError`](./src/models/errors/latitudesherror.ts)**:
-* [`ErrorObject`](./src/models/errors/errorobject.ts): Applicable to 64 of 196 methods.*
+* [`ErrorObject`](./src/models/errors/errorobject.ts): Applicable to 68 of 202 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>

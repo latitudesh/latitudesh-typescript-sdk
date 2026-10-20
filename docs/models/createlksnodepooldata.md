@@ -8,8 +8,9 @@ import { CreateLksNodePoolData } from "latitudesh-typescript-sdk/models";
 let value: CreateLksNodePoolData = {
   type: "lks_node_pools",
   attributes: {
-    plan: "<value>",
-    count: 523154,
+    serverIds: [
+      "sv_9dQKr1pRMLyd",
+    ],
     kubernetesVersion: "1.36.3",
     maxPodsPerNode: 110,
     taints: [

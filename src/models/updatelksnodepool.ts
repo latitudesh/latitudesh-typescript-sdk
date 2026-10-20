@@ -21,14 +21,18 @@ export const UpdateLksNodePoolType = {
 export type UpdateLksNodePoolType = ClosedEnum<typeof UpdateLksNodePoolType>;
 
 /**
- * At least one attribute must be provided. max_pods_per_node is set once, at creation, and is not updatable: a PATCH that carries it is rejected with 422.
+ * At least one attribute must be provided. max_pods_per_node and mode are set once, at creation, and are not updatable: a PATCH that carries either is rejected with 422.
  */
 export type UpdateLksNodePoolAttributes = {
   name?: string | undefined;
   /**
-   * must be >= 1
+   * must be >= 1. on_demand node pools only; rejected for allocated node pools
    */
   count?: number | undefined;
+  /**
+   * Allocated node pools only. Declarative: send the whole set of servers the pool should have. Added servers are checked like on create and reinstalled to join; removed servers are drained and reinstalled with a clean OS. Cannot be combined with a kubernetes_version change.
+   */
+  serverIds?: Array<string> | undefined;
   /**
    * A newer patch rolls a node-recreating upgrade. Must not be lower than the current patch (422 DOWNGRADE_NOT_ALLOWED) nor newer than the control-plane patch (422 VERSION_SKEW)
    */
@@ -47,7 +51,7 @@ export type UpdateLksNodePoolAttributes = {
 export type UpdateLksNodePoolData = {
   type: UpdateLksNodePoolType;
   /**
-   * At least one attribute must be provided. max_pods_per_node is set once, at creation, and is not updatable: a PATCH that carries it is rejected with 422.
+   * At least one attribute must be provided. max_pods_per_node and mode are set once, at creation, and are not updatable: a PATCH that carries either is rejected with 422.
    */
   attributes?: UpdateLksNodePoolAttributes | undefined;
 };
@@ -73,12 +77,14 @@ export const UpdateLksNodePoolAttributes$inboundSchema: z.ZodType<
 > = z.object({
   name: z.string().optional(),
   count: z.number().int().optional(),
+  server_ids: z.array(z.string()).optional(),
   kubernetes_version: z.string().optional(),
   labels: z.record(z.string()).optional(),
   taints: z.array(LksNodePoolTaint$inboundSchema).optional(),
   description: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
+    "server_ids": "serverIds",
     "kubernetes_version": "kubernetesVersion",
   });
 });
@@ -86,6 +92,7 @@ export const UpdateLksNodePoolAttributes$inboundSchema: z.ZodType<
 export type UpdateLksNodePoolAttributes$Outbound = {
   name?: string | undefined;
   count?: number | undefined;
+  server_ids?: Array<string> | undefined;
   kubernetes_version?: string | undefined;
   labels?: { [k: string]: string } | undefined;
   taints?: Array<LksNodePoolTaint$Outbound> | undefined;
@@ -100,12 +107,14 @@ export const UpdateLksNodePoolAttributes$outboundSchema: z.ZodType<
 > = z.object({
   name: z.string().optional(),
   count: z.number().int().optional(),
+  serverIds: z.array(z.string()).optional(),
   kubernetesVersion: z.string().optional(),
   labels: z.record(z.string()).optional(),
   taints: z.array(LksNodePoolTaint$outboundSchema).optional(),
   description: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
+    serverIds: "server_ids",
     kubernetesVersion: "kubernetes_version",
   });
 });

@@ -23,8 +23,18 @@ export type LksNodePoolDataType = ClosedEnum<typeof LksNodePoolDataType>;
 export type LksNodePoolDataAttributes = {
   name?: string | null | undefined;
   type?: string | undefined;
+  /**
+   * on_demand: nodes are servers provisioned from stock. allocated: nodes are servers already in the project, reinstalled to join the pool.
+   */
   mode?: string | undefined;
+  /**
+   * null for allocated node pools
+   */
   plan?: string | null | undefined;
+  /**
+   * Servers backing an allocated node pool; null for on_demand node pools
+   */
+  serverIds?: Array<string> | null | undefined;
   description?: string | null | undefined;
   count?: number | null | undefined;
   /**
@@ -36,7 +46,7 @@ export type LksNodePoolDataAttributes = {
   status?: string | null | undefined;
   message?: string | null | undefined;
   /**
-   * Machine-readable status reason (open enum)
+   * Machine-readable status reason (open enum). Allocated pools also report AdoptingServers, ServerNotEligible, ServerQuarantined, ServerReturnBlocked and ReturningServers.
    */
   reason?: string | null | undefined;
   readyNodes?: number | null | undefined;
@@ -71,6 +81,7 @@ export const LksNodePoolDataAttributes$inboundSchema: z.ZodType<
   type: z.string().optional(),
   mode: z.string().optional(),
   plan: z.nullable(z.string()).optional(),
+  server_ids: z.nullable(z.array(z.string())).optional(),
   description: z.nullable(z.string()).optional(),
   count: z.nullable(z.number().int()).optional(),
   max_pods_per_node: z.nullable(z.number().int()).optional(),
@@ -86,6 +97,7 @@ export const LksNodePoolDataAttributes$inboundSchema: z.ZodType<
   updated_at: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
+    "server_ids": "serverIds",
     "max_pods_per_node": "maxPodsPerNode",
     "kubernetes_version": "kubernetesVersion",
     "platform_version": "platformVersion",
@@ -100,6 +112,7 @@ export type LksNodePoolDataAttributes$Outbound = {
   type?: string | undefined;
   mode?: string | undefined;
   plan?: string | null | undefined;
+  server_ids?: Array<string> | null | undefined;
   description?: string | null | undefined;
   count?: number | null | undefined;
   max_pods_per_node?: number | null | undefined;
@@ -125,6 +138,7 @@ export const LksNodePoolDataAttributes$outboundSchema: z.ZodType<
   type: z.string().optional(),
   mode: z.string().optional(),
   plan: z.nullable(z.string()).optional(),
+  serverIds: z.nullable(z.array(z.string())).optional(),
   description: z.nullable(z.string()).optional(),
   count: z.nullable(z.number().int()).optional(),
   maxPodsPerNode: z.nullable(z.number().int()).optional(),
@@ -140,6 +154,7 @@ export const LksNodePoolDataAttributes$outboundSchema: z.ZodType<
   updatedAt: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
+    serverIds: "server_ids",
     maxPodsPerNode: "max_pods_per_node",
     kubernetesVersion: "kubernetes_version",
     platformVersion: "platform_version",

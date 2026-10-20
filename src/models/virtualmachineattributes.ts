@@ -182,6 +182,10 @@ export type VirtualMachineAttributesAttributes = {
   team?: TeamInclude | undefined;
   project?: ProjectInclude | undefined;
   /**
+   * Whether the VM re-applies the platform network configuration on every boot. Set at creation; false for VMs created before this option was available. When false, configure networks attached to the VM inside the guest yourself, as described in [Private networks: configure the OS](https://www.latitude.sh/docs/networking/private-networks#step-3-configure-the-os).
+   */
+  applyNetworkOnBoot?: boolean | undefined;
+  /**
    * Deprecated, always false. Opt-in extra field, requested via `extra_fields[virtual_machines]=pending_restart`. Attaching and detaching restart the VM automatically.
    */
   pendingRestart?: boolean | undefined;
@@ -733,6 +737,7 @@ export const VirtualMachineAttributesAttributes$inboundSchema: z.ZodType<
     .optional(),
   team: TeamInclude$inboundSchema.optional(),
   project: ProjectInclude$inboundSchema.optional(),
+  apply_network_on_boot: z.boolean().optional(),
   pending_restart: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -741,6 +746,7 @@ export const VirtualMachineAttributesAttributes$inboundSchema: z.ZodType<
     "operating_system": "operatingSystem",
     "user_data": "userData",
     "marketplace_app": "marketplaceApp",
+    "apply_network_on_boot": "applyNetworkOnBoot",
     "pending_restart": "pendingRestart",
   });
 });
@@ -767,6 +773,7 @@ export type VirtualMachineAttributesAttributes$Outbound = {
   tags?: Array<VirtualMachineAttributesTag$Outbound> | undefined;
   team?: TeamInclude$Outbound | undefined;
   project?: ProjectInclude$Outbound | undefined;
+  apply_network_on_boot?: boolean | undefined;
   pending_restart?: boolean | undefined;
 };
 
@@ -798,6 +805,7 @@ export const VirtualMachineAttributesAttributes$outboundSchema: z.ZodType<
     .optional(),
   team: TeamInclude$outboundSchema.optional(),
   project: ProjectInclude$outboundSchema.optional(),
+  applyNetworkOnBoot: z.boolean().optional(),
   pendingRestart: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -806,6 +814,7 @@ export const VirtualMachineAttributesAttributes$outboundSchema: z.ZodType<
     operatingSystem: "operating_system",
     userData: "user_data",
     marketplaceApp: "marketplace_app",
+    applyNetworkOnBoot: "apply_network_on_boot",
     pendingRestart: "pending_restart",
   });
 });
