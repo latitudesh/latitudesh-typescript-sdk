@@ -21,7 +21,7 @@ Returns a list of all roles that can be assigned to users
     const [result, apiCall] = await rolesList(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

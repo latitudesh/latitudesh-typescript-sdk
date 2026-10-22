@@ -23,7 +23,7 @@ Updates an existing lifecycle rule for an object storage bucket.`,
       await objectStoragePatchStorageBucketLifecycleRule(
         client,
         args.request,
-        { fetchOptions: { signal: ctx.signal } },
+        { fetchOptions: { signal: ctx.mcpReq.signal } },
       ).$inspect();
 
     if (!result.ok) {

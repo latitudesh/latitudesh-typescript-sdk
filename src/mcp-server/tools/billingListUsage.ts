@@ -21,7 +21,7 @@ Returns the billing usage of a project
     const [result, apiCall] = await billingListUsage(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

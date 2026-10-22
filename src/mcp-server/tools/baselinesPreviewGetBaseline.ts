@@ -23,7 +23,7 @@ Retrieve a single baseline.
     const [result, apiCall] = await baselinesPreviewGetBaseline(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

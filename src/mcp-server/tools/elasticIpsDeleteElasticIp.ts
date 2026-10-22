@@ -21,7 +21,7 @@ Releases an Elastic IP, returning it to the available pool. The IP will transiti
     const [result, apiCall] = await elasticIpsDeleteElasticIp(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

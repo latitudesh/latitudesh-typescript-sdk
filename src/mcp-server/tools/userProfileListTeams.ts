@@ -14,7 +14,7 @@ Returns a list of all teams the user belongs to
   tool: async (client, ctx) => {
     const [result, apiCall] = await userProfileListTeams(
       client,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

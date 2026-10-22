@@ -21,7 +21,7 @@ Allows to increase or decrease bandwidth packages. Only admins and owners can re
     const [result, apiCall] = await plansUpdateBandwidth(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

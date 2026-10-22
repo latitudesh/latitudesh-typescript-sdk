@@ -20,7 +20,7 @@ Lists all the volumes from a team.`,
     const [result, apiCall] = await blockStorageListVolumes(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

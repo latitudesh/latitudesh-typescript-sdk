@@ -23,7 +23,7 @@ Retrieves a single LKS cluster.
     const [result, apiCall] = await lksGetLKSCluster(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

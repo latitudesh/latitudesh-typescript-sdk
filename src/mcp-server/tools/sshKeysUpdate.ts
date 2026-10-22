@@ -21,7 +21,7 @@ Allows you update SSH Key in a project. These keys can be used to access servers
     const [result, apiCall] = await sshKeysUpdate(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

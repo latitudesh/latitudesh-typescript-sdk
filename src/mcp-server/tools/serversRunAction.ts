@@ -24,7 +24,7 @@ Performs an action on a given server:
     const [result, apiCall] = await serversRunAction(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

@@ -25,7 +25,7 @@ Retrieves the kubeconfig file for a Kubernetes cluster. The kubeconfig is only a
         await kubernetesClustersGetKubernetesClusterKubeconfig(
           client,
           args.request,
-          { fetchOptions: { signal: ctx.signal } },
+          { fetchOptions: { signal: ctx.mcpReq.signal } },
         ).$inspect();
 
       if (!result.ok) {

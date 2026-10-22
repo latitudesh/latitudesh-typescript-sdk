@@ -14,7 +14,7 @@ List all Tags in the team.
   tool: async (client, ctx) => {
     const [result, apiCall] = await tagsList(
       client,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

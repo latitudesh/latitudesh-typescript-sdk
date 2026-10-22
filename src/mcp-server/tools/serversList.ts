@@ -21,7 +21,7 @@ Returns a list of all servers belonging to the team.
     const [result, apiCall] = await serversList(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

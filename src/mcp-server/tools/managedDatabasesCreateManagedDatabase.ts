@@ -20,7 +20,7 @@ export const tool$managedDatabasesCreateManagedDatabase: ToolDefinition<
     const [result, apiCall] = await managedDatabasesCreateManagedDatabase(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

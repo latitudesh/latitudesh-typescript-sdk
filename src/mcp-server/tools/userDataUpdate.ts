@@ -21,7 +21,7 @@ Allow you update User Data in a team.
     const [result, apiCall] = await userDataUpdate(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

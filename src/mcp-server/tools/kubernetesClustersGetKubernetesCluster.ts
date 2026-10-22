@@ -23,7 +23,7 @@ Retrieves detailed information about a Kubernetes cluster including its status, 
     const [result, apiCall] = await kubernetesClustersGetKubernetesCluster(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

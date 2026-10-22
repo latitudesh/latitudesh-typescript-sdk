@@ -22,7 +22,7 @@ Attaches a running server to the private storage network the filesystem is serve
     const [result, apiCall] = await filesystemStorageAttachFilesystem(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

@@ -22,7 +22,7 @@ Retrieve a BGP session announcing an elastic IP`,
     const [result, apiCall] = await elasticIpsGetElasticIpBgpSession(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

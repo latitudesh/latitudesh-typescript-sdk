@@ -22,7 +22,7 @@ Lists all [available locations](https://latitude.sh/locations). For server avail
     const [result, apiCall] = await regionsGet(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

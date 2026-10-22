@@ -23,7 +23,7 @@ Lists the backups of the given Virtual Machine.
     const [result, apiCall] = await virtualMachineBackupsListForVirtualMachine(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

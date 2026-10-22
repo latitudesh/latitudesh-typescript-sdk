@@ -22,7 +22,7 @@ Creates a new VPN Session.
     const [result, apiCall] = await vpnSessionsCreate(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

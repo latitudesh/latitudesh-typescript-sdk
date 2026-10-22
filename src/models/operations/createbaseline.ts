@@ -29,6 +29,19 @@ export const TargetType2 = {
 export type TargetType2 = ClosedEnum<typeof TargetType2>;
 
 /**
+ * RAID level for the default disk layout. With 4 or more disks (or a hardware RAID boot disk) the OS stays on the boot disk or a RAID 1 mirror and the remaining disks form the data array at /data at this level; with 2-3 disks the level applies to the OS across all disks. 'raid-10' is data-only, needs at least 4 data disks and is applied only at locations with the `raid_ten` feature. Mutually exclusive with disk_layout
+ */
+export const CreateBaselineRaid2 = {
+  Raid0: "raid-0",
+  Raid1: "raid-1",
+  Raid10: "raid-10",
+} as const;
+/**
+ * RAID level for the default disk layout. With 4 or more disks (or a hardware RAID boot disk) the OS stays on the boot disk or a RAID 1 mirror and the remaining disks form the data array at /data at this level; with 2-3 disks the level applies to the OS across all disks. 'raid-10' is data-only, needs at least 4 data disks and is applied only at locations with the `raid_ten` feature. Mutually exclusive with disk_layout
+ */
+export type CreateBaselineRaid2 = ClosedEnum<typeof CreateBaselineRaid2>;
+
+/**
  * Expected BIOS settings, keyed by setting id
  */
 export type Bios2 = {};
@@ -67,6 +80,10 @@ export type CreateBaselineAttributes2 = {
    */
   diskLayout?: Array<models.BaselineDiskLayoutGroup> | undefined;
   /**
+   * RAID level for the default disk layout. With 4 or more disks (or a hardware RAID boot disk) the OS stays on the boot disk or a RAID 1 mirror and the remaining disks form the data array at /data at this level; with 2-3 disks the level applies to the OS across all disks. 'raid-10' is data-only, needs at least 4 data disks and is applied only at locations with the `raid_ten` feature. Mutually exclusive with disk_layout
+   */
+  raid?: CreateBaselineRaid2 | null | undefined;
+  /**
    * Expected BIOS settings, keyed by setting id
    */
   bios?: Bios2 | undefined;
@@ -96,6 +113,15 @@ export const TargetType2$inboundSchema: z.ZodNativeEnum<typeof TargetType2> = z
 /** @internal */
 export const TargetType2$outboundSchema: z.ZodNativeEnum<typeof TargetType2> =
   TargetType2$inboundSchema;
+
+/** @internal */
+export const CreateBaselineRaid2$inboundSchema: z.ZodNativeEnum<
+  typeof CreateBaselineRaid2
+> = z.nativeEnum(CreateBaselineRaid2);
+/** @internal */
+export const CreateBaselineRaid2$outboundSchema: z.ZodNativeEnum<
+  typeof CreateBaselineRaid2
+> = CreateBaselineRaid2$inboundSchema;
 
 /** @internal */
 export const Bios2$inboundSchema: z.ZodType<Bios2, z.ZodTypeDef, unknown> = z
@@ -137,6 +163,7 @@ export const CreateBaselineAttributes2$inboundSchema: z.ZodType<
   ssh_key_ids: z.array(z.string()).optional(),
   user_data_id: z.nullable(z.string()).optional(),
   disk_layout: z.array(models.BaselineDiskLayoutGroup$inboundSchema).optional(),
+  raid: z.nullable(CreateBaselineRaid2$inboundSchema).optional(),
   bios: z.lazy(() => Bios2$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -157,6 +184,7 @@ export type CreateBaselineAttributes2$Outbound = {
   ssh_key_ids?: Array<string> | undefined;
   user_data_id?: string | null | undefined;
   disk_layout?: Array<models.BaselineDiskLayoutGroup$Outbound> | undefined;
+  raid?: string | null | undefined;
   bios?: Bios2$Outbound | undefined;
 };
 
@@ -174,6 +202,7 @@ export const CreateBaselineAttributes2$outboundSchema: z.ZodType<
   sshKeyIds: z.array(z.string()).optional(),
   userDataId: z.nullable(z.string()).optional(),
   diskLayout: z.array(models.BaselineDiskLayoutGroup$outboundSchema).optional(),
+  raid: z.nullable(CreateBaselineRaid2$outboundSchema).optional(),
   bios: z.lazy(() => Bios2$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {

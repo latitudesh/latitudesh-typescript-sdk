@@ -22,7 +22,7 @@ Returns a list of all servers and virtual machines assigned to a firewall.`,
     const [result, apiCall] = await firewallsGetAllFirewallAssignments(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

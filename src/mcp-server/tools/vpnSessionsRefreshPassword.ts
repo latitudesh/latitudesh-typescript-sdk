@@ -21,7 +21,7 @@ Refreshing an existing VPN Session will create new credentials for that session
     const [result, apiCall] = await vpnSessionsRefreshPassword(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

@@ -23,7 +23,7 @@ Creates a new lifecycle rule for an object storage bucket. Lifecycle rules autom
       await objectStoragePostStorageBucketLifecycleRules(
         client,
         args.request,
-        { fetchOptions: { signal: ctx.signal } },
+        { fetchOptions: { signal: ctx.mcpReq.signal } },
       ).$inspect();
 
     if (!result.ok) {

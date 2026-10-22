@@ -20,7 +20,7 @@ Assigns a server or a virtual machine to a firewall by its ID.`,
     const [result, apiCall] = await firewallsAssignmentsCreate(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

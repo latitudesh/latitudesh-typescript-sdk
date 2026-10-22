@@ -24,7 +24,7 @@ Related guide: https://docs.latitude.sh/docs/ipmi
     const [result, apiCall] = await serversCreateIpmiSession(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

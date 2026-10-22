@@ -48,14 +48,15 @@ export type CreateServerReinstallOperatingSystem2 = ClosedEnum<
 >;
 
 /**
- * RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, or omit/null for no RAID configuration
+ * RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, 'raid-10' for RAID 10 on the data disks (only at locations with the `raid_ten` feature), or omit/null for no RAID configuration
  */
 export const CreateServerReinstallRaid2 = {
   Raid0: "raid-0",
   Raid1: "raid-1",
+  Raid10: "raid-10",
 } as const;
 /**
- * RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, or omit/null for no RAID configuration
+ * RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, 'raid-10' for RAID 10 on the data disks (only at locations with the `raid_ten` feature), or omit/null for no RAID configuration
  */
 export type CreateServerReinstallRaid2 = ClosedEnum<
   typeof CreateServerReinstallRaid2
@@ -73,6 +74,7 @@ export type CreateServerReinstallRole2 = ClosedEnum<
 export const CreateServerReinstallRaidLevel2 = {
   Raid0: "raid-0",
   Raid1: "raid-1",
+  Raid10: "raid-10",
 } as const;
 export type CreateServerReinstallRaidLevel2 = ClosedEnum<
   typeof CreateServerReinstallRaidLevel2
@@ -112,7 +114,7 @@ export type CreateServerReinstallAttributes2 = {
    */
   userData?: string | null | undefined;
   /**
-   * RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, or omit/null for no RAID configuration
+   * RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, 'raid-10' for RAID 10 on the data disks (only at locations with the `raid_ten` feature), or omit/null for no RAID configuration
    */
   raid?: CreateServerReinstallRaid2 | null | undefined;
   diskLayout?: Array<CreateServerReinstallDiskLayout2> | null | undefined;

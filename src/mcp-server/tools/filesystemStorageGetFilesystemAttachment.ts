@@ -22,7 +22,7 @@ Returns whether a server is attached to the storage network the filesystem is se
     const [result, apiCall] = await filesystemStorageGetFilesystemAttachment(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

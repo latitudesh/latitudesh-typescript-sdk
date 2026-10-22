@@ -110,14 +110,15 @@ export type CreateServerOperatingSystem2 = OpenEnum<
 >;
 
 /**
- * RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, or omit/null for no RAID configuration
+ * RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, 'raid-10' for RAID 10 on the data disks (only at locations with the `raid_ten` feature), or omit/null for no RAID configuration
  */
 export const CreateServerRaid2 = {
   Raid0: "raid-0",
   Raid1: "raid-1",
+  Raid10: "raid-10",
 } as const;
 /**
- * RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, or omit/null for no RAID configuration
+ * RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, 'raid-10' for RAID 10 on the data disks (only at locations with the `raid_ten` feature), or omit/null for no RAID configuration
  */
 export type CreateServerRaid2 = ClosedEnum<typeof CreateServerRaid2>;
 
@@ -131,6 +132,7 @@ export type CreateServerRole2 = ClosedEnum<typeof CreateServerRole2>;
 export const CreateServerRaidLevel2 = {
   Raid0: "raid-0",
   Raid1: "raid-1",
+  Raid10: "raid-10",
 } as const;
 export type CreateServerRaidLevel2 = ClosedEnum<typeof CreateServerRaidLevel2>;
 
@@ -193,7 +195,7 @@ export type CreateServerAttributes2 = {
    */
   userData?: string | null | undefined;
   /**
-   * RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, or omit/null for no RAID configuration
+   * RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, 'raid-10' for RAID 10 on the data disks (only at locations with the `raid_ten` feature), or omit/null for no RAID configuration
    */
   raid?: CreateServerRaid2 | null | undefined;
   diskLayout?: Array<CreateServerDiskLayout2> | null | undefined;

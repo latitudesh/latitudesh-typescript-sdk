@@ -21,7 +21,7 @@ Returns daily object storage usage for a project. Each row reports the canonical
     const [result, apiCall] = await objectStorageGetStorageUsage(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

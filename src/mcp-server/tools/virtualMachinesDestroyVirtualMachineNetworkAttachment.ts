@@ -28,7 +28,7 @@ Some virtual machines run on older infrastructure that doesn't support network a
         await virtualMachinesDestroyVirtualMachineNetworkAttachment(
           client,
           args.request,
-          { fetchOptions: { signal: ctx.signal } },
+          { fetchOptions: { signal: ctx.mcpReq.signal } },
         ).$inspect();
 
       if (!result.ok) {

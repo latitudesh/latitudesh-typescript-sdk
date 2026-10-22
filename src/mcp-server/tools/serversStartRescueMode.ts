@@ -20,7 +20,7 @@ Starts rescue mode on a given server.`,
     const [result, apiCall] = await serversStartRescueMode(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

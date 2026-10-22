@@ -20,7 +20,7 @@ Removes a server or a virtual machine from a firewall by its assignment ID.`,
     const [result, apiCall] = await firewallsDeleteAssignment(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

@@ -21,7 +21,7 @@ List all Elastic IPs for the authenticated team. Elastic IPs are static public I
     const [result, apiCall] = await elasticIpsListElasticIps(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

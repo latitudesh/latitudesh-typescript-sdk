@@ -20,7 +20,7 @@ Unschedules the server removal at the end of the billing cycle.`,
     const [result, apiCall] = await serversUnscheduleDeletion(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

@@ -24,7 +24,7 @@ List all Management and Additional IP Addresses.
     const [result, apiCall] = await ipAddressesList(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

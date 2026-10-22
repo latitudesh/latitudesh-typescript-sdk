@@ -14,7 +14,7 @@ Lists the Kubernetes patches the platform offers, with their lifecycle flags. Us
   tool: async (client, ctx) => {
     const [result, apiCall] = await lksListLKSAvailableVersions(
       client,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

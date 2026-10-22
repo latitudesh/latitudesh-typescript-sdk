@@ -29,7 +29,7 @@ The node pool must be idle: one that is provisioning, updating, scaling, upgradi
     const [result, apiCall] = await lksUpdateLKSNodePool(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

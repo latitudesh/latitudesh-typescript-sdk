@@ -26,7 +26,7 @@ Adds a node pool to an LKS cluster. \`mode\` decides where the pool's nodes come
     const [result, apiCall] = await lksCreateLKSNodePool(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

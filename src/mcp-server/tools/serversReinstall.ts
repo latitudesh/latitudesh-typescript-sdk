@@ -18,7 +18,7 @@ export const tool$serversReinstall: ToolDefinition<typeof args> = {
     const [result, apiCall] = await serversReinstall(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {
