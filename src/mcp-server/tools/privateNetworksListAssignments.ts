@@ -23,7 +23,7 @@ Returns a list of all servers assigned to virtual networks.
       const [result, apiCall] = await privateNetworksListAssignments(
         client,
         args.request,
-        { fetchOptions: { signal: ctx.signal } },
+        { fetchOptions: { signal: ctx.mcpReq.signal } },
       ).$inspect();
 
       if (!result.ok) {

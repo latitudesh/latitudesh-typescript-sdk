@@ -42,14 +42,15 @@ export type UpdateServerDeployConfigOperatingSystem2 = ClosedEnum<
 >;
 
 /**
- * RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, or omit/null for no RAID configuration
+ * RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, 'raid-10' for RAID 10 on the data disks (only at locations with the `raid_ten` feature), or omit/null for no RAID configuration
  */
 export const UpdateServerDeployConfigRaid2 = {
   Raid0: "raid-0",
   Raid1: "raid-1",
+  Raid10: "raid-10",
 } as const;
 /**
- * RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, or omit/null for no RAID configuration
+ * RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, 'raid-10' for RAID 10 on the data disks (only at locations with the `raid_ten` feature), or omit/null for no RAID configuration
  */
 export type UpdateServerDeployConfigRaid2 = ClosedEnum<
   typeof UpdateServerDeployConfigRaid2
@@ -67,6 +68,7 @@ export type UpdateServerDeployConfigRole2 = ClosedEnum<
 export const UpdateServerDeployConfigRaidLevel2 = {
   Raid0: "raid-0",
   Raid1: "raid-1",
+  Raid10: "raid-10",
 } as const;
 export type UpdateServerDeployConfigRaidLevel2 = ClosedEnum<
   typeof UpdateServerDeployConfigRaidLevel2
@@ -91,7 +93,7 @@ export type UpdateServerDeployConfigAttributes2 = {
   hostname?: string | null | undefined;
   operatingSystem?: UpdateServerDeployConfigOperatingSystem2 | null | undefined;
   /**
-   * RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, or omit/null for no RAID configuration
+   * RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, 'raid-10' for RAID 10 on the data disks (only at locations with the `raid_ten` feature), or omit/null for no RAID configuration
    */
   raid?: UpdateServerDeployConfigRaid2 | null | undefined;
   diskLayout?: Array<UpdateServerDeployConfigDiskLayout2> | null | undefined;

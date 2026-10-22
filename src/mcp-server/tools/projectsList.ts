@@ -21,7 +21,7 @@ Returns a list of all projects for the current team
     const [result, apiCall] = await projectsList(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

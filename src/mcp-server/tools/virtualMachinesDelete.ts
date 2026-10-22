@@ -21,7 +21,7 @@ Destroys a Virtual Machine.
     const [result, apiCall] = await virtualMachinesDelete(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

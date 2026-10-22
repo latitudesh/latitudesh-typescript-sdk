@@ -23,7 +23,7 @@ When \`allocatable\` is false, \`reasons\` lists why, using the same codes that 
     const [result, apiCall] = await lksListLKSAllocatableServers(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

@@ -25,14 +25,15 @@ export type BaselineDiskLayoutGroupRole = ClosedEnum<
 >;
 
 /**
- * RAID level for the group. Only valid for the 'os' and 'storage' roles
+ * RAID level for the group. Only valid for the 'os' and 'storage' roles; 'raid-10' is storage-only, needs at least 4 disks, and is applied only at locations with the `raid_ten` feature
  */
 export const BaselineDiskLayoutGroupRaidLevel = {
   Raid0: "raid-0",
   Raid1: "raid-1",
+  Raid10: "raid-10",
 } as const;
 /**
- * RAID level for the group. Only valid for the 'os' and 'storage' roles
+ * RAID level for the group. Only valid for the 'os' and 'storage' roles; 'raid-10' is storage-only, needs at least 4 disks, and is applied only at locations with the `raid_ten` feature
  */
 export type BaselineDiskLayoutGroupRaidLevel = ClosedEnum<
   typeof BaselineDiskLayoutGroupRaidLevel
@@ -61,7 +62,7 @@ export type BaselineDiskLayoutGroup = {
    */
   count?: number | undefined;
   /**
-   * RAID level for the group. Only valid for the 'os' and 'storage' roles
+   * RAID level for the group. Only valid for the 'os' and 'storage' roles; 'raid-10' is storage-only, needs at least 4 disks, and is applied only at locations with the `raid_ten` feature
    */
   raidLevel?: BaselineDiskLayoutGroupRaidLevel | null | undefined;
   /**

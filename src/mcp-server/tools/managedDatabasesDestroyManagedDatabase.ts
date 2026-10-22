@@ -20,7 +20,7 @@ export const tool$managedDatabasesDestroyManagedDatabase: ToolDefinition<
     const [result, apiCall] = await managedDatabasesDestroyManagedDatabase(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

@@ -24,7 +24,7 @@ Provision a customer network: an IPv4 block of the chosen size plus a paired IPv
     const [result, apiCall] = await publicNetworksCreatePublicNetwork(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

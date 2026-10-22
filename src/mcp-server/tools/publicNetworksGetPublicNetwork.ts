@@ -21,7 +21,7 @@ Retrieve a customer network`,
       const [result, apiCall] = await publicNetworksGetPublicNetwork(
         client,
         args.request,
-        { fetchOptions: { signal: ctx.signal } },
+        { fetchOptions: { signal: ctx.mcpReq.signal } },
       ).$inspect();
 
       if (!result.ok) {

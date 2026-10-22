@@ -20,7 +20,7 @@ Returns a list of all servers and virtual machines assigned to a particular fire
     const [result, apiCall] = await firewallsListAssignments(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

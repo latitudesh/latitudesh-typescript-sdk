@@ -21,7 +21,7 @@ Lists the nodes of a node pool, with the status of each node and of the server i
     const [result, apiCall] = await lksListLKSNodes(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

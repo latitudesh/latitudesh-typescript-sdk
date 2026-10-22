@@ -15,7 +15,7 @@ Lists bare metal plans available to LKS with per-site capacity for a node pool.
   tool: async (client, ctx) => {
     const [result, apiCall] = await plansGetLksPlans(
       client,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

@@ -24,7 +24,7 @@ Reserve an available address of a network for your own use, so servers are never
     const [result, apiCall] = await publicNetworksUpdatePublicNetworkIp(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

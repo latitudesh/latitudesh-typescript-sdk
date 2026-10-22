@@ -20,7 +20,7 @@ Allows you to add persistent storage to a project. These volumes can be used to 
     const [result, apiCall] = await blockStorageCreateVolume(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

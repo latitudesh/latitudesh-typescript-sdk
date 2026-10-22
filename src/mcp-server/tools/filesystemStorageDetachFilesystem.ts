@@ -22,7 +22,7 @@ Detaches a server from the storage network the filesystem is served on, removing
     const [result, apiCall] = await filesystemStorageDetachFilesystem(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

@@ -22,7 +22,7 @@ Retrieve a single marketplace app by ID or slug. Only published apps are visible
     const [result, apiCall] = await marketplaceAppsGetMarketplaceApp(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

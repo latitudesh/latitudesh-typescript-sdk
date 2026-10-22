@@ -54,6 +54,19 @@ export type BaselineDataUserData = {
 };
 
 /**
+ * Expected RAID level with the default disk layout (data array on 4+ disk servers, the OS on 2-3 disk servers). Mutually exclusive with disk_layout
+ */
+export const Raid = {
+  Raid0: "raid-0",
+  Raid1: "raid-1",
+  Raid10: "raid-10",
+} as const;
+/**
+ * Expected RAID level with the default disk layout (data array on 4+ disk servers, the OS on 2-3 disk servers). Mutually exclusive with disk_layout
+ */
+export type Raid = ClosedEnum<typeof Raid>;
+
+/**
  * Expected BIOS settings, keyed by setting id
  */
 export type Bios = {};
@@ -91,6 +104,10 @@ export type BaselineDataAttributes = {
    * Expected disk layout
    */
   diskLayout?: Array<BaselineDiskLayoutGroup> | undefined;
+  /**
+   * Expected RAID level with the default disk layout (data array on 4+ disk servers, the OS on 2-3 disk servers). Mutually exclusive with disk_layout
+   */
+  raid?: Raid | null | undefined;
   /**
    * Expected BIOS settings, keyed by setting id
    */
@@ -252,6 +269,14 @@ export function baselineDataUserDataFromJSON(
 }
 
 /** @internal */
+export const Raid$inboundSchema: z.ZodNativeEnum<typeof Raid> = z.nativeEnum(
+  Raid,
+);
+/** @internal */
+export const Raid$outboundSchema: z.ZodNativeEnum<typeof Raid> =
+  Raid$inboundSchema;
+
+/** @internal */
 export const Bios$inboundSchema: z.ZodType<Bios, z.ZodTypeDef, unknown> = z
   .object({});
 /** @internal */
@@ -289,6 +314,7 @@ export const BaselineDataAttributes$inboundSchema: z.ZodType<
   user_data: z.nullable(z.lazy(() => BaselineDataUserData$inboundSchema))
     .optional(),
   disk_layout: z.array(BaselineDiskLayoutGroup$inboundSchema).optional(),
+  raid: z.nullable(Raid$inboundSchema).optional(),
   bios: z.lazy(() => Bios$inboundSchema).optional(),
   created_at: z.nullable(z.string()).optional(),
 }).transform((v) => {
@@ -311,6 +337,7 @@ export type BaselineDataAttributes$Outbound = {
   ssh_keys?: Array<BaselineDataSshKey$Outbound> | undefined;
   user_data?: BaselineDataUserData$Outbound | null | undefined;
   disk_layout?: Array<BaselineDiskLayoutGroup$Outbound> | undefined;
+  raid?: string | null | undefined;
   bios?: Bios$Outbound | undefined;
   created_at?: string | null | undefined;
 };
@@ -330,6 +357,7 @@ export const BaselineDataAttributes$outboundSchema: z.ZodType<
   userData: z.nullable(z.lazy(() => BaselineDataUserData$outboundSchema))
     .optional(),
   diskLayout: z.array(BaselineDiskLayoutGroup$outboundSchema).optional(),
+  raid: z.nullable(Raid$outboundSchema).optional(),
   bios: z.lazy(() => Bios$outboundSchema).optional(),
   createdAt: z.nullable(z.string()).optional(),
 }).transform((v) => {

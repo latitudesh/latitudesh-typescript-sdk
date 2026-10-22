@@ -21,7 +21,7 @@ Allows you create SSH Keys. These keys can be used to access servers after deplo
     const [result, apiCall] = await sshKeysCreate(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

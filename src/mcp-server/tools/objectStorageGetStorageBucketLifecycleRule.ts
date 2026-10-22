@@ -22,7 +22,7 @@ Retrieves details of a specific lifecycle rule.`,
     const [result, apiCall] = await objectStorageGetStorageBucketLifecycleRule(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

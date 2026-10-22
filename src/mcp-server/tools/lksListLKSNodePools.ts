@@ -21,7 +21,7 @@ Lists every node pool of an LKS cluster. The response is not paginated; \`meta.t
     const [result, apiCall] = await lksListLKSNodePools(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

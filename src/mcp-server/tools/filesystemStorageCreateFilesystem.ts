@@ -22,7 +22,7 @@ Allows you to add persistent storage to a project. These filesystems can be used
     const [result, apiCall] = await filesystemStorageCreateFilesystem(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

@@ -14,7 +14,7 @@ Retrieve the current user profile
   tool: async (client, ctx) => {
     const [result, apiCall] = await userProfileGet(
       client,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

@@ -14,7 +14,7 @@ Lists every backup that belongs to the authenticated team.
   tool: async (client, ctx) => {
     const [result, apiCall] = await virtualMachineBackupsList(
       client,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

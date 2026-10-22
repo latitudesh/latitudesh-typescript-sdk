@@ -21,7 +21,7 @@ Triggers a backup of the Virtual Machine referenced in the body.
     const [result, apiCall] = await virtualMachineBackupsCreate(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

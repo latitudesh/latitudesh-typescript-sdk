@@ -22,7 +22,7 @@ Allows you to remove a filesystem from a project.`,
     const [result, apiCall] = await filesystemStorageDeleteFilesystem(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

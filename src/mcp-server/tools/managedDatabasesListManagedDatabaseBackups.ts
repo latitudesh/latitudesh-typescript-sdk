@@ -20,7 +20,7 @@ export const tool$managedDatabasesListManagedDatabaseBackups: ToolDefinition<
     const [result, apiCall] = await managedDatabasesListManagedDatabaseBackups(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

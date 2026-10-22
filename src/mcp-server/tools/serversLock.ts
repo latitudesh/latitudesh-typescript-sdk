@@ -20,7 +20,7 @@ Locks the server. A locked server cannot be deleted or modified and no actions c
     const [result, apiCall] = await serversLock(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

@@ -21,7 +21,7 @@ Creates a new object storage bucket for a project.`,
       const [result, apiCall] = await objectStoragePostStorageBuckets(
         client,
         args.request,
-        { fetchOptions: { signal: ctx.signal } },
+        { fetchOptions: { signal: ctx.mcpReq.signal } },
       ).$inspect();
 
       if (!result.ok) {

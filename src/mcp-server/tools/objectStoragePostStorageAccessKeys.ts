@@ -22,7 +22,7 @@ Creates an object storage IAM access key for a project. The secret is returned o
     const [result, apiCall] = await objectStoragePostStorageAccessKeys(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

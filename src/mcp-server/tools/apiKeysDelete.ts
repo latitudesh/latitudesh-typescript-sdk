@@ -21,7 +21,7 @@ Delete an existing API Key. Once deleted, the API Key can no longer be used to a
     const [result, apiCall] = await apiKeysDelete(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

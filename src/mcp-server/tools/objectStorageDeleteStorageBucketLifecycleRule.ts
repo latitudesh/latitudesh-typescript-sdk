@@ -23,7 +23,7 @@ Deletes a lifecycle rule from an object storage bucket.`,
       await objectStorageDeleteStorageBucketLifecycleRule(
         client,
         args.request,
-        { fetchOptions: { signal: ctx.signal } },
+        { fetchOptions: { signal: ctx.mcpReq.signal } },
       ).$inspect();
 
     if (!result.ok) {

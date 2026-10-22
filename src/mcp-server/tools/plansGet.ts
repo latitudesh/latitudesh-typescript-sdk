@@ -18,7 +18,7 @@ export const tool$plansGet: ToolDefinition<typeof args> = {
     const [result, apiCall] = await plansGet(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

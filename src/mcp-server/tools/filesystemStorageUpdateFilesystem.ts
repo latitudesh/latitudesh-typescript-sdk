@@ -22,7 +22,7 @@ Allow you to upgrade the size of a filesystem.`,
     const [result, apiCall] = await filesystemStorageUpdateFilesystem(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {
