@@ -12,6 +12,7 @@ let value: UnmapVolumeRequest = {
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `id`               | *string*           | :heavy_check_mark: | Volume ID          |
+| Field                                                                                    | Type                                                                                     | Required                                                                                 | Description                                                                              |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `id`                                                                                     | *string*                                                                                 | :heavy_check_mark:                                                                       | Volume ID                                                                                |
+| `requestBody`                                                                            | [operations.UnmapVolumeRequestBody2](../../models/operations/unmapvolumerequestbody2.md) | :heavy_minus_sign:                                                                       | N/A                                                                                      |

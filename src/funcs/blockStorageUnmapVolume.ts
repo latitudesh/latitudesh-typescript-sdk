@@ -3,7 +3,7 @@
  */
 
 import { LatitudeshCore } from "../core.js";
-import { encodeSimple } from "../lib/encodings.js";
+import { encodeJSON, encodeSimple } from "../lib/encodings.js";
 import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
@@ -29,7 +29,7 @@ import { Result } from "../types/fp.js";
  * Unmap volume
  *
  * @remarks
- * Unmaps a high performance volume from the server it is currently mapped to.
+ * Unmaps a high performance volume from one of the servers it is mapped to.
  */
 export function blockStorageUnmapVolume(
   client: LatitudeshCore,
@@ -84,7 +84,7 @@ async function $do(
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = null;
+  const body = encodeJSON("body", payload.RequestBody, { explode: true });
 
   const pathParams = {
     id: encodeSimple("id", payload.id, {
@@ -95,6 +95,7 @@ async function $do(
   const path = pathToFunc("/storage/volumes/{id}/unmap")(pathParams);
 
   const headers = new Headers(compactMap({
+    "Content-Type": "application/json",
     Accept: "application/vnd.api+json",
   }));
 

@@ -236,6 +236,17 @@ run();
 * [mapVolume](docs/sdks/blockstorage/README.md#mapvolume) - Map volume
 * [unmapVolume](docs/sdks/blockstorage/README.md#unmapvolume) - Unmap volume
 
+### [Clusters](docs/sdks/clusters/README.md)
+
+* [getProjectClusterRequirements](docs/sdks/clusters/README.md#getprojectclusterrequirements) - Get cluster requirements
+* [updateProjectClusterRequirements](docs/sdks/clusters/README.md#updateprojectclusterrequirements) - Change cluster requirements
+* [signProjectClusterRequirements](docs/sdks/clusters/README.md#signprojectclusterrequirements) - Sign cluster requirements
+* [getProjectClusterRequirementSignoffs](docs/sdks/clusters/README.md#getprojectclusterrequirementsignoffs) - List cluster requirement sign-offs
+* [getProjectClusterNodeGroups](docs/sdks/clusters/README.md#getprojectclusternodegroups) - List cluster node groups
+* [createProjectClusterNodeGroup](docs/sdks/clusters/README.md#createprojectclusternodegroup) - Create a cluster node group
+* [deleteProjectClusterNodeGroup](docs/sdks/clusters/README.md#deleteprojectclusternodegroup) - Delete a cluster node group
+* [updateProjectClusterNodeGroup](docs/sdks/clusters/README.md#updateprojectclusternodegroup) - Update a cluster node group
+
 ### [ElasticIps](docs/sdks/elasticips/README.md)
 
 * [listElasticIps](docs/sdks/elasticips/README.md#listelasticips) - List Elastic IPs
@@ -276,6 +287,14 @@ run();
 ### [Firewalls.Assignments](docs/sdks/assignments/README.md)
 
 * [create](docs/sdks/assignments/README.md#create) - Assign server to firewall
+
+### [Inference](docs/sdks/inference/README.md)
+
+* [getInferenceModels](docs/sdks/inference/README.md#getinferencemodels) - List available inference models
+* [getInferenceApiKeys](docs/sdks/inference/README.md#getinferenceapikeys) - List inference API keys
+* [postInferenceApiKey](docs/sdks/inference/README.md#postinferenceapikey) - Create an inference API key
+* [deleteInferenceApiKey](docs/sdks/inference/README.md#deleteinferenceapikey) - Revoke an inference API key
+* [getInferenceUsage](docs/sdks/inference/README.md#getinferenceusage) - Get inference usage for a project
 
 ### [IpAddresses](docs/sdks/ipaddresses/README.md)
 
@@ -401,6 +420,14 @@ run();
 * [list](docs/sdks/roles/README.md#list) - List roles
 * [get](docs/sdks/roles/README.md#get) - Retrieve role
 
+### [SandboxesPreview](docs/sdks/sandboxespreview/README.md)
+
+* [getSandboxes](docs/sdks/sandboxespreview/README.md#getsandboxes) - List sandboxes
+* [createSandbox](docs/sdks/sandboxespreview/README.md#createsandbox) - Create sandbox
+* [getSandbox](docs/sdks/sandboxespreview/README.md#getsandbox) - Retrieve sandbox
+* [destroySandbox](docs/sdks/sandboxespreview/README.md#destroysandbox) - Delete sandbox
+* [execSandbox](docs/sdks/sandboxespreview/README.md#execsandbox) - Run a command in a sandbox
+
 ### [Servers](docs/sdks/servers/README.md)
 
 * [list](docs/sdks/servers/README.md#list) - List servers
@@ -515,13 +542,6 @@ run();
 
 * [delete](docs/sdks/virtualnetworks/README.md#delete) - Delete VLAN
 
-### [VpnSessions](docs/sdks/vpnsessions/README.md)
-
-* [list](docs/sdks/vpnsessions/README.md#list) - List VPN sessions
-* [create](docs/sdks/vpnsessions/README.md#create) - Create VPN session
-* [refreshPassword](docs/sdks/vpnsessions/README.md#refreshpassword) - Refresh VPN session
-* [delete](docs/sdks/vpnsessions/README.md#delete) - Delete VPN session
-
 </details>
 <!-- End Available Resources and Operations [operations] -->
 
@@ -557,6 +577,14 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`blockStorageRetrieveVolume`](docs/sdks/blockstorage/README.md#retrievevolume) - Retrieve volume
 - [`blockStorageUnmapVolume`](docs/sdks/blockstorage/README.md#unmapvolume) - Unmap volume
 - [`blockStorageUpdateVolume`](docs/sdks/blockstorage/README.md#updatevolume) - Update volume
+- [`clustersCreateProjectClusterNodeGroup`](docs/sdks/clusters/README.md#createprojectclusternodegroup) - Create a cluster node group
+- [`clustersDeleteProjectClusterNodeGroup`](docs/sdks/clusters/README.md#deleteprojectclusternodegroup) - Delete a cluster node group
+- [`clustersGetProjectClusterNodeGroups`](docs/sdks/clusters/README.md#getprojectclusternodegroups) - List cluster node groups
+- [`clustersGetProjectClusterRequirements`](docs/sdks/clusters/README.md#getprojectclusterrequirements) - Get cluster requirements
+- [`clustersGetProjectClusterRequirementSignoffs`](docs/sdks/clusters/README.md#getprojectclusterrequirementsignoffs) - List cluster requirement sign-offs
+- [`clustersSignProjectClusterRequirements`](docs/sdks/clusters/README.md#signprojectclusterrequirements) - Sign cluster requirements
+- [`clustersUpdateProjectClusterNodeGroup`](docs/sdks/clusters/README.md#updateprojectclusternodegroup) - Update a cluster node group
+- [`clustersUpdateProjectClusterRequirements`](docs/sdks/clusters/README.md#updateprojectclusterrequirements) - Change cluster requirements
 - [`elasticIpsCreateElasticIp`](docs/sdks/elasticips/README.md#createelasticip) - Create an Elastic IP
 - [`elasticIpsCreateElasticIpBgpSession`](docs/sdks/elasticips/README.md#createelasticipbgpsession) - Create a BGP session
 - [`elasticIpsDeleteElasticIp`](docs/sdks/elasticips/README.md#deleteelasticip) - Release an Elastic IP
@@ -583,6 +611,11 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`firewallsList`](docs/sdks/firewalls/README.md#list) - List firewalls
 - [`firewallsListAssignments`](docs/sdks/firewalls/README.md#listassignments) - Firewall assignments
 - [`firewallsUpdate`](docs/sdks/firewalls/README.md#update) - Update firewall
+- [`inferenceDeleteInferenceApiKey`](docs/sdks/inference/README.md#deleteinferenceapikey) - Revoke an inference API key
+- [`inferenceGetInferenceApiKeys`](docs/sdks/inference/README.md#getinferenceapikeys) - List inference API keys
+- [`inferenceGetInferenceModels`](docs/sdks/inference/README.md#getinferencemodels) - List available inference models
+- [`inferenceGetInferenceUsage`](docs/sdks/inference/README.md#getinferenceusage) - Get inference usage for a project
+- [`inferencePostInferenceApiKey`](docs/sdks/inference/README.md#postinferenceapikey) - Create an inference API key
 - [`ipAddressesGet`](docs/sdks/ipaddresses/README.md#get) - Retrieve an IP
 - [`ipAddressesList`](docs/sdks/ipaddresses/README.md#list) - List IPs
 - [`lksCreateLKSCluster`](docs/sdks/lks/README.md#createlkscluster) - Create an LKS cluster
@@ -654,6 +687,11 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`regionsGet`](docs/sdks/regions/README.md#get) - List regions
 - [`rolesGet`](docs/sdks/roles/README.md#get) - Retrieve role
 - [`rolesList`](docs/sdks/roles/README.md#list) - List roles
+- [`sandboxesPreviewCreateSandbox`](docs/sdks/sandboxespreview/README.md#createsandbox) - Create sandbox
+- [`sandboxesPreviewDestroySandbox`](docs/sdks/sandboxespreview/README.md#destroysandbox) - Delete sandbox
+- [`sandboxesPreviewExecSandbox`](docs/sdks/sandboxespreview/README.md#execsandbox) - Run a command in a sandbox
+- [`sandboxesPreviewGetSandbox`](docs/sdks/sandboxespreview/README.md#getsandbox) - Retrieve sandbox
+- [`sandboxesPreviewGetSandboxes`](docs/sdks/sandboxespreview/README.md#getsandboxes) - List sandboxes
 - [`serversCreate`](docs/sdks/servers/README.md#create) - Create server
 - [`serversCreateIpmiSession`](docs/sdks/servers/README.md#createipmisession) - Create IPMI credentials
 - [`serversDelete`](docs/sdks/servers/README.md#delete) - Remove server
@@ -720,10 +758,6 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`virtualMachinesShowVirtualMachineMetrics`](docs/sdks/virtualmachines/README.md#showvirtualmachinemetrics) - Retrieve VM metrics
 - [`virtualMachinesUpdateVirtualMachine`](docs/sdks/virtualmachines/README.md#updatevirtualmachine) - Update VM
 - [`virtualNetworksDelete`](docs/sdks/virtualnetworks/README.md#delete) - Delete VLAN
-- [`vpnSessionsCreate`](docs/sdks/vpnsessions/README.md#create) - Create VPN session
-- [`vpnSessionsDelete`](docs/sdks/vpnsessions/README.md#delete) - Delete VPN session
-- [`vpnSessionsList`](docs/sdks/vpnsessions/README.md#list) - List VPN sessions
-- [`vpnSessionsRefreshPassword`](docs/sdks/vpnsessions/README.md#refreshpassword) - Refresh VPN session
 - ~~[`blockStorageMountVolume`](docs/sdks/blockstorage/README.md#mountvolume)~~ - Mount volume (deprecated) :warning: **Deprecated**
 - ~~[`kubernetesClustersCreateKubernetesCluster`](docs/sdks/kubernetesclusters/README.md#createkubernetescluster)~~ - Create a Kubernetes Cluster :warning: **Deprecated**
 - ~~[`kubernetesClustersDeleteKubernetesCluster`](docs/sdks/kubernetesclusters/README.md#deletekubernetescluster)~~ - Delete a Kubernetes Cluster :warning: **Deprecated**
@@ -866,14 +900,8 @@ const latitudesh = new Latitudesh({
 
 async function run() {
   try {
-    const result = await latitudesh.elasticIps.createElasticIp({
-      data: {
-        type: "elastic_ips",
-        attributes: {
-          serverId: "sv_2GmAlJ6BXlK1a",
-          projectId: "proj_AoW6vRnwkvLn0",
-        },
-      },
+    const result = await latitudesh.inference.getInferenceModels({
+      projectId: "proj_AoW6vRnwkvLn0",
     });
 
     console.log(result);
@@ -914,7 +942,7 @@ run();
 
 
 **Inherit from [`LatitudeshError`](./src/models/errors/latitudesherror.ts)**:
-* [`ErrorObject`](./src/models/errors/errorobject.ts): Applicable to 68 of 202 methods.*
+* [`ErrorObject`](./src/models/errors/errorobject.ts): Applicable to 74 of 216 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>

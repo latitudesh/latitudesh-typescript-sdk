@@ -158,7 +158,7 @@ run();
 
 | Error Type                    | Status Code                   | Content Type                  |
 | ----------------------------- | ----------------------------- | ----------------------------- |
-| errors.ErrorObject            | 403                           | application/vnd.api+json      |
+| errors.ErrorObject            | 403, 409                      | application/vnd.api+json      |
 | errors.LatitudeshDefaultError | 4XX, 5XX                      | \*/\*                         |
 
 ## list
@@ -299,7 +299,7 @@ run();
 
 | Error Type                    | Status Code                   | Content Type                  |
 | ----------------------------- | ----------------------------- | ----------------------------- |
-| errors.ErrorObject            | 403                           | application/vnd.api+json      |
+| errors.ErrorObject            | 403, 409                      | application/vnd.api+json      |
 | errors.LatitudeshDefaultError | 4XX, 5XX                      | \*/\*                         |
 
 ## get

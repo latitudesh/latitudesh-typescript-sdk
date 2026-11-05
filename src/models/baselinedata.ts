@@ -69,7 +69,7 @@ export type Raid = ClosedEnum<typeof Raid>;
 /**
  * Expected BIOS settings, keyed by setting id
  */
-export type Bios = {};
+export type BaselineDataBios = {};
 
 export type BaselineDataAttributes = {
   /**
@@ -111,7 +111,7 @@ export type BaselineDataAttributes = {
   /**
    * Expected BIOS settings, keyed by setting id
    */
-  bios?: Bios | undefined;
+  bios?: BaselineDataBios | undefined;
   /**
    * Date the baseline was created
    */
@@ -277,25 +277,35 @@ export const Raid$outboundSchema: z.ZodNativeEnum<typeof Raid> =
   Raid$inboundSchema;
 
 /** @internal */
-export const Bios$inboundSchema: z.ZodType<Bios, z.ZodTypeDef, unknown> = z
-  .object({});
+export const BaselineDataBios$inboundSchema: z.ZodType<
+  BaselineDataBios,
+  z.ZodTypeDef,
+  unknown
+> = z.object({});
 /** @internal */
-export type Bios$Outbound = {};
+export type BaselineDataBios$Outbound = {};
 
 /** @internal */
-export const Bios$outboundSchema: z.ZodType<Bios$Outbound, z.ZodTypeDef, Bios> =
-  z.object({});
+export const BaselineDataBios$outboundSchema: z.ZodType<
+  BaselineDataBios$Outbound,
+  z.ZodTypeDef,
+  BaselineDataBios
+> = z.object({});
 
-export function biosToJSON(bios: Bios): string {
-  return JSON.stringify(Bios$outboundSchema.parse(bios));
+export function baselineDataBiosToJSON(
+  baselineDataBios: BaselineDataBios,
+): string {
+  return JSON.stringify(
+    BaselineDataBios$outboundSchema.parse(baselineDataBios),
+  );
 }
-export function biosFromJSON(
+export function baselineDataBiosFromJSON(
   jsonString: string,
-): SafeParseResult<Bios, SDKValidationError> {
+): SafeParseResult<BaselineDataBios, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Bios$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Bios' from JSON`,
+    (x) => BaselineDataBios$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'BaselineDataBios' from JSON`,
   );
 }
 
@@ -315,7 +325,7 @@ export const BaselineDataAttributes$inboundSchema: z.ZodType<
     .optional(),
   disk_layout: z.array(BaselineDiskLayoutGroup$inboundSchema).optional(),
   raid: z.nullable(Raid$inboundSchema).optional(),
-  bios: z.lazy(() => Bios$inboundSchema).optional(),
+  bios: z.lazy(() => BaselineDataBios$inboundSchema).optional(),
   created_at: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -338,7 +348,7 @@ export type BaselineDataAttributes$Outbound = {
   user_data?: BaselineDataUserData$Outbound | null | undefined;
   disk_layout?: Array<BaselineDiskLayoutGroup$Outbound> | undefined;
   raid?: string | null | undefined;
-  bios?: Bios$Outbound | undefined;
+  bios?: BaselineDataBios$Outbound | undefined;
   created_at?: string | null | undefined;
 };
 
@@ -358,7 +368,7 @@ export const BaselineDataAttributes$outboundSchema: z.ZodType<
     .optional(),
   diskLayout: z.array(BaselineDiskLayoutGroup$outboundSchema).optional(),
   raid: z.nullable(Raid$outboundSchema).optional(),
-  bios: z.lazy(() => Bios$outboundSchema).optional(),
+  bios: z.lazy(() => BaselineDataBios$outboundSchema).optional(),
   createdAt: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {

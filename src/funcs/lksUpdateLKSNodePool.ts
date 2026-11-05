@@ -39,6 +39,8 @@ import { Result } from "../types/fp.js";
  *
  * For an allocated node pool, `server_ids` replaces `count`: send the whole set of servers the pool should have. Added servers are checked as on create and reinstalled to join; removed servers are drained and reinstalled with a clean OS, with no data, keys or user data restored. A server set change cannot be combined with a `kubernetes_version` change.
  *
+ * Raising `count` checks available stock of the pool's plan at the cluster's site for the added nodes only (new `count` minus current `count`). When stock is insufficient, the request is rejected with 422 `INSUFFICIENT_STOCK` and the node pool is left unchanged. Lowering `count` is not checked against stock.
+ *
  * The node pool must be idle: one that is provisioning, updating, scaling, upgrading, paused or deleting rejects the request with 409.
  */
 export function lksUpdateLKSNodePool(

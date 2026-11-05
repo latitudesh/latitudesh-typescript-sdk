@@ -1,0 +1,34 @@
+# InferenceModelAttributes
+
+## Example Usage
+
+```typescript
+import { InferenceModelAttributes } from "latitudesh-typescript-sdk/models";
+
+let value: InferenceModelAttributes = {
+  inputPricePerMillionTokens: "0.0375",
+  outputPricePerMillionTokens: "0.0375",
+  capabilities: [
+    "chat",
+  ],
+  regions: [
+    "dallas",
+  ],
+};
+```
+
+## Fields
+
+| Field                                                                                         | Type                                                                                          | Required                                                                                      | Description                                                                                   | Example                                                                                       |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `displayName`                                                                                 | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |                                                                                               |
+| `description`                                                                                 | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |                                                                                               |
+| `provider`                                                                                    | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |                                                                                               |
+| `modality`                                                                                    | *string*                                                                                      | :heavy_minus_sign:                                                                            | Model modality. Known values include text, vision, embedding and audio, but the set may grow. |                                                                                               |
+| `contextLength`                                                                               | *number*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |                                                                                               |
+| `inputPricePerMillionTokens`                                                                  | *string*                                                                                      | :heavy_minus_sign:                                                                            | USD per million tokens as a decimal string with 2 to 6 decimal places                         | 0.0375                                                                                        |
+| `outputPricePerMillionTokens`                                                                 | *string*                                                                                      | :heavy_minus_sign:                                                                            | USD per million tokens as a decimal string with 2 to 6 decimal places                         | 0.0375                                                                                        |
+| `capabilities`                                                                                | *string*[]                                                                                    | :heavy_minus_sign:                                                                            | N/A                                                                                           | [<br/>"chat"<br/>]                                                                            |
+| `regions`                                                                                     | *string*[]                                                                                    | :heavy_minus_sign:                                                                            | N/A                                                                                           | [<br/>"dallas"<br/>]                                                                          |
+| `createdAt`                                                                                   | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |                                                                                               |
+| `updatedAt`                                                                                   | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |                                                                                               |

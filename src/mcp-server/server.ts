@@ -31,6 +31,14 @@ import { tool$blockStorageMountVolume } from "./tools/blockStorageMountVolume.js
 import { tool$blockStorageRetrieveVolume } from "./tools/blockStorageRetrieveVolume.js";
 import { tool$blockStorageUnmapVolume } from "./tools/blockStorageUnmapVolume.js";
 import { tool$blockStorageUpdateVolume } from "./tools/blockStorageUpdateVolume.js";
+import { tool$clustersCreateProjectClusterNodeGroup } from "./tools/clustersCreateProjectClusterNodeGroup.js";
+import { tool$clustersDeleteProjectClusterNodeGroup } from "./tools/clustersDeleteProjectClusterNodeGroup.js";
+import { tool$clustersGetProjectClusterNodeGroups } from "./tools/clustersGetProjectClusterNodeGroups.js";
+import { tool$clustersGetProjectClusterRequirements } from "./tools/clustersGetProjectClusterRequirements.js";
+import { tool$clustersGetProjectClusterRequirementSignoffs } from "./tools/clustersGetProjectClusterRequirementSignoffs.js";
+import { tool$clustersSignProjectClusterRequirements } from "./tools/clustersSignProjectClusterRequirements.js";
+import { tool$clustersUpdateProjectClusterNodeGroup } from "./tools/clustersUpdateProjectClusterNodeGroup.js";
+import { tool$clustersUpdateProjectClusterRequirements } from "./tools/clustersUpdateProjectClusterRequirements.js";
 import { tool$elasticIpsCreateElasticIp } from "./tools/elasticIpsCreateElasticIp.js";
 import { tool$elasticIpsCreateElasticIpBgpSession } from "./tools/elasticIpsCreateElasticIpBgpSession.js";
 import { tool$elasticIpsDeleteElasticIp } from "./tools/elasticIpsDeleteElasticIp.js";
@@ -57,6 +65,11 @@ import { tool$firewallsGetAllFirewallAssignments } from "./tools/firewallsGetAll
 import { tool$firewallsList } from "./tools/firewallsList.js";
 import { tool$firewallsListAssignments } from "./tools/firewallsListAssignments.js";
 import { tool$firewallsUpdate } from "./tools/firewallsUpdate.js";
+import { tool$inferenceDeleteInferenceApiKey } from "./tools/inferenceDeleteInferenceApiKey.js";
+import { tool$inferenceGetInferenceApiKeys } from "./tools/inferenceGetInferenceApiKeys.js";
+import { tool$inferenceGetInferenceModels } from "./tools/inferenceGetInferenceModels.js";
+import { tool$inferenceGetInferenceUsage } from "./tools/inferenceGetInferenceUsage.js";
+import { tool$inferencePostInferenceApiKey } from "./tools/inferencePostInferenceApiKey.js";
 import { tool$ipAddressesGet } from "./tools/ipAddressesGet.js";
 import { tool$ipAddressesList } from "./tools/ipAddressesList.js";
 import { tool$kubernetesClustersCreateKubernetesCluster } from "./tools/kubernetesClustersCreateKubernetesCluster.js";
@@ -136,6 +149,11 @@ import { tool$regionsFetch } from "./tools/regionsFetch.js";
 import { tool$regionsGet } from "./tools/regionsGet.js";
 import { tool$rolesGet } from "./tools/rolesGet.js";
 import { tool$rolesList } from "./tools/rolesList.js";
+import { tool$sandboxesPreviewCreateSandbox } from "./tools/sandboxesPreviewCreateSandbox.js";
+import { tool$sandboxesPreviewDestroySandbox } from "./tools/sandboxesPreviewDestroySandbox.js";
+import { tool$sandboxesPreviewExecSandbox } from "./tools/sandboxesPreviewExecSandbox.js";
+import { tool$sandboxesPreviewGetSandbox } from "./tools/sandboxesPreviewGetSandbox.js";
+import { tool$sandboxesPreviewGetSandboxes } from "./tools/sandboxesPreviewGetSandboxes.js";
 import { tool$serversCreate } from "./tools/serversCreate.js";
 import { tool$serversCreateIpmiSession } from "./tools/serversCreateIpmiSession.js";
 import { tool$serversDelete } from "./tools/serversDelete.js";
@@ -211,10 +229,6 @@ import { tool$virtualMachinesListVirtualMachineNetworkAttachments } from "./tool
 import { tool$virtualMachinesShowVirtualMachineMetrics } from "./tools/virtualMachinesShowVirtualMachineMetrics.js";
 import { tool$virtualMachinesUpdateVirtualMachine } from "./tools/virtualMachinesUpdateVirtualMachine.js";
 import { tool$virtualNetworksDelete } from "./tools/virtualNetworksDelete.js";
-import { tool$vpnSessionsCreate } from "./tools/vpnSessionsCreate.js";
-import { tool$vpnSessionsDelete } from "./tools/vpnSessionsDelete.js";
-import { tool$vpnSessionsList } from "./tools/vpnSessionsList.js";
-import { tool$vpnSessionsRefreshPassword } from "./tools/vpnSessionsRefreshPassword.js";
 
 export function createMCPServer(deps: {
   logger: ConsoleLogger;
@@ -227,7 +241,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Latitudesh",
-    version: "0.9.0",
+    version: "0.9.1",
   });
 
   const client = new LatitudeshCore({
@@ -263,6 +277,11 @@ export function createMCPServer(deps: {
   tool(tool$apiKeysUpdate);
   tool(tool$apiKeysDelete);
   tool(tool$apiKeysUpdateApiKey);
+  tool(tool$inferenceGetInferenceModels);
+  tool(tool$inferenceGetInferenceApiKeys);
+  tool(tool$inferencePostInferenceApiKey);
+  tool(tool$inferenceDeleteInferenceApiKey);
+  tool(tool$inferenceGetInferenceUsage);
   tool(tool$baselinesPreviewGetBaselines);
   tool(tool$baselinesPreviewCreateBaseline);
   tool(tool$baselinesPreviewGetBaseline);
@@ -367,10 +386,23 @@ export function createMCPServer(deps: {
   tool(tool$userDataRetrieve);
   tool(tool$userDataUpdate);
   tool(tool$userDataDelete);
+  tool(tool$clustersGetProjectClusterRequirements);
+  tool(tool$clustersUpdateProjectClusterRequirements);
+  tool(tool$clustersSignProjectClusterRequirements);
+  tool(tool$clustersGetProjectClusterRequirementSignoffs);
+  tool(tool$clustersGetProjectClusterNodeGroups);
+  tool(tool$clustersCreateProjectClusterNodeGroup);
+  tool(tool$clustersDeleteProjectClusterNodeGroup);
+  tool(tool$clustersUpdateProjectClusterNodeGroup);
   tool(tool$regionsGet);
   tool(tool$regionsFetch);
   tool(tool$rolesList);
   tool(tool$rolesGet);
+  tool(tool$sandboxesPreviewGetSandboxes);
+  tool(tool$sandboxesPreviewCreateSandbox);
+  tool(tool$sandboxesPreviewGetSandbox);
+  tool(tool$sandboxesPreviewDestroySandbox);
+  tool(tool$sandboxesPreviewExecSandbox);
   tool(tool$serversList);
   tool(tool$serversCreate);
   tool(tool$serversGet);
@@ -445,10 +477,6 @@ export function createMCPServer(deps: {
   tool(tool$privateNetworksAssign);
   tool(tool$privateNetworksDeleteAssignment);
   tool(tool$virtualNetworksDelete);
-  tool(tool$vpnSessionsList);
-  tool(tool$vpnSessionsCreate);
-  tool(tool$vpnSessionsRefreshPassword);
-  tool(tool$vpnSessionsDelete);
   tool(tool$managedDatabasesShowManagedDatabaseMetrics);
   tool(tool$managedDatabasesListManagedDatabases);
   tool(tool$managedDatabasesCreateManagedDatabase);

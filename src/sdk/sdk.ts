@@ -7,10 +7,12 @@ import { ApiKeys } from "./apikeys.js";
 import { BaselinesPreview } from "./baselinespreview.js";
 import { Billing } from "./billing.js";
 import { BlockStorage } from "./blockstorage.js";
+import { Clusters } from "./clusters.js";
 import { ElasticIps } from "./elasticips.js";
 import { Events } from "./events.js";
 import { FilesystemStorage } from "./filesystemstorage.js";
 import { Firewalls } from "./firewalls.js";
+import { Inference } from "./inference.js";
 import { IpAddresses } from "./ipaddresses.js";
 import { KubernetesClusters } from "./kubernetesclusters.js";
 import { Lks } from "./lks.js";
@@ -24,6 +26,7 @@ import { Projects } from "./projects.js";
 import { PublicNetworks } from "./publicnetworks.js";
 import { Regions } from "./regions.js";
 import { Roles } from "./roles.js";
+import { SandboxesPreview } from "./sandboxespreview.js";
 import { Servers } from "./servers.js";
 import { SSHKeys } from "./sshkeys.js";
 import { Tags } from "./tags.js";
@@ -36,12 +39,16 @@ import { VirtualMachineBackups } from "./virtualmachinebackups.js";
 import { VirtualMachineRestores } from "./virtualmachinerestores.js";
 import { VirtualMachines } from "./virtualmachines.js";
 import { VirtualNetworks } from "./virtualnetworks.js";
-import { VpnSessions } from "./vpnsessions.js";
 
 export class Latitudesh extends ClientSDK {
   private _apiKeys?: ApiKeys;
   get apiKeys(): ApiKeys {
     return (this._apiKeys ??= new ApiKeys(this._options));
+  }
+
+  private _inference?: Inference;
+  get inference(): Inference {
+    return (this._inference ??= new Inference(this._options));
   }
 
   private _baselinesPreview?: BaselinesPreview;
@@ -129,6 +136,11 @@ export class Latitudesh extends ClientSDK {
     return (this._userData ??= new UserData(this._options));
   }
 
+  private _clusters?: Clusters;
+  get clusters(): Clusters {
+    return (this._clusters ??= new Clusters(this._options));
+  }
+
   private _regions?: Regions;
   get regions(): Regions {
     return (this._regions ??= new Regions(this._options));
@@ -137,6 +149,11 @@ export class Latitudesh extends ClientSDK {
   private _roles?: Roles;
   get roles(): Roles {
     return (this._roles ??= new Roles(this._options));
+  }
+
+  private _sandboxesPreview?: SandboxesPreview;
+  get sandboxesPreview(): SandboxesPreview {
+    return (this._sandboxesPreview ??= new SandboxesPreview(this._options));
   }
 
   private _servers?: Servers;
@@ -201,11 +218,6 @@ export class Latitudesh extends ClientSDK {
   private _virtualNetworks?: VirtualNetworks;
   get virtualNetworks(): VirtualNetworks {
     return (this._virtualNetworks ??= new VirtualNetworks(this._options));
-  }
-
-  private _vpnSessions?: VpnSessions;
-  get vpnSessions(): VpnSessions {
-    return (this._vpnSessions ??= new VpnSessions(this._options));
   }
 
   private _managedDatabases?: ManagedDatabases;

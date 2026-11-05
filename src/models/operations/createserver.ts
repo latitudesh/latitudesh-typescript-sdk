@@ -112,7 +112,7 @@ export type CreateServerOperatingSystem2 = OpenEnum<
 /**
  * RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, 'raid-10' for RAID 10 on the data disks (only at locations with the `raid_ten` feature), or omit/null for no RAID configuration
  */
-export const CreateServerRaid2 = {
+export const CreateServerCreateServerRaid = {
   Raid0: "raid-0",
   Raid1: "raid-1",
   Raid10: "raid-10",
@@ -120,7 +120,9 @@ export const CreateServerRaid2 = {
 /**
  * RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, 'raid-10' for RAID 10 on the data disks (only at locations with the `raid_ten` feature), or omit/null for no RAID configuration
  */
-export type CreateServerRaid2 = ClosedEnum<typeof CreateServerRaid2>;
+export type CreateServerCreateServerRaid = ClosedEnum<
+  typeof CreateServerCreateServerRaid
+>;
 
 export const CreateServerRole2 = {
   Os: "os",
@@ -197,7 +199,7 @@ export type CreateServerAttributes2 = {
   /**
    * RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, 'raid-10' for RAID 10 on the data disks (only at locations with the `raid_ten` feature), or omit/null for no RAID configuration
    */
-  raid?: CreateServerRaid2 | null | undefined;
+  raid?: CreateServerCreateServerRaid | null | undefined;
   diskLayout?: Array<CreateServerDiskLayout2> | null | undefined;
   /**
    * URL where iPXE script is stored on, OR the iPXE script encoded in base64. This attribute is required when iPXE is selected as operating system.
@@ -277,13 +279,13 @@ export const CreateServerOperatingSystem2$outboundSchema: z.ZodType<
 > = openEnums.outboundSchema(CreateServerOperatingSystem2);
 
 /** @internal */
-export const CreateServerRaid2$inboundSchema: z.ZodNativeEnum<
-  typeof CreateServerRaid2
-> = z.nativeEnum(CreateServerRaid2);
+export const CreateServerCreateServerRaid$inboundSchema: z.ZodNativeEnum<
+  typeof CreateServerCreateServerRaid
+> = z.nativeEnum(CreateServerCreateServerRaid);
 /** @internal */
-export const CreateServerRaid2$outboundSchema: z.ZodNativeEnum<
-  typeof CreateServerRaid2
-> = CreateServerRaid2$inboundSchema;
+export const CreateServerCreateServerRaid$outboundSchema: z.ZodNativeEnum<
+  typeof CreateServerCreateServerRaid
+> = CreateServerCreateServerRaid$inboundSchema;
 
 /** @internal */
 export const CreateServerRole2$inboundSchema: z.ZodNativeEnum<
@@ -395,7 +397,7 @@ export const CreateServerAttributes2$inboundSchema: z.ZodType<
   hostname: z.string(),
   ssh_keys: z.nullable(z.array(z.string())).optional(),
   user_data: z.nullable(z.string()).optional(),
-  raid: z.nullable(CreateServerRaid2$inboundSchema).optional(),
+  raid: z.nullable(CreateServerCreateServerRaid$inboundSchema).optional(),
   disk_layout: z.nullable(
     z.array(z.lazy(() => CreateServerDiskLayout2$inboundSchema)),
   ).optional(),
@@ -449,7 +451,7 @@ export const CreateServerAttributes2$outboundSchema: z.ZodType<
   hostname: z.string(),
   sshKeys: z.nullable(z.array(z.string())).optional(),
   userData: z.nullable(z.string()).optional(),
-  raid: z.nullable(CreateServerRaid2$outboundSchema).optional(),
+  raid: z.nullable(CreateServerCreateServerRaid$outboundSchema).optional(),
   diskLayout: z.nullable(
     z.array(z.lazy(() => CreateServerDiskLayout2$outboundSchema)),
   ).optional(),

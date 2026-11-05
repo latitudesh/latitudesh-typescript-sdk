@@ -1,0 +1,24 @@
+# CreateClusterNodeGroupAttributes
+
+## Example Usage
+
+```typescript
+import { CreateClusterNodeGroupAttributes } from "latitudesh-typescript-sdk/models";
+
+let value: CreateClusterNodeGroupAttributes = {
+  name: "<value>",
+  kind: "other",
+  plan: "<value>",
+  serverCount: 485870,
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                     | Type                                                                                                                                                      | Required                                                                                                                                                  | Description                                                                                                                                               |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `name`                                                                                                                                                    | *string*                                                                                                                                                  | :heavy_check_mark:                                                                                                                                        | Unique within the cluster; leading and trailing spaces are trimmed                                                                                        |
+| `kind`                                                                                                                                                    | [models.CreateClusterNodeGroupKind](../models/createclusternodegroupkind.md)                                                                              | :heavy_check_mark:                                                                                                                                        | N/A                                                                                                                                                       |
+| `plan`                                                                                                                                                    | *string*                                                                                                                                                  | :heavy_check_mark:                                                                                                                                        | The slug of a bare-metal or GPU plan on sale                                                                                                              |
+| `serverCount`                                                                                                                                             | *number*                                                                                                                                                  | :heavy_check_mark:                                                                                                                                        | N/A                                                                                                                                                       |
+| `os`                                                                                                                                                      | *string*                                                                                                                                                  | :heavy_minus_sign:                                                                                                                                        | An operating system slug the plan can run, or empty or null to clear it. Changing the plan checks the node group's operating system against the new plan. |

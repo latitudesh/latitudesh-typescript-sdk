@@ -3,16 +3,40 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as models from "../index.js";
+
+export const UnmapVolumeType2 = {
+  Volumes: "volumes",
+} as const;
+export type UnmapVolumeType2 = ClosedEnum<typeof UnmapVolumeType2>;
+
+export type UnmapVolumeAttributes2 = {
+  /**
+   * ID of the server to unmap the volume from. Required when the volume is mapped to more than one server; when it is mapped to a single server, that server is unmapped if this is omitted.
+   */
+  serverId?: string | undefined;
+};
+
+export type UnmapVolumeData2 = {
+  type?: UnmapVolumeType2 | undefined;
+  attributes?: UnmapVolumeAttributes2 | undefined;
+};
+
+export type UnmapVolumeRequestBody2 = {
+  data?: UnmapVolumeData2 | undefined;
+};
 
 export type UnmapVolumeRequest = {
   /**
    * Volume ID
    */
   id: string;
+  requestBody?: UnmapVolumeRequestBody2 | undefined;
 };
 
 export type UnmapVolumeMeta = {};
@@ -26,16 +50,159 @@ export type UnmapVolumeResponse = {
 };
 
 /** @internal */
+export const UnmapVolumeType2$inboundSchema: z.ZodNativeEnum<
+  typeof UnmapVolumeType2
+> = z.nativeEnum(UnmapVolumeType2);
+/** @internal */
+export const UnmapVolumeType2$outboundSchema: z.ZodNativeEnum<
+  typeof UnmapVolumeType2
+> = UnmapVolumeType2$inboundSchema;
+
+/** @internal */
+export const UnmapVolumeAttributes2$inboundSchema: z.ZodType<
+  UnmapVolumeAttributes2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  server_id: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "server_id": "serverId",
+  });
+});
+/** @internal */
+export type UnmapVolumeAttributes2$Outbound = {
+  server_id?: string | undefined;
+};
+
+/** @internal */
+export const UnmapVolumeAttributes2$outboundSchema: z.ZodType<
+  UnmapVolumeAttributes2$Outbound,
+  z.ZodTypeDef,
+  UnmapVolumeAttributes2
+> = z.object({
+  serverId: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    serverId: "server_id",
+  });
+});
+
+export function unmapVolumeAttributes2ToJSON(
+  unmapVolumeAttributes2: UnmapVolumeAttributes2,
+): string {
+  return JSON.stringify(
+    UnmapVolumeAttributes2$outboundSchema.parse(unmapVolumeAttributes2),
+  );
+}
+export function unmapVolumeAttributes2FromJSON(
+  jsonString: string,
+): SafeParseResult<UnmapVolumeAttributes2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UnmapVolumeAttributes2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UnmapVolumeAttributes2' from JSON`,
+  );
+}
+
+/** @internal */
+export const UnmapVolumeData2$inboundSchema: z.ZodType<
+  UnmapVolumeData2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: UnmapVolumeType2$inboundSchema.optional(),
+  attributes: z.lazy(() => UnmapVolumeAttributes2$inboundSchema).optional(),
+});
+/** @internal */
+export type UnmapVolumeData2$Outbound = {
+  type?: string | undefined;
+  attributes?: UnmapVolumeAttributes2$Outbound | undefined;
+};
+
+/** @internal */
+export const UnmapVolumeData2$outboundSchema: z.ZodType<
+  UnmapVolumeData2$Outbound,
+  z.ZodTypeDef,
+  UnmapVolumeData2
+> = z.object({
+  type: UnmapVolumeType2$outboundSchema.optional(),
+  attributes: z.lazy(() => UnmapVolumeAttributes2$outboundSchema).optional(),
+});
+
+export function unmapVolumeData2ToJSON(
+  unmapVolumeData2: UnmapVolumeData2,
+): string {
+  return JSON.stringify(
+    UnmapVolumeData2$outboundSchema.parse(unmapVolumeData2),
+  );
+}
+export function unmapVolumeData2FromJSON(
+  jsonString: string,
+): SafeParseResult<UnmapVolumeData2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UnmapVolumeData2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UnmapVolumeData2' from JSON`,
+  );
+}
+
+/** @internal */
+export const UnmapVolumeRequestBody2$inboundSchema: z.ZodType<
+  UnmapVolumeRequestBody2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  data: z.lazy(() => UnmapVolumeData2$inboundSchema).optional(),
+});
+/** @internal */
+export type UnmapVolumeRequestBody2$Outbound = {
+  data?: UnmapVolumeData2$Outbound | undefined;
+};
+
+/** @internal */
+export const UnmapVolumeRequestBody2$outboundSchema: z.ZodType<
+  UnmapVolumeRequestBody2$Outbound,
+  z.ZodTypeDef,
+  UnmapVolumeRequestBody2
+> = z.object({
+  data: z.lazy(() => UnmapVolumeData2$outboundSchema).optional(),
+});
+
+export function unmapVolumeRequestBody2ToJSON(
+  unmapVolumeRequestBody2: UnmapVolumeRequestBody2,
+): string {
+  return JSON.stringify(
+    UnmapVolumeRequestBody2$outboundSchema.parse(unmapVolumeRequestBody2),
+  );
+}
+export function unmapVolumeRequestBody2FromJSON(
+  jsonString: string,
+): SafeParseResult<UnmapVolumeRequestBody2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UnmapVolumeRequestBody2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UnmapVolumeRequestBody2' from JSON`,
+  );
+}
+
+/** @internal */
 export const UnmapVolumeRequest$inboundSchema: z.ZodType<
   UnmapVolumeRequest,
   z.ZodTypeDef,
   unknown
 > = z.object({
   id: z.string(),
+  RequestBody: z.lazy(() => UnmapVolumeRequestBody2$inboundSchema).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "RequestBody": "requestBody",
+  });
 });
 /** @internal */
 export type UnmapVolumeRequest$Outbound = {
   id: string;
+  RequestBody?: UnmapVolumeRequestBody2$Outbound | undefined;
 };
 
 /** @internal */
@@ -45,6 +212,11 @@ export const UnmapVolumeRequest$outboundSchema: z.ZodType<
   UnmapVolumeRequest
 > = z.object({
   id: z.string(),
+  requestBody: z.lazy(() => UnmapVolumeRequestBody2$outboundSchema).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    requestBody: "RequestBody",
+  });
 });
 
 export function unmapVolumeRequestToJSON(

@@ -6,6 +6,11 @@
 import { PlanDataRegion } from "latitudesh-typescript-sdk/models";
 
 let value: PlanDataRegion = {
+  locations: {
+    inStockCount: {
+      "SAO": 5,
+    },
+  },
   pricing: {
     "USD": {
       hour: 2.18,

@@ -22,6 +22,7 @@ export type OperatingSystemDataFeatures = {
   userData?: boolean | undefined;
   accelerate?: boolean | undefined;
   rescue?: boolean | undefined;
+  arm64?: boolean | undefined;
   workflow?: boolean | undefined;
 };
 
@@ -61,6 +62,7 @@ export const OperatingSystemDataFeatures$inboundSchema: z.ZodType<
   user_data: z.boolean().optional(),
   accelerate: z.boolean().optional(),
   rescue: z.boolean().optional(),
+  arm64: z.boolean().optional(),
   workflow: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -75,6 +77,7 @@ export type OperatingSystemDataFeatures$Outbound = {
   user_data?: boolean | undefined;
   accelerate?: boolean | undefined;
   rescue?: boolean | undefined;
+  arm64?: boolean | undefined;
   workflow?: boolean | undefined;
 };
 
@@ -89,6 +92,7 @@ export const OperatingSystemDataFeatures$outboundSchema: z.ZodType<
   userData: z.boolean().optional(),
   accelerate: z.boolean().optional(),
   rescue: z.boolean().optional(),
+  arm64: z.boolean().optional(),
   workflow: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {

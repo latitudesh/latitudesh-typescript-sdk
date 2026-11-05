@@ -161,7 +161,7 @@ async function $do(
     M.json(201, models.VirtualMachineBackup$inboundSchema, {
       ctype: "application/vnd.api+json",
     }),
-    M.jsonErr(403, errors.ErrorObject$inboundSchema, {
+    M.jsonErr([403, 409], errors.ErrorObject$inboundSchema, {
       ctype: "application/vnd.api+json",
     }),
     M.fail([404, "4XX"]),

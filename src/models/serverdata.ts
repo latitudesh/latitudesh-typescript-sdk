@@ -75,6 +75,7 @@ export type ServerDataFeatures = {
   userData?: boolean | undefined;
   accelerate?: boolean | undefined;
   rescue?: boolean | undefined;
+  arm64?: boolean | undefined;
   workflow?: boolean | undefined;
 };
 
@@ -183,6 +184,7 @@ export type ServerDataAttributes = {
    * @remarks
    * `off` - The server is powered OFF
    * `unknown` - The server power status is unknown
+   * `configuring_bios` - The server is applying custom BIOS settings at the start of a reinstall
    * `disk_erasing` - The server is in reinstalling state `disk_erasing`
    * `deploying` - The server is deploying or reinstalling
    * `failed_deployment` - The server has failed deployment or reinstall
@@ -401,6 +403,7 @@ export const ServerDataFeatures$inboundSchema: z.ZodType<
   user_data: z.boolean().optional(),
   accelerate: z.boolean().optional(),
   rescue: z.boolean().optional(),
+  arm64: z.boolean().optional(),
   workflow: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -415,6 +418,7 @@ export type ServerDataFeatures$Outbound = {
   user_data?: boolean | undefined;
   accelerate?: boolean | undefined;
   rescue?: boolean | undefined;
+  arm64?: boolean | undefined;
   workflow?: boolean | undefined;
 };
 
@@ -429,6 +433,7 @@ export const ServerDataFeatures$outboundSchema: z.ZodType<
   userData: z.boolean().optional(),
   accelerate: z.boolean().optional(),
   rescue: z.boolean().optional(),
+  arm64: z.boolean().optional(),
   workflow: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {

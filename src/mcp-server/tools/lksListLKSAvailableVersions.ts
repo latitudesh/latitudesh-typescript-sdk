@@ -3,17 +3,24 @@
  */
 
 import { lksListLKSAvailableVersions } from "../../funcs/lksListLKSAvailableVersions.js";
+import * as operations from "../../models/operations/index.js";
 import { formatResult, ToolDefinition } from "../tools.js";
 
-export const tool$lksListLKSAvailableVersions: ToolDefinition = {
+const args = {
+  request: operations.ListLksAvailableVersionsRequest$inboundSchema.optional(),
+};
+
+export const tool$lksListLKSAvailableVersions: ToolDefinition<typeof args> = {
   name: "lks-list-lks-available-versions",
   description: `List available Kubernetes versions
 
 Lists the Kubernetes patches the platform offers, with their lifecycle flags. Use a version with \`available_for_creation: true\` when creating a cluster or a node pool, and one with \`available_for_upgrade: true\` when upgrading. Exactly one entry has \`default: true\`.
 `,
-  tool: async (client, ctx) => {
+  args,
+  tool: async (client, args, ctx) => {
     const [result, apiCall] = await lksListLKSAvailableVersions(
       client,
+      args.request,
       { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 

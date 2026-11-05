@@ -49,6 +49,10 @@ export type VirtualMachineAttributesFeatures = {
    */
   rescue?: boolean | undefined;
   /**
+   * Whether the operating system can be deployed on ARM (arm64) servers
+   */
+  arm64?: boolean | undefined;
+  /**
    * Whether workflow is supported
    */
   workflow?: boolean | undefined;
@@ -216,6 +220,7 @@ export const VirtualMachineAttributesFeatures$inboundSchema: z.ZodType<
   ssh_keys: z.boolean().optional(),
   user_data: z.boolean().optional(),
   rescue: z.boolean().optional(),
+  arm64: z.boolean().optional(),
   workflow: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -229,6 +234,7 @@ export type VirtualMachineAttributesFeatures$Outbound = {
   ssh_keys?: boolean | undefined;
   user_data?: boolean | undefined;
   rescue?: boolean | undefined;
+  arm64?: boolean | undefined;
   workflow?: boolean | undefined;
 };
 
@@ -242,6 +248,7 @@ export const VirtualMachineAttributesFeatures$outboundSchema: z.ZodType<
   sshKeys: z.boolean().optional(),
   userData: z.boolean().optional(),
   rescue: z.boolean().optional(),
+  arm64: z.boolean().optional(),
   workflow: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {

@@ -14,7 +14,7 @@ export const tool$blockStorageMapVolume: ToolDefinition<typeof args> = {
   name: "block-storage-map-volume",
   description: `Map volume
 
-Maps a high performance volume to a server over NVMe-TCP.`,
+Maps a high performance volume to a server over NVMe-TCP. Teams with multi-host mapping enabled can map a volume to several servers, once per server; otherwise a volume maps to one server. Every mapped server writes to the same NVMe namespace, so use a cluster-aware filesystem when more than one server mounts the volume.`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await blockStorageMapVolume(

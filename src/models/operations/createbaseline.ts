@@ -44,7 +44,7 @@ export type CreateBaselineRaid2 = ClosedEnum<typeof CreateBaselineRaid2>;
 /**
  * Expected BIOS settings, keyed by setting id
  */
-export type Bios2 = {};
+export type CreateBaselineBios2 = {};
 
 export type CreateBaselineAttributes2 = {
   /**
@@ -86,7 +86,7 @@ export type CreateBaselineAttributes2 = {
   /**
    * Expected BIOS settings, keyed by setting id
    */
-  bios?: Bios2 | undefined;
+  bios?: CreateBaselineBios2 | undefined;
 };
 
 export type CreateBaselineData2 = {
@@ -124,28 +124,35 @@ export const CreateBaselineRaid2$outboundSchema: z.ZodNativeEnum<
 > = CreateBaselineRaid2$inboundSchema;
 
 /** @internal */
-export const Bios2$inboundSchema: z.ZodType<Bios2, z.ZodTypeDef, unknown> = z
-  .object({});
+export const CreateBaselineBios2$inboundSchema: z.ZodType<
+  CreateBaselineBios2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({});
 /** @internal */
-export type Bios2$Outbound = {};
+export type CreateBaselineBios2$Outbound = {};
 
 /** @internal */
-export const Bios2$outboundSchema: z.ZodType<
-  Bios2$Outbound,
+export const CreateBaselineBios2$outboundSchema: z.ZodType<
+  CreateBaselineBios2$Outbound,
   z.ZodTypeDef,
-  Bios2
+  CreateBaselineBios2
 > = z.object({});
 
-export function bios2ToJSON(bios2: Bios2): string {
-  return JSON.stringify(Bios2$outboundSchema.parse(bios2));
+export function createBaselineBios2ToJSON(
+  createBaselineBios2: CreateBaselineBios2,
+): string {
+  return JSON.stringify(
+    CreateBaselineBios2$outboundSchema.parse(createBaselineBios2),
+  );
 }
-export function bios2FromJSON(
+export function createBaselineBios2FromJSON(
   jsonString: string,
-): SafeParseResult<Bios2, SDKValidationError> {
+): SafeParseResult<CreateBaselineBios2, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Bios2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Bios2' from JSON`,
+    (x) => CreateBaselineBios2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateBaselineBios2' from JSON`,
   );
 }
 
@@ -164,7 +171,7 @@ export const CreateBaselineAttributes2$inboundSchema: z.ZodType<
   user_data_id: z.nullable(z.string()).optional(),
   disk_layout: z.array(models.BaselineDiskLayoutGroup$inboundSchema).optional(),
   raid: z.nullable(CreateBaselineRaid2$inboundSchema).optional(),
-  bios: z.lazy(() => Bios2$inboundSchema).optional(),
+  bios: z.lazy(() => CreateBaselineBios2$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "target_type": "targetType",
@@ -185,7 +192,7 @@ export type CreateBaselineAttributes2$Outbound = {
   user_data_id?: string | null | undefined;
   disk_layout?: Array<models.BaselineDiskLayoutGroup$Outbound> | undefined;
   raid?: string | null | undefined;
-  bios?: Bios2$Outbound | undefined;
+  bios?: CreateBaselineBios2$Outbound | undefined;
 };
 
 /** @internal */
@@ -203,7 +210,7 @@ export const CreateBaselineAttributes2$outboundSchema: z.ZodType<
   userDataId: z.nullable(z.string()).optional(),
   diskLayout: z.array(models.BaselineDiskLayoutGroup$outboundSchema).optional(),
   raid: z.nullable(CreateBaselineRaid2$outboundSchema).optional(),
-  bios: z.lazy(() => Bios2$outboundSchema).optional(),
+  bios: z.lazy(() => CreateBaselineBios2$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     targetType: "target_type",

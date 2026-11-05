@@ -85,6 +85,75 @@ async function run() {
 
 run();
 ```
+### Example Usage: LocationUnavailable
+
+<!-- UsageSnippet language="typescript" operationID="create-filesystem" method="post" path="/storage/filesystems" example="LocationUnavailable" -->
+```typescript
+import { Latitudesh } from "latitudesh-typescript-sdk";
+
+const latitudesh = new Latitudesh({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const result = await latitudesh.filesystemStorage.createFilesystem({
+    data: {
+      type: "filesystems",
+      attributes: {
+        project: "<value>",
+        name: "<value>",
+        region: "<value>",
+        protocols: [
+          "nfs4",
+        ],
+      },
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
+import { filesystemStorageCreateFilesystem } from "latitudesh-typescript-sdk/funcs/filesystemStorageCreateFilesystem.js";
+
+// Use `LatitudeshCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const latitudesh = new LatitudeshCore({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const res = await filesystemStorageCreateFilesystem(latitudesh, {
+    data: {
+      type: "filesystems",
+      attributes: {
+        project: "<value>",
+        name: "<value>",
+        region: "<value>",
+        protocols: [
+          "nfs4",
+        ],
+      },
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("filesystemStorageCreateFilesystem failed:", res.error);
+  }
+}
+
+run();
+```
 ### Example Usage: Storage creation frozen
 
 <!-- UsageSnippet language="typescript" operationID="create-filesystem" method="post" path="/storage/filesystems" example="Storage creation frozen" -->
@@ -172,6 +241,7 @@ run();
 
 | Error Type                    | Status Code                   | Content Type                  |
 | ----------------------------- | ----------------------------- | ----------------------------- |
+| errors.ErrorObject            | 422                           | application/vnd.api+json      |
 | errors.ErrorObject            | 503                           | application/vnd.api+json      |
 | errors.LatitudeshDefaultError | 4XX, 5XX                      | \*/\*                         |
 
