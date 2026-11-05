@@ -96,6 +96,14 @@ export type CreateServerReinstallDiskLayout2 = {
   mountPoint?: string | null | undefined;
 };
 
+export const CreateServerReinstallBios2 = {
+  Enabled: "enabled",
+  Disabled: "disabled",
+} as const;
+export type CreateServerReinstallBios2 = ClosedEnum<
+  typeof CreateServerReinstallBios2
+>;
+
 export type CreateServerReinstallAttributes2 = {
   /**
    * The OS selected for the reinstall process
@@ -127,13 +135,17 @@ export type CreateServerReinstallAttributes2 = {
    */
   persistentNetboot?: boolean | undefined;
   /**
-   * **Preview.** Available to teams with public networks enabled. Set to 'true' to attach the server onto the given 'public_network_id', or 'false' to detach an existing public network, during the reinstall. Requires 'public_network_id' when attaching.
+   * **Preview.** Available to teams with public networks enabled. Set to true to attach the server onto the given public_network_id. Requires public_network_id; the server must be public-network eligible.
    */
   publicNetwork?: boolean | null | undefined;
   /**
-   * ID of a customer public network to attach this server to during the reinstall. The public network must belong to the same project and be in the same location as the server, and must have at least one free IP address. Applies to this reinstall only; omit it to leave any existing public network unchanged.
+   * **Preview.** Available to teams with public networks enabled. ID of a customer public network to attach the server onto. Requires public_network: true. The public network must belong to the same project and location as the server and have a free address. A server already attached to another public network is detached from it first. Applies only to this reinstall; omitting it leaves an existing attachment.
    */
   publicNetworkId?: string | null | undefined;
+  /**
+   * **Preview.** Available to teams with custom BIOS settings enabled. Custom BIOS settings applied before the OS is installed. Keys are BIOS setting names (e.g. `cpu_virtualization`, `simultaneous_multithreading`, `iommu`, `sr_iov`); only the settings listed in the server specs `supported_bios_settings` are accepted. Values are `enabled` or `disabled`. The settings are kept and reapplied on later reinstalls that omit `bios`; send `null` or `{}` to stop applying them. The reinstall fails if the settings cannot be applied.
+   */
+  bios?: { [k: string]: CreateServerReinstallBios2 } | null | undefined;
 };
 
 export type CreateServerReinstallData2 = {
@@ -273,6 +285,15 @@ export function createServerReinstallDiskLayout2FromJSON(
 }
 
 /** @internal */
+export const CreateServerReinstallBios2$inboundSchema: z.ZodNativeEnum<
+  typeof CreateServerReinstallBios2
+> = z.nativeEnum(CreateServerReinstallBios2);
+/** @internal */
+export const CreateServerReinstallBios2$outboundSchema: z.ZodNativeEnum<
+  typeof CreateServerReinstallBios2
+> = CreateServerReinstallBios2$inboundSchema;
+
+/** @internal */
 export const CreateServerReinstallAttributes2$inboundSchema: z.ZodType<
   CreateServerReinstallAttributes2,
   z.ZodTypeDef,
@@ -291,6 +312,8 @@ export const CreateServerReinstallAttributes2$inboundSchema: z.ZodType<
   persistent_netboot: z.boolean().optional(),
   public_network: z.nullable(z.boolean()).optional(),
   public_network_id: z.nullable(z.string()).optional(),
+  bios: z.nullable(z.record(CreateServerReinstallBios2$inboundSchema))
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "operating_system": "operatingSystem",
@@ -317,6 +340,7 @@ export type CreateServerReinstallAttributes2$Outbound = {
   persistent_netboot?: boolean | undefined;
   public_network?: boolean | null | undefined;
   public_network_id?: string | null | undefined;
+  bios?: { [k: string]: string } | null | undefined;
 };
 
 /** @internal */
@@ -338,6 +362,8 @@ export const CreateServerReinstallAttributes2$outboundSchema: z.ZodType<
   persistentNetboot: z.boolean().optional(),
   publicNetwork: z.nullable(z.boolean()).optional(),
   publicNetworkId: z.nullable(z.string()).optional(),
+  bios: z.nullable(z.record(CreateServerReinstallBios2$outboundSchema))
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     operatingSystem: "operating_system",

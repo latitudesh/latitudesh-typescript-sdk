@@ -41,6 +41,12 @@ export type DiskLayout = {
   mountPoint?: string | null | undefined;
 };
 
+export const BiosEnum = {
+  Enabled: "enabled",
+  Disabled: "disabled",
+} as const;
+export type BiosEnum = ClosedEnum<typeof BiosEnum>;
+
 export type DeployConfigAttributes = {
   operatingSystem?: string | undefined;
   hostname?: string | undefined;
@@ -56,6 +62,10 @@ export type DeployConfigAttributes = {
   persistentNetboot?: boolean | null | undefined;
   publicNetwork?: boolean | null | undefined;
   publicNetworkId?: string | null | undefined;
+  /**
+   * Custom BIOS settings applied on the last reinstall, reapplied on the next one unless it sends `bios`. Keys are BIOS setting names (e.g. `cpu_virtualization`), values are `enabled` or `disabled`.
+   */
+  bios?: { [k: string]: BiosEnum } | null | undefined;
 };
 
 export type DeployConfigData = {
@@ -165,6 +175,13 @@ export function diskLayoutFromJSON(
 }
 
 /** @internal */
+export const BiosEnum$inboundSchema: z.ZodNativeEnum<typeof BiosEnum> = z
+  .nativeEnum(BiosEnum);
+/** @internal */
+export const BiosEnum$outboundSchema: z.ZodNativeEnum<typeof BiosEnum> =
+  BiosEnum$inboundSchema;
+
+/** @internal */
 export const DeployConfigAttributes$inboundSchema: z.ZodType<
   DeployConfigAttributes,
   z.ZodTypeDef,
@@ -182,6 +199,7 @@ export const DeployConfigAttributes$inboundSchema: z.ZodType<
   persistent_netboot: z.nullable(z.boolean()).optional(),
   public_network: z.nullable(z.boolean()).optional(),
   public_network_id: z.nullable(z.string()).optional(),
+  bios: z.nullable(z.record(BiosEnum$inboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     "operating_system": "operatingSystem",
@@ -207,6 +225,7 @@ export type DeployConfigAttributes$Outbound = {
   persistent_netboot?: boolean | null | undefined;
   public_network?: boolean | null | undefined;
   public_network_id?: string | null | undefined;
+  bios?: { [k: string]: string } | null | undefined;
 };
 
 /** @internal */
@@ -227,6 +246,7 @@ export const DeployConfigAttributes$outboundSchema: z.ZodType<
   persistentNetboot: z.nullable(z.boolean()).optional(),
   publicNetwork: z.nullable(z.boolean()).optional(),
   publicNetworkId: z.nullable(z.string()).optional(),
+  bios: z.nullable(z.record(BiosEnum$outboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     operatingSystem: "operating_system",

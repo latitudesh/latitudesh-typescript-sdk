@@ -161,6 +161,9 @@ async function $do(
     M.json(201, operations.CreateFilesystemResponse$inboundSchema, {
       ctype: "application/vnd.api+json",
     }),
+    M.jsonErr(422, errors.ErrorObject$inboundSchema, {
+      ctype: "application/vnd.api+json",
+    }),
     M.jsonErr(503, errors.ErrorObject$inboundSchema, {
       ctype: "application/vnd.api+json",
     }),

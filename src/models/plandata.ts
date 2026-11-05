@@ -75,6 +75,10 @@ export type PlanDataSpecs = {
 export type PlanDataLocations = {
   available?: Array<string> | undefined;
   inStock?: Array<string> | undefined;
+  /**
+   * Servers in stock keyed by site slug. Only sites with stock are present.
+   */
+  inStockCount?: { [k: string]: number } | undefined;
 };
 
 export const PlanDataStockLevel = {
@@ -406,15 +410,18 @@ export const PlanDataLocations$inboundSchema: z.ZodType<
 > = z.object({
   available: z.array(z.string()).optional(),
   in_stock: z.array(z.string()).optional(),
+  in_stock_count: z.record(z.number().int()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "in_stock": "inStock",
+    "in_stock_count": "inStockCount",
   });
 });
 /** @internal */
 export type PlanDataLocations$Outbound = {
   available?: Array<string> | undefined;
   in_stock?: Array<string> | undefined;
+  in_stock_count?: { [k: string]: number } | undefined;
 };
 
 /** @internal */
@@ -425,9 +432,11 @@ export const PlanDataLocations$outboundSchema: z.ZodType<
 > = z.object({
   available: z.array(z.string()).optional(),
   inStock: z.array(z.string()).optional(),
+  inStockCount: z.record(z.number().int()).optional(),
 }).transform((v) => {
   return remap$(v, {
     inStock: "in_stock",
+    inStockCount: "in_stock_count",
   });
 });
 

@@ -174,7 +174,7 @@ async function $do(
       operations.PostStorageBucketLifecycleRulesResponse$inboundSchema,
       { ctype: "application/vnd.api+json" },
     ),
-    M.jsonErr([403, 404, 422], errors.ErrorObject$inboundSchema, {
+    M.jsonErr([403, 404, 409, 422], errors.ErrorObject$inboundSchema, {
       ctype: "application/vnd.api+json",
     }),
     M.jsonErr(500, errors.ErrorObject$inboundSchema, {

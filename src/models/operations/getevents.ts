@@ -23,7 +23,7 @@ export type GetEventsRequest = {
    */
   filterTargetName?: Array<string> | undefined;
   /**
-   * The target id of the event to filter by
+   * The target id of the event to filter by. An LKS cluster id also returns the events of the cluster node pools
    */
   filterTargetId?: string | undefined;
   /**

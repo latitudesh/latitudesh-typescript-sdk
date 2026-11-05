@@ -90,7 +90,7 @@ run();
 
 Allows you to add persistent storage to a project. These volumes can be used to store data across your servers.
 
-### Example Usage
+### Example Usage: Created
 
 <!-- UsageSnippet language="typescript" operationID="create-volume" method="post" path="/storage/volumes" example="Created" -->
 ```typescript
@@ -155,6 +155,71 @@ async function run() {
 
 run();
 ```
+### Example Usage: LocationUnavailable
+
+<!-- UsageSnippet language="typescript" operationID="create-volume" method="post" path="/storage/volumes" example="LocationUnavailable" -->
+```typescript
+import { Latitudesh } from "latitudesh-typescript-sdk";
+
+const latitudesh = new Latitudesh({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const result = await latitudesh.blockStorage.createVolume({
+    data: {
+      type: "volumes",
+      attributes: {
+        project: "<value>",
+        name: "<value>",
+        region: "<value>",
+        sizeInGb: 185826,
+      },
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { LatitudeshCore } from "latitudesh-typescript-sdk/core.js";
+import { blockStorageCreateVolume } from "latitudesh-typescript-sdk/funcs/blockStorageCreateVolume.js";
+
+// Use `LatitudeshCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const latitudesh = new LatitudeshCore({
+  bearer: process.env["LATITUDESH_BEARER"] ?? "",
+});
+
+async function run() {
+  const res = await blockStorageCreateVolume(latitudesh, {
+    data: {
+      type: "volumes",
+      attributes: {
+        project: "<value>",
+        name: "<value>",
+        region: "<value>",
+        sizeInGb: 185826,
+      },
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("blockStorageCreateVolume failed:", res.error);
+  }
+}
+
+run();
+```
 
 ### Parameters
 
@@ -173,6 +238,7 @@ run();
 
 | Error Type                    | Status Code                   | Content Type                  |
 | ----------------------------- | ----------------------------- | ----------------------------- |
+| errors.ErrorObject            | 422                           | application/vnd.api+json      |
 | errors.LatitudeshDefaultError | 4XX, 5XX                      | \*/\*                         |
 
 ## retrieveVolume
@@ -503,7 +569,7 @@ run();
 
 ## mapVolume
 
-Maps a high performance volume to a server over NVMe-TCP.
+Maps a high performance volume to a server over NVMe-TCP. Teams with multi-host mapping enabled can map a volume to several servers, once per server; otherwise a volume maps to one server. Every mapped server writes to the same NVMe namespace, so use a cluster-aware filesystem when more than one server mounts the volume.
 
 ### Example Usage
 
@@ -592,7 +658,7 @@ run();
 
 ## unmapVolume
 
-Unmaps a high performance volume from the server it is currently mapped to.
+Unmaps a high performance volume from one of the servers it is mapped to.
 
 ### Example Usage
 
@@ -607,6 +673,13 @@ const latitudesh = new Latitudesh({
 async function run() {
   const result = await latitudesh.blockStorage.unmapVolume({
     id: "<id>",
+    requestBody: {
+      data: {
+        attributes: {
+          serverId: "sv_abcd1234",
+        },
+      },
+    },
   });
 
   console.log(result);
@@ -632,6 +705,13 @@ const latitudesh = new LatitudeshCore({
 async function run() {
   const res = await blockStorageUnmapVolume(latitudesh, {
     id: "<id>",
+    requestBody: {
+      data: {
+        attributes: {
+          serverId: "sv_abcd1234",
+        },
+      },
+    },
   });
   if (res.ok) {
     const { value: result } = res;

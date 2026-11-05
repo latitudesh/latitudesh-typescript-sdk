@@ -17,4 +17,5 @@ let value: OperatingSystemDataFeatures = {};
 | `userData`         | *boolean*          | :heavy_minus_sign: | N/A                |
 | `accelerate`       | *boolean*          | :heavy_minus_sign: | N/A                |
 | `rescue`           | *boolean*          | :heavy_minus_sign: | N/A                |
+| `arm64`            | *boolean*          | :heavy_minus_sign: | N/A                |
 | `workflow`         | *boolean*          | :heavy_minus_sign: | N/A                |

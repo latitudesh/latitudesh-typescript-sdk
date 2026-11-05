@@ -9,25 +9,25 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export const MountVolumeType = {
+export const MountVolumeType2 = {
   Volumes: "volumes",
 } as const;
-export type MountVolumeType = ClosedEnum<typeof MountVolumeType>;
+export type MountVolumeType2 = ClosedEnum<typeof MountVolumeType2>;
 
-export type MountVolumeAttributes = {
+export type MountVolumeAttributes2 = {
   /**
    * NVMe Qualified Name (NQN) of the client/server that will access the volume. Format: nqn.YYYY-MM.domain:identifier (e.g., "nqn.2024-01.com.example:server01"). This uniquely identifies the NVMe client and must be configured on the client server.
    */
   nqn: string;
 };
 
-export type MountVolumeData = {
-  type: MountVolumeType;
-  attributes: MountVolumeAttributes;
+export type MountVolumeData2 = {
+  type: MountVolumeType2;
+  attributes: MountVolumeAttributes2;
 };
 
-export type MountVolumeRequestBody = {
-  data: MountVolumeData;
+export type MountVolumeRequestBody2 = {
+  data: MountVolumeData2;
 };
 
 export type MountVolumeRequest = {
@@ -35,133 +35,135 @@ export type MountVolumeRequest = {
    * Volume ID
    */
   id: string;
-  requestBody: MountVolumeRequestBody;
+  requestBody: MountVolumeRequestBody2;
 };
 
 /** @internal */
-export const MountVolumeType$inboundSchema: z.ZodNativeEnum<
-  typeof MountVolumeType
-> = z.nativeEnum(MountVolumeType);
+export const MountVolumeType2$inboundSchema: z.ZodNativeEnum<
+  typeof MountVolumeType2
+> = z.nativeEnum(MountVolumeType2);
 /** @internal */
-export const MountVolumeType$outboundSchema: z.ZodNativeEnum<
-  typeof MountVolumeType
-> = MountVolumeType$inboundSchema;
+export const MountVolumeType2$outboundSchema: z.ZodNativeEnum<
+  typeof MountVolumeType2
+> = MountVolumeType2$inboundSchema;
 
 /** @internal */
-export const MountVolumeAttributes$inboundSchema: z.ZodType<
-  MountVolumeAttributes,
+export const MountVolumeAttributes2$inboundSchema: z.ZodType<
+  MountVolumeAttributes2,
   z.ZodTypeDef,
   unknown
 > = z.object({
   nqn: z.string(),
 });
 /** @internal */
-export type MountVolumeAttributes$Outbound = {
+export type MountVolumeAttributes2$Outbound = {
   nqn: string;
 };
 
 /** @internal */
-export const MountVolumeAttributes$outboundSchema: z.ZodType<
-  MountVolumeAttributes$Outbound,
+export const MountVolumeAttributes2$outboundSchema: z.ZodType<
+  MountVolumeAttributes2$Outbound,
   z.ZodTypeDef,
-  MountVolumeAttributes
+  MountVolumeAttributes2
 > = z.object({
   nqn: z.string(),
 });
 
-export function mountVolumeAttributesToJSON(
-  mountVolumeAttributes: MountVolumeAttributes,
+export function mountVolumeAttributes2ToJSON(
+  mountVolumeAttributes2: MountVolumeAttributes2,
 ): string {
   return JSON.stringify(
-    MountVolumeAttributes$outboundSchema.parse(mountVolumeAttributes),
+    MountVolumeAttributes2$outboundSchema.parse(mountVolumeAttributes2),
   );
 }
-export function mountVolumeAttributesFromJSON(
+export function mountVolumeAttributes2FromJSON(
   jsonString: string,
-): SafeParseResult<MountVolumeAttributes, SDKValidationError> {
+): SafeParseResult<MountVolumeAttributes2, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => MountVolumeAttributes$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'MountVolumeAttributes' from JSON`,
+    (x) => MountVolumeAttributes2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'MountVolumeAttributes2' from JSON`,
   );
 }
 
 /** @internal */
-export const MountVolumeData$inboundSchema: z.ZodType<
-  MountVolumeData,
+export const MountVolumeData2$inboundSchema: z.ZodType<
+  MountVolumeData2,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: MountVolumeType$inboundSchema,
-  attributes: z.lazy(() => MountVolumeAttributes$inboundSchema),
+  type: MountVolumeType2$inboundSchema,
+  attributes: z.lazy(() => MountVolumeAttributes2$inboundSchema),
 });
 /** @internal */
-export type MountVolumeData$Outbound = {
+export type MountVolumeData2$Outbound = {
   type: string;
-  attributes: MountVolumeAttributes$Outbound;
+  attributes: MountVolumeAttributes2$Outbound;
 };
 
 /** @internal */
-export const MountVolumeData$outboundSchema: z.ZodType<
-  MountVolumeData$Outbound,
+export const MountVolumeData2$outboundSchema: z.ZodType<
+  MountVolumeData2$Outbound,
   z.ZodTypeDef,
-  MountVolumeData
+  MountVolumeData2
 > = z.object({
-  type: MountVolumeType$outboundSchema,
-  attributes: z.lazy(() => MountVolumeAttributes$outboundSchema),
+  type: MountVolumeType2$outboundSchema,
+  attributes: z.lazy(() => MountVolumeAttributes2$outboundSchema),
 });
 
-export function mountVolumeDataToJSON(
-  mountVolumeData: MountVolumeData,
+export function mountVolumeData2ToJSON(
+  mountVolumeData2: MountVolumeData2,
 ): string {
-  return JSON.stringify(MountVolumeData$outboundSchema.parse(mountVolumeData));
+  return JSON.stringify(
+    MountVolumeData2$outboundSchema.parse(mountVolumeData2),
+  );
 }
-export function mountVolumeDataFromJSON(
+export function mountVolumeData2FromJSON(
   jsonString: string,
-): SafeParseResult<MountVolumeData, SDKValidationError> {
+): SafeParseResult<MountVolumeData2, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => MountVolumeData$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'MountVolumeData' from JSON`,
+    (x) => MountVolumeData2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'MountVolumeData2' from JSON`,
   );
 }
 
 /** @internal */
-export const MountVolumeRequestBody$inboundSchema: z.ZodType<
-  MountVolumeRequestBody,
+export const MountVolumeRequestBody2$inboundSchema: z.ZodType<
+  MountVolumeRequestBody2,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  data: z.lazy(() => MountVolumeData$inboundSchema),
+  data: z.lazy(() => MountVolumeData2$inboundSchema),
 });
 /** @internal */
-export type MountVolumeRequestBody$Outbound = {
-  data: MountVolumeData$Outbound;
+export type MountVolumeRequestBody2$Outbound = {
+  data: MountVolumeData2$Outbound;
 };
 
 /** @internal */
-export const MountVolumeRequestBody$outboundSchema: z.ZodType<
-  MountVolumeRequestBody$Outbound,
+export const MountVolumeRequestBody2$outboundSchema: z.ZodType<
+  MountVolumeRequestBody2$Outbound,
   z.ZodTypeDef,
-  MountVolumeRequestBody
+  MountVolumeRequestBody2
 > = z.object({
-  data: z.lazy(() => MountVolumeData$outboundSchema),
+  data: z.lazy(() => MountVolumeData2$outboundSchema),
 });
 
-export function mountVolumeRequestBodyToJSON(
-  mountVolumeRequestBody: MountVolumeRequestBody,
+export function mountVolumeRequestBody2ToJSON(
+  mountVolumeRequestBody2: MountVolumeRequestBody2,
 ): string {
   return JSON.stringify(
-    MountVolumeRequestBody$outboundSchema.parse(mountVolumeRequestBody),
+    MountVolumeRequestBody2$outboundSchema.parse(mountVolumeRequestBody2),
   );
 }
-export function mountVolumeRequestBodyFromJSON(
+export function mountVolumeRequestBody2FromJSON(
   jsonString: string,
-): SafeParseResult<MountVolumeRequestBody, SDKValidationError> {
+): SafeParseResult<MountVolumeRequestBody2, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => MountVolumeRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'MountVolumeRequestBody' from JSON`,
+    (x) => MountVolumeRequestBody2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'MountVolumeRequestBody2' from JSON`,
   );
 }
 
@@ -172,7 +174,7 @@ export const MountVolumeRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   id: z.string(),
-  RequestBody: z.lazy(() => MountVolumeRequestBody$inboundSchema),
+  RequestBody: z.lazy(() => MountVolumeRequestBody2$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
     "RequestBody": "requestBody",
@@ -181,7 +183,7 @@ export const MountVolumeRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type MountVolumeRequest$Outbound = {
   id: string;
-  RequestBody: MountVolumeRequestBody$Outbound;
+  RequestBody: MountVolumeRequestBody2$Outbound;
 };
 
 /** @internal */
@@ -191,7 +193,7 @@ export const MountVolumeRequest$outboundSchema: z.ZodType<
   MountVolumeRequest
 > = z.object({
   id: z.string(),
-  requestBody: z.lazy(() => MountVolumeRequestBody$outboundSchema),
+  requestBody: z.lazy(() => MountVolumeRequestBody2$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
     requestBody: "RequestBody",

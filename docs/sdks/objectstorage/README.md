@@ -1638,7 +1638,7 @@ run();
 
 | Error Type                    | Status Code                   | Content Type                  |
 | ----------------------------- | ----------------------------- | ----------------------------- |
-| errors.ErrorObject            | 403, 404, 422                 | application/vnd.api+json      |
+| errors.ErrorObject            | 403, 404, 409, 422            | application/vnd.api+json      |
 | errors.ErrorObject            | 500                           | application/vnd.api+json      |
 | errors.LatitudeshDefaultError | 4XX, 5XX                      | \*/\*                         |
 

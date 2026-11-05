@@ -9,6 +9,11 @@ let value: PlanData = {
   attributes: {
     regions: [
       {
+        locations: {
+          inStockCount: {
+            "SAO": 5,
+          },
+        },
         pricing: {
           "USD": {
             hour: 2.18,

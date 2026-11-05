@@ -57,7 +57,7 @@ export type GetIpsRequest = {
    */
   filterLocation?: string | undefined;
   /**
-   * The address of IP to filter by starts_with
+   * The address of IP to filter by starts_with. Private IPs are only listed when this filter is set
    */
   filterAddress?: string | undefined;
   /**

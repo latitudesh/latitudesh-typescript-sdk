@@ -30,8 +30,31 @@ export type Initiator = {
   nqn?: string | undefined;
 };
 
+export type Mapping = {
+  /**
+   * ID of the mapped server.
+   */
+  serverId?: string | null | undefined;
+  /**
+   * Mapping lifecycle state: "mapping" while the mapping is being applied, "mapped" once the server can access the volume, "unmapping" while the mapping is being removed, or "failed". Mapping and unmapping are asynchronous, so poll the volume until this reaches a terminal state. The entry disappears once the server is fully unmapped.
+   */
+  status?: string | null | undefined;
+  /**
+   * NVMe Qualified Name of the server.
+   */
+  nqn?: string | null | undefined;
+  /**
+   * NVMe namespace ID of the mapping.
+   */
+  nsid?: number | null | undefined;
+  /**
+   * Storage IP of the server, in CIDR notation. Null until the mapping status is "mapped".
+   */
+  hostCidr?: string | null | undefined;
+};
+
 /**
- * Storage network the mapped server joins to reach the volume over NVMe-TCP. Null until the network has been provisioned for the volume.
+ * Storage network the mapped servers join to reach the volume over NVMe-TCP. Null until the network has been provisioned for the volume.
  */
 export type VolumeDataStorageNetwork = {
   /**
@@ -39,7 +62,9 @@ export type VolumeDataStorageNetwork = {
    */
   vid?: number | null | undefined;
   /**
-   * Storage IP of the mapped server, in CIDR notation. Null until the mapping status is "mapped".
+   * Deprecated: use mappings[].host_cidr. Storage IP of the server when the volume is mapped to exactly one server and the mapping is "mapped"; null otherwise.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   hostCidr?: string | null | undefined;
   /**
@@ -61,27 +86,39 @@ export type VolumeDataStorageNetwork = {
 };
 
 /**
- * NVMe-TCP block mapping of a high performance volume. Null for volumes that are not mapped to a server.
+ * NVMe-TCP block mappings of a high performance volume. A volume can be mapped to several servers at once; every server writes to the same NVMe namespace, so use a cluster-aware filesystem when more than one server mounts the volume. Null for volumes that are not mapped to any server.
  */
 export type Block = {
   /**
-   * Mapping lifecycle state: "mapping" while the mapping is being applied, "mapped" once the server can access the volume, "unmapping" while the mapping is being removed, or "failed". Mapping and unmapping are asynchronous, so poll the volume until this reaches a terminal state. The block object becomes null once the volume is fully unmapped.
+   * Deprecated: use mappings[].status. Status of the mapping when the volume is mapped to exactly one server; null otherwise.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   status?: string | null | undefined;
   /**
-   * NVMe Qualified Name of the mapped server.
+   * Deprecated: use mappings[].nqn. NVMe Qualified Name of the server when the volume is mapped to exactly one server; null otherwise.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   nqn?: string | null | undefined;
   /**
-   * NVMe namespace ID of the mapping.
+   * Deprecated: use mappings[].nsid. NVMe namespace ID of the mapping when the volume is mapped to exactly one server; null otherwise.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   nsid?: number | null | undefined;
   /**
-   * ID of the server the volume is mapped to.
+   * Deprecated: use mappings[].server_id. ID of the server when the volume is mapped to exactly one server; null otherwise.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   serverId?: string | null | undefined;
   /**
-   * Storage network the mapped server joins to reach the volume over NVMe-TCP. Null until the network has been provisioned for the volume.
+   * One entry per server the volume is mapped to.
+   */
+  mappings?: Array<Mapping> | undefined;
+  /**
+   * Storage network the mapped servers join to reach the volume over NVMe-TCP. Null until the network has been provisioned for the volume.
    */
   storageNetwork?: VolumeDataStorageNetwork | null | undefined;
 };
@@ -111,7 +148,7 @@ export type VolumeDataAttributes = {
    */
   nguid?: string | null | undefined;
   /**
-   * NVMe-TCP block mapping of a high performance volume. Null for volumes that are not mapped to a server.
+   * NVMe-TCP block mappings of a high performance volume. A volume can be mapped to several servers at once; every server writes to the same NVMe namespace, so use a cluster-aware filesystem when more than one server mounts the volume. Null for volumes that are not mapped to any server.
    */
   block?: Block | null | undefined;
   /**
@@ -178,6 +215,60 @@ export function initiatorFromJSON(
     jsonString,
     (x) => Initiator$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'Initiator' from JSON`,
+  );
+}
+
+/** @internal */
+export const Mapping$inboundSchema: z.ZodType<Mapping, z.ZodTypeDef, unknown> =
+  z.object({
+    server_id: z.nullable(z.string()).optional(),
+    status: z.nullable(z.string()).optional(),
+    nqn: z.nullable(z.string()).optional(),
+    nsid: z.nullable(z.number().int()).optional(),
+    host_cidr: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "server_id": "serverId",
+      "host_cidr": "hostCidr",
+    });
+  });
+/** @internal */
+export type Mapping$Outbound = {
+  server_id?: string | null | undefined;
+  status?: string | null | undefined;
+  nqn?: string | null | undefined;
+  nsid?: number | null | undefined;
+  host_cidr?: string | null | undefined;
+};
+
+/** @internal */
+export const Mapping$outboundSchema: z.ZodType<
+  Mapping$Outbound,
+  z.ZodTypeDef,
+  Mapping
+> = z.object({
+  serverId: z.nullable(z.string()).optional(),
+  status: z.nullable(z.string()).optional(),
+  nqn: z.nullable(z.string()).optional(),
+  nsid: z.nullable(z.number().int()).optional(),
+  hostCidr: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    serverId: "server_id",
+    hostCidr: "host_cidr",
+  });
+});
+
+export function mappingToJSON(mapping: Mapping): string {
+  return JSON.stringify(Mapping$outboundSchema.parse(mapping));
+}
+export function mappingFromJSON(
+  jsonString: string,
+): SafeParseResult<Mapping, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Mapping$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Mapping' from JSON`,
   );
 }
 
@@ -254,6 +345,7 @@ export const Block$inboundSchema: z.ZodType<Block, z.ZodTypeDef, unknown> = z
     nqn: z.nullable(z.string()).optional(),
     nsid: z.nullable(z.number().int()).optional(),
     server_id: z.nullable(z.string()).optional(),
+    mappings: z.array(z.lazy(() => Mapping$inboundSchema)).optional(),
     storage_network: z.nullable(
       z.lazy(() => VolumeDataStorageNetwork$inboundSchema),
     ).optional(),
@@ -269,6 +361,7 @@ export type Block$Outbound = {
   nqn?: string | null | undefined;
   nsid?: number | null | undefined;
   server_id?: string | null | undefined;
+  mappings?: Array<Mapping$Outbound> | undefined;
   storage_network?: VolumeDataStorageNetwork$Outbound | null | undefined;
 };
 
@@ -282,6 +375,7 @@ export const Block$outboundSchema: z.ZodType<
   nqn: z.nullable(z.string()).optional(),
   nsid: z.nullable(z.number().int()).optional(),
   serverId: z.nullable(z.string()).optional(),
+  mappings: z.array(z.lazy(() => Mapping$outboundSchema)).optional(),
   storageNetwork: z.nullable(
     z.lazy(() => VolumeDataStorageNetwork$outboundSchema),
   ).optional(),
