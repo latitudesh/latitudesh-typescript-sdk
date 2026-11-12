@@ -10,6 +10,7 @@ let value: InferenceModels = {
     {
       attributes: {
         inputPricePerMillionTokens: "0.0375",
+        cachedInputPricePerMillionTokens: "0.0075",
         outputPricePerMillionTokens: "0.0375",
         capabilities: [
           "chat",
