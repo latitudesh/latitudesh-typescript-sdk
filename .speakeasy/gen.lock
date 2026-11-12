@@ -1,24 +1,24 @@
 lockVersion: 2.0.0
 id: c8245324-f3d7-42c7-8124-ce79579cbff5
 management:
-  docChecksum: 0d3aa5f37e6aae59472cb612a72a6e5d
+  docChecksum: 4d5b67a5c2da30652aaaf6556d306262
   docVersion: "2023-06-01"
-  speakeasyVersion: 1.806.0
-  generationVersion: 2.956.1
-  releaseVersion: 0.9.1
-  configChecksum: ecda8d1fc2cd13165871da379f86b66b
+  speakeasyVersion: 1.808.1
+  generationVersion: 2.960.8
+  releaseVersion: 0.9.2
+  configChecksum: c7bc13a8311418ec35be1c3dd842f8e5
   repoURL: https://github.com/latitudesh/latitudesh-typescript-sdk.git
   installationURL: https://github.com/latitudesh/latitudesh-typescript-sdk
   published: true
 persistentEdits:
-  generation_id: cb2815b3-e3e5-415f-b37f-c63dbcd32071
-  pristine_commit_hash: 28c18320e41937171efa0f227861294b777fa12a
-  pristine_tree_hash: 81ad6c576cd3407c6b64faf000965543b251dbd8
+  generation_id: d4f4a696-185f-47dd-a942-2bef976ebd8a
+  pristine_commit_hash: c782b059224f34aab94cc375e82925a0e7888530
+  pristine_tree_hash: 9e58af9cc04a8dca3151cda3ac0414ae060ec1b6
 features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.14
-    core: 3.31.8
+    core: 3.31.11
     defaultEnabledRetries: 0.1.0
     deprecations: 2.81.1
     devContainers: 2.90.1
@@ -942,16 +942,16 @@ trackedFiles:
     pristine_git_object: f4405a0a1385630df75b995be04fd8f27d2a08c0
   docs/models/inferencemodel.md:
     id: 4d617f3ee32a
-    last_write_checksum: sha1:186dd5a0e0672d6517f905cb066943a55adbb7ae
-    pristine_git_object: b73b5e62b385aaf920b9041100d3d0072726e4d9
+    last_write_checksum: sha1:a0eaa24b3531227e0a076353c23ad92e99d7826e
+    pristine_git_object: 26c275b83c570d5843fb6a171660e65a04626a3d
   docs/models/inferencemodelattributes.md:
     id: 53e102ab5aff
-    last_write_checksum: sha1:a30db2c146c37e09f8356f825934819e23b599ed
-    pristine_git_object: d820dff41784142836047df913b9140b7b677948
+    last_write_checksum: sha1:b685ff0bcd8068a94a65f47ee537aee9087f66f8
+    pristine_git_object: ffb99fb3b24c0d2b2720f85592df75c5e0933497
   docs/models/inferencemodels.md:
     id: 5c1639f713f0
-    last_write_checksum: sha1:f94f8a819c7d5af52d2662f2ab425aba376f6d6d
-    pristine_git_object: 7dcfa1d3979296cad35c343860a26965a756e2fb
+    last_write_checksum: sha1:cf65fab70b5c01058771fa6e6f17e35fbdc76af5
+    pristine_git_object: bef1097ec008b38c99b4e729148ba15a8215c327
   docs/models/inferencemodeltype.md:
     id: 6a715c41ed1d
     last_write_checksum: sha1:e18eb78165ee7cdd868ddb30141670e532384f7e
@@ -5118,12 +5118,12 @@ trackedFiles:
     pristine_git_object: 249e5d9837dbad499fc14718cebf96fd4875a9e8
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:de49ec7cc2a4a3ce9b67d06abaaec811d3b71b48
-    pristine_git_object: efd50cb469a79c862dbf1143237402553f21e782
+    last_write_checksum: sha1:9abf2a3ff553c539beb5a467d6826f79cea695dd
+    pristine_git_object: 2d1326cae0695c8ef081ef041713aba9a5b856e3
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:1135bb97a6c592c7c835008091a5ef7d1d3acbdb
-    pristine_git_object: b489a1958436c4d2605bb0be20b62ed402ad9234
+    last_write_checksum: sha1:218ae77fd2d3b07cc1f50dfa27f6aaeb1e812bb4
+    pristine_git_object: aea3bdbf68876c38864a5f5229671e8b1c5a507a
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:9bb7b3807363b77f27dbdb87d6d10e9605f723d6
@@ -6014,16 +6014,16 @@ trackedFiles:
     pristine_git_object: 0aebd8b0a4867e35cb3348fc52921c3c0b4725b7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:06951ab45aa13854c360354642b73169cd1c91b6
-    pristine_git_object: 4bc1256234680c1fb197dc6e0e08a6515dd9d239
+    last_write_checksum: sha1:3117deb18554320c8e1eeec8aea4429116eb245d
+    pristine_git_object: 76567cf7deee67d08dfaa38029020e2393ee4713
   src/lib/encodings.ts:
     id: 3bd8ead98afd
     last_write_checksum: sha1:a257d6f6108693db2197617c579400bc8f0da914
     pristine_git_object: d6e751fe6a9a39af519df802d05c999f6783bae8
   src/lib/env.ts:
     id: c52972a3b198
-    last_write_checksum: sha1:cb30418151dc05d4cb8fbe8c8a728cd72ac702ad
-    pristine_git_object: 46ca0170dbd39592196c6aa4d2be8b4f1dbdf37e
+    last_write_checksum: sha1:b0f5ee8fd4e893be0b44dac7626cdbaabe2fec73
+    pristine_git_object: da287ea136030e6970e8c9145a6691729e07b0c3
   src/lib/files.ts:
     id: e5efa54fcb95
     last_write_checksum: sha1:795c14026405d547bfc47012f7ad9666e530fa7f
@@ -6090,8 +6090,8 @@ trackedFiles:
     pristine_git_object: 0955a573c2ce989d63c737410ab8cc28706d9f74
   src/mcp-server/mcp-server.ts:
     id: aabbc4ab07c1
-    last_write_checksum: sha1:68970cd340ea735a7a519fc4c7a28042de76a2ba
-    pristine_git_object: 45135adbbbf5d6c9939cf3b5d3689478a200e22c
+    last_write_checksum: sha1:7f305ad583befd44bb691cb2e399678edb6dd074
+    pristine_git_object: 107552bbe22e19da8505c31a3a354a7de5fcfa93
   src/mcp-server/prompts.ts:
     id: 26f3d73cbf31
     last_write_checksum: sha1:a84646a3726a008952cf59e1f0f258d8aec22ea6
@@ -6106,8 +6106,8 @@ trackedFiles:
     pristine_git_object: c25696d4c4f70e081fa5d87ad6891874c509a577
   src/mcp-server/server.ts:
     id: 2784dd48e82a
-    last_write_checksum: sha1:0691800a18d3b472d4c6b1a46b3a968f8a9479cf
-    pristine_git_object: d5d128fa93a754c47281e83a5593e6c8f137cea6
+    last_write_checksum: sha1:1e2ec27ac1a29be656997ce251c0e56aead74378
+    pristine_git_object: e6bb9786fbb7cd21c3707cd3e7af3c7f596ba10f
   src/mcp-server/shared.ts:
     id: 074e80d4be1e
     last_write_checksum: sha1:c4c1d8169a3a283584b8f13ea1533e438fe6fd69
@@ -7222,8 +7222,8 @@ trackedFiles:
     pristine_git_object: 00803c5a574f41751bff56079ee81f6333c76198
   src/models/inferencemodel.ts:
     id: a3d3f13eb539
-    last_write_checksum: sha1:d24f362fb117538aacfa7befb09b8bd1e8839740
-    pristine_git_object: 46db01778f88475d7f4f1c699dbe1e8f6d7c0e74
+    last_write_checksum: sha1:8b386eb6d1a40b1204afa7dcb45b49b08fedf4f6
+    pristine_git_object: 498e285bc7fe70041e3f83019adb41cffbf70279
   src/models/inferencemodels.ts:
     id: 305140c6a195
     last_write_checksum: sha1:b3286bfad24557def1d3763c5572efa525484d7e
@@ -12051,7 +12051,7 @@ examples:
           project_id: "proj_AoW6vRnwkvLn0"
       responses:
         "200":
-          application/vnd.api+json: {"data": [{"id": "llama-3.3-70b-instruct", "type": "inference_models", "attributes": {"display_name": "Llama 3.3 70B Instruct", "description": "Meta's Llama 3.3 70B instruction-tuned model.", "provider": "meta", "modality": "text", "context_length": 131072, "input_price_per_million_tokens": "0.00", "output_price_per_million_tokens": "0.00", "capabilities": ["chat"], "regions": ["dallas"], "created_at": "2026-01-14T15:56:29+00:00", "updated_at": "2026-01-14T15:56:29+00:00"}}]}
+          application/vnd.api+json: {"data": [{"id": "llama-3.3-70b-instruct", "type": "inference_models", "attributes": {"display_name": "Llama 3.3 70B Instruct", "description": "Meta's Llama 3.3 70B instruction-tuned model.", "provider": "meta", "modality": "text", "context_length": 131072, "input_price_per_million_tokens": "0.00", "cached_input_price_per_million_tokens": "0.00", "output_price_per_million_tokens": "0.00", "capabilities": ["chat"], "regions": ["dallas"], "created_at": "2026-01-14T15:56:29+00:00", "updated_at": "2026-01-14T15:56:29+00:00"}}]}
   get-inference-api-keys:
     Success:
       parameters:
@@ -12211,7 +12211,9 @@ examples:
           application/vnd.api+json: {"data": {"id": "sbx-demo", "type": "sandbox_execs", "attributes": {"stdout": "Python 3.12.0\n", "stderr": "", "exit_code": 0, "truncated": false}}}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Typescript SDK Changes:\n* `latitudesh.inference.getInferenceModels()`: **Added**\n* `latitudesh.inference.getInferenceApiKeys()`: **Added**\n* `latitudesh.inference.postInferenceApiKey()`: **Added**\n* `latitudesh.inference.deleteInferenceApiKey()`: **Added**\n* `latitudesh.inference.getInferenceUsage()`: **Added**\n* `latitudesh.clusters.getProjectClusterRequirements()`: **Added**\n* `latitudesh.clusters.updateProjectClusterRequirements()`: **Added**\n* `latitudesh.clusters.signProjectClusterRequirements()`: **Added**\n* `latitudesh.clusters.getProjectClusterRequirementSignoffs()`: **Added**\n* `latitudesh.clusters.getProjectClusterNodeGroups()`: **Added**\n* `latitudesh.clusters.createProjectClusterNodeGroup()`: **Added**\n* `latitudesh.clusters.deleteProjectClusterNodeGroup()`: **Added**\n* `latitudesh.clusters.updateProjectClusterNodeGroup()`: **Added**\n* `latitudesh.sandboxes(preview).getSandboxes()`: **Added**\n* `latitudesh.sandboxes(preview).createSandbox()`: **Added**\n* `latitudesh.sandboxes(preview).getSandbox()`: **Added**\n* `latitudesh.sandboxes(preview).destroySandbox()`: **Added**\n* `latitudesh.sandboxes(preview).execSandbox()`: **Added**\n* `latitudesh.vpnSessions.list()`: **Removed** (Breaking ⚠️)\n* `latitudesh.vpnSessions.create()`: **Removed** (Breaking ⚠️)\n* `latitudesh.vpnSessions.refreshPassword()`: **Removed** (Breaking ⚠️)\n* `latitudesh.vpnSessions.delete()`: **Removed** (Breaking ⚠️)\n* `latitudesh.operatingSystems.listPlans()`:  `response.data[].attributes.features.arm64` **Added**\n* `latitudesh.lks.listLksAvailableVersions()`: \n  *  `request` **Added**\n  *  `error.status[404]` **Added**\n* `latitudesh.plans.list()`:  `response.data[].attributes.regions[].locations.inStockCount` **Added**\n* `latitudesh.plans.get()`:  `response.data.attributes.regions[].locations.inStockCount` **Added**\n* `latitudesh.objectStorage.postStorageBucketLifecycleRules()`:  `error.status[409]` **Added**\n* `latitudesh.servers.list()`:  `response.data[].attributes.operatingSystem.features.arm64` **Added**\n* `latitudesh.servers.create()`:  `response.data.attributes.operatingSystem.features.arm64` **Added**\n* `latitudesh.servers.get()`:  `response.data.attributes.operatingSystem.features.arm64` **Added**\n* `latitudesh.servers.update()`:  `response.data.attributes.operatingSystem.features.arm64` **Added**\n* `latitudesh.servers.getDeployConfig()`:  `response.data.attributes.bios` **Added**\n* `latitudesh.servers.updateDeployConfig()`:  `response.data.attributes.bios` **Added**\n* `latitudesh.servers.lock()`:  `response.data.attributes.operatingSystem.features.arm64` **Added**\n* `latitudesh.servers.unlock()`:  `response.data.attributes.operatingSystem.features.arm64` **Added**\n* `latitudesh.servers.reinstall()`: \n  *  `request.requestBody.data.attributes.bios` **Added**\n* `latitudesh.filesystemStorage.createFilesystem()`:  `error.status[422]` **Added**\n* `latitudesh.blockStorage.listVolumes()`:  `response.data[].attributes.block` **Changed**\n* `latitudesh.blockStorage.createVolume()`: \n  *  `response.data.attributes.block` **Changed**\n  *  `error.status[422]` **Added**\n* `latitudesh.blockStorage.retrieveVolume()`:  `response.data.attributes.block` **Changed**\n* `latitudesh.blockStorage.updateVolume()`:  `response.data.attributes.block` **Changed**\n* `latitudesh.blockStorage.mapVolume()`:  `response.data.attributes.block` **Changed**\n* `latitudesh.blockStorage.unmapVolume()`: \n  *  `request.requestBody` **Added**\n  *  `response.data.attributes.block` **Changed**\n* `latitudesh.virtualMachines.create()`:  `response.data.attributes.operatingSystem.features.arm64` **Added**\n* `latitudesh.virtualMachines.list()`:  `response.data[].attributes.operatingSystem.features.arm64` **Added**\n* `latitudesh.virtualMachines.get()`:  `response.data.attributes.operatingSystem.features.arm64` **Added**\n* `latitudesh.virtualMachines.updateVirtualMachine()`:  `response.data.attributes.operatingSystem.features.arm64` **Added**\n* `latitudesh.virtualMachineBackups.createForVirtualMachine()`:  `error.status[409]` **Added**\n* `latitudesh.virtualMachineBackups.create()`:  `error.status[409]` **Added**\n"
+releaseNotes: |
+  ## Typescript SDK Changes:
+  * `latitudesh.inference.getInferenceModels()`:  `response.data[].attributes.cachedInputPricePerMillionTokens` **Added**
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json

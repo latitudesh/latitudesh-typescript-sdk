@@ -28,6 +28,10 @@ export type InferenceModelAttributes = {
    */
   inputPricePerMillionTokens?: string | null | undefined;
   /**
+   * USD per million cached input tokens as a decimal string with 2 to 6 decimal places
+   */
+  cachedInputPricePerMillionTokens?: string | null | undefined;
+  /**
    * USD per million tokens as a decimal string with 2 to 6 decimal places
    */
   outputPricePerMillionTokens?: string | null | undefined;
@@ -67,6 +71,7 @@ export const InferenceModelAttributes$inboundSchema: z.ZodType<
   modality: z.nullable(z.string()).optional(),
   context_length: z.nullable(z.number().int()).optional(),
   input_price_per_million_tokens: z.nullable(z.string()).optional(),
+  cached_input_price_per_million_tokens: z.nullable(z.string()).optional(),
   output_price_per_million_tokens: z.nullable(z.string()).optional(),
   capabilities: z.array(z.string()).optional(),
   regions: z.array(z.string()).optional(),
@@ -81,6 +86,7 @@ export const InferenceModelAttributes$inboundSchema: z.ZodType<
     "display_name": "displayName",
     "context_length": "contextLength",
     "input_price_per_million_tokens": "inputPricePerMillionTokens",
+    "cached_input_price_per_million_tokens": "cachedInputPricePerMillionTokens",
     "output_price_per_million_tokens": "outputPricePerMillionTokens",
     "created_at": "createdAt",
     "updated_at": "updatedAt",
@@ -94,6 +100,7 @@ export type InferenceModelAttributes$Outbound = {
   modality?: string | null | undefined;
   context_length?: number | null | undefined;
   input_price_per_million_tokens?: string | null | undefined;
+  cached_input_price_per_million_tokens?: string | null | undefined;
   output_price_per_million_tokens?: string | null | undefined;
   capabilities?: Array<string> | undefined;
   regions?: Array<string> | undefined;
@@ -113,6 +120,7 @@ export const InferenceModelAttributes$outboundSchema: z.ZodType<
   modality: z.nullable(z.string()).optional(),
   contextLength: z.nullable(z.number().int()).optional(),
   inputPricePerMillionTokens: z.nullable(z.string()).optional(),
+  cachedInputPricePerMillionTokens: z.nullable(z.string()).optional(),
   outputPricePerMillionTokens: z.nullable(z.string()).optional(),
   capabilities: z.array(z.string()).optional(),
   regions: z.array(z.string()).optional(),
@@ -123,6 +131,7 @@ export const InferenceModelAttributes$outboundSchema: z.ZodType<
     displayName: "display_name",
     contextLength: "context_length",
     inputPricePerMillionTokens: "input_price_per_million_tokens",
+    cachedInputPricePerMillionTokens: "cached_input_price_per_million_tokens",
     outputPricePerMillionTokens: "output_price_per_million_tokens",
     createdAt: "created_at",
     updatedAt: "updated_at",
