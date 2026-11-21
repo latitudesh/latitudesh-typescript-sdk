@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -53,7 +53,7 @@ export type InferenceModel = {
 /** @internal */
 export const InferenceModelType$inboundSchema: z.ZodNativeEnum<
   typeof InferenceModelType
-> = z.nativeEnum(InferenceModelType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(InferenceModelType));
 /** @internal */
 export const InferenceModelType$outboundSchema: z.ZodNativeEnum<
   typeof InferenceModelType
@@ -64,34 +64,37 @@ export const InferenceModelAttributes$inboundSchema: z.ZodType<
   InferenceModelAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  display_name: z.nullable(z.string()).optional(),
-  description: z.nullable(z.string()).optional(),
-  provider: z.nullable(z.string()).optional(),
-  modality: z.nullable(z.string()).optional(),
-  context_length: z.nullable(z.number().int()).optional(),
-  input_price_per_million_tokens: z.nullable(z.string()).optional(),
-  cached_input_price_per_million_tokens: z.nullable(z.string()).optional(),
-  output_price_per_million_tokens: z.nullable(z.string()).optional(),
-  capabilities: z.array(z.string()).optional(),
-  regions: z.array(z.string()).optional(),
-  created_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  updated_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "display_name": "displayName",
-    "context_length": "contextLength",
-    "input_price_per_million_tokens": "inputPricePerMillionTokens",
-    "cached_input_price_per_million_tokens": "cachedInputPricePerMillionTokens",
-    "output_price_per_million_tokens": "outputPricePerMillionTokens",
-    "created_at": "createdAt",
-    "updated_at": "updatedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    display_name: z.nullable(z.string()).optional(),
+    description: z.nullable(z.string()).optional(),
+    provider: z.nullable(z.string()).optional(),
+    modality: z.nullable(z.string()).optional(),
+    context_length: z.nullable(z.number().int()).optional(),
+    input_price_per_million_tokens: z.nullable(z.string()).optional(),
+    cached_input_price_per_million_tokens: z.nullable(z.string()).optional(),
+    output_price_per_million_tokens: z.nullable(z.string()).optional(),
+    capabilities: z.array(z.string()).optional(),
+    regions: z.array(z.string()).optional(),
+    created_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    updated_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "display_name": "displayName",
+      "context_length": "contextLength",
+      "input_price_per_million_tokens": "inputPricePerMillionTokens",
+      "cached_input_price_per_million_tokens":
+        "cachedInputPricePerMillionTokens",
+      "output_price_per_million_tokens": "outputPricePerMillionTokens",
+      "created_at": "createdAt",
+      "updated_at": "updatedAt",
+    });
+  })
+);
 /** @internal */
 export type InferenceModelAttributes$Outbound = {
   display_name?: string | null | undefined;
@@ -113,30 +116,32 @@ export const InferenceModelAttributes$outboundSchema: z.ZodType<
   InferenceModelAttributes$Outbound,
   z.ZodTypeDef,
   InferenceModelAttributes
-> = z.object({
-  displayName: z.nullable(z.string()).optional(),
-  description: z.nullable(z.string()).optional(),
-  provider: z.nullable(z.string()).optional(),
-  modality: z.nullable(z.string()).optional(),
-  contextLength: z.nullable(z.number().int()).optional(),
-  inputPricePerMillionTokens: z.nullable(z.string()).optional(),
-  cachedInputPricePerMillionTokens: z.nullable(z.string()).optional(),
-  outputPricePerMillionTokens: z.nullable(z.string()).optional(),
-  capabilities: z.array(z.string()).optional(),
-  regions: z.array(z.string()).optional(),
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-    contextLength: "context_length",
-    inputPricePerMillionTokens: "input_price_per_million_tokens",
-    cachedInputPricePerMillionTokens: "cached_input_price_per_million_tokens",
-    outputPricePerMillionTokens: "output_price_per_million_tokens",
-    createdAt: "created_at",
-    updatedAt: "updated_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    displayName: z.nullable(z.string()).optional(),
+    description: z.nullable(z.string()).optional(),
+    provider: z.nullable(z.string()).optional(),
+    modality: z.nullable(z.string()).optional(),
+    contextLength: z.nullable(z.number().int()).optional(),
+    inputPricePerMillionTokens: z.nullable(z.string()).optional(),
+    cachedInputPricePerMillionTokens: z.nullable(z.string()).optional(),
+    outputPricePerMillionTokens: z.nullable(z.string()).optional(),
+    capabilities: z.array(z.string()).optional(),
+    regions: z.array(z.string()).optional(),
+    createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      displayName: "display_name",
+      contextLength: "context_length",
+      inputPricePerMillionTokens: "input_price_per_million_tokens",
+      cachedInputPricePerMillionTokens: "cached_input_price_per_million_tokens",
+      outputPricePerMillionTokens: "output_price_per_million_tokens",
+      createdAt: "created_at",
+      updatedAt: "updated_at",
+    });
+  })
+);
 
 export function inferenceModelAttributesToJSON(
   inferenceModelAttributes: InferenceModelAttributes,
@@ -160,11 +165,13 @@ export const InferenceModel$inboundSchema: z.ZodType<
   InferenceModel,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  type: InferenceModelType$inboundSchema.optional(),
-  attributes: z.lazy(() => InferenceModelAttributes$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: InferenceModelType$inboundSchema.optional(),
+    attributes: z.lazy(() => InferenceModelAttributes$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type InferenceModel$Outbound = {
   id?: string | undefined;
@@ -177,11 +184,14 @@ export const InferenceModel$outboundSchema: z.ZodType<
   InferenceModel$Outbound,
   z.ZodTypeDef,
   InferenceModel
-> = z.object({
-  id: z.string().optional(),
-  type: InferenceModelType$outboundSchema.optional(),
-  attributes: z.lazy(() => InferenceModelAttributes$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: InferenceModelType$outboundSchema.optional(),
+    attributes: z.lazy(() => InferenceModelAttributes$outboundSchema)
+      .optional(),
+  })
+);
 
 export function inferenceModelToJSON(inferenceModel: InferenceModel): string {
   return JSON.stringify(InferenceModel$outboundSchema.parse(inferenceModel));

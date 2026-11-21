@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 import {
@@ -25,7 +25,7 @@ export const VirtualMachineBackupMeta$inboundSchema: z.ZodType<
   VirtualMachineBackupMeta,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type VirtualMachineBackupMeta$Outbound = {};
 
@@ -34,7 +34,7 @@ export const VirtualMachineBackupMeta$outboundSchema: z.ZodType<
   VirtualMachineBackupMeta$Outbound,
   z.ZodTypeDef,
   VirtualMachineBackupMeta
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function virtualMachineBackupMetaToJSON(
   virtualMachineBackupMeta: VirtualMachineBackupMeta,
@@ -58,10 +58,12 @@ export const VirtualMachineBackup$inboundSchema: z.ZodType<
   VirtualMachineBackup,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: VirtualMachineBackupAttributes$inboundSchema.optional(),
-  meta: z.lazy(() => VirtualMachineBackupMeta$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: VirtualMachineBackupAttributes$inboundSchema.optional(),
+    meta: z.lazy(() => VirtualMachineBackupMeta$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type VirtualMachineBackup$Outbound = {
   data?: VirtualMachineBackupAttributes$Outbound | undefined;
@@ -73,10 +75,12 @@ export const VirtualMachineBackup$outboundSchema: z.ZodType<
   VirtualMachineBackup$Outbound,
   z.ZodTypeDef,
   VirtualMachineBackup
-> = z.object({
-  data: VirtualMachineBackupAttributes$outboundSchema.optional(),
-  meta: z.lazy(() => VirtualMachineBackupMeta$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: VirtualMachineBackupAttributes$outboundSchema.optional(),
+    meta: z.lazy(() => VirtualMachineBackupMeta$outboundSchema).optional(),
+  })
+);
 
 export function virtualMachineBackupToJSON(
   virtualMachineBackup: VirtualMachineBackup,

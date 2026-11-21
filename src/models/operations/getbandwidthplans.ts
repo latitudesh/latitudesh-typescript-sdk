@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as models from "../index.js";
@@ -38,21 +38,23 @@ export const GetBandwidthPlansRequest$inboundSchema: z.ZodType<
   GetBandwidthPlansRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "API-Version": z.string().default("2023-06-01"),
-  "filter[id]": z.string().optional(),
-  "page[size]": z.number().int().default(20),
-  "page[number]": z.number().int().default(1),
-  "stats[total]": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "API-Version": "apiVersion",
-    "filter[id]": "filterId",
-    "page[size]": "pageSize",
-    "page[number]": "pageNumber",
-    "stats[total]": "statsTotal",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "API-Version": z.string().default("2023-06-01"),
+    "filter[id]": z.string().optional(),
+    "page[size]": z.number().int().default(20),
+    "page[number]": z.number().int().default(1),
+    "stats[total]": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "API-Version": "apiVersion",
+      "filter[id]": "filterId",
+      "page[size]": "pageSize",
+      "page[number]": "pageNumber",
+      "stats[total]": "statsTotal",
+    });
+  })
+);
 /** @internal */
 export type GetBandwidthPlansRequest$Outbound = {
   "API-Version": string;
@@ -67,21 +69,23 @@ export const GetBandwidthPlansRequest$outboundSchema: z.ZodType<
   GetBandwidthPlansRequest$Outbound,
   z.ZodTypeDef,
   GetBandwidthPlansRequest
-> = z.object({
-  apiVersion: z.string().default("2023-06-01"),
-  filterId: z.string().optional(),
-  pageSize: z.number().int().default(20),
-  pageNumber: z.number().int().default(1),
-  statsTotal: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    apiVersion: "API-Version",
-    filterId: "filter[id]",
-    pageSize: "page[size]",
-    pageNumber: "page[number]",
-    statsTotal: "stats[total]",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    apiVersion: z.string().default("2023-06-01"),
+    filterId: z.string().optional(),
+    pageSize: z.number().int().default(20),
+    pageNumber: z.number().int().default(1),
+    statsTotal: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      apiVersion: "API-Version",
+      filterId: "filter[id]",
+      pageSize: "page[size]",
+      pageNumber: "page[number]",
+      statsTotal: "stats[total]",
+    });
+  })
+);
 
 export function getBandwidthPlansRequestToJSON(
   getBandwidthPlansRequest: GetBandwidthPlansRequest,
@@ -105,13 +109,15 @@ export const GetBandwidthPlansResponse$inboundSchema: z.ZodType<
   GetBandwidthPlansResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  Result: models.BandwidthPlans$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "Result": "result",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    Result: models.BandwidthPlans$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "Result": "result",
+    });
+  })
+);
 /** @internal */
 export type GetBandwidthPlansResponse$Outbound = {
   Result: models.BandwidthPlans$Outbound;
@@ -122,13 +128,15 @@ export const GetBandwidthPlansResponse$outboundSchema: z.ZodType<
   GetBandwidthPlansResponse$Outbound,
   z.ZodTypeDef,
   GetBandwidthPlansResponse
-> = z.object({
-  result: models.BandwidthPlans$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    result: "Result",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    result: models.BandwidthPlans$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      result: "Result",
+    });
+  })
+);
 
 export function getBandwidthPlansResponseToJSON(
   getBandwidthPlansResponse: GetBandwidthPlansResponse,

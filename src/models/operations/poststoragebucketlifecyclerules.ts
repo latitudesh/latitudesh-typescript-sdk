@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -71,7 +71,9 @@ export type PostStorageBucketLifecycleRulesResponse = {
 /** @internal */
 export const PostStorageBucketLifecycleRulesType$inboundSchema: z.ZodNativeEnum<
   typeof PostStorageBucketLifecycleRulesType
-> = z.nativeEnum(PostStorageBucketLifecycleRulesType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(PostStorageBucketLifecycleRulesType)
+);
 /** @internal */
 export const PostStorageBucketLifecycleRulesType$outboundSchema:
   z.ZodNativeEnum<typeof PostStorageBucketLifecycleRulesType> =
@@ -82,20 +84,22 @@ export const PostStorageBucketLifecycleRulesAttributes$inboundSchema: z.ZodType<
   PostStorageBucketLifecycleRulesAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string(),
-  enabled: z.boolean().default(true),
-  prefix: z.nullable(z.string()).optional(),
-  expiration_days: z.number().int(),
-  noncurrent_days: z.nullable(z.number().int()).optional(),
-  abort_mpu_days_after_initiation: z.nullable(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "expiration_days": "expirationDays",
-    "noncurrent_days": "noncurrentDays",
-    "abort_mpu_days_after_initiation": "abortMpuDaysAfterInitiation",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    enabled: z.boolean().default(true),
+    prefix: z.nullable(z.string()).optional(),
+    expiration_days: z.number().int(),
+    noncurrent_days: z.nullable(z.number().int()).optional(),
+    abort_mpu_days_after_initiation: z.nullable(z.number().int()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "expiration_days": "expirationDays",
+      "noncurrent_days": "noncurrentDays",
+      "abort_mpu_days_after_initiation": "abortMpuDaysAfterInitiation",
+    });
+  })
+);
 /** @internal */
 export type PostStorageBucketLifecycleRulesAttributes$Outbound = {
   name: string;
@@ -112,20 +116,22 @@ export const PostStorageBucketLifecycleRulesAttributes$outboundSchema:
     PostStorageBucketLifecycleRulesAttributes$Outbound,
     z.ZodTypeDef,
     PostStorageBucketLifecycleRulesAttributes
-  > = z.object({
-    name: z.string(),
-    enabled: z.boolean().default(true),
-    prefix: z.nullable(z.string()).optional(),
-    expirationDays: z.number().int(),
-    noncurrentDays: z.nullable(z.number().int()).optional(),
-    abortMpuDaysAfterInitiation: z.nullable(z.number().int()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      expirationDays: "expiration_days",
-      noncurrentDays: "noncurrent_days",
-      abortMpuDaysAfterInitiation: "abort_mpu_days_after_initiation",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      name: z.string(),
+      enabled: z.boolean().default(true),
+      prefix: z.nullable(z.string()).optional(),
+      expirationDays: z.number().int(),
+      noncurrentDays: z.nullable(z.number().int()).optional(),
+      abortMpuDaysAfterInitiation: z.nullable(z.number().int()).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        expirationDays: "expiration_days",
+        noncurrentDays: "noncurrent_days",
+        abortMpuDaysAfterInitiation: "abort_mpu_days_after_initiation",
+      });
+    })
+  );
 
 export function postStorageBucketLifecycleRulesAttributesToJSON(
   postStorageBucketLifecycleRulesAttributes:
@@ -158,12 +164,14 @@ export const PostStorageBucketLifecycleRulesData$inboundSchema: z.ZodType<
   PostStorageBucketLifecycleRulesData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: PostStorageBucketLifecycleRulesType$inboundSchema,
-  attributes: z.lazy(() =>
-    PostStorageBucketLifecycleRulesAttributes$inboundSchema
-  ),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: PostStorageBucketLifecycleRulesType$inboundSchema,
+    attributes: z.lazy(() =>
+      PostStorageBucketLifecycleRulesAttributes$inboundSchema
+    ),
+  })
+);
 /** @internal */
 export type PostStorageBucketLifecycleRulesData$Outbound = {
   type: string;
@@ -175,12 +183,14 @@ export const PostStorageBucketLifecycleRulesData$outboundSchema: z.ZodType<
   PostStorageBucketLifecycleRulesData$Outbound,
   z.ZodTypeDef,
   PostStorageBucketLifecycleRulesData
-> = z.object({
-  type: PostStorageBucketLifecycleRulesType$outboundSchema,
-  attributes: z.lazy(() =>
-    PostStorageBucketLifecycleRulesAttributes$outboundSchema
-  ),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: PostStorageBucketLifecycleRulesType$outboundSchema,
+    attributes: z.lazy(() =>
+      PostStorageBucketLifecycleRulesAttributes$outboundSchema
+    ),
+  })
+);
 
 export function postStorageBucketLifecycleRulesDataToJSON(
   postStorageBucketLifecycleRulesData: PostStorageBucketLifecycleRulesData,
@@ -205,9 +215,11 @@ export function postStorageBucketLifecycleRulesDataFromJSON(
 /** @internal */
 export const PostStorageBucketLifecycleRulesRequestBody$inboundSchema:
   z.ZodType<PostStorageBucketLifecycleRulesRequestBody, z.ZodTypeDef, unknown> =
-    z.object({
-      data: z.lazy(() => PostStorageBucketLifecycleRulesData$inboundSchema),
-    });
+    /* @__PURE__ */ lazySchema$(() =>
+      z.object({
+        data: z.lazy(() => PostStorageBucketLifecycleRulesData$inboundSchema),
+      })
+    );
 /** @internal */
 export type PostStorageBucketLifecycleRulesRequestBody$Outbound = {
   data: PostStorageBucketLifecycleRulesData$Outbound;
@@ -219,9 +231,11 @@ export const PostStorageBucketLifecycleRulesRequestBody$outboundSchema:
     PostStorageBucketLifecycleRulesRequestBody$Outbound,
     z.ZodTypeDef,
     PostStorageBucketLifecycleRulesRequestBody
-  > = z.object({
-    data: z.lazy(() => PostStorageBucketLifecycleRulesData$outboundSchema),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      data: z.lazy(() => PostStorageBucketLifecycleRulesData$outboundSchema),
+    })
+  );
 
 export function postStorageBucketLifecycleRulesRequestBodyToJSON(
   postStorageBucketLifecycleRulesRequestBody:
@@ -254,17 +268,19 @@ export const PostStorageBucketLifecycleRulesRequest$inboundSchema: z.ZodType<
   PostStorageBucketLifecycleRulesRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  bucket_id: z.string(),
-  RequestBody: z.lazy(() =>
-    PostStorageBucketLifecycleRulesRequestBody$inboundSchema
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    "bucket_id": "bucketId",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    bucket_id: z.string(),
+    RequestBody: z.lazy(() =>
+      PostStorageBucketLifecycleRulesRequestBody$inboundSchema
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "bucket_id": "bucketId",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type PostStorageBucketLifecycleRulesRequest$Outbound = {
   bucket_id: string;
@@ -276,17 +292,19 @@ export const PostStorageBucketLifecycleRulesRequest$outboundSchema: z.ZodType<
   PostStorageBucketLifecycleRulesRequest$Outbound,
   z.ZodTypeDef,
   PostStorageBucketLifecycleRulesRequest
-> = z.object({
-  bucketId: z.string(),
-  requestBody: z.lazy(() =>
-    PostStorageBucketLifecycleRulesRequestBody$outboundSchema
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    bucketId: "bucket_id",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    bucketId: z.string(),
+    requestBody: z.lazy(() =>
+      PostStorageBucketLifecycleRulesRequestBody$outboundSchema
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      bucketId: "bucket_id",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function postStorageBucketLifecycleRulesRequestToJSON(
   postStorageBucketLifecycleRulesRequest:
@@ -314,9 +332,11 @@ export const PostStorageBucketLifecycleRulesResponse$inboundSchema: z.ZodType<
   PostStorageBucketLifecycleRulesResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: models.LifecycleRuleData$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: models.LifecycleRuleData$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type PostStorageBucketLifecycleRulesResponse$Outbound = {
   data?: models.LifecycleRuleData$Outbound | undefined;
@@ -327,9 +347,11 @@ export const PostStorageBucketLifecycleRulesResponse$outboundSchema: z.ZodType<
   PostStorageBucketLifecycleRulesResponse$Outbound,
   z.ZodTypeDef,
   PostStorageBucketLifecycleRulesResponse
-> = z.object({
-  data: models.LifecycleRuleData$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: models.LifecycleRuleData$outboundSchema.optional(),
+  })
+);
 
 export function postStorageBucketLifecycleRulesResponseToJSON(
   postStorageBucketLifecycleRulesResponse:

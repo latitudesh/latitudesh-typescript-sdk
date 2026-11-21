@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 import {
@@ -31,13 +31,15 @@ export const SandboxesMeta$inboundSchema: z.ZodType<
   SandboxesMeta,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  next_page_token: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "next_page_token": "nextPageToken",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    next_page_token: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "next_page_token": "nextPageToken",
+    });
+  })
+);
 /** @internal */
 export type SandboxesMeta$Outbound = {
   next_page_token?: string | undefined;
@@ -48,13 +50,15 @@ export const SandboxesMeta$outboundSchema: z.ZodType<
   SandboxesMeta$Outbound,
   z.ZodTypeDef,
   SandboxesMeta
-> = z.object({
-  nextPageToken: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    nextPageToken: "next_page_token",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    nextPageToken: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      nextPageToken: "next_page_token",
+    });
+  })
+);
 
 export function sandboxesMetaToJSON(sandboxesMeta: SandboxesMeta): string {
   return JSON.stringify(SandboxesMeta$outboundSchema.parse(sandboxesMeta));
@@ -74,10 +78,12 @@ export const Sandboxes$inboundSchema: z.ZodType<
   Sandboxes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.array(SandboxData$inboundSchema).optional(),
-  meta: z.lazy(() => SandboxesMeta$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(SandboxData$inboundSchema).optional(),
+    meta: z.lazy(() => SandboxesMeta$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type Sandboxes$Outbound = {
   data?: Array<SandboxData$Outbound> | undefined;
@@ -89,10 +95,12 @@ export const Sandboxes$outboundSchema: z.ZodType<
   Sandboxes$Outbound,
   z.ZodTypeDef,
   Sandboxes
-> = z.object({
-  data: z.array(SandboxData$outboundSchema).optional(),
-  meta: z.lazy(() => SandboxesMeta$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(SandboxData$outboundSchema).optional(),
+    meta: z.lazy(() => SandboxesMeta$outboundSchema).optional(),
+  })
+);
 
 export function sandboxesToJSON(sandboxes: Sandboxes): string {
   return JSON.stringify(Sandboxes$outboundSchema.parse(sandboxes));

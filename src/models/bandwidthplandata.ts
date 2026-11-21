@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -45,19 +45,21 @@ export type BandwidthPlanData = {
 /** @internal */
 export const BandwidthPlanDataType$inboundSchema: z.ZodNativeEnum<
   typeof BandwidthPlanDataType
-> = z.nativeEnum(BandwidthPlanDataType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(BandwidthPlanDataType));
 /** @internal */
 export const BandwidthPlanDataType$outboundSchema: z.ZodNativeEnum<
   typeof BandwidthPlanDataType
 > = BandwidthPlanDataType$inboundSchema;
 
 /** @internal */
-export const Usd$inboundSchema: z.ZodType<Usd, z.ZodTypeDef, unknown> = z
-  .object({
-    monthly: z.number().int().optional(),
-    hourly: z.number().int().optional(),
-    yearly: z.nullable(z.number().int()).optional(),
-  });
+export const Usd$inboundSchema: z.ZodType<Usd, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      monthly: z.number().int().optional(),
+      hourly: z.number().int().optional(),
+      yearly: z.nullable(z.number().int()).optional(),
+    })
+  );
 /** @internal */
 export type Usd$Outbound = {
   monthly?: number | undefined;
@@ -66,12 +68,14 @@ export type Usd$Outbound = {
 };
 
 /** @internal */
-export const Usd$outboundSchema: z.ZodType<Usd$Outbound, z.ZodTypeDef, Usd> = z
-  .object({
-    monthly: z.number().int().optional(),
-    hourly: z.number().int().optional(),
-    yearly: z.nullable(z.number().int()).optional(),
-  });
+export const Usd$outboundSchema: z.ZodType<Usd$Outbound, z.ZodTypeDef, Usd> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      monthly: z.number().int().optional(),
+      hourly: z.number().int().optional(),
+      yearly: z.nullable(z.number().int()).optional(),
+    })
+  );
 
 export function usdToJSON(usd: Usd): string {
   return JSON.stringify(Usd$outboundSchema.parse(usd));
@@ -87,12 +91,14 @@ export function usdFromJSON(
 }
 
 /** @internal */
-export const Brl$inboundSchema: z.ZodType<Brl, z.ZodTypeDef, unknown> = z
-  .object({
-    monthly: z.number().int().optional(),
-    hourly: z.number().int().optional(),
-    yearly: z.nullable(z.number().int()).optional(),
-  });
+export const Brl$inboundSchema: z.ZodType<Brl, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      monthly: z.number().int().optional(),
+      hourly: z.number().int().optional(),
+      yearly: z.nullable(z.number().int()).optional(),
+    })
+  );
 /** @internal */
 export type Brl$Outbound = {
   monthly?: number | undefined;
@@ -101,12 +107,14 @@ export type Brl$Outbound = {
 };
 
 /** @internal */
-export const Brl$outboundSchema: z.ZodType<Brl$Outbound, z.ZodTypeDef, Brl> = z
-  .object({
-    monthly: z.number().int().optional(),
-    hourly: z.number().int().optional(),
-    yearly: z.nullable(z.number().int()).optional(),
-  });
+export const Brl$outboundSchema: z.ZodType<Brl$Outbound, z.ZodTypeDef, Brl> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      monthly: z.number().int().optional(),
+      hourly: z.number().int().optional(),
+      yearly: z.nullable(z.number().int()).optional(),
+    })
+  );
 
 export function brlToJSON(brl: Brl): string {
   return JSON.stringify(Brl$outboundSchema.parse(brl));
@@ -126,10 +134,12 @@ export const BandwidthPlanDataPricing$inboundSchema: z.ZodType<
   BandwidthPlanDataPricing,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  usd: z.lazy(() => Usd$inboundSchema).optional(),
-  brl: z.lazy(() => Brl$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    usd: z.lazy(() => Usd$inboundSchema).optional(),
+    brl: z.lazy(() => Brl$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type BandwidthPlanDataPricing$Outbound = {
   usd?: Usd$Outbound | undefined;
@@ -141,10 +151,12 @@ export const BandwidthPlanDataPricing$outboundSchema: z.ZodType<
   BandwidthPlanDataPricing$Outbound,
   z.ZodTypeDef,
   BandwidthPlanDataPricing
-> = z.object({
-  usd: z.lazy(() => Usd$outboundSchema).optional(),
-  brl: z.lazy(() => Brl$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    usd: z.lazy(() => Usd$outboundSchema).optional(),
+    brl: z.lazy(() => Brl$outboundSchema).optional(),
+  })
+);
 
 export function bandwidthPlanDataPricingToJSON(
   bandwidthPlanDataPricing: BandwidthPlanDataPricing,
@@ -168,11 +180,13 @@ export const BandwidthPlanDataAttributes$inboundSchema: z.ZodType<
   BandwidthPlanDataAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  region: z.string().optional(),
-  locations: z.array(z.string()).optional(),
-  pricing: z.lazy(() => BandwidthPlanDataPricing$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    region: z.string().optional(),
+    locations: z.array(z.string()).optional(),
+    pricing: z.lazy(() => BandwidthPlanDataPricing$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type BandwidthPlanDataAttributes$Outbound = {
   region?: string | undefined;
@@ -185,11 +199,13 @@ export const BandwidthPlanDataAttributes$outboundSchema: z.ZodType<
   BandwidthPlanDataAttributes$Outbound,
   z.ZodTypeDef,
   BandwidthPlanDataAttributes
-> = z.object({
-  region: z.string().optional(),
-  locations: z.array(z.string()).optional(),
-  pricing: z.lazy(() => BandwidthPlanDataPricing$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    region: z.string().optional(),
+    locations: z.array(z.string()).optional(),
+    pricing: z.lazy(() => BandwidthPlanDataPricing$outboundSchema).optional(),
+  })
+);
 
 export function bandwidthPlanDataAttributesToJSON(
   bandwidthPlanDataAttributes: BandwidthPlanDataAttributes,
@@ -215,12 +231,14 @@ export const BandwidthPlanData$inboundSchema: z.ZodType<
   BandwidthPlanData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  type: BandwidthPlanDataType$inboundSchema.optional(),
-  attributes: z.lazy(() => BandwidthPlanDataAttributes$inboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: BandwidthPlanDataType$inboundSchema.optional(),
+    attributes: z.lazy(() => BandwidthPlanDataAttributes$inboundSchema)
+      .optional(),
+  })
+);
 /** @internal */
 export type BandwidthPlanData$Outbound = {
   id?: string | undefined;
@@ -233,12 +251,14 @@ export const BandwidthPlanData$outboundSchema: z.ZodType<
   BandwidthPlanData$Outbound,
   z.ZodTypeDef,
   BandwidthPlanData
-> = z.object({
-  id: z.string().optional(),
-  type: BandwidthPlanDataType$outboundSchema.optional(),
-  attributes: z.lazy(() => BandwidthPlanDataAttributes$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: BandwidthPlanDataType$outboundSchema.optional(),
+    attributes: z.lazy(() => BandwidthPlanDataAttributes$outboundSchema)
+      .optional(),
+  })
+);
 
 export function bandwidthPlanDataToJSON(
   bandwidthPlanData: BandwidthPlanData,

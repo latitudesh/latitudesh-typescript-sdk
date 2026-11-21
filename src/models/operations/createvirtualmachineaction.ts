@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -52,7 +52,9 @@ export type CreateVirtualMachineActionRequest = {
 /** @internal */
 export const CreateVirtualMachineActionType2$inboundSchema: z.ZodNativeEnum<
   typeof CreateVirtualMachineActionType2
-> = z.nativeEnum(CreateVirtualMachineActionType2);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(CreateVirtualMachineActionType2)
+);
 /** @internal */
 export const CreateVirtualMachineActionType2$outboundSchema: z.ZodNativeEnum<
   typeof CreateVirtualMachineActionType2
@@ -61,7 +63,9 @@ export const CreateVirtualMachineActionType2$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const CreateVirtualMachineActionAction2$inboundSchema: z.ZodNativeEnum<
   typeof CreateVirtualMachineActionAction2
-> = z.nativeEnum(CreateVirtualMachineActionAction2);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(CreateVirtualMachineActionAction2)
+);
 /** @internal */
 export const CreateVirtualMachineActionAction2$outboundSchema: z.ZodNativeEnum<
   typeof CreateVirtualMachineActionAction2
@@ -72,9 +76,11 @@ export const CreateVirtualMachineActionAttributes2$inboundSchema: z.ZodType<
   CreateVirtualMachineActionAttributes2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  action: CreateVirtualMachineActionAction2$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    action: CreateVirtualMachineActionAction2$inboundSchema,
+  })
+);
 /** @internal */
 export type CreateVirtualMachineActionAttributes2$Outbound = {
   action: string;
@@ -85,9 +91,11 @@ export const CreateVirtualMachineActionAttributes2$outboundSchema: z.ZodType<
   CreateVirtualMachineActionAttributes2$Outbound,
   z.ZodTypeDef,
   CreateVirtualMachineActionAttributes2
-> = z.object({
-  action: CreateVirtualMachineActionAction2$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    action: CreateVirtualMachineActionAction2$outboundSchema,
+  })
+);
 
 export function createVirtualMachineActionAttributes2ToJSON(
   createVirtualMachineActionAttributes2: CreateVirtualMachineActionAttributes2,
@@ -114,11 +122,15 @@ export const CreateVirtualMachineActionRequestBody2$inboundSchema: z.ZodType<
   CreateVirtualMachineActionRequestBody2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  type: CreateVirtualMachineActionType2$inboundSchema,
-  attributes: z.lazy(() => CreateVirtualMachineActionAttributes2$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    type: CreateVirtualMachineActionType2$inboundSchema,
+    attributes: z.lazy(() =>
+      CreateVirtualMachineActionAttributes2$inboundSchema
+    ),
+  })
+);
 /** @internal */
 export type CreateVirtualMachineActionRequestBody2$Outbound = {
   id: string;
@@ -131,13 +143,15 @@ export const CreateVirtualMachineActionRequestBody2$outboundSchema: z.ZodType<
   CreateVirtualMachineActionRequestBody2$Outbound,
   z.ZodTypeDef,
   CreateVirtualMachineActionRequestBody2
-> = z.object({
-  id: z.string(),
-  type: CreateVirtualMachineActionType2$outboundSchema,
-  attributes: z.lazy(() =>
-    CreateVirtualMachineActionAttributes2$outboundSchema
-  ),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    type: CreateVirtualMachineActionType2$outboundSchema,
+    attributes: z.lazy(() =>
+      CreateVirtualMachineActionAttributes2$outboundSchema
+    ),
+  })
+);
 
 export function createVirtualMachineActionRequestBody2ToJSON(
   createVirtualMachineActionRequestBody2:
@@ -165,17 +179,19 @@ export const CreateVirtualMachineActionRequest$inboundSchema: z.ZodType<
   CreateVirtualMachineActionRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  virtual_machine_id: z.string(),
-  RequestBody: z.lazy(() =>
-    CreateVirtualMachineActionRequestBody2$inboundSchema
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    "virtual_machine_id": "virtualMachineId",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    virtual_machine_id: z.string(),
+    RequestBody: z.lazy(() =>
+      CreateVirtualMachineActionRequestBody2$inboundSchema
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "virtual_machine_id": "virtualMachineId",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type CreateVirtualMachineActionRequest$Outbound = {
   virtual_machine_id: string;
@@ -187,17 +203,19 @@ export const CreateVirtualMachineActionRequest$outboundSchema: z.ZodType<
   CreateVirtualMachineActionRequest$Outbound,
   z.ZodTypeDef,
   CreateVirtualMachineActionRequest
-> = z.object({
-  virtualMachineId: z.string(),
-  requestBody: z.lazy(() =>
-    CreateVirtualMachineActionRequestBody2$outboundSchema
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    virtualMachineId: "virtual_machine_id",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    virtualMachineId: z.string(),
+    requestBody: z.lazy(() =>
+      CreateVirtualMachineActionRequestBody2$outboundSchema
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      virtualMachineId: "virtual_machine_id",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function createVirtualMachineActionRequestToJSON(
   createVirtualMachineActionRequest: CreateVirtualMachineActionRequest,

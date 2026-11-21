@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -62,7 +62,7 @@ export type CreateLksCluster = {
 /** @internal */
 export const CreateLksClusterType$inboundSchema: z.ZodNativeEnum<
   typeof CreateLksClusterType
-> = z.nativeEnum(CreateLksClusterType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CreateLksClusterType));
 /** @internal */
 export const CreateLksClusterType$outboundSchema: z.ZodNativeEnum<
   typeof CreateLksClusterType
@@ -73,17 +73,19 @@ export const CreateLksClusterNetwork$inboundSchema: z.ZodType<
   CreateLksClusterNetwork,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  pod_cidrs: z.array(z.string()).optional(),
-  service_cidrs: z.array(z.string()).optional(),
-  node_cidrs: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "pod_cidrs": "podCidrs",
-    "service_cidrs": "serviceCidrs",
-    "node_cidrs": "nodeCidrs",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    pod_cidrs: z.array(z.string()).optional(),
+    service_cidrs: z.array(z.string()).optional(),
+    node_cidrs: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "pod_cidrs": "podCidrs",
+      "service_cidrs": "serviceCidrs",
+      "node_cidrs": "nodeCidrs",
+    });
+  })
+);
 /** @internal */
 export type CreateLksClusterNetwork$Outbound = {
   pod_cidrs?: Array<string> | undefined;
@@ -96,17 +98,19 @@ export const CreateLksClusterNetwork$outboundSchema: z.ZodType<
   CreateLksClusterNetwork$Outbound,
   z.ZodTypeDef,
   CreateLksClusterNetwork
-> = z.object({
-  podCidrs: z.array(z.string()).optional(),
-  serviceCidrs: z.array(z.string()).optional(),
-  nodeCidrs: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    podCidrs: "pod_cidrs",
-    serviceCidrs: "service_cidrs",
-    nodeCidrs: "node_cidrs",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    podCidrs: z.array(z.string()).optional(),
+    serviceCidrs: z.array(z.string()).optional(),
+    nodeCidrs: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      podCidrs: "pod_cidrs",
+      serviceCidrs: "service_cidrs",
+      nodeCidrs: "node_cidrs",
+    });
+  })
+);
 
 export function createLksClusterNetworkToJSON(
   createLksClusterNetwork: CreateLksClusterNetwork,
@@ -130,20 +134,22 @@ export const CreateLksClusterAttributes$inboundSchema: z.ZodType<
   CreateLksClusterAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string(),
-  project_id: z.string(),
-  site: z.string(),
-  kubernetes_version: z.string(),
-  description: z.string().optional(),
-  network: z.nullable(z.lazy(() => CreateLksClusterNetwork$inboundSchema))
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "project_id": "projectId",
-    "kubernetes_version": "kubernetesVersion",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    project_id: z.string(),
+    site: z.string(),
+    kubernetes_version: z.string(),
+    description: z.string().optional(),
+    network: z.nullable(z.lazy(() => CreateLksClusterNetwork$inboundSchema))
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "project_id": "projectId",
+      "kubernetes_version": "kubernetesVersion",
+    });
+  })
+);
 /** @internal */
 export type CreateLksClusterAttributes$Outbound = {
   name: string;
@@ -159,20 +165,22 @@ export const CreateLksClusterAttributes$outboundSchema: z.ZodType<
   CreateLksClusterAttributes$Outbound,
   z.ZodTypeDef,
   CreateLksClusterAttributes
-> = z.object({
-  name: z.string(),
-  projectId: z.string(),
-  site: z.string(),
-  kubernetesVersion: z.string(),
-  description: z.string().optional(),
-  network: z.nullable(z.lazy(() => CreateLksClusterNetwork$outboundSchema))
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    projectId: "project_id",
-    kubernetesVersion: "kubernetes_version",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    projectId: z.string(),
+    site: z.string(),
+    kubernetesVersion: z.string(),
+    description: z.string().optional(),
+    network: z.nullable(z.lazy(() => CreateLksClusterNetwork$outboundSchema))
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      projectId: "project_id",
+      kubernetesVersion: "kubernetes_version",
+    });
+  })
+);
 
 export function createLksClusterAttributesToJSON(
   createLksClusterAttributes: CreateLksClusterAttributes,
@@ -196,10 +204,12 @@ export const CreateLksClusterData$inboundSchema: z.ZodType<
   CreateLksClusterData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: CreateLksClusterType$inboundSchema,
-  attributes: z.lazy(() => CreateLksClusterAttributes$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CreateLksClusterType$inboundSchema,
+    attributes: z.lazy(() => CreateLksClusterAttributes$inboundSchema),
+  })
+);
 /** @internal */
 export type CreateLksClusterData$Outbound = {
   type: string;
@@ -211,10 +221,12 @@ export const CreateLksClusterData$outboundSchema: z.ZodType<
   CreateLksClusterData$Outbound,
   z.ZodTypeDef,
   CreateLksClusterData
-> = z.object({
-  type: CreateLksClusterType$outboundSchema,
-  attributes: z.lazy(() => CreateLksClusterAttributes$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CreateLksClusterType$outboundSchema,
+    attributes: z.lazy(() => CreateLksClusterAttributes$outboundSchema),
+  })
+);
 
 export function createLksClusterDataToJSON(
   createLksClusterData: CreateLksClusterData,
@@ -238,9 +250,11 @@ export const CreateLksCluster$inboundSchema: z.ZodType<
   CreateLksCluster,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => CreateLksClusterData$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => CreateLksClusterData$inboundSchema),
+  })
+);
 /** @internal */
 export type CreateLksCluster$Outbound = {
   data: CreateLksClusterData$Outbound;
@@ -251,9 +265,11 @@ export const CreateLksCluster$outboundSchema: z.ZodType<
   CreateLksCluster$Outbound,
   z.ZodTypeDef,
   CreateLksCluster
-> = z.object({
-  data: z.lazy(() => CreateLksClusterData$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => CreateLksClusterData$outboundSchema),
+  })
+);
 
 export function createLksClusterToJSON(
   createLksCluster: CreateLksCluster,

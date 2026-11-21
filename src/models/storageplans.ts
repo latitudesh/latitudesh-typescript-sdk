@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 import {
@@ -25,7 +25,7 @@ export const StoragePlansMeta$inboundSchema: z.ZodType<
   StoragePlansMeta,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type StoragePlansMeta$Outbound = {};
 
@@ -34,7 +34,7 @@ export const StoragePlansMeta$outboundSchema: z.ZodType<
   StoragePlansMeta$Outbound,
   z.ZodTypeDef,
   StoragePlansMeta
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function storagePlansMetaToJSON(
   storagePlansMeta: StoragePlansMeta,
@@ -58,10 +58,12 @@ export const StoragePlans$inboundSchema: z.ZodType<
   StoragePlans,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.array(StoragePlanData$inboundSchema).optional(),
-  meta: z.lazy(() => StoragePlansMeta$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(StoragePlanData$inboundSchema).optional(),
+    meta: z.lazy(() => StoragePlansMeta$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type StoragePlans$Outbound = {
   data?: Array<StoragePlanData$Outbound> | undefined;
@@ -73,10 +75,12 @@ export const StoragePlans$outboundSchema: z.ZodType<
   StoragePlans$Outbound,
   z.ZodTypeDef,
   StoragePlans
-> = z.object({
-  data: z.array(StoragePlanData$outboundSchema).optional(),
-  meta: z.lazy(() => StoragePlansMeta$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(StoragePlanData$outboundSchema).optional(),
+    meta: z.lazy(() => StoragePlansMeta$outboundSchema).optional(),
+  })
+);
 
 export function storagePlansToJSON(storagePlans: StoragePlans): string {
   return JSON.stringify(StoragePlans$outboundSchema.parse(storagePlans));

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -64,16 +64,15 @@ export type VirtualMachineMetrics = {
 };
 
 /** @internal */
-export const Metric$inboundSchema: z.ZodNativeEnum<typeof Metric> = z
-  .nativeEnum(Metric);
+export const Metric$inboundSchema: z.ZodNativeEnum<typeof Metric> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Metric));
 /** @internal */
 export const Metric$outboundSchema: z.ZodNativeEnum<typeof Metric> =
   Metric$inboundSchema;
 
 /** @internal */
-export const Range$inboundSchema: z.ZodNativeEnum<typeof Range> = z.nativeEnum(
-  Range,
-);
+export const Range$inboundSchema: z.ZodNativeEnum<typeof Range> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Range));
 /** @internal */
 export const Range$outboundSchema: z.ZodNativeEnum<typeof Range> =
   Range$inboundSchema;
@@ -81,19 +80,22 @@ export const Range$outboundSchema: z.ZodNativeEnum<typeof Range> =
 /** @internal */
 export const VirtualMachineMetricsUnit$inboundSchema: z.ZodNativeEnum<
   typeof VirtualMachineMetricsUnit
-> = z.nativeEnum(VirtualMachineMetricsUnit);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(VirtualMachineMetricsUnit));
 /** @internal */
 export const VirtualMachineMetricsUnit$outboundSchema: z.ZodNativeEnum<
   typeof VirtualMachineMetricsUnit
 > = VirtualMachineMetricsUnit$inboundSchema;
 
 /** @internal */
-export const Point$inboundSchema: z.ZodType<Point, z.ZodTypeDef, unknown> = z
-  .object({
-    timestamp: z.string().datetime({ offset: true }).transform(v => new Date(v))
-      .optional(),
-    value: z.number().optional(),
-  });
+export const Point$inboundSchema: z.ZodType<Point, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      timestamp: z.string().datetime({ offset: true }).transform(v =>
+        new Date(v)
+      ).optional(),
+      value: z.number().optional(),
+    })
+  );
 /** @internal */
 export type Point$Outbound = {
   timestamp?: string | undefined;
@@ -105,10 +107,12 @@ export const Point$outboundSchema: z.ZodType<
   Point$Outbound,
   z.ZodTypeDef,
   Point
-> = z.object({
-  timestamp: z.date().transform(v => v.toISOString()).optional(),
-  value: z.number().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    timestamp: z.date().transform(v => v.toISOString()).optional(),
+    value: z.number().optional(),
+  })
+);
 
 export function pointToJSON(point: Point): string {
   return JSON.stringify(Point$outboundSchema.parse(point));
@@ -128,13 +132,15 @@ export const VirtualMachineMetrics$inboundSchema: z.ZodType<
   VirtualMachineMetrics,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  metric: Metric$inboundSchema.optional(),
-  range: Range$inboundSchema.optional(),
-  step: z.string().optional(),
-  unit: VirtualMachineMetricsUnit$inboundSchema.optional(),
-  points: z.array(z.lazy(() => Point$inboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    metric: Metric$inboundSchema.optional(),
+    range: Range$inboundSchema.optional(),
+    step: z.string().optional(),
+    unit: VirtualMachineMetricsUnit$inboundSchema.optional(),
+    points: z.array(z.lazy(() => Point$inboundSchema)).optional(),
+  })
+);
 /** @internal */
 export type VirtualMachineMetrics$Outbound = {
   metric?: string | undefined;
@@ -149,13 +155,15 @@ export const VirtualMachineMetrics$outboundSchema: z.ZodType<
   VirtualMachineMetrics$Outbound,
   z.ZodTypeDef,
   VirtualMachineMetrics
-> = z.object({
-  metric: Metric$outboundSchema.optional(),
-  range: Range$outboundSchema.optional(),
-  step: z.string().optional(),
-  unit: VirtualMachineMetricsUnit$outboundSchema.optional(),
-  points: z.array(z.lazy(() => Point$outboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    metric: Metric$outboundSchema.optional(),
+    range: Range$outboundSchema.optional(),
+    step: z.string().optional(),
+    unit: VirtualMachineMetricsUnit$outboundSchema.optional(),
+    points: z.array(z.lazy(() => Point$outboundSchema)).optional(),
+  })
+);
 
 export function virtualMachineMetricsToJSON(
   virtualMachineMetrics: VirtualMachineMetrics,

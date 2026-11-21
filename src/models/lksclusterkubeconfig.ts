@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -35,7 +35,7 @@ export type LksClusterKubeconfig = {
 /** @internal */
 export const LksClusterKubeconfigType$inboundSchema: z.ZodNativeEnum<
   typeof LksClusterKubeconfigType
-> = z.nativeEnum(LksClusterKubeconfigType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(LksClusterKubeconfigType));
 /** @internal */
 export const LksClusterKubeconfigType$outboundSchema: z.ZodNativeEnum<
   typeof LksClusterKubeconfigType
@@ -46,9 +46,11 @@ export const LksClusterKubeconfigAttributes$inboundSchema: z.ZodType<
   LksClusterKubeconfigAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  kubeconfig: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    kubeconfig: z.string().optional(),
+  })
+);
 /** @internal */
 export type LksClusterKubeconfigAttributes$Outbound = {
   kubeconfig?: string | undefined;
@@ -59,9 +61,11 @@ export const LksClusterKubeconfigAttributes$outboundSchema: z.ZodType<
   LksClusterKubeconfigAttributes$Outbound,
   z.ZodTypeDef,
   LksClusterKubeconfigAttributes
-> = z.object({
-  kubeconfig: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    kubeconfig: z.string().optional(),
+  })
+);
 
 export function lksClusterKubeconfigAttributesToJSON(
   lksClusterKubeconfigAttributes: LksClusterKubeconfigAttributes,
@@ -87,12 +91,14 @@ export const LksClusterKubeconfigData$inboundSchema: z.ZodType<
   LksClusterKubeconfigData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  type: LksClusterKubeconfigType$inboundSchema.optional(),
-  attributes: z.lazy(() => LksClusterKubeconfigAttributes$inboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: LksClusterKubeconfigType$inboundSchema.optional(),
+    attributes: z.lazy(() => LksClusterKubeconfigAttributes$inboundSchema)
+      .optional(),
+  })
+);
 /** @internal */
 export type LksClusterKubeconfigData$Outbound = {
   id?: string | undefined;
@@ -105,12 +111,14 @@ export const LksClusterKubeconfigData$outboundSchema: z.ZodType<
   LksClusterKubeconfigData$Outbound,
   z.ZodTypeDef,
   LksClusterKubeconfigData
-> = z.object({
-  id: z.string().optional(),
-  type: LksClusterKubeconfigType$outboundSchema.optional(),
-  attributes: z.lazy(() => LksClusterKubeconfigAttributes$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: LksClusterKubeconfigType$outboundSchema.optional(),
+    attributes: z.lazy(() => LksClusterKubeconfigAttributes$outboundSchema)
+      .optional(),
+  })
+);
 
 export function lksClusterKubeconfigDataToJSON(
   lksClusterKubeconfigData: LksClusterKubeconfigData,
@@ -134,9 +142,11 @@ export const LksClusterKubeconfig$inboundSchema: z.ZodType<
   LksClusterKubeconfig,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => LksClusterKubeconfigData$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => LksClusterKubeconfigData$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type LksClusterKubeconfig$Outbound = {
   data?: LksClusterKubeconfigData$Outbound | undefined;
@@ -147,9 +157,11 @@ export const LksClusterKubeconfig$outboundSchema: z.ZodType<
   LksClusterKubeconfig$Outbound,
   z.ZodTypeDef,
   LksClusterKubeconfig
-> = z.object({
-  data: z.lazy(() => LksClusterKubeconfigData$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => LksClusterKubeconfigData$outboundSchema).optional(),
+  })
+);
 
 export function lksClusterKubeconfigToJSON(
   lksClusterKubeconfig: LksClusterKubeconfig,

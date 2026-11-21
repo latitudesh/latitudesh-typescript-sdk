@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -21,15 +21,17 @@ export const DeleteProjectUserDataRequest$inboundSchema: z.ZodType<
   DeleteProjectUserDataRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  project_id: z.string(),
-  user_data_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "project_id": "projectId",
-    "user_data_id": "userDataId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    project_id: z.string(),
+    user_data_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "project_id": "projectId",
+      "user_data_id": "userDataId",
+    });
+  })
+);
 /** @internal */
 export type DeleteProjectUserDataRequest$Outbound = {
   project_id: string;
@@ -41,15 +43,17 @@ export const DeleteProjectUserDataRequest$outboundSchema: z.ZodType<
   DeleteProjectUserDataRequest$Outbound,
   z.ZodTypeDef,
   DeleteProjectUserDataRequest
-> = z.object({
-  projectId: z.string(),
-  userDataId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    projectId: "project_id",
-    userDataId: "user_data_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    projectId: z.string(),
+    userDataId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      projectId: "project_id",
+      userDataId: "user_data_id",
+    });
+  })
+);
 
 export function deleteProjectUserDataRequestToJSON(
   deleteProjectUserDataRequest: DeleteProjectUserDataRequest,

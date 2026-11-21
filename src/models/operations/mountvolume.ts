@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -41,7 +41,7 @@ export type MountVolumeRequest = {
 /** @internal */
 export const MountVolumeType2$inboundSchema: z.ZodNativeEnum<
   typeof MountVolumeType2
-> = z.nativeEnum(MountVolumeType2);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(MountVolumeType2));
 /** @internal */
 export const MountVolumeType2$outboundSchema: z.ZodNativeEnum<
   typeof MountVolumeType2
@@ -52,9 +52,11 @@ export const MountVolumeAttributes2$inboundSchema: z.ZodType<
   MountVolumeAttributes2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  nqn: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    nqn: z.string(),
+  })
+);
 /** @internal */
 export type MountVolumeAttributes2$Outbound = {
   nqn: string;
@@ -65,9 +67,11 @@ export const MountVolumeAttributes2$outboundSchema: z.ZodType<
   MountVolumeAttributes2$Outbound,
   z.ZodTypeDef,
   MountVolumeAttributes2
-> = z.object({
-  nqn: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    nqn: z.string(),
+  })
+);
 
 export function mountVolumeAttributes2ToJSON(
   mountVolumeAttributes2: MountVolumeAttributes2,
@@ -91,10 +95,12 @@ export const MountVolumeData2$inboundSchema: z.ZodType<
   MountVolumeData2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: MountVolumeType2$inboundSchema,
-  attributes: z.lazy(() => MountVolumeAttributes2$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: MountVolumeType2$inboundSchema,
+    attributes: z.lazy(() => MountVolumeAttributes2$inboundSchema),
+  })
+);
 /** @internal */
 export type MountVolumeData2$Outbound = {
   type: string;
@@ -106,10 +112,12 @@ export const MountVolumeData2$outboundSchema: z.ZodType<
   MountVolumeData2$Outbound,
   z.ZodTypeDef,
   MountVolumeData2
-> = z.object({
-  type: MountVolumeType2$outboundSchema,
-  attributes: z.lazy(() => MountVolumeAttributes2$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: MountVolumeType2$outboundSchema,
+    attributes: z.lazy(() => MountVolumeAttributes2$outboundSchema),
+  })
+);
 
 export function mountVolumeData2ToJSON(
   mountVolumeData2: MountVolumeData2,
@@ -133,9 +141,11 @@ export const MountVolumeRequestBody2$inboundSchema: z.ZodType<
   MountVolumeRequestBody2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => MountVolumeData2$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => MountVolumeData2$inboundSchema),
+  })
+);
 /** @internal */
 export type MountVolumeRequestBody2$Outbound = {
   data: MountVolumeData2$Outbound;
@@ -146,9 +156,11 @@ export const MountVolumeRequestBody2$outboundSchema: z.ZodType<
   MountVolumeRequestBody2$Outbound,
   z.ZodTypeDef,
   MountVolumeRequestBody2
-> = z.object({
-  data: z.lazy(() => MountVolumeData2$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => MountVolumeData2$outboundSchema),
+  })
+);
 
 export function mountVolumeRequestBody2ToJSON(
   mountVolumeRequestBody2: MountVolumeRequestBody2,
@@ -172,14 +184,16 @@ export const MountVolumeRequest$inboundSchema: z.ZodType<
   MountVolumeRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  RequestBody: z.lazy(() => MountVolumeRequestBody2$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    RequestBody: z.lazy(() => MountVolumeRequestBody2$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type MountVolumeRequest$Outbound = {
   id: string;
@@ -191,14 +205,16 @@ export const MountVolumeRequest$outboundSchema: z.ZodType<
   MountVolumeRequest$Outbound,
   z.ZodTypeDef,
   MountVolumeRequest
-> = z.object({
-  id: z.string(),
-  requestBody: z.lazy(() => MountVolumeRequestBody2$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    requestBody: z.lazy(() => MountVolumeRequestBody2$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function mountVolumeRequestToJSON(
   mountVolumeRequest: MountVolumeRequest,

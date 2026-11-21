@@ -14,6 +14,7 @@ let value: Requirements = {
       label: "BIOS: multithreading",
       category: "bios",
       check: "bios_smt",
+      nodeGroupId: "7",
     },
   ],
   values: {

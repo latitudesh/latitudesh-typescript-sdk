@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 
 export const StoragePlanStorageType = {
@@ -15,7 +16,7 @@ export type StoragePlanStorageType = ClosedEnum<typeof StoragePlanStorageType>;
 /** @internal */
 export const StoragePlanStorageType$inboundSchema: z.ZodNativeEnum<
   typeof StoragePlanStorageType
-> = z.nativeEnum(StoragePlanStorageType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(StoragePlanStorageType));
 /** @internal */
 export const StoragePlanStorageType$outboundSchema: z.ZodNativeEnum<
   typeof StoragePlanStorageType

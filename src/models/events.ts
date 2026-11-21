@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 import {
@@ -25,11 +25,13 @@ export type Events = {
 };
 
 /** @internal */
-export const Events$inboundSchema: z.ZodType<Events, z.ZodTypeDef, unknown> = z
-  .object({
-    data: z.array(EventData$inboundSchema).optional(),
-    meta: PaginationMeta$inboundSchema.optional(),
-  });
+export const Events$inboundSchema: z.ZodType<Events, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      data: z.array(EventData$inboundSchema).optional(),
+      meta: PaginationMeta$inboundSchema.optional(),
+    })
+  );
 /** @internal */
 export type Events$Outbound = {
   data?: Array<EventData$Outbound> | undefined;
@@ -41,10 +43,12 @@ export const Events$outboundSchema: z.ZodType<
   Events$Outbound,
   z.ZodTypeDef,
   Events
-> = z.object({
-  data: z.array(EventData$outboundSchema).optional(),
-  meta: PaginationMeta$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(EventData$outboundSchema).optional(),
+    meta: PaginationMeta$outboundSchema.optional(),
+  })
+);
 
 export function eventsToJSON(events: Events): string {
   return JSON.stringify(Events$outboundSchema.parse(events));

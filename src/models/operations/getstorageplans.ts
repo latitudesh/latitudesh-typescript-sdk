@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -24,15 +24,17 @@ export const GetStoragePlansRequest$inboundSchema: z.ZodType<
   GetStoragePlansRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "filter[storage_type]": z.string().optional(),
-  "filter[storage_class]": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "filter[storage_type]": "filterStorageType",
-    "filter[storage_class]": "filterStorageClass",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "filter[storage_type]": z.string().optional(),
+    "filter[storage_class]": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "filter[storage_type]": "filterStorageType",
+      "filter[storage_class]": "filterStorageClass",
+    });
+  })
+);
 /** @internal */
 export type GetStoragePlansRequest$Outbound = {
   "filter[storage_type]"?: string | undefined;
@@ -44,15 +46,17 @@ export const GetStoragePlansRequest$outboundSchema: z.ZodType<
   GetStoragePlansRequest$Outbound,
   z.ZodTypeDef,
   GetStoragePlansRequest
-> = z.object({
-  filterStorageType: z.string().optional(),
-  filterStorageClass: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    filterStorageType: "filter[storage_type]",
-    filterStorageClass: "filter[storage_class]",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    filterStorageType: z.string().optional(),
+    filterStorageClass: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      filterStorageType: "filter[storage_type]",
+      filterStorageClass: "filter[storage_class]",
+    });
+  })
+);
 
 export function getStoragePlansRequestToJSON(
   getStoragePlansRequest: GetStoragePlansRequest,

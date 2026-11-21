@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -41,7 +41,7 @@ export type CreateApiKey = {
 /** @internal */
 export const CreateApiKeyType$inboundSchema: z.ZodNativeEnum<
   typeof CreateApiKeyType
-> = z.nativeEnum(CreateApiKeyType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CreateApiKeyType));
 /** @internal */
 export const CreateApiKeyType$outboundSchema: z.ZodNativeEnum<
   typeof CreateApiKeyType
@@ -52,16 +52,18 @@ export const CreateApiKeyAttributes$inboundSchema: z.ZodType<
   CreateApiKeyAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string().default("Name of the API Key"),
-  read_only: z.boolean().optional(),
-  allowed_ips: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "read_only": "readOnly",
-    "allowed_ips": "allowedIps",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().default("Name of the API Key"),
+    read_only: z.boolean().optional(),
+    allowed_ips: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "read_only": "readOnly",
+      "allowed_ips": "allowedIps",
+    });
+  })
+);
 /** @internal */
 export type CreateApiKeyAttributes$Outbound = {
   name: string;
@@ -74,16 +76,18 @@ export const CreateApiKeyAttributes$outboundSchema: z.ZodType<
   CreateApiKeyAttributes$Outbound,
   z.ZodTypeDef,
   CreateApiKeyAttributes
-> = z.object({
-  name: z.string().default("Name of the API Key"),
-  readOnly: z.boolean().optional(),
-  allowedIps: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    readOnly: "read_only",
-    allowedIps: "allowed_ips",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().default("Name of the API Key"),
+    readOnly: z.boolean().optional(),
+    allowedIps: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      readOnly: "read_only",
+      allowedIps: "allowed_ips",
+    });
+  })
+);
 
 export function createApiKeyAttributesToJSON(
   createApiKeyAttributes: CreateApiKeyAttributes,
@@ -107,10 +111,12 @@ export const CreateApiKeyData$inboundSchema: z.ZodType<
   CreateApiKeyData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: CreateApiKeyType$inboundSchema,
-  attributes: z.lazy(() => CreateApiKeyAttributes$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CreateApiKeyType$inboundSchema,
+    attributes: z.lazy(() => CreateApiKeyAttributes$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type CreateApiKeyData$Outbound = {
   type: string;
@@ -122,10 +128,12 @@ export const CreateApiKeyData$outboundSchema: z.ZodType<
   CreateApiKeyData$Outbound,
   z.ZodTypeDef,
   CreateApiKeyData
-> = z.object({
-  type: CreateApiKeyType$outboundSchema,
-  attributes: z.lazy(() => CreateApiKeyAttributes$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CreateApiKeyType$outboundSchema,
+    attributes: z.lazy(() => CreateApiKeyAttributes$outboundSchema).optional(),
+  })
+);
 
 export function createApiKeyDataToJSON(
   createApiKeyData: CreateApiKeyData,
@@ -149,9 +157,11 @@ export const CreateApiKey$inboundSchema: z.ZodType<
   CreateApiKey,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => CreateApiKeyData$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => CreateApiKeyData$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type CreateApiKey$Outbound = {
   data?: CreateApiKeyData$Outbound | undefined;
@@ -162,9 +172,11 @@ export const CreateApiKey$outboundSchema: z.ZodType<
   CreateApiKey$Outbound,
   z.ZodTypeDef,
   CreateApiKey
-> = z.object({
-  data: z.lazy(() => CreateApiKeyData$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => CreateApiKeyData$outboundSchema).optional(),
+  })
+);
 
 export function createApiKeyToJSON(createApiKey: CreateApiKey): string {
   return JSON.stringify(CreateApiKey$outboundSchema.parse(createApiKey));

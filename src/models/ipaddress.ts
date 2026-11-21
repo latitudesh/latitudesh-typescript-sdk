@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 import {
@@ -25,7 +25,7 @@ export const IpAddressMeta$inboundSchema: z.ZodType<
   IpAddressMeta,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type IpAddressMeta$Outbound = {};
 
@@ -34,7 +34,7 @@ export const IpAddressMeta$outboundSchema: z.ZodType<
   IpAddressMeta$Outbound,
   z.ZodTypeDef,
   IpAddressMeta
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function ipAddressMetaToJSON(ipAddressMeta: IpAddressMeta): string {
   return JSON.stringify(IpAddressMeta$outboundSchema.parse(ipAddressMeta));
@@ -54,10 +54,12 @@ export const IpAddress$inboundSchema: z.ZodType<
   IpAddress,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: IpAddressData$inboundSchema.optional(),
-  meta: z.lazy(() => IpAddressMeta$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: IpAddressData$inboundSchema.optional(),
+    meta: z.lazy(() => IpAddressMeta$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type IpAddress$Outbound = {
   data?: IpAddressData$Outbound | undefined;
@@ -69,10 +71,12 @@ export const IpAddress$outboundSchema: z.ZodType<
   IpAddress$Outbound,
   z.ZodTypeDef,
   IpAddress
-> = z.object({
-  data: IpAddressData$outboundSchema.optional(),
-  meta: z.lazy(() => IpAddressMeta$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: IpAddressData$outboundSchema.optional(),
+    meta: z.lazy(() => IpAddressMeta$outboundSchema).optional(),
+  })
+);
 
 export function ipAddressToJSON(ipAddress: IpAddress): string {
   return JSON.stringify(IpAddress$outboundSchema.parse(ipAddress));

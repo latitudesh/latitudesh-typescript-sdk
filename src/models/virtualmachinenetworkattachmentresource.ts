@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -50,8 +50,10 @@ export type VirtualMachineNetworkAttachmentResource = {
 
 /** @internal */
 export const VirtualMachineNetworkAttachmentResourceType$inboundSchema:
-  z.ZodNativeEnum<typeof VirtualMachineNetworkAttachmentResourceType> = z
-    .nativeEnum(VirtualMachineNetworkAttachmentResourceType);
+  z.ZodNativeEnum<typeof VirtualMachineNetworkAttachmentResourceType> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(VirtualMachineNetworkAttachmentResourceType)
+    );
 /** @internal */
 export const VirtualMachineNetworkAttachmentResourceType$outboundSchema:
   z.ZodNativeEnum<typeof VirtualMachineNetworkAttachmentResourceType> =
@@ -63,19 +65,21 @@ export const VirtualMachineNetworkAttachmentResourceAttributes$inboundSchema:
     VirtualMachineNetworkAttachmentResourceAttributes,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    virtual_network_id: z.string().optional(),
-    vid: z.number().int().optional(),
-    address: z.nullable(z.string()).optional(),
-    mac_address: z.nullable(z.string()).optional(),
-    pending_restart: z.boolean().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "virtual_network_id": "virtualNetworkId",
-      "mac_address": "macAddress",
-      "pending_restart": "pendingRestart",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      virtual_network_id: z.string().optional(),
+      vid: z.number().int().optional(),
+      address: z.nullable(z.string()).optional(),
+      mac_address: z.nullable(z.string()).optional(),
+      pending_restart: z.boolean().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "virtual_network_id": "virtualNetworkId",
+        "mac_address": "macAddress",
+        "pending_restart": "pendingRestart",
+      });
+    })
+  );
 /** @internal */
 export type VirtualMachineNetworkAttachmentResourceAttributes$Outbound = {
   virtual_network_id?: string | undefined;
@@ -91,19 +95,21 @@ export const VirtualMachineNetworkAttachmentResourceAttributes$outboundSchema:
     VirtualMachineNetworkAttachmentResourceAttributes$Outbound,
     z.ZodTypeDef,
     VirtualMachineNetworkAttachmentResourceAttributes
-  > = z.object({
-    virtualNetworkId: z.string().optional(),
-    vid: z.number().int().optional(),
-    address: z.nullable(z.string()).optional(),
-    macAddress: z.nullable(z.string()).optional(),
-    pendingRestart: z.boolean().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      virtualNetworkId: "virtual_network_id",
-      macAddress: "mac_address",
-      pendingRestart: "pending_restart",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      virtualNetworkId: z.string().optional(),
+      vid: z.number().int().optional(),
+      address: z.nullable(z.string()).optional(),
+      macAddress: z.nullable(z.string()).optional(),
+      pendingRestart: z.boolean().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        virtualNetworkId: "virtual_network_id",
+        macAddress: "mac_address",
+        pendingRestart: "pending_restart",
+      });
+    })
+  );
 
 export function virtualMachineNetworkAttachmentResourceAttributesToJSON(
   virtualMachineNetworkAttachmentResourceAttributes:
@@ -136,13 +142,15 @@ export const VirtualMachineNetworkAttachmentResource$inboundSchema: z.ZodType<
   VirtualMachineNetworkAttachmentResource,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  type: VirtualMachineNetworkAttachmentResourceType$inboundSchema.optional(),
-  attributes: z.lazy(() =>
-    VirtualMachineNetworkAttachmentResourceAttributes$inboundSchema
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: VirtualMachineNetworkAttachmentResourceType$inboundSchema.optional(),
+    attributes: z.lazy(() =>
+      VirtualMachineNetworkAttachmentResourceAttributes$inboundSchema
+    ).optional(),
+  })
+);
 /** @internal */
 export type VirtualMachineNetworkAttachmentResource$Outbound = {
   id?: string | undefined;
@@ -157,13 +165,15 @@ export const VirtualMachineNetworkAttachmentResource$outboundSchema: z.ZodType<
   VirtualMachineNetworkAttachmentResource$Outbound,
   z.ZodTypeDef,
   VirtualMachineNetworkAttachmentResource
-> = z.object({
-  id: z.string().optional(),
-  type: VirtualMachineNetworkAttachmentResourceType$outboundSchema.optional(),
-  attributes: z.lazy(() =>
-    VirtualMachineNetworkAttachmentResourceAttributes$outboundSchema
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: VirtualMachineNetworkAttachmentResourceType$outboundSchema.optional(),
+    attributes: z.lazy(() =>
+      VirtualMachineNetworkAttachmentResourceAttributes$outboundSchema
+    ).optional(),
+  })
+);
 
 export function virtualMachineNetworkAttachmentResourceToJSON(
   virtualMachineNetworkAttachmentResource:

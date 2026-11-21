@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as models from "../index.js";
@@ -20,9 +20,11 @@ export const PostApiKeyResponse$inboundSchema: z.ZodType<
   PostApiKeyResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: models.ApiKey$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: models.ApiKey$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type PostApiKeyResponse$Outbound = {
   data?: models.ApiKey$Outbound | undefined;
@@ -33,9 +35,11 @@ export const PostApiKeyResponse$outboundSchema: z.ZodType<
   PostApiKeyResponse$Outbound,
   z.ZodTypeDef,
   PostApiKeyResponse
-> = z.object({
-  data: models.ApiKey$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: models.ApiKey$outboundSchema.optional(),
+  })
+);
 
 export function postApiKeyResponseToJSON(
   postApiKeyResponse: PostApiKeyResponse,

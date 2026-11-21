@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -63,19 +63,21 @@ export type EventData = {
 /** @internal */
 export const EventDataType$inboundSchema: z.ZodNativeEnum<
   typeof EventDataType
-> = z.nativeEnum(EventDataType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(EventDataType));
 /** @internal */
 export const EventDataType$outboundSchema: z.ZodNativeEnum<
   typeof EventDataType
 > = EventDataType$inboundSchema;
 
 /** @internal */
-export const Author$inboundSchema: z.ZodType<Author, z.ZodTypeDef, unknown> = z
-  .object({
-    id: z.nullable(z.string()).optional(),
-    name: z.nullable(z.string()).optional(),
-    email: z.nullable(z.string()).optional(),
-  });
+export const Author$inboundSchema: z.ZodType<Author, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.nullable(z.string()).optional(),
+      name: z.nullable(z.string()).optional(),
+      email: z.nullable(z.string()).optional(),
+    })
+  );
 /** @internal */
 export type Author$Outbound = {
   id?: string | null | undefined;
@@ -88,11 +90,13 @@ export const Author$outboundSchema: z.ZodType<
   Author$Outbound,
   z.ZodTypeDef,
   Author
-> = z.object({
-  id: z.nullable(z.string()).optional(),
-  name: z.nullable(z.string()).optional(),
-  email: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.nullable(z.string()).optional(),
+    name: z.nullable(z.string()).optional(),
+    email: z.nullable(z.string()).optional(),
+  })
+);
 
 export function authorToJSON(author: Author): string {
   return JSON.stringify(Author$outboundSchema.parse(author));
@@ -112,11 +116,13 @@ export const EventDataProject$inboundSchema: z.ZodType<
   EventDataProject,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.nullable(z.string()).optional(),
-  name: z.nullable(z.string()).optional(),
-  slug: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.nullable(z.string()).optional(),
+    name: z.nullable(z.string()).optional(),
+    slug: z.nullable(z.string()).optional(),
+  })
+);
 /** @internal */
 export type EventDataProject$Outbound = {
   id?: string | null | undefined;
@@ -129,11 +135,13 @@ export const EventDataProject$outboundSchema: z.ZodType<
   EventDataProject$Outbound,
   z.ZodTypeDef,
   EventDataProject
-> = z.object({
-  id: z.nullable(z.string()).optional(),
-  name: z.nullable(z.string()).optional(),
-  slug: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.nullable(z.string()).optional(),
+    name: z.nullable(z.string()).optional(),
+    slug: z.nullable(z.string()).optional(),
+  })
+);
 
 export function eventDataProjectToJSON(
   eventDataProject: EventDataProject,
@@ -157,10 +165,12 @@ export const EventDataTeam$inboundSchema: z.ZodType<
   EventDataTeam,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.nullable(z.string()).optional(),
-  name: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.nullable(z.string()).optional(),
+    name: z.nullable(z.string()).optional(),
+  })
+);
 /** @internal */
 export type EventDataTeam$Outbound = {
   id?: string | null | undefined;
@@ -172,10 +182,12 @@ export const EventDataTeam$outboundSchema: z.ZodType<
   EventDataTeam$Outbound,
   z.ZodTypeDef,
   EventDataTeam
-> = z.object({
-  id: z.nullable(z.string()).optional(),
-  name: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.nullable(z.string()).optional(),
+    name: z.nullable(z.string()).optional(),
+  })
+);
 
 export function eventDataTeamToJSON(eventDataTeam: EventDataTeam): string {
   return JSON.stringify(EventDataTeam$outboundSchema.parse(eventDataTeam));
@@ -191,11 +203,13 @@ export function eventDataTeamFromJSON(
 }
 
 /** @internal */
-export const Target$inboundSchema: z.ZodType<Target, z.ZodTypeDef, unknown> = z
-  .object({
-    id: z.nullable(z.string()).optional(),
-    name: z.string().optional(),
-  });
+export const Target$inboundSchema: z.ZodType<Target, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.nullable(z.string()).optional(),
+      name: z.string().optional(),
+    })
+  );
 /** @internal */
 export type Target$Outbound = {
   id?: string | null | undefined;
@@ -207,10 +221,12 @@ export const Target$outboundSchema: z.ZodType<
   Target$Outbound,
   z.ZodTypeDef,
   Target
-> = z.object({
-  id: z.nullable(z.string()).optional(),
-  name: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.nullable(z.string()).optional(),
+    name: z.string().optional(),
+  })
+);
 
 export function targetToJSON(target: Target): string {
   return JSON.stringify(Target$outboundSchema.parse(target));
@@ -230,7 +246,7 @@ export const Properties$inboundSchema: z.ZodType<
   Properties,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type Properties$Outbound = {};
 
@@ -239,7 +255,7 @@ export const Properties$outboundSchema: z.ZodType<
   Properties$Outbound,
   z.ZodTypeDef,
   Properties
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function propertiesToJSON(properties: Properties): string {
   return JSON.stringify(Properties$outboundSchema.parse(properties));
@@ -259,19 +275,21 @@ export const EventDataAttributes$inboundSchema: z.ZodType<
   EventDataAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  action: z.string().optional(),
-  created_at: z.string().optional(),
-  author: z.lazy(() => Author$inboundSchema).optional(),
-  project: z.lazy(() => EventDataProject$inboundSchema).optional(),
-  team: z.lazy(() => EventDataTeam$inboundSchema).optional(),
-  target: z.lazy(() => Target$inboundSchema).optional(),
-  properties: z.nullable(z.lazy(() => Properties$inboundSchema)).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "created_at": "createdAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    action: z.string().optional(),
+    created_at: z.string().optional(),
+    author: z.lazy(() => Author$inboundSchema).optional(),
+    project: z.lazy(() => EventDataProject$inboundSchema).optional(),
+    team: z.lazy(() => EventDataTeam$inboundSchema).optional(),
+    target: z.lazy(() => Target$inboundSchema).optional(),
+    properties: z.nullable(z.lazy(() => Properties$inboundSchema)).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "created_at": "createdAt",
+    });
+  })
+);
 /** @internal */
 export type EventDataAttributes$Outbound = {
   action?: string | undefined;
@@ -288,19 +306,21 @@ export const EventDataAttributes$outboundSchema: z.ZodType<
   EventDataAttributes$Outbound,
   z.ZodTypeDef,
   EventDataAttributes
-> = z.object({
-  action: z.string().optional(),
-  createdAt: z.string().optional(),
-  author: z.lazy(() => Author$outboundSchema).optional(),
-  project: z.lazy(() => EventDataProject$outboundSchema).optional(),
-  team: z.lazy(() => EventDataTeam$outboundSchema).optional(),
-  target: z.lazy(() => Target$outboundSchema).optional(),
-  properties: z.nullable(z.lazy(() => Properties$outboundSchema)).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    createdAt: "created_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    action: z.string().optional(),
+    createdAt: z.string().optional(),
+    author: z.lazy(() => Author$outboundSchema).optional(),
+    project: z.lazy(() => EventDataProject$outboundSchema).optional(),
+    team: z.lazy(() => EventDataTeam$outboundSchema).optional(),
+    target: z.lazy(() => Target$outboundSchema).optional(),
+    properties: z.nullable(z.lazy(() => Properties$outboundSchema)).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      createdAt: "created_at",
+    });
+  })
+);
 
 export function eventDataAttributesToJSON(
   eventDataAttributes: EventDataAttributes,
@@ -324,11 +344,13 @@ export const EventData$inboundSchema: z.ZodType<
   EventData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  type: EventDataType$inboundSchema.optional(),
-  attributes: z.lazy(() => EventDataAttributes$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: EventDataType$inboundSchema.optional(),
+    attributes: z.lazy(() => EventDataAttributes$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type EventData$Outbound = {
   id?: string | undefined;
@@ -341,11 +363,13 @@ export const EventData$outboundSchema: z.ZodType<
   EventData$Outbound,
   z.ZodTypeDef,
   EventData
-> = z.object({
-  id: z.string().optional(),
-  type: EventDataType$outboundSchema.optional(),
-  attributes: z.lazy(() => EventDataAttributes$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: EventDataType$outboundSchema.optional(),
+    attributes: z.lazy(() => EventDataAttributes$outboundSchema).optional(),
+  })
+);
 
 export function eventDataToJSON(eventData: EventData): string {
   return JSON.stringify(EventData$outboundSchema.parse(eventData));

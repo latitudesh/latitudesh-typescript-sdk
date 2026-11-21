@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -17,13 +17,15 @@ export const GetTrafficQuotaRequest$inboundSchema: z.ZodType<
   GetTrafficQuotaRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "filter[project]": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "filter[project]": "filterProject",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "filter[project]": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "filter[project]": "filterProject",
+    });
+  })
+);
 /** @internal */
 export type GetTrafficQuotaRequest$Outbound = {
   "filter[project]"?: string | undefined;
@@ -34,13 +36,15 @@ export const GetTrafficQuotaRequest$outboundSchema: z.ZodType<
   GetTrafficQuotaRequest$Outbound,
   z.ZodTypeDef,
   GetTrafficQuotaRequest
-> = z.object({
-  filterProject: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    filterProject: "filter[project]",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    filterProject: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      filterProject: "filter[project]",
+    });
+  })
+);
 
 export function getTrafficQuotaRequestToJSON(
   getTrafficQuotaRequest: GetTrafficQuotaRequest,

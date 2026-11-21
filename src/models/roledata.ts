@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -28,7 +28,7 @@ export type RoleData = {
 
 /** @internal */
 export const RoleDataType$inboundSchema: z.ZodNativeEnum<typeof RoleDataType> =
-  z.nativeEnum(RoleDataType);
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(RoleDataType));
 /** @internal */
 export const RoleDataType$outboundSchema: z.ZodNativeEnum<typeof RoleDataType> =
   RoleDataType$inboundSchema;
@@ -38,9 +38,11 @@ export const RoleDataAttributes$inboundSchema: z.ZodType<
   RoleDataAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+  })
+);
 /** @internal */
 export type RoleDataAttributes$Outbound = {
   name?: string | undefined;
@@ -51,9 +53,11 @@ export const RoleDataAttributes$outboundSchema: z.ZodType<
   RoleDataAttributes$Outbound,
   z.ZodTypeDef,
   RoleDataAttributes
-> = z.object({
-  name: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+  })
+);
 
 export function roleDataAttributesToJSON(
   roleDataAttributes: RoleDataAttributes,
@@ -77,11 +81,13 @@ export const RoleData$inboundSchema: z.ZodType<
   RoleData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  type: RoleDataType$inboundSchema.optional(),
-  attributes: z.lazy(() => RoleDataAttributes$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: RoleDataType$inboundSchema.optional(),
+    attributes: z.lazy(() => RoleDataAttributes$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type RoleData$Outbound = {
   id?: string | undefined;
@@ -94,11 +100,13 @@ export const RoleData$outboundSchema: z.ZodType<
   RoleData$Outbound,
   z.ZodTypeDef,
   RoleData
-> = z.object({
-  id: z.string().optional(),
-  type: RoleDataType$outboundSchema.optional(),
-  attributes: z.lazy(() => RoleDataAttributes$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: RoleDataType$outboundSchema.optional(),
+    attributes: z.lazy(() => RoleDataAttributes$outboundSchema).optional(),
+  })
+);
 
 export function roleDataToJSON(roleData: RoleData): string {
   return JSON.stringify(RoleData$outboundSchema.parse(roleData));

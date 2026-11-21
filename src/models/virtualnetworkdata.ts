@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -79,7 +79,7 @@ export type VirtualNetworkData = {
 /** @internal */
 export const VirtualNetworkDataType$inboundSchema: z.ZodNativeEnum<
   typeof VirtualNetworkDataType
-> = z.nativeEnum(VirtualNetworkDataType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(VirtualNetworkDataType));
 /** @internal */
 export const VirtualNetworkDataType$outboundSchema: z.ZodNativeEnum<
   typeof VirtualNetworkDataType
@@ -90,12 +90,14 @@ export const VirtualNetworkDataSite$inboundSchema: z.ZodType<
   VirtualNetworkDataSite,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  facility: z.string().optional(),
-  name: z.string().optional(),
-  slug: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    facility: z.string().optional(),
+    name: z.string().optional(),
+    slug: z.string().optional(),
+  })
+);
 /** @internal */
 export type VirtualNetworkDataSite$Outbound = {
   id?: string | undefined;
@@ -109,12 +111,14 @@ export const VirtualNetworkDataSite$outboundSchema: z.ZodType<
   VirtualNetworkDataSite$Outbound,
   z.ZodTypeDef,
   VirtualNetworkDataSite
-> = z.object({
-  id: z.string().optional(),
-  facility: z.string().optional(),
-  name: z.string().optional(),
-  slug: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    facility: z.string().optional(),
+    name: z.string().optional(),
+    slug: z.string().optional(),
+  })
+);
 
 export function virtualNetworkDataSiteToJSON(
   virtualNetworkDataSite: VirtualNetworkDataSite,
@@ -138,11 +142,13 @@ export const VirtualNetworkDataRegion$inboundSchema: z.ZodType<
   VirtualNetworkDataRegion,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  city: z.string().optional(),
-  country: z.string().optional(),
-  site: z.lazy(() => VirtualNetworkDataSite$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    city: z.string().optional(),
+    country: z.string().optional(),
+    site: z.lazy(() => VirtualNetworkDataSite$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type VirtualNetworkDataRegion$Outbound = {
   city?: string | undefined;
@@ -155,11 +161,13 @@ export const VirtualNetworkDataRegion$outboundSchema: z.ZodType<
   VirtualNetworkDataRegion$Outbound,
   z.ZodTypeDef,
   VirtualNetworkDataRegion
-> = z.object({
-  city: z.string().optional(),
-  country: z.string().optional(),
-  site: z.lazy(() => VirtualNetworkDataSite$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    city: z.string().optional(),
+    country: z.string().optional(),
+    site: z.lazy(() => VirtualNetworkDataSite$outboundSchema).optional(),
+  })
+);
 
 export function virtualNetworkDataRegionToJSON(
   virtualNetworkDataRegion: VirtualNetworkDataRegion,
@@ -183,12 +191,14 @@ export const VirtualNetworkDataTag$inboundSchema: z.ZodType<
   VirtualNetworkDataTag,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  description: z.nullable(z.string()).optional(),
-  color: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    name: z.string().optional(),
+    description: z.nullable(z.string()).optional(),
+    color: z.nullable(z.string()).optional(),
+  })
+);
 /** @internal */
 export type VirtualNetworkDataTag$Outbound = {
   id?: string | undefined;
@@ -202,12 +212,14 @@ export const VirtualNetworkDataTag$outboundSchema: z.ZodType<
   VirtualNetworkDataTag$Outbound,
   z.ZodTypeDef,
   VirtualNetworkDataTag
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  description: z.nullable(z.string()).optional(),
-  color: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    name: z.string().optional(),
+    description: z.nullable(z.string()).optional(),
+    color: z.nullable(z.string()).optional(),
+  })
+);
 
 export function virtualNetworkDataTagToJSON(
   virtualNetworkDataTag: VirtualNetworkDataTag,
@@ -231,24 +243,26 @@ export const VirtualNetworkDataAttributes$inboundSchema: z.ZodType<
   VirtualNetworkDataAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  vid: z.number().int().optional(),
-  name: z.string().optional(),
-  description: z.string().optional(),
-  project: ProjectInclude$inboundSchema.optional(),
-  region: z.lazy(() => VirtualNetworkDataRegion$inboundSchema).optional(),
-  created_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  assignments_count: z.number().int().optional(),
-  tags: z.array(z.lazy(() => VirtualNetworkDataTag$inboundSchema)).optional(),
-  storage: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "created_at": "createdAt",
-    "assignments_count": "assignmentsCount",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    vid: z.number().int().optional(),
+    name: z.string().optional(),
+    description: z.string().optional(),
+    project: ProjectInclude$inboundSchema.optional(),
+    region: z.lazy(() => VirtualNetworkDataRegion$inboundSchema).optional(),
+    created_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    assignments_count: z.number().int().optional(),
+    tags: z.array(z.lazy(() => VirtualNetworkDataTag$inboundSchema)).optional(),
+    storage: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "created_at": "createdAt",
+      "assignments_count": "assignmentsCount",
+    });
+  })
+);
 /** @internal */
 export type VirtualNetworkDataAttributes$Outbound = {
   vid?: number | undefined;
@@ -267,22 +281,25 @@ export const VirtualNetworkDataAttributes$outboundSchema: z.ZodType<
   VirtualNetworkDataAttributes$Outbound,
   z.ZodTypeDef,
   VirtualNetworkDataAttributes
-> = z.object({
-  vid: z.number().int().optional(),
-  name: z.string().optional(),
-  description: z.string().optional(),
-  project: ProjectInclude$outboundSchema.optional(),
-  region: z.lazy(() => VirtualNetworkDataRegion$outboundSchema).optional(),
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  assignmentsCount: z.number().int().optional(),
-  tags: z.array(z.lazy(() => VirtualNetworkDataTag$outboundSchema)).optional(),
-  storage: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    createdAt: "created_at",
-    assignmentsCount: "assignments_count",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    vid: z.number().int().optional(),
+    name: z.string().optional(),
+    description: z.string().optional(),
+    project: ProjectInclude$outboundSchema.optional(),
+    region: z.lazy(() => VirtualNetworkDataRegion$outboundSchema).optional(),
+    createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    assignmentsCount: z.number().int().optional(),
+    tags: z.array(z.lazy(() => VirtualNetworkDataTag$outboundSchema))
+      .optional(),
+    storage: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      createdAt: "created_at",
+      assignmentsCount: "assignments_count",
+    });
+  })
+);
 
 export function virtualNetworkDataAttributesToJSON(
   virtualNetworkDataAttributes: VirtualNetworkDataAttributes,
@@ -308,12 +325,14 @@ export const VirtualNetworkData$inboundSchema: z.ZodType<
   VirtualNetworkData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  type: VirtualNetworkDataType$inboundSchema.optional(),
-  attributes: z.lazy(() => VirtualNetworkDataAttributes$inboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: VirtualNetworkDataType$inboundSchema.optional(),
+    attributes: z.lazy(() => VirtualNetworkDataAttributes$inboundSchema)
+      .optional(),
+  })
+);
 /** @internal */
 export type VirtualNetworkData$Outbound = {
   id?: string | undefined;
@@ -326,12 +345,14 @@ export const VirtualNetworkData$outboundSchema: z.ZodType<
   VirtualNetworkData$Outbound,
   z.ZodTypeDef,
   VirtualNetworkData
-> = z.object({
-  id: z.string().optional(),
-  type: VirtualNetworkDataType$outboundSchema.optional(),
-  attributes: z.lazy(() => VirtualNetworkDataAttributes$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: VirtualNetworkDataType$outboundSchema.optional(),
+    attributes: z.lazy(() => VirtualNetworkDataAttributes$outboundSchema)
+      .optional(),
+  })
+);
 
 export function virtualNetworkDataToJSON(
   virtualNetworkData: VirtualNetworkData,

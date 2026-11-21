@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 import {
@@ -25,7 +25,7 @@ export const VirtualMachineMeta$inboundSchema: z.ZodType<
   VirtualMachineMeta,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type VirtualMachineMeta$Outbound = {};
 
@@ -34,7 +34,7 @@ export const VirtualMachineMeta$outboundSchema: z.ZodType<
   VirtualMachineMeta$Outbound,
   z.ZodTypeDef,
   VirtualMachineMeta
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function virtualMachineMetaToJSON(
   virtualMachineMeta: VirtualMachineMeta,
@@ -58,10 +58,12 @@ export const VirtualMachine$inboundSchema: z.ZodType<
   VirtualMachine,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: VirtualMachineAttributes$inboundSchema.optional(),
-  meta: z.lazy(() => VirtualMachineMeta$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: VirtualMachineAttributes$inboundSchema.optional(),
+    meta: z.lazy(() => VirtualMachineMeta$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type VirtualMachine$Outbound = {
   data?: VirtualMachineAttributes$Outbound | undefined;
@@ -73,10 +75,12 @@ export const VirtualMachine$outboundSchema: z.ZodType<
   VirtualMachine$Outbound,
   z.ZodTypeDef,
   VirtualMachine
-> = z.object({
-  data: VirtualMachineAttributes$outboundSchema.optional(),
-  meta: z.lazy(() => VirtualMachineMeta$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: VirtualMachineAttributes$outboundSchema.optional(),
+    meta: z.lazy(() => VirtualMachineMeta$outboundSchema).optional(),
+  })
+);
 
 export function virtualMachineToJSON(virtualMachine: VirtualMachine): string {
   return JSON.stringify(VirtualMachine$outboundSchema.parse(virtualMachine));

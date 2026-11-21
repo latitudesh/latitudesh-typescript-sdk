@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -57,7 +57,7 @@ export type FirewallServer = {
 /** @internal */
 export const FirewallServerType$inboundSchema: z.ZodNativeEnum<
   typeof FirewallServerType
-> = z.nativeEnum(FirewallServerType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(FirewallServerType));
 /** @internal */
 export const FirewallServerType$outboundSchema: z.ZodNativeEnum<
   typeof FirewallServerType
@@ -68,15 +68,17 @@ export const FirewallServerServer$inboundSchema: z.ZodType<
   FirewallServerServer,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  hostname: z.string().optional(),
-  primary_ipv4: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "primary_ipv4": "primaryIpv4",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    hostname: z.string().optional(),
+    primary_ipv4: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "primary_ipv4": "primaryIpv4",
+    });
+  })
+);
 /** @internal */
 export type FirewallServerServer$Outbound = {
   id?: string | undefined;
@@ -89,15 +91,17 @@ export const FirewallServerServer$outboundSchema: z.ZodType<
   FirewallServerServer$Outbound,
   z.ZodTypeDef,
   FirewallServerServer
-> = z.object({
-  id: z.string().optional(),
-  hostname: z.string().optional(),
-  primaryIpv4: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    primaryIpv4: "primary_ipv4",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    hostname: z.string().optional(),
+    primaryIpv4: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      primaryIpv4: "primary_ipv4",
+    });
+  })
+);
 
 export function firewallServerServerToJSON(
   firewallServerServer: FirewallServerServer,
@@ -121,15 +125,17 @@ export const FirewallServerVirtualMachine$inboundSchema: z.ZodType<
   FirewallServerVirtualMachine,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  hostname: z.string().optional(),
-  primary_ipv4: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "primary_ipv4": "primaryIpv4",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    hostname: z.string().optional(),
+    primary_ipv4: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "primary_ipv4": "primaryIpv4",
+    });
+  })
+);
 /** @internal */
 export type FirewallServerVirtualMachine$Outbound = {
   id?: string | undefined;
@@ -142,15 +148,17 @@ export const FirewallServerVirtualMachine$outboundSchema: z.ZodType<
   FirewallServerVirtualMachine$Outbound,
   z.ZodTypeDef,
   FirewallServerVirtualMachine
-> = z.object({
-  id: z.string().optional(),
-  hostname: z.string().optional(),
-  primaryIpv4: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    primaryIpv4: "primary_ipv4",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    hostname: z.string().optional(),
+    primaryIpv4: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      primaryIpv4: "primary_ipv4",
+    });
+  })
+);
 
 export function firewallServerVirtualMachineToJSON(
   firewallServerVirtualMachine: FirewallServerVirtualMachine,
@@ -176,17 +184,19 @@ export const FirewallServerAttributes$inboundSchema: z.ZodType<
   FirewallServerAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  server: z.lazy(() => FirewallServerServer$inboundSchema).optional(),
-  virtual_machine: z.lazy(() => FirewallServerVirtualMachine$inboundSchema)
-    .optional(),
-  firewall_id: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "virtual_machine": "virtualMachine",
-    "firewall_id": "firewallId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    server: z.lazy(() => FirewallServerServer$inboundSchema).optional(),
+    virtual_machine: z.lazy(() => FirewallServerVirtualMachine$inboundSchema)
+      .optional(),
+    firewall_id: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "virtual_machine": "virtualMachine",
+      "firewall_id": "firewallId",
+    });
+  })
+);
 /** @internal */
 export type FirewallServerAttributes$Outbound = {
   server?: FirewallServerServer$Outbound | undefined;
@@ -199,17 +209,19 @@ export const FirewallServerAttributes$outboundSchema: z.ZodType<
   FirewallServerAttributes$Outbound,
   z.ZodTypeDef,
   FirewallServerAttributes
-> = z.object({
-  server: z.lazy(() => FirewallServerServer$outboundSchema).optional(),
-  virtualMachine: z.lazy(() => FirewallServerVirtualMachine$outboundSchema)
-    .optional(),
-  firewallId: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    virtualMachine: "virtual_machine",
-    firewallId: "firewall_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    server: z.lazy(() => FirewallServerServer$outboundSchema).optional(),
+    virtualMachine: z.lazy(() => FirewallServerVirtualMachine$outboundSchema)
+      .optional(),
+    firewallId: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      virtualMachine: "virtual_machine",
+      firewallId: "firewall_id",
+    });
+  })
+);
 
 export function firewallServerAttributesToJSON(
   firewallServerAttributes: FirewallServerAttributes,
@@ -233,11 +245,13 @@ export const FirewallServerData$inboundSchema: z.ZodType<
   FirewallServerData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  type: FirewallServerType$inboundSchema.optional(),
-  attributes: z.lazy(() => FirewallServerAttributes$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: FirewallServerType$inboundSchema.optional(),
+    attributes: z.lazy(() => FirewallServerAttributes$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type FirewallServerData$Outbound = {
   id?: string | undefined;
@@ -250,11 +264,14 @@ export const FirewallServerData$outboundSchema: z.ZodType<
   FirewallServerData$Outbound,
   z.ZodTypeDef,
   FirewallServerData
-> = z.object({
-  id: z.string().optional(),
-  type: FirewallServerType$outboundSchema.optional(),
-  attributes: z.lazy(() => FirewallServerAttributes$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: FirewallServerType$outboundSchema.optional(),
+    attributes: z.lazy(() => FirewallServerAttributes$outboundSchema)
+      .optional(),
+  })
+);
 
 export function firewallServerDataToJSON(
   firewallServerData: FirewallServerData,
@@ -278,9 +295,11 @@ export const FirewallServer$inboundSchema: z.ZodType<
   FirewallServer,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => FirewallServerData$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => FirewallServerData$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type FirewallServer$Outbound = {
   data?: FirewallServerData$Outbound | undefined;
@@ -291,9 +310,11 @@ export const FirewallServer$outboundSchema: z.ZodType<
   FirewallServer$Outbound,
   z.ZodTypeDef,
   FirewallServer
-> = z.object({
-  data: z.lazy(() => FirewallServerData$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => FirewallServerData$outboundSchema).optional(),
+  })
+);
 
 export function firewallServerToJSON(firewallServer: FirewallServer): string {
   return JSON.stringify(FirewallServer$outboundSchema.parse(firewallServer));

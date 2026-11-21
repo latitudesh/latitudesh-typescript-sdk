@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -101,15 +101,15 @@ export type CreateBaselineRequest = {
 /** @internal */
 export const CreateBaselineType2$inboundSchema: z.ZodNativeEnum<
   typeof CreateBaselineType2
-> = z.nativeEnum(CreateBaselineType2);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CreateBaselineType2));
 /** @internal */
 export const CreateBaselineType2$outboundSchema: z.ZodNativeEnum<
   typeof CreateBaselineType2
 > = CreateBaselineType2$inboundSchema;
 
 /** @internal */
-export const TargetType2$inboundSchema: z.ZodNativeEnum<typeof TargetType2> = z
-  .nativeEnum(TargetType2);
+export const TargetType2$inboundSchema: z.ZodNativeEnum<typeof TargetType2> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(TargetType2));
 /** @internal */
 export const TargetType2$outboundSchema: z.ZodNativeEnum<typeof TargetType2> =
   TargetType2$inboundSchema;
@@ -117,7 +117,7 @@ export const TargetType2$outboundSchema: z.ZodNativeEnum<typeof TargetType2> =
 /** @internal */
 export const CreateBaselineRaid2$inboundSchema: z.ZodNativeEnum<
   typeof CreateBaselineRaid2
-> = z.nativeEnum(CreateBaselineRaid2);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CreateBaselineRaid2));
 /** @internal */
 export const CreateBaselineRaid2$outboundSchema: z.ZodNativeEnum<
   typeof CreateBaselineRaid2
@@ -128,7 +128,7 @@ export const CreateBaselineBios2$inboundSchema: z.ZodType<
   CreateBaselineBios2,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type CreateBaselineBios2$Outbound = {};
 
@@ -137,7 +137,7 @@ export const CreateBaselineBios2$outboundSchema: z.ZodType<
   CreateBaselineBios2$Outbound,
   z.ZodTypeDef,
   CreateBaselineBios2
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function createBaselineBios2ToJSON(
   createBaselineBios2: CreateBaselineBios2,
@@ -161,26 +161,29 @@ export const CreateBaselineAttributes2$inboundSchema: z.ZodType<
   CreateBaselineAttributes2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string(),
-  description: z.nullable(z.string()).optional(),
-  target_type: TargetType2$inboundSchema,
-  operating_system: z.string(),
-  platforms: z.array(z.string()).optional(),
-  ssh_key_ids: z.array(z.string()).optional(),
-  user_data_id: z.nullable(z.string()).optional(),
-  disk_layout: z.array(models.BaselineDiskLayoutGroup$inboundSchema).optional(),
-  raid: z.nullable(CreateBaselineRaid2$inboundSchema).optional(),
-  bios: z.lazy(() => CreateBaselineBios2$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "target_type": "targetType",
-    "operating_system": "operatingSystem",
-    "ssh_key_ids": "sshKeyIds",
-    "user_data_id": "userDataId",
-    "disk_layout": "diskLayout",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    description: z.nullable(z.string()).optional(),
+    target_type: TargetType2$inboundSchema,
+    operating_system: z.string(),
+    platforms: z.array(z.string()).optional(),
+    ssh_key_ids: z.array(z.string()).optional(),
+    user_data_id: z.nullable(z.string()).optional(),
+    disk_layout: z.array(models.BaselineDiskLayoutGroup$inboundSchema)
+      .optional(),
+    raid: z.nullable(CreateBaselineRaid2$inboundSchema).optional(),
+    bios: z.lazy(() => CreateBaselineBios2$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "target_type": "targetType",
+      "operating_system": "operatingSystem",
+      "ssh_key_ids": "sshKeyIds",
+      "user_data_id": "userDataId",
+      "disk_layout": "diskLayout",
+    });
+  })
+);
 /** @internal */
 export type CreateBaselineAttributes2$Outbound = {
   name: string;
@@ -200,26 +203,29 @@ export const CreateBaselineAttributes2$outboundSchema: z.ZodType<
   CreateBaselineAttributes2$Outbound,
   z.ZodTypeDef,
   CreateBaselineAttributes2
-> = z.object({
-  name: z.string(),
-  description: z.nullable(z.string()).optional(),
-  targetType: TargetType2$outboundSchema,
-  operatingSystem: z.string(),
-  platforms: z.array(z.string()).optional(),
-  sshKeyIds: z.array(z.string()).optional(),
-  userDataId: z.nullable(z.string()).optional(),
-  diskLayout: z.array(models.BaselineDiskLayoutGroup$outboundSchema).optional(),
-  raid: z.nullable(CreateBaselineRaid2$outboundSchema).optional(),
-  bios: z.lazy(() => CreateBaselineBios2$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    targetType: "target_type",
-    operatingSystem: "operating_system",
-    sshKeyIds: "ssh_key_ids",
-    userDataId: "user_data_id",
-    diskLayout: "disk_layout",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    description: z.nullable(z.string()).optional(),
+    targetType: TargetType2$outboundSchema,
+    operatingSystem: z.string(),
+    platforms: z.array(z.string()).optional(),
+    sshKeyIds: z.array(z.string()).optional(),
+    userDataId: z.nullable(z.string()).optional(),
+    diskLayout: z.array(models.BaselineDiskLayoutGroup$outboundSchema)
+      .optional(),
+    raid: z.nullable(CreateBaselineRaid2$outboundSchema).optional(),
+    bios: z.lazy(() => CreateBaselineBios2$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      targetType: "target_type",
+      operatingSystem: "operating_system",
+      sshKeyIds: "ssh_key_ids",
+      userDataId: "user_data_id",
+      diskLayout: "disk_layout",
+    });
+  })
+);
 
 export function createBaselineAttributes2ToJSON(
   createBaselineAttributes2: CreateBaselineAttributes2,
@@ -243,10 +249,13 @@ export const CreateBaselineData2$inboundSchema: z.ZodType<
   CreateBaselineData2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: CreateBaselineType2$inboundSchema.optional(),
-  attributes: z.lazy(() => CreateBaselineAttributes2$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CreateBaselineType2$inboundSchema.optional(),
+    attributes: z.lazy(() => CreateBaselineAttributes2$inboundSchema)
+      .optional(),
+  })
+);
 /** @internal */
 export type CreateBaselineData2$Outbound = {
   type?: string | undefined;
@@ -258,10 +267,13 @@ export const CreateBaselineData2$outboundSchema: z.ZodType<
   CreateBaselineData2$Outbound,
   z.ZodTypeDef,
   CreateBaselineData2
-> = z.object({
-  type: CreateBaselineType2$outboundSchema.optional(),
-  attributes: z.lazy(() => CreateBaselineAttributes2$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CreateBaselineType2$outboundSchema.optional(),
+    attributes: z.lazy(() => CreateBaselineAttributes2$outboundSchema)
+      .optional(),
+  })
+);
 
 export function createBaselineData2ToJSON(
   createBaselineData2: CreateBaselineData2,
@@ -285,9 +297,11 @@ export const CreateBaselineRequest$inboundSchema: z.ZodType<
   CreateBaselineRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => CreateBaselineData2$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => CreateBaselineData2$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type CreateBaselineRequest$Outbound = {
   data?: CreateBaselineData2$Outbound | undefined;
@@ -298,9 +312,11 @@ export const CreateBaselineRequest$outboundSchema: z.ZodType<
   CreateBaselineRequest$Outbound,
   z.ZodTypeDef,
   CreateBaselineRequest
-> = z.object({
-  data: z.lazy(() => CreateBaselineData2$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => CreateBaselineData2$outboundSchema).optional(),
+  })
+);
 
 export function createBaselineRequestToJSON(
   createBaselineRequest: CreateBaselineRequest,

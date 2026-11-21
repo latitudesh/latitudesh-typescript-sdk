@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as models from "../index.js";
@@ -69,34 +69,36 @@ export const GetEventsRequest$inboundSchema: z.ZodType<
   GetEventsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "filter[author]": z.string().optional(),
-  "filter[project]": z.string().optional(),
-  "filter[target_name]": z.array(z.string()).optional(),
-  "filter[target_id]": z.string().optional(),
-  "filter[action]": z.string().optional(),
-  "filter[created_at][gte]": z.string().optional(),
-  "filter[created_at][lte]": z.string().optional(),
-  "filter[created_at]": z.array(z.string()).optional(),
-  "page[size]": z.number().int().default(20),
-  "page[number]": z.number().int().default(1),
-  "stats[total]": z.string().optional(),
-  sort: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "filter[author]": "filterAuthor",
-    "filter[project]": "filterProject",
-    "filter[target_name]": "filterTargetName",
-    "filter[target_id]": "filterTargetId",
-    "filter[action]": "filterAction",
-    "filter[created_at][gte]": "filterCreatedAtGte",
-    "filter[created_at][lte]": "filterCreatedAtLte",
-    "filter[created_at]": "filterCreatedAt",
-    "page[size]": "pageSize",
-    "page[number]": "pageNumber",
-    "stats[total]": "statsTotal",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "filter[author]": z.string().optional(),
+    "filter[project]": z.string().optional(),
+    "filter[target_name]": z.array(z.string()).optional(),
+    "filter[target_id]": z.string().optional(),
+    "filter[action]": z.string().optional(),
+    "filter[created_at][gte]": z.string().optional(),
+    "filter[created_at][lte]": z.string().optional(),
+    "filter[created_at]": z.array(z.string()).optional(),
+    "page[size]": z.number().int().default(20),
+    "page[number]": z.number().int().default(1),
+    "stats[total]": z.string().optional(),
+    sort: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "filter[author]": "filterAuthor",
+      "filter[project]": "filterProject",
+      "filter[target_name]": "filterTargetName",
+      "filter[target_id]": "filterTargetId",
+      "filter[action]": "filterAction",
+      "filter[created_at][gte]": "filterCreatedAtGte",
+      "filter[created_at][lte]": "filterCreatedAtLte",
+      "filter[created_at]": "filterCreatedAt",
+      "page[size]": "pageSize",
+      "page[number]": "pageNumber",
+      "stats[total]": "statsTotal",
+    });
+  })
+);
 /** @internal */
 export type GetEventsRequest$Outbound = {
   "filter[author]"?: string | undefined;
@@ -118,34 +120,36 @@ export const GetEventsRequest$outboundSchema: z.ZodType<
   GetEventsRequest$Outbound,
   z.ZodTypeDef,
   GetEventsRequest
-> = z.object({
-  filterAuthor: z.string().optional(),
-  filterProject: z.string().optional(),
-  filterTargetName: z.array(z.string()).optional(),
-  filterTargetId: z.string().optional(),
-  filterAction: z.string().optional(),
-  filterCreatedAtGte: z.string().optional(),
-  filterCreatedAtLte: z.string().optional(),
-  filterCreatedAt: z.array(z.string()).optional(),
-  pageSize: z.number().int().default(20),
-  pageNumber: z.number().int().default(1),
-  statsTotal: z.string().optional(),
-  sort: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    filterAuthor: "filter[author]",
-    filterProject: "filter[project]",
-    filterTargetName: "filter[target_name]",
-    filterTargetId: "filter[target_id]",
-    filterAction: "filter[action]",
-    filterCreatedAtGte: "filter[created_at][gte]",
-    filterCreatedAtLte: "filter[created_at][lte]",
-    filterCreatedAt: "filter[created_at]",
-    pageSize: "page[size]",
-    pageNumber: "page[number]",
-    statsTotal: "stats[total]",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    filterAuthor: z.string().optional(),
+    filterProject: z.string().optional(),
+    filterTargetName: z.array(z.string()).optional(),
+    filterTargetId: z.string().optional(),
+    filterAction: z.string().optional(),
+    filterCreatedAtGte: z.string().optional(),
+    filterCreatedAtLte: z.string().optional(),
+    filterCreatedAt: z.array(z.string()).optional(),
+    pageSize: z.number().int().default(20),
+    pageNumber: z.number().int().default(1),
+    statsTotal: z.string().optional(),
+    sort: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      filterAuthor: "filter[author]",
+      filterProject: "filter[project]",
+      filterTargetName: "filter[target_name]",
+      filterTargetId: "filter[target_id]",
+      filterAction: "filter[action]",
+      filterCreatedAtGte: "filter[created_at][gte]",
+      filterCreatedAtLte: "filter[created_at][lte]",
+      filterCreatedAt: "filter[created_at]",
+      pageSize: "page[size]",
+      pageNumber: "page[number]",
+      statsTotal: "stats[total]",
+    });
+  })
+);
 
 export function getEventsRequestToJSON(
   getEventsRequest: GetEventsRequest,
@@ -169,13 +173,15 @@ export const GetEventsResponse$inboundSchema: z.ZodType<
   GetEventsResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  Result: models.Events$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "Result": "result",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    Result: models.Events$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "Result": "result",
+    });
+  })
+);
 /** @internal */
 export type GetEventsResponse$Outbound = {
   Result: models.Events$Outbound;
@@ -186,13 +192,15 @@ export const GetEventsResponse$outboundSchema: z.ZodType<
   GetEventsResponse$Outbound,
   z.ZodTypeDef,
   GetEventsResponse
-> = z.object({
-  result: models.Events$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    result: "Result",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    result: models.Events$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      result: "Result",
+    });
+  })
+);
 
 export function getEventsResponseToJSON(
   getEventsResponse: GetEventsResponse,

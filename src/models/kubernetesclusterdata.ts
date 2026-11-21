@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import * as openEnums from "../types/enums.js";
 import { ClosedEnum, OpenEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
@@ -345,18 +345,22 @@ export const KubernetesClusterDataPhase$inboundSchema: z.ZodType<
   KubernetesClusterDataPhase,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(KubernetesClusterDataPhase);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(KubernetesClusterDataPhase)
+);
 /** @internal */
 export const KubernetesClusterDataPhase$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   KubernetesClusterDataPhase
-> = openEnums.outboundSchema(KubernetesClusterDataPhase);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(KubernetesClusterDataPhase)
+);
 
 /** @internal */
 export const VersionStatus$inboundSchema: z.ZodNativeEnum<
   typeof VersionStatus
-> = z.nativeEnum(VersionStatus);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(VersionStatus));
 /** @internal */
 export const VersionStatus$outboundSchema: z.ZodNativeEnum<
   typeof VersionStatus
@@ -367,15 +371,17 @@ export const ControlPlane$inboundSchema: z.ZodType<
   ControlPlane,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ready: z.boolean().optional(),
-  replicas: z.number().int().optional(),
-  ready_replicas: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "ready_replicas": "readyReplicas",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ready: z.boolean().optional(),
+    replicas: z.number().int().optional(),
+    ready_replicas: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ready_replicas": "readyReplicas",
+    });
+  })
+);
 /** @internal */
 export type ControlPlane$Outbound = {
   ready?: boolean | undefined;
@@ -388,15 +394,17 @@ export const ControlPlane$outboundSchema: z.ZodType<
   ControlPlane$Outbound,
   z.ZodTypeDef,
   ControlPlane
-> = z.object({
-  ready: z.boolean().optional(),
-  replicas: z.number().int().optional(),
-  readyReplicas: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    readyReplicas: "ready_replicas",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ready: z.boolean().optional(),
+    replicas: z.number().int().optional(),
+    readyReplicas: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      readyReplicas: "ready_replicas",
+    });
+  })
+);
 
 export function controlPlaneToJSON(controlPlane: ControlPlane): string {
   return JSON.stringify(ControlPlane$outboundSchema.parse(controlPlane));
@@ -413,16 +421,18 @@ export function controlPlaneFromJSON(
 
 /** @internal */
 export const Workers$inboundSchema: z.ZodType<Workers, z.ZodTypeDef, unknown> =
-  z.object({
-    replicas: z.number().int().optional(),
-    ready_replicas: z.number().int().optional(),
-    available_replicas: z.number().int().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ready_replicas": "readyReplicas",
-      "available_replicas": "availableReplicas",
-    });
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      replicas: z.number().int().optional(),
+      ready_replicas: z.number().int().optional(),
+      available_replicas: z.number().int().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ready_replicas": "readyReplicas",
+        "available_replicas": "availableReplicas",
+      });
+    })
+  );
 /** @internal */
 export type Workers$Outbound = {
   replicas?: number | undefined;
@@ -435,16 +445,18 @@ export const Workers$outboundSchema: z.ZodType<
   Workers$Outbound,
   z.ZodTypeDef,
   Workers
-> = z.object({
-  replicas: z.number().int().optional(),
-  readyReplicas: z.number().int().optional(),
-  availableReplicas: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    readyReplicas: "ready_replicas",
-    availableReplicas: "available_replicas",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    replicas: z.number().int().optional(),
+    readyReplicas: z.number().int().optional(),
+    availableReplicas: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      readyReplicas: "ready_replicas",
+      availableReplicas: "available_replicas",
+    });
+  })
+);
 
 export function workersToJSON(workers: Workers): string {
   return JSON.stringify(Workers$outboundSchema.parse(workers));
@@ -464,31 +476,35 @@ export const WorkerStatus$inboundSchema: z.ZodType<
   WorkerStatus,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(WorkerStatus);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(WorkerStatus));
 /** @internal */
 export const WorkerStatus$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   WorkerStatus
-> = openEnums.outboundSchema(WorkerStatus);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(WorkerStatus));
 
 /** @internal */
 export const ControlPlaneStatus$inboundSchema: z.ZodType<
   ControlPlaneStatus,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(ControlPlaneStatus);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(ControlPlaneStatus)
+);
 /** @internal */
 export const ControlPlaneStatus$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   ControlPlaneStatus
-> = openEnums.outboundSchema(ControlPlaneStatus);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(ControlPlaneStatus)
+);
 
 /** @internal */
 export const KubernetesClusterDataName$inboundSchema: z.ZodNativeEnum<
   typeof KubernetesClusterDataName
-> = z.nativeEnum(KubernetesClusterDataName);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(KubernetesClusterDataName));
 /** @internal */
 export const KubernetesClusterDataName$outboundSchema: z.ZodNativeEnum<
   typeof KubernetesClusterDataName
@@ -497,7 +513,9 @@ export const KubernetesClusterDataName$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const KubernetesClusterDataStepStatus$inboundSchema: z.ZodNativeEnum<
   typeof KubernetesClusterDataStepStatus
-> = z.nativeEnum(KubernetesClusterDataStepStatus);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(KubernetesClusterDataStepStatus)
+);
 /** @internal */
 export const KubernetesClusterDataStepStatus$outboundSchema: z.ZodNativeEnum<
   typeof KubernetesClusterDataStepStatus
@@ -508,10 +526,12 @@ export const KubernetesClusterDataStep$inboundSchema: z.ZodType<
   KubernetesClusterDataStep,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: KubernetesClusterDataName$inboundSchema.optional(),
-  status: KubernetesClusterDataStepStatus$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: KubernetesClusterDataName$inboundSchema.optional(),
+    status: KubernetesClusterDataStepStatus$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type KubernetesClusterDataStep$Outbound = {
   name?: string | undefined;
@@ -523,10 +543,12 @@ export const KubernetesClusterDataStep$outboundSchema: z.ZodType<
   KubernetesClusterDataStep$Outbound,
   z.ZodTypeDef,
   KubernetesClusterDataStep
-> = z.object({
-  name: KubernetesClusterDataName$outboundSchema.optional(),
-  status: KubernetesClusterDataStepStatus$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: KubernetesClusterDataName$outboundSchema.optional(),
+    status: KubernetesClusterDataStepStatus$outboundSchema.optional(),
+  })
+);
 
 export function kubernetesClusterDataStepToJSON(
   kubernetesClusterDataStep: KubernetesClusterDataStep,
@@ -548,38 +570,40 @@ export function kubernetesClusterDataStepFromJSON(
 /** @internal */
 export const KubernetesClusterDataType$inboundSchema: z.ZodNativeEnum<
   typeof KubernetesClusterDataType
-> = z.nativeEnum(KubernetesClusterDataType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(KubernetesClusterDataType));
 /** @internal */
 export const KubernetesClusterDataType$outboundSchema: z.ZodNativeEnum<
   typeof KubernetesClusterDataType
 > = KubernetesClusterDataType$inboundSchema;
 
 /** @internal */
-export const NodeStatus$inboundSchema: z.ZodNativeEnum<typeof NodeStatus> = z
-  .nativeEnum(NodeStatus);
+export const NodeStatus$inboundSchema: z.ZodNativeEnum<typeof NodeStatus> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(NodeStatus));
 /** @internal */
 export const NodeStatus$outboundSchema: z.ZodNativeEnum<typeof NodeStatus> =
   NodeStatus$inboundSchema;
 
 /** @internal */
-export const Node$inboundSchema: z.ZodType<Node, z.ZodTypeDef, unknown> = z
-  .object({
-    id: z.string().optional(),
-    name: z.string().optional(),
-    hostname: z.nullable(z.string()).optional(),
-    server_id: z.nullable(z.string()).optional(),
-    type: KubernetesClusterDataType$inboundSchema.optional(),
-    status: NodeStatus$inboundSchema.optional(),
-    ip: z.nullable(z.string()).optional(),
-    internal_ip: z.nullable(z.string()).optional(),
-    external_ip: z.nullable(z.string()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "server_id": "serverId",
-      "internal_ip": "internalIp",
-      "external_ip": "externalIp",
-    });
-  });
+export const Node$inboundSchema: z.ZodType<Node, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string().optional(),
+      name: z.string().optional(),
+      hostname: z.nullable(z.string()).optional(),
+      server_id: z.nullable(z.string()).optional(),
+      type: KubernetesClusterDataType$inboundSchema.optional(),
+      status: NodeStatus$inboundSchema.optional(),
+      ip: z.nullable(z.string()).optional(),
+      internal_ip: z.nullable(z.string()).optional(),
+      external_ip: z.nullable(z.string()).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "server_id": "serverId",
+        "internal_ip": "internalIp",
+        "external_ip": "externalIp",
+      });
+    })
+  );
 /** @internal */
 export type Node$Outbound = {
   id?: string | undefined;
@@ -595,23 +619,25 @@ export type Node$Outbound = {
 
 /** @internal */
 export const Node$outboundSchema: z.ZodType<Node$Outbound, z.ZodTypeDef, Node> =
-  z.object({
-    id: z.string().optional(),
-    name: z.string().optional(),
-    hostname: z.nullable(z.string()).optional(),
-    serverId: z.nullable(z.string()).optional(),
-    type: KubernetesClusterDataType$outboundSchema.optional(),
-    status: NodeStatus$outboundSchema.optional(),
-    ip: z.nullable(z.string()).optional(),
-    internalIp: z.nullable(z.string()).optional(),
-    externalIp: z.nullable(z.string()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      serverId: "server_id",
-      internalIp: "internal_ip",
-      externalIp: "external_ip",
-    });
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string().optional(),
+      name: z.string().optional(),
+      hostname: z.nullable(z.string()).optional(),
+      serverId: z.nullable(z.string()).optional(),
+      type: KubernetesClusterDataType$outboundSchema.optional(),
+      status: NodeStatus$outboundSchema.optional(),
+      ip: z.nullable(z.string()).optional(),
+      internalIp: z.nullable(z.string()).optional(),
+      externalIp: z.nullable(z.string()).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        serverId: "server_id",
+        internalIp: "internal_ip",
+        externalIp: "external_ip",
+      });
+    })
+  );
 
 export function nodeToJSON(node: Node): string {
   return JSON.stringify(Node$outboundSchema.parse(node));
@@ -631,11 +657,13 @@ export const KubernetesClusterDataProject$inboundSchema: z.ZodType<
   KubernetesClusterDataProject,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  slug: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    name: z.string().optional(),
+    slug: z.string().optional(),
+  })
+);
 /** @internal */
 export type KubernetesClusterDataProject$Outbound = {
   id?: string | undefined;
@@ -648,11 +676,13 @@ export const KubernetesClusterDataProject$outboundSchema: z.ZodType<
   KubernetesClusterDataProject$Outbound,
   z.ZodTypeDef,
   KubernetesClusterDataProject
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  slug: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    name: z.string().optional(),
+    slug: z.string().optional(),
+  })
+);
 
 export function kubernetesClusterDataProjectToJSON(
   kubernetesClusterDataProject: KubernetesClusterDataProject,
@@ -678,62 +708,66 @@ export const KubernetesClusterDataAttributes$inboundSchema: z.ZodType<
   KubernetesClusterDataAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string().optional(),
-  phase: KubernetesClusterDataPhase$inboundSchema.optional(),
-  ready: z.boolean().optional(),
-  control_plane_endpoint: z.nullable(z.string()).optional(),
-  kubeconfig_url: z.nullable(z.string()).optional(),
-  location: z.nullable(z.string()).optional(),
-  load_balancer_ips: z.array(z.string()).optional(),
-  kubernetes_version: z.nullable(z.string()).optional(),
-  version_status: VersionStatus$inboundSchema.optional(),
-  available_upgrade: z.nullable(z.string()).optional(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  plan: z.nullable(z.string()).optional(),
-  worker_plan: z.nullable(z.string()).optional(),
-  control_plane_count: z.number().int().optional(),
-  worker_count: z.number().int().optional(),
-  control_plane: z.nullable(z.lazy(() => ControlPlane$inboundSchema))
-    .optional(),
-  workers: z.nullable(z.lazy(() => Workers$inboundSchema)).optional(),
-  worker_status: z.nullable(WorkerStatus$inboundSchema).optional(),
-  control_plane_status: ControlPlaneStatus$inboundSchema.optional(),
-  infrastructure_ready: z.boolean().optional(),
-  control_plane_ready: z.boolean().optional(),
-  message: z.string().optional(),
-  steps: z.array(z.lazy(() => KubernetesClusterDataStep$inboundSchema))
-    .optional(),
-  last_status_change: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  failure_message: z.nullable(z.string()).optional(),
-  failure_reason: z.nullable(z.string()).optional(),
-  nodes: z.array(z.lazy(() => Node$inboundSchema)).optional(),
-  project: z.lazy(() => KubernetesClusterDataProject$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "control_plane_endpoint": "controlPlaneEndpoint",
-    "kubeconfig_url": "kubeconfigUrl",
-    "load_balancer_ips": "loadBalancerIps",
-    "kubernetes_version": "kubernetesVersion",
-    "version_status": "versionStatus",
-    "available_upgrade": "availableUpgrade",
-    "created_at": "createdAt",
-    "worker_plan": "workerPlan",
-    "control_plane_count": "controlPlaneCount",
-    "worker_count": "workerCount",
-    "control_plane": "controlPlane",
-    "worker_status": "workerStatus",
-    "control_plane_status": "controlPlaneStatus",
-    "infrastructure_ready": "infrastructureReady",
-    "control_plane_ready": "controlPlaneReady",
-    "last_status_change": "lastStatusChange",
-    "failure_message": "failureMessage",
-    "failure_reason": "failureReason",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    phase: KubernetesClusterDataPhase$inboundSchema.optional(),
+    ready: z.boolean().optional(),
+    control_plane_endpoint: z.nullable(z.string()).optional(),
+    kubeconfig_url: z.nullable(z.string()).optional(),
+    location: z.nullable(z.string()).optional(),
+    load_balancer_ips: z.array(z.string()).optional(),
+    kubernetes_version: z.nullable(z.string()).optional(),
+    version_status: VersionStatus$inboundSchema.optional(),
+    available_upgrade: z.nullable(z.string()).optional(),
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ).optional(),
+    plan: z.nullable(z.string()).optional(),
+    worker_plan: z.nullable(z.string()).optional(),
+    control_plane_count: z.number().int().optional(),
+    worker_count: z.number().int().optional(),
+    control_plane: z.nullable(z.lazy(() => ControlPlane$inboundSchema))
+      .optional(),
+    workers: z.nullable(z.lazy(() => Workers$inboundSchema)).optional(),
+    worker_status: z.nullable(WorkerStatus$inboundSchema).optional(),
+    control_plane_status: ControlPlaneStatus$inboundSchema.optional(),
+    infrastructure_ready: z.boolean().optional(),
+    control_plane_ready: z.boolean().optional(),
+    message: z.string().optional(),
+    steps: z.array(z.lazy(() => KubernetesClusterDataStep$inboundSchema))
+      .optional(),
+    last_status_change: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    failure_message: z.nullable(z.string()).optional(),
+    failure_reason: z.nullable(z.string()).optional(),
+    nodes: z.array(z.lazy(() => Node$inboundSchema)).optional(),
+    project: z.lazy(() => KubernetesClusterDataProject$inboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "control_plane_endpoint": "controlPlaneEndpoint",
+      "kubeconfig_url": "kubeconfigUrl",
+      "load_balancer_ips": "loadBalancerIps",
+      "kubernetes_version": "kubernetesVersion",
+      "version_status": "versionStatus",
+      "available_upgrade": "availableUpgrade",
+      "created_at": "createdAt",
+      "worker_plan": "workerPlan",
+      "control_plane_count": "controlPlaneCount",
+      "worker_count": "workerCount",
+      "control_plane": "controlPlane",
+      "worker_status": "workerStatus",
+      "control_plane_status": "controlPlaneStatus",
+      "infrastructure_ready": "infrastructureReady",
+      "control_plane_ready": "controlPlaneReady",
+      "last_status_change": "lastStatusChange",
+      "failure_message": "failureMessage",
+      "failure_reason": "failureReason",
+    });
+  })
+);
 /** @internal */
 export type KubernetesClusterDataAttributes$Outbound = {
   name?: string | undefined;
@@ -771,60 +805,63 @@ export const KubernetesClusterDataAttributes$outboundSchema: z.ZodType<
   KubernetesClusterDataAttributes$Outbound,
   z.ZodTypeDef,
   KubernetesClusterDataAttributes
-> = z.object({
-  name: z.string().optional(),
-  phase: KubernetesClusterDataPhase$outboundSchema.optional(),
-  ready: z.boolean().optional(),
-  controlPlaneEndpoint: z.nullable(z.string()).optional(),
-  kubeconfigUrl: z.nullable(z.string()).optional(),
-  location: z.nullable(z.string()).optional(),
-  loadBalancerIps: z.array(z.string()).optional(),
-  kubernetesVersion: z.nullable(z.string()).optional(),
-  versionStatus: VersionStatus$outboundSchema.optional(),
-  availableUpgrade: z.nullable(z.string()).optional(),
-  createdAt: z.date().transform(v => v.toISOString()).optional(),
-  plan: z.nullable(z.string()).optional(),
-  workerPlan: z.nullable(z.string()).optional(),
-  controlPlaneCount: z.number().int().optional(),
-  workerCount: z.number().int().optional(),
-  controlPlane: z.nullable(z.lazy(() => ControlPlane$outboundSchema))
-    .optional(),
-  workers: z.nullable(z.lazy(() => Workers$outboundSchema)).optional(),
-  workerStatus: z.nullable(WorkerStatus$outboundSchema).optional(),
-  controlPlaneStatus: ControlPlaneStatus$outboundSchema.optional(),
-  infrastructureReady: z.boolean().optional(),
-  controlPlaneReady: z.boolean().optional(),
-  message: z.string().optional(),
-  steps: z.array(z.lazy(() => KubernetesClusterDataStep$outboundSchema))
-    .optional(),
-  lastStatusChange: z.nullable(z.date().transform(v => v.toISOString()))
-    .optional(),
-  failureMessage: z.nullable(z.string()).optional(),
-  failureReason: z.nullable(z.string()).optional(),
-  nodes: z.array(z.lazy(() => Node$outboundSchema)).optional(),
-  project: z.lazy(() => KubernetesClusterDataProject$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    controlPlaneEndpoint: "control_plane_endpoint",
-    kubeconfigUrl: "kubeconfig_url",
-    loadBalancerIps: "load_balancer_ips",
-    kubernetesVersion: "kubernetes_version",
-    versionStatus: "version_status",
-    availableUpgrade: "available_upgrade",
-    createdAt: "created_at",
-    workerPlan: "worker_plan",
-    controlPlaneCount: "control_plane_count",
-    workerCount: "worker_count",
-    controlPlane: "control_plane",
-    workerStatus: "worker_status",
-    controlPlaneStatus: "control_plane_status",
-    infrastructureReady: "infrastructure_ready",
-    controlPlaneReady: "control_plane_ready",
-    lastStatusChange: "last_status_change",
-    failureMessage: "failure_message",
-    failureReason: "failure_reason",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    phase: KubernetesClusterDataPhase$outboundSchema.optional(),
+    ready: z.boolean().optional(),
+    controlPlaneEndpoint: z.nullable(z.string()).optional(),
+    kubeconfigUrl: z.nullable(z.string()).optional(),
+    location: z.nullable(z.string()).optional(),
+    loadBalancerIps: z.array(z.string()).optional(),
+    kubernetesVersion: z.nullable(z.string()).optional(),
+    versionStatus: VersionStatus$outboundSchema.optional(),
+    availableUpgrade: z.nullable(z.string()).optional(),
+    createdAt: z.date().transform(v => v.toISOString()).optional(),
+    plan: z.nullable(z.string()).optional(),
+    workerPlan: z.nullable(z.string()).optional(),
+    controlPlaneCount: z.number().int().optional(),
+    workerCount: z.number().int().optional(),
+    controlPlane: z.nullable(z.lazy(() => ControlPlane$outboundSchema))
+      .optional(),
+    workers: z.nullable(z.lazy(() => Workers$outboundSchema)).optional(),
+    workerStatus: z.nullable(WorkerStatus$outboundSchema).optional(),
+    controlPlaneStatus: ControlPlaneStatus$outboundSchema.optional(),
+    infrastructureReady: z.boolean().optional(),
+    controlPlaneReady: z.boolean().optional(),
+    message: z.string().optional(),
+    steps: z.array(z.lazy(() => KubernetesClusterDataStep$outboundSchema))
+      .optional(),
+    lastStatusChange: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+    failureMessage: z.nullable(z.string()).optional(),
+    failureReason: z.nullable(z.string()).optional(),
+    nodes: z.array(z.lazy(() => Node$outboundSchema)).optional(),
+    project: z.lazy(() => KubernetesClusterDataProject$outboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      controlPlaneEndpoint: "control_plane_endpoint",
+      kubeconfigUrl: "kubeconfig_url",
+      loadBalancerIps: "load_balancer_ips",
+      kubernetesVersion: "kubernetes_version",
+      versionStatus: "version_status",
+      availableUpgrade: "available_upgrade",
+      createdAt: "created_at",
+      workerPlan: "worker_plan",
+      controlPlaneCount: "control_plane_count",
+      workerCount: "worker_count",
+      controlPlane: "control_plane",
+      workerStatus: "worker_status",
+      controlPlaneStatus: "control_plane_status",
+      infrastructureReady: "infrastructure_ready",
+      controlPlaneReady: "control_plane_ready",
+      lastStatusChange: "last_status_change",
+      failureMessage: "failure_message",
+      failureReason: "failure_reason",
+    });
+  })
+);
 
 export function kubernetesClusterDataAttributesToJSON(
   kubernetesClusterDataAttributes: KubernetesClusterDataAttributes,
@@ -850,12 +887,14 @@ export const KubernetesClusterData$inboundSchema: z.ZodType<
   KubernetesClusterData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  type: z.string().optional(),
-  attributes: z.lazy(() => KubernetesClusterDataAttributes$inboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: z.string().optional(),
+    attributes: z.lazy(() => KubernetesClusterDataAttributes$inboundSchema)
+      .optional(),
+  })
+);
 /** @internal */
 export type KubernetesClusterData$Outbound = {
   id?: string | undefined;
@@ -868,12 +907,14 @@ export const KubernetesClusterData$outboundSchema: z.ZodType<
   KubernetesClusterData$Outbound,
   z.ZodTypeDef,
   KubernetesClusterData
-> = z.object({
-  id: z.string().optional(),
-  type: z.string().optional(),
-  attributes: z.lazy(() => KubernetesClusterDataAttributes$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: z.string().optional(),
+    attributes: z.lazy(() => KubernetesClusterDataAttributes$outboundSchema)
+      .optional(),
+  })
+);
 
 export function kubernetesClusterDataToJSON(
   kubernetesClusterData: KubernetesClusterData,

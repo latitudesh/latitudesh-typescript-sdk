@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -63,22 +63,24 @@ export type FirewallData = {
 /** @internal */
 export const FirewallDataType$inboundSchema: z.ZodNativeEnum<
   typeof FirewallDataType
-> = z.nativeEnum(FirewallDataType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(FirewallDataType));
 /** @internal */
 export const FirewallDataType$outboundSchema: z.ZodNativeEnum<
   typeof FirewallDataType
 > = FirewallDataType$inboundSchema;
 
 /** @internal */
-export const Rule$inboundSchema: z.ZodType<Rule, z.ZodTypeDef, unknown> = z
-  .object({
-    from: z.string().optional(),
-    to: z.string().optional(),
-    port: z.string().optional(),
-    protocol: z.string().optional(),
-    default: z.boolean().optional(),
-    description: z.nullable(z.string()).optional(),
-  });
+export const Rule$inboundSchema: z.ZodType<Rule, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      from: z.string().optional(),
+      to: z.string().optional(),
+      port: z.string().optional(),
+      protocol: z.string().optional(),
+      default: z.boolean().optional(),
+      description: z.nullable(z.string()).optional(),
+    })
+  );
 /** @internal */
 export type Rule$Outbound = {
   from?: string | undefined;
@@ -91,14 +93,16 @@ export type Rule$Outbound = {
 
 /** @internal */
 export const Rule$outboundSchema: z.ZodType<Rule$Outbound, z.ZodTypeDef, Rule> =
-  z.object({
-    from: z.string().optional(),
-    to: z.string().optional(),
-    port: z.string().optional(),
-    protocol: z.string().optional(),
-    default: z.boolean().optional(),
-    description: z.nullable(z.string()).optional(),
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      from: z.string().optional(),
+      to: z.string().optional(),
+      port: z.string().optional(),
+      protocol: z.string().optional(),
+      default: z.boolean().optional(),
+      description: z.nullable(z.string()).optional(),
+    })
+  );
 
 export function ruleToJSON(rule: Rule): string {
   return JSON.stringify(Rule$outboundSchema.parse(rule));
@@ -118,11 +122,13 @@ export const FirewallDataProject$inboundSchema: z.ZodType<
   FirewallDataProject,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  slug: z.string().optional(),
-  name: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    slug: z.string().optional(),
+    name: z.string().optional(),
+  })
+);
 /** @internal */
 export type FirewallDataProject$Outbound = {
   id?: string | undefined;
@@ -135,11 +141,13 @@ export const FirewallDataProject$outboundSchema: z.ZodType<
   FirewallDataProject$Outbound,
   z.ZodTypeDef,
   FirewallDataProject
-> = z.object({
-  id: z.string().optional(),
-  slug: z.string().optional(),
-  name: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    slug: z.string().optional(),
+    name: z.string().optional(),
+  })
+);
 
 export function firewallDataProjectToJSON(
   firewallDataProject: FirewallDataProject,
@@ -163,12 +171,14 @@ export const FirewallDataTag$inboundSchema: z.ZodType<
   FirewallDataTag,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  description: z.nullable(z.string()).optional(),
-  color: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    name: z.string().optional(),
+    description: z.nullable(z.string()).optional(),
+    color: z.nullable(z.string()).optional(),
+  })
+);
 /** @internal */
 export type FirewallDataTag$Outbound = {
   id?: string | undefined;
@@ -182,12 +192,14 @@ export const FirewallDataTag$outboundSchema: z.ZodType<
   FirewallDataTag$Outbound,
   z.ZodTypeDef,
   FirewallDataTag
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  description: z.nullable(z.string()).optional(),
-  color: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    name: z.string().optional(),
+    description: z.nullable(z.string()).optional(),
+    color: z.nullable(z.string()).optional(),
+  })
+);
 
 export function firewallDataTagToJSON(
   firewallDataTag: FirewallDataTag,
@@ -209,12 +221,14 @@ export const FirewallDataAttributes$inboundSchema: z.ZodType<
   FirewallDataAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string().optional(),
-  rules: z.array(z.lazy(() => Rule$inboundSchema)).optional(),
-  project: z.lazy(() => FirewallDataProject$inboundSchema).optional(),
-  tags: z.array(z.lazy(() => FirewallDataTag$inboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    rules: z.array(z.lazy(() => Rule$inboundSchema)).optional(),
+    project: z.lazy(() => FirewallDataProject$inboundSchema).optional(),
+    tags: z.array(z.lazy(() => FirewallDataTag$inboundSchema)).optional(),
+  })
+);
 /** @internal */
 export type FirewallDataAttributes$Outbound = {
   name?: string | undefined;
@@ -228,12 +242,14 @@ export const FirewallDataAttributes$outboundSchema: z.ZodType<
   FirewallDataAttributes$Outbound,
   z.ZodTypeDef,
   FirewallDataAttributes
-> = z.object({
-  name: z.string().optional(),
-  rules: z.array(z.lazy(() => Rule$outboundSchema)).optional(),
-  project: z.lazy(() => FirewallDataProject$outboundSchema).optional(),
-  tags: z.array(z.lazy(() => FirewallDataTag$outboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    rules: z.array(z.lazy(() => Rule$outboundSchema)).optional(),
+    project: z.lazy(() => FirewallDataProject$outboundSchema).optional(),
+    tags: z.array(z.lazy(() => FirewallDataTag$outboundSchema)).optional(),
+  })
+);
 
 export function firewallDataAttributesToJSON(
   firewallDataAttributes: FirewallDataAttributes,
@@ -257,11 +273,13 @@ export const FirewallData$inboundSchema: z.ZodType<
   FirewallData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  type: FirewallDataType$inboundSchema.optional(),
-  attributes: z.lazy(() => FirewallDataAttributes$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: FirewallDataType$inboundSchema.optional(),
+    attributes: z.lazy(() => FirewallDataAttributes$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type FirewallData$Outbound = {
   id?: string | undefined;
@@ -274,11 +292,13 @@ export const FirewallData$outboundSchema: z.ZodType<
   FirewallData$Outbound,
   z.ZodTypeDef,
   FirewallData
-> = z.object({
-  id: z.string().optional(),
-  type: FirewallDataType$outboundSchema.optional(),
-  attributes: z.lazy(() => FirewallDataAttributes$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: FirewallDataType$outboundSchema.optional(),
+    attributes: z.lazy(() => FirewallDataAttributes$outboundSchema).optional(),
+  })
+);
 
 export function firewallDataToJSON(firewallData: FirewallData): string {
   return JSON.stringify(FirewallData$outboundSchema.parse(firewallData));

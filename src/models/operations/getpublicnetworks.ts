@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -18,15 +18,17 @@ export const GetPublicNetworksRequest$inboundSchema: z.ZodType<
   GetPublicNetworksRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "filter[project]": z.string().optional(),
-  "filter[site]": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "filter[project]": "filterProject",
-    "filter[site]": "filterSite",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "filter[project]": z.string().optional(),
+    "filter[site]": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "filter[project]": "filterProject",
+      "filter[site]": "filterSite",
+    });
+  })
+);
 /** @internal */
 export type GetPublicNetworksRequest$Outbound = {
   "filter[project]"?: string | undefined;
@@ -38,15 +40,17 @@ export const GetPublicNetworksRequest$outboundSchema: z.ZodType<
   GetPublicNetworksRequest$Outbound,
   z.ZodTypeDef,
   GetPublicNetworksRequest
-> = z.object({
-  filterProject: z.string().optional(),
-  filterSite: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    filterProject: "filter[project]",
-    filterSite: "filter[site]",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    filterProject: z.string().optional(),
+    filterSite: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      filterProject: "filter[project]",
+      filterSite: "filter[site]",
+    });
+  })
+);
 
 export function getPublicNetworksRequestToJSON(
   getPublicNetworksRequest: GetPublicNetworksRequest,

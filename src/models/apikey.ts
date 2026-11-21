@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -72,8 +72,8 @@ export type ApiKey = {
 };
 
 /** @internal */
-export const ApiKeyType$inboundSchema: z.ZodNativeEnum<typeof ApiKeyType> = z
-  .nativeEnum(ApiKeyType);
+export const ApiKeyType$inboundSchema: z.ZodNativeEnum<typeof ApiKeyType> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ApiKeyType));
 /** @internal */
 export const ApiKeyType$outboundSchema: z.ZodNativeEnum<typeof ApiKeyType> =
   ApiKeyType$inboundSchema;
@@ -83,10 +83,12 @@ export const ApiKeyUser$inboundSchema: z.ZodType<
   ApiKeyUser,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  email: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    email: z.string().optional(),
+  })
+);
 /** @internal */
 export type ApiKeyUser$Outbound = {
   id?: string | undefined;
@@ -98,10 +100,12 @@ export const ApiKeyUser$outboundSchema: z.ZodType<
   ApiKeyUser$Outbound,
   z.ZodTypeDef,
   ApiKeyUser
-> = z.object({
-  id: z.string().optional(),
-  email: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    email: z.string().optional(),
+  })
+);
 
 export function apiKeyUserToJSON(apiKeyUser: ApiKeyUser): string {
   return JSON.stringify(ApiKeyUser$outboundSchema.parse(apiKeyUser));
@@ -121,32 +125,36 @@ export const ApiKeyAttributes$inboundSchema: z.ZodType<
   ApiKeyAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string().optional(),
-  api_version: z.string().optional(),
-  token: z.string().optional(),
-  token_last_slice: z.string().optional(),
-  read_only: z.nullable(z.boolean()).optional(),
-  allowed_ips: z.nullable(z.array(z.string())).optional(),
-  last_used_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  user: z.lazy(() => ApiKeyUser$inboundSchema).optional(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "api_version": "apiVersion",
-    "token_last_slice": "tokenLastSlice",
-    "read_only": "readOnly",
-    "allowed_ips": "allowedIps",
-    "last_used_at": "lastUsedAt",
-    "created_at": "createdAt",
-    "updated_at": "updatedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    api_version: z.string().optional(),
+    token: z.string().optional(),
+    token_last_slice: z.string().optional(),
+    read_only: z.nullable(z.boolean()).optional(),
+    allowed_ips: z.nullable(z.array(z.string())).optional(),
+    last_used_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    user: z.lazy(() => ApiKeyUser$inboundSchema).optional(),
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ).optional(),
+    updated_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "api_version": "apiVersion",
+      "token_last_slice": "tokenLastSlice",
+      "read_only": "readOnly",
+      "allowed_ips": "allowedIps",
+      "last_used_at": "lastUsedAt",
+      "created_at": "createdAt",
+      "updated_at": "updatedAt",
+    });
+  })
+);
 /** @internal */
 export type ApiKeyAttributes$Outbound = {
   name?: string | undefined;
@@ -166,28 +174,30 @@ export const ApiKeyAttributes$outboundSchema: z.ZodType<
   ApiKeyAttributes$Outbound,
   z.ZodTypeDef,
   ApiKeyAttributes
-> = z.object({
-  name: z.string().optional(),
-  apiVersion: z.string().optional(),
-  token: z.string().optional(),
-  tokenLastSlice: z.string().optional(),
-  readOnly: z.nullable(z.boolean()).optional(),
-  allowedIps: z.nullable(z.array(z.string())).optional(),
-  lastUsedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  user: z.lazy(() => ApiKeyUser$outboundSchema).optional(),
-  createdAt: z.date().transform(v => v.toISOString()).optional(),
-  updatedAt: z.date().transform(v => v.toISOString()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    apiVersion: "api_version",
-    tokenLastSlice: "token_last_slice",
-    readOnly: "read_only",
-    allowedIps: "allowed_ips",
-    lastUsedAt: "last_used_at",
-    createdAt: "created_at",
-    updatedAt: "updated_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    apiVersion: z.string().optional(),
+    token: z.string().optional(),
+    tokenLastSlice: z.string().optional(),
+    readOnly: z.nullable(z.boolean()).optional(),
+    allowedIps: z.nullable(z.array(z.string())).optional(),
+    lastUsedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    user: z.lazy(() => ApiKeyUser$outboundSchema).optional(),
+    createdAt: z.date().transform(v => v.toISOString()).optional(),
+    updatedAt: z.date().transform(v => v.toISOString()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      apiVersion: "api_version",
+      tokenLastSlice: "token_last_slice",
+      readOnly: "read_only",
+      allowedIps: "allowed_ips",
+      lastUsedAt: "last_used_at",
+      createdAt: "created_at",
+      updatedAt: "updated_at",
+    });
+  })
+);
 
 export function apiKeyAttributesToJSON(
   apiKeyAttributes: ApiKeyAttributes,
@@ -207,12 +217,14 @@ export function apiKeyAttributesFromJSON(
 }
 
 /** @internal */
-export const ApiKey$inboundSchema: z.ZodType<ApiKey, z.ZodTypeDef, unknown> = z
-  .object({
-    id: z.string().optional(),
-    type: ApiKeyType$inboundSchema.optional(),
-    attributes: z.lazy(() => ApiKeyAttributes$inboundSchema).optional(),
-  });
+export const ApiKey$inboundSchema: z.ZodType<ApiKey, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string().optional(),
+      type: ApiKeyType$inboundSchema.optional(),
+      attributes: z.lazy(() => ApiKeyAttributes$inboundSchema).optional(),
+    })
+  );
 /** @internal */
 export type ApiKey$Outbound = {
   id?: string | undefined;
@@ -225,11 +237,13 @@ export const ApiKey$outboundSchema: z.ZodType<
   ApiKey$Outbound,
   z.ZodTypeDef,
   ApiKey
-> = z.object({
-  id: z.string().optional(),
-  type: ApiKeyType$outboundSchema.optional(),
-  attributes: z.lazy(() => ApiKeyAttributes$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: ApiKeyType$outboundSchema.optional(),
+    attributes: z.lazy(() => ApiKeyAttributes$outboundSchema).optional(),
+  })
+);
 
 export function apiKeyToJSON(apiKey: ApiKey): string {
   return JSON.stringify(ApiKey$outboundSchema.parse(apiKey));

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -90,7 +90,7 @@ export type CreateLksNodePool = {
 /** @internal */
 export const CreateLksNodePoolType$inboundSchema: z.ZodNativeEnum<
   typeof CreateLksNodePoolType
-> = z.nativeEnum(CreateLksNodePoolType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CreateLksNodePoolType));
 /** @internal */
 export const CreateLksNodePoolType$outboundSchema: z.ZodNativeEnum<
   typeof CreateLksNodePoolType
@@ -99,7 +99,7 @@ export const CreateLksNodePoolType$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const TypeBareMetal$inboundSchema: z.ZodNativeEnum<
   typeof TypeBareMetal
-> = z.nativeEnum(TypeBareMetal);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(TypeBareMetal));
 /** @internal */
 export const TypeBareMetal$outboundSchema: z.ZodNativeEnum<
   typeof TypeBareMetal
@@ -108,7 +108,7 @@ export const TypeBareMetal$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const CreateLksNodePoolMode$inboundSchema: z.ZodNativeEnum<
   typeof CreateLksNodePoolMode
-> = z.nativeEnum(CreateLksNodePoolMode);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CreateLksNodePoolMode));
 /** @internal */
 export const CreateLksNodePoolMode$outboundSchema: z.ZodNativeEnum<
   typeof CreateLksNodePoolMode
@@ -119,25 +119,27 @@ export const CreateLksNodePoolAttributes$inboundSchema: z.ZodType<
   CreateLksNodePoolAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: TypeBareMetal$inboundSchema.optional(),
-  mode: CreateLksNodePoolMode$inboundSchema.default("on_demand"),
-  plan: z.string().optional(),
-  count: z.number().int().optional(),
-  server_ids: z.array(z.string()).optional(),
-  kubernetes_version: z.string().optional(),
-  max_pods_per_node: z.number().int().optional(),
-  name: z.string().optional(),
-  description: z.string().optional(),
-  labels: z.record(z.string()).optional(),
-  taints: z.array(LksNodePoolTaint$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "server_ids": "serverIds",
-    "kubernetes_version": "kubernetesVersion",
-    "max_pods_per_node": "maxPodsPerNode",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: TypeBareMetal$inboundSchema.optional(),
+    mode: CreateLksNodePoolMode$inboundSchema.default("on_demand"),
+    plan: z.string().optional(),
+    count: z.number().int().optional(),
+    server_ids: z.array(z.string()).optional(),
+    kubernetes_version: z.string().optional(),
+    max_pods_per_node: z.number().int().optional(),
+    name: z.string().optional(),
+    description: z.string().optional(),
+    labels: z.record(z.string()).optional(),
+    taints: z.array(LksNodePoolTaint$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "server_ids": "serverIds",
+      "kubernetes_version": "kubernetesVersion",
+      "max_pods_per_node": "maxPodsPerNode",
+    });
+  })
+);
 /** @internal */
 export type CreateLksNodePoolAttributes$Outbound = {
   type?: string | undefined;
@@ -158,25 +160,27 @@ export const CreateLksNodePoolAttributes$outboundSchema: z.ZodType<
   CreateLksNodePoolAttributes$Outbound,
   z.ZodTypeDef,
   CreateLksNodePoolAttributes
-> = z.object({
-  type: TypeBareMetal$outboundSchema.optional(),
-  mode: CreateLksNodePoolMode$outboundSchema.default("on_demand"),
-  plan: z.string().optional(),
-  count: z.number().int().optional(),
-  serverIds: z.array(z.string()).optional(),
-  kubernetesVersion: z.string().optional(),
-  maxPodsPerNode: z.number().int().optional(),
-  name: z.string().optional(),
-  description: z.string().optional(),
-  labels: z.record(z.string()).optional(),
-  taints: z.array(LksNodePoolTaint$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    serverIds: "server_ids",
-    kubernetesVersion: "kubernetes_version",
-    maxPodsPerNode: "max_pods_per_node",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: TypeBareMetal$outboundSchema.optional(),
+    mode: CreateLksNodePoolMode$outboundSchema.default("on_demand"),
+    plan: z.string().optional(),
+    count: z.number().int().optional(),
+    serverIds: z.array(z.string()).optional(),
+    kubernetesVersion: z.string().optional(),
+    maxPodsPerNode: z.number().int().optional(),
+    name: z.string().optional(),
+    description: z.string().optional(),
+    labels: z.record(z.string()).optional(),
+    taints: z.array(LksNodePoolTaint$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      serverIds: "server_ids",
+      kubernetesVersion: "kubernetes_version",
+      maxPodsPerNode: "max_pods_per_node",
+    });
+  })
+);
 
 export function createLksNodePoolAttributesToJSON(
   createLksNodePoolAttributes: CreateLksNodePoolAttributes,
@@ -202,10 +206,12 @@ export const CreateLksNodePoolData$inboundSchema: z.ZodType<
   CreateLksNodePoolData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: CreateLksNodePoolType$inboundSchema,
-  attributes: z.lazy(() => CreateLksNodePoolAttributes$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CreateLksNodePoolType$inboundSchema,
+    attributes: z.lazy(() => CreateLksNodePoolAttributes$inboundSchema),
+  })
+);
 /** @internal */
 export type CreateLksNodePoolData$Outbound = {
   type: string;
@@ -217,10 +223,12 @@ export const CreateLksNodePoolData$outboundSchema: z.ZodType<
   CreateLksNodePoolData$Outbound,
   z.ZodTypeDef,
   CreateLksNodePoolData
-> = z.object({
-  type: CreateLksNodePoolType$outboundSchema,
-  attributes: z.lazy(() => CreateLksNodePoolAttributes$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CreateLksNodePoolType$outboundSchema,
+    attributes: z.lazy(() => CreateLksNodePoolAttributes$outboundSchema),
+  })
+);
 
 export function createLksNodePoolDataToJSON(
   createLksNodePoolData: CreateLksNodePoolData,
@@ -244,9 +252,11 @@ export const CreateLksNodePool$inboundSchema: z.ZodType<
   CreateLksNodePool,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => CreateLksNodePoolData$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => CreateLksNodePoolData$inboundSchema),
+  })
+);
 /** @internal */
 export type CreateLksNodePool$Outbound = {
   data: CreateLksNodePoolData$Outbound;
@@ -257,9 +267,11 @@ export const CreateLksNodePool$outboundSchema: z.ZodType<
   CreateLksNodePool$Outbound,
   z.ZodTypeDef,
   CreateLksNodePool
-> = z.object({
-  data: z.lazy(() => CreateLksNodePoolData$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => CreateLksNodePoolData$outboundSchema),
+  })
+);
 
 export function createLksNodePoolToJSON(
   createLksNodePool: CreateLksNodePool,

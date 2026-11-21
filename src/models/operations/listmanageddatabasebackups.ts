@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -46,14 +46,16 @@ export const ListManagedDatabaseBackupsRequest$inboundSchema: z.ZodType<
   ListManagedDatabaseBackupsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  managed_database_id: z.string(),
-  phase: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "managed_database_id": "managedDatabaseId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    managed_database_id: z.string(),
+    phase: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "managed_database_id": "managedDatabaseId",
+    });
+  })
+);
 /** @internal */
 export type ListManagedDatabaseBackupsRequest$Outbound = {
   managed_database_id: string;
@@ -65,14 +67,16 @@ export const ListManagedDatabaseBackupsRequest$outboundSchema: z.ZodType<
   ListManagedDatabaseBackupsRequest$Outbound,
   z.ZodTypeDef,
   ListManagedDatabaseBackupsRequest
-> = z.object({
-  managedDatabaseId: z.string(),
-  phase: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    managedDatabaseId: "managed_database_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    managedDatabaseId: z.string(),
+    phase: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      managedDatabaseId: "managed_database_id",
+    });
+  })
+);
 
 export function listManagedDatabaseBackupsRequestToJSON(
   listManagedDatabaseBackupsRequest: ListManagedDatabaseBackupsRequest,
@@ -98,17 +102,19 @@ export const ScheduledBackup$inboundSchema: z.ZodType<
   ScheduledBackup,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string().optional(),
-  schedule: z.nullable(z.string()).optional(),
-  suspended: z.boolean().optional(),
-  immediate: z.boolean().optional(),
-  last_scheduled_at: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "last_scheduled_at": "lastScheduledAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    schedule: z.nullable(z.string()).optional(),
+    suspended: z.boolean().optional(),
+    immediate: z.boolean().optional(),
+    last_scheduled_at: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "last_scheduled_at": "lastScheduledAt",
+    });
+  })
+);
 /** @internal */
 export type ScheduledBackup$Outbound = {
   name?: string | undefined;
@@ -123,17 +129,19 @@ export const ScheduledBackup$outboundSchema: z.ZodType<
   ScheduledBackup$Outbound,
   z.ZodTypeDef,
   ScheduledBackup
-> = z.object({
-  name: z.string().optional(),
-  schedule: z.nullable(z.string()).optional(),
-  suspended: z.boolean().optional(),
-  immediate: z.boolean().optional(),
-  lastScheduledAt: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    lastScheduledAt: "last_scheduled_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    schedule: z.nullable(z.string()).optional(),
+    suspended: z.boolean().optional(),
+    immediate: z.boolean().optional(),
+    lastScheduledAt: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      lastScheduledAt: "last_scheduled_at",
+    });
+  })
+);
 
 export function scheduledBackupToJSON(
   scheduledBackup: ScheduledBackup,
@@ -151,16 +159,18 @@ export function scheduledBackupFromJSON(
 }
 
 /** @internal */
-export const Backup$inboundSchema: z.ZodType<Backup, z.ZodTypeDef, unknown> = z
-  .object({
-    id: z.string(),
-    phase: z.nullable(z.string()),
-    created_at: z.nullable(z.string()),
-  }).transform((v) => {
-    return remap$(v, {
-      "created_at": "createdAt",
-    });
-  });
+export const Backup$inboundSchema: z.ZodType<Backup, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      phase: z.nullable(z.string()),
+      created_at: z.nullable(z.string()),
+    }).transform((v) => {
+      return remap$(v, {
+        "created_at": "createdAt",
+      });
+    })
+  );
 /** @internal */
 export type Backup$Outbound = {
   id: string;
@@ -173,15 +183,17 @@ export const Backup$outboundSchema: z.ZodType<
   Backup$Outbound,
   z.ZodTypeDef,
   Backup
-> = z.object({
-  id: z.string(),
-  phase: z.nullable(z.string()),
-  createdAt: z.nullable(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    createdAt: "created_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    phase: z.nullable(z.string()),
+    createdAt: z.nullable(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      createdAt: "created_at",
+    });
+  })
+);
 
 export function backupToJSON(backup: Backup): string {
   return JSON.stringify(Backup$outboundSchema.parse(backup));
@@ -201,14 +213,16 @@ export const ListManagedDatabaseBackupsResponse$inboundSchema: z.ZodType<
   ListManagedDatabaseBackupsResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  scheduled_backup: z.nullable(z.lazy(() => ScheduledBackup$inboundSchema)),
-  backups: z.array(z.lazy(() => Backup$inboundSchema)),
-}).transform((v) => {
-  return remap$(v, {
-    "scheduled_backup": "scheduledBackup",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    scheduled_backup: z.nullable(z.lazy(() => ScheduledBackup$inboundSchema)),
+    backups: z.array(z.lazy(() => Backup$inboundSchema)),
+  }).transform((v) => {
+    return remap$(v, {
+      "scheduled_backup": "scheduledBackup",
+    });
+  })
+);
 /** @internal */
 export type ListManagedDatabaseBackupsResponse$Outbound = {
   scheduled_backup: ScheduledBackup$Outbound | null;
@@ -220,14 +234,16 @@ export const ListManagedDatabaseBackupsResponse$outboundSchema: z.ZodType<
   ListManagedDatabaseBackupsResponse$Outbound,
   z.ZodTypeDef,
   ListManagedDatabaseBackupsResponse
-> = z.object({
-  scheduledBackup: z.nullable(z.lazy(() => ScheduledBackup$outboundSchema)),
-  backups: z.array(z.lazy(() => Backup$outboundSchema)),
-}).transform((v) => {
-  return remap$(v, {
-    scheduledBackup: "scheduled_backup",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    scheduledBackup: z.nullable(z.lazy(() => ScheduledBackup$outboundSchema)),
+    backups: z.array(z.lazy(() => Backup$outboundSchema)),
+  }).transform((v) => {
+    return remap$(v, {
+      scheduledBackup: "scheduled_backup",
+    });
+  })
+);
 
 export function listManagedDatabaseBackupsResponseToJSON(
   listManagedDatabaseBackupsResponse: ListManagedDatabaseBackupsResponse,

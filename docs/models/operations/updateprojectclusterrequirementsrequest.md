@@ -12,6 +12,7 @@ let value: UpdateProjectClusterRequirementsRequest = {
       type: "cluster_requirements",
       attributes: {
         add: "storage_fs",
+        nodeGroupId: "7",
       },
     },
   },

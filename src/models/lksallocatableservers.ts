@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 import {
@@ -27,9 +27,11 @@ export const LksAllocatableServersMeta$inboundSchema: z.ZodType<
   LksAllocatableServersMeta,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  total: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    total: z.number().int().optional(),
+  })
+);
 /** @internal */
 export type LksAllocatableServersMeta$Outbound = {
   total?: number | undefined;
@@ -40,9 +42,11 @@ export const LksAllocatableServersMeta$outboundSchema: z.ZodType<
   LksAllocatableServersMeta$Outbound,
   z.ZodTypeDef,
   LksAllocatableServersMeta
-> = z.object({
-  total: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    total: z.number().int().optional(),
+  })
+);
 
 export function lksAllocatableServersMetaToJSON(
   lksAllocatableServersMeta: LksAllocatableServersMeta,
@@ -66,10 +70,12 @@ export const LksAllocatableServers$inboundSchema: z.ZodType<
   LksAllocatableServers,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.array(LksAllocatableServerData$inboundSchema).optional(),
-  meta: z.lazy(() => LksAllocatableServersMeta$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(LksAllocatableServerData$inboundSchema).optional(),
+    meta: z.lazy(() => LksAllocatableServersMeta$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type LksAllocatableServers$Outbound = {
   data?: Array<LksAllocatableServerData$Outbound> | undefined;
@@ -81,10 +87,12 @@ export const LksAllocatableServers$outboundSchema: z.ZodType<
   LksAllocatableServers$Outbound,
   z.ZodTypeDef,
   LksAllocatableServers
-> = z.object({
-  data: z.array(LksAllocatableServerData$outboundSchema).optional(),
-  meta: z.lazy(() => LksAllocatableServersMeta$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(LksAllocatableServerData$outboundSchema).optional(),
+    meta: z.lazy(() => LksAllocatableServersMeta$outboundSchema).optional(),
+  })
+);
 
 export function lksAllocatableServersToJSON(
   lksAllocatableServers: LksAllocatableServers,

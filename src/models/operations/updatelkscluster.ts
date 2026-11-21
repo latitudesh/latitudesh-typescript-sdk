@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as models from "../index.js";
@@ -22,14 +22,16 @@ export const UpdateLksClusterRequest$inboundSchema: z.ZodType<
   UpdateLksClusterRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  update_lks_cluster: models.UpdateLksCluster$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "update_lks_cluster": "updateLksCluster",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    update_lks_cluster: models.UpdateLksCluster$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "update_lks_cluster": "updateLksCluster",
+    });
+  })
+);
 /** @internal */
 export type UpdateLksClusterRequest$Outbound = {
   id: string;
@@ -41,14 +43,16 @@ export const UpdateLksClusterRequest$outboundSchema: z.ZodType<
   UpdateLksClusterRequest$Outbound,
   z.ZodTypeDef,
   UpdateLksClusterRequest
-> = z.object({
-  id: z.string(),
-  updateLksCluster: models.UpdateLksCluster$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    updateLksCluster: "update_lks_cluster",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    updateLksCluster: models.UpdateLksCluster$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      updateLksCluster: "update_lks_cluster",
+    });
+  })
+);
 
 export function updateLksClusterRequestToJSON(
   updateLksClusterRequest: UpdateLksClusterRequest,

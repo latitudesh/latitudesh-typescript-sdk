@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as models from "../index.js";
@@ -26,16 +26,18 @@ export const UpdateProjectClusterNodeGroupRequest$inboundSchema: z.ZodType<
   UpdateProjectClusterNodeGroupRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  project_id: z.string(),
-  id: z.string(),
-  update_cluster_node_group: models.UpdateClusterNodeGroup$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "project_id": "projectId",
-    "update_cluster_node_group": "updateClusterNodeGroup",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    project_id: z.string(),
+    id: z.string(),
+    update_cluster_node_group: models.UpdateClusterNodeGroup$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "project_id": "projectId",
+      "update_cluster_node_group": "updateClusterNodeGroup",
+    });
+  })
+);
 /** @internal */
 export type UpdateProjectClusterNodeGroupRequest$Outbound = {
   project_id: string;
@@ -48,16 +50,18 @@ export const UpdateProjectClusterNodeGroupRequest$outboundSchema: z.ZodType<
   UpdateProjectClusterNodeGroupRequest$Outbound,
   z.ZodTypeDef,
   UpdateProjectClusterNodeGroupRequest
-> = z.object({
-  projectId: z.string(),
-  id: z.string(),
-  updateClusterNodeGroup: models.UpdateClusterNodeGroup$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    projectId: "project_id",
-    updateClusterNodeGroup: "update_cluster_node_group",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    projectId: z.string(),
+    id: z.string(),
+    updateClusterNodeGroup: models.UpdateClusterNodeGroup$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      projectId: "project_id",
+      updateClusterNodeGroup: "update_cluster_node_group",
+    });
+  })
+);
 
 export function updateProjectClusterNodeGroupRequestToJSON(
   updateProjectClusterNodeGroupRequest: UpdateProjectClusterNodeGroupRequest,

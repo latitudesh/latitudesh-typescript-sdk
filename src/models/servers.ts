@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 import {
@@ -26,10 +26,12 @@ export type Servers = {
 
 /** @internal */
 export const Servers$inboundSchema: z.ZodType<Servers, z.ZodTypeDef, unknown> =
-  z.object({
-    data: z.array(ServerData$inboundSchema).optional(),
-    meta: PaginationMeta$inboundSchema.optional(),
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      data: z.array(ServerData$inboundSchema).optional(),
+      meta: PaginationMeta$inboundSchema.optional(),
+    })
+  );
 /** @internal */
 export type Servers$Outbound = {
   data?: Array<ServerData$Outbound> | undefined;
@@ -41,10 +43,12 @@ export const Servers$outboundSchema: z.ZodType<
   Servers$Outbound,
   z.ZodTypeDef,
   Servers
-> = z.object({
-  data: z.array(ServerData$outboundSchema).optional(),
-  meta: PaginationMeta$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(ServerData$outboundSchema).optional(),
+    meta: PaginationMeta$outboundSchema.optional(),
+  })
+);
 
 export function serversToJSON(servers: Servers): string {
   return JSON.stringify(Servers$outboundSchema.parse(servers));

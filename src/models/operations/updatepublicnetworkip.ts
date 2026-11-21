@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as models from "../index.js";
@@ -19,14 +19,16 @@ export const UpdatePublicNetworkIpRequest$inboundSchema: z.ZodType<
   UpdatePublicNetworkIpRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  update_public_network_ip: models.UpdatePublicNetworkIp$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "update_public_network_ip": "updatePublicNetworkIp",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    update_public_network_ip: models.UpdatePublicNetworkIp$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "update_public_network_ip": "updatePublicNetworkIp",
+    });
+  })
+);
 /** @internal */
 export type UpdatePublicNetworkIpRequest$Outbound = {
   id: string;
@@ -38,14 +40,16 @@ export const UpdatePublicNetworkIpRequest$outboundSchema: z.ZodType<
   UpdatePublicNetworkIpRequest$Outbound,
   z.ZodTypeDef,
   UpdatePublicNetworkIpRequest
-> = z.object({
-  id: z.string(),
-  updatePublicNetworkIp: models.UpdatePublicNetworkIp$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    updatePublicNetworkIp: "update_public_network_ip",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    updatePublicNetworkIp: models.UpdatePublicNetworkIp$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      updatePublicNetworkIp: "update_public_network_ip",
+    });
+  })
+);
 
 export function updatePublicNetworkIpRequestToJSON(
   updatePublicNetworkIpRequest: UpdatePublicNetworkIpRequest,

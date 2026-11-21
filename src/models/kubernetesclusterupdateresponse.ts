@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -70,7 +70,9 @@ export type KubernetesClusterUpdateResponse = {
 /** @internal */
 export const KubernetesClusterUpdateResponseType$inboundSchema: z.ZodNativeEnum<
   typeof KubernetesClusterUpdateResponseType
-> = z.nativeEnum(KubernetesClusterUpdateResponseType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(KubernetesClusterUpdateResponseType)
+);
 /** @internal */
 export const KubernetesClusterUpdateResponseType$outboundSchema:
   z.ZodNativeEnum<typeof KubernetesClusterUpdateResponseType> =
@@ -78,9 +80,10 @@ export const KubernetesClusterUpdateResponseType$outboundSchema:
 
 /** @internal */
 export const KubernetesClusterUpdateResponseStatus$inboundSchema:
-  z.ZodNativeEnum<typeof KubernetesClusterUpdateResponseStatus> = z.nativeEnum(
-    KubernetesClusterUpdateResponseStatus,
-  );
+  z.ZodNativeEnum<typeof KubernetesClusterUpdateResponseStatus> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(KubernetesClusterUpdateResponseStatus)
+    );
 /** @internal */
 export const KubernetesClusterUpdateResponseStatus$outboundSchema:
   z.ZodNativeEnum<typeof KubernetesClusterUpdateResponseStatus> =
@@ -91,19 +94,21 @@ export const KubernetesClusterUpdateResponseAttributes$inboundSchema: z.ZodType<
   KubernetesClusterUpdateResponseAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string().optional(),
-  status: KubernetesClusterUpdateResponseStatus$inboundSchema.optional(),
-  worker_count: z.nullable(z.number().int()).optional(),
-  control_plane_count: z.nullable(z.number().int()).optional(),
-  kubernetes_version: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "worker_count": "workerCount",
-    "control_plane_count": "controlPlaneCount",
-    "kubernetes_version": "kubernetesVersion",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    status: KubernetesClusterUpdateResponseStatus$inboundSchema.optional(),
+    worker_count: z.nullable(z.number().int()).optional(),
+    control_plane_count: z.nullable(z.number().int()).optional(),
+    kubernetes_version: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "worker_count": "workerCount",
+      "control_plane_count": "controlPlaneCount",
+      "kubernetes_version": "kubernetesVersion",
+    });
+  })
+);
 /** @internal */
 export type KubernetesClusterUpdateResponseAttributes$Outbound = {
   name?: string | undefined;
@@ -119,19 +124,21 @@ export const KubernetesClusterUpdateResponseAttributes$outboundSchema:
     KubernetesClusterUpdateResponseAttributes$Outbound,
     z.ZodTypeDef,
     KubernetesClusterUpdateResponseAttributes
-  > = z.object({
-    name: z.string().optional(),
-    status: KubernetesClusterUpdateResponseStatus$outboundSchema.optional(),
-    workerCount: z.nullable(z.number().int()).optional(),
-    controlPlaneCount: z.nullable(z.number().int()).optional(),
-    kubernetesVersion: z.nullable(z.string()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      workerCount: "worker_count",
-      controlPlaneCount: "control_plane_count",
-      kubernetesVersion: "kubernetes_version",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      name: z.string().optional(),
+      status: KubernetesClusterUpdateResponseStatus$outboundSchema.optional(),
+      workerCount: z.nullable(z.number().int()).optional(),
+      controlPlaneCount: z.nullable(z.number().int()).optional(),
+      kubernetesVersion: z.nullable(z.string()).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        workerCount: "worker_count",
+        controlPlaneCount: "control_plane_count",
+        kubernetesVersion: "kubernetes_version",
+      });
+    })
+  );
 
 export function kubernetesClusterUpdateResponseAttributesToJSON(
   kubernetesClusterUpdateResponseAttributes:
@@ -164,13 +171,15 @@ export const KubernetesClusterUpdateResponseData$inboundSchema: z.ZodType<
   KubernetesClusterUpdateResponseData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: KubernetesClusterUpdateResponseType$inboundSchema.optional(),
-  id: z.string().optional(),
-  attributes: z.lazy(() =>
-    KubernetesClusterUpdateResponseAttributes$inboundSchema
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: KubernetesClusterUpdateResponseType$inboundSchema.optional(),
+    id: z.string().optional(),
+    attributes: z.lazy(() =>
+      KubernetesClusterUpdateResponseAttributes$inboundSchema
+    ).optional(),
+  })
+);
 /** @internal */
 export type KubernetesClusterUpdateResponseData$Outbound = {
   type?: string | undefined;
@@ -183,13 +192,15 @@ export const KubernetesClusterUpdateResponseData$outboundSchema: z.ZodType<
   KubernetesClusterUpdateResponseData$Outbound,
   z.ZodTypeDef,
   KubernetesClusterUpdateResponseData
-> = z.object({
-  type: KubernetesClusterUpdateResponseType$outboundSchema.optional(),
-  id: z.string().optional(),
-  attributes: z.lazy(() =>
-    KubernetesClusterUpdateResponseAttributes$outboundSchema
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: KubernetesClusterUpdateResponseType$outboundSchema.optional(),
+    id: z.string().optional(),
+    attributes: z.lazy(() =>
+      KubernetesClusterUpdateResponseAttributes$outboundSchema
+    ).optional(),
+  })
+);
 
 export function kubernetesClusterUpdateResponseDataToJSON(
   kubernetesClusterUpdateResponseData: KubernetesClusterUpdateResponseData,
@@ -216,10 +227,12 @@ export const KubernetesClusterUpdateResponse$inboundSchema: z.ZodType<
   KubernetesClusterUpdateResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => KubernetesClusterUpdateResponseData$inboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => KubernetesClusterUpdateResponseData$inboundSchema)
+      .optional(),
+  })
+);
 /** @internal */
 export type KubernetesClusterUpdateResponse$Outbound = {
   data?: KubernetesClusterUpdateResponseData$Outbound | undefined;
@@ -230,10 +243,12 @@ export const KubernetesClusterUpdateResponse$outboundSchema: z.ZodType<
   KubernetesClusterUpdateResponse$Outbound,
   z.ZodTypeDef,
   KubernetesClusterUpdateResponse
-> = z.object({
-  data: z.lazy(() => KubernetesClusterUpdateResponseData$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => KubernetesClusterUpdateResponseData$outboundSchema)
+      .optional(),
+  })
+);
 
 export function kubernetesClusterUpdateResponseToJSON(
   kubernetesClusterUpdateResponse: KubernetesClusterUpdateResponse,

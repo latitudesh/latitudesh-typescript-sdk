@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -49,7 +49,7 @@ export type SandboxExec = {
 /** @internal */
 export const SandboxExecType$inboundSchema: z.ZodNativeEnum<
   typeof SandboxExecType
-> = z.nativeEnum(SandboxExecType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(SandboxExecType));
 /** @internal */
 export const SandboxExecType$outboundSchema: z.ZodNativeEnum<
   typeof SandboxExecType
@@ -60,16 +60,18 @@ export const SandboxExecAttributes$inboundSchema: z.ZodType<
   SandboxExecAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  stdout: z.string().optional(),
-  stderr: z.string().optional(),
-  exit_code: z.nullable(z.number().int()).optional(),
-  truncated: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "exit_code": "exitCode",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    stdout: z.string().optional(),
+    stderr: z.string().optional(),
+    exit_code: z.nullable(z.number().int()).optional(),
+    truncated: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "exit_code": "exitCode",
+    });
+  })
+);
 /** @internal */
 export type SandboxExecAttributes$Outbound = {
   stdout?: string | undefined;
@@ -83,16 +85,18 @@ export const SandboxExecAttributes$outboundSchema: z.ZodType<
   SandboxExecAttributes$Outbound,
   z.ZodTypeDef,
   SandboxExecAttributes
-> = z.object({
-  stdout: z.string().optional(),
-  stderr: z.string().optional(),
-  exitCode: z.nullable(z.number().int()).optional(),
-  truncated: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    exitCode: "exit_code",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    stdout: z.string().optional(),
+    stderr: z.string().optional(),
+    exitCode: z.nullable(z.number().int()).optional(),
+    truncated: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      exitCode: "exit_code",
+    });
+  })
+);
 
 export function sandboxExecAttributesToJSON(
   sandboxExecAttributes: SandboxExecAttributes,
@@ -116,11 +120,13 @@ export const SandboxExecData$inboundSchema: z.ZodType<
   SandboxExecData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  type: SandboxExecType$inboundSchema.optional(),
-  attributes: z.lazy(() => SandboxExecAttributes$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: SandboxExecType$inboundSchema.optional(),
+    attributes: z.lazy(() => SandboxExecAttributes$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type SandboxExecData$Outbound = {
   id?: string | undefined;
@@ -133,11 +139,13 @@ export const SandboxExecData$outboundSchema: z.ZodType<
   SandboxExecData$Outbound,
   z.ZodTypeDef,
   SandboxExecData
-> = z.object({
-  id: z.string().optional(),
-  type: SandboxExecType$outboundSchema.optional(),
-  attributes: z.lazy(() => SandboxExecAttributes$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: SandboxExecType$outboundSchema.optional(),
+    attributes: z.lazy(() => SandboxExecAttributes$outboundSchema).optional(),
+  })
+);
 
 export function sandboxExecDataToJSON(
   sandboxExecData: SandboxExecData,
@@ -159,9 +167,11 @@ export const SandboxExec$inboundSchema: z.ZodType<
   SandboxExec,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => SandboxExecData$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => SandboxExecData$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type SandboxExec$Outbound = {
   data?: SandboxExecData$Outbound | undefined;
@@ -172,9 +182,11 @@ export const SandboxExec$outboundSchema: z.ZodType<
   SandboxExec$Outbound,
   z.ZodTypeDef,
   SandboxExec
-> = z.object({
-  data: z.lazy(() => SandboxExecData$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => SandboxExecData$outboundSchema).optional(),
+  })
+);
 
 export function sandboxExecToJSON(sandboxExec: SandboxExec): string {
   return JSON.stringify(SandboxExec$outboundSchema.parse(sandboxExec));

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -68,9 +68,11 @@ export const GetStorageAccessKeysRequest$inboundSchema: z.ZodType<
   GetStorageAccessKeysRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  project: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    project: z.string(),
+  })
+);
 /** @internal */
 export type GetStorageAccessKeysRequest$Outbound = {
   project: string;
@@ -81,9 +83,11 @@ export const GetStorageAccessKeysRequest$outboundSchema: z.ZodType<
   GetStorageAccessKeysRequest$Outbound,
   z.ZodTypeDef,
   GetStorageAccessKeysRequest
-> = z.object({
-  project: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    project: z.string(),
+  })
+);
 
 export function getStorageAccessKeysRequestToJSON(
   getStorageAccessKeysRequest: GetStorageAccessKeysRequest,
@@ -109,19 +113,21 @@ export const Standard$inboundSchema: z.ZodType<
   Standard,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string().optional(),
-  username: z.string().optional(),
-  access_key_id: z.string().optional(),
-  status: z.string().optional(),
-  created_at: z.string().optional(),
-  region: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "access_key_id": "accessKeyId",
-    "created_at": "createdAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    username: z.string().optional(),
+    access_key_id: z.string().optional(),
+    status: z.string().optional(),
+    created_at: z.string().optional(),
+    region: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "access_key_id": "accessKeyId",
+      "created_at": "createdAt",
+    });
+  })
+);
 /** @internal */
 export type Standard$Outbound = {
   name?: string | undefined;
@@ -137,19 +143,21 @@ export const Standard$outboundSchema: z.ZodType<
   Standard$Outbound,
   z.ZodTypeDef,
   Standard
-> = z.object({
-  name: z.string().optional(),
-  username: z.string().optional(),
-  accessKeyId: z.string().optional(),
-  status: z.string().optional(),
-  createdAt: z.string().optional(),
-  region: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    accessKeyId: "access_key_id",
-    createdAt: "created_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    username: z.string().optional(),
+    accessKeyId: z.string().optional(),
+    status: z.string().optional(),
+    createdAt: z.string().optional(),
+    region: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      accessKeyId: "access_key_id",
+      createdAt: "created_at",
+    });
+  })
+);
 
 export function standardToJSON(standard: Standard): string {
   return JSON.stringify(Standard$outboundSchema.parse(standard));
@@ -169,19 +177,21 @@ export const HighPerformance$inboundSchema: z.ZodType<
   HighPerformance,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string().optional(),
-  username: z.string().optional(),
-  access_key_id: z.string().optional(),
-  status: z.string().optional(),
-  created_at: z.string().optional(),
-  region: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "access_key_id": "accessKeyId",
-    "created_at": "createdAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    username: z.string().optional(),
+    access_key_id: z.string().optional(),
+    status: z.string().optional(),
+    created_at: z.string().optional(),
+    region: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "access_key_id": "accessKeyId",
+      "created_at": "createdAt",
+    });
+  })
+);
 /** @internal */
 export type HighPerformance$Outbound = {
   name?: string | undefined;
@@ -197,19 +207,21 @@ export const HighPerformance$outboundSchema: z.ZodType<
   HighPerformance$Outbound,
   z.ZodTypeDef,
   HighPerformance
-> = z.object({
-  name: z.string().optional(),
-  username: z.string().optional(),
-  accessKeyId: z.string().optional(),
-  status: z.string().optional(),
-  createdAt: z.string().optional(),
-  region: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    accessKeyId: "access_key_id",
-    createdAt: "created_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    username: z.string().optional(),
+    accessKeyId: z.string().optional(),
+    status: z.string().optional(),
+    createdAt: z.string().optional(),
+    region: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      accessKeyId: "access_key_id",
+      createdAt: "created_at",
+    });
+  })
+);
 
 export function highPerformanceToJSON(
   highPerformance: HighPerformance,
@@ -231,15 +243,17 @@ export const GetStorageAccessKeysData$inboundSchema: z.ZodType<
   GetStorageAccessKeysData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  standard: z.array(z.lazy(() => Standard$inboundSchema)).optional(),
-  high_performance: z.array(z.lazy(() => HighPerformance$inboundSchema))
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "high_performance": "highPerformance",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    standard: z.array(z.lazy(() => Standard$inboundSchema)).optional(),
+    high_performance: z.array(z.lazy(() => HighPerformance$inboundSchema))
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "high_performance": "highPerformance",
+    });
+  })
+);
 /** @internal */
 export type GetStorageAccessKeysData$Outbound = {
   standard?: Array<Standard$Outbound> | undefined;
@@ -251,15 +265,17 @@ export const GetStorageAccessKeysData$outboundSchema: z.ZodType<
   GetStorageAccessKeysData$Outbound,
   z.ZodTypeDef,
   GetStorageAccessKeysData
-> = z.object({
-  standard: z.array(z.lazy(() => Standard$outboundSchema)).optional(),
-  highPerformance: z.array(z.lazy(() => HighPerformance$outboundSchema))
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    highPerformance: "high_performance",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    standard: z.array(z.lazy(() => Standard$outboundSchema)).optional(),
+    highPerformance: z.array(z.lazy(() => HighPerformance$outboundSchema))
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      highPerformance: "high_performance",
+    });
+  })
+);
 
 export function getStorageAccessKeysDataToJSON(
   getStorageAccessKeysData: GetStorageAccessKeysData,
@@ -283,9 +299,11 @@ export const GetStorageAccessKeysResponse$inboundSchema: z.ZodType<
   GetStorageAccessKeysResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => GetStorageAccessKeysData$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => GetStorageAccessKeysData$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type GetStorageAccessKeysResponse$Outbound = {
   data?: GetStorageAccessKeysData$Outbound | undefined;
@@ -296,9 +314,11 @@ export const GetStorageAccessKeysResponse$outboundSchema: z.ZodType<
   GetStorageAccessKeysResponse$Outbound,
   z.ZodTypeDef,
   GetStorageAccessKeysResponse
-> = z.object({
-  data: z.lazy(() => GetStorageAccessKeysData$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => GetStorageAccessKeysData$outboundSchema).optional(),
+  })
+);
 
 export function getStorageAccessKeysResponseToJSON(
   getStorageAccessKeysResponse: GetStorageAccessKeysResponse,

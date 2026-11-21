@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -65,7 +65,7 @@ export type LksNodePoolData = {
 /** @internal */
 export const LksNodePoolDataType$inboundSchema: z.ZodNativeEnum<
   typeof LksNodePoolDataType
-> = z.nativeEnum(LksNodePoolDataType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(LksNodePoolDataType));
 /** @internal */
 export const LksNodePoolDataType$outboundSchema: z.ZodNativeEnum<
   typeof LksNodePoolDataType
@@ -76,36 +76,38 @@ export const LksNodePoolDataAttributes$inboundSchema: z.ZodType<
   LksNodePoolDataAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.nullable(z.string()).optional(),
-  type: z.string().optional(),
-  mode: z.string().optional(),
-  plan: z.nullable(z.string()).optional(),
-  server_ids: z.nullable(z.array(z.string())).optional(),
-  description: z.nullable(z.string()).optional(),
-  count: z.nullable(z.number().int()).optional(),
-  max_pods_per_node: z.nullable(z.number().int()).optional(),
-  kubernetes_version: z.nullable(z.string()).optional(),
-  platform_version: z.nullable(z.string()).optional(),
-  status: z.nullable(z.string()).optional(),
-  message: z.nullable(z.string()).optional(),
-  reason: z.nullable(z.string()).optional(),
-  ready_nodes: z.nullable(z.number().int()).optional(),
-  labels: z.record(z.string()).optional(),
-  taints: z.array(LksNodePoolTaint$inboundSchema).optional(),
-  created_at: z.nullable(z.string()).optional(),
-  updated_at: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "server_ids": "serverIds",
-    "max_pods_per_node": "maxPodsPerNode",
-    "kubernetes_version": "kubernetesVersion",
-    "platform_version": "platformVersion",
-    "ready_nodes": "readyNodes",
-    "created_at": "createdAt",
-    "updated_at": "updatedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.nullable(z.string()).optional(),
+    type: z.string().optional(),
+    mode: z.string().optional(),
+    plan: z.nullable(z.string()).optional(),
+    server_ids: z.nullable(z.array(z.string())).optional(),
+    description: z.nullable(z.string()).optional(),
+    count: z.nullable(z.number().int()).optional(),
+    max_pods_per_node: z.nullable(z.number().int()).optional(),
+    kubernetes_version: z.nullable(z.string()).optional(),
+    platform_version: z.nullable(z.string()).optional(),
+    status: z.nullable(z.string()).optional(),
+    message: z.nullable(z.string()).optional(),
+    reason: z.nullable(z.string()).optional(),
+    ready_nodes: z.nullable(z.number().int()).optional(),
+    labels: z.record(z.string()).optional(),
+    taints: z.array(LksNodePoolTaint$inboundSchema).optional(),
+    created_at: z.nullable(z.string()).optional(),
+    updated_at: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "server_ids": "serverIds",
+      "max_pods_per_node": "maxPodsPerNode",
+      "kubernetes_version": "kubernetesVersion",
+      "platform_version": "platformVersion",
+      "ready_nodes": "readyNodes",
+      "created_at": "createdAt",
+      "updated_at": "updatedAt",
+    });
+  })
+);
 /** @internal */
 export type LksNodePoolDataAttributes$Outbound = {
   name?: string | null | undefined;
@@ -133,36 +135,38 @@ export const LksNodePoolDataAttributes$outboundSchema: z.ZodType<
   LksNodePoolDataAttributes$Outbound,
   z.ZodTypeDef,
   LksNodePoolDataAttributes
-> = z.object({
-  name: z.nullable(z.string()).optional(),
-  type: z.string().optional(),
-  mode: z.string().optional(),
-  plan: z.nullable(z.string()).optional(),
-  serverIds: z.nullable(z.array(z.string())).optional(),
-  description: z.nullable(z.string()).optional(),
-  count: z.nullable(z.number().int()).optional(),
-  maxPodsPerNode: z.nullable(z.number().int()).optional(),
-  kubernetesVersion: z.nullable(z.string()).optional(),
-  platformVersion: z.nullable(z.string()).optional(),
-  status: z.nullable(z.string()).optional(),
-  message: z.nullable(z.string()).optional(),
-  reason: z.nullable(z.string()).optional(),
-  readyNodes: z.nullable(z.number().int()).optional(),
-  labels: z.record(z.string()).optional(),
-  taints: z.array(LksNodePoolTaint$outboundSchema).optional(),
-  createdAt: z.nullable(z.string()).optional(),
-  updatedAt: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    serverIds: "server_ids",
-    maxPodsPerNode: "max_pods_per_node",
-    kubernetesVersion: "kubernetes_version",
-    platformVersion: "platform_version",
-    readyNodes: "ready_nodes",
-    createdAt: "created_at",
-    updatedAt: "updated_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.nullable(z.string()).optional(),
+    type: z.string().optional(),
+    mode: z.string().optional(),
+    plan: z.nullable(z.string()).optional(),
+    serverIds: z.nullable(z.array(z.string())).optional(),
+    description: z.nullable(z.string()).optional(),
+    count: z.nullable(z.number().int()).optional(),
+    maxPodsPerNode: z.nullable(z.number().int()).optional(),
+    kubernetesVersion: z.nullable(z.string()).optional(),
+    platformVersion: z.nullable(z.string()).optional(),
+    status: z.nullable(z.string()).optional(),
+    message: z.nullable(z.string()).optional(),
+    reason: z.nullable(z.string()).optional(),
+    readyNodes: z.nullable(z.number().int()).optional(),
+    labels: z.record(z.string()).optional(),
+    taints: z.array(LksNodePoolTaint$outboundSchema).optional(),
+    createdAt: z.nullable(z.string()).optional(),
+    updatedAt: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      serverIds: "server_ids",
+      maxPodsPerNode: "max_pods_per_node",
+      kubernetesVersion: "kubernetes_version",
+      platformVersion: "platform_version",
+      readyNodes: "ready_nodes",
+      createdAt: "created_at",
+      updatedAt: "updated_at",
+    });
+  })
+);
 
 export function lksNodePoolDataAttributesToJSON(
   lksNodePoolDataAttributes: LksNodePoolDataAttributes,
@@ -186,11 +190,14 @@ export const LksNodePoolData$inboundSchema: z.ZodType<
   LksNodePoolData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  type: LksNodePoolDataType$inboundSchema.optional(),
-  attributes: z.lazy(() => LksNodePoolDataAttributes$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: LksNodePoolDataType$inboundSchema.optional(),
+    attributes: z.lazy(() => LksNodePoolDataAttributes$inboundSchema)
+      .optional(),
+  })
+);
 /** @internal */
 export type LksNodePoolData$Outbound = {
   id?: string | undefined;
@@ -203,11 +210,14 @@ export const LksNodePoolData$outboundSchema: z.ZodType<
   LksNodePoolData$Outbound,
   z.ZodTypeDef,
   LksNodePoolData
-> = z.object({
-  id: z.string().optional(),
-  type: LksNodePoolDataType$outboundSchema.optional(),
-  attributes: z.lazy(() => LksNodePoolDataAttributes$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: LksNodePoolDataType$outboundSchema.optional(),
+    attributes: z.lazy(() => LksNodePoolDataAttributes$outboundSchema)
+      .optional(),
+  })
+);
 
 export function lksNodePoolDataToJSON(
   lksNodePoolData: LksNodePoolData,

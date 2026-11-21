@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -38,7 +38,7 @@ export type UpdatePublicNetworkIp = {
 /** @internal */
 export const UpdatePublicNetworkIpType$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePublicNetworkIpType
-> = z.nativeEnum(UpdatePublicNetworkIpType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(UpdatePublicNetworkIpType));
 /** @internal */
 export const UpdatePublicNetworkIpType$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePublicNetworkIpType
@@ -49,10 +49,12 @@ export const UpdatePublicNetworkIpAttributes$inboundSchema: z.ZodType<
   UpdatePublicNetworkIpAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  address: z.string(),
-  reserved: z.boolean(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    address: z.string(),
+    reserved: z.boolean(),
+  })
+);
 /** @internal */
 export type UpdatePublicNetworkIpAttributes$Outbound = {
   address: string;
@@ -64,10 +66,12 @@ export const UpdatePublicNetworkIpAttributes$outboundSchema: z.ZodType<
   UpdatePublicNetworkIpAttributes$Outbound,
   z.ZodTypeDef,
   UpdatePublicNetworkIpAttributes
-> = z.object({
-  address: z.string(),
-  reserved: z.boolean(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    address: z.string(),
+    reserved: z.boolean(),
+  })
+);
 
 export function updatePublicNetworkIpAttributesToJSON(
   updatePublicNetworkIpAttributes: UpdatePublicNetworkIpAttributes,
@@ -93,11 +97,13 @@ export const UpdatePublicNetworkIpData$inboundSchema: z.ZodType<
   UpdatePublicNetworkIpData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: UpdatePublicNetworkIpType$inboundSchema,
-  attributes: z.lazy(() => UpdatePublicNetworkIpAttributes$inboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: UpdatePublicNetworkIpType$inboundSchema,
+    attributes: z.lazy(() => UpdatePublicNetworkIpAttributes$inboundSchema)
+      .optional(),
+  })
+);
 /** @internal */
 export type UpdatePublicNetworkIpData$Outbound = {
   type: string;
@@ -109,11 +115,13 @@ export const UpdatePublicNetworkIpData$outboundSchema: z.ZodType<
   UpdatePublicNetworkIpData$Outbound,
   z.ZodTypeDef,
   UpdatePublicNetworkIpData
-> = z.object({
-  type: UpdatePublicNetworkIpType$outboundSchema,
-  attributes: z.lazy(() => UpdatePublicNetworkIpAttributes$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: UpdatePublicNetworkIpType$outboundSchema,
+    attributes: z.lazy(() => UpdatePublicNetworkIpAttributes$outboundSchema)
+      .optional(),
+  })
+);
 
 export function updatePublicNetworkIpDataToJSON(
   updatePublicNetworkIpData: UpdatePublicNetworkIpData,
@@ -137,9 +145,11 @@ export const UpdatePublicNetworkIp$inboundSchema: z.ZodType<
   UpdatePublicNetworkIp,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => UpdatePublicNetworkIpData$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => UpdatePublicNetworkIpData$inboundSchema),
+  })
+);
 /** @internal */
 export type UpdatePublicNetworkIp$Outbound = {
   data: UpdatePublicNetworkIpData$Outbound;
@@ -150,9 +160,11 @@ export const UpdatePublicNetworkIp$outboundSchema: z.ZodType<
   UpdatePublicNetworkIp$Outbound,
   z.ZodTypeDef,
   UpdatePublicNetworkIp
-> = z.object({
-  data: z.lazy(() => UpdatePublicNetworkIpData$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => UpdatePublicNetworkIpData$outboundSchema),
+  })
+);
 
 export function updatePublicNetworkIpToJSON(
   updatePublicNetworkIp: UpdatePublicNetworkIp,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { RFCDate } from "../types/rfcdate.js";
@@ -43,6 +43,10 @@ export type Item = {
   check?: string | undefined;
   expected?: string | null | undefined;
   note?: string | null | undefined;
+  /**
+   * The node group the requirement applies to; absent or null for the whole cluster
+   */
+  nodeGroupId?: string | null | undefined;
 };
 
 export type Values = {
@@ -165,7 +169,9 @@ export type ClusterRequirementsData = {
 /** @internal */
 export const ClusterRequirementsDataType$inboundSchema: z.ZodNativeEnum<
   typeof ClusterRequirementsDataType
-> = z.nativeEnum(ClusterRequirementsDataType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(ClusterRequirementsDataType)
+);
 /** @internal */
 export const ClusterRequirementsDataType$outboundSchema: z.ZodNativeEnum<
   typeof ClusterRequirementsDataType
@@ -174,22 +180,29 @@ export const ClusterRequirementsDataType$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const RequirementsState$inboundSchema: z.ZodNativeEnum<
   typeof RequirementsState
-> = z.nativeEnum(RequirementsState);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(RequirementsState));
 /** @internal */
 export const RequirementsState$outboundSchema: z.ZodNativeEnum<
   typeof RequirementsState
 > = RequirementsState$inboundSchema;
 
 /** @internal */
-export const Item$inboundSchema: z.ZodType<Item, z.ZodTypeDef, unknown> = z
-  .object({
-    id: z.string().optional(),
-    label: z.string().optional(),
-    category: z.string().optional(),
-    check: z.string().optional(),
-    expected: z.nullable(z.string()).optional(),
-    note: z.nullable(z.string()).optional(),
-  });
+export const Item$inboundSchema: z.ZodType<Item, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string().optional(),
+      label: z.string().optional(),
+      category: z.string().optional(),
+      check: z.string().optional(),
+      expected: z.nullable(z.string()).optional(),
+      note: z.nullable(z.string()).optional(),
+      node_group_id: z.nullable(z.string()).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "node_group_id": "nodeGroupId",
+      });
+    })
+  );
 /** @internal */
 export type Item$Outbound = {
   id?: string | undefined;
@@ -198,18 +211,26 @@ export type Item$Outbound = {
   check?: string | undefined;
   expected?: string | null | undefined;
   note?: string | null | undefined;
+  node_group_id?: string | null | undefined;
 };
 
 /** @internal */
 export const Item$outboundSchema: z.ZodType<Item$Outbound, z.ZodTypeDef, Item> =
-  z.object({
-    id: z.string().optional(),
-    label: z.string().optional(),
-    category: z.string().optional(),
-    check: z.string().optional(),
-    expected: z.nullable(z.string()).optional(),
-    note: z.nullable(z.string()).optional(),
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string().optional(),
+      label: z.string().optional(),
+      category: z.string().optional(),
+      check: z.string().optional(),
+      expected: z.nullable(z.string()).optional(),
+      note: z.nullable(z.string()).optional(),
+      nodeGroupId: z.nullable(z.string()).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        nodeGroupId: "node_group_id",
+      });
+    })
+  );
 
 export function itemToJSON(item: Item): string {
   return JSON.stringify(Item$outboundSchema.parse(item));
@@ -225,11 +246,13 @@ export function itemFromJSON(
 }
 
 /** @internal */
-export const Values$inboundSchema: z.ZodType<Values, z.ZodTypeDef, unknown> = z
-  .object({
-    expected: z.nullable(z.string()).optional(),
-    note: z.nullable(z.string()).optional(),
-  });
+export const Values$inboundSchema: z.ZodType<Values, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      expected: z.nullable(z.string()).optional(),
+      note: z.nullable(z.string()).optional(),
+    })
+  );
 /** @internal */
 export type Values$Outbound = {
   expected?: string | null | undefined;
@@ -241,10 +264,12 @@ export const Values$outboundSchema: z.ZodType<
   Values$Outbound,
   z.ZodTypeDef,
   Values
-> = z.object({
-  expected: z.nullable(z.string()).optional(),
-  note: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    expected: z.nullable(z.string()).optional(),
+    note: z.nullable(z.string()).optional(),
+  })
+);
 
 export function valuesToJSON(values: Values): string {
   return JSON.stringify(Values$outboundSchema.parse(values));
@@ -264,10 +289,12 @@ export const Requirements$inboundSchema: z.ZodType<
   Requirements,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  items: z.array(z.lazy(() => Item$inboundSchema)).optional(),
-  values: z.record(z.lazy(() => Values$inboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    items: z.array(z.lazy(() => Item$inboundSchema)).optional(),
+    values: z.record(z.lazy(() => Values$inboundSchema)).optional(),
+  })
+);
 /** @internal */
 export type Requirements$Outbound = {
   items?: Array<Item$Outbound> | undefined;
@@ -279,10 +306,12 @@ export const Requirements$outboundSchema: z.ZodType<
   Requirements$Outbound,
   z.ZodTypeDef,
   Requirements
-> = z.object({
-  items: z.array(z.lazy(() => Item$outboundSchema)).optional(),
-  values: z.record(z.lazy(() => Values$outboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    items: z.array(z.lazy(() => Item$outboundSchema)).optional(),
+    values: z.record(z.lazy(() => Values$outboundSchema)).optional(),
+  })
+);
 
 export function requirementsToJSON(requirements: Requirements): string {
   return JSON.stringify(Requirements$outboundSchema.parse(requirements));
@@ -300,7 +329,7 @@ export function requirementsFromJSON(
 /** @internal */
 export const NodeGroupKind$inboundSchema: z.ZodNativeEnum<
   typeof NodeGroupKind
-> = z.nativeEnum(NodeGroupKind);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(NodeGroupKind));
 /** @internal */
 export const NodeGroupKind$outboundSchema: z.ZodNativeEnum<
   typeof NodeGroupKind
@@ -311,22 +340,24 @@ export const NodeGroup$inboundSchema: z.ZodType<
   NodeGroup,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  kind: NodeGroupKind$inboundSchema.optional(),
-  plan: z.nullable(z.string()).optional(),
-  plan_name: z.nullable(z.string()).optional(),
-  server_count: z.nullable(z.number().int()).optional(),
-  os: z.nullable(z.string()).optional(),
-  os_options: z.array(ClusterOsOption$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "plan_name": "planName",
-    "server_count": "serverCount",
-    "os_options": "osOptions",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    name: z.string().optional(),
+    kind: NodeGroupKind$inboundSchema.optional(),
+    plan: z.nullable(z.string()).optional(),
+    plan_name: z.nullable(z.string()).optional(),
+    server_count: z.nullable(z.number().int()).optional(),
+    os: z.nullable(z.string()).optional(),
+    os_options: z.array(ClusterOsOption$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "plan_name": "planName",
+      "server_count": "serverCount",
+      "os_options": "osOptions",
+    });
+  })
+);
 /** @internal */
 export type NodeGroup$Outbound = {
   id?: string | undefined;
@@ -344,22 +375,24 @@ export const NodeGroup$outboundSchema: z.ZodType<
   NodeGroup$Outbound,
   z.ZodTypeDef,
   NodeGroup
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  kind: NodeGroupKind$outboundSchema.optional(),
-  plan: z.nullable(z.string()).optional(),
-  planName: z.nullable(z.string()).optional(),
-  serverCount: z.nullable(z.number().int()).optional(),
-  os: z.nullable(z.string()).optional(),
-  osOptions: z.array(ClusterOsOption$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    planName: "plan_name",
-    serverCount: "server_count",
-    osOptions: "os_options",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    name: z.string().optional(),
+    kind: NodeGroupKind$outboundSchema.optional(),
+    plan: z.nullable(z.string()).optional(),
+    planName: z.nullable(z.string()).optional(),
+    serverCount: z.nullable(z.number().int()).optional(),
+    os: z.nullable(z.string()).optional(),
+    osOptions: z.array(ClusterOsOption$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      planName: "plan_name",
+      serverCount: "server_count",
+      osOptions: "os_options",
+    });
+  })
+);
 
 export function nodeGroupToJSON(nodeGroup: NodeGroup): string {
   return JSON.stringify(NodeGroup$outboundSchema.parse(nodeGroup));
@@ -377,7 +410,7 @@ export function nodeGroupFromJSON(
 /** @internal */
 export const NodeGroupOptionsKind$inboundSchema: z.ZodNativeEnum<
   typeof NodeGroupOptionsKind
-> = z.nativeEnum(NodeGroupOptionsKind);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(NodeGroupOptionsKind));
 /** @internal */
 export const NodeGroupOptionsKind$outboundSchema: z.ZodNativeEnum<
   typeof NodeGroupOptionsKind
@@ -388,15 +421,17 @@ export const ClusterRequirementsDataPlan$inboundSchema: z.ZodType<
   ClusterRequirementsDataPlan,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  slug: z.string().optional(),
-  name: z.string().optional(),
-  os_options: z.array(ClusterOsOption$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "os_options": "osOptions",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    slug: z.string().optional(),
+    name: z.string().optional(),
+    os_options: z.array(ClusterOsOption$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "os_options": "osOptions",
+    });
+  })
+);
 /** @internal */
 export type ClusterRequirementsDataPlan$Outbound = {
   slug?: string | undefined;
@@ -409,15 +444,17 @@ export const ClusterRequirementsDataPlan$outboundSchema: z.ZodType<
   ClusterRequirementsDataPlan$Outbound,
   z.ZodTypeDef,
   ClusterRequirementsDataPlan
-> = z.object({
-  slug: z.string().optional(),
-  name: z.string().optional(),
-  osOptions: z.array(ClusterOsOption$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    osOptions: "os_options",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    slug: z.string().optional(),
+    name: z.string().optional(),
+    osOptions: z.array(ClusterOsOption$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      osOptions: "os_options",
+    });
+  })
+);
 
 export function clusterRequirementsDataPlanToJSON(
   clusterRequirementsDataPlan: ClusterRequirementsDataPlan,
@@ -443,16 +480,18 @@ export const NodeGroupOptions$inboundSchema: z.ZodType<
   NodeGroupOptions,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  kinds: z.array(NodeGroupOptionsKind$inboundSchema).optional(),
-  max_server_count: z.number().int().optional(),
-  plans: z.array(z.lazy(() => ClusterRequirementsDataPlan$inboundSchema))
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "max_server_count": "maxServerCount",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    kinds: z.array(NodeGroupOptionsKind$inboundSchema).optional(),
+    max_server_count: z.number().int().optional(),
+    plans: z.array(z.lazy(() => ClusterRequirementsDataPlan$inboundSchema))
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "max_server_count": "maxServerCount",
+    });
+  })
+);
 /** @internal */
 export type NodeGroupOptions$Outbound = {
   kinds?: Array<string> | undefined;
@@ -465,16 +504,18 @@ export const NodeGroupOptions$outboundSchema: z.ZodType<
   NodeGroupOptions$Outbound,
   z.ZodTypeDef,
   NodeGroupOptions
-> = z.object({
-  kinds: z.array(NodeGroupOptionsKind$outboundSchema).optional(),
-  maxServerCount: z.number().int().optional(),
-  plans: z.array(z.lazy(() => ClusterRequirementsDataPlan$outboundSchema))
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    maxServerCount: "max_server_count",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    kinds: z.array(NodeGroupOptionsKind$outboundSchema).optional(),
+    maxServerCount: z.number().int().optional(),
+    plans: z.array(z.lazy(() => ClusterRequirementsDataPlan$outboundSchema))
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      maxServerCount: "max_server_count",
+    });
+  })
+);
 
 export function nodeGroupOptionsToJSON(
   nodeGroupOptions: NodeGroupOptions,
@@ -495,15 +536,17 @@ export function nodeGroupOptionsFromJSON(
 
 /** @internal */
 export const Signoff$inboundSchema: z.ZodType<Signoff, z.ZodTypeDef, unknown> =
-  z.object({
-    user_email: z.string().optional(),
-    signed_at: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "user_email": "userEmail",
-      "signed_at": "signedAt",
-    });
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      user_email: z.string().optional(),
+      signed_at: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "user_email": "userEmail",
+        "signed_at": "signedAt",
+      });
+    })
+  );
 /** @internal */
 export type Signoff$Outbound = {
   user_email?: string | undefined;
@@ -515,15 +558,17 @@ export const Signoff$outboundSchema: z.ZodType<
   Signoff$Outbound,
   z.ZodTypeDef,
   Signoff
-> = z.object({
-  userEmail: z.string().optional(),
-  signedAt: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    userEmail: "user_email",
-    signedAt: "signed_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    userEmail: z.string().optional(),
+    signedAt: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      userEmail: "user_email",
+      signedAt: "signed_at",
+    });
+  })
+);
 
 export function signoffToJSON(signoff: Signoff): string {
   return JSON.stringify(Signoff$outboundSchema.parse(signoff));
@@ -543,25 +588,27 @@ export const ClusterRequirementsDataAttributes$inboundSchema: z.ZodType<
   ClusterRequirementsDataAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  requirements_state: RequirementsState$inboundSchema.optional(),
-  requirements_due_date: z.nullable(z.string().transform(v => new RFCDate(v)))
-    .optional(),
-  requirements: z.lazy(() => Requirements$inboundSchema).optional(),
-  node_groups: z.array(z.lazy(() => NodeGroup$inboundSchema)).optional(),
-  node_group_options: z.nullable(z.lazy(() => NodeGroupOptions$inboundSchema))
-    .optional(),
-  requirements_version: z.nullable(z.string()).optional(),
-  signoff: z.nullable(z.lazy(() => Signoff$inboundSchema)).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "requirements_state": "requirementsState",
-    "requirements_due_date": "requirementsDueDate",
-    "node_groups": "nodeGroups",
-    "node_group_options": "nodeGroupOptions",
-    "requirements_version": "requirementsVersion",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    requirements_state: RequirementsState$inboundSchema.optional(),
+    requirements_due_date: z.nullable(z.string().transform(v => new RFCDate(v)))
+      .optional(),
+    requirements: z.lazy(() => Requirements$inboundSchema).optional(),
+    node_groups: z.array(z.lazy(() => NodeGroup$inboundSchema)).optional(),
+    node_group_options: z.nullable(z.lazy(() => NodeGroupOptions$inboundSchema))
+      .optional(),
+    requirements_version: z.nullable(z.string()).optional(),
+    signoff: z.nullable(z.lazy(() => Signoff$inboundSchema)).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "requirements_state": "requirementsState",
+      "requirements_due_date": "requirementsDueDate",
+      "node_groups": "nodeGroups",
+      "node_group_options": "nodeGroupOptions",
+      "requirements_version": "requirementsVersion",
+    });
+  })
+);
 /** @internal */
 export type ClusterRequirementsDataAttributes$Outbound = {
   requirements_state?: string | undefined;
@@ -578,26 +625,28 @@ export const ClusterRequirementsDataAttributes$outboundSchema: z.ZodType<
   ClusterRequirementsDataAttributes$Outbound,
   z.ZodTypeDef,
   ClusterRequirementsDataAttributes
-> = z.object({
-  requirementsState: RequirementsState$outboundSchema.optional(),
-  requirementsDueDate: z.nullable(
-    z.instanceof(RFCDate).transform(v => v.toString()),
-  ).optional(),
-  requirements: z.lazy(() => Requirements$outboundSchema).optional(),
-  nodeGroups: z.array(z.lazy(() => NodeGroup$outboundSchema)).optional(),
-  nodeGroupOptions: z.nullable(z.lazy(() => NodeGroupOptions$outboundSchema))
-    .optional(),
-  requirementsVersion: z.nullable(z.string()).optional(),
-  signoff: z.nullable(z.lazy(() => Signoff$outboundSchema)).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    requirementsState: "requirements_state",
-    requirementsDueDate: "requirements_due_date",
-    nodeGroups: "node_groups",
-    nodeGroupOptions: "node_group_options",
-    requirementsVersion: "requirements_version",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    requirementsState: RequirementsState$outboundSchema.optional(),
+    requirementsDueDate: z.nullable(
+      z.instanceof(RFCDate).transform(v => v.toString()),
+    ).optional(),
+    requirements: z.lazy(() => Requirements$outboundSchema).optional(),
+    nodeGroups: z.array(z.lazy(() => NodeGroup$outboundSchema)).optional(),
+    nodeGroupOptions: z.nullable(z.lazy(() => NodeGroupOptions$outboundSchema))
+      .optional(),
+    requirementsVersion: z.nullable(z.string()).optional(),
+    signoff: z.nullable(z.lazy(() => Signoff$outboundSchema)).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      requirementsState: "requirements_state",
+      requirementsDueDate: "requirements_due_date",
+      nodeGroups: "node_groups",
+      nodeGroupOptions: "node_group_options",
+      requirementsVersion: "requirements_version",
+    });
+  })
+);
 
 export function clusterRequirementsDataAttributesToJSON(
   clusterRequirementsDataAttributes: ClusterRequirementsDataAttributes,
@@ -623,12 +672,14 @@ export const ClusterRequirementsData$inboundSchema: z.ZodType<
   ClusterRequirementsData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  type: ClusterRequirementsDataType$inboundSchema.optional(),
-  attributes: z.lazy(() => ClusterRequirementsDataAttributes$inboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: ClusterRequirementsDataType$inboundSchema.optional(),
+    attributes: z.lazy(() => ClusterRequirementsDataAttributes$inboundSchema)
+      .optional(),
+  })
+);
 /** @internal */
 export type ClusterRequirementsData$Outbound = {
   id?: string | undefined;
@@ -641,12 +692,14 @@ export const ClusterRequirementsData$outboundSchema: z.ZodType<
   ClusterRequirementsData$Outbound,
   z.ZodTypeDef,
   ClusterRequirementsData
-> = z.object({
-  id: z.string().optional(),
-  type: ClusterRequirementsDataType$outboundSchema.optional(),
-  attributes: z.lazy(() => ClusterRequirementsDataAttributes$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: ClusterRequirementsDataType$outboundSchema.optional(),
+    attributes: z.lazy(() => ClusterRequirementsDataAttributes$outboundSchema)
+      .optional(),
+  })
+);
 
 export function clusterRequirementsDataToJSON(
   clusterRequirementsData: ClusterRequirementsData,

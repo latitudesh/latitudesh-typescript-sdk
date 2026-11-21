@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import {
   ElasticIpData,
@@ -25,7 +25,7 @@ export const ElasticIpsMeta$inboundSchema: z.ZodType<
   ElasticIpsMeta,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type ElasticIpsMeta$Outbound = {};
 
@@ -34,7 +34,7 @@ export const ElasticIpsMeta$outboundSchema: z.ZodType<
   ElasticIpsMeta$Outbound,
   z.ZodTypeDef,
   ElasticIpsMeta
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function elasticIpsMetaToJSON(elasticIpsMeta: ElasticIpsMeta): string {
   return JSON.stringify(ElasticIpsMeta$outboundSchema.parse(elasticIpsMeta));
@@ -54,10 +54,12 @@ export const ElasticIps$inboundSchema: z.ZodType<
   ElasticIps,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.array(ElasticIpData$inboundSchema).optional(),
-  meta: z.lazy(() => ElasticIpsMeta$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(ElasticIpData$inboundSchema).optional(),
+    meta: z.lazy(() => ElasticIpsMeta$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type ElasticIps$Outbound = {
   data?: Array<ElasticIpData$Outbound> | undefined;
@@ -69,10 +71,12 @@ export const ElasticIps$outboundSchema: z.ZodType<
   ElasticIps$Outbound,
   z.ZodTypeDef,
   ElasticIps
-> = z.object({
-  data: z.array(ElasticIpData$outboundSchema).optional(),
-  meta: z.lazy(() => ElasticIpsMeta$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(ElasticIpData$outboundSchema).optional(),
+    meta: z.lazy(() => ElasticIpsMeta$outboundSchema).optional(),
+  })
+);
 
 export function elasticIpsToJSON(elasticIps: ElasticIps): string {
   return JSON.stringify(ElasticIps$outboundSchema.parse(elasticIps));

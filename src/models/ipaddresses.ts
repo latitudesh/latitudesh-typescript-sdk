@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 import {
@@ -29,10 +29,12 @@ export const IpAddresses$inboundSchema: z.ZodType<
   IpAddresses,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.array(IpAddressData$inboundSchema).optional(),
-  meta: PaginationMeta$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(IpAddressData$inboundSchema).optional(),
+    meta: PaginationMeta$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type IpAddresses$Outbound = {
   data?: Array<IpAddressData$Outbound> | undefined;
@@ -44,10 +46,12 @@ export const IpAddresses$outboundSchema: z.ZodType<
   IpAddresses$Outbound,
   z.ZodTypeDef,
   IpAddresses
-> = z.object({
-  data: z.array(IpAddressData$outboundSchema).optional(),
-  meta: PaginationMeta$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(IpAddressData$outboundSchema).optional(),
+    meta: PaginationMeta$outboundSchema.optional(),
+  })
+);
 
 export function ipAddressesToJSON(ipAddresses: IpAddresses): string {
   return JSON.stringify(IpAddresses$outboundSchema.parse(ipAddresses));

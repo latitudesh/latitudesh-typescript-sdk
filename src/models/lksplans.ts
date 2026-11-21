@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -138,7 +138,7 @@ export type LksPlans = {
 
 /** @internal */
 export const LksPlansType$inboundSchema: z.ZodNativeEnum<typeof LksPlansType> =
-  z.nativeEnum(LksPlansType);
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(LksPlansType));
 /** @internal */
 export const LksPlansType$outboundSchema: z.ZodNativeEnum<typeof LksPlansType> =
   LksPlansType$inboundSchema;
@@ -148,12 +148,14 @@ export const LksPlansCpu$inboundSchema: z.ZodType<
   LksPlansCpu,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.nullable(z.string()).optional(),
-  clock: z.nullable(z.number()).optional(),
-  cores: z.nullable(z.number().int()).optional(),
-  count: z.nullable(z.number().int()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.nullable(z.string()).optional(),
+    clock: z.nullable(z.number()).optional(),
+    cores: z.nullable(z.number().int()).optional(),
+    count: z.nullable(z.number().int()).optional(),
+  })
+);
 /** @internal */
 export type LksPlansCpu$Outbound = {
   type?: string | null | undefined;
@@ -167,12 +169,14 @@ export const LksPlansCpu$outboundSchema: z.ZodType<
   LksPlansCpu$Outbound,
   z.ZodTypeDef,
   LksPlansCpu
-> = z.object({
-  type: z.nullable(z.string()).optional(),
-  clock: z.nullable(z.number()).optional(),
-  cores: z.nullable(z.number().int()).optional(),
-  count: z.nullable(z.number().int()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.nullable(z.string()).optional(),
+    clock: z.nullable(z.number()).optional(),
+    cores: z.nullable(z.number().int()).optional(),
+    count: z.nullable(z.number().int()).optional(),
+  })
+);
 
 export function lksPlansCpuToJSON(lksPlansCpu: LksPlansCpu): string {
   return JSON.stringify(LksPlansCpu$outboundSchema.parse(lksPlansCpu));
@@ -188,8 +192,8 @@ export function lksPlansCpuFromJSON(
 }
 
 /** @internal */
-export const Total$inboundSchema: z.ZodType<Total, z.ZodTypeDef, unknown> = z
-  .union([z.number().int(), z.string()]);
+export const Total$inboundSchema: z.ZodType<Total, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() => z.union([z.number().int(), z.string()]));
 /** @internal */
 export type Total$Outbound = number | string;
 
@@ -198,7 +202,7 @@ export const Total$outboundSchema: z.ZodType<
   Total$Outbound,
   z.ZodTypeDef,
   Total
-> = z.union([z.number().int(), z.string()]);
+> = /* @__PURE__ */ lazySchema$(() => z.union([z.number().int(), z.string()]));
 
 export function totalToJSON(total: Total): string {
   return JSON.stringify(Total$outboundSchema.parse(total));
@@ -218,9 +222,11 @@ export const LksPlansMemory$inboundSchema: z.ZodType<
   LksPlansMemory,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  total: z.nullable(z.union([z.number().int(), z.string()])).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    total: z.nullable(z.union([z.number().int(), z.string()])).optional(),
+  })
+);
 /** @internal */
 export type LksPlansMemory$Outbound = {
   total?: number | string | null | undefined;
@@ -231,9 +237,11 @@ export const LksPlansMemory$outboundSchema: z.ZodType<
   LksPlansMemory$Outbound,
   z.ZodTypeDef,
   LksPlansMemory
-> = z.object({
-  total: z.nullable(z.union([z.number().int(), z.string()])).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    total: z.nullable(z.union([z.number().int(), z.string()])).optional(),
+  })
+);
 
 export function lksPlansMemoryToJSON(lksPlansMemory: LksPlansMemory): string {
   return JSON.stringify(LksPlansMemory$outboundSchema.parse(lksPlansMemory));
@@ -253,11 +261,13 @@ export const LksPlansDrive$inboundSchema: z.ZodType<
   LksPlansDrive,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  count: z.nullable(z.number().int()).optional(),
-  size: z.nullable(z.string()).optional(),
-  type: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    count: z.nullable(z.number().int()).optional(),
+    size: z.nullable(z.string()).optional(),
+    type: z.nullable(z.string()).optional(),
+  })
+);
 /** @internal */
 export type LksPlansDrive$Outbound = {
   count?: number | null | undefined;
@@ -270,11 +280,13 @@ export const LksPlansDrive$outboundSchema: z.ZodType<
   LksPlansDrive$Outbound,
   z.ZodTypeDef,
   LksPlansDrive
-> = z.object({
-  count: z.nullable(z.number().int()).optional(),
-  size: z.nullable(z.string()).optional(),
-  type: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    count: z.nullable(z.number().int()).optional(),
+    size: z.nullable(z.string()).optional(),
+    type: z.nullable(z.string()).optional(),
+  })
+);
 
 export function lksPlansDriveToJSON(lksPlansDrive: LksPlansDrive): string {
   return JSON.stringify(LksPlansDrive$outboundSchema.parse(lksPlansDrive));
@@ -294,10 +306,12 @@ export const LksPlansNic$inboundSchema: z.ZodType<
   LksPlansNic,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  count: z.nullable(z.number().int()).optional(),
-  type: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    count: z.nullable(z.number().int()).optional(),
+    type: z.nullable(z.string()).optional(),
+  })
+);
 /** @internal */
 export type LksPlansNic$Outbound = {
   count?: number | null | undefined;
@@ -309,10 +323,12 @@ export const LksPlansNic$outboundSchema: z.ZodType<
   LksPlansNic$Outbound,
   z.ZodTypeDef,
   LksPlansNic
-> = z.object({
-  count: z.nullable(z.number().int()).optional(),
-  type: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    count: z.nullable(z.number().int()).optional(),
+    type: z.nullable(z.string()).optional(),
+  })
+);
 
 export function lksPlansNicToJSON(lksPlansNic: LksPlansNic): string {
   return JSON.stringify(LksPlansNic$outboundSchema.parse(lksPlansNic));
@@ -332,16 +348,18 @@ export const LksPlansGpu$inboundSchema: z.ZodType<
   LksPlansGpu,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  count: z.nullable(z.number().int()).optional(),
-  type: z.nullable(z.string()).optional(),
-  vram_per_gpu: z.nullable(z.number().int()).optional(),
-  interconnect: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "vram_per_gpu": "vramPerGpu",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    count: z.nullable(z.number().int()).optional(),
+    type: z.nullable(z.string()).optional(),
+    vram_per_gpu: z.nullable(z.number().int()).optional(),
+    interconnect: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "vram_per_gpu": "vramPerGpu",
+    });
+  })
+);
 /** @internal */
 export type LksPlansGpu$Outbound = {
   count?: number | null | undefined;
@@ -355,16 +373,18 @@ export const LksPlansGpu$outboundSchema: z.ZodType<
   LksPlansGpu$Outbound,
   z.ZodTypeDef,
   LksPlansGpu
-> = z.object({
-  count: z.nullable(z.number().int()).optional(),
-  type: z.nullable(z.string()).optional(),
-  vramPerGpu: z.nullable(z.number().int()).optional(),
-  interconnect: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    vramPerGpu: "vram_per_gpu",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    count: z.nullable(z.number().int()).optional(),
+    type: z.nullable(z.string()).optional(),
+    vramPerGpu: z.nullable(z.number().int()).optional(),
+    interconnect: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      vramPerGpu: "vram_per_gpu",
+    });
+  })
+);
 
 export function lksPlansGpuToJSON(lksPlansGpu: LksPlansGpu): string {
   return JSON.stringify(LksPlansGpu$outboundSchema.parse(lksPlansGpu));
@@ -384,13 +404,15 @@ export const LksPlansSpecs$inboundSchema: z.ZodType<
   LksPlansSpecs,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  cpu: z.lazy(() => LksPlansCpu$inboundSchema).optional(),
-  memory: z.lazy(() => LksPlansMemory$inboundSchema).optional(),
-  drives: z.array(z.lazy(() => LksPlansDrive$inboundSchema)).optional(),
-  nics: z.array(z.lazy(() => LksPlansNic$inboundSchema)).optional(),
-  gpu: z.lazy(() => LksPlansGpu$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    cpu: z.lazy(() => LksPlansCpu$inboundSchema).optional(),
+    memory: z.lazy(() => LksPlansMemory$inboundSchema).optional(),
+    drives: z.array(z.lazy(() => LksPlansDrive$inboundSchema)).optional(),
+    nics: z.array(z.lazy(() => LksPlansNic$inboundSchema)).optional(),
+    gpu: z.lazy(() => LksPlansGpu$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type LksPlansSpecs$Outbound = {
   cpu?: LksPlansCpu$Outbound | undefined;
@@ -405,13 +427,15 @@ export const LksPlansSpecs$outboundSchema: z.ZodType<
   LksPlansSpecs$Outbound,
   z.ZodTypeDef,
   LksPlansSpecs
-> = z.object({
-  cpu: z.lazy(() => LksPlansCpu$outboundSchema).optional(),
-  memory: z.lazy(() => LksPlansMemory$outboundSchema).optional(),
-  drives: z.array(z.lazy(() => LksPlansDrive$outboundSchema)).optional(),
-  nics: z.array(z.lazy(() => LksPlansNic$outboundSchema)).optional(),
-  gpu: z.lazy(() => LksPlansGpu$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    cpu: z.lazy(() => LksPlansCpu$outboundSchema).optional(),
+    memory: z.lazy(() => LksPlansMemory$outboundSchema).optional(),
+    drives: z.array(z.lazy(() => LksPlansDrive$outboundSchema)).optional(),
+    nics: z.array(z.lazy(() => LksPlansNic$outboundSchema)).optional(),
+    gpu: z.lazy(() => LksPlansGpu$outboundSchema).optional(),
+  })
+);
 
 export function lksPlansSpecsToJSON(lksPlansSpecs: LksPlansSpecs): string {
   return JSON.stringify(LksPlansSpecs$outboundSchema.parse(lksPlansSpecs));
@@ -431,16 +455,18 @@ export const LksPlansLocations$inboundSchema: z.ZodType<
   LksPlansLocations,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  available: z.array(z.string()).optional(),
-  in_stock: z.array(z.string()).optional(),
-  in_stock_count: z.record(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "in_stock": "inStock",
-    "in_stock_count": "inStockCount",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    available: z.array(z.string()).optional(),
+    in_stock: z.array(z.string()).optional(),
+    in_stock_count: z.record(z.number().int()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "in_stock": "inStock",
+      "in_stock_count": "inStockCount",
+    });
+  })
+);
 /** @internal */
 export type LksPlansLocations$Outbound = {
   available?: Array<string> | undefined;
@@ -453,16 +479,18 @@ export const LksPlansLocations$outboundSchema: z.ZodType<
   LksPlansLocations$Outbound,
   z.ZodTypeDef,
   LksPlansLocations
-> = z.object({
-  available: z.array(z.string()).optional(),
-  inStock: z.array(z.string()).optional(),
-  inStockCount: z.record(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    inStock: "in_stock",
-    inStockCount: "in_stock_count",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    available: z.array(z.string()).optional(),
+    inStock: z.array(z.string()).optional(),
+    inStockCount: z.record(z.number().int()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      inStock: "in_stock",
+      inStockCount: "in_stock_count",
+    });
+  })
+);
 
 export function lksPlansLocationsToJSON(
   lksPlansLocations: LksPlansLocations,
@@ -484,7 +512,7 @@ export function lksPlansLocationsFromJSON(
 /** @internal */
 export const LksPlansStockLevel$inboundSchema: z.ZodNativeEnum<
   typeof LksPlansStockLevel
-> = z.nativeEnum(LksPlansStockLevel);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(LksPlansStockLevel));
 /** @internal */
 export const LksPlansStockLevel$outboundSchema: z.ZodNativeEnum<
   typeof LksPlansStockLevel
@@ -495,11 +523,13 @@ export const LksPlansPricing$inboundSchema: z.ZodType<
   LksPlansPricing,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  hour: z.nullable(z.number()).optional(),
-  month: z.nullable(z.number()).optional(),
-  year: z.nullable(z.number()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    hour: z.nullable(z.number()).optional(),
+    month: z.nullable(z.number()).optional(),
+    year: z.nullable(z.number()).optional(),
+  })
+);
 /** @internal */
 export type LksPlansPricing$Outbound = {
   hour?: number | null | undefined;
@@ -512,11 +542,13 @@ export const LksPlansPricing$outboundSchema: z.ZodType<
   LksPlansPricing$Outbound,
   z.ZodTypeDef,
   LksPlansPricing
-> = z.object({
-  hour: z.nullable(z.number()).optional(),
-  month: z.nullable(z.number()).optional(),
-  year: z.nullable(z.number()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    hour: z.nullable(z.number()).optional(),
+    month: z.nullable(z.number()).optional(),
+    year: z.nullable(z.number()).optional(),
+  })
+);
 
 export function lksPlansPricingToJSON(
   lksPlansPricing: LksPlansPricing,
@@ -538,16 +570,18 @@ export const LksPlansRegion$inboundSchema: z.ZodType<
   LksPlansRegion,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string().optional(),
-  locations: z.lazy(() => LksPlansLocations$inboundSchema).optional(),
-  stock_level: LksPlansStockLevel$inboundSchema.optional(),
-  pricing: z.record(z.lazy(() => LksPlansPricing$inboundSchema)).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "stock_level": "stockLevel",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    locations: z.lazy(() => LksPlansLocations$inboundSchema).optional(),
+    stock_level: LksPlansStockLevel$inboundSchema.optional(),
+    pricing: z.record(z.lazy(() => LksPlansPricing$inboundSchema)).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "stock_level": "stockLevel",
+    });
+  })
+);
 /** @internal */
 export type LksPlansRegion$Outbound = {
   name?: string | undefined;
@@ -561,16 +595,18 @@ export const LksPlansRegion$outboundSchema: z.ZodType<
   LksPlansRegion$Outbound,
   z.ZodTypeDef,
   LksPlansRegion
-> = z.object({
-  name: z.string().optional(),
-  locations: z.lazy(() => LksPlansLocations$outboundSchema).optional(),
-  stockLevel: LksPlansStockLevel$outboundSchema.optional(),
-  pricing: z.record(z.lazy(() => LksPlansPricing$outboundSchema)).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    stockLevel: "stock_level",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    locations: z.lazy(() => LksPlansLocations$outboundSchema).optional(),
+    stockLevel: LksPlansStockLevel$outboundSchema.optional(),
+    pricing: z.record(z.lazy(() => LksPlansPricing$outboundSchema)).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      stockLevel: "stock_level",
+    });
+  })
+);
 
 export function lksPlansRegionToJSON(lksPlansRegion: LksPlansRegion): string {
   return JSON.stringify(LksPlansRegion$outboundSchema.parse(lksPlansRegion));
@@ -590,12 +626,14 @@ export const LksPlansAttributes$inboundSchema: z.ZodType<
   LksPlansAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string().optional(),
-  slug: z.string().optional(),
-  specs: z.lazy(() => LksPlansSpecs$inboundSchema).optional(),
-  regions: z.array(z.lazy(() => LksPlansRegion$inboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    slug: z.string().optional(),
+    specs: z.lazy(() => LksPlansSpecs$inboundSchema).optional(),
+    regions: z.array(z.lazy(() => LksPlansRegion$inboundSchema)).optional(),
+  })
+);
 /** @internal */
 export type LksPlansAttributes$Outbound = {
   name?: string | undefined;
@@ -609,12 +647,14 @@ export const LksPlansAttributes$outboundSchema: z.ZodType<
   LksPlansAttributes$Outbound,
   z.ZodTypeDef,
   LksPlansAttributes
-> = z.object({
-  name: z.string().optional(),
-  slug: z.string().optional(),
-  specs: z.lazy(() => LksPlansSpecs$outboundSchema).optional(),
-  regions: z.array(z.lazy(() => LksPlansRegion$outboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    slug: z.string().optional(),
+    specs: z.lazy(() => LksPlansSpecs$outboundSchema).optional(),
+    regions: z.array(z.lazy(() => LksPlansRegion$outboundSchema)).optional(),
+  })
+);
 
 export function lksPlansAttributesToJSON(
   lksPlansAttributes: LksPlansAttributes,
@@ -638,11 +678,13 @@ export const LksPlansData$inboundSchema: z.ZodType<
   LksPlansData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  type: LksPlansType$inboundSchema.optional(),
-  attributes: z.lazy(() => LksPlansAttributes$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: LksPlansType$inboundSchema.optional(),
+    attributes: z.lazy(() => LksPlansAttributes$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type LksPlansData$Outbound = {
   id?: string | undefined;
@@ -655,11 +697,13 @@ export const LksPlansData$outboundSchema: z.ZodType<
   LksPlansData$Outbound,
   z.ZodTypeDef,
   LksPlansData
-> = z.object({
-  id: z.string().optional(),
-  type: LksPlansType$outboundSchema.optional(),
-  attributes: z.lazy(() => LksPlansAttributes$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: LksPlansType$outboundSchema.optional(),
+    attributes: z.lazy(() => LksPlansAttributes$outboundSchema).optional(),
+  })
+);
 
 export function lksPlansDataToJSON(lksPlansData: LksPlansData): string {
   return JSON.stringify(LksPlansData$outboundSchema.parse(lksPlansData));
@@ -679,9 +723,11 @@ export const LksPlans$inboundSchema: z.ZodType<
   LksPlans,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.array(z.lazy(() => LksPlansData$inboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(z.lazy(() => LksPlansData$inboundSchema)).optional(),
+  })
+);
 /** @internal */
 export type LksPlans$Outbound = {
   data?: Array<LksPlansData$Outbound> | undefined;
@@ -692,9 +738,11 @@ export const LksPlans$outboundSchema: z.ZodType<
   LksPlans$Outbound,
   z.ZodTypeDef,
   LksPlans
-> = z.object({
-  data: z.array(z.lazy(() => LksPlansData$outboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(z.lazy(() => LksPlansData$outboundSchema)).optional(),
+  })
+);
 
 export function lksPlansToJSON(lksPlans: LksPlans): string {
   return JSON.stringify(LksPlans$outboundSchema.parse(lksPlans));

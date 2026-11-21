@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -59,7 +59,7 @@ export type CreatePublicNetwork = {
 /** @internal */
 export const CreatePublicNetworkType$inboundSchema: z.ZodNativeEnum<
   typeof CreatePublicNetworkType
-> = z.nativeEnum(CreatePublicNetworkType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CreatePublicNetworkType));
 /** @internal */
 export const CreatePublicNetworkType$outboundSchema: z.ZodNativeEnum<
   typeof CreatePublicNetworkType
@@ -68,7 +68,7 @@ export const CreatePublicNetworkType$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const CreatePublicNetworkSize$inboundSchema: z.ZodNativeEnum<
   typeof CreatePublicNetworkSize
-> = z.nativeEnum(CreatePublicNetworkSize);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CreatePublicNetworkSize));
 /** @internal */
 export const CreatePublicNetworkSize$outboundSchema: z.ZodNativeEnum<
   typeof CreatePublicNetworkSize
@@ -79,15 +79,17 @@ export const CreatePublicNetworkAttributes$inboundSchema: z.ZodType<
   CreatePublicNetworkAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  project_id: z.string(),
-  site: z.string(),
-  size: CreatePublicNetworkSize$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "project_id": "projectId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    project_id: z.string(),
+    site: z.string(),
+    size: CreatePublicNetworkSize$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "project_id": "projectId",
+    });
+  })
+);
 /** @internal */
 export type CreatePublicNetworkAttributes$Outbound = {
   project_id: string;
@@ -100,15 +102,17 @@ export const CreatePublicNetworkAttributes$outboundSchema: z.ZodType<
   CreatePublicNetworkAttributes$Outbound,
   z.ZodTypeDef,
   CreatePublicNetworkAttributes
-> = z.object({
-  projectId: z.string(),
-  site: z.string(),
-  size: CreatePublicNetworkSize$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    projectId: "project_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    projectId: z.string(),
+    site: z.string(),
+    size: CreatePublicNetworkSize$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      projectId: "project_id",
+    });
+  })
+);
 
 export function createPublicNetworkAttributesToJSON(
   createPublicNetworkAttributes: CreatePublicNetworkAttributes,
@@ -134,11 +138,13 @@ export const CreatePublicNetworkData$inboundSchema: z.ZodType<
   CreatePublicNetworkData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: CreatePublicNetworkType$inboundSchema,
-  attributes: z.lazy(() => CreatePublicNetworkAttributes$inboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CreatePublicNetworkType$inboundSchema,
+    attributes: z.lazy(() => CreatePublicNetworkAttributes$inboundSchema)
+      .optional(),
+  })
+);
 /** @internal */
 export type CreatePublicNetworkData$Outbound = {
   type: string;
@@ -150,11 +156,13 @@ export const CreatePublicNetworkData$outboundSchema: z.ZodType<
   CreatePublicNetworkData$Outbound,
   z.ZodTypeDef,
   CreatePublicNetworkData
-> = z.object({
-  type: CreatePublicNetworkType$outboundSchema,
-  attributes: z.lazy(() => CreatePublicNetworkAttributes$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CreatePublicNetworkType$outboundSchema,
+    attributes: z.lazy(() => CreatePublicNetworkAttributes$outboundSchema)
+      .optional(),
+  })
+);
 
 export function createPublicNetworkDataToJSON(
   createPublicNetworkData: CreatePublicNetworkData,
@@ -178,9 +186,11 @@ export const CreatePublicNetwork$inboundSchema: z.ZodType<
   CreatePublicNetwork,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => CreatePublicNetworkData$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => CreatePublicNetworkData$inboundSchema),
+  })
+);
 /** @internal */
 export type CreatePublicNetwork$Outbound = {
   data: CreatePublicNetworkData$Outbound;
@@ -191,9 +201,11 @@ export const CreatePublicNetwork$outboundSchema: z.ZodType<
   CreatePublicNetwork$Outbound,
   z.ZodTypeDef,
   CreatePublicNetwork
-> = z.object({
-  data: z.lazy(() => CreatePublicNetworkData$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => CreatePublicNetworkData$outboundSchema),
+  })
+);
 
 export function createPublicNetworkToJSON(
   createPublicNetwork: CreatePublicNetwork,

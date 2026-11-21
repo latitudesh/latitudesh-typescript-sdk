@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -47,7 +47,9 @@ export type CreateFirewallAssignmentRequest = {
 /** @internal */
 export const CreateFirewallAssignmentType2$inboundSchema: z.ZodNativeEnum<
   typeof CreateFirewallAssignmentType2
-> = z.nativeEnum(CreateFirewallAssignmentType2);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(CreateFirewallAssignmentType2)
+);
 /** @internal */
 export const CreateFirewallAssignmentType2$outboundSchema: z.ZodNativeEnum<
   typeof CreateFirewallAssignmentType2
@@ -58,15 +60,17 @@ export const CreateFirewallAssignmentAttributes2$inboundSchema: z.ZodType<
   CreateFirewallAssignmentAttributes2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  server_id: z.string().optional(),
-  virtual_machine_id: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "server_id": "serverId",
-    "virtual_machine_id": "virtualMachineId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    server_id: z.string().optional(),
+    virtual_machine_id: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "server_id": "serverId",
+      "virtual_machine_id": "virtualMachineId",
+    });
+  })
+);
 /** @internal */
 export type CreateFirewallAssignmentAttributes2$Outbound = {
   server_id?: string | undefined;
@@ -78,15 +82,17 @@ export const CreateFirewallAssignmentAttributes2$outboundSchema: z.ZodType<
   CreateFirewallAssignmentAttributes2$Outbound,
   z.ZodTypeDef,
   CreateFirewallAssignmentAttributes2
-> = z.object({
-  serverId: z.string().optional(),
-  virtualMachineId: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    serverId: "server_id",
-    virtualMachineId: "virtual_machine_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    serverId: z.string().optional(),
+    virtualMachineId: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      serverId: "server_id",
+      virtualMachineId: "virtual_machine_id",
+    });
+  })
+);
 
 export function createFirewallAssignmentAttributes2ToJSON(
   createFirewallAssignmentAttributes2: CreateFirewallAssignmentAttributes2,
@@ -113,11 +119,13 @@ export const CreateFirewallAssignmentData2$inboundSchema: z.ZodType<
   CreateFirewallAssignmentData2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: CreateFirewallAssignmentType2$inboundSchema,
-  attributes: z.lazy(() => CreateFirewallAssignmentAttributes2$inboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CreateFirewallAssignmentType2$inboundSchema,
+    attributes: z.lazy(() => CreateFirewallAssignmentAttributes2$inboundSchema)
+      .optional(),
+  })
+);
 /** @internal */
 export type CreateFirewallAssignmentData2$Outbound = {
   type: string;
@@ -129,11 +137,13 @@ export const CreateFirewallAssignmentData2$outboundSchema: z.ZodType<
   CreateFirewallAssignmentData2$Outbound,
   z.ZodTypeDef,
   CreateFirewallAssignmentData2
-> = z.object({
-  type: CreateFirewallAssignmentType2$outboundSchema,
-  attributes: z.lazy(() => CreateFirewallAssignmentAttributes2$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CreateFirewallAssignmentType2$outboundSchema,
+    attributes: z.lazy(() => CreateFirewallAssignmentAttributes2$outboundSchema)
+      .optional(),
+  })
+);
 
 export function createFirewallAssignmentData2ToJSON(
   createFirewallAssignmentData2: CreateFirewallAssignmentData2,
@@ -159,9 +169,11 @@ export const CreateFirewallAssignmentRequestBody2$inboundSchema: z.ZodType<
   CreateFirewallAssignmentRequestBody2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => CreateFirewallAssignmentData2$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => CreateFirewallAssignmentData2$inboundSchema),
+  })
+);
 /** @internal */
 export type CreateFirewallAssignmentRequestBody2$Outbound = {
   data: CreateFirewallAssignmentData2$Outbound;
@@ -172,9 +184,11 @@ export const CreateFirewallAssignmentRequestBody2$outboundSchema: z.ZodType<
   CreateFirewallAssignmentRequestBody2$Outbound,
   z.ZodTypeDef,
   CreateFirewallAssignmentRequestBody2
-> = z.object({
-  data: z.lazy(() => CreateFirewallAssignmentData2$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => CreateFirewallAssignmentData2$outboundSchema),
+  })
+);
 
 export function createFirewallAssignmentRequestBody2ToJSON(
   createFirewallAssignmentRequestBody2: CreateFirewallAssignmentRequestBody2,
@@ -201,15 +215,19 @@ export const CreateFirewallAssignmentRequest$inboundSchema: z.ZodType<
   CreateFirewallAssignmentRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  firewall_id: z.string(),
-  RequestBody: z.lazy(() => CreateFirewallAssignmentRequestBody2$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "firewall_id": "firewallId",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    firewall_id: z.string(),
+    RequestBody: z.lazy(() =>
+      CreateFirewallAssignmentRequestBody2$inboundSchema
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "firewall_id": "firewallId",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type CreateFirewallAssignmentRequest$Outbound = {
   firewall_id: string;
@@ -221,17 +239,19 @@ export const CreateFirewallAssignmentRequest$outboundSchema: z.ZodType<
   CreateFirewallAssignmentRequest$Outbound,
   z.ZodTypeDef,
   CreateFirewallAssignmentRequest
-> = z.object({
-  firewallId: z.string(),
-  requestBody: z.lazy(() =>
-    CreateFirewallAssignmentRequestBody2$outboundSchema
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    firewallId: "firewall_id",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    firewallId: z.string(),
+    requestBody: z.lazy(() =>
+      CreateFirewallAssignmentRequestBody2$outboundSchema
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      firewallId: "firewall_id",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function createFirewallAssignmentRequestToJSON(
   createFirewallAssignmentRequest: CreateFirewallAssignmentRequest,

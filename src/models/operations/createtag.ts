@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -40,7 +40,7 @@ export type CreateTagRequest = {
 /** @internal */
 export const CreateTagType2$inboundSchema: z.ZodNativeEnum<
   typeof CreateTagType2
-> = z.nativeEnum(CreateTagType2);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CreateTagType2));
 /** @internal */
 export const CreateTagType2$outboundSchema: z.ZodNativeEnum<
   typeof CreateTagType2
@@ -51,11 +51,13 @@ export const CreateTagAttributes2$inboundSchema: z.ZodType<
   CreateTagAttributes2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string(),
-  description: z.nullable(z.string()).optional(),
-  color: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    description: z.nullable(z.string()).optional(),
+    color: z.string(),
+  })
+);
 /** @internal */
 export type CreateTagAttributes2$Outbound = {
   name: string;
@@ -68,11 +70,13 @@ export const CreateTagAttributes2$outboundSchema: z.ZodType<
   CreateTagAttributes2$Outbound,
   z.ZodTypeDef,
   CreateTagAttributes2
-> = z.object({
-  name: z.string(),
-  description: z.nullable(z.string()).optional(),
-  color: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    description: z.nullable(z.string()).optional(),
+    color: z.string(),
+  })
+);
 
 export function createTagAttributes2ToJSON(
   createTagAttributes2: CreateTagAttributes2,
@@ -96,10 +100,12 @@ export const CreateTagData2$inboundSchema: z.ZodType<
   CreateTagData2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: CreateTagType2$inboundSchema.optional(),
-  attributes: z.lazy(() => CreateTagAttributes2$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CreateTagType2$inboundSchema.optional(),
+    attributes: z.lazy(() => CreateTagAttributes2$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type CreateTagData2$Outbound = {
   type?: string | undefined;
@@ -111,10 +117,12 @@ export const CreateTagData2$outboundSchema: z.ZodType<
   CreateTagData2$Outbound,
   z.ZodTypeDef,
   CreateTagData2
-> = z.object({
-  type: CreateTagType2$outboundSchema.optional(),
-  attributes: z.lazy(() => CreateTagAttributes2$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CreateTagType2$outboundSchema.optional(),
+    attributes: z.lazy(() => CreateTagAttributes2$outboundSchema).optional(),
+  })
+);
 
 export function createTagData2ToJSON(createTagData2: CreateTagData2): string {
   return JSON.stringify(CreateTagData2$outboundSchema.parse(createTagData2));
@@ -134,9 +142,11 @@ export const CreateTagRequest$inboundSchema: z.ZodType<
   CreateTagRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => CreateTagData2$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => CreateTagData2$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type CreateTagRequest$Outbound = {
   data?: CreateTagData2$Outbound | undefined;
@@ -147,9 +157,11 @@ export const CreateTagRequest$outboundSchema: z.ZodType<
   CreateTagRequest$Outbound,
   z.ZodTypeDef,
   CreateTagRequest
-> = z.object({
-  data: z.lazy(() => CreateTagData2$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => CreateTagData2$outboundSchema).optional(),
+  })
+);
 
 export function createTagRequestToJSON(
   createTagRequest: CreateTagRequest,

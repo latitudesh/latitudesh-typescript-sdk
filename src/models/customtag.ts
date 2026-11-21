@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import {
   CustomTagData,
@@ -25,7 +25,7 @@ export const CustomTagMeta$inboundSchema: z.ZodType<
   CustomTagMeta,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type CustomTagMeta$Outbound = {};
 
@@ -34,7 +34,7 @@ export const CustomTagMeta$outboundSchema: z.ZodType<
   CustomTagMeta$Outbound,
   z.ZodTypeDef,
   CustomTagMeta
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function customTagMetaToJSON(customTagMeta: CustomTagMeta): string {
   return JSON.stringify(CustomTagMeta$outboundSchema.parse(customTagMeta));
@@ -54,10 +54,12 @@ export const CustomTag$inboundSchema: z.ZodType<
   CustomTag,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: CustomTagData$inboundSchema.optional(),
-  meta: z.lazy(() => CustomTagMeta$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: CustomTagData$inboundSchema.optional(),
+    meta: z.lazy(() => CustomTagMeta$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type CustomTag$Outbound = {
   data?: CustomTagData$Outbound | undefined;
@@ -69,10 +71,12 @@ export const CustomTag$outboundSchema: z.ZodType<
   CustomTag$Outbound,
   z.ZodTypeDef,
   CustomTag
-> = z.object({
-  data: CustomTagData$outboundSchema.optional(),
-  meta: z.lazy(() => CustomTagMeta$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: CustomTagData$outboundSchema.optional(),
+    meta: z.lazy(() => CustomTagMeta$outboundSchema).optional(),
+  })
+);
 
 export function customTagToJSON(customTag: CustomTag): string {
   return JSON.stringify(CustomTag$outboundSchema.parse(customTag));

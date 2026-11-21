@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -55,7 +55,7 @@ export type CreateServerActionRequest = {
 /** @internal */
 export const CreateServerActionType2$inboundSchema: z.ZodNativeEnum<
   typeof CreateServerActionType2
-> = z.nativeEnum(CreateServerActionType2);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CreateServerActionType2));
 /** @internal */
 export const CreateServerActionType2$outboundSchema: z.ZodNativeEnum<
   typeof CreateServerActionType2
@@ -64,7 +64,7 @@ export const CreateServerActionType2$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const CreateServerActionAction2$inboundSchema: z.ZodNativeEnum<
   typeof CreateServerActionAction2
-> = z.nativeEnum(CreateServerActionAction2);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CreateServerActionAction2));
 /** @internal */
 export const CreateServerActionAction2$outboundSchema: z.ZodNativeEnum<
   typeof CreateServerActionAction2
@@ -75,9 +75,11 @@ export const CreateServerActionAttributes2$inboundSchema: z.ZodType<
   CreateServerActionAttributes2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  action: CreateServerActionAction2$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    action: CreateServerActionAction2$inboundSchema,
+  })
+);
 /** @internal */
 export type CreateServerActionAttributes2$Outbound = {
   action: string;
@@ -88,9 +90,11 @@ export const CreateServerActionAttributes2$outboundSchema: z.ZodType<
   CreateServerActionAttributes2$Outbound,
   z.ZodTypeDef,
   CreateServerActionAttributes2
-> = z.object({
-  action: CreateServerActionAction2$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    action: CreateServerActionAction2$outboundSchema,
+  })
+);
 
 export function createServerActionAttributes2ToJSON(
   createServerActionAttributes2: CreateServerActionAttributes2,
@@ -116,11 +120,13 @@ export const CreateServerActionData2$inboundSchema: z.ZodType<
   CreateServerActionData2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: CreateServerActionType2$inboundSchema,
-  attributes: z.lazy(() => CreateServerActionAttributes2$inboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CreateServerActionType2$inboundSchema,
+    attributes: z.lazy(() => CreateServerActionAttributes2$inboundSchema)
+      .optional(),
+  })
+);
 /** @internal */
 export type CreateServerActionData2$Outbound = {
   type: string;
@@ -132,11 +138,13 @@ export const CreateServerActionData2$outboundSchema: z.ZodType<
   CreateServerActionData2$Outbound,
   z.ZodTypeDef,
   CreateServerActionData2
-> = z.object({
-  type: CreateServerActionType2$outboundSchema,
-  attributes: z.lazy(() => CreateServerActionAttributes2$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CreateServerActionType2$outboundSchema,
+    attributes: z.lazy(() => CreateServerActionAttributes2$outboundSchema)
+      .optional(),
+  })
+);
 
 export function createServerActionData2ToJSON(
   createServerActionData2: CreateServerActionData2,
@@ -160,9 +168,11 @@ export const CreateServerActionRequestBody2$inboundSchema: z.ZodType<
   CreateServerActionRequestBody2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => CreateServerActionData2$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => CreateServerActionData2$inboundSchema),
+  })
+);
 /** @internal */
 export type CreateServerActionRequestBody2$Outbound = {
   data: CreateServerActionData2$Outbound;
@@ -173,9 +183,11 @@ export const CreateServerActionRequestBody2$outboundSchema: z.ZodType<
   CreateServerActionRequestBody2$Outbound,
   z.ZodTypeDef,
   CreateServerActionRequestBody2
-> = z.object({
-  data: z.lazy(() => CreateServerActionData2$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => CreateServerActionData2$outboundSchema),
+  })
+);
 
 export function createServerActionRequestBody2ToJSON(
   createServerActionRequestBody2: CreateServerActionRequestBody2,
@@ -201,15 +213,17 @@ export const CreateServerActionRequest$inboundSchema: z.ZodType<
   CreateServerActionRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  server_id: z.string(),
-  RequestBody: z.lazy(() => CreateServerActionRequestBody2$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "server_id": "serverId",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    server_id: z.string(),
+    RequestBody: z.lazy(() => CreateServerActionRequestBody2$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "server_id": "serverId",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type CreateServerActionRequest$Outbound = {
   server_id: string;
@@ -221,15 +235,17 @@ export const CreateServerActionRequest$outboundSchema: z.ZodType<
   CreateServerActionRequest$Outbound,
   z.ZodTypeDef,
   CreateServerActionRequest
-> = z.object({
-  serverId: z.string(),
-  requestBody: z.lazy(() => CreateServerActionRequestBody2$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    serverId: "server_id",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    serverId: z.string(),
+    requestBody: z.lazy(() => CreateServerActionRequestBody2$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      serverId: "server_id",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function createServerActionRequestToJSON(
   createServerActionRequest: CreateServerActionRequest,

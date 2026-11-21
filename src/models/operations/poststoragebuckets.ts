@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -104,7 +104,7 @@ export type PostStorageBucketsResponse = {
 /** @internal */
 export const PostStorageBucketsType$inboundSchema: z.ZodNativeEnum<
   typeof PostStorageBucketsType
-> = z.nativeEnum(PostStorageBucketsType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(PostStorageBucketsType));
 /** @internal */
 export const PostStorageBucketsType$outboundSchema: z.ZodNativeEnum<
   typeof PostStorageBucketsType
@@ -113,7 +113,9 @@ export const PostStorageBucketsType$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const PostStorageBucketsStorageClass$inboundSchema: z.ZodNativeEnum<
   typeof PostStorageBucketsStorageClass
-> = z.nativeEnum(PostStorageBucketsStorageClass);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(PostStorageBucketsStorageClass)
+);
 /** @internal */
 export const PostStorageBucketsStorageClass$outboundSchema: z.ZodNativeEnum<
   typeof PostStorageBucketsStorageClass
@@ -122,7 +124,7 @@ export const PostStorageBucketsStorageClass$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const RetentionMode$inboundSchema: z.ZodNativeEnum<
   typeof RetentionMode
-> = z.nativeEnum(RetentionMode);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(RetentionMode));
 /** @internal */
 export const RetentionMode$outboundSchema: z.ZodNativeEnum<
   typeof RetentionMode
@@ -133,26 +135,28 @@ export const PostStorageBucketsAttributes$inboundSchema: z.ZodType<
   PostStorageBucketsAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  project: z.string(),
-  name: z.string(),
-  region: z.string(),
-  scoped: z.boolean().default(false),
-  customer: z.string().optional(),
-  storage_class: PostStorageBucketsStorageClass$inboundSchema.default(
-    "standard",
-  ),
-  versioning: z.boolean().default(false),
-  locking: z.boolean().default(false),
-  retention_mode: RetentionMode$inboundSchema.default("NONE"),
-  retention_period: z.nullable(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "storage_class": "storageClass",
-    "retention_mode": "retentionMode",
-    "retention_period": "retentionPeriod",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    project: z.string(),
+    name: z.string(),
+    region: z.string(),
+    scoped: z.boolean().default(false),
+    customer: z.string().optional(),
+    storage_class: PostStorageBucketsStorageClass$inboundSchema.default(
+      "standard",
+    ),
+    versioning: z.boolean().default(false),
+    locking: z.boolean().default(false),
+    retention_mode: RetentionMode$inboundSchema.default("NONE"),
+    retention_period: z.nullable(z.number().int()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "storage_class": "storageClass",
+      "retention_mode": "retentionMode",
+      "retention_period": "retentionPeriod",
+    });
+  })
+);
 /** @internal */
 export type PostStorageBucketsAttributes$Outbound = {
   project: string;
@@ -172,26 +176,28 @@ export const PostStorageBucketsAttributes$outboundSchema: z.ZodType<
   PostStorageBucketsAttributes$Outbound,
   z.ZodTypeDef,
   PostStorageBucketsAttributes
-> = z.object({
-  project: z.string(),
-  name: z.string(),
-  region: z.string(),
-  scoped: z.boolean().default(false),
-  customer: z.string().optional(),
-  storageClass: PostStorageBucketsStorageClass$outboundSchema.default(
-    "standard",
-  ),
-  versioning: z.boolean().default(false),
-  locking: z.boolean().default(false),
-  retentionMode: RetentionMode$outboundSchema.default("NONE"),
-  retentionPeriod: z.nullable(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    storageClass: "storage_class",
-    retentionMode: "retention_mode",
-    retentionPeriod: "retention_period",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    project: z.string(),
+    name: z.string(),
+    region: z.string(),
+    scoped: z.boolean().default(false),
+    customer: z.string().optional(),
+    storageClass: PostStorageBucketsStorageClass$outboundSchema.default(
+      "standard",
+    ),
+    versioning: z.boolean().default(false),
+    locking: z.boolean().default(false),
+    retentionMode: RetentionMode$outboundSchema.default("NONE"),
+    retentionPeriod: z.nullable(z.number().int()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      storageClass: "storage_class",
+      retentionMode: "retention_mode",
+      retentionPeriod: "retention_period",
+    });
+  })
+);
 
 export function postStorageBucketsAttributesToJSON(
   postStorageBucketsAttributes: PostStorageBucketsAttributes,
@@ -217,10 +223,12 @@ export const PostStorageBucketsData$inboundSchema: z.ZodType<
   PostStorageBucketsData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: PostStorageBucketsType$inboundSchema,
-  attributes: z.lazy(() => PostStorageBucketsAttributes$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: PostStorageBucketsType$inboundSchema,
+    attributes: z.lazy(() => PostStorageBucketsAttributes$inboundSchema),
+  })
+);
 /** @internal */
 export type PostStorageBucketsData$Outbound = {
   type: string;
@@ -232,10 +240,12 @@ export const PostStorageBucketsData$outboundSchema: z.ZodType<
   PostStorageBucketsData$Outbound,
   z.ZodTypeDef,
   PostStorageBucketsData
-> = z.object({
-  type: PostStorageBucketsType$outboundSchema,
-  attributes: z.lazy(() => PostStorageBucketsAttributes$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: PostStorageBucketsType$outboundSchema,
+    attributes: z.lazy(() => PostStorageBucketsAttributes$outboundSchema),
+  })
+);
 
 export function postStorageBucketsDataToJSON(
   postStorageBucketsData: PostStorageBucketsData,
@@ -259,9 +269,11 @@ export const PostStorageBucketsRequest$inboundSchema: z.ZodType<
   PostStorageBucketsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => PostStorageBucketsData$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => PostStorageBucketsData$inboundSchema),
+  })
+);
 /** @internal */
 export type PostStorageBucketsRequest$Outbound = {
   data: PostStorageBucketsData$Outbound;
@@ -272,9 +284,11 @@ export const PostStorageBucketsRequest$outboundSchema: z.ZodType<
   PostStorageBucketsRequest$Outbound,
   z.ZodTypeDef,
   PostStorageBucketsRequest
-> = z.object({
-  data: z.lazy(() => PostStorageBucketsData$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => PostStorageBucketsData$outboundSchema),
+  })
+);
 
 export function postStorageBucketsRequestToJSON(
   postStorageBucketsRequest: PostStorageBucketsRequest,
@@ -298,9 +312,11 @@ export const PostStorageBucketsResponse$inboundSchema: z.ZodType<
   PostStorageBucketsResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: models.ObjectStorageData$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: models.ObjectStorageData$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type PostStorageBucketsResponse$Outbound = {
   data?: models.ObjectStorageData$Outbound | undefined;
@@ -311,9 +327,11 @@ export const PostStorageBucketsResponse$outboundSchema: z.ZodType<
   PostStorageBucketsResponse$Outbound,
   z.ZodTypeDef,
   PostStorageBucketsResponse
-> = z.object({
-  data: models.ObjectStorageData$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: models.ObjectStorageData$outboundSchema.optional(),
+  })
+);
 
 export function postStorageBucketsResponseToJSON(
   postStorageBucketsResponse: PostStorageBucketsResponse,

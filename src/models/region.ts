@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -47,8 +47,8 @@ export type Region = {
 };
 
 /** @internal */
-export const RegionType$inboundSchema: z.ZodNativeEnum<typeof RegionType> = z
-  .nativeEnum(RegionType);
+export const RegionType$inboundSchema: z.ZodNativeEnum<typeof RegionType> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(RegionType));
 /** @internal */
 export const RegionType$outboundSchema: z.ZodNativeEnum<typeof RegionType> =
   RegionType$inboundSchema;
@@ -58,19 +58,21 @@ export const RegionAttributes$inboundSchema: z.ZodType<
   RegionAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  slug: z.string().optional(),
-  name: z.string().optional(),
-  facility: z.nullable(z.string()).optional(),
-  country: RegionCountry$inboundSchema.optional(),
-  type: z.nullable(z.string()).optional(),
-  features: z.array(z.string()).optional(),
-  network_group: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "network_group": "networkGroup",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    slug: z.string().optional(),
+    name: z.string().optional(),
+    facility: z.nullable(z.string()).optional(),
+    country: RegionCountry$inboundSchema.optional(),
+    type: z.nullable(z.string()).optional(),
+    features: z.array(z.string()).optional(),
+    network_group: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "network_group": "networkGroup",
+    });
+  })
+);
 /** @internal */
 export type RegionAttributes$Outbound = {
   slug?: string | undefined;
@@ -87,19 +89,21 @@ export const RegionAttributes$outboundSchema: z.ZodType<
   RegionAttributes$Outbound,
   z.ZodTypeDef,
   RegionAttributes
-> = z.object({
-  slug: z.string().optional(),
-  name: z.string().optional(),
-  facility: z.nullable(z.string()).optional(),
-  country: RegionCountry$outboundSchema.optional(),
-  type: z.nullable(z.string()).optional(),
-  features: z.array(z.string()).optional(),
-  networkGroup: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    networkGroup: "network_group",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    slug: z.string().optional(),
+    name: z.string().optional(),
+    facility: z.nullable(z.string()).optional(),
+    country: RegionCountry$outboundSchema.optional(),
+    type: z.nullable(z.string()).optional(),
+    features: z.array(z.string()).optional(),
+    networkGroup: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      networkGroup: "network_group",
+    });
+  })
+);
 
 export function regionAttributesToJSON(
   regionAttributes: RegionAttributes,
@@ -123,11 +127,13 @@ export const DataRegions$inboundSchema: z.ZodType<
   DataRegions,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  type: RegionType$inboundSchema.optional(),
-  attributes: z.lazy(() => RegionAttributes$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: RegionType$inboundSchema.optional(),
+    attributes: z.lazy(() => RegionAttributes$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type DataRegions$Outbound = {
   id?: string | undefined;
@@ -140,11 +146,13 @@ export const DataRegions$outboundSchema: z.ZodType<
   DataRegions$Outbound,
   z.ZodTypeDef,
   DataRegions
-> = z.object({
-  id: z.string().optional(),
-  type: RegionType$outboundSchema.optional(),
-  attributes: z.lazy(() => RegionAttributes$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: RegionType$outboundSchema.optional(),
+    attributes: z.lazy(() => RegionAttributes$outboundSchema).optional(),
+  })
+);
 
 export function dataRegionsToJSON(dataRegions: DataRegions): string {
   return JSON.stringify(DataRegions$outboundSchema.parse(dataRegions));
@@ -160,10 +168,12 @@ export function dataRegionsFromJSON(
 }
 
 /** @internal */
-export const Region$inboundSchema: z.ZodType<Region, z.ZodTypeDef, unknown> = z
-  .object({
-    data: z.lazy(() => DataRegions$inboundSchema).optional(),
-  });
+export const Region$inboundSchema: z.ZodType<Region, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      data: z.lazy(() => DataRegions$inboundSchema).optional(),
+    })
+  );
 /** @internal */
 export type Region$Outbound = {
   data?: DataRegions$Outbound | undefined;
@@ -174,9 +184,11 @@ export const Region$outboundSchema: z.ZodType<
   Region$Outbound,
   z.ZodTypeDef,
   Region
-> = z.object({
-  data: z.lazy(() => DataRegions$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => DataRegions$outboundSchema).optional(),
+  })
+);
 
 export function regionToJSON(region: Region): string {
   return JSON.stringify(Region$outboundSchema.parse(region));

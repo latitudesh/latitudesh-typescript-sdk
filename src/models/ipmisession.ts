@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -46,7 +46,7 @@ export type IpmiSession = {
 /** @internal */
 export const IpmiSessionType$inboundSchema: z.ZodNativeEnum<
   typeof IpmiSessionType
-> = z.nativeEnum(IpmiSessionType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(IpmiSessionType));
 /** @internal */
 export const IpmiSessionType$outboundSchema: z.ZodNativeEnum<
   typeof IpmiSessionType
@@ -57,19 +57,21 @@ export const IpmiSessionAttributes$inboundSchema: z.ZodType<
   IpmiSessionAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ipmi_address: z.string().optional(),
-  ipmi_url: z.nullable(z.string()).optional(),
-  ipmi_username: z.string().optional(),
-  ipmi_password: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "ipmi_address": "ipmiAddress",
-    "ipmi_url": "ipmiUrl",
-    "ipmi_username": "ipmiUsername",
-    "ipmi_password": "ipmiPassword",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ipmi_address: z.string().optional(),
+    ipmi_url: z.nullable(z.string()).optional(),
+    ipmi_username: z.string().optional(),
+    ipmi_password: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ipmi_address": "ipmiAddress",
+      "ipmi_url": "ipmiUrl",
+      "ipmi_username": "ipmiUsername",
+      "ipmi_password": "ipmiPassword",
+    });
+  })
+);
 /** @internal */
 export type IpmiSessionAttributes$Outbound = {
   ipmi_address?: string | undefined;
@@ -83,19 +85,21 @@ export const IpmiSessionAttributes$outboundSchema: z.ZodType<
   IpmiSessionAttributes$Outbound,
   z.ZodTypeDef,
   IpmiSessionAttributes
-> = z.object({
-  ipmiAddress: z.string().optional(),
-  ipmiUrl: z.nullable(z.string()).optional(),
-  ipmiUsername: z.string().optional(),
-  ipmiPassword: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    ipmiAddress: "ipmi_address",
-    ipmiUrl: "ipmi_url",
-    ipmiUsername: "ipmi_username",
-    ipmiPassword: "ipmi_password",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ipmiAddress: z.string().optional(),
+    ipmiUrl: z.nullable(z.string()).optional(),
+    ipmiUsername: z.string().optional(),
+    ipmiPassword: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      ipmiAddress: "ipmi_address",
+      ipmiUrl: "ipmi_url",
+      ipmiUsername: "ipmi_username",
+      ipmiPassword: "ipmi_password",
+    });
+  })
+);
 
 export function ipmiSessionAttributesToJSON(
   ipmiSessionAttributes: IpmiSessionAttributes,
@@ -119,11 +123,13 @@ export const IpmiSessionData$inboundSchema: z.ZodType<
   IpmiSessionData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  type: IpmiSessionType$inboundSchema.optional(),
-  attributes: z.lazy(() => IpmiSessionAttributes$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: IpmiSessionType$inboundSchema.optional(),
+    attributes: z.lazy(() => IpmiSessionAttributes$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type IpmiSessionData$Outbound = {
   id?: string | undefined;
@@ -136,11 +142,13 @@ export const IpmiSessionData$outboundSchema: z.ZodType<
   IpmiSessionData$Outbound,
   z.ZodTypeDef,
   IpmiSessionData
-> = z.object({
-  id: z.string().optional(),
-  type: IpmiSessionType$outboundSchema.optional(),
-  attributes: z.lazy(() => IpmiSessionAttributes$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: IpmiSessionType$outboundSchema.optional(),
+    attributes: z.lazy(() => IpmiSessionAttributes$outboundSchema).optional(),
+  })
+);
 
 export function ipmiSessionDataToJSON(
   ipmiSessionData: IpmiSessionData,
@@ -162,9 +170,11 @@ export const IpmiSession$inboundSchema: z.ZodType<
   IpmiSession,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => IpmiSessionData$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => IpmiSessionData$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type IpmiSession$Outbound = {
   data?: IpmiSessionData$Outbound | undefined;
@@ -175,9 +185,11 @@ export const IpmiSession$outboundSchema: z.ZodType<
   IpmiSession$Outbound,
   z.ZodTypeDef,
   IpmiSession
-> = z.object({
-  data: z.lazy(() => IpmiSessionData$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => IpmiSessionData$outboundSchema).optional(),
+  })
+);
 
 export function ipmiSessionToJSON(ipmiSession: IpmiSession): string {
   return JSON.stringify(IpmiSession$outboundSchema.parse(ipmiSession));

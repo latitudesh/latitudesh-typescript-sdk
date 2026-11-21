@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as models from "../index.js";
@@ -49,24 +49,26 @@ export const IndexVirtualMachineRequest$inboundSchema: z.ZodType<
   IndexVirtualMachineRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "filter[project]": z.string().optional(),
-  "filter[tags]": z.string().optional(),
-  "extra_fields[virtual_machines]": z.string().optional(),
-  sort: z.string().optional(),
-  "page[size]": z.number().int().default(20),
-  "page[number]": z.number().int().default(1),
-  "stats[total]": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "filter[project]": "filterProject",
-    "filter[tags]": "filterTags",
-    "extra_fields[virtual_machines]": "extraFieldsVirtualMachines",
-    "page[size]": "pageSize",
-    "page[number]": "pageNumber",
-    "stats[total]": "statsTotal",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "filter[project]": z.string().optional(),
+    "filter[tags]": z.string().optional(),
+    "extra_fields[virtual_machines]": z.string().optional(),
+    sort: z.string().optional(),
+    "page[size]": z.number().int().default(20),
+    "page[number]": z.number().int().default(1),
+    "stats[total]": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "filter[project]": "filterProject",
+      "filter[tags]": "filterTags",
+      "extra_fields[virtual_machines]": "extraFieldsVirtualMachines",
+      "page[size]": "pageSize",
+      "page[number]": "pageNumber",
+      "stats[total]": "statsTotal",
+    });
+  })
+);
 /** @internal */
 export type IndexVirtualMachineRequest$Outbound = {
   "filter[project]"?: string | undefined;
@@ -83,24 +85,26 @@ export const IndexVirtualMachineRequest$outboundSchema: z.ZodType<
   IndexVirtualMachineRequest$Outbound,
   z.ZodTypeDef,
   IndexVirtualMachineRequest
-> = z.object({
-  filterProject: z.string().optional(),
-  filterTags: z.string().optional(),
-  extraFieldsVirtualMachines: z.string().optional(),
-  sort: z.string().optional(),
-  pageSize: z.number().int().default(20),
-  pageNumber: z.number().int().default(1),
-  statsTotal: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    filterProject: "filter[project]",
-    filterTags: "filter[tags]",
-    extraFieldsVirtualMachines: "extra_fields[virtual_machines]",
-    pageSize: "page[size]",
-    pageNumber: "page[number]",
-    statsTotal: "stats[total]",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    filterProject: z.string().optional(),
+    filterTags: z.string().optional(),
+    extraFieldsVirtualMachines: z.string().optional(),
+    sort: z.string().optional(),
+    pageSize: z.number().int().default(20),
+    pageNumber: z.number().int().default(1),
+    statsTotal: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      filterProject: "filter[project]",
+      filterTags: "filter[tags]",
+      extraFieldsVirtualMachines: "extra_fields[virtual_machines]",
+      pageSize: "page[size]",
+      pageNumber: "page[number]",
+      statsTotal: "stats[total]",
+    });
+  })
+);
 
 export function indexVirtualMachineRequestToJSON(
   indexVirtualMachineRequest: IndexVirtualMachineRequest,
@@ -124,13 +128,15 @@ export const IndexVirtualMachineResponse$inboundSchema: z.ZodType<
   IndexVirtualMachineResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  Result: models.VirtualMachines$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "Result": "result",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    Result: models.VirtualMachines$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "Result": "result",
+    });
+  })
+);
 /** @internal */
 export type IndexVirtualMachineResponse$Outbound = {
   Result: models.VirtualMachines$Outbound;
@@ -141,13 +147,15 @@ export const IndexVirtualMachineResponse$outboundSchema: z.ZodType<
   IndexVirtualMachineResponse$Outbound,
   z.ZodTypeDef,
   IndexVirtualMachineResponse
-> = z.object({
-  result: models.VirtualMachines$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    result: "Result",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    result: models.VirtualMachines$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      result: "Result",
+    });
+  })
+);
 
 export function indexVirtualMachineResponseToJSON(
   indexVirtualMachineResponse: IndexVirtualMachineResponse,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 import {
@@ -22,9 +22,11 @@ export const LksNodePool$inboundSchema: z.ZodType<
   LksNodePool,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: LksNodePoolData$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: LksNodePoolData$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type LksNodePool$Outbound = {
   data?: LksNodePoolData$Outbound | undefined;
@@ -35,9 +37,11 @@ export const LksNodePool$outboundSchema: z.ZodType<
   LksNodePool$Outbound,
   z.ZodTypeDef,
   LksNodePool
-> = z.object({
-  data: LksNodePoolData$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: LksNodePoolData$outboundSchema.optional(),
+  })
+);
 
 export function lksNodePoolToJSON(lksNodePool: LksNodePool): string {
   return JSON.stringify(LksNodePool$outboundSchema.parse(lksNodePool));

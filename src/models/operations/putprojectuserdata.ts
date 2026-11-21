@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -49,7 +49,7 @@ export type PutProjectUserDataRequest = {
 /** @internal */
 export const PutProjectUserDataType2$inboundSchema: z.ZodNativeEnum<
   typeof PutProjectUserDataType2
-> = z.nativeEnum(PutProjectUserDataType2);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(PutProjectUserDataType2));
 /** @internal */
 export const PutProjectUserDataType2$outboundSchema: z.ZodNativeEnum<
   typeof PutProjectUserDataType2
@@ -60,10 +60,12 @@ export const PutProjectUserDataAttributes2$inboundSchema: z.ZodType<
   PutProjectUserDataAttributes2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  description: z.string().optional(),
-  content: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    description: z.string().optional(),
+    content: z.string().optional(),
+  })
+);
 /** @internal */
 export type PutProjectUserDataAttributes2$Outbound = {
   description?: string | undefined;
@@ -75,10 +77,12 @@ export const PutProjectUserDataAttributes2$outboundSchema: z.ZodType<
   PutProjectUserDataAttributes2$Outbound,
   z.ZodTypeDef,
   PutProjectUserDataAttributes2
-> = z.object({
-  description: z.string().optional(),
-  content: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    description: z.string().optional(),
+    content: z.string().optional(),
+  })
+);
 
 export function putProjectUserDataAttributes2ToJSON(
   putProjectUserDataAttributes2: PutProjectUserDataAttributes2,
@@ -104,12 +108,14 @@ export const PutProjectUserDataData2$inboundSchema: z.ZodType<
   PutProjectUserDataData2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  type: PutProjectUserDataType2$inboundSchema,
-  attributes: z.lazy(() => PutProjectUserDataAttributes2$inboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    type: PutProjectUserDataType2$inboundSchema,
+    attributes: z.lazy(() => PutProjectUserDataAttributes2$inboundSchema)
+      .optional(),
+  })
+);
 /** @internal */
 export type PutProjectUserDataData2$Outbound = {
   id: string;
@@ -122,12 +128,14 @@ export const PutProjectUserDataData2$outboundSchema: z.ZodType<
   PutProjectUserDataData2$Outbound,
   z.ZodTypeDef,
   PutProjectUserDataData2
-> = z.object({
-  id: z.string(),
-  type: PutProjectUserDataType2$outboundSchema,
-  attributes: z.lazy(() => PutProjectUserDataAttributes2$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    type: PutProjectUserDataType2$outboundSchema,
+    attributes: z.lazy(() => PutProjectUserDataAttributes2$outboundSchema)
+      .optional(),
+  })
+);
 
 export function putProjectUserDataData2ToJSON(
   putProjectUserDataData2: PutProjectUserDataData2,
@@ -151,9 +159,11 @@ export const PutProjectUserDataRequestBody2$inboundSchema: z.ZodType<
   PutProjectUserDataRequestBody2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => PutProjectUserDataData2$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => PutProjectUserDataData2$inboundSchema),
+  })
+);
 /** @internal */
 export type PutProjectUserDataRequestBody2$Outbound = {
   data: PutProjectUserDataData2$Outbound;
@@ -164,9 +174,11 @@ export const PutProjectUserDataRequestBody2$outboundSchema: z.ZodType<
   PutProjectUserDataRequestBody2$Outbound,
   z.ZodTypeDef,
   PutProjectUserDataRequestBody2
-> = z.object({
-  data: z.lazy(() => PutProjectUserDataData2$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => PutProjectUserDataData2$outboundSchema),
+  })
+);
 
 export function putProjectUserDataRequestBody2ToJSON(
   putProjectUserDataRequestBody2: PutProjectUserDataRequestBody2,
@@ -192,18 +204,20 @@ export const PutProjectUserDataRequest$inboundSchema: z.ZodType<
   PutProjectUserDataRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  project_id: z.string(),
-  user_data_id: z.string(),
-  RequestBody: z.lazy(() => PutProjectUserDataRequestBody2$inboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "project_id": "projectId",
-    "user_data_id": "userDataId",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    project_id: z.string(),
+    user_data_id: z.string(),
+    RequestBody: z.lazy(() => PutProjectUserDataRequestBody2$inboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "project_id": "projectId",
+      "user_data_id": "userDataId",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type PutProjectUserDataRequest$Outbound = {
   project_id: string;
@@ -216,18 +230,20 @@ export const PutProjectUserDataRequest$outboundSchema: z.ZodType<
   PutProjectUserDataRequest$Outbound,
   z.ZodTypeDef,
   PutProjectUserDataRequest
-> = z.object({
-  projectId: z.string(),
-  userDataId: z.string(),
-  requestBody: z.lazy(() => PutProjectUserDataRequestBody2$outboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    projectId: "project_id",
-    userDataId: "user_data_id",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    projectId: z.string(),
+    userDataId: z.string(),
+    requestBody: z.lazy(() => PutProjectUserDataRequestBody2$outboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      projectId: "project_id",
+      userDataId: "user_data_id",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function putProjectUserDataRequestToJSON(
   putProjectUserDataRequest: PutProjectUserDataRequest,

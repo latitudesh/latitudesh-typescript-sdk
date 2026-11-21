@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -108,8 +108,8 @@ export type Traffic = {
 };
 
 /** @internal */
-export const TrafficType$inboundSchema: z.ZodNativeEnum<typeof TrafficType> = z
-  .nativeEnum(TrafficType);
+export const TrafficType$inboundSchema: z.ZodNativeEnum<typeof TrafficType> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(TrafficType));
 /** @internal */
 export const TrafficType$outboundSchema: z.ZodNativeEnum<typeof TrafficType> =
   TrafficType$inboundSchema;
@@ -119,24 +119,26 @@ export const AttributesData$inboundSchema: z.ZodType<
   AttributesData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  date: z.string().optional(),
-  inbound_gb: z.number().int().optional(),
-  outbound_gb: z.number().int().optional(),
-  avg_outbound_speed_mbps: z.number().optional(),
-  avg_inbound_speed_mbps: z.number().optional(),
-  outbound_speed_mbps: z.number().optional(),
-  inbound_speed_mbps: z.number().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "inbound_gb": "inboundGb",
-    "outbound_gb": "outboundGb",
-    "avg_outbound_speed_mbps": "avgOutboundSpeedMbps",
-    "avg_inbound_speed_mbps": "avgInboundSpeedMbps",
-    "outbound_speed_mbps": "outboundSpeedMbps",
-    "inbound_speed_mbps": "inboundSpeedMbps",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    date: z.string().optional(),
+    inbound_gb: z.number().int().optional(),
+    outbound_gb: z.number().int().optional(),
+    avg_outbound_speed_mbps: z.number().optional(),
+    avg_inbound_speed_mbps: z.number().optional(),
+    outbound_speed_mbps: z.number().optional(),
+    inbound_speed_mbps: z.number().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "inbound_gb": "inboundGb",
+      "outbound_gb": "outboundGb",
+      "avg_outbound_speed_mbps": "avgOutboundSpeedMbps",
+      "avg_inbound_speed_mbps": "avgInboundSpeedMbps",
+      "outbound_speed_mbps": "outboundSpeedMbps",
+      "inbound_speed_mbps": "inboundSpeedMbps",
+    });
+  })
+);
 /** @internal */
 export type AttributesData$Outbound = {
   date?: string | undefined;
@@ -153,24 +155,26 @@ export const AttributesData$outboundSchema: z.ZodType<
   AttributesData$Outbound,
   z.ZodTypeDef,
   AttributesData
-> = z.object({
-  date: z.string().optional(),
-  inboundGb: z.number().int().optional(),
-  outboundGb: z.number().int().optional(),
-  avgOutboundSpeedMbps: z.number().optional(),
-  avgInboundSpeedMbps: z.number().optional(),
-  outboundSpeedMbps: z.number().optional(),
-  inboundSpeedMbps: z.number().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    inboundGb: "inbound_gb",
-    outboundGb: "outbound_gb",
-    avgOutboundSpeedMbps: "avg_outbound_speed_mbps",
-    avgInboundSpeedMbps: "avg_inbound_speed_mbps",
-    outboundSpeedMbps: "outbound_speed_mbps",
-    inboundSpeedMbps: "inbound_speed_mbps",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    date: z.string().optional(),
+    inboundGb: z.number().int().optional(),
+    outboundGb: z.number().int().optional(),
+    avgOutboundSpeedMbps: z.number().optional(),
+    avgInboundSpeedMbps: z.number().optional(),
+    outboundSpeedMbps: z.number().optional(),
+    inboundSpeedMbps: z.number().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      inboundGb: "inbound_gb",
+      outboundGb: "outbound_gb",
+      avgOutboundSpeedMbps: "avg_outbound_speed_mbps",
+      avgInboundSpeedMbps: "avg_inbound_speed_mbps",
+      outboundSpeedMbps: "outbound_speed_mbps",
+      inboundSpeedMbps: "inbound_speed_mbps",
+    });
+  })
+);
 
 export function attributesDataToJSON(attributesData: AttributesData): string {
   return JSON.stringify(AttributesData$outboundSchema.parse(attributesData));
@@ -190,22 +194,24 @@ export const TrafficRegion$inboundSchema: z.ZodType<
   TrafficRegion,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  region_slug: z.string().optional(),
-  total_inbound_gb: z.number().int().optional(),
-  total_outbound_gb: z.number().int().optional(),
-  total_inbound_95th_percentile_mbps: z.number().optional(),
-  total_outbound_95th_percentile_mbps: z.number().optional(),
-  data: z.array(z.lazy(() => AttributesData$inboundSchema)).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "region_slug": "regionSlug",
-    "total_inbound_gb": "totalInboundGb",
-    "total_outbound_gb": "totalOutboundGb",
-    "total_inbound_95th_percentile_mbps": "totalInbound95thPercentileMbps",
-    "total_outbound_95th_percentile_mbps": "totalOutbound95thPercentileMbps",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    region_slug: z.string().optional(),
+    total_inbound_gb: z.number().int().optional(),
+    total_outbound_gb: z.number().int().optional(),
+    total_inbound_95th_percentile_mbps: z.number().optional(),
+    total_outbound_95th_percentile_mbps: z.number().optional(),
+    data: z.array(z.lazy(() => AttributesData$inboundSchema)).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "region_slug": "regionSlug",
+      "total_inbound_gb": "totalInboundGb",
+      "total_outbound_gb": "totalOutboundGb",
+      "total_inbound_95th_percentile_mbps": "totalInbound95thPercentileMbps",
+      "total_outbound_95th_percentile_mbps": "totalOutbound95thPercentileMbps",
+    });
+  })
+);
 /** @internal */
 export type TrafficRegion$Outbound = {
   region_slug?: string | undefined;
@@ -221,22 +227,24 @@ export const TrafficRegion$outboundSchema: z.ZodType<
   TrafficRegion$Outbound,
   z.ZodTypeDef,
   TrafficRegion
-> = z.object({
-  regionSlug: z.string().optional(),
-  totalInboundGb: z.number().int().optional(),
-  totalOutboundGb: z.number().int().optional(),
-  totalInbound95thPercentileMbps: z.number().optional(),
-  totalOutbound95thPercentileMbps: z.number().optional(),
-  data: z.array(z.lazy(() => AttributesData$outboundSchema)).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    regionSlug: "region_slug",
-    totalInboundGb: "total_inbound_gb",
-    totalOutboundGb: "total_outbound_gb",
-    totalInbound95thPercentileMbps: "total_inbound_95th_percentile_mbps",
-    totalOutbound95thPercentileMbps: "total_outbound_95th_percentile_mbps",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    regionSlug: z.string().optional(),
+    totalInboundGb: z.number().int().optional(),
+    totalOutboundGb: z.number().int().optional(),
+    totalInbound95thPercentileMbps: z.number().optional(),
+    totalOutbound95thPercentileMbps: z.number().optional(),
+    data: z.array(z.lazy(() => AttributesData$outboundSchema)).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      regionSlug: "region_slug",
+      totalInboundGb: "total_inbound_gb",
+      totalOutboundGb: "total_outbound_gb",
+      totalInbound95thPercentileMbps: "total_inbound_95th_percentile_mbps",
+      totalOutbound95thPercentileMbps: "total_outbound_95th_percentile_mbps",
+    });
+  })
+);
 
 export function trafficRegionToJSON(trafficRegion: TrafficRegion): string {
   return JSON.stringify(TrafficRegion$outboundSchema.parse(trafficRegion));
@@ -256,24 +264,26 @@ export const TrafficAttributes$inboundSchema: z.ZodType<
   TrafficAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  from_date: z.number().int().optional(),
-  to_date: z.number().int().optional(),
-  regions: z.array(z.lazy(() => TrafficRegion$inboundSchema)).optional(),
-  total_inbound_gb: z.number().int().optional(),
-  total_outbound_gb: z.number().int().optional(),
-  total_inbound_95th_percentile_mbps: z.number().optional(),
-  total_outbound_95th_percentile_mbps: z.number().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "from_date": "fromDate",
-    "to_date": "toDate",
-    "total_inbound_gb": "totalInboundGb",
-    "total_outbound_gb": "totalOutboundGb",
-    "total_inbound_95th_percentile_mbps": "totalInbound95thPercentileMbps",
-    "total_outbound_95th_percentile_mbps": "totalOutbound95thPercentileMbps",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    from_date: z.number().int().optional(),
+    to_date: z.number().int().optional(),
+    regions: z.array(z.lazy(() => TrafficRegion$inboundSchema)).optional(),
+    total_inbound_gb: z.number().int().optional(),
+    total_outbound_gb: z.number().int().optional(),
+    total_inbound_95th_percentile_mbps: z.number().optional(),
+    total_outbound_95th_percentile_mbps: z.number().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "from_date": "fromDate",
+      "to_date": "toDate",
+      "total_inbound_gb": "totalInboundGb",
+      "total_outbound_gb": "totalOutboundGb",
+      "total_inbound_95th_percentile_mbps": "totalInbound95thPercentileMbps",
+      "total_outbound_95th_percentile_mbps": "totalOutbound95thPercentileMbps",
+    });
+  })
+);
 /** @internal */
 export type TrafficAttributes$Outbound = {
   from_date?: number | undefined;
@@ -290,24 +300,26 @@ export const TrafficAttributes$outboundSchema: z.ZodType<
   TrafficAttributes$Outbound,
   z.ZodTypeDef,
   TrafficAttributes
-> = z.object({
-  fromDate: z.number().int().optional(),
-  toDate: z.number().int().optional(),
-  regions: z.array(z.lazy(() => TrafficRegion$outboundSchema)).optional(),
-  totalInboundGb: z.number().int().optional(),
-  totalOutboundGb: z.number().int().optional(),
-  totalInbound95thPercentileMbps: z.number().optional(),
-  totalOutbound95thPercentileMbps: z.number().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    fromDate: "from_date",
-    toDate: "to_date",
-    totalInboundGb: "total_inbound_gb",
-    totalOutboundGb: "total_outbound_gb",
-    totalInbound95thPercentileMbps: "total_inbound_95th_percentile_mbps",
-    totalOutbound95thPercentileMbps: "total_outbound_95th_percentile_mbps",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    fromDate: z.number().int().optional(),
+    toDate: z.number().int().optional(),
+    regions: z.array(z.lazy(() => TrafficRegion$outboundSchema)).optional(),
+    totalInboundGb: z.number().int().optional(),
+    totalOutboundGb: z.number().int().optional(),
+    totalInbound95thPercentileMbps: z.number().optional(),
+    totalOutbound95thPercentileMbps: z.number().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      fromDate: "from_date",
+      toDate: "to_date",
+      totalInboundGb: "total_inbound_gb",
+      totalOutboundGb: "total_outbound_gb",
+      totalInbound95thPercentileMbps: "total_inbound_95th_percentile_mbps",
+      totalOutbound95thPercentileMbps: "total_outbound_95th_percentile_mbps",
+    });
+  })
+);
 
 export function trafficAttributesToJSON(
   trafficAttributes: TrafficAttributes,
@@ -331,11 +343,13 @@ export const TrafficData$inboundSchema: z.ZodType<
   TrafficData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  type: TrafficType$inboundSchema.optional(),
-  attributes: z.lazy(() => TrafficAttributes$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: TrafficType$inboundSchema.optional(),
+    attributes: z.lazy(() => TrafficAttributes$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type TrafficData$Outbound = {
   id?: string | undefined;
@@ -348,11 +362,13 @@ export const TrafficData$outboundSchema: z.ZodType<
   TrafficData$Outbound,
   z.ZodTypeDef,
   TrafficData
-> = z.object({
-  id: z.string().optional(),
-  type: TrafficType$outboundSchema.optional(),
-  attributes: z.lazy(() => TrafficAttributes$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: TrafficType$outboundSchema.optional(),
+    attributes: z.lazy(() => TrafficAttributes$outboundSchema).optional(),
+  })
+);
 
 export function trafficDataToJSON(trafficData: TrafficData): string {
   return JSON.stringify(TrafficData$outboundSchema.parse(trafficData));
@@ -372,7 +388,7 @@ export const TrafficMeta$inboundSchema: z.ZodType<
   TrafficMeta,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type TrafficMeta$Outbound = {};
 
@@ -381,7 +397,7 @@ export const TrafficMeta$outboundSchema: z.ZodType<
   TrafficMeta$Outbound,
   z.ZodTypeDef,
   TrafficMeta
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function trafficMetaToJSON(trafficMeta: TrafficMeta): string {
   return JSON.stringify(TrafficMeta$outboundSchema.parse(trafficMeta));
@@ -398,10 +414,12 @@ export function trafficMetaFromJSON(
 
 /** @internal */
 export const Traffic$inboundSchema: z.ZodType<Traffic, z.ZodTypeDef, unknown> =
-  z.object({
-    data: z.lazy(() => TrafficData$inboundSchema).optional(),
-    meta: z.lazy(() => TrafficMeta$inboundSchema).optional(),
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      data: z.lazy(() => TrafficData$inboundSchema).optional(),
+      meta: z.lazy(() => TrafficMeta$inboundSchema).optional(),
+    })
+  );
 /** @internal */
 export type Traffic$Outbound = {
   data?: TrafficData$Outbound | undefined;
@@ -413,10 +431,12 @@ export const Traffic$outboundSchema: z.ZodType<
   Traffic$Outbound,
   z.ZodTypeDef,
   Traffic
-> = z.object({
-  data: z.lazy(() => TrafficData$outboundSchema).optional(),
-  meta: z.lazy(() => TrafficMeta$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => TrafficData$outboundSchema).optional(),
+    meta: z.lazy(() => TrafficMeta$outboundSchema).optional(),
+  })
+);
 
 export function trafficToJSON(traffic: Traffic): string {
   return JSON.stringify(Traffic$outboundSchema.parse(traffic));

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { ClosedEnum, OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -78,7 +78,7 @@ export type CreateVirtualNetworkRequest = {
 /** @internal */
 export const CreateVirtualNetworkType2$inboundSchema: z.ZodNativeEnum<
   typeof CreateVirtualNetworkType2
-> = z.nativeEnum(CreateVirtualNetworkType2);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CreateVirtualNetworkType2));
 /** @internal */
 export const CreateVirtualNetworkType2$outboundSchema: z.ZodNativeEnum<
   typeof CreateVirtualNetworkType2
@@ -89,24 +89,30 @@ export const CreateVirtualNetworkSite2$inboundSchema: z.ZodType<
   CreateVirtualNetworkSite2,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(CreateVirtualNetworkSite2);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(CreateVirtualNetworkSite2)
+);
 /** @internal */
 export const CreateVirtualNetworkSite2$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   CreateVirtualNetworkSite2
-> = openEnums.outboundSchema(CreateVirtualNetworkSite2);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(CreateVirtualNetworkSite2)
+);
 
 /** @internal */
 export const CreateVirtualNetworkAttributes2$inboundSchema: z.ZodType<
   CreateVirtualNetworkAttributes2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  description: z.string(),
-  site: CreateVirtualNetworkSite2$inboundSchema.optional(),
-  project: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    description: z.string(),
+    site: CreateVirtualNetworkSite2$inboundSchema.optional(),
+    project: z.string(),
+  })
+);
 /** @internal */
 export type CreateVirtualNetworkAttributes2$Outbound = {
   description: string;
@@ -119,11 +125,13 @@ export const CreateVirtualNetworkAttributes2$outboundSchema: z.ZodType<
   CreateVirtualNetworkAttributes2$Outbound,
   z.ZodTypeDef,
   CreateVirtualNetworkAttributes2
-> = z.object({
-  description: z.string(),
-  site: CreateVirtualNetworkSite2$outboundSchema.optional(),
-  project: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    description: z.string(),
+    site: CreateVirtualNetworkSite2$outboundSchema.optional(),
+    project: z.string(),
+  })
+);
 
 export function createVirtualNetworkAttributes2ToJSON(
   createVirtualNetworkAttributes2: CreateVirtualNetworkAttributes2,
@@ -149,10 +157,12 @@ export const CreateVirtualNetworkData2$inboundSchema: z.ZodType<
   CreateVirtualNetworkData2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: CreateVirtualNetworkType2$inboundSchema,
-  attributes: z.lazy(() => CreateVirtualNetworkAttributes2$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CreateVirtualNetworkType2$inboundSchema,
+    attributes: z.lazy(() => CreateVirtualNetworkAttributes2$inboundSchema),
+  })
+);
 /** @internal */
 export type CreateVirtualNetworkData2$Outbound = {
   type: string;
@@ -164,10 +174,12 @@ export const CreateVirtualNetworkData2$outboundSchema: z.ZodType<
   CreateVirtualNetworkData2$Outbound,
   z.ZodTypeDef,
   CreateVirtualNetworkData2
-> = z.object({
-  type: CreateVirtualNetworkType2$outboundSchema,
-  attributes: z.lazy(() => CreateVirtualNetworkAttributes2$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CreateVirtualNetworkType2$outboundSchema,
+    attributes: z.lazy(() => CreateVirtualNetworkAttributes2$outboundSchema),
+  })
+);
 
 export function createVirtualNetworkData2ToJSON(
   createVirtualNetworkData2: CreateVirtualNetworkData2,
@@ -191,9 +203,11 @@ export const CreateVirtualNetworkRequest$inboundSchema: z.ZodType<
   CreateVirtualNetworkRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => CreateVirtualNetworkData2$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => CreateVirtualNetworkData2$inboundSchema),
+  })
+);
 /** @internal */
 export type CreateVirtualNetworkRequest$Outbound = {
   data: CreateVirtualNetworkData2$Outbound;
@@ -204,9 +218,11 @@ export const CreateVirtualNetworkRequest$outboundSchema: z.ZodType<
   CreateVirtualNetworkRequest$Outbound,
   z.ZodTypeDef,
   CreateVirtualNetworkRequest
-> = z.object({
-  data: z.lazy(() => CreateVirtualNetworkData2$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => CreateVirtualNetworkData2$outboundSchema),
+  })
+);
 
 export function createVirtualNetworkRequestToJSON(
   createVirtualNetworkRequest: CreateVirtualNetworkRequest,

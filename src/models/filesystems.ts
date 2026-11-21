@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 import {
@@ -25,7 +25,7 @@ export const FilesystemsMeta$inboundSchema: z.ZodType<
   FilesystemsMeta,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type FilesystemsMeta$Outbound = {};
 
@@ -34,7 +34,7 @@ export const FilesystemsMeta$outboundSchema: z.ZodType<
   FilesystemsMeta$Outbound,
   z.ZodTypeDef,
   FilesystemsMeta
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function filesystemsMetaToJSON(
   filesystemsMeta: FilesystemsMeta,
@@ -56,10 +56,12 @@ export const Filesystems$inboundSchema: z.ZodType<
   Filesystems,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.array(FilesystemData$inboundSchema).optional(),
-  meta: z.lazy(() => FilesystemsMeta$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(FilesystemData$inboundSchema).optional(),
+    meta: z.lazy(() => FilesystemsMeta$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type Filesystems$Outbound = {
   data?: Array<FilesystemData$Outbound> | undefined;
@@ -71,10 +73,12 @@ export const Filesystems$outboundSchema: z.ZodType<
   Filesystems$Outbound,
   z.ZodTypeDef,
   Filesystems
-> = z.object({
-  data: z.array(FilesystemData$outboundSchema).optional(),
-  meta: z.lazy(() => FilesystemsMeta$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(FilesystemData$outboundSchema).optional(),
+    meta: z.lazy(() => FilesystemsMeta$outboundSchema).optional(),
+  })
+);
 
 export function filesystemsToJSON(filesystems: Filesystems): string {
   return JSON.stringify(Filesystems$outboundSchema.parse(filesystems));

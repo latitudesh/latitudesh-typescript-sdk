@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -53,7 +53,7 @@ export type CreateVolumeResponse = {
 /** @internal */
 export const CreateVolumeType2$inboundSchema: z.ZodNativeEnum<
   typeof CreateVolumeType2
-> = z.nativeEnum(CreateVolumeType2);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CreateVolumeType2));
 /** @internal */
 export const CreateVolumeType2$outboundSchema: z.ZodNativeEnum<
   typeof CreateVolumeType2
@@ -64,16 +64,18 @@ export const CreateVolumeAttributes2$inboundSchema: z.ZodType<
   CreateVolumeAttributes2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  project: z.string(),
-  name: z.string(),
-  region: z.string(),
-  size_in_gb: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    "size_in_gb": "sizeInGb",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    project: z.string(),
+    name: z.string(),
+    region: z.string(),
+    size_in_gb: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      "size_in_gb": "sizeInGb",
+    });
+  })
+);
 /** @internal */
 export type CreateVolumeAttributes2$Outbound = {
   project: string;
@@ -87,16 +89,18 @@ export const CreateVolumeAttributes2$outboundSchema: z.ZodType<
   CreateVolumeAttributes2$Outbound,
   z.ZodTypeDef,
   CreateVolumeAttributes2
-> = z.object({
-  project: z.string(),
-  name: z.string(),
-  region: z.string(),
-  sizeInGb: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    sizeInGb: "size_in_gb",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    project: z.string(),
+    name: z.string(),
+    region: z.string(),
+    sizeInGb: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      sizeInGb: "size_in_gb",
+    });
+  })
+);
 
 export function createVolumeAttributes2ToJSON(
   createVolumeAttributes2: CreateVolumeAttributes2,
@@ -120,10 +124,12 @@ export const CreateVolumeData2$inboundSchema: z.ZodType<
   CreateVolumeData2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: CreateVolumeType2$inboundSchema,
-  attributes: z.lazy(() => CreateVolumeAttributes2$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CreateVolumeType2$inboundSchema,
+    attributes: z.lazy(() => CreateVolumeAttributes2$inboundSchema),
+  })
+);
 /** @internal */
 export type CreateVolumeData2$Outbound = {
   type: string;
@@ -135,10 +141,12 @@ export const CreateVolumeData2$outboundSchema: z.ZodType<
   CreateVolumeData2$Outbound,
   z.ZodTypeDef,
   CreateVolumeData2
-> = z.object({
-  type: CreateVolumeType2$outboundSchema,
-  attributes: z.lazy(() => CreateVolumeAttributes2$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CreateVolumeType2$outboundSchema,
+    attributes: z.lazy(() => CreateVolumeAttributes2$outboundSchema),
+  })
+);
 
 export function createVolumeData2ToJSON(
   createVolumeData2: CreateVolumeData2,
@@ -162,9 +170,11 @@ export const CreateVolumeRequest$inboundSchema: z.ZodType<
   CreateVolumeRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => CreateVolumeData2$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => CreateVolumeData2$inboundSchema),
+  })
+);
 /** @internal */
 export type CreateVolumeRequest$Outbound = {
   data: CreateVolumeData2$Outbound;
@@ -175,9 +185,11 @@ export const CreateVolumeRequest$outboundSchema: z.ZodType<
   CreateVolumeRequest$Outbound,
   z.ZodTypeDef,
   CreateVolumeRequest
-> = z.object({
-  data: z.lazy(() => CreateVolumeData2$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => CreateVolumeData2$outboundSchema),
+  })
+);
 
 export function createVolumeRequestToJSON(
   createVolumeRequest: CreateVolumeRequest,
@@ -201,9 +213,11 @@ export const CreateVolumeResponse$inboundSchema: z.ZodType<
   CreateVolumeResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: models.VolumeData$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: models.VolumeData$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type CreateVolumeResponse$Outbound = {
   data?: models.VolumeData$Outbound | undefined;
@@ -214,9 +228,11 @@ export const CreateVolumeResponse$outboundSchema: z.ZodType<
   CreateVolumeResponse$Outbound,
   z.ZodTypeDef,
   CreateVolumeResponse
-> = z.object({
-  data: models.VolumeData$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: models.VolumeData$outboundSchema.optional(),
+  })
+);
 
 export function createVolumeResponseToJSON(
   createVolumeResponse: CreateVolumeResponse,
