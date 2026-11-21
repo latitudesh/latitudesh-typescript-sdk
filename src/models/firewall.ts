@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 import {
@@ -25,7 +25,7 @@ export const FirewallMeta$inboundSchema: z.ZodType<
   FirewallMeta,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type FirewallMeta$Outbound = {};
 
@@ -34,7 +34,7 @@ export const FirewallMeta$outboundSchema: z.ZodType<
   FirewallMeta$Outbound,
   z.ZodTypeDef,
   FirewallMeta
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function firewallMetaToJSON(firewallMeta: FirewallMeta): string {
   return JSON.stringify(FirewallMeta$outboundSchema.parse(firewallMeta));
@@ -54,10 +54,12 @@ export const Firewall$inboundSchema: z.ZodType<
   Firewall,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: FirewallData$inboundSchema.optional(),
-  meta: z.lazy(() => FirewallMeta$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: FirewallData$inboundSchema.optional(),
+    meta: z.lazy(() => FirewallMeta$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type Firewall$Outbound = {
   data?: FirewallData$Outbound | undefined;
@@ -69,10 +71,12 @@ export const Firewall$outboundSchema: z.ZodType<
   Firewall$Outbound,
   z.ZodTypeDef,
   Firewall
-> = z.object({
-  data: FirewallData$outboundSchema.optional(),
-  meta: z.lazy(() => FirewallMeta$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: FirewallData$outboundSchema.optional(),
+    meta: z.lazy(() => FirewallMeta$outboundSchema).optional(),
+  })
+);
 
 export function firewallToJSON(firewall: Firewall): string {
   return JSON.stringify(Firewall$outboundSchema.parse(firewall));

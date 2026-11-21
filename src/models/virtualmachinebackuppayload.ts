@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -35,7 +35,9 @@ export type VirtualMachineBackupPayload = {
 /** @internal */
 export const VirtualMachineBackupPayloadType$inboundSchema: z.ZodNativeEnum<
   typeof VirtualMachineBackupPayloadType
-> = z.nativeEnum(VirtualMachineBackupPayloadType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(VirtualMachineBackupPayloadType)
+);
 /** @internal */
 export const VirtualMachineBackupPayloadType$outboundSchema: z.ZodNativeEnum<
   typeof VirtualMachineBackupPayloadType
@@ -46,13 +48,15 @@ export const VirtualMachineBackupPayloadAttributes$inboundSchema: z.ZodType<
   VirtualMachineBackupPayloadAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  virtual_machine: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "virtual_machine": "virtualMachine",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    virtual_machine: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "virtual_machine": "virtualMachine",
+    });
+  })
+);
 /** @internal */
 export type VirtualMachineBackupPayloadAttributes$Outbound = {
   virtual_machine: string;
@@ -63,13 +67,15 @@ export const VirtualMachineBackupPayloadAttributes$outboundSchema: z.ZodType<
   VirtualMachineBackupPayloadAttributes$Outbound,
   z.ZodTypeDef,
   VirtualMachineBackupPayloadAttributes
-> = z.object({
-  virtualMachine: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    virtualMachine: "virtual_machine",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    virtualMachine: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      virtualMachine: "virtual_machine",
+    });
+  })
+);
 
 export function virtualMachineBackupPayloadAttributesToJSON(
   virtualMachineBackupPayloadAttributes: VirtualMachineBackupPayloadAttributes,
@@ -96,11 +102,14 @@ export const VirtualMachineBackupPayloadData$inboundSchema: z.ZodType<
   VirtualMachineBackupPayloadData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: VirtualMachineBackupPayloadType$inboundSchema.optional(),
-  attributes: z.lazy(() => VirtualMachineBackupPayloadAttributes$inboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: VirtualMachineBackupPayloadType$inboundSchema.optional(),
+    attributes: z.lazy(() =>
+      VirtualMachineBackupPayloadAttributes$inboundSchema
+    ).optional(),
+  })
+);
 /** @internal */
 export type VirtualMachineBackupPayloadData$Outbound = {
   type?: string | undefined;
@@ -112,11 +121,14 @@ export const VirtualMachineBackupPayloadData$outboundSchema: z.ZodType<
   VirtualMachineBackupPayloadData$Outbound,
   z.ZodTypeDef,
   VirtualMachineBackupPayloadData
-> = z.object({
-  type: VirtualMachineBackupPayloadType$outboundSchema.optional(),
-  attributes: z.lazy(() => VirtualMachineBackupPayloadAttributes$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: VirtualMachineBackupPayloadType$outboundSchema.optional(),
+    attributes: z.lazy(() =>
+      VirtualMachineBackupPayloadAttributes$outboundSchema
+    ).optional(),
+  })
+);
 
 export function virtualMachineBackupPayloadDataToJSON(
   virtualMachineBackupPayloadData: VirtualMachineBackupPayloadData,
@@ -142,9 +154,12 @@ export const VirtualMachineBackupPayload$inboundSchema: z.ZodType<
   VirtualMachineBackupPayload,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => VirtualMachineBackupPayloadData$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => VirtualMachineBackupPayloadData$inboundSchema)
+      .optional(),
+  })
+);
 /** @internal */
 export type VirtualMachineBackupPayload$Outbound = {
   data?: VirtualMachineBackupPayloadData$Outbound | undefined;
@@ -155,9 +170,12 @@ export const VirtualMachineBackupPayload$outboundSchema: z.ZodType<
   VirtualMachineBackupPayload$Outbound,
   z.ZodTypeDef,
   VirtualMachineBackupPayload
-> = z.object({
-  data: z.lazy(() => VirtualMachineBackupPayloadData$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => VirtualMachineBackupPayloadData$outboundSchema)
+      .optional(),
+  })
+);
 
 export function virtualMachineBackupPayloadToJSON(
   virtualMachineBackupPayload: VirtualMachineBackupPayload,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -69,7 +69,9 @@ export type ManagedDatabaseUpdatePayload = {
 /** @internal */
 export const ManagedDatabaseUpdatePayloadType$inboundSchema: z.ZodNativeEnum<
   typeof ManagedDatabaseUpdatePayloadType
-> = z.nativeEnum(ManagedDatabaseUpdatePayloadType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(ManagedDatabaseUpdatePayloadType)
+);
 /** @internal */
 export const ManagedDatabaseUpdatePayloadType$outboundSchema: z.ZodNativeEnum<
   typeof ManagedDatabaseUpdatePayloadType
@@ -80,10 +82,12 @@ export const AccessCredentials$inboundSchema: z.ZodType<
   AccessCredentials,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  accessKeyId: z.string().optional(),
-  secretAccessKey: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessKeyId: z.string().optional(),
+    secretAccessKey: z.string().optional(),
+  })
+);
 /** @internal */
 export type AccessCredentials$Outbound = {
   accessKeyId?: string | undefined;
@@ -95,10 +99,12 @@ export const AccessCredentials$outboundSchema: z.ZodType<
   AccessCredentials$Outbound,
   z.ZodTypeDef,
   AccessCredentials
-> = z.object({
-  accessKeyId: z.string().optional(),
-  secretAccessKey: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessKeyId: z.string().optional(),
+    secretAccessKey: z.string().optional(),
+  })
+);
 
 export function accessCredentialsToJSON(
   accessCredentials: AccessCredentials,
@@ -122,19 +128,22 @@ export const ManagedDatabaseUpdatePayloadAttributes$inboundSchema: z.ZodType<
   ManagedDatabaseUpdatePayloadAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  trusted_sources: z.array(z.string()).optional(),
-  parameters: z.record(z.any()).optional(),
-  pooler: z.record(z.any()).optional(),
-  backup: z.record(z.any()).optional(),
-  access_credentials: z.lazy(() => AccessCredentials$inboundSchema).optional(),
-  supabase: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "trusted_sources": "trustedSources",
-    "access_credentials": "accessCredentials",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    trusted_sources: z.array(z.string()).optional(),
+    parameters: z.record(z.any()).optional(),
+    pooler: z.record(z.any()).optional(),
+    backup: z.record(z.any()).optional(),
+    access_credentials: z.lazy(() => AccessCredentials$inboundSchema)
+      .optional(),
+    supabase: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "trusted_sources": "trustedSources",
+      "access_credentials": "accessCredentials",
+    });
+  })
+);
 /** @internal */
 export type ManagedDatabaseUpdatePayloadAttributes$Outbound = {
   trusted_sources?: Array<string> | undefined;
@@ -150,19 +159,22 @@ export const ManagedDatabaseUpdatePayloadAttributes$outboundSchema: z.ZodType<
   ManagedDatabaseUpdatePayloadAttributes$Outbound,
   z.ZodTypeDef,
   ManagedDatabaseUpdatePayloadAttributes
-> = z.object({
-  trustedSources: z.array(z.string()).optional(),
-  parameters: z.record(z.any()).optional(),
-  pooler: z.record(z.any()).optional(),
-  backup: z.record(z.any()).optional(),
-  accessCredentials: z.lazy(() => AccessCredentials$outboundSchema).optional(),
-  supabase: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    trustedSources: "trusted_sources",
-    accessCredentials: "access_credentials",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    trustedSources: z.array(z.string()).optional(),
+    parameters: z.record(z.any()).optional(),
+    pooler: z.record(z.any()).optional(),
+    backup: z.record(z.any()).optional(),
+    accessCredentials: z.lazy(() => AccessCredentials$outboundSchema)
+      .optional(),
+    supabase: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      trustedSources: "trusted_sources",
+      accessCredentials: "access_credentials",
+    });
+  })
+);
 
 export function managedDatabaseUpdatePayloadAttributesToJSON(
   managedDatabaseUpdatePayloadAttributes:
@@ -190,11 +202,14 @@ export const ManagedDatabaseUpdatePayloadData$inboundSchema: z.ZodType<
   ManagedDatabaseUpdatePayloadData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: ManagedDatabaseUpdatePayloadType$inboundSchema.optional(),
-  attributes: z.lazy(() => ManagedDatabaseUpdatePayloadAttributes$inboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: ManagedDatabaseUpdatePayloadType$inboundSchema.optional(),
+    attributes: z.lazy(() =>
+      ManagedDatabaseUpdatePayloadAttributes$inboundSchema
+    ).optional(),
+  })
+);
 /** @internal */
 export type ManagedDatabaseUpdatePayloadData$Outbound = {
   type?: string | undefined;
@@ -206,12 +221,14 @@ export const ManagedDatabaseUpdatePayloadData$outboundSchema: z.ZodType<
   ManagedDatabaseUpdatePayloadData$Outbound,
   z.ZodTypeDef,
   ManagedDatabaseUpdatePayloadData
-> = z.object({
-  type: ManagedDatabaseUpdatePayloadType$outboundSchema.optional(),
-  attributes: z.lazy(() =>
-    ManagedDatabaseUpdatePayloadAttributes$outboundSchema
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: ManagedDatabaseUpdatePayloadType$outboundSchema.optional(),
+    attributes: z.lazy(() =>
+      ManagedDatabaseUpdatePayloadAttributes$outboundSchema
+    ).optional(),
+  })
+);
 
 export function managedDatabaseUpdatePayloadDataToJSON(
   managedDatabaseUpdatePayloadData: ManagedDatabaseUpdatePayloadData,
@@ -237,9 +254,12 @@ export const ManagedDatabaseUpdatePayload$inboundSchema: z.ZodType<
   ManagedDatabaseUpdatePayload,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => ManagedDatabaseUpdatePayloadData$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => ManagedDatabaseUpdatePayloadData$inboundSchema)
+      .optional(),
+  })
+);
 /** @internal */
 export type ManagedDatabaseUpdatePayload$Outbound = {
   data?: ManagedDatabaseUpdatePayloadData$Outbound | undefined;
@@ -250,10 +270,12 @@ export const ManagedDatabaseUpdatePayload$outboundSchema: z.ZodType<
   ManagedDatabaseUpdatePayload$Outbound,
   z.ZodTypeDef,
   ManagedDatabaseUpdatePayload
-> = z.object({
-  data: z.lazy(() => ManagedDatabaseUpdatePayloadData$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => ManagedDatabaseUpdatePayloadData$outboundSchema)
+      .optional(),
+  })
+);
 
 export function managedDatabaseUpdatePayloadToJSON(
   managedDatabaseUpdatePayload: ManagedDatabaseUpdatePayload,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -20,13 +20,15 @@ export const GetRegionRequest$inboundSchema: z.ZodType<
   GetRegionRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  region_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "region_id": "regionId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    region_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "region_id": "regionId",
+    });
+  })
+);
 /** @internal */
 export type GetRegionRequest$Outbound = {
   region_id: string;
@@ -37,13 +39,15 @@ export const GetRegionRequest$outboundSchema: z.ZodType<
   GetRegionRequest$Outbound,
   z.ZodTypeDef,
   GetRegionRequest
-> = z.object({
-  regionId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    regionId: "region_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    regionId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      regionId: "region_id",
+    });
+  })
+);
 
 export function getRegionRequestToJSON(
   getRegionRequest: GetRegionRequest,

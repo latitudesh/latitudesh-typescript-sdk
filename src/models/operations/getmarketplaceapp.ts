@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -19,9 +19,11 @@ export const GetMarketplaceAppRequest$inboundSchema: z.ZodType<
   GetMarketplaceAppRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+  })
+);
 /** @internal */
 export type GetMarketplaceAppRequest$Outbound = {
   id: string;
@@ -32,9 +34,11 @@ export const GetMarketplaceAppRequest$outboundSchema: z.ZodType<
   GetMarketplaceAppRequest$Outbound,
   z.ZodTypeDef,
   GetMarketplaceAppRequest
-> = z.object({
-  id: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+  })
+);
 
 export function getMarketplaceAppRequestToJSON(
   getMarketplaceAppRequest: GetMarketplaceAppRequest,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -39,7 +39,7 @@ export type CreateInferenceApiKey = {
 /** @internal */
 export const CreateInferenceApiKeyType$inboundSchema: z.ZodNativeEnum<
   typeof CreateInferenceApiKeyType
-> = z.nativeEnum(CreateInferenceApiKeyType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CreateInferenceApiKeyType));
 /** @internal */
 export const CreateInferenceApiKeyType$outboundSchema: z.ZodNativeEnum<
   typeof CreateInferenceApiKeyType
@@ -50,14 +50,16 @@ export const CreateInferenceApiKeyAttributes$inboundSchema: z.ZodType<
   CreateInferenceApiKeyAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  project_id: z.string(),
-  name: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "project_id": "projectId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    project_id: z.string(),
+    name: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "project_id": "projectId",
+    });
+  })
+);
 /** @internal */
 export type CreateInferenceApiKeyAttributes$Outbound = {
   project_id: string;
@@ -69,14 +71,16 @@ export const CreateInferenceApiKeyAttributes$outboundSchema: z.ZodType<
   CreateInferenceApiKeyAttributes$Outbound,
   z.ZodTypeDef,
   CreateInferenceApiKeyAttributes
-> = z.object({
-  projectId: z.string(),
-  name: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    projectId: "project_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    projectId: z.string(),
+    name: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      projectId: "project_id",
+    });
+  })
+);
 
 export function createInferenceApiKeyAttributesToJSON(
   createInferenceApiKeyAttributes: CreateInferenceApiKeyAttributes,
@@ -102,10 +106,12 @@ export const CreateInferenceApiKeyData$inboundSchema: z.ZodType<
   CreateInferenceApiKeyData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: CreateInferenceApiKeyType$inboundSchema,
-  attributes: z.lazy(() => CreateInferenceApiKeyAttributes$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CreateInferenceApiKeyType$inboundSchema,
+    attributes: z.lazy(() => CreateInferenceApiKeyAttributes$inboundSchema),
+  })
+);
 /** @internal */
 export type CreateInferenceApiKeyData$Outbound = {
   type: string;
@@ -117,10 +123,12 @@ export const CreateInferenceApiKeyData$outboundSchema: z.ZodType<
   CreateInferenceApiKeyData$Outbound,
   z.ZodTypeDef,
   CreateInferenceApiKeyData
-> = z.object({
-  type: CreateInferenceApiKeyType$outboundSchema,
-  attributes: z.lazy(() => CreateInferenceApiKeyAttributes$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CreateInferenceApiKeyType$outboundSchema,
+    attributes: z.lazy(() => CreateInferenceApiKeyAttributes$outboundSchema),
+  })
+);
 
 export function createInferenceApiKeyDataToJSON(
   createInferenceApiKeyData: CreateInferenceApiKeyData,
@@ -144,9 +152,11 @@ export const CreateInferenceApiKey$inboundSchema: z.ZodType<
   CreateInferenceApiKey,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => CreateInferenceApiKeyData$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => CreateInferenceApiKeyData$inboundSchema),
+  })
+);
 /** @internal */
 export type CreateInferenceApiKey$Outbound = {
   data: CreateInferenceApiKeyData$Outbound;
@@ -157,9 +167,11 @@ export const CreateInferenceApiKey$outboundSchema: z.ZodType<
   CreateInferenceApiKey$Outbound,
   z.ZodTypeDef,
   CreateInferenceApiKey
-> = z.object({
-  data: z.lazy(() => CreateInferenceApiKeyData$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => CreateInferenceApiKeyData$outboundSchema),
+  })
+);
 
 export function createInferenceApiKeyToJSON(
   createInferenceApiKey: CreateInferenceApiKey,

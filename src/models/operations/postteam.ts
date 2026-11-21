@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -59,15 +59,15 @@ export type PostTeamResponse = {
 /** @internal */
 export const PostTeamType2$inboundSchema: z.ZodNativeEnum<
   typeof PostTeamType2
-> = z.nativeEnum(PostTeamType2);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(PostTeamType2));
 /** @internal */
 export const PostTeamType2$outboundSchema: z.ZodNativeEnum<
   typeof PostTeamType2
 > = PostTeamType2$inboundSchema;
 
 /** @internal */
-export const Currency2$inboundSchema: z.ZodNativeEnum<typeof Currency2> = z
-  .nativeEnum(Currency2);
+export const Currency2$inboundSchema: z.ZodNativeEnum<typeof Currency2> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Currency2));
 /** @internal */
 export const Currency2$outboundSchema: z.ZodNativeEnum<typeof Currency2> =
   Currency2$inboundSchema;
@@ -77,18 +77,20 @@ export const PostTeamAttributes2$inboundSchema: z.ZodType<
   PostTeamAttributes2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string(),
-  currency: Currency2$inboundSchema,
-  address: z.string().optional(),
-  enforce_mfa: z.boolean().optional(),
-  referred_code: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "enforce_mfa": "enforceMfa",
-    "referred_code": "referredCode",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    currency: Currency2$inboundSchema,
+    address: z.string().optional(),
+    enforce_mfa: z.boolean().optional(),
+    referred_code: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "enforce_mfa": "enforceMfa",
+      "referred_code": "referredCode",
+    });
+  })
+);
 /** @internal */
 export type PostTeamAttributes2$Outbound = {
   name: string;
@@ -103,18 +105,20 @@ export const PostTeamAttributes2$outboundSchema: z.ZodType<
   PostTeamAttributes2$Outbound,
   z.ZodTypeDef,
   PostTeamAttributes2
-> = z.object({
-  name: z.string(),
-  currency: Currency2$outboundSchema,
-  address: z.string().optional(),
-  enforceMfa: z.boolean().optional(),
-  referredCode: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    enforceMfa: "enforce_mfa",
-    referredCode: "referred_code",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    currency: Currency2$outboundSchema,
+    address: z.string().optional(),
+    enforceMfa: z.boolean().optional(),
+    referredCode: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      enforceMfa: "enforce_mfa",
+      referredCode: "referred_code",
+    });
+  })
+);
 
 export function postTeamAttributes2ToJSON(
   postTeamAttributes2: PostTeamAttributes2,
@@ -138,10 +142,12 @@ export const PostTeamData2$inboundSchema: z.ZodType<
   PostTeamData2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: PostTeamType2$inboundSchema,
-  attributes: z.lazy(() => PostTeamAttributes2$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: PostTeamType2$inboundSchema,
+    attributes: z.lazy(() => PostTeamAttributes2$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type PostTeamData2$Outbound = {
   type: string;
@@ -153,10 +159,12 @@ export const PostTeamData2$outboundSchema: z.ZodType<
   PostTeamData2$Outbound,
   z.ZodTypeDef,
   PostTeamData2
-> = z.object({
-  type: PostTeamType2$outboundSchema,
-  attributes: z.lazy(() => PostTeamAttributes2$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: PostTeamType2$outboundSchema,
+    attributes: z.lazy(() => PostTeamAttributes2$outboundSchema).optional(),
+  })
+);
 
 export function postTeamData2ToJSON(postTeamData2: PostTeamData2): string {
   return JSON.stringify(PostTeamData2$outboundSchema.parse(postTeamData2));
@@ -176,9 +184,11 @@ export const PostTeamRequest$inboundSchema: z.ZodType<
   PostTeamRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => PostTeamData2$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => PostTeamData2$inboundSchema),
+  })
+);
 /** @internal */
 export type PostTeamRequest$Outbound = {
   data: PostTeamData2$Outbound;
@@ -189,9 +199,11 @@ export const PostTeamRequest$outboundSchema: z.ZodType<
   PostTeamRequest$Outbound,
   z.ZodTypeDef,
   PostTeamRequest
-> = z.object({
-  data: z.lazy(() => PostTeamData2$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => PostTeamData2$outboundSchema),
+  })
+);
 
 export function postTeamRequestToJSON(
   postTeamRequest: PostTeamRequest,
@@ -213,13 +225,15 @@ export const PostTeamMeta$inboundSchema: z.ZodType<
   PostTeamMeta,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  session_token: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "session_token": "sessionToken",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    session_token: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "session_token": "sessionToken",
+    });
+  })
+);
 /** @internal */
 export type PostTeamMeta$Outbound = {
   session_token?: string | undefined;
@@ -230,13 +244,15 @@ export const PostTeamMeta$outboundSchema: z.ZodType<
   PostTeamMeta$Outbound,
   z.ZodTypeDef,
   PostTeamMeta
-> = z.object({
-  sessionToken: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    sessionToken: "session_token",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    sessionToken: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      sessionToken: "session_token",
+    });
+  })
+);
 
 export function postTeamMetaToJSON(postTeamMeta: PostTeamMeta): string {
   return JSON.stringify(PostTeamMeta$outboundSchema.parse(postTeamMeta));
@@ -256,10 +272,12 @@ export const PostTeamResponse$inboundSchema: z.ZodType<
   PostTeamResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: models.Team$inboundSchema.optional(),
-  meta: z.lazy(() => PostTeamMeta$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: models.Team$inboundSchema.optional(),
+    meta: z.lazy(() => PostTeamMeta$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type PostTeamResponse$Outbound = {
   data?: models.Team$Outbound | undefined;
@@ -271,10 +289,12 @@ export const PostTeamResponse$outboundSchema: z.ZodType<
   PostTeamResponse$Outbound,
   z.ZodTypeDef,
   PostTeamResponse
-> = z.object({
-  data: models.Team$outboundSchema.optional(),
-  meta: z.lazy(() => PostTeamMeta$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: models.Team$outboundSchema.optional(),
+    meta: z.lazy(() => PostTeamMeta$outboundSchema).optional(),
+  })
+);
 
 export function postTeamResponseToJSON(
   postTeamResponse: PostTeamResponse,

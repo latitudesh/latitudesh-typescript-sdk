@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -36,21 +36,23 @@ export const GetProjectSshKeysRequest$inboundSchema: z.ZodType<
   GetProjectSshKeysRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  project_id: z.string(),
-  "filter[tags]": z.string().optional(),
-  "stats[total]": z.string().optional(),
-  "page[number]": z.number().int().optional(),
-  "page[size]": z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "project_id": "projectId",
-    "filter[tags]": "filterTags",
-    "stats[total]": "statsTotal",
-    "page[number]": "pageNumber",
-    "page[size]": "pageSize",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    project_id: z.string(),
+    "filter[tags]": z.string().optional(),
+    "stats[total]": z.string().optional(),
+    "page[number]": z.number().int().optional(),
+    "page[size]": z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "project_id": "projectId",
+      "filter[tags]": "filterTags",
+      "stats[total]": "statsTotal",
+      "page[number]": "pageNumber",
+      "page[size]": "pageSize",
+    });
+  })
+);
 /** @internal */
 export type GetProjectSshKeysRequest$Outbound = {
   project_id: string;
@@ -65,21 +67,23 @@ export const GetProjectSshKeysRequest$outboundSchema: z.ZodType<
   GetProjectSshKeysRequest$Outbound,
   z.ZodTypeDef,
   GetProjectSshKeysRequest
-> = z.object({
-  projectId: z.string(),
-  filterTags: z.string().optional(),
-  statsTotal: z.string().optional(),
-  pageNumber: z.number().int().optional(),
-  pageSize: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    projectId: "project_id",
-    filterTags: "filter[tags]",
-    statsTotal: "stats[total]",
-    pageNumber: "page[number]",
-    pageSize: "page[size]",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    projectId: z.string(),
+    filterTags: z.string().optional(),
+    statsTotal: z.string().optional(),
+    pageNumber: z.number().int().optional(),
+    pageSize: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      projectId: "project_id",
+      filterTags: "filter[tags]",
+      statsTotal: "stats[total]",
+      pageNumber: "page[number]",
+      pageSize: "page[size]",
+    });
+  })
+);
 
 export function getProjectSshKeysRequestToJSON(
   getProjectSshKeysRequest: GetProjectSshKeysRequest,

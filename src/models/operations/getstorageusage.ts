@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { RFCDate } from "../../types/rfcdate.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -33,19 +33,21 @@ export const GetStorageUsageRequest$inboundSchema: z.ZodType<
   GetStorageUsageRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "filter[project]": z.string(),
-  "filter[storage_id]": z.string().optional(),
-  "filter[start_date]": z.string().transform(v => new RFCDate(v)).optional(),
-  "filter[end_date]": z.string().transform(v => new RFCDate(v)).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "filter[project]": "filterProject",
-    "filter[storage_id]": "filterStorageId",
-    "filter[start_date]": "filterStartDate",
-    "filter[end_date]": "filterEndDate",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "filter[project]": z.string(),
+    "filter[storage_id]": z.string().optional(),
+    "filter[start_date]": z.string().transform(v => new RFCDate(v)).optional(),
+    "filter[end_date]": z.string().transform(v => new RFCDate(v)).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "filter[project]": "filterProject",
+      "filter[storage_id]": "filterStorageId",
+      "filter[start_date]": "filterStartDate",
+      "filter[end_date]": "filterEndDate",
+    });
+  })
+);
 /** @internal */
 export type GetStorageUsageRequest$Outbound = {
   "filter[project]": string;
@@ -59,20 +61,23 @@ export const GetStorageUsageRequest$outboundSchema: z.ZodType<
   GetStorageUsageRequest$Outbound,
   z.ZodTypeDef,
   GetStorageUsageRequest
-> = z.object({
-  filterProject: z.string(),
-  filterStorageId: z.string().optional(),
-  filterStartDate: z.instanceof(RFCDate).transform(v => v.toString())
-    .optional(),
-  filterEndDate: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    filterProject: "filter[project]",
-    filterStorageId: "filter[storage_id]",
-    filterStartDate: "filter[start_date]",
-    filterEndDate: "filter[end_date]",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    filterProject: z.string(),
+    filterStorageId: z.string().optional(),
+    filterStartDate: z.instanceof(RFCDate).transform(v => v.toString())
+      .optional(),
+    filterEndDate: z.instanceof(RFCDate).transform(v => v.toString())
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      filterProject: "filter[project]",
+      filterStorageId: "filter[storage_id]",
+      filterStartDate: "filter[start_date]",
+      filterEndDate: "filter[end_date]",
+    });
+  })
+);
 
 export function getStorageUsageRequestToJSON(
   getStorageUsageRequest: GetStorageUsageRequest,

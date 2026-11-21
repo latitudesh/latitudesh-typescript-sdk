@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as models from "../index.js";
@@ -26,16 +26,18 @@ export const UpdateLksNodePoolRequest$inboundSchema: z.ZodType<
   UpdateLksNodePoolRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  cluster_id: z.string(),
-  id: z.string(),
-  update_lks_node_pool: models.UpdateLksNodePool$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "cluster_id": "clusterId",
-    "update_lks_node_pool": "updateLksNodePool",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    cluster_id: z.string(),
+    id: z.string(),
+    update_lks_node_pool: models.UpdateLksNodePool$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "cluster_id": "clusterId",
+      "update_lks_node_pool": "updateLksNodePool",
+    });
+  })
+);
 /** @internal */
 export type UpdateLksNodePoolRequest$Outbound = {
   cluster_id: string;
@@ -48,16 +50,18 @@ export const UpdateLksNodePoolRequest$outboundSchema: z.ZodType<
   UpdateLksNodePoolRequest$Outbound,
   z.ZodTypeDef,
   UpdateLksNodePoolRequest
-> = z.object({
-  clusterId: z.string(),
-  id: z.string(),
-  updateLksNodePool: models.UpdateLksNodePool$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    clusterId: "cluster_id",
-    updateLksNodePool: "update_lks_node_pool",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    clusterId: z.string(),
+    id: z.string(),
+    updateLksNodePool: models.UpdateLksNodePool$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      clusterId: "cluster_id",
+      updateLksNodePool: "update_lks_node_pool",
+    });
+  })
+);
 
 export function updateLksNodePoolRequestToJSON(
   updateLksNodePoolRequest: UpdateLksNodePoolRequest,

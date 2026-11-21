@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -21,15 +21,17 @@ export const GetUserDataRequest$inboundSchema: z.ZodType<
   GetUserDataRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  user_data_id: z.string(),
-  "extra_fields[user_data]": z.string().default("decoded_content"),
-}).transform((v) => {
-  return remap$(v, {
-    "user_data_id": "userDataId",
-    "extra_fields[user_data]": "extraFieldsUserData",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    user_data_id: z.string(),
+    "extra_fields[user_data]": z.string().default("decoded_content"),
+  }).transform((v) => {
+    return remap$(v, {
+      "user_data_id": "userDataId",
+      "extra_fields[user_data]": "extraFieldsUserData",
+    });
+  })
+);
 /** @internal */
 export type GetUserDataRequest$Outbound = {
   user_data_id: string;
@@ -41,15 +43,17 @@ export const GetUserDataRequest$outboundSchema: z.ZodType<
   GetUserDataRequest$Outbound,
   z.ZodTypeDef,
   GetUserDataRequest
-> = z.object({
-  userDataId: z.string(),
-  extraFieldsUserData: z.string().default("decoded_content"),
-}).transform((v) => {
-  return remap$(v, {
-    userDataId: "user_data_id",
-    extraFieldsUserData: "extra_fields[user_data]",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    userDataId: z.string(),
+    extraFieldsUserData: z.string().default("decoded_content"),
+  }).transform((v) => {
+    return remap$(v, {
+      userDataId: "user_data_id",
+      extraFieldsUserData: "extra_fields[user_data]",
+    });
+  })
+);
 
 export function getUserDataRequestToJSON(
   getUserDataRequest: GetUserDataRequest,

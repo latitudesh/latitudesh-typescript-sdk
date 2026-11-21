@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 
@@ -43,15 +43,17 @@ export const ProjectIncludeBilling$inboundSchema: z.ZodType<
   ProjectIncludeBilling,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  subscription_id: z.nullable(z.string()).optional(),
-  type: z.string().optional(),
-  method: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "subscription_id": "subscriptionId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    subscription_id: z.nullable(z.string()).optional(),
+    type: z.string().optional(),
+    method: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "subscription_id": "subscriptionId",
+    });
+  })
+);
 /** @internal */
 export type ProjectIncludeBilling$Outbound = {
   subscription_id?: string | null | undefined;
@@ -64,15 +66,17 @@ export const ProjectIncludeBilling$outboundSchema: z.ZodType<
   ProjectIncludeBilling$Outbound,
   z.ZodTypeDef,
   ProjectIncludeBilling
-> = z.object({
-  subscriptionId: z.nullable(z.string()).optional(),
-  type: z.string().optional(),
-  method: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    subscriptionId: "subscription_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    subscriptionId: z.nullable(z.string()).optional(),
+    type: z.string().optional(),
+    method: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      subscriptionId: "subscription_id",
+    });
+  })
+);
 
 export function projectIncludeBillingToJSON(
   projectIncludeBilling: ProjectIncludeBilling,
@@ -96,20 +100,22 @@ export const ProjectIncludeStats$inboundSchema: z.ZodType<
   ProjectIncludeStats,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  databases: z.number().int().optional(),
-  ip_addresses: z.number().int().optional(),
-  prefixes: z.number().int().optional(),
-  servers: z.number().int().optional(),
-  storages: z.number().int().optional(),
-  virtual_machines: z.number().int().optional(),
-  vlans: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "ip_addresses": "ipAddresses",
-    "virtual_machines": "virtualMachines",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    databases: z.number().int().optional(),
+    ip_addresses: z.number().int().optional(),
+    prefixes: z.number().int().optional(),
+    servers: z.number().int().optional(),
+    storages: z.number().int().optional(),
+    virtual_machines: z.number().int().optional(),
+    vlans: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ip_addresses": "ipAddresses",
+      "virtual_machines": "virtualMachines",
+    });
+  })
+);
 /** @internal */
 export type ProjectIncludeStats$Outbound = {
   databases?: number | undefined;
@@ -126,20 +132,22 @@ export const ProjectIncludeStats$outboundSchema: z.ZodType<
   ProjectIncludeStats$Outbound,
   z.ZodTypeDef,
   ProjectIncludeStats
-> = z.object({
-  databases: z.number().int().optional(),
-  ipAddresses: z.number().int().optional(),
-  prefixes: z.number().int().optional(),
-  servers: z.number().int().optional(),
-  storages: z.number().int().optional(),
-  virtualMachines: z.number().int().optional(),
-  vlans: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    ipAddresses: "ip_addresses",
-    virtualMachines: "virtual_machines",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    databases: z.number().int().optional(),
+    ipAddresses: z.number().int().optional(),
+    prefixes: z.number().int().optional(),
+    servers: z.number().int().optional(),
+    storages: z.number().int().optional(),
+    virtualMachines: z.number().int().optional(),
+    vlans: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      ipAddresses: "ip_addresses",
+      virtualMachines: "virtual_machines",
+    });
+  })
+);
 
 export function projectIncludeStatsToJSON(
   projectIncludeStats: ProjectIncludeStats,
@@ -163,26 +171,28 @@ export const ProjectInclude$inboundSchema: z.ZodType<
   ProjectInclude,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  slug: z.string().optional(),
-  description: z.nullable(z.string()).optional(),
-  billing_type: z.nullable(z.string()).optional(),
-  provisioning_type: z.nullable(z.string()).optional(),
-  billing_method: z.nullable(z.string()).optional(),
-  bandwidth_alert: z.boolean().optional(),
-  environment: z.nullable(z.string()).optional(),
-  billing: z.lazy(() => ProjectIncludeBilling$inboundSchema).optional(),
-  stats: z.lazy(() => ProjectIncludeStats$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "billing_type": "billingType",
-    "provisioning_type": "provisioningType",
-    "billing_method": "billingMethod",
-    "bandwidth_alert": "bandwidthAlert",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    name: z.string().optional(),
+    slug: z.string().optional(),
+    description: z.nullable(z.string()).optional(),
+    billing_type: z.nullable(z.string()).optional(),
+    provisioning_type: z.nullable(z.string()).optional(),
+    billing_method: z.nullable(z.string()).optional(),
+    bandwidth_alert: z.boolean().optional(),
+    environment: z.nullable(z.string()).optional(),
+    billing: z.lazy(() => ProjectIncludeBilling$inboundSchema).optional(),
+    stats: z.lazy(() => ProjectIncludeStats$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "billing_type": "billingType",
+      "provisioning_type": "provisioningType",
+      "billing_method": "billingMethod",
+      "bandwidth_alert": "bandwidthAlert",
+    });
+  })
+);
 /** @internal */
 export type ProjectInclude$Outbound = {
   id?: string | undefined;
@@ -203,26 +213,28 @@ export const ProjectInclude$outboundSchema: z.ZodType<
   ProjectInclude$Outbound,
   z.ZodTypeDef,
   ProjectInclude
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  slug: z.string().optional(),
-  description: z.nullable(z.string()).optional(),
-  billingType: z.nullable(z.string()).optional(),
-  provisioningType: z.nullable(z.string()).optional(),
-  billingMethod: z.nullable(z.string()).optional(),
-  bandwidthAlert: z.boolean().optional(),
-  environment: z.nullable(z.string()).optional(),
-  billing: z.lazy(() => ProjectIncludeBilling$outboundSchema).optional(),
-  stats: z.lazy(() => ProjectIncludeStats$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    billingType: "billing_type",
-    provisioningType: "provisioning_type",
-    billingMethod: "billing_method",
-    bandwidthAlert: "bandwidth_alert",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    name: z.string().optional(),
+    slug: z.string().optional(),
+    description: z.nullable(z.string()).optional(),
+    billingType: z.nullable(z.string()).optional(),
+    provisioningType: z.nullable(z.string()).optional(),
+    billingMethod: z.nullable(z.string()).optional(),
+    bandwidthAlert: z.boolean().optional(),
+    environment: z.nullable(z.string()).optional(),
+    billing: z.lazy(() => ProjectIncludeBilling$outboundSchema).optional(),
+    stats: z.lazy(() => ProjectIncludeStats$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      billingType: "billing_type",
+      provisioningType: "provisioning_type",
+      billingMethod: "billing_method",
+      bandwidthAlert: "bandwidth_alert",
+    });
+  })
+);
 
 export function projectIncludeToJSON(projectInclude: ProjectInclude): string {
   return JSON.stringify(ProjectInclude$outboundSchema.parse(projectInclude));

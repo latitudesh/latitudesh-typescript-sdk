@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -17,13 +17,15 @@ export const DestroyVirtualMachineRequest$inboundSchema: z.ZodType<
   DestroyVirtualMachineRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  virtual_machine_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "virtual_machine_id": "virtualMachineId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    virtual_machine_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "virtual_machine_id": "virtualMachineId",
+    });
+  })
+);
 /** @internal */
 export type DestroyVirtualMachineRequest$Outbound = {
   virtual_machine_id: string;
@@ -34,13 +36,15 @@ export const DestroyVirtualMachineRequest$outboundSchema: z.ZodType<
   DestroyVirtualMachineRequest$Outbound,
   z.ZodTypeDef,
   DestroyVirtualMachineRequest
-> = z.object({
-  virtualMachineId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    virtualMachineId: "virtual_machine_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    virtualMachineId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      virtualMachineId: "virtual_machine_id",
+    });
+  })
+);
 
 export function destroyVirtualMachineRequestToJSON(
   destroyVirtualMachineRequest: DestroyVirtualMachineRequest,

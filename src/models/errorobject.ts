@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 
@@ -24,11 +24,13 @@ export type ErrorT = {
 };
 
 /** @internal */
-export const Source$inboundSchema: z.ZodType<Source, z.ZodTypeDef, unknown> = z
-  .object({
-    pointer: z.string().optional(),
-    parameter: z.string().optional(),
-  });
+export const Source$inboundSchema: z.ZodType<Source, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      pointer: z.string().optional(),
+      parameter: z.string().optional(),
+    })
+  );
 /** @internal */
 export type Source$Outbound = {
   pointer?: string | undefined;
@@ -40,10 +42,12 @@ export const Source$outboundSchema: z.ZodType<
   Source$Outbound,
   z.ZodTypeDef,
   Source
-> = z.object({
-  pointer: z.string().optional(),
-  parameter: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    pointer: z.string().optional(),
+    parameter: z.string().optional(),
+  })
+);
 
 export function sourceToJSON(source: Source): string {
   return JSON.stringify(Source$outboundSchema.parse(source));
@@ -63,7 +67,7 @@ export const ErrorObjectMeta$inboundSchema: z.ZodType<
   ErrorObjectMeta,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type ErrorObjectMeta$Outbound = {};
 
@@ -72,7 +76,7 @@ export const ErrorObjectMeta$outboundSchema: z.ZodType<
   ErrorObjectMeta$Outbound,
   z.ZodTypeDef,
   ErrorObjectMeta
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function errorObjectMetaToJSON(
   errorObjectMeta: ErrorObjectMeta,
@@ -90,15 +94,17 @@ export function errorObjectMetaFromJSON(
 }
 
 /** @internal */
-export const ErrorT$inboundSchema: z.ZodType<ErrorT, z.ZodTypeDef, unknown> = z
-  .object({
-    code: z.nullable(z.string()).optional(),
-    status: z.string().optional(),
-    title: z.string().optional(),
-    detail: z.string().optional(),
-    source: z.lazy(() => Source$inboundSchema).optional(),
-    meta: z.lazy(() => ErrorObjectMeta$inboundSchema).optional(),
-  });
+export const ErrorT$inboundSchema: z.ZodType<ErrorT, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      code: z.nullable(z.string()).optional(),
+      status: z.string().optional(),
+      title: z.string().optional(),
+      detail: z.string().optional(),
+      source: z.lazy(() => Source$inboundSchema).optional(),
+      meta: z.lazy(() => ErrorObjectMeta$inboundSchema).optional(),
+    })
+  );
 /** @internal */
 export type ErrorT$Outbound = {
   code?: string | null | undefined;
@@ -114,14 +120,16 @@ export const ErrorT$outboundSchema: z.ZodType<
   ErrorT$Outbound,
   z.ZodTypeDef,
   ErrorT
-> = z.object({
-  code: z.nullable(z.string()).optional(),
-  status: z.string().optional(),
-  title: z.string().optional(),
-  detail: z.string().optional(),
-  source: z.lazy(() => Source$outboundSchema).optional(),
-  meta: z.lazy(() => ErrorObjectMeta$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    code: z.nullable(z.string()).optional(),
+    status: z.string().optional(),
+    title: z.string().optional(),
+    detail: z.string().optional(),
+    source: z.lazy(() => Source$outboundSchema).optional(),
+    meta: z.lazy(() => ErrorObjectMeta$outboundSchema).optional(),
+  })
+);
 
 export function errorToJSON(errorT: ErrorT): string {
   return JSON.stringify(ErrorT$outboundSchema.parse(errorT));

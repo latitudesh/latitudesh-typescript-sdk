@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -20,13 +20,15 @@ export const DeleteKubernetesClusterRequest$inboundSchema: z.ZodType<
   DeleteKubernetesClusterRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  kubernetes_cluster_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "kubernetes_cluster_id": "kubernetesClusterId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    kubernetes_cluster_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "kubernetes_cluster_id": "kubernetesClusterId",
+    });
+  })
+);
 /** @internal */
 export type DeleteKubernetesClusterRequest$Outbound = {
   kubernetes_cluster_id: string;
@@ -37,13 +39,15 @@ export const DeleteKubernetesClusterRequest$outboundSchema: z.ZodType<
   DeleteKubernetesClusterRequest$Outbound,
   z.ZodTypeDef,
   DeleteKubernetesClusterRequest
-> = z.object({
-  kubernetesClusterId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    kubernetesClusterId: "kubernetes_cluster_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    kubernetesClusterId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      kubernetesClusterId: "kubernetes_cluster_id",
+    });
+  })
+);
 
 export function deleteKubernetesClusterRequestToJSON(
   deleteKubernetesClusterRequest: DeleteKubernetesClusterRequest,

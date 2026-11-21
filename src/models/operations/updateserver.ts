@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -61,7 +61,7 @@ export type UpdateServerRequest = {
 /** @internal */
 export const UpdateServerType2$inboundSchema: z.ZodNativeEnum<
   typeof UpdateServerType2
-> = z.nativeEnum(UpdateServerType2);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(UpdateServerType2));
 /** @internal */
 export const UpdateServerType2$outboundSchema: z.ZodNativeEnum<
   typeof UpdateServerType2
@@ -70,7 +70,7 @@ export const UpdateServerType2$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const UpdateServerBilling2$inboundSchema: z.ZodNativeEnum<
   typeof UpdateServerBilling2
-> = z.nativeEnum(UpdateServerBilling2);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(UpdateServerBilling2));
 /** @internal */
 export const UpdateServerBilling2$outboundSchema: z.ZodNativeEnum<
   typeof UpdateServerBilling2
@@ -81,12 +81,14 @@ export const UpdateServerAttributes2$inboundSchema: z.ZodType<
   UpdateServerAttributes2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  hostname: z.string().optional(),
-  billing: z.nullable(UpdateServerBilling2$inboundSchema).optional(),
-  tags: z.nullable(z.array(z.string())).optional(),
-  project: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    hostname: z.string().optional(),
+    billing: z.nullable(UpdateServerBilling2$inboundSchema).optional(),
+    tags: z.nullable(z.array(z.string())).optional(),
+    project: z.string().optional(),
+  })
+);
 /** @internal */
 export type UpdateServerAttributes2$Outbound = {
   hostname?: string | undefined;
@@ -100,12 +102,14 @@ export const UpdateServerAttributes2$outboundSchema: z.ZodType<
   UpdateServerAttributes2$Outbound,
   z.ZodTypeDef,
   UpdateServerAttributes2
-> = z.object({
-  hostname: z.string().optional(),
-  billing: z.nullable(UpdateServerBilling2$outboundSchema).optional(),
-  tags: z.nullable(z.array(z.string())).optional(),
-  project: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    hostname: z.string().optional(),
+    billing: z.nullable(UpdateServerBilling2$outboundSchema).optional(),
+    tags: z.nullable(z.array(z.string())).optional(),
+    project: z.string().optional(),
+  })
+);
 
 export function updateServerAttributes2ToJSON(
   updateServerAttributes2: UpdateServerAttributes2,
@@ -129,11 +133,13 @@ export const UpdateServerData2$inboundSchema: z.ZodType<
   UpdateServerData2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  type: UpdateServerType2$inboundSchema.optional(),
-  attributes: z.lazy(() => UpdateServerAttributes2$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: UpdateServerType2$inboundSchema.optional(),
+    attributes: z.lazy(() => UpdateServerAttributes2$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type UpdateServerData2$Outbound = {
   id?: string | undefined;
@@ -146,11 +152,13 @@ export const UpdateServerData2$outboundSchema: z.ZodType<
   UpdateServerData2$Outbound,
   z.ZodTypeDef,
   UpdateServerData2
-> = z.object({
-  id: z.string().optional(),
-  type: UpdateServerType2$outboundSchema.optional(),
-  attributes: z.lazy(() => UpdateServerAttributes2$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: UpdateServerType2$outboundSchema.optional(),
+    attributes: z.lazy(() => UpdateServerAttributes2$outboundSchema).optional(),
+  })
+);
 
 export function updateServerData2ToJSON(
   updateServerData2: UpdateServerData2,
@@ -174,9 +182,11 @@ export const UpdateServerRequestBody2$inboundSchema: z.ZodType<
   UpdateServerRequestBody2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => UpdateServerData2$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => UpdateServerData2$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type UpdateServerRequestBody2$Outbound = {
   data?: UpdateServerData2$Outbound | undefined;
@@ -187,9 +197,11 @@ export const UpdateServerRequestBody2$outboundSchema: z.ZodType<
   UpdateServerRequestBody2$Outbound,
   z.ZodTypeDef,
   UpdateServerRequestBody2
-> = z.object({
-  data: z.lazy(() => UpdateServerData2$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => UpdateServerData2$outboundSchema).optional(),
+  })
+);
 
 export function updateServerRequestBody2ToJSON(
   updateServerRequestBody2: UpdateServerRequestBody2,
@@ -213,15 +225,17 @@ export const UpdateServerRequest$inboundSchema: z.ZodType<
   UpdateServerRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  server_id: z.string(),
-  RequestBody: z.lazy(() => UpdateServerRequestBody2$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "server_id": "serverId",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    server_id: z.string(),
+    RequestBody: z.lazy(() => UpdateServerRequestBody2$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "server_id": "serverId",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type UpdateServerRequest$Outbound = {
   server_id: string;
@@ -233,15 +247,17 @@ export const UpdateServerRequest$outboundSchema: z.ZodType<
   UpdateServerRequest$Outbound,
   z.ZodTypeDef,
   UpdateServerRequest
-> = z.object({
-  serverId: z.string(),
-  requestBody: z.lazy(() => UpdateServerRequestBody2$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    serverId: "server_id",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    serverId: z.string(),
+    requestBody: z.lazy(() => UpdateServerRequestBody2$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      serverId: "server_id",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function updateServerRequestToJSON(
   updateServerRequest: UpdateServerRequest,

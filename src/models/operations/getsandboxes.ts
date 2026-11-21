@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -24,15 +24,17 @@ export const GetSandboxesRequest$inboundSchema: z.ZodType<
   GetSandboxesRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  project_id: z.string(),
-  page_token: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "project_id": "projectId",
-    "page_token": "pageToken",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    project_id: z.string(),
+    page_token: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "project_id": "projectId",
+      "page_token": "pageToken",
+    });
+  })
+);
 /** @internal */
 export type GetSandboxesRequest$Outbound = {
   project_id: string;
@@ -44,15 +46,17 @@ export const GetSandboxesRequest$outboundSchema: z.ZodType<
   GetSandboxesRequest$Outbound,
   z.ZodTypeDef,
   GetSandboxesRequest
-> = z.object({
-  projectId: z.string(),
-  pageToken: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    projectId: "project_id",
-    pageToken: "page_token",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    projectId: z.string(),
+    pageToken: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      projectId: "project_id",
+      pageToken: "page_token",
+    });
+  })
+);
 
 export function getSandboxesRequestToJSON(
   getSandboxesRequest: GetSandboxesRequest,

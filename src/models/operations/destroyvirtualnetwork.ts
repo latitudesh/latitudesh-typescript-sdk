@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -20,13 +20,15 @@ export const DestroyVirtualNetworkRequest$inboundSchema: z.ZodType<
   DestroyVirtualNetworkRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  vlan_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "vlan_id": "vlanId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    vlan_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "vlan_id": "vlanId",
+    });
+  })
+);
 /** @internal */
 export type DestroyVirtualNetworkRequest$Outbound = {
   vlan_id: string;
@@ -37,13 +39,15 @@ export const DestroyVirtualNetworkRequest$outboundSchema: z.ZodType<
   DestroyVirtualNetworkRequest$Outbound,
   z.ZodTypeDef,
   DestroyVirtualNetworkRequest
-> = z.object({
-  vlanId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    vlanId: "vlan_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    vlanId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      vlanId: "vlan_id",
+    });
+  })
+);
 
 export function destroyVirtualNetworkRequestToJSON(
   destroyVirtualNetworkRequest: DestroyVirtualNetworkRequest,

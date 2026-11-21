@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -20,13 +20,15 @@ export const DestroySandboxRequest$inboundSchema: z.ZodType<
   DestroySandboxRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  sandbox_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "sandbox_id": "sandboxId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    sandbox_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "sandbox_id": "sandboxId",
+    });
+  })
+);
 /** @internal */
 export type DestroySandboxRequest$Outbound = {
   sandbox_id: string;
@@ -37,13 +39,15 @@ export const DestroySandboxRequest$outboundSchema: z.ZodType<
   DestroySandboxRequest$Outbound,
   z.ZodTypeDef,
   DestroySandboxRequest
-> = z.object({
-  sandboxId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    sandboxId: "sandbox_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    sandboxId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      sandboxId: "sandbox_id",
+    });
+  })
+);
 
 export function destroySandboxRequestToJSON(
   destroySandboxRequest: DestroySandboxRequest,

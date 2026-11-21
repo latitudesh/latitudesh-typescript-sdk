@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as models from "../index.js";
@@ -61,31 +61,33 @@ export const GetProjectsRequest$inboundSchema: z.ZodType<
   GetProjectsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "filter[name]": z.string().optional(),
-  "filter[slug]": z.string().optional(),
-  "filter[description]": z.string().optional(),
-  "filter[billing_type]": z.string().optional(),
-  "filter[environment]": z.string().optional(),
-  "filter[tags]": z.string().optional(),
-  "extra_fields[projects]": z.string().optional(),
-  "page[size]": z.number().int().default(20),
-  "page[number]": z.number().int().default(1),
-  "stats[total]": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "filter[name]": "filterName",
-    "filter[slug]": "filterSlug",
-    "filter[description]": "filterDescription",
-    "filter[billing_type]": "filterBillingType",
-    "filter[environment]": "filterEnvironment",
-    "filter[tags]": "filterTags",
-    "extra_fields[projects]": "extraFieldsProjects",
-    "page[size]": "pageSize",
-    "page[number]": "pageNumber",
-    "stats[total]": "statsTotal",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "filter[name]": z.string().optional(),
+    "filter[slug]": z.string().optional(),
+    "filter[description]": z.string().optional(),
+    "filter[billing_type]": z.string().optional(),
+    "filter[environment]": z.string().optional(),
+    "filter[tags]": z.string().optional(),
+    "extra_fields[projects]": z.string().optional(),
+    "page[size]": z.number().int().default(20),
+    "page[number]": z.number().int().default(1),
+    "stats[total]": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "filter[name]": "filterName",
+      "filter[slug]": "filterSlug",
+      "filter[description]": "filterDescription",
+      "filter[billing_type]": "filterBillingType",
+      "filter[environment]": "filterEnvironment",
+      "filter[tags]": "filterTags",
+      "extra_fields[projects]": "extraFieldsProjects",
+      "page[size]": "pageSize",
+      "page[number]": "pageNumber",
+      "stats[total]": "statsTotal",
+    });
+  })
+);
 /** @internal */
 export type GetProjectsRequest$Outbound = {
   "filter[name]"?: string | undefined;
@@ -105,31 +107,33 @@ export const GetProjectsRequest$outboundSchema: z.ZodType<
   GetProjectsRequest$Outbound,
   z.ZodTypeDef,
   GetProjectsRequest
-> = z.object({
-  filterName: z.string().optional(),
-  filterSlug: z.string().optional(),
-  filterDescription: z.string().optional(),
-  filterBillingType: z.string().optional(),
-  filterEnvironment: z.string().optional(),
-  filterTags: z.string().optional(),
-  extraFieldsProjects: z.string().optional(),
-  pageSize: z.number().int().default(20),
-  pageNumber: z.number().int().default(1),
-  statsTotal: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    filterName: "filter[name]",
-    filterSlug: "filter[slug]",
-    filterDescription: "filter[description]",
-    filterBillingType: "filter[billing_type]",
-    filterEnvironment: "filter[environment]",
-    filterTags: "filter[tags]",
-    extraFieldsProjects: "extra_fields[projects]",
-    pageSize: "page[size]",
-    pageNumber: "page[number]",
-    statsTotal: "stats[total]",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    filterName: z.string().optional(),
+    filterSlug: z.string().optional(),
+    filterDescription: z.string().optional(),
+    filterBillingType: z.string().optional(),
+    filterEnvironment: z.string().optional(),
+    filterTags: z.string().optional(),
+    extraFieldsProjects: z.string().optional(),
+    pageSize: z.number().int().default(20),
+    pageNumber: z.number().int().default(1),
+    statsTotal: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      filterName: "filter[name]",
+      filterSlug: "filter[slug]",
+      filterDescription: "filter[description]",
+      filterBillingType: "filter[billing_type]",
+      filterEnvironment: "filter[environment]",
+      filterTags: "filter[tags]",
+      extraFieldsProjects: "extra_fields[projects]",
+      pageSize: "page[size]",
+      pageNumber: "page[number]",
+      statsTotal: "stats[total]",
+    });
+  })
+);
 
 export function getProjectsRequestToJSON(
   getProjectsRequest: GetProjectsRequest,
@@ -153,13 +157,15 @@ export const GetProjectsResponse$inboundSchema: z.ZodType<
   GetProjectsResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  Result: models.Projects$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "Result": "result",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    Result: models.Projects$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "Result": "result",
+    });
+  })
+);
 /** @internal */
 export type GetProjectsResponse$Outbound = {
   Result: models.Projects$Outbound;
@@ -170,13 +176,15 @@ export const GetProjectsResponse$outboundSchema: z.ZodType<
   GetProjectsResponse$Outbound,
   z.ZodTypeDef,
   GetProjectsResponse
-> = z.object({
-  result: models.Projects$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    result: "Result",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    result: models.Projects$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      result: "Result",
+    });
+  })
+);
 
 export function getProjectsResponseToJSON(
   getProjectsResponse: GetProjectsResponse,

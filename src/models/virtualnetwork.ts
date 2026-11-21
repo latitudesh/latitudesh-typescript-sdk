@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 import {
@@ -25,7 +25,7 @@ export const VirtualNetworkMeta$inboundSchema: z.ZodType<
   VirtualNetworkMeta,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type VirtualNetworkMeta$Outbound = {};
 
@@ -34,7 +34,7 @@ export const VirtualNetworkMeta$outboundSchema: z.ZodType<
   VirtualNetworkMeta$Outbound,
   z.ZodTypeDef,
   VirtualNetworkMeta
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function virtualNetworkMetaToJSON(
   virtualNetworkMeta: VirtualNetworkMeta,
@@ -58,10 +58,12 @@ export const VirtualNetwork$inboundSchema: z.ZodType<
   VirtualNetwork,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: VirtualNetworkData$inboundSchema.optional(),
-  meta: z.lazy(() => VirtualNetworkMeta$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: VirtualNetworkData$inboundSchema.optional(),
+    meta: z.lazy(() => VirtualNetworkMeta$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type VirtualNetwork$Outbound = {
   data?: VirtualNetworkData$Outbound | undefined;
@@ -73,10 +75,12 @@ export const VirtualNetwork$outboundSchema: z.ZodType<
   VirtualNetwork$Outbound,
   z.ZodTypeDef,
   VirtualNetwork
-> = z.object({
-  data: VirtualNetworkData$outboundSchema.optional(),
-  meta: z.lazy(() => VirtualNetworkMeta$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: VirtualNetworkData$outboundSchema.optional(),
+    meta: z.lazy(() => VirtualNetworkMeta$outboundSchema).optional(),
+  })
+);
 
 export function virtualNetworkToJSON(virtualNetwork: VirtualNetwork): string {
   return JSON.stringify(VirtualNetwork$outboundSchema.parse(virtualNetwork));

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { RFCDate } from "../types/rfcdate.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -61,28 +61,31 @@ export const StorageUsageAttributes$inboundSchema: z.ZodType<
   StorageUsageAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  date: z.string().transform(v => new RFCDate(v)).optional(),
-  storage_id: z.string().optional(),
-  project_id: z.string().optional(),
-  storage_type: z.nullable(z.string()).optional(),
-  tier: z.nullable(z.string()).optional(),
-  region: z.string().optional(),
-  bytes: z.number().int().optional(),
-  raw_value: z.number().optional(),
-  raw_unit: z.string().optional(),
-  ingested_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "storage_id": "storageId",
-    "project_id": "projectId",
-    "storage_type": "storageType",
-    "raw_value": "rawValue",
-    "raw_unit": "rawUnit",
-    "ingested_at": "ingestedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    date: z.string().transform(v => new RFCDate(v)).optional(),
+    storage_id: z.string().optional(),
+    project_id: z.string().optional(),
+    storage_type: z.nullable(z.string()).optional(),
+    tier: z.nullable(z.string()).optional(),
+    region: z.string().optional(),
+    bytes: z.number().int().optional(),
+    raw_value: z.number().optional(),
+    raw_unit: z.string().optional(),
+    ingested_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "storage_id": "storageId",
+      "project_id": "projectId",
+      "storage_type": "storageType",
+      "raw_value": "rawValue",
+      "raw_unit": "rawUnit",
+      "ingested_at": "ingestedAt",
+    });
+  })
+);
 /** @internal */
 export type StorageUsageAttributes$Outbound = {
   date?: string | undefined;
@@ -102,27 +105,29 @@ export const StorageUsageAttributes$outboundSchema: z.ZodType<
   StorageUsageAttributes$Outbound,
   z.ZodTypeDef,
   StorageUsageAttributes
-> = z.object({
-  date: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
-  storageId: z.string().optional(),
-  projectId: z.string().optional(),
-  storageType: z.nullable(z.string()).optional(),
-  tier: z.nullable(z.string()).optional(),
-  region: z.string().optional(),
-  bytes: z.number().int().optional(),
-  rawValue: z.number().optional(),
-  rawUnit: z.string().optional(),
-  ingestedAt: z.date().transform(v => v.toISOString()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    storageId: "storage_id",
-    projectId: "project_id",
-    storageType: "storage_type",
-    rawValue: "raw_value",
-    rawUnit: "raw_unit",
-    ingestedAt: "ingested_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    date: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
+    storageId: z.string().optional(),
+    projectId: z.string().optional(),
+    storageType: z.nullable(z.string()).optional(),
+    tier: z.nullable(z.string()).optional(),
+    region: z.string().optional(),
+    bytes: z.number().int().optional(),
+    rawValue: z.number().optional(),
+    rawUnit: z.string().optional(),
+    ingestedAt: z.date().transform(v => v.toISOString()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      storageId: "storage_id",
+      projectId: "project_id",
+      storageType: "storage_type",
+      rawValue: "raw_value",
+      rawUnit: "raw_unit",
+      ingestedAt: "ingested_at",
+    });
+  })
+);
 
 export function storageUsageAttributesToJSON(
   storageUsageAttributes: StorageUsageAttributes,
@@ -146,11 +151,13 @@ export const StorageUsageData$inboundSchema: z.ZodType<
   StorageUsageData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  type: z.string().optional(),
-  attributes: z.lazy(() => StorageUsageAttributes$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: z.string().optional(),
+    attributes: z.lazy(() => StorageUsageAttributes$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type StorageUsageData$Outbound = {
   id?: string | undefined;
@@ -163,11 +170,13 @@ export const StorageUsageData$outboundSchema: z.ZodType<
   StorageUsageData$Outbound,
   z.ZodTypeDef,
   StorageUsageData
-> = z.object({
-  id: z.string().optional(),
-  type: z.string().optional(),
-  attributes: z.lazy(() => StorageUsageAttributes$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: z.string().optional(),
+    attributes: z.lazy(() => StorageUsageAttributes$outboundSchema).optional(),
+  })
+);
 
 export function storageUsageDataToJSON(
   storageUsageData: StorageUsageData,
@@ -191,9 +200,11 @@ export const StorageUsage$inboundSchema: z.ZodType<
   StorageUsage,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.array(z.lazy(() => StorageUsageData$inboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(z.lazy(() => StorageUsageData$inboundSchema)).optional(),
+  })
+);
 /** @internal */
 export type StorageUsage$Outbound = {
   data?: Array<StorageUsageData$Outbound> | undefined;
@@ -204,9 +215,11 @@ export const StorageUsage$outboundSchema: z.ZodType<
   StorageUsage$Outbound,
   z.ZodTypeDef,
   StorageUsage
-> = z.object({
-  data: z.array(z.lazy(() => StorageUsageData$outboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(z.lazy(() => StorageUsageData$outboundSchema)).optional(),
+  })
+);
 
 export function storageUsageToJSON(storageUsage: StorageUsage): string {
   return JSON.stringify(StorageUsage$outboundSchema.parse(storageUsage));

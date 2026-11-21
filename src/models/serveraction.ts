@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -33,7 +33,7 @@ export type ServerAction = {
 /** @internal */
 export const ServerActionType$inboundSchema: z.ZodNativeEnum<
   typeof ServerActionType
-> = z.nativeEnum(ServerActionType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ServerActionType));
 /** @internal */
 export const ServerActionType$outboundSchema: z.ZodNativeEnum<
   typeof ServerActionType
@@ -44,9 +44,11 @@ export const ServerActionAttributes$inboundSchema: z.ZodType<
   ServerActionAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  status: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    status: z.string().optional(),
+  })
+);
 /** @internal */
 export type ServerActionAttributes$Outbound = {
   status?: string | undefined;
@@ -57,9 +59,11 @@ export const ServerActionAttributes$outboundSchema: z.ZodType<
   ServerActionAttributes$Outbound,
   z.ZodTypeDef,
   ServerActionAttributes
-> = z.object({
-  status: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    status: z.string().optional(),
+  })
+);
 
 export function serverActionAttributesToJSON(
   serverActionAttributes: ServerActionAttributes,
@@ -83,11 +87,13 @@ export const ServerActionData$inboundSchema: z.ZodType<
   ServerActionData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  type: ServerActionType$inboundSchema.optional(),
-  attributes: z.lazy(() => ServerActionAttributes$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: ServerActionType$inboundSchema.optional(),
+    attributes: z.lazy(() => ServerActionAttributes$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type ServerActionData$Outbound = {
   id?: string | undefined;
@@ -100,11 +106,13 @@ export const ServerActionData$outboundSchema: z.ZodType<
   ServerActionData$Outbound,
   z.ZodTypeDef,
   ServerActionData
-> = z.object({
-  id: z.string().optional(),
-  type: ServerActionType$outboundSchema.optional(),
-  attributes: z.lazy(() => ServerActionAttributes$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: ServerActionType$outboundSchema.optional(),
+    attributes: z.lazy(() => ServerActionAttributes$outboundSchema).optional(),
+  })
+);
 
 export function serverActionDataToJSON(
   serverActionData: ServerActionData,
@@ -128,7 +136,7 @@ export const ServerActionMeta$inboundSchema: z.ZodType<
   ServerActionMeta,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type ServerActionMeta$Outbound = {};
 
@@ -137,7 +145,7 @@ export const ServerActionMeta$outboundSchema: z.ZodType<
   ServerActionMeta$Outbound,
   z.ZodTypeDef,
   ServerActionMeta
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function serverActionMetaToJSON(
   serverActionMeta: ServerActionMeta,
@@ -161,10 +169,12 @@ export const ServerAction$inboundSchema: z.ZodType<
   ServerAction,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => ServerActionData$inboundSchema).optional(),
-  meta: z.lazy(() => ServerActionMeta$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => ServerActionData$inboundSchema).optional(),
+    meta: z.lazy(() => ServerActionMeta$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type ServerAction$Outbound = {
   data?: ServerActionData$Outbound | undefined;
@@ -176,10 +186,12 @@ export const ServerAction$outboundSchema: z.ZodType<
   ServerAction$Outbound,
   z.ZodTypeDef,
   ServerAction
-> = z.object({
-  data: z.lazy(() => ServerActionData$outboundSchema).optional(),
-  meta: z.lazy(() => ServerActionMeta$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => ServerActionData$outboundSchema).optional(),
+    meta: z.lazy(() => ServerActionMeta$outboundSchema).optional(),
+  })
+);
 
 export function serverActionToJSON(serverAction: ServerAction): string {
   return JSON.stringify(ServerAction$outboundSchema.parse(serverAction));

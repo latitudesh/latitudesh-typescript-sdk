@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 import {
@@ -29,10 +29,12 @@ export const VirtualMachines$inboundSchema: z.ZodType<
   VirtualMachines,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.array(VirtualMachineAttributes$inboundSchema).optional(),
-  meta: PaginationMeta$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(VirtualMachineAttributes$inboundSchema).optional(),
+    meta: PaginationMeta$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type VirtualMachines$Outbound = {
   data?: Array<VirtualMachineAttributes$Outbound> | undefined;
@@ -44,10 +46,12 @@ export const VirtualMachines$outboundSchema: z.ZodType<
   VirtualMachines$Outbound,
   z.ZodTypeDef,
   VirtualMachines
-> = z.object({
-  data: z.array(VirtualMachineAttributes$outboundSchema).optional(),
-  meta: PaginationMeta$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(VirtualMachineAttributes$outboundSchema).optional(),
+    meta: PaginationMeta$outboundSchema.optional(),
+  })
+);
 
 export function virtualMachinesToJSON(
   virtualMachines: VirtualMachines,

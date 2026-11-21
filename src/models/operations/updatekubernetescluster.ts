@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as models from "../index.js";
@@ -22,15 +22,17 @@ export const UpdateKubernetesClusterRequest$inboundSchema: z.ZodType<
   UpdateKubernetesClusterRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  kubernetes_cluster_id: z.string(),
-  update_kubernetes_cluster: models.UpdateKubernetesCluster$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "kubernetes_cluster_id": "kubernetesClusterId",
-    "update_kubernetes_cluster": "updateKubernetesCluster",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    kubernetes_cluster_id: z.string(),
+    update_kubernetes_cluster: models.UpdateKubernetesCluster$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "kubernetes_cluster_id": "kubernetesClusterId",
+      "update_kubernetes_cluster": "updateKubernetesCluster",
+    });
+  })
+);
 /** @internal */
 export type UpdateKubernetesClusterRequest$Outbound = {
   kubernetes_cluster_id: string;
@@ -42,15 +44,17 @@ export const UpdateKubernetesClusterRequest$outboundSchema: z.ZodType<
   UpdateKubernetesClusterRequest$Outbound,
   z.ZodTypeDef,
   UpdateKubernetesClusterRequest
-> = z.object({
-  kubernetesClusterId: z.string(),
-  updateKubernetesCluster: models.UpdateKubernetesCluster$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    kubernetesClusterId: "kubernetes_cluster_id",
-    updateKubernetesCluster: "update_kubernetes_cluster",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    kubernetesClusterId: z.string(),
+    updateKubernetesCluster: models.UpdateKubernetesCluster$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      kubernetesClusterId: "kubernetes_cluster_id",
+      updateKubernetesCluster: "update_kubernetes_cluster",
+    });
+  })
+);
 
 export function updateKubernetesClusterRequestToJSON(
   updateKubernetesClusterRequest: UpdateKubernetesClusterRequest,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -62,7 +62,7 @@ export type SshKeyData = {
 /** @internal */
 export const SshKeyDataType$inboundSchema: z.ZodNativeEnum<
   typeof SshKeyDataType
-> = z.nativeEnum(SshKeyDataType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(SshKeyDataType));
 /** @internal */
 export const SshKeyDataType$outboundSchema: z.ZodNativeEnum<
   typeof SshKeyDataType
@@ -73,12 +73,14 @@ export const SshKeyDataTag$inboundSchema: z.ZodType<
   SshKeyDataTag,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  description: z.nullable(z.string()).optional(),
-  color: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    name: z.string().optional(),
+    description: z.nullable(z.string()).optional(),
+    color: z.nullable(z.string()).optional(),
+  })
+);
 /** @internal */
 export type SshKeyDataTag$Outbound = {
   id?: string | undefined;
@@ -92,12 +94,14 @@ export const SshKeyDataTag$outboundSchema: z.ZodType<
   SshKeyDataTag$Outbound,
   z.ZodTypeDef,
   SshKeyDataTag
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  description: z.nullable(z.string()).optional(),
-  color: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    name: z.string().optional(),
+    description: z.nullable(z.string()).optional(),
+    color: z.nullable(z.string()).optional(),
+  })
+);
 
 export function sshKeyDataTagToJSON(sshKeyDataTag: SshKeyDataTag): string {
   return JSON.stringify(SshKeyDataTag$outboundSchema.parse(sshKeyDataTag));
@@ -117,22 +121,24 @@ export const SshKeyDataAttributes$inboundSchema: z.ZodType<
   SshKeyDataAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  tags: z.array(z.lazy(() => SshKeyDataTag$inboundSchema)).optional(),
-  name: z.string().optional(),
-  public_key: z.string().optional(),
-  fingerprint: z.string().optional(),
-  user: UserInclude$inboundSchema.optional(),
-  project: ProjectInclude$inboundSchema.optional(),
-  created_at: z.string().optional(),
-  updated_at: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "public_key": "publicKey",
-    "created_at": "createdAt",
-    "updated_at": "updatedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    tags: z.array(z.lazy(() => SshKeyDataTag$inboundSchema)).optional(),
+    name: z.string().optional(),
+    public_key: z.string().optional(),
+    fingerprint: z.string().optional(),
+    user: UserInclude$inboundSchema.optional(),
+    project: ProjectInclude$inboundSchema.optional(),
+    created_at: z.string().optional(),
+    updated_at: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "public_key": "publicKey",
+      "created_at": "createdAt",
+      "updated_at": "updatedAt",
+    });
+  })
+);
 /** @internal */
 export type SshKeyDataAttributes$Outbound = {
   tags?: Array<SshKeyDataTag$Outbound> | undefined;
@@ -150,22 +156,24 @@ export const SshKeyDataAttributes$outboundSchema: z.ZodType<
   SshKeyDataAttributes$Outbound,
   z.ZodTypeDef,
   SshKeyDataAttributes
-> = z.object({
-  tags: z.array(z.lazy(() => SshKeyDataTag$outboundSchema)).optional(),
-  name: z.string().optional(),
-  publicKey: z.string().optional(),
-  fingerprint: z.string().optional(),
-  user: UserInclude$outboundSchema.optional(),
-  project: ProjectInclude$outboundSchema.optional(),
-  createdAt: z.string().optional(),
-  updatedAt: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    publicKey: "public_key",
-    createdAt: "created_at",
-    updatedAt: "updated_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    tags: z.array(z.lazy(() => SshKeyDataTag$outboundSchema)).optional(),
+    name: z.string().optional(),
+    publicKey: z.string().optional(),
+    fingerprint: z.string().optional(),
+    user: UserInclude$outboundSchema.optional(),
+    project: ProjectInclude$outboundSchema.optional(),
+    createdAt: z.string().optional(),
+    updatedAt: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      publicKey: "public_key",
+      createdAt: "created_at",
+      updatedAt: "updated_at",
+    });
+  })
+);
 
 export function sshKeyDataAttributesToJSON(
   sshKeyDataAttributes: SshKeyDataAttributes,
@@ -189,11 +197,13 @@ export const SshKeyData$inboundSchema: z.ZodType<
   SshKeyData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  type: SshKeyDataType$inboundSchema,
-  attributes: z.lazy(() => SshKeyDataAttributes$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: SshKeyDataType$inboundSchema,
+    attributes: z.lazy(() => SshKeyDataAttributes$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type SshKeyData$Outbound = {
   id?: string | undefined;
@@ -206,11 +216,13 @@ export const SshKeyData$outboundSchema: z.ZodType<
   SshKeyData$Outbound,
   z.ZodTypeDef,
   SshKeyData
-> = z.object({
-  id: z.string().optional(),
-  type: SshKeyDataType$outboundSchema,
-  attributes: z.lazy(() => SshKeyDataAttributes$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: SshKeyDataType$outboundSchema,
+    attributes: z.lazy(() => SshKeyDataAttributes$outboundSchema).optional(),
+  })
+);
 
 export function sshKeyDataToJSON(sshKeyData: SshKeyData): string {
   return JSON.stringify(SshKeyData$outboundSchema.parse(sshKeyData));

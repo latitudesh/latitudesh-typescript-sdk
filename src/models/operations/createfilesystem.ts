@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -65,7 +65,7 @@ export type CreateFilesystemResponse = {
 /** @internal */
 export const CreateFilesystemType2$inboundSchema: z.ZodNativeEnum<
   typeof CreateFilesystemType2
-> = z.nativeEnum(CreateFilesystemType2);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CreateFilesystemType2));
 /** @internal */
 export const CreateFilesystemType2$outboundSchema: z.ZodNativeEnum<
   typeof CreateFilesystemType2
@@ -74,7 +74,7 @@ export const CreateFilesystemType2$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const CreateFilesystemProtocol2$inboundSchema: z.ZodNativeEnum<
   typeof CreateFilesystemProtocol2
-> = z.nativeEnum(CreateFilesystemProtocol2);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CreateFilesystemProtocol2));
 /** @internal */
 export const CreateFilesystemProtocol2$outboundSchema: z.ZodNativeEnum<
   typeof CreateFilesystemProtocol2
@@ -85,17 +85,19 @@ export const CreateFilesystemAttributes2$inboundSchema: z.ZodType<
   CreateFilesystemAttributes2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  project: z.string(),
-  name: z.string(),
-  region: z.string(),
-  size_in_gb: z.number().int().default(1500),
-  protocols: z.array(CreateFilesystemProtocol2$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "size_in_gb": "sizeInGb",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    project: z.string(),
+    name: z.string(),
+    region: z.string(),
+    size_in_gb: z.number().int().default(1500),
+    protocols: z.array(CreateFilesystemProtocol2$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "size_in_gb": "sizeInGb",
+    });
+  })
+);
 /** @internal */
 export type CreateFilesystemAttributes2$Outbound = {
   project: string;
@@ -110,17 +112,19 @@ export const CreateFilesystemAttributes2$outboundSchema: z.ZodType<
   CreateFilesystemAttributes2$Outbound,
   z.ZodTypeDef,
   CreateFilesystemAttributes2
-> = z.object({
-  project: z.string(),
-  name: z.string(),
-  region: z.string(),
-  sizeInGb: z.number().int().default(1500),
-  protocols: z.array(CreateFilesystemProtocol2$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    sizeInGb: "size_in_gb",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    project: z.string(),
+    name: z.string(),
+    region: z.string(),
+    sizeInGb: z.number().int().default(1500),
+    protocols: z.array(CreateFilesystemProtocol2$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      sizeInGb: "size_in_gb",
+    });
+  })
+);
 
 export function createFilesystemAttributes2ToJSON(
   createFilesystemAttributes2: CreateFilesystemAttributes2,
@@ -146,10 +150,12 @@ export const CreateFilesystemData2$inboundSchema: z.ZodType<
   CreateFilesystemData2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: CreateFilesystemType2$inboundSchema,
-  attributes: z.lazy(() => CreateFilesystemAttributes2$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CreateFilesystemType2$inboundSchema,
+    attributes: z.lazy(() => CreateFilesystemAttributes2$inboundSchema),
+  })
+);
 /** @internal */
 export type CreateFilesystemData2$Outbound = {
   type: string;
@@ -161,10 +167,12 @@ export const CreateFilesystemData2$outboundSchema: z.ZodType<
   CreateFilesystemData2$Outbound,
   z.ZodTypeDef,
   CreateFilesystemData2
-> = z.object({
-  type: CreateFilesystemType2$outboundSchema,
-  attributes: z.lazy(() => CreateFilesystemAttributes2$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CreateFilesystemType2$outboundSchema,
+    attributes: z.lazy(() => CreateFilesystemAttributes2$outboundSchema),
+  })
+);
 
 export function createFilesystemData2ToJSON(
   createFilesystemData2: CreateFilesystemData2,
@@ -188,9 +196,11 @@ export const CreateFilesystemRequest$inboundSchema: z.ZodType<
   CreateFilesystemRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => CreateFilesystemData2$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => CreateFilesystemData2$inboundSchema),
+  })
+);
 /** @internal */
 export type CreateFilesystemRequest$Outbound = {
   data: CreateFilesystemData2$Outbound;
@@ -201,9 +211,11 @@ export const CreateFilesystemRequest$outboundSchema: z.ZodType<
   CreateFilesystemRequest$Outbound,
   z.ZodTypeDef,
   CreateFilesystemRequest
-> = z.object({
-  data: z.lazy(() => CreateFilesystemData2$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => CreateFilesystemData2$outboundSchema),
+  })
+);
 
 export function createFilesystemRequestToJSON(
   createFilesystemRequest: CreateFilesystemRequest,
@@ -227,9 +239,11 @@ export const CreateFilesystemResponse$inboundSchema: z.ZodType<
   CreateFilesystemResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: models.FilesystemData$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: models.FilesystemData$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type CreateFilesystemResponse$Outbound = {
   data?: models.FilesystemData$Outbound | undefined;
@@ -240,9 +254,11 @@ export const CreateFilesystemResponse$outboundSchema: z.ZodType<
   CreateFilesystemResponse$Outbound,
   z.ZodTypeDef,
   CreateFilesystemResponse
-> = z.object({
-  data: models.FilesystemData$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: models.FilesystemData$outboundSchema.optional(),
+  })
+);
 
 export function createFilesystemResponseToJSON(
   createFilesystemResponse: CreateFilesystemResponse,

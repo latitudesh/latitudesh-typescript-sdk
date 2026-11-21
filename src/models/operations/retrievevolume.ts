@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as models from "../index.js";
@@ -27,9 +27,11 @@ export const RetrieveVolumeRequest$inboundSchema: z.ZodType<
   RetrieveVolumeRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+  })
+);
 /** @internal */
 export type RetrieveVolumeRequest$Outbound = {
   id: string;
@@ -40,9 +42,11 @@ export const RetrieveVolumeRequest$outboundSchema: z.ZodType<
   RetrieveVolumeRequest$Outbound,
   z.ZodTypeDef,
   RetrieveVolumeRequest
-> = z.object({
-  id: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+  })
+);
 
 export function retrieveVolumeRequestToJSON(
   retrieveVolumeRequest: RetrieveVolumeRequest,
@@ -66,9 +70,11 @@ export const RetrieveVolumeResponse$inboundSchema: z.ZodType<
   RetrieveVolumeResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: models.VolumeData$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: models.VolumeData$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type RetrieveVolumeResponse$Outbound = {
   data?: models.VolumeData$Outbound | undefined;
@@ -79,9 +85,11 @@ export const RetrieveVolumeResponse$outboundSchema: z.ZodType<
   RetrieveVolumeResponse$Outbound,
   z.ZodTypeDef,
   RetrieveVolumeResponse
-> = z.object({
-  data: models.VolumeData$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: models.VolumeData$outboundSchema.optional(),
+  })
+);
 
 export function retrieveVolumeResponseToJSON(
   retrieveVolumeResponse: RetrieveVolumeResponse,

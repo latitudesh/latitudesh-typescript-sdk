@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -33,16 +33,15 @@ export type ShowVirtualMachineMetricsRequest = {
 };
 
 /** @internal */
-export const Metric$inboundSchema: z.ZodNativeEnum<typeof Metric> = z
-  .nativeEnum(Metric);
+export const Metric$inboundSchema: z.ZodNativeEnum<typeof Metric> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Metric));
 /** @internal */
 export const Metric$outboundSchema: z.ZodNativeEnum<typeof Metric> =
   Metric$inboundSchema;
 
 /** @internal */
-export const Range$inboundSchema: z.ZodNativeEnum<typeof Range> = z.nativeEnum(
-  Range,
-);
+export const Range$inboundSchema: z.ZodNativeEnum<typeof Range> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Range));
 /** @internal */
 export const Range$outboundSchema: z.ZodNativeEnum<typeof Range> =
   Range$inboundSchema;
@@ -52,17 +51,19 @@ export const ShowVirtualMachineMetricsRequest$inboundSchema: z.ZodType<
   ShowVirtualMachineMetricsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  virtual_machine_id: z.string(),
-  metric: Metric$inboundSchema,
-  range: Range$inboundSchema.optional(),
-  force_refresh: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "virtual_machine_id": "virtualMachineId",
-    "force_refresh": "forceRefresh",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    virtual_machine_id: z.string(),
+    metric: Metric$inboundSchema,
+    range: Range$inboundSchema.optional(),
+    force_refresh: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "virtual_machine_id": "virtualMachineId",
+      "force_refresh": "forceRefresh",
+    });
+  })
+);
 /** @internal */
 export type ShowVirtualMachineMetricsRequest$Outbound = {
   virtual_machine_id: string;
@@ -76,17 +77,19 @@ export const ShowVirtualMachineMetricsRequest$outboundSchema: z.ZodType<
   ShowVirtualMachineMetricsRequest$Outbound,
   z.ZodTypeDef,
   ShowVirtualMachineMetricsRequest
-> = z.object({
-  virtualMachineId: z.string(),
-  metric: Metric$outboundSchema,
-  range: Range$outboundSchema.optional(),
-  forceRefresh: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    virtualMachineId: "virtual_machine_id",
-    forceRefresh: "force_refresh",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    virtualMachineId: z.string(),
+    metric: Metric$outboundSchema,
+    range: Range$outboundSchema.optional(),
+    forceRefresh: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      virtualMachineId: "virtual_machine_id",
+      forceRefresh: "force_refresh",
+    });
+  })
+);
 
 export function showVirtualMachineMetricsRequestToJSON(
   showVirtualMachineMetricsRequest: ShowVirtualMachineMetricsRequest,

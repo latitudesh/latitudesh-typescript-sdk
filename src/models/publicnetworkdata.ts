@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -134,7 +134,9 @@ export type PublicNetworkData = {
 /** @internal */
 export const PublicNetworkDataTypePublicNetworks$inboundSchema: z.ZodNativeEnum<
   typeof PublicNetworkDataTypePublicNetworks
-> = z.nativeEnum(PublicNetworkDataTypePublicNetworks);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(PublicNetworkDataTypePublicNetworks)
+);
 /** @internal */
 export const PublicNetworkDataTypePublicNetworks$outboundSchema:
   z.ZodNativeEnum<typeof PublicNetworkDataTypePublicNetworks> =
@@ -143,7 +145,7 @@ export const PublicNetworkDataTypePublicNetworks$outboundSchema:
 /** @internal */
 export const PublicNetworkDataSize$inboundSchema: z.ZodNativeEnum<
   typeof PublicNetworkDataSize
-> = z.nativeEnum(PublicNetworkDataSize);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(PublicNetworkDataSize));
 /** @internal */
 export const PublicNetworkDataSize$outboundSchema: z.ZodNativeEnum<
   typeof PublicNetworkDataSize
@@ -152,7 +154,7 @@ export const PublicNetworkDataSize$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const PublicNetworkDataRole$inboundSchema: z.ZodNativeEnum<
   typeof PublicNetworkDataRole
-> = z.nativeEnum(PublicNetworkDataRole);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(PublicNetworkDataRole));
 /** @internal */
 export const PublicNetworkDataRole$outboundSchema: z.ZodNativeEnum<
   typeof PublicNetworkDataRole
@@ -161,7 +163,7 @@ export const PublicNetworkDataRole$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const AssignmentType$inboundSchema: z.ZodNativeEnum<
   typeof AssignmentType
-> = z.nativeEnum(AssignmentType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(AssignmentType));
 /** @internal */
 export const AssignmentType$outboundSchema: z.ZodNativeEnum<
   typeof AssignmentType
@@ -172,11 +174,13 @@ export const PublicNetworkDataAssignment$inboundSchema: z.ZodType<
   PublicNetworkDataAssignment,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: AssignmentType$inboundSchema.optional(),
-  id: z.string().optional(),
-  hostname: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: AssignmentType$inboundSchema.optional(),
+    id: z.string().optional(),
+    hostname: z.nullable(z.string()).optional(),
+  })
+);
 /** @internal */
 export type PublicNetworkDataAssignment$Outbound = {
   type?: string | undefined;
@@ -189,11 +193,13 @@ export const PublicNetworkDataAssignment$outboundSchema: z.ZodType<
   PublicNetworkDataAssignment$Outbound,
   z.ZodTypeDef,
   PublicNetworkDataAssignment
-> = z.object({
-  type: AssignmentType$outboundSchema.optional(),
-  id: z.string().optional(),
-  hostname: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: AssignmentType$outboundSchema.optional(),
+    id: z.string().optional(),
+    hostname: z.nullable(z.string()).optional(),
+  })
+);
 
 export function publicNetworkDataAssignmentToJSON(
   publicNetworkDataAssignment: PublicNetworkDataAssignment,
@@ -215,13 +221,16 @@ export function publicNetworkDataAssignmentFromJSON(
 }
 
 /** @internal */
-export const Ip$inboundSchema: z.ZodType<Ip, z.ZodTypeDef, unknown> = z.object({
-  address: z.string().optional(),
-  role: PublicNetworkDataRole$inboundSchema.optional(),
-  assignment: z.nullable(
-    z.lazy(() => PublicNetworkDataAssignment$inboundSchema),
-  ).optional(),
-});
+export const Ip$inboundSchema: z.ZodType<Ip, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      address: z.string().optional(),
+      role: PublicNetworkDataRole$inboundSchema.optional(),
+      assignment: z.nullable(
+        z.lazy(() => PublicNetworkDataAssignment$inboundSchema),
+      ).optional(),
+    })
+  );
 /** @internal */
 export type Ip$Outbound = {
   address?: string | undefined;
@@ -230,14 +239,16 @@ export type Ip$Outbound = {
 };
 
 /** @internal */
-export const Ip$outboundSchema: z.ZodType<Ip$Outbound, z.ZodTypeDef, Ip> = z
-  .object({
-    address: z.string().optional(),
-    role: PublicNetworkDataRole$outboundSchema.optional(),
-    assignment: z.nullable(
-      z.lazy(() => PublicNetworkDataAssignment$outboundSchema),
-    ).optional(),
-  });
+export const Ip$outboundSchema: z.ZodType<Ip$Outbound, z.ZodTypeDef, Ip> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      address: z.string().optional(),
+      role: PublicNetworkDataRole$outboundSchema.optional(),
+      assignment: z.nullable(
+        z.lazy(() => PublicNetworkDataAssignment$outboundSchema),
+      ).optional(),
+    })
+  );
 
 export function ipToJSON(ip: Ip): string {
   return JSON.stringify(Ip$outboundSchema.parse(ip));
@@ -257,11 +268,13 @@ export const PublicNetworkDataProject$inboundSchema: z.ZodType<
   PublicNetworkDataProject,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  slug: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    name: z.string().optional(),
+    slug: z.string().optional(),
+  })
+);
 /** @internal */
 export type PublicNetworkDataProject$Outbound = {
   id?: string | undefined;
@@ -274,11 +287,13 @@ export const PublicNetworkDataProject$outboundSchema: z.ZodType<
   PublicNetworkDataProject$Outbound,
   z.ZodTypeDef,
   PublicNetworkDataProject
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  slug: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    name: z.string().optional(),
+    slug: z.string().optional(),
+  })
+);
 
 export function publicNetworkDataProjectToJSON(
   publicNetworkDataProject: PublicNetworkDataProject,
@@ -302,11 +317,13 @@ export const PublicNetworkDataLocation$inboundSchema: z.ZodType<
   PublicNetworkDataLocation,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  slug: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    name: z.string().optional(),
+    slug: z.string().optional(),
+  })
+);
 /** @internal */
 export type PublicNetworkDataLocation$Outbound = {
   id?: string | undefined;
@@ -319,11 +336,13 @@ export const PublicNetworkDataLocation$outboundSchema: z.ZodType<
   PublicNetworkDataLocation$Outbound,
   z.ZodTypeDef,
   PublicNetworkDataLocation
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  slug: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    name: z.string().optional(),
+    slug: z.string().optional(),
+  })
+);
 
 export function publicNetworkDataLocationToJSON(
   publicNetworkDataLocation: PublicNetworkDataLocation,
@@ -347,11 +366,13 @@ export const PublicNetworkDataRegion$inboundSchema: z.ZodType<
   PublicNetworkDataRegion,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  location: z.lazy(() => PublicNetworkDataLocation$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    name: z.string().optional(),
+    location: z.lazy(() => PublicNetworkDataLocation$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type PublicNetworkDataRegion$Outbound = {
   id?: string | undefined;
@@ -364,11 +385,13 @@ export const PublicNetworkDataRegion$outboundSchema: z.ZodType<
   PublicNetworkDataRegion$Outbound,
   z.ZodTypeDef,
   PublicNetworkDataRegion
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  location: z.lazy(() => PublicNetworkDataLocation$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    name: z.string().optional(),
+    location: z.lazy(() => PublicNetworkDataLocation$outboundSchema).optional(),
+  })
+);
 
 export function publicNetworkDataRegionToJSON(
   publicNetworkDataRegion: PublicNetworkDataRegion,
@@ -392,28 +415,31 @@ export const PublicNetworkDataAttributes$inboundSchema: z.ZodType<
   PublicNetworkDataAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ipv4: z.string().optional(),
-  ipv6: z.nullable(z.string()).optional(),
-  size: PublicNetworkDataSize$inboundSchema.optional(),
-  activated: z.boolean().optional(),
-  capacity: z.number().int().optional(),
-  ips_used: z.number().int().optional(),
-  ips_free: z.number().int().optional(),
-  ips: z.array(z.lazy(() => Ip$inboundSchema)).optional(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  project: z.nullable(z.lazy(() => PublicNetworkDataProject$inboundSchema))
-    .optional(),
-  region: z.nullable(z.lazy(() => PublicNetworkDataRegion$inboundSchema))
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "ips_used": "ipsUsed",
-    "ips_free": "ipsFree",
-    "created_at": "createdAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ipv4: z.string().optional(),
+    ipv6: z.nullable(z.string()).optional(),
+    size: PublicNetworkDataSize$inboundSchema.optional(),
+    activated: z.boolean().optional(),
+    capacity: z.number().int().optional(),
+    ips_used: z.number().int().optional(),
+    ips_free: z.number().int().optional(),
+    ips: z.array(z.lazy(() => Ip$inboundSchema)).optional(),
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ).optional(),
+    project: z.nullable(z.lazy(() => PublicNetworkDataProject$inboundSchema))
+      .optional(),
+    region: z.nullable(z.lazy(() => PublicNetworkDataRegion$inboundSchema))
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ips_used": "ipsUsed",
+      "ips_free": "ipsFree",
+      "created_at": "createdAt",
+    });
+  })
+);
 /** @internal */
 export type PublicNetworkDataAttributes$Outbound = {
   ipv4?: string | undefined;
@@ -434,27 +460,29 @@ export const PublicNetworkDataAttributes$outboundSchema: z.ZodType<
   PublicNetworkDataAttributes$Outbound,
   z.ZodTypeDef,
   PublicNetworkDataAttributes
-> = z.object({
-  ipv4: z.string().optional(),
-  ipv6: z.nullable(z.string()).optional(),
-  size: PublicNetworkDataSize$outboundSchema.optional(),
-  activated: z.boolean().optional(),
-  capacity: z.number().int().optional(),
-  ipsUsed: z.number().int().optional(),
-  ipsFree: z.number().int().optional(),
-  ips: z.array(z.lazy(() => Ip$outboundSchema)).optional(),
-  createdAt: z.date().transform(v => v.toISOString()).optional(),
-  project: z.nullable(z.lazy(() => PublicNetworkDataProject$outboundSchema))
-    .optional(),
-  region: z.nullable(z.lazy(() => PublicNetworkDataRegion$outboundSchema))
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    ipsUsed: "ips_used",
-    ipsFree: "ips_free",
-    createdAt: "created_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ipv4: z.string().optional(),
+    ipv6: z.nullable(z.string()).optional(),
+    size: PublicNetworkDataSize$outboundSchema.optional(),
+    activated: z.boolean().optional(),
+    capacity: z.number().int().optional(),
+    ipsUsed: z.number().int().optional(),
+    ipsFree: z.number().int().optional(),
+    ips: z.array(z.lazy(() => Ip$outboundSchema)).optional(),
+    createdAt: z.date().transform(v => v.toISOString()).optional(),
+    project: z.nullable(z.lazy(() => PublicNetworkDataProject$outboundSchema))
+      .optional(),
+    region: z.nullable(z.lazy(() => PublicNetworkDataRegion$outboundSchema))
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      ipsUsed: "ips_used",
+      ipsFree: "ips_free",
+      createdAt: "created_at",
+    });
+  })
+);
 
 export function publicNetworkDataAttributesToJSON(
   publicNetworkDataAttributes: PublicNetworkDataAttributes,
@@ -480,12 +508,14 @@ export const PublicNetworkData$inboundSchema: z.ZodType<
   PublicNetworkData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  type: PublicNetworkDataTypePublicNetworks$inboundSchema.optional(),
-  attributes: z.lazy(() => PublicNetworkDataAttributes$inboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: PublicNetworkDataTypePublicNetworks$inboundSchema.optional(),
+    attributes: z.lazy(() => PublicNetworkDataAttributes$inboundSchema)
+      .optional(),
+  })
+);
 /** @internal */
 export type PublicNetworkData$Outbound = {
   id?: string | undefined;
@@ -498,12 +528,14 @@ export const PublicNetworkData$outboundSchema: z.ZodType<
   PublicNetworkData$Outbound,
   z.ZodTypeDef,
   PublicNetworkData
-> = z.object({
-  id: z.string().optional(),
-  type: PublicNetworkDataTypePublicNetworks$outboundSchema.optional(),
-  attributes: z.lazy(() => PublicNetworkDataAttributes$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: PublicNetworkDataTypePublicNetworks$outboundSchema.optional(),
+    attributes: z.lazy(() => PublicNetworkDataAttributes$outboundSchema)
+      .optional(),
+  })
+);
 
 export function publicNetworkDataToJSON(
   publicNetworkData: PublicNetworkData,

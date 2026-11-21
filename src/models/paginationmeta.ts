@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 
@@ -27,9 +27,11 @@ export const PaginationMetaTotal$inboundSchema: z.ZodType<
   PaginationMetaTotal,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  count: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    count: z.number().int().optional(),
+  })
+);
 /** @internal */
 export type PaginationMetaTotal$Outbound = {
   count?: number | undefined;
@@ -40,9 +42,11 @@ export const PaginationMetaTotal$outboundSchema: z.ZodType<
   PaginationMetaTotal$Outbound,
   z.ZodTypeDef,
   PaginationMetaTotal
-> = z.object({
-  count: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    count: z.number().int().optional(),
+  })
+);
 
 export function paginationMetaTotalToJSON(
   paginationMetaTotal: PaginationMetaTotal,
@@ -66,9 +70,11 @@ export const PaginationMetaStats$inboundSchema: z.ZodType<
   PaginationMetaStats,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  total: z.lazy(() => PaginationMetaTotal$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    total: z.lazy(() => PaginationMetaTotal$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type PaginationMetaStats$Outbound = {
   total?: PaginationMetaTotal$Outbound | undefined;
@@ -79,9 +85,11 @@ export const PaginationMetaStats$outboundSchema: z.ZodType<
   PaginationMetaStats$Outbound,
   z.ZodTypeDef,
   PaginationMetaStats
-> = z.object({
-  total: z.lazy(() => PaginationMetaTotal$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    total: z.lazy(() => PaginationMetaTotal$outboundSchema).optional(),
+  })
+);
 
 export function paginationMetaStatsToJSON(
   paginationMetaStats: PaginationMetaStats,
@@ -105,9 +113,11 @@ export const PaginationMeta$inboundSchema: z.ZodType<
   PaginationMeta,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  stats: z.lazy(() => PaginationMetaStats$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    stats: z.lazy(() => PaginationMetaStats$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type PaginationMeta$Outbound = {
   stats?: PaginationMetaStats$Outbound | undefined;
@@ -118,9 +128,11 @@ export const PaginationMeta$outboundSchema: z.ZodType<
   PaginationMeta$Outbound,
   z.ZodTypeDef,
   PaginationMeta
-> = z.object({
-  stats: z.lazy(() => PaginationMetaStats$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    stats: z.lazy(() => PaginationMetaStats$outboundSchema).optional(),
+  })
+);
 
 export function paginationMetaToJSON(paginationMeta: PaginationMeta): string {
   return JSON.stringify(PaginationMeta$outboundSchema.parse(paginationMeta));

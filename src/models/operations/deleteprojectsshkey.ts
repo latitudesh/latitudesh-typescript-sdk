@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -21,15 +21,17 @@ export const DeleteProjectSshKeyRequest$inboundSchema: z.ZodType<
   DeleteProjectSshKeyRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  project_id: z.string(),
-  ssh_key_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "project_id": "projectId",
-    "ssh_key_id": "sshKeyId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    project_id: z.string(),
+    ssh_key_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "project_id": "projectId",
+      "ssh_key_id": "sshKeyId",
+    });
+  })
+);
 /** @internal */
 export type DeleteProjectSshKeyRequest$Outbound = {
   project_id: string;
@@ -41,15 +43,17 @@ export const DeleteProjectSshKeyRequest$outboundSchema: z.ZodType<
   DeleteProjectSshKeyRequest$Outbound,
   z.ZodTypeDef,
   DeleteProjectSshKeyRequest
-> = z.object({
-  projectId: z.string(),
-  sshKeyId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    projectId: "project_id",
-    sshKeyId: "ssh_key_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    projectId: z.string(),
+    sshKeyId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      projectId: "project_id",
+      sshKeyId: "ssh_key_id",
+    });
+  })
+);
 
 export function deleteProjectSshKeyRequestToJSON(
   deleteProjectSshKeyRequest: DeleteProjectSshKeyRequest,

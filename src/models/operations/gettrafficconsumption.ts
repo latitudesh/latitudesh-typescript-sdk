@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -32,19 +32,21 @@ export const GetTrafficConsumptionRequest$inboundSchema: z.ZodType<
   GetTrafficConsumptionRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "filter[server]": z.string().optional(),
-  "filter[project]": z.string().optional(),
-  "filter[date][gte]": z.string(),
-  "filter[date][lte]": z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "filter[server]": "filterServer",
-    "filter[project]": "filterProject",
-    "filter[date][gte]": "filterDateGte",
-    "filter[date][lte]": "filterDateLte",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "filter[server]": z.string().optional(),
+    "filter[project]": z.string().optional(),
+    "filter[date][gte]": z.string(),
+    "filter[date][lte]": z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "filter[server]": "filterServer",
+      "filter[project]": "filterProject",
+      "filter[date][gte]": "filterDateGte",
+      "filter[date][lte]": "filterDateLte",
+    });
+  })
+);
 /** @internal */
 export type GetTrafficConsumptionRequest$Outbound = {
   "filter[server]"?: string | undefined;
@@ -58,19 +60,21 @@ export const GetTrafficConsumptionRequest$outboundSchema: z.ZodType<
   GetTrafficConsumptionRequest$Outbound,
   z.ZodTypeDef,
   GetTrafficConsumptionRequest
-> = z.object({
-  filterServer: z.string().optional(),
-  filterProject: z.string().optional(),
-  filterDateGte: z.string(),
-  filterDateLte: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    filterServer: "filter[server]",
-    filterProject: "filter[project]",
-    filterDateGte: "filter[date][gte]",
-    filterDateLte: "filter[date][lte]",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    filterServer: z.string().optional(),
+    filterProject: z.string().optional(),
+    filterDateGte: z.string(),
+    filterDateLte: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      filterServer: "filter[server]",
+      filterProject: "filter[project]",
+      filterDateGte: "filter[date][gte]",
+      filterDateLte: "filter[date][lte]",
+    });
+  })
+);
 
 export function getTrafficConsumptionRequestToJSON(
   getTrafficConsumptionRequest: GetTrafficConsumptionRequest,

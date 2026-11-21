@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 
@@ -30,10 +30,12 @@ export const KubernetesAvailableVersionsData$inboundSchema: z.ZodType<
   KubernetesAvailableVersionsData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  latest: z.string().optional(),
-  minor: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    latest: z.string().optional(),
+    minor: z.string().optional(),
+  })
+);
 /** @internal */
 export type KubernetesAvailableVersionsData$Outbound = {
   latest?: string | undefined;
@@ -45,10 +47,12 @@ export const KubernetesAvailableVersionsData$outboundSchema: z.ZodType<
   KubernetesAvailableVersionsData$Outbound,
   z.ZodTypeDef,
   KubernetesAvailableVersionsData
-> = z.object({
-  latest: z.string().optional(),
-  minor: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    latest: z.string().optional(),
+    minor: z.string().optional(),
+  })
+);
 
 export function kubernetesAvailableVersionsDataToJSON(
   kubernetesAvailableVersionsData: KubernetesAvailableVersionsData,
@@ -74,10 +78,12 @@ export const KubernetesAvailableVersions$inboundSchema: z.ZodType<
   KubernetesAvailableVersions,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.array(z.lazy(() => KubernetesAvailableVersionsData$inboundSchema))
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(z.lazy(() => KubernetesAvailableVersionsData$inboundSchema))
+      .optional(),
+  })
+);
 /** @internal */
 export type KubernetesAvailableVersions$Outbound = {
   data?: Array<KubernetesAvailableVersionsData$Outbound> | undefined;
@@ -88,10 +94,12 @@ export const KubernetesAvailableVersions$outboundSchema: z.ZodType<
   KubernetesAvailableVersions$Outbound,
   z.ZodTypeDef,
   KubernetesAvailableVersions
-> = z.object({
-  data: z.array(z.lazy(() => KubernetesAvailableVersionsData$outboundSchema))
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(z.lazy(() => KubernetesAvailableVersionsData$outboundSchema))
+      .optional(),
+  })
+);
 
 export function kubernetesAvailableVersionsToJSON(
   kubernetesAvailableVersions: KubernetesAvailableVersions,

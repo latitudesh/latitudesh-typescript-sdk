@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 import {
@@ -22,9 +22,11 @@ export const PublicNetwork$inboundSchema: z.ZodType<
   PublicNetwork,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: PublicNetworkData$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: PublicNetworkData$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type PublicNetwork$Outbound = {
   data?: PublicNetworkData$Outbound | undefined;
@@ -35,9 +37,11 @@ export const PublicNetwork$outboundSchema: z.ZodType<
   PublicNetwork$Outbound,
   z.ZodTypeDef,
   PublicNetwork
-> = z.object({
-  data: PublicNetworkData$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: PublicNetworkData$outboundSchema.optional(),
+  })
+);
 
 export function publicNetworkToJSON(publicNetwork: PublicNetwork): string {
   return JSON.stringify(PublicNetwork$outboundSchema.parse(publicNetwork));

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as models from "../index.js";
@@ -37,19 +37,21 @@ export const GetAllFirewallAssignmentsRequest$inboundSchema: z.ZodType<
   GetAllFirewallAssignmentsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "filter[server]": z.string().optional(),
-  "filter[virtual_machine]": z.string().optional(),
-  "page[size]": z.number().int().default(20),
-  "page[number]": z.number().int().default(1),
-}).transform((v) => {
-  return remap$(v, {
-    "filter[server]": "filterServer",
-    "filter[virtual_machine]": "filterVirtualMachine",
-    "page[size]": "pageSize",
-    "page[number]": "pageNumber",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "filter[server]": z.string().optional(),
+    "filter[virtual_machine]": z.string().optional(),
+    "page[size]": z.number().int().default(20),
+    "page[number]": z.number().int().default(1),
+  }).transform((v) => {
+    return remap$(v, {
+      "filter[server]": "filterServer",
+      "filter[virtual_machine]": "filterVirtualMachine",
+      "page[size]": "pageSize",
+      "page[number]": "pageNumber",
+    });
+  })
+);
 /** @internal */
 export type GetAllFirewallAssignmentsRequest$Outbound = {
   "filter[server]"?: string | undefined;
@@ -63,19 +65,21 @@ export const GetAllFirewallAssignmentsRequest$outboundSchema: z.ZodType<
   GetAllFirewallAssignmentsRequest$Outbound,
   z.ZodTypeDef,
   GetAllFirewallAssignmentsRequest
-> = z.object({
-  filterServer: z.string().optional(),
-  filterVirtualMachine: z.string().optional(),
-  pageSize: z.number().int().default(20),
-  pageNumber: z.number().int().default(1),
-}).transform((v) => {
-  return remap$(v, {
-    filterServer: "filter[server]",
-    filterVirtualMachine: "filter[virtual_machine]",
-    pageSize: "page[size]",
-    pageNumber: "page[number]",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    filterServer: z.string().optional(),
+    filterVirtualMachine: z.string().optional(),
+    pageSize: z.number().int().default(20),
+    pageNumber: z.number().int().default(1),
+  }).transform((v) => {
+    return remap$(v, {
+      filterServer: "filter[server]",
+      filterVirtualMachine: "filter[virtual_machine]",
+      pageSize: "page[size]",
+      pageNumber: "page[number]",
+    });
+  })
+);
 
 export function getAllFirewallAssignmentsRequestToJSON(
   getAllFirewallAssignmentsRequest: GetAllFirewallAssignmentsRequest,
@@ -101,13 +105,15 @@ export const GetAllFirewallAssignmentsResponse$inboundSchema: z.ZodType<
   GetAllFirewallAssignmentsResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  Result: models.FirewallAssignments$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "Result": "result",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    Result: models.FirewallAssignments$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "Result": "result",
+    });
+  })
+);
 /** @internal */
 export type GetAllFirewallAssignmentsResponse$Outbound = {
   Result: models.FirewallAssignments$Outbound;
@@ -118,13 +124,15 @@ export const GetAllFirewallAssignmentsResponse$outboundSchema: z.ZodType<
   GetAllFirewallAssignmentsResponse$Outbound,
   z.ZodTypeDef,
   GetAllFirewallAssignmentsResponse
-> = z.object({
-  result: models.FirewallAssignments$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    result: "Result",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    result: models.FirewallAssignments$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      result: "Result",
+    });
+  })
+);
 
 export function getAllFirewallAssignmentsResponseToJSON(
   getAllFirewallAssignmentsResponse: GetAllFirewallAssignmentsResponse,

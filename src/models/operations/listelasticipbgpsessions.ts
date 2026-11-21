@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -17,13 +17,15 @@ export const ListElasticIpBgpSessionsRequest$inboundSchema: z.ZodType<
   ListElasticIpBgpSessionsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  elastic_ip_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "elastic_ip_id": "elasticIpId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    elastic_ip_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "elastic_ip_id": "elasticIpId",
+    });
+  })
+);
 /** @internal */
 export type ListElasticIpBgpSessionsRequest$Outbound = {
   elastic_ip_id: string;
@@ -34,13 +36,15 @@ export const ListElasticIpBgpSessionsRequest$outboundSchema: z.ZodType<
   ListElasticIpBgpSessionsRequest$Outbound,
   z.ZodTypeDef,
   ListElasticIpBgpSessionsRequest
-> = z.object({
-  elasticIpId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    elasticIpId: "elastic_ip_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    elasticIpId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      elasticIpId: "elastic_ip_id",
+    });
+  })
+);
 
 export function listElasticIpBgpSessionsRequestToJSON(
   listElasticIpBgpSessionsRequest: ListElasticIpBgpSessionsRequest,

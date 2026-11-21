@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as models from "../index.js";
@@ -22,15 +22,17 @@ export const UpdateManagedDatabaseRequest$inboundSchema: z.ZodType<
   UpdateManagedDatabaseRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  managed_database_update_payload:
-    models.ManagedDatabaseUpdatePayload$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "managed_database_update_payload": "managedDatabaseUpdatePayload",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    managed_database_update_payload:
+      models.ManagedDatabaseUpdatePayload$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "managed_database_update_payload": "managedDatabaseUpdatePayload",
+    });
+  })
+);
 /** @internal */
 export type UpdateManagedDatabaseRequest$Outbound = {
   id: string;
@@ -42,15 +44,17 @@ export const UpdateManagedDatabaseRequest$outboundSchema: z.ZodType<
   UpdateManagedDatabaseRequest$Outbound,
   z.ZodTypeDef,
   UpdateManagedDatabaseRequest
-> = z.object({
-  id: z.string(),
-  managedDatabaseUpdatePayload:
-    models.ManagedDatabaseUpdatePayload$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    managedDatabaseUpdatePayload: "managed_database_update_payload",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    managedDatabaseUpdatePayload:
+      models.ManagedDatabaseUpdatePayload$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      managedDatabaseUpdatePayload: "managed_database_update_payload",
+    });
+  })
+);
 
 export function updateManagedDatabaseRequestToJSON(
   updateManagedDatabaseRequest: UpdateManagedDatabaseRequest,

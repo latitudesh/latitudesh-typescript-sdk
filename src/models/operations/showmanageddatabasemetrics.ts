@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -48,15 +48,17 @@ export const ShowManagedDatabaseMetricsRequest$inboundSchema: z.ZodType<
   ShowManagedDatabaseMetricsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  managed_database_id: z.string(),
-  period: z.number().int().optional(),
-  queries: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "managed_database_id": "managedDatabaseId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    managed_database_id: z.string(),
+    period: z.number().int().optional(),
+    queries: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "managed_database_id": "managedDatabaseId",
+    });
+  })
+);
 /** @internal */
 export type ShowManagedDatabaseMetricsRequest$Outbound = {
   managed_database_id: string;
@@ -69,15 +71,17 @@ export const ShowManagedDatabaseMetricsRequest$outboundSchema: z.ZodType<
   ShowManagedDatabaseMetricsRequest$Outbound,
   z.ZodTypeDef,
   ShowManagedDatabaseMetricsRequest
-> = z.object({
-  managedDatabaseId: z.string(),
-  period: z.number().int().optional(),
-  queries: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    managedDatabaseId: "managed_database_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    managedDatabaseId: z.string(),
+    period: z.number().int().optional(),
+    queries: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      managedDatabaseId: "managed_database_id",
+    });
+  })
+);
 
 export function showManagedDatabaseMetricsRequestToJSON(
   showManagedDatabaseMetricsRequest: ShowManagedDatabaseMetricsRequest,
@@ -99,13 +103,15 @@ export function showManagedDatabaseMetricsRequestFromJSON(
 }
 
 /** @internal */
-export const Point$inboundSchema: z.ZodType<Point, z.ZodTypeDef, unknown> = z
-  .object({
-    timestamp: z.string().datetime({ offset: true }).transform(v =>
-      new Date(v)
-    ),
-    value: z.number(),
-  });
+export const Point$inboundSchema: z.ZodType<Point, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      timestamp: z.string().datetime({ offset: true }).transform(v =>
+        new Date(v)
+      ),
+      value: z.number(),
+    })
+  );
 /** @internal */
 export type Point$Outbound = {
   timestamp: string;
@@ -117,10 +123,12 @@ export const Point$outboundSchema: z.ZodType<
   Point$Outbound,
   z.ZodTypeDef,
   Point
-> = z.object({
-  timestamp: z.date().transform(v => v.toISOString()),
-  value: z.number(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    timestamp: z.date().transform(v => v.toISOString()),
+    value: z.number(),
+  })
+);
 
 export function pointToJSON(point: Point): string {
   return JSON.stringify(Point$outboundSchema.parse(point));
@@ -137,11 +145,13 @@ export function pointFromJSON(
 
 /** @internal */
 export const Metrics$inboundSchema: z.ZodType<Metrics, z.ZodTypeDef, unknown> =
-  z.object({
-    unit: z.string(),
-    current: z.nullable(z.number()),
-    points: z.array(z.lazy(() => Point$inboundSchema)),
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      unit: z.string(),
+      current: z.nullable(z.number()),
+      points: z.array(z.lazy(() => Point$inboundSchema)),
+    })
+  );
 /** @internal */
 export type Metrics$Outbound = {
   unit: string;
@@ -154,11 +164,13 @@ export const Metrics$outboundSchema: z.ZodType<
   Metrics$Outbound,
   z.ZodTypeDef,
   Metrics
-> = z.object({
-  unit: z.string(),
-  current: z.nullable(z.number()),
-  points: z.array(z.lazy(() => Point$outboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    unit: z.string(),
+    current: z.nullable(z.number()),
+    points: z.array(z.lazy(() => Point$outboundSchema)),
+  })
+);
 
 export function metricsToJSON(metrics: Metrics): string {
   return JSON.stringify(Metrics$outboundSchema.parse(metrics));
@@ -178,11 +190,13 @@ export const ShowManagedDatabaseMetricsResponse$inboundSchema: z.ZodType<
   ShowManagedDatabaseMetricsResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  from: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  to: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  metrics: z.record(z.lazy(() => Metrics$inboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    from: z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    to: z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    metrics: z.record(z.lazy(() => Metrics$inboundSchema)),
+  })
+);
 /** @internal */
 export type ShowManagedDatabaseMetricsResponse$Outbound = {
   from: string;
@@ -195,11 +209,13 @@ export const ShowManagedDatabaseMetricsResponse$outboundSchema: z.ZodType<
   ShowManagedDatabaseMetricsResponse$Outbound,
   z.ZodTypeDef,
   ShowManagedDatabaseMetricsResponse
-> = z.object({
-  from: z.date().transform(v => v.toISOString()),
-  to: z.date().transform(v => v.toISOString()),
-  metrics: z.record(z.lazy(() => Metrics$outboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    from: z.date().transform(v => v.toISOString()),
+    to: z.date().transform(v => v.toISOString()),
+    metrics: z.record(z.lazy(() => Metrics$outboundSchema)),
+  })
+);
 
 export function showManagedDatabaseMetricsResponseToJSON(
   showManagedDatabaseMetricsResponse: ShowManagedDatabaseMetricsResponse,

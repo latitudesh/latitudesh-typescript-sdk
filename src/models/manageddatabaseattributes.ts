@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -124,7 +124,9 @@ export type ManagedDatabaseAttributes = {
 /** @internal */
 export const ManagedDatabaseAttributesType$inboundSchema: z.ZodNativeEnum<
   typeof ManagedDatabaseAttributesType
-> = z.nativeEnum(ManagedDatabaseAttributesType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(ManagedDatabaseAttributesType)
+);
 /** @internal */
 export const ManagedDatabaseAttributesType$outboundSchema: z.ZodNativeEnum<
   typeof ManagedDatabaseAttributesType
@@ -135,14 +137,16 @@ export const ManagedDatabaseAttributesSpecs$inboundSchema: z.ZodType<
   ManagedDatabaseAttributesSpecs,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  cpu: z.nullable(z.number().int()).optional(),
-  memory: z.nullable(z.number().int()).optional(),
-  storage: z.nullable(z.number().int()).optional(),
-  shards: z.nullable(z.number().int()).optional(),
-  replicas: z.nullable(z.number().int()).optional(),
-  iops: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    cpu: z.nullable(z.number().int()).optional(),
+    memory: z.nullable(z.number().int()).optional(),
+    storage: z.nullable(z.number().int()).optional(),
+    shards: z.nullable(z.number().int()).optional(),
+    replicas: z.nullable(z.number().int()).optional(),
+    iops: z.nullable(z.string()).optional(),
+  })
+);
 /** @internal */
 export type ManagedDatabaseAttributesSpecs$Outbound = {
   cpu?: number | null | undefined;
@@ -158,14 +162,16 @@ export const ManagedDatabaseAttributesSpecs$outboundSchema: z.ZodType<
   ManagedDatabaseAttributesSpecs$Outbound,
   z.ZodTypeDef,
   ManagedDatabaseAttributesSpecs
-> = z.object({
-  cpu: z.nullable(z.number().int()).optional(),
-  memory: z.nullable(z.number().int()).optional(),
-  storage: z.nullable(z.number().int()).optional(),
-  shards: z.nullable(z.number().int()).optional(),
-  replicas: z.nullable(z.number().int()).optional(),
-  iops: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    cpu: z.nullable(z.number().int()).optional(),
+    memory: z.nullable(z.number().int()).optional(),
+    storage: z.nullable(z.number().int()).optional(),
+    shards: z.nullable(z.number().int()).optional(),
+    replicas: z.nullable(z.number().int()).optional(),
+    iops: z.nullable(z.string()).optional(),
+  })
+);
 
 export function managedDatabaseAttributesSpecsToJSON(
   managedDatabaseAttributesSpecs: ManagedDatabaseAttributesSpecs,
@@ -191,12 +197,14 @@ export const ManagedDatabaseAttributesSite$inboundSchema: z.ZodType<
   ManagedDatabaseAttributesSite,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  slug: z.string().optional(),
-  facility: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    name: z.string().optional(),
+    slug: z.string().optional(),
+    facility: z.string().optional(),
+  })
+);
 /** @internal */
 export type ManagedDatabaseAttributesSite$Outbound = {
   id?: string | undefined;
@@ -210,12 +218,14 @@ export const ManagedDatabaseAttributesSite$outboundSchema: z.ZodType<
   ManagedDatabaseAttributesSite$Outbound,
   z.ZodTypeDef,
   ManagedDatabaseAttributesSite
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  slug: z.string().optional(),
-  facility: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    name: z.string().optional(),
+    slug: z.string().optional(),
+    facility: z.string().optional(),
+  })
+);
 
 export function managedDatabaseAttributesSiteToJSON(
   managedDatabaseAttributesSite: ManagedDatabaseAttributesSite,
@@ -241,12 +251,14 @@ export const ManagedDatabaseAttributesRegion$inboundSchema: z.ZodType<
   ManagedDatabaseAttributesRegion,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  city: z.nullable(z.string()).optional(),
-  country: z.nullable(z.string()).optional(),
-  site: z.nullable(z.lazy(() => ManagedDatabaseAttributesSite$inboundSchema))
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    city: z.nullable(z.string()).optional(),
+    country: z.nullable(z.string()).optional(),
+    site: z.nullable(z.lazy(() => ManagedDatabaseAttributesSite$inboundSchema))
+      .optional(),
+  })
+);
 /** @internal */
 export type ManagedDatabaseAttributesRegion$Outbound = {
   city?: string | null | undefined;
@@ -259,12 +271,14 @@ export const ManagedDatabaseAttributesRegion$outboundSchema: z.ZodType<
   ManagedDatabaseAttributesRegion$Outbound,
   z.ZodTypeDef,
   ManagedDatabaseAttributesRegion
-> = z.object({
-  city: z.nullable(z.string()).optional(),
-  country: z.nullable(z.string()).optional(),
-  site: z.nullable(z.lazy(() => ManagedDatabaseAttributesSite$outboundSchema))
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    city: z.nullable(z.string()).optional(),
+    country: z.nullable(z.string()).optional(),
+    site: z.nullable(z.lazy(() => ManagedDatabaseAttributesSite$outboundSchema))
+      .optional(),
+  })
+);
 
 export function managedDatabaseAttributesRegionToJSON(
   managedDatabaseAttributesRegion: ManagedDatabaseAttributesRegion,
@@ -290,12 +304,14 @@ export const ManagedDatabaseAttributesPlan$inboundSchema: z.ZodType<
   ManagedDatabaseAttributesPlan,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  name: z.nullable(z.string()).optional(),
-  slug: z.nullable(z.string()).optional(),
-  billing: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    name: z.nullable(z.string()).optional(),
+    slug: z.nullable(z.string()).optional(),
+    billing: z.string().optional(),
+  })
+);
 /** @internal */
 export type ManagedDatabaseAttributesPlan$Outbound = {
   id?: string | undefined;
@@ -309,12 +325,14 @@ export const ManagedDatabaseAttributesPlan$outboundSchema: z.ZodType<
   ManagedDatabaseAttributesPlan$Outbound,
   z.ZodTypeDef,
   ManagedDatabaseAttributesPlan
-> = z.object({
-  id: z.string().optional(),
-  name: z.nullable(z.string()).optional(),
-  slug: z.nullable(z.string()).optional(),
-  billing: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    name: z.nullable(z.string()).optional(),
+    slug: z.nullable(z.string()).optional(),
+    billing: z.string().optional(),
+  })
+);
 
 export function managedDatabaseAttributesPlanToJSON(
   managedDatabaseAttributesPlan: ManagedDatabaseAttributesPlan,
@@ -340,21 +358,23 @@ export const ManagedDatabaseAttributesCredentials$inboundSchema: z.ZodType<
   ManagedDatabaseAttributesCredentials,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  host: z.string().optional(),
-  http_port: z.nullable(z.number().int()).optional(),
-  tcp_port: z.nullable(z.number().int()).optional(),
-  port: z.nullable(z.number().int()).optional(),
-  database: z.nullable(z.string()).optional(),
-  url: z.nullable(z.string()).optional(),
-  username: z.string().optional(),
-  password: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "http_port": "httpPort",
-    "tcp_port": "tcpPort",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    host: z.string().optional(),
+    http_port: z.nullable(z.number().int()).optional(),
+    tcp_port: z.nullable(z.number().int()).optional(),
+    port: z.nullable(z.number().int()).optional(),
+    database: z.nullable(z.string()).optional(),
+    url: z.nullable(z.string()).optional(),
+    username: z.string().optional(),
+    password: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "http_port": "httpPort",
+      "tcp_port": "tcpPort",
+    });
+  })
+);
 /** @internal */
 export type ManagedDatabaseAttributesCredentials$Outbound = {
   host?: string | undefined;
@@ -372,21 +392,23 @@ export const ManagedDatabaseAttributesCredentials$outboundSchema: z.ZodType<
   ManagedDatabaseAttributesCredentials$Outbound,
   z.ZodTypeDef,
   ManagedDatabaseAttributesCredentials
-> = z.object({
-  host: z.string().optional(),
-  httpPort: z.nullable(z.number().int()).optional(),
-  tcpPort: z.nullable(z.number().int()).optional(),
-  port: z.nullable(z.number().int()).optional(),
-  database: z.nullable(z.string()).optional(),
-  url: z.nullable(z.string()).optional(),
-  username: z.string().optional(),
-  password: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    httpPort: "http_port",
-    tcpPort: "tcp_port",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    host: z.string().optional(),
+    httpPort: z.nullable(z.number().int()).optional(),
+    tcpPort: z.nullable(z.number().int()).optional(),
+    port: z.nullable(z.number().int()).optional(),
+    database: z.nullable(z.string()).optional(),
+    url: z.nullable(z.string()).optional(),
+    username: z.string().optional(),
+    password: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      httpPort: "http_port",
+      tcpPort: "tcp_port",
+    });
+  })
+);
 
 export function managedDatabaseAttributesCredentialsToJSON(
   managedDatabaseAttributesCredentials: ManagedDatabaseAttributesCredentials,
@@ -413,9 +435,11 @@ export const ManagedDatabaseAttributesRecovery$inboundSchema: z.ZodType<
   ManagedDatabaseAttributesRecovery,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  enabled: z.nullable(z.boolean()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    enabled: z.nullable(z.boolean()).optional(),
+  })
+);
 /** @internal */
 export type ManagedDatabaseAttributesRecovery$Outbound = {
   enabled?: boolean | null | undefined;
@@ -426,9 +450,11 @@ export const ManagedDatabaseAttributesRecovery$outboundSchema: z.ZodType<
   ManagedDatabaseAttributesRecovery$Outbound,
   z.ZodTypeDef,
   ManagedDatabaseAttributesRecovery
-> = z.object({
-  enabled: z.nullable(z.boolean()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    enabled: z.nullable(z.boolean()).optional(),
+  })
+);
 
 export function managedDatabaseAttributesRecoveryToJSON(
   managedDatabaseAttributesRecovery: ManagedDatabaseAttributesRecovery,
@@ -454,9 +480,11 @@ export const Supabase$inboundSchema: z.ZodType<
   Supabase,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  enabled: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    enabled: z.boolean().optional(),
+  })
+);
 /** @internal */
 export type Supabase$Outbound = {
   enabled?: boolean | undefined;
@@ -467,9 +495,11 @@ export const Supabase$outboundSchema: z.ZodType<
   Supabase$Outbound,
   z.ZodTypeDef,
   Supabase
-> = z.object({
-  enabled: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    enabled: z.boolean().optional(),
+  })
+);
 
 export function supabaseToJSON(supabase: Supabase): string {
   return JSON.stringify(Supabase$outboundSchema.parse(supabase));
@@ -489,37 +519,40 @@ export const ManagedDatabaseAttributesAttributes$inboundSchema: z.ZodType<
   ManagedDatabaseAttributesAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string().optional(),
-  engine: z.string().optional(),
-  status: z.string().optional(),
-  namespace: z.nullable(z.string()).optional(),
-  created_at: z.nullable(z.string()).optional(),
-  specs: z.nullable(z.lazy(() => ManagedDatabaseAttributesSpecs$inboundSchema))
-    .optional(),
-  region: z.lazy(() => ManagedDatabaseAttributesRegion$inboundSchema)
-    .optional(),
-  plan: z.lazy(() => ManagedDatabaseAttributesPlan$inboundSchema).optional(),
-  team: TeamInclude$inboundSchema.optional(),
-  project: ProjectInclude$inboundSchema.optional(),
-  trusted_sources: z.array(z.string()).optional(),
-  play_url: z.nullable(z.string()).optional(),
-  credentials: z.nullable(
-    z.lazy(() => ManagedDatabaseAttributesCredentials$inboundSchema),
-  ).optional(),
-  parameters: z.record(z.string()).optional(),
-  pooler: z.record(z.any()).optional(),
-  backup: z.record(z.any()).optional(),
-  recovery: z.lazy(() => ManagedDatabaseAttributesRecovery$inboundSchema)
-    .optional(),
-  supabase: z.lazy(() => Supabase$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "created_at": "createdAt",
-    "trusted_sources": "trustedSources",
-    "play_url": "playUrl",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    engine: z.string().optional(),
+    status: z.string().optional(),
+    namespace: z.nullable(z.string()).optional(),
+    created_at: z.nullable(z.string()).optional(),
+    specs: z.nullable(
+      z.lazy(() => ManagedDatabaseAttributesSpecs$inboundSchema),
+    ).optional(),
+    region: z.lazy(() => ManagedDatabaseAttributesRegion$inboundSchema)
+      .optional(),
+    plan: z.lazy(() => ManagedDatabaseAttributesPlan$inboundSchema).optional(),
+    team: TeamInclude$inboundSchema.optional(),
+    project: ProjectInclude$inboundSchema.optional(),
+    trusted_sources: z.array(z.string()).optional(),
+    play_url: z.nullable(z.string()).optional(),
+    credentials: z.nullable(
+      z.lazy(() => ManagedDatabaseAttributesCredentials$inboundSchema),
+    ).optional(),
+    parameters: z.record(z.string()).optional(),
+    pooler: z.record(z.any()).optional(),
+    backup: z.record(z.any()).optional(),
+    recovery: z.lazy(() => ManagedDatabaseAttributesRecovery$inboundSchema)
+      .optional(),
+    supabase: z.lazy(() => Supabase$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "created_at": "createdAt",
+      "trusted_sources": "trustedSources",
+      "play_url": "playUrl",
+    });
+  })
+);
 /** @internal */
 export type ManagedDatabaseAttributesAttributes$Outbound = {
   name?: string | undefined;
@@ -550,37 +583,40 @@ export const ManagedDatabaseAttributesAttributes$outboundSchema: z.ZodType<
   ManagedDatabaseAttributesAttributes$Outbound,
   z.ZodTypeDef,
   ManagedDatabaseAttributesAttributes
-> = z.object({
-  name: z.string().optional(),
-  engine: z.string().optional(),
-  status: z.string().optional(),
-  namespace: z.nullable(z.string()).optional(),
-  createdAt: z.nullable(z.string()).optional(),
-  specs: z.nullable(z.lazy(() => ManagedDatabaseAttributesSpecs$outboundSchema))
-    .optional(),
-  region: z.lazy(() => ManagedDatabaseAttributesRegion$outboundSchema)
-    .optional(),
-  plan: z.lazy(() => ManagedDatabaseAttributesPlan$outboundSchema).optional(),
-  team: TeamInclude$outboundSchema.optional(),
-  project: ProjectInclude$outboundSchema.optional(),
-  trustedSources: z.array(z.string()).optional(),
-  playUrl: z.nullable(z.string()).optional(),
-  credentials: z.nullable(
-    z.lazy(() => ManagedDatabaseAttributesCredentials$outboundSchema),
-  ).optional(),
-  parameters: z.record(z.string()).optional(),
-  pooler: z.record(z.any()).optional(),
-  backup: z.record(z.any()).optional(),
-  recovery: z.lazy(() => ManagedDatabaseAttributesRecovery$outboundSchema)
-    .optional(),
-  supabase: z.lazy(() => Supabase$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    createdAt: "created_at",
-    trustedSources: "trusted_sources",
-    playUrl: "play_url",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    engine: z.string().optional(),
+    status: z.string().optional(),
+    namespace: z.nullable(z.string()).optional(),
+    createdAt: z.nullable(z.string()).optional(),
+    specs: z.nullable(
+      z.lazy(() => ManagedDatabaseAttributesSpecs$outboundSchema),
+    ).optional(),
+    region: z.lazy(() => ManagedDatabaseAttributesRegion$outboundSchema)
+      .optional(),
+    plan: z.lazy(() => ManagedDatabaseAttributesPlan$outboundSchema).optional(),
+    team: TeamInclude$outboundSchema.optional(),
+    project: ProjectInclude$outboundSchema.optional(),
+    trustedSources: z.array(z.string()).optional(),
+    playUrl: z.nullable(z.string()).optional(),
+    credentials: z.nullable(
+      z.lazy(() => ManagedDatabaseAttributesCredentials$outboundSchema),
+    ).optional(),
+    parameters: z.record(z.string()).optional(),
+    pooler: z.record(z.any()).optional(),
+    backup: z.record(z.any()).optional(),
+    recovery: z.lazy(() => ManagedDatabaseAttributesRecovery$outboundSchema)
+      .optional(),
+    supabase: z.lazy(() => Supabase$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      createdAt: "created_at",
+      trustedSources: "trusted_sources",
+      playUrl: "play_url",
+    });
+  })
+);
 
 export function managedDatabaseAttributesAttributesToJSON(
   managedDatabaseAttributesAttributes: ManagedDatabaseAttributesAttributes,
@@ -607,12 +643,14 @@ export const ManagedDatabaseAttributes$inboundSchema: z.ZodType<
   ManagedDatabaseAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  type: ManagedDatabaseAttributesType$inboundSchema.optional(),
-  attributes: z.lazy(() => ManagedDatabaseAttributesAttributes$inboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: ManagedDatabaseAttributesType$inboundSchema.optional(),
+    attributes: z.lazy(() => ManagedDatabaseAttributesAttributes$inboundSchema)
+      .optional(),
+  })
+);
 /** @internal */
 export type ManagedDatabaseAttributes$Outbound = {
   id?: string | undefined;
@@ -625,12 +663,14 @@ export const ManagedDatabaseAttributes$outboundSchema: z.ZodType<
   ManagedDatabaseAttributes$Outbound,
   z.ZodTypeDef,
   ManagedDatabaseAttributes
-> = z.object({
-  id: z.string().optional(),
-  type: ManagedDatabaseAttributesType$outboundSchema.optional(),
-  attributes: z.lazy(() => ManagedDatabaseAttributesAttributes$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: ManagedDatabaseAttributesType$outboundSchema.optional(),
+    attributes: z.lazy(() => ManagedDatabaseAttributesAttributes$outboundSchema)
+      .optional(),
+  })
+);
 
 export function managedDatabaseAttributesToJSON(
   managedDatabaseAttributes: ManagedDatabaseAttributes,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -48,7 +48,7 @@ export type CustomTagData = {
 /** @internal */
 export const CustomTagDataType$inboundSchema: z.ZodNativeEnum<
   typeof CustomTagDataType
-> = z.nativeEnum(CustomTagDataType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CustomTagDataType));
 /** @internal */
 export const CustomTagDataType$outboundSchema: z.ZodNativeEnum<
   typeof CustomTagDataType
@@ -59,13 +59,15 @@ export const CustomTagDataAttributes$inboundSchema: z.ZodType<
   CustomTagDataAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string().optional(),
-  slug: z.string().optional(),
-  description: z.nullable(z.string()).optional(),
-  color: z.string().optional(),
-  team: TeamInclude$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    slug: z.string().optional(),
+    description: z.nullable(z.string()).optional(),
+    color: z.string().optional(),
+    team: TeamInclude$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type CustomTagDataAttributes$Outbound = {
   name?: string | undefined;
@@ -80,13 +82,15 @@ export const CustomTagDataAttributes$outboundSchema: z.ZodType<
   CustomTagDataAttributes$Outbound,
   z.ZodTypeDef,
   CustomTagDataAttributes
-> = z.object({
-  name: z.string().optional(),
-  slug: z.string().optional(),
-  description: z.nullable(z.string()).optional(),
-  color: z.string().optional(),
-  team: TeamInclude$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    slug: z.string().optional(),
+    description: z.nullable(z.string()).optional(),
+    color: z.string().optional(),
+    team: TeamInclude$outboundSchema.optional(),
+  })
+);
 
 export function customTagDataAttributesToJSON(
   customTagDataAttributes: CustomTagDataAttributes,
@@ -110,11 +114,13 @@ export const CustomTagData$inboundSchema: z.ZodType<
   CustomTagData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  type: CustomTagDataType$inboundSchema.optional(),
-  attributes: z.lazy(() => CustomTagDataAttributes$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: CustomTagDataType$inboundSchema.optional(),
+    attributes: z.lazy(() => CustomTagDataAttributes$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type CustomTagData$Outbound = {
   id?: string | undefined;
@@ -127,11 +133,13 @@ export const CustomTagData$outboundSchema: z.ZodType<
   CustomTagData$Outbound,
   z.ZodTypeDef,
   CustomTagData
-> = z.object({
-  id: z.string().optional(),
-  type: CustomTagDataType$outboundSchema.optional(),
-  attributes: z.lazy(() => CustomTagDataAttributes$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: CustomTagDataType$outboundSchema.optional(),
+    attributes: z.lazy(() => CustomTagDataAttributes$outboundSchema).optional(),
+  })
+);
 
 export function customTagDataToJSON(customTagData: CustomTagData): string {
   return JSON.stringify(CustomTagData$outboundSchema.parse(customTagData));

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -61,7 +61,7 @@ export type FirewallAssignmentData = {
 /** @internal */
 export const FirewallAssignmentDataType$inboundSchema: z.ZodNativeEnum<
   typeof FirewallAssignmentDataType
-> = z.nativeEnum(FirewallAssignmentDataType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(FirewallAssignmentDataType));
 /** @internal */
 export const FirewallAssignmentDataType$outboundSchema: z.ZodNativeEnum<
   typeof FirewallAssignmentDataType
@@ -72,15 +72,17 @@ export const FirewallAssignmentDataServer$inboundSchema: z.ZodType<
   FirewallAssignmentDataServer,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  primary_ipv4: z.nullable(z.string()).optional(),
-  hostname: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "primary_ipv4": "primaryIpv4",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    primary_ipv4: z.nullable(z.string()).optional(),
+    hostname: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "primary_ipv4": "primaryIpv4",
+    });
+  })
+);
 /** @internal */
 export type FirewallAssignmentDataServer$Outbound = {
   id?: string | undefined;
@@ -93,15 +95,17 @@ export const FirewallAssignmentDataServer$outboundSchema: z.ZodType<
   FirewallAssignmentDataServer$Outbound,
   z.ZodTypeDef,
   FirewallAssignmentDataServer
-> = z.object({
-  id: z.string().optional(),
-  primaryIpv4: z.nullable(z.string()).optional(),
-  hostname: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    primaryIpv4: "primary_ipv4",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    primaryIpv4: z.nullable(z.string()).optional(),
+    hostname: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      primaryIpv4: "primary_ipv4",
+    });
+  })
+);
 
 export function firewallAssignmentDataServerToJSON(
   firewallAssignmentDataServer: FirewallAssignmentDataServer,
@@ -127,15 +131,17 @@ export const FirewallAssignmentDataVirtualMachine$inboundSchema: z.ZodType<
   FirewallAssignmentDataVirtualMachine,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  primary_ipv4: z.nullable(z.string()).optional(),
-  hostname: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "primary_ipv4": "primaryIpv4",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    primary_ipv4: z.nullable(z.string()).optional(),
+    hostname: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "primary_ipv4": "primaryIpv4",
+    });
+  })
+);
 /** @internal */
 export type FirewallAssignmentDataVirtualMachine$Outbound = {
   id?: string | undefined;
@@ -148,15 +154,17 @@ export const FirewallAssignmentDataVirtualMachine$outboundSchema: z.ZodType<
   FirewallAssignmentDataVirtualMachine$Outbound,
   z.ZodTypeDef,
   FirewallAssignmentDataVirtualMachine
-> = z.object({
-  id: z.string().optional(),
-  primaryIpv4: z.nullable(z.string()).optional(),
-  hostname: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    primaryIpv4: "primary_ipv4",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    primaryIpv4: z.nullable(z.string()).optional(),
+    hostname: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      primaryIpv4: "primary_ipv4",
+    });
+  })
+);
 
 export function firewallAssignmentDataVirtualMachineToJSON(
   firewallAssignmentDataVirtualMachine: FirewallAssignmentDataVirtualMachine,
@@ -183,10 +191,12 @@ export const FirewallAssignmentDataFirewall$inboundSchema: z.ZodType<
   FirewallAssignmentDataFirewall,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    name: z.string().optional(),
+  })
+);
 /** @internal */
 export type FirewallAssignmentDataFirewall$Outbound = {
   id?: string | undefined;
@@ -198,10 +208,12 @@ export const FirewallAssignmentDataFirewall$outboundSchema: z.ZodType<
   FirewallAssignmentDataFirewall$Outbound,
   z.ZodTypeDef,
   FirewallAssignmentDataFirewall
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    name: z.string().optional(),
+  })
+);
 
 export function firewallAssignmentDataFirewallToJSON(
   firewallAssignmentDataFirewall: FirewallAssignmentDataFirewall,
@@ -227,20 +239,22 @@ export const FirewallAssignmentDataAttributes$inboundSchema: z.ZodType<
   FirewallAssignmentDataAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  server: z.lazy(() => FirewallAssignmentDataServer$inboundSchema).optional(),
-  virtual_machine: z.lazy(() =>
-    FirewallAssignmentDataVirtualMachine$inboundSchema
-  ).optional(),
-  firewall: z.lazy(() => FirewallAssignmentDataFirewall$inboundSchema)
-    .optional(),
-  firewall_id: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "virtual_machine": "virtualMachine",
-    "firewall_id": "firewallId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    server: z.lazy(() => FirewallAssignmentDataServer$inboundSchema).optional(),
+    virtual_machine: z.lazy(() =>
+      FirewallAssignmentDataVirtualMachine$inboundSchema
+    ).optional(),
+    firewall: z.lazy(() => FirewallAssignmentDataFirewall$inboundSchema)
+      .optional(),
+    firewall_id: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "virtual_machine": "virtualMachine",
+      "firewall_id": "firewallId",
+    });
+  })
+);
 /** @internal */
 export type FirewallAssignmentDataAttributes$Outbound = {
   server?: FirewallAssignmentDataServer$Outbound | undefined;
@@ -254,20 +268,23 @@ export const FirewallAssignmentDataAttributes$outboundSchema: z.ZodType<
   FirewallAssignmentDataAttributes$Outbound,
   z.ZodTypeDef,
   FirewallAssignmentDataAttributes
-> = z.object({
-  server: z.lazy(() => FirewallAssignmentDataServer$outboundSchema).optional(),
-  virtualMachine: z.lazy(() =>
-    FirewallAssignmentDataVirtualMachine$outboundSchema
-  ).optional(),
-  firewall: z.lazy(() => FirewallAssignmentDataFirewall$outboundSchema)
-    .optional(),
-  firewallId: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    virtualMachine: "virtual_machine",
-    firewallId: "firewall_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    server: z.lazy(() => FirewallAssignmentDataServer$outboundSchema)
+      .optional(),
+    virtualMachine: z.lazy(() =>
+      FirewallAssignmentDataVirtualMachine$outboundSchema
+    ).optional(),
+    firewall: z.lazy(() => FirewallAssignmentDataFirewall$outboundSchema)
+      .optional(),
+    firewallId: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      virtualMachine: "virtual_machine",
+      firewallId: "firewall_id",
+    });
+  })
+);
 
 export function firewallAssignmentDataAttributesToJSON(
   firewallAssignmentDataAttributes: FirewallAssignmentDataAttributes,
@@ -293,12 +310,14 @@ export const FirewallAssignmentData$inboundSchema: z.ZodType<
   FirewallAssignmentData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  type: FirewallAssignmentDataType$inboundSchema.optional(),
-  attributes: z.lazy(() => FirewallAssignmentDataAttributes$inboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: FirewallAssignmentDataType$inboundSchema.optional(),
+    attributes: z.lazy(() => FirewallAssignmentDataAttributes$inboundSchema)
+      .optional(),
+  })
+);
 /** @internal */
 export type FirewallAssignmentData$Outbound = {
   id?: string | undefined;
@@ -311,12 +330,14 @@ export const FirewallAssignmentData$outboundSchema: z.ZodType<
   FirewallAssignmentData$Outbound,
   z.ZodTypeDef,
   FirewallAssignmentData
-> = z.object({
-  id: z.string().optional(),
-  type: FirewallAssignmentDataType$outboundSchema.optional(),
-  attributes: z.lazy(() => FirewallAssignmentDataAttributes$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: FirewallAssignmentDataType$outboundSchema.optional(),
+    attributes: z.lazy(() => FirewallAssignmentDataAttributes$outboundSchema)
+      .optional(),
+  })
+);
 
 export function firewallAssignmentDataToJSON(
   firewallAssignmentData: FirewallAssignmentData,

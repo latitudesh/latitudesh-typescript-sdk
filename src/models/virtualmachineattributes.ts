@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -204,7 +204,9 @@ export type VirtualMachineAttributes = {
 /** @internal */
 export const VirtualMachineAttributesType$inboundSchema: z.ZodNativeEnum<
   typeof VirtualMachineAttributesType
-> = z.nativeEnum(VirtualMachineAttributesType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(VirtualMachineAttributesType)
+);
 /** @internal */
 export const VirtualMachineAttributesType$outboundSchema: z.ZodNativeEnum<
   typeof VirtualMachineAttributesType
@@ -215,19 +217,21 @@ export const VirtualMachineAttributesFeatures$inboundSchema: z.ZodType<
   VirtualMachineAttributesFeatures,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  raid: z.boolean().optional(),
-  ssh_keys: z.boolean().optional(),
-  user_data: z.boolean().optional(),
-  rescue: z.boolean().optional(),
-  arm64: z.boolean().optional(),
-  workflow: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "ssh_keys": "sshKeys",
-    "user_data": "userData",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    raid: z.boolean().optional(),
+    ssh_keys: z.boolean().optional(),
+    user_data: z.boolean().optional(),
+    rescue: z.boolean().optional(),
+    arm64: z.boolean().optional(),
+    workflow: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ssh_keys": "sshKeys",
+      "user_data": "userData",
+    });
+  })
+);
 /** @internal */
 export type VirtualMachineAttributesFeatures$Outbound = {
   raid?: boolean | undefined;
@@ -243,19 +247,21 @@ export const VirtualMachineAttributesFeatures$outboundSchema: z.ZodType<
   VirtualMachineAttributesFeatures$Outbound,
   z.ZodTypeDef,
   VirtualMachineAttributesFeatures
-> = z.object({
-  raid: z.boolean().optional(),
-  sshKeys: z.boolean().optional(),
-  userData: z.boolean().optional(),
-  rescue: z.boolean().optional(),
-  arm64: z.boolean().optional(),
-  workflow: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    sshKeys: "ssh_keys",
-    userData: "user_data",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    raid: z.boolean().optional(),
+    sshKeys: z.boolean().optional(),
+    userData: z.boolean().optional(),
+    rescue: z.boolean().optional(),
+    arm64: z.boolean().optional(),
+    workflow: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      sshKeys: "ssh_keys",
+      userData: "user_data",
+    });
+  })
+);
 
 export function virtualMachineAttributesFeaturesToJSON(
   virtualMachineAttributesFeatures: VirtualMachineAttributesFeatures,
@@ -281,11 +287,13 @@ export const VirtualMachineAttributesDistro$inboundSchema: z.ZodType<
   VirtualMachineAttributesDistro,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string().optional(),
-  slug: z.string().optional(),
-  series: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    slug: z.string().optional(),
+    series: z.string().optional(),
+  })
+);
 /** @internal */
 export type VirtualMachineAttributesDistro$Outbound = {
   name?: string | undefined;
@@ -298,11 +306,13 @@ export const VirtualMachineAttributesDistro$outboundSchema: z.ZodType<
   VirtualMachineAttributesDistro$Outbound,
   z.ZodTypeDef,
   VirtualMachineAttributesDistro
-> = z.object({
-  name: z.string().optional(),
-  slug: z.string().optional(),
-  series: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    slug: z.string().optional(),
+    series: z.string().optional(),
+  })
+);
 
 export function virtualMachineAttributesDistroToJSON(
   virtualMachineAttributesDistro: VirtualMachineAttributesDistro,
@@ -328,14 +338,17 @@ export const VirtualMachineAttributesOperatingSystem$inboundSchema: z.ZodType<
   VirtualMachineAttributesOperatingSystem,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string().optional(),
-  slug: z.string().optional(),
-  version: z.string().optional(),
-  features: z.lazy(() => VirtualMachineAttributesFeatures$inboundSchema)
-    .optional(),
-  distro: z.lazy(() => VirtualMachineAttributesDistro$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    slug: z.string().optional(),
+    version: z.string().optional(),
+    features: z.lazy(() => VirtualMachineAttributesFeatures$inboundSchema)
+      .optional(),
+    distro: z.lazy(() => VirtualMachineAttributesDistro$inboundSchema)
+      .optional(),
+  })
+);
 /** @internal */
 export type VirtualMachineAttributesOperatingSystem$Outbound = {
   name?: string | undefined;
@@ -350,15 +363,17 @@ export const VirtualMachineAttributesOperatingSystem$outboundSchema: z.ZodType<
   VirtualMachineAttributesOperatingSystem$Outbound,
   z.ZodTypeDef,
   VirtualMachineAttributesOperatingSystem
-> = z.object({
-  name: z.string().optional(),
-  slug: z.string().optional(),
-  version: z.string().optional(),
-  features: z.lazy(() => VirtualMachineAttributesFeatures$outboundSchema)
-    .optional(),
-  distro: z.lazy(() => VirtualMachineAttributesDistro$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    slug: z.string().optional(),
+    version: z.string().optional(),
+    features: z.lazy(() => VirtualMachineAttributesFeatures$outboundSchema)
+      .optional(),
+    distro: z.lazy(() => VirtualMachineAttributesDistro$outboundSchema)
+      .optional(),
+  })
+);
 
 export function virtualMachineAttributesOperatingSystemToJSON(
   virtualMachineAttributesOperatingSystem:
@@ -391,20 +406,22 @@ export const VirtualMachineAttributesSshKey$inboundSchema: z.ZodType<
   VirtualMachineAttributesSshKey,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  fingerprint: z.string().optional(),
-  public_key: z.string().optional(),
-  created_at: z.string().optional(),
-  updated_at: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "public_key": "publicKey",
-    "created_at": "createdAt",
-    "updated_at": "updatedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    name: z.string().optional(),
+    fingerprint: z.string().optional(),
+    public_key: z.string().optional(),
+    created_at: z.string().optional(),
+    updated_at: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "public_key": "publicKey",
+      "created_at": "createdAt",
+      "updated_at": "updatedAt",
+    });
+  })
+);
 /** @internal */
 export type VirtualMachineAttributesSshKey$Outbound = {
   id?: string | undefined;
@@ -420,20 +437,22 @@ export const VirtualMachineAttributesSshKey$outboundSchema: z.ZodType<
   VirtualMachineAttributesSshKey$Outbound,
   z.ZodTypeDef,
   VirtualMachineAttributesSshKey
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  fingerprint: z.string().optional(),
-  publicKey: z.string().optional(),
-  createdAt: z.string().optional(),
-  updatedAt: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    publicKey: "public_key",
-    createdAt: "created_at",
-    updatedAt: "updated_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    name: z.string().optional(),
+    fingerprint: z.string().optional(),
+    publicKey: z.string().optional(),
+    createdAt: z.string().optional(),
+    updatedAt: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      publicKey: "public_key",
+      createdAt: "created_at",
+      updatedAt: "updated_at",
+    });
+  })
+);
 
 export function virtualMachineAttributesSshKeyToJSON(
   virtualMachineAttributesSshKey: VirtualMachineAttributesSshKey,
@@ -459,18 +478,20 @@ export const VirtualMachineAttributesCredentials$inboundSchema: z.ZodType<
   VirtualMachineAttributesCredentials,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  username: z.nullable(z.string()).optional(),
-  host: z.nullable(z.string()).optional(),
-  password: z.nullable(z.string()).optional(),
-  ssh_keys: z.nullable(
-    z.array(z.lazy(() => VirtualMachineAttributesSshKey$inboundSchema)),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "ssh_keys": "sshKeys",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    username: z.nullable(z.string()).optional(),
+    host: z.nullable(z.string()).optional(),
+    password: z.nullable(z.string()).optional(),
+    ssh_keys: z.nullable(
+      z.array(z.lazy(() => VirtualMachineAttributesSshKey$inboundSchema)),
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ssh_keys": "sshKeys",
+    });
+  })
+);
 /** @internal */
 export type VirtualMachineAttributesCredentials$Outbound = {
   username?: string | null | undefined;
@@ -484,18 +505,20 @@ export const VirtualMachineAttributesCredentials$outboundSchema: z.ZodType<
   VirtualMachineAttributesCredentials$Outbound,
   z.ZodTypeDef,
   VirtualMachineAttributesCredentials
-> = z.object({
-  username: z.nullable(z.string()).optional(),
-  host: z.nullable(z.string()).optional(),
-  password: z.nullable(z.string()).optional(),
-  sshKeys: z.nullable(
-    z.array(z.lazy(() => VirtualMachineAttributesSshKey$outboundSchema)),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    sshKeys: "ssh_keys",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    username: z.nullable(z.string()).optional(),
+    host: z.nullable(z.string()).optional(),
+    password: z.nullable(z.string()).optional(),
+    sshKeys: z.nullable(
+      z.array(z.lazy(() => VirtualMachineAttributesSshKey$outboundSchema)),
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      sshKeys: "ssh_keys",
+    });
+  })
+);
 
 export function virtualMachineAttributesCredentialsToJSON(
   virtualMachineAttributesCredentials: VirtualMachineAttributesCredentials,
@@ -522,11 +545,13 @@ export const VirtualMachineAttributesMarketplaceApp$inboundSchema: z.ZodType<
   VirtualMachineAttributesMarketplaceApp,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  slug: z.string().optional(),
-  name: z.nullable(z.string()).optional(),
-  version: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    slug: z.string().optional(),
+    name: z.nullable(z.string()).optional(),
+    version: z.nullable(z.string()).optional(),
+  })
+);
 /** @internal */
 export type VirtualMachineAttributesMarketplaceApp$Outbound = {
   slug?: string | undefined;
@@ -539,11 +564,13 @@ export const VirtualMachineAttributesMarketplaceApp$outboundSchema: z.ZodType<
   VirtualMachineAttributesMarketplaceApp$Outbound,
   z.ZodTypeDef,
   VirtualMachineAttributesMarketplaceApp
-> = z.object({
-  slug: z.string().optional(),
-  name: z.nullable(z.string()).optional(),
-  version: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    slug: z.string().optional(),
+    name: z.nullable(z.string()).optional(),
+    version: z.nullable(z.string()).optional(),
+  })
+);
 
 export function virtualMachineAttributesMarketplaceAppToJSON(
   virtualMachineAttributesMarketplaceApp:
@@ -571,11 +598,13 @@ export const VirtualMachineAttributesPlan$inboundSchema: z.ZodType<
   VirtualMachineAttributesPlan,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  slug: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    name: z.string().optional(),
+    slug: z.string().optional(),
+  })
+);
 /** @internal */
 export type VirtualMachineAttributesPlan$Outbound = {
   id?: string | undefined;
@@ -588,11 +617,13 @@ export const VirtualMachineAttributesPlan$outboundSchema: z.ZodType<
   VirtualMachineAttributesPlan$Outbound,
   z.ZodTypeDef,
   VirtualMachineAttributesPlan
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  slug: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    name: z.string().optional(),
+    slug: z.string().optional(),
+  })
+);
 
 export function virtualMachineAttributesPlanToJSON(
   virtualMachineAttributesPlan: VirtualMachineAttributesPlan,
@@ -618,13 +649,15 @@ export const VirtualMachineAttributesSpecs$inboundSchema: z.ZodType<
   VirtualMachineAttributesSpecs,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  vcpu: z.nullable(z.number().int()).optional(),
-  ram: z.nullable(z.string()).optional(),
-  storage: z.nullable(z.string()).optional(),
-  nic: z.nullable(z.string()).optional(),
-  gpu: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    vcpu: z.nullable(z.number().int()).optional(),
+    ram: z.nullable(z.string()).optional(),
+    storage: z.nullable(z.string()).optional(),
+    nic: z.nullable(z.string()).optional(),
+    gpu: z.nullable(z.string()).optional(),
+  })
+);
 /** @internal */
 export type VirtualMachineAttributesSpecs$Outbound = {
   vcpu?: number | null | undefined;
@@ -639,13 +672,15 @@ export const VirtualMachineAttributesSpecs$outboundSchema: z.ZodType<
   VirtualMachineAttributesSpecs$Outbound,
   z.ZodTypeDef,
   VirtualMachineAttributesSpecs
-> = z.object({
-  vcpu: z.nullable(z.number().int()).optional(),
-  ram: z.nullable(z.string()).optional(),
-  storage: z.nullable(z.string()).optional(),
-  nic: z.nullable(z.string()).optional(),
-  gpu: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    vcpu: z.nullable(z.number().int()).optional(),
+    ram: z.nullable(z.string()).optional(),
+    storage: z.nullable(z.string()).optional(),
+    nic: z.nullable(z.string()).optional(),
+    gpu: z.nullable(z.string()).optional(),
+  })
+);
 
 export function virtualMachineAttributesSpecsToJSON(
   virtualMachineAttributesSpecs: VirtualMachineAttributesSpecs,
@@ -671,12 +706,14 @@ export const VirtualMachineAttributesTag$inboundSchema: z.ZodType<
   VirtualMachineAttributesTag,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  description: z.nullable(z.string()).optional(),
-  color: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    name: z.string().optional(),
+    description: z.nullable(z.string()).optional(),
+    color: z.nullable(z.string()).optional(),
+  })
+);
 /** @internal */
 export type VirtualMachineAttributesTag$Outbound = {
   id?: string | undefined;
@@ -690,12 +727,14 @@ export const VirtualMachineAttributesTag$outboundSchema: z.ZodType<
   VirtualMachineAttributesTag$Outbound,
   z.ZodTypeDef,
   VirtualMachineAttributesTag
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  description: z.nullable(z.string()).optional(),
-  color: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    name: z.string().optional(),
+    description: z.nullable(z.string()).optional(),
+    color: z.nullable(z.string()).optional(),
+  })
+);
 
 export function virtualMachineAttributesTagToJSON(
   virtualMachineAttributesTag: VirtualMachineAttributesTag,
@@ -721,42 +760,44 @@ export const VirtualMachineAttributesAttributes$inboundSchema: z.ZodType<
   VirtualMachineAttributesAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string().optional(),
-  created_at: z.string().optional(),
-  status: z.string().optional(),
-  primary_ipv4: z.nullable(z.string()).optional(),
-  operating_system: z.nullable(
-    z.lazy(() => VirtualMachineAttributesOperatingSystem$inboundSchema),
-  ).optional(),
-  credentials: z.nullable(
-    z.lazy(() => VirtualMachineAttributesCredentials$inboundSchema),
-  ).optional(),
-  site: z.nullable(z.string()).optional(),
-  billing: z.nullable(z.string()).optional(),
-  user_data: z.nullable(z.string()).optional(),
-  marketplace_app: z.nullable(
-    z.lazy(() => VirtualMachineAttributesMarketplaceApp$inboundSchema),
-  ).optional(),
-  plan: z.lazy(() => VirtualMachineAttributesPlan$inboundSchema).optional(),
-  specs: z.lazy(() => VirtualMachineAttributesSpecs$inboundSchema).optional(),
-  tags: z.array(z.lazy(() => VirtualMachineAttributesTag$inboundSchema))
-    .optional(),
-  team: TeamInclude$inboundSchema.optional(),
-  project: ProjectInclude$inboundSchema.optional(),
-  apply_network_on_boot: z.boolean().optional(),
-  pending_restart: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "created_at": "createdAt",
-    "primary_ipv4": "primaryIpv4",
-    "operating_system": "operatingSystem",
-    "user_data": "userData",
-    "marketplace_app": "marketplaceApp",
-    "apply_network_on_boot": "applyNetworkOnBoot",
-    "pending_restart": "pendingRestart",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    created_at: z.string().optional(),
+    status: z.string().optional(),
+    primary_ipv4: z.nullable(z.string()).optional(),
+    operating_system: z.nullable(
+      z.lazy(() => VirtualMachineAttributesOperatingSystem$inboundSchema),
+    ).optional(),
+    credentials: z.nullable(
+      z.lazy(() => VirtualMachineAttributesCredentials$inboundSchema),
+    ).optional(),
+    site: z.nullable(z.string()).optional(),
+    billing: z.nullable(z.string()).optional(),
+    user_data: z.nullable(z.string()).optional(),
+    marketplace_app: z.nullable(
+      z.lazy(() => VirtualMachineAttributesMarketplaceApp$inboundSchema),
+    ).optional(),
+    plan: z.lazy(() => VirtualMachineAttributesPlan$inboundSchema).optional(),
+    specs: z.lazy(() => VirtualMachineAttributesSpecs$inboundSchema).optional(),
+    tags: z.array(z.lazy(() => VirtualMachineAttributesTag$inboundSchema))
+      .optional(),
+    team: TeamInclude$inboundSchema.optional(),
+    project: ProjectInclude$inboundSchema.optional(),
+    apply_network_on_boot: z.boolean().optional(),
+    pending_restart: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "created_at": "createdAt",
+      "primary_ipv4": "primaryIpv4",
+      "operating_system": "operatingSystem",
+      "user_data": "userData",
+      "marketplace_app": "marketplaceApp",
+      "apply_network_on_boot": "applyNetworkOnBoot",
+      "pending_restart": "pendingRestart",
+    });
+  })
+);
 /** @internal */
 export type VirtualMachineAttributesAttributes$Outbound = {
   name?: string | undefined;
@@ -789,42 +830,45 @@ export const VirtualMachineAttributesAttributes$outboundSchema: z.ZodType<
   VirtualMachineAttributesAttributes$Outbound,
   z.ZodTypeDef,
   VirtualMachineAttributesAttributes
-> = z.object({
-  name: z.string().optional(),
-  createdAt: z.string().optional(),
-  status: z.string().optional(),
-  primaryIpv4: z.nullable(z.string()).optional(),
-  operatingSystem: z.nullable(
-    z.lazy(() => VirtualMachineAttributesOperatingSystem$outboundSchema),
-  ).optional(),
-  credentials: z.nullable(
-    z.lazy(() => VirtualMachineAttributesCredentials$outboundSchema),
-  ).optional(),
-  site: z.nullable(z.string()).optional(),
-  billing: z.nullable(z.string()).optional(),
-  userData: z.nullable(z.string()).optional(),
-  marketplaceApp: z.nullable(
-    z.lazy(() => VirtualMachineAttributesMarketplaceApp$outboundSchema),
-  ).optional(),
-  plan: z.lazy(() => VirtualMachineAttributesPlan$outboundSchema).optional(),
-  specs: z.lazy(() => VirtualMachineAttributesSpecs$outboundSchema).optional(),
-  tags: z.array(z.lazy(() => VirtualMachineAttributesTag$outboundSchema))
-    .optional(),
-  team: TeamInclude$outboundSchema.optional(),
-  project: ProjectInclude$outboundSchema.optional(),
-  applyNetworkOnBoot: z.boolean().optional(),
-  pendingRestart: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    createdAt: "created_at",
-    primaryIpv4: "primary_ipv4",
-    operatingSystem: "operating_system",
-    userData: "user_data",
-    marketplaceApp: "marketplace_app",
-    applyNetworkOnBoot: "apply_network_on_boot",
-    pendingRestart: "pending_restart",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    createdAt: z.string().optional(),
+    status: z.string().optional(),
+    primaryIpv4: z.nullable(z.string()).optional(),
+    operatingSystem: z.nullable(
+      z.lazy(() => VirtualMachineAttributesOperatingSystem$outboundSchema),
+    ).optional(),
+    credentials: z.nullable(
+      z.lazy(() => VirtualMachineAttributesCredentials$outboundSchema),
+    ).optional(),
+    site: z.nullable(z.string()).optional(),
+    billing: z.nullable(z.string()).optional(),
+    userData: z.nullable(z.string()).optional(),
+    marketplaceApp: z.nullable(
+      z.lazy(() => VirtualMachineAttributesMarketplaceApp$outboundSchema),
+    ).optional(),
+    plan: z.lazy(() => VirtualMachineAttributesPlan$outboundSchema).optional(),
+    specs: z.lazy(() => VirtualMachineAttributesSpecs$outboundSchema)
+      .optional(),
+    tags: z.array(z.lazy(() => VirtualMachineAttributesTag$outboundSchema))
+      .optional(),
+    team: TeamInclude$outboundSchema.optional(),
+    project: ProjectInclude$outboundSchema.optional(),
+    applyNetworkOnBoot: z.boolean().optional(),
+    pendingRestart: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      createdAt: "created_at",
+      primaryIpv4: "primary_ipv4",
+      operatingSystem: "operating_system",
+      userData: "user_data",
+      marketplaceApp: "marketplace_app",
+      applyNetworkOnBoot: "apply_network_on_boot",
+      pendingRestart: "pending_restart",
+    });
+  })
+);
 
 export function virtualMachineAttributesAttributesToJSON(
   virtualMachineAttributesAttributes: VirtualMachineAttributesAttributes,
@@ -851,12 +895,14 @@ export const VirtualMachineAttributes$inboundSchema: z.ZodType<
   VirtualMachineAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  type: VirtualMachineAttributesType$inboundSchema.optional(),
-  attributes: z.lazy(() => VirtualMachineAttributesAttributes$inboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: VirtualMachineAttributesType$inboundSchema.optional(),
+    attributes: z.lazy(() => VirtualMachineAttributesAttributes$inboundSchema)
+      .optional(),
+  })
+);
 /** @internal */
 export type VirtualMachineAttributes$Outbound = {
   id?: string | undefined;
@@ -869,12 +915,14 @@ export const VirtualMachineAttributes$outboundSchema: z.ZodType<
   VirtualMachineAttributes$Outbound,
   z.ZodTypeDef,
   VirtualMachineAttributes
-> = z.object({
-  id: z.string().optional(),
-  type: VirtualMachineAttributesType$outboundSchema.optional(),
-  attributes: z.lazy(() => VirtualMachineAttributesAttributes$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: VirtualMachineAttributesType$outboundSchema.optional(),
+    attributes: z.lazy(() => VirtualMachineAttributesAttributes$outboundSchema)
+      .optional(),
+  })
+);
 
 export function virtualMachineAttributesToJSON(
   virtualMachineAttributes: VirtualMachineAttributes,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -40,7 +40,7 @@ export type PostUserDataRequest = {
 /** @internal */
 export const PostUserDataType2$inboundSchema: z.ZodNativeEnum<
   typeof PostUserDataType2
-> = z.nativeEnum(PostUserDataType2);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(PostUserDataType2));
 /** @internal */
 export const PostUserDataType2$outboundSchema: z.ZodNativeEnum<
   typeof PostUserDataType2
@@ -51,11 +51,13 @@ export const PostUserDataAttributes2$inboundSchema: z.ZodType<
   PostUserDataAttributes2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  description: z.string(),
-  project: z.string().optional(),
-  content: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    description: z.string(),
+    project: z.string().optional(),
+    content: z.string(),
+  })
+);
 /** @internal */
 export type PostUserDataAttributes2$Outbound = {
   description: string;
@@ -68,11 +70,13 @@ export const PostUserDataAttributes2$outboundSchema: z.ZodType<
   PostUserDataAttributes2$Outbound,
   z.ZodTypeDef,
   PostUserDataAttributes2
-> = z.object({
-  description: z.string(),
-  project: z.string().optional(),
-  content: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    description: z.string(),
+    project: z.string().optional(),
+    content: z.string(),
+  })
+);
 
 export function postUserDataAttributes2ToJSON(
   postUserDataAttributes2: PostUserDataAttributes2,
@@ -96,10 +100,12 @@ export const PostUserDataData2$inboundSchema: z.ZodType<
   PostUserDataData2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: PostUserDataType2$inboundSchema,
-  attributes: z.lazy(() => PostUserDataAttributes2$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: PostUserDataType2$inboundSchema,
+    attributes: z.lazy(() => PostUserDataAttributes2$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type PostUserDataData2$Outbound = {
   type: string;
@@ -111,10 +117,12 @@ export const PostUserDataData2$outboundSchema: z.ZodType<
   PostUserDataData2$Outbound,
   z.ZodTypeDef,
   PostUserDataData2
-> = z.object({
-  type: PostUserDataType2$outboundSchema,
-  attributes: z.lazy(() => PostUserDataAttributes2$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: PostUserDataType2$outboundSchema,
+    attributes: z.lazy(() => PostUserDataAttributes2$outboundSchema).optional(),
+  })
+);
 
 export function postUserDataData2ToJSON(
   postUserDataData2: PostUserDataData2,
@@ -138,9 +146,11 @@ export const PostUserDataRequest$inboundSchema: z.ZodType<
   PostUserDataRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => PostUserDataData2$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => PostUserDataData2$inboundSchema),
+  })
+);
 /** @internal */
 export type PostUserDataRequest$Outbound = {
   data: PostUserDataData2$Outbound;
@@ -151,9 +161,11 @@ export const PostUserDataRequest$outboundSchema: z.ZodType<
   PostUserDataRequest$Outbound,
   z.ZodTypeDef,
   PostUserDataRequest
-> = z.object({
-  data: z.lazy(() => PostUserDataData2$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => PostUserDataData2$outboundSchema),
+  })
+);
 
 export function postUserDataRequestToJSON(
   postUserDataRequest: PostUserDataRequest,

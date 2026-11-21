@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 import {
@@ -22,9 +22,11 @@ export const MarketplaceApp$inboundSchema: z.ZodType<
   MarketplaceApp,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: MarketplaceAppData$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: MarketplaceAppData$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type MarketplaceApp$Outbound = {
   data?: MarketplaceAppData$Outbound | undefined;
@@ -35,9 +37,11 @@ export const MarketplaceApp$outboundSchema: z.ZodType<
   MarketplaceApp$Outbound,
   z.ZodTypeDef,
   MarketplaceApp
-> = z.object({
-  data: MarketplaceAppData$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: MarketplaceAppData$outboundSchema.optional(),
+  })
+);
 
 export function marketplaceAppToJSON(marketplaceApp: MarketplaceApp): string {
   return JSON.stringify(MarketplaceApp$outboundSchema.parse(marketplaceApp));

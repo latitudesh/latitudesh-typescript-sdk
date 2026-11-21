@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -80,7 +80,7 @@ export type GetPlansResponse = {
 /** @internal */
 export const FilterStockLevel$inboundSchema: z.ZodNativeEnum<
   typeof FilterStockLevel
-> = z.nativeEnum(FilterStockLevel);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(FilterStockLevel));
 /** @internal */
 export const FilterStockLevel$outboundSchema: z.ZodNativeEnum<
   typeof FilterStockLevel
@@ -91,27 +91,29 @@ export const GetPlansRequest$inboundSchema: z.ZodType<
   GetPlansRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "filter[name]": z.string().optional(),
-  "filter[slug]": z.string().optional(),
-  "filter[location]": z.string().optional(),
-  "filter[stock_level]": FilterStockLevel$inboundSchema.optional(),
-  "filter[in_stock]": z.boolean().optional(),
-  "filter[gpu]": z.boolean().optional(),
-  "filter[ram]": z.number().int().optional(),
-  "filter[disk]": z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "filter[name]": "filterName",
-    "filter[slug]": "filterSlug",
-    "filter[location]": "filterLocation",
-    "filter[stock_level]": "filterStockLevel",
-    "filter[in_stock]": "filterInStock",
-    "filter[gpu]": "filterGpu",
-    "filter[ram]": "filterRam",
-    "filter[disk]": "filterDisk",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "filter[name]": z.string().optional(),
+    "filter[slug]": z.string().optional(),
+    "filter[location]": z.string().optional(),
+    "filter[stock_level]": FilterStockLevel$inboundSchema.optional(),
+    "filter[in_stock]": z.boolean().optional(),
+    "filter[gpu]": z.boolean().optional(),
+    "filter[ram]": z.number().int().optional(),
+    "filter[disk]": z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "filter[name]": "filterName",
+      "filter[slug]": "filterSlug",
+      "filter[location]": "filterLocation",
+      "filter[stock_level]": "filterStockLevel",
+      "filter[in_stock]": "filterInStock",
+      "filter[gpu]": "filterGpu",
+      "filter[ram]": "filterRam",
+      "filter[disk]": "filterDisk",
+    });
+  })
+);
 /** @internal */
 export type GetPlansRequest$Outbound = {
   "filter[name]"?: string | undefined;
@@ -129,27 +131,29 @@ export const GetPlansRequest$outboundSchema: z.ZodType<
   GetPlansRequest$Outbound,
   z.ZodTypeDef,
   GetPlansRequest
-> = z.object({
-  filterName: z.string().optional(),
-  filterSlug: z.string().optional(),
-  filterLocation: z.string().optional(),
-  filterStockLevel: FilterStockLevel$outboundSchema.optional(),
-  filterInStock: z.boolean().optional(),
-  filterGpu: z.boolean().optional(),
-  filterRam: z.number().int().optional(),
-  filterDisk: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    filterName: "filter[name]",
-    filterSlug: "filter[slug]",
-    filterLocation: "filter[location]",
-    filterStockLevel: "filter[stock_level]",
-    filterInStock: "filter[in_stock]",
-    filterGpu: "filter[gpu]",
-    filterRam: "filter[ram]",
-    filterDisk: "filter[disk]",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    filterName: z.string().optional(),
+    filterSlug: z.string().optional(),
+    filterLocation: z.string().optional(),
+    filterStockLevel: FilterStockLevel$outboundSchema.optional(),
+    filterInStock: z.boolean().optional(),
+    filterGpu: z.boolean().optional(),
+    filterRam: z.number().int().optional(),
+    filterDisk: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      filterName: "filter[name]",
+      filterSlug: "filter[slug]",
+      filterLocation: "filter[location]",
+      filterStockLevel: "filter[stock_level]",
+      filterInStock: "filter[in_stock]",
+      filterGpu: "filter[gpu]",
+      filterRam: "filter[ram]",
+      filterDisk: "filter[disk]",
+    });
+  })
+);
 
 export function getPlansRequestToJSON(
   getPlansRequest: GetPlansRequest,
@@ -171,9 +175,11 @@ export const GetPlansResponse$inboundSchema: z.ZodType<
   GetPlansResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.array(models.PlanData$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(models.PlanData$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type GetPlansResponse$Outbound = {
   data?: Array<models.PlanData$Outbound> | undefined;
@@ -184,9 +190,11 @@ export const GetPlansResponse$outboundSchema: z.ZodType<
   GetPlansResponse$Outbound,
   z.ZodTypeDef,
   GetPlansResponse
-> = z.object({
-  data: z.array(models.PlanData$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(models.PlanData$outboundSchema).optional(),
+  })
+);
 
 export function getPlansResponseToJSON(
   getPlansResponse: GetPlansResponse,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -61,7 +61,7 @@ export type CreateElasticIp = {
 /** @internal */
 export const CreateElasticIpType$inboundSchema: z.ZodNativeEnum<
   typeof CreateElasticIpType
-> = z.nativeEnum(CreateElasticIpType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CreateElasticIpType));
 /** @internal */
 export const CreateElasticIpType$outboundSchema: z.ZodNativeEnum<
   typeof CreateElasticIpType
@@ -70,7 +70,7 @@ export const CreateElasticIpType$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const CreateElasticIpMode$inboundSchema: z.ZodNativeEnum<
   typeof CreateElasticIpMode
-> = z.nativeEnum(CreateElasticIpMode);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CreateElasticIpMode));
 /** @internal */
 export const CreateElasticIpMode$outboundSchema: z.ZodNativeEnum<
   typeof CreateElasticIpMode
@@ -81,19 +81,21 @@ export const CreateElasticIpAttributes$inboundSchema: z.ZodType<
   CreateElasticIpAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  mode: CreateElasticIpMode$inboundSchema.default("routed"),
-  server_id: z.string().optional(),
-  project_id: z.string(),
-  server_ids: z.array(z.string()).optional(),
-  site: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "server_id": "serverId",
-    "project_id": "projectId",
-    "server_ids": "serverIds",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    mode: CreateElasticIpMode$inboundSchema.default("routed"),
+    server_id: z.string().optional(),
+    project_id: z.string(),
+    server_ids: z.array(z.string()).optional(),
+    site: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "server_id": "serverId",
+      "project_id": "projectId",
+      "server_ids": "serverIds",
+    });
+  })
+);
 /** @internal */
 export type CreateElasticIpAttributes$Outbound = {
   mode: string;
@@ -108,19 +110,21 @@ export const CreateElasticIpAttributes$outboundSchema: z.ZodType<
   CreateElasticIpAttributes$Outbound,
   z.ZodTypeDef,
   CreateElasticIpAttributes
-> = z.object({
-  mode: CreateElasticIpMode$outboundSchema.default("routed"),
-  serverId: z.string().optional(),
-  projectId: z.string(),
-  serverIds: z.array(z.string()).optional(),
-  site: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    serverId: "server_id",
-    projectId: "project_id",
-    serverIds: "server_ids",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    mode: CreateElasticIpMode$outboundSchema.default("routed"),
+    serverId: z.string().optional(),
+    projectId: z.string(),
+    serverIds: z.array(z.string()).optional(),
+    site: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      serverId: "server_id",
+      projectId: "project_id",
+      serverIds: "server_ids",
+    });
+  })
+);
 
 export function createElasticIpAttributesToJSON(
   createElasticIpAttributes: CreateElasticIpAttributes,
@@ -144,10 +148,13 @@ export const CreateElasticIpData$inboundSchema: z.ZodType<
   CreateElasticIpData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: CreateElasticIpType$inboundSchema,
-  attributes: z.lazy(() => CreateElasticIpAttributes$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CreateElasticIpType$inboundSchema,
+    attributes: z.lazy(() => CreateElasticIpAttributes$inboundSchema)
+      .optional(),
+  })
+);
 /** @internal */
 export type CreateElasticIpData$Outbound = {
   type: string;
@@ -159,10 +166,13 @@ export const CreateElasticIpData$outboundSchema: z.ZodType<
   CreateElasticIpData$Outbound,
   z.ZodTypeDef,
   CreateElasticIpData
-> = z.object({
-  type: CreateElasticIpType$outboundSchema,
-  attributes: z.lazy(() => CreateElasticIpAttributes$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CreateElasticIpType$outboundSchema,
+    attributes: z.lazy(() => CreateElasticIpAttributes$outboundSchema)
+      .optional(),
+  })
+);
 
 export function createElasticIpDataToJSON(
   createElasticIpData: CreateElasticIpData,
@@ -186,9 +196,11 @@ export const CreateElasticIp$inboundSchema: z.ZodType<
   CreateElasticIp,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => CreateElasticIpData$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => CreateElasticIpData$inboundSchema),
+  })
+);
 /** @internal */
 export type CreateElasticIp$Outbound = {
   data: CreateElasticIpData$Outbound;
@@ -199,9 +211,11 @@ export const CreateElasticIp$outboundSchema: z.ZodType<
   CreateElasticIp$Outbound,
   z.ZodTypeDef,
   CreateElasticIp
-> = z.object({
-  data: z.lazy(() => CreateElasticIpData$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => CreateElasticIpData$outboundSchema),
+  })
+);
 
 export function createElasticIpToJSON(
   createElasticIp: CreateElasticIp,

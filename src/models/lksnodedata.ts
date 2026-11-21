@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -57,7 +57,7 @@ export type LksNodeData = {
 /** @internal */
 export const LksNodeDataType$inboundSchema: z.ZodNativeEnum<
   typeof LksNodeDataType
-> = z.nativeEnum(LksNodeDataType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(LksNodeDataType));
 /** @internal */
 export const LksNodeDataType$outboundSchema: z.ZodNativeEnum<
   typeof LksNodeDataType
@@ -68,10 +68,12 @@ export const LksNodeDataServer$inboundSchema: z.ZodType<
   LksNodeDataServer,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  status: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    status: z.nullable(z.string()).optional(),
+  })
+);
 /** @internal */
 export type LksNodeDataServer$Outbound = {
   id?: string | undefined;
@@ -83,10 +85,12 @@ export const LksNodeDataServer$outboundSchema: z.ZodType<
   LksNodeDataServer$Outbound,
   z.ZodTypeDef,
   LksNodeDataServer
-> = z.object({
-  id: z.string().optional(),
-  status: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    status: z.nullable(z.string()).optional(),
+  })
+);
 
 export function lksNodeDataServerToJSON(
   lksNodeDataServer: LksNodeDataServer,
@@ -110,22 +114,25 @@ export const LksNodeDataAttributes$inboundSchema: z.ZodType<
   LksNodeDataAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string().optional(),
-  status: z.nullable(z.string()).optional(),
-  reason: z.nullable(z.string()).optional(),
-  message: z.nullable(z.string()).optional(),
-  server: z.nullable(z.lazy(() => LksNodeDataServer$inboundSchema)).optional(),
-  joined_at: z.nullable(z.string()).optional(),
-  created_at: z.nullable(z.string()).optional(),
-  updated_at: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "joined_at": "joinedAt",
-    "created_at": "createdAt",
-    "updated_at": "updatedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    status: z.nullable(z.string()).optional(),
+    reason: z.nullable(z.string()).optional(),
+    message: z.nullable(z.string()).optional(),
+    server: z.nullable(z.lazy(() => LksNodeDataServer$inboundSchema))
+      .optional(),
+    joined_at: z.nullable(z.string()).optional(),
+    created_at: z.nullable(z.string()).optional(),
+    updated_at: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "joined_at": "joinedAt",
+      "created_at": "createdAt",
+      "updated_at": "updatedAt",
+    });
+  })
+);
 /** @internal */
 export type LksNodeDataAttributes$Outbound = {
   name?: string | undefined;
@@ -143,22 +150,25 @@ export const LksNodeDataAttributes$outboundSchema: z.ZodType<
   LksNodeDataAttributes$Outbound,
   z.ZodTypeDef,
   LksNodeDataAttributes
-> = z.object({
-  name: z.string().optional(),
-  status: z.nullable(z.string()).optional(),
-  reason: z.nullable(z.string()).optional(),
-  message: z.nullable(z.string()).optional(),
-  server: z.nullable(z.lazy(() => LksNodeDataServer$outboundSchema)).optional(),
-  joinedAt: z.nullable(z.string()).optional(),
-  createdAt: z.nullable(z.string()).optional(),
-  updatedAt: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    joinedAt: "joined_at",
-    createdAt: "created_at",
-    updatedAt: "updated_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    status: z.nullable(z.string()).optional(),
+    reason: z.nullable(z.string()).optional(),
+    message: z.nullable(z.string()).optional(),
+    server: z.nullable(z.lazy(() => LksNodeDataServer$outboundSchema))
+      .optional(),
+    joinedAt: z.nullable(z.string()).optional(),
+    createdAt: z.nullable(z.string()).optional(),
+    updatedAt: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      joinedAt: "joined_at",
+      createdAt: "created_at",
+      updatedAt: "updated_at",
+    });
+  })
+);
 
 export function lksNodeDataAttributesToJSON(
   lksNodeDataAttributes: LksNodeDataAttributes,
@@ -182,11 +192,13 @@ export const LksNodeData$inboundSchema: z.ZodType<
   LksNodeData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  type: LksNodeDataType$inboundSchema.optional(),
-  attributes: z.lazy(() => LksNodeDataAttributes$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: LksNodeDataType$inboundSchema.optional(),
+    attributes: z.lazy(() => LksNodeDataAttributes$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type LksNodeData$Outbound = {
   id?: string | undefined;
@@ -199,11 +211,13 @@ export const LksNodeData$outboundSchema: z.ZodType<
   LksNodeData$Outbound,
   z.ZodTypeDef,
   LksNodeData
-> = z.object({
-  id: z.string().optional(),
-  type: LksNodeDataType$outboundSchema.optional(),
-  attributes: z.lazy(() => LksNodeDataAttributes$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: LksNodeDataType$outboundSchema.optional(),
+    attributes: z.lazy(() => LksNodeDataAttributes$outboundSchema).optional(),
+  })
+);
 
 export function lksNodeDataToJSON(lksNodeData: LksNodeData): string {
   return JSON.stringify(LksNodeData$outboundSchema.parse(lksNodeData));

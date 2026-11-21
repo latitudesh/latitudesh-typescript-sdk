@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 import {
@@ -27,9 +27,11 @@ export const LksSitesMeta$inboundSchema: z.ZodType<
   LksSitesMeta,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  total: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    total: z.number().int().optional(),
+  })
+);
 /** @internal */
 export type LksSitesMeta$Outbound = {
   total?: number | undefined;
@@ -40,9 +42,11 @@ export const LksSitesMeta$outboundSchema: z.ZodType<
   LksSitesMeta$Outbound,
   z.ZodTypeDef,
   LksSitesMeta
-> = z.object({
-  total: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    total: z.number().int().optional(),
+  })
+);
 
 export function lksSitesMetaToJSON(lksSitesMeta: LksSitesMeta): string {
   return JSON.stringify(LksSitesMeta$outboundSchema.parse(lksSitesMeta));
@@ -62,10 +66,12 @@ export const LksSites$inboundSchema: z.ZodType<
   LksSites,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.array(LksSiteData$inboundSchema).optional(),
-  meta: z.lazy(() => LksSitesMeta$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(LksSiteData$inboundSchema).optional(),
+    meta: z.lazy(() => LksSitesMeta$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type LksSites$Outbound = {
   data?: Array<LksSiteData$Outbound> | undefined;
@@ -77,10 +83,12 @@ export const LksSites$outboundSchema: z.ZodType<
   LksSites$Outbound,
   z.ZodTypeDef,
   LksSites
-> = z.object({
-  data: z.array(LksSiteData$outboundSchema).optional(),
-  meta: z.lazy(() => LksSitesMeta$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(LksSiteData$outboundSchema).optional(),
+    meta: z.lazy(() => LksSitesMeta$outboundSchema).optional(),
+  })
+);
 
 export function lksSitesToJSON(lksSites: LksSites): string {
   return JSON.stringify(LksSites$outboundSchema.parse(lksSites));

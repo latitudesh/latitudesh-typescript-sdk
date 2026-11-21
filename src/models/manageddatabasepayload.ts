@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -97,7 +97,7 @@ export type ManagedDatabasePayload = {
 /** @internal */
 export const ManagedDatabasePayloadType$inboundSchema: z.ZodNativeEnum<
   typeof ManagedDatabasePayloadType
-> = z.nativeEnum(ManagedDatabasePayloadType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ManagedDatabasePayloadType));
 /** @internal */
 export const ManagedDatabasePayloadType$outboundSchema: z.ZodNativeEnum<
   typeof ManagedDatabasePayloadType
@@ -106,7 +106,9 @@ export const ManagedDatabasePayloadType$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const ManagedDatabasePayloadBilling$inboundSchema: z.ZodNativeEnum<
   typeof ManagedDatabasePayloadBilling
-> = z.nativeEnum(ManagedDatabasePayloadBilling);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(ManagedDatabasePayloadBilling)
+);
 /** @internal */
 export const ManagedDatabasePayloadBilling$outboundSchema: z.ZodNativeEnum<
   typeof ManagedDatabasePayloadBilling
@@ -117,10 +119,12 @@ export const ManagedDatabasePayloadRecovery$inboundSchema: z.ZodType<
   ManagedDatabasePayloadRecovery,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  sourceDatabaseName: z.string().optional(),
-  backupId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    sourceDatabaseName: z.string().optional(),
+    backupId: z.string().optional(),
+  })
+);
 /** @internal */
 export type ManagedDatabasePayloadRecovery$Outbound = {
   sourceDatabaseName?: string | undefined;
@@ -132,10 +136,12 @@ export const ManagedDatabasePayloadRecovery$outboundSchema: z.ZodType<
   ManagedDatabasePayloadRecovery$Outbound,
   z.ZodTypeDef,
   ManagedDatabasePayloadRecovery
-> = z.object({
-  sourceDatabaseName: z.string().optional(),
-  backupId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    sourceDatabaseName: z.string().optional(),
+    backupId: z.string().optional(),
+  })
+);
 
 export function managedDatabasePayloadRecoveryToJSON(
   managedDatabasePayloadRecovery: ManagedDatabasePayloadRecovery,
@@ -161,25 +167,27 @@ export const ManagedDatabasePayloadAttributes$inboundSchema: z.ZodType<
   ManagedDatabasePayloadAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string(),
-  project_id: z.string(),
-  region: z.string(),
-  plan: z.string(),
-  engine: z.string(),
-  billing: ManagedDatabasePayloadBilling$inboundSchema.optional(),
-  parameters: z.record(z.any()).optional(),
-  pooler: z.record(z.any()).optional(),
-  backup: z.record(z.any()).optional(),
-  recovery: z.lazy(() => ManagedDatabasePayloadRecovery$inboundSchema)
-    .optional(),
-  replica_regions: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "project_id": "projectId",
-    "replica_regions": "replicaRegions",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    project_id: z.string(),
+    region: z.string(),
+    plan: z.string(),
+    engine: z.string(),
+    billing: ManagedDatabasePayloadBilling$inboundSchema.optional(),
+    parameters: z.record(z.any()).optional(),
+    pooler: z.record(z.any()).optional(),
+    backup: z.record(z.any()).optional(),
+    recovery: z.lazy(() => ManagedDatabasePayloadRecovery$inboundSchema)
+      .optional(),
+    replica_regions: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "project_id": "projectId",
+      "replica_regions": "replicaRegions",
+    });
+  })
+);
 /** @internal */
 export type ManagedDatabasePayloadAttributes$Outbound = {
   name: string;
@@ -200,25 +208,27 @@ export const ManagedDatabasePayloadAttributes$outboundSchema: z.ZodType<
   ManagedDatabasePayloadAttributes$Outbound,
   z.ZodTypeDef,
   ManagedDatabasePayloadAttributes
-> = z.object({
-  name: z.string(),
-  projectId: z.string(),
-  region: z.string(),
-  plan: z.string(),
-  engine: z.string(),
-  billing: ManagedDatabasePayloadBilling$outboundSchema.optional(),
-  parameters: z.record(z.any()).optional(),
-  pooler: z.record(z.any()).optional(),
-  backup: z.record(z.any()).optional(),
-  recovery: z.lazy(() => ManagedDatabasePayloadRecovery$outboundSchema)
-    .optional(),
-  replicaRegions: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    projectId: "project_id",
-    replicaRegions: "replica_regions",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    projectId: z.string(),
+    region: z.string(),
+    plan: z.string(),
+    engine: z.string(),
+    billing: ManagedDatabasePayloadBilling$outboundSchema.optional(),
+    parameters: z.record(z.any()).optional(),
+    pooler: z.record(z.any()).optional(),
+    backup: z.record(z.any()).optional(),
+    recovery: z.lazy(() => ManagedDatabasePayloadRecovery$outboundSchema)
+      .optional(),
+    replicaRegions: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      projectId: "project_id",
+      replicaRegions: "replica_regions",
+    });
+  })
+);
 
 export function managedDatabasePayloadAttributesToJSON(
   managedDatabasePayloadAttributes: ManagedDatabasePayloadAttributes,
@@ -244,11 +254,13 @@ export const ManagedDatabasePayloadData$inboundSchema: z.ZodType<
   ManagedDatabasePayloadData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: ManagedDatabasePayloadType$inboundSchema.optional(),
-  attributes: z.lazy(() => ManagedDatabasePayloadAttributes$inboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: ManagedDatabasePayloadType$inboundSchema.optional(),
+    attributes: z.lazy(() => ManagedDatabasePayloadAttributes$inboundSchema)
+      .optional(),
+  })
+);
 /** @internal */
 export type ManagedDatabasePayloadData$Outbound = {
   type?: string | undefined;
@@ -260,11 +272,13 @@ export const ManagedDatabasePayloadData$outboundSchema: z.ZodType<
   ManagedDatabasePayloadData$Outbound,
   z.ZodTypeDef,
   ManagedDatabasePayloadData
-> = z.object({
-  type: ManagedDatabasePayloadType$outboundSchema.optional(),
-  attributes: z.lazy(() => ManagedDatabasePayloadAttributes$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: ManagedDatabasePayloadType$outboundSchema.optional(),
+    attributes: z.lazy(() => ManagedDatabasePayloadAttributes$outboundSchema)
+      .optional(),
+  })
+);
 
 export function managedDatabasePayloadDataToJSON(
   managedDatabasePayloadData: ManagedDatabasePayloadData,
@@ -288,9 +302,11 @@ export const ManagedDatabasePayload$inboundSchema: z.ZodType<
   ManagedDatabasePayload,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => ManagedDatabasePayloadData$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => ManagedDatabasePayloadData$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type ManagedDatabasePayload$Outbound = {
   data?: ManagedDatabasePayloadData$Outbound | undefined;
@@ -301,9 +317,11 @@ export const ManagedDatabasePayload$outboundSchema: z.ZodType<
   ManagedDatabasePayload$Outbound,
   z.ZodTypeDef,
   ManagedDatabasePayload
-> = z.object({
-  data: z.lazy(() => ManagedDatabasePayloadData$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => ManagedDatabasePayloadData$outboundSchema).optional(),
+  })
+);
 
 export function managedDatabasePayloadToJSON(
   managedDatabasePayload: ManagedDatabasePayload,

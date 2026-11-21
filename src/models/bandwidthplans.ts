@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import {
   BandwidthPlanData,
@@ -29,10 +29,12 @@ export const BandwidthPlans$inboundSchema: z.ZodType<
   BandwidthPlans,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.array(BandwidthPlanData$inboundSchema).optional(),
-  meta: PaginationMeta$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(BandwidthPlanData$inboundSchema).optional(),
+    meta: PaginationMeta$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type BandwidthPlans$Outbound = {
   data?: Array<BandwidthPlanData$Outbound> | undefined;
@@ -44,10 +46,12 @@ export const BandwidthPlans$outboundSchema: z.ZodType<
   BandwidthPlans$Outbound,
   z.ZodTypeDef,
   BandwidthPlans
-> = z.object({
-  data: z.array(BandwidthPlanData$outboundSchema).optional(),
-  meta: PaginationMeta$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(BandwidthPlanData$outboundSchema).optional(),
+    meta: PaginationMeta$outboundSchema.optional(),
+  })
+);
 
 export function bandwidthPlansToJSON(bandwidthPlans: BandwidthPlans): string {
   return JSON.stringify(BandwidthPlans$outboundSchema.parse(bandwidthPlans));

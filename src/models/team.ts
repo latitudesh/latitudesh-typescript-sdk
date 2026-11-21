@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 import {
@@ -69,14 +69,16 @@ export const TeamBilling$inboundSchema: z.ZodType<
   TeamBilling,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  customer_billing_id: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "customer_billing_id": "customerBillingId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    customer_billing_id: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "customer_billing_id": "customerBillingId",
+    });
+  })
+);
 /** @internal */
 export type TeamBilling$Outbound = {
   id?: string | undefined;
@@ -88,14 +90,16 @@ export const TeamBilling$outboundSchema: z.ZodType<
   TeamBilling$Outbound,
   z.ZodTypeDef,
   TeamBilling
-> = z.object({
-  id: z.string().optional(),
-  customerBillingId: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    customerBillingId: "customer_billing_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    customerBillingId: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      customerBillingId: "customer_billing_id",
+    });
+  })
+);
 
 export function teamBillingToJSON(teamBilling: TeamBilling): string {
   return JSON.stringify(TeamBilling$outboundSchema.parse(teamBilling));
@@ -115,31 +119,33 @@ export const TeamLimits$inboundSchema: z.ZodType<
   TeamLimits,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  bare_metal: z.nullable(z.number().int()).optional(),
-  bare_metal_gpu: z.nullable(z.number().int()).optional(),
-  virtual_machine: z.nullable(z.number().int()).optional(),
-  virtual_machine_gpu: z.nullable(z.number().int()).optional(),
-  elastic_ip: z.nullable(z.number().int()).optional(),
-  bgp_session_per_ip: z.nullable(z.number().int()).optional(),
-  public_network: z.nullable(z.number().int()).optional(),
-  virtual_network: z.nullable(z.number().int()).optional(),
-  database: z.nullable(z.number().int()).optional(),
-  filesystem: z.nullable(z.number().int()).optional(),
-  block_storage: z.nullable(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "bare_metal": "bareMetal",
-    "bare_metal_gpu": "bareMetalGpu",
-    "virtual_machine": "virtualMachine",
-    "virtual_machine_gpu": "virtualMachineGpu",
-    "elastic_ip": "elasticIp",
-    "bgp_session_per_ip": "bgpSessionPerIp",
-    "public_network": "publicNetwork",
-    "virtual_network": "virtualNetwork",
-    "block_storage": "blockStorage",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    bare_metal: z.nullable(z.number().int()).optional(),
+    bare_metal_gpu: z.nullable(z.number().int()).optional(),
+    virtual_machine: z.nullable(z.number().int()).optional(),
+    virtual_machine_gpu: z.nullable(z.number().int()).optional(),
+    elastic_ip: z.nullable(z.number().int()).optional(),
+    bgp_session_per_ip: z.nullable(z.number().int()).optional(),
+    public_network: z.nullable(z.number().int()).optional(),
+    virtual_network: z.nullable(z.number().int()).optional(),
+    database: z.nullable(z.number().int()).optional(),
+    filesystem: z.nullable(z.number().int()).optional(),
+    block_storage: z.nullable(z.number().int()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "bare_metal": "bareMetal",
+      "bare_metal_gpu": "bareMetalGpu",
+      "virtual_machine": "virtualMachine",
+      "virtual_machine_gpu": "virtualMachineGpu",
+      "elastic_ip": "elasticIp",
+      "bgp_session_per_ip": "bgpSessionPerIp",
+      "public_network": "publicNetwork",
+      "virtual_network": "virtualNetwork",
+      "block_storage": "blockStorage",
+    });
+  })
+);
 /** @internal */
 export type TeamLimits$Outbound = {
   bare_metal?: number | null | undefined;
@@ -160,31 +166,33 @@ export const TeamLimits$outboundSchema: z.ZodType<
   TeamLimits$Outbound,
   z.ZodTypeDef,
   TeamLimits
-> = z.object({
-  bareMetal: z.nullable(z.number().int()).optional(),
-  bareMetalGpu: z.nullable(z.number().int()).optional(),
-  virtualMachine: z.nullable(z.number().int()).optional(),
-  virtualMachineGpu: z.nullable(z.number().int()).optional(),
-  elasticIp: z.nullable(z.number().int()).optional(),
-  bgpSessionPerIp: z.nullable(z.number().int()).optional(),
-  publicNetwork: z.nullable(z.number().int()).optional(),
-  virtualNetwork: z.nullable(z.number().int()).optional(),
-  database: z.nullable(z.number().int()).optional(),
-  filesystem: z.nullable(z.number().int()).optional(),
-  blockStorage: z.nullable(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    bareMetal: "bare_metal",
-    bareMetalGpu: "bare_metal_gpu",
-    virtualMachine: "virtual_machine",
-    virtualMachineGpu: "virtual_machine_gpu",
-    elasticIp: "elastic_ip",
-    bgpSessionPerIp: "bgp_session_per_ip",
-    publicNetwork: "public_network",
-    virtualNetwork: "virtual_network",
-    blockStorage: "block_storage",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    bareMetal: z.nullable(z.number().int()).optional(),
+    bareMetalGpu: z.nullable(z.number().int()).optional(),
+    virtualMachine: z.nullable(z.number().int()).optional(),
+    virtualMachineGpu: z.nullable(z.number().int()).optional(),
+    elasticIp: z.nullable(z.number().int()).optional(),
+    bgpSessionPerIp: z.nullable(z.number().int()).optional(),
+    publicNetwork: z.nullable(z.number().int()).optional(),
+    virtualNetwork: z.nullable(z.number().int()).optional(),
+    database: z.nullable(z.number().int()).optional(),
+    filesystem: z.nullable(z.number().int()).optional(),
+    blockStorage: z.nullable(z.number().int()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      bareMetal: "bare_metal",
+      bareMetalGpu: "bare_metal_gpu",
+      virtualMachine: "virtual_machine",
+      virtualMachineGpu: "virtual_machine_gpu",
+      elasticIp: "elastic_ip",
+      bgpSessionPerIp: "bgp_session_per_ip",
+      publicNetwork: "public_network",
+      virtualNetwork: "virtual_network",
+      blockStorage: "block_storage",
+    });
+  })
+);
 
 export function teamLimitsToJSON(teamLimits: TeamLimits): string {
   return JSON.stringify(TeamLimits$outboundSchema.parse(teamLimits));
@@ -204,34 +212,36 @@ export const TeamAttributes$inboundSchema: z.ZodType<
   TeamAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string().optional(),
-  slug: z.string().optional(),
-  description: z.nullable(z.string()).optional(),
-  address: z.nullable(z.string()).optional(),
-  currency: z.nullable(z.string()).optional(),
-  created_at: z.string().optional(),
-  updated_at: z.string().optional(),
-  status: z.nullable(z.string()).optional(),
-  enforce_mfa: z.nullable(z.boolean()).optional(),
-  customer_billing_id: z.nullable(z.string()).optional(),
-  referred_code: z.nullable(z.string()).optional(),
-  users: z.array(UserInclude$inboundSchema).optional(),
-  projects: z.array(ProjectInclude$inboundSchema).optional(),
-  owner: UserInclude$inboundSchema.optional(),
-  billing: z.lazy(() => TeamBilling$inboundSchema).optional(),
-  feature_flags: z.array(z.string()).optional(),
-  limits: z.lazy(() => TeamLimits$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "created_at": "createdAt",
-    "updated_at": "updatedAt",
-    "enforce_mfa": "enforceMfa",
-    "customer_billing_id": "customerBillingId",
-    "referred_code": "referredCode",
-    "feature_flags": "featureFlags",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    slug: z.string().optional(),
+    description: z.nullable(z.string()).optional(),
+    address: z.nullable(z.string()).optional(),
+    currency: z.nullable(z.string()).optional(),
+    created_at: z.string().optional(),
+    updated_at: z.string().optional(),
+    status: z.nullable(z.string()).optional(),
+    enforce_mfa: z.nullable(z.boolean()).optional(),
+    customer_billing_id: z.nullable(z.string()).optional(),
+    referred_code: z.nullable(z.string()).optional(),
+    users: z.array(UserInclude$inboundSchema).optional(),
+    projects: z.array(ProjectInclude$inboundSchema).optional(),
+    owner: UserInclude$inboundSchema.optional(),
+    billing: z.lazy(() => TeamBilling$inboundSchema).optional(),
+    feature_flags: z.array(z.string()).optional(),
+    limits: z.lazy(() => TeamLimits$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "created_at": "createdAt",
+      "updated_at": "updatedAt",
+      "enforce_mfa": "enforceMfa",
+      "customer_billing_id": "customerBillingId",
+      "referred_code": "referredCode",
+      "feature_flags": "featureFlags",
+    });
+  })
+);
 /** @internal */
 export type TeamAttributes$Outbound = {
   name?: string | undefined;
@@ -258,34 +268,36 @@ export const TeamAttributes$outboundSchema: z.ZodType<
   TeamAttributes$Outbound,
   z.ZodTypeDef,
   TeamAttributes
-> = z.object({
-  name: z.string().optional(),
-  slug: z.string().optional(),
-  description: z.nullable(z.string()).optional(),
-  address: z.nullable(z.string()).optional(),
-  currency: z.nullable(z.string()).optional(),
-  createdAt: z.string().optional(),
-  updatedAt: z.string().optional(),
-  status: z.nullable(z.string()).optional(),
-  enforceMfa: z.nullable(z.boolean()).optional(),
-  customerBillingId: z.nullable(z.string()).optional(),
-  referredCode: z.nullable(z.string()).optional(),
-  users: z.array(UserInclude$outboundSchema).optional(),
-  projects: z.array(ProjectInclude$outboundSchema).optional(),
-  owner: UserInclude$outboundSchema.optional(),
-  billing: z.lazy(() => TeamBilling$outboundSchema).optional(),
-  featureFlags: z.array(z.string()).optional(),
-  limits: z.lazy(() => TeamLimits$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    createdAt: "created_at",
-    updatedAt: "updated_at",
-    enforceMfa: "enforce_mfa",
-    customerBillingId: "customer_billing_id",
-    referredCode: "referred_code",
-    featureFlags: "feature_flags",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    slug: z.string().optional(),
+    description: z.nullable(z.string()).optional(),
+    address: z.nullable(z.string()).optional(),
+    currency: z.nullable(z.string()).optional(),
+    createdAt: z.string().optional(),
+    updatedAt: z.string().optional(),
+    status: z.nullable(z.string()).optional(),
+    enforceMfa: z.nullable(z.boolean()).optional(),
+    customerBillingId: z.nullable(z.string()).optional(),
+    referredCode: z.nullable(z.string()).optional(),
+    users: z.array(UserInclude$outboundSchema).optional(),
+    projects: z.array(ProjectInclude$outboundSchema).optional(),
+    owner: UserInclude$outboundSchema.optional(),
+    billing: z.lazy(() => TeamBilling$outboundSchema).optional(),
+    featureFlags: z.array(z.string()).optional(),
+    limits: z.lazy(() => TeamLimits$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      createdAt: "created_at",
+      updatedAt: "updated_at",
+      enforceMfa: "enforce_mfa",
+      customerBillingId: "customer_billing_id",
+      referredCode: "referred_code",
+      featureFlags: "feature_flags",
+    });
+  })
+);
 
 export function teamAttributesToJSON(teamAttributes: TeamAttributes): string {
   return JSON.stringify(TeamAttributes$outboundSchema.parse(teamAttributes));
@@ -301,11 +313,13 @@ export function teamAttributesFromJSON(
 }
 
 /** @internal */
-export const Team$inboundSchema: z.ZodType<Team, z.ZodTypeDef, unknown> = z
-  .object({
-    id: z.string().optional(),
-    attributes: z.lazy(() => TeamAttributes$inboundSchema).optional(),
-  });
+export const Team$inboundSchema: z.ZodType<Team, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string().optional(),
+      attributes: z.lazy(() => TeamAttributes$inboundSchema).optional(),
+    })
+  );
 /** @internal */
 export type Team$Outbound = {
   id?: string | undefined;
@@ -314,10 +328,12 @@ export type Team$Outbound = {
 
 /** @internal */
 export const Team$outboundSchema: z.ZodType<Team$Outbound, z.ZodTypeDef, Team> =
-  z.object({
-    id: z.string().optional(),
-    attributes: z.lazy(() => TeamAttributes$outboundSchema).optional(),
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string().optional(),
+      attributes: z.lazy(() => TeamAttributes$outboundSchema).optional(),
+    })
+  );
 
 export function teamToJSON(team: Team): string {
   return JSON.stringify(Team$outboundSchema.parse(team));

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -41,7 +41,7 @@ export type AttachFilesystemRequest = {
 /** @internal */
 export const AttachFilesystemType2$inboundSchema: z.ZodNativeEnum<
   typeof AttachFilesystemType2
-> = z.nativeEnum(AttachFilesystemType2);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(AttachFilesystemType2));
 /** @internal */
 export const AttachFilesystemType2$outboundSchema: z.ZodNativeEnum<
   typeof AttachFilesystemType2
@@ -52,13 +52,15 @@ export const AttachFilesystemAttributes2$inboundSchema: z.ZodType<
   AttachFilesystemAttributes2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  server_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "server_id": "serverId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    server_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "server_id": "serverId",
+    });
+  })
+);
 /** @internal */
 export type AttachFilesystemAttributes2$Outbound = {
   server_id: string;
@@ -69,13 +71,15 @@ export const AttachFilesystemAttributes2$outboundSchema: z.ZodType<
   AttachFilesystemAttributes2$Outbound,
   z.ZodTypeDef,
   AttachFilesystemAttributes2
-> = z.object({
-  serverId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    serverId: "server_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    serverId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      serverId: "server_id",
+    });
+  })
+);
 
 export function attachFilesystemAttributes2ToJSON(
   attachFilesystemAttributes2: AttachFilesystemAttributes2,
@@ -101,10 +105,12 @@ export const AttachFilesystemData2$inboundSchema: z.ZodType<
   AttachFilesystemData2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: AttachFilesystemType2$inboundSchema,
-  attributes: z.lazy(() => AttachFilesystemAttributes2$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: AttachFilesystemType2$inboundSchema,
+    attributes: z.lazy(() => AttachFilesystemAttributes2$inboundSchema),
+  })
+);
 /** @internal */
 export type AttachFilesystemData2$Outbound = {
   type: string;
@@ -116,10 +122,12 @@ export const AttachFilesystemData2$outboundSchema: z.ZodType<
   AttachFilesystemData2$Outbound,
   z.ZodTypeDef,
   AttachFilesystemData2
-> = z.object({
-  type: AttachFilesystemType2$outboundSchema,
-  attributes: z.lazy(() => AttachFilesystemAttributes2$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: AttachFilesystemType2$outboundSchema,
+    attributes: z.lazy(() => AttachFilesystemAttributes2$outboundSchema),
+  })
+);
 
 export function attachFilesystemData2ToJSON(
   attachFilesystemData2: AttachFilesystemData2,
@@ -143,9 +151,11 @@ export const AttachFilesystemRequestBody2$inboundSchema: z.ZodType<
   AttachFilesystemRequestBody2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => AttachFilesystemData2$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => AttachFilesystemData2$inboundSchema),
+  })
+);
 /** @internal */
 export type AttachFilesystemRequestBody2$Outbound = {
   data: AttachFilesystemData2$Outbound;
@@ -156,9 +166,11 @@ export const AttachFilesystemRequestBody2$outboundSchema: z.ZodType<
   AttachFilesystemRequestBody2$Outbound,
   z.ZodTypeDef,
   AttachFilesystemRequestBody2
-> = z.object({
-  data: z.lazy(() => AttachFilesystemData2$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => AttachFilesystemData2$outboundSchema),
+  })
+);
 
 export function attachFilesystemRequestBody2ToJSON(
   attachFilesystemRequestBody2: AttachFilesystemRequestBody2,
@@ -184,15 +196,17 @@ export const AttachFilesystemRequest$inboundSchema: z.ZodType<
   AttachFilesystemRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  filesystem_id: z.string(),
-  RequestBody: z.lazy(() => AttachFilesystemRequestBody2$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "filesystem_id": "filesystemId",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    filesystem_id: z.string(),
+    RequestBody: z.lazy(() => AttachFilesystemRequestBody2$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "filesystem_id": "filesystemId",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type AttachFilesystemRequest$Outbound = {
   filesystem_id: string;
@@ -204,15 +218,17 @@ export const AttachFilesystemRequest$outboundSchema: z.ZodType<
   AttachFilesystemRequest$Outbound,
   z.ZodTypeDef,
   AttachFilesystemRequest
-> = z.object({
-  filesystemId: z.string(),
-  requestBody: z.lazy(() => AttachFilesystemRequestBody2$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    filesystemId: "filesystem_id",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    filesystemId: z.string(),
+    requestBody: z.lazy(() => AttachFilesystemRequestBody2$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      filesystemId: "filesystem_id",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function attachFilesystemRequestToJSON(
   attachFilesystemRequest: AttachFilesystemRequest,

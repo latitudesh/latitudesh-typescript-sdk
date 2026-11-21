@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -65,7 +65,7 @@ export type UpdateFirewallRequest = {
 /** @internal */
 export const UpdateFirewallType2$inboundSchema: z.ZodNativeEnum<
   typeof UpdateFirewallType2
-> = z.nativeEnum(UpdateFirewallType2);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(UpdateFirewallType2));
 /** @internal */
 export const UpdateFirewallType2$outboundSchema: z.ZodNativeEnum<
   typeof UpdateFirewallType2
@@ -74,7 +74,7 @@ export const UpdateFirewallType2$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const UpdateFirewallProtocol2$inboundSchema: z.ZodNativeEnum<
   typeof UpdateFirewallProtocol2
-> = z.nativeEnum(UpdateFirewallProtocol2);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(UpdateFirewallProtocol2));
 /** @internal */
 export const UpdateFirewallProtocol2$outboundSchema: z.ZodNativeEnum<
   typeof UpdateFirewallProtocol2
@@ -85,13 +85,15 @@ export const UpdateFirewallRule2$inboundSchema: z.ZodType<
   UpdateFirewallRule2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  from: z.string().optional(),
-  to: z.string().optional(),
-  protocol: UpdateFirewallProtocol2$inboundSchema.optional(),
-  port: z.string().optional(),
-  description: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    from: z.string().optional(),
+    to: z.string().optional(),
+    protocol: UpdateFirewallProtocol2$inboundSchema.optional(),
+    port: z.string().optional(),
+    description: z.nullable(z.string()).optional(),
+  })
+);
 /** @internal */
 export type UpdateFirewallRule2$Outbound = {
   from?: string | undefined;
@@ -106,13 +108,15 @@ export const UpdateFirewallRule2$outboundSchema: z.ZodType<
   UpdateFirewallRule2$Outbound,
   z.ZodTypeDef,
   UpdateFirewallRule2
-> = z.object({
-  from: z.string().optional(),
-  to: z.string().optional(),
-  protocol: UpdateFirewallProtocol2$outboundSchema.optional(),
-  port: z.string().optional(),
-  description: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    from: z.string().optional(),
+    to: z.string().optional(),
+    protocol: UpdateFirewallProtocol2$outboundSchema.optional(),
+    port: z.string().optional(),
+    description: z.nullable(z.string()).optional(),
+  })
+);
 
 export function updateFirewallRule2ToJSON(
   updateFirewallRule2: UpdateFirewallRule2,
@@ -136,11 +140,13 @@ export const UpdateFirewallAttributes2$inboundSchema: z.ZodType<
   UpdateFirewallAttributes2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string().optional(),
-  tags: z.array(z.string()).optional(),
-  rules: z.array(z.lazy(() => UpdateFirewallRule2$inboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    tags: z.array(z.string()).optional(),
+    rules: z.array(z.lazy(() => UpdateFirewallRule2$inboundSchema)).optional(),
+  })
+);
 /** @internal */
 export type UpdateFirewallAttributes2$Outbound = {
   name?: string | undefined;
@@ -153,11 +159,13 @@ export const UpdateFirewallAttributes2$outboundSchema: z.ZodType<
   UpdateFirewallAttributes2$Outbound,
   z.ZodTypeDef,
   UpdateFirewallAttributes2
-> = z.object({
-  name: z.string().optional(),
-  tags: z.array(z.string()).optional(),
-  rules: z.array(z.lazy(() => UpdateFirewallRule2$outboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    tags: z.array(z.string()).optional(),
+    rules: z.array(z.lazy(() => UpdateFirewallRule2$outboundSchema)).optional(),
+  })
+);
 
 export function updateFirewallAttributes2ToJSON(
   updateFirewallAttributes2: UpdateFirewallAttributes2,
@@ -181,10 +189,13 @@ export const UpdateFirewallData2$inboundSchema: z.ZodType<
   UpdateFirewallData2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: UpdateFirewallType2$inboundSchema,
-  attributes: z.lazy(() => UpdateFirewallAttributes2$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: UpdateFirewallType2$inboundSchema,
+    attributes: z.lazy(() => UpdateFirewallAttributes2$inboundSchema)
+      .optional(),
+  })
+);
 /** @internal */
 export type UpdateFirewallData2$Outbound = {
   type: string;
@@ -196,10 +207,13 @@ export const UpdateFirewallData2$outboundSchema: z.ZodType<
   UpdateFirewallData2$Outbound,
   z.ZodTypeDef,
   UpdateFirewallData2
-> = z.object({
-  type: UpdateFirewallType2$outboundSchema,
-  attributes: z.lazy(() => UpdateFirewallAttributes2$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: UpdateFirewallType2$outboundSchema,
+    attributes: z.lazy(() => UpdateFirewallAttributes2$outboundSchema)
+      .optional(),
+  })
+);
 
 export function updateFirewallData2ToJSON(
   updateFirewallData2: UpdateFirewallData2,
@@ -223,9 +237,11 @@ export const UpdateFirewallRequestBody2$inboundSchema: z.ZodType<
   UpdateFirewallRequestBody2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => UpdateFirewallData2$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => UpdateFirewallData2$inboundSchema),
+  })
+);
 /** @internal */
 export type UpdateFirewallRequestBody2$Outbound = {
   data: UpdateFirewallData2$Outbound;
@@ -236,9 +252,11 @@ export const UpdateFirewallRequestBody2$outboundSchema: z.ZodType<
   UpdateFirewallRequestBody2$Outbound,
   z.ZodTypeDef,
   UpdateFirewallRequestBody2
-> = z.object({
-  data: z.lazy(() => UpdateFirewallData2$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => UpdateFirewallData2$outboundSchema),
+  })
+);
 
 export function updateFirewallRequestBody2ToJSON(
   updateFirewallRequestBody2: UpdateFirewallRequestBody2,
@@ -262,15 +280,17 @@ export const UpdateFirewallRequest$inboundSchema: z.ZodType<
   UpdateFirewallRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  firewall_id: z.string(),
-  RequestBody: z.lazy(() => UpdateFirewallRequestBody2$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "firewall_id": "firewallId",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    firewall_id: z.string(),
+    RequestBody: z.lazy(() => UpdateFirewallRequestBody2$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "firewall_id": "firewallId",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type UpdateFirewallRequest$Outbound = {
   firewall_id: string;
@@ -282,15 +302,17 @@ export const UpdateFirewallRequest$outboundSchema: z.ZodType<
   UpdateFirewallRequest$Outbound,
   z.ZodTypeDef,
   UpdateFirewallRequest
-> = z.object({
-  firewallId: z.string(),
-  requestBody: z.lazy(() => UpdateFirewallRequestBody2$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    firewallId: "firewall_id",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    firewallId: z.string(),
+    requestBody: z.lazy(() => UpdateFirewallRequestBody2$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      firewallId: "firewall_id",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function updateFirewallRequestToJSON(
   updateFirewallRequest: UpdateFirewallRequest,

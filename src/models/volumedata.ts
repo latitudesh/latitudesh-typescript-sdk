@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -177,7 +177,7 @@ export type VolumeData = {
 /** @internal */
 export const VolumeDataType$inboundSchema: z.ZodNativeEnum<
   typeof VolumeDataType
-> = z.nativeEnum(VolumeDataType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(VolumeDataType));
 /** @internal */
 export const VolumeDataType$outboundSchema: z.ZodNativeEnum<
   typeof VolumeDataType
@@ -188,9 +188,11 @@ export const Initiator$inboundSchema: z.ZodType<
   Initiator,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  nqn: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    nqn: z.string().optional(),
+  })
+);
 /** @internal */
 export type Initiator$Outbound = {
   nqn?: string | undefined;
@@ -201,9 +203,11 @@ export const Initiator$outboundSchema: z.ZodType<
   Initiator$Outbound,
   z.ZodTypeDef,
   Initiator
-> = z.object({
-  nqn: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    nqn: z.string().optional(),
+  })
+);
 
 export function initiatorToJSON(initiator: Initiator): string {
   return JSON.stringify(Initiator$outboundSchema.parse(initiator));
@@ -220,18 +224,20 @@ export function initiatorFromJSON(
 
 /** @internal */
 export const Mapping$inboundSchema: z.ZodType<Mapping, z.ZodTypeDef, unknown> =
-  z.object({
-    server_id: z.nullable(z.string()).optional(),
-    status: z.nullable(z.string()).optional(),
-    nqn: z.nullable(z.string()).optional(),
-    nsid: z.nullable(z.number().int()).optional(),
-    host_cidr: z.nullable(z.string()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "server_id": "serverId",
-      "host_cidr": "hostCidr",
-    });
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      server_id: z.nullable(z.string()).optional(),
+      status: z.nullable(z.string()).optional(),
+      nqn: z.nullable(z.string()).optional(),
+      nsid: z.nullable(z.number().int()).optional(),
+      host_cidr: z.nullable(z.string()).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "server_id": "serverId",
+        "host_cidr": "hostCidr",
+      });
+    })
+  );
 /** @internal */
 export type Mapping$Outbound = {
   server_id?: string | null | undefined;
@@ -246,18 +252,20 @@ export const Mapping$outboundSchema: z.ZodType<
   Mapping$Outbound,
   z.ZodTypeDef,
   Mapping
-> = z.object({
-  serverId: z.nullable(z.string()).optional(),
-  status: z.nullable(z.string()).optional(),
-  nqn: z.nullable(z.string()).optional(),
-  nsid: z.nullable(z.number().int()).optional(),
-  hostCidr: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    serverId: "server_id",
-    hostCidr: "host_cidr",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    serverId: z.nullable(z.string()).optional(),
+    status: z.nullable(z.string()).optional(),
+    nqn: z.nullable(z.string()).optional(),
+    nsid: z.nullable(z.number().int()).optional(),
+    hostCidr: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      serverId: "server_id",
+      hostCidr: "host_cidr",
+    });
+  })
+);
 
 export function mappingToJSON(mapping: Mapping): string {
   return JSON.stringify(Mapping$outboundSchema.parse(mapping));
@@ -277,20 +285,22 @@ export const VolumeDataStorageNetwork$inboundSchema: z.ZodType<
   VolumeDataStorageNetwork,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  vid: z.nullable(z.number().int()).optional(),
-  host_cidr: z.nullable(z.string()).optional(),
-  gateway: z.nullable(z.string()).optional(),
-  routes: z.nullable(z.array(z.string())).optional(),
-  block_gateway: z.nullable(z.string()).optional(),
-  block_port: z.nullable(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "host_cidr": "hostCidr",
-    "block_gateway": "blockGateway",
-    "block_port": "blockPort",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    vid: z.nullable(z.number().int()).optional(),
+    host_cidr: z.nullable(z.string()).optional(),
+    gateway: z.nullable(z.string()).optional(),
+    routes: z.nullable(z.array(z.string())).optional(),
+    block_gateway: z.nullable(z.string()).optional(),
+    block_port: z.nullable(z.number().int()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "host_cidr": "hostCidr",
+      "block_gateway": "blockGateway",
+      "block_port": "blockPort",
+    });
+  })
+);
 /** @internal */
 export type VolumeDataStorageNetwork$Outbound = {
   vid?: number | null | undefined;
@@ -306,20 +316,22 @@ export const VolumeDataStorageNetwork$outboundSchema: z.ZodType<
   VolumeDataStorageNetwork$Outbound,
   z.ZodTypeDef,
   VolumeDataStorageNetwork
-> = z.object({
-  vid: z.nullable(z.number().int()).optional(),
-  hostCidr: z.nullable(z.string()).optional(),
-  gateway: z.nullable(z.string()).optional(),
-  routes: z.nullable(z.array(z.string())).optional(),
-  blockGateway: z.nullable(z.string()).optional(),
-  blockPort: z.nullable(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    hostCidr: "host_cidr",
-    blockGateway: "block_gateway",
-    blockPort: "block_port",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    vid: z.nullable(z.number().int()).optional(),
+    hostCidr: z.nullable(z.string()).optional(),
+    gateway: z.nullable(z.string()).optional(),
+    routes: z.nullable(z.array(z.string())).optional(),
+    blockGateway: z.nullable(z.string()).optional(),
+    blockPort: z.nullable(z.number().int()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      hostCidr: "host_cidr",
+      blockGateway: "block_gateway",
+      blockPort: "block_port",
+    });
+  })
+);
 
 export function volumeDataStorageNetworkToJSON(
   volumeDataStorageNetwork: VolumeDataStorageNetwork,
@@ -339,22 +351,24 @@ export function volumeDataStorageNetworkFromJSON(
 }
 
 /** @internal */
-export const Block$inboundSchema: z.ZodType<Block, z.ZodTypeDef, unknown> = z
-  .object({
-    status: z.nullable(z.string()).optional(),
-    nqn: z.nullable(z.string()).optional(),
-    nsid: z.nullable(z.number().int()).optional(),
-    server_id: z.nullable(z.string()).optional(),
-    mappings: z.array(z.lazy(() => Mapping$inboundSchema)).optional(),
-    storage_network: z.nullable(
-      z.lazy(() => VolumeDataStorageNetwork$inboundSchema),
-    ).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "server_id": "serverId",
-      "storage_network": "storageNetwork",
-    });
-  });
+export const Block$inboundSchema: z.ZodType<Block, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      status: z.nullable(z.string()).optional(),
+      nqn: z.nullable(z.string()).optional(),
+      nsid: z.nullable(z.number().int()).optional(),
+      server_id: z.nullable(z.string()).optional(),
+      mappings: z.array(z.lazy(() => Mapping$inboundSchema)).optional(),
+      storage_network: z.nullable(
+        z.lazy(() => VolumeDataStorageNetwork$inboundSchema),
+      ).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "server_id": "serverId",
+        "storage_network": "storageNetwork",
+      });
+    })
+  );
 /** @internal */
 export type Block$Outbound = {
   status?: string | null | undefined;
@@ -370,21 +384,23 @@ export const Block$outboundSchema: z.ZodType<
   Block$Outbound,
   z.ZodTypeDef,
   Block
-> = z.object({
-  status: z.nullable(z.string()).optional(),
-  nqn: z.nullable(z.string()).optional(),
-  nsid: z.nullable(z.number().int()).optional(),
-  serverId: z.nullable(z.string()).optional(),
-  mappings: z.array(z.lazy(() => Mapping$outboundSchema)).optional(),
-  storageNetwork: z.nullable(
-    z.lazy(() => VolumeDataStorageNetwork$outboundSchema),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    serverId: "server_id",
-    storageNetwork: "storage_network",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    status: z.nullable(z.string()).optional(),
+    nqn: z.nullable(z.string()).optional(),
+    nsid: z.nullable(z.number().int()).optional(),
+    serverId: z.nullable(z.string()).optional(),
+    mappings: z.array(z.lazy(() => Mapping$outboundSchema)).optional(),
+    storageNetwork: z.nullable(
+      z.lazy(() => VolumeDataStorageNetwork$outboundSchema),
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      serverId: "server_id",
+      storageNetwork: "storage_network",
+    });
+  })
+);
 
 export function blockToJSON(block: Block): string {
   return JSON.stringify(Block$outboundSchema.parse(block));
@@ -404,12 +420,14 @@ export const VolumeDataSite$inboundSchema: z.ZodType<
   VolumeDataSite,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  slug: z.string().optional(),
-  facility: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    name: z.string().optional(),
+    slug: z.string().optional(),
+    facility: z.string().optional(),
+  })
+);
 /** @internal */
 export type VolumeDataSite$Outbound = {
   id?: string | undefined;
@@ -423,12 +441,14 @@ export const VolumeDataSite$outboundSchema: z.ZodType<
   VolumeDataSite$Outbound,
   z.ZodTypeDef,
   VolumeDataSite
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  slug: z.string().optional(),
-  facility: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    name: z.string().optional(),
+    slug: z.string().optional(),
+    facility: z.string().optional(),
+  })
+);
 
 export function volumeDataSiteToJSON(volumeDataSite: VolumeDataSite): string {
   return JSON.stringify(VolumeDataSite$outboundSchema.parse(volumeDataSite));
@@ -448,11 +468,13 @@ export const VolumeDataRegion$inboundSchema: z.ZodType<
   VolumeDataRegion,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  city: z.nullable(z.string()).optional(),
-  country: z.nullable(z.string()).optional(),
-  site: z.nullable(z.lazy(() => VolumeDataSite$inboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    city: z.nullable(z.string()).optional(),
+    country: z.nullable(z.string()).optional(),
+    site: z.nullable(z.lazy(() => VolumeDataSite$inboundSchema)).optional(),
+  })
+);
 /** @internal */
 export type VolumeDataRegion$Outbound = {
   city?: string | null | undefined;
@@ -465,11 +487,13 @@ export const VolumeDataRegion$outboundSchema: z.ZodType<
   VolumeDataRegion$Outbound,
   z.ZodTypeDef,
   VolumeDataRegion
-> = z.object({
-  city: z.nullable(z.string()).optional(),
-  country: z.nullable(z.string()).optional(),
-  site: z.nullable(z.lazy(() => VolumeDataSite$outboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    city: z.nullable(z.string()).optional(),
+    country: z.nullable(z.string()).optional(),
+    site: z.nullable(z.lazy(() => VolumeDataSite$outboundSchema)).optional(),
+  })
+);
 
 export function volumeDataRegionToJSON(
   volumeDataRegion: VolumeDataRegion,
@@ -493,34 +517,36 @@ export const VolumeDataAttributes$inboundSchema: z.ZodType<
   VolumeDataAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string().optional(),
-  size_in_gb: z.number().int().optional(),
-  created_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  namespace_id: z.nullable(z.number().int()).optional(),
-  connector_id: z.nullable(z.string()).optional(),
-  initiators: z.nullable(z.array(z.lazy(() => Initiator$inboundSchema)))
-    .optional(),
-  nguid: z.nullable(z.string()).optional(),
-  block: z.nullable(z.lazy(() => Block$inboundSchema)).optional(),
-  keyring: z.nullable(z.string()).optional(),
-  cluster_user: z.nullable(z.string()).optional(),
-  volume_path: z.nullable(z.string()).optional(),
-  region: z.nullable(z.lazy(() => VolumeDataRegion$inboundSchema)).optional(),
-  project: ProjectInclude$inboundSchema.optional(),
-  team: TeamInclude$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "size_in_gb": "sizeInGb",
-    "created_at": "createdAt",
-    "namespace_id": "namespaceId",
-    "connector_id": "connectorId",
-    "cluster_user": "clusterUser",
-    "volume_path": "volumePath",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    size_in_gb: z.number().int().optional(),
+    created_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    namespace_id: z.nullable(z.number().int()).optional(),
+    connector_id: z.nullable(z.string()).optional(),
+    initiators: z.nullable(z.array(z.lazy(() => Initiator$inboundSchema)))
+      .optional(),
+    nguid: z.nullable(z.string()).optional(),
+    block: z.nullable(z.lazy(() => Block$inboundSchema)).optional(),
+    keyring: z.nullable(z.string()).optional(),
+    cluster_user: z.nullable(z.string()).optional(),
+    volume_path: z.nullable(z.string()).optional(),
+    region: z.nullable(z.lazy(() => VolumeDataRegion$inboundSchema)).optional(),
+    project: ProjectInclude$inboundSchema.optional(),
+    team: TeamInclude$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "size_in_gb": "sizeInGb",
+      "created_at": "createdAt",
+      "namespace_id": "namespaceId",
+      "connector_id": "connectorId",
+      "cluster_user": "clusterUser",
+      "volume_path": "volumePath",
+    });
+  })
+);
 /** @internal */
 export type VolumeDataAttributes$Outbound = {
   name?: string | undefined;
@@ -544,32 +570,35 @@ export const VolumeDataAttributes$outboundSchema: z.ZodType<
   VolumeDataAttributes$Outbound,
   z.ZodTypeDef,
   VolumeDataAttributes
-> = z.object({
-  name: z.string().optional(),
-  sizeInGb: z.number().int().optional(),
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  namespaceId: z.nullable(z.number().int()).optional(),
-  connectorId: z.nullable(z.string()).optional(),
-  initiators: z.nullable(z.array(z.lazy(() => Initiator$outboundSchema)))
-    .optional(),
-  nguid: z.nullable(z.string()).optional(),
-  block: z.nullable(z.lazy(() => Block$outboundSchema)).optional(),
-  keyring: z.nullable(z.string()).optional(),
-  clusterUser: z.nullable(z.string()).optional(),
-  volumePath: z.nullable(z.string()).optional(),
-  region: z.nullable(z.lazy(() => VolumeDataRegion$outboundSchema)).optional(),
-  project: ProjectInclude$outboundSchema.optional(),
-  team: TeamInclude$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    sizeInGb: "size_in_gb",
-    createdAt: "created_at",
-    namespaceId: "namespace_id",
-    connectorId: "connector_id",
-    clusterUser: "cluster_user",
-    volumePath: "volume_path",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    sizeInGb: z.number().int().optional(),
+    createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    namespaceId: z.nullable(z.number().int()).optional(),
+    connectorId: z.nullable(z.string()).optional(),
+    initiators: z.nullable(z.array(z.lazy(() => Initiator$outboundSchema)))
+      .optional(),
+    nguid: z.nullable(z.string()).optional(),
+    block: z.nullable(z.lazy(() => Block$outboundSchema)).optional(),
+    keyring: z.nullable(z.string()).optional(),
+    clusterUser: z.nullable(z.string()).optional(),
+    volumePath: z.nullable(z.string()).optional(),
+    region: z.nullable(z.lazy(() => VolumeDataRegion$outboundSchema))
+      .optional(),
+    project: ProjectInclude$outboundSchema.optional(),
+    team: TeamInclude$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      sizeInGb: "size_in_gb",
+      createdAt: "created_at",
+      namespaceId: "namespace_id",
+      connectorId: "connector_id",
+      clusterUser: "cluster_user",
+      volumePath: "volume_path",
+    });
+  })
+);
 
 export function volumeDataAttributesToJSON(
   volumeDataAttributes: VolumeDataAttributes,
@@ -593,11 +622,13 @@ export const VolumeData$inboundSchema: z.ZodType<
   VolumeData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  type: VolumeDataType$inboundSchema.optional(),
-  attributes: z.lazy(() => VolumeDataAttributes$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: VolumeDataType$inboundSchema.optional(),
+    attributes: z.lazy(() => VolumeDataAttributes$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type VolumeData$Outbound = {
   id?: string | undefined;
@@ -610,11 +641,13 @@ export const VolumeData$outboundSchema: z.ZodType<
   VolumeData$Outbound,
   z.ZodTypeDef,
   VolumeData
-> = z.object({
-  id: z.string().optional(),
-  type: VolumeDataType$outboundSchema.optional(),
-  attributes: z.lazy(() => VolumeDataAttributes$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: VolumeDataType$outboundSchema.optional(),
+    attributes: z.lazy(() => VolumeDataAttributes$outboundSchema).optional(),
+  })
+);
 
 export function volumeDataToJSON(volumeData: VolumeData): string {
   return JSON.stringify(VolumeData$outboundSchema.parse(volumeData));

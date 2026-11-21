@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import {
   ClusterNodeGroupData,
@@ -27,9 +27,11 @@ export const ClusterNodeGroupsMeta$inboundSchema: z.ZodType<
   ClusterNodeGroupsMeta,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  total: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    total: z.number().int().optional(),
+  })
+);
 /** @internal */
 export type ClusterNodeGroupsMeta$Outbound = {
   total?: number | undefined;
@@ -40,9 +42,11 @@ export const ClusterNodeGroupsMeta$outboundSchema: z.ZodType<
   ClusterNodeGroupsMeta$Outbound,
   z.ZodTypeDef,
   ClusterNodeGroupsMeta
-> = z.object({
-  total: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    total: z.number().int().optional(),
+  })
+);
 
 export function clusterNodeGroupsMetaToJSON(
   clusterNodeGroupsMeta: ClusterNodeGroupsMeta,
@@ -66,10 +70,12 @@ export const ClusterNodeGroups$inboundSchema: z.ZodType<
   ClusterNodeGroups,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.array(ClusterNodeGroupData$inboundSchema).optional(),
-  meta: z.lazy(() => ClusterNodeGroupsMeta$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(ClusterNodeGroupData$inboundSchema).optional(),
+    meta: z.lazy(() => ClusterNodeGroupsMeta$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type ClusterNodeGroups$Outbound = {
   data?: Array<ClusterNodeGroupData$Outbound> | undefined;
@@ -81,10 +87,12 @@ export const ClusterNodeGroups$outboundSchema: z.ZodType<
   ClusterNodeGroups$Outbound,
   z.ZodTypeDef,
   ClusterNodeGroups
-> = z.object({
-  data: z.array(ClusterNodeGroupData$outboundSchema).optional(),
-  meta: z.lazy(() => ClusterNodeGroupsMeta$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(ClusterNodeGroupData$outboundSchema).optional(),
+    meta: z.lazy(() => ClusterNodeGroupsMeta$outboundSchema).optional(),
+  })
+);
 
 export function clusterNodeGroupsToJSON(
   clusterNodeGroups: ClusterNodeGroups,

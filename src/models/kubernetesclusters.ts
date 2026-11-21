@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 import {
@@ -25,9 +25,11 @@ export const KubernetesClusters$inboundSchema: z.ZodType<
   KubernetesClusters,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.array(KubernetesClusterSummaryData$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(KubernetesClusterSummaryData$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type KubernetesClusters$Outbound = {
   data?: Array<KubernetesClusterSummaryData$Outbound> | undefined;
@@ -38,9 +40,11 @@ export const KubernetesClusters$outboundSchema: z.ZodType<
   KubernetesClusters$Outbound,
   z.ZodTypeDef,
   KubernetesClusters
-> = z.object({
-  data: z.array(KubernetesClusterSummaryData$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(KubernetesClusterSummaryData$outboundSchema).optional(),
+  })
+);
 
 export function kubernetesClustersToJSON(
   kubernetesClusters: KubernetesClusters,

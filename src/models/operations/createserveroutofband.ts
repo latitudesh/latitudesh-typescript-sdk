@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -40,7 +40,7 @@ export type CreateServerOutOfBandRequest = {
 /** @internal */
 export const CreateServerOutOfBandType2$inboundSchema: z.ZodNativeEnum<
   typeof CreateServerOutOfBandType2
-> = z.nativeEnum(CreateServerOutOfBandType2);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CreateServerOutOfBandType2));
 /** @internal */
 export const CreateServerOutOfBandType2$outboundSchema: z.ZodNativeEnum<
   typeof CreateServerOutOfBandType2
@@ -51,13 +51,15 @@ export const CreateServerOutOfBandAttributes2$inboundSchema: z.ZodType<
   CreateServerOutOfBandAttributes2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ssh_key_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "ssh_key_id": "sshKeyId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ssh_key_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ssh_key_id": "sshKeyId",
+    });
+  })
+);
 /** @internal */
 export type CreateServerOutOfBandAttributes2$Outbound = {
   ssh_key_id: string;
@@ -68,13 +70,15 @@ export const CreateServerOutOfBandAttributes2$outboundSchema: z.ZodType<
   CreateServerOutOfBandAttributes2$Outbound,
   z.ZodTypeDef,
   CreateServerOutOfBandAttributes2
-> = z.object({
-  sshKeyId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    sshKeyId: "ssh_key_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    sshKeyId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      sshKeyId: "ssh_key_id",
+    });
+  })
+);
 
 export function createServerOutOfBandAttributes2ToJSON(
   createServerOutOfBandAttributes2: CreateServerOutOfBandAttributes2,
@@ -100,11 +104,13 @@ export const CreateServerOutOfBandData2$inboundSchema: z.ZodType<
   CreateServerOutOfBandData2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: CreateServerOutOfBandType2$inboundSchema,
-  attributes: z.lazy(() => CreateServerOutOfBandAttributes2$inboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CreateServerOutOfBandType2$inboundSchema,
+    attributes: z.lazy(() => CreateServerOutOfBandAttributes2$inboundSchema)
+      .optional(),
+  })
+);
 /** @internal */
 export type CreateServerOutOfBandData2$Outbound = {
   type: string;
@@ -116,11 +122,13 @@ export const CreateServerOutOfBandData2$outboundSchema: z.ZodType<
   CreateServerOutOfBandData2$Outbound,
   z.ZodTypeDef,
   CreateServerOutOfBandData2
-> = z.object({
-  type: CreateServerOutOfBandType2$outboundSchema,
-  attributes: z.lazy(() => CreateServerOutOfBandAttributes2$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CreateServerOutOfBandType2$outboundSchema,
+    attributes: z.lazy(() => CreateServerOutOfBandAttributes2$outboundSchema)
+      .optional(),
+  })
+);
 
 export function createServerOutOfBandData2ToJSON(
   createServerOutOfBandData2: CreateServerOutOfBandData2,
@@ -144,9 +152,11 @@ export const CreateServerOutOfBandRequestBody2$inboundSchema: z.ZodType<
   CreateServerOutOfBandRequestBody2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => CreateServerOutOfBandData2$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => CreateServerOutOfBandData2$inboundSchema),
+  })
+);
 /** @internal */
 export type CreateServerOutOfBandRequestBody2$Outbound = {
   data: CreateServerOutOfBandData2$Outbound;
@@ -157,9 +167,11 @@ export const CreateServerOutOfBandRequestBody2$outboundSchema: z.ZodType<
   CreateServerOutOfBandRequestBody2$Outbound,
   z.ZodTypeDef,
   CreateServerOutOfBandRequestBody2
-> = z.object({
-  data: z.lazy(() => CreateServerOutOfBandData2$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => CreateServerOutOfBandData2$outboundSchema),
+  })
+);
 
 export function createServerOutOfBandRequestBody2ToJSON(
   createServerOutOfBandRequestBody2: CreateServerOutOfBandRequestBody2,
@@ -185,15 +197,17 @@ export const CreateServerOutOfBandRequest$inboundSchema: z.ZodType<
   CreateServerOutOfBandRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  server_id: z.string(),
-  RequestBody: z.lazy(() => CreateServerOutOfBandRequestBody2$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "server_id": "serverId",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    server_id: z.string(),
+    RequestBody: z.lazy(() => CreateServerOutOfBandRequestBody2$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "server_id": "serverId",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type CreateServerOutOfBandRequest$Outbound = {
   server_id: string;
@@ -205,15 +219,17 @@ export const CreateServerOutOfBandRequest$outboundSchema: z.ZodType<
   CreateServerOutOfBandRequest$Outbound,
   z.ZodTypeDef,
   CreateServerOutOfBandRequest
-> = z.object({
-  serverId: z.string(),
-  requestBody: z.lazy(() => CreateServerOutOfBandRequestBody2$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    serverId: "server_id",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    serverId: z.string(),
+    requestBody: z.lazy(() => CreateServerOutOfBandRequestBody2$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      serverId: "server_id",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function createServerOutOfBandRequestToJSON(
   createServerOutOfBandRequest: CreateServerOutOfBandRequest,

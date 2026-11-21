@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import {
   ApiKey,
@@ -25,7 +25,7 @@ export const ApiKeysMeta$inboundSchema: z.ZodType<
   ApiKeysMeta,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type ApiKeysMeta$Outbound = {};
 
@@ -34,7 +34,7 @@ export const ApiKeysMeta$outboundSchema: z.ZodType<
   ApiKeysMeta$Outbound,
   z.ZodTypeDef,
   ApiKeysMeta
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function apiKeysMetaToJSON(apiKeysMeta: ApiKeysMeta): string {
   return JSON.stringify(ApiKeysMeta$outboundSchema.parse(apiKeysMeta));
@@ -51,10 +51,12 @@ export function apiKeysMetaFromJSON(
 
 /** @internal */
 export const ApiKeys$inboundSchema: z.ZodType<ApiKeys, z.ZodTypeDef, unknown> =
-  z.object({
-    data: z.array(ApiKey$inboundSchema).optional(),
-    meta: z.lazy(() => ApiKeysMeta$inboundSchema).optional(),
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      data: z.array(ApiKey$inboundSchema).optional(),
+      meta: z.lazy(() => ApiKeysMeta$inboundSchema).optional(),
+    })
+  );
 /** @internal */
 export type ApiKeys$Outbound = {
   data?: Array<ApiKey$Outbound> | undefined;
@@ -66,10 +68,12 @@ export const ApiKeys$outboundSchema: z.ZodType<
   ApiKeys$Outbound,
   z.ZodTypeDef,
   ApiKeys
-> = z.object({
-  data: z.array(ApiKey$outboundSchema).optional(),
-  meta: z.lazy(() => ApiKeysMeta$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(ApiKey$outboundSchema).optional(),
+    meta: z.lazy(() => ApiKeysMeta$outboundSchema).optional(),
+  })
+);
 
 export function apiKeysToJSON(apiKeys: ApiKeys): string {
   return JSON.stringify(ApiKeys$outboundSchema.parse(apiKeys));

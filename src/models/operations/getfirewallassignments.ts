@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as models from "../index.js";
@@ -33,17 +33,19 @@ export const GetFirewallAssignmentsRequest$inboundSchema: z.ZodType<
   GetFirewallAssignmentsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  firewall_id: z.string(),
-  "page[size]": z.number().int().default(20),
-  "page[number]": z.number().int().default(1),
-}).transform((v) => {
-  return remap$(v, {
-    "firewall_id": "firewallId",
-    "page[size]": "pageSize",
-    "page[number]": "pageNumber",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    firewall_id: z.string(),
+    "page[size]": z.number().int().default(20),
+    "page[number]": z.number().int().default(1),
+  }).transform((v) => {
+    return remap$(v, {
+      "firewall_id": "firewallId",
+      "page[size]": "pageSize",
+      "page[number]": "pageNumber",
+    });
+  })
+);
 /** @internal */
 export type GetFirewallAssignmentsRequest$Outbound = {
   firewall_id: string;
@@ -56,17 +58,19 @@ export const GetFirewallAssignmentsRequest$outboundSchema: z.ZodType<
   GetFirewallAssignmentsRequest$Outbound,
   z.ZodTypeDef,
   GetFirewallAssignmentsRequest
-> = z.object({
-  firewallId: z.string(),
-  pageSize: z.number().int().default(20),
-  pageNumber: z.number().int().default(1),
-}).transform((v) => {
-  return remap$(v, {
-    firewallId: "firewall_id",
-    pageSize: "page[size]",
-    pageNumber: "page[number]",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    firewallId: z.string(),
+    pageSize: z.number().int().default(20),
+    pageNumber: z.number().int().default(1),
+  }).transform((v) => {
+    return remap$(v, {
+      firewallId: "firewall_id",
+      pageSize: "page[size]",
+      pageNumber: "page[number]",
+    });
+  })
+);
 
 export function getFirewallAssignmentsRequestToJSON(
   getFirewallAssignmentsRequest: GetFirewallAssignmentsRequest,
@@ -92,13 +96,15 @@ export const GetFirewallAssignmentsResponse$inboundSchema: z.ZodType<
   GetFirewallAssignmentsResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  Result: models.FirewallAssignments$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "Result": "result",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    Result: models.FirewallAssignments$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "Result": "result",
+    });
+  })
+);
 /** @internal */
 export type GetFirewallAssignmentsResponse$Outbound = {
   Result: models.FirewallAssignments$Outbound;
@@ -109,13 +115,15 @@ export const GetFirewallAssignmentsResponse$outboundSchema: z.ZodType<
   GetFirewallAssignmentsResponse$Outbound,
   z.ZodTypeDef,
   GetFirewallAssignmentsResponse
-> = z.object({
-  result: models.FirewallAssignments$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    result: "Result",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    result: models.FirewallAssignments$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      result: "Result",
+    });
+  })
+);
 
 export function getFirewallAssignmentsResponseToJSON(
   getFirewallAssignmentsResponse: GetFirewallAssignmentsResponse,

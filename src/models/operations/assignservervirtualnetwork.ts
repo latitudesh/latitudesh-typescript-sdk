@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -33,7 +33,9 @@ export type AssignServerVirtualNetworkRequest = {
 /** @internal */
 export const AssignServerVirtualNetworkType2$inboundSchema: z.ZodNativeEnum<
   typeof AssignServerVirtualNetworkType2
-> = z.nativeEnum(AssignServerVirtualNetworkType2);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(AssignServerVirtualNetworkType2)
+);
 /** @internal */
 export const AssignServerVirtualNetworkType2$outboundSchema: z.ZodNativeEnum<
   typeof AssignServerVirtualNetworkType2
@@ -44,15 +46,17 @@ export const AssignServerVirtualNetworkAttributes2$inboundSchema: z.ZodType<
   AssignServerVirtualNetworkAttributes2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  server_id: z.string(),
-  virtual_network_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "server_id": "serverId",
-    "virtual_network_id": "virtualNetworkId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    server_id: z.string(),
+    virtual_network_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "server_id": "serverId",
+      "virtual_network_id": "virtualNetworkId",
+    });
+  })
+);
 /** @internal */
 export type AssignServerVirtualNetworkAttributes2$Outbound = {
   server_id: string;
@@ -64,15 +68,17 @@ export const AssignServerVirtualNetworkAttributes2$outboundSchema: z.ZodType<
   AssignServerVirtualNetworkAttributes2$Outbound,
   z.ZodTypeDef,
   AssignServerVirtualNetworkAttributes2
-> = z.object({
-  serverId: z.string(),
-  virtualNetworkId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    serverId: "server_id",
-    virtualNetworkId: "virtual_network_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    serverId: z.string(),
+    virtualNetworkId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      serverId: "server_id",
+      virtualNetworkId: "virtual_network_id",
+    });
+  })
+);
 
 export function assignServerVirtualNetworkAttributes2ToJSON(
   assignServerVirtualNetworkAttributes2: AssignServerVirtualNetworkAttributes2,
@@ -99,11 +105,14 @@ export const AssignServerVirtualNetworkData2$inboundSchema: z.ZodType<
   AssignServerVirtualNetworkData2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: AssignServerVirtualNetworkType2$inboundSchema,
-  attributes: z.lazy(() => AssignServerVirtualNetworkAttributes2$inboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: AssignServerVirtualNetworkType2$inboundSchema,
+    attributes: z.lazy(() =>
+      AssignServerVirtualNetworkAttributes2$inboundSchema
+    ).optional(),
+  })
+);
 /** @internal */
 export type AssignServerVirtualNetworkData2$Outbound = {
   type: string;
@@ -115,11 +124,14 @@ export const AssignServerVirtualNetworkData2$outboundSchema: z.ZodType<
   AssignServerVirtualNetworkData2$Outbound,
   z.ZodTypeDef,
   AssignServerVirtualNetworkData2
-> = z.object({
-  type: AssignServerVirtualNetworkType2$outboundSchema,
-  attributes: z.lazy(() => AssignServerVirtualNetworkAttributes2$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: AssignServerVirtualNetworkType2$outboundSchema,
+    attributes: z.lazy(() =>
+      AssignServerVirtualNetworkAttributes2$outboundSchema
+    ).optional(),
+  })
+);
 
 export function assignServerVirtualNetworkData2ToJSON(
   assignServerVirtualNetworkData2: AssignServerVirtualNetworkData2,
@@ -145,9 +157,12 @@ export const AssignServerVirtualNetworkRequest$inboundSchema: z.ZodType<
   AssignServerVirtualNetworkRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => AssignServerVirtualNetworkData2$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => AssignServerVirtualNetworkData2$inboundSchema)
+      .optional(),
+  })
+);
 /** @internal */
 export type AssignServerVirtualNetworkRequest$Outbound = {
   data?: AssignServerVirtualNetworkData2$Outbound | undefined;
@@ -158,9 +173,12 @@ export const AssignServerVirtualNetworkRequest$outboundSchema: z.ZodType<
   AssignServerVirtualNetworkRequest$Outbound,
   z.ZodTypeDef,
   AssignServerVirtualNetworkRequest
-> = z.object({
-  data: z.lazy(() => AssignServerVirtualNetworkData2$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => AssignServerVirtualNetworkData2$outboundSchema)
+      .optional(),
+  })
+);
 
 export function assignServerVirtualNetworkRequestToJSON(
   assignServerVirtualNetworkRequest: AssignServerVirtualNetworkRequest,

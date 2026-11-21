@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -20,13 +20,15 @@ export const ListLksAvailableVersionsRequest$inboundSchema: z.ZodType<
   ListLksAvailableVersionsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "filter[site]": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "filter[site]": "filterSite",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "filter[site]": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "filter[site]": "filterSite",
+    });
+  })
+);
 /** @internal */
 export type ListLksAvailableVersionsRequest$Outbound = {
   "filter[site]"?: string | undefined;
@@ -37,13 +39,15 @@ export const ListLksAvailableVersionsRequest$outboundSchema: z.ZodType<
   ListLksAvailableVersionsRequest$Outbound,
   z.ZodTypeDef,
   ListLksAvailableVersionsRequest
-> = z.object({
-  filterSite: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    filterSite: "filter[site]",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    filterSite: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      filterSite: "filter[site]",
+    });
+  })
+);
 
 export function listLksAvailableVersionsRequestToJSON(
   listLksAvailableVersionsRequest: ListLksAvailableVersionsRequest,

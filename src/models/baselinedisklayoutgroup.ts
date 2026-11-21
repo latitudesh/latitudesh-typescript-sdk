@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -78,7 +78,9 @@ export type BaselineDiskLayoutGroup = {
 /** @internal */
 export const BaselineDiskLayoutGroupRole$inboundSchema: z.ZodNativeEnum<
   typeof BaselineDiskLayoutGroupRole
-> = z.nativeEnum(BaselineDiskLayoutGroupRole);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(BaselineDiskLayoutGroupRole)
+);
 /** @internal */
 export const BaselineDiskLayoutGroupRole$outboundSchema: z.ZodNativeEnum<
   typeof BaselineDiskLayoutGroupRole
@@ -87,7 +89,9 @@ export const BaselineDiskLayoutGroupRole$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const BaselineDiskLayoutGroupRaidLevel$inboundSchema: z.ZodNativeEnum<
   typeof BaselineDiskLayoutGroupRaidLevel
-> = z.nativeEnum(BaselineDiskLayoutGroupRaidLevel);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(BaselineDiskLayoutGroupRaidLevel)
+);
 /** @internal */
 export const BaselineDiskLayoutGroupRaidLevel$outboundSchema: z.ZodNativeEnum<
   typeof BaselineDiskLayoutGroupRaidLevel
@@ -96,7 +100,9 @@ export const BaselineDiskLayoutGroupRaidLevel$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const BaselineDiskLayoutGroupFilesystem$inboundSchema: z.ZodNativeEnum<
   typeof BaselineDiskLayoutGroupFilesystem
-> = z.nativeEnum(BaselineDiskLayoutGroupFilesystem);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(BaselineDiskLayoutGroupFilesystem)
+);
 /** @internal */
 export const BaselineDiskLayoutGroupFilesystem$outboundSchema: z.ZodNativeEnum<
   typeof BaselineDiskLayoutGroupFilesystem
@@ -107,20 +113,22 @@ export const BaselineDiskLayoutGroup$inboundSchema: z.ZodType<
   BaselineDiskLayoutGroup,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  role: BaselineDiskLayoutGroupRole$inboundSchema.optional(),
-  count: z.number().int().optional(),
-  raid_level: z.nullable(BaselineDiskLayoutGroupRaidLevel$inboundSchema)
-    .optional(),
-  filesystem: z.nullable(BaselineDiskLayoutGroupFilesystem$inboundSchema)
-    .optional(),
-  mount_point: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "raid_level": "raidLevel",
-    "mount_point": "mountPoint",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    role: BaselineDiskLayoutGroupRole$inboundSchema.optional(),
+    count: z.number().int().optional(),
+    raid_level: z.nullable(BaselineDiskLayoutGroupRaidLevel$inboundSchema)
+      .optional(),
+    filesystem: z.nullable(BaselineDiskLayoutGroupFilesystem$inboundSchema)
+      .optional(),
+    mount_point: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "raid_level": "raidLevel",
+      "mount_point": "mountPoint",
+    });
+  })
+);
 /** @internal */
 export type BaselineDiskLayoutGroup$Outbound = {
   role?: string | undefined;
@@ -135,20 +143,22 @@ export const BaselineDiskLayoutGroup$outboundSchema: z.ZodType<
   BaselineDiskLayoutGroup$Outbound,
   z.ZodTypeDef,
   BaselineDiskLayoutGroup
-> = z.object({
-  role: BaselineDiskLayoutGroupRole$outboundSchema.optional(),
-  count: z.number().int().optional(),
-  raidLevel: z.nullable(BaselineDiskLayoutGroupRaidLevel$outboundSchema)
-    .optional(),
-  filesystem: z.nullable(BaselineDiskLayoutGroupFilesystem$outboundSchema)
-    .optional(),
-  mountPoint: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    raidLevel: "raid_level",
-    mountPoint: "mount_point",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    role: BaselineDiskLayoutGroupRole$outboundSchema.optional(),
+    count: z.number().int().optional(),
+    raidLevel: z.nullable(BaselineDiskLayoutGroupRaidLevel$outboundSchema)
+      .optional(),
+    filesystem: z.nullable(BaselineDiskLayoutGroupFilesystem$outboundSchema)
+      .optional(),
+    mountPoint: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      raidLevel: "raid_level",
+      mountPoint: "mount_point",
+    });
+  })
+);
 
 export function baselineDiskLayoutGroupToJSON(
   baselineDiskLayoutGroup: BaselineDiskLayoutGroup,

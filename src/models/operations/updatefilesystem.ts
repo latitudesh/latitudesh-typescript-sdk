@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -50,7 +50,7 @@ export type UpdateFilesystemResponse = {
 /** @internal */
 export const UpdateFilesystemType2$inboundSchema: z.ZodNativeEnum<
   typeof UpdateFilesystemType2
-> = z.nativeEnum(UpdateFilesystemType2);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(UpdateFilesystemType2));
 /** @internal */
 export const UpdateFilesystemType2$outboundSchema: z.ZodNativeEnum<
   typeof UpdateFilesystemType2
@@ -61,13 +61,15 @@ export const UpdateFilesystemAttributes2$inboundSchema: z.ZodType<
   UpdateFilesystemAttributes2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  size_in_gb: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    "size_in_gb": "sizeInGb",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    size_in_gb: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      "size_in_gb": "sizeInGb",
+    });
+  })
+);
 /** @internal */
 export type UpdateFilesystemAttributes2$Outbound = {
   size_in_gb: number;
@@ -78,13 +80,15 @@ export const UpdateFilesystemAttributes2$outboundSchema: z.ZodType<
   UpdateFilesystemAttributes2$Outbound,
   z.ZodTypeDef,
   UpdateFilesystemAttributes2
-> = z.object({
-  sizeInGb: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    sizeInGb: "size_in_gb",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    sizeInGb: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      sizeInGb: "size_in_gb",
+    });
+  })
+);
 
 export function updateFilesystemAttributes2ToJSON(
   updateFilesystemAttributes2: UpdateFilesystemAttributes2,
@@ -110,11 +114,13 @@ export const UpdateFilesystemData2$inboundSchema: z.ZodType<
   UpdateFilesystemData2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  type: UpdateFilesystemType2$inboundSchema,
-  attributes: z.lazy(() => UpdateFilesystemAttributes2$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: UpdateFilesystemType2$inboundSchema,
+    attributes: z.lazy(() => UpdateFilesystemAttributes2$inboundSchema),
+  })
+);
 /** @internal */
 export type UpdateFilesystemData2$Outbound = {
   id?: string | undefined;
@@ -127,11 +133,13 @@ export const UpdateFilesystemData2$outboundSchema: z.ZodType<
   UpdateFilesystemData2$Outbound,
   z.ZodTypeDef,
   UpdateFilesystemData2
-> = z.object({
-  id: z.string().optional(),
-  type: UpdateFilesystemType2$outboundSchema,
-  attributes: z.lazy(() => UpdateFilesystemAttributes2$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: UpdateFilesystemType2$outboundSchema,
+    attributes: z.lazy(() => UpdateFilesystemAttributes2$outboundSchema),
+  })
+);
 
 export function updateFilesystemData2ToJSON(
   updateFilesystemData2: UpdateFilesystemData2,
@@ -155,9 +163,11 @@ export const UpdateFilesystemRequestBody2$inboundSchema: z.ZodType<
   UpdateFilesystemRequestBody2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => UpdateFilesystemData2$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => UpdateFilesystemData2$inboundSchema),
+  })
+);
 /** @internal */
 export type UpdateFilesystemRequestBody2$Outbound = {
   data: UpdateFilesystemData2$Outbound;
@@ -168,9 +178,11 @@ export const UpdateFilesystemRequestBody2$outboundSchema: z.ZodType<
   UpdateFilesystemRequestBody2$Outbound,
   z.ZodTypeDef,
   UpdateFilesystemRequestBody2
-> = z.object({
-  data: z.lazy(() => UpdateFilesystemData2$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => UpdateFilesystemData2$outboundSchema),
+  })
+);
 
 export function updateFilesystemRequestBody2ToJSON(
   updateFilesystemRequestBody2: UpdateFilesystemRequestBody2,
@@ -196,15 +208,17 @@ export const UpdateFilesystemRequest$inboundSchema: z.ZodType<
   UpdateFilesystemRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  filesystem_id: z.string(),
-  RequestBody: z.lazy(() => UpdateFilesystemRequestBody2$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "filesystem_id": "filesystemId",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    filesystem_id: z.string(),
+    RequestBody: z.lazy(() => UpdateFilesystemRequestBody2$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "filesystem_id": "filesystemId",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type UpdateFilesystemRequest$Outbound = {
   filesystem_id: string;
@@ -216,15 +230,17 @@ export const UpdateFilesystemRequest$outboundSchema: z.ZodType<
   UpdateFilesystemRequest$Outbound,
   z.ZodTypeDef,
   UpdateFilesystemRequest
-> = z.object({
-  filesystemId: z.string(),
-  requestBody: z.lazy(() => UpdateFilesystemRequestBody2$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    filesystemId: "filesystem_id",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    filesystemId: z.string(),
+    requestBody: z.lazy(() => UpdateFilesystemRequestBody2$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      filesystemId: "filesystem_id",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function updateFilesystemRequestToJSON(
   updateFilesystemRequest: UpdateFilesystemRequest,
@@ -248,9 +264,11 @@ export const UpdateFilesystemResponse$inboundSchema: z.ZodType<
   UpdateFilesystemResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: models.FilesystemData$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: models.FilesystemData$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type UpdateFilesystemResponse$Outbound = {
   data?: models.FilesystemData$Outbound | undefined;
@@ -261,9 +279,11 @@ export const UpdateFilesystemResponse$outboundSchema: z.ZodType<
   UpdateFilesystemResponse$Outbound,
   z.ZodTypeDef,
   UpdateFilesystemResponse
-> = z.object({
-  data: models.FilesystemData$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: models.FilesystemData$outboundSchema.optional(),
+  })
+);
 
 export function updateFilesystemResponseToJSON(
   updateFilesystemResponse: UpdateFilesystemResponse,

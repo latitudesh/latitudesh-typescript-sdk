@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import {
   BgpSessionData,
@@ -22,9 +22,11 @@ export const BgpSession$inboundSchema: z.ZodType<
   BgpSession,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: BgpSessionData$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: BgpSessionData$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type BgpSession$Outbound = {
   data?: BgpSessionData$Outbound | undefined;
@@ -35,9 +37,11 @@ export const BgpSession$outboundSchema: z.ZodType<
   BgpSession$Outbound,
   z.ZodTypeDef,
   BgpSession
-> = z.object({
-  data: BgpSessionData$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: BgpSessionData$outboundSchema.optional(),
+  })
+);
 
 export function bgpSessionToJSON(bgpSession: BgpSession): string {
   return JSON.stringify(BgpSession$outboundSchema.parse(bgpSession));

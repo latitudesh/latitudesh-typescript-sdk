@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -84,7 +84,9 @@ export type FilesystemAttachmentData = {
 /** @internal */
 export const FilesystemAttachmentDataType$inboundSchema: z.ZodNativeEnum<
   typeof FilesystemAttachmentDataType
-> = z.nativeEnum(FilesystemAttachmentDataType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(FilesystemAttachmentDataType)
+);
 /** @internal */
 export const FilesystemAttachmentDataType$outboundSchema: z.ZodNativeEnum<
   typeof FilesystemAttachmentDataType
@@ -93,7 +95,9 @@ export const FilesystemAttachmentDataType$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const FilesystemAttachmentDataStatus$inboundSchema: z.ZodNativeEnum<
   typeof FilesystemAttachmentDataStatus
-> = z.nativeEnum(FilesystemAttachmentDataStatus);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(FilesystemAttachmentDataStatus)
+);
 /** @internal */
 export const FilesystemAttachmentDataStatus$outboundSchema: z.ZodNativeEnum<
   typeof FilesystemAttachmentDataStatus
@@ -104,16 +108,18 @@ export const FilesystemAttachmentDataStorageNetwork$inboundSchema: z.ZodType<
   FilesystemAttachmentDataStorageNetwork,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  vid: z.nullable(z.number().int()).optional(),
-  host_cidr: z.string().optional(),
-  gateway: z.nullable(z.string()).optional(),
-  routes: z.nullable(z.array(z.string())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "host_cidr": "hostCidr",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    vid: z.nullable(z.number().int()).optional(),
+    host_cidr: z.string().optional(),
+    gateway: z.nullable(z.string()).optional(),
+    routes: z.nullable(z.array(z.string())).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "host_cidr": "hostCidr",
+    });
+  })
+);
 /** @internal */
 export type FilesystemAttachmentDataStorageNetwork$Outbound = {
   vid?: number | null | undefined;
@@ -127,16 +133,18 @@ export const FilesystemAttachmentDataStorageNetwork$outboundSchema: z.ZodType<
   FilesystemAttachmentDataStorageNetwork$Outbound,
   z.ZodTypeDef,
   FilesystemAttachmentDataStorageNetwork
-> = z.object({
-  vid: z.nullable(z.number().int()).optional(),
-  hostCidr: z.string().optional(),
-  gateway: z.nullable(z.string()).optional(),
-  routes: z.nullable(z.array(z.string())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    hostCidr: "host_cidr",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    vid: z.nullable(z.number().int()).optional(),
+    hostCidr: z.string().optional(),
+    gateway: z.nullable(z.string()).optional(),
+    routes: z.nullable(z.array(z.string())).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      hostCidr: "host_cidr",
+    });
+  })
+);
 
 export function filesystemAttachmentDataStorageNetworkToJSON(
   filesystemAttachmentDataStorageNetwork:
@@ -164,22 +172,24 @@ export const FilesystemAttachmentDataAttributes$inboundSchema: z.ZodType<
   FilesystemAttachmentDataAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  filesystem_id: z.string().optional(),
-  server_id: z.string().optional(),
-  status: FilesystemAttachmentDataStatus$inboundSchema.optional(),
-  failure_reason: z.nullable(z.string()).optional(),
-  storage_network: z.nullable(
-    z.lazy(() => FilesystemAttachmentDataStorageNetwork$inboundSchema),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "filesystem_id": "filesystemId",
-    "server_id": "serverId",
-    "failure_reason": "failureReason",
-    "storage_network": "storageNetwork",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    filesystem_id: z.string().optional(),
+    server_id: z.string().optional(),
+    status: FilesystemAttachmentDataStatus$inboundSchema.optional(),
+    failure_reason: z.nullable(z.string()).optional(),
+    storage_network: z.nullable(
+      z.lazy(() => FilesystemAttachmentDataStorageNetwork$inboundSchema),
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "filesystem_id": "filesystemId",
+      "server_id": "serverId",
+      "failure_reason": "failureReason",
+      "storage_network": "storageNetwork",
+    });
+  })
+);
 /** @internal */
 export type FilesystemAttachmentDataAttributes$Outbound = {
   filesystem_id?: string | undefined;
@@ -197,22 +207,24 @@ export const FilesystemAttachmentDataAttributes$outboundSchema: z.ZodType<
   FilesystemAttachmentDataAttributes$Outbound,
   z.ZodTypeDef,
   FilesystemAttachmentDataAttributes
-> = z.object({
-  filesystemId: z.string().optional(),
-  serverId: z.string().optional(),
-  status: FilesystemAttachmentDataStatus$outboundSchema.optional(),
-  failureReason: z.nullable(z.string()).optional(),
-  storageNetwork: z.nullable(
-    z.lazy(() => FilesystemAttachmentDataStorageNetwork$outboundSchema),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    filesystemId: "filesystem_id",
-    serverId: "server_id",
-    failureReason: "failure_reason",
-    storageNetwork: "storage_network",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    filesystemId: z.string().optional(),
+    serverId: z.string().optional(),
+    status: FilesystemAttachmentDataStatus$outboundSchema.optional(),
+    failureReason: z.nullable(z.string()).optional(),
+    storageNetwork: z.nullable(
+      z.lazy(() => FilesystemAttachmentDataStorageNetwork$outboundSchema),
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      filesystemId: "filesystem_id",
+      serverId: "server_id",
+      failureReason: "failure_reason",
+      storageNetwork: "storage_network",
+    });
+  })
+);
 
 export function filesystemAttachmentDataAttributesToJSON(
   filesystemAttachmentDataAttributes: FilesystemAttachmentDataAttributes,
@@ -239,12 +251,14 @@ export const FilesystemAttachmentData$inboundSchema: z.ZodType<
   FilesystemAttachmentData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  type: FilesystemAttachmentDataType$inboundSchema.optional(),
-  attributes: z.lazy(() => FilesystemAttachmentDataAttributes$inboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: FilesystemAttachmentDataType$inboundSchema.optional(),
+    attributes: z.lazy(() => FilesystemAttachmentDataAttributes$inboundSchema)
+      .optional(),
+  })
+);
 /** @internal */
 export type FilesystemAttachmentData$Outbound = {
   id?: string | undefined;
@@ -257,12 +271,14 @@ export const FilesystemAttachmentData$outboundSchema: z.ZodType<
   FilesystemAttachmentData$Outbound,
   z.ZodTypeDef,
   FilesystemAttachmentData
-> = z.object({
-  id: z.string().optional(),
-  type: FilesystemAttachmentDataType$outboundSchema.optional(),
-  attributes: z.lazy(() => FilesystemAttachmentDataAttributes$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: FilesystemAttachmentDataType$outboundSchema.optional(),
+    attributes: z.lazy(() => FilesystemAttachmentDataAttributes$outboundSchema)
+      .optional(),
+  })
+);
 
 export function filesystemAttachmentDataToJSON(
   filesystemAttachmentData: FilesystemAttachmentData,

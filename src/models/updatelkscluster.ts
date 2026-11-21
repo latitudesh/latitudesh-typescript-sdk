@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -41,7 +41,7 @@ export type UpdateLksCluster = {
 /** @internal */
 export const UpdateLksClusterType$inboundSchema: z.ZodNativeEnum<
   typeof UpdateLksClusterType
-> = z.nativeEnum(UpdateLksClusterType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(UpdateLksClusterType));
 /** @internal */
 export const UpdateLksClusterType$outboundSchema: z.ZodNativeEnum<
   typeof UpdateLksClusterType
@@ -52,15 +52,17 @@ export const UpdateLksClusterAttributes$inboundSchema: z.ZodType<
   UpdateLksClusterAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string().optional(),
-  description: z.string().optional(),
-  kubernetes_version: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "kubernetes_version": "kubernetesVersion",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    description: z.string().optional(),
+    kubernetes_version: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "kubernetes_version": "kubernetesVersion",
+    });
+  })
+);
 /** @internal */
 export type UpdateLksClusterAttributes$Outbound = {
   name?: string | undefined;
@@ -73,15 +75,17 @@ export const UpdateLksClusterAttributes$outboundSchema: z.ZodType<
   UpdateLksClusterAttributes$Outbound,
   z.ZodTypeDef,
   UpdateLksClusterAttributes
-> = z.object({
-  name: z.string().optional(),
-  description: z.string().optional(),
-  kubernetesVersion: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    kubernetesVersion: "kubernetes_version",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    description: z.string().optional(),
+    kubernetesVersion: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      kubernetesVersion: "kubernetes_version",
+    });
+  })
+);
 
 export function updateLksClusterAttributesToJSON(
   updateLksClusterAttributes: UpdateLksClusterAttributes,
@@ -105,10 +109,13 @@ export const UpdateLksClusterData$inboundSchema: z.ZodType<
   UpdateLksClusterData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: UpdateLksClusterType$inboundSchema,
-  attributes: z.lazy(() => UpdateLksClusterAttributes$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: UpdateLksClusterType$inboundSchema,
+    attributes: z.lazy(() => UpdateLksClusterAttributes$inboundSchema)
+      .optional(),
+  })
+);
 /** @internal */
 export type UpdateLksClusterData$Outbound = {
   type: string;
@@ -120,11 +127,13 @@ export const UpdateLksClusterData$outboundSchema: z.ZodType<
   UpdateLksClusterData$Outbound,
   z.ZodTypeDef,
   UpdateLksClusterData
-> = z.object({
-  type: UpdateLksClusterType$outboundSchema,
-  attributes: z.lazy(() => UpdateLksClusterAttributes$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: UpdateLksClusterType$outboundSchema,
+    attributes: z.lazy(() => UpdateLksClusterAttributes$outboundSchema)
+      .optional(),
+  })
+);
 
 export function updateLksClusterDataToJSON(
   updateLksClusterData: UpdateLksClusterData,
@@ -148,9 +157,11 @@ export const UpdateLksCluster$inboundSchema: z.ZodType<
   UpdateLksCluster,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => UpdateLksClusterData$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => UpdateLksClusterData$inboundSchema),
+  })
+);
 /** @internal */
 export type UpdateLksCluster$Outbound = {
   data: UpdateLksClusterData$Outbound;
@@ -161,9 +172,11 @@ export const UpdateLksCluster$outboundSchema: z.ZodType<
   UpdateLksCluster$Outbound,
   z.ZodTypeDef,
   UpdateLksCluster
-> = z.object({
-  data: z.lazy(() => UpdateLksClusterData$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => UpdateLksClusterData$outboundSchema),
+  })
+);
 
 export function updateLksClusterToJSON(
   updateLksCluster: UpdateLksCluster,

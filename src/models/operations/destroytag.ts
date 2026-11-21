@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -17,13 +17,15 @@ export const DestroyTagRequest$inboundSchema: z.ZodType<
   DestroyTagRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  tag_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "tag_id": "tagId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    tag_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "tag_id": "tagId",
+    });
+  })
+);
 /** @internal */
 export type DestroyTagRequest$Outbound = {
   tag_id: string;
@@ -34,13 +36,15 @@ export const DestroyTagRequest$outboundSchema: z.ZodType<
   DestroyTagRequest$Outbound,
   z.ZodTypeDef,
   DestroyTagRequest
-> = z.object({
-  tagId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    tagId: "tag_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    tagId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      tagId: "tag_id",
+    });
+  })
+);
 
 export function destroyTagRequestToJSON(
   destroyTagRequest: DestroyTagRequest,

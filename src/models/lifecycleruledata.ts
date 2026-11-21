@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -53,7 +53,7 @@ export type LifecycleRuleData = {
 /** @internal */
 export const LifecycleRuleDataType$inboundSchema: z.ZodNativeEnum<
   typeof LifecycleRuleDataType
-> = z.nativeEnum(LifecycleRuleDataType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(LifecycleRuleDataType));
 /** @internal */
 export const LifecycleRuleDataType$outboundSchema: z.ZodNativeEnum<
   typeof LifecycleRuleDataType
@@ -64,20 +64,22 @@ export const LifecycleRuleDataAttributes$inboundSchema: z.ZodType<
   LifecycleRuleDataAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string().optional(),
-  enabled: z.boolean().optional(),
-  prefix: z.nullable(z.string()).optional(),
-  expiration_days: z.number().int().optional(),
-  noncurrent_days: z.nullable(z.number().int()).optional(),
-  abort_mpu_days_after_initiation: z.nullable(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "expiration_days": "expirationDays",
-    "noncurrent_days": "noncurrentDays",
-    "abort_mpu_days_after_initiation": "abortMpuDaysAfterInitiation",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    enabled: z.boolean().optional(),
+    prefix: z.nullable(z.string()).optional(),
+    expiration_days: z.number().int().optional(),
+    noncurrent_days: z.nullable(z.number().int()).optional(),
+    abort_mpu_days_after_initiation: z.nullable(z.number().int()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "expiration_days": "expirationDays",
+      "noncurrent_days": "noncurrentDays",
+      "abort_mpu_days_after_initiation": "abortMpuDaysAfterInitiation",
+    });
+  })
+);
 /** @internal */
 export type LifecycleRuleDataAttributes$Outbound = {
   name?: string | undefined;
@@ -93,20 +95,22 @@ export const LifecycleRuleDataAttributes$outboundSchema: z.ZodType<
   LifecycleRuleDataAttributes$Outbound,
   z.ZodTypeDef,
   LifecycleRuleDataAttributes
-> = z.object({
-  name: z.string().optional(),
-  enabled: z.boolean().optional(),
-  prefix: z.nullable(z.string()).optional(),
-  expirationDays: z.number().int().optional(),
-  noncurrentDays: z.nullable(z.number().int()).optional(),
-  abortMpuDaysAfterInitiation: z.nullable(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    expirationDays: "expiration_days",
-    noncurrentDays: "noncurrent_days",
-    abortMpuDaysAfterInitiation: "abort_mpu_days_after_initiation",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    enabled: z.boolean().optional(),
+    prefix: z.nullable(z.string()).optional(),
+    expirationDays: z.number().int().optional(),
+    noncurrentDays: z.nullable(z.number().int()).optional(),
+    abortMpuDaysAfterInitiation: z.nullable(z.number().int()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      expirationDays: "expiration_days",
+      noncurrentDays: "noncurrent_days",
+      abortMpuDaysAfterInitiation: "abort_mpu_days_after_initiation",
+    });
+  })
+);
 
 export function lifecycleRuleDataAttributesToJSON(
   lifecycleRuleDataAttributes: LifecycleRuleDataAttributes,
@@ -132,12 +136,14 @@ export const LifecycleRuleData$inboundSchema: z.ZodType<
   LifecycleRuleData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  type: LifecycleRuleDataType$inboundSchema.optional(),
-  attributes: z.lazy(() => LifecycleRuleDataAttributes$inboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: LifecycleRuleDataType$inboundSchema.optional(),
+    attributes: z.lazy(() => LifecycleRuleDataAttributes$inboundSchema)
+      .optional(),
+  })
+);
 /** @internal */
 export type LifecycleRuleData$Outbound = {
   id?: string | undefined;
@@ -150,12 +156,14 @@ export const LifecycleRuleData$outboundSchema: z.ZodType<
   LifecycleRuleData$Outbound,
   z.ZodTypeDef,
   LifecycleRuleData
-> = z.object({
-  id: z.string().optional(),
-  type: LifecycleRuleDataType$outboundSchema.optional(),
-  attributes: z.lazy(() => LifecycleRuleDataAttributes$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: LifecycleRuleDataType$outboundSchema.optional(),
+    attributes: z.lazy(() => LifecycleRuleDataAttributes$outboundSchema)
+      .optional(),
+  })
+);
 
 export function lifecycleRuleDataToJSON(
   lifecycleRuleData: LifecycleRuleData,

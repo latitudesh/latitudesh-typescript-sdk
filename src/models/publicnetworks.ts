@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 import {
@@ -25,7 +25,7 @@ export const PublicNetworksMeta$inboundSchema: z.ZodType<
   PublicNetworksMeta,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type PublicNetworksMeta$Outbound = {};
 
@@ -34,7 +34,7 @@ export const PublicNetworksMeta$outboundSchema: z.ZodType<
   PublicNetworksMeta$Outbound,
   z.ZodTypeDef,
   PublicNetworksMeta
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function publicNetworksMetaToJSON(
   publicNetworksMeta: PublicNetworksMeta,
@@ -58,10 +58,12 @@ export const PublicNetworks$inboundSchema: z.ZodType<
   PublicNetworks,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.array(PublicNetworkData$inboundSchema).optional(),
-  meta: z.lazy(() => PublicNetworksMeta$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(PublicNetworkData$inboundSchema).optional(),
+    meta: z.lazy(() => PublicNetworksMeta$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type PublicNetworks$Outbound = {
   data?: Array<PublicNetworkData$Outbound> | undefined;
@@ -73,10 +75,12 @@ export const PublicNetworks$outboundSchema: z.ZodType<
   PublicNetworks$Outbound,
   z.ZodTypeDef,
   PublicNetworks
-> = z.object({
-  data: z.array(PublicNetworkData$outboundSchema).optional(),
-  meta: z.lazy(() => PublicNetworksMeta$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(PublicNetworkData$outboundSchema).optional(),
+    meta: z.lazy(() => PublicNetworksMeta$outboundSchema).optional(),
+  })
+);
 
 export function publicNetworksToJSON(publicNetworks: PublicNetworks): string {
   return JSON.stringify(PublicNetworks$outboundSchema.parse(publicNetworks));

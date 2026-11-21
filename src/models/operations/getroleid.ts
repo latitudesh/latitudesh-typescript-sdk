@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -17,13 +17,15 @@ export const GetRoleIdRequest$inboundSchema: z.ZodType<
   GetRoleIdRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  role_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "role_id": "roleId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    role_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "role_id": "roleId",
+    });
+  })
+);
 /** @internal */
 export type GetRoleIdRequest$Outbound = {
   role_id: string;
@@ -34,13 +36,15 @@ export const GetRoleIdRequest$outboundSchema: z.ZodType<
   GetRoleIdRequest$Outbound,
   z.ZodTypeDef,
   GetRoleIdRequest
-> = z.object({
-  roleId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    roleId: "role_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    roleId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      roleId: "role_id",
+    });
+  })
+);
 
 export function getRoleIdRequestToJSON(
   getRoleIdRequest: GetRoleIdRequest,

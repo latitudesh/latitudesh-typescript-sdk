@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -52,7 +52,9 @@ export type LksAllocatableServerData = {
 /** @internal */
 export const LksAllocatableServerDataType$inboundSchema: z.ZodNativeEnum<
   typeof LksAllocatableServerDataType
-> = z.nativeEnum(LksAllocatableServerDataType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(LksAllocatableServerDataType)
+);
 /** @internal */
 export const LksAllocatableServerDataType$outboundSchema: z.ZodNativeEnum<
   typeof LksAllocatableServerDataType
@@ -63,10 +65,12 @@ export const LksAllocatableServerDataPlan$inboundSchema: z.ZodType<
   LksAllocatableServerDataPlan,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  slug: z.nullable(z.string()).optional(),
-  name: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    slug: z.nullable(z.string()).optional(),
+    name: z.nullable(z.string()).optional(),
+  })
+);
 /** @internal */
 export type LksAllocatableServerDataPlan$Outbound = {
   slug?: string | null | undefined;
@@ -78,10 +82,12 @@ export const LksAllocatableServerDataPlan$outboundSchema: z.ZodType<
   LksAllocatableServerDataPlan$Outbound,
   z.ZodTypeDef,
   LksAllocatableServerDataPlan
-> = z.object({
-  slug: z.nullable(z.string()).optional(),
-  name: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    slug: z.nullable(z.string()).optional(),
+    name: z.nullable(z.string()).optional(),
+  })
+);
 
 export function lksAllocatableServerDataPlanToJSON(
   lksAllocatableServerDataPlan: LksAllocatableServerDataPlan,
@@ -107,20 +113,22 @@ export const LksAllocatableServerDataAttributes$inboundSchema: z.ZodType<
   LksAllocatableServerDataAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  hostname: z.nullable(z.string()).optional(),
-  plan: z.lazy(() => LksAllocatableServerDataPlan$inboundSchema).optional(),
-  status: z.nullable(z.string()).optional(),
-  allocatable: z.boolean().optional(),
-  reasons: z.array(z.string()).optional(),
-  node_pool_id: z.nullable(z.string()).optional(),
-  cluster_id: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "node_pool_id": "nodePoolId",
-    "cluster_id": "clusterId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    hostname: z.nullable(z.string()).optional(),
+    plan: z.lazy(() => LksAllocatableServerDataPlan$inboundSchema).optional(),
+    status: z.nullable(z.string()).optional(),
+    allocatable: z.boolean().optional(),
+    reasons: z.array(z.string()).optional(),
+    node_pool_id: z.nullable(z.string()).optional(),
+    cluster_id: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "node_pool_id": "nodePoolId",
+      "cluster_id": "clusterId",
+    });
+  })
+);
 /** @internal */
 export type LksAllocatableServerDataAttributes$Outbound = {
   hostname?: string | null | undefined;
@@ -137,20 +145,22 @@ export const LksAllocatableServerDataAttributes$outboundSchema: z.ZodType<
   LksAllocatableServerDataAttributes$Outbound,
   z.ZodTypeDef,
   LksAllocatableServerDataAttributes
-> = z.object({
-  hostname: z.nullable(z.string()).optional(),
-  plan: z.lazy(() => LksAllocatableServerDataPlan$outboundSchema).optional(),
-  status: z.nullable(z.string()).optional(),
-  allocatable: z.boolean().optional(),
-  reasons: z.array(z.string()).optional(),
-  nodePoolId: z.nullable(z.string()).optional(),
-  clusterId: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    nodePoolId: "node_pool_id",
-    clusterId: "cluster_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    hostname: z.nullable(z.string()).optional(),
+    plan: z.lazy(() => LksAllocatableServerDataPlan$outboundSchema).optional(),
+    status: z.nullable(z.string()).optional(),
+    allocatable: z.boolean().optional(),
+    reasons: z.array(z.string()).optional(),
+    nodePoolId: z.nullable(z.string()).optional(),
+    clusterId: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      nodePoolId: "node_pool_id",
+      clusterId: "cluster_id",
+    });
+  })
+);
 
 export function lksAllocatableServerDataAttributesToJSON(
   lksAllocatableServerDataAttributes: LksAllocatableServerDataAttributes,
@@ -177,12 +187,14 @@ export const LksAllocatableServerData$inboundSchema: z.ZodType<
   LksAllocatableServerData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  type: LksAllocatableServerDataType$inboundSchema.optional(),
-  attributes: z.lazy(() => LksAllocatableServerDataAttributes$inboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: LksAllocatableServerDataType$inboundSchema.optional(),
+    attributes: z.lazy(() => LksAllocatableServerDataAttributes$inboundSchema)
+      .optional(),
+  })
+);
 /** @internal */
 export type LksAllocatableServerData$Outbound = {
   id?: string | undefined;
@@ -195,12 +207,14 @@ export const LksAllocatableServerData$outboundSchema: z.ZodType<
   LksAllocatableServerData$Outbound,
   z.ZodTypeDef,
   LksAllocatableServerData
-> = z.object({
-  id: z.string().optional(),
-  type: LksAllocatableServerDataType$outboundSchema.optional(),
-  attributes: z.lazy(() => LksAllocatableServerDataAttributes$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: LksAllocatableServerDataType$outboundSchema.optional(),
+    attributes: z.lazy(() => LksAllocatableServerDataAttributes$outboundSchema)
+      .optional(),
+  })
+);
 
 export function lksAllocatableServerDataToJSON(
   lksAllocatableServerData: LksAllocatableServerData,

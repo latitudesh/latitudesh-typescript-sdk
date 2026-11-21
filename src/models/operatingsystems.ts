@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 import {
@@ -29,10 +29,12 @@ export const OperatingSystems$inboundSchema: z.ZodType<
   OperatingSystems,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.array(OperatingSystemData$inboundSchema).optional(),
-  meta: PaginationMeta$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(OperatingSystemData$inboundSchema).optional(),
+    meta: PaginationMeta$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type OperatingSystems$Outbound = {
   data?: Array<OperatingSystemData$Outbound> | undefined;
@@ -44,10 +46,12 @@ export const OperatingSystems$outboundSchema: z.ZodType<
   OperatingSystems$Outbound,
   z.ZodTypeDef,
   OperatingSystems
-> = z.object({
-  data: z.array(OperatingSystemData$outboundSchema).optional(),
-  meta: PaginationMeta$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(OperatingSystemData$outboundSchema).optional(),
+    meta: PaginationMeta$outboundSchema.optional(),
+  })
+);
 
 export function operatingSystemsToJSON(
   operatingSystems: OperatingSystems,

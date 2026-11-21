@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -17,13 +17,15 @@ export const DeleteFilesystemRequest$inboundSchema: z.ZodType<
   DeleteFilesystemRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  filesystem_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "filesystem_id": "filesystemId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    filesystem_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "filesystem_id": "filesystemId",
+    });
+  })
+);
 /** @internal */
 export type DeleteFilesystemRequest$Outbound = {
   filesystem_id: string;
@@ -34,13 +36,15 @@ export const DeleteFilesystemRequest$outboundSchema: z.ZodType<
   DeleteFilesystemRequest$Outbound,
   z.ZodTypeDef,
   DeleteFilesystemRequest
-> = z.object({
-  filesystemId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    filesystemId: "filesystem_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    filesystemId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      filesystemId: "filesystem_id",
+    });
+  })
+);
 
 export function deleteFilesystemRequestToJSON(
   deleteFilesystemRequest: DeleteFilesystemRequest,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -52,7 +52,7 @@ export type MapVolumeResponse = {
 /** @internal */
 export const MapVolumeType2$inboundSchema: z.ZodNativeEnum<
   typeof MapVolumeType2
-> = z.nativeEnum(MapVolumeType2);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(MapVolumeType2));
 /** @internal */
 export const MapVolumeType2$outboundSchema: z.ZodNativeEnum<
   typeof MapVolumeType2
@@ -63,13 +63,15 @@ export const MapVolumeAttributes2$inboundSchema: z.ZodType<
   MapVolumeAttributes2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  server_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "server_id": "serverId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    server_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "server_id": "serverId",
+    });
+  })
+);
 /** @internal */
 export type MapVolumeAttributes2$Outbound = {
   server_id: string;
@@ -80,13 +82,15 @@ export const MapVolumeAttributes2$outboundSchema: z.ZodType<
   MapVolumeAttributes2$Outbound,
   z.ZodTypeDef,
   MapVolumeAttributes2
-> = z.object({
-  serverId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    serverId: "server_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    serverId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      serverId: "server_id",
+    });
+  })
+);
 
 export function mapVolumeAttributes2ToJSON(
   mapVolumeAttributes2: MapVolumeAttributes2,
@@ -110,10 +114,12 @@ export const MapVolumeData2$inboundSchema: z.ZodType<
   MapVolumeData2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: MapVolumeType2$inboundSchema,
-  attributes: z.lazy(() => MapVolumeAttributes2$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: MapVolumeType2$inboundSchema,
+    attributes: z.lazy(() => MapVolumeAttributes2$inboundSchema),
+  })
+);
 /** @internal */
 export type MapVolumeData2$Outbound = {
   type: string;
@@ -125,10 +131,12 @@ export const MapVolumeData2$outboundSchema: z.ZodType<
   MapVolumeData2$Outbound,
   z.ZodTypeDef,
   MapVolumeData2
-> = z.object({
-  type: MapVolumeType2$outboundSchema,
-  attributes: z.lazy(() => MapVolumeAttributes2$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: MapVolumeType2$outboundSchema,
+    attributes: z.lazy(() => MapVolumeAttributes2$outboundSchema),
+  })
+);
 
 export function mapVolumeData2ToJSON(mapVolumeData2: MapVolumeData2): string {
   return JSON.stringify(MapVolumeData2$outboundSchema.parse(mapVolumeData2));
@@ -148,9 +156,11 @@ export const MapVolumeRequestBody2$inboundSchema: z.ZodType<
   MapVolumeRequestBody2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => MapVolumeData2$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => MapVolumeData2$inboundSchema),
+  })
+);
 /** @internal */
 export type MapVolumeRequestBody2$Outbound = {
   data: MapVolumeData2$Outbound;
@@ -161,9 +171,11 @@ export const MapVolumeRequestBody2$outboundSchema: z.ZodType<
   MapVolumeRequestBody2$Outbound,
   z.ZodTypeDef,
   MapVolumeRequestBody2
-> = z.object({
-  data: z.lazy(() => MapVolumeData2$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => MapVolumeData2$outboundSchema),
+  })
+);
 
 export function mapVolumeRequestBody2ToJSON(
   mapVolumeRequestBody2: MapVolumeRequestBody2,
@@ -187,14 +199,16 @@ export const MapVolumeRequest$inboundSchema: z.ZodType<
   MapVolumeRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  RequestBody: z.lazy(() => MapVolumeRequestBody2$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    RequestBody: z.lazy(() => MapVolumeRequestBody2$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type MapVolumeRequest$Outbound = {
   id: string;
@@ -206,14 +220,16 @@ export const MapVolumeRequest$outboundSchema: z.ZodType<
   MapVolumeRequest$Outbound,
   z.ZodTypeDef,
   MapVolumeRequest
-> = z.object({
-  id: z.string(),
-  requestBody: z.lazy(() => MapVolumeRequestBody2$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    requestBody: z.lazy(() => MapVolumeRequestBody2$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function mapVolumeRequestToJSON(
   mapVolumeRequest: MapVolumeRequest,
@@ -237,7 +253,7 @@ export const MapVolumeMeta$inboundSchema: z.ZodType<
   MapVolumeMeta,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type MapVolumeMeta$Outbound = {};
 
@@ -246,7 +262,7 @@ export const MapVolumeMeta$outboundSchema: z.ZodType<
   MapVolumeMeta$Outbound,
   z.ZodTypeDef,
   MapVolumeMeta
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function mapVolumeMetaToJSON(mapVolumeMeta: MapVolumeMeta): string {
   return JSON.stringify(MapVolumeMeta$outboundSchema.parse(mapVolumeMeta));
@@ -266,10 +282,12 @@ export const MapVolumeResponse$inboundSchema: z.ZodType<
   MapVolumeResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: models.VolumeData$inboundSchema.optional(),
-  meta: z.lazy(() => MapVolumeMeta$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: models.VolumeData$inboundSchema.optional(),
+    meta: z.lazy(() => MapVolumeMeta$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type MapVolumeResponse$Outbound = {
   data?: models.VolumeData$Outbound | undefined;
@@ -281,10 +299,12 @@ export const MapVolumeResponse$outboundSchema: z.ZodType<
   MapVolumeResponse$Outbound,
   z.ZodTypeDef,
   MapVolumeResponse
-> = z.object({
-  data: models.VolumeData$outboundSchema.optional(),
-  meta: z.lazy(() => MapVolumeMeta$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: models.VolumeData$outboundSchema.optional(),
+    meta: z.lazy(() => MapVolumeMeta$outboundSchema).optional(),
+  })
+);
 
 export function mapVolumeResponseToJSON(
   mapVolumeResponse: MapVolumeResponse,

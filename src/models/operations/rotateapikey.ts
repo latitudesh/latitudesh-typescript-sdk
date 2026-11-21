@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as models from "../index.js";
@@ -26,15 +26,17 @@ export const RotateApiKeyRequest$inboundSchema: z.ZodType<
   RotateApiKeyRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  api_key_id: z.string(),
-  update_api_key: models.UpdateApiKey$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "api_key_id": "apiKeyId",
-    "update_api_key": "updateApiKey",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    api_key_id: z.string(),
+    update_api_key: models.UpdateApiKey$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "api_key_id": "apiKeyId",
+      "update_api_key": "updateApiKey",
+    });
+  })
+);
 /** @internal */
 export type RotateApiKeyRequest$Outbound = {
   api_key_id: string;
@@ -46,15 +48,17 @@ export const RotateApiKeyRequest$outboundSchema: z.ZodType<
   RotateApiKeyRequest$Outbound,
   z.ZodTypeDef,
   RotateApiKeyRequest
-> = z.object({
-  apiKeyId: z.string(),
-  updateApiKey: models.UpdateApiKey$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    apiKeyId: "api_key_id",
-    updateApiKey: "update_api_key",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    apiKeyId: z.string(),
+    updateApiKey: models.UpdateApiKey$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      apiKeyId: "api_key_id",
+      updateApiKey: "update_api_key",
+    });
+  })
+);
 
 export function rotateApiKeyRequestToJSON(
   rotateApiKeyRequest: RotateApiKeyRequest,
@@ -78,9 +82,11 @@ export const RotateApiKeyResponse$inboundSchema: z.ZodType<
   RotateApiKeyResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: models.ApiKey$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: models.ApiKey$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type RotateApiKeyResponse$Outbound = {
   data?: models.ApiKey$Outbound | undefined;
@@ -91,9 +97,11 @@ export const RotateApiKeyResponse$outboundSchema: z.ZodType<
   RotateApiKeyResponse$Outbound,
   z.ZodTypeDef,
   RotateApiKeyResponse
-> = z.object({
-  data: models.ApiKey$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: models.ApiKey$outboundSchema.optional(),
+  })
+);
 
 export function rotateApiKeyResponseToJSON(
   rotateApiKeyResponse: RotateApiKeyResponse,

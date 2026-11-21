@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -159,7 +159,7 @@ export type ElasticIpData = {
 /** @internal */
 export const ElasticIpDataType$inboundSchema: z.ZodNativeEnum<
   typeof ElasticIpDataType
-> = z.nativeEnum(ElasticIpDataType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ElasticIpDataType));
 /** @internal */
 export const ElasticIpDataType$outboundSchema: z.ZodNativeEnum<
   typeof ElasticIpDataType
@@ -168,7 +168,7 @@ export const ElasticIpDataType$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const ElasticIpDataFamily$inboundSchema: z.ZodNativeEnum<
   typeof ElasticIpDataFamily
-> = z.nativeEnum(ElasticIpDataFamily);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ElasticIpDataFamily));
 /** @internal */
 export const ElasticIpDataFamily$outboundSchema: z.ZodNativeEnum<
   typeof ElasticIpDataFamily
@@ -177,7 +177,7 @@ export const ElasticIpDataFamily$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const ElasticIpDataMode$inboundSchema: z.ZodNativeEnum<
   typeof ElasticIpDataMode
-> = z.nativeEnum(ElasticIpDataMode);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ElasticIpDataMode));
 /** @internal */
 export const ElasticIpDataMode$outboundSchema: z.ZodNativeEnum<
   typeof ElasticIpDataMode
@@ -186,7 +186,7 @@ export const ElasticIpDataMode$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const ElasticIpDataStatus$inboundSchema: z.ZodNativeEnum<
   typeof ElasticIpDataStatus
-> = z.nativeEnum(ElasticIpDataStatus);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ElasticIpDataStatus));
 /** @internal */
 export const ElasticIpDataStatus$outboundSchema: z.ZodNativeEnum<
   typeof ElasticIpDataStatus
@@ -197,17 +197,19 @@ export const ElasticIpDataServer$inboundSchema: z.ZodType<
   ElasticIpDataServer,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  hostname: z.string().optional(),
-  primary_ipv4: z.string().optional(),
-  operating_system: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "primary_ipv4": "primaryIpv4",
-    "operating_system": "operatingSystem",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    hostname: z.string().optional(),
+    primary_ipv4: z.string().optional(),
+    operating_system: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "primary_ipv4": "primaryIpv4",
+      "operating_system": "operatingSystem",
+    });
+  })
+);
 /** @internal */
 export type ElasticIpDataServer$Outbound = {
   id?: string | undefined;
@@ -221,17 +223,19 @@ export const ElasticIpDataServer$outboundSchema: z.ZodType<
   ElasticIpDataServer$Outbound,
   z.ZodTypeDef,
   ElasticIpDataServer
-> = z.object({
-  id: z.string().optional(),
-  hostname: z.string().optional(),
-  primaryIpv4: z.string().optional(),
-  operatingSystem: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    primaryIpv4: "primary_ipv4",
-    operatingSystem: "operating_system",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    hostname: z.string().optional(),
+    primaryIpv4: z.string().optional(),
+    operatingSystem: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      primaryIpv4: "primary_ipv4",
+      operatingSystem: "operating_system",
+    });
+  })
+);
 
 export function elasticIpDataServerToJSON(
   elasticIpDataServer: ElasticIpDataServer,
@@ -255,11 +259,13 @@ export const ElasticIpDataProject$inboundSchema: z.ZodType<
   ElasticIpDataProject,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  slug: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    name: z.string().optional(),
+    slug: z.string().optional(),
+  })
+);
 /** @internal */
 export type ElasticIpDataProject$Outbound = {
   id?: string | undefined;
@@ -272,11 +278,13 @@ export const ElasticIpDataProject$outboundSchema: z.ZodType<
   ElasticIpDataProject$Outbound,
   z.ZodTypeDef,
   ElasticIpDataProject
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  slug: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    name: z.string().optional(),
+    slug: z.string().optional(),
+  })
+);
 
 export function elasticIpDataProjectToJSON(
   elasticIpDataProject: ElasticIpDataProject,
@@ -300,11 +308,13 @@ export const ElasticIpDataLocation$inboundSchema: z.ZodType<
   ElasticIpDataLocation,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  slug: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    name: z.string().optional(),
+    slug: z.string().optional(),
+  })
+);
 /** @internal */
 export type ElasticIpDataLocation$Outbound = {
   id?: string | undefined;
@@ -317,11 +327,13 @@ export const ElasticIpDataLocation$outboundSchema: z.ZodType<
   ElasticIpDataLocation$Outbound,
   z.ZodTypeDef,
   ElasticIpDataLocation
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  slug: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    name: z.string().optional(),
+    slug: z.string().optional(),
+  })
+);
 
 export function elasticIpDataLocationToJSON(
   elasticIpDataLocation: ElasticIpDataLocation,
@@ -345,11 +357,13 @@ export const ElasticIpDataRegion$inboundSchema: z.ZodType<
   ElasticIpDataRegion,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  location: z.lazy(() => ElasticIpDataLocation$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    name: z.string().optional(),
+    location: z.lazy(() => ElasticIpDataLocation$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type ElasticIpDataRegion$Outbound = {
   id?: string | undefined;
@@ -362,11 +376,13 @@ export const ElasticIpDataRegion$outboundSchema: z.ZodType<
   ElasticIpDataRegion$Outbound,
   z.ZodTypeDef,
   ElasticIpDataRegion
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  location: z.lazy(() => ElasticIpDataLocation$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    name: z.string().optional(),
+    location: z.lazy(() => ElasticIpDataLocation$outboundSchema).optional(),
+  })
+);
 
 export function elasticIpDataRegionToJSON(
   elasticIpDataRegion: ElasticIpDataRegion,
@@ -390,25 +406,28 @@ export const ElasticIpDataAttributes$inboundSchema: z.ZodType<
   ElasticIpDataAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  address: z.string().optional(),
-  family: ElasticIpDataFamily$inboundSchema.optional(),
-  prefix_length: z.number().int().optional(),
-  mode: ElasticIpDataMode$inboundSchema.optional(),
-  status: ElasticIpDataStatus$inboundSchema.optional(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  server: z.nullable(z.lazy(() => ElasticIpDataServer$inboundSchema))
-    .optional(),
-  project: z.lazy(() => ElasticIpDataProject$inboundSchema).optional(),
-  region: z.nullable(z.lazy(() => ElasticIpDataRegion$inboundSchema))
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "prefix_length": "prefixLength",
-    "created_at": "createdAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    address: z.string().optional(),
+    family: ElasticIpDataFamily$inboundSchema.optional(),
+    prefix_length: z.number().int().optional(),
+    mode: ElasticIpDataMode$inboundSchema.optional(),
+    status: ElasticIpDataStatus$inboundSchema.optional(),
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ).optional(),
+    server: z.nullable(z.lazy(() => ElasticIpDataServer$inboundSchema))
+      .optional(),
+    project: z.lazy(() => ElasticIpDataProject$inboundSchema).optional(),
+    region: z.nullable(z.lazy(() => ElasticIpDataRegion$inboundSchema))
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "prefix_length": "prefixLength",
+      "created_at": "createdAt",
+    });
+  })
+);
 /** @internal */
 export type ElasticIpDataAttributes$Outbound = {
   address?: string | undefined;
@@ -427,24 +446,26 @@ export const ElasticIpDataAttributes$outboundSchema: z.ZodType<
   ElasticIpDataAttributes$Outbound,
   z.ZodTypeDef,
   ElasticIpDataAttributes
-> = z.object({
-  address: z.string().optional(),
-  family: ElasticIpDataFamily$outboundSchema.optional(),
-  prefixLength: z.number().int().optional(),
-  mode: ElasticIpDataMode$outboundSchema.optional(),
-  status: ElasticIpDataStatus$outboundSchema.optional(),
-  createdAt: z.date().transform(v => v.toISOString()).optional(),
-  server: z.nullable(z.lazy(() => ElasticIpDataServer$outboundSchema))
-    .optional(),
-  project: z.lazy(() => ElasticIpDataProject$outboundSchema).optional(),
-  region: z.nullable(z.lazy(() => ElasticIpDataRegion$outboundSchema))
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    prefixLength: "prefix_length",
-    createdAt: "created_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    address: z.string().optional(),
+    family: ElasticIpDataFamily$outboundSchema.optional(),
+    prefixLength: z.number().int().optional(),
+    mode: ElasticIpDataMode$outboundSchema.optional(),
+    status: ElasticIpDataStatus$outboundSchema.optional(),
+    createdAt: z.date().transform(v => v.toISOString()).optional(),
+    server: z.nullable(z.lazy(() => ElasticIpDataServer$outboundSchema))
+      .optional(),
+    project: z.lazy(() => ElasticIpDataProject$outboundSchema).optional(),
+    region: z.nullable(z.lazy(() => ElasticIpDataRegion$outboundSchema))
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      prefixLength: "prefix_length",
+      createdAt: "created_at",
+    });
+  })
+);
 
 export function elasticIpDataAttributesToJSON(
   elasticIpDataAttributes: ElasticIpDataAttributes,
@@ -468,11 +489,13 @@ export const ElasticIpData$inboundSchema: z.ZodType<
   ElasticIpData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.nullable(z.string()).optional(),
-  type: ElasticIpDataType$inboundSchema.optional(),
-  attributes: z.lazy(() => ElasticIpDataAttributes$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.nullable(z.string()).optional(),
+    type: ElasticIpDataType$inboundSchema.optional(),
+    attributes: z.lazy(() => ElasticIpDataAttributes$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type ElasticIpData$Outbound = {
   id?: string | null | undefined;
@@ -485,11 +508,13 @@ export const ElasticIpData$outboundSchema: z.ZodType<
   ElasticIpData$Outbound,
   z.ZodTypeDef,
   ElasticIpData
-> = z.object({
-  id: z.nullable(z.string()).optional(),
-  type: ElasticIpDataType$outboundSchema.optional(),
-  attributes: z.lazy(() => ElasticIpDataAttributes$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.nullable(z.string()).optional(),
+    type: ElasticIpDataType$outboundSchema.optional(),
+    attributes: z.lazy(() => ElasticIpDataAttributes$outboundSchema).optional(),
+  })
+);
 
 export function elasticIpDataToJSON(elasticIpData: ElasticIpData): string {
   return JSON.stringify(ElasticIpData$outboundSchema.parse(elasticIpData));

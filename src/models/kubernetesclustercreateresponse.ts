@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 
@@ -44,15 +44,17 @@ export const KubernetesClusterCreateResponseAttributes$inboundSchema: z.ZodType<
   KubernetesClusterCreateResponseAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string().optional(),
-  status: z.string().optional(),
-  control_plane_endpoint: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "control_plane_endpoint": "controlPlaneEndpoint",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    status: z.string().optional(),
+    control_plane_endpoint: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "control_plane_endpoint": "controlPlaneEndpoint",
+    });
+  })
+);
 /** @internal */
 export type KubernetesClusterCreateResponseAttributes$Outbound = {
   name?: string | undefined;
@@ -66,15 +68,17 @@ export const KubernetesClusterCreateResponseAttributes$outboundSchema:
     KubernetesClusterCreateResponseAttributes$Outbound,
     z.ZodTypeDef,
     KubernetesClusterCreateResponseAttributes
-  > = z.object({
-    name: z.string().optional(),
-    status: z.string().optional(),
-    controlPlaneEndpoint: z.nullable(z.string()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      controlPlaneEndpoint: "control_plane_endpoint",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      name: z.string().optional(),
+      status: z.string().optional(),
+      controlPlaneEndpoint: z.nullable(z.string()).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        controlPlaneEndpoint: "control_plane_endpoint",
+      });
+    })
+  );
 
 export function kubernetesClusterCreateResponseAttributesToJSON(
   kubernetesClusterCreateResponseAttributes:
@@ -107,13 +111,15 @@ export const KubernetesClusterCreateResponseData$inboundSchema: z.ZodType<
   KubernetesClusterCreateResponseData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  type: z.string().optional(),
-  attributes: z.lazy(() =>
-    KubernetesClusterCreateResponseAttributes$inboundSchema
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: z.string().optional(),
+    attributes: z.lazy(() =>
+      KubernetesClusterCreateResponseAttributes$inboundSchema
+    ).optional(),
+  })
+);
 /** @internal */
 export type KubernetesClusterCreateResponseData$Outbound = {
   id?: string | undefined;
@@ -126,13 +132,15 @@ export const KubernetesClusterCreateResponseData$outboundSchema: z.ZodType<
   KubernetesClusterCreateResponseData$Outbound,
   z.ZodTypeDef,
   KubernetesClusterCreateResponseData
-> = z.object({
-  id: z.string().optional(),
-  type: z.string().optional(),
-  attributes: z.lazy(() =>
-    KubernetesClusterCreateResponseAttributes$outboundSchema
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: z.string().optional(),
+    attributes: z.lazy(() =>
+      KubernetesClusterCreateResponseAttributes$outboundSchema
+    ).optional(),
+  })
+);
 
 export function kubernetesClusterCreateResponseDataToJSON(
   kubernetesClusterCreateResponseData: KubernetesClusterCreateResponseData,
@@ -159,10 +167,12 @@ export const KubernetesClusterCreateResponse$inboundSchema: z.ZodType<
   KubernetesClusterCreateResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => KubernetesClusterCreateResponseData$inboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => KubernetesClusterCreateResponseData$inboundSchema)
+      .optional(),
+  })
+);
 /** @internal */
 export type KubernetesClusterCreateResponse$Outbound = {
   data?: KubernetesClusterCreateResponseData$Outbound | undefined;
@@ -173,10 +183,12 @@ export const KubernetesClusterCreateResponse$outboundSchema: z.ZodType<
   KubernetesClusterCreateResponse$Outbound,
   z.ZodTypeDef,
   KubernetesClusterCreateResponse
-> = z.object({
-  data: z.lazy(() => KubernetesClusterCreateResponseData$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => KubernetesClusterCreateResponseData$outboundSchema)
+      .optional(),
+  })
+);
 
 export function kubernetesClusterCreateResponseToJSON(
   kubernetesClusterCreateResponse: KubernetesClusterCreateResponse,

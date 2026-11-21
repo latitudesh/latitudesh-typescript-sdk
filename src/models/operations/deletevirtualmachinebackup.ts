@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -16,9 +16,11 @@ export const DeleteVirtualMachineBackupRequest$inboundSchema: z.ZodType<
   DeleteVirtualMachineBackupRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+  })
+);
 /** @internal */
 export type DeleteVirtualMachineBackupRequest$Outbound = {
   id: string;
@@ -29,9 +31,11 @@ export const DeleteVirtualMachineBackupRequest$outboundSchema: z.ZodType<
   DeleteVirtualMachineBackupRequest$Outbound,
   z.ZodTypeDef,
   DeleteVirtualMachineBackupRequest
-> = z.object({
-  id: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+  })
+);
 
 export function deleteVirtualMachineBackupRequestToJSON(
   deleteVirtualMachineBackupRequest: DeleteVirtualMachineBackupRequest,

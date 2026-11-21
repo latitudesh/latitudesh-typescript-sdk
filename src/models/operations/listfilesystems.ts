@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -20,13 +20,15 @@ export const ListFilesystemsRequest$inboundSchema: z.ZodType<
   ListFilesystemsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "filter[project]": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "filter[project]": "filterProject",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "filter[project]": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "filter[project]": "filterProject",
+    });
+  })
+);
 /** @internal */
 export type ListFilesystemsRequest$Outbound = {
   "filter[project]"?: string | undefined;
@@ -37,13 +39,15 @@ export const ListFilesystemsRequest$outboundSchema: z.ZodType<
   ListFilesystemsRequest$Outbound,
   z.ZodTypeDef,
   ListFilesystemsRequest
-> = z.object({
-  filterProject: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    filterProject: "filter[project]",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    filterProject: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      filterProject: "filter[project]",
+    });
+  })
+);
 
 export function listFilesystemsRequestToJSON(
   listFilesystemsRequest: ListFilesystemsRequest,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -53,7 +53,7 @@ export type StoragePlanData = {
 /** @internal */
 export const StoragePlanDataType$inboundSchema: z.ZodNativeEnum<
   typeof StoragePlanDataType
-> = z.nativeEnum(StoragePlanDataType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(StoragePlanDataType));
 /** @internal */
 export const StoragePlanDataType$outboundSchema: z.ZodNativeEnum<
   typeof StoragePlanDataType
@@ -64,9 +64,11 @@ export const StoragePlanDataPricing$inboundSchema: z.ZodType<
   StoragePlanDataPricing,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  month: z.number().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    month: z.number().optional(),
+  })
+);
 /** @internal */
 export type StoragePlanDataPricing$Outbound = {
   month?: number | undefined;
@@ -77,9 +79,11 @@ export const StoragePlanDataPricing$outboundSchema: z.ZodType<
   StoragePlanDataPricing$Outbound,
   z.ZodTypeDef,
   StoragePlanDataPricing
-> = z.object({
-  month: z.number().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    month: z.number().optional(),
+  })
+);
 
 export function storagePlanDataPricingToJSON(
   storagePlanDataPricing: StoragePlanDataPricing,
@@ -103,12 +107,14 @@ export const StoragePlanDataRegion$inboundSchema: z.ZodType<
   StoragePlanDataRegion,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string().optional(),
-  locations: z.array(z.string()).optional(),
-  pricing: z.record(z.lazy(() => StoragePlanDataPricing$inboundSchema))
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    locations: z.array(z.string()).optional(),
+    pricing: z.record(z.lazy(() => StoragePlanDataPricing$inboundSchema))
+      .optional(),
+  })
+);
 /** @internal */
 export type StoragePlanDataRegion$Outbound = {
   name?: string | undefined;
@@ -121,12 +127,14 @@ export const StoragePlanDataRegion$outboundSchema: z.ZodType<
   StoragePlanDataRegion$Outbound,
   z.ZodTypeDef,
   StoragePlanDataRegion
-> = z.object({
-  name: z.string().optional(),
-  locations: z.array(z.string()).optional(),
-  pricing: z.record(z.lazy(() => StoragePlanDataPricing$outboundSchema))
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    locations: z.array(z.string()).optional(),
+    pricing: z.record(z.lazy(() => StoragePlanDataPricing$outboundSchema))
+      .optional(),
+  })
+);
 
 export function storagePlanDataRegionToJSON(
   storagePlanDataRegion: StoragePlanDataRegion,
@@ -150,18 +158,20 @@ export const StoragePlanDataAttributes$inboundSchema: z.ZodType<
   StoragePlanDataAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string().optional(),
-  storage_type: StoragePlanStorageType$inboundSchema.optional(),
-  storage_class: z.nullable(StoragePlanStorageClass$inboundSchema).optional(),
-  regions: z.array(z.lazy(() => StoragePlanDataRegion$inboundSchema))
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "storage_type": "storagePlanStorageType",
-    "storage_class": "storagePlanStorageClass",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    storage_type: StoragePlanStorageType$inboundSchema.optional(),
+    storage_class: z.nullable(StoragePlanStorageClass$inboundSchema).optional(),
+    regions: z.array(z.lazy(() => StoragePlanDataRegion$inboundSchema))
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "storage_type": "storagePlanStorageType",
+      "storage_class": "storagePlanStorageClass",
+    });
+  })
+);
 /** @internal */
 export type StoragePlanDataAttributes$Outbound = {
   name?: string | undefined;
@@ -175,19 +185,21 @@ export const StoragePlanDataAttributes$outboundSchema: z.ZodType<
   StoragePlanDataAttributes$Outbound,
   z.ZodTypeDef,
   StoragePlanDataAttributes
-> = z.object({
-  name: z.string().optional(),
-  storagePlanStorageType: StoragePlanStorageType$outboundSchema.optional(),
-  storagePlanStorageClass: z.nullable(StoragePlanStorageClass$outboundSchema)
-    .optional(),
-  regions: z.array(z.lazy(() => StoragePlanDataRegion$outboundSchema))
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    storagePlanStorageType: "storage_type",
-    storagePlanStorageClass: "storage_class",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    storagePlanStorageType: StoragePlanStorageType$outboundSchema.optional(),
+    storagePlanStorageClass: z.nullable(StoragePlanStorageClass$outboundSchema)
+      .optional(),
+    regions: z.array(z.lazy(() => StoragePlanDataRegion$outboundSchema))
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      storagePlanStorageType: "storage_type",
+      storagePlanStorageClass: "storage_class",
+    });
+  })
+);
 
 export function storagePlanDataAttributesToJSON(
   storagePlanDataAttributes: StoragePlanDataAttributes,
@@ -211,11 +223,14 @@ export const StoragePlanData$inboundSchema: z.ZodType<
   StoragePlanData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  type: StoragePlanDataType$inboundSchema.optional(),
-  attributes: z.lazy(() => StoragePlanDataAttributes$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: StoragePlanDataType$inboundSchema.optional(),
+    attributes: z.lazy(() => StoragePlanDataAttributes$inboundSchema)
+      .optional(),
+  })
+);
 /** @internal */
 export type StoragePlanData$Outbound = {
   id?: string | undefined;
@@ -228,11 +243,14 @@ export const StoragePlanData$outboundSchema: z.ZodType<
   StoragePlanData$Outbound,
   z.ZodTypeDef,
   StoragePlanData
-> = z.object({
-  id: z.string().optional(),
-  type: StoragePlanDataType$outboundSchema.optional(),
-  attributes: z.lazy(() => StoragePlanDataAttributes$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: StoragePlanDataType$outboundSchema.optional(),
+    attributes: z.lazy(() => StoragePlanDataAttributes$outboundSchema)
+      .optional(),
+  })
+);
 
 export function storagePlanDataToJSON(
   storagePlanData: StoragePlanData,

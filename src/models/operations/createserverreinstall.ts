@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -165,7 +165,7 @@ export type CreateServerReinstallRequest = {
 /** @internal */
 export const CreateServerReinstallType2$inboundSchema: z.ZodNativeEnum<
   typeof CreateServerReinstallType2
-> = z.nativeEnum(CreateServerReinstallType2);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CreateServerReinstallType2));
 /** @internal */
 export const CreateServerReinstallType2$outboundSchema: z.ZodNativeEnum<
   typeof CreateServerReinstallType2
@@ -173,9 +173,10 @@ export const CreateServerReinstallType2$outboundSchema: z.ZodNativeEnum<
 
 /** @internal */
 export const CreateServerReinstallOperatingSystem2$inboundSchema:
-  z.ZodNativeEnum<typeof CreateServerReinstallOperatingSystem2> = z.nativeEnum(
-    CreateServerReinstallOperatingSystem2,
-  );
+  z.ZodNativeEnum<typeof CreateServerReinstallOperatingSystem2> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(CreateServerReinstallOperatingSystem2)
+    );
 /** @internal */
 export const CreateServerReinstallOperatingSystem2$outboundSchema:
   z.ZodNativeEnum<typeof CreateServerReinstallOperatingSystem2> =
@@ -184,7 +185,7 @@ export const CreateServerReinstallOperatingSystem2$outboundSchema:
 /** @internal */
 export const CreateServerReinstallRaid2$inboundSchema: z.ZodNativeEnum<
   typeof CreateServerReinstallRaid2
-> = z.nativeEnum(CreateServerReinstallRaid2);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CreateServerReinstallRaid2));
 /** @internal */
 export const CreateServerReinstallRaid2$outboundSchema: z.ZodNativeEnum<
   typeof CreateServerReinstallRaid2
@@ -193,7 +194,7 @@ export const CreateServerReinstallRaid2$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const CreateServerReinstallRole2$inboundSchema: z.ZodNativeEnum<
   typeof CreateServerReinstallRole2
-> = z.nativeEnum(CreateServerReinstallRole2);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CreateServerReinstallRole2));
 /** @internal */
 export const CreateServerReinstallRole2$outboundSchema: z.ZodNativeEnum<
   typeof CreateServerReinstallRole2
@@ -202,7 +203,9 @@ export const CreateServerReinstallRole2$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const CreateServerReinstallRaidLevel2$inboundSchema: z.ZodNativeEnum<
   typeof CreateServerReinstallRaidLevel2
-> = z.nativeEnum(CreateServerReinstallRaidLevel2);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(CreateServerReinstallRaidLevel2)
+);
 /** @internal */
 export const CreateServerReinstallRaidLevel2$outboundSchema: z.ZodNativeEnum<
   typeof CreateServerReinstallRaidLevel2
@@ -211,7 +214,9 @@ export const CreateServerReinstallRaidLevel2$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const CreateServerReinstallFilesystem2$inboundSchema: z.ZodNativeEnum<
   typeof CreateServerReinstallFilesystem2
-> = z.nativeEnum(CreateServerReinstallFilesystem2);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(CreateServerReinstallFilesystem2)
+);
 /** @internal */
 export const CreateServerReinstallFilesystem2$outboundSchema: z.ZodNativeEnum<
   typeof CreateServerReinstallFilesystem2
@@ -222,20 +227,22 @@ export const CreateServerReinstallDiskLayout2$inboundSchema: z.ZodType<
   CreateServerReinstallDiskLayout2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  count: z.number().int(),
-  role: CreateServerReinstallRole2$inboundSchema,
-  raid_level: z.nullable(CreateServerReinstallRaidLevel2$inboundSchema)
-    .optional(),
-  filesystem: z.nullable(CreateServerReinstallFilesystem2$inboundSchema)
-    .optional(),
-  mount_point: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "raid_level": "raidLevel",
-    "mount_point": "mountPoint",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    count: z.number().int(),
+    role: CreateServerReinstallRole2$inboundSchema,
+    raid_level: z.nullable(CreateServerReinstallRaidLevel2$inboundSchema)
+      .optional(),
+    filesystem: z.nullable(CreateServerReinstallFilesystem2$inboundSchema)
+      .optional(),
+    mount_point: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "raid_level": "raidLevel",
+      "mount_point": "mountPoint",
+    });
+  })
+);
 /** @internal */
 export type CreateServerReinstallDiskLayout2$Outbound = {
   count: number;
@@ -250,20 +257,22 @@ export const CreateServerReinstallDiskLayout2$outboundSchema: z.ZodType<
   CreateServerReinstallDiskLayout2$Outbound,
   z.ZodTypeDef,
   CreateServerReinstallDiskLayout2
-> = z.object({
-  count: z.number().int(),
-  role: CreateServerReinstallRole2$outboundSchema,
-  raidLevel: z.nullable(CreateServerReinstallRaidLevel2$outboundSchema)
-    .optional(),
-  filesystem: z.nullable(CreateServerReinstallFilesystem2$outboundSchema)
-    .optional(),
-  mountPoint: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    raidLevel: "raid_level",
-    mountPoint: "mount_point",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    count: z.number().int(),
+    role: CreateServerReinstallRole2$outboundSchema,
+    raidLevel: z.nullable(CreateServerReinstallRaidLevel2$outboundSchema)
+      .optional(),
+    filesystem: z.nullable(CreateServerReinstallFilesystem2$outboundSchema)
+      .optional(),
+    mountPoint: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      raidLevel: "raid_level",
+      mountPoint: "mount_point",
+    });
+  })
+);
 
 export function createServerReinstallDiskLayout2ToJSON(
   createServerReinstallDiskLayout2: CreateServerReinstallDiskLayout2,
@@ -287,7 +296,7 @@ export function createServerReinstallDiskLayout2FromJSON(
 /** @internal */
 export const CreateServerReinstallBios2$inboundSchema: z.ZodNativeEnum<
   typeof CreateServerReinstallBios2
-> = z.nativeEnum(CreateServerReinstallBios2);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CreateServerReinstallBios2));
 /** @internal */
 export const CreateServerReinstallBios2$outboundSchema: z.ZodNativeEnum<
   typeof CreateServerReinstallBios2
@@ -298,33 +307,35 @@ export const CreateServerReinstallAttributes2$inboundSchema: z.ZodType<
   CreateServerReinstallAttributes2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  operating_system: CreateServerReinstallOperatingSystem2$inboundSchema
-    .optional(),
-  hostname: z.string().optional(),
-  ssh_keys: z.nullable(z.array(z.string())).optional(),
-  user_data: z.nullable(z.string()).optional(),
-  raid: z.nullable(CreateServerReinstallRaid2$inboundSchema).optional(),
-  disk_layout: z.nullable(
-    z.array(z.lazy(() => CreateServerReinstallDiskLayout2$inboundSchema)),
-  ).optional(),
-  ipxe: z.nullable(z.string()).optional(),
-  persistent_netboot: z.boolean().optional(),
-  public_network: z.nullable(z.boolean()).optional(),
-  public_network_id: z.nullable(z.string()).optional(),
-  bios: z.nullable(z.record(CreateServerReinstallBios2$inboundSchema))
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "operating_system": "operatingSystem",
-    "ssh_keys": "sshKeys",
-    "user_data": "userData",
-    "disk_layout": "diskLayout",
-    "persistent_netboot": "persistentNetboot",
-    "public_network": "publicNetwork",
-    "public_network_id": "publicNetworkId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    operating_system: CreateServerReinstallOperatingSystem2$inboundSchema
+      .optional(),
+    hostname: z.string().optional(),
+    ssh_keys: z.nullable(z.array(z.string())).optional(),
+    user_data: z.nullable(z.string()).optional(),
+    raid: z.nullable(CreateServerReinstallRaid2$inboundSchema).optional(),
+    disk_layout: z.nullable(
+      z.array(z.lazy(() => CreateServerReinstallDiskLayout2$inboundSchema)),
+    ).optional(),
+    ipxe: z.nullable(z.string()).optional(),
+    persistent_netboot: z.boolean().optional(),
+    public_network: z.nullable(z.boolean()).optional(),
+    public_network_id: z.nullable(z.string()).optional(),
+    bios: z.nullable(z.record(CreateServerReinstallBios2$inboundSchema))
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "operating_system": "operatingSystem",
+      "ssh_keys": "sshKeys",
+      "user_data": "userData",
+      "disk_layout": "diskLayout",
+      "persistent_netboot": "persistentNetboot",
+      "public_network": "publicNetwork",
+      "public_network_id": "publicNetworkId",
+    });
+  })
+);
 /** @internal */
 export type CreateServerReinstallAttributes2$Outbound = {
   operating_system?: string | undefined;
@@ -348,33 +359,35 @@ export const CreateServerReinstallAttributes2$outboundSchema: z.ZodType<
   CreateServerReinstallAttributes2$Outbound,
   z.ZodTypeDef,
   CreateServerReinstallAttributes2
-> = z.object({
-  operatingSystem: CreateServerReinstallOperatingSystem2$outboundSchema
-    .optional(),
-  hostname: z.string().optional(),
-  sshKeys: z.nullable(z.array(z.string())).optional(),
-  userData: z.nullable(z.string()).optional(),
-  raid: z.nullable(CreateServerReinstallRaid2$outboundSchema).optional(),
-  diskLayout: z.nullable(
-    z.array(z.lazy(() => CreateServerReinstallDiskLayout2$outboundSchema)),
-  ).optional(),
-  ipxe: z.nullable(z.string()).optional(),
-  persistentNetboot: z.boolean().optional(),
-  publicNetwork: z.nullable(z.boolean()).optional(),
-  publicNetworkId: z.nullable(z.string()).optional(),
-  bios: z.nullable(z.record(CreateServerReinstallBios2$outboundSchema))
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    operatingSystem: "operating_system",
-    sshKeys: "ssh_keys",
-    userData: "user_data",
-    diskLayout: "disk_layout",
-    persistentNetboot: "persistent_netboot",
-    publicNetwork: "public_network",
-    publicNetworkId: "public_network_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    operatingSystem: CreateServerReinstallOperatingSystem2$outboundSchema
+      .optional(),
+    hostname: z.string().optional(),
+    sshKeys: z.nullable(z.array(z.string())).optional(),
+    userData: z.nullable(z.string()).optional(),
+    raid: z.nullable(CreateServerReinstallRaid2$outboundSchema).optional(),
+    diskLayout: z.nullable(
+      z.array(z.lazy(() => CreateServerReinstallDiskLayout2$outboundSchema)),
+    ).optional(),
+    ipxe: z.nullable(z.string()).optional(),
+    persistentNetboot: z.boolean().optional(),
+    publicNetwork: z.nullable(z.boolean()).optional(),
+    publicNetworkId: z.nullable(z.string()).optional(),
+    bios: z.nullable(z.record(CreateServerReinstallBios2$outboundSchema))
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      operatingSystem: "operating_system",
+      sshKeys: "ssh_keys",
+      userData: "user_data",
+      diskLayout: "disk_layout",
+      persistentNetboot: "persistent_netboot",
+      publicNetwork: "public_network",
+      publicNetworkId: "public_network_id",
+    });
+  })
+);
 
 export function createServerReinstallAttributes2ToJSON(
   createServerReinstallAttributes2: CreateServerReinstallAttributes2,
@@ -400,11 +413,13 @@ export const CreateServerReinstallData2$inboundSchema: z.ZodType<
   CreateServerReinstallData2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: CreateServerReinstallType2$inboundSchema,
-  attributes: z.lazy(() => CreateServerReinstallAttributes2$inboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CreateServerReinstallType2$inboundSchema,
+    attributes: z.lazy(() => CreateServerReinstallAttributes2$inboundSchema)
+      .optional(),
+  })
+);
 /** @internal */
 export type CreateServerReinstallData2$Outbound = {
   type: string;
@@ -416,11 +431,13 @@ export const CreateServerReinstallData2$outboundSchema: z.ZodType<
   CreateServerReinstallData2$Outbound,
   z.ZodTypeDef,
   CreateServerReinstallData2
-> = z.object({
-  type: CreateServerReinstallType2$outboundSchema,
-  attributes: z.lazy(() => CreateServerReinstallAttributes2$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CreateServerReinstallType2$outboundSchema,
+    attributes: z.lazy(() => CreateServerReinstallAttributes2$outboundSchema)
+      .optional(),
+  })
+);
 
 export function createServerReinstallData2ToJSON(
   createServerReinstallData2: CreateServerReinstallData2,
@@ -444,9 +461,11 @@ export const CreateServerReinstallRequestBody2$inboundSchema: z.ZodType<
   CreateServerReinstallRequestBody2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => CreateServerReinstallData2$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => CreateServerReinstallData2$inboundSchema),
+  })
+);
 /** @internal */
 export type CreateServerReinstallRequestBody2$Outbound = {
   data: CreateServerReinstallData2$Outbound;
@@ -457,9 +476,11 @@ export const CreateServerReinstallRequestBody2$outboundSchema: z.ZodType<
   CreateServerReinstallRequestBody2$Outbound,
   z.ZodTypeDef,
   CreateServerReinstallRequestBody2
-> = z.object({
-  data: z.lazy(() => CreateServerReinstallData2$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => CreateServerReinstallData2$outboundSchema),
+  })
+);
 
 export function createServerReinstallRequestBody2ToJSON(
   createServerReinstallRequestBody2: CreateServerReinstallRequestBody2,
@@ -485,15 +506,17 @@ export const CreateServerReinstallRequest$inboundSchema: z.ZodType<
   CreateServerReinstallRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  server_id: z.string(),
-  RequestBody: z.lazy(() => CreateServerReinstallRequestBody2$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "server_id": "serverId",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    server_id: z.string(),
+    RequestBody: z.lazy(() => CreateServerReinstallRequestBody2$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "server_id": "serverId",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type CreateServerReinstallRequest$Outbound = {
   server_id: string;
@@ -505,15 +528,17 @@ export const CreateServerReinstallRequest$outboundSchema: z.ZodType<
   CreateServerReinstallRequest$Outbound,
   z.ZodTypeDef,
   CreateServerReinstallRequest
-> = z.object({
-  serverId: z.string(),
-  requestBody: z.lazy(() => CreateServerReinstallRequestBody2$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    serverId: "server_id",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    serverId: z.string(),
+    requestBody: z.lazy(() => CreateServerReinstallRequestBody2$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      serverId: "server_id",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function createServerReinstallRequestToJSON(
   createServerReinstallRequest: CreateServerReinstallRequest,

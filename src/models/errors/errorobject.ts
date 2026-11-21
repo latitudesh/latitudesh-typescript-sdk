@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as models from "../index.js";
 import { LatitudeshError } from "./latitudesherror.js";
 
@@ -36,19 +37,21 @@ export const ErrorObject$inboundSchema: z.ZodType<
   ErrorObject,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  errors: z.array(z.lazy(() => models.ErrorT$inboundSchema)).optional(),
-  request$: z.instanceof(Request),
-  response$: z.instanceof(Response),
-  body$: z.string(),
-})
-  .transform((v) => {
-    return new ErrorObject(v, {
-      request: v.request$,
-      response: v.response$,
-      body: v.body$,
-    });
-  });
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    errors: z.array(z.lazy(() => models.ErrorT$inboundSchema)).optional(),
+    request$: z.instanceof(Request),
+    response$: z.instanceof(Response),
+    body$: z.string(),
+  })
+    .transform((v) => {
+      return new ErrorObject(v, {
+        request: v.request$,
+        response: v.response$,
+        body: v.body$,
+      });
+    })
+);
 
 /** @internal */
 export type ErrorObject$Outbound = {
@@ -60,8 +63,10 @@ export const ErrorObject$outboundSchema: z.ZodType<
   ErrorObject$Outbound,
   z.ZodTypeDef,
   ErrorObject
-> = z.instanceof(ErrorObject)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    errors: z.array(z.lazy(() => models.ErrorT$outboundSchema)).optional(),
-  }));
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.instanceof(ErrorObject)
+    .transform(v => v.data$)
+    .pipe(z.object({
+      errors: z.array(z.lazy(() => models.ErrorT$outboundSchema)).optional(),
+    }))
+);

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -49,7 +49,7 @@ export type BandwidthPackages = {
 /** @internal */
 export const BandwidthPackagesType$inboundSchema: z.ZodNativeEnum<
   typeof BandwidthPackagesType
-> = z.nativeEnum(BandwidthPackagesType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(BandwidthPackagesType));
 /** @internal */
 export const BandwidthPackagesType$outboundSchema: z.ZodNativeEnum<
   typeof BandwidthPackagesType
@@ -60,11 +60,13 @@ export const BandwidthPackagesProject$inboundSchema: z.ZodType<
   BandwidthPackagesProject,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  slug: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    name: z.string().optional(),
+    slug: z.string().optional(),
+  })
+);
 /** @internal */
 export type BandwidthPackagesProject$Outbound = {
   id?: string | undefined;
@@ -77,11 +79,13 @@ export const BandwidthPackagesProject$outboundSchema: z.ZodType<
   BandwidthPackagesProject$Outbound,
   z.ZodTypeDef,
   BandwidthPackagesProject
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  slug: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    name: z.string().optional(),
+    slug: z.string().optional(),
+  })
+);
 
 export function bandwidthPackagesProjectToJSON(
   bandwidthPackagesProject: BandwidthPackagesProject,
@@ -102,19 +106,21 @@ export function bandwidthPackagesProjectFromJSON(
 
 /** @internal */
 export const Package$inboundSchema: z.ZodType<Package, z.ZodTypeDef, unknown> =
-  z.object({
-    region_slug: z.string().optional(),
-    currency: z.string().optional(),
-    unit_price: z.nullable(z.number()).optional(),
-    contracted: z.number().int().optional(),
-    total_price: z.number().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "region_slug": "regionSlug",
-      "unit_price": "unitPrice",
-      "total_price": "totalPrice",
-    });
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      region_slug: z.string().optional(),
+      currency: z.string().optional(),
+      unit_price: z.nullable(z.number()).optional(),
+      contracted: z.number().int().optional(),
+      total_price: z.number().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "region_slug": "regionSlug",
+        "unit_price": "unitPrice",
+        "total_price": "totalPrice",
+      });
+    })
+  );
 /** @internal */
 export type Package$Outbound = {
   region_slug?: string | undefined;
@@ -129,19 +135,21 @@ export const Package$outboundSchema: z.ZodType<
   Package$Outbound,
   z.ZodTypeDef,
   Package
-> = z.object({
-  regionSlug: z.string().optional(),
-  currency: z.string().optional(),
-  unitPrice: z.nullable(z.number()).optional(),
-  contracted: z.number().int().optional(),
-  totalPrice: z.number().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    regionSlug: "region_slug",
-    unitPrice: "unit_price",
-    totalPrice: "total_price",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    regionSlug: z.string().optional(),
+    currency: z.string().optional(),
+    unitPrice: z.nullable(z.number()).optional(),
+    contracted: z.number().int().optional(),
+    totalPrice: z.number().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      regionSlug: "region_slug",
+      unitPrice: "unit_price",
+      totalPrice: "total_price",
+    });
+  })
+);
 
 export function packageToJSON(value: Package): string {
   return JSON.stringify(Package$outboundSchema.parse(value));
@@ -161,10 +169,12 @@ export const BandwidthPackagesAttributes$inboundSchema: z.ZodType<
   BandwidthPackagesAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  project: z.lazy(() => BandwidthPackagesProject$inboundSchema).optional(),
-  packages: z.array(z.lazy(() => Package$inboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    project: z.lazy(() => BandwidthPackagesProject$inboundSchema).optional(),
+    packages: z.array(z.lazy(() => Package$inboundSchema)).optional(),
+  })
+);
 /** @internal */
 export type BandwidthPackagesAttributes$Outbound = {
   project?: BandwidthPackagesProject$Outbound | undefined;
@@ -176,10 +186,12 @@ export const BandwidthPackagesAttributes$outboundSchema: z.ZodType<
   BandwidthPackagesAttributes$Outbound,
   z.ZodTypeDef,
   BandwidthPackagesAttributes
-> = z.object({
-  project: z.lazy(() => BandwidthPackagesProject$outboundSchema).optional(),
-  packages: z.array(z.lazy(() => Package$outboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    project: z.lazy(() => BandwidthPackagesProject$outboundSchema).optional(),
+    packages: z.array(z.lazy(() => Package$outboundSchema)).optional(),
+  })
+);
 
 export function bandwidthPackagesAttributesToJSON(
   bandwidthPackagesAttributes: BandwidthPackagesAttributes,
@@ -205,12 +217,14 @@ export const BandwidthPackagesData$inboundSchema: z.ZodType<
   BandwidthPackagesData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  type: BandwidthPackagesType$inboundSchema.optional(),
-  attributes: z.lazy(() => BandwidthPackagesAttributes$inboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: BandwidthPackagesType$inboundSchema.optional(),
+    attributes: z.lazy(() => BandwidthPackagesAttributes$inboundSchema)
+      .optional(),
+  })
+);
 /** @internal */
 export type BandwidthPackagesData$Outbound = {
   id?: string | undefined;
@@ -223,12 +237,14 @@ export const BandwidthPackagesData$outboundSchema: z.ZodType<
   BandwidthPackagesData$Outbound,
   z.ZodTypeDef,
   BandwidthPackagesData
-> = z.object({
-  id: z.string().optional(),
-  type: BandwidthPackagesType$outboundSchema.optional(),
-  attributes: z.lazy(() => BandwidthPackagesAttributes$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: BandwidthPackagesType$outboundSchema.optional(),
+    attributes: z.lazy(() => BandwidthPackagesAttributes$outboundSchema)
+      .optional(),
+  })
+);
 
 export function bandwidthPackagesDataToJSON(
   bandwidthPackagesData: BandwidthPackagesData,
@@ -252,7 +268,7 @@ export const BandwidthPackagesMeta$inboundSchema: z.ZodType<
   BandwidthPackagesMeta,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type BandwidthPackagesMeta$Outbound = {};
 
@@ -261,7 +277,7 @@ export const BandwidthPackagesMeta$outboundSchema: z.ZodType<
   BandwidthPackagesMeta$Outbound,
   z.ZodTypeDef,
   BandwidthPackagesMeta
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function bandwidthPackagesMetaToJSON(
   bandwidthPackagesMeta: BandwidthPackagesMeta,
@@ -285,10 +301,12 @@ export const BandwidthPackages$inboundSchema: z.ZodType<
   BandwidthPackages,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => BandwidthPackagesData$inboundSchema).optional(),
-  meta: z.lazy(() => BandwidthPackagesMeta$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => BandwidthPackagesData$inboundSchema).optional(),
+    meta: z.lazy(() => BandwidthPackagesMeta$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type BandwidthPackages$Outbound = {
   data?: BandwidthPackagesData$Outbound | undefined;
@@ -300,10 +318,12 @@ export const BandwidthPackages$outboundSchema: z.ZodType<
   BandwidthPackages$Outbound,
   z.ZodTypeDef,
   BandwidthPackages
-> = z.object({
-  data: z.lazy(() => BandwidthPackagesData$outboundSchema).optional(),
-  meta: z.lazy(() => BandwidthPackagesMeta$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => BandwidthPackagesData$outboundSchema).optional(),
+    meta: z.lazy(() => BandwidthPackagesMeta$outboundSchema).optional(),
+  })
+);
 
 export function bandwidthPackagesToJSON(
   bandwidthPackages: BandwidthPackages,

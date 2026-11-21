@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -101,7 +101,7 @@ export type BgpSessionData = {
 /** @internal */
 export const BgpSessionDataType$inboundSchema: z.ZodNativeEnum<
   typeof BgpSessionDataType
-> = z.nativeEnum(BgpSessionDataType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(BgpSessionDataType));
 /** @internal */
 export const BgpSessionDataType$outboundSchema: z.ZodNativeEnum<
   typeof BgpSessionDataType
@@ -110,7 +110,7 @@ export const BgpSessionDataType$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const BgpSessionDataStatus$inboundSchema: z.ZodNativeEnum<
   typeof BgpSessionDataStatus
-> = z.nativeEnum(BgpSessionDataStatus);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(BgpSessionDataStatus));
 /** @internal */
 export const BgpSessionDataStatus$outboundSchema: z.ZodNativeEnum<
   typeof BgpSessionDataStatus
@@ -121,17 +121,19 @@ export const BgpSessionDataServer$inboundSchema: z.ZodType<
   BgpSessionDataServer,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  hostname: z.string().optional(),
-  primary_ipv4: z.nullable(z.string()).optional(),
-  operating_system: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "primary_ipv4": "primaryIpv4",
-    "operating_system": "operatingSystem",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    hostname: z.string().optional(),
+    primary_ipv4: z.nullable(z.string()).optional(),
+    operating_system: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "primary_ipv4": "primaryIpv4",
+      "operating_system": "operatingSystem",
+    });
+  })
+);
 /** @internal */
 export type BgpSessionDataServer$Outbound = {
   id?: string | undefined;
@@ -145,17 +147,19 @@ export const BgpSessionDataServer$outboundSchema: z.ZodType<
   BgpSessionDataServer$Outbound,
   z.ZodTypeDef,
   BgpSessionDataServer
-> = z.object({
-  id: z.string().optional(),
-  hostname: z.string().optional(),
-  primaryIpv4: z.nullable(z.string()).optional(),
-  operatingSystem: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    primaryIpv4: "primary_ipv4",
-    operatingSystem: "operating_system",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    hostname: z.string().optional(),
+    primaryIpv4: z.nullable(z.string()).optional(),
+    operatingSystem: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      primaryIpv4: "primary_ipv4",
+      operatingSystem: "operating_system",
+    });
+  })
+);
 
 export function bgpSessionDataServerToJSON(
   bgpSessionDataServer: BgpSessionDataServer,
@@ -179,11 +183,13 @@ export const BgpSessionDataLocation$inboundSchema: z.ZodType<
   BgpSessionDataLocation,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  slug: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    name: z.string().optional(),
+    slug: z.string().optional(),
+  })
+);
 /** @internal */
 export type BgpSessionDataLocation$Outbound = {
   id?: string | undefined;
@@ -196,11 +202,13 @@ export const BgpSessionDataLocation$outboundSchema: z.ZodType<
   BgpSessionDataLocation$Outbound,
   z.ZodTypeDef,
   BgpSessionDataLocation
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  slug: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    name: z.string().optional(),
+    slug: z.string().optional(),
+  })
+);
 
 export function bgpSessionDataLocationToJSON(
   bgpSessionDataLocation: BgpSessionDataLocation,
@@ -224,11 +232,13 @@ export const BgpSessionDataRegion$inboundSchema: z.ZodType<
   BgpSessionDataRegion,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  location: z.lazy(() => BgpSessionDataLocation$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    name: z.string().optional(),
+    location: z.lazy(() => BgpSessionDataLocation$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type BgpSessionDataRegion$Outbound = {
   id?: string | undefined;
@@ -241,11 +251,13 @@ export const BgpSessionDataRegion$outboundSchema: z.ZodType<
   BgpSessionDataRegion$Outbound,
   z.ZodTypeDef,
   BgpSessionDataRegion
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  location: z.lazy(() => BgpSessionDataLocation$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    name: z.string().optional(),
+    location: z.lazy(() => BgpSessionDataLocation$outboundSchema).optional(),
+  })
+);
 
 export function bgpSessionDataRegionToJSON(
   bgpSessionDataRegion: BgpSessionDataRegion,
@@ -269,27 +281,29 @@ export const BgpSessionDataAttributes$inboundSchema: z.ZodType<
   BgpSessionDataAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  status: z.nullable(BgpSessionDataStatus$inboundSchema).optional(),
-  status_message: z.nullable(z.string()).optional(),
-  server_ip: z.nullable(z.string()).optional(),
-  peer_address: z.nullable(z.string()).optional(),
-  asn: z.nullable(z.number().int()).optional(),
-  created_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  server: z.nullable(z.lazy(() => BgpSessionDataServer$inboundSchema))
-    .optional(),
-  region: z.nullable(z.lazy(() => BgpSessionDataRegion$inboundSchema))
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "status_message": "statusMessage",
-    "server_ip": "serverIp",
-    "peer_address": "peerAddress",
-    "created_at": "createdAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    status: z.nullable(BgpSessionDataStatus$inboundSchema).optional(),
+    status_message: z.nullable(z.string()).optional(),
+    server_ip: z.nullable(z.string()).optional(),
+    peer_address: z.nullable(z.string()).optional(),
+    asn: z.nullable(z.number().int()).optional(),
+    created_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    server: z.nullable(z.lazy(() => BgpSessionDataServer$inboundSchema))
+      .optional(),
+    region: z.nullable(z.lazy(() => BgpSessionDataRegion$inboundSchema))
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "status_message": "statusMessage",
+      "server_ip": "serverIp",
+      "peer_address": "peerAddress",
+      "created_at": "createdAt",
+    });
+  })
+);
 /** @internal */
 export type BgpSessionDataAttributes$Outbound = {
   status?: string | null | undefined;
@@ -307,25 +321,27 @@ export const BgpSessionDataAttributes$outboundSchema: z.ZodType<
   BgpSessionDataAttributes$Outbound,
   z.ZodTypeDef,
   BgpSessionDataAttributes
-> = z.object({
-  status: z.nullable(BgpSessionDataStatus$outboundSchema).optional(),
-  statusMessage: z.nullable(z.string()).optional(),
-  serverIp: z.nullable(z.string()).optional(),
-  peerAddress: z.nullable(z.string()).optional(),
-  asn: z.nullable(z.number().int()).optional(),
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  server: z.nullable(z.lazy(() => BgpSessionDataServer$outboundSchema))
-    .optional(),
-  region: z.nullable(z.lazy(() => BgpSessionDataRegion$outboundSchema))
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    statusMessage: "status_message",
-    serverIp: "server_ip",
-    peerAddress: "peer_address",
-    createdAt: "created_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    status: z.nullable(BgpSessionDataStatus$outboundSchema).optional(),
+    statusMessage: z.nullable(z.string()).optional(),
+    serverIp: z.nullable(z.string()).optional(),
+    peerAddress: z.nullable(z.string()).optional(),
+    asn: z.nullable(z.number().int()).optional(),
+    createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    server: z.nullable(z.lazy(() => BgpSessionDataServer$outboundSchema))
+      .optional(),
+    region: z.nullable(z.lazy(() => BgpSessionDataRegion$outboundSchema))
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      statusMessage: "status_message",
+      serverIp: "server_ip",
+      peerAddress: "peer_address",
+      createdAt: "created_at",
+    });
+  })
+);
 
 export function bgpSessionDataAttributesToJSON(
   bgpSessionDataAttributes: BgpSessionDataAttributes,
@@ -349,11 +365,13 @@ export const BgpSessionData$inboundSchema: z.ZodType<
   BgpSessionData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  type: BgpSessionDataType$inboundSchema.optional(),
-  attributes: z.lazy(() => BgpSessionDataAttributes$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: BgpSessionDataType$inboundSchema.optional(),
+    attributes: z.lazy(() => BgpSessionDataAttributes$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type BgpSessionData$Outbound = {
   id?: string | undefined;
@@ -366,11 +384,14 @@ export const BgpSessionData$outboundSchema: z.ZodType<
   BgpSessionData$Outbound,
   z.ZodTypeDef,
   BgpSessionData
-> = z.object({
-  id: z.string().optional(),
-  type: BgpSessionDataType$outboundSchema.optional(),
-  attributes: z.lazy(() => BgpSessionDataAttributes$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: BgpSessionDataType$outboundSchema.optional(),
+    attributes: z.lazy(() => BgpSessionDataAttributes$outboundSchema)
+      .optional(),
+  })
+);
 
 export function bgpSessionDataToJSON(bgpSessionData: BgpSessionData): string {
   return JSON.stringify(BgpSessionData$outboundSchema.parse(bgpSessionData));

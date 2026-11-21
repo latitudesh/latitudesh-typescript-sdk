@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 import {
@@ -25,7 +25,7 @@ export const PlanMeta$inboundSchema: z.ZodType<
   PlanMeta,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type PlanMeta$Outbound = {};
 
@@ -34,7 +34,7 @@ export const PlanMeta$outboundSchema: z.ZodType<
   PlanMeta$Outbound,
   z.ZodTypeDef,
   PlanMeta
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function planMetaToJSON(planMeta: PlanMeta): string {
   return JSON.stringify(PlanMeta$outboundSchema.parse(planMeta));
@@ -50,11 +50,13 @@ export function planMetaFromJSON(
 }
 
 /** @internal */
-export const Plan$inboundSchema: z.ZodType<Plan, z.ZodTypeDef, unknown> = z
-  .object({
-    data: PlanData$inboundSchema.optional(),
-    meta: z.lazy(() => PlanMeta$inboundSchema).optional(),
-  });
+export const Plan$inboundSchema: z.ZodType<Plan, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      data: PlanData$inboundSchema.optional(),
+      meta: z.lazy(() => PlanMeta$inboundSchema).optional(),
+    })
+  );
 /** @internal */
 export type Plan$Outbound = {
   data?: PlanData$Outbound | undefined;
@@ -63,10 +65,12 @@ export type Plan$Outbound = {
 
 /** @internal */
 export const Plan$outboundSchema: z.ZodType<Plan$Outbound, z.ZodTypeDef, Plan> =
-  z.object({
-    data: PlanData$outboundSchema.optional(),
-    meta: z.lazy(() => PlanMeta$outboundSchema).optional(),
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      data: PlanData$outboundSchema.optional(),
+      meta: z.lazy(() => PlanMeta$outboundSchema).optional(),
+    })
+  );
 
 export function planToJSON(plan: Plan): string {
   return JSON.stringify(Plan$outboundSchema.parse(plan));
