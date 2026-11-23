@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -64,15 +64,15 @@ export type InferenceApiKey = {
 /** @internal */
 export const InferenceApiKeyType$inboundSchema: z.ZodNativeEnum<
   typeof InferenceApiKeyType
-> = z.nativeEnum(InferenceApiKeyType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(InferenceApiKeyType));
 /** @internal */
 export const InferenceApiKeyType$outboundSchema: z.ZodNativeEnum<
   typeof InferenceApiKeyType
 > = InferenceApiKeyType$inboundSchema;
 
 /** @internal */
-export const SyncStatus$inboundSchema: z.ZodNativeEnum<typeof SyncStatus> = z
-  .nativeEnum(SyncStatus);
+export const SyncStatus$inboundSchema: z.ZodNativeEnum<typeof SyncStatus> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(SyncStatus));
 /** @internal */
 export const SyncStatus$outboundSchema: z.ZodNativeEnum<typeof SyncStatus> =
   SyncStatus$inboundSchema;
@@ -82,24 +82,27 @@ export const InferenceApiKeyAttributes$inboundSchema: z.ZodType<
   InferenceApiKeyAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string().optional(),
-  token: z.nullable(z.string()).optional(),
-  token_last_slice: z.string().optional(),
-  sync_status: SyncStatus$inboundSchema.optional(),
-  last_used_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "token_last_slice": "tokenLastSlice",
-    "sync_status": "syncStatus",
-    "last_used_at": "lastUsedAt",
-    "created_at": "createdAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    token: z.nullable(z.string()).optional(),
+    token_last_slice: z.string().optional(),
+    sync_status: SyncStatus$inboundSchema.optional(),
+    last_used_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "token_last_slice": "tokenLastSlice",
+      "sync_status": "syncStatus",
+      "last_used_at": "lastUsedAt",
+      "created_at": "createdAt",
+    });
+  })
+);
 /** @internal */
 export type InferenceApiKeyAttributes$Outbound = {
   name?: string | undefined;
@@ -115,21 +118,23 @@ export const InferenceApiKeyAttributes$outboundSchema: z.ZodType<
   InferenceApiKeyAttributes$Outbound,
   z.ZodTypeDef,
   InferenceApiKeyAttributes
-> = z.object({
-  name: z.string().optional(),
-  token: z.nullable(z.string()).optional(),
-  tokenLastSlice: z.string().optional(),
-  syncStatus: SyncStatus$outboundSchema.optional(),
-  lastUsedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  createdAt: z.date().transform(v => v.toISOString()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    tokenLastSlice: "token_last_slice",
-    syncStatus: "sync_status",
-    lastUsedAt: "last_used_at",
-    createdAt: "created_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    token: z.nullable(z.string()).optional(),
+    tokenLastSlice: z.string().optional(),
+    syncStatus: SyncStatus$outboundSchema.optional(),
+    lastUsedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    createdAt: z.date().transform(v => v.toISOString()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      tokenLastSlice: "token_last_slice",
+      syncStatus: "sync_status",
+      lastUsedAt: "last_used_at",
+      createdAt: "created_at",
+    });
+  })
+);
 
 export function inferenceApiKeyAttributesToJSON(
   inferenceApiKeyAttributes: InferenceApiKeyAttributes,
@@ -153,11 +158,14 @@ export const InferenceApiKey$inboundSchema: z.ZodType<
   InferenceApiKey,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  type: InferenceApiKeyType$inboundSchema.optional(),
-  attributes: z.lazy(() => InferenceApiKeyAttributes$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: InferenceApiKeyType$inboundSchema.optional(),
+    attributes: z.lazy(() => InferenceApiKeyAttributes$inboundSchema)
+      .optional(),
+  })
+);
 /** @internal */
 export type InferenceApiKey$Outbound = {
   id?: string | undefined;
@@ -170,11 +178,14 @@ export const InferenceApiKey$outboundSchema: z.ZodType<
   InferenceApiKey$Outbound,
   z.ZodTypeDef,
   InferenceApiKey
-> = z.object({
-  id: z.string().optional(),
-  type: InferenceApiKeyType$outboundSchema.optional(),
-  attributes: z.lazy(() => InferenceApiKeyAttributes$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: InferenceApiKeyType$outboundSchema.optional(),
+    attributes: z.lazy(() => InferenceApiKeyAttributes$outboundSchema)
+      .optional(),
+  })
+);
 
 export function inferenceApiKeyToJSON(
   inferenceApiKey: InferenceApiKey,

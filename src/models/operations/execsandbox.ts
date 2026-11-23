@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -48,16 +48,18 @@ export const ExecSandboxAttributes2$inboundSchema: z.ZodType<
   ExecSandboxAttributes2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  command: z.array(z.string()),
-  environment: z.record(z.string()).optional(),
-  workdir: z.string().optional(),
-  timeout_seconds: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "timeout_seconds": "timeoutSeconds",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    command: z.array(z.string()),
+    environment: z.record(z.string()).optional(),
+    workdir: z.string().optional(),
+    timeout_seconds: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "timeout_seconds": "timeoutSeconds",
+    });
+  })
+);
 /** @internal */
 export type ExecSandboxAttributes2$Outbound = {
   command: Array<string>;
@@ -71,16 +73,18 @@ export const ExecSandboxAttributes2$outboundSchema: z.ZodType<
   ExecSandboxAttributes2$Outbound,
   z.ZodTypeDef,
   ExecSandboxAttributes2
-> = z.object({
-  command: z.array(z.string()),
-  environment: z.record(z.string()).optional(),
-  workdir: z.string().optional(),
-  timeoutSeconds: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    timeoutSeconds: "timeout_seconds",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    command: z.array(z.string()),
+    environment: z.record(z.string()).optional(),
+    workdir: z.string().optional(),
+    timeoutSeconds: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      timeoutSeconds: "timeout_seconds",
+    });
+  })
+);
 
 export function execSandboxAttributes2ToJSON(
   execSandboxAttributes2: ExecSandboxAttributes2,
@@ -104,9 +108,11 @@ export const ExecSandboxData2$inboundSchema: z.ZodType<
   ExecSandboxData2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  attributes: z.lazy(() => ExecSandboxAttributes2$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    attributes: z.lazy(() => ExecSandboxAttributes2$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type ExecSandboxData2$Outbound = {
   attributes?: ExecSandboxAttributes2$Outbound | undefined;
@@ -117,9 +123,11 @@ export const ExecSandboxData2$outboundSchema: z.ZodType<
   ExecSandboxData2$Outbound,
   z.ZodTypeDef,
   ExecSandboxData2
-> = z.object({
-  attributes: z.lazy(() => ExecSandboxAttributes2$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    attributes: z.lazy(() => ExecSandboxAttributes2$outboundSchema).optional(),
+  })
+);
 
 export function execSandboxData2ToJSON(
   execSandboxData2: ExecSandboxData2,
@@ -143,9 +151,11 @@ export const ExecSandboxRequestBody2$inboundSchema: z.ZodType<
   ExecSandboxRequestBody2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => ExecSandboxData2$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => ExecSandboxData2$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type ExecSandboxRequestBody2$Outbound = {
   data?: ExecSandboxData2$Outbound | undefined;
@@ -156,9 +166,11 @@ export const ExecSandboxRequestBody2$outboundSchema: z.ZodType<
   ExecSandboxRequestBody2$Outbound,
   z.ZodTypeDef,
   ExecSandboxRequestBody2
-> = z.object({
-  data: z.lazy(() => ExecSandboxData2$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => ExecSandboxData2$outboundSchema).optional(),
+  })
+);
 
 export function execSandboxRequestBody2ToJSON(
   execSandboxRequestBody2: ExecSandboxRequestBody2,
@@ -182,15 +194,17 @@ export const ExecSandboxRequest$inboundSchema: z.ZodType<
   ExecSandboxRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  sandbox_id: z.string(),
-  RequestBody: z.lazy(() => ExecSandboxRequestBody2$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "sandbox_id": "sandboxId",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    sandbox_id: z.string(),
+    RequestBody: z.lazy(() => ExecSandboxRequestBody2$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "sandbox_id": "sandboxId",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type ExecSandboxRequest$Outbound = {
   sandbox_id: string;
@@ -202,15 +216,17 @@ export const ExecSandboxRequest$outboundSchema: z.ZodType<
   ExecSandboxRequest$Outbound,
   z.ZodTypeDef,
   ExecSandboxRequest
-> = z.object({
-  sandboxId: z.string(),
-  requestBody: z.lazy(() => ExecSandboxRequestBody2$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    sandboxId: "sandbox_id",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    sandboxId: z.string(),
+    requestBody: z.lazy(() => ExecSandboxRequestBody2$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      sandboxId: "sandbox_id",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function execSandboxRequestToJSON(
   execSandboxRequest: ExecSandboxRequest,

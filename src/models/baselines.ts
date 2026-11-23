@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import {
   BaselineData,
@@ -25,7 +25,7 @@ export const BaselinesMeta$inboundSchema: z.ZodType<
   BaselinesMeta,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type BaselinesMeta$Outbound = {};
 
@@ -34,7 +34,7 @@ export const BaselinesMeta$outboundSchema: z.ZodType<
   BaselinesMeta$Outbound,
   z.ZodTypeDef,
   BaselinesMeta
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function baselinesMetaToJSON(baselinesMeta: BaselinesMeta): string {
   return JSON.stringify(BaselinesMeta$outboundSchema.parse(baselinesMeta));
@@ -54,10 +54,12 @@ export const Baselines$inboundSchema: z.ZodType<
   Baselines,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.array(BaselineData$inboundSchema).optional(),
-  meta: z.lazy(() => BaselinesMeta$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(BaselineData$inboundSchema).optional(),
+    meta: z.lazy(() => BaselinesMeta$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type Baselines$Outbound = {
   data?: Array<BaselineData$Outbound> | undefined;
@@ -69,10 +71,12 @@ export const Baselines$outboundSchema: z.ZodType<
   Baselines$Outbound,
   z.ZodTypeDef,
   Baselines
-> = z.object({
-  data: z.array(BaselineData$outboundSchema).optional(),
-  meta: z.lazy(() => BaselinesMeta$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(BaselineData$outboundSchema).optional(),
+    meta: z.lazy(() => BaselinesMeta$outboundSchema).optional(),
+  })
+);
 
 export function baselinesToJSON(baselines: Baselines): string {
   return JSON.stringify(Baselines$outboundSchema.parse(baselines));

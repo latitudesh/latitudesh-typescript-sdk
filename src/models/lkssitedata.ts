@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import {
@@ -38,7 +38,7 @@ export type LksSiteData = {
 /** @internal */
 export const LksSiteDataType$inboundSchema: z.ZodNativeEnum<
   typeof LksSiteDataType
-> = z.nativeEnum(LksSiteDataType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(LksSiteDataType));
 /** @internal */
 export const LksSiteDataType$outboundSchema: z.ZodNativeEnum<
   typeof LksSiteDataType
@@ -49,12 +49,14 @@ export const LksSiteDataAttributes$inboundSchema: z.ZodType<
   LksSiteDataAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string().optional(),
-  slug: z.string().optional(),
-  facility: z.string().optional(),
-  country: Country$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    slug: z.string().optional(),
+    facility: z.string().optional(),
+    country: Country$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type LksSiteDataAttributes$Outbound = {
   name?: string | undefined;
@@ -68,12 +70,14 @@ export const LksSiteDataAttributes$outboundSchema: z.ZodType<
   LksSiteDataAttributes$Outbound,
   z.ZodTypeDef,
   LksSiteDataAttributes
-> = z.object({
-  name: z.string().optional(),
-  slug: z.string().optional(),
-  facility: z.string().optional(),
-  country: Country$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    slug: z.string().optional(),
+    facility: z.string().optional(),
+    country: Country$outboundSchema.optional(),
+  })
+);
 
 export function lksSiteDataAttributesToJSON(
   lksSiteDataAttributes: LksSiteDataAttributes,
@@ -97,11 +101,13 @@ export const LksSiteData$inboundSchema: z.ZodType<
   LksSiteData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  type: LksSiteDataType$inboundSchema.optional(),
-  attributes: z.lazy(() => LksSiteDataAttributes$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: LksSiteDataType$inboundSchema.optional(),
+    attributes: z.lazy(() => LksSiteDataAttributes$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type LksSiteData$Outbound = {
   id?: string | undefined;
@@ -114,11 +120,13 @@ export const LksSiteData$outboundSchema: z.ZodType<
   LksSiteData$Outbound,
   z.ZodTypeDef,
   LksSiteData
-> = z.object({
-  id: z.string().optional(),
-  type: LksSiteDataType$outboundSchema.optional(),
-  attributes: z.lazy(() => LksSiteDataAttributes$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: LksSiteDataType$outboundSchema.optional(),
+    attributes: z.lazy(() => LksSiteDataAttributes$outboundSchema).optional(),
+  })
+);
 
 export function lksSiteDataToJSON(lksSiteData: LksSiteData): string {
   return JSON.stringify(LksSiteData$outboundSchema.parse(lksSiteData));

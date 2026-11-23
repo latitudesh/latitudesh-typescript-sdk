@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import {
@@ -127,15 +127,15 @@ export type BaselineData = {
 /** @internal */
 export const BaselineDataType$inboundSchema: z.ZodNativeEnum<
   typeof BaselineDataType
-> = z.nativeEnum(BaselineDataType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(BaselineDataType));
 /** @internal */
 export const BaselineDataType$outboundSchema: z.ZodNativeEnum<
   typeof BaselineDataType
 > = BaselineDataType$inboundSchema;
 
 /** @internal */
-export const TargetType$inboundSchema: z.ZodNativeEnum<typeof TargetType> = z
-  .nativeEnum(TargetType);
+export const TargetType$inboundSchema: z.ZodNativeEnum<typeof TargetType> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(TargetType));
 /** @internal */
 export const TargetType$outboundSchema: z.ZodNativeEnum<typeof TargetType> =
   TargetType$inboundSchema;
@@ -145,11 +145,13 @@ export const Platform$inboundSchema: z.ZodType<
   Platform,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  slug: z.string().optional(),
-  name: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    slug: z.string().optional(),
+    name: z.string().optional(),
+  })
+);
 /** @internal */
 export type Platform$Outbound = {
   id?: string | undefined;
@@ -162,11 +164,13 @@ export const Platform$outboundSchema: z.ZodType<
   Platform$Outbound,
   z.ZodTypeDef,
   Platform
-> = z.object({
-  id: z.string().optional(),
-  slug: z.string().optional(),
-  name: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    slug: z.string().optional(),
+    name: z.string().optional(),
+  })
+);
 
 export function platformToJSON(platform: Platform): string {
   return JSON.stringify(Platform$outboundSchema.parse(platform));
@@ -186,11 +190,13 @@ export const BaselineDataSshKey$inboundSchema: z.ZodType<
   BaselineDataSshKey,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  fingerprint: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    name: z.string().optional(),
+    fingerprint: z.string().optional(),
+  })
+);
 /** @internal */
 export type BaselineDataSshKey$Outbound = {
   id?: string | undefined;
@@ -203,11 +209,13 @@ export const BaselineDataSshKey$outboundSchema: z.ZodType<
   BaselineDataSshKey$Outbound,
   z.ZodTypeDef,
   BaselineDataSshKey
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  fingerprint: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    name: z.string().optional(),
+    fingerprint: z.string().optional(),
+  })
+);
 
 export function baselineDataSshKeyToJSON(
   baselineDataSshKey: BaselineDataSshKey,
@@ -231,10 +239,12 @@ export const BaselineDataUserData$inboundSchema: z.ZodType<
   BaselineDataUserData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  description: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    description: z.nullable(z.string()).optional(),
+  })
+);
 /** @internal */
 export type BaselineDataUserData$Outbound = {
   id?: string | undefined;
@@ -246,10 +256,12 @@ export const BaselineDataUserData$outboundSchema: z.ZodType<
   BaselineDataUserData$Outbound,
   z.ZodTypeDef,
   BaselineDataUserData
-> = z.object({
-  id: z.string().optional(),
-  description: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    description: z.nullable(z.string()).optional(),
+  })
+);
 
 export function baselineDataUserDataToJSON(
   baselineDataUserData: BaselineDataUserData,
@@ -269,9 +281,8 @@ export function baselineDataUserDataFromJSON(
 }
 
 /** @internal */
-export const Raid$inboundSchema: z.ZodNativeEnum<typeof Raid> = z.nativeEnum(
-  Raid,
-);
+export const Raid$inboundSchema: z.ZodNativeEnum<typeof Raid> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Raid));
 /** @internal */
 export const Raid$outboundSchema: z.ZodNativeEnum<typeof Raid> =
   Raid$inboundSchema;
@@ -281,7 +292,7 @@ export const BaselineDataBios$inboundSchema: z.ZodType<
   BaselineDataBios,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type BaselineDataBios$Outbound = {};
 
@@ -290,7 +301,7 @@ export const BaselineDataBios$outboundSchema: z.ZodType<
   BaselineDataBios$Outbound,
   z.ZodTypeDef,
   BaselineDataBios
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function baselineDataBiosToJSON(
   baselineDataBios: BaselineDataBios,
@@ -314,29 +325,32 @@ export const BaselineDataAttributes$inboundSchema: z.ZodType<
   BaselineDataAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string().optional(),
-  description: z.nullable(z.string()).optional(),
-  target_type: TargetType$inboundSchema.optional(),
-  operating_system: z.nullable(z.string()).optional(),
-  platforms: z.array(z.lazy(() => Platform$inboundSchema)).optional(),
-  ssh_keys: z.array(z.lazy(() => BaselineDataSshKey$inboundSchema)).optional(),
-  user_data: z.nullable(z.lazy(() => BaselineDataUserData$inboundSchema))
-    .optional(),
-  disk_layout: z.array(BaselineDiskLayoutGroup$inboundSchema).optional(),
-  raid: z.nullable(Raid$inboundSchema).optional(),
-  bios: z.lazy(() => BaselineDataBios$inboundSchema).optional(),
-  created_at: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "target_type": "targetType",
-    "operating_system": "operatingSystem",
-    "ssh_keys": "sshKeys",
-    "user_data": "userData",
-    "disk_layout": "diskLayout",
-    "created_at": "createdAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    description: z.nullable(z.string()).optional(),
+    target_type: TargetType$inboundSchema.optional(),
+    operating_system: z.nullable(z.string()).optional(),
+    platforms: z.array(z.lazy(() => Platform$inboundSchema)).optional(),
+    ssh_keys: z.array(z.lazy(() => BaselineDataSshKey$inboundSchema))
+      .optional(),
+    user_data: z.nullable(z.lazy(() => BaselineDataUserData$inboundSchema))
+      .optional(),
+    disk_layout: z.array(BaselineDiskLayoutGroup$inboundSchema).optional(),
+    raid: z.nullable(Raid$inboundSchema).optional(),
+    bios: z.lazy(() => BaselineDataBios$inboundSchema).optional(),
+    created_at: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "target_type": "targetType",
+      "operating_system": "operatingSystem",
+      "ssh_keys": "sshKeys",
+      "user_data": "userData",
+      "disk_layout": "diskLayout",
+      "created_at": "createdAt",
+    });
+  })
+);
 /** @internal */
 export type BaselineDataAttributes$Outbound = {
   name?: string | undefined;
@@ -357,29 +371,32 @@ export const BaselineDataAttributes$outboundSchema: z.ZodType<
   BaselineDataAttributes$Outbound,
   z.ZodTypeDef,
   BaselineDataAttributes
-> = z.object({
-  name: z.string().optional(),
-  description: z.nullable(z.string()).optional(),
-  targetType: TargetType$outboundSchema.optional(),
-  operatingSystem: z.nullable(z.string()).optional(),
-  platforms: z.array(z.lazy(() => Platform$outboundSchema)).optional(),
-  sshKeys: z.array(z.lazy(() => BaselineDataSshKey$outboundSchema)).optional(),
-  userData: z.nullable(z.lazy(() => BaselineDataUserData$outboundSchema))
-    .optional(),
-  diskLayout: z.array(BaselineDiskLayoutGroup$outboundSchema).optional(),
-  raid: z.nullable(Raid$outboundSchema).optional(),
-  bios: z.lazy(() => BaselineDataBios$outboundSchema).optional(),
-  createdAt: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    targetType: "target_type",
-    operatingSystem: "operating_system",
-    sshKeys: "ssh_keys",
-    userData: "user_data",
-    diskLayout: "disk_layout",
-    createdAt: "created_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    description: z.nullable(z.string()).optional(),
+    targetType: TargetType$outboundSchema.optional(),
+    operatingSystem: z.nullable(z.string()).optional(),
+    platforms: z.array(z.lazy(() => Platform$outboundSchema)).optional(),
+    sshKeys: z.array(z.lazy(() => BaselineDataSshKey$outboundSchema))
+      .optional(),
+    userData: z.nullable(z.lazy(() => BaselineDataUserData$outboundSchema))
+      .optional(),
+    diskLayout: z.array(BaselineDiskLayoutGroup$outboundSchema).optional(),
+    raid: z.nullable(Raid$outboundSchema).optional(),
+    bios: z.lazy(() => BaselineDataBios$outboundSchema).optional(),
+    createdAt: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      targetType: "target_type",
+      operatingSystem: "operating_system",
+      sshKeys: "ssh_keys",
+      userData: "user_data",
+      diskLayout: "disk_layout",
+      createdAt: "created_at",
+    });
+  })
+);
 
 export function baselineDataAttributesToJSON(
   baselineDataAttributes: BaselineDataAttributes,
@@ -403,11 +420,13 @@ export const BaselineData$inboundSchema: z.ZodType<
   BaselineData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  type: BaselineDataType$inboundSchema.optional(),
-  attributes: z.lazy(() => BaselineDataAttributes$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: BaselineDataType$inboundSchema.optional(),
+    attributes: z.lazy(() => BaselineDataAttributes$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type BaselineData$Outbound = {
   id?: string | undefined;
@@ -420,11 +439,13 @@ export const BaselineData$outboundSchema: z.ZodType<
   BaselineData$Outbound,
   z.ZodTypeDef,
   BaselineData
-> = z.object({
-  id: z.string().optional(),
-  type: BaselineDataType$outboundSchema.optional(),
-  attributes: z.lazy(() => BaselineDataAttributes$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: BaselineDataType$outboundSchema.optional(),
+    attributes: z.lazy(() => BaselineDataAttributes$outboundSchema).optional(),
+  })
+);
 
 export function baselineDataToJSON(baselineData: BaselineData): string {
   return JSON.stringify(BaselineData$outboundSchema.parse(baselineData));

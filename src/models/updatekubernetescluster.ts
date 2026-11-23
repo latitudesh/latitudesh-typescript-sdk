@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -53,7 +53,9 @@ export type UpdateKubernetesCluster = {
 /** @internal */
 export const UpdateKubernetesClusterType$inboundSchema: z.ZodNativeEnum<
   typeof UpdateKubernetesClusterType
-> = z.nativeEnum(UpdateKubernetesClusterType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(UpdateKubernetesClusterType)
+);
 /** @internal */
 export const UpdateKubernetesClusterType$outboundSchema: z.ZodNativeEnum<
   typeof UpdateKubernetesClusterType
@@ -64,19 +66,21 @@ export const UpdateKubernetesClusterAttributes$inboundSchema: z.ZodType<
   UpdateKubernetesClusterAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  worker_count: z.number().int().optional(),
-  control_plane_count: z.number().int().optional(),
-  worker_plan: z.nullable(z.string()).optional(),
-  kubernetes_version: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "worker_count": "workerCount",
-    "control_plane_count": "controlPlaneCount",
-    "worker_plan": "workerPlan",
-    "kubernetes_version": "kubernetesVersion",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    worker_count: z.number().int().optional(),
+    control_plane_count: z.number().int().optional(),
+    worker_plan: z.nullable(z.string()).optional(),
+    kubernetes_version: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "worker_count": "workerCount",
+      "control_plane_count": "controlPlaneCount",
+      "worker_plan": "workerPlan",
+      "kubernetes_version": "kubernetesVersion",
+    });
+  })
+);
 /** @internal */
 export type UpdateKubernetesClusterAttributes$Outbound = {
   worker_count?: number | undefined;
@@ -90,19 +94,21 @@ export const UpdateKubernetesClusterAttributes$outboundSchema: z.ZodType<
   UpdateKubernetesClusterAttributes$Outbound,
   z.ZodTypeDef,
   UpdateKubernetesClusterAttributes
-> = z.object({
-  workerCount: z.number().int().optional(),
-  controlPlaneCount: z.number().int().optional(),
-  workerPlan: z.nullable(z.string()).optional(),
-  kubernetesVersion: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    workerCount: "worker_count",
-    controlPlaneCount: "control_plane_count",
-    workerPlan: "worker_plan",
-    kubernetesVersion: "kubernetes_version",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    workerCount: z.number().int().optional(),
+    controlPlaneCount: z.number().int().optional(),
+    workerPlan: z.nullable(z.string()).optional(),
+    kubernetesVersion: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      workerCount: "worker_count",
+      controlPlaneCount: "control_plane_count",
+      workerPlan: "worker_plan",
+      kubernetesVersion: "kubernetes_version",
+    });
+  })
+);
 
 export function updateKubernetesClusterAttributesToJSON(
   updateKubernetesClusterAttributes: UpdateKubernetesClusterAttributes,
@@ -128,10 +134,12 @@ export const UpdateKubernetesClusterData$inboundSchema: z.ZodType<
   UpdateKubernetesClusterData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: UpdateKubernetesClusterType$inboundSchema,
-  attributes: z.lazy(() => UpdateKubernetesClusterAttributes$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: UpdateKubernetesClusterType$inboundSchema,
+    attributes: z.lazy(() => UpdateKubernetesClusterAttributes$inboundSchema),
+  })
+);
 /** @internal */
 export type UpdateKubernetesClusterData$Outbound = {
   type: string;
@@ -143,10 +151,12 @@ export const UpdateKubernetesClusterData$outboundSchema: z.ZodType<
   UpdateKubernetesClusterData$Outbound,
   z.ZodTypeDef,
   UpdateKubernetesClusterData
-> = z.object({
-  type: UpdateKubernetesClusterType$outboundSchema,
-  attributes: z.lazy(() => UpdateKubernetesClusterAttributes$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: UpdateKubernetesClusterType$outboundSchema,
+    attributes: z.lazy(() => UpdateKubernetesClusterAttributes$outboundSchema),
+  })
+);
 
 export function updateKubernetesClusterDataToJSON(
   updateKubernetesClusterData: UpdateKubernetesClusterData,
@@ -172,9 +182,11 @@ export const UpdateKubernetesCluster$inboundSchema: z.ZodType<
   UpdateKubernetesCluster,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => UpdateKubernetesClusterData$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => UpdateKubernetesClusterData$inboundSchema),
+  })
+);
 /** @internal */
 export type UpdateKubernetesCluster$Outbound = {
   data: UpdateKubernetesClusterData$Outbound;
@@ -185,9 +197,11 @@ export const UpdateKubernetesCluster$outboundSchema: z.ZodType<
   UpdateKubernetesCluster$Outbound,
   z.ZodTypeDef,
   UpdateKubernetesCluster
-> = z.object({
-  data: z.lazy(() => UpdateKubernetesClusterData$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => UpdateKubernetesClusterData$outboundSchema),
+  })
+);
 
 export function updateKubernetesClusterToJSON(
   updateKubernetesCluster: UpdateKubernetesCluster,

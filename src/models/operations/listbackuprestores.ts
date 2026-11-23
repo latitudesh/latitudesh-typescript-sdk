@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -17,13 +17,15 @@ export const ListBackupRestoresRequest$inboundSchema: z.ZodType<
   ListBackupRestoresRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  backup_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "backup_id": "backupId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    backup_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "backup_id": "backupId",
+    });
+  })
+);
 /** @internal */
 export type ListBackupRestoresRequest$Outbound = {
   backup_id: string;
@@ -34,13 +36,15 @@ export const ListBackupRestoresRequest$outboundSchema: z.ZodType<
   ListBackupRestoresRequest$Outbound,
   z.ZodTypeDef,
   ListBackupRestoresRequest
-> = z.object({
-  backupId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    backupId: "backup_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    backupId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      backupId: "backup_id",
+    });
+  })
+);
 
 export function listBackupRestoresRequestToJSON(
   listBackupRestoresRequest: ListBackupRestoresRequest,

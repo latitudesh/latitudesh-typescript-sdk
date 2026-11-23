@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -21,13 +21,15 @@ export const GetProjectClusterRequirementSignoffsRequest$inboundSchema:
     GetProjectClusterRequirementSignoffsRequest,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    project_id: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      "project_id": "projectId",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      project_id: z.string(),
+    }).transform((v) => {
+      return remap$(v, {
+        "project_id": "projectId",
+      });
+    })
+  );
 /** @internal */
 export type GetProjectClusterRequirementSignoffsRequest$Outbound = {
   project_id: string;
@@ -39,13 +41,15 @@ export const GetProjectClusterRequirementSignoffsRequest$outboundSchema:
     GetProjectClusterRequirementSignoffsRequest$Outbound,
     z.ZodTypeDef,
     GetProjectClusterRequirementSignoffsRequest
-  > = z.object({
-    projectId: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      projectId: "project_id",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      projectId: z.string(),
+    }).transform((v) => {
+      return remap$(v, {
+        projectId: "project_id",
+      });
+    })
+  );
 
 export function getProjectClusterRequirementSignoffsRequestToJSON(
   getProjectClusterRequirementSignoffsRequest:

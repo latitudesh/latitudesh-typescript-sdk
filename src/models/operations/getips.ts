@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -100,14 +100,14 @@ export type GetIpsResponse = {
 
 /** @internal */
 export const FilterFamily$inboundSchema: z.ZodNativeEnum<typeof FilterFamily> =
-  z.nativeEnum(FilterFamily);
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(FilterFamily));
 /** @internal */
 export const FilterFamily$outboundSchema: z.ZodNativeEnum<typeof FilterFamily> =
   FilterFamily$inboundSchema;
 
 /** @internal */
-export const FilterType$inboundSchema: z.ZodNativeEnum<typeof FilterType> = z
-  .nativeEnum(FilterType);
+export const FilterType$inboundSchema: z.ZodNativeEnum<typeof FilterType> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(FilterType));
 /** @internal */
 export const FilterType$outboundSchema: z.ZodNativeEnum<typeof FilterType> =
   FilterType$inboundSchema;
@@ -117,38 +117,40 @@ export const GetIpsRequest$inboundSchema: z.ZodType<
   GetIpsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "filter[server]": z.string().optional(),
-  "filter[project]": z.string().optional(),
-  "filter[family]": FilterFamily$inboundSchema.optional(),
-  "filter[type]": FilterType$inboundSchema.optional(),
-  "filter[location]": z.string().optional(),
-  "filter[address]": z.string().optional(),
-  "filter[additional]": z.boolean().optional(),
-  "filter[available]": z.boolean().optional(),
-  "filter[management]": z.boolean().optional(),
-  "extra_fields[ip_addresses]": z.string().optional(),
-  "page[size]": z.number().int().default(20),
-  "page[number]": z.number().int().default(1),
-  "stats[total]": z.string().optional(),
-  sort: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "filter[server]": "filterServer",
-    "filter[project]": "filterProject",
-    "filter[family]": "filterFamily",
-    "filter[type]": "filterType",
-    "filter[location]": "filterLocation",
-    "filter[address]": "filterAddress",
-    "filter[additional]": "filterAdditional",
-    "filter[available]": "filterAvailable",
-    "filter[management]": "filterManagement",
-    "extra_fields[ip_addresses]": "extraFieldsIpAddresses",
-    "page[size]": "pageSize",
-    "page[number]": "pageNumber",
-    "stats[total]": "statsTotal",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "filter[server]": z.string().optional(),
+    "filter[project]": z.string().optional(),
+    "filter[family]": FilterFamily$inboundSchema.optional(),
+    "filter[type]": FilterType$inboundSchema.optional(),
+    "filter[location]": z.string().optional(),
+    "filter[address]": z.string().optional(),
+    "filter[additional]": z.boolean().optional(),
+    "filter[available]": z.boolean().optional(),
+    "filter[management]": z.boolean().optional(),
+    "extra_fields[ip_addresses]": z.string().optional(),
+    "page[size]": z.number().int().default(20),
+    "page[number]": z.number().int().default(1),
+    "stats[total]": z.string().optional(),
+    sort: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "filter[server]": "filterServer",
+      "filter[project]": "filterProject",
+      "filter[family]": "filterFamily",
+      "filter[type]": "filterType",
+      "filter[location]": "filterLocation",
+      "filter[address]": "filterAddress",
+      "filter[additional]": "filterAdditional",
+      "filter[available]": "filterAvailable",
+      "filter[management]": "filterManagement",
+      "extra_fields[ip_addresses]": "extraFieldsIpAddresses",
+      "page[size]": "pageSize",
+      "page[number]": "pageNumber",
+      "stats[total]": "statsTotal",
+    });
+  })
+);
 /** @internal */
 export type GetIpsRequest$Outbound = {
   "filter[server]"?: string | undefined;
@@ -172,38 +174,40 @@ export const GetIpsRequest$outboundSchema: z.ZodType<
   GetIpsRequest$Outbound,
   z.ZodTypeDef,
   GetIpsRequest
-> = z.object({
-  filterServer: z.string().optional(),
-  filterProject: z.string().optional(),
-  filterFamily: FilterFamily$outboundSchema.optional(),
-  filterType: FilterType$outboundSchema.optional(),
-  filterLocation: z.string().optional(),
-  filterAddress: z.string().optional(),
-  filterAdditional: z.boolean().optional(),
-  filterAvailable: z.boolean().optional(),
-  filterManagement: z.boolean().optional(),
-  extraFieldsIpAddresses: z.string().optional(),
-  pageSize: z.number().int().default(20),
-  pageNumber: z.number().int().default(1),
-  statsTotal: z.string().optional(),
-  sort: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    filterServer: "filter[server]",
-    filterProject: "filter[project]",
-    filterFamily: "filter[family]",
-    filterType: "filter[type]",
-    filterLocation: "filter[location]",
-    filterAddress: "filter[address]",
-    filterAdditional: "filter[additional]",
-    filterAvailable: "filter[available]",
-    filterManagement: "filter[management]",
-    extraFieldsIpAddresses: "extra_fields[ip_addresses]",
-    pageSize: "page[size]",
-    pageNumber: "page[number]",
-    statsTotal: "stats[total]",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    filterServer: z.string().optional(),
+    filterProject: z.string().optional(),
+    filterFamily: FilterFamily$outboundSchema.optional(),
+    filterType: FilterType$outboundSchema.optional(),
+    filterLocation: z.string().optional(),
+    filterAddress: z.string().optional(),
+    filterAdditional: z.boolean().optional(),
+    filterAvailable: z.boolean().optional(),
+    filterManagement: z.boolean().optional(),
+    extraFieldsIpAddresses: z.string().optional(),
+    pageSize: z.number().int().default(20),
+    pageNumber: z.number().int().default(1),
+    statsTotal: z.string().optional(),
+    sort: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      filterServer: "filter[server]",
+      filterProject: "filter[project]",
+      filterFamily: "filter[family]",
+      filterType: "filter[type]",
+      filterLocation: "filter[location]",
+      filterAddress: "filter[address]",
+      filterAdditional: "filter[additional]",
+      filterAvailable: "filter[available]",
+      filterManagement: "filter[management]",
+      extraFieldsIpAddresses: "extra_fields[ip_addresses]",
+      pageSize: "page[size]",
+      pageNumber: "page[number]",
+      statsTotal: "stats[total]",
+    });
+  })
+);
 
 export function getIpsRequestToJSON(getIpsRequest: GetIpsRequest): string {
   return JSON.stringify(GetIpsRequest$outboundSchema.parse(getIpsRequest));
@@ -223,13 +227,15 @@ export const GetIpsResponse$inboundSchema: z.ZodType<
   GetIpsResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  Result: models.IpAddresses$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "Result": "result",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    Result: models.IpAddresses$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "Result": "result",
+    });
+  })
+);
 /** @internal */
 export type GetIpsResponse$Outbound = {
   Result: models.IpAddresses$Outbound;
@@ -240,13 +246,15 @@ export const GetIpsResponse$outboundSchema: z.ZodType<
   GetIpsResponse$Outbound,
   z.ZodTypeDef,
   GetIpsResponse
-> = z.object({
-  result: models.IpAddresses$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    result: "Result",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    result: models.IpAddresses$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      result: "Result",
+    });
+  })
+);
 
 export function getIpsResponseToJSON(getIpsResponse: GetIpsResponse): string {
   return JSON.stringify(GetIpsResponse$outboundSchema.parse(getIpsResponse));

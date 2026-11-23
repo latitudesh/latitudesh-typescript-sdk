@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as models from "../index.js";
@@ -33,17 +33,19 @@ export const GetTeamMembersRequest$inboundSchema: z.ZodType<
   GetTeamMembersRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "page[size]": z.number().int().default(20),
-  "page[number]": z.number().int().default(1),
-  "stats[total]": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "page[size]": "pageSize",
-    "page[number]": "pageNumber",
-    "stats[total]": "statsTotal",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "page[size]": z.number().int().default(20),
+    "page[number]": z.number().int().default(1),
+    "stats[total]": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "page[size]": "pageSize",
+      "page[number]": "pageNumber",
+      "stats[total]": "statsTotal",
+    });
+  })
+);
 /** @internal */
 export type GetTeamMembersRequest$Outbound = {
   "page[size]": number;
@@ -56,17 +58,19 @@ export const GetTeamMembersRequest$outboundSchema: z.ZodType<
   GetTeamMembersRequest$Outbound,
   z.ZodTypeDef,
   GetTeamMembersRequest
-> = z.object({
-  pageSize: z.number().int().default(20),
-  pageNumber: z.number().int().default(1),
-  statsTotal: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    pageSize: "page[size]",
-    pageNumber: "page[number]",
-    statsTotal: "stats[total]",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    pageSize: z.number().int().default(20),
+    pageNumber: z.number().int().default(1),
+    statsTotal: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      pageSize: "page[size]",
+      pageNumber: "page[number]",
+      statsTotal: "stats[total]",
+    });
+  })
+);
 
 export function getTeamMembersRequestToJSON(
   getTeamMembersRequest: GetTeamMembersRequest,
@@ -90,13 +94,15 @@ export const GetTeamMembersResponse$inboundSchema: z.ZodType<
   GetTeamMembersResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  Result: models.TeamMembers$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "Result": "result",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    Result: models.TeamMembers$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "Result": "result",
+    });
+  })
+);
 /** @internal */
 export type GetTeamMembersResponse$Outbound = {
   Result: models.TeamMembers$Outbound;
@@ -107,13 +113,15 @@ export const GetTeamMembersResponse$outboundSchema: z.ZodType<
   GetTeamMembersResponse$Outbound,
   z.ZodTypeDef,
   GetTeamMembersResponse
-> = z.object({
-  result: models.TeamMembers$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    result: "Result",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    result: models.TeamMembers$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      result: "Result",
+    });
+  })
+);
 
 export function getTeamMembersResponseToJSON(
   getTeamMembersResponse: GetTeamMembersResponse,

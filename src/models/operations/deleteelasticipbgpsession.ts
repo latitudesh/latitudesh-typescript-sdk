@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -19,15 +19,17 @@ export const DeleteElasticIpBgpSessionRequest$inboundSchema: z.ZodType<
   DeleteElasticIpBgpSessionRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  elastic_ip_id: z.string(),
-  id: z.string(),
-  force: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "elastic_ip_id": "elasticIpId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    elastic_ip_id: z.string(),
+    id: z.string(),
+    force: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "elastic_ip_id": "elasticIpId",
+    });
+  })
+);
 /** @internal */
 export type DeleteElasticIpBgpSessionRequest$Outbound = {
   elastic_ip_id: string;
@@ -40,15 +42,17 @@ export const DeleteElasticIpBgpSessionRequest$outboundSchema: z.ZodType<
   DeleteElasticIpBgpSessionRequest$Outbound,
   z.ZodTypeDef,
   DeleteElasticIpBgpSessionRequest
-> = z.object({
-  elasticIpId: z.string(),
-  id: z.string(),
-  force: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    elasticIpId: "elastic_ip_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    elasticIpId: z.string(),
+    id: z.string(),
+    force: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      elasticIpId: "elastic_ip_id",
+    });
+  })
+);
 
 export function deleteElasticIpBgpSessionRequestToJSON(
   deleteElasticIpBgpSessionRequest: DeleteElasticIpBgpSessionRequest,

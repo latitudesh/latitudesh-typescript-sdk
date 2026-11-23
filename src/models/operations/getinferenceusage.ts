@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -42,8 +42,8 @@ export type GetInferenceUsageRequest = {
 };
 
 /** @internal */
-export const Granularity$inboundSchema: z.ZodNativeEnum<typeof Granularity> = z
-  .nativeEnum(Granularity);
+export const Granularity$inboundSchema: z.ZodNativeEnum<typeof Granularity> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Granularity));
 /** @internal */
 export const Granularity$outboundSchema: z.ZodNativeEnum<typeof Granularity> =
   Granularity$inboundSchema;
@@ -53,16 +53,18 @@ export const GetInferenceUsageRequest$inboundSchema: z.ZodType<
   GetInferenceUsageRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  project_id: z.string(),
-  from: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  to: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  granularity: Granularity$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "project_id": "projectId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    project_id: z.string(),
+    from: z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    to: z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    granularity: Granularity$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "project_id": "projectId",
+    });
+  })
+);
 /** @internal */
 export type GetInferenceUsageRequest$Outbound = {
   project_id: string;
@@ -76,16 +78,18 @@ export const GetInferenceUsageRequest$outboundSchema: z.ZodType<
   GetInferenceUsageRequest$Outbound,
   z.ZodTypeDef,
   GetInferenceUsageRequest
-> = z.object({
-  projectId: z.string(),
-  from: z.date().transform(v => v.toISOString()),
-  to: z.date().transform(v => v.toISOString()),
-  granularity: Granularity$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    projectId: "project_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    projectId: z.string(),
+    from: z.date().transform(v => v.toISOString()),
+    to: z.date().transform(v => v.toISOString()),
+    granularity: Granularity$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      projectId: "project_id",
+    });
+  })
+);
 
 export function getInferenceUsageRequestToJSON(
   getInferenceUsageRequest: GetInferenceUsageRequest,

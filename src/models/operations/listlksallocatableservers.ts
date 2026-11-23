@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -24,15 +24,17 @@ export const ListLksAllocatableServersRequest$inboundSchema: z.ZodType<
   ListLksAllocatableServersRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "filter[project]": z.string(),
-  "filter[site]": z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "filter[project]": "filterProject",
-    "filter[site]": "filterSite",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "filter[project]": z.string(),
+    "filter[site]": z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "filter[project]": "filterProject",
+      "filter[site]": "filterSite",
+    });
+  })
+);
 /** @internal */
 export type ListLksAllocatableServersRequest$Outbound = {
   "filter[project]": string;
@@ -44,15 +46,17 @@ export const ListLksAllocatableServersRequest$outboundSchema: z.ZodType<
   ListLksAllocatableServersRequest$Outbound,
   z.ZodTypeDef,
   ListLksAllocatableServersRequest
-> = z.object({
-  filterProject: z.string(),
-  filterSite: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    filterProject: "filter[project]",
-    filterSite: "filter[site]",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    filterProject: z.string(),
+    filterSite: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      filterProject: "filter[project]",
+      filterSite: "filter[site]",
+    });
+  })
+);
 
 export function listLksAllocatableServersRequestToJSON(
   listLksAllocatableServersRequest: ListLksAllocatableServersRequest,

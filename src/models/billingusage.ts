@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -168,7 +168,7 @@ export const BillingUsageMeta$inboundSchema: z.ZodType<
   BillingUsageMeta,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type BillingUsageMeta$Outbound = {};
 
@@ -177,7 +177,7 @@ export const BillingUsageMeta$outboundSchema: z.ZodType<
   BillingUsageMeta$Outbound,
   z.ZodTypeDef,
   BillingUsageMeta
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function billingUsageMetaToJSON(
   billingUsageMeta: BillingUsageMeta,
@@ -201,11 +201,13 @@ export const BillingUsageProject$inboundSchema: z.ZodType<
   BillingUsageProject,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  slug: z.string().optional(),
-  name: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    slug: z.string().optional(),
+    name: z.string().optional(),
+  })
+);
 /** @internal */
 export type BillingUsageProject$Outbound = {
   id?: string | undefined;
@@ -218,11 +220,13 @@ export const BillingUsageProject$outboundSchema: z.ZodType<
   BillingUsageProject$Outbound,
   z.ZodTypeDef,
   BillingUsageProject
-> = z.object({
-  id: z.string().optional(),
-  slug: z.string().optional(),
-  name: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    slug: z.string().optional(),
+    name: z.string().optional(),
+  })
+);
 
 export function billingUsageProjectToJSON(
   billingUsageProject: BillingUsageProject,
@@ -242,13 +246,15 @@ export function billingUsageProjectFromJSON(
 }
 
 /** @internal */
-export const Period$inboundSchema: z.ZodType<Period, z.ZodTypeDef, unknown> = z
-  .object({
-    start: z.string().datetime({ offset: true }).transform(v => new Date(v))
-      .optional(),
-    end: z.string().datetime({ offset: true }).transform(v => new Date(v))
-      .optional(),
-  });
+export const Period$inboundSchema: z.ZodType<Period, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      start: z.string().datetime({ offset: true }).transform(v => new Date(v))
+        .optional(),
+      end: z.string().datetime({ offset: true }).transform(v => new Date(v))
+        .optional(),
+    })
+  );
 /** @internal */
 export type Period$Outbound = {
   start?: string | undefined;
@@ -260,10 +266,12 @@ export const Period$outboundSchema: z.ZodType<
   Period$Outbound,
   z.ZodTypeDef,
   Period
-> = z.object({
-  start: z.date().transform(v => v.toISOString()).optional(),
-  end: z.date().transform(v => v.toISOString()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    start: z.date().transform(v => v.toISOString()).optional(),
+    end: z.date().transform(v => v.toISOString()).optional(),
+  })
+);
 
 export function periodToJSON(period: Period): string {
   return JSON.stringify(Period$outboundSchema.parse(period));
@@ -281,7 +289,7 @@ export function periodFromJSON(
 /** @internal */
 export const BillingUsageType$inboundSchema: z.ZodNativeEnum<
   typeof BillingUsageType
-> = z.nativeEnum(BillingUsageType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(BillingUsageType));
 /** @internal */
 export const BillingUsageType$outboundSchema: z.ZodNativeEnum<
   typeof BillingUsageType
@@ -292,11 +300,13 @@ export const Discount$inboundSchema: z.ZodType<
   Discount,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  description: z.string(),
-  type: BillingUsageType$inboundSchema,
-  value: z.number(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    description: z.string(),
+    type: BillingUsageType$inboundSchema,
+    value: z.number(),
+  })
+);
 /** @internal */
 export type Discount$Outbound = {
   description: string;
@@ -309,11 +319,13 @@ export const Discount$outboundSchema: z.ZodType<
   Discount$Outbound,
   z.ZodTypeDef,
   Discount
-> = z.object({
-  description: z.string(),
-  type: BillingUsageType$outboundSchema,
-  value: z.number(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    description: z.string(),
+    type: BillingUsageType$outboundSchema,
+    value: z.number(),
+  })
+);
 
 export function discountToJSON(discount: Discount): string {
   return JSON.stringify(Discount$outboundSchema.parse(discount));
@@ -331,15 +343,15 @@ export function discountFromJSON(
 /** @internal */
 export const BillingUsageUnit$inboundSchema: z.ZodNativeEnum<
   typeof BillingUsageUnit
-> = z.nativeEnum(BillingUsageUnit);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(BillingUsageUnit));
 /** @internal */
 export const BillingUsageUnit$outboundSchema: z.ZodNativeEnum<
   typeof BillingUsageUnit
 > = BillingUsageUnit$inboundSchema;
 
 /** @internal */
-export const UsageType$inboundSchema: z.ZodNativeEnum<typeof UsageType> = z
-  .nativeEnum(UsageType);
+export const UsageType$inboundSchema: z.ZodNativeEnum<typeof UsageType> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(UsageType));
 /** @internal */
 export const UsageType$outboundSchema: z.ZodNativeEnum<typeof UsageType> =
   UsageType$inboundSchema;
@@ -349,12 +361,14 @@ export const BillingUsageServer$inboundSchema: z.ZodType<
   BillingUsageServer,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  hostname: z.string().optional(),
-  plan: z.nullable(z.string()).optional(),
-  tags: z.array(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    hostname: z.string().optional(),
+    plan: z.nullable(z.string()).optional(),
+    tags: z.array(z.string()).optional(),
+  })
+);
 /** @internal */
 export type BillingUsageServer$Outbound = {
   id?: string | undefined;
@@ -368,12 +382,14 @@ export const BillingUsageServer$outboundSchema: z.ZodType<
   BillingUsageServer$Outbound,
   z.ZodTypeDef,
   BillingUsageServer
-> = z.object({
-  id: z.string().optional(),
-  hostname: z.string().optional(),
-  plan: z.nullable(z.string()).optional(),
-  tags: z.array(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    hostname: z.string().optional(),
+    plan: z.nullable(z.string()).optional(),
+    tags: z.array(z.string()).optional(),
+  })
+);
 
 export function billingUsageServerToJSON(
   billingUsageServer: BillingUsageServer,
@@ -393,12 +409,14 @@ export function billingUsageServerFromJSON(
 }
 
 /** @internal */
-export const Bucket$inboundSchema: z.ZodType<Bucket, z.ZodTypeDef, unknown> = z
-  .object({
-    id: z.string().optional(),
-    name: z.string().optional(),
-    location: z.nullable(z.string()).optional(),
-  });
+export const Bucket$inboundSchema: z.ZodType<Bucket, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string().optional(),
+      name: z.string().optional(),
+      location: z.nullable(z.string()).optional(),
+    })
+  );
 /** @internal */
 export type Bucket$Outbound = {
   id?: string | undefined;
@@ -411,11 +429,13 @@ export const Bucket$outboundSchema: z.ZodType<
   Bucket$Outbound,
   z.ZodTypeDef,
   Bucket
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  location: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    name: z.string().optional(),
+    location: z.nullable(z.string()).optional(),
+  })
+);
 
 export function bucketToJSON(bucket: Bucket): string {
   return JSON.stringify(Bucket$outboundSchema.parse(bucket));
@@ -435,15 +455,17 @@ export const Metadata$inboundSchema: z.ZodType<
   Metadata,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  servers: z.array(z.lazy(() => BillingUsageServer$inboundSchema)).optional(),
-  bucket: z.lazy(() => Bucket$inboundSchema).optional(),
-  billing_unit_divisor: z.nullable(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "billing_unit_divisor": "billingUnitDivisor",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    servers: z.array(z.lazy(() => BillingUsageServer$inboundSchema)).optional(),
+    bucket: z.lazy(() => Bucket$inboundSchema).optional(),
+    billing_unit_divisor: z.nullable(z.number().int()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "billing_unit_divisor": "billingUnitDivisor",
+    });
+  })
+);
 /** @internal */
 export type Metadata$Outbound = {
   servers?: Array<BillingUsageServer$Outbound> | undefined;
@@ -456,15 +478,18 @@ export const Metadata$outboundSchema: z.ZodType<
   Metadata$Outbound,
   z.ZodTypeDef,
   Metadata
-> = z.object({
-  servers: z.array(z.lazy(() => BillingUsageServer$outboundSchema)).optional(),
-  bucket: z.lazy(() => Bucket$outboundSchema).optional(),
-  billingUnitDivisor: z.nullable(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    billingUnitDivisor: "billing_unit_divisor",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    servers: z.array(z.lazy(() => BillingUsageServer$outboundSchema))
+      .optional(),
+    bucket: z.lazy(() => Bucket$outboundSchema).optional(),
+    billingUnitDivisor: z.nullable(z.number().int()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      billingUnitDivisor: "billing_unit_divisor",
+    });
+  })
+);
 
 export function metadataToJSON(metadata: Metadata): string {
   return JSON.stringify(Metadata$outboundSchema.parse(metadata));
@@ -481,36 +506,38 @@ export function metadataFromJSON(
 
 /** @internal */
 export const Product$inboundSchema: z.ZodType<Product, z.ZodTypeDef, unknown> =
-  z.object({
-    id: z.string().optional(),
-    resource: z.string().optional(),
-    name: z.string().optional(),
-    proration: z.boolean().optional(),
-    discounts: z.array(z.lazy(() => Discount$inboundSchema)).optional(),
-    discountable: z.boolean().optional(),
-    description: z.string().optional(),
-    amount_without_discount: z.number().int().optional(),
-    start: z.string().datetime({ offset: true }).transform(v => new Date(v))
-      .optional(),
-    end: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ).optional(),
-    unit: BillingUsageUnit$inboundSchema.optional(),
-    unit_amount: z.number().optional(),
-    unit_price: z.number().optional(),
-    usage_type: UsageType$inboundSchema.optional(),
-    quantity: z.number().optional(),
-    amount: z.number().optional(),
-    price: z.number().optional(),
-    metadata: z.lazy(() => Metadata$inboundSchema).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "amount_without_discount": "amountWithoutDiscount",
-      "unit_amount": "unitAmount",
-      "unit_price": "unitPrice",
-      "usage_type": "usageType",
-    });
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string().optional(),
+      resource: z.string().optional(),
+      name: z.string().optional(),
+      proration: z.boolean().optional(),
+      discounts: z.array(z.lazy(() => Discount$inboundSchema)).optional(),
+      discountable: z.boolean().optional(),
+      description: z.string().optional(),
+      amount_without_discount: z.number().int().optional(),
+      start: z.string().datetime({ offset: true }).transform(v => new Date(v))
+        .optional(),
+      end: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ).optional(),
+      unit: BillingUsageUnit$inboundSchema.optional(),
+      unit_amount: z.number().optional(),
+      unit_price: z.number().optional(),
+      usage_type: UsageType$inboundSchema.optional(),
+      quantity: z.number().optional(),
+      amount: z.number().optional(),
+      price: z.number().optional(),
+      metadata: z.lazy(() => Metadata$inboundSchema).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "amount_without_discount": "amountWithoutDiscount",
+        "unit_amount": "unitAmount",
+        "unit_price": "unitPrice",
+        "usage_type": "usageType",
+      });
+    })
+  );
 /** @internal */
 export type Product$Outbound = {
   id?: string | undefined;
@@ -538,33 +565,35 @@ export const Product$outboundSchema: z.ZodType<
   Product$Outbound,
   z.ZodTypeDef,
   Product
-> = z.object({
-  id: z.string().optional(),
-  resource: z.string().optional(),
-  name: z.string().optional(),
-  proration: z.boolean().optional(),
-  discounts: z.array(z.lazy(() => Discount$outboundSchema)).optional(),
-  discountable: z.boolean().optional(),
-  description: z.string().optional(),
-  amountWithoutDiscount: z.number().int().optional(),
-  start: z.date().transform(v => v.toISOString()).optional(),
-  end: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  unit: BillingUsageUnit$outboundSchema.optional(),
-  unitAmount: z.number().optional(),
-  unitPrice: z.number().optional(),
-  usageType: UsageType$outboundSchema.optional(),
-  quantity: z.number().optional(),
-  amount: z.number().optional(),
-  price: z.number().optional(),
-  metadata: z.lazy(() => Metadata$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    amountWithoutDiscount: "amount_without_discount",
-    unitAmount: "unit_amount",
-    unitPrice: "unit_price",
-    usageType: "usage_type",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    resource: z.string().optional(),
+    name: z.string().optional(),
+    proration: z.boolean().optional(),
+    discounts: z.array(z.lazy(() => Discount$outboundSchema)).optional(),
+    discountable: z.boolean().optional(),
+    description: z.string().optional(),
+    amountWithoutDiscount: z.number().int().optional(),
+    start: z.date().transform(v => v.toISOString()).optional(),
+    end: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    unit: BillingUsageUnit$outboundSchema.optional(),
+    unitAmount: z.number().optional(),
+    unitPrice: z.number().optional(),
+    usageType: UsageType$outboundSchema.optional(),
+    quantity: z.number().optional(),
+    amount: z.number().optional(),
+    price: z.number().optional(),
+    metadata: z.lazy(() => Metadata$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      amountWithoutDiscount: "amount_without_discount",
+      unitAmount: "unit_amount",
+      unitPrice: "unit_price",
+      usageType: "usage_type",
+    });
+  })
+);
 
 export function productToJSON(product: Product): string {
   return JSON.stringify(Product$outboundSchema.parse(product));
@@ -584,19 +613,21 @@ export const BillingUsageAttributes$inboundSchema: z.ZodType<
   BillingUsageAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  project: z.lazy(() => BillingUsageProject$inboundSchema).optional(),
-  period: z.lazy(() => Period$inboundSchema).optional(),
-  available_credit_balance: z.number().int().optional(),
-  amount: z.number().optional(),
-  price: z.number().optional(),
-  threshold: z.nullable(z.number()).optional(),
-  products: z.array(z.lazy(() => Product$inboundSchema)).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "available_credit_balance": "availableCreditBalance",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    project: z.lazy(() => BillingUsageProject$inboundSchema).optional(),
+    period: z.lazy(() => Period$inboundSchema).optional(),
+    available_credit_balance: z.number().int().optional(),
+    amount: z.number().optional(),
+    price: z.number().optional(),
+    threshold: z.nullable(z.number()).optional(),
+    products: z.array(z.lazy(() => Product$inboundSchema)).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "available_credit_balance": "availableCreditBalance",
+    });
+  })
+);
 /** @internal */
 export type BillingUsageAttributes$Outbound = {
   project?: BillingUsageProject$Outbound | undefined;
@@ -613,19 +644,21 @@ export const BillingUsageAttributes$outboundSchema: z.ZodType<
   BillingUsageAttributes$Outbound,
   z.ZodTypeDef,
   BillingUsageAttributes
-> = z.object({
-  project: z.lazy(() => BillingUsageProject$outboundSchema).optional(),
-  period: z.lazy(() => Period$outboundSchema).optional(),
-  availableCreditBalance: z.number().int().optional(),
-  amount: z.number().optional(),
-  price: z.number().optional(),
-  threshold: z.nullable(z.number()).optional(),
-  products: z.array(z.lazy(() => Product$outboundSchema)).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    availableCreditBalance: "available_credit_balance",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    project: z.lazy(() => BillingUsageProject$outboundSchema).optional(),
+    period: z.lazy(() => Period$outboundSchema).optional(),
+    availableCreditBalance: z.number().int().optional(),
+    amount: z.number().optional(),
+    price: z.number().optional(),
+    threshold: z.nullable(z.number()).optional(),
+    products: z.array(z.lazy(() => Product$outboundSchema)).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      availableCreditBalance: "available_credit_balance",
+    });
+  })
+);
 
 export function billingUsageAttributesToJSON(
   billingUsageAttributes: BillingUsageAttributes,
@@ -649,11 +682,13 @@ export const BillingUsageData$inboundSchema: z.ZodType<
   BillingUsageData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  type: z.string().optional(),
-  attributes: z.lazy(() => BillingUsageAttributes$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: z.string().optional(),
+    attributes: z.lazy(() => BillingUsageAttributes$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type BillingUsageData$Outbound = {
   id?: string | undefined;
@@ -666,11 +701,13 @@ export const BillingUsageData$outboundSchema: z.ZodType<
   BillingUsageData$Outbound,
   z.ZodTypeDef,
   BillingUsageData
-> = z.object({
-  id: z.string().optional(),
-  type: z.string().optional(),
-  attributes: z.lazy(() => BillingUsageAttributes$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: z.string().optional(),
+    attributes: z.lazy(() => BillingUsageAttributes$outboundSchema).optional(),
+  })
+);
 
 export function billingUsageDataToJSON(
   billingUsageData: BillingUsageData,
@@ -694,10 +731,12 @@ export const BillingUsage$inboundSchema: z.ZodType<
   BillingUsage,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  meta: z.lazy(() => BillingUsageMeta$inboundSchema).optional(),
-  data: z.lazy(() => BillingUsageData$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    meta: z.lazy(() => BillingUsageMeta$inboundSchema).optional(),
+    data: z.lazy(() => BillingUsageData$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type BillingUsage$Outbound = {
   meta?: BillingUsageMeta$Outbound | undefined;
@@ -709,10 +748,12 @@ export const BillingUsage$outboundSchema: z.ZodType<
   BillingUsage$Outbound,
   z.ZodTypeDef,
   BillingUsage
-> = z.object({
-  meta: z.lazy(() => BillingUsageMeta$outboundSchema).optional(),
-  data: z.lazy(() => BillingUsageData$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    meta: z.lazy(() => BillingUsageMeta$outboundSchema).optional(),
+    data: z.lazy(() => BillingUsageData$outboundSchema).optional(),
+  })
+);
 
 export function billingUsageToJSON(billingUsage: BillingUsage): string {
   return JSON.stringify(BillingUsage$outboundSchema.parse(billingUsage));

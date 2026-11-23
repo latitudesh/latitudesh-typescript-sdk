@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -37,7 +37,7 @@ export type CreateBgpSession = {
 /** @internal */
 export const CreateBgpSessionType$inboundSchema: z.ZodNativeEnum<
   typeof CreateBgpSessionType
-> = z.nativeEnum(CreateBgpSessionType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CreateBgpSessionType));
 /** @internal */
 export const CreateBgpSessionType$outboundSchema: z.ZodNativeEnum<
   typeof CreateBgpSessionType
@@ -48,15 +48,17 @@ export const CreateBgpSessionAttributes$inboundSchema: z.ZodType<
   CreateBgpSessionAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  server_id: z.string(),
-  requestor_id: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "server_id": "serverId",
-    "requestor_id": "requestorId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    server_id: z.string(),
+    requestor_id: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "server_id": "serverId",
+      "requestor_id": "requestorId",
+    });
+  })
+);
 /** @internal */
 export type CreateBgpSessionAttributes$Outbound = {
   server_id: string;
@@ -68,15 +70,17 @@ export const CreateBgpSessionAttributes$outboundSchema: z.ZodType<
   CreateBgpSessionAttributes$Outbound,
   z.ZodTypeDef,
   CreateBgpSessionAttributes
-> = z.object({
-  serverId: z.string(),
-  requestorId: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    serverId: "server_id",
-    requestorId: "requestor_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    serverId: z.string(),
+    requestorId: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      serverId: "server_id",
+      requestorId: "requestor_id",
+    });
+  })
+);
 
 export function createBgpSessionAttributesToJSON(
   createBgpSessionAttributes: CreateBgpSessionAttributes,
@@ -100,10 +104,13 @@ export const CreateBgpSessionData$inboundSchema: z.ZodType<
   CreateBgpSessionData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: CreateBgpSessionType$inboundSchema,
-  attributes: z.lazy(() => CreateBgpSessionAttributes$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CreateBgpSessionType$inboundSchema,
+    attributes: z.lazy(() => CreateBgpSessionAttributes$inboundSchema)
+      .optional(),
+  })
+);
 /** @internal */
 export type CreateBgpSessionData$Outbound = {
   type: string;
@@ -115,11 +122,13 @@ export const CreateBgpSessionData$outboundSchema: z.ZodType<
   CreateBgpSessionData$Outbound,
   z.ZodTypeDef,
   CreateBgpSessionData
-> = z.object({
-  type: CreateBgpSessionType$outboundSchema,
-  attributes: z.lazy(() => CreateBgpSessionAttributes$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CreateBgpSessionType$outboundSchema,
+    attributes: z.lazy(() => CreateBgpSessionAttributes$outboundSchema)
+      .optional(),
+  })
+);
 
 export function createBgpSessionDataToJSON(
   createBgpSessionData: CreateBgpSessionData,
@@ -143,9 +152,11 @@ export const CreateBgpSession$inboundSchema: z.ZodType<
   CreateBgpSession,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => CreateBgpSessionData$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => CreateBgpSessionData$inboundSchema),
+  })
+);
 /** @internal */
 export type CreateBgpSession$Outbound = {
   data: CreateBgpSessionData$Outbound;
@@ -156,9 +167,11 @@ export const CreateBgpSession$outboundSchema: z.ZodType<
   CreateBgpSession$Outbound,
   z.ZodTypeDef,
   CreateBgpSession
-> = z.object({
-  data: z.lazy(() => CreateBgpSessionData$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => CreateBgpSessionData$outboundSchema),
+  })
+);
 
 export function createBgpSessionToJSON(
   createBgpSession: CreateBgpSession,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -43,7 +43,7 @@ export type PatchUserDataRequest = {
 /** @internal */
 export const PatchUserDataType2$inboundSchema: z.ZodNativeEnum<
   typeof PatchUserDataType2
-> = z.nativeEnum(PatchUserDataType2);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(PatchUserDataType2));
 /** @internal */
 export const PatchUserDataType2$outboundSchema: z.ZodNativeEnum<
   typeof PatchUserDataType2
@@ -54,10 +54,12 @@ export const PatchUserDataAttributes2$inboundSchema: z.ZodType<
   PatchUserDataAttributes2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  description: z.string().optional(),
-  content: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    description: z.string().optional(),
+    content: z.string().optional(),
+  })
+);
 /** @internal */
 export type PatchUserDataAttributes2$Outbound = {
   description?: string | undefined;
@@ -69,10 +71,12 @@ export const PatchUserDataAttributes2$outboundSchema: z.ZodType<
   PatchUserDataAttributes2$Outbound,
   z.ZodTypeDef,
   PatchUserDataAttributes2
-> = z.object({
-  description: z.string().optional(),
-  content: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    description: z.string().optional(),
+    content: z.string().optional(),
+  })
+);
 
 export function patchUserDataAttributes2ToJSON(
   patchUserDataAttributes2: PatchUserDataAttributes2,
@@ -96,11 +100,13 @@ export const PatchUserDataData2$inboundSchema: z.ZodType<
   PatchUserDataData2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  type: PatchUserDataType2$inboundSchema,
-  attributes: z.lazy(() => PatchUserDataAttributes2$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    type: PatchUserDataType2$inboundSchema,
+    attributes: z.lazy(() => PatchUserDataAttributes2$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type PatchUserDataData2$Outbound = {
   id: string;
@@ -113,11 +119,14 @@ export const PatchUserDataData2$outboundSchema: z.ZodType<
   PatchUserDataData2$Outbound,
   z.ZodTypeDef,
   PatchUserDataData2
-> = z.object({
-  id: z.string(),
-  type: PatchUserDataType2$outboundSchema,
-  attributes: z.lazy(() => PatchUserDataAttributes2$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    type: PatchUserDataType2$outboundSchema,
+    attributes: z.lazy(() => PatchUserDataAttributes2$outboundSchema)
+      .optional(),
+  })
+);
 
 export function patchUserDataData2ToJSON(
   patchUserDataData2: PatchUserDataData2,
@@ -141,9 +150,11 @@ export const PatchUserDataRequestBody2$inboundSchema: z.ZodType<
   PatchUserDataRequestBody2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => PatchUserDataData2$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => PatchUserDataData2$inboundSchema),
+  })
+);
 /** @internal */
 export type PatchUserDataRequestBody2$Outbound = {
   data: PatchUserDataData2$Outbound;
@@ -154,9 +165,11 @@ export const PatchUserDataRequestBody2$outboundSchema: z.ZodType<
   PatchUserDataRequestBody2$Outbound,
   z.ZodTypeDef,
   PatchUserDataRequestBody2
-> = z.object({
-  data: z.lazy(() => PatchUserDataData2$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => PatchUserDataData2$outboundSchema),
+  })
+);
 
 export function patchUserDataRequestBody2ToJSON(
   patchUserDataRequestBody2: PatchUserDataRequestBody2,
@@ -180,15 +193,18 @@ export const PatchUserDataRequest$inboundSchema: z.ZodType<
   PatchUserDataRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  user_data_id: z.string(),
-  RequestBody: z.lazy(() => PatchUserDataRequestBody2$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "user_data_id": "userDataId",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    user_data_id: z.string(),
+    RequestBody: z.lazy(() => PatchUserDataRequestBody2$inboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "user_data_id": "userDataId",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type PatchUserDataRequest$Outbound = {
   user_data_id: string;
@@ -200,16 +216,18 @@ export const PatchUserDataRequest$outboundSchema: z.ZodType<
   PatchUserDataRequest$Outbound,
   z.ZodTypeDef,
   PatchUserDataRequest
-> = z.object({
-  userDataId: z.string(),
-  requestBody: z.lazy(() => PatchUserDataRequestBody2$outboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    userDataId: "user_data_id",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    userDataId: z.string(),
+    requestBody: z.lazy(() => PatchUserDataRequestBody2$outboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      userDataId: "user_data_id",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function patchUserDataRequestToJSON(
   patchUserDataRequest: PatchUserDataRequest,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -41,7 +41,7 @@ export type PostTeamMembersRequest = {
 /** @internal */
 export const PostTeamMembersType2$inboundSchema: z.ZodNativeEnum<
   typeof PostTeamMembersType2
-> = z.nativeEnum(PostTeamMembersType2);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(PostTeamMembersType2));
 /** @internal */
 export const PostTeamMembersType2$outboundSchema: z.ZodNativeEnum<
   typeof PostTeamMembersType2
@@ -50,7 +50,7 @@ export const PostTeamMembersType2$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const PostTeamMembersRole2$inboundSchema: z.ZodNativeEnum<
   typeof PostTeamMembersRole2
-> = z.nativeEnum(PostTeamMembersRole2);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(PostTeamMembersRole2));
 /** @internal */
 export const PostTeamMembersRole2$outboundSchema: z.ZodNativeEnum<
   typeof PostTeamMembersRole2
@@ -61,17 +61,19 @@ export const PostTeamMembersAttributes2$inboundSchema: z.ZodType<
   PostTeamMembersAttributes2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  first_name: z.string().optional(),
-  last_name: z.string().optional(),
-  email: z.string(),
-  role: PostTeamMembersRole2$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "first_name": "firstName",
-    "last_name": "lastName",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    first_name: z.string().optional(),
+    last_name: z.string().optional(),
+    email: z.string(),
+    role: PostTeamMembersRole2$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "first_name": "firstName",
+      "last_name": "lastName",
+    });
+  })
+);
 /** @internal */
 export type PostTeamMembersAttributes2$Outbound = {
   first_name?: string | undefined;
@@ -85,17 +87,19 @@ export const PostTeamMembersAttributes2$outboundSchema: z.ZodType<
   PostTeamMembersAttributes2$Outbound,
   z.ZodTypeDef,
   PostTeamMembersAttributes2
-> = z.object({
-  firstName: z.string().optional(),
-  lastName: z.string().optional(),
-  email: z.string(),
-  role: PostTeamMembersRole2$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    firstName: "first_name",
-    lastName: "last_name",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    firstName: z.string().optional(),
+    lastName: z.string().optional(),
+    email: z.string(),
+    role: PostTeamMembersRole2$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      firstName: "first_name",
+      lastName: "last_name",
+    });
+  })
+);
 
 export function postTeamMembersAttributes2ToJSON(
   postTeamMembersAttributes2: PostTeamMembersAttributes2,
@@ -119,10 +123,13 @@ export const PostTeamMembersData2$inboundSchema: z.ZodType<
   PostTeamMembersData2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: PostTeamMembersType2$inboundSchema,
-  attributes: z.lazy(() => PostTeamMembersAttributes2$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: PostTeamMembersType2$inboundSchema,
+    attributes: z.lazy(() => PostTeamMembersAttributes2$inboundSchema)
+      .optional(),
+  })
+);
 /** @internal */
 export type PostTeamMembersData2$Outbound = {
   type: string;
@@ -134,11 +141,13 @@ export const PostTeamMembersData2$outboundSchema: z.ZodType<
   PostTeamMembersData2$Outbound,
   z.ZodTypeDef,
   PostTeamMembersData2
-> = z.object({
-  type: PostTeamMembersType2$outboundSchema,
-  attributes: z.lazy(() => PostTeamMembersAttributes2$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: PostTeamMembersType2$outboundSchema,
+    attributes: z.lazy(() => PostTeamMembersAttributes2$outboundSchema)
+      .optional(),
+  })
+);
 
 export function postTeamMembersData2ToJSON(
   postTeamMembersData2: PostTeamMembersData2,
@@ -162,9 +171,11 @@ export const PostTeamMembersRequest$inboundSchema: z.ZodType<
   PostTeamMembersRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => PostTeamMembersData2$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => PostTeamMembersData2$inboundSchema),
+  })
+);
 /** @internal */
 export type PostTeamMembersRequest$Outbound = {
   data: PostTeamMembersData2$Outbound;
@@ -175,9 +186,11 @@ export const PostTeamMembersRequest$outboundSchema: z.ZodType<
   PostTeamMembersRequest$Outbound,
   z.ZodTypeDef,
   PostTeamMembersRequest
-> = z.object({
-  data: z.lazy(() => PostTeamMembersData2$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => PostTeamMembersData2$outboundSchema),
+  })
+);
 
 export function postTeamMembersRequestToJSON(
   postTeamMembersRequest: PostTeamMembersRequest,

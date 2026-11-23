@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as models from "../index.js";
@@ -45,23 +45,25 @@ export const GetVirtualNetworksAssignmentsRequest$inboundSchema: z.ZodType<
   GetVirtualNetworksAssignmentsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "filter[server]": z.string().optional(),
-  "filter[vid]": z.string().optional(),
-  "filter[virtual_network_id]": z.string().optional(),
-  "page[size]": z.number().int().default(20),
-  "page[number]": z.number().int().default(1),
-  "stats[total]": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "filter[server]": "filterServer",
-    "filter[vid]": "filterVid",
-    "filter[virtual_network_id]": "filterVirtualNetworkId",
-    "page[size]": "pageSize",
-    "page[number]": "pageNumber",
-    "stats[total]": "statsTotal",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "filter[server]": z.string().optional(),
+    "filter[vid]": z.string().optional(),
+    "filter[virtual_network_id]": z.string().optional(),
+    "page[size]": z.number().int().default(20),
+    "page[number]": z.number().int().default(1),
+    "stats[total]": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "filter[server]": "filterServer",
+      "filter[vid]": "filterVid",
+      "filter[virtual_network_id]": "filterVirtualNetworkId",
+      "page[size]": "pageSize",
+      "page[number]": "pageNumber",
+      "stats[total]": "statsTotal",
+    });
+  })
+);
 /** @internal */
 export type GetVirtualNetworksAssignmentsRequest$Outbound = {
   "filter[server]"?: string | undefined;
@@ -77,23 +79,25 @@ export const GetVirtualNetworksAssignmentsRequest$outboundSchema: z.ZodType<
   GetVirtualNetworksAssignmentsRequest$Outbound,
   z.ZodTypeDef,
   GetVirtualNetworksAssignmentsRequest
-> = z.object({
-  filterServer: z.string().optional(),
-  filterVid: z.string().optional(),
-  filterVirtualNetworkId: z.string().optional(),
-  pageSize: z.number().int().default(20),
-  pageNumber: z.number().int().default(1),
-  statsTotal: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    filterServer: "filter[server]",
-    filterVid: "filter[vid]",
-    filterVirtualNetworkId: "filter[virtual_network_id]",
-    pageSize: "page[size]",
-    pageNumber: "page[number]",
-    statsTotal: "stats[total]",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    filterServer: z.string().optional(),
+    filterVid: z.string().optional(),
+    filterVirtualNetworkId: z.string().optional(),
+    pageSize: z.number().int().default(20),
+    pageNumber: z.number().int().default(1),
+    statsTotal: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      filterServer: "filter[server]",
+      filterVid: "filter[vid]",
+      filterVirtualNetworkId: "filter[virtual_network_id]",
+      pageSize: "page[size]",
+      pageNumber: "page[number]",
+      statsTotal: "stats[total]",
+    });
+  })
+);
 
 export function getVirtualNetworksAssignmentsRequestToJSON(
   getVirtualNetworksAssignmentsRequest: GetVirtualNetworksAssignmentsRequest,
@@ -120,13 +124,15 @@ export const GetVirtualNetworksAssignmentsResponse$inboundSchema: z.ZodType<
   GetVirtualNetworksAssignmentsResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  Result: models.VirtualNetworkAssignments$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "Result": "result",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    Result: models.VirtualNetworkAssignments$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "Result": "result",
+    });
+  })
+);
 /** @internal */
 export type GetVirtualNetworksAssignmentsResponse$Outbound = {
   Result: models.VirtualNetworkAssignments$Outbound;
@@ -137,13 +143,15 @@ export const GetVirtualNetworksAssignmentsResponse$outboundSchema: z.ZodType<
   GetVirtualNetworksAssignmentsResponse$Outbound,
   z.ZodTypeDef,
   GetVirtualNetworksAssignmentsResponse
-> = z.object({
-  result: models.VirtualNetworkAssignments$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    result: "Result",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    result: models.VirtualNetworkAssignments$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      result: "Result",
+    });
+  })
+);
 
 export function getVirtualNetworksAssignmentsResponseToJSON(
   getVirtualNetworksAssignmentsResponse: GetVirtualNetworksAssignmentsResponse,

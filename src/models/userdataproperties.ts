@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -47,7 +47,7 @@ export type UserDataProperties = {
 /** @internal */
 export const UserDataPropertiesType$inboundSchema: z.ZodNativeEnum<
   typeof UserDataPropertiesType
-> = z.nativeEnum(UserDataPropertiesType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(UserDataPropertiesType));
 /** @internal */
 export const UserDataPropertiesType$outboundSchema: z.ZodNativeEnum<
   typeof UserDataPropertiesType
@@ -58,20 +58,22 @@ export const UserDataPropertiesAttributes$inboundSchema: z.ZodType<
   UserDataPropertiesAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  description: z.string().optional(),
-  content: z.string().optional(),
-  decoded_content: z.nullable(z.string()).optional(),
-  project: ProjectInclude$inboundSchema.optional(),
-  created_at: z.string().optional(),
-  updated_at: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "decoded_content": "decodedContent",
-    "created_at": "createdAt",
-    "updated_at": "updatedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    description: z.string().optional(),
+    content: z.string().optional(),
+    decoded_content: z.nullable(z.string()).optional(),
+    project: ProjectInclude$inboundSchema.optional(),
+    created_at: z.string().optional(),
+    updated_at: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "decoded_content": "decodedContent",
+      "created_at": "createdAt",
+      "updated_at": "updatedAt",
+    });
+  })
+);
 /** @internal */
 export type UserDataPropertiesAttributes$Outbound = {
   description?: string | undefined;
@@ -87,20 +89,22 @@ export const UserDataPropertiesAttributes$outboundSchema: z.ZodType<
   UserDataPropertiesAttributes$Outbound,
   z.ZodTypeDef,
   UserDataPropertiesAttributes
-> = z.object({
-  description: z.string().optional(),
-  content: z.string().optional(),
-  decodedContent: z.nullable(z.string()).optional(),
-  project: ProjectInclude$outboundSchema.optional(),
-  createdAt: z.string().optional(),
-  updatedAt: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    decodedContent: "decoded_content",
-    createdAt: "created_at",
-    updatedAt: "updated_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    description: z.string().optional(),
+    content: z.string().optional(),
+    decodedContent: z.nullable(z.string()).optional(),
+    project: ProjectInclude$outboundSchema.optional(),
+    createdAt: z.string().optional(),
+    updatedAt: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      decodedContent: "decoded_content",
+      createdAt: "created_at",
+      updatedAt: "updated_at",
+    });
+  })
+);
 
 export function userDataPropertiesAttributesToJSON(
   userDataPropertiesAttributes: UserDataPropertiesAttributes,
@@ -126,12 +130,14 @@ export const UserDataProperties$inboundSchema: z.ZodType<
   UserDataProperties,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  type: UserDataPropertiesType$inboundSchema,
-  attributes: z.lazy(() => UserDataPropertiesAttributes$inboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: UserDataPropertiesType$inboundSchema,
+    attributes: z.lazy(() => UserDataPropertiesAttributes$inboundSchema)
+      .optional(),
+  })
+);
 /** @internal */
 export type UserDataProperties$Outbound = {
   id?: string | undefined;
@@ -144,12 +150,14 @@ export const UserDataProperties$outboundSchema: z.ZodType<
   UserDataProperties$Outbound,
   z.ZodTypeDef,
   UserDataProperties
-> = z.object({
-  id: z.string().optional(),
-  type: UserDataPropertiesType$outboundSchema,
-  attributes: z.lazy(() => UserDataPropertiesAttributes$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: UserDataPropertiesType$outboundSchema,
+    attributes: z.lazy(() => UserDataPropertiesAttributes$outboundSchema)
+      .optional(),
+  })
+);
 
 export function userDataPropertiesToJSON(
   userDataProperties: UserDataProperties,

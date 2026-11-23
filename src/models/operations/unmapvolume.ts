@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -52,7 +52,7 @@ export type UnmapVolumeResponse = {
 /** @internal */
 export const UnmapVolumeType2$inboundSchema: z.ZodNativeEnum<
   typeof UnmapVolumeType2
-> = z.nativeEnum(UnmapVolumeType2);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(UnmapVolumeType2));
 /** @internal */
 export const UnmapVolumeType2$outboundSchema: z.ZodNativeEnum<
   typeof UnmapVolumeType2
@@ -63,13 +63,15 @@ export const UnmapVolumeAttributes2$inboundSchema: z.ZodType<
   UnmapVolumeAttributes2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  server_id: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "server_id": "serverId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    server_id: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "server_id": "serverId",
+    });
+  })
+);
 /** @internal */
 export type UnmapVolumeAttributes2$Outbound = {
   server_id?: string | undefined;
@@ -80,13 +82,15 @@ export const UnmapVolumeAttributes2$outboundSchema: z.ZodType<
   UnmapVolumeAttributes2$Outbound,
   z.ZodTypeDef,
   UnmapVolumeAttributes2
-> = z.object({
-  serverId: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    serverId: "server_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    serverId: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      serverId: "server_id",
+    });
+  })
+);
 
 export function unmapVolumeAttributes2ToJSON(
   unmapVolumeAttributes2: UnmapVolumeAttributes2,
@@ -110,10 +114,12 @@ export const UnmapVolumeData2$inboundSchema: z.ZodType<
   UnmapVolumeData2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: UnmapVolumeType2$inboundSchema.optional(),
-  attributes: z.lazy(() => UnmapVolumeAttributes2$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: UnmapVolumeType2$inboundSchema.optional(),
+    attributes: z.lazy(() => UnmapVolumeAttributes2$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type UnmapVolumeData2$Outbound = {
   type?: string | undefined;
@@ -125,10 +131,12 @@ export const UnmapVolumeData2$outboundSchema: z.ZodType<
   UnmapVolumeData2$Outbound,
   z.ZodTypeDef,
   UnmapVolumeData2
-> = z.object({
-  type: UnmapVolumeType2$outboundSchema.optional(),
-  attributes: z.lazy(() => UnmapVolumeAttributes2$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: UnmapVolumeType2$outboundSchema.optional(),
+    attributes: z.lazy(() => UnmapVolumeAttributes2$outboundSchema).optional(),
+  })
+);
 
 export function unmapVolumeData2ToJSON(
   unmapVolumeData2: UnmapVolumeData2,
@@ -152,9 +160,11 @@ export const UnmapVolumeRequestBody2$inboundSchema: z.ZodType<
   UnmapVolumeRequestBody2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => UnmapVolumeData2$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => UnmapVolumeData2$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type UnmapVolumeRequestBody2$Outbound = {
   data?: UnmapVolumeData2$Outbound | undefined;
@@ -165,9 +175,11 @@ export const UnmapVolumeRequestBody2$outboundSchema: z.ZodType<
   UnmapVolumeRequestBody2$Outbound,
   z.ZodTypeDef,
   UnmapVolumeRequestBody2
-> = z.object({
-  data: z.lazy(() => UnmapVolumeData2$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => UnmapVolumeData2$outboundSchema).optional(),
+  })
+);
 
 export function unmapVolumeRequestBody2ToJSON(
   unmapVolumeRequestBody2: UnmapVolumeRequestBody2,
@@ -191,14 +203,16 @@ export const UnmapVolumeRequest$inboundSchema: z.ZodType<
   UnmapVolumeRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  RequestBody: z.lazy(() => UnmapVolumeRequestBody2$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    RequestBody: z.lazy(() => UnmapVolumeRequestBody2$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type UnmapVolumeRequest$Outbound = {
   id: string;
@@ -210,14 +224,17 @@ export const UnmapVolumeRequest$outboundSchema: z.ZodType<
   UnmapVolumeRequest$Outbound,
   z.ZodTypeDef,
   UnmapVolumeRequest
-> = z.object({
-  id: z.string(),
-  requestBody: z.lazy(() => UnmapVolumeRequestBody2$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    requestBody: z.lazy(() => UnmapVolumeRequestBody2$outboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function unmapVolumeRequestToJSON(
   unmapVolumeRequest: UnmapVolumeRequest,
@@ -241,7 +258,7 @@ export const UnmapVolumeMeta$inboundSchema: z.ZodType<
   UnmapVolumeMeta,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type UnmapVolumeMeta$Outbound = {};
 
@@ -250,7 +267,7 @@ export const UnmapVolumeMeta$outboundSchema: z.ZodType<
   UnmapVolumeMeta$Outbound,
   z.ZodTypeDef,
   UnmapVolumeMeta
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function unmapVolumeMetaToJSON(
   unmapVolumeMeta: UnmapVolumeMeta,
@@ -272,10 +289,12 @@ export const UnmapVolumeResponse$inboundSchema: z.ZodType<
   UnmapVolumeResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: models.VolumeData$inboundSchema.optional(),
-  meta: z.lazy(() => UnmapVolumeMeta$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: models.VolumeData$inboundSchema.optional(),
+    meta: z.lazy(() => UnmapVolumeMeta$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type UnmapVolumeResponse$Outbound = {
   data?: models.VolumeData$Outbound | undefined;
@@ -287,10 +306,12 @@ export const UnmapVolumeResponse$outboundSchema: z.ZodType<
   UnmapVolumeResponse$Outbound,
   z.ZodTypeDef,
   UnmapVolumeResponse
-> = z.object({
-  data: models.VolumeData$outboundSchema.optional(),
-  meta: z.lazy(() => UnmapVolumeMeta$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: models.VolumeData$outboundSchema.optional(),
+    meta: z.lazy(() => UnmapVolumeMeta$outboundSchema).optional(),
+  })
+);
 
 export function unmapVolumeResponseToJSON(
   unmapVolumeResponse: UnmapVolumeResponse,

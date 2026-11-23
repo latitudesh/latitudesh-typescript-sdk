@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as models from "../index.js";
@@ -32,14 +32,16 @@ export const GetStorageBucketLifecycleRuleRequest$inboundSchema: z.ZodType<
   GetStorageBucketLifecycleRuleRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  bucket_id: z.string(),
-  id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "bucket_id": "bucketId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    bucket_id: z.string(),
+    id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "bucket_id": "bucketId",
+    });
+  })
+);
 /** @internal */
 export type GetStorageBucketLifecycleRuleRequest$Outbound = {
   bucket_id: string;
@@ -51,14 +53,16 @@ export const GetStorageBucketLifecycleRuleRequest$outboundSchema: z.ZodType<
   GetStorageBucketLifecycleRuleRequest$Outbound,
   z.ZodTypeDef,
   GetStorageBucketLifecycleRuleRequest
-> = z.object({
-  bucketId: z.string(),
-  id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    bucketId: "bucket_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    bucketId: z.string(),
+    id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      bucketId: "bucket_id",
+    });
+  })
+);
 
 export function getStorageBucketLifecycleRuleRequestToJSON(
   getStorageBucketLifecycleRuleRequest: GetStorageBucketLifecycleRuleRequest,
@@ -85,9 +89,11 @@ export const GetStorageBucketLifecycleRuleResponse$inboundSchema: z.ZodType<
   GetStorageBucketLifecycleRuleResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: models.LifecycleRuleData$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: models.LifecycleRuleData$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type GetStorageBucketLifecycleRuleResponse$Outbound = {
   data?: models.LifecycleRuleData$Outbound | undefined;
@@ -98,9 +104,11 @@ export const GetStorageBucketLifecycleRuleResponse$outboundSchema: z.ZodType<
   GetStorageBucketLifecycleRuleResponse$Outbound,
   z.ZodTypeDef,
   GetStorageBucketLifecycleRuleResponse
-> = z.object({
-  data: models.LifecycleRuleData$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: models.LifecycleRuleData$outboundSchema.optional(),
+  })
+);
 
 export function getStorageBucketLifecycleRuleResponseToJSON(
   getStorageBucketLifecycleRuleResponse: GetStorageBucketLifecycleRuleResponse,

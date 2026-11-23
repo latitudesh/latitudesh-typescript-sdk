@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as models from "../index.js";
@@ -34,19 +34,21 @@ export const ListFirewallsRequest$inboundSchema: z.ZodType<
   ListFirewallsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "filter[project]": z.string().optional(),
-  "filter[tags]": z.string().optional(),
-  "page[size]": z.number().int().default(20),
-  "page[number]": z.number().int().default(1),
-}).transform((v) => {
-  return remap$(v, {
-    "filter[project]": "filterProject",
-    "filter[tags]": "filterTags",
-    "page[size]": "pageSize",
-    "page[number]": "pageNumber",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "filter[project]": z.string().optional(),
+    "filter[tags]": z.string().optional(),
+    "page[size]": z.number().int().default(20),
+    "page[number]": z.number().int().default(1),
+  }).transform((v) => {
+    return remap$(v, {
+      "filter[project]": "filterProject",
+      "filter[tags]": "filterTags",
+      "page[size]": "pageSize",
+      "page[number]": "pageNumber",
+    });
+  })
+);
 /** @internal */
 export type ListFirewallsRequest$Outbound = {
   "filter[project]"?: string | undefined;
@@ -60,19 +62,21 @@ export const ListFirewallsRequest$outboundSchema: z.ZodType<
   ListFirewallsRequest$Outbound,
   z.ZodTypeDef,
   ListFirewallsRequest
-> = z.object({
-  filterProject: z.string().optional(),
-  filterTags: z.string().optional(),
-  pageSize: z.number().int().default(20),
-  pageNumber: z.number().int().default(1),
-}).transform((v) => {
-  return remap$(v, {
-    filterProject: "filter[project]",
-    filterTags: "filter[tags]",
-    pageSize: "page[size]",
-    pageNumber: "page[number]",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    filterProject: z.string().optional(),
+    filterTags: z.string().optional(),
+    pageSize: z.number().int().default(20),
+    pageNumber: z.number().int().default(1),
+  }).transform((v) => {
+    return remap$(v, {
+      filterProject: "filter[project]",
+      filterTags: "filter[tags]",
+      pageSize: "page[size]",
+      pageNumber: "page[number]",
+    });
+  })
+);
 
 export function listFirewallsRequestToJSON(
   listFirewallsRequest: ListFirewallsRequest,
@@ -96,13 +100,15 @@ export const ListFirewallsResponse$inboundSchema: z.ZodType<
   ListFirewallsResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  Result: models.Firewalls$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "Result": "result",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    Result: models.Firewalls$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "Result": "result",
+    });
+  })
+);
 /** @internal */
 export type ListFirewallsResponse$Outbound = {
   Result: models.Firewalls$Outbound;
@@ -113,13 +119,15 @@ export const ListFirewallsResponse$outboundSchema: z.ZodType<
   ListFirewallsResponse$Outbound,
   z.ZodTypeDef,
   ListFirewallsResponse
-> = z.object({
-  result: models.Firewalls$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    result: "Result",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    result: models.Firewalls$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      result: "Result",
+    });
+  })
+);
 
 export function listFirewallsResponseToJSON(
   listFirewallsResponse: ListFirewallsResponse,

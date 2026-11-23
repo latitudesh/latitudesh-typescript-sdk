@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -54,7 +54,7 @@ export type ClusterNodeGroupData = {
 /** @internal */
 export const ClusterNodeGroupDataType$inboundSchema: z.ZodNativeEnum<
   typeof ClusterNodeGroupDataType
-> = z.nativeEnum(ClusterNodeGroupDataType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ClusterNodeGroupDataType));
 /** @internal */
 export const ClusterNodeGroupDataType$outboundSchema: z.ZodNativeEnum<
   typeof ClusterNodeGroupDataType
@@ -63,7 +63,7 @@ export const ClusterNodeGroupDataType$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const ClusterNodeGroupDataKind$inboundSchema: z.ZodNativeEnum<
   typeof ClusterNodeGroupDataKind
-> = z.nativeEnum(ClusterNodeGroupDataKind);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ClusterNodeGroupDataKind));
 /** @internal */
 export const ClusterNodeGroupDataKind$outboundSchema: z.ZodNativeEnum<
   typeof ClusterNodeGroupDataKind
@@ -74,19 +74,21 @@ export const ClusterNodeGroupDataAttributes$inboundSchema: z.ZodType<
   ClusterNodeGroupDataAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string().optional(),
-  kind: ClusterNodeGroupDataKind$inboundSchema.optional(),
-  plan: z.nullable(z.string()).optional(),
-  plan_name: z.nullable(z.string()).optional(),
-  server_count: z.number().int().optional(),
-  os: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "plan_name": "planName",
-    "server_count": "serverCount",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    kind: ClusterNodeGroupDataKind$inboundSchema.optional(),
+    plan: z.nullable(z.string()).optional(),
+    plan_name: z.nullable(z.string()).optional(),
+    server_count: z.number().int().optional(),
+    os: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "plan_name": "planName",
+      "server_count": "serverCount",
+    });
+  })
+);
 /** @internal */
 export type ClusterNodeGroupDataAttributes$Outbound = {
   name?: string | undefined;
@@ -102,19 +104,21 @@ export const ClusterNodeGroupDataAttributes$outboundSchema: z.ZodType<
   ClusterNodeGroupDataAttributes$Outbound,
   z.ZodTypeDef,
   ClusterNodeGroupDataAttributes
-> = z.object({
-  name: z.string().optional(),
-  kind: ClusterNodeGroupDataKind$outboundSchema.optional(),
-  plan: z.nullable(z.string()).optional(),
-  planName: z.nullable(z.string()).optional(),
-  serverCount: z.number().int().optional(),
-  os: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    planName: "plan_name",
-    serverCount: "server_count",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    kind: ClusterNodeGroupDataKind$outboundSchema.optional(),
+    plan: z.nullable(z.string()).optional(),
+    planName: z.nullable(z.string()).optional(),
+    serverCount: z.number().int().optional(),
+    os: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      planName: "plan_name",
+      serverCount: "server_count",
+    });
+  })
+);
 
 export function clusterNodeGroupDataAttributesToJSON(
   clusterNodeGroupDataAttributes: ClusterNodeGroupDataAttributes,
@@ -140,12 +144,14 @@ export const ClusterNodeGroupData$inboundSchema: z.ZodType<
   ClusterNodeGroupData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  type: ClusterNodeGroupDataType$inboundSchema.optional(),
-  attributes: z.lazy(() => ClusterNodeGroupDataAttributes$inboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: ClusterNodeGroupDataType$inboundSchema.optional(),
+    attributes: z.lazy(() => ClusterNodeGroupDataAttributes$inboundSchema)
+      .optional(),
+  })
+);
 /** @internal */
 export type ClusterNodeGroupData$Outbound = {
   id?: string | undefined;
@@ -158,12 +164,14 @@ export const ClusterNodeGroupData$outboundSchema: z.ZodType<
   ClusterNodeGroupData$Outbound,
   z.ZodTypeDef,
   ClusterNodeGroupData
-> = z.object({
-  id: z.string().optional(),
-  type: ClusterNodeGroupDataType$outboundSchema.optional(),
-  attributes: z.lazy(() => ClusterNodeGroupDataAttributes$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: ClusterNodeGroupDataType$outboundSchema.optional(),
+    attributes: z.lazy(() => ClusterNodeGroupDataAttributes$outboundSchema)
+      .optional(),
+  })
+);
 
 export function clusterNodeGroupDataToJSON(
   clusterNodeGroupData: ClusterNodeGroupData,

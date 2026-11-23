@@ -9,9 +9,8 @@ import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
-import { RequestOptions } from "../lib/sdks.js";
+import { encodePath, RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
-import { pathToFunc } from "../lib/url.js";
 import {
   ConnectionError,
   InvalidRequestError,
@@ -30,7 +29,7 @@ import { Result } from "../types/fp.js";
  * Delete a cluster node group
  *
  * @remarks
- * Removes one of your cluster's node groups. Only available for projects that have a GPU cluster; any other project answers 404 PROJECT_NOT_A_CLUSTER. Signed requirements need to be signed again. Needs an owner, administrator or collaborator.
+ * Removes a node group from your cluster. You can't remove it while your requirements are signed, or while requirements apply only to this node group.
  */
 export function clustersDeleteProjectClusterNodeGroup(
   client: LatitudeshCore,
@@ -100,9 +99,14 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-  const path = pathToFunc("/projects/{project_id}/cluster/node_groups/{id}")(
+  const pathResult = encodePath(
+    "/projects/{project_id}/cluster/node_groups/{id}",
     pathParams,
   );
+  if (!pathResult.ok) {
+    return [pathResult, { status: "invalid" }];
+  }
+  const path = pathResult.value;
 
   const headers = new Headers(compactMap({
     Accept: "*/*",
@@ -166,7 +170,7 @@ async function $do(
     | SDKValidationError
   >(
     M.nil(204, z.void()),
-    M.fail([403, 404, "4XX"]),
+    M.fail([403, 404, 409, "4XX"]),
     M.fail("5XX"),
   )(response, req);
   if (!result.ok) {

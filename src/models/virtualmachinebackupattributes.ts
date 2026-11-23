@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -63,7 +63,9 @@ export type VirtualMachineBackupAttributes = {
 /** @internal */
 export const VirtualMachineBackupAttributesType$inboundSchema: z.ZodNativeEnum<
   typeof VirtualMachineBackupAttributesType
-> = z.nativeEnum(VirtualMachineBackupAttributesType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(VirtualMachineBackupAttributesType)
+);
 /** @internal */
 export const VirtualMachineBackupAttributesType$outboundSchema: z.ZodNativeEnum<
   typeof VirtualMachineBackupAttributesType
@@ -71,9 +73,10 @@ export const VirtualMachineBackupAttributesType$outboundSchema: z.ZodNativeEnum<
 
 /** @internal */
 export const VirtualMachineBackupAttributesStatus$inboundSchema:
-  z.ZodNativeEnum<typeof VirtualMachineBackupAttributesStatus> = z.nativeEnum(
-    VirtualMachineBackupAttributesStatus,
-  );
+  z.ZodNativeEnum<typeof VirtualMachineBackupAttributesStatus> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(VirtualMachineBackupAttributesStatus)
+    );
 /** @internal */
 export const VirtualMachineBackupAttributesStatus$outboundSchema:
   z.ZodNativeEnum<typeof VirtualMachineBackupAttributesStatus> =
@@ -85,10 +88,12 @@ export const VirtualMachineBackupAttributesVirtualMachine$inboundSchema:
     VirtualMachineBackupAttributesVirtualMachine,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    id: z.string().optional(),
-    name: z.string().optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string().optional(),
+      name: z.string().optional(),
+    })
+  );
 /** @internal */
 export type VirtualMachineBackupAttributesVirtualMachine$Outbound = {
   id?: string | undefined;
@@ -101,10 +106,12 @@ export const VirtualMachineBackupAttributesVirtualMachine$outboundSchema:
     VirtualMachineBackupAttributesVirtualMachine$Outbound,
     z.ZodTypeDef,
     VirtualMachineBackupAttributesVirtualMachine
-  > = z.object({
-    id: z.string().optional(),
-    name: z.string().optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string().optional(),
+      name: z.string().optional(),
+    })
+  );
 
 export function virtualMachineBackupAttributesVirtualMachineToJSON(
   virtualMachineBackupAttributesVirtualMachine:
@@ -137,26 +144,28 @@ export const VirtualMachineBackupAttributesAttributes$inboundSchema: z.ZodType<
   VirtualMachineBackupAttributesAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  status: VirtualMachineBackupAttributesStatus$inboundSchema.optional(),
-  size_bytes: z.nullable(z.number().int()).optional(),
-  expires_at: z.nullable(z.string()).optional(),
-  failure_reason: z.nullable(z.string()).optional(),
-  created_at: z.string().optional(),
-  virtual_machine: z.lazy(() =>
-    VirtualMachineBackupAttributesVirtualMachine$inboundSchema
-  ).optional(),
-  team: TeamInclude$inboundSchema.optional(),
-  project: ProjectInclude$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "size_bytes": "sizeBytes",
-    "expires_at": "expiresAt",
-    "failure_reason": "failureReason",
-    "created_at": "createdAt",
-    "virtual_machine": "virtualMachine",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    status: VirtualMachineBackupAttributesStatus$inboundSchema.optional(),
+    size_bytes: z.nullable(z.number().int()).optional(),
+    expires_at: z.nullable(z.string()).optional(),
+    failure_reason: z.nullable(z.string()).optional(),
+    created_at: z.string().optional(),
+    virtual_machine: z.lazy(() =>
+      VirtualMachineBackupAttributesVirtualMachine$inboundSchema
+    ).optional(),
+    team: TeamInclude$inboundSchema.optional(),
+    project: ProjectInclude$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "size_bytes": "sizeBytes",
+      "expires_at": "expiresAt",
+      "failure_reason": "failureReason",
+      "created_at": "createdAt",
+      "virtual_machine": "virtualMachine",
+    });
+  })
+);
 /** @internal */
 export type VirtualMachineBackupAttributesAttributes$Outbound = {
   status?: string | undefined;
@@ -176,26 +185,28 @@ export const VirtualMachineBackupAttributesAttributes$outboundSchema: z.ZodType<
   VirtualMachineBackupAttributesAttributes$Outbound,
   z.ZodTypeDef,
   VirtualMachineBackupAttributesAttributes
-> = z.object({
-  status: VirtualMachineBackupAttributesStatus$outboundSchema.optional(),
-  sizeBytes: z.nullable(z.number().int()).optional(),
-  expiresAt: z.nullable(z.string()).optional(),
-  failureReason: z.nullable(z.string()).optional(),
-  createdAt: z.string().optional(),
-  virtualMachine: z.lazy(() =>
-    VirtualMachineBackupAttributesVirtualMachine$outboundSchema
-  ).optional(),
-  team: TeamInclude$outboundSchema.optional(),
-  project: ProjectInclude$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    sizeBytes: "size_bytes",
-    expiresAt: "expires_at",
-    failureReason: "failure_reason",
-    createdAt: "created_at",
-    virtualMachine: "virtual_machine",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    status: VirtualMachineBackupAttributesStatus$outboundSchema.optional(),
+    sizeBytes: z.nullable(z.number().int()).optional(),
+    expiresAt: z.nullable(z.string()).optional(),
+    failureReason: z.nullable(z.string()).optional(),
+    createdAt: z.string().optional(),
+    virtualMachine: z.lazy(() =>
+      VirtualMachineBackupAttributesVirtualMachine$outboundSchema
+    ).optional(),
+    team: TeamInclude$outboundSchema.optional(),
+    project: ProjectInclude$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      sizeBytes: "size_bytes",
+      expiresAt: "expires_at",
+      failureReason: "failure_reason",
+      createdAt: "created_at",
+      virtualMachine: "virtual_machine",
+    });
+  })
+);
 
 export function virtualMachineBackupAttributesAttributesToJSON(
   virtualMachineBackupAttributesAttributes:
@@ -228,13 +239,15 @@ export const VirtualMachineBackupAttributes$inboundSchema: z.ZodType<
   VirtualMachineBackupAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  type: VirtualMachineBackupAttributesType$inboundSchema.optional(),
-  attributes: z.lazy(() =>
-    VirtualMachineBackupAttributesAttributes$inboundSchema
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: VirtualMachineBackupAttributesType$inboundSchema.optional(),
+    attributes: z.lazy(() =>
+      VirtualMachineBackupAttributesAttributes$inboundSchema
+    ).optional(),
+  })
+);
 /** @internal */
 export type VirtualMachineBackupAttributes$Outbound = {
   id?: string | undefined;
@@ -247,13 +260,15 @@ export const VirtualMachineBackupAttributes$outboundSchema: z.ZodType<
   VirtualMachineBackupAttributes$Outbound,
   z.ZodTypeDef,
   VirtualMachineBackupAttributes
-> = z.object({
-  id: z.string().optional(),
-  type: VirtualMachineBackupAttributesType$outboundSchema.optional(),
-  attributes: z.lazy(() =>
-    VirtualMachineBackupAttributesAttributes$outboundSchema
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: VirtualMachineBackupAttributesType$outboundSchema.optional(),
+    attributes: z.lazy(() =>
+      VirtualMachineBackupAttributesAttributes$outboundSchema
+    ).optional(),
+  })
+);
 
 export function virtualMachineBackupAttributesToJSON(
   virtualMachineBackupAttributes: VirtualMachineBackupAttributes,

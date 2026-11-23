@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as models from "../index.js";
@@ -165,82 +165,84 @@ export const GetServersRequest$inboundSchema: z.ZodType<
   GetServersRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "filter[id]": z.string().optional(),
-  "filter[project]": z.string().optional(),
-  "filter[region]": z.string().optional(),
-  "filter[hostname]": z.string().optional(),
-  "filter[hostname][eql]": z.string().optional(),
-  "filter[hostname][prefix]": z.string().optional(),
-  "filter[hostname][suffix]": z.string().optional(),
-  "filter[hostname][match]": z.string().optional(),
-  "filter[created_at_gte]": z.string().optional(),
-  "filter[created_at_lte]": z.string().optional(),
-  "filter[created_at]": z.string().optional(),
-  "filter[label]": z.string().optional(),
-  "filter[label][eql]": z.string().optional(),
-  "filter[label][prefix]": z.string().optional(),
-  "filter[label][suffix]": z.string().optional(),
-  "filter[label][match]": z.string().optional(),
-  "filter[status]": z.string().optional(),
-  "filter[plan]": z.string().optional(),
-  "filter[plan][eql]": z.string().optional(),
-  "filter[plan][prefix]": z.string().optional(),
-  "filter[plan][suffix]": z.string().optional(),
-  "filter[plan][match]": z.string().optional(),
-  "filter[gpu]": z.boolean().optional(),
-  "filter[ram][eql]": z.number().int().optional(),
-  "filter[ram][gte]": z.number().int().optional(),
-  "filter[ram][lte]": z.number().int().optional(),
-  "filter[disk][eql]": z.number().int().optional(),
-  "filter[disk][gte]": z.number().int().optional(),
-  "filter[disk][lte]": z.number().int().optional(),
-  "filter[tags]": z.string().optional(),
-  "filter[bgp_eligible]": z.boolean().optional(),
-  "extra_fields[servers]": z.string().optional(),
-  sort: z.string().optional(),
-  "page[size]": z.number().int().default(20),
-  "page[number]": z.number().int().default(1),
-  "stats[total]": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "filter[id]": "filterId",
-    "filter[project]": "filterProject",
-    "filter[region]": "filterRegion",
-    "filter[hostname]": "filterHostname",
-    "filter[hostname][eql]": "filterHostnameEql",
-    "filter[hostname][prefix]": "filterHostnamePrefix",
-    "filter[hostname][suffix]": "filterHostnameSuffix",
-    "filter[hostname][match]": "filterHostnameMatch",
-    "filter[created_at_gte]": "filterCreatedAtGte",
-    "filter[created_at_lte]": "filterCreatedAtLte",
-    "filter[created_at]": "filterCreatedAt",
-    "filter[label]": "filterLabel",
-    "filter[label][eql]": "filterLabelEql",
-    "filter[label][prefix]": "filterLabelPrefix",
-    "filter[label][suffix]": "filterLabelSuffix",
-    "filter[label][match]": "filterLabelMatch",
-    "filter[status]": "filterStatus",
-    "filter[plan]": "filterPlan",
-    "filter[plan][eql]": "filterPlanEql",
-    "filter[plan][prefix]": "filterPlanPrefix",
-    "filter[plan][suffix]": "filterPlanSuffix",
-    "filter[plan][match]": "filterPlanMatch",
-    "filter[gpu]": "filterGpu",
-    "filter[ram][eql]": "filterRamEql",
-    "filter[ram][gte]": "filterRamGte",
-    "filter[ram][lte]": "filterRamLte",
-    "filter[disk][eql]": "filterDiskEql",
-    "filter[disk][gte]": "filterDiskGte",
-    "filter[disk][lte]": "filterDiskLte",
-    "filter[tags]": "filterTags",
-    "filter[bgp_eligible]": "filterBgpEligible",
-    "extra_fields[servers]": "extraFieldsServers",
-    "page[size]": "pageSize",
-    "page[number]": "pageNumber",
-    "stats[total]": "statsTotal",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "filter[id]": z.string().optional(),
+    "filter[project]": z.string().optional(),
+    "filter[region]": z.string().optional(),
+    "filter[hostname]": z.string().optional(),
+    "filter[hostname][eql]": z.string().optional(),
+    "filter[hostname][prefix]": z.string().optional(),
+    "filter[hostname][suffix]": z.string().optional(),
+    "filter[hostname][match]": z.string().optional(),
+    "filter[created_at_gte]": z.string().optional(),
+    "filter[created_at_lte]": z.string().optional(),
+    "filter[created_at]": z.string().optional(),
+    "filter[label]": z.string().optional(),
+    "filter[label][eql]": z.string().optional(),
+    "filter[label][prefix]": z.string().optional(),
+    "filter[label][suffix]": z.string().optional(),
+    "filter[label][match]": z.string().optional(),
+    "filter[status]": z.string().optional(),
+    "filter[plan]": z.string().optional(),
+    "filter[plan][eql]": z.string().optional(),
+    "filter[plan][prefix]": z.string().optional(),
+    "filter[plan][suffix]": z.string().optional(),
+    "filter[plan][match]": z.string().optional(),
+    "filter[gpu]": z.boolean().optional(),
+    "filter[ram][eql]": z.number().int().optional(),
+    "filter[ram][gte]": z.number().int().optional(),
+    "filter[ram][lte]": z.number().int().optional(),
+    "filter[disk][eql]": z.number().int().optional(),
+    "filter[disk][gte]": z.number().int().optional(),
+    "filter[disk][lte]": z.number().int().optional(),
+    "filter[tags]": z.string().optional(),
+    "filter[bgp_eligible]": z.boolean().optional(),
+    "extra_fields[servers]": z.string().optional(),
+    sort: z.string().optional(),
+    "page[size]": z.number().int().default(20),
+    "page[number]": z.number().int().default(1),
+    "stats[total]": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "filter[id]": "filterId",
+      "filter[project]": "filterProject",
+      "filter[region]": "filterRegion",
+      "filter[hostname]": "filterHostname",
+      "filter[hostname][eql]": "filterHostnameEql",
+      "filter[hostname][prefix]": "filterHostnamePrefix",
+      "filter[hostname][suffix]": "filterHostnameSuffix",
+      "filter[hostname][match]": "filterHostnameMatch",
+      "filter[created_at_gte]": "filterCreatedAtGte",
+      "filter[created_at_lte]": "filterCreatedAtLte",
+      "filter[created_at]": "filterCreatedAt",
+      "filter[label]": "filterLabel",
+      "filter[label][eql]": "filterLabelEql",
+      "filter[label][prefix]": "filterLabelPrefix",
+      "filter[label][suffix]": "filterLabelSuffix",
+      "filter[label][match]": "filterLabelMatch",
+      "filter[status]": "filterStatus",
+      "filter[plan]": "filterPlan",
+      "filter[plan][eql]": "filterPlanEql",
+      "filter[plan][prefix]": "filterPlanPrefix",
+      "filter[plan][suffix]": "filterPlanSuffix",
+      "filter[plan][match]": "filterPlanMatch",
+      "filter[gpu]": "filterGpu",
+      "filter[ram][eql]": "filterRamEql",
+      "filter[ram][gte]": "filterRamGte",
+      "filter[ram][lte]": "filterRamLte",
+      "filter[disk][eql]": "filterDiskEql",
+      "filter[disk][gte]": "filterDiskGte",
+      "filter[disk][lte]": "filterDiskLte",
+      "filter[tags]": "filterTags",
+      "filter[bgp_eligible]": "filterBgpEligible",
+      "extra_fields[servers]": "extraFieldsServers",
+      "page[size]": "pageSize",
+      "page[number]": "pageNumber",
+      "stats[total]": "statsTotal",
+    });
+  })
+);
 /** @internal */
 export type GetServersRequest$Outbound = {
   "filter[id]"?: string | undefined;
@@ -286,82 +288,84 @@ export const GetServersRequest$outboundSchema: z.ZodType<
   GetServersRequest$Outbound,
   z.ZodTypeDef,
   GetServersRequest
-> = z.object({
-  filterId: z.string().optional(),
-  filterProject: z.string().optional(),
-  filterRegion: z.string().optional(),
-  filterHostname: z.string().optional(),
-  filterHostnameEql: z.string().optional(),
-  filterHostnamePrefix: z.string().optional(),
-  filterHostnameSuffix: z.string().optional(),
-  filterHostnameMatch: z.string().optional(),
-  filterCreatedAtGte: z.string().optional(),
-  filterCreatedAtLte: z.string().optional(),
-  filterCreatedAt: z.string().optional(),
-  filterLabel: z.string().optional(),
-  filterLabelEql: z.string().optional(),
-  filterLabelPrefix: z.string().optional(),
-  filterLabelSuffix: z.string().optional(),
-  filterLabelMatch: z.string().optional(),
-  filterStatus: z.string().optional(),
-  filterPlan: z.string().optional(),
-  filterPlanEql: z.string().optional(),
-  filterPlanPrefix: z.string().optional(),
-  filterPlanSuffix: z.string().optional(),
-  filterPlanMatch: z.string().optional(),
-  filterGpu: z.boolean().optional(),
-  filterRamEql: z.number().int().optional(),
-  filterRamGte: z.number().int().optional(),
-  filterRamLte: z.number().int().optional(),
-  filterDiskEql: z.number().int().optional(),
-  filterDiskGte: z.number().int().optional(),
-  filterDiskLte: z.number().int().optional(),
-  filterTags: z.string().optional(),
-  filterBgpEligible: z.boolean().optional(),
-  extraFieldsServers: z.string().optional(),
-  sort: z.string().optional(),
-  pageSize: z.number().int().default(20),
-  pageNumber: z.number().int().default(1),
-  statsTotal: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    filterId: "filter[id]",
-    filterProject: "filter[project]",
-    filterRegion: "filter[region]",
-    filterHostname: "filter[hostname]",
-    filterHostnameEql: "filter[hostname][eql]",
-    filterHostnamePrefix: "filter[hostname][prefix]",
-    filterHostnameSuffix: "filter[hostname][suffix]",
-    filterHostnameMatch: "filter[hostname][match]",
-    filterCreatedAtGte: "filter[created_at_gte]",
-    filterCreatedAtLte: "filter[created_at_lte]",
-    filterCreatedAt: "filter[created_at]",
-    filterLabel: "filter[label]",
-    filterLabelEql: "filter[label][eql]",
-    filterLabelPrefix: "filter[label][prefix]",
-    filterLabelSuffix: "filter[label][suffix]",
-    filterLabelMatch: "filter[label][match]",
-    filterStatus: "filter[status]",
-    filterPlan: "filter[plan]",
-    filterPlanEql: "filter[plan][eql]",
-    filterPlanPrefix: "filter[plan][prefix]",
-    filterPlanSuffix: "filter[plan][suffix]",
-    filterPlanMatch: "filter[plan][match]",
-    filterGpu: "filter[gpu]",
-    filterRamEql: "filter[ram][eql]",
-    filterRamGte: "filter[ram][gte]",
-    filterRamLte: "filter[ram][lte]",
-    filterDiskEql: "filter[disk][eql]",
-    filterDiskGte: "filter[disk][gte]",
-    filterDiskLte: "filter[disk][lte]",
-    filterTags: "filter[tags]",
-    filterBgpEligible: "filter[bgp_eligible]",
-    extraFieldsServers: "extra_fields[servers]",
-    pageSize: "page[size]",
-    pageNumber: "page[number]",
-    statsTotal: "stats[total]",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    filterId: z.string().optional(),
+    filterProject: z.string().optional(),
+    filterRegion: z.string().optional(),
+    filterHostname: z.string().optional(),
+    filterHostnameEql: z.string().optional(),
+    filterHostnamePrefix: z.string().optional(),
+    filterHostnameSuffix: z.string().optional(),
+    filterHostnameMatch: z.string().optional(),
+    filterCreatedAtGte: z.string().optional(),
+    filterCreatedAtLte: z.string().optional(),
+    filterCreatedAt: z.string().optional(),
+    filterLabel: z.string().optional(),
+    filterLabelEql: z.string().optional(),
+    filterLabelPrefix: z.string().optional(),
+    filterLabelSuffix: z.string().optional(),
+    filterLabelMatch: z.string().optional(),
+    filterStatus: z.string().optional(),
+    filterPlan: z.string().optional(),
+    filterPlanEql: z.string().optional(),
+    filterPlanPrefix: z.string().optional(),
+    filterPlanSuffix: z.string().optional(),
+    filterPlanMatch: z.string().optional(),
+    filterGpu: z.boolean().optional(),
+    filterRamEql: z.number().int().optional(),
+    filterRamGte: z.number().int().optional(),
+    filterRamLte: z.number().int().optional(),
+    filterDiskEql: z.number().int().optional(),
+    filterDiskGte: z.number().int().optional(),
+    filterDiskLte: z.number().int().optional(),
+    filterTags: z.string().optional(),
+    filterBgpEligible: z.boolean().optional(),
+    extraFieldsServers: z.string().optional(),
+    sort: z.string().optional(),
+    pageSize: z.number().int().default(20),
+    pageNumber: z.number().int().default(1),
+    statsTotal: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      filterId: "filter[id]",
+      filterProject: "filter[project]",
+      filterRegion: "filter[region]",
+      filterHostname: "filter[hostname]",
+      filterHostnameEql: "filter[hostname][eql]",
+      filterHostnamePrefix: "filter[hostname][prefix]",
+      filterHostnameSuffix: "filter[hostname][suffix]",
+      filterHostnameMatch: "filter[hostname][match]",
+      filterCreatedAtGte: "filter[created_at_gte]",
+      filterCreatedAtLte: "filter[created_at_lte]",
+      filterCreatedAt: "filter[created_at]",
+      filterLabel: "filter[label]",
+      filterLabelEql: "filter[label][eql]",
+      filterLabelPrefix: "filter[label][prefix]",
+      filterLabelSuffix: "filter[label][suffix]",
+      filterLabelMatch: "filter[label][match]",
+      filterStatus: "filter[status]",
+      filterPlan: "filter[plan]",
+      filterPlanEql: "filter[plan][eql]",
+      filterPlanPrefix: "filter[plan][prefix]",
+      filterPlanSuffix: "filter[plan][suffix]",
+      filterPlanMatch: "filter[plan][match]",
+      filterGpu: "filter[gpu]",
+      filterRamEql: "filter[ram][eql]",
+      filterRamGte: "filter[ram][gte]",
+      filterRamLte: "filter[ram][lte]",
+      filterDiskEql: "filter[disk][eql]",
+      filterDiskGte: "filter[disk][gte]",
+      filterDiskLte: "filter[disk][lte]",
+      filterTags: "filter[tags]",
+      filterBgpEligible: "filter[bgp_eligible]",
+      extraFieldsServers: "extra_fields[servers]",
+      pageSize: "page[size]",
+      pageNumber: "page[number]",
+      statsTotal: "stats[total]",
+    });
+  })
+);
 
 export function getServersRequestToJSON(
   getServersRequest: GetServersRequest,
@@ -385,13 +389,15 @@ export const GetServersResponse$inboundSchema: z.ZodType<
   GetServersResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  Result: models.Servers$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "Result": "result",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    Result: models.Servers$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "Result": "result",
+    });
+  })
+);
 /** @internal */
 export type GetServersResponse$Outbound = {
   Result: models.Servers$Outbound;
@@ -402,13 +408,15 @@ export const GetServersResponse$outboundSchema: z.ZodType<
   GetServersResponse$Outbound,
   z.ZodTypeDef,
   GetServersResponse
-> = z.object({
-  result: models.Servers$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    result: "Result",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    result: models.Servers$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      result: "Result",
+    });
+  })
+);
 
 export function getServersResponseToJSON(
   getServersResponse: GetServersResponse,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 
@@ -51,19 +51,21 @@ export type InferenceUsage = {
 
 /** @internal */
 export const ByModel$inboundSchema: z.ZodType<ByModel, z.ZodTypeDef, unknown> =
-  z.object({
-    model: z.string().optional(),
-    requests: z.number().int().optional(),
-    input_tokens: z.number().int().optional(),
-    output_tokens: z.number().int().optional(),
-    estimated_cost: z.nullable(z.string()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "input_tokens": "inputTokens",
-      "output_tokens": "outputTokens",
-      "estimated_cost": "estimatedCost",
-    });
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      model: z.string().optional(),
+      requests: z.number().int().optional(),
+      input_tokens: z.number().int().optional(),
+      output_tokens: z.number().int().optional(),
+      estimated_cost: z.nullable(z.string()).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "input_tokens": "inputTokens",
+        "output_tokens": "outputTokens",
+        "estimated_cost": "estimatedCost",
+      });
+    })
+  );
 /** @internal */
 export type ByModel$Outbound = {
   model?: string | undefined;
@@ -78,19 +80,21 @@ export const ByModel$outboundSchema: z.ZodType<
   ByModel$Outbound,
   z.ZodTypeDef,
   ByModel
-> = z.object({
-  model: z.string().optional(),
-  requests: z.number().int().optional(),
-  inputTokens: z.number().int().optional(),
-  outputTokens: z.number().int().optional(),
-  estimatedCost: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    inputTokens: "input_tokens",
-    outputTokens: "output_tokens",
-    estimatedCost: "estimated_cost",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string().optional(),
+    requests: z.number().int().optional(),
+    inputTokens: z.number().int().optional(),
+    outputTokens: z.number().int().optional(),
+    estimatedCost: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      inputTokens: "input_tokens",
+      outputTokens: "output_tokens",
+      estimatedCost: "estimated_cost",
+    });
+  })
+);
 
 export function byModelToJSON(byModel: ByModel): string {
   return JSON.stringify(ByModel$outboundSchema.parse(byModel));
@@ -106,15 +110,17 @@ export function byModelFromJSON(
 }
 
 /** @internal */
-export const Models$inboundSchema: z.ZodType<Models, z.ZodTypeDef, unknown> = z
-  .object({
-    requests: z.number().int().optional(),
-    estimated_cost: z.nullable(z.string()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "estimated_cost": "estimatedCost",
-    });
-  });
+export const Models$inboundSchema: z.ZodType<Models, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      requests: z.number().int().optional(),
+      estimated_cost: z.nullable(z.string()).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "estimated_cost": "estimatedCost",
+      });
+    })
+  );
 /** @internal */
 export type Models$Outbound = {
   requests?: number | undefined;
@@ -126,14 +132,16 @@ export const Models$outboundSchema: z.ZodType<
   Models$Outbound,
   z.ZodTypeDef,
   Models
-> = z.object({
-  requests: z.number().int().optional(),
-  estimatedCost: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    estimatedCost: "estimated_cost",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    requests: z.number().int().optional(),
+    estimatedCost: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      estimatedCost: "estimated_cost",
+    });
+  })
+);
 
 export function modelsToJSON(models: Models): string {
   return JSON.stringify(Models$outboundSchema.parse(models));
@@ -149,12 +157,15 @@ export function modelsFromJSON(
 }
 
 /** @internal */
-export const Series$inboundSchema: z.ZodType<Series, z.ZodTypeDef, unknown> = z
-  .object({
-    timestamp: z.string().datetime({ offset: true }).transform(v => new Date(v))
-      .optional(),
-    models: z.record(z.lazy(() => Models$inboundSchema)).optional(),
-  });
+export const Series$inboundSchema: z.ZodType<Series, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      timestamp: z.string().datetime({ offset: true }).transform(v =>
+        new Date(v)
+      ).optional(),
+      models: z.record(z.lazy(() => Models$inboundSchema)).optional(),
+    })
+  );
 /** @internal */
 export type Series$Outbound = {
   timestamp?: string | undefined;
@@ -166,10 +177,12 @@ export const Series$outboundSchema: z.ZodType<
   Series$Outbound,
   z.ZodTypeDef,
   Series
-> = z.object({
-  timestamp: z.date().transform(v => v.toISOString()).optional(),
-  models: z.record(z.lazy(() => Models$outboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    timestamp: z.date().transform(v => v.toISOString()).optional(),
+    models: z.record(z.lazy(() => Models$outboundSchema)).optional(),
+  })
+);
 
 export function seriesToJSON(series: Series): string {
   return JSON.stringify(Series$outboundSchema.parse(series));
@@ -189,20 +202,22 @@ export const InferenceUsage$inboundSchema: z.ZodType<
   InferenceUsage,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  total_estimated_cost: z.string().optional(),
-  total_requests: z.number().int().optional(),
-  total_tokens: z.number().int().optional(),
-  by_model: z.array(z.lazy(() => ByModel$inboundSchema)).optional(),
-  series: z.array(z.lazy(() => Series$inboundSchema)).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "total_estimated_cost": "totalEstimatedCost",
-    "total_requests": "totalRequests",
-    "total_tokens": "totalTokens",
-    "by_model": "byModel",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    total_estimated_cost: z.string().optional(),
+    total_requests: z.number().int().optional(),
+    total_tokens: z.number().int().optional(),
+    by_model: z.array(z.lazy(() => ByModel$inboundSchema)).optional(),
+    series: z.array(z.lazy(() => Series$inboundSchema)).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "total_estimated_cost": "totalEstimatedCost",
+      "total_requests": "totalRequests",
+      "total_tokens": "totalTokens",
+      "by_model": "byModel",
+    });
+  })
+);
 /** @internal */
 export type InferenceUsage$Outbound = {
   total_estimated_cost?: string | undefined;
@@ -217,20 +232,22 @@ export const InferenceUsage$outboundSchema: z.ZodType<
   InferenceUsage$Outbound,
   z.ZodTypeDef,
   InferenceUsage
-> = z.object({
-  totalEstimatedCost: z.string().optional(),
-  totalRequests: z.number().int().optional(),
-  totalTokens: z.number().int().optional(),
-  byModel: z.array(z.lazy(() => ByModel$outboundSchema)).optional(),
-  series: z.array(z.lazy(() => Series$outboundSchema)).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    totalEstimatedCost: "total_estimated_cost",
-    totalRequests: "total_requests",
-    totalTokens: "total_tokens",
-    byModel: "by_model",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    totalEstimatedCost: z.string().optional(),
+    totalRequests: z.number().int().optional(),
+    totalTokens: z.number().int().optional(),
+    byModel: z.array(z.lazy(() => ByModel$outboundSchema)).optional(),
+    series: z.array(z.lazy(() => Series$outboundSchema)).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      totalEstimatedCost: "total_estimated_cost",
+      totalRequests: "total_requests",
+      totalTokens: "total_tokens",
+      byModel: "by_model",
+    });
+  })
+);
 
 export function inferenceUsageToJSON(inferenceUsage: InferenceUsage): string {
   return JSON.stringify(InferenceUsage$outboundSchema.parse(inferenceUsage));

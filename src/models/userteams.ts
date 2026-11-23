@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 import {
@@ -25,7 +25,7 @@ export const UserTeamsMeta$inboundSchema: z.ZodType<
   UserTeamsMeta,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type UserTeamsMeta$Outbound = {};
 
@@ -34,7 +34,7 @@ export const UserTeamsMeta$outboundSchema: z.ZodType<
   UserTeamsMeta$Outbound,
   z.ZodTypeDef,
   UserTeamsMeta
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function userTeamsMetaToJSON(userTeamsMeta: UserTeamsMeta): string {
   return JSON.stringify(UserTeamsMeta$outboundSchema.parse(userTeamsMeta));
@@ -54,10 +54,12 @@ export const UserTeams$inboundSchema: z.ZodType<
   UserTeams,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.array(UserTeam$inboundSchema).optional(),
-  meta: z.lazy(() => UserTeamsMeta$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(UserTeam$inboundSchema).optional(),
+    meta: z.lazy(() => UserTeamsMeta$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type UserTeams$Outbound = {
   data?: Array<UserTeam$Outbound> | undefined;
@@ -69,10 +71,12 @@ export const UserTeams$outboundSchema: z.ZodType<
   UserTeams$Outbound,
   z.ZodTypeDef,
   UserTeams
-> = z.object({
-  data: z.array(UserTeam$outboundSchema).optional(),
-  meta: z.lazy(() => UserTeamsMeta$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(UserTeam$outboundSchema).optional(),
+    meta: z.lazy(() => UserTeamsMeta$outboundSchema).optional(),
+  })
+);
 
 export function userTeamsToJSON(userTeams: UserTeams): string {
   return JSON.stringify(UserTeams$outboundSchema.parse(userTeams));

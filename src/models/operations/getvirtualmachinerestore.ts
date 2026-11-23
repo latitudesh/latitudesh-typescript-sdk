@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -16,9 +16,11 @@ export const GetVirtualMachineRestoreRequest$inboundSchema: z.ZodType<
   GetVirtualMachineRestoreRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+  })
+);
 /** @internal */
 export type GetVirtualMachineRestoreRequest$Outbound = {
   id: string;
@@ -29,9 +31,11 @@ export const GetVirtualMachineRestoreRequest$outboundSchema: z.ZodType<
   GetVirtualMachineRestoreRequest$Outbound,
   z.ZodTypeDef,
   GetVirtualMachineRestoreRequest
-> = z.object({
-  id: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+  })
+);
 
 export function getVirtualMachineRestoreRequestToJSON(
   getVirtualMachineRestoreRequest: GetVirtualMachineRestoreRequest,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -24,15 +24,17 @@ export const GetIpRequest$inboundSchema: z.ZodType<
   GetIpRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ip_id: z.string(),
-  "extra_fields[ip_addresses]": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "ip_id": "ipId",
-    "extra_fields[ip_addresses]": "extraFieldsIpAddresses",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ip_id: z.string(),
+    "extra_fields[ip_addresses]": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ip_id": "ipId",
+      "extra_fields[ip_addresses]": "extraFieldsIpAddresses",
+    });
+  })
+);
 /** @internal */
 export type GetIpRequest$Outbound = {
   ip_id: string;
@@ -44,15 +46,17 @@ export const GetIpRequest$outboundSchema: z.ZodType<
   GetIpRequest$Outbound,
   z.ZodTypeDef,
   GetIpRequest
-> = z.object({
-  ipId: z.string(),
-  extraFieldsIpAddresses: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    ipId: "ip_id",
-    extraFieldsIpAddresses: "extra_fields[ip_addresses]",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ipId: z.string(),
+    extraFieldsIpAddresses: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      ipId: "ip_id",
+      extraFieldsIpAddresses: "extra_fields[ip_addresses]",
+    });
+  })
+);
 
 export function getIpRequestToJSON(getIpRequest: GetIpRequest): string {
   return JSON.stringify(GetIpRequest$outboundSchema.parse(getIpRequest));

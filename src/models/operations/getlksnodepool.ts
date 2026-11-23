@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -24,14 +24,16 @@ export const GetLksNodePoolRequest$inboundSchema: z.ZodType<
   GetLksNodePoolRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  cluster_id: z.string(),
-  id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "cluster_id": "clusterId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    cluster_id: z.string(),
+    id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "cluster_id": "clusterId",
+    });
+  })
+);
 /** @internal */
 export type GetLksNodePoolRequest$Outbound = {
   cluster_id: string;
@@ -43,14 +45,16 @@ export const GetLksNodePoolRequest$outboundSchema: z.ZodType<
   GetLksNodePoolRequest$Outbound,
   z.ZodTypeDef,
   GetLksNodePoolRequest
-> = z.object({
-  clusterId: z.string(),
-  id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    clusterId: "cluster_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    clusterId: z.string(),
+    id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      clusterId: "cluster_id",
+    });
+  })
+);
 
 export function getLksNodePoolRequestToJSON(
   getLksNodePoolRequest: GetLksNodePoolRequest,

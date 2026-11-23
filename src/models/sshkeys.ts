@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 import {
@@ -26,10 +26,12 @@ export type SshKeys = {
 
 /** @internal */
 export const SshKeys$inboundSchema: z.ZodType<SshKeys, z.ZodTypeDef, unknown> =
-  z.object({
-    data: z.array(SshKeyData$inboundSchema).optional(),
-    meta: PaginationMeta$inboundSchema.optional(),
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      data: z.array(SshKeyData$inboundSchema).optional(),
+      meta: PaginationMeta$inboundSchema.optional(),
+    })
+  );
 /** @internal */
 export type SshKeys$Outbound = {
   data?: Array<SshKeyData$Outbound> | undefined;
@@ -41,10 +43,12 @@ export const SshKeys$outboundSchema: z.ZodType<
   SshKeys$Outbound,
   z.ZodTypeDef,
   SshKeys
-> = z.object({
-  data: z.array(SshKeyData$outboundSchema).optional(),
-  meta: PaginationMeta$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(SshKeyData$outboundSchema).optional(),
+    meta: PaginationMeta$outboundSchema.optional(),
+  })
+);
 
 export function sshKeysToJSON(sshKeys: SshKeys): string {
   return JSON.stringify(SshKeys$outboundSchema.parse(sshKeys));

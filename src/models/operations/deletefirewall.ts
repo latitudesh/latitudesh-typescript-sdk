@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -20,13 +20,15 @@ export const DeleteFirewallRequest$inboundSchema: z.ZodType<
   DeleteFirewallRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  firewall_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "firewall_id": "firewallId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    firewall_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "firewall_id": "firewallId",
+    });
+  })
+);
 /** @internal */
 export type DeleteFirewallRequest$Outbound = {
   firewall_id: string;
@@ -37,13 +39,15 @@ export const DeleteFirewallRequest$outboundSchema: z.ZodType<
   DeleteFirewallRequest$Outbound,
   z.ZodTypeDef,
   DeleteFirewallRequest
-> = z.object({
-  firewallId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    firewallId: "firewall_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    firewallId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      firewallId: "firewall_id",
+    });
+  })
+);
 
 export function deleteFirewallRequestToJSON(
   deleteFirewallRequest: DeleteFirewallRequest,

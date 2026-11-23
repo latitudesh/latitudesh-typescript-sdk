@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 import {
@@ -19,9 +19,11 @@ export type Sandbox = {
 
 /** @internal */
 export const Sandbox$inboundSchema: z.ZodType<Sandbox, z.ZodTypeDef, unknown> =
-  z.object({
-    data: SandboxData$inboundSchema.optional(),
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      data: SandboxData$inboundSchema.optional(),
+    })
+  );
 /** @internal */
 export type Sandbox$Outbound = {
   data?: SandboxData$Outbound | undefined;
@@ -32,9 +34,11 @@ export const Sandbox$outboundSchema: z.ZodType<
   Sandbox$Outbound,
   z.ZodTypeDef,
   Sandbox
-> = z.object({
-  data: SandboxData$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: SandboxData$outboundSchema.optional(),
+  })
+);
 
 export function sandboxToJSON(sandbox: Sandbox): string {
   return JSON.stringify(Sandbox$outboundSchema.parse(sandbox));

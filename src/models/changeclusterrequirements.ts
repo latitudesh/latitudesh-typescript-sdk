@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -17,7 +17,7 @@ export type ChangeClusterRequirementsType = ClosedEnum<
 >;
 
 /**
- * Exactly one of add, add_checks, remove, remove_checks or set. expected and note go with add and set.
+ * Exactly one of add, add_checks, remove, remove_checks or set. expected, note and node_group_id go with add and set.
  */
 export type ChangeClusterRequirementsAttributes = {
   /**
@@ -42,12 +42,16 @@ export type ChangeClusterRequirementsAttributes = {
   set?: string | undefined;
   expected?: string | null | undefined;
   note?: string | null | undefined;
+  /**
+   * One of the cluster's node groups the requirement applies to; null for the whole cluster. A set without it keeps the current scope.
+   */
+  nodeGroupId?: string | null | undefined;
 };
 
 export type ChangeClusterRequirementsData = {
   type: ChangeClusterRequirementsType;
   /**
-   * Exactly one of add, add_checks, remove, remove_checks or set. expected and note go with add and set.
+   * Exactly one of add, add_checks, remove, remove_checks or set. expected, note and node_group_id go with add and set.
    */
   attributes: ChangeClusterRequirementsAttributes;
 };
@@ -59,7 +63,9 @@ export type ChangeClusterRequirements = {
 /** @internal */
 export const ChangeClusterRequirementsType$inboundSchema: z.ZodNativeEnum<
   typeof ChangeClusterRequirementsType
-> = z.nativeEnum(ChangeClusterRequirementsType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(ChangeClusterRequirementsType)
+);
 /** @internal */
 export const ChangeClusterRequirementsType$outboundSchema: z.ZodNativeEnum<
   typeof ChangeClusterRequirementsType
@@ -70,20 +76,24 @@ export const ChangeClusterRequirementsAttributes$inboundSchema: z.ZodType<
   ChangeClusterRequirementsAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  add: z.string().optional(),
-  add_checks: z.array(z.string()).optional(),
-  remove: z.string().optional(),
-  remove_checks: z.array(z.string()).optional(),
-  set: z.string().optional(),
-  expected: z.nullable(z.string()).optional(),
-  note: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "add_checks": "addChecks",
-    "remove_checks": "removeChecks",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    add: z.string().optional(),
+    add_checks: z.array(z.string()).optional(),
+    remove: z.string().optional(),
+    remove_checks: z.array(z.string()).optional(),
+    set: z.string().optional(),
+    expected: z.nullable(z.string()).optional(),
+    note: z.nullable(z.string()).optional(),
+    node_group_id: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "add_checks": "addChecks",
+      "remove_checks": "removeChecks",
+      "node_group_id": "nodeGroupId",
+    });
+  })
+);
 /** @internal */
 export type ChangeClusterRequirementsAttributes$Outbound = {
   add?: string | undefined;
@@ -93,6 +103,7 @@ export type ChangeClusterRequirementsAttributes$Outbound = {
   set?: string | undefined;
   expected?: string | null | undefined;
   note?: string | null | undefined;
+  node_group_id?: string | null | undefined;
 };
 
 /** @internal */
@@ -100,20 +111,24 @@ export const ChangeClusterRequirementsAttributes$outboundSchema: z.ZodType<
   ChangeClusterRequirementsAttributes$Outbound,
   z.ZodTypeDef,
   ChangeClusterRequirementsAttributes
-> = z.object({
-  add: z.string().optional(),
-  addChecks: z.array(z.string()).optional(),
-  remove: z.string().optional(),
-  removeChecks: z.array(z.string()).optional(),
-  set: z.string().optional(),
-  expected: z.nullable(z.string()).optional(),
-  note: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    addChecks: "add_checks",
-    removeChecks: "remove_checks",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    add: z.string().optional(),
+    addChecks: z.array(z.string()).optional(),
+    remove: z.string().optional(),
+    removeChecks: z.array(z.string()).optional(),
+    set: z.string().optional(),
+    expected: z.nullable(z.string()).optional(),
+    note: z.nullable(z.string()).optional(),
+    nodeGroupId: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      addChecks: "add_checks",
+      removeChecks: "remove_checks",
+      nodeGroupId: "node_group_id",
+    });
+  })
+);
 
 export function changeClusterRequirementsAttributesToJSON(
   changeClusterRequirementsAttributes: ChangeClusterRequirementsAttributes,
@@ -140,10 +155,12 @@ export const ChangeClusterRequirementsData$inboundSchema: z.ZodType<
   ChangeClusterRequirementsData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: ChangeClusterRequirementsType$inboundSchema,
-  attributes: z.lazy(() => ChangeClusterRequirementsAttributes$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: ChangeClusterRequirementsType$inboundSchema,
+    attributes: z.lazy(() => ChangeClusterRequirementsAttributes$inboundSchema),
+  })
+);
 /** @internal */
 export type ChangeClusterRequirementsData$Outbound = {
   type: string;
@@ -155,10 +172,14 @@ export const ChangeClusterRequirementsData$outboundSchema: z.ZodType<
   ChangeClusterRequirementsData$Outbound,
   z.ZodTypeDef,
   ChangeClusterRequirementsData
-> = z.object({
-  type: ChangeClusterRequirementsType$outboundSchema,
-  attributes: z.lazy(() => ChangeClusterRequirementsAttributes$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: ChangeClusterRequirementsType$outboundSchema,
+    attributes: z.lazy(() =>
+      ChangeClusterRequirementsAttributes$outboundSchema
+    ),
+  })
+);
 
 export function changeClusterRequirementsDataToJSON(
   changeClusterRequirementsData: ChangeClusterRequirementsData,
@@ -184,9 +205,11 @@ export const ChangeClusterRequirements$inboundSchema: z.ZodType<
   ChangeClusterRequirements,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => ChangeClusterRequirementsData$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => ChangeClusterRequirementsData$inboundSchema),
+  })
+);
 /** @internal */
 export type ChangeClusterRequirements$Outbound = {
   data: ChangeClusterRequirementsData$Outbound;
@@ -197,9 +220,11 @@ export const ChangeClusterRequirements$outboundSchema: z.ZodType<
   ChangeClusterRequirements$Outbound,
   z.ZodTypeDef,
   ChangeClusterRequirements
-> = z.object({
-  data: z.lazy(() => ChangeClusterRequirementsData$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => ChangeClusterRequirementsData$outboundSchema),
+  })
+);
 
 export function changeClusterRequirementsToJSON(
   changeClusterRequirements: ChangeClusterRequirements,

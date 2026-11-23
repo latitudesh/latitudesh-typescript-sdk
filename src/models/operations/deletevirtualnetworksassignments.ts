@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -17,13 +17,15 @@ export const DeleteVirtualNetworksAssignmentsRequest$inboundSchema: z.ZodType<
   DeleteVirtualNetworksAssignmentsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  assignment_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "assignment_id": "assignmentId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    assignment_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "assignment_id": "assignmentId",
+    });
+  })
+);
 /** @internal */
 export type DeleteVirtualNetworksAssignmentsRequest$Outbound = {
   assignment_id: string;
@@ -34,13 +36,15 @@ export const DeleteVirtualNetworksAssignmentsRequest$outboundSchema: z.ZodType<
   DeleteVirtualNetworksAssignmentsRequest$Outbound,
   z.ZodTypeDef,
   DeleteVirtualNetworksAssignmentsRequest
-> = z.object({
-  assignmentId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    assignmentId: "assignment_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    assignmentId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      assignmentId: "assignment_id",
+    });
+  })
+);
 
 export function deleteVirtualNetworksAssignmentsRequestToJSON(
   deleteVirtualNetworksAssignmentsRequest:

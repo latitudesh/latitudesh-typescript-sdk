@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 import {
@@ -25,7 +25,7 @@ export const RoleMeta$inboundSchema: z.ZodType<
   RoleMeta,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type RoleMeta$Outbound = {};
 
@@ -34,7 +34,7 @@ export const RoleMeta$outboundSchema: z.ZodType<
   RoleMeta$Outbound,
   z.ZodTypeDef,
   RoleMeta
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function roleMetaToJSON(roleMeta: RoleMeta): string {
   return JSON.stringify(RoleMeta$outboundSchema.parse(roleMeta));
@@ -50,11 +50,13 @@ export function roleMetaFromJSON(
 }
 
 /** @internal */
-export const Role$inboundSchema: z.ZodType<Role, z.ZodTypeDef, unknown> = z
-  .object({
-    data: RoleData$inboundSchema.optional(),
-    meta: z.lazy(() => RoleMeta$inboundSchema).optional(),
-  });
+export const Role$inboundSchema: z.ZodType<Role, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      data: RoleData$inboundSchema.optional(),
+      meta: z.lazy(() => RoleMeta$inboundSchema).optional(),
+    })
+  );
 /** @internal */
 export type Role$Outbound = {
   data?: RoleData$Outbound | undefined;
@@ -63,10 +65,12 @@ export type Role$Outbound = {
 
 /** @internal */
 export const Role$outboundSchema: z.ZodType<Role$Outbound, z.ZodTypeDef, Role> =
-  z.object({
-    data: RoleData$outboundSchema.optional(),
-    meta: z.lazy(() => RoleMeta$outboundSchema).optional(),
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      data: RoleData$outboundSchema.optional(),
+      meta: z.lazy(() => RoleMeta$outboundSchema).optional(),
+    })
+  );
 
 export function roleToJSON(role: Role): string {
   return JSON.stringify(Role$outboundSchema.parse(role));

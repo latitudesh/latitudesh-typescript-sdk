@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -86,7 +86,7 @@ export type VirtualMachinePayload = {
 /** @internal */
 export const VirtualMachinePayloadType$inboundSchema: z.ZodNativeEnum<
   typeof VirtualMachinePayloadType
-> = z.nativeEnum(VirtualMachinePayloadType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(VirtualMachinePayloadType));
 /** @internal */
 export const VirtualMachinePayloadType$outboundSchema: z.ZodNativeEnum<
   typeof VirtualMachinePayloadType
@@ -95,7 +95,9 @@ export const VirtualMachinePayloadType$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const VirtualMachinePayloadBilling$inboundSchema: z.ZodNativeEnum<
   typeof VirtualMachinePayloadBilling
-> = z.nativeEnum(VirtualMachinePayloadBilling);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(VirtualMachinePayloadBilling)
+);
 /** @internal */
 export const VirtualMachinePayloadBilling$outboundSchema: z.ZodNativeEnum<
   typeof VirtualMachinePayloadBilling
@@ -106,7 +108,7 @@ export const UserDataUnion$inboundSchema: z.ZodType<
   UserDataUnion,
   z.ZodTypeDef,
   unknown
-> = z.union([z.number().int(), z.string()]);
+> = /* @__PURE__ */ lazySchema$(() => z.union([z.number().int(), z.string()]));
 /** @internal */
 export type UserDataUnion$Outbound = number | string;
 
@@ -115,7 +117,7 @@ export const UserDataUnion$outboundSchema: z.ZodType<
   UserDataUnion$Outbound,
   z.ZodTypeDef,
   UserDataUnion
-> = z.union([z.number().int(), z.string()]);
+> = /* @__PURE__ */ lazySchema$(() => z.union([z.number().int(), z.string()]));
 
 export function userDataUnionToJSON(userDataUnion: UserDataUnion): string {
   return JSON.stringify(UserDataUnion$outboundSchema.parse(userDataUnion));
@@ -135,27 +137,29 @@ export const VirtualMachinePayloadAttributes$inboundSchema: z.ZodType<
   VirtualMachinePayloadAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string().default("my-vm"),
-  billing: VirtualMachinePayloadBilling$inboundSchema.optional(),
-  plan: z.nullable(z.string()).optional(),
-  ssh_keys: z.nullable(z.array(z.string())).optional(),
-  project: z.string().default("my-project"),
-  operating_system: z.nullable(z.string()).optional(),
-  user_data: z.nullable(z.union([z.number().int(), z.string()])).optional(),
-  marketplace_app: z.nullable(z.string()).optional(),
-  tags: z.nullable(z.array(z.string())).optional(),
-  apply_network_on_boot: z.boolean().default(true),
-  site: z.nullable(z.string().default("DAL")),
-}).transform((v) => {
-  return remap$(v, {
-    "ssh_keys": "sshKeys",
-    "operating_system": "operatingSystem",
-    "user_data": "userData",
-    "marketplace_app": "marketplaceApp",
-    "apply_network_on_boot": "applyNetworkOnBoot",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().default("my-vm"),
+    billing: VirtualMachinePayloadBilling$inboundSchema.optional(),
+    plan: z.nullable(z.string()).optional(),
+    ssh_keys: z.nullable(z.array(z.string())).optional(),
+    project: z.string().default("my-project"),
+    operating_system: z.nullable(z.string()).optional(),
+    user_data: z.nullable(z.union([z.number().int(), z.string()])).optional(),
+    marketplace_app: z.nullable(z.string()).optional(),
+    tags: z.nullable(z.array(z.string())).optional(),
+    apply_network_on_boot: z.boolean().default(true),
+    site: z.nullable(z.string().default("DAL")),
+  }).transform((v) => {
+    return remap$(v, {
+      "ssh_keys": "sshKeys",
+      "operating_system": "operatingSystem",
+      "user_data": "userData",
+      "marketplace_app": "marketplaceApp",
+      "apply_network_on_boot": "applyNetworkOnBoot",
+    });
+  })
+);
 /** @internal */
 export type VirtualMachinePayloadAttributes$Outbound = {
   name: string;
@@ -176,27 +180,29 @@ export const VirtualMachinePayloadAttributes$outboundSchema: z.ZodType<
   VirtualMachinePayloadAttributes$Outbound,
   z.ZodTypeDef,
   VirtualMachinePayloadAttributes
-> = z.object({
-  name: z.string().default("my-vm"),
-  billing: VirtualMachinePayloadBilling$outboundSchema.optional(),
-  plan: z.nullable(z.string()).optional(),
-  sshKeys: z.nullable(z.array(z.string())).optional(),
-  project: z.string().default("my-project"),
-  operatingSystem: z.nullable(z.string()).optional(),
-  userData: z.nullable(z.union([z.number().int(), z.string()])).optional(),
-  marketplaceApp: z.nullable(z.string()).optional(),
-  tags: z.nullable(z.array(z.string())).optional(),
-  applyNetworkOnBoot: z.boolean().default(true),
-  site: z.nullable(z.string().default("DAL")),
-}).transform((v) => {
-  return remap$(v, {
-    sshKeys: "ssh_keys",
-    operatingSystem: "operating_system",
-    userData: "user_data",
-    marketplaceApp: "marketplace_app",
-    applyNetworkOnBoot: "apply_network_on_boot",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().default("my-vm"),
+    billing: VirtualMachinePayloadBilling$outboundSchema.optional(),
+    plan: z.nullable(z.string()).optional(),
+    sshKeys: z.nullable(z.array(z.string())).optional(),
+    project: z.string().default("my-project"),
+    operatingSystem: z.nullable(z.string()).optional(),
+    userData: z.nullable(z.union([z.number().int(), z.string()])).optional(),
+    marketplaceApp: z.nullable(z.string()).optional(),
+    tags: z.nullable(z.array(z.string())).optional(),
+    applyNetworkOnBoot: z.boolean().default(true),
+    site: z.nullable(z.string().default("DAL")),
+  }).transform((v) => {
+    return remap$(v, {
+      sshKeys: "ssh_keys",
+      operatingSystem: "operating_system",
+      userData: "user_data",
+      marketplaceApp: "marketplace_app",
+      applyNetworkOnBoot: "apply_network_on_boot",
+    });
+  })
+);
 
 export function virtualMachinePayloadAttributesToJSON(
   virtualMachinePayloadAttributes: VirtualMachinePayloadAttributes,
@@ -222,11 +228,13 @@ export const VirtualMachinePayloadData$inboundSchema: z.ZodType<
   VirtualMachinePayloadData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: VirtualMachinePayloadType$inboundSchema.optional(),
-  attributes: z.lazy(() => VirtualMachinePayloadAttributes$inboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: VirtualMachinePayloadType$inboundSchema.optional(),
+    attributes: z.lazy(() => VirtualMachinePayloadAttributes$inboundSchema)
+      .optional(),
+  })
+);
 /** @internal */
 export type VirtualMachinePayloadData$Outbound = {
   type?: string | undefined;
@@ -238,11 +246,13 @@ export const VirtualMachinePayloadData$outboundSchema: z.ZodType<
   VirtualMachinePayloadData$Outbound,
   z.ZodTypeDef,
   VirtualMachinePayloadData
-> = z.object({
-  type: VirtualMachinePayloadType$outboundSchema.optional(),
-  attributes: z.lazy(() => VirtualMachinePayloadAttributes$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: VirtualMachinePayloadType$outboundSchema.optional(),
+    attributes: z.lazy(() => VirtualMachinePayloadAttributes$outboundSchema)
+      .optional(),
+  })
+);
 
 export function virtualMachinePayloadDataToJSON(
   virtualMachinePayloadData: VirtualMachinePayloadData,
@@ -266,9 +276,11 @@ export const VirtualMachinePayload$inboundSchema: z.ZodType<
   VirtualMachinePayload,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => VirtualMachinePayloadData$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => VirtualMachinePayloadData$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type VirtualMachinePayload$Outbound = {
   data?: VirtualMachinePayloadData$Outbound | undefined;
@@ -279,9 +291,11 @@ export const VirtualMachinePayload$outboundSchema: z.ZodType<
   VirtualMachinePayload$Outbound,
   z.ZodTypeDef,
   VirtualMachinePayload
-> = z.object({
-  data: z.lazy(() => VirtualMachinePayloadData$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => VirtualMachinePayloadData$outboundSchema).optional(),
+  })
+);
 
 export function virtualMachinePayloadToJSON(
   virtualMachinePayload: VirtualMachinePayload,

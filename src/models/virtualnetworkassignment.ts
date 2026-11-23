@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 import {
@@ -25,7 +25,7 @@ export const VirtualNetworkAssignmentMeta$inboundSchema: z.ZodType<
   VirtualNetworkAssignmentMeta,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type VirtualNetworkAssignmentMeta$Outbound = {};
 
@@ -34,7 +34,7 @@ export const VirtualNetworkAssignmentMeta$outboundSchema: z.ZodType<
   VirtualNetworkAssignmentMeta$Outbound,
   z.ZodTypeDef,
   VirtualNetworkAssignmentMeta
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function virtualNetworkAssignmentMetaToJSON(
   virtualNetworkAssignmentMeta: VirtualNetworkAssignmentMeta,
@@ -60,10 +60,12 @@ export const VirtualNetworkAssignment$inboundSchema: z.ZodType<
   VirtualNetworkAssignment,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: VirtualNetworkAssignmentData$inboundSchema.optional(),
-  meta: z.lazy(() => VirtualNetworkAssignmentMeta$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: VirtualNetworkAssignmentData$inboundSchema.optional(),
+    meta: z.lazy(() => VirtualNetworkAssignmentMeta$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type VirtualNetworkAssignment$Outbound = {
   data?: VirtualNetworkAssignmentData$Outbound | undefined;
@@ -75,10 +77,12 @@ export const VirtualNetworkAssignment$outboundSchema: z.ZodType<
   VirtualNetworkAssignment$Outbound,
   z.ZodTypeDef,
   VirtualNetworkAssignment
-> = z.object({
-  data: VirtualNetworkAssignmentData$outboundSchema.optional(),
-  meta: z.lazy(() => VirtualNetworkAssignmentMeta$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: VirtualNetworkAssignmentData$outboundSchema.optional(),
+    meta: z.lazy(() => VirtualNetworkAssignmentMeta$outboundSchema).optional(),
+  })
+);
 
 export function virtualNetworkAssignmentToJSON(
   virtualNetworkAssignment: VirtualNetworkAssignment,

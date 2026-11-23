@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as models from "../index.js";
@@ -41,21 +41,23 @@ export const GetRegionsRequest$inboundSchema: z.ZodType<
   GetRegionsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "page[size]": z.number().int().default(20),
-  "page[number]": z.number().int().default(1),
-  "stats[total]": z.string().optional(),
-  include_custom: z.boolean().optional(),
-  "filter[features]": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "page[size]": "pageSize",
-    "page[number]": "pageNumber",
-    "stats[total]": "statsTotal",
-    "include_custom": "includeCustom",
-    "filter[features]": "filterFeatures",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "page[size]": z.number().int().default(20),
+    "page[number]": z.number().int().default(1),
+    "stats[total]": z.string().optional(),
+    include_custom: z.boolean().optional(),
+    "filter[features]": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "page[size]": "pageSize",
+      "page[number]": "pageNumber",
+      "stats[total]": "statsTotal",
+      "include_custom": "includeCustom",
+      "filter[features]": "filterFeatures",
+    });
+  })
+);
 /** @internal */
 export type GetRegionsRequest$Outbound = {
   "page[size]": number;
@@ -70,21 +72,23 @@ export const GetRegionsRequest$outboundSchema: z.ZodType<
   GetRegionsRequest$Outbound,
   z.ZodTypeDef,
   GetRegionsRequest
-> = z.object({
-  pageSize: z.number().int().default(20),
-  pageNumber: z.number().int().default(1),
-  statsTotal: z.string().optional(),
-  includeCustom: z.boolean().optional(),
-  filterFeatures: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    pageSize: "page[size]",
-    pageNumber: "page[number]",
-    statsTotal: "stats[total]",
-    includeCustom: "include_custom",
-    filterFeatures: "filter[features]",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    pageSize: z.number().int().default(20),
+    pageNumber: z.number().int().default(1),
+    statsTotal: z.string().optional(),
+    includeCustom: z.boolean().optional(),
+    filterFeatures: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      pageSize: "page[size]",
+      pageNumber: "page[number]",
+      statsTotal: "stats[total]",
+      includeCustom: "include_custom",
+      filterFeatures: "filter[features]",
+    });
+  })
+);
 
 export function getRegionsRequestToJSON(
   getRegionsRequest: GetRegionsRequest,
@@ -108,13 +112,15 @@ export const GetRegionsResponse$inboundSchema: z.ZodType<
   GetRegionsResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  Result: models.Regions$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "Result": "result",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    Result: models.Regions$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "Result": "result",
+    });
+  })
+);
 /** @internal */
 export type GetRegionsResponse$Outbound = {
   Result: models.Regions$Outbound;
@@ -125,13 +131,15 @@ export const GetRegionsResponse$outboundSchema: z.ZodType<
   GetRegionsResponse$Outbound,
   z.ZodTypeDef,
   GetRegionsResponse
-> = z.object({
-  result: models.Regions$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    result: "Result",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    result: models.Regions$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      result: "Result",
+    });
+  })
+);
 
 export function getRegionsResponseToJSON(
   getRegionsResponse: GetRegionsResponse,

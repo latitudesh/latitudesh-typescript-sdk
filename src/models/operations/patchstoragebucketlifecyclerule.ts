@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -75,7 +75,9 @@ export type PatchStorageBucketLifecycleRuleResponse = {
 /** @internal */
 export const PatchStorageBucketLifecycleRuleType$inboundSchema: z.ZodNativeEnum<
   typeof PatchStorageBucketLifecycleRuleType
-> = z.nativeEnum(PatchStorageBucketLifecycleRuleType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(PatchStorageBucketLifecycleRuleType)
+);
 /** @internal */
 export const PatchStorageBucketLifecycleRuleType$outboundSchema:
   z.ZodNativeEnum<typeof PatchStorageBucketLifecycleRuleType> =
@@ -86,20 +88,22 @@ export const PatchStorageBucketLifecycleRuleAttributes$inboundSchema: z.ZodType<
   PatchStorageBucketLifecycleRuleAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string(),
-  enabled: z.boolean().optional(),
-  prefix: z.nullable(z.string()).optional(),
-  expiration_days: z.number().int().optional(),
-  noncurrent_days: z.nullable(z.number().int()).optional(),
-  abort_mpu_days_after_initiation: z.nullable(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "expiration_days": "expirationDays",
-    "noncurrent_days": "noncurrentDays",
-    "abort_mpu_days_after_initiation": "abortMpuDaysAfterInitiation",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    enabled: z.boolean().optional(),
+    prefix: z.nullable(z.string()).optional(),
+    expiration_days: z.number().int().optional(),
+    noncurrent_days: z.nullable(z.number().int()).optional(),
+    abort_mpu_days_after_initiation: z.nullable(z.number().int()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "expiration_days": "expirationDays",
+      "noncurrent_days": "noncurrentDays",
+      "abort_mpu_days_after_initiation": "abortMpuDaysAfterInitiation",
+    });
+  })
+);
 /** @internal */
 export type PatchStorageBucketLifecycleRuleAttributes$Outbound = {
   name: string;
@@ -116,20 +120,22 @@ export const PatchStorageBucketLifecycleRuleAttributes$outboundSchema:
     PatchStorageBucketLifecycleRuleAttributes$Outbound,
     z.ZodTypeDef,
     PatchStorageBucketLifecycleRuleAttributes
-  > = z.object({
-    name: z.string(),
-    enabled: z.boolean().optional(),
-    prefix: z.nullable(z.string()).optional(),
-    expirationDays: z.number().int().optional(),
-    noncurrentDays: z.nullable(z.number().int()).optional(),
-    abortMpuDaysAfterInitiation: z.nullable(z.number().int()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      expirationDays: "expiration_days",
-      noncurrentDays: "noncurrent_days",
-      abortMpuDaysAfterInitiation: "abort_mpu_days_after_initiation",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      name: z.string(),
+      enabled: z.boolean().optional(),
+      prefix: z.nullable(z.string()).optional(),
+      expirationDays: z.number().int().optional(),
+      noncurrentDays: z.nullable(z.number().int()).optional(),
+      abortMpuDaysAfterInitiation: z.nullable(z.number().int()).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        expirationDays: "expiration_days",
+        noncurrentDays: "noncurrent_days",
+        abortMpuDaysAfterInitiation: "abort_mpu_days_after_initiation",
+      });
+    })
+  );
 
 export function patchStorageBucketLifecycleRuleAttributesToJSON(
   patchStorageBucketLifecycleRuleAttributes:
@@ -162,12 +168,14 @@ export const PatchStorageBucketLifecycleRuleData$inboundSchema: z.ZodType<
   PatchStorageBucketLifecycleRuleData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: PatchStorageBucketLifecycleRuleType$inboundSchema,
-  attributes: z.lazy(() =>
-    PatchStorageBucketLifecycleRuleAttributes$inboundSchema
-  ),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: PatchStorageBucketLifecycleRuleType$inboundSchema,
+    attributes: z.lazy(() =>
+      PatchStorageBucketLifecycleRuleAttributes$inboundSchema
+    ),
+  })
+);
 /** @internal */
 export type PatchStorageBucketLifecycleRuleData$Outbound = {
   type: string;
@@ -179,12 +187,14 @@ export const PatchStorageBucketLifecycleRuleData$outboundSchema: z.ZodType<
   PatchStorageBucketLifecycleRuleData$Outbound,
   z.ZodTypeDef,
   PatchStorageBucketLifecycleRuleData
-> = z.object({
-  type: PatchStorageBucketLifecycleRuleType$outboundSchema,
-  attributes: z.lazy(() =>
-    PatchStorageBucketLifecycleRuleAttributes$outboundSchema
-  ),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: PatchStorageBucketLifecycleRuleType$outboundSchema,
+    attributes: z.lazy(() =>
+      PatchStorageBucketLifecycleRuleAttributes$outboundSchema
+    ),
+  })
+);
 
 export function patchStorageBucketLifecycleRuleDataToJSON(
   patchStorageBucketLifecycleRuleData: PatchStorageBucketLifecycleRuleData,
@@ -209,9 +219,11 @@ export function patchStorageBucketLifecycleRuleDataFromJSON(
 /** @internal */
 export const PatchStorageBucketLifecycleRuleRequestBody$inboundSchema:
   z.ZodType<PatchStorageBucketLifecycleRuleRequestBody, z.ZodTypeDef, unknown> =
-    z.object({
-      data: z.lazy(() => PatchStorageBucketLifecycleRuleData$inboundSchema),
-    });
+    /* @__PURE__ */ lazySchema$(() =>
+      z.object({
+        data: z.lazy(() => PatchStorageBucketLifecycleRuleData$inboundSchema),
+      })
+    );
 /** @internal */
 export type PatchStorageBucketLifecycleRuleRequestBody$Outbound = {
   data: PatchStorageBucketLifecycleRuleData$Outbound;
@@ -223,9 +235,11 @@ export const PatchStorageBucketLifecycleRuleRequestBody$outboundSchema:
     PatchStorageBucketLifecycleRuleRequestBody$Outbound,
     z.ZodTypeDef,
     PatchStorageBucketLifecycleRuleRequestBody
-  > = z.object({
-    data: z.lazy(() => PatchStorageBucketLifecycleRuleData$outboundSchema),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      data: z.lazy(() => PatchStorageBucketLifecycleRuleData$outboundSchema),
+    })
+  );
 
 export function patchStorageBucketLifecycleRuleRequestBodyToJSON(
   patchStorageBucketLifecycleRuleRequestBody:
@@ -258,18 +272,20 @@ export const PatchStorageBucketLifecycleRuleRequest$inboundSchema: z.ZodType<
   PatchStorageBucketLifecycleRuleRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  bucket_id: z.string(),
-  id: z.string(),
-  RequestBody: z.lazy(() =>
-    PatchStorageBucketLifecycleRuleRequestBody$inboundSchema
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    "bucket_id": "bucketId",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    bucket_id: z.string(),
+    id: z.string(),
+    RequestBody: z.lazy(() =>
+      PatchStorageBucketLifecycleRuleRequestBody$inboundSchema
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "bucket_id": "bucketId",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type PatchStorageBucketLifecycleRuleRequest$Outbound = {
   bucket_id: string;
@@ -282,18 +298,20 @@ export const PatchStorageBucketLifecycleRuleRequest$outboundSchema: z.ZodType<
   PatchStorageBucketLifecycleRuleRequest$Outbound,
   z.ZodTypeDef,
   PatchStorageBucketLifecycleRuleRequest
-> = z.object({
-  bucketId: z.string(),
-  id: z.string(),
-  requestBody: z.lazy(() =>
-    PatchStorageBucketLifecycleRuleRequestBody$outboundSchema
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    bucketId: "bucket_id",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    bucketId: z.string(),
+    id: z.string(),
+    requestBody: z.lazy(() =>
+      PatchStorageBucketLifecycleRuleRequestBody$outboundSchema
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      bucketId: "bucket_id",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function patchStorageBucketLifecycleRuleRequestToJSON(
   patchStorageBucketLifecycleRuleRequest:
@@ -321,9 +339,11 @@ export const PatchStorageBucketLifecycleRuleResponse$inboundSchema: z.ZodType<
   PatchStorageBucketLifecycleRuleResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: models.LifecycleRuleData$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: models.LifecycleRuleData$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type PatchStorageBucketLifecycleRuleResponse$Outbound = {
   data?: models.LifecycleRuleData$Outbound | undefined;
@@ -334,9 +354,11 @@ export const PatchStorageBucketLifecycleRuleResponse$outboundSchema: z.ZodType<
   PatchStorageBucketLifecycleRuleResponse$Outbound,
   z.ZodTypeDef,
   PatchStorageBucketLifecycleRuleResponse
-> = z.object({
-  data: models.LifecycleRuleData$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: models.LifecycleRuleData$outboundSchema.optional(),
+  })
+);
 
 export function patchStorageBucketLifecycleRuleResponseToJSON(
   patchStorageBucketLifecycleRuleResponse:

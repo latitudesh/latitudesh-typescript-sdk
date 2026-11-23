@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 import {
@@ -27,9 +27,11 @@ export const LksNodePoolsMeta$inboundSchema: z.ZodType<
   LksNodePoolsMeta,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  total: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    total: z.number().int().optional(),
+  })
+);
 /** @internal */
 export type LksNodePoolsMeta$Outbound = {
   total?: number | undefined;
@@ -40,9 +42,11 @@ export const LksNodePoolsMeta$outboundSchema: z.ZodType<
   LksNodePoolsMeta$Outbound,
   z.ZodTypeDef,
   LksNodePoolsMeta
-> = z.object({
-  total: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    total: z.number().int().optional(),
+  })
+);
 
 export function lksNodePoolsMetaToJSON(
   lksNodePoolsMeta: LksNodePoolsMeta,
@@ -66,10 +70,12 @@ export const LksNodePools$inboundSchema: z.ZodType<
   LksNodePools,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.array(LksNodePoolData$inboundSchema).optional(),
-  meta: z.lazy(() => LksNodePoolsMeta$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(LksNodePoolData$inboundSchema).optional(),
+    meta: z.lazy(() => LksNodePoolsMeta$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type LksNodePools$Outbound = {
   data?: Array<LksNodePoolData$Outbound> | undefined;
@@ -81,10 +87,12 @@ export const LksNodePools$outboundSchema: z.ZodType<
   LksNodePools$Outbound,
   z.ZodTypeDef,
   LksNodePools
-> = z.object({
-  data: z.array(LksNodePoolData$outboundSchema).optional(),
-  meta: z.lazy(() => LksNodePoolsMeta$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(LksNodePoolData$outboundSchema).optional(),
+    meta: z.lazy(() => LksNodePoolsMeta$outboundSchema).optional(),
+  })
+);
 
 export function lksNodePoolsToJSON(lksNodePools: LksNodePools): string {
   return JSON.stringify(LksNodePools$outboundSchema.parse(lksNodePools));

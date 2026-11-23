@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 import {
@@ -22,9 +22,11 @@ export const ManagedDatabases$inboundSchema: z.ZodType<
   ManagedDatabases,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.array(ManagedDatabaseAttributes$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(ManagedDatabaseAttributes$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type ManagedDatabases$Outbound = {
   data?: Array<ManagedDatabaseAttributes$Outbound> | undefined;
@@ -35,9 +37,11 @@ export const ManagedDatabases$outboundSchema: z.ZodType<
   ManagedDatabases$Outbound,
   z.ZodTypeDef,
   ManagedDatabases
-> = z.object({
-  data: z.array(ManagedDatabaseAttributes$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(ManagedDatabaseAttributes$outboundSchema).optional(),
+  })
+);
 
 export function managedDatabasesToJSON(
   managedDatabases: ManagedDatabases,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -45,8 +45,8 @@ export type User = {
 };
 
 /** @internal */
-export const UserType$inboundSchema: z.ZodNativeEnum<typeof UserType> = z
-  .nativeEnum(UserType);
+export const UserType$inboundSchema: z.ZodNativeEnum<typeof UserType> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(UserType));
 /** @internal */
 export const UserType$outboundSchema: z.ZodNativeEnum<typeof UserType> =
   UserType$inboundSchema;
@@ -56,19 +56,23 @@ export const UserRole$inboundSchema: z.ZodType<
   UserRole,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "created_at": "createdAt",
-    "updated_at": "updatedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    name: z.string().optional(),
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ).optional(),
+    updated_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "created_at": "createdAt",
+      "updated_at": "updatedAt",
+    });
+  })
+);
 /** @internal */
 export type UserRole$Outbound = {
   id?: string | undefined;
@@ -82,17 +86,19 @@ export const UserRole$outboundSchema: z.ZodType<
   UserRole$Outbound,
   z.ZodTypeDef,
   UserRole
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  createdAt: z.date().transform(v => v.toISOString()).optional(),
-  updatedAt: z.date().transform(v => v.toISOString()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    createdAt: "created_at",
-    updatedAt: "updated_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    name: z.string().optional(),
+    createdAt: z.date().transform(v => v.toISOString()).optional(),
+    updatedAt: z.date().transform(v => v.toISOString()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      createdAt: "created_at",
+      updatedAt: "updated_at",
+    });
+  })
+);
 
 export function userRoleToJSON(userRole: UserRole): string {
   return JSON.stringify(UserRole$outboundSchema.parse(userRole));
@@ -112,24 +118,26 @@ export const UserAttributes$inboundSchema: z.ZodType<
   UserAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  first_name: z.string().optional(),
-  last_name: z.string().optional(),
-  email: z.string().optional(),
-  authentication_factor_id: z.string().optional(),
-  created_at: z.string().optional(),
-  updated_at: z.string().optional(),
-  role: z.lazy(() => UserRole$inboundSchema).optional(),
-  teams: z.array(TeamInclude$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "first_name": "firstName",
-    "last_name": "lastName",
-    "authentication_factor_id": "authenticationFactorId",
-    "created_at": "createdAt",
-    "updated_at": "updatedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    first_name: z.string().optional(),
+    last_name: z.string().optional(),
+    email: z.string().optional(),
+    authentication_factor_id: z.string().optional(),
+    created_at: z.string().optional(),
+    updated_at: z.string().optional(),
+    role: z.lazy(() => UserRole$inboundSchema).optional(),
+    teams: z.array(TeamInclude$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "first_name": "firstName",
+      "last_name": "lastName",
+      "authentication_factor_id": "authenticationFactorId",
+      "created_at": "createdAt",
+      "updated_at": "updatedAt",
+    });
+  })
+);
 /** @internal */
 export type UserAttributes$Outbound = {
   first_name?: string | undefined;
@@ -147,24 +155,26 @@ export const UserAttributes$outboundSchema: z.ZodType<
   UserAttributes$Outbound,
   z.ZodTypeDef,
   UserAttributes
-> = z.object({
-  firstName: z.string().optional(),
-  lastName: z.string().optional(),
-  email: z.string().optional(),
-  authenticationFactorId: z.string().optional(),
-  createdAt: z.string().optional(),
-  updatedAt: z.string().optional(),
-  role: z.lazy(() => UserRole$outboundSchema).optional(),
-  teams: z.array(TeamInclude$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    firstName: "first_name",
-    lastName: "last_name",
-    authenticationFactorId: "authentication_factor_id",
-    createdAt: "created_at",
-    updatedAt: "updated_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    firstName: z.string().optional(),
+    lastName: z.string().optional(),
+    email: z.string().optional(),
+    authenticationFactorId: z.string().optional(),
+    createdAt: z.string().optional(),
+    updatedAt: z.string().optional(),
+    role: z.lazy(() => UserRole$outboundSchema).optional(),
+    teams: z.array(TeamInclude$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      firstName: "first_name",
+      lastName: "last_name",
+      authenticationFactorId: "authentication_factor_id",
+      createdAt: "created_at",
+      updatedAt: "updated_at",
+    });
+  })
+);
 
 export function userAttributesToJSON(userAttributes: UserAttributes): string {
   return JSON.stringify(UserAttributes$outboundSchema.parse(userAttributes));
@@ -180,12 +190,14 @@ export function userAttributesFromJSON(
 }
 
 /** @internal */
-export const User$inboundSchema: z.ZodType<User, z.ZodTypeDef, unknown> = z
-  .object({
-    id: z.string().optional(),
-    type: UserType$inboundSchema.optional(),
-    attributes: z.lazy(() => UserAttributes$inboundSchema).optional(),
-  });
+export const User$inboundSchema: z.ZodType<User, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string().optional(),
+      type: UserType$inboundSchema.optional(),
+      attributes: z.lazy(() => UserAttributes$inboundSchema).optional(),
+    })
+  );
 /** @internal */
 export type User$Outbound = {
   id?: string | undefined;
@@ -195,11 +207,13 @@ export type User$Outbound = {
 
 /** @internal */
 export const User$outboundSchema: z.ZodType<User$Outbound, z.ZodTypeDef, User> =
-  z.object({
-    id: z.string().optional(),
-    type: UserType$outboundSchema.optional(),
-    attributes: z.lazy(() => UserAttributes$outboundSchema).optional(),
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string().optional(),
+      type: UserType$outboundSchema.optional(),
+      attributes: z.lazy(() => UserAttributes$outboundSchema).optional(),
+    })
+  );
 
 export function userToJSON(user: User): string {
   return JSON.stringify(User$outboundSchema.parse(user));

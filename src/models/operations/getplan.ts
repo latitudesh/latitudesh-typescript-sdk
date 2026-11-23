@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -17,13 +17,15 @@ export const GetPlanRequest$inboundSchema: z.ZodType<
   GetPlanRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  plan_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "plan_id": "planId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    plan_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "plan_id": "planId",
+    });
+  })
+);
 /** @internal */
 export type GetPlanRequest$Outbound = {
   plan_id: string;
@@ -34,13 +36,15 @@ export const GetPlanRequest$outboundSchema: z.ZodType<
   GetPlanRequest$Outbound,
   z.ZodTypeDef,
   GetPlanRequest
-> = z.object({
-  planId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    planId: "plan_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    planId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      planId: "plan_id",
+    });
+  })
+);
 
 export function getPlanRequestToJSON(getPlanRequest: GetPlanRequest): string {
   return JSON.stringify(GetPlanRequest$outboundSchema.parse(getPlanRequest));

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 import {
@@ -22,9 +22,11 @@ export const LksKubernetesVersions$inboundSchema: z.ZodType<
   LksKubernetesVersions,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.array(LksKubernetesVersionData$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(LksKubernetesVersionData$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type LksKubernetesVersions$Outbound = {
   data?: Array<LksKubernetesVersionData$Outbound> | undefined;
@@ -35,9 +37,11 @@ export const LksKubernetesVersions$outboundSchema: z.ZodType<
   LksKubernetesVersions$Outbound,
   z.ZodTypeDef,
   LksKubernetesVersions
-> = z.object({
-  data: z.array(LksKubernetesVersionData$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(LksKubernetesVersionData$outboundSchema).optional(),
+  })
+);
 
 export function lksKubernetesVersionsToJSON(
   lksKubernetesVersions: LksKubernetesVersions,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 
@@ -54,11 +54,13 @@ export const OutOfBandConnectionSshKey$inboundSchema: z.ZodType<
   OutOfBandConnectionSshKey,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  description: z.string().optional(),
-  fingerprint: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    description: z.string().optional(),
+    fingerprint: z.string().optional(),
+  })
+);
 /** @internal */
 export type OutOfBandConnectionSshKey$Outbound = {
   id?: string | undefined;
@@ -71,11 +73,13 @@ export const OutOfBandConnectionSshKey$outboundSchema: z.ZodType<
   OutOfBandConnectionSshKey$Outbound,
   z.ZodTypeDef,
   OutOfBandConnectionSshKey
-> = z.object({
-  id: z.string().optional(),
-  description: z.string().optional(),
-  fingerprint: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    description: z.string().optional(),
+    fingerprint: z.string().optional(),
+  })
+);
 
 export function outOfBandConnectionSshKeyToJSON(
   outOfBandConnectionSshKey: OutOfBandConnectionSshKey,
@@ -99,10 +103,12 @@ export const OutOfBandConnectionCredentials$inboundSchema: z.ZodType<
   OutOfBandConnectionCredentials,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  user: z.nullable(z.string()).optional(),
-  password: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    user: z.nullable(z.string()).optional(),
+    password: z.nullable(z.string()).optional(),
+  })
+);
 /** @internal */
 export type OutOfBandConnectionCredentials$Outbound = {
   user?: string | null | undefined;
@@ -114,10 +120,12 @@ export const OutOfBandConnectionCredentials$outboundSchema: z.ZodType<
   OutOfBandConnectionCredentials$Outbound,
   z.ZodTypeDef,
   OutOfBandConnectionCredentials
-> = z.object({
-  user: z.nullable(z.string()).optional(),
-  password: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    user: z.nullable(z.string()).optional(),
+    password: z.nullable(z.string()).optional(),
+  })
+);
 
 export function outOfBandConnectionCredentialsToJSON(
   outOfBandConnectionCredentials: OutOfBandConnectionCredentials,
@@ -143,24 +151,26 @@ export const OutOfBandConnectionAttributes$inboundSchema: z.ZodType<
   OutOfBandConnectionAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ssh_key: z.lazy(() => OutOfBandConnectionSshKey$inboundSchema).optional(),
-  created_at: z.string().optional(),
-  username: z.string().optional(),
-  credentials: z.lazy(() => OutOfBandConnectionCredentials$inboundSchema)
-    .optional(),
-  port: z.string().optional(),
-  access_ip: z.nullable(z.string()).optional(),
-  server_id: z.string().optional(),
-  status: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "ssh_key": "sshKey",
-    "created_at": "createdAt",
-    "access_ip": "accessIp",
-    "server_id": "serverId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ssh_key: z.lazy(() => OutOfBandConnectionSshKey$inboundSchema).optional(),
+    created_at: z.string().optional(),
+    username: z.string().optional(),
+    credentials: z.lazy(() => OutOfBandConnectionCredentials$inboundSchema)
+      .optional(),
+    port: z.string().optional(),
+    access_ip: z.nullable(z.string()).optional(),
+    server_id: z.string().optional(),
+    status: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ssh_key": "sshKey",
+      "created_at": "createdAt",
+      "access_ip": "accessIp",
+      "server_id": "serverId",
+    });
+  })
+);
 /** @internal */
 export type OutOfBandConnectionAttributes$Outbound = {
   ssh_key?: OutOfBandConnectionSshKey$Outbound | undefined;
@@ -178,24 +188,26 @@ export const OutOfBandConnectionAttributes$outboundSchema: z.ZodType<
   OutOfBandConnectionAttributes$Outbound,
   z.ZodTypeDef,
   OutOfBandConnectionAttributes
-> = z.object({
-  sshKey: z.lazy(() => OutOfBandConnectionSshKey$outboundSchema).optional(),
-  createdAt: z.string().optional(),
-  username: z.string().optional(),
-  credentials: z.lazy(() => OutOfBandConnectionCredentials$outboundSchema)
-    .optional(),
-  port: z.string().optional(),
-  accessIp: z.nullable(z.string()).optional(),
-  serverId: z.string().optional(),
-  status: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    sshKey: "ssh_key",
-    createdAt: "created_at",
-    accessIp: "access_ip",
-    serverId: "server_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    sshKey: z.lazy(() => OutOfBandConnectionSshKey$outboundSchema).optional(),
+    createdAt: z.string().optional(),
+    username: z.string().optional(),
+    credentials: z.lazy(() => OutOfBandConnectionCredentials$outboundSchema)
+      .optional(),
+    port: z.string().optional(),
+    accessIp: z.nullable(z.string()).optional(),
+    serverId: z.string().optional(),
+    status: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      sshKey: "ssh_key",
+      createdAt: "created_at",
+      accessIp: "access_ip",
+      serverId: "server_id",
+    });
+  })
+);
 
 export function outOfBandConnectionAttributesToJSON(
   outOfBandConnectionAttributes: OutOfBandConnectionAttributes,
@@ -221,12 +233,14 @@ export const OutOfBandConnectionData$inboundSchema: z.ZodType<
   OutOfBandConnectionData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  type: z.string().optional(),
-  attributes: z.lazy(() => OutOfBandConnectionAttributes$inboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: z.string().optional(),
+    attributes: z.lazy(() => OutOfBandConnectionAttributes$inboundSchema)
+      .optional(),
+  })
+);
 /** @internal */
 export type OutOfBandConnectionData$Outbound = {
   id?: string | undefined;
@@ -239,12 +253,14 @@ export const OutOfBandConnectionData$outboundSchema: z.ZodType<
   OutOfBandConnectionData$Outbound,
   z.ZodTypeDef,
   OutOfBandConnectionData
-> = z.object({
-  id: z.string().optional(),
-  type: z.string().optional(),
-  attributes: z.lazy(() => OutOfBandConnectionAttributes$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: z.string().optional(),
+    attributes: z.lazy(() => OutOfBandConnectionAttributes$outboundSchema)
+      .optional(),
+  })
+);
 
 export function outOfBandConnectionDataToJSON(
   outOfBandConnectionData: OutOfBandConnectionData,
@@ -268,7 +284,7 @@ export const OutOfBandConnectionMeta$inboundSchema: z.ZodType<
   OutOfBandConnectionMeta,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type OutOfBandConnectionMeta$Outbound = {};
 
@@ -277,7 +293,7 @@ export const OutOfBandConnectionMeta$outboundSchema: z.ZodType<
   OutOfBandConnectionMeta$Outbound,
   z.ZodTypeDef,
   OutOfBandConnectionMeta
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function outOfBandConnectionMetaToJSON(
   outOfBandConnectionMeta: OutOfBandConnectionMeta,
@@ -301,10 +317,12 @@ export const OutOfBandConnection$inboundSchema: z.ZodType<
   OutOfBandConnection,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => OutOfBandConnectionData$inboundSchema).optional(),
-  meta: z.lazy(() => OutOfBandConnectionMeta$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => OutOfBandConnectionData$inboundSchema).optional(),
+    meta: z.lazy(() => OutOfBandConnectionMeta$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type OutOfBandConnection$Outbound = {
   data?: OutOfBandConnectionData$Outbound | undefined;
@@ -316,10 +334,12 @@ export const OutOfBandConnection$outboundSchema: z.ZodType<
   OutOfBandConnection$Outbound,
   z.ZodTypeDef,
   OutOfBandConnection
-> = z.object({
-  data: z.lazy(() => OutOfBandConnectionData$outboundSchema).optional(),
-  meta: z.lazy(() => OutOfBandConnectionMeta$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => OutOfBandConnectionData$outboundSchema).optional(),
+    meta: z.lazy(() => OutOfBandConnectionMeta$outboundSchema).optional(),
+  })
+);
 
 export function outOfBandConnectionToJSON(
   outOfBandConnection: OutOfBandConnection,

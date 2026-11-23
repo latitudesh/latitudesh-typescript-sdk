@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -25,8 +25,8 @@ export type LksNodePoolTaint = {
 };
 
 /** @internal */
-export const Effect$inboundSchema: z.ZodNativeEnum<typeof Effect> = z
-  .nativeEnum(Effect);
+export const Effect$inboundSchema: z.ZodNativeEnum<typeof Effect> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Effect));
 /** @internal */
 export const Effect$outboundSchema: z.ZodNativeEnum<typeof Effect> =
   Effect$inboundSchema;
@@ -36,11 +36,13 @@ export const LksNodePoolTaint$inboundSchema: z.ZodType<
   LksNodePoolTaint,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  key: z.string(),
-  value: z.nullable(z.string()).optional(),
-  effect: Effect$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    key: z.string(),
+    value: z.nullable(z.string()).optional(),
+    effect: Effect$inboundSchema,
+  })
+);
 /** @internal */
 export type LksNodePoolTaint$Outbound = {
   key: string;
@@ -53,11 +55,13 @@ export const LksNodePoolTaint$outboundSchema: z.ZodType<
   LksNodePoolTaint$Outbound,
   z.ZodTypeDef,
   LksNodePoolTaint
-> = z.object({
-  key: z.string(),
-  value: z.nullable(z.string()).optional(),
-  effect: Effect$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    key: z.string(),
+    value: z.nullable(z.string()).optional(),
+    effect: Effect$outboundSchema,
+  })
+);
 
 export function lksNodePoolTaintToJSON(
   lksNodePoolTaint: LksNodePoolTaint,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as models from "../index.js";
@@ -28,13 +28,15 @@ export const ListVolumesRequest$inboundSchema: z.ZodType<
   ListVolumesRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "filter[project]": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "filter[project]": "filterProject",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "filter[project]": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "filter[project]": "filterProject",
+    });
+  })
+);
 /** @internal */
 export type ListVolumesRequest$Outbound = {
   "filter[project]"?: string | undefined;
@@ -45,13 +47,15 @@ export const ListVolumesRequest$outboundSchema: z.ZodType<
   ListVolumesRequest$Outbound,
   z.ZodTypeDef,
   ListVolumesRequest
-> = z.object({
-  filterProject: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    filterProject: "filter[project]",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    filterProject: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      filterProject: "filter[project]",
+    });
+  })
+);
 
 export function listVolumesRequestToJSON(
   listVolumesRequest: ListVolumesRequest,
@@ -75,9 +79,11 @@ export const ListVolumesResponse$inboundSchema: z.ZodType<
   ListVolumesResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.array(models.VolumeData$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(models.VolumeData$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type ListVolumesResponse$Outbound = {
   data?: Array<models.VolumeData$Outbound> | undefined;
@@ -88,9 +94,11 @@ export const ListVolumesResponse$outboundSchema: z.ZodType<
   ListVolumesResponse$Outbound,
   z.ZodTypeDef,
   ListVolumesResponse
-> = z.object({
-  data: z.array(models.VolumeData$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(models.VolumeData$outboundSchema).optional(),
+  })
+);
 
 export function listVolumesResponseToJSON(
   listVolumesResponse: ListVolumesResponse,

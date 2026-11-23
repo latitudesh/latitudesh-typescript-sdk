@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -20,13 +20,15 @@ export const GetServerOutOfBandRequest$inboundSchema: z.ZodType<
   GetServerOutOfBandRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  server_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "server_id": "serverId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    server_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "server_id": "serverId",
+    });
+  })
+);
 /** @internal */
 export type GetServerOutOfBandRequest$Outbound = {
   server_id: string;
@@ -37,13 +39,15 @@ export const GetServerOutOfBandRequest$outboundSchema: z.ZodType<
   GetServerOutOfBandRequest$Outbound,
   z.ZodTypeDef,
   GetServerOutOfBandRequest
-> = z.object({
-  serverId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    serverId: "server_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    serverId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      serverId: "server_id",
+    });
+  })
+);
 
 export function getServerOutOfBandRequestToJSON(
   getServerOutOfBandRequest: GetServerOutOfBandRequest,

@@ -9,13 +9,14 @@ let value: ChangeClusterRequirementsData = {
   type: "cluster_requirements",
   attributes: {
     add: "storage_fs",
+    nodeGroupId: "7",
   },
 };
 ```
 
 ## Fields
 
-| Field                                                                                                | Type                                                                                                 | Required                                                                                             | Description                                                                                          |
-| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| `type`                                                                                               | [models.ChangeClusterRequirementsType](../models/changeclusterrequirementstype.md)                   | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
-| `attributes`                                                                                         | [models.ChangeClusterRequirementsAttributes](../models/changeclusterrequirementsattributes.md)       | :heavy_check_mark:                                                                                   | Exactly one of add, add_checks, remove, remove_checks or set. expected and note go with add and set. |
+| Field                                                                                                               | Type                                                                                                                | Required                                                                                                            | Description                                                                                                         |
+| ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                              | [models.ChangeClusterRequirementsType](../models/changeclusterrequirementstype.md)                                  | :heavy_check_mark:                                                                                                  | N/A                                                                                                                 |
+| `attributes`                                                                                                        | [models.ChangeClusterRequirementsAttributes](../models/changeclusterrequirementsattributes.md)                      | :heavy_check_mark:                                                                                                  | Exactly one of add, add_checks, remove, remove_checks or set. expected, note and node_group_id go with add and set. |

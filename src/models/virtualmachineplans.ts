@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -214,19 +214,21 @@ export type VirtualMachinePlans = {
 /** @internal */
 export const VirtualMachinePlansType$inboundSchema: z.ZodNativeEnum<
   typeof VirtualMachinePlansType
-> = z.nativeEnum(VirtualMachinePlansType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(VirtualMachinePlansType));
 /** @internal */
 export const VirtualMachinePlansType$outboundSchema: z.ZodNativeEnum<
   typeof VirtualMachinePlansType
 > = VirtualMachinePlansType$inboundSchema;
 
 /** @internal */
-export const Vcpu$inboundSchema: z.ZodType<Vcpu, z.ZodTypeDef, unknown> = z
-  .object({
-    count: z.nullable(z.number().int()).optional(),
-    clock: z.nullable(z.number()).optional(),
-    type: z.nullable(z.string()).optional(),
-  });
+export const Vcpu$inboundSchema: z.ZodType<Vcpu, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      count: z.nullable(z.number().int()).optional(),
+      clock: z.nullable(z.number()).optional(),
+      type: z.nullable(z.string()).optional(),
+    })
+  );
 /** @internal */
 export type Vcpu$Outbound = {
   count?: number | null | undefined;
@@ -236,11 +238,13 @@ export type Vcpu$Outbound = {
 
 /** @internal */
 export const Vcpu$outboundSchema: z.ZodType<Vcpu$Outbound, z.ZodTypeDef, Vcpu> =
-  z.object({
-    count: z.nullable(z.number().int()).optional(),
-    clock: z.nullable(z.number()).optional(),
-    type: z.nullable(z.string()).optional(),
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      count: z.nullable(z.number().int()).optional(),
+      clock: z.nullable(z.number()).optional(),
+      type: z.nullable(z.string()).optional(),
+    })
+  );
 
 export function vcpuToJSON(vcpu: Vcpu): string {
   return JSON.stringify(Vcpu$outboundSchema.parse(vcpu));
@@ -260,10 +264,12 @@ export const VirtualMachinePlansNic$inboundSchema: z.ZodType<
   VirtualMachinePlansNic,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.string().optional(),
-  count: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.string().optional(),
+    count: z.number().int().optional(),
+  })
+);
 /** @internal */
 export type VirtualMachinePlansNic$Outbound = {
   type?: string | undefined;
@@ -275,10 +281,12 @@ export const VirtualMachinePlansNic$outboundSchema: z.ZodType<
   VirtualMachinePlansNic$Outbound,
   z.ZodTypeDef,
   VirtualMachinePlansNic
-> = z.object({
-  type: z.string().optional(),
-  count: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.string().optional(),
+    count: z.number().int().optional(),
+  })
+);
 
 export function virtualMachinePlansNicToJSON(
   virtualMachinePlansNic: VirtualMachinePlansNic,
@@ -300,7 +308,7 @@ export function virtualMachinePlansNicFromJSON(
 /** @internal */
 export const VirtualMachinePlansUnit$inboundSchema: z.ZodNativeEnum<
   typeof VirtualMachinePlansUnit
-> = z.nativeEnum(VirtualMachinePlansUnit);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(VirtualMachinePlansUnit));
 /** @internal */
 export const VirtualMachinePlansUnit$outboundSchema: z.ZodNativeEnum<
   typeof VirtualMachinePlansUnit
@@ -311,10 +319,12 @@ export const VirtualMachinePlansSize$inboundSchema: z.ZodType<
   VirtualMachinePlansSize,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  amount: z.number().int().optional(),
-  unit: VirtualMachinePlansUnit$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    amount: z.number().int().optional(),
+    unit: VirtualMachinePlansUnit$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type VirtualMachinePlansSize$Outbound = {
   amount?: number | undefined;
@@ -326,10 +336,12 @@ export const VirtualMachinePlansSize$outboundSchema: z.ZodType<
   VirtualMachinePlansSize$Outbound,
   z.ZodTypeDef,
   VirtualMachinePlansSize
-> = z.object({
-  amount: z.number().int().optional(),
-  unit: VirtualMachinePlansUnit$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    amount: z.number().int().optional(),
+    unit: VirtualMachinePlansUnit$outboundSchema.optional(),
+  })
+);
 
 export function virtualMachinePlansSizeToJSON(
   virtualMachinePlansSize: VirtualMachinePlansSize,
@@ -349,11 +361,13 @@ export function virtualMachinePlansSizeFromJSON(
 }
 
 /** @internal */
-export const Disk$inboundSchema: z.ZodType<Disk, z.ZodTypeDef, unknown> = z
-  .object({
-    type: z.string().optional(),
-    size: z.lazy(() => VirtualMachinePlansSize$inboundSchema).optional(),
-  });
+export const Disk$inboundSchema: z.ZodType<Disk, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.string().optional(),
+      size: z.lazy(() => VirtualMachinePlansSize$inboundSchema).optional(),
+    })
+  );
 /** @internal */
 export type Disk$Outbound = {
   type?: string | undefined;
@@ -362,10 +376,12 @@ export type Disk$Outbound = {
 
 /** @internal */
 export const Disk$outboundSchema: z.ZodType<Disk$Outbound, z.ZodTypeDef, Disk> =
-  z.object({
-    type: z.string().optional(),
-    size: z.lazy(() => VirtualMachinePlansSize$outboundSchema).optional(),
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.string().optional(),
+      size: z.lazy(() => VirtualMachinePlansSize$outboundSchema).optional(),
+    })
+  );
 
 export function diskToJSON(disk: Disk): string {
   return JSON.stringify(Disk$outboundSchema.parse(disk));
@@ -385,20 +401,23 @@ export const VirtualMachinePlansSpecs$inboundSchema: z.ZodType<
   VirtualMachinePlansSpecs,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  memory: z.number().int().optional(),
-  gpu: z.nullable(z.string()).optional(),
-  vram_per_gpu: z.nullable(z.number().int()).optional(),
-  vcpus: z.number().int().optional(),
-  vcpu: z.lazy(() => Vcpu$inboundSchema).optional(),
-  nics: z.nullable(z.array(z.lazy(() => VirtualMachinePlansNic$inboundSchema)))
-    .optional(),
-  disk: z.lazy(() => Disk$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "vram_per_gpu": "vramPerGpu",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    memory: z.number().int().optional(),
+    gpu: z.nullable(z.string()).optional(),
+    vram_per_gpu: z.nullable(z.number().int()).optional(),
+    vcpus: z.number().int().optional(),
+    vcpu: z.lazy(() => Vcpu$inboundSchema).optional(),
+    nics: z.nullable(
+      z.array(z.lazy(() => VirtualMachinePlansNic$inboundSchema)),
+    ).optional(),
+    disk: z.lazy(() => Disk$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "vram_per_gpu": "vramPerGpu",
+    });
+  })
+);
 /** @internal */
 export type VirtualMachinePlansSpecs$Outbound = {
   memory?: number | undefined;
@@ -415,20 +434,23 @@ export const VirtualMachinePlansSpecs$outboundSchema: z.ZodType<
   VirtualMachinePlansSpecs$Outbound,
   z.ZodTypeDef,
   VirtualMachinePlansSpecs
-> = z.object({
-  memory: z.number().int().optional(),
-  gpu: z.nullable(z.string()).optional(),
-  vramPerGpu: z.nullable(z.number().int()).optional(),
-  vcpus: z.number().int().optional(),
-  vcpu: z.lazy(() => Vcpu$outboundSchema).optional(),
-  nics: z.nullable(z.array(z.lazy(() => VirtualMachinePlansNic$outboundSchema)))
-    .optional(),
-  disk: z.lazy(() => Disk$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    vramPerGpu: "vram_per_gpu",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    memory: z.number().int().optional(),
+    gpu: z.nullable(z.string()).optional(),
+    vramPerGpu: z.nullable(z.number().int()).optional(),
+    vcpus: z.number().int().optional(),
+    vcpu: z.lazy(() => Vcpu$outboundSchema).optional(),
+    nics: z.nullable(
+      z.array(z.lazy(() => VirtualMachinePlansNic$outboundSchema)),
+    ).optional(),
+    disk: z.lazy(() => Disk$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      vramPerGpu: "vram_per_gpu",
+    });
+  })
+);
 
 export function virtualMachinePlansSpecsToJSON(
   virtualMachinePlansSpecs: VirtualMachinePlansSpecs,
@@ -452,11 +474,13 @@ export const VirtualMachinePlansPricing$inboundSchema: z.ZodType<
   VirtualMachinePlansPricing,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  hour: z.number().optional(),
-  month: z.number().optional(),
-  year: z.number().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    hour: z.number().optional(),
+    month: z.number().optional(),
+    year: z.number().optional(),
+  })
+);
 /** @internal */
 export type VirtualMachinePlansPricing$Outbound = {
   hour?: number | undefined;
@@ -469,11 +493,13 @@ export const VirtualMachinePlansPricing$outboundSchema: z.ZodType<
   VirtualMachinePlansPricing$Outbound,
   z.ZodTypeDef,
   VirtualMachinePlansPricing
-> = z.object({
-  hour: z.number().optional(),
-  month: z.number().optional(),
-  year: z.number().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    hour: z.number().optional(),
+    month: z.number().optional(),
+    year: z.number().optional(),
+  })
+);
 
 export function virtualMachinePlansPricingToJSON(
   virtualMachinePlansPricing: VirtualMachinePlansPricing,
@@ -497,14 +523,16 @@ export const VirtualMachinePlansLocations$inboundSchema: z.ZodType<
   VirtualMachinePlansLocations,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  available: z.array(z.string()).optional(),
-  in_stock: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "in_stock": "inStock",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    available: z.array(z.string()).optional(),
+    in_stock: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "in_stock": "inStock",
+    });
+  })
+);
 /** @internal */
 export type VirtualMachinePlansLocations$Outbound = {
   available?: Array<string> | undefined;
@@ -516,14 +544,16 @@ export const VirtualMachinePlansLocations$outboundSchema: z.ZodType<
   VirtualMachinePlansLocations$Outbound,
   z.ZodTypeDef,
   VirtualMachinePlansLocations
-> = z.object({
-  available: z.array(z.string()).optional(),
-  inStock: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    inStock: "in_stock",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    available: z.array(z.string()).optional(),
+    inStock: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      inStock: "in_stock",
+    });
+  })
+);
 
 export function virtualMachinePlansLocationsToJSON(
   virtualMachinePlansLocations: VirtualMachinePlansLocations,
@@ -547,7 +577,9 @@ export function virtualMachinePlansLocationsFromJSON(
 /** @internal */
 export const VirtualMachinePlansRegionStockLevel$inboundSchema: z.ZodNativeEnum<
   typeof VirtualMachinePlansRegionStockLevel
-> = z.nativeEnum(VirtualMachinePlansRegionStockLevel);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(VirtualMachinePlansRegionStockLevel)
+);
 /** @internal */
 export const VirtualMachinePlansRegionStockLevel$outboundSchema:
   z.ZodNativeEnum<typeof VirtualMachinePlansRegionStockLevel> =
@@ -558,19 +590,21 @@ export const VirtualMachinePlansRegion$inboundSchema: z.ZodType<
   VirtualMachinePlansRegion,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string().optional(),
-  available: z.array(z.string()).optional(),
-  pricing: z.record(z.lazy(() => VirtualMachinePlansPricing$inboundSchema))
-    .optional(),
-  locations: z.lazy(() => VirtualMachinePlansLocations$inboundSchema)
-    .optional(),
-  stock_level: VirtualMachinePlansRegionStockLevel$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "stock_level": "stockLevel",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    available: z.array(z.string()).optional(),
+    pricing: z.record(z.lazy(() => VirtualMachinePlansPricing$inboundSchema))
+      .optional(),
+    locations: z.lazy(() => VirtualMachinePlansLocations$inboundSchema)
+      .optional(),
+    stock_level: VirtualMachinePlansRegionStockLevel$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "stock_level": "stockLevel",
+    });
+  })
+);
 /** @internal */
 export type VirtualMachinePlansRegion$Outbound = {
   name?: string | undefined;
@@ -585,19 +619,21 @@ export const VirtualMachinePlansRegion$outboundSchema: z.ZodType<
   VirtualMachinePlansRegion$Outbound,
   z.ZodTypeDef,
   VirtualMachinePlansRegion
-> = z.object({
-  name: z.string().optional(),
-  available: z.array(z.string()).optional(),
-  pricing: z.record(z.lazy(() => VirtualMachinePlansPricing$outboundSchema))
-    .optional(),
-  locations: z.lazy(() => VirtualMachinePlansLocations$outboundSchema)
-    .optional(),
-  stockLevel: VirtualMachinePlansRegionStockLevel$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    stockLevel: "stock_level",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    available: z.array(z.string()).optional(),
+    pricing: z.record(z.lazy(() => VirtualMachinePlansPricing$outboundSchema))
+      .optional(),
+    locations: z.lazy(() => VirtualMachinePlansLocations$outboundSchema)
+      .optional(),
+    stockLevel: VirtualMachinePlansRegionStockLevel$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      stockLevel: "stock_level",
+    });
+  })
+);
 
 export function virtualMachinePlansRegionToJSON(
   virtualMachinePlansRegion: VirtualMachinePlansRegion,
@@ -619,7 +655,9 @@ export function virtualMachinePlansRegionFromJSON(
 /** @internal */
 export const VirtualMachinePlansStockLevel$inboundSchema: z.ZodNativeEnum<
   typeof VirtualMachinePlansStockLevel
-> = z.nativeEnum(VirtualMachinePlansStockLevel);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(VirtualMachinePlansStockLevel)
+);
 /** @internal */
 export const VirtualMachinePlansStockLevel$outboundSchema: z.ZodNativeEnum<
   typeof VirtualMachinePlansStockLevel
@@ -630,20 +668,22 @@ export const VirtualMachinePlansAttributes$inboundSchema: z.ZodType<
   VirtualMachinePlansAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string().optional(),
-  slug: z.string().optional(),
-  specs: z.lazy(() => VirtualMachinePlansSpecs$inboundSchema).optional(),
-  regions: z.array(z.lazy(() => VirtualMachinePlansRegion$inboundSchema))
-    .optional(),
-  stock_level: VirtualMachinePlansStockLevel$inboundSchema.optional(),
-  available_operating_systems: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "stock_level": "stockLevel",
-    "available_operating_systems": "availableOperatingSystems",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    slug: z.string().optional(),
+    specs: z.lazy(() => VirtualMachinePlansSpecs$inboundSchema).optional(),
+    regions: z.array(z.lazy(() => VirtualMachinePlansRegion$inboundSchema))
+      .optional(),
+    stock_level: VirtualMachinePlansStockLevel$inboundSchema.optional(),
+    available_operating_systems: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "stock_level": "stockLevel",
+      "available_operating_systems": "availableOperatingSystems",
+    });
+  })
+);
 /** @internal */
 export type VirtualMachinePlansAttributes$Outbound = {
   name?: string | undefined;
@@ -659,20 +699,22 @@ export const VirtualMachinePlansAttributes$outboundSchema: z.ZodType<
   VirtualMachinePlansAttributes$Outbound,
   z.ZodTypeDef,
   VirtualMachinePlansAttributes
-> = z.object({
-  name: z.string().optional(),
-  slug: z.string().optional(),
-  specs: z.lazy(() => VirtualMachinePlansSpecs$outboundSchema).optional(),
-  regions: z.array(z.lazy(() => VirtualMachinePlansRegion$outboundSchema))
-    .optional(),
-  stockLevel: VirtualMachinePlansStockLevel$outboundSchema.optional(),
-  availableOperatingSystems: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    stockLevel: "stock_level",
-    availableOperatingSystems: "available_operating_systems",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    slug: z.string().optional(),
+    specs: z.lazy(() => VirtualMachinePlansSpecs$outboundSchema).optional(),
+    regions: z.array(z.lazy(() => VirtualMachinePlansRegion$outboundSchema))
+      .optional(),
+    stockLevel: VirtualMachinePlansStockLevel$outboundSchema.optional(),
+    availableOperatingSystems: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      stockLevel: "stock_level",
+      availableOperatingSystems: "available_operating_systems",
+    });
+  })
+);
 
 export function virtualMachinePlansAttributesToJSON(
   virtualMachinePlansAttributes: VirtualMachinePlansAttributes,
@@ -698,12 +740,14 @@ export const VirtualMachinePlansData$inboundSchema: z.ZodType<
   VirtualMachinePlansData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  type: VirtualMachinePlansType$inboundSchema.optional(),
-  attributes: z.lazy(() => VirtualMachinePlansAttributes$inboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: VirtualMachinePlansType$inboundSchema.optional(),
+    attributes: z.lazy(() => VirtualMachinePlansAttributes$inboundSchema)
+      .optional(),
+  })
+);
 /** @internal */
 export type VirtualMachinePlansData$Outbound = {
   id?: string | undefined;
@@ -716,12 +760,14 @@ export const VirtualMachinePlansData$outboundSchema: z.ZodType<
   VirtualMachinePlansData$Outbound,
   z.ZodTypeDef,
   VirtualMachinePlansData
-> = z.object({
-  id: z.string().optional(),
-  type: VirtualMachinePlansType$outboundSchema.optional(),
-  attributes: z.lazy(() => VirtualMachinePlansAttributes$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: VirtualMachinePlansType$outboundSchema.optional(),
+    attributes: z.lazy(() => VirtualMachinePlansAttributes$outboundSchema)
+      .optional(),
+  })
+);
 
 export function virtualMachinePlansDataToJSON(
   virtualMachinePlansData: VirtualMachinePlansData,
@@ -745,9 +791,12 @@ export const VirtualMachinePlans$inboundSchema: z.ZodType<
   VirtualMachinePlans,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.array(z.lazy(() => VirtualMachinePlansData$inboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(z.lazy(() => VirtualMachinePlansData$inboundSchema))
+      .optional(),
+  })
+);
 /** @internal */
 export type VirtualMachinePlans$Outbound = {
   data?: Array<VirtualMachinePlansData$Outbound> | undefined;
@@ -758,10 +807,12 @@ export const VirtualMachinePlans$outboundSchema: z.ZodType<
   VirtualMachinePlans$Outbound,
   z.ZodTypeDef,
   VirtualMachinePlans
-> = z.object({
-  data: z.array(z.lazy(() => VirtualMachinePlansData$outboundSchema))
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(z.lazy(() => VirtualMachinePlansData$outboundSchema))
+      .optional(),
+  })
+);
 
 export function virtualMachinePlansToJSON(
   virtualMachinePlans: VirtualMachinePlans,

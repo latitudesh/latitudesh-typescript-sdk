@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -28,17 +28,19 @@ export const ListLksNodesRequest$inboundSchema: z.ZodType<
   ListLksNodesRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  cluster_id: z.string(),
-  node_pool_id: z.string(),
-  "filter[status]": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "cluster_id": "clusterId",
-    "node_pool_id": "nodePoolId",
-    "filter[status]": "filterStatus",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    cluster_id: z.string(),
+    node_pool_id: z.string(),
+    "filter[status]": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "cluster_id": "clusterId",
+      "node_pool_id": "nodePoolId",
+      "filter[status]": "filterStatus",
+    });
+  })
+);
 /** @internal */
 export type ListLksNodesRequest$Outbound = {
   cluster_id: string;
@@ -51,17 +53,19 @@ export const ListLksNodesRequest$outboundSchema: z.ZodType<
   ListLksNodesRequest$Outbound,
   z.ZodTypeDef,
   ListLksNodesRequest
-> = z.object({
-  clusterId: z.string(),
-  nodePoolId: z.string(),
-  filterStatus: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    clusterId: "cluster_id",
-    nodePoolId: "node_pool_id",
-    filterStatus: "filter[status]",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    clusterId: z.string(),
+    nodePoolId: z.string(),
+    filterStatus: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      clusterId: "cluster_id",
+      nodePoolId: "node_pool_id",
+      filterStatus: "filter[status]",
+    });
+  })
+);
 
 export function listLksNodesRequestToJSON(
   listLksNodesRequest: ListLksNodesRequest,

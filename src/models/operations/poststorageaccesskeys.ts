@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -161,9 +161,10 @@ export type PostStorageAccessKeysResponse = {
 
 /** @internal */
 export const PostStorageAccessKeysTypeRequestBody$inboundSchema:
-  z.ZodNativeEnum<typeof PostStorageAccessKeysTypeRequestBody> = z.nativeEnum(
-    PostStorageAccessKeysTypeRequestBody,
-  );
+  z.ZodNativeEnum<typeof PostStorageAccessKeysTypeRequestBody> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(PostStorageAccessKeysTypeRequestBody)
+    );
 /** @internal */
 export const PostStorageAccessKeysTypeRequestBody$outboundSchema:
   z.ZodNativeEnum<typeof PostStorageAccessKeysTypeRequestBody> =
@@ -172,22 +173,22 @@ export const PostStorageAccessKeysTypeRequestBody$outboundSchema:
 /** @internal */
 export const AccessKeyStorageClass$inboundSchema: z.ZodNativeEnum<
   typeof AccessKeyStorageClass
-> = z.nativeEnum(AccessKeyStorageClass);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(AccessKeyStorageClass));
 /** @internal */
 export const AccessKeyStorageClass$outboundSchema: z.ZodNativeEnum<
   typeof AccessKeyStorageClass
 > = AccessKeyStorageClass$inboundSchema;
 
 /** @internal */
-export const AccessScope$inboundSchema: z.ZodNativeEnum<typeof AccessScope> = z
-  .nativeEnum(AccessScope);
+export const AccessScope$inboundSchema: z.ZodNativeEnum<typeof AccessScope> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(AccessScope));
 /** @internal */
 export const AccessScope$outboundSchema: z.ZodNativeEnum<typeof AccessScope> =
   AccessScope$inboundSchema;
 
 /** @internal */
-export const Permission$inboundSchema: z.ZodNativeEnum<typeof Permission> = z
-  .nativeEnum(Permission);
+export const Permission$inboundSchema: z.ZodNativeEnum<typeof Permission> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Permission));
 /** @internal */
 export const Permission$outboundSchema: z.ZodNativeEnum<typeof Permission> =
   Permission$inboundSchema;
@@ -197,14 +198,16 @@ export const BucketPermission$inboundSchema: z.ZodType<
   BucketPermission,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  bucket_id: z.string(),
-  permission: Permission$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "bucket_id": "bucketId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    bucket_id: z.string(),
+    permission: Permission$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "bucket_id": "bucketId",
+    });
+  })
+);
 /** @internal */
 export type BucketPermission$Outbound = {
   bucket_id: string;
@@ -216,14 +219,16 @@ export const BucketPermission$outboundSchema: z.ZodType<
   BucketPermission$Outbound,
   z.ZodTypeDef,
   BucketPermission
-> = z.object({
-  bucketId: z.string(),
-  permission: Permission$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    bucketId: "bucket_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    bucketId: z.string(),
+    permission: Permission$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      bucketId: "bucket_id",
+    });
+  })
+);
 
 export function bucketPermissionToJSON(
   bucketPermission: BucketPermission,
@@ -245,21 +250,24 @@ export function bucketPermissionFromJSON(
 /** @internal */
 export const PostStorageAccessKeysAttributesRequestBody$inboundSchema:
   z.ZodType<PostStorageAccessKeysAttributesRequestBody, z.ZodTypeDef, unknown> =
-    z.object({
-      project: z.string(),
-      storage_class: AccessKeyStorageClass$inboundSchema,
-      name: z.string(),
-      access_scope: AccessScope$inboundSchema,
-      region: z.string(),
-      bucket_permissions: z.array(z.lazy(() => BucketPermission$inboundSchema))
-        .optional(),
-    }).transform((v) => {
-      return remap$(v, {
-        "storage_class": "accessKeyStorageClass",
-        "access_scope": "accessScope",
-        "bucket_permissions": "bucketPermissions",
-      });
-    });
+    /* @__PURE__ */ lazySchema$(() =>
+      z.object({
+        project: z.string(),
+        storage_class: AccessKeyStorageClass$inboundSchema,
+        name: z.string(),
+        access_scope: AccessScope$inboundSchema,
+        region: z.string(),
+        bucket_permissions: z.array(
+          z.lazy(() => BucketPermission$inboundSchema),
+        ).optional(),
+      }).transform((v) => {
+        return remap$(v, {
+          "storage_class": "accessKeyStorageClass",
+          "access_scope": "accessScope",
+          "bucket_permissions": "bucketPermissions",
+        });
+      })
+    );
 /** @internal */
 export type PostStorageAccessKeysAttributesRequestBody$Outbound = {
   project: string;
@@ -276,21 +284,23 @@ export const PostStorageAccessKeysAttributesRequestBody$outboundSchema:
     PostStorageAccessKeysAttributesRequestBody$Outbound,
     z.ZodTypeDef,
     PostStorageAccessKeysAttributesRequestBody
-  > = z.object({
-    project: z.string(),
-    accessKeyStorageClass: AccessKeyStorageClass$outboundSchema,
-    name: z.string(),
-    accessScope: AccessScope$outboundSchema,
-    region: z.string(),
-    bucketPermissions: z.array(z.lazy(() => BucketPermission$outboundSchema))
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      accessKeyStorageClass: "storage_class",
-      accessScope: "access_scope",
-      bucketPermissions: "bucket_permissions",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      project: z.string(),
+      accessKeyStorageClass: AccessKeyStorageClass$outboundSchema,
+      name: z.string(),
+      accessScope: AccessScope$outboundSchema,
+      region: z.string(),
+      bucketPermissions: z.array(z.lazy(() => BucketPermission$outboundSchema))
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        accessKeyStorageClass: "storage_class",
+        accessScope: "access_scope",
+        bucketPermissions: "bucket_permissions",
+      });
+    })
+  );
 
 export function postStorageAccessKeysAttributesRequestBodyToJSON(
   postStorageAccessKeysAttributesRequestBody:
@@ -323,12 +333,14 @@ export const PostStorageAccessKeysDataRequest$inboundSchema: z.ZodType<
   PostStorageAccessKeysDataRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: PostStorageAccessKeysTypeRequestBody$inboundSchema,
-  attributes: z.lazy(() =>
-    PostStorageAccessKeysAttributesRequestBody$inboundSchema
-  ),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: PostStorageAccessKeysTypeRequestBody$inboundSchema,
+    attributes: z.lazy(() =>
+      PostStorageAccessKeysAttributesRequestBody$inboundSchema
+    ),
+  })
+);
 /** @internal */
 export type PostStorageAccessKeysDataRequest$Outbound = {
   type: string;
@@ -340,12 +352,14 @@ export const PostStorageAccessKeysDataRequest$outboundSchema: z.ZodType<
   PostStorageAccessKeysDataRequest$Outbound,
   z.ZodTypeDef,
   PostStorageAccessKeysDataRequest
-> = z.object({
-  type: PostStorageAccessKeysTypeRequestBody$outboundSchema,
-  attributes: z.lazy(() =>
-    PostStorageAccessKeysAttributesRequestBody$outboundSchema
-  ),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: PostStorageAccessKeysTypeRequestBody$outboundSchema,
+    attributes: z.lazy(() =>
+      PostStorageAccessKeysAttributesRequestBody$outboundSchema
+    ),
+  })
+);
 
 export function postStorageAccessKeysDataRequestToJSON(
   postStorageAccessKeysDataRequest: PostStorageAccessKeysDataRequest,
@@ -371,9 +385,11 @@ export const PostStorageAccessKeysRequest$inboundSchema: z.ZodType<
   PostStorageAccessKeysRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => PostStorageAccessKeysDataRequest$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => PostStorageAccessKeysDataRequest$inboundSchema),
+  })
+);
 /** @internal */
 export type PostStorageAccessKeysRequest$Outbound = {
   data: PostStorageAccessKeysDataRequest$Outbound;
@@ -384,9 +400,11 @@ export const PostStorageAccessKeysRequest$outboundSchema: z.ZodType<
   PostStorageAccessKeysRequest$Outbound,
   z.ZodTypeDef,
   PostStorageAccessKeysRequest
-> = z.object({
-  data: z.lazy(() => PostStorageAccessKeysDataRequest$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => PostStorageAccessKeysDataRequest$outboundSchema),
+  })
+);
 
 export function postStorageAccessKeysRequestToJSON(
   postStorageAccessKeysRequest: PostStorageAccessKeysRequest,
@@ -410,7 +428,9 @@ export function postStorageAccessKeysRequestFromJSON(
 /** @internal */
 export const PostStorageAccessKeysTypeResponse$inboundSchema: z.ZodNativeEnum<
   typeof PostStorageAccessKeysTypeResponse
-> = z.nativeEnum(PostStorageAccessKeysTypeResponse);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(PostStorageAccessKeysTypeResponse)
+);
 /** @internal */
 export const PostStorageAccessKeysTypeResponse$outboundSchema: z.ZodNativeEnum<
   typeof PostStorageAccessKeysTypeResponse
@@ -421,22 +441,24 @@ export const AccessKey$inboundSchema: z.ZodType<
   AccessKey,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  access_key_id: z.string().optional(),
-  secret_access_key: z.string().optional(),
-  access_key: z.string().optional(),
-  secret_key: z.string().optional(),
-  name: z.string().optional(),
-  status: z.string().optional(),
-  username: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "access_key_id": "accessKeyId",
-    "secret_access_key": "secretAccessKey",
-    "access_key": "accessKey",
-    "secret_key": "secretKey",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    access_key_id: z.string().optional(),
+    secret_access_key: z.string().optional(),
+    access_key: z.string().optional(),
+    secret_key: z.string().optional(),
+    name: z.string().optional(),
+    status: z.string().optional(),
+    username: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "access_key_id": "accessKeyId",
+      "secret_access_key": "secretAccessKey",
+      "access_key": "accessKey",
+      "secret_key": "secretKey",
+    });
+  })
+);
 /** @internal */
 export type AccessKey$Outbound = {
   access_key_id?: string | undefined;
@@ -453,22 +475,24 @@ export const AccessKey$outboundSchema: z.ZodType<
   AccessKey$Outbound,
   z.ZodTypeDef,
   AccessKey
-> = z.object({
-  accessKeyId: z.string().optional(),
-  secretAccessKey: z.string().optional(),
-  accessKey: z.string().optional(),
-  secretKey: z.string().optional(),
-  name: z.string().optional(),
-  status: z.string().optional(),
-  username: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    accessKeyId: "access_key_id",
-    secretAccessKey: "secret_access_key",
-    accessKey: "access_key",
-    secretKey: "secret_key",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessKeyId: z.string().optional(),
+    secretAccessKey: z.string().optional(),
+    accessKey: z.string().optional(),
+    secretKey: z.string().optional(),
+    name: z.string().optional(),
+    status: z.string().optional(),
+    username: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      accessKeyId: "access_key_id",
+      secretAccessKey: "secret_access_key",
+      accessKey: "access_key",
+      secretKey: "secret_key",
+    });
+  })
+);
 
 export function accessKeyToJSON(accessKey: AccessKey): string {
   return JSON.stringify(AccessKey$outboundSchema.parse(accessKey));
@@ -488,13 +512,15 @@ export const PostStorageAccessKeysAttributesResponse$inboundSchema: z.ZodType<
   PostStorageAccessKeysAttributesResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  access_key: z.lazy(() => AccessKey$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "access_key": "accessKey",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    access_key: z.lazy(() => AccessKey$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "access_key": "accessKey",
+    });
+  })
+);
 /** @internal */
 export type PostStorageAccessKeysAttributesResponse$Outbound = {
   access_key?: AccessKey$Outbound | undefined;
@@ -505,13 +531,15 @@ export const PostStorageAccessKeysAttributesResponse$outboundSchema: z.ZodType<
   PostStorageAccessKeysAttributesResponse$Outbound,
   z.ZodTypeDef,
   PostStorageAccessKeysAttributesResponse
-> = z.object({
-  accessKey: z.lazy(() => AccessKey$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    accessKey: "access_key",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessKey: z.lazy(() => AccessKey$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      accessKey: "access_key",
+    });
+  })
+);
 
 export function postStorageAccessKeysAttributesResponseToJSON(
   postStorageAccessKeysAttributesResponse:
@@ -544,12 +572,14 @@ export const PostStorageAccessKeysDataResponse$inboundSchema: z.ZodType<
   PostStorageAccessKeysDataResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: PostStorageAccessKeysTypeResponse$inboundSchema.optional(),
-  attributes: z.lazy(() =>
-    PostStorageAccessKeysAttributesResponse$inboundSchema
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: PostStorageAccessKeysTypeResponse$inboundSchema.optional(),
+    attributes: z.lazy(() =>
+      PostStorageAccessKeysAttributesResponse$inboundSchema
+    ).optional(),
+  })
+);
 /** @internal */
 export type PostStorageAccessKeysDataResponse$Outbound = {
   type?: string | undefined;
@@ -561,12 +591,14 @@ export const PostStorageAccessKeysDataResponse$outboundSchema: z.ZodType<
   PostStorageAccessKeysDataResponse$Outbound,
   z.ZodTypeDef,
   PostStorageAccessKeysDataResponse
-> = z.object({
-  type: PostStorageAccessKeysTypeResponse$outboundSchema.optional(),
-  attributes: z.lazy(() =>
-    PostStorageAccessKeysAttributesResponse$outboundSchema
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: PostStorageAccessKeysTypeResponse$outboundSchema.optional(),
+    attributes: z.lazy(() =>
+      PostStorageAccessKeysAttributesResponse$outboundSchema
+    ).optional(),
+  })
+);
 
 export function postStorageAccessKeysDataResponseToJSON(
   postStorageAccessKeysDataResponse: PostStorageAccessKeysDataResponse,
@@ -592,10 +624,12 @@ export const PostStorageAccessKeysResponse$inboundSchema: z.ZodType<
   PostStorageAccessKeysResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => PostStorageAccessKeysDataResponse$inboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => PostStorageAccessKeysDataResponse$inboundSchema)
+      .optional(),
+  })
+);
 /** @internal */
 export type PostStorageAccessKeysResponse$Outbound = {
   data?: PostStorageAccessKeysDataResponse$Outbound | undefined;
@@ -606,10 +640,12 @@ export const PostStorageAccessKeysResponse$outboundSchema: z.ZodType<
   PostStorageAccessKeysResponse$Outbound,
   z.ZodTypeDef,
   PostStorageAccessKeysResponse
-> = z.object({
-  data: z.lazy(() => PostStorageAccessKeysDataResponse$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => PostStorageAccessKeysDataResponse$outboundSchema)
+      .optional(),
+  })
+);
 
 export function postStorageAccessKeysResponseToJSON(
   postStorageAccessKeysResponse: PostStorageAccessKeysResponse,

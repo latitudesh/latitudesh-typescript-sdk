@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as models from "../index.js";
@@ -19,15 +19,17 @@ export const CreateElasticIpBgpSessionRequest$inboundSchema: z.ZodType<
   CreateElasticIpBgpSessionRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  elastic_ip_id: z.string(),
-  create_bgp_session: models.CreateBgpSession$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "elastic_ip_id": "elasticIpId",
-    "create_bgp_session": "createBgpSession",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    elastic_ip_id: z.string(),
+    create_bgp_session: models.CreateBgpSession$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "elastic_ip_id": "elasticIpId",
+      "create_bgp_session": "createBgpSession",
+    });
+  })
+);
 /** @internal */
 export type CreateElasticIpBgpSessionRequest$Outbound = {
   elastic_ip_id: string;
@@ -39,15 +41,17 @@ export const CreateElasticIpBgpSessionRequest$outboundSchema: z.ZodType<
   CreateElasticIpBgpSessionRequest$Outbound,
   z.ZodTypeDef,
   CreateElasticIpBgpSessionRequest
-> = z.object({
-  elasticIpId: z.string(),
-  createBgpSession: models.CreateBgpSession$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    elasticIpId: "elastic_ip_id",
-    createBgpSession: "create_bgp_session",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    elasticIpId: z.string(),
+    createBgpSession: models.CreateBgpSession$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      elasticIpId: "elastic_ip_id",
+      createBgpSession: "create_bgp_session",
+    });
+  })
+);
 
 export function createElasticIpBgpSessionRequestToJSON(
   createElasticIpBgpSessionRequest: CreateElasticIpBgpSessionRequest,

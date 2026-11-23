@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 import {
@@ -22,9 +22,11 @@ export const LifecycleRules$inboundSchema: z.ZodType<
   LifecycleRules,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.array(LifecycleRuleData$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(LifecycleRuleData$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type LifecycleRules$Outbound = {
   data?: Array<LifecycleRuleData$Outbound> | undefined;
@@ -35,9 +37,11 @@ export const LifecycleRules$outboundSchema: z.ZodType<
   LifecycleRules$Outbound,
   z.ZodTypeDef,
   LifecycleRules
-> = z.object({
-  data: z.array(LifecycleRuleData$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(LifecycleRuleData$outboundSchema).optional(),
+  })
+);
 
 export function lifecycleRulesToJSON(lifecycleRules: LifecycleRules): string {
   return JSON.stringify(LifecycleRules$outboundSchema.parse(lifecycleRules));

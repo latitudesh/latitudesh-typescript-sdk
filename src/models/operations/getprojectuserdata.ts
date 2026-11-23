@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -25,17 +25,19 @@ export const GetProjectUserDataRequest$inboundSchema: z.ZodType<
   GetProjectUserDataRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  project_id: z.string(),
-  user_data_id: z.string(),
-  "extra_fields[user_data]": z.string().default("decoded_content"),
-}).transform((v) => {
-  return remap$(v, {
-    "project_id": "projectId",
-    "user_data_id": "userDataId",
-    "extra_fields[user_data]": "extraFieldsUserData",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    project_id: z.string(),
+    user_data_id: z.string(),
+    "extra_fields[user_data]": z.string().default("decoded_content"),
+  }).transform((v) => {
+    return remap$(v, {
+      "project_id": "projectId",
+      "user_data_id": "userDataId",
+      "extra_fields[user_data]": "extraFieldsUserData",
+    });
+  })
+);
 /** @internal */
 export type GetProjectUserDataRequest$Outbound = {
   project_id: string;
@@ -48,17 +50,19 @@ export const GetProjectUserDataRequest$outboundSchema: z.ZodType<
   GetProjectUserDataRequest$Outbound,
   z.ZodTypeDef,
   GetProjectUserDataRequest
-> = z.object({
-  projectId: z.string(),
-  userDataId: z.string(),
-  extraFieldsUserData: z.string().default("decoded_content"),
-}).transform((v) => {
-  return remap$(v, {
-    projectId: "project_id",
-    userDataId: "user_data_id",
-    extraFieldsUserData: "extra_fields[user_data]",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    projectId: z.string(),
+    userDataId: z.string(),
+    extraFieldsUserData: z.string().default("decoded_content"),
+  }).transform((v) => {
+    return remap$(v, {
+      projectId: "project_id",
+      userDataId: "user_data_id",
+      extraFieldsUserData: "extra_fields[user_data]",
+    });
+  })
+);
 
 export function getProjectUserDataRequestToJSON(
   getProjectUserDataRequest: GetProjectUserDataRequest,

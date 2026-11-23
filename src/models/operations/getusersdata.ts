@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as models from "../index.js";
@@ -45,23 +45,25 @@ export const GetUsersDataRequest$inboundSchema: z.ZodType<
   GetUsersDataRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "filter[project]": z.string().optional(),
-  "filter[scope]": z.string().optional(),
-  "stats[total]": z.string().optional(),
-  "extra_fields[user_data]": z.string().default("decoded_content"),
-  "page[size]": z.number().int().default(20),
-  "page[number]": z.number().int().default(1),
-}).transform((v) => {
-  return remap$(v, {
-    "filter[project]": "filterProject",
-    "filter[scope]": "filterScope",
-    "stats[total]": "statsTotal",
-    "extra_fields[user_data]": "extraFieldsUserData",
-    "page[size]": "pageSize",
-    "page[number]": "pageNumber",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "filter[project]": z.string().optional(),
+    "filter[scope]": z.string().optional(),
+    "stats[total]": z.string().optional(),
+    "extra_fields[user_data]": z.string().default("decoded_content"),
+    "page[size]": z.number().int().default(20),
+    "page[number]": z.number().int().default(1),
+  }).transform((v) => {
+    return remap$(v, {
+      "filter[project]": "filterProject",
+      "filter[scope]": "filterScope",
+      "stats[total]": "statsTotal",
+      "extra_fields[user_data]": "extraFieldsUserData",
+      "page[size]": "pageSize",
+      "page[number]": "pageNumber",
+    });
+  })
+);
 /** @internal */
 export type GetUsersDataRequest$Outbound = {
   "filter[project]"?: string | undefined;
@@ -77,23 +79,25 @@ export const GetUsersDataRequest$outboundSchema: z.ZodType<
   GetUsersDataRequest$Outbound,
   z.ZodTypeDef,
   GetUsersDataRequest
-> = z.object({
-  filterProject: z.string().optional(),
-  filterScope: z.string().optional(),
-  statsTotal: z.string().optional(),
-  extraFieldsUserData: z.string().default("decoded_content"),
-  pageSize: z.number().int().default(20),
-  pageNumber: z.number().int().default(1),
-}).transform((v) => {
-  return remap$(v, {
-    filterProject: "filter[project]",
-    filterScope: "filter[scope]",
-    statsTotal: "stats[total]",
-    extraFieldsUserData: "extra_fields[user_data]",
-    pageSize: "page[size]",
-    pageNumber: "page[number]",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    filterProject: z.string().optional(),
+    filterScope: z.string().optional(),
+    statsTotal: z.string().optional(),
+    extraFieldsUserData: z.string().default("decoded_content"),
+    pageSize: z.number().int().default(20),
+    pageNumber: z.number().int().default(1),
+  }).transform((v) => {
+    return remap$(v, {
+      filterProject: "filter[project]",
+      filterScope: "filter[scope]",
+      statsTotal: "stats[total]",
+      extraFieldsUserData: "extra_fields[user_data]",
+      pageSize: "page[size]",
+      pageNumber: "page[number]",
+    });
+  })
+);
 
 export function getUsersDataRequestToJSON(
   getUsersDataRequest: GetUsersDataRequest,
@@ -117,13 +121,15 @@ export const GetUsersDataResponse$inboundSchema: z.ZodType<
   GetUsersDataResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  Result: models.UserData$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "Result": "result",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    Result: models.UserData$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "Result": "result",
+    });
+  })
+);
 /** @internal */
 export type GetUsersDataResponse$Outbound = {
   Result: models.UserData$Outbound;
@@ -134,13 +140,15 @@ export const GetUsersDataResponse$outboundSchema: z.ZodType<
   GetUsersDataResponse$Outbound,
   z.ZodTypeDef,
   GetUsersDataResponse
-> = z.object({
-  result: models.UserData$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    result: "Result",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    result: models.UserData$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      result: "Result",
+    });
+  })
+);
 
 export function getUsersDataResponseToJSON(
   getUsersDataResponse: GetUsersDataResponse,

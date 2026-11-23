@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 import {
@@ -22,10 +22,12 @@ export const VirtualMachineNetworkAttachments$inboundSchema: z.ZodType<
   VirtualMachineNetworkAttachments,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.array(VirtualMachineNetworkAttachmentResource$inboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(VirtualMachineNetworkAttachmentResource$inboundSchema)
+      .optional(),
+  })
+);
 /** @internal */
 export type VirtualMachineNetworkAttachments$Outbound = {
   data?: Array<VirtualMachineNetworkAttachmentResource$Outbound> | undefined;
@@ -36,10 +38,12 @@ export const VirtualMachineNetworkAttachments$outboundSchema: z.ZodType<
   VirtualMachineNetworkAttachments$Outbound,
   z.ZodTypeDef,
   VirtualMachineNetworkAttachments
-> = z.object({
-  data: z.array(VirtualMachineNetworkAttachmentResource$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(VirtualMachineNetworkAttachmentResource$outboundSchema)
+      .optional(),
+  })
+);
 
 export function virtualMachineNetworkAttachmentsToJSON(
   virtualMachineNetworkAttachments: VirtualMachineNetworkAttachments,

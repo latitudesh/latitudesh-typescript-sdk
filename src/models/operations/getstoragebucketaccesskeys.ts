@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -39,9 +39,11 @@ export const GetStorageBucketAccessKeysRequest$inboundSchema: z.ZodType<
   GetStorageBucketAccessKeysRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+  })
+);
 /** @internal */
 export type GetStorageBucketAccessKeysRequest$Outbound = {
   id: string;
@@ -52,9 +54,11 @@ export const GetStorageBucketAccessKeysRequest$outboundSchema: z.ZodType<
   GetStorageBucketAccessKeysRequest$Outbound,
   z.ZodTypeDef,
   GetStorageBucketAccessKeysRequest
-> = z.object({
-  id: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+  })
+);
 
 export function getStorageBucketAccessKeysRequestToJSON(
   getStorageBucketAccessKeysRequest: GetStorageBucketAccessKeysRequest,
@@ -80,19 +84,21 @@ export const GetStorageBucketAccessKeysData$inboundSchema: z.ZodType<
   GetStorageBucketAccessKeysData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string().optional(),
-  username: z.string().optional(),
-  access_key_id: z.string().optional(),
-  status: z.string().optional(),
-  created_at: z.string().optional(),
-  access: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "access_key_id": "accessKeyId",
-    "created_at": "createdAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    username: z.string().optional(),
+    access_key_id: z.string().optional(),
+    status: z.string().optional(),
+    created_at: z.string().optional(),
+    access: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "access_key_id": "accessKeyId",
+      "created_at": "createdAt",
+    });
+  })
+);
 /** @internal */
 export type GetStorageBucketAccessKeysData$Outbound = {
   name?: string | undefined;
@@ -108,19 +114,21 @@ export const GetStorageBucketAccessKeysData$outboundSchema: z.ZodType<
   GetStorageBucketAccessKeysData$Outbound,
   z.ZodTypeDef,
   GetStorageBucketAccessKeysData
-> = z.object({
-  name: z.string().optional(),
-  username: z.string().optional(),
-  accessKeyId: z.string().optional(),
-  status: z.string().optional(),
-  createdAt: z.string().optional(),
-  access: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    accessKeyId: "access_key_id",
-    createdAt: "created_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    username: z.string().optional(),
+    accessKeyId: z.string().optional(),
+    status: z.string().optional(),
+    createdAt: z.string().optional(),
+    access: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      accessKeyId: "access_key_id",
+      createdAt: "created_at",
+    });
+  })
+);
 
 export function getStorageBucketAccessKeysDataToJSON(
   getStorageBucketAccessKeysData: GetStorageBucketAccessKeysData,
@@ -146,10 +154,12 @@ export const GetStorageBucketAccessKeysResponse$inboundSchema: z.ZodType<
   GetStorageBucketAccessKeysResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.array(z.lazy(() => GetStorageBucketAccessKeysData$inboundSchema))
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(z.lazy(() => GetStorageBucketAccessKeysData$inboundSchema))
+      .optional(),
+  })
+);
 /** @internal */
 export type GetStorageBucketAccessKeysResponse$Outbound = {
   data?: Array<GetStorageBucketAccessKeysData$Outbound> | undefined;
@@ -160,10 +170,12 @@ export const GetStorageBucketAccessKeysResponse$outboundSchema: z.ZodType<
   GetStorageBucketAccessKeysResponse$Outbound,
   z.ZodTypeDef,
   GetStorageBucketAccessKeysResponse
-> = z.object({
-  data: z.array(z.lazy(() => GetStorageBucketAccessKeysData$outboundSchema))
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(z.lazy(() => GetStorageBucketAccessKeysData$outboundSchema))
+      .optional(),
+  })
+);
 
 export function getStorageBucketAccessKeysResponseToJSON(
   getStorageBucketAccessKeysResponse: GetStorageBucketAccessKeysResponse,

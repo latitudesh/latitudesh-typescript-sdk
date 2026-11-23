@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -71,7 +71,7 @@ export type CreateProjectResponse = {
 /** @internal */
 export const CreateProjectType2$inboundSchema: z.ZodNativeEnum<
   typeof CreateProjectType2
-> = z.nativeEnum(CreateProjectType2);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CreateProjectType2));
 /** @internal */
 export const CreateProjectType2$outboundSchema: z.ZodNativeEnum<
   typeof CreateProjectType2
@@ -80,7 +80,7 @@ export const CreateProjectType2$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const ProvisioningType2$inboundSchema: z.ZodNativeEnum<
   typeof ProvisioningType2
-> = z.nativeEnum(ProvisioningType2);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ProvisioningType2));
 /** @internal */
 export const ProvisioningType2$outboundSchema: z.ZodNativeEnum<
   typeof ProvisioningType2
@@ -89,7 +89,7 @@ export const ProvisioningType2$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const CreateProjectEnvironment2$inboundSchema: z.ZodNativeEnum<
   typeof CreateProjectEnvironment2
-> = z.nativeEnum(CreateProjectEnvironment2);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CreateProjectEnvironment2));
 /** @internal */
 export const CreateProjectEnvironment2$outboundSchema: z.ZodNativeEnum<
   typeof CreateProjectEnvironment2
@@ -100,16 +100,18 @@ export const CreateProjectAttributes2$inboundSchema: z.ZodType<
   CreateProjectAttributes2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string(),
-  provisioning_type: ProvisioningType2$inboundSchema,
-  description: z.string().optional(),
-  environment: CreateProjectEnvironment2$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "provisioning_type": "provisioningType",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    provisioning_type: ProvisioningType2$inboundSchema,
+    description: z.string().optional(),
+    environment: CreateProjectEnvironment2$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "provisioning_type": "provisioningType",
+    });
+  })
+);
 /** @internal */
 export type CreateProjectAttributes2$Outbound = {
   name: string;
@@ -123,16 +125,18 @@ export const CreateProjectAttributes2$outboundSchema: z.ZodType<
   CreateProjectAttributes2$Outbound,
   z.ZodTypeDef,
   CreateProjectAttributes2
-> = z.object({
-  name: z.string(),
-  provisioningType: ProvisioningType2$outboundSchema,
-  description: z.string().optional(),
-  environment: CreateProjectEnvironment2$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    provisioningType: "provisioning_type",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    provisioningType: ProvisioningType2$outboundSchema,
+    description: z.string().optional(),
+    environment: CreateProjectEnvironment2$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      provisioningType: "provisioning_type",
+    });
+  })
+);
 
 export function createProjectAttributes2ToJSON(
   createProjectAttributes2: CreateProjectAttributes2,
@@ -156,10 +160,12 @@ export const CreateProjectData2$inboundSchema: z.ZodType<
   CreateProjectData2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: CreateProjectType2$inboundSchema,
-  attributes: z.lazy(() => CreateProjectAttributes2$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CreateProjectType2$inboundSchema,
+    attributes: z.lazy(() => CreateProjectAttributes2$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type CreateProjectData2$Outbound = {
   type: string;
@@ -171,10 +177,13 @@ export const CreateProjectData2$outboundSchema: z.ZodType<
   CreateProjectData2$Outbound,
   z.ZodTypeDef,
   CreateProjectData2
-> = z.object({
-  type: CreateProjectType2$outboundSchema,
-  attributes: z.lazy(() => CreateProjectAttributes2$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CreateProjectType2$outboundSchema,
+    attributes: z.lazy(() => CreateProjectAttributes2$outboundSchema)
+      .optional(),
+  })
+);
 
 export function createProjectData2ToJSON(
   createProjectData2: CreateProjectData2,
@@ -198,9 +207,11 @@ export const CreateProjectRequest$inboundSchema: z.ZodType<
   CreateProjectRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => CreateProjectData2$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => CreateProjectData2$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type CreateProjectRequest$Outbound = {
   data?: CreateProjectData2$Outbound | undefined;
@@ -211,9 +222,11 @@ export const CreateProjectRequest$outboundSchema: z.ZodType<
   CreateProjectRequest$Outbound,
   z.ZodTypeDef,
   CreateProjectRequest
-> = z.object({
-  data: z.lazy(() => CreateProjectData2$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => CreateProjectData2$outboundSchema).optional(),
+  })
+);
 
 export function createProjectRequestToJSON(
   createProjectRequest: CreateProjectRequest,
@@ -237,9 +250,11 @@ export const CreateProjectResponse$inboundSchema: z.ZodType<
   CreateProjectResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: models.Project$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: models.Project$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type CreateProjectResponse$Outbound = {
   data?: models.Project$Outbound | undefined;
@@ -250,9 +265,11 @@ export const CreateProjectResponse$outboundSchema: z.ZodType<
   CreateProjectResponse$Outbound,
   z.ZodTypeDef,
   CreateProjectResponse
-> = z.object({
-  data: models.Project$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: models.Project$outboundSchema.optional(),
+  })
+);
 
 export function createProjectResponseToJSON(
   createProjectResponse: CreateProjectResponse,

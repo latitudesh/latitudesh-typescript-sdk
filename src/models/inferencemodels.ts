@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 import {
@@ -22,9 +22,11 @@ export const InferenceModels$inboundSchema: z.ZodType<
   InferenceModels,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.array(InferenceModel$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(InferenceModel$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type InferenceModels$Outbound = {
   data?: Array<InferenceModel$Outbound> | undefined;
@@ -35,9 +37,11 @@ export const InferenceModels$outboundSchema: z.ZodType<
   InferenceModels$Outbound,
   z.ZodTypeDef,
   InferenceModels
-> = z.object({
-  data: z.array(InferenceModel$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(InferenceModel$outboundSchema).optional(),
+  })
+);
 
 export function inferenceModelsToJSON(
   inferenceModels: InferenceModels,

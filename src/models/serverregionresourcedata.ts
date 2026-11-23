@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 
@@ -28,19 +28,21 @@ export const ServerRegionResourceDataSite$inboundSchema: z.ZodType<
   ServerRegionResourceDataSite,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  slug: z.string().optional(),
-  facility: z.string().optional(),
-  rack_id: z.string().optional(),
-  rack_name: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "rack_id": "rackId",
-    "rack_name": "rackName",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    name: z.string().optional(),
+    slug: z.string().optional(),
+    facility: z.string().optional(),
+    rack_id: z.string().optional(),
+    rack_name: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "rack_id": "rackId",
+      "rack_name": "rackName",
+    });
+  })
+);
 /** @internal */
 export type ServerRegionResourceDataSite$Outbound = {
   id?: string | undefined;
@@ -56,19 +58,21 @@ export const ServerRegionResourceDataSite$outboundSchema: z.ZodType<
   ServerRegionResourceDataSite$Outbound,
   z.ZodTypeDef,
   ServerRegionResourceDataSite
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  slug: z.string().optional(),
-  facility: z.string().optional(),
-  rackId: z.string().optional(),
-  rackName: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    rackId: "rack_id",
-    rackName: "rack_name",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    name: z.string().optional(),
+    slug: z.string().optional(),
+    facility: z.string().optional(),
+    rackId: z.string().optional(),
+    rackName: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      rackId: "rack_id",
+      rackName: "rack_name",
+    });
+  })
+);
 
 export function serverRegionResourceDataSiteToJSON(
   serverRegionResourceDataSite: ServerRegionResourceDataSite,
@@ -94,11 +98,13 @@ export const ServerRegionResourceData$inboundSchema: z.ZodType<
   ServerRegionResourceData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  city: z.string().optional(),
-  country: z.string().optional(),
-  site: z.lazy(() => ServerRegionResourceDataSite$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    city: z.string().optional(),
+    country: z.string().optional(),
+    site: z.lazy(() => ServerRegionResourceDataSite$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type ServerRegionResourceData$Outbound = {
   city?: string | undefined;
@@ -111,11 +117,13 @@ export const ServerRegionResourceData$outboundSchema: z.ZodType<
   ServerRegionResourceData$Outbound,
   z.ZodTypeDef,
   ServerRegionResourceData
-> = z.object({
-  city: z.string().optional(),
-  country: z.string().optional(),
-  site: z.lazy(() => ServerRegionResourceDataSite$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    city: z.string().optional(),
+    country: z.string().optional(),
+    site: z.lazy(() => ServerRegionResourceDataSite$outboundSchema).optional(),
+  })
+);
 
 export function serverRegionResourceDataToJSON(
   serverRegionResourceData: ServerRegionResourceData,

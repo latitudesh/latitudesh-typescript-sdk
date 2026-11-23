@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -66,7 +66,7 @@ export type CreateFirewallRequest = {
 /** @internal */
 export const CreateFirewallType2$inboundSchema: z.ZodNativeEnum<
   typeof CreateFirewallType2
-> = z.nativeEnum(CreateFirewallType2);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CreateFirewallType2));
 /** @internal */
 export const CreateFirewallType2$outboundSchema: z.ZodNativeEnum<
   typeof CreateFirewallType2
@@ -75,7 +75,7 @@ export const CreateFirewallType2$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const CreateFirewallProtocol2$inboundSchema: z.ZodNativeEnum<
   typeof CreateFirewallProtocol2
-> = z.nativeEnum(CreateFirewallProtocol2);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CreateFirewallProtocol2));
 /** @internal */
 export const CreateFirewallProtocol2$outboundSchema: z.ZodNativeEnum<
   typeof CreateFirewallProtocol2
@@ -86,13 +86,15 @@ export const CreateFirewallRule2$inboundSchema: z.ZodType<
   CreateFirewallRule2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  from: z.string().optional(),
-  to: z.string().optional(),
-  protocol: CreateFirewallProtocol2$inboundSchema.optional(),
-  port: z.string().optional(),
-  description: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    from: z.string().optional(),
+    to: z.string().optional(),
+    protocol: CreateFirewallProtocol2$inboundSchema.optional(),
+    port: z.string().optional(),
+    description: z.nullable(z.string()).optional(),
+  })
+);
 /** @internal */
 export type CreateFirewallRule2$Outbound = {
   from?: string | undefined;
@@ -107,13 +109,15 @@ export const CreateFirewallRule2$outboundSchema: z.ZodType<
   CreateFirewallRule2$Outbound,
   z.ZodTypeDef,
   CreateFirewallRule2
-> = z.object({
-  from: z.string().optional(),
-  to: z.string().optional(),
-  protocol: CreateFirewallProtocol2$outboundSchema.optional(),
-  port: z.string().optional(),
-  description: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    from: z.string().optional(),
+    to: z.string().optional(),
+    protocol: CreateFirewallProtocol2$outboundSchema.optional(),
+    port: z.string().optional(),
+    description: z.nullable(z.string()).optional(),
+  })
+);
 
 export function createFirewallRule2ToJSON(
   createFirewallRule2: CreateFirewallRule2,
@@ -137,12 +141,14 @@ export const CreateFirewallAttributes2$inboundSchema: z.ZodType<
   CreateFirewallAttributes2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string(),
-  project: z.string(),
-  tags: z.array(z.string()).optional(),
-  rules: z.array(z.lazy(() => CreateFirewallRule2$inboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    project: z.string(),
+    tags: z.array(z.string()).optional(),
+    rules: z.array(z.lazy(() => CreateFirewallRule2$inboundSchema)).optional(),
+  })
+);
 /** @internal */
 export type CreateFirewallAttributes2$Outbound = {
   name: string;
@@ -156,12 +162,14 @@ export const CreateFirewallAttributes2$outboundSchema: z.ZodType<
   CreateFirewallAttributes2$Outbound,
   z.ZodTypeDef,
   CreateFirewallAttributes2
-> = z.object({
-  name: z.string(),
-  project: z.string(),
-  tags: z.array(z.string()).optional(),
-  rules: z.array(z.lazy(() => CreateFirewallRule2$outboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    project: z.string(),
+    tags: z.array(z.string()).optional(),
+    rules: z.array(z.lazy(() => CreateFirewallRule2$outboundSchema)).optional(),
+  })
+);
 
 export function createFirewallAttributes2ToJSON(
   createFirewallAttributes2: CreateFirewallAttributes2,
@@ -185,10 +193,13 @@ export const CreateFirewallData2$inboundSchema: z.ZodType<
   CreateFirewallData2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: CreateFirewallType2$inboundSchema,
-  attributes: z.lazy(() => CreateFirewallAttributes2$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CreateFirewallType2$inboundSchema,
+    attributes: z.lazy(() => CreateFirewallAttributes2$inboundSchema)
+      .optional(),
+  })
+);
 /** @internal */
 export type CreateFirewallData2$Outbound = {
   type: string;
@@ -200,10 +211,13 @@ export const CreateFirewallData2$outboundSchema: z.ZodType<
   CreateFirewallData2$Outbound,
   z.ZodTypeDef,
   CreateFirewallData2
-> = z.object({
-  type: CreateFirewallType2$outboundSchema,
-  attributes: z.lazy(() => CreateFirewallAttributes2$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CreateFirewallType2$outboundSchema,
+    attributes: z.lazy(() => CreateFirewallAttributes2$outboundSchema)
+      .optional(),
+  })
+);
 
 export function createFirewallData2ToJSON(
   createFirewallData2: CreateFirewallData2,
@@ -227,9 +241,11 @@ export const CreateFirewallRequest$inboundSchema: z.ZodType<
   CreateFirewallRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => CreateFirewallData2$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => CreateFirewallData2$inboundSchema),
+  })
+);
 /** @internal */
 export type CreateFirewallRequest$Outbound = {
   data: CreateFirewallData2$Outbound;
@@ -240,9 +256,11 @@ export const CreateFirewallRequest$outboundSchema: z.ZodType<
   CreateFirewallRequest$Outbound,
   z.ZodTypeDef,
   CreateFirewallRequest
-> = z.object({
-  data: z.lazy(() => CreateFirewallData2$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => CreateFirewallData2$outboundSchema),
+  })
+);
 
 export function createFirewallRequestToJSON(
   createFirewallRequest: CreateFirewallRequest,

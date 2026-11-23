@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -34,7 +34,7 @@ export type ServerScheduleDeletion = {
 /** @internal */
 export const ServerScheduleDeletionType$inboundSchema: z.ZodNativeEnum<
   typeof ServerScheduleDeletionType
-> = z.nativeEnum(ServerScheduleDeletionType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ServerScheduleDeletionType));
 /** @internal */
 export const ServerScheduleDeletionType$outboundSchema: z.ZodNativeEnum<
   typeof ServerScheduleDeletionType
@@ -45,15 +45,17 @@ export const ServerScheduleDeletionAttributes$inboundSchema: z.ZodType<
   ServerScheduleDeletionAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  server_id: z.string().optional(),
-  scheduled_deletion_at: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "server_id": "serverId",
-    "scheduled_deletion_at": "scheduledDeletionAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    server_id: z.string().optional(),
+    scheduled_deletion_at: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "server_id": "serverId",
+      "scheduled_deletion_at": "scheduledDeletionAt",
+    });
+  })
+);
 /** @internal */
 export type ServerScheduleDeletionAttributes$Outbound = {
   server_id?: string | undefined;
@@ -65,15 +67,17 @@ export const ServerScheduleDeletionAttributes$outboundSchema: z.ZodType<
   ServerScheduleDeletionAttributes$Outbound,
   z.ZodTypeDef,
   ServerScheduleDeletionAttributes
-> = z.object({
-  serverId: z.string().optional(),
-  scheduledDeletionAt: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    serverId: "server_id",
-    scheduledDeletionAt: "scheduled_deletion_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    serverId: z.string().optional(),
+    scheduledDeletionAt: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      serverId: "server_id",
+      scheduledDeletionAt: "scheduled_deletion_at",
+    });
+  })
+);
 
 export function serverScheduleDeletionAttributesToJSON(
   serverScheduleDeletionAttributes: ServerScheduleDeletionAttributes,
@@ -99,12 +103,14 @@ export const ServerScheduleDeletionData$inboundSchema: z.ZodType<
   ServerScheduleDeletionData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  type: ServerScheduleDeletionType$inboundSchema.optional(),
-  attributes: z.lazy(() => ServerScheduleDeletionAttributes$inboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: ServerScheduleDeletionType$inboundSchema.optional(),
+    attributes: z.lazy(() => ServerScheduleDeletionAttributes$inboundSchema)
+      .optional(),
+  })
+);
 /** @internal */
 export type ServerScheduleDeletionData$Outbound = {
   id?: string | undefined;
@@ -117,12 +123,14 @@ export const ServerScheduleDeletionData$outboundSchema: z.ZodType<
   ServerScheduleDeletionData$Outbound,
   z.ZodTypeDef,
   ServerScheduleDeletionData
-> = z.object({
-  id: z.string().optional(),
-  type: ServerScheduleDeletionType$outboundSchema.optional(),
-  attributes: z.lazy(() => ServerScheduleDeletionAttributes$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: ServerScheduleDeletionType$outboundSchema.optional(),
+    attributes: z.lazy(() => ServerScheduleDeletionAttributes$outboundSchema)
+      .optional(),
+  })
+);
 
 export function serverScheduleDeletionDataToJSON(
   serverScheduleDeletionData: ServerScheduleDeletionData,
@@ -146,9 +154,11 @@ export const ServerScheduleDeletion$inboundSchema: z.ZodType<
   ServerScheduleDeletion,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => ServerScheduleDeletionData$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => ServerScheduleDeletionData$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type ServerScheduleDeletion$Outbound = {
   data?: ServerScheduleDeletionData$Outbound | undefined;
@@ -159,9 +169,11 @@ export const ServerScheduleDeletion$outboundSchema: z.ZodType<
   ServerScheduleDeletion$Outbound,
   z.ZodTypeDef,
   ServerScheduleDeletion
-> = z.object({
-  data: z.lazy(() => ServerScheduleDeletionData$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => ServerScheduleDeletionData$outboundSchema).optional(),
+  })
+);
 
 export function serverScheduleDeletionToJSON(
   serverScheduleDeletion: ServerScheduleDeletion,

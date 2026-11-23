@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as models from "../index.js";
@@ -41,17 +41,19 @@ export const GetRolesRequest$inboundSchema: z.ZodType<
   GetRolesRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "page[size]": z.number().int().default(20),
-  "page[number]": z.number().int().default(1),
-  "stats[total]": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "page[size]": "pageSize",
-    "page[number]": "pageNumber",
-    "stats[total]": "statsTotal",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "page[size]": z.number().int().default(20),
+    "page[number]": z.number().int().default(1),
+    "stats[total]": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "page[size]": "pageSize",
+      "page[number]": "pageNumber",
+      "stats[total]": "statsTotal",
+    });
+  })
+);
 /** @internal */
 export type GetRolesRequest$Outbound = {
   "page[size]": number;
@@ -64,17 +66,19 @@ export const GetRolesRequest$outboundSchema: z.ZodType<
   GetRolesRequest$Outbound,
   z.ZodTypeDef,
   GetRolesRequest
-> = z.object({
-  pageSize: z.number().int().default(20),
-  pageNumber: z.number().int().default(1),
-  statsTotal: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    pageSize: "page[size]",
-    pageNumber: "page[number]",
-    statsTotal: "stats[total]",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    pageSize: z.number().int().default(20),
+    pageNumber: z.number().int().default(1),
+    statsTotal: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      pageSize: "page[size]",
+      pageNumber: "page[number]",
+      statsTotal: "stats[total]",
+    });
+  })
+);
 
 export function getRolesRequestToJSON(
   getRolesRequest: GetRolesRequest,
@@ -96,10 +100,12 @@ export const GetRolesResponseBody$inboundSchema: z.ZodType<
   GetRolesResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.array(models.RoleData$inboundSchema).optional(),
-  meta: models.PaginationMeta$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(models.RoleData$inboundSchema).optional(),
+    meta: models.PaginationMeta$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type GetRolesResponseBody$Outbound = {
   data?: Array<models.RoleData$Outbound> | undefined;
@@ -111,10 +117,12 @@ export const GetRolesResponseBody$outboundSchema: z.ZodType<
   GetRolesResponseBody$Outbound,
   z.ZodTypeDef,
   GetRolesResponseBody
-> = z.object({
-  data: z.array(models.RoleData$outboundSchema).optional(),
-  meta: models.PaginationMeta$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(models.RoleData$outboundSchema).optional(),
+    meta: models.PaginationMeta$outboundSchema.optional(),
+  })
+);
 
 export function getRolesResponseBodyToJSON(
   getRolesResponseBody: GetRolesResponseBody,
@@ -138,13 +146,15 @@ export const GetRolesResponse$inboundSchema: z.ZodType<
   GetRolesResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  Result: z.lazy(() => GetRolesResponseBody$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "Result": "result",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    Result: z.lazy(() => GetRolesResponseBody$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "Result": "result",
+    });
+  })
+);
 /** @internal */
 export type GetRolesResponse$Outbound = {
   Result: GetRolesResponseBody$Outbound;
@@ -155,13 +165,15 @@ export const GetRolesResponse$outboundSchema: z.ZodType<
   GetRolesResponse$Outbound,
   z.ZodTypeDef,
   GetRolesResponse
-> = z.object({
-  result: z.lazy(() => GetRolesResponseBody$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    result: "Result",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    result: z.lazy(() => GetRolesResponseBody$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      result: "Result",
+    });
+  })
+);
 
 export function getRolesResponseToJSON(
   getRolesResponse: GetRolesResponse,

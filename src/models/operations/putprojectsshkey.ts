@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -52,7 +52,7 @@ export type PutProjectSshKeyResponse = {
 /** @internal */
 export const PutProjectSshKeyType2$inboundSchema: z.ZodNativeEnum<
   typeof PutProjectSshKeyType2
-> = z.nativeEnum(PutProjectSshKeyType2);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(PutProjectSshKeyType2));
 /** @internal */
 export const PutProjectSshKeyType2$outboundSchema: z.ZodNativeEnum<
   typeof PutProjectSshKeyType2
@@ -63,10 +63,12 @@ export const PutProjectSshKeyAttributes2$inboundSchema: z.ZodType<
   PutProjectSshKeyAttributes2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  tags: z.array(z.string()).optional(),
-  name: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    tags: z.array(z.string()).optional(),
+    name: z.string().optional(),
+  })
+);
 /** @internal */
 export type PutProjectSshKeyAttributes2$Outbound = {
   tags?: Array<string> | undefined;
@@ -78,10 +80,12 @@ export const PutProjectSshKeyAttributes2$outboundSchema: z.ZodType<
   PutProjectSshKeyAttributes2$Outbound,
   z.ZodTypeDef,
   PutProjectSshKeyAttributes2
-> = z.object({
-  tags: z.array(z.string()).optional(),
-  name: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    tags: z.array(z.string()).optional(),
+    name: z.string().optional(),
+  })
+);
 
 export function putProjectSshKeyAttributes2ToJSON(
   putProjectSshKeyAttributes2: PutProjectSshKeyAttributes2,
@@ -107,12 +111,14 @@ export const PutProjectSshKeyData2$inboundSchema: z.ZodType<
   PutProjectSshKeyData2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  type: PutProjectSshKeyType2$inboundSchema,
-  attributes: z.lazy(() => PutProjectSshKeyAttributes2$inboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    type: PutProjectSshKeyType2$inboundSchema,
+    attributes: z.lazy(() => PutProjectSshKeyAttributes2$inboundSchema)
+      .optional(),
+  })
+);
 /** @internal */
 export type PutProjectSshKeyData2$Outbound = {
   id: string;
@@ -125,12 +131,14 @@ export const PutProjectSshKeyData2$outboundSchema: z.ZodType<
   PutProjectSshKeyData2$Outbound,
   z.ZodTypeDef,
   PutProjectSshKeyData2
-> = z.object({
-  id: z.string(),
-  type: PutProjectSshKeyType2$outboundSchema,
-  attributes: z.lazy(() => PutProjectSshKeyAttributes2$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    type: PutProjectSshKeyType2$outboundSchema,
+    attributes: z.lazy(() => PutProjectSshKeyAttributes2$outboundSchema)
+      .optional(),
+  })
+);
 
 export function putProjectSshKeyData2ToJSON(
   putProjectSshKeyData2: PutProjectSshKeyData2,
@@ -154,9 +162,11 @@ export const PutProjectSshKeyRequestBody2$inboundSchema: z.ZodType<
   PutProjectSshKeyRequestBody2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => PutProjectSshKeyData2$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => PutProjectSshKeyData2$inboundSchema),
+  })
+);
 /** @internal */
 export type PutProjectSshKeyRequestBody2$Outbound = {
   data: PutProjectSshKeyData2$Outbound;
@@ -167,9 +177,11 @@ export const PutProjectSshKeyRequestBody2$outboundSchema: z.ZodType<
   PutProjectSshKeyRequestBody2$Outbound,
   z.ZodTypeDef,
   PutProjectSshKeyRequestBody2
-> = z.object({
-  data: z.lazy(() => PutProjectSshKeyData2$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => PutProjectSshKeyData2$outboundSchema),
+  })
+);
 
 export function putProjectSshKeyRequestBody2ToJSON(
   putProjectSshKeyRequestBody2: PutProjectSshKeyRequestBody2,
@@ -195,17 +207,19 @@ export const PutProjectSshKeyRequest$inboundSchema: z.ZodType<
   PutProjectSshKeyRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  project_id: z.string(),
-  ssh_key_id: z.string(),
-  RequestBody: z.lazy(() => PutProjectSshKeyRequestBody2$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "project_id": "projectId",
-    "ssh_key_id": "sshKeyId",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    project_id: z.string(),
+    ssh_key_id: z.string(),
+    RequestBody: z.lazy(() => PutProjectSshKeyRequestBody2$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "project_id": "projectId",
+      "ssh_key_id": "sshKeyId",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type PutProjectSshKeyRequest$Outbound = {
   project_id: string;
@@ -218,17 +232,19 @@ export const PutProjectSshKeyRequest$outboundSchema: z.ZodType<
   PutProjectSshKeyRequest$Outbound,
   z.ZodTypeDef,
   PutProjectSshKeyRequest
-> = z.object({
-  projectId: z.string(),
-  sshKeyId: z.string(),
-  requestBody: z.lazy(() => PutProjectSshKeyRequestBody2$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    projectId: "project_id",
-    sshKeyId: "ssh_key_id",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    projectId: z.string(),
+    sshKeyId: z.string(),
+    requestBody: z.lazy(() => PutProjectSshKeyRequestBody2$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      projectId: "project_id",
+      sshKeyId: "ssh_key_id",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function putProjectSshKeyRequestToJSON(
   putProjectSshKeyRequest: PutProjectSshKeyRequest,
@@ -252,9 +268,11 @@ export const PutProjectSshKeyResponse$inboundSchema: z.ZodType<
   PutProjectSshKeyResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: models.SshKeyData$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: models.SshKeyData$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type PutProjectSshKeyResponse$Outbound = {
   data?: models.SshKeyData$Outbound | undefined;
@@ -265,9 +283,11 @@ export const PutProjectSshKeyResponse$outboundSchema: z.ZodType<
   PutProjectSshKeyResponse$Outbound,
   z.ZodTypeDef,
   PutProjectSshKeyResponse
-> = z.object({
-  data: models.SshKeyData$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: models.SshKeyData$outboundSchema.optional(),
+  })
+);
 
 export function putProjectSshKeyResponseToJSON(
   putProjectSshKeyResponse: PutProjectSshKeyResponse,

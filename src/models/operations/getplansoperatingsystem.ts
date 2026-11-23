@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as models from "../index.js";
@@ -33,17 +33,19 @@ export const GetPlansOperatingSystemRequest$inboundSchema: z.ZodType<
   GetPlansOperatingSystemRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "page[size]": z.number().int().default(20),
-  "page[number]": z.number().int().default(1),
-  "stats[total]": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "page[size]": "pageSize",
-    "page[number]": "pageNumber",
-    "stats[total]": "statsTotal",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "page[size]": z.number().int().default(20),
+    "page[number]": z.number().int().default(1),
+    "stats[total]": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "page[size]": "pageSize",
+      "page[number]": "pageNumber",
+      "stats[total]": "statsTotal",
+    });
+  })
+);
 /** @internal */
 export type GetPlansOperatingSystemRequest$Outbound = {
   "page[size]": number;
@@ -56,17 +58,19 @@ export const GetPlansOperatingSystemRequest$outboundSchema: z.ZodType<
   GetPlansOperatingSystemRequest$Outbound,
   z.ZodTypeDef,
   GetPlansOperatingSystemRequest
-> = z.object({
-  pageSize: z.number().int().default(20),
-  pageNumber: z.number().int().default(1),
-  statsTotal: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    pageSize: "page[size]",
-    pageNumber: "page[number]",
-    statsTotal: "stats[total]",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    pageSize: z.number().int().default(20),
+    pageNumber: z.number().int().default(1),
+    statsTotal: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      pageSize: "page[size]",
+      pageNumber: "page[number]",
+      statsTotal: "stats[total]",
+    });
+  })
+);
 
 export function getPlansOperatingSystemRequestToJSON(
   getPlansOperatingSystemRequest: GetPlansOperatingSystemRequest,
@@ -92,13 +96,15 @@ export const GetPlansOperatingSystemResponse$inboundSchema: z.ZodType<
   GetPlansOperatingSystemResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  Result: models.OperatingSystems$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "Result": "result",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    Result: models.OperatingSystems$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "Result": "result",
+    });
+  })
+);
 /** @internal */
 export type GetPlansOperatingSystemResponse$Outbound = {
   Result: models.OperatingSystems$Outbound;
@@ -109,13 +115,15 @@ export const GetPlansOperatingSystemResponse$outboundSchema: z.ZodType<
   GetPlansOperatingSystemResponse$Outbound,
   z.ZodTypeDef,
   GetPlansOperatingSystemResponse
-> = z.object({
-  result: models.OperatingSystems$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    result: "Result",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    result: models.OperatingSystems$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      result: "Result",
+    });
+  })
+);
 
 export function getPlansOperatingSystemResponseToJSON(
   getPlansOperatingSystemResponse: GetPlansOperatingSystemResponse,

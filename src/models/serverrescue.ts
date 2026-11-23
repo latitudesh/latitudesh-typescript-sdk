@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 
@@ -18,7 +18,7 @@ export const ServerRescueMeta$inboundSchema: z.ZodType<
   ServerRescueMeta,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type ServerRescueMeta$Outbound = {};
 
@@ -27,7 +27,7 @@ export const ServerRescueMeta$outboundSchema: z.ZodType<
   ServerRescueMeta$Outbound,
   z.ZodTypeDef,
   ServerRescueMeta
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function serverRescueMetaToJSON(
   serverRescueMeta: ServerRescueMeta,
@@ -51,9 +51,11 @@ export const ServerRescue$inboundSchema: z.ZodType<
   ServerRescue,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  meta: z.lazy(() => ServerRescueMeta$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    meta: z.lazy(() => ServerRescueMeta$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type ServerRescue$Outbound = {
   meta?: ServerRescueMeta$Outbound | undefined;
@@ -64,9 +66,11 @@ export const ServerRescue$outboundSchema: z.ZodType<
   ServerRescue$Outbound,
   z.ZodTypeDef,
   ServerRescue
-> = z.object({
-  meta: z.lazy(() => ServerRescueMeta$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    meta: z.lazy(() => ServerRescueMeta$outboundSchema).optional(),
+  })
+);
 
 export function serverRescueToJSON(serverRescue: ServerRescue): string {
   return JSON.stringify(ServerRescue$outboundSchema.parse(serverRescue));

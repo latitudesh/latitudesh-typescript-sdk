@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import * as openEnums from "../types/enums.js";
 import { ClosedEnum, OpenEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
@@ -128,8 +128,8 @@ export type Project = {
 };
 
 /** @internal */
-export const ProjectType$inboundSchema: z.ZodNativeEnum<typeof ProjectType> = z
-  .nativeEnum(ProjectType);
+export const ProjectType$inboundSchema: z.ZodNativeEnum<typeof ProjectType> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ProjectType));
 /** @internal */
 export const ProjectType$outboundSchema: z.ZodNativeEnum<typeof ProjectType> =
   ProjectType$inboundSchema;
@@ -139,7 +139,7 @@ export const ProjectTag$inboundSchema: z.ZodType<
   ProjectTag,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type ProjectTag$Outbound = {};
 
@@ -148,7 +148,7 @@ export const ProjectTag$outboundSchema: z.ZodType<
   ProjectTag$Outbound,
   z.ZodTypeDef,
   ProjectTag
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function projectTagToJSON(projectTag: ProjectTag): string {
   return JSON.stringify(ProjectTag$outboundSchema.parse(projectTag));
@@ -168,59 +168,61 @@ export const BillingType$inboundSchema: z.ZodType<
   BillingType,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(BillingType);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(BillingType));
 /** @internal */
 export const BillingType$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   BillingType
-> = openEnums.outboundSchema(BillingType);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(BillingType));
 
 /** @internal */
 export const BillingMethod$inboundSchema: z.ZodType<
   BillingMethod,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(BillingMethod);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(BillingMethod));
 /** @internal */
 export const BillingMethod$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   BillingMethod
-> = openEnums.outboundSchema(BillingMethod);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(BillingMethod));
 
 /** @internal */
 export const Environment$inboundSchema: z.ZodType<
   Environment,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(Environment);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(Environment));
 /** @internal */
 export const Environment$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   Environment
-> = openEnums.outboundSchema(Environment);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(Environment));
 
 /** @internal */
 export const ProjectStats$inboundSchema: z.ZodType<
   ProjectStats,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  databases: z.number().optional(),
-  ip_addresses: z.number().optional(),
-  prefixes: z.number().optional(),
-  servers: z.number().optional(),
-  storages: z.number().optional(),
-  virtual_machines: z.number().optional(),
-  vlans: z.number().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "ip_addresses": "ipAddresses",
-    "virtual_machines": "virtualMachines",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    databases: z.number().optional(),
+    ip_addresses: z.number().optional(),
+    prefixes: z.number().optional(),
+    servers: z.number().optional(),
+    storages: z.number().optional(),
+    virtual_machines: z.number().optional(),
+    vlans: z.number().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ip_addresses": "ipAddresses",
+      "virtual_machines": "virtualMachines",
+    });
+  })
+);
 /** @internal */
 export type ProjectStats$Outbound = {
   databases?: number | undefined;
@@ -237,20 +239,22 @@ export const ProjectStats$outboundSchema: z.ZodType<
   ProjectStats$Outbound,
   z.ZodTypeDef,
   ProjectStats
-> = z.object({
-  databases: z.number().optional(),
-  ipAddresses: z.number().optional(),
-  prefixes: z.number().optional(),
-  servers: z.number().optional(),
-  storages: z.number().optional(),
-  virtualMachines: z.number().optional(),
-  vlans: z.number().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    ipAddresses: "ip_addresses",
-    virtualMachines: "virtual_machines",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    databases: z.number().optional(),
+    ipAddresses: z.number().optional(),
+    prefixes: z.number().optional(),
+    servers: z.number().optional(),
+    storages: z.number().optional(),
+    virtualMachines: z.number().optional(),
+    vlans: z.number().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      ipAddresses: "ip_addresses",
+      virtualMachines: "virtual_machines",
+    });
+  })
+);
 
 export function projectStatsToJSON(projectStats: ProjectStats): string {
   return JSON.stringify(ProjectStats$outboundSchema.parse(projectStats));
@@ -270,15 +274,17 @@ export const ProjectBilling$inboundSchema: z.ZodType<
   ProjectBilling,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  subscription_id: z.string().optional(),
-  type: z.string().optional(),
-  method: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "subscription_id": "subscriptionId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    subscription_id: z.string().optional(),
+    type: z.string().optional(),
+    method: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "subscription_id": "subscriptionId",
+    });
+  })
+);
 /** @internal */
 export type ProjectBilling$Outbound = {
   subscription_id?: string | undefined;
@@ -291,15 +297,17 @@ export const ProjectBilling$outboundSchema: z.ZodType<
   ProjectBilling$Outbound,
   z.ZodTypeDef,
   ProjectBilling
-> = z.object({
-  subscriptionId: z.string().optional(),
-  type: z.string().optional(),
-  method: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    subscriptionId: "subscription_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    subscriptionId: z.string().optional(),
+    type: z.string().optional(),
+    method: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      subscriptionId: "subscription_id",
+    });
+  })
+);
 
 export function projectBillingToJSON(projectBilling: ProjectBilling): string {
   return JSON.stringify(ProjectBilling$outboundSchema.parse(projectBilling));
@@ -319,32 +327,34 @@ export const ProjectAttributes$inboundSchema: z.ZodType<
   ProjectAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  tags: z.array(z.lazy(() => ProjectTag$inboundSchema)).optional(),
-  name: z.string().optional(),
-  slug: z.string().optional(),
-  description: z.nullable(z.string()).optional(),
-  billing_type: z.nullable(BillingType$inboundSchema).optional(),
-  billing_method: z.nullable(BillingMethod$inboundSchema).optional(),
-  cost: z.nullable(z.string()).optional(),
-  bandwidth_alert: z.nullable(z.boolean()).optional(),
-  environment: z.nullable(Environment$inboundSchema).optional(),
-  provisioning_type: z.nullable(z.string()).optional(),
-  stats: z.lazy(() => ProjectStats$inboundSchema).optional(),
-  billing: z.lazy(() => ProjectBilling$inboundSchema).optional(),
-  team: TeamInclude$inboundSchema.optional(),
-  created_at: z.string().optional(),
-  updated_at: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "billing_type": "billingType",
-    "billing_method": "billingMethod",
-    "bandwidth_alert": "bandwidthAlert",
-    "provisioning_type": "provisioningType",
-    "created_at": "createdAt",
-    "updated_at": "updatedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    tags: z.array(z.lazy(() => ProjectTag$inboundSchema)).optional(),
+    name: z.string().optional(),
+    slug: z.string().optional(),
+    description: z.nullable(z.string()).optional(),
+    billing_type: z.nullable(BillingType$inboundSchema).optional(),
+    billing_method: z.nullable(BillingMethod$inboundSchema).optional(),
+    cost: z.nullable(z.string()).optional(),
+    bandwidth_alert: z.nullable(z.boolean()).optional(),
+    environment: z.nullable(Environment$inboundSchema).optional(),
+    provisioning_type: z.nullable(z.string()).optional(),
+    stats: z.lazy(() => ProjectStats$inboundSchema).optional(),
+    billing: z.lazy(() => ProjectBilling$inboundSchema).optional(),
+    team: TeamInclude$inboundSchema.optional(),
+    created_at: z.string().optional(),
+    updated_at: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "billing_type": "billingType",
+      "billing_method": "billingMethod",
+      "bandwidth_alert": "bandwidthAlert",
+      "provisioning_type": "provisioningType",
+      "created_at": "createdAt",
+      "updated_at": "updatedAt",
+    });
+  })
+);
 /** @internal */
 export type ProjectAttributes$Outbound = {
   tags?: Array<ProjectTag$Outbound> | undefined;
@@ -369,32 +379,34 @@ export const ProjectAttributes$outboundSchema: z.ZodType<
   ProjectAttributes$Outbound,
   z.ZodTypeDef,
   ProjectAttributes
-> = z.object({
-  tags: z.array(z.lazy(() => ProjectTag$outboundSchema)).optional(),
-  name: z.string().optional(),
-  slug: z.string().optional(),
-  description: z.nullable(z.string()).optional(),
-  billingType: z.nullable(BillingType$outboundSchema).optional(),
-  billingMethod: z.nullable(BillingMethod$outboundSchema).optional(),
-  cost: z.nullable(z.string()).optional(),
-  bandwidthAlert: z.nullable(z.boolean()).optional(),
-  environment: z.nullable(Environment$outboundSchema).optional(),
-  provisioningType: z.nullable(z.string()).optional(),
-  stats: z.lazy(() => ProjectStats$outboundSchema).optional(),
-  billing: z.lazy(() => ProjectBilling$outboundSchema).optional(),
-  team: TeamInclude$outboundSchema.optional(),
-  createdAt: z.string().optional(),
-  updatedAt: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    billingType: "billing_type",
-    billingMethod: "billing_method",
-    bandwidthAlert: "bandwidth_alert",
-    provisioningType: "provisioning_type",
-    createdAt: "created_at",
-    updatedAt: "updated_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    tags: z.array(z.lazy(() => ProjectTag$outboundSchema)).optional(),
+    name: z.string().optional(),
+    slug: z.string().optional(),
+    description: z.nullable(z.string()).optional(),
+    billingType: z.nullable(BillingType$outboundSchema).optional(),
+    billingMethod: z.nullable(BillingMethod$outboundSchema).optional(),
+    cost: z.nullable(z.string()).optional(),
+    bandwidthAlert: z.nullable(z.boolean()).optional(),
+    environment: z.nullable(Environment$outboundSchema).optional(),
+    provisioningType: z.nullable(z.string()).optional(),
+    stats: z.lazy(() => ProjectStats$outboundSchema).optional(),
+    billing: z.lazy(() => ProjectBilling$outboundSchema).optional(),
+    team: TeamInclude$outboundSchema.optional(),
+    createdAt: z.string().optional(),
+    updatedAt: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      billingType: "billing_type",
+      billingMethod: "billing_method",
+      bandwidthAlert: "bandwidth_alert",
+      provisioningType: "provisioning_type",
+      createdAt: "created_at",
+      updatedAt: "updated_at",
+    });
+  })
+);
 
 export function projectAttributesToJSON(
   projectAttributes: ProjectAttributes,
@@ -415,11 +427,13 @@ export function projectAttributesFromJSON(
 
 /** @internal */
 export const Project$inboundSchema: z.ZodType<Project, z.ZodTypeDef, unknown> =
-  z.object({
-    id: z.string().optional(),
-    type: ProjectType$inboundSchema.optional(),
-    attributes: z.lazy(() => ProjectAttributes$inboundSchema).optional(),
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string().optional(),
+      type: ProjectType$inboundSchema.optional(),
+      attributes: z.lazy(() => ProjectAttributes$inboundSchema).optional(),
+    })
+  );
 /** @internal */
 export type Project$Outbound = {
   id?: string | undefined;
@@ -432,11 +446,13 @@ export const Project$outboundSchema: z.ZodType<
   Project$Outbound,
   z.ZodTypeDef,
   Project
-> = z.object({
-  id: z.string().optional(),
-  type: ProjectType$outboundSchema.optional(),
-  attributes: z.lazy(() => ProjectAttributes$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: ProjectType$outboundSchema.optional(),
+    attributes: z.lazy(() => ProjectAttributes$outboundSchema).optional(),
+  })
+);
 
 export function projectToJSON(project: Project): string {
   return JSON.stringify(Project$outboundSchema.parse(project));

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -16,9 +16,11 @@ export const DeleteVolumeRequest$inboundSchema: z.ZodType<
   DeleteVolumeRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+  })
+);
 /** @internal */
 export type DeleteVolumeRequest$Outbound = {
   id: string;
@@ -29,9 +31,11 @@ export const DeleteVolumeRequest$outboundSchema: z.ZodType<
   DeleteVolumeRequest$Outbound,
   z.ZodTypeDef,
   DeleteVolumeRequest
-> = z.object({
-  id: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+  })
+);
 
 export function deleteVolumeRequestToJSON(
   deleteVolumeRequest: DeleteVolumeRequest,

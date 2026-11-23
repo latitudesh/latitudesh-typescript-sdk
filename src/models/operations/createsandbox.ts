@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -45,7 +45,7 @@ export type CreateSandboxRequest = {
 /** @internal */
 export const CreateSandboxType2$inboundSchema: z.ZodNativeEnum<
   typeof CreateSandboxType2
-> = z.nativeEnum(CreateSandboxType2);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CreateSandboxType2));
 /** @internal */
 export const CreateSandboxType2$outboundSchema: z.ZodNativeEnum<
   typeof CreateSandboxType2
@@ -56,16 +56,18 @@ export const CreateSandboxAttributes2$inboundSchema: z.ZodType<
   CreateSandboxAttributes2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  project_id: z.string(),
-  name: z.string().optional(),
-  image: z.string().optional(),
-  environment: z.record(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "project_id": "projectId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    project_id: z.string(),
+    name: z.string().optional(),
+    image: z.string().optional(),
+    environment: z.record(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "project_id": "projectId",
+    });
+  })
+);
 /** @internal */
 export type CreateSandboxAttributes2$Outbound = {
   project_id: string;
@@ -79,16 +81,18 @@ export const CreateSandboxAttributes2$outboundSchema: z.ZodType<
   CreateSandboxAttributes2$Outbound,
   z.ZodTypeDef,
   CreateSandboxAttributes2
-> = z.object({
-  projectId: z.string(),
-  name: z.string().optional(),
-  image: z.string().optional(),
-  environment: z.record(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    projectId: "project_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    projectId: z.string(),
+    name: z.string().optional(),
+    image: z.string().optional(),
+    environment: z.record(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      projectId: "project_id",
+    });
+  })
+);
 
 export function createSandboxAttributes2ToJSON(
   createSandboxAttributes2: CreateSandboxAttributes2,
@@ -112,10 +116,12 @@ export const CreateSandboxData2$inboundSchema: z.ZodType<
   CreateSandboxData2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: CreateSandboxType2$inboundSchema.optional(),
-  attributes: z.lazy(() => CreateSandboxAttributes2$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CreateSandboxType2$inboundSchema.optional(),
+    attributes: z.lazy(() => CreateSandboxAttributes2$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type CreateSandboxData2$Outbound = {
   type?: string | undefined;
@@ -127,10 +133,13 @@ export const CreateSandboxData2$outboundSchema: z.ZodType<
   CreateSandboxData2$Outbound,
   z.ZodTypeDef,
   CreateSandboxData2
-> = z.object({
-  type: CreateSandboxType2$outboundSchema.optional(),
-  attributes: z.lazy(() => CreateSandboxAttributes2$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CreateSandboxType2$outboundSchema.optional(),
+    attributes: z.lazy(() => CreateSandboxAttributes2$outboundSchema)
+      .optional(),
+  })
+);
 
 export function createSandboxData2ToJSON(
   createSandboxData2: CreateSandboxData2,
@@ -154,9 +163,11 @@ export const CreateSandboxRequest$inboundSchema: z.ZodType<
   CreateSandboxRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => CreateSandboxData2$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => CreateSandboxData2$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type CreateSandboxRequest$Outbound = {
   data?: CreateSandboxData2$Outbound | undefined;
@@ -167,9 +178,11 @@ export const CreateSandboxRequest$outboundSchema: z.ZodType<
   CreateSandboxRequest$Outbound,
   z.ZodTypeDef,
   CreateSandboxRequest
-> = z.object({
-  data: z.lazy(() => CreateSandboxData2$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => CreateSandboxData2$outboundSchema).optional(),
+  })
+);
 
 export function createSandboxRequestToJSON(
   createSandboxRequest: CreateSandboxRequest,
