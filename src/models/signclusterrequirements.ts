@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -35,7 +35,9 @@ export type SignClusterRequirements = {
 /** @internal */
 export const SignClusterRequirementsType$inboundSchema: z.ZodNativeEnum<
   typeof SignClusterRequirementsType
-> = z.nativeEnum(SignClusterRequirementsType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(SignClusterRequirementsType)
+);
 /** @internal */
 export const SignClusterRequirementsType$outboundSchema: z.ZodNativeEnum<
   typeof SignClusterRequirementsType
@@ -46,13 +48,15 @@ export const SignClusterRequirementsAttributes$inboundSchema: z.ZodType<
   SignClusterRequirementsAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  requirements_version: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "requirements_version": "requirementsVersion",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    requirements_version: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "requirements_version": "requirementsVersion",
+    });
+  })
+);
 /** @internal */
 export type SignClusterRequirementsAttributes$Outbound = {
   requirements_version: string;
@@ -63,13 +67,15 @@ export const SignClusterRequirementsAttributes$outboundSchema: z.ZodType<
   SignClusterRequirementsAttributes$Outbound,
   z.ZodTypeDef,
   SignClusterRequirementsAttributes
-> = z.object({
-  requirementsVersion: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    requirementsVersion: "requirements_version",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    requirementsVersion: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      requirementsVersion: "requirements_version",
+    });
+  })
+);
 
 export function signClusterRequirementsAttributesToJSON(
   signClusterRequirementsAttributes: SignClusterRequirementsAttributes,
@@ -95,10 +101,12 @@ export const SignClusterRequirementsData$inboundSchema: z.ZodType<
   SignClusterRequirementsData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: SignClusterRequirementsType$inboundSchema,
-  attributes: z.lazy(() => SignClusterRequirementsAttributes$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: SignClusterRequirementsType$inboundSchema,
+    attributes: z.lazy(() => SignClusterRequirementsAttributes$inboundSchema),
+  })
+);
 /** @internal */
 export type SignClusterRequirementsData$Outbound = {
   type: string;
@@ -110,10 +118,12 @@ export const SignClusterRequirementsData$outboundSchema: z.ZodType<
   SignClusterRequirementsData$Outbound,
   z.ZodTypeDef,
   SignClusterRequirementsData
-> = z.object({
-  type: SignClusterRequirementsType$outboundSchema,
-  attributes: z.lazy(() => SignClusterRequirementsAttributes$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: SignClusterRequirementsType$outboundSchema,
+    attributes: z.lazy(() => SignClusterRequirementsAttributes$outboundSchema),
+  })
+);
 
 export function signClusterRequirementsDataToJSON(
   signClusterRequirementsData: SignClusterRequirementsData,
@@ -139,9 +149,11 @@ export const SignClusterRequirements$inboundSchema: z.ZodType<
   SignClusterRequirements,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => SignClusterRequirementsData$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => SignClusterRequirementsData$inboundSchema),
+  })
+);
 /** @internal */
 export type SignClusterRequirements$Outbound = {
   data: SignClusterRequirementsData$Outbound;
@@ -152,9 +164,11 @@ export const SignClusterRequirements$outboundSchema: z.ZodType<
   SignClusterRequirements$Outbound,
   z.ZodTypeDef,
   SignClusterRequirements
-> = z.object({
-  data: z.lazy(() => SignClusterRequirementsData$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => SignClusterRequirementsData$outboundSchema),
+  })
+);
 
 export function signClusterRequirementsToJSON(
   signClusterRequirements: SignClusterRequirements,

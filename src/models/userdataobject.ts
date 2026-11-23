@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 import {
@@ -25,7 +25,7 @@ export const UserDataObjectMeta$inboundSchema: z.ZodType<
   UserDataObjectMeta,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type UserDataObjectMeta$Outbound = {};
 
@@ -34,7 +34,7 @@ export const UserDataObjectMeta$outboundSchema: z.ZodType<
   UserDataObjectMeta$Outbound,
   z.ZodTypeDef,
   UserDataObjectMeta
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function userDataObjectMetaToJSON(
   userDataObjectMeta: UserDataObjectMeta,
@@ -58,10 +58,12 @@ export const UserDataObject$inboundSchema: z.ZodType<
   UserDataObject,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: UserDataProperties$inboundSchema.optional(),
-  meta: z.lazy(() => UserDataObjectMeta$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: UserDataProperties$inboundSchema.optional(),
+    meta: z.lazy(() => UserDataObjectMeta$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type UserDataObject$Outbound = {
   data?: UserDataProperties$Outbound | undefined;
@@ -73,10 +75,12 @@ export const UserDataObject$outboundSchema: z.ZodType<
   UserDataObject$Outbound,
   z.ZodTypeDef,
   UserDataObject
-> = z.object({
-  data: UserDataProperties$outboundSchema.optional(),
-  meta: z.lazy(() => UserDataObjectMeta$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: UserDataProperties$outboundSchema.optional(),
+    meta: z.lazy(() => UserDataObjectMeta$outboundSchema).optional(),
+  })
+);
 
 export function userDataObjectToJSON(userDataObject: UserDataObject): string {
   return JSON.stringify(UserDataObject$outboundSchema.parse(userDataObject));

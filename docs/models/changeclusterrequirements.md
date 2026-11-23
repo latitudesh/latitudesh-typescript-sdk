@@ -10,6 +10,7 @@ let value: ChangeClusterRequirements = {
     type: "cluster_requirements",
     attributes: {
       add: "storage_fs",
+      nodeGroupId: "7",
     },
   },
 };

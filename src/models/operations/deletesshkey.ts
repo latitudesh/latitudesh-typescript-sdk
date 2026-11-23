@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -17,13 +17,15 @@ export const DeleteSshKeyRequest$inboundSchema: z.ZodType<
   DeleteSshKeyRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ssh_key_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "ssh_key_id": "sshKeyId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ssh_key_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ssh_key_id": "sshKeyId",
+    });
+  })
+);
 /** @internal */
 export type DeleteSshKeyRequest$Outbound = {
   ssh_key_id: string;
@@ -34,13 +36,15 @@ export const DeleteSshKeyRequest$outboundSchema: z.ZodType<
   DeleteSshKeyRequest$Outbound,
   z.ZodTypeDef,
   DeleteSshKeyRequest
-> = z.object({
-  sshKeyId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    sshKeyId: "ssh_key_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    sshKeyId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      sshKeyId: "ssh_key_id",
+    });
+  })
+);
 
 export function deleteSshKeyRequestToJSON(
   deleteSshKeyRequest: DeleteSshKeyRequest,

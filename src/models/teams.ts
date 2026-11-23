@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 import {
@@ -25,7 +25,7 @@ export const TeamsMeta$inboundSchema: z.ZodType<
   TeamsMeta,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type TeamsMeta$Outbound = {};
 
@@ -34,7 +34,7 @@ export const TeamsMeta$outboundSchema: z.ZodType<
   TeamsMeta$Outbound,
   z.ZodTypeDef,
   TeamsMeta
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function teamsMetaToJSON(teamsMeta: TeamsMeta): string {
   return JSON.stringify(TeamsMeta$outboundSchema.parse(teamsMeta));
@@ -50,11 +50,13 @@ export function teamsMetaFromJSON(
 }
 
 /** @internal */
-export const Teams$inboundSchema: z.ZodType<Teams, z.ZodTypeDef, unknown> = z
-  .object({
-    data: z.array(Team$inboundSchema).optional(),
-    meta: z.lazy(() => TeamsMeta$inboundSchema).optional(),
-  });
+export const Teams$inboundSchema: z.ZodType<Teams, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      data: z.array(Team$inboundSchema).optional(),
+      meta: z.lazy(() => TeamsMeta$inboundSchema).optional(),
+    })
+  );
 /** @internal */
 export type Teams$Outbound = {
   data?: Array<Team$Outbound> | undefined;
@@ -66,10 +68,12 @@ export const Teams$outboundSchema: z.ZodType<
   Teams$Outbound,
   z.ZodTypeDef,
   Teams
-> = z.object({
-  data: z.array(Team$outboundSchema).optional(),
-  meta: z.lazy(() => TeamsMeta$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(Team$outboundSchema).optional(),
+    meta: z.lazy(() => TeamsMeta$outboundSchema).optional(),
+  })
+);
 
 export function teamsToJSON(teams: Teams): string {
   return JSON.stringify(Teams$outboundSchema.parse(teams));

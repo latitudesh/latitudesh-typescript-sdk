@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -56,7 +56,7 @@ export type CreateClusterNodeGroup = {
 /** @internal */
 export const CreateClusterNodeGroupType$inboundSchema: z.ZodNativeEnum<
   typeof CreateClusterNodeGroupType
-> = z.nativeEnum(CreateClusterNodeGroupType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CreateClusterNodeGroupType));
 /** @internal */
 export const CreateClusterNodeGroupType$outboundSchema: z.ZodNativeEnum<
   typeof CreateClusterNodeGroupType
@@ -65,7 +65,7 @@ export const CreateClusterNodeGroupType$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const CreateClusterNodeGroupKind$inboundSchema: z.ZodNativeEnum<
   typeof CreateClusterNodeGroupKind
-> = z.nativeEnum(CreateClusterNodeGroupKind);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CreateClusterNodeGroupKind));
 /** @internal */
 export const CreateClusterNodeGroupKind$outboundSchema: z.ZodNativeEnum<
   typeof CreateClusterNodeGroupKind
@@ -76,17 +76,19 @@ export const CreateClusterNodeGroupAttributes$inboundSchema: z.ZodType<
   CreateClusterNodeGroupAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string(),
-  kind: CreateClusterNodeGroupKind$inboundSchema,
-  plan: z.string(),
-  server_count: z.number().int(),
-  os: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "server_count": "serverCount",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    kind: CreateClusterNodeGroupKind$inboundSchema,
+    plan: z.string(),
+    server_count: z.number().int(),
+    os: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "server_count": "serverCount",
+    });
+  })
+);
 /** @internal */
 export type CreateClusterNodeGroupAttributes$Outbound = {
   name: string;
@@ -101,17 +103,19 @@ export const CreateClusterNodeGroupAttributes$outboundSchema: z.ZodType<
   CreateClusterNodeGroupAttributes$Outbound,
   z.ZodTypeDef,
   CreateClusterNodeGroupAttributes
-> = z.object({
-  name: z.string(),
-  kind: CreateClusterNodeGroupKind$outboundSchema,
-  plan: z.string(),
-  serverCount: z.number().int(),
-  os: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    serverCount: "server_count",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    kind: CreateClusterNodeGroupKind$outboundSchema,
+    plan: z.string(),
+    serverCount: z.number().int(),
+    os: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      serverCount: "server_count",
+    });
+  })
+);
 
 export function createClusterNodeGroupAttributesToJSON(
   createClusterNodeGroupAttributes: CreateClusterNodeGroupAttributes,
@@ -137,10 +141,12 @@ export const CreateClusterNodeGroupData$inboundSchema: z.ZodType<
   CreateClusterNodeGroupData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: CreateClusterNodeGroupType$inboundSchema,
-  attributes: z.lazy(() => CreateClusterNodeGroupAttributes$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CreateClusterNodeGroupType$inboundSchema,
+    attributes: z.lazy(() => CreateClusterNodeGroupAttributes$inboundSchema),
+  })
+);
 /** @internal */
 export type CreateClusterNodeGroupData$Outbound = {
   type: string;
@@ -152,10 +158,12 @@ export const CreateClusterNodeGroupData$outboundSchema: z.ZodType<
   CreateClusterNodeGroupData$Outbound,
   z.ZodTypeDef,
   CreateClusterNodeGroupData
-> = z.object({
-  type: CreateClusterNodeGroupType$outboundSchema,
-  attributes: z.lazy(() => CreateClusterNodeGroupAttributes$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CreateClusterNodeGroupType$outboundSchema,
+    attributes: z.lazy(() => CreateClusterNodeGroupAttributes$outboundSchema),
+  })
+);
 
 export function createClusterNodeGroupDataToJSON(
   createClusterNodeGroupData: CreateClusterNodeGroupData,
@@ -179,9 +187,11 @@ export const CreateClusterNodeGroup$inboundSchema: z.ZodType<
   CreateClusterNodeGroup,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => CreateClusterNodeGroupData$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => CreateClusterNodeGroupData$inboundSchema),
+  })
+);
 /** @internal */
 export type CreateClusterNodeGroup$Outbound = {
   data: CreateClusterNodeGroupData$Outbound;
@@ -192,9 +202,11 @@ export const CreateClusterNodeGroup$outboundSchema: z.ZodType<
   CreateClusterNodeGroup$Outbound,
   z.ZodTypeDef,
   CreateClusterNodeGroup
-> = z.object({
-  data: z.lazy(() => CreateClusterNodeGroupData$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => CreateClusterNodeGroupData$outboundSchema),
+  })
+);
 
 export function createClusterNodeGroupToJSON(
   createClusterNodeGroup: CreateClusterNodeGroup,

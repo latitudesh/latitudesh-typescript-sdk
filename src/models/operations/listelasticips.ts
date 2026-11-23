@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -54,7 +54,7 @@ export type ListElasticIpsResponse = {
 
 /** @internal */
 export const FilterStatus$inboundSchema: z.ZodNativeEnum<typeof FilterStatus> =
-  z.nativeEnum(FilterStatus);
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(FilterStatus));
 /** @internal */
 export const FilterStatus$outboundSchema: z.ZodNativeEnum<typeof FilterStatus> =
   FilterStatus$inboundSchema;
@@ -64,21 +64,23 @@ export const ListElasticIpsRequest$inboundSchema: z.ZodType<
   ListElasticIpsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "filter[project]": z.string().optional(),
-  "filter[server]": z.string().optional(),
-  "filter[status]": FilterStatus$inboundSchema.optional(),
-  "page[size]": z.number().int().default(20),
-  "page[number]": z.number().int().default(1),
-}).transform((v) => {
-  return remap$(v, {
-    "filter[project]": "filterProject",
-    "filter[server]": "filterServer",
-    "filter[status]": "filterStatus",
-    "page[size]": "pageSize",
-    "page[number]": "pageNumber",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "filter[project]": z.string().optional(),
+    "filter[server]": z.string().optional(),
+    "filter[status]": FilterStatus$inboundSchema.optional(),
+    "page[size]": z.number().int().default(20),
+    "page[number]": z.number().int().default(1),
+  }).transform((v) => {
+    return remap$(v, {
+      "filter[project]": "filterProject",
+      "filter[server]": "filterServer",
+      "filter[status]": "filterStatus",
+      "page[size]": "pageSize",
+      "page[number]": "pageNumber",
+    });
+  })
+);
 /** @internal */
 export type ListElasticIpsRequest$Outbound = {
   "filter[project]"?: string | undefined;
@@ -93,21 +95,23 @@ export const ListElasticIpsRequest$outboundSchema: z.ZodType<
   ListElasticIpsRequest$Outbound,
   z.ZodTypeDef,
   ListElasticIpsRequest
-> = z.object({
-  filterProject: z.string().optional(),
-  filterServer: z.string().optional(),
-  filterStatus: FilterStatus$outboundSchema.optional(),
-  pageSize: z.number().int().default(20),
-  pageNumber: z.number().int().default(1),
-}).transform((v) => {
-  return remap$(v, {
-    filterProject: "filter[project]",
-    filterServer: "filter[server]",
-    filterStatus: "filter[status]",
-    pageSize: "page[size]",
-    pageNumber: "page[number]",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    filterProject: z.string().optional(),
+    filterServer: z.string().optional(),
+    filterStatus: FilterStatus$outboundSchema.optional(),
+    pageSize: z.number().int().default(20),
+    pageNumber: z.number().int().default(1),
+  }).transform((v) => {
+    return remap$(v, {
+      filterProject: "filter[project]",
+      filterServer: "filter[server]",
+      filterStatus: "filter[status]",
+      pageSize: "page[size]",
+      pageNumber: "page[number]",
+    });
+  })
+);
 
 export function listElasticIpsRequestToJSON(
   listElasticIpsRequest: ListElasticIpsRequest,
@@ -131,13 +135,15 @@ export const ListElasticIpsResponse$inboundSchema: z.ZodType<
   ListElasticIpsResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  Result: models.ElasticIps$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "Result": "result",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    Result: models.ElasticIps$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "Result": "result",
+    });
+  })
+);
 /** @internal */
 export type ListElasticIpsResponse$Outbound = {
   Result: models.ElasticIps$Outbound;
@@ -148,13 +154,15 @@ export const ListElasticIpsResponse$outboundSchema: z.ZodType<
   ListElasticIpsResponse$Outbound,
   z.ZodTypeDef,
   ListElasticIpsResponse
-> = z.object({
-  result: models.ElasticIps$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    result: "Result",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    result: models.ElasticIps$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      result: "Result",
+    });
+  })
+);
 
 export function listElasticIpsResponseToJSON(
   listElasticIpsResponse: ListElasticIpsResponse,

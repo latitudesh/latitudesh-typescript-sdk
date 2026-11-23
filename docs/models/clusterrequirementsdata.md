@@ -17,6 +17,7 @@ let value: ClusterRequirementsData = {
           label: "BIOS: multithreading",
           category: "bios",
           check: "bios_smt",
+          nodeGroupId: "7",
         },
       ],
       values: {

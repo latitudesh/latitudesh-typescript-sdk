@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -61,7 +61,9 @@ export type ManagedDatabasePlanAttributes = {
 /** @internal */
 export const ManagedDatabasePlanAttributesType$inboundSchema: z.ZodNativeEnum<
   typeof ManagedDatabasePlanAttributesType
-> = z.nativeEnum(ManagedDatabasePlanAttributesType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(ManagedDatabasePlanAttributesType)
+);
 /** @internal */
 export const ManagedDatabasePlanAttributesType$outboundSchema: z.ZodNativeEnum<
   typeof ManagedDatabasePlanAttributesType
@@ -72,14 +74,16 @@ export const ManagedDatabasePlanAttributesSpecs$inboundSchema: z.ZodType<
   ManagedDatabasePlanAttributesSpecs,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  cpu: z.string().optional(),
-  memory: z.string().optional(),
-  storage: z.string().optional(),
-  shards: z.number().int().optional(),
-  replicas: z.number().int().optional(),
-  iops: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    cpu: z.string().optional(),
+    memory: z.string().optional(),
+    storage: z.string().optional(),
+    shards: z.number().int().optional(),
+    replicas: z.number().int().optional(),
+    iops: z.nullable(z.string()).optional(),
+  })
+);
 /** @internal */
 export type ManagedDatabasePlanAttributesSpecs$Outbound = {
   cpu?: string | undefined;
@@ -95,14 +99,16 @@ export const ManagedDatabasePlanAttributesSpecs$outboundSchema: z.ZodType<
   ManagedDatabasePlanAttributesSpecs$Outbound,
   z.ZodTypeDef,
   ManagedDatabasePlanAttributesSpecs
-> = z.object({
-  cpu: z.string().optional(),
-  memory: z.string().optional(),
-  storage: z.string().optional(),
-  shards: z.number().int().optional(),
-  replicas: z.number().int().optional(),
-  iops: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    cpu: z.string().optional(),
+    memory: z.string().optional(),
+    storage: z.string().optional(),
+    shards: z.number().int().optional(),
+    replicas: z.number().int().optional(),
+    iops: z.nullable(z.string()).optional(),
+  })
+);
 
 export function managedDatabasePlanAttributesSpecsToJSON(
   managedDatabasePlanAttributesSpecs: ManagedDatabasePlanAttributesSpecs,
@@ -129,12 +135,14 @@ export const ManagedDatabasePlanAttributesSite$inboundSchema: z.ZodType<
   ManagedDatabasePlanAttributesSite,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  slug: z.string().optional(),
-  facility: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    name: z.string().optional(),
+    slug: z.string().optional(),
+    facility: z.string().optional(),
+  })
+);
 /** @internal */
 export type ManagedDatabasePlanAttributesSite$Outbound = {
   id?: string | undefined;
@@ -148,12 +156,14 @@ export const ManagedDatabasePlanAttributesSite$outboundSchema: z.ZodType<
   ManagedDatabasePlanAttributesSite$Outbound,
   z.ZodTypeDef,
   ManagedDatabasePlanAttributesSite
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  slug: z.string().optional(),
-  facility: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    name: z.string().optional(),
+    slug: z.string().optional(),
+    facility: z.string().optional(),
+  })
+);
 
 export function managedDatabasePlanAttributesSiteToJSON(
   managedDatabasePlanAttributesSite: ManagedDatabasePlanAttributesSite,
@@ -179,10 +189,12 @@ export const ManagedDatabasePlanAttributesPricing$inboundSchema: z.ZodType<
   ManagedDatabasePlanAttributesPricing,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  month: z.nullable(z.number()).optional(),
-  year: z.nullable(z.number()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    month: z.nullable(z.number()).optional(),
+    year: z.nullable(z.number()).optional(),
+  })
+);
 /** @internal */
 export type ManagedDatabasePlanAttributesPricing$Outbound = {
   month?: number | null | undefined;
@@ -194,10 +206,12 @@ export const ManagedDatabasePlanAttributesPricing$outboundSchema: z.ZodType<
   ManagedDatabasePlanAttributesPricing$Outbound,
   z.ZodTypeDef,
   ManagedDatabasePlanAttributesPricing
-> = z.object({
-  month: z.nullable(z.number()).optional(),
-  year: z.nullable(z.number()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    month: z.nullable(z.number()).optional(),
+    year: z.nullable(z.number()).optional(),
+  })
+);
 
 export function managedDatabasePlanAttributesPricingToJSON(
   managedDatabasePlanAttributesPricing: ManagedDatabasePlanAttributesPricing,
@@ -224,16 +238,18 @@ export const ManagedDatabasePlanAttributesRegion$inboundSchema: z.ZodType<
   ManagedDatabasePlanAttributesRegion,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  region: z.string().optional(),
-  city: z.string().optional(),
-  country: z.string().optional(),
-  site: z.lazy(() => ManagedDatabasePlanAttributesSite$inboundSchema)
-    .optional(),
-  pricing: z.record(
-    z.lazy(() => ManagedDatabasePlanAttributesPricing$inboundSchema),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    region: z.string().optional(),
+    city: z.string().optional(),
+    country: z.string().optional(),
+    site: z.lazy(() => ManagedDatabasePlanAttributesSite$inboundSchema)
+      .optional(),
+    pricing: z.record(
+      z.lazy(() => ManagedDatabasePlanAttributesPricing$inboundSchema),
+    ).optional(),
+  })
+);
 /** @internal */
 export type ManagedDatabasePlanAttributesRegion$Outbound = {
   region?: string | undefined;
@@ -250,16 +266,18 @@ export const ManagedDatabasePlanAttributesRegion$outboundSchema: z.ZodType<
   ManagedDatabasePlanAttributesRegion$Outbound,
   z.ZodTypeDef,
   ManagedDatabasePlanAttributesRegion
-> = z.object({
-  region: z.string().optional(),
-  city: z.string().optional(),
-  country: z.string().optional(),
-  site: z.lazy(() => ManagedDatabasePlanAttributesSite$outboundSchema)
-    .optional(),
-  pricing: z.record(
-    z.lazy(() => ManagedDatabasePlanAttributesPricing$outboundSchema),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    region: z.string().optional(),
+    city: z.string().optional(),
+    country: z.string().optional(),
+    site: z.lazy(() => ManagedDatabasePlanAttributesSite$outboundSchema)
+      .optional(),
+    pricing: z.record(
+      z.lazy(() => ManagedDatabasePlanAttributesPricing$outboundSchema),
+    ).optional(),
+  })
+);
 
 export function managedDatabasePlanAttributesRegionToJSON(
   managedDatabasePlanAttributesRegion: ManagedDatabasePlanAttributesRegion,
@@ -286,16 +304,18 @@ export const ManagedDatabasePlanAttributesAttributes$inboundSchema: z.ZodType<
   ManagedDatabasePlanAttributesAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string().optional(),
-  slug: z.string().optional(),
-  engine: z.string().optional(),
-  specs: z.lazy(() => ManagedDatabasePlanAttributesSpecs$inboundSchema)
-    .optional(),
-  regions: z.array(
-    z.lazy(() => ManagedDatabasePlanAttributesRegion$inboundSchema),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    slug: z.string().optional(),
+    engine: z.string().optional(),
+    specs: z.lazy(() => ManagedDatabasePlanAttributesSpecs$inboundSchema)
+      .optional(),
+    regions: z.array(
+      z.lazy(() => ManagedDatabasePlanAttributesRegion$inboundSchema),
+    ).optional(),
+  })
+);
 /** @internal */
 export type ManagedDatabasePlanAttributesAttributes$Outbound = {
   name?: string | undefined;
@@ -310,16 +330,18 @@ export const ManagedDatabasePlanAttributesAttributes$outboundSchema: z.ZodType<
   ManagedDatabasePlanAttributesAttributes$Outbound,
   z.ZodTypeDef,
   ManagedDatabasePlanAttributesAttributes
-> = z.object({
-  name: z.string().optional(),
-  slug: z.string().optional(),
-  engine: z.string().optional(),
-  specs: z.lazy(() => ManagedDatabasePlanAttributesSpecs$outboundSchema)
-    .optional(),
-  regions: z.array(
-    z.lazy(() => ManagedDatabasePlanAttributesRegion$outboundSchema),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    slug: z.string().optional(),
+    engine: z.string().optional(),
+    specs: z.lazy(() => ManagedDatabasePlanAttributesSpecs$outboundSchema)
+      .optional(),
+    regions: z.array(
+      z.lazy(() => ManagedDatabasePlanAttributesRegion$outboundSchema),
+    ).optional(),
+  })
+);
 
 export function managedDatabasePlanAttributesAttributesToJSON(
   managedDatabasePlanAttributesAttributes:
@@ -352,13 +374,15 @@ export const ManagedDatabasePlanAttributes$inboundSchema: z.ZodType<
   ManagedDatabasePlanAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  type: ManagedDatabasePlanAttributesType$inboundSchema.optional(),
-  attributes: z.lazy(() =>
-    ManagedDatabasePlanAttributesAttributes$inboundSchema
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: ManagedDatabasePlanAttributesType$inboundSchema.optional(),
+    attributes: z.lazy(() =>
+      ManagedDatabasePlanAttributesAttributes$inboundSchema
+    ).optional(),
+  })
+);
 /** @internal */
 export type ManagedDatabasePlanAttributes$Outbound = {
   id?: string | undefined;
@@ -371,13 +395,15 @@ export const ManagedDatabasePlanAttributes$outboundSchema: z.ZodType<
   ManagedDatabasePlanAttributes$Outbound,
   z.ZodTypeDef,
   ManagedDatabasePlanAttributes
-> = z.object({
-  id: z.string().optional(),
-  type: ManagedDatabasePlanAttributesType$outboundSchema.optional(),
-  attributes: z.lazy(() =>
-    ManagedDatabasePlanAttributesAttributes$outboundSchema
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: ManagedDatabasePlanAttributesType$outboundSchema.optional(),
+    attributes: z.lazy(() =>
+      ManagedDatabasePlanAttributesAttributes$outboundSchema
+    ).optional(),
+  })
+);
 
 export function managedDatabasePlanAttributesToJSON(
   managedDatabasePlanAttributes: ManagedDatabasePlanAttributes,

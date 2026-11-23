@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -94,7 +94,7 @@ export type FilesystemData = {
 /** @internal */
 export const FilesystemDataType$inboundSchema: z.ZodNativeEnum<
   typeof FilesystemDataType
-> = z.nativeEnum(FilesystemDataType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(FilesystemDataType));
 /** @internal */
 export const FilesystemDataType$outboundSchema: z.ZodNativeEnum<
   typeof FilesystemDataType
@@ -103,15 +103,15 @@ export const FilesystemDataType$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const FilesystemStorageClass$inboundSchema: z.ZodNativeEnum<
   typeof FilesystemStorageClass
-> = z.nativeEnum(FilesystemStorageClass);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(FilesystemStorageClass));
 /** @internal */
 export const FilesystemStorageClass$outboundSchema: z.ZodNativeEnum<
   typeof FilesystemStorageClass
 > = FilesystemStorageClass$inboundSchema;
 
 /** @internal */
-export const Protocol$inboundSchema: z.ZodNativeEnum<typeof Protocol> = z
-  .nativeEnum(Protocol);
+export const Protocol$inboundSchema: z.ZodNativeEnum<typeof Protocol> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Protocol));
 /** @internal */
 export const Protocol$outboundSchema: z.ZodNativeEnum<typeof Protocol> =
   Protocol$inboundSchema;
@@ -121,12 +121,14 @@ export const FilesystemDataSite$inboundSchema: z.ZodType<
   FilesystemDataSite,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  slug: z.string().optional(),
-  facility: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    name: z.string().optional(),
+    slug: z.string().optional(),
+    facility: z.string().optional(),
+  })
+);
 /** @internal */
 export type FilesystemDataSite$Outbound = {
   id?: string | undefined;
@@ -140,12 +142,14 @@ export const FilesystemDataSite$outboundSchema: z.ZodType<
   FilesystemDataSite$Outbound,
   z.ZodTypeDef,
   FilesystemDataSite
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  slug: z.string().optional(),
-  facility: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    name: z.string().optional(),
+    slug: z.string().optional(),
+    facility: z.string().optional(),
+  })
+);
 
 export function filesystemDataSiteToJSON(
   filesystemDataSite: FilesystemDataSite,
@@ -169,11 +173,13 @@ export const FilesystemDataRegion$inboundSchema: z.ZodType<
   FilesystemDataRegion,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  city: z.nullable(z.string()).optional(),
-  country: z.nullable(z.string()).optional(),
-  site: z.nullable(z.lazy(() => FilesystemDataSite$inboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    city: z.nullable(z.string()).optional(),
+    country: z.nullable(z.string()).optional(),
+    site: z.nullable(z.lazy(() => FilesystemDataSite$inboundSchema)).optional(),
+  })
+);
 /** @internal */
 export type FilesystemDataRegion$Outbound = {
   city?: string | null | undefined;
@@ -186,11 +192,14 @@ export const FilesystemDataRegion$outboundSchema: z.ZodType<
   FilesystemDataRegion$Outbound,
   z.ZodTypeDef,
   FilesystemDataRegion
-> = z.object({
-  city: z.nullable(z.string()).optional(),
-  country: z.nullable(z.string()).optional(),
-  site: z.nullable(z.lazy(() => FilesystemDataSite$outboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    city: z.nullable(z.string()).optional(),
+    country: z.nullable(z.string()).optional(),
+    site: z.nullable(z.lazy(() => FilesystemDataSite$outboundSchema))
+      .optional(),
+  })
+);
 
 export function filesystemDataRegionToJSON(
   filesystemDataRegion: FilesystemDataRegion,
@@ -214,34 +223,36 @@ export const FilesystemDataAttributes$inboundSchema: z.ZodType<
   FilesystemDataAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string().optional(),
-  size_in_gb: z.number().int().optional(),
-  storage_class: z.nullable(FilesystemStorageClass$inboundSchema).optional(),
-  created_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  keyring: z.nullable(z.string()).optional(),
-  cluster_user: z.nullable(z.string()).optional(),
-  volume_path: z.nullable(z.string()).optional(),
-  nfs_mount_path: z.nullable(z.string()).optional(),
-  protocols: z.nullable(z.array(Protocol$inboundSchema)).optional(),
-  file_endpoint: z.nullable(z.string()).optional(),
-  region: z.nullable(z.lazy(() => FilesystemDataRegion$inboundSchema))
-    .optional(),
-  project: ProjectInclude$inboundSchema.optional(),
-  team: TeamInclude$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "size_in_gb": "sizeInGb",
-    "storage_class": "filesystemStorageClass",
-    "created_at": "createdAt",
-    "cluster_user": "clusterUser",
-    "volume_path": "volumePath",
-    "nfs_mount_path": "nfsMountPath",
-    "file_endpoint": "fileEndpoint",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    size_in_gb: z.number().int().optional(),
+    storage_class: z.nullable(FilesystemStorageClass$inboundSchema).optional(),
+    created_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    keyring: z.nullable(z.string()).optional(),
+    cluster_user: z.nullable(z.string()).optional(),
+    volume_path: z.nullable(z.string()).optional(),
+    nfs_mount_path: z.nullable(z.string()).optional(),
+    protocols: z.nullable(z.array(Protocol$inboundSchema)).optional(),
+    file_endpoint: z.nullable(z.string()).optional(),
+    region: z.nullable(z.lazy(() => FilesystemDataRegion$inboundSchema))
+      .optional(),
+    project: ProjectInclude$inboundSchema.optional(),
+    team: TeamInclude$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "size_in_gb": "sizeInGb",
+      "storage_class": "filesystemStorageClass",
+      "created_at": "createdAt",
+      "cluster_user": "clusterUser",
+      "volume_path": "volumePath",
+      "nfs_mount_path": "nfsMountPath",
+      "file_endpoint": "fileEndpoint",
+    });
+  })
+);
 /** @internal */
 export type FilesystemDataAttributes$Outbound = {
   name?: string | undefined;
@@ -264,33 +275,35 @@ export const FilesystemDataAttributes$outboundSchema: z.ZodType<
   FilesystemDataAttributes$Outbound,
   z.ZodTypeDef,
   FilesystemDataAttributes
-> = z.object({
-  name: z.string().optional(),
-  sizeInGb: z.number().int().optional(),
-  filesystemStorageClass: z.nullable(FilesystemStorageClass$outboundSchema)
-    .optional(),
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  keyring: z.nullable(z.string()).optional(),
-  clusterUser: z.nullable(z.string()).optional(),
-  volumePath: z.nullable(z.string()).optional(),
-  nfsMountPath: z.nullable(z.string()).optional(),
-  protocols: z.nullable(z.array(Protocol$outboundSchema)).optional(),
-  fileEndpoint: z.nullable(z.string()).optional(),
-  region: z.nullable(z.lazy(() => FilesystemDataRegion$outboundSchema))
-    .optional(),
-  project: ProjectInclude$outboundSchema.optional(),
-  team: TeamInclude$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    sizeInGb: "size_in_gb",
-    filesystemStorageClass: "storage_class",
-    createdAt: "created_at",
-    clusterUser: "cluster_user",
-    volumePath: "volume_path",
-    nfsMountPath: "nfs_mount_path",
-    fileEndpoint: "file_endpoint",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    sizeInGb: z.number().int().optional(),
+    filesystemStorageClass: z.nullable(FilesystemStorageClass$outboundSchema)
+      .optional(),
+    createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    keyring: z.nullable(z.string()).optional(),
+    clusterUser: z.nullable(z.string()).optional(),
+    volumePath: z.nullable(z.string()).optional(),
+    nfsMountPath: z.nullable(z.string()).optional(),
+    protocols: z.nullable(z.array(Protocol$outboundSchema)).optional(),
+    fileEndpoint: z.nullable(z.string()).optional(),
+    region: z.nullable(z.lazy(() => FilesystemDataRegion$outboundSchema))
+      .optional(),
+    project: ProjectInclude$outboundSchema.optional(),
+    team: TeamInclude$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      sizeInGb: "size_in_gb",
+      filesystemStorageClass: "storage_class",
+      createdAt: "created_at",
+      clusterUser: "cluster_user",
+      volumePath: "volume_path",
+      nfsMountPath: "nfs_mount_path",
+      fileEndpoint: "file_endpoint",
+    });
+  })
+);
 
 export function filesystemDataAttributesToJSON(
   filesystemDataAttributes: FilesystemDataAttributes,
@@ -314,11 +327,13 @@ export const FilesystemData$inboundSchema: z.ZodType<
   FilesystemData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  type: FilesystemDataType$inboundSchema.optional(),
-  attributes: z.lazy(() => FilesystemDataAttributes$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: FilesystemDataType$inboundSchema.optional(),
+    attributes: z.lazy(() => FilesystemDataAttributes$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type FilesystemData$Outbound = {
   id?: string | undefined;
@@ -331,11 +346,14 @@ export const FilesystemData$outboundSchema: z.ZodType<
   FilesystemData$Outbound,
   z.ZodTypeDef,
   FilesystemData
-> = z.object({
-  id: z.string().optional(),
-  type: FilesystemDataType$outboundSchema.optional(),
-  attributes: z.lazy(() => FilesystemDataAttributes$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: FilesystemDataType$outboundSchema.optional(),
+    attributes: z.lazy(() => FilesystemDataAttributes$outboundSchema)
+      .optional(),
+  })
+);
 
 export function filesystemDataToJSON(filesystemData: FilesystemData): string {
   return JSON.stringify(FilesystemData$outboundSchema.parse(filesystemData));

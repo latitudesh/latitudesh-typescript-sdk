@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -33,15 +33,17 @@ export const DeleteInferenceApiKeyRequest$inboundSchema: z.ZodType<
   DeleteInferenceApiKeyRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  project_id: z.string(),
-  api_key_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "project_id": "projectId",
-    "api_key_id": "apiKeyId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    project_id: z.string(),
+    api_key_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "project_id": "projectId",
+      "api_key_id": "apiKeyId",
+    });
+  })
+);
 /** @internal */
 export type DeleteInferenceApiKeyRequest$Outbound = {
   project_id: string;
@@ -53,15 +55,17 @@ export const DeleteInferenceApiKeyRequest$outboundSchema: z.ZodType<
   DeleteInferenceApiKeyRequest$Outbound,
   z.ZodTypeDef,
   DeleteInferenceApiKeyRequest
-> = z.object({
-  projectId: z.string(),
-  apiKeyId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    projectId: "project_id",
-    apiKeyId: "api_key_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    projectId: z.string(),
+    apiKeyId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      projectId: "project_id",
+      apiKeyId: "api_key_id",
+    });
+  })
+);
 
 export function deleteInferenceApiKeyRequestToJSON(
   deleteInferenceApiKeyRequest: DeleteInferenceApiKeyRequest,
@@ -87,7 +91,7 @@ export const DeleteInferenceApiKeyMeta$inboundSchema: z.ZodType<
   DeleteInferenceApiKeyMeta,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type DeleteInferenceApiKeyMeta$Outbound = {};
 
@@ -96,7 +100,7 @@ export const DeleteInferenceApiKeyMeta$outboundSchema: z.ZodType<
   DeleteInferenceApiKeyMeta$Outbound,
   z.ZodTypeDef,
   DeleteInferenceApiKeyMeta
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function deleteInferenceApiKeyMetaToJSON(
   deleteInferenceApiKeyMeta: DeleteInferenceApiKeyMeta,
@@ -120,9 +124,11 @@ export const DeleteInferenceApiKeyResponse$inboundSchema: z.ZodType<
   DeleteInferenceApiKeyResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  meta: z.lazy(() => DeleteInferenceApiKeyMeta$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    meta: z.lazy(() => DeleteInferenceApiKeyMeta$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type DeleteInferenceApiKeyResponse$Outbound = {
   meta?: DeleteInferenceApiKeyMeta$Outbound | undefined;
@@ -133,9 +139,11 @@ export const DeleteInferenceApiKeyResponse$outboundSchema: z.ZodType<
   DeleteInferenceApiKeyResponse$Outbound,
   z.ZodTypeDef,
   DeleteInferenceApiKeyResponse
-> = z.object({
-  meta: z.lazy(() => DeleteInferenceApiKeyMeta$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    meta: z.lazy(() => DeleteInferenceApiKeyMeta$outboundSchema).optional(),
+  })
+);
 
 export function deleteInferenceApiKeyResponseToJSON(
   deleteInferenceApiKeyResponse: DeleteInferenceApiKeyResponse,

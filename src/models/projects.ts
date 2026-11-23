@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 import {
@@ -29,10 +29,12 @@ export const Projects$inboundSchema: z.ZodType<
   Projects,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.array(Project$inboundSchema).optional(),
-  meta: PaginationMeta$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(Project$inboundSchema).optional(),
+    meta: PaginationMeta$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type Projects$Outbound = {
   data?: Array<Project$Outbound> | undefined;
@@ -44,10 +46,12 @@ export const Projects$outboundSchema: z.ZodType<
   Projects$Outbound,
   z.ZodTypeDef,
   Projects
-> = z.object({
-  data: z.array(Project$outboundSchema).optional(),
-  meta: PaginationMeta$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(Project$outboundSchema).optional(),
+    meta: PaginationMeta$outboundSchema.optional(),
+  })
+);
 
 export function projectsToJSON(projects: Projects): string {
   return JSON.stringify(Projects$outboundSchema.parse(projects));

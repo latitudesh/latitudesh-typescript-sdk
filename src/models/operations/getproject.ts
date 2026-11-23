@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as models from "../index.js";
@@ -31,13 +31,15 @@ export const GetProjectRequest$inboundSchema: z.ZodType<
   GetProjectRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  project_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "project_id": "projectId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    project_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "project_id": "projectId",
+    });
+  })
+);
 /** @internal */
 export type GetProjectRequest$Outbound = {
   project_id: string;
@@ -48,13 +50,15 @@ export const GetProjectRequest$outboundSchema: z.ZodType<
   GetProjectRequest$Outbound,
   z.ZodTypeDef,
   GetProjectRequest
-> = z.object({
-  projectId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    projectId: "project_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    projectId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      projectId: "project_id",
+    });
+  })
+);
 
 export function getProjectRequestToJSON(
   getProjectRequest: GetProjectRequest,
@@ -78,7 +82,7 @@ export const GetProjectMeta$inboundSchema: z.ZodType<
   GetProjectMeta,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type GetProjectMeta$Outbound = {};
 
@@ -87,7 +91,7 @@ export const GetProjectMeta$outboundSchema: z.ZodType<
   GetProjectMeta$Outbound,
   z.ZodTypeDef,
   GetProjectMeta
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function getProjectMetaToJSON(getProjectMeta: GetProjectMeta): string {
   return JSON.stringify(GetProjectMeta$outboundSchema.parse(getProjectMeta));
@@ -107,10 +111,12 @@ export const GetProjectResponse$inboundSchema: z.ZodType<
   GetProjectResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: models.Project$inboundSchema.optional(),
-  meta: z.lazy(() => GetProjectMeta$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: models.Project$inboundSchema.optional(),
+    meta: z.lazy(() => GetProjectMeta$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type GetProjectResponse$Outbound = {
   data?: models.Project$Outbound | undefined;
@@ -122,10 +128,12 @@ export const GetProjectResponse$outboundSchema: z.ZodType<
   GetProjectResponse$Outbound,
   z.ZodTypeDef,
   GetProjectResponse
-> = z.object({
-  data: models.Project$outboundSchema.optional(),
-  meta: z.lazy(() => GetProjectMeta$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: models.Project$outboundSchema.optional(),
+    meta: z.lazy(() => GetProjectMeta$outboundSchema).optional(),
+  })
+);
 
 export function getProjectResponseToJSON(
   getProjectResponse: GetProjectResponse,

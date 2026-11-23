@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -32,7 +32,9 @@ export type LksKubernetesVersionData = {
 /** @internal */
 export const LksKubernetesVersionDataType$inboundSchema: z.ZodNativeEnum<
   typeof LksKubernetesVersionDataType
-> = z.nativeEnum(LksKubernetesVersionDataType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(LksKubernetesVersionDataType)
+);
 /** @internal */
 export const LksKubernetesVersionDataType$outboundSchema: z.ZodNativeEnum<
   typeof LksKubernetesVersionDataType
@@ -43,17 +45,19 @@ export const LksKubernetesVersionDataAttributes$inboundSchema: z.ZodType<
   LksKubernetesVersionDataAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  version: z.string().optional(),
-  default: z.boolean().optional(),
-  available_for_creation: z.boolean().optional(),
-  available_for_upgrade: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "available_for_creation": "availableForCreation",
-    "available_for_upgrade": "availableForUpgrade",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    version: z.string().optional(),
+    default: z.boolean().optional(),
+    available_for_creation: z.boolean().optional(),
+    available_for_upgrade: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "available_for_creation": "availableForCreation",
+      "available_for_upgrade": "availableForUpgrade",
+    });
+  })
+);
 /** @internal */
 export type LksKubernetesVersionDataAttributes$Outbound = {
   version?: string | undefined;
@@ -67,17 +71,19 @@ export const LksKubernetesVersionDataAttributes$outboundSchema: z.ZodType<
   LksKubernetesVersionDataAttributes$Outbound,
   z.ZodTypeDef,
   LksKubernetesVersionDataAttributes
-> = z.object({
-  version: z.string().optional(),
-  default: z.boolean().optional(),
-  availableForCreation: z.boolean().optional(),
-  availableForUpgrade: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    availableForCreation: "available_for_creation",
-    availableForUpgrade: "available_for_upgrade",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    version: z.string().optional(),
+    default: z.boolean().optional(),
+    availableForCreation: z.boolean().optional(),
+    availableForUpgrade: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      availableForCreation: "available_for_creation",
+      availableForUpgrade: "available_for_upgrade",
+    });
+  })
+);
 
 export function lksKubernetesVersionDataAttributesToJSON(
   lksKubernetesVersionDataAttributes: LksKubernetesVersionDataAttributes,
@@ -104,12 +110,14 @@ export const LksKubernetesVersionData$inboundSchema: z.ZodType<
   LksKubernetesVersionData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  type: LksKubernetesVersionDataType$inboundSchema.optional(),
-  attributes: z.lazy(() => LksKubernetesVersionDataAttributes$inboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: LksKubernetesVersionDataType$inboundSchema.optional(),
+    attributes: z.lazy(() => LksKubernetesVersionDataAttributes$inboundSchema)
+      .optional(),
+  })
+);
 /** @internal */
 export type LksKubernetesVersionData$Outbound = {
   id?: string | undefined;
@@ -122,12 +130,14 @@ export const LksKubernetesVersionData$outboundSchema: z.ZodType<
   LksKubernetesVersionData$Outbound,
   z.ZodTypeDef,
   LksKubernetesVersionData
-> = z.object({
-  id: z.string().optional(),
-  type: LksKubernetesVersionDataType$outboundSchema.optional(),
-  attributes: z.lazy(() => LksKubernetesVersionDataAttributes$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: LksKubernetesVersionDataType$outboundSchema.optional(),
+    attributes: z.lazy(() => LksKubernetesVersionDataAttributes$outboundSchema)
+      .optional(),
+  })
+);
 
 export function lksKubernetesVersionDataToJSON(
   lksKubernetesVersionData: LksKubernetesVersionData,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 import {
@@ -25,7 +25,7 @@ export const ServerMeta$inboundSchema: z.ZodType<
   ServerMeta,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type ServerMeta$Outbound = {};
 
@@ -34,7 +34,7 @@ export const ServerMeta$outboundSchema: z.ZodType<
   ServerMeta$Outbound,
   z.ZodTypeDef,
   ServerMeta
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function serverMetaToJSON(serverMeta: ServerMeta): string {
   return JSON.stringify(ServerMeta$outboundSchema.parse(serverMeta));
@@ -50,11 +50,13 @@ export function serverMetaFromJSON(
 }
 
 /** @internal */
-export const Server$inboundSchema: z.ZodType<Server, z.ZodTypeDef, unknown> = z
-  .object({
-    data: ServerData$inboundSchema.optional(),
-    meta: z.lazy(() => ServerMeta$inboundSchema).optional(),
-  });
+export const Server$inboundSchema: z.ZodType<Server, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      data: ServerData$inboundSchema.optional(),
+      meta: z.lazy(() => ServerMeta$inboundSchema).optional(),
+    })
+  );
 /** @internal */
 export type Server$Outbound = {
   data?: ServerData$Outbound | undefined;
@@ -66,10 +68,12 @@ export const Server$outboundSchema: z.ZodType<
   Server$Outbound,
   z.ZodTypeDef,
   Server
-> = z.object({
-  data: ServerData$outboundSchema.optional(),
-  meta: z.lazy(() => ServerMeta$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: ServerData$outboundSchema.optional(),
+    meta: z.lazy(() => ServerMeta$outboundSchema).optional(),
+  })
+);
 
 export function serverToJSON(server: Server): string {
   return JSON.stringify(Server$outboundSchema.parse(server));

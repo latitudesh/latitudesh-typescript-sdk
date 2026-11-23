@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -116,13 +116,15 @@ export const GetStorageBucketMetricsRequest$inboundSchema: z.ZodType<
   GetStorageBucketMetricsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  bucket_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "bucket_id": "bucketId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    bucket_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "bucket_id": "bucketId",
+    });
+  })
+);
 /** @internal */
 export type GetStorageBucketMetricsRequest$Outbound = {
   bucket_id: string;
@@ -133,13 +135,15 @@ export const GetStorageBucketMetricsRequest$outboundSchema: z.ZodType<
   GetStorageBucketMetricsRequest$Outbound,
   z.ZodTypeDef,
   GetStorageBucketMetricsRequest
-> = z.object({
-  bucketId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    bucketId: "bucket_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    bucketId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      bucketId: "bucket_id",
+    });
+  })
+);
 
 export function getStorageBucketMetricsRequestToJSON(
   getStorageBucketMetricsRequest: GetStorageBucketMetricsRequest,
@@ -163,22 +167,26 @@ export function getStorageBucketMetricsRequestFromJSON(
 /** @internal */
 export const GetStorageBucketMetricsType$inboundSchema: z.ZodNativeEnum<
   typeof GetStorageBucketMetricsType
-> = z.nativeEnum(GetStorageBucketMetricsType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(GetStorageBucketMetricsType)
+);
 /** @internal */
 export const GetStorageBucketMetricsType$outboundSchema: z.ZodNativeEnum<
   typeof GetStorageBucketMetricsType
 > = GetStorageBucketMetricsType$inboundSchema;
 
 /** @internal */
-export const Period$inboundSchema: z.ZodType<Period, z.ZodTypeDef, unknown> = z
-  .object({
-    start: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ).optional(),
-    end: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ).optional(),
-  });
+export const Period$inboundSchema: z.ZodType<Period, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      start: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ).optional(),
+      end: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ).optional(),
+    })
+  );
 /** @internal */
 export type Period$Outbound = {
   start?: string | null | undefined;
@@ -190,10 +198,12 @@ export const Period$outboundSchema: z.ZodType<
   Period$Outbound,
   z.ZodTypeDef,
   Period
-> = z.object({
-  start: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  end: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    start: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    end: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+  })
+);
 
 export function periodToJSON(period: Period): string {
   return JSON.stringify(Period$outboundSchema.parse(period));
@@ -209,20 +219,21 @@ export function periodFromJSON(
 }
 
 /** @internal */
-export const Unit$inboundSchema: z.ZodNativeEnum<typeof Unit> = z.nativeEnum(
-  Unit,
-);
+export const Unit$inboundSchema: z.ZodNativeEnum<typeof Unit> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Unit));
 /** @internal */
 export const Unit$outboundSchema: z.ZodNativeEnum<typeof Unit> =
   Unit$inboundSchema;
 
 /** @internal */
 export const Storage$inboundSchema: z.ZodType<Storage, z.ZodTypeDef, unknown> =
-  z.object({
-    consumed: z.number().int().optional(),
-    current: z.number().int().optional(),
-    unit: Unit$inboundSchema.optional(),
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      consumed: z.number().int().optional(),
+      current: z.number().int().optional(),
+      unit: Unit$inboundSchema.optional(),
+    })
+  );
 /** @internal */
 export type Storage$Outbound = {
   consumed?: number | undefined;
@@ -235,11 +246,13 @@ export const Storage$outboundSchema: z.ZodType<
   Storage$Outbound,
   z.ZodTypeDef,
   Storage
-> = z.object({
-  consumed: z.number().int().optional(),
-  current: z.number().int().optional(),
-  unit: Unit$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    consumed: z.number().int().optional(),
+    current: z.number().int().optional(),
+    unit: Unit$outboundSchema.optional(),
+  })
+);
 
 export function storageToJSON(storage: Storage): string {
   return JSON.stringify(Storage$outboundSchema.parse(storage));
@@ -259,10 +272,12 @@ export const EstimatedCost$inboundSchema: z.ZodType<
   EstimatedCost,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  amount: z.number().optional(),
-  currency: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    amount: z.number().optional(),
+    currency: z.string().optional(),
+  })
+);
 /** @internal */
 export type EstimatedCost$Outbound = {
   amount?: number | undefined;
@@ -274,10 +289,12 @@ export const EstimatedCost$outboundSchema: z.ZodType<
   EstimatedCost$Outbound,
   z.ZodTypeDef,
   EstimatedCost
-> = z.object({
-  amount: z.number().optional(),
-  currency: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    amount: z.number().optional(),
+    currency: z.string().optional(),
+  })
+);
 
 export function estimatedCostToJSON(estimatedCost: EstimatedCost): string {
   return JSON.stringify(EstimatedCost$outboundSchema.parse(estimatedCost));
@@ -297,15 +314,17 @@ export const GetStorageBucketMetricsAttributes$inboundSchema: z.ZodType<
   GetStorageBucketMetricsAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  period: z.lazy(() => Period$inboundSchema).optional(),
-  storage: z.lazy(() => Storage$inboundSchema).optional(),
-  estimated_cost: z.lazy(() => EstimatedCost$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "estimated_cost": "estimatedCost",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    period: z.lazy(() => Period$inboundSchema).optional(),
+    storage: z.lazy(() => Storage$inboundSchema).optional(),
+    estimated_cost: z.lazy(() => EstimatedCost$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "estimated_cost": "estimatedCost",
+    });
+  })
+);
 /** @internal */
 export type GetStorageBucketMetricsAttributes$Outbound = {
   period?: Period$Outbound | undefined;
@@ -318,15 +337,17 @@ export const GetStorageBucketMetricsAttributes$outboundSchema: z.ZodType<
   GetStorageBucketMetricsAttributes$Outbound,
   z.ZodTypeDef,
   GetStorageBucketMetricsAttributes
-> = z.object({
-  period: z.lazy(() => Period$outboundSchema).optional(),
-  storage: z.lazy(() => Storage$outboundSchema).optional(),
-  estimatedCost: z.lazy(() => EstimatedCost$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    estimatedCost: "estimated_cost",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    period: z.lazy(() => Period$outboundSchema).optional(),
+    storage: z.lazy(() => Storage$outboundSchema).optional(),
+    estimatedCost: z.lazy(() => EstimatedCost$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      estimatedCost: "estimated_cost",
+    });
+  })
+);
 
 export function getStorageBucketMetricsAttributesToJSON(
   getStorageBucketMetricsAttributes: GetStorageBucketMetricsAttributes,
@@ -352,12 +373,14 @@ export const GetStorageBucketMetricsData$inboundSchema: z.ZodType<
   GetStorageBucketMetricsData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  type: GetStorageBucketMetricsType$inboundSchema.optional(),
-  attributes: z.lazy(() => GetStorageBucketMetricsAttributes$inboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: GetStorageBucketMetricsType$inboundSchema.optional(),
+    attributes: z.lazy(() => GetStorageBucketMetricsAttributes$inboundSchema)
+      .optional(),
+  })
+);
 /** @internal */
 export type GetStorageBucketMetricsData$Outbound = {
   id?: string | undefined;
@@ -370,12 +393,14 @@ export const GetStorageBucketMetricsData$outboundSchema: z.ZodType<
   GetStorageBucketMetricsData$Outbound,
   z.ZodTypeDef,
   GetStorageBucketMetricsData
-> = z.object({
-  id: z.string().optional(),
-  type: GetStorageBucketMetricsType$outboundSchema.optional(),
-  attributes: z.lazy(() => GetStorageBucketMetricsAttributes$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: GetStorageBucketMetricsType$outboundSchema.optional(),
+    attributes: z.lazy(() => GetStorageBucketMetricsAttributes$outboundSchema)
+      .optional(),
+  })
+);
 
 export function getStorageBucketMetricsDataToJSON(
   getStorageBucketMetricsData: GetStorageBucketMetricsData,
@@ -401,9 +426,11 @@ export const GetStorageBucketMetricsResponse$inboundSchema: z.ZodType<
   GetStorageBucketMetricsResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => GetStorageBucketMetricsData$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => GetStorageBucketMetricsData$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type GetStorageBucketMetricsResponse$Outbound = {
   data?: GetStorageBucketMetricsData$Outbound | undefined;
@@ -414,9 +441,11 @@ export const GetStorageBucketMetricsResponse$outboundSchema: z.ZodType<
   GetStorageBucketMetricsResponse$Outbound,
   z.ZodTypeDef,
   GetStorageBucketMetricsResponse
-> = z.object({
-  data: z.lazy(() => GetStorageBucketMetricsData$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => GetStorageBucketMetricsData$outboundSchema).optional(),
+  })
+);
 
 export function getStorageBucketMetricsResponseToJSON(
   getStorageBucketMetricsResponse: GetStorageBucketMetricsResponse,

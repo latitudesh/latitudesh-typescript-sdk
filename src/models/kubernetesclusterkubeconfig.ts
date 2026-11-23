@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 
@@ -37,14 +37,16 @@ export const KubernetesClusterKubeconfigAttributes$inboundSchema: z.ZodType<
   KubernetesClusterKubeconfigAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  cluster_name: z.string().optional(),
-  kubeconfig: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "cluster_name": "clusterName",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    cluster_name: z.string().optional(),
+    kubeconfig: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "cluster_name": "clusterName",
+    });
+  })
+);
 /** @internal */
 export type KubernetesClusterKubeconfigAttributes$Outbound = {
   cluster_name?: string | undefined;
@@ -56,14 +58,16 @@ export const KubernetesClusterKubeconfigAttributes$outboundSchema: z.ZodType<
   KubernetesClusterKubeconfigAttributes$Outbound,
   z.ZodTypeDef,
   KubernetesClusterKubeconfigAttributes
-> = z.object({
-  clusterName: z.string().optional(),
-  kubeconfig: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    clusterName: "cluster_name",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    clusterName: z.string().optional(),
+    kubeconfig: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      clusterName: "cluster_name",
+    });
+  })
+);
 
 export function kubernetesClusterKubeconfigAttributesToJSON(
   kubernetesClusterKubeconfigAttributes: KubernetesClusterKubeconfigAttributes,
@@ -90,12 +94,15 @@ export const KubernetesClusterKubeconfigData$inboundSchema: z.ZodType<
   KubernetesClusterKubeconfigData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  type: z.string().optional(),
-  attributes: z.lazy(() => KubernetesClusterKubeconfigAttributes$inboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: z.string().optional(),
+    attributes: z.lazy(() =>
+      KubernetesClusterKubeconfigAttributes$inboundSchema
+    ).optional(),
+  })
+);
 /** @internal */
 export type KubernetesClusterKubeconfigData$Outbound = {
   id?: string | undefined;
@@ -108,12 +115,15 @@ export const KubernetesClusterKubeconfigData$outboundSchema: z.ZodType<
   KubernetesClusterKubeconfigData$Outbound,
   z.ZodTypeDef,
   KubernetesClusterKubeconfigData
-> = z.object({
-  id: z.string().optional(),
-  type: z.string().optional(),
-  attributes: z.lazy(() => KubernetesClusterKubeconfigAttributes$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: z.string().optional(),
+    attributes: z.lazy(() =>
+      KubernetesClusterKubeconfigAttributes$outboundSchema
+    ).optional(),
+  })
+);
 
 export function kubernetesClusterKubeconfigDataToJSON(
   kubernetesClusterKubeconfigData: KubernetesClusterKubeconfigData,
@@ -139,9 +149,12 @@ export const KubernetesClusterKubeconfig$inboundSchema: z.ZodType<
   KubernetesClusterKubeconfig,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => KubernetesClusterKubeconfigData$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => KubernetesClusterKubeconfigData$inboundSchema)
+      .optional(),
+  })
+);
 /** @internal */
 export type KubernetesClusterKubeconfig$Outbound = {
   data?: KubernetesClusterKubeconfigData$Outbound | undefined;
@@ -152,9 +165,12 @@ export const KubernetesClusterKubeconfig$outboundSchema: z.ZodType<
   KubernetesClusterKubeconfig$Outbound,
   z.ZodTypeDef,
   KubernetesClusterKubeconfig
-> = z.object({
-  data: z.lazy(() => KubernetesClusterKubeconfigData$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => KubernetesClusterKubeconfigData$outboundSchema)
+      .optional(),
+  })
+);
 
 export function kubernetesClusterKubeconfigToJSON(
   kubernetesClusterKubeconfig: KubernetesClusterKubeconfig,

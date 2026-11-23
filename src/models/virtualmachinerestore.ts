@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 import {
@@ -25,7 +25,7 @@ export const VirtualMachineRestoreMeta$inboundSchema: z.ZodType<
   VirtualMachineRestoreMeta,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type VirtualMachineRestoreMeta$Outbound = {};
 
@@ -34,7 +34,7 @@ export const VirtualMachineRestoreMeta$outboundSchema: z.ZodType<
   VirtualMachineRestoreMeta$Outbound,
   z.ZodTypeDef,
   VirtualMachineRestoreMeta
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function virtualMachineRestoreMetaToJSON(
   virtualMachineRestoreMeta: VirtualMachineRestoreMeta,
@@ -58,10 +58,12 @@ export const VirtualMachineRestore$inboundSchema: z.ZodType<
   VirtualMachineRestore,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: VirtualMachineRestoreAttributes$inboundSchema.optional(),
-  meta: z.lazy(() => VirtualMachineRestoreMeta$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: VirtualMachineRestoreAttributes$inboundSchema.optional(),
+    meta: z.lazy(() => VirtualMachineRestoreMeta$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type VirtualMachineRestore$Outbound = {
   data?: VirtualMachineRestoreAttributes$Outbound | undefined;
@@ -73,10 +75,12 @@ export const VirtualMachineRestore$outboundSchema: z.ZodType<
   VirtualMachineRestore$Outbound,
   z.ZodTypeDef,
   VirtualMachineRestore
-> = z.object({
-  data: VirtualMachineRestoreAttributes$outboundSchema.optional(),
-  meta: z.lazy(() => VirtualMachineRestoreMeta$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: VirtualMachineRestoreAttributes$outboundSchema.optional(),
+    meta: z.lazy(() => VirtualMachineRestoreMeta$outboundSchema).optional(),
+  })
+);
 
 export function virtualMachineRestoreToJSON(
   virtualMachineRestore: VirtualMachineRestore,

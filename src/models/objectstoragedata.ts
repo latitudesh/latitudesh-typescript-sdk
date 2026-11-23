@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -148,7 +148,7 @@ export type ObjectStorageData = {
 /** @internal */
 export const ObjectStorageDataType$inboundSchema: z.ZodNativeEnum<
   typeof ObjectStorageDataType
-> = z.nativeEnum(ObjectStorageDataType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ObjectStorageDataType));
 /** @internal */
 export const ObjectStorageDataType$outboundSchema: z.ZodNativeEnum<
   typeof ObjectStorageDataType
@@ -156,7 +156,7 @@ export const ObjectStorageDataType$outboundSchema: z.ZodNativeEnum<
 
 /** @internal */
 export const StorageClass$inboundSchema: z.ZodNativeEnum<typeof StorageClass> =
-  z.nativeEnum(StorageClass);
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(StorageClass));
 /** @internal */
 export const StorageClass$outboundSchema: z.ZodNativeEnum<typeof StorageClass> =
   StorageClass$inboundSchema;
@@ -164,7 +164,7 @@ export const StorageClass$outboundSchema: z.ZodNativeEnum<typeof StorageClass> =
 /** @internal */
 export const RetentionMode$inboundSchema: z.ZodNativeEnum<
   typeof RetentionMode
-> = z.nativeEnum(RetentionMode);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(RetentionMode));
 /** @internal */
 export const RetentionMode$outboundSchema: z.ZodNativeEnum<
   typeof RetentionMode
@@ -175,11 +175,13 @@ export const ObjectStorageDataRegion$inboundSchema: z.ZodType<
   ObjectStorageDataRegion,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  city: z.string().optional(),
-  country: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    city: z.string().optional(),
+    country: z.nullable(z.string()).optional(),
+  })
+);
 /** @internal */
 export type ObjectStorageDataRegion$Outbound = {
   id?: string | undefined;
@@ -192,11 +194,13 @@ export const ObjectStorageDataRegion$outboundSchema: z.ZodType<
   ObjectStorageDataRegion$Outbound,
   z.ZodTypeDef,
   ObjectStorageDataRegion
-> = z.object({
-  id: z.string().optional(),
-  city: z.string().optional(),
-  country: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    city: z.string().optional(),
+    country: z.nullable(z.string()).optional(),
+  })
+);
 
 export function objectStorageDataRegionToJSON(
   objectStorageDataRegion: ObjectStorageDataRegion,
@@ -220,13 +224,15 @@ export const ObjectStorageDataCredentials$inboundSchema: z.ZodType<
   ObjectStorageDataCredentials,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  access_key: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "access_key": "accessKey",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    access_key: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "access_key": "accessKey",
+    });
+  })
+);
 /** @internal */
 export type ObjectStorageDataCredentials$Outbound = {
   access_key?: string | undefined;
@@ -237,13 +243,15 @@ export const ObjectStorageDataCredentials$outboundSchema: z.ZodType<
   ObjectStorageDataCredentials$Outbound,
   z.ZodTypeDef,
   ObjectStorageDataCredentials
-> = z.object({
-  accessKey: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    accessKey: "access_key",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessKey: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      accessKey: "access_key",
+    });
+  })
+);
 
 export function objectStorageDataCredentialsToJSON(
   objectStorageDataCredentials: ObjectStorageDataCredentials,
@@ -269,37 +277,39 @@ export const ObjectStorageDataAttributes$inboundSchema: z.ZodType<
   ObjectStorageDataAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string().optional(),
-  storage_type: z.string().optional(),
-  storage_class: StorageClass$inboundSchema.optional(),
-  created_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  bucket_name: z.string().optional(),
-  endpoint: z.string().optional(),
-  versioning: z.nullable(z.boolean()).optional(),
-  locking: z.nullable(z.boolean()).optional(),
-  retention_mode: z.nullable(RetentionMode$inboundSchema).optional(),
-  retention_period: z.nullable(z.number().int()).optional(),
-  source: z.string().optional(),
-  region: z.nullable(z.lazy(() => ObjectStorageDataRegion$inboundSchema))
-    .optional(),
-  credentials: z.nullable(
-    z.lazy(() => ObjectStorageDataCredentials$inboundSchema),
-  ).optional(),
-  project: ProjectInclude$inboundSchema.optional(),
-  team: TeamInclude$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "storage_type": "storageType",
-    "storage_class": "storageClass",
-    "created_at": "createdAt",
-    "bucket_name": "bucketName",
-    "retention_mode": "retentionMode",
-    "retention_period": "retentionPeriod",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    storage_type: z.string().optional(),
+    storage_class: StorageClass$inboundSchema.optional(),
+    created_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    bucket_name: z.string().optional(),
+    endpoint: z.string().optional(),
+    versioning: z.nullable(z.boolean()).optional(),
+    locking: z.nullable(z.boolean()).optional(),
+    retention_mode: z.nullable(RetentionMode$inboundSchema).optional(),
+    retention_period: z.nullable(z.number().int()).optional(),
+    source: z.string().optional(),
+    region: z.nullable(z.lazy(() => ObjectStorageDataRegion$inboundSchema))
+      .optional(),
+    credentials: z.nullable(
+      z.lazy(() => ObjectStorageDataCredentials$inboundSchema),
+    ).optional(),
+    project: ProjectInclude$inboundSchema.optional(),
+    team: TeamInclude$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "storage_type": "storageType",
+      "storage_class": "storageClass",
+      "created_at": "createdAt",
+      "bucket_name": "bucketName",
+      "retention_mode": "retentionMode",
+      "retention_period": "retentionPeriod",
+    });
+  })
+);
 /** @internal */
 export type ObjectStorageDataAttributes$Outbound = {
   name?: string | undefined;
@@ -324,35 +334,37 @@ export const ObjectStorageDataAttributes$outboundSchema: z.ZodType<
   ObjectStorageDataAttributes$Outbound,
   z.ZodTypeDef,
   ObjectStorageDataAttributes
-> = z.object({
-  name: z.string().optional(),
-  storageType: z.string().optional(),
-  storageClass: StorageClass$outboundSchema.optional(),
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  bucketName: z.string().optional(),
-  endpoint: z.string().optional(),
-  versioning: z.nullable(z.boolean()).optional(),
-  locking: z.nullable(z.boolean()).optional(),
-  retentionMode: z.nullable(RetentionMode$outboundSchema).optional(),
-  retentionPeriod: z.nullable(z.number().int()).optional(),
-  source: z.string().optional(),
-  region: z.nullable(z.lazy(() => ObjectStorageDataRegion$outboundSchema))
-    .optional(),
-  credentials: z.nullable(
-    z.lazy(() => ObjectStorageDataCredentials$outboundSchema),
-  ).optional(),
-  project: ProjectInclude$outboundSchema.optional(),
-  team: TeamInclude$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    storageType: "storage_type",
-    storageClass: "storage_class",
-    createdAt: "created_at",
-    bucketName: "bucket_name",
-    retentionMode: "retention_mode",
-    retentionPeriod: "retention_period",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    storageType: z.string().optional(),
+    storageClass: StorageClass$outboundSchema.optional(),
+    createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    bucketName: z.string().optional(),
+    endpoint: z.string().optional(),
+    versioning: z.nullable(z.boolean()).optional(),
+    locking: z.nullable(z.boolean()).optional(),
+    retentionMode: z.nullable(RetentionMode$outboundSchema).optional(),
+    retentionPeriod: z.nullable(z.number().int()).optional(),
+    source: z.string().optional(),
+    region: z.nullable(z.lazy(() => ObjectStorageDataRegion$outboundSchema))
+      .optional(),
+    credentials: z.nullable(
+      z.lazy(() => ObjectStorageDataCredentials$outboundSchema),
+    ).optional(),
+    project: ProjectInclude$outboundSchema.optional(),
+    team: TeamInclude$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      storageType: "storage_type",
+      storageClass: "storage_class",
+      createdAt: "created_at",
+      bucketName: "bucket_name",
+      retentionMode: "retention_mode",
+      retentionPeriod: "retention_period",
+    });
+  })
+);
 
 export function objectStorageDataAttributesToJSON(
   objectStorageDataAttributes: ObjectStorageDataAttributes,
@@ -378,12 +390,14 @@ export const ObjectStorageData$inboundSchema: z.ZodType<
   ObjectStorageData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  type: ObjectStorageDataType$inboundSchema.optional(),
-  attributes: z.lazy(() => ObjectStorageDataAttributes$inboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: ObjectStorageDataType$inboundSchema.optional(),
+    attributes: z.lazy(() => ObjectStorageDataAttributes$inboundSchema)
+      .optional(),
+  })
+);
 /** @internal */
 export type ObjectStorageData$Outbound = {
   id?: string | undefined;
@@ -396,12 +410,14 @@ export const ObjectStorageData$outboundSchema: z.ZodType<
   ObjectStorageData$Outbound,
   z.ZodTypeDef,
   ObjectStorageData
-> = z.object({
-  id: z.string().optional(),
-  type: ObjectStorageDataType$outboundSchema.optional(),
-  attributes: z.lazy(() => ObjectStorageDataAttributes$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: ObjectStorageDataType$outboundSchema.optional(),
+    attributes: z.lazy(() => ObjectStorageDataAttributes$outboundSchema)
+      .optional(),
+  })
+);
 
 export function objectStorageDataToJSON(
   objectStorageData: ObjectStorageData,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as models from "../index.js";
@@ -32,17 +32,19 @@ export const CreateVirtualMachineNetworkAttachmentRequest$inboundSchema:
     CreateVirtualMachineNetworkAttachmentRequest,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    virtual_machine_id: z.string(),
-    virtual_machine_network_attachment_create_payload:
-      models.VirtualMachineNetworkAttachmentCreatePayload$inboundSchema,
-  }).transform((v) => {
-    return remap$(v, {
-      "virtual_machine_id": "virtualMachineId",
-      "virtual_machine_network_attachment_create_payload":
-        "virtualMachineNetworkAttachmentCreatePayload",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      virtual_machine_id: z.string(),
+      virtual_machine_network_attachment_create_payload:
+        models.VirtualMachineNetworkAttachmentCreatePayload$inboundSchema,
+    }).transform((v) => {
+      return remap$(v, {
+        "virtual_machine_id": "virtualMachineId",
+        "virtual_machine_network_attachment_create_payload":
+          "virtualMachineNetworkAttachmentCreatePayload",
+      });
+    })
+  );
 /** @internal */
 export type CreateVirtualMachineNetworkAttachmentRequest$Outbound = {
   virtual_machine_id: string;
@@ -56,17 +58,19 @@ export const CreateVirtualMachineNetworkAttachmentRequest$outboundSchema:
     CreateVirtualMachineNetworkAttachmentRequest$Outbound,
     z.ZodTypeDef,
     CreateVirtualMachineNetworkAttachmentRequest
-  > = z.object({
-    virtualMachineId: z.string(),
-    virtualMachineNetworkAttachmentCreatePayload:
-      models.VirtualMachineNetworkAttachmentCreatePayload$outboundSchema,
-  }).transform((v) => {
-    return remap$(v, {
-      virtualMachineId: "virtual_machine_id",
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      virtualMachineId: z.string(),
       virtualMachineNetworkAttachmentCreatePayload:
-        "virtual_machine_network_attachment_create_payload",
-    });
-  });
+        models.VirtualMachineNetworkAttachmentCreatePayload$outboundSchema,
+    }).transform((v) => {
+      return remap$(v, {
+        virtualMachineId: "virtual_machine_id",
+        virtualMachineNetworkAttachmentCreatePayload:
+          "virtual_machine_network_attachment_create_payload",
+      });
+    })
+  );
 
 export function createVirtualMachineNetworkAttachmentRequestToJSON(
   createVirtualMachineNetworkAttachmentRequest:
@@ -99,9 +103,11 @@ export const CreateVirtualMachineNetworkAttachmentMeta$inboundSchema: z.ZodType<
   CreateVirtualMachineNetworkAttachmentMeta,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  status: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    status: z.string().optional(),
+  })
+);
 /** @internal */
 export type CreateVirtualMachineNetworkAttachmentMeta$Outbound = {
   status?: string | undefined;
@@ -113,9 +119,11 @@ export const CreateVirtualMachineNetworkAttachmentMeta$outboundSchema:
     CreateVirtualMachineNetworkAttachmentMeta$Outbound,
     z.ZodTypeDef,
     CreateVirtualMachineNetworkAttachmentMeta
-  > = z.object({
-    status: z.string().optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      status: z.string().optional(),
+    })
+  );
 
 export function createVirtualMachineNetworkAttachmentMetaToJSON(
   createVirtualMachineNetworkAttachmentMeta:
@@ -149,10 +157,13 @@ export const CreateVirtualMachineNetworkAttachmentResponse$inboundSchema:
     CreateVirtualMachineNetworkAttachmentResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    meta: z.lazy(() => CreateVirtualMachineNetworkAttachmentMeta$inboundSchema)
-      .optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      meta: z.lazy(() =>
+        CreateVirtualMachineNetworkAttachmentMeta$inboundSchema
+      ).optional(),
+    })
+  );
 /** @internal */
 export type CreateVirtualMachineNetworkAttachmentResponse$Outbound = {
   meta?: CreateVirtualMachineNetworkAttachmentMeta$Outbound | undefined;
@@ -164,10 +175,13 @@ export const CreateVirtualMachineNetworkAttachmentResponse$outboundSchema:
     CreateVirtualMachineNetworkAttachmentResponse$Outbound,
     z.ZodTypeDef,
     CreateVirtualMachineNetworkAttachmentResponse
-  > = z.object({
-    meta: z.lazy(() => CreateVirtualMachineNetworkAttachmentMeta$outboundSchema)
-      .optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      meta: z.lazy(() =>
+        CreateVirtualMachineNetworkAttachmentMeta$outboundSchema
+      ).optional(),
+    })
+  );
 
 export function createVirtualMachineNetworkAttachmentResponseToJSON(
   createVirtualMachineNetworkAttachmentResponse:

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as models from "../index.js";
@@ -19,16 +19,18 @@ export const UpdateVirtualMachineRequest$inboundSchema: z.ZodType<
   UpdateVirtualMachineRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  virtual_machine_id: z.string(),
-  virtual_machine_update_payload:
-    models.VirtualMachineUpdatePayload$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "virtual_machine_id": "virtualMachineId",
-    "virtual_machine_update_payload": "virtualMachineUpdatePayload",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    virtual_machine_id: z.string(),
+    virtual_machine_update_payload:
+      models.VirtualMachineUpdatePayload$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "virtual_machine_id": "virtualMachineId",
+      "virtual_machine_update_payload": "virtualMachineUpdatePayload",
+    });
+  })
+);
 /** @internal */
 export type UpdateVirtualMachineRequest$Outbound = {
   virtual_machine_id: string;
@@ -40,16 +42,18 @@ export const UpdateVirtualMachineRequest$outboundSchema: z.ZodType<
   UpdateVirtualMachineRequest$Outbound,
   z.ZodTypeDef,
   UpdateVirtualMachineRequest
-> = z.object({
-  virtualMachineId: z.string(),
-  virtualMachineUpdatePayload:
-    models.VirtualMachineUpdatePayload$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    virtualMachineId: "virtual_machine_id",
-    virtualMachineUpdatePayload: "virtual_machine_update_payload",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    virtualMachineId: z.string(),
+    virtualMachineUpdatePayload:
+      models.VirtualMachineUpdatePayload$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      virtualMachineId: "virtual_machine_id",
+      virtualMachineUpdatePayload: "virtual_machine_update_payload",
+    });
+  })
+);
 
 export function updateVirtualMachineRequestToJSON(
   updateVirtualMachineRequest: UpdateVirtualMachineRequest,

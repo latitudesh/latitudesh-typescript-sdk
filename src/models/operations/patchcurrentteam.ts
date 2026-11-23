@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -46,7 +46,7 @@ export type PatchCurrentTeamResponse = {
 /** @internal */
 export const PatchCurrentTeamType2$inboundSchema: z.ZodNativeEnum<
   typeof PatchCurrentTeamType2
-> = z.nativeEnum(PatchCurrentTeamType2);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(PatchCurrentTeamType2));
 /** @internal */
 export const PatchCurrentTeamType2$outboundSchema: z.ZodNativeEnum<
   typeof PatchCurrentTeamType2
@@ -57,15 +57,17 @@ export const PatchCurrentTeamAttributes2$inboundSchema: z.ZodType<
   PatchCurrentTeamAttributes2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  address: z.string().optional(),
-  name: z.string().optional(),
-  enforce_mfa: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "enforce_mfa": "enforceMfa",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    address: z.string().optional(),
+    name: z.string().optional(),
+    enforce_mfa: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "enforce_mfa": "enforceMfa",
+    });
+  })
+);
 /** @internal */
 export type PatchCurrentTeamAttributes2$Outbound = {
   address?: string | undefined;
@@ -78,15 +80,17 @@ export const PatchCurrentTeamAttributes2$outboundSchema: z.ZodType<
   PatchCurrentTeamAttributes2$Outbound,
   z.ZodTypeDef,
   PatchCurrentTeamAttributes2
-> = z.object({
-  address: z.string().optional(),
-  name: z.string().optional(),
-  enforceMfa: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    enforceMfa: "enforce_mfa",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    address: z.string().optional(),
+    name: z.string().optional(),
+    enforceMfa: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      enforceMfa: "enforce_mfa",
+    });
+  })
+);
 
 export function patchCurrentTeamAttributes2ToJSON(
   patchCurrentTeamAttributes2: PatchCurrentTeamAttributes2,
@@ -112,12 +116,14 @@ export const PatchCurrentTeamData2$inboundSchema: z.ZodType<
   PatchCurrentTeamData2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  type: PatchCurrentTeamType2$inboundSchema,
-  attributes: z.lazy(() => PatchCurrentTeamAttributes2$inboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    type: PatchCurrentTeamType2$inboundSchema,
+    attributes: z.lazy(() => PatchCurrentTeamAttributes2$inboundSchema)
+      .optional(),
+  })
+);
 /** @internal */
 export type PatchCurrentTeamData2$Outbound = {
   id: string;
@@ -130,12 +136,14 @@ export const PatchCurrentTeamData2$outboundSchema: z.ZodType<
   PatchCurrentTeamData2$Outbound,
   z.ZodTypeDef,
   PatchCurrentTeamData2
-> = z.object({
-  id: z.string(),
-  type: PatchCurrentTeamType2$outboundSchema,
-  attributes: z.lazy(() => PatchCurrentTeamAttributes2$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    type: PatchCurrentTeamType2$outboundSchema,
+    attributes: z.lazy(() => PatchCurrentTeamAttributes2$outboundSchema)
+      .optional(),
+  })
+);
 
 export function patchCurrentTeamData2ToJSON(
   patchCurrentTeamData2: PatchCurrentTeamData2,
@@ -159,9 +167,11 @@ export const PatchCurrentTeamRequestBody2$inboundSchema: z.ZodType<
   PatchCurrentTeamRequestBody2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => PatchCurrentTeamData2$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => PatchCurrentTeamData2$inboundSchema),
+  })
+);
 /** @internal */
 export type PatchCurrentTeamRequestBody2$Outbound = {
   data: PatchCurrentTeamData2$Outbound;
@@ -172,9 +182,11 @@ export const PatchCurrentTeamRequestBody2$outboundSchema: z.ZodType<
   PatchCurrentTeamRequestBody2$Outbound,
   z.ZodTypeDef,
   PatchCurrentTeamRequestBody2
-> = z.object({
-  data: z.lazy(() => PatchCurrentTeamData2$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => PatchCurrentTeamData2$outboundSchema),
+  })
+);
 
 export function patchCurrentTeamRequestBody2ToJSON(
   patchCurrentTeamRequestBody2: PatchCurrentTeamRequestBody2,
@@ -200,15 +212,17 @@ export const PatchCurrentTeamRequest$inboundSchema: z.ZodType<
   PatchCurrentTeamRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  team_id: z.string(),
-  RequestBody: z.lazy(() => PatchCurrentTeamRequestBody2$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "team_id": "teamId",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    team_id: z.string(),
+    RequestBody: z.lazy(() => PatchCurrentTeamRequestBody2$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "team_id": "teamId",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type PatchCurrentTeamRequest$Outbound = {
   team_id: string;
@@ -220,15 +234,17 @@ export const PatchCurrentTeamRequest$outboundSchema: z.ZodType<
   PatchCurrentTeamRequest$Outbound,
   z.ZodTypeDef,
   PatchCurrentTeamRequest
-> = z.object({
-  teamId: z.string(),
-  requestBody: z.lazy(() => PatchCurrentTeamRequestBody2$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    teamId: "team_id",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    teamId: z.string(),
+    requestBody: z.lazy(() => PatchCurrentTeamRequestBody2$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      teamId: "team_id",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function patchCurrentTeamRequestToJSON(
   patchCurrentTeamRequest: PatchCurrentTeamRequest,
@@ -252,9 +268,11 @@ export const PatchCurrentTeamResponse$inboundSchema: z.ZodType<
   PatchCurrentTeamResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: models.Team$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: models.Team$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type PatchCurrentTeamResponse$Outbound = {
   data?: models.Team$Outbound | undefined;
@@ -265,9 +283,11 @@ export const PatchCurrentTeamResponse$outboundSchema: z.ZodType<
   PatchCurrentTeamResponse$Outbound,
   z.ZodTypeDef,
   PatchCurrentTeamResponse
-> = z.object({
-  data: models.Team$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: models.Team$outboundSchema.optional(),
+  })
+);
 
 export function patchCurrentTeamResponseToJSON(
   patchCurrentTeamResponse: PatchCurrentTeamResponse,

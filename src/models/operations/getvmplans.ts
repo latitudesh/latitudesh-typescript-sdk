@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -20,13 +20,15 @@ export const GetVmPlansRequest$inboundSchema: z.ZodType<
   GetVmPlansRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "filter[gpu]": z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "filter[gpu]": "filterGpu",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "filter[gpu]": z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "filter[gpu]": "filterGpu",
+    });
+  })
+);
 /** @internal */
 export type GetVmPlansRequest$Outbound = {
   "filter[gpu]"?: boolean | undefined;
@@ -37,13 +39,15 @@ export const GetVmPlansRequest$outboundSchema: z.ZodType<
   GetVmPlansRequest$Outbound,
   z.ZodTypeDef,
   GetVmPlansRequest
-> = z.object({
-  filterGpu: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    filterGpu: "filter[gpu]",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    filterGpu: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      filterGpu: "filter[gpu]",
+    });
+  })
+);
 
 export function getVmPlansRequestToJSON(
   getVmPlansRequest: GetVmPlansRequest,

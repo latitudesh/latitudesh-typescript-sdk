@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as models from "../index.js";
@@ -22,15 +22,17 @@ export const SignProjectClusterRequirementsRequest$inboundSchema: z.ZodType<
   SignProjectClusterRequirementsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  project_id: z.string(),
-  sign_cluster_requirements: models.SignClusterRequirements$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "project_id": "projectId",
-    "sign_cluster_requirements": "signClusterRequirements",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    project_id: z.string(),
+    sign_cluster_requirements: models.SignClusterRequirements$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "project_id": "projectId",
+      "sign_cluster_requirements": "signClusterRequirements",
+    });
+  })
+);
 /** @internal */
 export type SignProjectClusterRequirementsRequest$Outbound = {
   project_id: string;
@@ -42,15 +44,17 @@ export const SignProjectClusterRequirementsRequest$outboundSchema: z.ZodType<
   SignProjectClusterRequirementsRequest$Outbound,
   z.ZodTypeDef,
   SignProjectClusterRequirementsRequest
-> = z.object({
-  projectId: z.string(),
-  signClusterRequirements: models.SignClusterRequirements$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    projectId: "project_id",
-    signClusterRequirements: "sign_cluster_requirements",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    projectId: z.string(),
+    signClusterRequirements: models.SignClusterRequirements$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      projectId: "project_id",
+      signClusterRequirements: "sign_cluster_requirements",
+    });
+  })
+);
 
 export function signProjectClusterRequirementsRequestToJSON(
   signProjectClusterRequirementsRequest: SignProjectClusterRequirementsRequest,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as models from "../index.js";
@@ -45,23 +45,25 @@ export const GetVirtualNetworksRequest$inboundSchema: z.ZodType<
   GetVirtualNetworksRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "filter[location]": z.string().optional(),
-  "filter[project]": z.string().optional(),
-  "filter[tags]": z.string().optional(),
-  "page[size]": z.number().int().default(20),
-  "page[number]": z.number().int().default(1),
-  "stats[total]": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "filter[location]": "filterLocation",
-    "filter[project]": "filterProject",
-    "filter[tags]": "filterTags",
-    "page[size]": "pageSize",
-    "page[number]": "pageNumber",
-    "stats[total]": "statsTotal",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "filter[location]": z.string().optional(),
+    "filter[project]": z.string().optional(),
+    "filter[tags]": z.string().optional(),
+    "page[size]": z.number().int().default(20),
+    "page[number]": z.number().int().default(1),
+    "stats[total]": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "filter[location]": "filterLocation",
+      "filter[project]": "filterProject",
+      "filter[tags]": "filterTags",
+      "page[size]": "pageSize",
+      "page[number]": "pageNumber",
+      "stats[total]": "statsTotal",
+    });
+  })
+);
 /** @internal */
 export type GetVirtualNetworksRequest$Outbound = {
   "filter[location]"?: string | undefined;
@@ -77,23 +79,25 @@ export const GetVirtualNetworksRequest$outboundSchema: z.ZodType<
   GetVirtualNetworksRequest$Outbound,
   z.ZodTypeDef,
   GetVirtualNetworksRequest
-> = z.object({
-  filterLocation: z.string().optional(),
-  filterProject: z.string().optional(),
-  filterTags: z.string().optional(),
-  pageSize: z.number().int().default(20),
-  pageNumber: z.number().int().default(1),
-  statsTotal: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    filterLocation: "filter[location]",
-    filterProject: "filter[project]",
-    filterTags: "filter[tags]",
-    pageSize: "page[size]",
-    pageNumber: "page[number]",
-    statsTotal: "stats[total]",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    filterLocation: z.string().optional(),
+    filterProject: z.string().optional(),
+    filterTags: z.string().optional(),
+    pageSize: z.number().int().default(20),
+    pageNumber: z.number().int().default(1),
+    statsTotal: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      filterLocation: "filter[location]",
+      filterProject: "filter[project]",
+      filterTags: "filter[tags]",
+      pageSize: "page[size]",
+      pageNumber: "page[number]",
+      statsTotal: "stats[total]",
+    });
+  })
+);
 
 export function getVirtualNetworksRequestToJSON(
   getVirtualNetworksRequest: GetVirtualNetworksRequest,
@@ -117,13 +121,15 @@ export const GetVirtualNetworksResponse$inboundSchema: z.ZodType<
   GetVirtualNetworksResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  Result: models.VirtualNetworks$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "Result": "result",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    Result: models.VirtualNetworks$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "Result": "result",
+    });
+  })
+);
 /** @internal */
 export type GetVirtualNetworksResponse$Outbound = {
   Result: models.VirtualNetworks$Outbound;
@@ -134,13 +140,15 @@ export const GetVirtualNetworksResponse$outboundSchema: z.ZodType<
   GetVirtualNetworksResponse$Outbound,
   z.ZodTypeDef,
   GetVirtualNetworksResponse
-> = z.object({
-  result: models.VirtualNetworks$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    result: "Result",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    result: models.VirtualNetworks$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      result: "Result",
+    });
+  })
+);
 
 export function getVirtualNetworksResponseToJSON(
   getVirtualNetworksResponse: GetVirtualNetworksResponse,

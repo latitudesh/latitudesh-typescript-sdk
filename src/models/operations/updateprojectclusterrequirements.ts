@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as models from "../index.js";
@@ -22,15 +22,17 @@ export const UpdateProjectClusterRequirementsRequest$inboundSchema: z.ZodType<
   UpdateProjectClusterRequirementsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  project_id: z.string(),
-  change_cluster_requirements: models.ChangeClusterRequirements$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "project_id": "projectId",
-    "change_cluster_requirements": "changeClusterRequirements",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    project_id: z.string(),
+    change_cluster_requirements: models.ChangeClusterRequirements$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "project_id": "projectId",
+      "change_cluster_requirements": "changeClusterRequirements",
+    });
+  })
+);
 /** @internal */
 export type UpdateProjectClusterRequirementsRequest$Outbound = {
   project_id: string;
@@ -42,15 +44,17 @@ export const UpdateProjectClusterRequirementsRequest$outboundSchema: z.ZodType<
   UpdateProjectClusterRequirementsRequest$Outbound,
   z.ZodTypeDef,
   UpdateProjectClusterRequirementsRequest
-> = z.object({
-  projectId: z.string(),
-  changeClusterRequirements: models.ChangeClusterRequirements$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    projectId: "project_id",
-    changeClusterRequirements: "change_cluster_requirements",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    projectId: z.string(),
+    changeClusterRequirements: models.ChangeClusterRequirements$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      projectId: "project_id",
+      changeClusterRequirements: "change_cluster_requirements",
+    });
+  })
+);
 
 export function updateProjectClusterRequirementsRequestToJSON(
   updateProjectClusterRequirementsRequest:

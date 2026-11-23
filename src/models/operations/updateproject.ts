@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -60,7 +60,7 @@ export type UpdateProjectResponse = {
 /** @internal */
 export const UpdateProjectType2$inboundSchema: z.ZodNativeEnum<
   typeof UpdateProjectType2
-> = z.nativeEnum(UpdateProjectType2);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(UpdateProjectType2));
 /** @internal */
 export const UpdateProjectType2$outboundSchema: z.ZodNativeEnum<
   typeof UpdateProjectType2
@@ -69,7 +69,7 @@ export const UpdateProjectType2$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const UpdateProjectEnvironment2$inboundSchema: z.ZodNativeEnum<
   typeof UpdateProjectEnvironment2
-> = z.nativeEnum(UpdateProjectEnvironment2);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(UpdateProjectEnvironment2));
 /** @internal */
 export const UpdateProjectEnvironment2$outboundSchema: z.ZodNativeEnum<
   typeof UpdateProjectEnvironment2
@@ -80,17 +80,19 @@ export const UpdateProjectAttributes2$inboundSchema: z.ZodType<
   UpdateProjectAttributes2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string().optional(),
-  description: z.string().optional(),
-  environment: UpdateProjectEnvironment2$inboundSchema.optional(),
-  bandwidth_alert: z.boolean().optional(),
-  tags: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "bandwidth_alert": "bandwidthAlert",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    description: z.string().optional(),
+    environment: UpdateProjectEnvironment2$inboundSchema.optional(),
+    bandwidth_alert: z.boolean().optional(),
+    tags: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "bandwidth_alert": "bandwidthAlert",
+    });
+  })
+);
 /** @internal */
 export type UpdateProjectAttributes2$Outbound = {
   name?: string | undefined;
@@ -105,17 +107,19 @@ export const UpdateProjectAttributes2$outboundSchema: z.ZodType<
   UpdateProjectAttributes2$Outbound,
   z.ZodTypeDef,
   UpdateProjectAttributes2
-> = z.object({
-  name: z.string().optional(),
-  description: z.string().optional(),
-  environment: UpdateProjectEnvironment2$outboundSchema.optional(),
-  bandwidthAlert: z.boolean().optional(),
-  tags: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    bandwidthAlert: "bandwidth_alert",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    description: z.string().optional(),
+    environment: UpdateProjectEnvironment2$outboundSchema.optional(),
+    bandwidthAlert: z.boolean().optional(),
+    tags: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      bandwidthAlert: "bandwidth_alert",
+    });
+  })
+);
 
 export function updateProjectAttributes2ToJSON(
   updateProjectAttributes2: UpdateProjectAttributes2,
@@ -139,11 +143,13 @@ export const UpdateProjectData2$inboundSchema: z.ZodType<
   UpdateProjectData2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  type: UpdateProjectType2$inboundSchema,
-  attributes: z.lazy(() => UpdateProjectAttributes2$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    type: UpdateProjectType2$inboundSchema,
+    attributes: z.lazy(() => UpdateProjectAttributes2$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type UpdateProjectData2$Outbound = {
   id: string;
@@ -156,11 +162,14 @@ export const UpdateProjectData2$outboundSchema: z.ZodType<
   UpdateProjectData2$Outbound,
   z.ZodTypeDef,
   UpdateProjectData2
-> = z.object({
-  id: z.string(),
-  type: UpdateProjectType2$outboundSchema,
-  attributes: z.lazy(() => UpdateProjectAttributes2$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    type: UpdateProjectType2$outboundSchema,
+    attributes: z.lazy(() => UpdateProjectAttributes2$outboundSchema)
+      .optional(),
+  })
+);
 
 export function updateProjectData2ToJSON(
   updateProjectData2: UpdateProjectData2,
@@ -184,9 +193,11 @@ export const UpdateProjectRequestBody2$inboundSchema: z.ZodType<
   UpdateProjectRequestBody2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => UpdateProjectData2$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => UpdateProjectData2$inboundSchema),
+  })
+);
 /** @internal */
 export type UpdateProjectRequestBody2$Outbound = {
   data: UpdateProjectData2$Outbound;
@@ -197,9 +208,11 @@ export const UpdateProjectRequestBody2$outboundSchema: z.ZodType<
   UpdateProjectRequestBody2$Outbound,
   z.ZodTypeDef,
   UpdateProjectRequestBody2
-> = z.object({
-  data: z.lazy(() => UpdateProjectData2$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => UpdateProjectData2$outboundSchema),
+  })
+);
 
 export function updateProjectRequestBody2ToJSON(
   updateProjectRequestBody2: UpdateProjectRequestBody2,
@@ -223,15 +236,18 @@ export const UpdateProjectRequest$inboundSchema: z.ZodType<
   UpdateProjectRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  project_id: z.string(),
-  RequestBody: z.lazy(() => UpdateProjectRequestBody2$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "project_id": "projectId",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    project_id: z.string(),
+    RequestBody: z.lazy(() => UpdateProjectRequestBody2$inboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "project_id": "projectId",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type UpdateProjectRequest$Outbound = {
   project_id: string;
@@ -243,16 +259,18 @@ export const UpdateProjectRequest$outboundSchema: z.ZodType<
   UpdateProjectRequest$Outbound,
   z.ZodTypeDef,
   UpdateProjectRequest
-> = z.object({
-  projectId: z.string(),
-  requestBody: z.lazy(() => UpdateProjectRequestBody2$outboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    projectId: "project_id",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    projectId: z.string(),
+    requestBody: z.lazy(() => UpdateProjectRequestBody2$outboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      projectId: "project_id",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function updateProjectRequestToJSON(
   updateProjectRequest: UpdateProjectRequest,
@@ -276,9 +294,11 @@ export const UpdateProjectResponse$inboundSchema: z.ZodType<
   UpdateProjectResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: models.Project$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: models.Project$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type UpdateProjectResponse$Outbound = {
   data?: models.Project$Outbound | undefined;
@@ -289,9 +309,11 @@ export const UpdateProjectResponse$outboundSchema: z.ZodType<
   UpdateProjectResponse$Outbound,
   z.ZodTypeDef,
   UpdateProjectResponse
-> = z.object({
-  data: models.Project$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: models.Project$outboundSchema.optional(),
+  })
+);
 
 export function updateProjectResponseToJSON(
   updateProjectResponse: UpdateProjectResponse,

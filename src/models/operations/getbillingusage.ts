@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -29,17 +29,19 @@ export const GetBillingUsageRequest$inboundSchema: z.ZodType<
   GetBillingUsageRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "filter[products][]": z.array(z.string()).optional(),
-  "filter[plan]": z.string().optional(),
-  "filter[project]": z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "filter[products][]": "filterProducts",
-    "filter[plan]": "filterPlan",
-    "filter[project]": "filterProject",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "filter[products][]": z.array(z.string()).optional(),
+    "filter[plan]": z.string().optional(),
+    "filter[project]": z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "filter[products][]": "filterProducts",
+      "filter[plan]": "filterPlan",
+      "filter[project]": "filterProject",
+    });
+  })
+);
 /** @internal */
 export type GetBillingUsageRequest$Outbound = {
   "filter[products][]"?: Array<string> | undefined;
@@ -52,17 +54,19 @@ export const GetBillingUsageRequest$outboundSchema: z.ZodType<
   GetBillingUsageRequest$Outbound,
   z.ZodTypeDef,
   GetBillingUsageRequest
-> = z.object({
-  filterProducts: z.array(z.string()).optional(),
-  filterPlan: z.string().optional(),
-  filterProject: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    filterProducts: "filter[products][]",
-    filterPlan: "filter[plan]",
-    filterProject: "filter[project]",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    filterProducts: z.array(z.string()).optional(),
+    filterPlan: z.string().optional(),
+    filterProject: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      filterProducts: "filter[products][]",
+      filterPlan: "filter[plan]",
+      filterProject: "filter[project]",
+    });
+  })
+);
 
 export function getBillingUsageRequestToJSON(
   getBillingUsageRequest: GetBillingUsageRequest,

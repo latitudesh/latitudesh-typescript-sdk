@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import * as openEnums from "../types/enums.js";
 import { ClosedEnum, OpenEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
@@ -126,18 +126,24 @@ export const KubernetesClusterSummaryDataPhase$inboundSchema: z.ZodType<
   KubernetesClusterSummaryDataPhase,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(KubernetesClusterSummaryDataPhase);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(KubernetesClusterSummaryDataPhase)
+);
 /** @internal */
 export const KubernetesClusterSummaryDataPhase$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   KubernetesClusterSummaryDataPhase
-> = openEnums.outboundSchema(KubernetesClusterSummaryDataPhase);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(KubernetesClusterSummaryDataPhase)
+);
 
 /** @internal */
 export const KubernetesClusterSummaryDataName$inboundSchema: z.ZodNativeEnum<
   typeof KubernetesClusterSummaryDataName
-> = z.nativeEnum(KubernetesClusterSummaryDataName);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(KubernetesClusterSummaryDataName)
+);
 /** @internal */
 export const KubernetesClusterSummaryDataName$outboundSchema: z.ZodNativeEnum<
   typeof KubernetesClusterSummaryDataName
@@ -146,7 +152,9 @@ export const KubernetesClusterSummaryDataName$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const KubernetesClusterSummaryDataStatus$inboundSchema: z.ZodNativeEnum<
   typeof KubernetesClusterSummaryDataStatus
-> = z.nativeEnum(KubernetesClusterSummaryDataStatus);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(KubernetesClusterSummaryDataStatus)
+);
 /** @internal */
 export const KubernetesClusterSummaryDataStatus$outboundSchema: z.ZodNativeEnum<
   typeof KubernetesClusterSummaryDataStatus
@@ -157,10 +165,12 @@ export const KubernetesClusterSummaryDataStep$inboundSchema: z.ZodType<
   KubernetesClusterSummaryDataStep,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: KubernetesClusterSummaryDataName$inboundSchema.optional(),
-  status: KubernetesClusterSummaryDataStatus$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: KubernetesClusterSummaryDataName$inboundSchema.optional(),
+    status: KubernetesClusterSummaryDataStatus$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type KubernetesClusterSummaryDataStep$Outbound = {
   name?: string | undefined;
@@ -172,10 +182,12 @@ export const KubernetesClusterSummaryDataStep$outboundSchema: z.ZodType<
   KubernetesClusterSummaryDataStep$Outbound,
   z.ZodTypeDef,
   KubernetesClusterSummaryDataStep
-> = z.object({
-  name: KubernetesClusterSummaryDataName$outboundSchema.optional(),
-  status: KubernetesClusterSummaryDataStatus$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: KubernetesClusterSummaryDataName$outboundSchema.optional(),
+    status: KubernetesClusterSummaryDataStatus$outboundSchema.optional(),
+  })
+);
 
 export function kubernetesClusterSummaryDataStepToJSON(
   kubernetesClusterSummaryDataStep: KubernetesClusterSummaryDataStep,
@@ -201,28 +213,31 @@ export const KubernetesClusterSummaryDataAttributes$inboundSchema: z.ZodType<
   KubernetesClusterSummaryDataAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string().optional(),
-  phase: KubernetesClusterSummaryDataPhase$inboundSchema.optional(),
-  ready: z.boolean().optional(),
-  infrastructure_ready: z.boolean().optional(),
-  control_plane_ready: z.boolean().optional(),
-  message: z.string().optional(),
-  steps: z.array(z.lazy(() => KubernetesClusterSummaryDataStep$inboundSchema))
-    .optional(),
-  last_status_change: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "infrastructure_ready": "infrastructureReady",
-    "control_plane_ready": "controlPlaneReady",
-    "last_status_change": "lastStatusChange",
-    "created_at": "createdAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    phase: KubernetesClusterSummaryDataPhase$inboundSchema.optional(),
+    ready: z.boolean().optional(),
+    infrastructure_ready: z.boolean().optional(),
+    control_plane_ready: z.boolean().optional(),
+    message: z.string().optional(),
+    steps: z.array(z.lazy(() => KubernetesClusterSummaryDataStep$inboundSchema))
+      .optional(),
+    last_status_change: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "infrastructure_ready": "infrastructureReady",
+      "control_plane_ready": "controlPlaneReady",
+      "last_status_change": "lastStatusChange",
+      "created_at": "createdAt",
+    });
+  })
+);
 /** @internal */
 export type KubernetesClusterSummaryDataAttributes$Outbound = {
   name?: string | undefined;
@@ -241,26 +256,29 @@ export const KubernetesClusterSummaryDataAttributes$outboundSchema: z.ZodType<
   KubernetesClusterSummaryDataAttributes$Outbound,
   z.ZodTypeDef,
   KubernetesClusterSummaryDataAttributes
-> = z.object({
-  name: z.string().optional(),
-  phase: KubernetesClusterSummaryDataPhase$outboundSchema.optional(),
-  ready: z.boolean().optional(),
-  infrastructureReady: z.boolean().optional(),
-  controlPlaneReady: z.boolean().optional(),
-  message: z.string().optional(),
-  steps: z.array(z.lazy(() => KubernetesClusterSummaryDataStep$outboundSchema))
-    .optional(),
-  lastStatusChange: z.nullable(z.date().transform(v => v.toISOString()))
-    .optional(),
-  createdAt: z.date().transform(v => v.toISOString()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    infrastructureReady: "infrastructure_ready",
-    controlPlaneReady: "control_plane_ready",
-    lastStatusChange: "last_status_change",
-    createdAt: "created_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    phase: KubernetesClusterSummaryDataPhase$outboundSchema.optional(),
+    ready: z.boolean().optional(),
+    infrastructureReady: z.boolean().optional(),
+    controlPlaneReady: z.boolean().optional(),
+    message: z.string().optional(),
+    steps: z.array(
+      z.lazy(() => KubernetesClusterSummaryDataStep$outboundSchema),
+    ).optional(),
+    lastStatusChange: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+    createdAt: z.date().transform(v => v.toISOString()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      infrastructureReady: "infrastructure_ready",
+      controlPlaneReady: "control_plane_ready",
+      lastStatusChange: "last_status_change",
+      createdAt: "created_at",
+    });
+  })
+);
 
 export function kubernetesClusterSummaryDataAttributesToJSON(
   kubernetesClusterSummaryDataAttributes:
@@ -288,12 +306,15 @@ export const KubernetesClusterSummaryData$inboundSchema: z.ZodType<
   KubernetesClusterSummaryData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  type: z.string().optional(),
-  attributes: z.lazy(() => KubernetesClusterSummaryDataAttributes$inboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: z.string().optional(),
+    attributes: z.lazy(() =>
+      KubernetesClusterSummaryDataAttributes$inboundSchema
+    ).optional(),
+  })
+);
 /** @internal */
 export type KubernetesClusterSummaryData$Outbound = {
   id?: string | undefined;
@@ -306,13 +327,15 @@ export const KubernetesClusterSummaryData$outboundSchema: z.ZodType<
   KubernetesClusterSummaryData$Outbound,
   z.ZodTypeDef,
   KubernetesClusterSummaryData
-> = z.object({
-  id: z.string().optional(),
-  type: z.string().optional(),
-  attributes: z.lazy(() =>
-    KubernetesClusterSummaryDataAttributes$outboundSchema
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: z.string().optional(),
+    attributes: z.lazy(() =>
+      KubernetesClusterSummaryDataAttributes$outboundSchema
+    ).optional(),
+  })
+);
 
 export function kubernetesClusterSummaryDataToJSON(
   kubernetesClusterSummaryData: KubernetesClusterSummaryData,

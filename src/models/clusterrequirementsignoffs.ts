@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -39,7 +39,9 @@ export type ClusterRequirementSignoffs = {
 /** @internal */
 export const ClusterRequirementSignoffsType$inboundSchema: z.ZodNativeEnum<
   typeof ClusterRequirementSignoffsType
-> = z.nativeEnum(ClusterRequirementSignoffsType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(ClusterRequirementSignoffsType)
+);
 /** @internal */
 export const ClusterRequirementSignoffsType$outboundSchema: z.ZodNativeEnum<
   typeof ClusterRequirementSignoffsType
@@ -50,15 +52,17 @@ export const ClusterRequirementSignoffsAttributes$inboundSchema: z.ZodType<
   ClusterRequirementSignoffsAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  user_email: z.string().optional(),
-  signed_at: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "user_email": "userEmail",
-    "signed_at": "signedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    user_email: z.string().optional(),
+    signed_at: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "user_email": "userEmail",
+      "signed_at": "signedAt",
+    });
+  })
+);
 /** @internal */
 export type ClusterRequirementSignoffsAttributes$Outbound = {
   user_email?: string | undefined;
@@ -70,15 +74,17 @@ export const ClusterRequirementSignoffsAttributes$outboundSchema: z.ZodType<
   ClusterRequirementSignoffsAttributes$Outbound,
   z.ZodTypeDef,
   ClusterRequirementSignoffsAttributes
-> = z.object({
-  userEmail: z.string().optional(),
-  signedAt: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    userEmail: "user_email",
-    signedAt: "signed_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    userEmail: z.string().optional(),
+    signedAt: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      userEmail: "user_email",
+      signedAt: "signed_at",
+    });
+  })
+);
 
 export function clusterRequirementSignoffsAttributesToJSON(
   clusterRequirementSignoffsAttributes: ClusterRequirementSignoffsAttributes,
@@ -105,12 +111,14 @@ export const ClusterRequirementSignoffsData$inboundSchema: z.ZodType<
   ClusterRequirementSignoffsData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  type: ClusterRequirementSignoffsType$inboundSchema.optional(),
-  attributes: z.lazy(() => ClusterRequirementSignoffsAttributes$inboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: ClusterRequirementSignoffsType$inboundSchema.optional(),
+    attributes: z.lazy(() => ClusterRequirementSignoffsAttributes$inboundSchema)
+      .optional(),
+  })
+);
 /** @internal */
 export type ClusterRequirementSignoffsData$Outbound = {
   id?: string | undefined;
@@ -123,12 +131,15 @@ export const ClusterRequirementSignoffsData$outboundSchema: z.ZodType<
   ClusterRequirementSignoffsData$Outbound,
   z.ZodTypeDef,
   ClusterRequirementSignoffsData
-> = z.object({
-  id: z.string().optional(),
-  type: ClusterRequirementSignoffsType$outboundSchema.optional(),
-  attributes: z.lazy(() => ClusterRequirementSignoffsAttributes$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: ClusterRequirementSignoffsType$outboundSchema.optional(),
+    attributes: z.lazy(() =>
+      ClusterRequirementSignoffsAttributes$outboundSchema
+    ).optional(),
+  })
+);
 
 export function clusterRequirementSignoffsDataToJSON(
   clusterRequirementSignoffsData: ClusterRequirementSignoffsData,
@@ -154,9 +165,11 @@ export const ClusterRequirementSignoffsMeta$inboundSchema: z.ZodType<
   ClusterRequirementSignoffsMeta,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  total: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    total: z.number().int().optional(),
+  })
+);
 /** @internal */
 export type ClusterRequirementSignoffsMeta$Outbound = {
   total?: number | undefined;
@@ -167,9 +180,11 @@ export const ClusterRequirementSignoffsMeta$outboundSchema: z.ZodType<
   ClusterRequirementSignoffsMeta$Outbound,
   z.ZodTypeDef,
   ClusterRequirementSignoffsMeta
-> = z.object({
-  total: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    total: z.number().int().optional(),
+  })
+);
 
 export function clusterRequirementSignoffsMetaToJSON(
   clusterRequirementSignoffsMeta: ClusterRequirementSignoffsMeta,
@@ -195,11 +210,13 @@ export const ClusterRequirementSignoffs$inboundSchema: z.ZodType<
   ClusterRequirementSignoffs,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.array(z.lazy(() => ClusterRequirementSignoffsData$inboundSchema))
-    .optional(),
-  meta: z.lazy(() => ClusterRequirementSignoffsMeta$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(z.lazy(() => ClusterRequirementSignoffsData$inboundSchema))
+      .optional(),
+    meta: z.lazy(() => ClusterRequirementSignoffsMeta$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type ClusterRequirementSignoffs$Outbound = {
   data?: Array<ClusterRequirementSignoffsData$Outbound> | undefined;
@@ -211,11 +228,14 @@ export const ClusterRequirementSignoffs$outboundSchema: z.ZodType<
   ClusterRequirementSignoffs$Outbound,
   z.ZodTypeDef,
   ClusterRequirementSignoffs
-> = z.object({
-  data: z.array(z.lazy(() => ClusterRequirementSignoffsData$outboundSchema))
-    .optional(),
-  meta: z.lazy(() => ClusterRequirementSignoffsMeta$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(z.lazy(() => ClusterRequirementSignoffsData$outboundSchema))
+      .optional(),
+    meta: z.lazy(() => ClusterRequirementSignoffsMeta$outboundSchema)
+      .optional(),
+  })
+);
 
 export function clusterRequirementSignoffsToJSON(
   clusterRequirementSignoffs: ClusterRequirementSignoffs,

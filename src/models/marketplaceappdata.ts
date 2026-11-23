@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -63,7 +63,7 @@ export type MarketplaceAppData = {
 /** @internal */
 export const MarketplaceAppDataType$inboundSchema: z.ZodNativeEnum<
   typeof MarketplaceAppDataType
-> = z.nativeEnum(MarketplaceAppDataType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(MarketplaceAppDataType));
 /** @internal */
 export const MarketplaceAppDataType$outboundSchema: z.ZodNativeEnum<
   typeof MarketplaceAppDataType
@@ -74,17 +74,19 @@ export const SystemRequirements$inboundSchema: z.ZodType<
   SystemRequirements,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  vcpus: z.nullable(z.number().int()).optional(),
-  memory_in_gb: z.nullable(z.number().int()).optional(),
-  storage_in_gb: z.nullable(z.number().int()).optional(),
-  gpu: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "memory_in_gb": "memoryInGb",
-    "storage_in_gb": "storageInGb",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    vcpus: z.nullable(z.number().int()).optional(),
+    memory_in_gb: z.nullable(z.number().int()).optional(),
+    storage_in_gb: z.nullable(z.number().int()).optional(),
+    gpu: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "memory_in_gb": "memoryInGb",
+      "storage_in_gb": "storageInGb",
+    });
+  })
+);
 /** @internal */
 export type SystemRequirements$Outbound = {
   vcpus?: number | null | undefined;
@@ -98,17 +100,19 @@ export const SystemRequirements$outboundSchema: z.ZodType<
   SystemRequirements$Outbound,
   z.ZodTypeDef,
   SystemRequirements
-> = z.object({
-  vcpus: z.nullable(z.number().int()).optional(),
-  memoryInGb: z.nullable(z.number().int()).optional(),
-  storageInGb: z.nullable(z.number().int()).optional(),
-  gpu: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    memoryInGb: "memory_in_gb",
-    storageInGb: "storage_in_gb",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    vcpus: z.nullable(z.number().int()).optional(),
+    memoryInGb: z.nullable(z.number().int()).optional(),
+    storageInGb: z.nullable(z.number().int()).optional(),
+    gpu: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      memoryInGb: "memory_in_gb",
+      storageInGb: "storage_in_gb",
+    });
+  })
+);
 
 export function systemRequirementsToJSON(
   systemRequirements: SystemRequirements,
@@ -130,7 +134,7 @@ export function systemRequirementsFromJSON(
 /** @internal */
 export const DeploymentStrategy$inboundSchema: z.ZodNativeEnum<
   typeof DeploymentStrategy
-> = z.nativeEnum(DeploymentStrategy);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(DeploymentStrategy));
 /** @internal */
 export const DeploymentStrategy$outboundSchema: z.ZodNativeEnum<
   typeof DeploymentStrategy
@@ -141,37 +145,39 @@ export const MarketplaceAppDataAttributes$inboundSchema: z.ZodType<
   MarketplaceAppDataAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string().optional(),
-  slug: z.string().optional(),
-  description: z.nullable(z.string()).optional(),
-  short_description: z.nullable(z.string()).optional(),
-  category: z.nullable(z.string()).optional(),
-  version: z.nullable(z.string()).optional(),
-  system_requirements: z.lazy(() => SystemRequirements$inboundSchema)
-    .optional(),
-  deployment_strategy: DeploymentStrategy$inboundSchema.optional(),
-  default_operating_system: z.nullable(z.string()).optional(),
-  compatible_plans: z.array(z.string()).optional(),
-  access_instructions: z.nullable(z.string()).optional(),
-  upstream_url: z.nullable(z.string()).optional(),
-  documentation_url: z.nullable(z.string()).optional(),
-  logo_url: z.nullable(z.string()).optional(),
-  created_at: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "short_description": "shortDescription",
-    "system_requirements": "systemRequirements",
-    "deployment_strategy": "deploymentStrategy",
-    "default_operating_system": "defaultOperatingSystem",
-    "compatible_plans": "compatiblePlans",
-    "access_instructions": "accessInstructions",
-    "upstream_url": "upstreamUrl",
-    "documentation_url": "documentationUrl",
-    "logo_url": "logoUrl",
-    "created_at": "createdAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    slug: z.string().optional(),
+    description: z.nullable(z.string()).optional(),
+    short_description: z.nullable(z.string()).optional(),
+    category: z.nullable(z.string()).optional(),
+    version: z.nullable(z.string()).optional(),
+    system_requirements: z.lazy(() => SystemRequirements$inboundSchema)
+      .optional(),
+    deployment_strategy: DeploymentStrategy$inboundSchema.optional(),
+    default_operating_system: z.nullable(z.string()).optional(),
+    compatible_plans: z.array(z.string()).optional(),
+    access_instructions: z.nullable(z.string()).optional(),
+    upstream_url: z.nullable(z.string()).optional(),
+    documentation_url: z.nullable(z.string()).optional(),
+    logo_url: z.nullable(z.string()).optional(),
+    created_at: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "short_description": "shortDescription",
+      "system_requirements": "systemRequirements",
+      "deployment_strategy": "deploymentStrategy",
+      "default_operating_system": "defaultOperatingSystem",
+      "compatible_plans": "compatiblePlans",
+      "access_instructions": "accessInstructions",
+      "upstream_url": "upstreamUrl",
+      "documentation_url": "documentationUrl",
+      "logo_url": "logoUrl",
+      "created_at": "createdAt",
+    });
+  })
+);
 /** @internal */
 export type MarketplaceAppDataAttributes$Outbound = {
   name?: string | undefined;
@@ -196,37 +202,39 @@ export const MarketplaceAppDataAttributes$outboundSchema: z.ZodType<
   MarketplaceAppDataAttributes$Outbound,
   z.ZodTypeDef,
   MarketplaceAppDataAttributes
-> = z.object({
-  name: z.string().optional(),
-  slug: z.string().optional(),
-  description: z.nullable(z.string()).optional(),
-  shortDescription: z.nullable(z.string()).optional(),
-  category: z.nullable(z.string()).optional(),
-  version: z.nullable(z.string()).optional(),
-  systemRequirements: z.lazy(() => SystemRequirements$outboundSchema)
-    .optional(),
-  deploymentStrategy: DeploymentStrategy$outboundSchema.optional(),
-  defaultOperatingSystem: z.nullable(z.string()).optional(),
-  compatiblePlans: z.array(z.string()).optional(),
-  accessInstructions: z.nullable(z.string()).optional(),
-  upstreamUrl: z.nullable(z.string()).optional(),
-  documentationUrl: z.nullable(z.string()).optional(),
-  logoUrl: z.nullable(z.string()).optional(),
-  createdAt: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    shortDescription: "short_description",
-    systemRequirements: "system_requirements",
-    deploymentStrategy: "deployment_strategy",
-    defaultOperatingSystem: "default_operating_system",
-    compatiblePlans: "compatible_plans",
-    accessInstructions: "access_instructions",
-    upstreamUrl: "upstream_url",
-    documentationUrl: "documentation_url",
-    logoUrl: "logo_url",
-    createdAt: "created_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    slug: z.string().optional(),
+    description: z.nullable(z.string()).optional(),
+    shortDescription: z.nullable(z.string()).optional(),
+    category: z.nullable(z.string()).optional(),
+    version: z.nullable(z.string()).optional(),
+    systemRequirements: z.lazy(() => SystemRequirements$outboundSchema)
+      .optional(),
+    deploymentStrategy: DeploymentStrategy$outboundSchema.optional(),
+    defaultOperatingSystem: z.nullable(z.string()).optional(),
+    compatiblePlans: z.array(z.string()).optional(),
+    accessInstructions: z.nullable(z.string()).optional(),
+    upstreamUrl: z.nullable(z.string()).optional(),
+    documentationUrl: z.nullable(z.string()).optional(),
+    logoUrl: z.nullable(z.string()).optional(),
+    createdAt: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      shortDescription: "short_description",
+      systemRequirements: "system_requirements",
+      deploymentStrategy: "deployment_strategy",
+      defaultOperatingSystem: "default_operating_system",
+      compatiblePlans: "compatible_plans",
+      accessInstructions: "access_instructions",
+      upstreamUrl: "upstream_url",
+      documentationUrl: "documentation_url",
+      logoUrl: "logo_url",
+      createdAt: "created_at",
+    });
+  })
+);
 
 export function marketplaceAppDataAttributesToJSON(
   marketplaceAppDataAttributes: MarketplaceAppDataAttributes,
@@ -252,12 +260,14 @@ export const MarketplaceAppData$inboundSchema: z.ZodType<
   MarketplaceAppData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  type: MarketplaceAppDataType$inboundSchema.optional(),
-  attributes: z.lazy(() => MarketplaceAppDataAttributes$inboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: MarketplaceAppDataType$inboundSchema.optional(),
+    attributes: z.lazy(() => MarketplaceAppDataAttributes$inboundSchema)
+      .optional(),
+  })
+);
 /** @internal */
 export type MarketplaceAppData$Outbound = {
   id?: string | undefined;
@@ -270,12 +280,14 @@ export const MarketplaceAppData$outboundSchema: z.ZodType<
   MarketplaceAppData$Outbound,
   z.ZodTypeDef,
   MarketplaceAppData
-> = z.object({
-  id: z.string().optional(),
-  type: MarketplaceAppDataType$outboundSchema.optional(),
-  attributes: z.lazy(() => MarketplaceAppDataAttributes$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: MarketplaceAppDataType$outboundSchema.optional(),
+    attributes: z.lazy(() => MarketplaceAppDataAttributes$outboundSchema)
+      .optional(),
+  })
+);
 
 export function marketplaceAppDataToJSON(
   marketplaceAppData: MarketplaceAppData,

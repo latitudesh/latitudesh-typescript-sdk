@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -62,7 +62,7 @@ export type TrafficQuota = {
 /** @internal */
 export const TrafficQuotaType$inboundSchema: z.ZodNativeEnum<
   typeof TrafficQuotaType
-> = z.nativeEnum(TrafficQuotaType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(TrafficQuotaType));
 /** @internal */
 export const TrafficQuotaType$outboundSchema: z.ZodNativeEnum<
   typeof TrafficQuotaType
@@ -73,11 +73,13 @@ export const QuotaInTb$inboundSchema: z.ZodType<
   QuotaInTb,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  granted: z.number().int().optional(),
-  additional: z.number().int().optional(),
-  total: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    granted: z.number().int().optional(),
+    additional: z.number().int().optional(),
+    total: z.number().int().optional(),
+  })
+);
 /** @internal */
 export type QuotaInTb$Outbound = {
   granted?: number | undefined;
@@ -90,11 +92,13 @@ export const QuotaInTb$outboundSchema: z.ZodType<
   QuotaInTb$Outbound,
   z.ZodTypeDef,
   QuotaInTb
-> = z.object({
-  granted: z.number().int().optional(),
-  additional: z.number().int().optional(),
-  total: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    granted: z.number().int().optional(),
+    additional: z.number().int().optional(),
+    total: z.number().int().optional(),
+  })
+);
 
 export function quotaInTbToJSON(quotaInTb: QuotaInTb): string {
   return JSON.stringify(QuotaInTb$outboundSchema.parse(quotaInTb));
@@ -114,11 +118,13 @@ export const QuotaInMbps$inboundSchema: z.ZodType<
   QuotaInMbps,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  granted: z.number().int().optional(),
-  additional: z.number().int().optional(),
-  total: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    granted: z.number().int().optional(),
+    additional: z.number().int().optional(),
+    total: z.number().int().optional(),
+  })
+);
 /** @internal */
 export type QuotaInMbps$Outbound = {
   granted?: number | undefined;
@@ -131,11 +137,13 @@ export const QuotaInMbps$outboundSchema: z.ZodType<
   QuotaInMbps$Outbound,
   z.ZodTypeDef,
   QuotaInMbps
-> = z.object({
-  granted: z.number().int().optional(),
-  additional: z.number().int().optional(),
-  total: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    granted: z.number().int().optional(),
+    additional: z.number().int().optional(),
+    total: z.number().int().optional(),
+  })
+);
 
 export function quotaInMbpsToJSON(quotaInMbps: QuotaInMbps): string {
   return JSON.stringify(QuotaInMbps$outboundSchema.parse(quotaInMbps));
@@ -155,20 +163,22 @@ export const QuotaPerRegion$inboundSchema: z.ZodType<
   QuotaPerRegion,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  region_id: z.string().optional(),
-  region_slug: z.string().optional(),
-  price: z.nullable(z.number().int()).optional(),
-  quota_in_tb: z.lazy(() => QuotaInTb$inboundSchema).optional(),
-  quota_in_mbps: z.lazy(() => QuotaInMbps$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "region_id": "regionId",
-    "region_slug": "regionSlug",
-    "quota_in_tb": "quotaInTb",
-    "quota_in_mbps": "quotaInMbps",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    region_id: z.string().optional(),
+    region_slug: z.string().optional(),
+    price: z.nullable(z.number().int()).optional(),
+    quota_in_tb: z.lazy(() => QuotaInTb$inboundSchema).optional(),
+    quota_in_mbps: z.lazy(() => QuotaInMbps$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "region_id": "regionId",
+      "region_slug": "regionSlug",
+      "quota_in_tb": "quotaInTb",
+      "quota_in_mbps": "quotaInMbps",
+    });
+  })
+);
 /** @internal */
 export type QuotaPerRegion$Outbound = {
   region_id?: string | undefined;
@@ -183,20 +193,22 @@ export const QuotaPerRegion$outboundSchema: z.ZodType<
   QuotaPerRegion$Outbound,
   z.ZodTypeDef,
   QuotaPerRegion
-> = z.object({
-  regionId: z.string().optional(),
-  regionSlug: z.string().optional(),
-  price: z.nullable(z.number().int()).optional(),
-  quotaInTb: z.lazy(() => QuotaInTb$outboundSchema).optional(),
-  quotaInMbps: z.lazy(() => QuotaInMbps$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    regionId: "region_id",
-    regionSlug: "region_slug",
-    quotaInTb: "quota_in_tb",
-    quotaInMbps: "quota_in_mbps",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    regionId: z.string().optional(),
+    regionSlug: z.string().optional(),
+    price: z.nullable(z.number().int()).optional(),
+    quotaInTb: z.lazy(() => QuotaInTb$outboundSchema).optional(),
+    quotaInMbps: z.lazy(() => QuotaInMbps$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      regionId: "region_id",
+      regionSlug: "region_slug",
+      quotaInTb: "quota_in_tb",
+      quotaInMbps: "quota_in_mbps",
+    });
+  })
+);
 
 export function quotaPerRegionToJSON(quotaPerRegion: QuotaPerRegion): string {
   return JSON.stringify(QuotaPerRegion$outboundSchema.parse(quotaPerRegion));
@@ -216,21 +228,23 @@ export const QuotaPerProject$inboundSchema: z.ZodType<
   QuotaPerProject,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  project_id: z.string().optional(),
-  project_slug: z.string().optional(),
-  price: z.nullable(z.number().int()).optional(),
-  billing_method: z.string().optional(),
-  quota_per_region: z.array(z.lazy(() => QuotaPerRegion$inboundSchema))
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "project_id": "projectId",
-    "project_slug": "projectSlug",
-    "billing_method": "billingMethod",
-    "quota_per_region": "quotaPerRegion",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    project_id: z.string().optional(),
+    project_slug: z.string().optional(),
+    price: z.nullable(z.number().int()).optional(),
+    billing_method: z.string().optional(),
+    quota_per_region: z.array(z.lazy(() => QuotaPerRegion$inboundSchema))
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "project_id": "projectId",
+      "project_slug": "projectSlug",
+      "billing_method": "billingMethod",
+      "quota_per_region": "quotaPerRegion",
+    });
+  })
+);
 /** @internal */
 export type QuotaPerProject$Outbound = {
   project_id?: string | undefined;
@@ -245,21 +259,23 @@ export const QuotaPerProject$outboundSchema: z.ZodType<
   QuotaPerProject$Outbound,
   z.ZodTypeDef,
   QuotaPerProject
-> = z.object({
-  projectId: z.string().optional(),
-  projectSlug: z.string().optional(),
-  price: z.nullable(z.number().int()).optional(),
-  billingMethod: z.string().optional(),
-  quotaPerRegion: z.array(z.lazy(() => QuotaPerRegion$outboundSchema))
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    projectId: "project_id",
-    projectSlug: "project_slug",
-    billingMethod: "billing_method",
-    quotaPerRegion: "quota_per_region",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    projectId: z.string().optional(),
+    projectSlug: z.string().optional(),
+    price: z.nullable(z.number().int()).optional(),
+    billingMethod: z.string().optional(),
+    quotaPerRegion: z.array(z.lazy(() => QuotaPerRegion$outboundSchema))
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      projectId: "project_id",
+      projectSlug: "project_slug",
+      billingMethod: "billing_method",
+      quotaPerRegion: "quota_per_region",
+    });
+  })
+);
 
 export function quotaPerProjectToJSON(
   quotaPerProject: QuotaPerProject,
@@ -281,14 +297,16 @@ export const TrafficQuotaAttributes$inboundSchema: z.ZodType<
   TrafficQuotaAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  quota_per_project: z.array(z.lazy(() => QuotaPerProject$inboundSchema))
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "quota_per_project": "quotaPerProject",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    quota_per_project: z.array(z.lazy(() => QuotaPerProject$inboundSchema))
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "quota_per_project": "quotaPerProject",
+    });
+  })
+);
 /** @internal */
 export type TrafficQuotaAttributes$Outbound = {
   quota_per_project?: Array<QuotaPerProject$Outbound> | undefined;
@@ -299,14 +317,16 @@ export const TrafficQuotaAttributes$outboundSchema: z.ZodType<
   TrafficQuotaAttributes$Outbound,
   z.ZodTypeDef,
   TrafficQuotaAttributes
-> = z.object({
-  quotaPerProject: z.array(z.lazy(() => QuotaPerProject$outboundSchema))
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    quotaPerProject: "quota_per_project",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    quotaPerProject: z.array(z.lazy(() => QuotaPerProject$outboundSchema))
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      quotaPerProject: "quota_per_project",
+    });
+  })
+);
 
 export function trafficQuotaAttributesToJSON(
   trafficQuotaAttributes: TrafficQuotaAttributes,
@@ -330,11 +350,13 @@ export const TrafficQuotaData$inboundSchema: z.ZodType<
   TrafficQuotaData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  type: TrafficQuotaType$inboundSchema.optional(),
-  attributes: z.lazy(() => TrafficQuotaAttributes$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: TrafficQuotaType$inboundSchema.optional(),
+    attributes: z.lazy(() => TrafficQuotaAttributes$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type TrafficQuotaData$Outbound = {
   id?: string | undefined;
@@ -347,11 +369,13 @@ export const TrafficQuotaData$outboundSchema: z.ZodType<
   TrafficQuotaData$Outbound,
   z.ZodTypeDef,
   TrafficQuotaData
-> = z.object({
-  id: z.string().optional(),
-  type: TrafficQuotaType$outboundSchema.optional(),
-  attributes: z.lazy(() => TrafficQuotaAttributes$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: TrafficQuotaType$outboundSchema.optional(),
+    attributes: z.lazy(() => TrafficQuotaAttributes$outboundSchema).optional(),
+  })
+);
 
 export function trafficQuotaDataToJSON(
   trafficQuotaData: TrafficQuotaData,
@@ -375,7 +399,7 @@ export const TrafficQuotaMeta$inboundSchema: z.ZodType<
   TrafficQuotaMeta,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type TrafficQuotaMeta$Outbound = {};
 
@@ -384,7 +408,7 @@ export const TrafficQuotaMeta$outboundSchema: z.ZodType<
   TrafficQuotaMeta$Outbound,
   z.ZodTypeDef,
   TrafficQuotaMeta
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function trafficQuotaMetaToJSON(
   trafficQuotaMeta: TrafficQuotaMeta,
@@ -408,10 +432,12 @@ export const TrafficQuota$inboundSchema: z.ZodType<
   TrafficQuota,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => TrafficQuotaData$inboundSchema).optional(),
-  meta: z.lazy(() => TrafficQuotaMeta$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => TrafficQuotaData$inboundSchema).optional(),
+    meta: z.lazy(() => TrafficQuotaMeta$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type TrafficQuota$Outbound = {
   data?: TrafficQuotaData$Outbound | undefined;
@@ -423,10 +449,12 @@ export const TrafficQuota$outboundSchema: z.ZodType<
   TrafficQuota$Outbound,
   z.ZodTypeDef,
   TrafficQuota
-> = z.object({
-  data: z.lazy(() => TrafficQuotaData$outboundSchema).optional(),
-  meta: z.lazy(() => TrafficQuotaMeta$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => TrafficQuotaData$outboundSchema).optional(),
+    meta: z.lazy(() => TrafficQuotaMeta$outboundSchema).optional(),
+  })
+);
 
 export function trafficQuotaToJSON(trafficQuota: TrafficQuota): string {
   return JSON.stringify(TrafficQuota$outboundSchema.parse(trafficQuota));

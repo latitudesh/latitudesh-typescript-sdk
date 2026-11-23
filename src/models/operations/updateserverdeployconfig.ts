@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -145,7 +145,9 @@ export type UpdateServerDeployConfigRequest = {
 /** @internal */
 export const UpdateServerDeployConfigType2$inboundSchema: z.ZodNativeEnum<
   typeof UpdateServerDeployConfigType2
-> = z.nativeEnum(UpdateServerDeployConfigType2);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(UpdateServerDeployConfigType2)
+);
 /** @internal */
 export const UpdateServerDeployConfigType2$outboundSchema: z.ZodNativeEnum<
   typeof UpdateServerDeployConfigType2
@@ -153,8 +155,10 @@ export const UpdateServerDeployConfigType2$outboundSchema: z.ZodNativeEnum<
 
 /** @internal */
 export const UpdateServerDeployConfigOperatingSystem2$inboundSchema:
-  z.ZodNativeEnum<typeof UpdateServerDeployConfigOperatingSystem2> = z
-    .nativeEnum(UpdateServerDeployConfigOperatingSystem2);
+  z.ZodNativeEnum<typeof UpdateServerDeployConfigOperatingSystem2> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(UpdateServerDeployConfigOperatingSystem2)
+    );
 /** @internal */
 export const UpdateServerDeployConfigOperatingSystem2$outboundSchema:
   z.ZodNativeEnum<typeof UpdateServerDeployConfigOperatingSystem2> =
@@ -163,7 +167,9 @@ export const UpdateServerDeployConfigOperatingSystem2$outboundSchema:
 /** @internal */
 export const UpdateServerDeployConfigRaid2$inboundSchema: z.ZodNativeEnum<
   typeof UpdateServerDeployConfigRaid2
-> = z.nativeEnum(UpdateServerDeployConfigRaid2);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(UpdateServerDeployConfigRaid2)
+);
 /** @internal */
 export const UpdateServerDeployConfigRaid2$outboundSchema: z.ZodNativeEnum<
   typeof UpdateServerDeployConfigRaid2
@@ -172,7 +178,9 @@ export const UpdateServerDeployConfigRaid2$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const UpdateServerDeployConfigRole2$inboundSchema: z.ZodNativeEnum<
   typeof UpdateServerDeployConfigRole2
-> = z.nativeEnum(UpdateServerDeployConfigRole2);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(UpdateServerDeployConfigRole2)
+);
 /** @internal */
 export const UpdateServerDeployConfigRole2$outboundSchema: z.ZodNativeEnum<
   typeof UpdateServerDeployConfigRole2
@@ -181,7 +189,9 @@ export const UpdateServerDeployConfigRole2$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const UpdateServerDeployConfigRaidLevel2$inboundSchema: z.ZodNativeEnum<
   typeof UpdateServerDeployConfigRaidLevel2
-> = z.nativeEnum(UpdateServerDeployConfigRaidLevel2);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(UpdateServerDeployConfigRaidLevel2)
+);
 /** @internal */
 export const UpdateServerDeployConfigRaidLevel2$outboundSchema: z.ZodNativeEnum<
   typeof UpdateServerDeployConfigRaidLevel2
@@ -190,7 +200,9 @@ export const UpdateServerDeployConfigRaidLevel2$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const UpdateServerDeployConfigFilesystem2$inboundSchema: z.ZodNativeEnum<
   typeof UpdateServerDeployConfigFilesystem2
-> = z.nativeEnum(UpdateServerDeployConfigFilesystem2);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(UpdateServerDeployConfigFilesystem2)
+);
 /** @internal */
 export const UpdateServerDeployConfigFilesystem2$outboundSchema:
   z.ZodNativeEnum<typeof UpdateServerDeployConfigFilesystem2> =
@@ -201,20 +213,22 @@ export const UpdateServerDeployConfigDiskLayout2$inboundSchema: z.ZodType<
   UpdateServerDeployConfigDiskLayout2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  count: z.number().int(),
-  role: UpdateServerDeployConfigRole2$inboundSchema,
-  raid_level: z.nullable(UpdateServerDeployConfigRaidLevel2$inboundSchema)
-    .optional(),
-  filesystem: z.nullable(UpdateServerDeployConfigFilesystem2$inboundSchema)
-    .optional(),
-  mount_point: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "raid_level": "raidLevel",
-    "mount_point": "mountPoint",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    count: z.number().int(),
+    role: UpdateServerDeployConfigRole2$inboundSchema,
+    raid_level: z.nullable(UpdateServerDeployConfigRaidLevel2$inboundSchema)
+      .optional(),
+    filesystem: z.nullable(UpdateServerDeployConfigFilesystem2$inboundSchema)
+      .optional(),
+    mount_point: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "raid_level": "raidLevel",
+      "mount_point": "mountPoint",
+    });
+  })
+);
 /** @internal */
 export type UpdateServerDeployConfigDiskLayout2$Outbound = {
   count: number;
@@ -229,20 +243,22 @@ export const UpdateServerDeployConfigDiskLayout2$outboundSchema: z.ZodType<
   UpdateServerDeployConfigDiskLayout2$Outbound,
   z.ZodTypeDef,
   UpdateServerDeployConfigDiskLayout2
-> = z.object({
-  count: z.number().int(),
-  role: UpdateServerDeployConfigRole2$outboundSchema,
-  raidLevel: z.nullable(UpdateServerDeployConfigRaidLevel2$outboundSchema)
-    .optional(),
-  filesystem: z.nullable(UpdateServerDeployConfigFilesystem2$outboundSchema)
-    .optional(),
-  mountPoint: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    raidLevel: "raid_level",
-    mountPoint: "mount_point",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    count: z.number().int(),
+    role: UpdateServerDeployConfigRole2$outboundSchema,
+    raidLevel: z.nullable(UpdateServerDeployConfigRaidLevel2$outboundSchema)
+      .optional(),
+    filesystem: z.nullable(UpdateServerDeployConfigFilesystem2$outboundSchema)
+      .optional(),
+    mountPoint: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      raidLevel: "raid_level",
+      mountPoint: "mount_point",
+    });
+  })
+);
 
 export function updateServerDeployConfigDiskLayout2ToJSON(
   updateServerDeployConfigDiskLayout2: UpdateServerDeployConfigDiskLayout2,
@@ -269,34 +285,36 @@ export const UpdateServerDeployConfigAttributes2$inboundSchema: z.ZodType<
   UpdateServerDeployConfigAttributes2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  hostname: z.nullable(z.string()).optional(),
-  operating_system: z.nullable(
-    UpdateServerDeployConfigOperatingSystem2$inboundSchema,
-  ).optional(),
-  raid: z.nullable(UpdateServerDeployConfigRaid2$inboundSchema).optional(),
-  disk_layout: z.nullable(
-    z.array(z.lazy(() => UpdateServerDeployConfigDiskLayout2$inboundSchema)),
-  ).optional(),
-  user_data: z.nullable(z.string()).optional(),
-  ssh_keys: z.nullable(z.array(z.string())).optional(),
-  ipxe_url: z.nullable(z.string()).optional(),
-  ipxe: z.nullable(z.string()).optional(),
-  persistent_netboot: z.boolean().optional(),
-  public_network: z.nullable(z.boolean()).optional(),
-  public_network_id: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "operating_system": "operatingSystem",
-    "disk_layout": "diskLayout",
-    "user_data": "userData",
-    "ssh_keys": "sshKeys",
-    "ipxe_url": "ipxeUrl",
-    "persistent_netboot": "persistentNetboot",
-    "public_network": "publicNetwork",
-    "public_network_id": "publicNetworkId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    hostname: z.nullable(z.string()).optional(),
+    operating_system: z.nullable(
+      UpdateServerDeployConfigOperatingSystem2$inboundSchema,
+    ).optional(),
+    raid: z.nullable(UpdateServerDeployConfigRaid2$inboundSchema).optional(),
+    disk_layout: z.nullable(
+      z.array(z.lazy(() => UpdateServerDeployConfigDiskLayout2$inboundSchema)),
+    ).optional(),
+    user_data: z.nullable(z.string()).optional(),
+    ssh_keys: z.nullable(z.array(z.string())).optional(),
+    ipxe_url: z.nullable(z.string()).optional(),
+    ipxe: z.nullable(z.string()).optional(),
+    persistent_netboot: z.boolean().optional(),
+    public_network: z.nullable(z.boolean()).optional(),
+    public_network_id: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "operating_system": "operatingSystem",
+      "disk_layout": "diskLayout",
+      "user_data": "userData",
+      "ssh_keys": "sshKeys",
+      "ipxe_url": "ipxeUrl",
+      "persistent_netboot": "persistentNetboot",
+      "public_network": "publicNetwork",
+      "public_network_id": "publicNetworkId",
+    });
+  })
+);
 /** @internal */
 export type UpdateServerDeployConfigAttributes2$Outbound = {
   hostname?: string | null | undefined;
@@ -320,34 +338,36 @@ export const UpdateServerDeployConfigAttributes2$outboundSchema: z.ZodType<
   UpdateServerDeployConfigAttributes2$Outbound,
   z.ZodTypeDef,
   UpdateServerDeployConfigAttributes2
-> = z.object({
-  hostname: z.nullable(z.string()).optional(),
-  operatingSystem: z.nullable(
-    UpdateServerDeployConfigOperatingSystem2$outboundSchema,
-  ).optional(),
-  raid: z.nullable(UpdateServerDeployConfigRaid2$outboundSchema).optional(),
-  diskLayout: z.nullable(
-    z.array(z.lazy(() => UpdateServerDeployConfigDiskLayout2$outboundSchema)),
-  ).optional(),
-  userData: z.nullable(z.string()).optional(),
-  sshKeys: z.nullable(z.array(z.string())).optional(),
-  ipxeUrl: z.nullable(z.string()).optional(),
-  ipxe: z.nullable(z.string()).optional(),
-  persistentNetboot: z.boolean().optional(),
-  publicNetwork: z.nullable(z.boolean()).optional(),
-  publicNetworkId: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    operatingSystem: "operating_system",
-    diskLayout: "disk_layout",
-    userData: "user_data",
-    sshKeys: "ssh_keys",
-    ipxeUrl: "ipxe_url",
-    persistentNetboot: "persistent_netboot",
-    publicNetwork: "public_network",
-    publicNetworkId: "public_network_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    hostname: z.nullable(z.string()).optional(),
+    operatingSystem: z.nullable(
+      UpdateServerDeployConfigOperatingSystem2$outboundSchema,
+    ).optional(),
+    raid: z.nullable(UpdateServerDeployConfigRaid2$outboundSchema).optional(),
+    diskLayout: z.nullable(
+      z.array(z.lazy(() => UpdateServerDeployConfigDiskLayout2$outboundSchema)),
+    ).optional(),
+    userData: z.nullable(z.string()).optional(),
+    sshKeys: z.nullable(z.array(z.string())).optional(),
+    ipxeUrl: z.nullable(z.string()).optional(),
+    ipxe: z.nullable(z.string()).optional(),
+    persistentNetboot: z.boolean().optional(),
+    publicNetwork: z.nullable(z.boolean()).optional(),
+    publicNetworkId: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      operatingSystem: "operating_system",
+      diskLayout: "disk_layout",
+      userData: "user_data",
+      sshKeys: "ssh_keys",
+      ipxeUrl: "ipxe_url",
+      persistentNetboot: "persistent_netboot",
+      publicNetwork: "public_network",
+      publicNetworkId: "public_network_id",
+    });
+  })
+);
 
 export function updateServerDeployConfigAttributes2ToJSON(
   updateServerDeployConfigAttributes2: UpdateServerDeployConfigAttributes2,
@@ -374,12 +394,14 @@ export const UpdateServerDeployConfigData2$inboundSchema: z.ZodType<
   UpdateServerDeployConfigData2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  type: UpdateServerDeployConfigType2$inboundSchema,
-  attributes: z.lazy(() => UpdateServerDeployConfigAttributes2$inboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: UpdateServerDeployConfigType2$inboundSchema,
+    attributes: z.lazy(() => UpdateServerDeployConfigAttributes2$inboundSchema)
+      .optional(),
+  })
+);
 /** @internal */
 export type UpdateServerDeployConfigData2$Outbound = {
   id?: string | undefined;
@@ -392,12 +414,14 @@ export const UpdateServerDeployConfigData2$outboundSchema: z.ZodType<
   UpdateServerDeployConfigData2$Outbound,
   z.ZodTypeDef,
   UpdateServerDeployConfigData2
-> = z.object({
-  id: z.string().optional(),
-  type: UpdateServerDeployConfigType2$outboundSchema,
-  attributes: z.lazy(() => UpdateServerDeployConfigAttributes2$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: UpdateServerDeployConfigType2$outboundSchema,
+    attributes: z.lazy(() => UpdateServerDeployConfigAttributes2$outboundSchema)
+      .optional(),
+  })
+);
 
 export function updateServerDeployConfigData2ToJSON(
   updateServerDeployConfigData2: UpdateServerDeployConfigData2,
@@ -423,9 +447,11 @@ export const UpdateServerDeployConfigRequestBody2$inboundSchema: z.ZodType<
   UpdateServerDeployConfigRequestBody2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => UpdateServerDeployConfigData2$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => UpdateServerDeployConfigData2$inboundSchema),
+  })
+);
 /** @internal */
 export type UpdateServerDeployConfigRequestBody2$Outbound = {
   data: UpdateServerDeployConfigData2$Outbound;
@@ -436,9 +462,11 @@ export const UpdateServerDeployConfigRequestBody2$outboundSchema: z.ZodType<
   UpdateServerDeployConfigRequestBody2$Outbound,
   z.ZodTypeDef,
   UpdateServerDeployConfigRequestBody2
-> = z.object({
-  data: z.lazy(() => UpdateServerDeployConfigData2$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => UpdateServerDeployConfigData2$outboundSchema),
+  })
+);
 
 export function updateServerDeployConfigRequestBody2ToJSON(
   updateServerDeployConfigRequestBody2: UpdateServerDeployConfigRequestBody2,
@@ -465,15 +493,19 @@ export const UpdateServerDeployConfigRequest$inboundSchema: z.ZodType<
   UpdateServerDeployConfigRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  server_id: z.string(),
-  RequestBody: z.lazy(() => UpdateServerDeployConfigRequestBody2$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "server_id": "serverId",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    server_id: z.string(),
+    RequestBody: z.lazy(() =>
+      UpdateServerDeployConfigRequestBody2$inboundSchema
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "server_id": "serverId",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type UpdateServerDeployConfigRequest$Outbound = {
   server_id: string;
@@ -485,17 +517,19 @@ export const UpdateServerDeployConfigRequest$outboundSchema: z.ZodType<
   UpdateServerDeployConfigRequest$Outbound,
   z.ZodTypeDef,
   UpdateServerDeployConfigRequest
-> = z.object({
-  serverId: z.string(),
-  requestBody: z.lazy(() =>
-    UpdateServerDeployConfigRequestBody2$outboundSchema
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    serverId: "server_id",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    serverId: z.string(),
+    requestBody: z.lazy(() =>
+      UpdateServerDeployConfigRequestBody2$outboundSchema
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      serverId: "server_id",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function updateServerDeployConfigRequestToJSON(
   updateServerDeployConfigRequest: UpdateServerDeployConfigRequest,

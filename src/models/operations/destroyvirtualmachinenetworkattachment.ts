@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -33,14 +33,16 @@ export const DestroyVirtualMachineNetworkAttachmentRequest$inboundSchema:
     DestroyVirtualMachineNetworkAttachmentRequest,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    virtual_machine_id: z.string(),
-    id: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      "virtual_machine_id": "virtualMachineId",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      virtual_machine_id: z.string(),
+      id: z.string(),
+    }).transform((v) => {
+      return remap$(v, {
+        "virtual_machine_id": "virtualMachineId",
+      });
+    })
+  );
 /** @internal */
 export type DestroyVirtualMachineNetworkAttachmentRequest$Outbound = {
   virtual_machine_id: string;
@@ -53,14 +55,16 @@ export const DestroyVirtualMachineNetworkAttachmentRequest$outboundSchema:
     DestroyVirtualMachineNetworkAttachmentRequest$Outbound,
     z.ZodTypeDef,
     DestroyVirtualMachineNetworkAttachmentRequest
-  > = z.object({
-    virtualMachineId: z.string(),
-    id: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      virtualMachineId: "virtual_machine_id",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      virtualMachineId: z.string(),
+      id: z.string(),
+    }).transform((v) => {
+      return remap$(v, {
+        virtualMachineId: "virtual_machine_id",
+      });
+    })
+  );
 
 export function destroyVirtualMachineNetworkAttachmentRequestToJSON(
   destroyVirtualMachineNetworkAttachmentRequest:
@@ -91,9 +95,11 @@ export function destroyVirtualMachineNetworkAttachmentRequestFromJSON(
 /** @internal */
 export const DestroyVirtualMachineNetworkAttachmentMeta$inboundSchema:
   z.ZodType<DestroyVirtualMachineNetworkAttachmentMeta, z.ZodTypeDef, unknown> =
-    z.object({
-      status: z.string().optional(),
-    });
+    /* @__PURE__ */ lazySchema$(() =>
+      z.object({
+        status: z.string().optional(),
+      })
+    );
 /** @internal */
 export type DestroyVirtualMachineNetworkAttachmentMeta$Outbound = {
   status?: string | undefined;
@@ -105,9 +111,11 @@ export const DestroyVirtualMachineNetworkAttachmentMeta$outboundSchema:
     DestroyVirtualMachineNetworkAttachmentMeta$Outbound,
     z.ZodTypeDef,
     DestroyVirtualMachineNetworkAttachmentMeta
-  > = z.object({
-    status: z.string().optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      status: z.string().optional(),
+    })
+  );
 
 export function destroyVirtualMachineNetworkAttachmentMetaToJSON(
   destroyVirtualMachineNetworkAttachmentMeta:
@@ -141,10 +149,13 @@ export const DestroyVirtualMachineNetworkAttachmentResponse$inboundSchema:
     DestroyVirtualMachineNetworkAttachmentResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    meta: z.lazy(() => DestroyVirtualMachineNetworkAttachmentMeta$inboundSchema)
-      .optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      meta: z.lazy(() =>
+        DestroyVirtualMachineNetworkAttachmentMeta$inboundSchema
+      ).optional(),
+    })
+  );
 /** @internal */
 export type DestroyVirtualMachineNetworkAttachmentResponse$Outbound = {
   meta?: DestroyVirtualMachineNetworkAttachmentMeta$Outbound | undefined;
@@ -156,11 +167,13 @@ export const DestroyVirtualMachineNetworkAttachmentResponse$outboundSchema:
     DestroyVirtualMachineNetworkAttachmentResponse$Outbound,
     z.ZodTypeDef,
     DestroyVirtualMachineNetworkAttachmentResponse
-  > = z.object({
-    meta: z.lazy(() =>
-      DestroyVirtualMachineNetworkAttachmentMeta$outboundSchema
-    ).optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      meta: z.lazy(() =>
+        DestroyVirtualMachineNetworkAttachmentMeta$outboundSchema
+      ).optional(),
+    })
+  );
 
 export function destroyVirtualMachineNetworkAttachmentResponseToJSON(
   destroyVirtualMachineNetworkAttachmentResponse:

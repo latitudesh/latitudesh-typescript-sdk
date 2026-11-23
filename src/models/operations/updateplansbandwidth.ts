@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -43,7 +43,7 @@ export type UpdatePlansBandwidthRequest = {
 /** @internal */
 export const UpdatePlansBandwidthType2$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePlansBandwidthType2
-> = z.nativeEnum(UpdatePlansBandwidthType2);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(UpdatePlansBandwidthType2));
 /** @internal */
 export const UpdatePlansBandwidthType2$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePlansBandwidthType2
@@ -54,15 +54,17 @@ export const UpdatePlansBandwidthAttributes2$inboundSchema: z.ZodType<
   UpdatePlansBandwidthAttributes2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  project: z.string().optional(),
-  quantity: z.number().int().optional(),
-  region_slug: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "region_slug": "regionSlug",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    project: z.string().optional(),
+    quantity: z.number().int().optional(),
+    region_slug: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "region_slug": "regionSlug",
+    });
+  })
+);
 /** @internal */
 export type UpdatePlansBandwidthAttributes2$Outbound = {
   project?: string | undefined;
@@ -75,15 +77,17 @@ export const UpdatePlansBandwidthAttributes2$outboundSchema: z.ZodType<
   UpdatePlansBandwidthAttributes2$Outbound,
   z.ZodTypeDef,
   UpdatePlansBandwidthAttributes2
-> = z.object({
-  project: z.string().optional(),
-  quantity: z.number().int().optional(),
-  regionSlug: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    regionSlug: "region_slug",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    project: z.string().optional(),
+    quantity: z.number().int().optional(),
+    regionSlug: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      regionSlug: "region_slug",
+    });
+  })
+);
 
 export function updatePlansBandwidthAttributes2ToJSON(
   updatePlansBandwidthAttributes2: UpdatePlansBandwidthAttributes2,
@@ -109,11 +113,13 @@ export const UpdatePlansBandwidthData2$inboundSchema: z.ZodType<
   UpdatePlansBandwidthData2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: UpdatePlansBandwidthType2$inboundSchema.optional(),
-  attributes: z.lazy(() => UpdatePlansBandwidthAttributes2$inboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: UpdatePlansBandwidthType2$inboundSchema.optional(),
+    attributes: z.lazy(() => UpdatePlansBandwidthAttributes2$inboundSchema)
+      .optional(),
+  })
+);
 /** @internal */
 export type UpdatePlansBandwidthData2$Outbound = {
   type?: string | undefined;
@@ -125,11 +131,13 @@ export const UpdatePlansBandwidthData2$outboundSchema: z.ZodType<
   UpdatePlansBandwidthData2$Outbound,
   z.ZodTypeDef,
   UpdatePlansBandwidthData2
-> = z.object({
-  type: UpdatePlansBandwidthType2$outboundSchema.optional(),
-  attributes: z.lazy(() => UpdatePlansBandwidthAttributes2$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: UpdatePlansBandwidthType2$outboundSchema.optional(),
+    attributes: z.lazy(() => UpdatePlansBandwidthAttributes2$outboundSchema)
+      .optional(),
+  })
+);
 
 export function updatePlansBandwidthData2ToJSON(
   updatePlansBandwidthData2: UpdatePlansBandwidthData2,
@@ -153,9 +161,11 @@ export const UpdatePlansBandwidthRequest$inboundSchema: z.ZodType<
   UpdatePlansBandwidthRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => UpdatePlansBandwidthData2$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => UpdatePlansBandwidthData2$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type UpdatePlansBandwidthRequest$Outbound = {
   data?: UpdatePlansBandwidthData2$Outbound | undefined;
@@ -166,9 +176,11 @@ export const UpdatePlansBandwidthRequest$outboundSchema: z.ZodType<
   UpdatePlansBandwidthRequest$Outbound,
   z.ZodTypeDef,
   UpdatePlansBandwidthRequest
-> = z.object({
-  data: z.lazy(() => UpdatePlansBandwidthData2$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => UpdatePlansBandwidthData2$outboundSchema).optional(),
+  })
+);
 
 export function updatePlansBandwidthRequestToJSON(
   updatePlansBandwidthRequest: UpdatePlansBandwidthRequest,

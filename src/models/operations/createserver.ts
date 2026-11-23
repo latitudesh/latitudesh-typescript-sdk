@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { ClosedEnum, OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -239,7 +239,7 @@ export type CreateServerRequest = {
 /** @internal */
 export const CreateServerType2$inboundSchema: z.ZodNativeEnum<
   typeof CreateServerType2
-> = z.nativeEnum(CreateServerType2);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CreateServerType2));
 /** @internal */
 export const CreateServerType2$outboundSchema: z.ZodNativeEnum<
   typeof CreateServerType2
@@ -247,41 +247,51 @@ export const CreateServerType2$outboundSchema: z.ZodNativeEnum<
 
 /** @internal */
 export const Plan2$inboundSchema: z.ZodType<Plan2, z.ZodTypeDef, unknown> =
-  openEnums.inboundSchema(Plan2);
+  /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(Plan2));
 /** @internal */
 export const Plan2$outboundSchema: z.ZodType<string, z.ZodTypeDef, Plan2> =
-  openEnums.outboundSchema(Plan2);
+  /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(Plan2));
 
 /** @internal */
 export const CreateServerSite2$inboundSchema: z.ZodType<
   CreateServerSite2,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(CreateServerSite2);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(CreateServerSite2)
+);
 /** @internal */
 export const CreateServerSite2$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   CreateServerSite2
-> = openEnums.outboundSchema(CreateServerSite2);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(CreateServerSite2)
+);
 
 /** @internal */
 export const CreateServerOperatingSystem2$inboundSchema: z.ZodType<
   CreateServerOperatingSystem2,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(CreateServerOperatingSystem2);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(CreateServerOperatingSystem2)
+);
 /** @internal */
 export const CreateServerOperatingSystem2$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   CreateServerOperatingSystem2
-> = openEnums.outboundSchema(CreateServerOperatingSystem2);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(CreateServerOperatingSystem2)
+);
 
 /** @internal */
 export const CreateServerCreateServerRaid$inboundSchema: z.ZodNativeEnum<
   typeof CreateServerCreateServerRaid
-> = z.nativeEnum(CreateServerCreateServerRaid);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(CreateServerCreateServerRaid)
+);
 /** @internal */
 export const CreateServerCreateServerRaid$outboundSchema: z.ZodNativeEnum<
   typeof CreateServerCreateServerRaid
@@ -290,7 +300,7 @@ export const CreateServerCreateServerRaid$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const CreateServerRole2$inboundSchema: z.ZodNativeEnum<
   typeof CreateServerRole2
-> = z.nativeEnum(CreateServerRole2);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CreateServerRole2));
 /** @internal */
 export const CreateServerRole2$outboundSchema: z.ZodNativeEnum<
   typeof CreateServerRole2
@@ -299,7 +309,7 @@ export const CreateServerRole2$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const CreateServerRaidLevel2$inboundSchema: z.ZodNativeEnum<
   typeof CreateServerRaidLevel2
-> = z.nativeEnum(CreateServerRaidLevel2);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CreateServerRaidLevel2));
 /** @internal */
 export const CreateServerRaidLevel2$outboundSchema: z.ZodNativeEnum<
   typeof CreateServerRaidLevel2
@@ -308,7 +318,7 @@ export const CreateServerRaidLevel2$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const CreateServerFilesystem2$inboundSchema: z.ZodNativeEnum<
   typeof CreateServerFilesystem2
-> = z.nativeEnum(CreateServerFilesystem2);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CreateServerFilesystem2));
 /** @internal */
 export const CreateServerFilesystem2$outboundSchema: z.ZodNativeEnum<
   typeof CreateServerFilesystem2
@@ -319,18 +329,20 @@ export const CreateServerDiskLayout2$inboundSchema: z.ZodType<
   CreateServerDiskLayout2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  count: z.number().int(),
-  role: CreateServerRole2$inboundSchema,
-  raid_level: z.nullable(CreateServerRaidLevel2$inboundSchema).optional(),
-  filesystem: z.nullable(CreateServerFilesystem2$inboundSchema).optional(),
-  mount_point: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "raid_level": "raidLevel",
-    "mount_point": "mountPoint",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    count: z.number().int(),
+    role: CreateServerRole2$inboundSchema,
+    raid_level: z.nullable(CreateServerRaidLevel2$inboundSchema).optional(),
+    filesystem: z.nullable(CreateServerFilesystem2$inboundSchema).optional(),
+    mount_point: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "raid_level": "raidLevel",
+      "mount_point": "mountPoint",
+    });
+  })
+);
 /** @internal */
 export type CreateServerDiskLayout2$Outbound = {
   count: number;
@@ -345,18 +357,20 @@ export const CreateServerDiskLayout2$outboundSchema: z.ZodType<
   CreateServerDiskLayout2$Outbound,
   z.ZodTypeDef,
   CreateServerDiskLayout2
-> = z.object({
-  count: z.number().int(),
-  role: CreateServerRole2$outboundSchema,
-  raidLevel: z.nullable(CreateServerRaidLevel2$outboundSchema).optional(),
-  filesystem: z.nullable(CreateServerFilesystem2$outboundSchema).optional(),
-  mountPoint: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    raidLevel: "raid_level",
-    mountPoint: "mount_point",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    count: z.number().int(),
+    role: CreateServerRole2$outboundSchema,
+    raidLevel: z.nullable(CreateServerRaidLevel2$outboundSchema).optional(),
+    filesystem: z.nullable(CreateServerFilesystem2$outboundSchema).optional(),
+    mountPoint: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      raidLevel: "raid_level",
+      mountPoint: "mount_point",
+    });
+  })
+);
 
 export function createServerDiskLayout2ToJSON(
   createServerDiskLayout2: CreateServerDiskLayout2,
@@ -378,7 +392,7 @@ export function createServerDiskLayout2FromJSON(
 /** @internal */
 export const CreateServerBilling2$inboundSchema: z.ZodNativeEnum<
   typeof CreateServerBilling2
-> = z.nativeEnum(CreateServerBilling2);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CreateServerBilling2));
 /** @internal */
 export const CreateServerBilling2$outboundSchema: z.ZodNativeEnum<
   typeof CreateServerBilling2
@@ -389,36 +403,38 @@ export const CreateServerAttributes2$inboundSchema: z.ZodType<
   CreateServerAttributes2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  project: z.string(),
-  plan: Plan2$inboundSchema,
-  site: CreateServerSite2$inboundSchema,
-  operating_system: CreateServerOperatingSystem2$inboundSchema,
-  hostname: z.string(),
-  ssh_keys: z.nullable(z.array(z.string())).optional(),
-  user_data: z.nullable(z.string()).optional(),
-  raid: z.nullable(CreateServerCreateServerRaid$inboundSchema).optional(),
-  disk_layout: z.nullable(
-    z.array(z.lazy(() => CreateServerDiskLayout2$inboundSchema)),
-  ).optional(),
-  ipxe: z.nullable(z.string()).optional(),
-  public_network: z.nullable(z.boolean()).optional(),
-  public_network_id: z.nullable(z.string()).optional(),
-  persistent_netboot: z.boolean().optional(),
-  bgp_ready: z.nullable(z.boolean()).optional(),
-  billing: z.nullable(CreateServerBilling2$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "operating_system": "operatingSystem",
-    "ssh_keys": "sshKeys",
-    "user_data": "userData",
-    "disk_layout": "diskLayout",
-    "public_network": "publicNetwork",
-    "public_network_id": "publicNetworkId",
-    "persistent_netboot": "persistentNetboot",
-    "bgp_ready": "bgpReady",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    project: z.string(),
+    plan: Plan2$inboundSchema,
+    site: CreateServerSite2$inboundSchema,
+    operating_system: CreateServerOperatingSystem2$inboundSchema,
+    hostname: z.string(),
+    ssh_keys: z.nullable(z.array(z.string())).optional(),
+    user_data: z.nullable(z.string()).optional(),
+    raid: z.nullable(CreateServerCreateServerRaid$inboundSchema).optional(),
+    disk_layout: z.nullable(
+      z.array(z.lazy(() => CreateServerDiskLayout2$inboundSchema)),
+    ).optional(),
+    ipxe: z.nullable(z.string()).optional(),
+    public_network: z.nullable(z.boolean()).optional(),
+    public_network_id: z.nullable(z.string()).optional(),
+    persistent_netboot: z.boolean().optional(),
+    bgp_ready: z.nullable(z.boolean()).optional(),
+    billing: z.nullable(CreateServerBilling2$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "operating_system": "operatingSystem",
+      "ssh_keys": "sshKeys",
+      "user_data": "userData",
+      "disk_layout": "diskLayout",
+      "public_network": "publicNetwork",
+      "public_network_id": "publicNetworkId",
+      "persistent_netboot": "persistentNetboot",
+      "bgp_ready": "bgpReady",
+    });
+  })
+);
 /** @internal */
 export type CreateServerAttributes2$Outbound = {
   project: string;
@@ -443,36 +459,38 @@ export const CreateServerAttributes2$outboundSchema: z.ZodType<
   CreateServerAttributes2$Outbound,
   z.ZodTypeDef,
   CreateServerAttributes2
-> = z.object({
-  project: z.string(),
-  plan: Plan2$outboundSchema,
-  site: CreateServerSite2$outboundSchema,
-  operatingSystem: CreateServerOperatingSystem2$outboundSchema,
-  hostname: z.string(),
-  sshKeys: z.nullable(z.array(z.string())).optional(),
-  userData: z.nullable(z.string()).optional(),
-  raid: z.nullable(CreateServerCreateServerRaid$outboundSchema).optional(),
-  diskLayout: z.nullable(
-    z.array(z.lazy(() => CreateServerDiskLayout2$outboundSchema)),
-  ).optional(),
-  ipxe: z.nullable(z.string()).optional(),
-  publicNetwork: z.nullable(z.boolean()).optional(),
-  publicNetworkId: z.nullable(z.string()).optional(),
-  persistentNetboot: z.boolean().optional(),
-  bgpReady: z.nullable(z.boolean()).optional(),
-  billing: z.nullable(CreateServerBilling2$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    operatingSystem: "operating_system",
-    sshKeys: "ssh_keys",
-    userData: "user_data",
-    diskLayout: "disk_layout",
-    publicNetwork: "public_network",
-    publicNetworkId: "public_network_id",
-    persistentNetboot: "persistent_netboot",
-    bgpReady: "bgp_ready",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    project: z.string(),
+    plan: Plan2$outboundSchema,
+    site: CreateServerSite2$outboundSchema,
+    operatingSystem: CreateServerOperatingSystem2$outboundSchema,
+    hostname: z.string(),
+    sshKeys: z.nullable(z.array(z.string())).optional(),
+    userData: z.nullable(z.string()).optional(),
+    raid: z.nullable(CreateServerCreateServerRaid$outboundSchema).optional(),
+    diskLayout: z.nullable(
+      z.array(z.lazy(() => CreateServerDiskLayout2$outboundSchema)),
+    ).optional(),
+    ipxe: z.nullable(z.string()).optional(),
+    publicNetwork: z.nullable(z.boolean()).optional(),
+    publicNetworkId: z.nullable(z.string()).optional(),
+    persistentNetboot: z.boolean().optional(),
+    bgpReady: z.nullable(z.boolean()).optional(),
+    billing: z.nullable(CreateServerBilling2$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      operatingSystem: "operating_system",
+      sshKeys: "ssh_keys",
+      userData: "user_data",
+      diskLayout: "disk_layout",
+      publicNetwork: "public_network",
+      publicNetworkId: "public_network_id",
+      persistentNetboot: "persistent_netboot",
+      bgpReady: "bgp_ready",
+    });
+  })
+);
 
 export function createServerAttributes2ToJSON(
   createServerAttributes2: CreateServerAttributes2,
@@ -496,10 +514,12 @@ export const CreateServerData2$inboundSchema: z.ZodType<
   CreateServerData2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: CreateServerType2$inboundSchema,
-  attributes: z.lazy(() => CreateServerAttributes2$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CreateServerType2$inboundSchema,
+    attributes: z.lazy(() => CreateServerAttributes2$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type CreateServerData2$Outbound = {
   type: string;
@@ -511,10 +531,12 @@ export const CreateServerData2$outboundSchema: z.ZodType<
   CreateServerData2$Outbound,
   z.ZodTypeDef,
   CreateServerData2
-> = z.object({
-  type: CreateServerType2$outboundSchema,
-  attributes: z.lazy(() => CreateServerAttributes2$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CreateServerType2$outboundSchema,
+    attributes: z.lazy(() => CreateServerAttributes2$outboundSchema).optional(),
+  })
+);
 
 export function createServerData2ToJSON(
   createServerData2: CreateServerData2,
@@ -538,9 +560,11 @@ export const CreateServerRequest$inboundSchema: z.ZodType<
   CreateServerRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => CreateServerData2$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => CreateServerData2$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type CreateServerRequest$Outbound = {
   data?: CreateServerData2$Outbound | undefined;
@@ -551,9 +575,11 @@ export const CreateServerRequest$outboundSchema: z.ZodType<
   CreateServerRequest$Outbound,
   z.ZodTypeDef,
   CreateServerRequest
-> = z.object({
-  data: z.lazy(() => CreateServerData2$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => CreateServerData2$outboundSchema).optional(),
+  })
+);
 
 export function createServerRequestToJSON(
   createServerRequest: CreateServerRequest,

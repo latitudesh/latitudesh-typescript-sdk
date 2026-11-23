@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -40,7 +40,7 @@ export type Membership = {
 /** @internal */
 export const MembershipRole$inboundSchema: z.ZodNativeEnum<
   typeof MembershipRole
-> = z.nativeEnum(MembershipRole);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(MembershipRole));
 /** @internal */
 export const MembershipRole$outboundSchema: z.ZodNativeEnum<
   typeof MembershipRole
@@ -51,29 +51,33 @@ export const MembershipAttributes$inboundSchema: z.ZodType<
   MembershipAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  first_name: z.string().optional(),
-  last_name: z.string().optional(),
-  email: z.string().optional(),
-  role: MembershipRole$inboundSchema.optional(),
-  mfa_enabled: z.boolean().optional(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  last_login_at: z.string().datetime({ offset: true }).transform(v =>
-    new Date(v)
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "first_name": "firstName",
-    "last_name": "lastName",
-    "mfa_enabled": "mfaEnabled",
-    "created_at": "createdAt",
-    "updated_at": "updatedAt",
-    "last_login_at": "lastLoginAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    first_name: z.string().optional(),
+    last_name: z.string().optional(),
+    email: z.string().optional(),
+    role: MembershipRole$inboundSchema.optional(),
+    mfa_enabled: z.boolean().optional(),
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ).optional(),
+    updated_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ).optional(),
+    last_login_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "first_name": "firstName",
+      "last_name": "lastName",
+      "mfa_enabled": "mfaEnabled",
+      "created_at": "createdAt",
+      "updated_at": "updatedAt",
+      "last_login_at": "lastLoginAt",
+    });
+  })
+);
 /** @internal */
 export type MembershipAttributes$Outbound = {
   first_name?: string | undefined;
@@ -91,25 +95,27 @@ export const MembershipAttributes$outboundSchema: z.ZodType<
   MembershipAttributes$Outbound,
   z.ZodTypeDef,
   MembershipAttributes
-> = z.object({
-  firstName: z.string().optional(),
-  lastName: z.string().optional(),
-  email: z.string().optional(),
-  role: MembershipRole$outboundSchema.optional(),
-  mfaEnabled: z.boolean().optional(),
-  createdAt: z.date().transform(v => v.toISOString()).optional(),
-  updatedAt: z.date().transform(v => v.toISOString()).optional(),
-  lastLoginAt: z.date().transform(v => v.toISOString()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    firstName: "first_name",
-    lastName: "last_name",
-    mfaEnabled: "mfa_enabled",
-    createdAt: "created_at",
-    updatedAt: "updated_at",
-    lastLoginAt: "last_login_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    firstName: z.string().optional(),
+    lastName: z.string().optional(),
+    email: z.string().optional(),
+    role: MembershipRole$outboundSchema.optional(),
+    mfaEnabled: z.boolean().optional(),
+    createdAt: z.date().transform(v => v.toISOString()).optional(),
+    updatedAt: z.date().transform(v => v.toISOString()).optional(),
+    lastLoginAt: z.date().transform(v => v.toISOString()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      firstName: "first_name",
+      lastName: "last_name",
+      mfaEnabled: "mfa_enabled",
+      createdAt: "created_at",
+      updatedAt: "updated_at",
+      lastLoginAt: "last_login_at",
+    });
+  })
+);
 
 export function membershipAttributesToJSON(
   membershipAttributes: MembershipAttributes,
@@ -133,10 +139,12 @@ export const MembershipData$inboundSchema: z.ZodType<
   MembershipData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  attributes: z.lazy(() => MembershipAttributes$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    attributes: z.lazy(() => MembershipAttributes$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type MembershipData$Outbound = {
   id?: string | undefined;
@@ -148,10 +156,12 @@ export const MembershipData$outboundSchema: z.ZodType<
   MembershipData$Outbound,
   z.ZodTypeDef,
   MembershipData
-> = z.object({
-  id: z.string().optional(),
-  attributes: z.lazy(() => MembershipAttributes$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    attributes: z.lazy(() => MembershipAttributes$outboundSchema).optional(),
+  })
+);
 
 export function membershipDataToJSON(membershipData: MembershipData): string {
   return JSON.stringify(MembershipData$outboundSchema.parse(membershipData));
@@ -171,9 +181,11 @@ export const Membership$inboundSchema: z.ZodType<
   Membership,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => MembershipData$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => MembershipData$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type Membership$Outbound = {
   data?: MembershipData$Outbound | undefined;
@@ -184,9 +196,11 @@ export const Membership$outboundSchema: z.ZodType<
   Membership$Outbound,
   z.ZodTypeDef,
   Membership
-> = z.object({
-  data: z.lazy(() => MembershipData$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => MembershipData$outboundSchema).optional(),
+  })
+);
 
 export function membershipToJSON(membership: Membership): string {
   return JSON.stringify(Membership$outboundSchema.parse(membership));

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -20,13 +20,15 @@ export const GetBaselineRequest$inboundSchema: z.ZodType<
   GetBaselineRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  baseline_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "baseline_id": "baselineId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    baseline_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "baseline_id": "baselineId",
+    });
+  })
+);
 /** @internal */
 export type GetBaselineRequest$Outbound = {
   baseline_id: string;
@@ -37,13 +39,15 @@ export const GetBaselineRequest$outboundSchema: z.ZodType<
   GetBaselineRequest$Outbound,
   z.ZodTypeDef,
   GetBaselineRequest
-> = z.object({
-  baselineId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    baselineId: "baseline_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    baselineId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      baselineId: "baseline_id",
+    });
+  })
+);
 
 export function getBaselineRequestToJSON(
   getBaselineRequest: GetBaselineRequest,

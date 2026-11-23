@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -42,7 +42,7 @@ export type UpdateApiKey = {
 /** @internal */
 export const UpdateApiKeyType$inboundSchema: z.ZodNativeEnum<
   typeof UpdateApiKeyType
-> = z.nativeEnum(UpdateApiKeyType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(UpdateApiKeyType));
 /** @internal */
 export const UpdateApiKeyType$outboundSchema: z.ZodNativeEnum<
   typeof UpdateApiKeyType
@@ -53,16 +53,18 @@ export const UpdateApiKeyAttributes$inboundSchema: z.ZodType<
   UpdateApiKeyAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string().optional(),
-  read_only: z.boolean().optional(),
-  allowed_ips: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "read_only": "readOnly",
-    "allowed_ips": "allowedIps",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    read_only: z.boolean().optional(),
+    allowed_ips: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "read_only": "readOnly",
+      "allowed_ips": "allowedIps",
+    });
+  })
+);
 /** @internal */
 export type UpdateApiKeyAttributes$Outbound = {
   name?: string | undefined;
@@ -75,16 +77,18 @@ export const UpdateApiKeyAttributes$outboundSchema: z.ZodType<
   UpdateApiKeyAttributes$Outbound,
   z.ZodTypeDef,
   UpdateApiKeyAttributes
-> = z.object({
-  name: z.string().optional(),
-  readOnly: z.boolean().optional(),
-  allowedIps: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    readOnly: "read_only",
-    allowedIps: "allowed_ips",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    readOnly: z.boolean().optional(),
+    allowedIps: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      readOnly: "read_only",
+      allowedIps: "allowed_ips",
+    });
+  })
+);
 
 export function updateApiKeyAttributesToJSON(
   updateApiKeyAttributes: UpdateApiKeyAttributes,
@@ -108,11 +112,13 @@ export const UpdateApiKeyData$inboundSchema: z.ZodType<
   UpdateApiKeyData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  type: UpdateApiKeyType$inboundSchema,
-  attributes: z.lazy(() => UpdateApiKeyAttributes$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: UpdateApiKeyType$inboundSchema,
+    attributes: z.lazy(() => UpdateApiKeyAttributes$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type UpdateApiKeyData$Outbound = {
   id?: string | undefined;
@@ -125,11 +131,13 @@ export const UpdateApiKeyData$outboundSchema: z.ZodType<
   UpdateApiKeyData$Outbound,
   z.ZodTypeDef,
   UpdateApiKeyData
-> = z.object({
-  id: z.string().optional(),
-  type: UpdateApiKeyType$outboundSchema,
-  attributes: z.lazy(() => UpdateApiKeyAttributes$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: UpdateApiKeyType$outboundSchema,
+    attributes: z.lazy(() => UpdateApiKeyAttributes$outboundSchema).optional(),
+  })
+);
 
 export function updateApiKeyDataToJSON(
   updateApiKeyData: UpdateApiKeyData,
@@ -153,9 +161,11 @@ export const UpdateApiKey$inboundSchema: z.ZodType<
   UpdateApiKey,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => UpdateApiKeyData$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => UpdateApiKeyData$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type UpdateApiKey$Outbound = {
   data?: UpdateApiKeyData$Outbound | undefined;
@@ -166,9 +176,11 @@ export const UpdateApiKey$outboundSchema: z.ZodType<
   UpdateApiKey$Outbound,
   z.ZodTypeDef,
   UpdateApiKey
-> = z.object({
-  data: z.lazy(() => UpdateApiKeyData$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => UpdateApiKeyData$outboundSchema).optional(),
+  })
+);
 
 export function updateApiKeyToJSON(updateApiKey: UpdateApiKey): string {
   return JSON.stringify(UpdateApiKey$outboundSchema.parse(updateApiKey));

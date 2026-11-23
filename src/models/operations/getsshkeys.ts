@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -40,23 +40,25 @@ export const GetSshKeysRequest$inboundSchema: z.ZodType<
   GetSshKeysRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "filter[project]": z.string().optional(),
-  "filter[scope]": z.string().optional(),
-  "filter[tags]": z.string().optional(),
-  "stats[total]": z.string().optional(),
-  "page[number]": z.number().int().optional(),
-  "page[size]": z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "filter[project]": "filterProject",
-    "filter[scope]": "filterScope",
-    "filter[tags]": "filterTags",
-    "stats[total]": "statsTotal",
-    "page[number]": "pageNumber",
-    "page[size]": "pageSize",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "filter[project]": z.string().optional(),
+    "filter[scope]": z.string().optional(),
+    "filter[tags]": z.string().optional(),
+    "stats[total]": z.string().optional(),
+    "page[number]": z.number().int().optional(),
+    "page[size]": z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "filter[project]": "filterProject",
+      "filter[scope]": "filterScope",
+      "filter[tags]": "filterTags",
+      "stats[total]": "statsTotal",
+      "page[number]": "pageNumber",
+      "page[size]": "pageSize",
+    });
+  })
+);
 /** @internal */
 export type GetSshKeysRequest$Outbound = {
   "filter[project]"?: string | undefined;
@@ -72,23 +74,25 @@ export const GetSshKeysRequest$outboundSchema: z.ZodType<
   GetSshKeysRequest$Outbound,
   z.ZodTypeDef,
   GetSshKeysRequest
-> = z.object({
-  filterProject: z.string().optional(),
-  filterScope: z.string().optional(),
-  filterTags: z.string().optional(),
-  statsTotal: z.string().optional(),
-  pageNumber: z.number().int().optional(),
-  pageSize: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    filterProject: "filter[project]",
-    filterScope: "filter[scope]",
-    filterTags: "filter[tags]",
-    statsTotal: "stats[total]",
-    pageNumber: "page[number]",
-    pageSize: "page[size]",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    filterProject: z.string().optional(),
+    filterScope: z.string().optional(),
+    filterTags: z.string().optional(),
+    statsTotal: z.string().optional(),
+    pageNumber: z.number().int().optional(),
+    pageSize: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      filterProject: "filter[project]",
+      filterScope: "filter[scope]",
+      filterTags: "filter[tags]",
+      statsTotal: "stats[total]",
+      pageNumber: "page[number]",
+      pageSize: "page[size]",
+    });
+  })
+);
 
 export function getSshKeysRequestToJSON(
   getSshKeysRequest: GetSshKeysRequest,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -17,13 +17,15 @@ export const DeleteUserDataRequest$inboundSchema: z.ZodType<
   DeleteUserDataRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  user_data_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "user_data_id": "userDataId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    user_data_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "user_data_id": "userDataId",
+    });
+  })
+);
 /** @internal */
 export type DeleteUserDataRequest$Outbound = {
   user_data_id: string;
@@ -34,13 +36,15 @@ export const DeleteUserDataRequest$outboundSchema: z.ZodType<
   DeleteUserDataRequest$Outbound,
   z.ZodTypeDef,
   DeleteUserDataRequest
-> = z.object({
-  userDataId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    userDataId: "user_data_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    userDataId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      userDataId: "user_data_id",
+    });
+  })
+);
 
 export function deleteUserDataRequestToJSON(
   deleteUserDataRequest: DeleteUserDataRequest,

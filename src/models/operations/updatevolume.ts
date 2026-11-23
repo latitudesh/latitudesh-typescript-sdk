@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -52,7 +52,7 @@ export type UpdateVolumeResponse = {
 /** @internal */
 export const UpdateVolumeType2$inboundSchema: z.ZodNativeEnum<
   typeof UpdateVolumeType2
-> = z.nativeEnum(UpdateVolumeType2);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(UpdateVolumeType2));
 /** @internal */
 export const UpdateVolumeType2$outboundSchema: z.ZodNativeEnum<
   typeof UpdateVolumeType2
@@ -63,13 +63,15 @@ export const UpdateVolumeAttributes2$inboundSchema: z.ZodType<
   UpdateVolumeAttributes2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  size_in_gb: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    "size_in_gb": "sizeInGb",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    size_in_gb: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      "size_in_gb": "sizeInGb",
+    });
+  })
+);
 /** @internal */
 export type UpdateVolumeAttributes2$Outbound = {
   size_in_gb: number;
@@ -80,13 +82,15 @@ export const UpdateVolumeAttributes2$outboundSchema: z.ZodType<
   UpdateVolumeAttributes2$Outbound,
   z.ZodTypeDef,
   UpdateVolumeAttributes2
-> = z.object({
-  sizeInGb: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    sizeInGb: "size_in_gb",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    sizeInGb: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      sizeInGb: "size_in_gb",
+    });
+  })
+);
 
 export function updateVolumeAttributes2ToJSON(
   updateVolumeAttributes2: UpdateVolumeAttributes2,
@@ -110,10 +114,12 @@ export const UpdateVolumeData2$inboundSchema: z.ZodType<
   UpdateVolumeData2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: UpdateVolumeType2$inboundSchema,
-  attributes: z.lazy(() => UpdateVolumeAttributes2$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: UpdateVolumeType2$inboundSchema,
+    attributes: z.lazy(() => UpdateVolumeAttributes2$inboundSchema),
+  })
+);
 /** @internal */
 export type UpdateVolumeData2$Outbound = {
   type: string;
@@ -125,10 +131,12 @@ export const UpdateVolumeData2$outboundSchema: z.ZodType<
   UpdateVolumeData2$Outbound,
   z.ZodTypeDef,
   UpdateVolumeData2
-> = z.object({
-  type: UpdateVolumeType2$outboundSchema,
-  attributes: z.lazy(() => UpdateVolumeAttributes2$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: UpdateVolumeType2$outboundSchema,
+    attributes: z.lazy(() => UpdateVolumeAttributes2$outboundSchema),
+  })
+);
 
 export function updateVolumeData2ToJSON(
   updateVolumeData2: UpdateVolumeData2,
@@ -152,9 +160,11 @@ export const UpdateVolumeRequestBody2$inboundSchema: z.ZodType<
   UpdateVolumeRequestBody2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => UpdateVolumeData2$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => UpdateVolumeData2$inboundSchema),
+  })
+);
 /** @internal */
 export type UpdateVolumeRequestBody2$Outbound = {
   data: UpdateVolumeData2$Outbound;
@@ -165,9 +175,11 @@ export const UpdateVolumeRequestBody2$outboundSchema: z.ZodType<
   UpdateVolumeRequestBody2$Outbound,
   z.ZodTypeDef,
   UpdateVolumeRequestBody2
-> = z.object({
-  data: z.lazy(() => UpdateVolumeData2$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => UpdateVolumeData2$outboundSchema),
+  })
+);
 
 export function updateVolumeRequestBody2ToJSON(
   updateVolumeRequestBody2: UpdateVolumeRequestBody2,
@@ -191,14 +203,16 @@ export const UpdateVolumeRequest$inboundSchema: z.ZodType<
   UpdateVolumeRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  RequestBody: z.lazy(() => UpdateVolumeRequestBody2$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    RequestBody: z.lazy(() => UpdateVolumeRequestBody2$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type UpdateVolumeRequest$Outbound = {
   id: string;
@@ -210,14 +224,16 @@ export const UpdateVolumeRequest$outboundSchema: z.ZodType<
   UpdateVolumeRequest$Outbound,
   z.ZodTypeDef,
   UpdateVolumeRequest
-> = z.object({
-  id: z.string(),
-  requestBody: z.lazy(() => UpdateVolumeRequestBody2$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    requestBody: z.lazy(() => UpdateVolumeRequestBody2$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function updateVolumeRequestToJSON(
   updateVolumeRequest: UpdateVolumeRequest,
@@ -241,7 +257,7 @@ export const UpdateVolumeMeta$inboundSchema: z.ZodType<
   UpdateVolumeMeta,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type UpdateVolumeMeta$Outbound = {};
 
@@ -250,7 +266,7 @@ export const UpdateVolumeMeta$outboundSchema: z.ZodType<
   UpdateVolumeMeta$Outbound,
   z.ZodTypeDef,
   UpdateVolumeMeta
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function updateVolumeMetaToJSON(
   updateVolumeMeta: UpdateVolumeMeta,
@@ -274,10 +290,12 @@ export const UpdateVolumeResponse$inboundSchema: z.ZodType<
   UpdateVolumeResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: models.VolumeData$inboundSchema.optional(),
-  meta: z.lazy(() => UpdateVolumeMeta$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: models.VolumeData$inboundSchema.optional(),
+    meta: z.lazy(() => UpdateVolumeMeta$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type UpdateVolumeResponse$Outbound = {
   data?: models.VolumeData$Outbound | undefined;
@@ -289,10 +307,12 @@ export const UpdateVolumeResponse$outboundSchema: z.ZodType<
   UpdateVolumeResponse$Outbound,
   z.ZodTypeDef,
   UpdateVolumeResponse
-> = z.object({
-  data: models.VolumeData$outboundSchema.optional(),
-  meta: z.lazy(() => UpdateVolumeMeta$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: models.VolumeData$outboundSchema.optional(),
+    meta: z.lazy(() => UpdateVolumeMeta$outboundSchema).optional(),
+  })
+);
 
 export function updateVolumeResponseToJSON(
   updateVolumeResponse: UpdateVolumeResponse,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -48,7 +48,7 @@ export type PutSshKeyResponse = {
 /** @internal */
 export const PutSshKeyType2$inboundSchema: z.ZodNativeEnum<
   typeof PutSshKeyType2
-> = z.nativeEnum(PutSshKeyType2);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(PutSshKeyType2));
 /** @internal */
 export const PutSshKeyType2$outboundSchema: z.ZodNativeEnum<
   typeof PutSshKeyType2
@@ -59,10 +59,12 @@ export const PutSshKeyAttributes2$inboundSchema: z.ZodType<
   PutSshKeyAttributes2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  tags: z.array(z.string()).optional(),
-  name: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    tags: z.array(z.string()).optional(),
+    name: z.string().optional(),
+  })
+);
 /** @internal */
 export type PutSshKeyAttributes2$Outbound = {
   tags?: Array<string> | undefined;
@@ -74,10 +76,12 @@ export const PutSshKeyAttributes2$outboundSchema: z.ZodType<
   PutSshKeyAttributes2$Outbound,
   z.ZodTypeDef,
   PutSshKeyAttributes2
-> = z.object({
-  tags: z.array(z.string()).optional(),
-  name: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    tags: z.array(z.string()).optional(),
+    name: z.string().optional(),
+  })
+);
 
 export function putSshKeyAttributes2ToJSON(
   putSshKeyAttributes2: PutSshKeyAttributes2,
@@ -101,11 +105,13 @@ export const PutSshKeyData2$inboundSchema: z.ZodType<
   PutSshKeyData2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  type: PutSshKeyType2$inboundSchema,
-  attributes: z.lazy(() => PutSshKeyAttributes2$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    type: PutSshKeyType2$inboundSchema,
+    attributes: z.lazy(() => PutSshKeyAttributes2$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type PutSshKeyData2$Outbound = {
   id: string;
@@ -118,11 +124,13 @@ export const PutSshKeyData2$outboundSchema: z.ZodType<
   PutSshKeyData2$Outbound,
   z.ZodTypeDef,
   PutSshKeyData2
-> = z.object({
-  id: z.string(),
-  type: PutSshKeyType2$outboundSchema,
-  attributes: z.lazy(() => PutSshKeyAttributes2$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    type: PutSshKeyType2$outboundSchema,
+    attributes: z.lazy(() => PutSshKeyAttributes2$outboundSchema).optional(),
+  })
+);
 
 export function putSshKeyData2ToJSON(putSshKeyData2: PutSshKeyData2): string {
   return JSON.stringify(PutSshKeyData2$outboundSchema.parse(putSshKeyData2));
@@ -142,9 +150,11 @@ export const PutSshKeyRequestBody2$inboundSchema: z.ZodType<
   PutSshKeyRequestBody2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => PutSshKeyData2$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => PutSshKeyData2$inboundSchema),
+  })
+);
 /** @internal */
 export type PutSshKeyRequestBody2$Outbound = {
   data: PutSshKeyData2$Outbound;
@@ -155,9 +165,11 @@ export const PutSshKeyRequestBody2$outboundSchema: z.ZodType<
   PutSshKeyRequestBody2$Outbound,
   z.ZodTypeDef,
   PutSshKeyRequestBody2
-> = z.object({
-  data: z.lazy(() => PutSshKeyData2$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => PutSshKeyData2$outboundSchema),
+  })
+);
 
 export function putSshKeyRequestBody2ToJSON(
   putSshKeyRequestBody2: PutSshKeyRequestBody2,
@@ -181,15 +193,17 @@ export const PutSshKeyRequest$inboundSchema: z.ZodType<
   PutSshKeyRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ssh_key_id: z.string(),
-  RequestBody: z.lazy(() => PutSshKeyRequestBody2$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "ssh_key_id": "sshKeyId",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ssh_key_id: z.string(),
+    RequestBody: z.lazy(() => PutSshKeyRequestBody2$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "ssh_key_id": "sshKeyId",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type PutSshKeyRequest$Outbound = {
   ssh_key_id: string;
@@ -201,15 +215,17 @@ export const PutSshKeyRequest$outboundSchema: z.ZodType<
   PutSshKeyRequest$Outbound,
   z.ZodTypeDef,
   PutSshKeyRequest
-> = z.object({
-  sshKeyId: z.string(),
-  requestBody: z.lazy(() => PutSshKeyRequestBody2$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    sshKeyId: "ssh_key_id",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    sshKeyId: z.string(),
+    requestBody: z.lazy(() => PutSshKeyRequestBody2$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      sshKeyId: "ssh_key_id",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function putSshKeyRequestToJSON(
   putSshKeyRequest: PutSshKeyRequest,
@@ -233,9 +249,11 @@ export const PutSshKeyResponse$inboundSchema: z.ZodType<
   PutSshKeyResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: models.SshKeyData$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: models.SshKeyData$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type PutSshKeyResponse$Outbound = {
   data?: models.SshKeyData$Outbound | undefined;
@@ -246,9 +264,11 @@ export const PutSshKeyResponse$outboundSchema: z.ZodType<
   PutSshKeyResponse$Outbound,
   z.ZodTypeDef,
   PutSshKeyResponse
-> = z.object({
-  data: models.SshKeyData$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: models.SshKeyData$outboundSchema.optional(),
+  })
+);
 
 export function putSshKeyResponseToJSON(
   putSshKeyResponse: PutSshKeyResponse,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -71,7 +71,9 @@ export type CreateKubernetesCluster = {
 /** @internal */
 export const CreateKubernetesClusterType$inboundSchema: z.ZodNativeEnum<
   typeof CreateKubernetesClusterType
-> = z.nativeEnum(CreateKubernetesClusterType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(CreateKubernetesClusterType)
+);
 /** @internal */
 export const CreateKubernetesClusterType$outboundSchema: z.ZodNativeEnum<
   typeof CreateKubernetesClusterType
@@ -82,28 +84,30 @@ export const CreateKubernetesClusterAttributes$inboundSchema: z.ZodType<
   CreateKubernetesClusterAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.nullable(z.string()).optional(),
-  project_id: z.string(),
-  site: z.string(),
-  plan: z.string(),
-  ssh_keys: z.nullable(z.array(z.string())).optional(),
-  worker_plan: z.nullable(z.string()).optional(),
-  kubernetes_version: z.nullable(z.string()).optional(),
-  control_plane_count: z.nullable(z.number().int()).optional(),
-  worker_count: z.nullable(z.number().int()).optional(),
-  operating_system: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "project_id": "projectId",
-    "ssh_keys": "sshKeys",
-    "worker_plan": "workerPlan",
-    "kubernetes_version": "kubernetesVersion",
-    "control_plane_count": "controlPlaneCount",
-    "worker_count": "workerCount",
-    "operating_system": "operatingSystem",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.nullable(z.string()).optional(),
+    project_id: z.string(),
+    site: z.string(),
+    plan: z.string(),
+    ssh_keys: z.nullable(z.array(z.string())).optional(),
+    worker_plan: z.nullable(z.string()).optional(),
+    kubernetes_version: z.nullable(z.string()).optional(),
+    control_plane_count: z.nullable(z.number().int()).optional(),
+    worker_count: z.nullable(z.number().int()).optional(),
+    operating_system: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "project_id": "projectId",
+      "ssh_keys": "sshKeys",
+      "worker_plan": "workerPlan",
+      "kubernetes_version": "kubernetesVersion",
+      "control_plane_count": "controlPlaneCount",
+      "worker_count": "workerCount",
+      "operating_system": "operatingSystem",
+    });
+  })
+);
 /** @internal */
 export type CreateKubernetesClusterAttributes$Outbound = {
   name?: string | null | undefined;
@@ -123,28 +127,30 @@ export const CreateKubernetesClusterAttributes$outboundSchema: z.ZodType<
   CreateKubernetesClusterAttributes$Outbound,
   z.ZodTypeDef,
   CreateKubernetesClusterAttributes
-> = z.object({
-  name: z.nullable(z.string()).optional(),
-  projectId: z.string(),
-  site: z.string(),
-  plan: z.string(),
-  sshKeys: z.nullable(z.array(z.string())).optional(),
-  workerPlan: z.nullable(z.string()).optional(),
-  kubernetesVersion: z.nullable(z.string()).optional(),
-  controlPlaneCount: z.nullable(z.number().int()).optional(),
-  workerCount: z.nullable(z.number().int()).optional(),
-  operatingSystem: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    projectId: "project_id",
-    sshKeys: "ssh_keys",
-    workerPlan: "worker_plan",
-    kubernetesVersion: "kubernetes_version",
-    controlPlaneCount: "control_plane_count",
-    workerCount: "worker_count",
-    operatingSystem: "operating_system",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.nullable(z.string()).optional(),
+    projectId: z.string(),
+    site: z.string(),
+    plan: z.string(),
+    sshKeys: z.nullable(z.array(z.string())).optional(),
+    workerPlan: z.nullable(z.string()).optional(),
+    kubernetesVersion: z.nullable(z.string()).optional(),
+    controlPlaneCount: z.nullable(z.number().int()).optional(),
+    workerCount: z.nullable(z.number().int()).optional(),
+    operatingSystem: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      projectId: "project_id",
+      sshKeys: "ssh_keys",
+      workerPlan: "worker_plan",
+      kubernetesVersion: "kubernetes_version",
+      controlPlaneCount: "control_plane_count",
+      workerCount: "worker_count",
+      operatingSystem: "operating_system",
+    });
+  })
+);
 
 export function createKubernetesClusterAttributesToJSON(
   createKubernetesClusterAttributes: CreateKubernetesClusterAttributes,
@@ -170,10 +176,12 @@ export const CreateKubernetesClusterData$inboundSchema: z.ZodType<
   CreateKubernetesClusterData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: CreateKubernetesClusterType$inboundSchema,
-  attributes: z.lazy(() => CreateKubernetesClusterAttributes$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CreateKubernetesClusterType$inboundSchema,
+    attributes: z.lazy(() => CreateKubernetesClusterAttributes$inboundSchema),
+  })
+);
 /** @internal */
 export type CreateKubernetesClusterData$Outbound = {
   type: string;
@@ -185,10 +193,12 @@ export const CreateKubernetesClusterData$outboundSchema: z.ZodType<
   CreateKubernetesClusterData$Outbound,
   z.ZodTypeDef,
   CreateKubernetesClusterData
-> = z.object({
-  type: CreateKubernetesClusterType$outboundSchema,
-  attributes: z.lazy(() => CreateKubernetesClusterAttributes$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CreateKubernetesClusterType$outboundSchema,
+    attributes: z.lazy(() => CreateKubernetesClusterAttributes$outboundSchema),
+  })
+);
 
 export function createKubernetesClusterDataToJSON(
   createKubernetesClusterData: CreateKubernetesClusterData,
@@ -214,9 +224,11 @@ export const CreateKubernetesCluster$inboundSchema: z.ZodType<
   CreateKubernetesCluster,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => CreateKubernetesClusterData$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => CreateKubernetesClusterData$inboundSchema),
+  })
+);
 /** @internal */
 export type CreateKubernetesCluster$Outbound = {
   data: CreateKubernetesClusterData$Outbound;
@@ -227,9 +239,11 @@ export const CreateKubernetesCluster$outboundSchema: z.ZodType<
   CreateKubernetesCluster$Outbound,
   z.ZodTypeDef,
   CreateKubernetesCluster
-> = z.object({
-  data: z.lazy(() => CreateKubernetesClusterData$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => CreateKubernetesClusterData$outboundSchema),
+  })
+);
 
 export function createKubernetesClusterToJSON(
   createKubernetesCluster: CreateKubernetesCluster,

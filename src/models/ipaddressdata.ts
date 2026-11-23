@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -97,7 +97,7 @@ export type IpAddressData = {
 /** @internal */
 export const TypeIPAddresses$inboundSchema: z.ZodNativeEnum<
   typeof TypeIPAddresses
-> = z.nativeEnum(TypeIPAddresses);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(TypeIPAddresses));
 /** @internal */
 export const TypeIPAddresses$outboundSchema: z.ZodNativeEnum<
   typeof TypeIPAddresses
@@ -106,7 +106,7 @@ export const TypeIPAddresses$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const IpAddressDataFamily$inboundSchema: z.ZodNativeEnum<
   typeof IpAddressDataFamily
-> = z.nativeEnum(IpAddressDataFamily);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(IpAddressDataFamily));
 /** @internal */
 export const IpAddressDataFamily$outboundSchema: z.ZodNativeEnum<
   typeof IpAddressDataFamily
@@ -115,7 +115,9 @@ export const IpAddressDataFamily$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const IpAddressDataAttributesType$inboundSchema: z.ZodNativeEnum<
   typeof IpAddressDataAttributesType
-> = z.nativeEnum(IpAddressDataAttributesType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(IpAddressDataAttributesType)
+);
 /** @internal */
 export const IpAddressDataAttributesType$outboundSchema: z.ZodNativeEnum<
   typeof IpAddressDataAttributesType
@@ -126,10 +128,12 @@ export const IpAddressDataProject$inboundSchema: z.ZodType<
   IpAddressDataProject,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    name: z.string().optional(),
+  })
+);
 /** @internal */
 export type IpAddressDataProject$Outbound = {
   id?: string | undefined;
@@ -141,10 +145,12 @@ export const IpAddressDataProject$outboundSchema: z.ZodType<
   IpAddressDataProject$Outbound,
   z.ZodTypeDef,
   IpAddressDataProject
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    name: z.string().optional(),
+  })
+);
 
 export function ipAddressDataProjectToJSON(
   ipAddressDataProject: IpAddressDataProject,
@@ -168,11 +174,13 @@ export const IpAddressDataLocation$inboundSchema: z.ZodType<
   IpAddressDataLocation,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  slug: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    name: z.string().optional(),
+    slug: z.string().optional(),
+  })
+);
 /** @internal */
 export type IpAddressDataLocation$Outbound = {
   id?: string | undefined;
@@ -185,11 +193,13 @@ export const IpAddressDataLocation$outboundSchema: z.ZodType<
   IpAddressDataLocation$Outbound,
   z.ZodTypeDef,
   IpAddressDataLocation
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  slug: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    name: z.string().optional(),
+    slug: z.string().optional(),
+  })
+);
 
 export function ipAddressDataLocationToJSON(
   ipAddressDataLocation: IpAddressDataLocation,
@@ -213,11 +223,13 @@ export const IpAddressDataRegion$inboundSchema: z.ZodType<
   IpAddressDataRegion,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  location: z.lazy(() => IpAddressDataLocation$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    name: z.string().optional(),
+    location: z.lazy(() => IpAddressDataLocation$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type IpAddressDataRegion$Outbound = {
   id?: string | undefined;
@@ -230,11 +242,13 @@ export const IpAddressDataRegion$outboundSchema: z.ZodType<
   IpAddressDataRegion$Outbound,
   z.ZodTypeDef,
   IpAddressDataRegion
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  location: z.lazy(() => IpAddressDataLocation$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    name: z.string().optional(),
+    location: z.lazy(() => IpAddressDataLocation$outboundSchema).optional(),
+  })
+);
 
 export function ipAddressDataRegionToJSON(
   ipAddressDataRegion: IpAddressDataRegion,
@@ -258,16 +272,18 @@ export const IpAddressDataAssignment$inboundSchema: z.ZodType<
   IpAddressDataAssignment,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  server_id: z.string().optional(),
-  hostname: z.nullable(z.string()).optional(),
-  assigned_at: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "server_id": "serverId",
-    "assigned_at": "assignedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    server_id: z.string().optional(),
+    hostname: z.nullable(z.string()).optional(),
+    assigned_at: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "server_id": "serverId",
+      "assigned_at": "assignedAt",
+    });
+  })
+);
 /** @internal */
 export type IpAddressDataAssignment$Outbound = {
   server_id?: string | undefined;
@@ -280,16 +296,18 @@ export const IpAddressDataAssignment$outboundSchema: z.ZodType<
   IpAddressDataAssignment$Outbound,
   z.ZodTypeDef,
   IpAddressDataAssignment
-> = z.object({
-  serverId: z.string().optional(),
-  hostname: z.nullable(z.string()).optional(),
-  assignedAt: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    serverId: "server_id",
-    assignedAt: "assigned_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    serverId: z.string().optional(),
+    hostname: z.nullable(z.string()).optional(),
+    assignedAt: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      serverId: "server_id",
+      assignedAt: "assigned_at",
+    });
+  })
+);
 
 export function ipAddressDataAssignmentToJSON(
   ipAddressDataAssignment: IpAddressDataAssignment,
@@ -310,11 +328,13 @@ export function ipAddressDataAssignmentFromJSON(
 
 /** @internal */
 export const Elastic$inboundSchema: z.ZodType<Elastic, z.ZodTypeDef, unknown> =
-  z.object({
-    id: z.string().optional(),
-    mode: z.string().optional(),
-    status: z.string().optional(),
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string().optional(),
+      mode: z.string().optional(),
+      status: z.string().optional(),
+    })
+  );
 /** @internal */
 export type Elastic$Outbound = {
   id?: string | undefined;
@@ -327,11 +347,13 @@ export const Elastic$outboundSchema: z.ZodType<
   Elastic$Outbound,
   z.ZodTypeDef,
   Elastic
-> = z.object({
-  id: z.string().optional(),
-  mode: z.string().optional(),
-  status: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    mode: z.string().optional(),
+    status: z.string().optional(),
+  })
+);
 
 export function elasticToJSON(elastic: Elastic): string {
   return JSON.stringify(Elastic$outboundSchema.parse(elastic));
@@ -351,29 +373,31 @@ export const IpAddressDataAttributes$inboundSchema: z.ZodType<
   IpAddressDataAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  address: z.string().optional(),
-  cidr: z.nullable(z.string()).optional(),
-  family: IpAddressDataFamily$inboundSchema.optional(),
-  gateway: z.nullable(z.string()).optional(),
-  netmask: z.string().optional(),
-  type: IpAddressDataAttributesType$inboundSchema.optional(),
-  public: z.boolean().optional(),
-  management: z.boolean().optional(),
-  additional: z.boolean().optional(),
-  project: z.lazy(() => IpAddressDataProject$inboundSchema).optional(),
-  region: z.lazy(() => IpAddressDataRegion$inboundSchema).optional(),
-  available: z.boolean().optional(),
-  assignment: z.lazy(() => IpAddressDataAssignment$inboundSchema).optional(),
-  elastic: z.lazy(() => Elastic$inboundSchema).optional(),
-  created_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "created_at": "createdAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    address: z.string().optional(),
+    cidr: z.nullable(z.string()).optional(),
+    family: IpAddressDataFamily$inboundSchema.optional(),
+    gateway: z.nullable(z.string()).optional(),
+    netmask: z.string().optional(),
+    type: IpAddressDataAttributesType$inboundSchema.optional(),
+    public: z.boolean().optional(),
+    management: z.boolean().optional(),
+    additional: z.boolean().optional(),
+    project: z.lazy(() => IpAddressDataProject$inboundSchema).optional(),
+    region: z.lazy(() => IpAddressDataRegion$inboundSchema).optional(),
+    available: z.boolean().optional(),
+    assignment: z.lazy(() => IpAddressDataAssignment$inboundSchema).optional(),
+    elastic: z.lazy(() => Elastic$inboundSchema).optional(),
+    created_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "created_at": "createdAt",
+    });
+  })
+);
 /** @internal */
 export type IpAddressDataAttributes$Outbound = {
   address?: string | undefined;
@@ -398,27 +422,29 @@ export const IpAddressDataAttributes$outboundSchema: z.ZodType<
   IpAddressDataAttributes$Outbound,
   z.ZodTypeDef,
   IpAddressDataAttributes
-> = z.object({
-  address: z.string().optional(),
-  cidr: z.nullable(z.string()).optional(),
-  family: IpAddressDataFamily$outboundSchema.optional(),
-  gateway: z.nullable(z.string()).optional(),
-  netmask: z.string().optional(),
-  type: IpAddressDataAttributesType$outboundSchema.optional(),
-  public: z.boolean().optional(),
-  management: z.boolean().optional(),
-  additional: z.boolean().optional(),
-  project: z.lazy(() => IpAddressDataProject$outboundSchema).optional(),
-  region: z.lazy(() => IpAddressDataRegion$outboundSchema).optional(),
-  available: z.boolean().optional(),
-  assignment: z.lazy(() => IpAddressDataAssignment$outboundSchema).optional(),
-  elastic: z.lazy(() => Elastic$outboundSchema).optional(),
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    createdAt: "created_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    address: z.string().optional(),
+    cidr: z.nullable(z.string()).optional(),
+    family: IpAddressDataFamily$outboundSchema.optional(),
+    gateway: z.nullable(z.string()).optional(),
+    netmask: z.string().optional(),
+    type: IpAddressDataAttributesType$outboundSchema.optional(),
+    public: z.boolean().optional(),
+    management: z.boolean().optional(),
+    additional: z.boolean().optional(),
+    project: z.lazy(() => IpAddressDataProject$outboundSchema).optional(),
+    region: z.lazy(() => IpAddressDataRegion$outboundSchema).optional(),
+    available: z.boolean().optional(),
+    assignment: z.lazy(() => IpAddressDataAssignment$outboundSchema).optional(),
+    elastic: z.lazy(() => Elastic$outboundSchema).optional(),
+    createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      createdAt: "created_at",
+    });
+  })
+);
 
 export function ipAddressDataAttributesToJSON(
   ipAddressDataAttributes: IpAddressDataAttributes,
@@ -442,11 +468,13 @@ export const IpAddressData$inboundSchema: z.ZodType<
   IpAddressData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  type: TypeIPAddresses$inboundSchema.optional(),
-  attributes: z.lazy(() => IpAddressDataAttributes$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: TypeIPAddresses$inboundSchema.optional(),
+    attributes: z.lazy(() => IpAddressDataAttributes$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type IpAddressData$Outbound = {
   id?: string | undefined;
@@ -459,11 +487,13 @@ export const IpAddressData$outboundSchema: z.ZodType<
   IpAddressData$Outbound,
   z.ZodTypeDef,
   IpAddressData
-> = z.object({
-  id: z.string().optional(),
-  type: TypeIPAddresses$outboundSchema.optional(),
-  attributes: z.lazy(() => IpAddressDataAttributes$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: TypeIPAddresses$outboundSchema.optional(),
+    attributes: z.lazy(() => IpAddressDataAttributes$outboundSchema).optional(),
+  })
+);
 
 export function ipAddressDataToJSON(ipAddressData: IpAddressData): string {
   return JSON.stringify(IpAddressData$outboundSchema.parse(ipAddressData));

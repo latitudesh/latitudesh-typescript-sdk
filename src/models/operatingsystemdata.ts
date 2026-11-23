@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -45,7 +45,7 @@ export type OperatingSystemData = {
 /** @internal */
 export const OperatingSystemDataType$inboundSchema: z.ZodNativeEnum<
   typeof OperatingSystemDataType
-> = z.nativeEnum(OperatingSystemDataType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(OperatingSystemDataType));
 /** @internal */
 export const OperatingSystemDataType$outboundSchema: z.ZodNativeEnum<
   typeof OperatingSystemDataType
@@ -56,20 +56,22 @@ export const OperatingSystemDataFeatures$inboundSchema: z.ZodType<
   OperatingSystemDataFeatures,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  raid: z.boolean().optional(),
-  ssh_keys: z.boolean().optional(),
-  user_data: z.boolean().optional(),
-  accelerate: z.boolean().optional(),
-  rescue: z.boolean().optional(),
-  arm64: z.boolean().optional(),
-  workflow: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "ssh_keys": "sshKeys",
-    "user_data": "userData",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    raid: z.boolean().optional(),
+    ssh_keys: z.boolean().optional(),
+    user_data: z.boolean().optional(),
+    accelerate: z.boolean().optional(),
+    rescue: z.boolean().optional(),
+    arm64: z.boolean().optional(),
+    workflow: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ssh_keys": "sshKeys",
+      "user_data": "userData",
+    });
+  })
+);
 /** @internal */
 export type OperatingSystemDataFeatures$Outbound = {
   raid?: boolean | undefined;
@@ -86,20 +88,22 @@ export const OperatingSystemDataFeatures$outboundSchema: z.ZodType<
   OperatingSystemDataFeatures$Outbound,
   z.ZodTypeDef,
   OperatingSystemDataFeatures
-> = z.object({
-  raid: z.boolean().optional(),
-  sshKeys: z.boolean().optional(),
-  userData: z.boolean().optional(),
-  accelerate: z.boolean().optional(),
-  rescue: z.boolean().optional(),
-  arm64: z.boolean().optional(),
-  workflow: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    sshKeys: "ssh_keys",
-    userData: "user_data",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    raid: z.boolean().optional(),
+    sshKeys: z.boolean().optional(),
+    userData: z.boolean().optional(),
+    accelerate: z.boolean().optional(),
+    rescue: z.boolean().optional(),
+    arm64: z.boolean().optional(),
+    workflow: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      sshKeys: "ssh_keys",
+      userData: "user_data",
+    });
+  })
+);
 
 export function operatingSystemDataFeaturesToJSON(
   operatingSystemDataFeatures: OperatingSystemDataFeatures,
@@ -125,19 +129,22 @@ export const OperatingSystemDataAttributes$inboundSchema: z.ZodType<
   OperatingSystemDataAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  features: z.lazy(() => OperatingSystemDataFeatures$inboundSchema).optional(),
-  name: z.string().optional(),
-  slug: z.string().optional(),
-  distro: z.string().optional(),
-  user: z.string().optional(),
-  version: z.string().optional(),
-  provisionable_on: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "provisionable_on": "provisionableOn",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    features: z.lazy(() => OperatingSystemDataFeatures$inboundSchema)
+      .optional(),
+    name: z.string().optional(),
+    slug: z.string().optional(),
+    distro: z.string().optional(),
+    user: z.string().optional(),
+    version: z.string().optional(),
+    provisionable_on: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "provisionable_on": "provisionableOn",
+    });
+  })
+);
 /** @internal */
 export type OperatingSystemDataAttributes$Outbound = {
   features?: OperatingSystemDataFeatures$Outbound | undefined;
@@ -154,19 +161,22 @@ export const OperatingSystemDataAttributes$outboundSchema: z.ZodType<
   OperatingSystemDataAttributes$Outbound,
   z.ZodTypeDef,
   OperatingSystemDataAttributes
-> = z.object({
-  features: z.lazy(() => OperatingSystemDataFeatures$outboundSchema).optional(),
-  name: z.string().optional(),
-  slug: z.string().optional(),
-  distro: z.string().optional(),
-  user: z.string().optional(),
-  version: z.string().optional(),
-  provisionableOn: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    provisionableOn: "provisionable_on",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    features: z.lazy(() => OperatingSystemDataFeatures$outboundSchema)
+      .optional(),
+    name: z.string().optional(),
+    slug: z.string().optional(),
+    distro: z.string().optional(),
+    user: z.string().optional(),
+    version: z.string().optional(),
+    provisionableOn: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      provisionableOn: "provisionable_on",
+    });
+  })
+);
 
 export function operatingSystemDataAttributesToJSON(
   operatingSystemDataAttributes: OperatingSystemDataAttributes,
@@ -192,12 +202,14 @@ export const OperatingSystemData$inboundSchema: z.ZodType<
   OperatingSystemData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  type: OperatingSystemDataType$inboundSchema.optional(),
-  attributes: z.lazy(() => OperatingSystemDataAttributes$inboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: OperatingSystemDataType$inboundSchema.optional(),
+    attributes: z.lazy(() => OperatingSystemDataAttributes$inboundSchema)
+      .optional(),
+  })
+);
 /** @internal */
 export type OperatingSystemData$Outbound = {
   id?: string | undefined;
@@ -210,12 +222,14 @@ export const OperatingSystemData$outboundSchema: z.ZodType<
   OperatingSystemData$Outbound,
   z.ZodTypeDef,
   OperatingSystemData
-> = z.object({
-  id: z.string().optional(),
-  type: OperatingSystemDataType$outboundSchema.optional(),
-  attributes: z.lazy(() => OperatingSystemDataAttributes$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: OperatingSystemDataType$outboundSchema.optional(),
+    attributes: z.lazy(() => OperatingSystemDataAttributes$outboundSchema)
+      .optional(),
+  })
+);
 
 export function operatingSystemDataToJSON(
   operatingSystemData: OperatingSystemData,

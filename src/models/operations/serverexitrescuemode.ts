@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -17,13 +17,15 @@ export const ServerExitRescueModeRequest$inboundSchema: z.ZodType<
   ServerExitRescueModeRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  server_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "server_id": "serverId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    server_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "server_id": "serverId",
+    });
+  })
+);
 /** @internal */
 export type ServerExitRescueModeRequest$Outbound = {
   server_id: string;
@@ -34,13 +36,15 @@ export const ServerExitRescueModeRequest$outboundSchema: z.ZodType<
   ServerExitRescueModeRequest$Outbound,
   z.ZodTypeDef,
   ServerExitRescueModeRequest
-> = z.object({
-  serverId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    serverId: "server_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    serverId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      serverId: "server_id",
+    });
+  })
+);
 
 export function serverExitRescueModeRequestToJSON(
   serverExitRescueModeRequest: ServerExitRescueModeRequest,

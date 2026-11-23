@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -44,8 +44,10 @@ export type DeleteStorageAccessKeysUsernameRequest = {
 
 /** @internal */
 export const DeleteStorageAccessKeysUsernameStorageClass$inboundSchema:
-  z.ZodNativeEnum<typeof DeleteStorageAccessKeysUsernameStorageClass> = z
-    .nativeEnum(DeleteStorageAccessKeysUsernameStorageClass);
+  z.ZodNativeEnum<typeof DeleteStorageAccessKeysUsernameStorageClass> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(DeleteStorageAccessKeysUsernameStorageClass)
+    );
 /** @internal */
 export const DeleteStorageAccessKeysUsernameStorageClass$outboundSchema:
   z.ZodNativeEnum<typeof DeleteStorageAccessKeysUsernameStorageClass> =
@@ -56,16 +58,18 @@ export const DeleteStorageAccessKeysUsernameRequest$inboundSchema: z.ZodType<
   DeleteStorageAccessKeysUsernameRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  username: z.string(),
-  storage_class: DeleteStorageAccessKeysUsernameStorageClass$inboundSchema,
-  project: z.string(),
-  region: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "storage_class": "storageClass",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    username: z.string(),
+    storage_class: DeleteStorageAccessKeysUsernameStorageClass$inboundSchema,
+    project: z.string(),
+    region: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "storage_class": "storageClass",
+    });
+  })
+);
 /** @internal */
 export type DeleteStorageAccessKeysUsernameRequest$Outbound = {
   username: string;
@@ -79,16 +83,18 @@ export const DeleteStorageAccessKeysUsernameRequest$outboundSchema: z.ZodType<
   DeleteStorageAccessKeysUsernameRequest$Outbound,
   z.ZodTypeDef,
   DeleteStorageAccessKeysUsernameRequest
-> = z.object({
-  username: z.string(),
-  storageClass: DeleteStorageAccessKeysUsernameStorageClass$outboundSchema,
-  project: z.string(),
-  region: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    storageClass: "storage_class",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    username: z.string(),
+    storageClass: DeleteStorageAccessKeysUsernameStorageClass$outboundSchema,
+    project: z.string(),
+    region: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      storageClass: "storage_class",
+    });
+  })
+);
 
 export function deleteStorageAccessKeysUsernameRequestToJSON(
   deleteStorageAccessKeysUsernameRequest:

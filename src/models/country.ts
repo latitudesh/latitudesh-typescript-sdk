@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 
@@ -14,10 +14,12 @@ export type Country = {
 
 /** @internal */
 export const Country$inboundSchema: z.ZodType<Country, z.ZodTypeDef, unknown> =
-  z.object({
-    slug: z.string().optional(),
-    name: z.string().optional(),
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      slug: z.string().optional(),
+      name: z.string().optional(),
+    })
+  );
 /** @internal */
 export type Country$Outbound = {
   slug?: string | undefined;
@@ -29,10 +31,12 @@ export const Country$outboundSchema: z.ZodType<
   Country$Outbound,
   z.ZodTypeDef,
   Country
-> = z.object({
-  slug: z.string().optional(),
-  name: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    slug: z.string().optional(),
+    name: z.string().optional(),
+  })
+);
 
 export function countryToJSON(country: Country): string {
   return JSON.stringify(Country$outboundSchema.parse(country));

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -47,7 +47,7 @@ export type UpdateTagRequest = {
 /** @internal */
 export const UpdateTagType2$inboundSchema: z.ZodNativeEnum<
   typeof UpdateTagType2
-> = z.nativeEnum(UpdateTagType2);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(UpdateTagType2));
 /** @internal */
 export const UpdateTagType2$outboundSchema: z.ZodNativeEnum<
   typeof UpdateTagType2
@@ -58,11 +58,13 @@ export const UpdateTagAttributes2$inboundSchema: z.ZodType<
   UpdateTagAttributes2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string().optional(),
-  description: z.nullable(z.string()).optional(),
-  color: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    description: z.nullable(z.string()).optional(),
+    color: z.string().optional(),
+  })
+);
 /** @internal */
 export type UpdateTagAttributes2$Outbound = {
   name?: string | undefined;
@@ -75,11 +77,13 @@ export const UpdateTagAttributes2$outboundSchema: z.ZodType<
   UpdateTagAttributes2$Outbound,
   z.ZodTypeDef,
   UpdateTagAttributes2
-> = z.object({
-  name: z.string().optional(),
-  description: z.nullable(z.string()).optional(),
-  color: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    description: z.nullable(z.string()).optional(),
+    color: z.string().optional(),
+  })
+);
 
 export function updateTagAttributes2ToJSON(
   updateTagAttributes2: UpdateTagAttributes2,
@@ -103,11 +107,13 @@ export const UpdateTagData2$inboundSchema: z.ZodType<
   UpdateTagData2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  type: UpdateTagType2$inboundSchema.optional(),
-  attributes: z.lazy(() => UpdateTagAttributes2$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: UpdateTagType2$inboundSchema.optional(),
+    attributes: z.lazy(() => UpdateTagAttributes2$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type UpdateTagData2$Outbound = {
   id?: string | undefined;
@@ -120,11 +126,13 @@ export const UpdateTagData2$outboundSchema: z.ZodType<
   UpdateTagData2$Outbound,
   z.ZodTypeDef,
   UpdateTagData2
-> = z.object({
-  id: z.string().optional(),
-  type: UpdateTagType2$outboundSchema.optional(),
-  attributes: z.lazy(() => UpdateTagAttributes2$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: UpdateTagType2$outboundSchema.optional(),
+    attributes: z.lazy(() => UpdateTagAttributes2$outboundSchema).optional(),
+  })
+);
 
 export function updateTagData2ToJSON(updateTagData2: UpdateTagData2): string {
   return JSON.stringify(UpdateTagData2$outboundSchema.parse(updateTagData2));
@@ -144,9 +152,11 @@ export const UpdateTagRequestBody2$inboundSchema: z.ZodType<
   UpdateTagRequestBody2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => UpdateTagData2$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => UpdateTagData2$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type UpdateTagRequestBody2$Outbound = {
   data?: UpdateTagData2$Outbound | undefined;
@@ -157,9 +167,11 @@ export const UpdateTagRequestBody2$outboundSchema: z.ZodType<
   UpdateTagRequestBody2$Outbound,
   z.ZodTypeDef,
   UpdateTagRequestBody2
-> = z.object({
-  data: z.lazy(() => UpdateTagData2$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => UpdateTagData2$outboundSchema).optional(),
+  })
+);
 
 export function updateTagRequestBody2ToJSON(
   updateTagRequestBody2: UpdateTagRequestBody2,
@@ -183,15 +195,17 @@ export const UpdateTagRequest$inboundSchema: z.ZodType<
   UpdateTagRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  tag_id: z.string(),
-  RequestBody: z.lazy(() => UpdateTagRequestBody2$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "tag_id": "tagId",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    tag_id: z.string(),
+    RequestBody: z.lazy(() => UpdateTagRequestBody2$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "tag_id": "tagId",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type UpdateTagRequest$Outbound = {
   tag_id: string;
@@ -203,15 +217,17 @@ export const UpdateTagRequest$outboundSchema: z.ZodType<
   UpdateTagRequest$Outbound,
   z.ZodTypeDef,
   UpdateTagRequest
-> = z.object({
-  tagId: z.string(),
-  requestBody: z.lazy(() => UpdateTagRequestBody2$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    tagId: "tag_id",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    tagId: z.string(),
+    requestBody: z.lazy(() => UpdateTagRequestBody2$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      tagId: "tag_id",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function updateTagRequestToJSON(
   updateTagRequest: UpdateTagRequest,

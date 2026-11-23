@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -42,7 +42,7 @@ export type UpdateVirtualNetworkRequest = {
 /** @internal */
 export const UpdateVirtualNetworkType2$inboundSchema: z.ZodNativeEnum<
   typeof UpdateVirtualNetworkType2
-> = z.nativeEnum(UpdateVirtualNetworkType2);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(UpdateVirtualNetworkType2));
 /** @internal */
 export const UpdateVirtualNetworkType2$outboundSchema: z.ZodNativeEnum<
   typeof UpdateVirtualNetworkType2
@@ -53,10 +53,12 @@ export const UpdateVirtualNetworkAttributes2$inboundSchema: z.ZodType<
   UpdateVirtualNetworkAttributes2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  tags: z.array(z.string()).optional(),
-  description: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    tags: z.array(z.string()).optional(),
+    description: z.string().optional(),
+  })
+);
 /** @internal */
 export type UpdateVirtualNetworkAttributes2$Outbound = {
   tags?: Array<string> | undefined;
@@ -68,10 +70,12 @@ export const UpdateVirtualNetworkAttributes2$outboundSchema: z.ZodType<
   UpdateVirtualNetworkAttributes2$Outbound,
   z.ZodTypeDef,
   UpdateVirtualNetworkAttributes2
-> = z.object({
-  tags: z.array(z.string()).optional(),
-  description: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    tags: z.array(z.string()).optional(),
+    description: z.string().optional(),
+  })
+);
 
 export function updateVirtualNetworkAttributes2ToJSON(
   updateVirtualNetworkAttributes2: UpdateVirtualNetworkAttributes2,
@@ -97,12 +101,14 @@ export const UpdateVirtualNetworkData2$inboundSchema: z.ZodType<
   UpdateVirtualNetworkData2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  type: UpdateVirtualNetworkType2$inboundSchema,
-  attributes: z.lazy(() => UpdateVirtualNetworkAttributes2$inboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    type: UpdateVirtualNetworkType2$inboundSchema,
+    attributes: z.lazy(() => UpdateVirtualNetworkAttributes2$inboundSchema)
+      .optional(),
+  })
+);
 /** @internal */
 export type UpdateVirtualNetworkData2$Outbound = {
   id: string;
@@ -115,12 +121,14 @@ export const UpdateVirtualNetworkData2$outboundSchema: z.ZodType<
   UpdateVirtualNetworkData2$Outbound,
   z.ZodTypeDef,
   UpdateVirtualNetworkData2
-> = z.object({
-  id: z.string(),
-  type: UpdateVirtualNetworkType2$outboundSchema,
-  attributes: z.lazy(() => UpdateVirtualNetworkAttributes2$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    type: UpdateVirtualNetworkType2$outboundSchema,
+    attributes: z.lazy(() => UpdateVirtualNetworkAttributes2$outboundSchema)
+      .optional(),
+  })
+);
 
 export function updateVirtualNetworkData2ToJSON(
   updateVirtualNetworkData2: UpdateVirtualNetworkData2,
@@ -144,9 +152,11 @@ export const UpdateVirtualNetworkRequestBody2$inboundSchema: z.ZodType<
   UpdateVirtualNetworkRequestBody2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => UpdateVirtualNetworkData2$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => UpdateVirtualNetworkData2$inboundSchema),
+  })
+);
 /** @internal */
 export type UpdateVirtualNetworkRequestBody2$Outbound = {
   data: UpdateVirtualNetworkData2$Outbound;
@@ -157,9 +167,11 @@ export const UpdateVirtualNetworkRequestBody2$outboundSchema: z.ZodType<
   UpdateVirtualNetworkRequestBody2$Outbound,
   z.ZodTypeDef,
   UpdateVirtualNetworkRequestBody2
-> = z.object({
-  data: z.lazy(() => UpdateVirtualNetworkData2$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => UpdateVirtualNetworkData2$outboundSchema),
+  })
+);
 
 export function updateVirtualNetworkRequestBody2ToJSON(
   updateVirtualNetworkRequestBody2: UpdateVirtualNetworkRequestBody2,
@@ -185,15 +197,17 @@ export const UpdateVirtualNetworkRequest$inboundSchema: z.ZodType<
   UpdateVirtualNetworkRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  vlan_id: z.string(),
-  RequestBody: z.lazy(() => UpdateVirtualNetworkRequestBody2$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "vlan_id": "vlanId",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    vlan_id: z.string(),
+    RequestBody: z.lazy(() => UpdateVirtualNetworkRequestBody2$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "vlan_id": "vlanId",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type UpdateVirtualNetworkRequest$Outbound = {
   vlan_id: string;
@@ -205,15 +219,17 @@ export const UpdateVirtualNetworkRequest$outboundSchema: z.ZodType<
   UpdateVirtualNetworkRequest$Outbound,
   z.ZodTypeDef,
   UpdateVirtualNetworkRequest
-> = z.object({
-  vlanId: z.string(),
-  requestBody: z.lazy(() => UpdateVirtualNetworkRequestBody2$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    vlanId: "vlan_id",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    vlanId: z.string(),
+    requestBody: z.lazy(() => UpdateVirtualNetworkRequestBody2$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      vlanId: "vlan_id",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function updateVirtualNetworkRequestToJSON(
   updateVirtualNetworkRequest: UpdateVirtualNetworkRequest,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 import {
@@ -27,9 +27,11 @@ export const LksClustersMeta$inboundSchema: z.ZodType<
   LksClustersMeta,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  total: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    total: z.number().int().optional(),
+  })
+);
 /** @internal */
 export type LksClustersMeta$Outbound = {
   total?: number | undefined;
@@ -40,9 +42,11 @@ export const LksClustersMeta$outboundSchema: z.ZodType<
   LksClustersMeta$Outbound,
   z.ZodTypeDef,
   LksClustersMeta
-> = z.object({
-  total: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    total: z.number().int().optional(),
+  })
+);
 
 export function lksClustersMetaToJSON(
   lksClustersMeta: LksClustersMeta,
@@ -64,10 +68,12 @@ export const LksClusters$inboundSchema: z.ZodType<
   LksClusters,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.array(LksClusterData$inboundSchema).optional(),
-  meta: z.lazy(() => LksClustersMeta$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(LksClusterData$inboundSchema).optional(),
+    meta: z.lazy(() => LksClustersMeta$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type LksClusters$Outbound = {
   data?: Array<LksClusterData$Outbound> | undefined;
@@ -79,10 +85,12 @@ export const LksClusters$outboundSchema: z.ZodType<
   LksClusters$Outbound,
   z.ZodTypeDef,
   LksClusters
-> = z.object({
-  data: z.array(LksClusterData$outboundSchema).optional(),
-  meta: z.lazy(() => LksClustersMeta$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(LksClusterData$outboundSchema).optional(),
+    meta: z.lazy(() => LksClustersMeta$outboundSchema).optional(),
+  })
+);
 
 export function lksClustersToJSON(lksClusters: LksClusters): string {
   return JSON.stringify(LksClusters$outboundSchema.parse(lksClusters));

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 import {
@@ -25,7 +25,7 @@ export const FirewallsMeta$inboundSchema: z.ZodType<
   FirewallsMeta,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type FirewallsMeta$Outbound = {};
 
@@ -34,7 +34,7 @@ export const FirewallsMeta$outboundSchema: z.ZodType<
   FirewallsMeta$Outbound,
   z.ZodTypeDef,
   FirewallsMeta
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function firewallsMetaToJSON(firewallsMeta: FirewallsMeta): string {
   return JSON.stringify(FirewallsMeta$outboundSchema.parse(firewallsMeta));
@@ -54,10 +54,12 @@ export const Firewalls$inboundSchema: z.ZodType<
   Firewalls,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.array(FirewallData$inboundSchema).optional(),
-  meta: z.lazy(() => FirewallsMeta$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(FirewallData$inboundSchema).optional(),
+    meta: z.lazy(() => FirewallsMeta$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type Firewalls$Outbound = {
   data?: Array<FirewallData$Outbound> | undefined;
@@ -69,10 +71,12 @@ export const Firewalls$outboundSchema: z.ZodType<
   Firewalls$Outbound,
   z.ZodTypeDef,
   Firewalls
-> = z.object({
-  data: z.array(FirewallData$outboundSchema).optional(),
-  meta: z.lazy(() => FirewallsMeta$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(FirewallData$outboundSchema).optional(),
+    meta: z.lazy(() => FirewallsMeta$outboundSchema).optional(),
+  })
+);
 
 export function firewallsToJSON(firewalls: Firewalls): string {
   return JSON.stringify(Firewalls$outboundSchema.parse(firewalls));

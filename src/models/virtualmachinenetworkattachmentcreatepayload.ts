@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -38,8 +38,10 @@ export type VirtualMachineNetworkAttachmentCreatePayload = {
 
 /** @internal */
 export const VirtualMachineNetworkAttachmentCreatePayloadType$inboundSchema:
-  z.ZodNativeEnum<typeof VirtualMachineNetworkAttachmentCreatePayloadType> = z
-    .nativeEnum(VirtualMachineNetworkAttachmentCreatePayloadType);
+  z.ZodNativeEnum<typeof VirtualMachineNetworkAttachmentCreatePayloadType> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(VirtualMachineNetworkAttachmentCreatePayloadType)
+    );
 /** @internal */
 export const VirtualMachineNetworkAttachmentCreatePayloadType$outboundSchema:
   z.ZodNativeEnum<typeof VirtualMachineNetworkAttachmentCreatePayloadType> =
@@ -51,14 +53,16 @@ export const VirtualMachineNetworkAttachmentCreatePayloadAttributes$inboundSchem
     VirtualMachineNetworkAttachmentCreatePayloadAttributes,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    virtual_network_id: z.string(),
-    address: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "virtual_network_id": "virtualNetworkId",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      virtual_network_id: z.string(),
+      address: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "virtual_network_id": "virtualNetworkId",
+      });
+    })
+  );
 /** @internal */
 export type VirtualMachineNetworkAttachmentCreatePayloadAttributes$Outbound = {
   virtual_network_id: string;
@@ -71,14 +75,16 @@ export const VirtualMachineNetworkAttachmentCreatePayloadAttributes$outboundSche
     VirtualMachineNetworkAttachmentCreatePayloadAttributes$Outbound,
     z.ZodTypeDef,
     VirtualMachineNetworkAttachmentCreatePayloadAttributes
-  > = z.object({
-    virtualNetworkId: z.string(),
-    address: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      virtualNetworkId: "virtual_network_id",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      virtualNetworkId: z.string(),
+      address: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        virtualNetworkId: "virtual_network_id",
+      });
+    })
+  );
 
 export function virtualMachineNetworkAttachmentCreatePayloadAttributesToJSON(
   virtualMachineNetworkAttachmentCreatePayloadAttributes:
@@ -111,12 +117,14 @@ export const VirtualMachineNetworkAttachmentCreatePayloadData$inboundSchema:
     VirtualMachineNetworkAttachmentCreatePayloadData,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    type: VirtualMachineNetworkAttachmentCreatePayloadType$inboundSchema,
-    attributes: z.lazy(() =>
-      VirtualMachineNetworkAttachmentCreatePayloadAttributes$inboundSchema
-    ),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: VirtualMachineNetworkAttachmentCreatePayloadType$inboundSchema,
+      attributes: z.lazy(() =>
+        VirtualMachineNetworkAttachmentCreatePayloadAttributes$inboundSchema
+      ),
+    })
+  );
 /** @internal */
 export type VirtualMachineNetworkAttachmentCreatePayloadData$Outbound = {
   type: string;
@@ -129,12 +137,14 @@ export const VirtualMachineNetworkAttachmentCreatePayloadData$outboundSchema:
     VirtualMachineNetworkAttachmentCreatePayloadData$Outbound,
     z.ZodTypeDef,
     VirtualMachineNetworkAttachmentCreatePayloadData
-  > = z.object({
-    type: VirtualMachineNetworkAttachmentCreatePayloadType$outboundSchema,
-    attributes: z.lazy(() =>
-      VirtualMachineNetworkAttachmentCreatePayloadAttributes$outboundSchema
-    ),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: VirtualMachineNetworkAttachmentCreatePayloadType$outboundSchema,
+      attributes: z.lazy(() =>
+        VirtualMachineNetworkAttachmentCreatePayloadAttributes$outboundSchema
+      ),
+    })
+  );
 
 export function virtualMachineNetworkAttachmentCreatePayloadDataToJSON(
   virtualMachineNetworkAttachmentCreatePayloadData:
@@ -168,11 +178,13 @@ export const VirtualMachineNetworkAttachmentCreatePayload$inboundSchema:
     VirtualMachineNetworkAttachmentCreatePayload,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    data: z.lazy(() =>
-      VirtualMachineNetworkAttachmentCreatePayloadData$inboundSchema
-    ),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      data: z.lazy(() =>
+        VirtualMachineNetworkAttachmentCreatePayloadData$inboundSchema
+      ),
+    })
+  );
 /** @internal */
 export type VirtualMachineNetworkAttachmentCreatePayload$Outbound = {
   data: VirtualMachineNetworkAttachmentCreatePayloadData$Outbound;
@@ -184,11 +196,13 @@ export const VirtualMachineNetworkAttachmentCreatePayload$outboundSchema:
     VirtualMachineNetworkAttachmentCreatePayload$Outbound,
     z.ZodTypeDef,
     VirtualMachineNetworkAttachmentCreatePayload
-  > = z.object({
-    data: z.lazy(() =>
-      VirtualMachineNetworkAttachmentCreatePayloadData$outboundSchema
-    ),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      data: z.lazy(() =>
+        VirtualMachineNetworkAttachmentCreatePayloadData$outboundSchema
+      ),
+    })
+  );
 
 export function virtualMachineNetworkAttachmentCreatePayloadToJSON(
   virtualMachineNetworkAttachmentCreatePayload:

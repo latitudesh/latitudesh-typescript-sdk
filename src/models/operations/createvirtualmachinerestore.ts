@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as models from "../index.js";
@@ -22,18 +22,20 @@ export const CreateVirtualMachineRestoreRequest$inboundSchema: z.ZodType<
   CreateVirtualMachineRestoreRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  virtual_machine_id: z.string(),
-  backup_id: z.string(),
-  virtual_machine_restore_payload: models
-    .VirtualMachineRestorePayload$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "virtual_machine_id": "virtualMachineId",
-    "backup_id": "backupId",
-    "virtual_machine_restore_payload": "virtualMachineRestorePayload",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    virtual_machine_id: z.string(),
+    backup_id: z.string(),
+    virtual_machine_restore_payload: models
+      .VirtualMachineRestorePayload$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "virtual_machine_id": "virtualMachineId",
+      "backup_id": "backupId",
+      "virtual_machine_restore_payload": "virtualMachineRestorePayload",
+    });
+  })
+);
 /** @internal */
 export type CreateVirtualMachineRestoreRequest$Outbound = {
   virtual_machine_id: string;
@@ -48,18 +50,20 @@ export const CreateVirtualMachineRestoreRequest$outboundSchema: z.ZodType<
   CreateVirtualMachineRestoreRequest$Outbound,
   z.ZodTypeDef,
   CreateVirtualMachineRestoreRequest
-> = z.object({
-  virtualMachineId: z.string(),
-  backupId: z.string(),
-  virtualMachineRestorePayload: models
-    .VirtualMachineRestorePayload$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    virtualMachineId: "virtual_machine_id",
-    backupId: "backup_id",
-    virtualMachineRestorePayload: "virtual_machine_restore_payload",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    virtualMachineId: z.string(),
+    backupId: z.string(),
+    virtualMachineRestorePayload: models
+      .VirtualMachineRestorePayload$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      virtualMachineId: "virtual_machine_id",
+      backupId: "backup_id",
+      virtualMachineRestorePayload: "virtual_machine_restore_payload",
+    });
+  })
+);
 
 export function createVirtualMachineRestoreRequestToJSON(
   createVirtualMachineRestoreRequest: CreateVirtualMachineRestoreRequest,

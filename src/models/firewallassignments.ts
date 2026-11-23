@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 import {
@@ -25,7 +25,7 @@ export const FirewallAssignmentsMeta$inboundSchema: z.ZodType<
   FirewallAssignmentsMeta,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type FirewallAssignmentsMeta$Outbound = {};
 
@@ -34,7 +34,7 @@ export const FirewallAssignmentsMeta$outboundSchema: z.ZodType<
   FirewallAssignmentsMeta$Outbound,
   z.ZodTypeDef,
   FirewallAssignmentsMeta
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function firewallAssignmentsMetaToJSON(
   firewallAssignmentsMeta: FirewallAssignmentsMeta,
@@ -58,10 +58,12 @@ export const FirewallAssignments$inboundSchema: z.ZodType<
   FirewallAssignments,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.array(FirewallAssignmentData$inboundSchema).optional(),
-  meta: z.lazy(() => FirewallAssignmentsMeta$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(FirewallAssignmentData$inboundSchema).optional(),
+    meta: z.lazy(() => FirewallAssignmentsMeta$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type FirewallAssignments$Outbound = {
   data?: Array<FirewallAssignmentData$Outbound> | undefined;
@@ -73,10 +75,12 @@ export const FirewallAssignments$outboundSchema: z.ZodType<
   FirewallAssignments$Outbound,
   z.ZodTypeDef,
   FirewallAssignments
-> = z.object({
-  data: z.array(FirewallAssignmentData$outboundSchema).optional(),
-  meta: z.lazy(() => FirewallAssignmentsMeta$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(FirewallAssignmentData$outboundSchema).optional(),
+    meta: z.lazy(() => FirewallAssignmentsMeta$outboundSchema).optional(),
+  })
+);
 
 export function firewallAssignmentsToJSON(
   firewallAssignments: FirewallAssignments,

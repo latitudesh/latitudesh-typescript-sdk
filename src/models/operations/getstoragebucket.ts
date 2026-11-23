@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as models from "../index.js";
@@ -27,9 +27,11 @@ export const GetStorageBucketRequest$inboundSchema: z.ZodType<
   GetStorageBucketRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+  })
+);
 /** @internal */
 export type GetStorageBucketRequest$Outbound = {
   id: string;
@@ -40,9 +42,11 @@ export const GetStorageBucketRequest$outboundSchema: z.ZodType<
   GetStorageBucketRequest$Outbound,
   z.ZodTypeDef,
   GetStorageBucketRequest
-> = z.object({
-  id: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+  })
+);
 
 export function getStorageBucketRequestToJSON(
   getStorageBucketRequest: GetStorageBucketRequest,
@@ -66,9 +70,11 @@ export const GetStorageBucketResponse$inboundSchema: z.ZodType<
   GetStorageBucketResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: models.ObjectStorageData$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: models.ObjectStorageData$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type GetStorageBucketResponse$Outbound = {
   data?: models.ObjectStorageData$Outbound | undefined;
@@ -79,9 +85,11 @@ export const GetStorageBucketResponse$outboundSchema: z.ZodType<
   GetStorageBucketResponse$Outbound,
   z.ZodTypeDef,
   GetStorageBucketResponse
-> = z.object({
-  data: models.ObjectStorageData$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: models.ObjectStorageData$outboundSchema.optional(),
+  })
+);
 
 export function getStorageBucketResponseToJSON(
   getStorageBucketResponse: GetStorageBucketResponse,

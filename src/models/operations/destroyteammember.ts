@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -20,13 +20,15 @@ export const DestroyTeamMemberRequest$inboundSchema: z.ZodType<
   DestroyTeamMemberRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  user_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "user_id": "userId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    user_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "user_id": "userId",
+    });
+  })
+);
 /** @internal */
 export type DestroyTeamMemberRequest$Outbound = {
   user_id: string;
@@ -37,13 +39,15 @@ export const DestroyTeamMemberRequest$outboundSchema: z.ZodType<
   DestroyTeamMemberRequest$Outbound,
   z.ZodTypeDef,
   DestroyTeamMemberRequest
-> = z.object({
-  userId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    userId: "user_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    userId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      userId: "user_id",
+    });
+  })
+);
 
 export function destroyTeamMemberRequestToJSON(
   destroyTeamMemberRequest: DestroyTeamMemberRequest,

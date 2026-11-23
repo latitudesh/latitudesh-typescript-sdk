@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -63,7 +63,7 @@ export type UpdateLksNodePool = {
 /** @internal */
 export const UpdateLksNodePoolType$inboundSchema: z.ZodNativeEnum<
   typeof UpdateLksNodePoolType
-> = z.nativeEnum(UpdateLksNodePoolType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(UpdateLksNodePoolType));
 /** @internal */
 export const UpdateLksNodePoolType$outboundSchema: z.ZodNativeEnum<
   typeof UpdateLksNodePoolType
@@ -74,20 +74,22 @@ export const UpdateLksNodePoolAttributes$inboundSchema: z.ZodType<
   UpdateLksNodePoolAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string().optional(),
-  count: z.number().int().optional(),
-  server_ids: z.array(z.string()).optional(),
-  kubernetes_version: z.string().optional(),
-  labels: z.record(z.string()).optional(),
-  taints: z.array(LksNodePoolTaint$inboundSchema).optional(),
-  description: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "server_ids": "serverIds",
-    "kubernetes_version": "kubernetesVersion",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    count: z.number().int().optional(),
+    server_ids: z.array(z.string()).optional(),
+    kubernetes_version: z.string().optional(),
+    labels: z.record(z.string()).optional(),
+    taints: z.array(LksNodePoolTaint$inboundSchema).optional(),
+    description: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "server_ids": "serverIds",
+      "kubernetes_version": "kubernetesVersion",
+    });
+  })
+);
 /** @internal */
 export type UpdateLksNodePoolAttributes$Outbound = {
   name?: string | undefined;
@@ -104,20 +106,22 @@ export const UpdateLksNodePoolAttributes$outboundSchema: z.ZodType<
   UpdateLksNodePoolAttributes$Outbound,
   z.ZodTypeDef,
   UpdateLksNodePoolAttributes
-> = z.object({
-  name: z.string().optional(),
-  count: z.number().int().optional(),
-  serverIds: z.array(z.string()).optional(),
-  kubernetesVersion: z.string().optional(),
-  labels: z.record(z.string()).optional(),
-  taints: z.array(LksNodePoolTaint$outboundSchema).optional(),
-  description: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    serverIds: "server_ids",
-    kubernetesVersion: "kubernetes_version",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    count: z.number().int().optional(),
+    serverIds: z.array(z.string()).optional(),
+    kubernetesVersion: z.string().optional(),
+    labels: z.record(z.string()).optional(),
+    taints: z.array(LksNodePoolTaint$outboundSchema).optional(),
+    description: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      serverIds: "server_ids",
+      kubernetesVersion: "kubernetes_version",
+    });
+  })
+);
 
 export function updateLksNodePoolAttributesToJSON(
   updateLksNodePoolAttributes: UpdateLksNodePoolAttributes,
@@ -143,11 +147,13 @@ export const UpdateLksNodePoolData$inboundSchema: z.ZodType<
   UpdateLksNodePoolData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: UpdateLksNodePoolType$inboundSchema,
-  attributes: z.lazy(() => UpdateLksNodePoolAttributes$inboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: UpdateLksNodePoolType$inboundSchema,
+    attributes: z.lazy(() => UpdateLksNodePoolAttributes$inboundSchema)
+      .optional(),
+  })
+);
 /** @internal */
 export type UpdateLksNodePoolData$Outbound = {
   type: string;
@@ -159,11 +165,13 @@ export const UpdateLksNodePoolData$outboundSchema: z.ZodType<
   UpdateLksNodePoolData$Outbound,
   z.ZodTypeDef,
   UpdateLksNodePoolData
-> = z.object({
-  type: UpdateLksNodePoolType$outboundSchema,
-  attributes: z.lazy(() => UpdateLksNodePoolAttributes$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: UpdateLksNodePoolType$outboundSchema,
+    attributes: z.lazy(() => UpdateLksNodePoolAttributes$outboundSchema)
+      .optional(),
+  })
+);
 
 export function updateLksNodePoolDataToJSON(
   updateLksNodePoolData: UpdateLksNodePoolData,
@@ -187,9 +195,11 @@ export const UpdateLksNodePool$inboundSchema: z.ZodType<
   UpdateLksNodePool,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.lazy(() => UpdateLksNodePoolData$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => UpdateLksNodePoolData$inboundSchema),
+  })
+);
 /** @internal */
 export type UpdateLksNodePool$Outbound = {
   data: UpdateLksNodePoolData$Outbound;
@@ -200,9 +210,11 @@ export const UpdateLksNodePool$outboundSchema: z.ZodType<
   UpdateLksNodePool$Outbound,
   z.ZodTypeDef,
   UpdateLksNodePool
-> = z.object({
-  data: z.lazy(() => UpdateLksNodePoolData$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.lazy(() => UpdateLksNodePoolData$outboundSchema),
+  })
+);
 
 export function updateLksNodePoolToJSON(
   updateLksNodePool: UpdateLksNodePool,

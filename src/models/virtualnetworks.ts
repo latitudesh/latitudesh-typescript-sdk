@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 import {
@@ -29,10 +29,12 @@ export const VirtualNetworks$inboundSchema: z.ZodType<
   VirtualNetworks,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.array(VirtualNetworkData$inboundSchema).optional(),
-  meta: PaginationMeta$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(VirtualNetworkData$inboundSchema).optional(),
+    meta: PaginationMeta$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type VirtualNetworks$Outbound = {
   data?: Array<VirtualNetworkData$Outbound> | undefined;
@@ -44,10 +46,12 @@ export const VirtualNetworks$outboundSchema: z.ZodType<
   VirtualNetworks$Outbound,
   z.ZodTypeDef,
   VirtualNetworks
-> = z.object({
-  data: z.array(VirtualNetworkData$outboundSchema).optional(),
-  meta: PaginationMeta$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(VirtualNetworkData$outboundSchema).optional(),
+    meta: PaginationMeta$outboundSchema.optional(),
+  })
+);
 
 export function virtualNetworksToJSON(
   virtualNetworks: VirtualNetworks,

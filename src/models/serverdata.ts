@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { ClosedEnum } from "../types/enums.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
@@ -257,12 +257,14 @@ export const ServerDataTag$inboundSchema: z.ZodType<
   ServerDataTag,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  description: z.nullable(z.string()).optional(),
-  color: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    name: z.string().optional(),
+    description: z.nullable(z.string()).optional(),
+    color: z.nullable(z.string()).optional(),
+  })
+);
 /** @internal */
 export type ServerDataTag$Outbound = {
   id?: string | undefined;
@@ -276,12 +278,14 @@ export const ServerDataTag$outboundSchema: z.ZodType<
   ServerDataTag$Outbound,
   z.ZodTypeDef,
   ServerDataTag
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  description: z.nullable(z.string()).optional(),
-  color: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    name: z.string().optional(),
+    description: z.nullable(z.string()).optional(),
+    color: z.nullable(z.string()).optional(),
+  })
+);
 
 export function serverDataTagToJSON(serverDataTag: ServerDataTag): string {
   return JSON.stringify(ServerDataTag$outboundSchema.parse(serverDataTag));
@@ -297,8 +301,8 @@ export function serverDataTagFromJSON(
 }
 
 /** @internal */
-export const IpmiStatus$inboundSchema: z.ZodNativeEnum<typeof IpmiStatus> = z
-  .nativeEnum(IpmiStatus);
+export const IpmiStatus$inboundSchema: z.ZodNativeEnum<typeof IpmiStatus> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(IpmiStatus));
 /** @internal */
 export const IpmiStatus$outboundSchema: z.ZodNativeEnum<typeof IpmiStatus> =
   IpmiStatus$inboundSchema;
@@ -308,11 +312,13 @@ export const ServerDataPublicNetwork$inboundSchema: z.ZodType<
   ServerDataPublicNetwork,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  ipv4: z.nullable(z.string()).optional(),
-  ipv6: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    ipv4: z.nullable(z.string()).optional(),
+    ipv6: z.nullable(z.string()).optional(),
+  })
+);
 /** @internal */
 export type ServerDataPublicNetwork$Outbound = {
   id?: string | undefined;
@@ -325,11 +331,13 @@ export const ServerDataPublicNetwork$outboundSchema: z.ZodType<
   ServerDataPublicNetwork$Outbound,
   z.ZodTypeDef,
   ServerDataPublicNetwork
-> = z.object({
-  id: z.string().optional(),
-  ipv4: z.nullable(z.string()).optional(),
-  ipv6: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    ipv4: z.nullable(z.string()).optional(),
+    ipv6: z.nullable(z.string()).optional(),
+  })
+);
 
 export function serverDataPublicNetworkToJSON(
   serverDataPublicNetwork: ServerDataPublicNetwork,
@@ -353,12 +361,14 @@ export const ServerDataPlan$inboundSchema: z.ZodType<
   ServerDataPlan,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  slug: z.string().optional(),
-  billing: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    name: z.string().optional(),
+    slug: z.string().optional(),
+    billing: z.nullable(z.string()).optional(),
+  })
+);
 /** @internal */
 export type ServerDataPlan$Outbound = {
   id?: string | undefined;
@@ -372,12 +382,14 @@ export const ServerDataPlan$outboundSchema: z.ZodType<
   ServerDataPlan$Outbound,
   z.ZodTypeDef,
   ServerDataPlan
-> = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  slug: z.string().optional(),
-  billing: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    name: z.string().optional(),
+    slug: z.string().optional(),
+    billing: z.nullable(z.string()).optional(),
+  })
+);
 
 export function serverDataPlanToJSON(serverDataPlan: ServerDataPlan): string {
   return JSON.stringify(ServerDataPlan$outboundSchema.parse(serverDataPlan));
@@ -397,20 +409,22 @@ export const ServerDataFeatures$inboundSchema: z.ZodType<
   ServerDataFeatures,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  raid: z.boolean().optional(),
-  ssh_keys: z.boolean().optional(),
-  user_data: z.boolean().optional(),
-  accelerate: z.boolean().optional(),
-  rescue: z.boolean().optional(),
-  arm64: z.boolean().optional(),
-  workflow: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "ssh_keys": "sshKeys",
-    "user_data": "userData",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    raid: z.boolean().optional(),
+    ssh_keys: z.boolean().optional(),
+    user_data: z.boolean().optional(),
+    accelerate: z.boolean().optional(),
+    rescue: z.boolean().optional(),
+    arm64: z.boolean().optional(),
+    workflow: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ssh_keys": "sshKeys",
+      "user_data": "userData",
+    });
+  })
+);
 /** @internal */
 export type ServerDataFeatures$Outbound = {
   raid?: boolean | undefined;
@@ -427,20 +441,22 @@ export const ServerDataFeatures$outboundSchema: z.ZodType<
   ServerDataFeatures$Outbound,
   z.ZodTypeDef,
   ServerDataFeatures
-> = z.object({
-  raid: z.boolean().optional(),
-  sshKeys: z.boolean().optional(),
-  userData: z.boolean().optional(),
-  accelerate: z.boolean().optional(),
-  rescue: z.boolean().optional(),
-  arm64: z.boolean().optional(),
-  workflow: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    sshKeys: "ssh_keys",
-    userData: "user_data",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    raid: z.boolean().optional(),
+    sshKeys: z.boolean().optional(),
+    userData: z.boolean().optional(),
+    accelerate: z.boolean().optional(),
+    rescue: z.boolean().optional(),
+    arm64: z.boolean().optional(),
+    workflow: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      sshKeys: "ssh_keys",
+      userData: "user_data",
+    });
+  })
+);
 
 export function serverDataFeaturesToJSON(
   serverDataFeatures: ServerDataFeatures,
@@ -464,11 +480,13 @@ export const ServerDataDistro$inboundSchema: z.ZodType<
   ServerDataDistro,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string().optional(),
-  slug: z.string().optional(),
-  series: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    slug: z.string().optional(),
+    series: z.string().optional(),
+  })
+);
 /** @internal */
 export type ServerDataDistro$Outbound = {
   name?: string | undefined;
@@ -481,11 +499,13 @@ export const ServerDataDistro$outboundSchema: z.ZodType<
   ServerDataDistro$Outbound,
   z.ZodTypeDef,
   ServerDataDistro
-> = z.object({
-  name: z.string().optional(),
-  slug: z.string().optional(),
-  series: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    slug: z.string().optional(),
+    series: z.string().optional(),
+  })
+);
 
 export function serverDataDistroToJSON(
   serverDataDistro: ServerDataDistro,
@@ -509,13 +529,15 @@ export const ServerDataOperatingSystem$inboundSchema: z.ZodType<
   ServerDataOperatingSystem,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string().optional(),
-  slug: z.string().optional(),
-  version: z.string().optional(),
-  features: z.lazy(() => ServerDataFeatures$inboundSchema).optional(),
-  distro: z.lazy(() => ServerDataDistro$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    slug: z.string().optional(),
+    version: z.string().optional(),
+    features: z.lazy(() => ServerDataFeatures$inboundSchema).optional(),
+    distro: z.lazy(() => ServerDataDistro$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type ServerDataOperatingSystem$Outbound = {
   name?: string | undefined;
@@ -530,13 +552,15 @@ export const ServerDataOperatingSystem$outboundSchema: z.ZodType<
   ServerDataOperatingSystem$Outbound,
   z.ZodTypeDef,
   ServerDataOperatingSystem
-> = z.object({
-  name: z.string().optional(),
-  slug: z.string().optional(),
-  version: z.string().optional(),
-  features: z.lazy(() => ServerDataFeatures$outboundSchema).optional(),
-  distro: z.lazy(() => ServerDataDistro$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    slug: z.string().optional(),
+    version: z.string().optional(),
+    features: z.lazy(() => ServerDataFeatures$outboundSchema).optional(),
+    distro: z.lazy(() => ServerDataDistro$outboundSchema).optional(),
+  })
+);
 
 export function serverDataOperatingSystemToJSON(
   serverDataOperatingSystem: ServerDataOperatingSystem,
@@ -560,13 +584,15 @@ export const ServerDataSpecs$inboundSchema: z.ZodType<
   ServerDataSpecs,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  cpu: z.string().optional(),
-  disk: z.string().optional(),
-  ram: z.string().optional(),
-  nic: z.string().optional(),
-  gpu: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    cpu: z.string().optional(),
+    disk: z.string().optional(),
+    ram: z.string().optional(),
+    nic: z.string().optional(),
+    gpu: z.nullable(z.string()).optional(),
+  })
+);
 /** @internal */
 export type ServerDataSpecs$Outbound = {
   cpu?: string | undefined;
@@ -581,13 +607,15 @@ export const ServerDataSpecs$outboundSchema: z.ZodType<
   ServerDataSpecs$Outbound,
   z.ZodTypeDef,
   ServerDataSpecs
-> = z.object({
-  cpu: z.string().optional(),
-  disk: z.string().optional(),
-  ram: z.string().optional(),
-  nic: z.string().optional(),
-  gpu: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    cpu: z.string().optional(),
+    disk: z.string().optional(),
+    ram: z.string().optional(),
+    nic: z.string().optional(),
+    gpu: z.nullable(z.string()).optional(),
+  })
+);
 
 export function serverDataSpecsToJSON(
   serverDataSpecs: ServerDataSpecs,
@@ -607,7 +635,7 @@ export function serverDataSpecsFromJSON(
 /** @internal */
 export const ServerDataRole$inboundSchema: z.ZodNativeEnum<
   typeof ServerDataRole
-> = z.nativeEnum(ServerDataRole);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ServerDataRole));
 /** @internal */
 export const ServerDataRole$outboundSchema: z.ZodNativeEnum<
   typeof ServerDataRole
@@ -618,16 +646,18 @@ export const Interface$inboundSchema: z.ZodType<
   Interface,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  role: ServerDataRole$inboundSchema.optional(),
-  name: z.string().optional(),
-  mac_address: z.nullable(z.string()).optional(),
-  description: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "mac_address": "macAddress",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    role: ServerDataRole$inboundSchema.optional(),
+    name: z.string().optional(),
+    mac_address: z.nullable(z.string()).optional(),
+    description: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "mac_address": "macAddress",
+    });
+  })
+);
 /** @internal */
 export type Interface$Outbound = {
   role?: string | undefined;
@@ -641,16 +671,18 @@ export const Interface$outboundSchema: z.ZodType<
   Interface$Outbound,
   z.ZodTypeDef,
   Interface
-> = z.object({
-  role: ServerDataRole$outboundSchema.optional(),
-  name: z.string().optional(),
-  macAddress: z.nullable(z.string()).optional(),
-  description: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    macAddress: "mac_address",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    role: ServerDataRole$outboundSchema.optional(),
+    name: z.string().optional(),
+    macAddress: z.nullable(z.string()).optional(),
+    description: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      macAddress: "mac_address",
+    });
+  })
+);
 
 export function interfaceToJSON(value: Interface): string {
   return JSON.stringify(Interface$outboundSchema.parse(value));
@@ -670,26 +702,30 @@ export const ServerDataSshKey$inboundSchema: z.ZodType<
   ServerDataSshKey,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.number().int().optional(),
-  name: z.string().optional(),
-  fingerprint: z.string().optional(),
-  public_key: z.string().optional(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  user_id: z.string().optional(),
-  group_id: z.nullable(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "public_key": "publicKey",
-    "created_at": "createdAt",
-    "updated_at": "updatedAt",
-    "user_id": "userId",
-    "group_id": "groupId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.number().int().optional(),
+    name: z.string().optional(),
+    fingerprint: z.string().optional(),
+    public_key: z.string().optional(),
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ).optional(),
+    updated_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ).optional(),
+    user_id: z.string().optional(),
+    group_id: z.nullable(z.number().int()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "public_key": "publicKey",
+      "created_at": "createdAt",
+      "updated_at": "updatedAt",
+      "user_id": "userId",
+      "group_id": "groupId",
+    });
+  })
+);
 /** @internal */
 export type ServerDataSshKey$Outbound = {
   id?: number | undefined;
@@ -707,24 +743,26 @@ export const ServerDataSshKey$outboundSchema: z.ZodType<
   ServerDataSshKey$Outbound,
   z.ZodTypeDef,
   ServerDataSshKey
-> = z.object({
-  id: z.number().int().optional(),
-  name: z.string().optional(),
-  fingerprint: z.string().optional(),
-  publicKey: z.string().optional(),
-  createdAt: z.date().transform(v => v.toISOString()).optional(),
-  updatedAt: z.date().transform(v => v.toISOString()).optional(),
-  userId: z.string().optional(),
-  groupId: z.nullable(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    publicKey: "public_key",
-    createdAt: "created_at",
-    updatedAt: "updated_at",
-    userId: "user_id",
-    groupId: "group_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.number().int().optional(),
+    name: z.string().optional(),
+    fingerprint: z.string().optional(),
+    publicKey: z.string().optional(),
+    createdAt: z.date().transform(v => v.toISOString()).optional(),
+    updatedAt: z.date().transform(v => v.toISOString()).optional(),
+    userId: z.string().optional(),
+    groupId: z.nullable(z.number().int()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      publicKey: "public_key",
+      createdAt: "created_at",
+      updatedAt: "updated_at",
+      userId: "user_id",
+      groupId: "group_id",
+    });
+  })
+);
 
 export function serverDataSshKeyToJSON(
   serverDataSshKey: ServerDataSshKey,
@@ -748,20 +786,22 @@ export const ServerDataCredentials$inboundSchema: z.ZodType<
   ServerDataCredentials,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  username: z.nullable(z.string()).optional(),
-  password: z.nullable(z.string()).optional(),
-  ssh_keys: z.nullable(z.array(z.lazy(() => ServerDataSshKey$inboundSchema)))
-    .optional(),
-  expires_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "ssh_keys": "sshKeys",
-    "expires_at": "expiresAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    username: z.nullable(z.string()).optional(),
+    password: z.nullable(z.string()).optional(),
+    ssh_keys: z.nullable(z.array(z.lazy(() => ServerDataSshKey$inboundSchema)))
+      .optional(),
+    expires_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ssh_keys": "sshKeys",
+      "expires_at": "expiresAt",
+    });
+  })
+);
 /** @internal */
 export type ServerDataCredentials$Outbound = {
   username?: string | null | undefined;
@@ -775,18 +815,20 @@ export const ServerDataCredentials$outboundSchema: z.ZodType<
   ServerDataCredentials$Outbound,
   z.ZodTypeDef,
   ServerDataCredentials
-> = z.object({
-  username: z.nullable(z.string()).optional(),
-  password: z.nullable(z.string()).optional(),
-  sshKeys: z.nullable(z.array(z.lazy(() => ServerDataSshKey$outboundSchema)))
-    .optional(),
-  expiresAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    sshKeys: "ssh_keys",
-    expiresAt: "expires_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    username: z.nullable(z.string()).optional(),
+    password: z.nullable(z.string()).optional(),
+    sshKeys: z.nullable(z.array(z.lazy(() => ServerDataSshKey$outboundSchema)))
+      .optional(),
+    expiresAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      sshKeys: "ssh_keys",
+      expiresAt: "expires_at",
+    });
+  })
+);
 
 export function serverDataCredentialsToJSON(
   serverDataCredentials: ServerDataCredentials,
@@ -810,55 +852,57 @@ export const ServerDataAttributes$inboundSchema: z.ZodType<
   ServerDataAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  tags: z.array(z.lazy(() => ServerDataTag$inboundSchema)).optional(),
-  hostname: z.string().optional(),
-  label: z.string().optional(),
-  price: z.nullable(z.number()).optional(),
-  status: z.string().optional(),
-  ipmi_status: z.nullable(IpmiStatus$inboundSchema).optional(),
-  role: z.string().optional(),
-  public_network_eligible: z.boolean().optional(),
-  bgp_eligible: z.boolean().optional(),
-  bgp_deployed: z.boolean().optional(),
-  public_network: z.nullable(
-    z.lazy(() => ServerDataPublicNetwork$inboundSchema),
-  ).optional(),
-  site: z.string().optional(),
-  locked: z.boolean().optional(),
-  legacy_network: z.nullable(z.boolean()).optional(),
-  features: z.nullable(z.array(z.string())).optional(),
-  rescue_allowed: z.boolean().optional(),
-  primary_ipv4: z.nullable(z.string()).optional(),
-  primary_ipv6: z.nullable(z.string()).optional(),
-  created_at: z.nullable(z.string()).optional(),
-  scheduled_deletion_at: z.nullable(z.string()).optional(),
-  plan: z.lazy(() => ServerDataPlan$inboundSchema).optional(),
-  operating_system: z.lazy(() => ServerDataOperatingSystem$inboundSchema)
-    .optional(),
-  region: ServerRegionResourceData$inboundSchema.optional(),
-  specs: z.lazy(() => ServerDataSpecs$inboundSchema).optional(),
-  interfaces: z.array(z.lazy(() => Interface$inboundSchema)).optional(),
-  credentials: z.nullable(z.lazy(() => ServerDataCredentials$inboundSchema))
-    .optional(),
-  project: ProjectInclude$inboundSchema.optional(),
-  team: TeamInclude$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "ipmi_status": "ipmiStatus",
-    "public_network_eligible": "publicNetworkEligible",
-    "bgp_eligible": "bgpEligible",
-    "bgp_deployed": "bgpDeployed",
-    "public_network": "publicNetwork",
-    "legacy_network": "legacyNetwork",
-    "rescue_allowed": "rescueAllowed",
-    "primary_ipv4": "primaryIpv4",
-    "primary_ipv6": "primaryIpv6",
-    "created_at": "createdAt",
-    "scheduled_deletion_at": "scheduledDeletionAt",
-    "operating_system": "operatingSystem",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    tags: z.array(z.lazy(() => ServerDataTag$inboundSchema)).optional(),
+    hostname: z.string().optional(),
+    label: z.string().optional(),
+    price: z.nullable(z.number()).optional(),
+    status: z.string().optional(),
+    ipmi_status: z.nullable(IpmiStatus$inboundSchema).optional(),
+    role: z.string().optional(),
+    public_network_eligible: z.boolean().optional(),
+    bgp_eligible: z.boolean().optional(),
+    bgp_deployed: z.boolean().optional(),
+    public_network: z.nullable(
+      z.lazy(() => ServerDataPublicNetwork$inboundSchema),
+    ).optional(),
+    site: z.string().optional(),
+    locked: z.boolean().optional(),
+    legacy_network: z.nullable(z.boolean()).optional(),
+    features: z.nullable(z.array(z.string())).optional(),
+    rescue_allowed: z.boolean().optional(),
+    primary_ipv4: z.nullable(z.string()).optional(),
+    primary_ipv6: z.nullable(z.string()).optional(),
+    created_at: z.nullable(z.string()).optional(),
+    scheduled_deletion_at: z.nullable(z.string()).optional(),
+    plan: z.lazy(() => ServerDataPlan$inboundSchema).optional(),
+    operating_system: z.lazy(() => ServerDataOperatingSystem$inboundSchema)
+      .optional(),
+    region: ServerRegionResourceData$inboundSchema.optional(),
+    specs: z.lazy(() => ServerDataSpecs$inboundSchema).optional(),
+    interfaces: z.array(z.lazy(() => Interface$inboundSchema)).optional(),
+    credentials: z.nullable(z.lazy(() => ServerDataCredentials$inboundSchema))
+      .optional(),
+    project: ProjectInclude$inboundSchema.optional(),
+    team: TeamInclude$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ipmi_status": "ipmiStatus",
+      "public_network_eligible": "publicNetworkEligible",
+      "bgp_eligible": "bgpEligible",
+      "bgp_deployed": "bgpDeployed",
+      "public_network": "publicNetwork",
+      "legacy_network": "legacyNetwork",
+      "rescue_allowed": "rescueAllowed",
+      "primary_ipv4": "primaryIpv4",
+      "primary_ipv6": "primaryIpv6",
+      "created_at": "createdAt",
+      "scheduled_deletion_at": "scheduledDeletionAt",
+      "operating_system": "operatingSystem",
+    });
+  })
+);
 /** @internal */
 export type ServerDataAttributes$Outbound = {
   tags?: Array<ServerDataTag$Outbound> | undefined;
@@ -896,55 +940,57 @@ export const ServerDataAttributes$outboundSchema: z.ZodType<
   ServerDataAttributes$Outbound,
   z.ZodTypeDef,
   ServerDataAttributes
-> = z.object({
-  tags: z.array(z.lazy(() => ServerDataTag$outboundSchema)).optional(),
-  hostname: z.string().optional(),
-  label: z.string().optional(),
-  price: z.nullable(z.number()).optional(),
-  status: z.string().optional(),
-  ipmiStatus: z.nullable(IpmiStatus$outboundSchema).optional(),
-  role: z.string().optional(),
-  publicNetworkEligible: z.boolean().optional(),
-  bgpEligible: z.boolean().optional(),
-  bgpDeployed: z.boolean().optional(),
-  publicNetwork: z.nullable(
-    z.lazy(() => ServerDataPublicNetwork$outboundSchema),
-  ).optional(),
-  site: z.string().optional(),
-  locked: z.boolean().optional(),
-  legacyNetwork: z.nullable(z.boolean()).optional(),
-  features: z.nullable(z.array(z.string())).optional(),
-  rescueAllowed: z.boolean().optional(),
-  primaryIpv4: z.nullable(z.string()).optional(),
-  primaryIpv6: z.nullable(z.string()).optional(),
-  createdAt: z.nullable(z.string()).optional(),
-  scheduledDeletionAt: z.nullable(z.string()).optional(),
-  plan: z.lazy(() => ServerDataPlan$outboundSchema).optional(),
-  operatingSystem: z.lazy(() => ServerDataOperatingSystem$outboundSchema)
-    .optional(),
-  region: ServerRegionResourceData$outboundSchema.optional(),
-  specs: z.lazy(() => ServerDataSpecs$outboundSchema).optional(),
-  interfaces: z.array(z.lazy(() => Interface$outboundSchema)).optional(),
-  credentials: z.nullable(z.lazy(() => ServerDataCredentials$outboundSchema))
-    .optional(),
-  project: ProjectInclude$outboundSchema.optional(),
-  team: TeamInclude$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    ipmiStatus: "ipmi_status",
-    publicNetworkEligible: "public_network_eligible",
-    bgpEligible: "bgp_eligible",
-    bgpDeployed: "bgp_deployed",
-    publicNetwork: "public_network",
-    legacyNetwork: "legacy_network",
-    rescueAllowed: "rescue_allowed",
-    primaryIpv4: "primary_ipv4",
-    primaryIpv6: "primary_ipv6",
-    createdAt: "created_at",
-    scheduledDeletionAt: "scheduled_deletion_at",
-    operatingSystem: "operating_system",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    tags: z.array(z.lazy(() => ServerDataTag$outboundSchema)).optional(),
+    hostname: z.string().optional(),
+    label: z.string().optional(),
+    price: z.nullable(z.number()).optional(),
+    status: z.string().optional(),
+    ipmiStatus: z.nullable(IpmiStatus$outboundSchema).optional(),
+    role: z.string().optional(),
+    publicNetworkEligible: z.boolean().optional(),
+    bgpEligible: z.boolean().optional(),
+    bgpDeployed: z.boolean().optional(),
+    publicNetwork: z.nullable(
+      z.lazy(() => ServerDataPublicNetwork$outboundSchema),
+    ).optional(),
+    site: z.string().optional(),
+    locked: z.boolean().optional(),
+    legacyNetwork: z.nullable(z.boolean()).optional(),
+    features: z.nullable(z.array(z.string())).optional(),
+    rescueAllowed: z.boolean().optional(),
+    primaryIpv4: z.nullable(z.string()).optional(),
+    primaryIpv6: z.nullable(z.string()).optional(),
+    createdAt: z.nullable(z.string()).optional(),
+    scheduledDeletionAt: z.nullable(z.string()).optional(),
+    plan: z.lazy(() => ServerDataPlan$outboundSchema).optional(),
+    operatingSystem: z.lazy(() => ServerDataOperatingSystem$outboundSchema)
+      .optional(),
+    region: ServerRegionResourceData$outboundSchema.optional(),
+    specs: z.lazy(() => ServerDataSpecs$outboundSchema).optional(),
+    interfaces: z.array(z.lazy(() => Interface$outboundSchema)).optional(),
+    credentials: z.nullable(z.lazy(() => ServerDataCredentials$outboundSchema))
+      .optional(),
+    project: ProjectInclude$outboundSchema.optional(),
+    team: TeamInclude$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      ipmiStatus: "ipmi_status",
+      publicNetworkEligible: "public_network_eligible",
+      bgpEligible: "bgp_eligible",
+      bgpDeployed: "bgp_deployed",
+      publicNetwork: "public_network",
+      legacyNetwork: "legacy_network",
+      rescueAllowed: "rescue_allowed",
+      primaryIpv4: "primary_ipv4",
+      primaryIpv6: "primary_ipv6",
+      createdAt: "created_at",
+      scheduledDeletionAt: "scheduled_deletion_at",
+      operatingSystem: "operating_system",
+    });
+  })
+);
 
 export function serverDataAttributesToJSON(
   serverDataAttributes: ServerDataAttributes,
@@ -968,11 +1014,13 @@ export const ServerData$inboundSchema: z.ZodType<
   ServerData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  type: z.string().optional(),
-  attributes: z.lazy(() => ServerDataAttributes$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: z.string().optional(),
+    attributes: z.lazy(() => ServerDataAttributes$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type ServerData$Outbound = {
   id?: string | undefined;
@@ -985,11 +1033,13 @@ export const ServerData$outboundSchema: z.ZodType<
   ServerData$Outbound,
   z.ZodTypeDef,
   ServerData
-> = z.object({
-  id: z.string().optional(),
-  type: z.string().optional(),
-  attributes: z.lazy(() => ServerDataAttributes$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    type: z.string().optional(),
+    attributes: z.lazy(() => ServerDataAttributes$outboundSchema).optional(),
+  })
+);
 
 export function serverDataToJSON(serverData: ServerData): string {
   return JSON.stringify(ServerData$outboundSchema.parse(serverData));

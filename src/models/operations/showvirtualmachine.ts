@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -21,15 +21,17 @@ export const ShowVirtualMachineRequest$inboundSchema: z.ZodType<
   ShowVirtualMachineRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  virtual_machine_id: z.string(),
-  "extra_fields[virtual_machines]": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "virtual_machine_id": "virtualMachineId",
-    "extra_fields[virtual_machines]": "extraFieldsVirtualMachines",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    virtual_machine_id: z.string(),
+    "extra_fields[virtual_machines]": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "virtual_machine_id": "virtualMachineId",
+      "extra_fields[virtual_machines]": "extraFieldsVirtualMachines",
+    });
+  })
+);
 /** @internal */
 export type ShowVirtualMachineRequest$Outbound = {
   virtual_machine_id: string;
@@ -41,15 +43,17 @@ export const ShowVirtualMachineRequest$outboundSchema: z.ZodType<
   ShowVirtualMachineRequest$Outbound,
   z.ZodTypeDef,
   ShowVirtualMachineRequest
-> = z.object({
-  virtualMachineId: z.string(),
-  extraFieldsVirtualMachines: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    virtualMachineId: "virtual_machine_id",
-    extraFieldsVirtualMachines: "extra_fields[virtual_machines]",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    virtualMachineId: z.string(),
+    extraFieldsVirtualMachines: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      virtualMachineId: "virtual_machine_id",
+      extraFieldsVirtualMachines: "extra_fields[virtual_machines]",
+    });
+  })
+);
 
 export function showVirtualMachineRequestToJSON(
   showVirtualMachineRequest: ShowVirtualMachineRequest,

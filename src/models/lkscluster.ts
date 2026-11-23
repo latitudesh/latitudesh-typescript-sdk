@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 import {
@@ -22,9 +22,11 @@ export const LksCluster$inboundSchema: z.ZodType<
   LksCluster,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: LksClusterData$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: LksClusterData$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type LksCluster$Outbound = {
   data?: LksClusterData$Outbound | undefined;
@@ -35,9 +37,11 @@ export const LksCluster$outboundSchema: z.ZodType<
   LksCluster$Outbound,
   z.ZodTypeDef,
   LksCluster
-> = z.object({
-  data: LksClusterData$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: LksClusterData$outboundSchema.optional(),
+  })
+);
 
 export function lksClusterToJSON(lksCluster: LksCluster): string {
   return JSON.stringify(LksCluster$outboundSchema.parse(lksCluster));

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 import {
@@ -25,7 +25,7 @@ export const InferenceApiKeysMeta$inboundSchema: z.ZodType<
   InferenceApiKeysMeta,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type InferenceApiKeysMeta$Outbound = {};
 
@@ -34,7 +34,7 @@ export const InferenceApiKeysMeta$outboundSchema: z.ZodType<
   InferenceApiKeysMeta$Outbound,
   z.ZodTypeDef,
   InferenceApiKeysMeta
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function inferenceApiKeysMetaToJSON(
   inferenceApiKeysMeta: InferenceApiKeysMeta,
@@ -58,10 +58,12 @@ export const InferenceApiKeys$inboundSchema: z.ZodType<
   InferenceApiKeys,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.array(InferenceApiKey$inboundSchema).optional(),
-  meta: z.lazy(() => InferenceApiKeysMeta$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(InferenceApiKey$inboundSchema).optional(),
+    meta: z.lazy(() => InferenceApiKeysMeta$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type InferenceApiKeys$Outbound = {
   data?: Array<InferenceApiKey$Outbound> | undefined;
@@ -73,10 +75,12 @@ export const InferenceApiKeys$outboundSchema: z.ZodType<
   InferenceApiKeys$Outbound,
   z.ZodTypeDef,
   InferenceApiKeys
-> = z.object({
-  data: z.array(InferenceApiKey$outboundSchema).optional(),
-  meta: z.lazy(() => InferenceApiKeysMeta$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(InferenceApiKey$outboundSchema).optional(),
+    meta: z.lazy(() => InferenceApiKeysMeta$outboundSchema).optional(),
+  })
+);
 
 export function inferenceApiKeysToJSON(
   inferenceApiKeys: InferenceApiKeys,

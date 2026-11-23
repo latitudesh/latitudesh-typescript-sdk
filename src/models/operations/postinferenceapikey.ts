@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as models from "../index.js";
@@ -23,7 +23,7 @@ export const PostInferenceApiKeyMeta$inboundSchema: z.ZodType<
   PostInferenceApiKeyMeta,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type PostInferenceApiKeyMeta$Outbound = {};
 
@@ -32,7 +32,7 @@ export const PostInferenceApiKeyMeta$outboundSchema: z.ZodType<
   PostInferenceApiKeyMeta$Outbound,
   z.ZodTypeDef,
   PostInferenceApiKeyMeta
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function postInferenceApiKeyMetaToJSON(
   postInferenceApiKeyMeta: PostInferenceApiKeyMeta,
@@ -56,10 +56,12 @@ export const PostInferenceApiKeyResponse$inboundSchema: z.ZodType<
   PostInferenceApiKeyResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: models.InferenceApiKey$inboundSchema.optional(),
-  meta: z.lazy(() => PostInferenceApiKeyMeta$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: models.InferenceApiKey$inboundSchema.optional(),
+    meta: z.lazy(() => PostInferenceApiKeyMeta$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type PostInferenceApiKeyResponse$Outbound = {
   data?: models.InferenceApiKey$Outbound | undefined;
@@ -71,10 +73,12 @@ export const PostInferenceApiKeyResponse$outboundSchema: z.ZodType<
   PostInferenceApiKeyResponse$Outbound,
   z.ZodTypeDef,
   PostInferenceApiKeyResponse
-> = z.object({
-  data: models.InferenceApiKey$outboundSchema.optional(),
-  meta: z.lazy(() => PostInferenceApiKeyMeta$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: models.InferenceApiKey$outboundSchema.optional(),
+    meta: z.lazy(() => PostInferenceApiKeyMeta$outboundSchema).optional(),
+  })
+);
 
 export function postInferenceApiKeyResponseToJSON(
   postInferenceApiKeyResponse: PostInferenceApiKeyResponse,

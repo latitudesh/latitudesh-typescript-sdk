@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../lib/schemas.js";
 import { Result as SafeParseResult } from "../types/fp.js";
 import {
   ClusterRequirementsData,
@@ -22,9 +22,11 @@ export const ClusterRequirements$inboundSchema: z.ZodType<
   ClusterRequirements,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: ClusterRequirementsData$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: ClusterRequirementsData$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type ClusterRequirements$Outbound = {
   data?: ClusterRequirementsData$Outbound | undefined;
@@ -35,9 +37,11 @@ export const ClusterRequirements$outboundSchema: z.ZodType<
   ClusterRequirements$Outbound,
   z.ZodTypeDef,
   ClusterRequirements
-> = z.object({
-  data: ClusterRequirementsData$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: ClusterRequirementsData$outboundSchema.optional(),
+  })
+);
 
 export function clusterRequirementsToJSON(
   clusterRequirements: ClusterRequirements,

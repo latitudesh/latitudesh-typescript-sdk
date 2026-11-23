@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as models from "../index.js";
@@ -22,15 +22,17 @@ export const CreateProjectClusterNodeGroupRequest$inboundSchema: z.ZodType<
   CreateProjectClusterNodeGroupRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  project_id: z.string(),
-  create_cluster_node_group: models.CreateClusterNodeGroup$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "project_id": "projectId",
-    "create_cluster_node_group": "createClusterNodeGroup",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    project_id: z.string(),
+    create_cluster_node_group: models.CreateClusterNodeGroup$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "project_id": "projectId",
+      "create_cluster_node_group": "createClusterNodeGroup",
+    });
+  })
+);
 /** @internal */
 export type CreateProjectClusterNodeGroupRequest$Outbound = {
   project_id: string;
@@ -42,15 +44,17 @@ export const CreateProjectClusterNodeGroupRequest$outboundSchema: z.ZodType<
   CreateProjectClusterNodeGroupRequest$Outbound,
   z.ZodTypeDef,
   CreateProjectClusterNodeGroupRequest
-> = z.object({
-  projectId: z.string(),
-  createClusterNodeGroup: models.CreateClusterNodeGroup$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    projectId: "project_id",
-    createClusterNodeGroup: "create_cluster_node_group",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    projectId: z.string(),
+    createClusterNodeGroup: models.CreateClusterNodeGroup$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      projectId: "project_id",
+      createClusterNodeGroup: "create_cluster_node_group",
+    });
+  })
+);
 
 export function createProjectClusterNodeGroupRequestToJSON(
   createProjectClusterNodeGroupRequest: CreateProjectClusterNodeGroupRequest,
