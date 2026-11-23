@@ -53,7 +53,11 @@ Handles automatic SDK generation (existing workflow).
 
 ### 4. **sdk_publish.yaml** - SDK Publishing
 
-Handles NPM package publishing (existing workflow).
+Publishes the package to npm when `.speakeasy/gen.lock` changes on `main`, or on manual dispatch.
+
+Publishing uses [npm Trusted Publishing](https://docs.npmjs.com/trusted-publishers) (OIDC), so there is no `NPM_TOKEN` secret. The trusted publisher configured on npmjs.com is tied to this repository and to the `sdk_publish.yaml` file name. If you rename the file, update the trusted publisher on npm.
+
+`.speakeasy/workflow.yaml` still declares `publish.npm.token: $npm_token`. Speakeasy uses that field only to mark the TypeScript target as published. The variable is never set, so `npm publish` authenticates through OIDC. Do not remove the field: without it, the publish job is skipped.
 
 ## Test Coverage
 

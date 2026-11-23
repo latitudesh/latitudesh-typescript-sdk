@@ -14,10 +14,12 @@ permissions:
   workflow_dispatch: {}
 jobs:
   publish:
+    # npm publishing uses Trusted Publishing (OIDC) via the `id-token: write`
+    # permission above, so no npm token is passed. The trusted publisher on
+    # npmjs.com is bound to this file name: renaming it breaks publishing.
     uses: speakeasy-api/sdk-generation-action/.github/workflows/sdk-publish.yaml@v15
     with:
       target: latitudesh
     secrets:
       github_access_token: ${{ secrets.GITHUB_TOKEN }}
-      npm_token: ${{ secrets.NPM_TOKEN }}
       speakeasy_api_key: ${{ secrets.SPEAKEASY_API_KEY }}
